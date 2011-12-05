@@ -1,0 +1,144 @@
+#capturefor(SEO_titling)$!place.Title#end
+#capturefor(SEO_DISCRIPTION)$!place.subHead#end
+#capturefor(SEO_KEYWORDS)$Controller.Gettags($place.id)#end
+#capturefor(SEO_CANONICAL)$siteroot/read/$!place.CustomUrl#end
+
+
+#if($Flash.message)
+<p style="color: red; font-weight: bold;">
+    $Flash.message
+</p>
+#end
+
+
+#set ($commentCount = $place.Pub_comments.Count)
+<div class="content">
+
+<div class="headline">$!place.Title</div>
+#set ($mug = "")
+#set ($iC = 0)
+<div class="byline"> By 
+#if($flag)
+#foreach($author in $place.Authors)
+$!author.Name
+#foreach($authuserImages in $author.Images)
+#set ($mug = $authuserImages.Id)
+#end
+#set ($iC = $iC+1)
+#between
+,
+#end
+#else 
+#foreach($author in $place.Authors)
+$!author.Name 
+#foreach($authuserImages in $author.Images)
+#set ($mug = $authuserImages.Id)
+#end
+#set ($iC = $iC+1)
+#between
+,
+#end
+#end</div>
+#if(${mug}==""||${mug}==0)
+#* just in case we want to put a fake placeholder *#
+#else
+<img id="selectedImage" class="mugArea" style="max-width:180px;float:left;margin-right:5px;margin-bottom:5px;" src="$siteroot/image/download.castle?id=${mug}&mug=true&m=crop&w=100&h=150" alt=""/>
+#end
+<em class="subhead">$!place.subHead</em>
+<div class="pubDate">Published $!place.PublishTime.toString().Replace('12:00:00 AM','')</div>
+<a href="#Comments" class="comments">Comments ($commentCount)</a>
+
+
+
+
+<div id="bodytext">
+#if($place.Id<=1000 && $place.Id!=434 && $place.getFirstImage().id)
+		<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="campusMap" class="img-main " style="float:left;margin-right:5px;margin-bottom:5px;"/>	
+#end
+$!place.renderdBodyText
+
+</div>
+<a name="Comments" id="Comments"></a>
+#if($place.tags.Count>0)
+<div class="inPlacetagsLine">
+<h4>tags:</h4>	#foreach($tag in $place.tags)
+<a title="$!tag.Name" href="../Public/placelist.castle?id=$!{tag.Id}">$!tag.Name</a>
+#between
+,
+#end
+</div>
+#else
+<hr/>
+#end
+
+  <form action="$siteroot/public/submitComment.castle" method="post" id="mainForm" onsubmit="return MySubmitForm();">
+    $Form.HiddenField("comment.Id")
+    <input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+    <div class="" style="clear:both">
+      <h3>Leave the comment here:</h3>
+      <p style="display:inline-block;float:left;margin-left: 1px;margin-top: 0;">
+        Name*:<br/>
+        <input type="text" value="" name="comment.commentorName" id="comment_commentorName" style="width:150px;"/>
+      </p>
+
+      <p style="display:inline-block;float:left;margin-left:5px;margin-top: 0;">
+        Email:<br/>
+        <input type="text" value="" name="comment.Email" id="comment_Email" style="width:225px;"/>
+      </p>
+
+    </div>
+    #*$Form.TextArea("comment.comments")*#
+    <textarea id="comment_comments_home" name="comment.comments" ></textarea>
+    <br/>
+
+    <script type="text/javascript" src="http://challenge.asirra.com/js/AsirraClientSide.js"></script>
+    <div style="width: 392px;">
+		<h3>You must click all the cats to submit</h3>
+		<h6>Hover over the images in the box, and when you see a cat click it to select the cat.  Click the refresh button at the side if you are unsure if it's a cat or dog.</h6>
+    </div>
+    <input type="submit" value="Submit" />
+
+  </form>
+<hr/>
+
+  #foreach($comment in $Place.comments)
+  #if($comment.published==true)<a name="com_${comment.Id}" id="com_${comment.Id}"></a>
+    <div class="comments #if($comment.FlagNumber>3)uFlaged #end" id="comment$comment.Id">
+    #if($comment.FlagNumber>3)<h3><span>Click to read <em>+</em></span> User flagged </h3>#end
+    <div #if($comment.FlagNumber>3)class="comment_closed"#end>
+		<form action="$siteroot/public/userFlag.castle" method="post" class="userFlagging" style="float:right; display:line-block;">
+			<input type="hidden" name="comment.Id" value ="$!comment.Id"/>
+			<input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+			<input type="submit" value="" class="userFlagged" title="Flag this post"/>
+		</form>
+      <h5 class="comment" style="float:right; display:line-block;">Posted: <em>$!comment.CreateTime</em>
+      #if($comment.UpdateTime && $comment.CreateTime && ($comment.UpdateTime != $comment.CreateTime))<br/>Updated:<em>$!comment.UpdateTime</em>#end
+      </h5>
+		<h3>#if($comment.commentorName)$!comment.commentorName #else Anonymous #end</h3>
+      <div class="byline">$!comment.Comments</div>
+      </div>
+    </div>
+    <hr/>
+    #end
+  #end
+
+</div>	
+<div class="clear_both"></div><!--div.clear_both-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

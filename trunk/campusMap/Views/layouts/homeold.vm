@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>The Daily campusMap Online</title> 
+<!-- favorites ico --> 
+<link rel="shortcut icon" href="../images/template/favicon.ico" /> 
+<link type="text/css" rel="stylesheet" href="../css/skin.css" />
+<link type="text/css" rel="stylesheet" href="../Content/css/styles-home.css" /> 
+
+<link type="text/css" rel="stylesheet" href="../Content/css/styles-nav.css" /> 
+<script src="../content/js/jquery-1.4.3.min.js" type="text/javascript"></script> 
+<!-- Scrolling News Ticker --> 
+<script src="../content/js/jquery.Scroller-1.0.min.js" type="text/javascript"></script> 
+<script src="../content/js/jquery.Scroller-fromHead.js" type="text/javascript"></script> 
+<!-- Open/Close Nav Slide --> 
+<script type="text/javascript" src="../content/js/jquery-ishovered.js"></script> 
+<script type="text/javascript" src="../content/js/jquery-makeabsolute.js"></script> 
+<script type="text/javascript" src="../content/js/popdown.js"></script> 
+<!-- Photo/Caption Slider --> 
+<script type="text/javascript" src="../content/js/jquery.cycle.all.2.72.js"></script> 
+<script type="text/javascript" src="../content/js/jquery.easing.1.1.1.js"></script> 
+
+<script type="text/javascript"> 
+$.fn.cycle.defaults.timeout = 6000;
+$(function() {
+    $('#slider').cycle({
+        fx:     'fade',
+        speed:  'fast',
+        timeout: 4000,
+        next:   '#next', 
+		prev:   '#prev' 
+    });
+});
+</script> 
+<style type="text/css">
+.roundcont {
+	width: 250px;
+	background-color: #f90;
+	color: #fff;
+}
+.roundcont p {
+	margin: 0 10px;
+}
+.roundtop { 
+	background: url(../images/template/tr.gif) no-repeat top right; 
+}
+.roundbottom {
+	background: url(../images/template/br.gif) no-repeat top right; 
+}
+img.corner {
+   width: 15px;
+   height: 15px;
+   border: none;
+   display: block !important;
+}
+ul#navlist
+{
+padding: 0;
+margin: 0;
+list-style-type: none;
+float: left;
+width: 80%;
+color: #fff;
+background-color: #036;
+}
+ul#navlist li { display: inline; }
+ul#navlist li a
+{
+float: left;
+width: 5em;
+color: #fff;
+background-color: #036;
+padding: 0.2em 1em;
+text-decoration: none;
+border-right: 1px solid #fff;
+}
+ul#navlist li a:hover
+{
+background-color: #369;
+color: #fff;
+}
+.rside
+{
+	float: right;
+	width: 50%;
+	padding: 0 0;
+	margin: 52px 0 0;
+	padding-top :10px;
+}
+.lside
+{
+	float:left;
+	width: 45%;
+	padding: 0 0;
+	margin: 0 10px 0 0;
+	text-align:left;
+}
+.lside h2{
+  margin-bottom: 10px;
+ 
+}
+.lside h2 a{
+ text-decoration:none;
+}
+.lside img
+{ float: left;
+    border: 1px solid #CCCCCC;
+    margin-right: 10px;
+}
+.block{
+ float:left;
+ width : 100%;
+}
+.rside li
+{
+text-align:left;
+list-style-type: bullet;
+text-align:left;
+}
+.place-more em{
+	color: #666666
+}
+.place-block{
+float:left;
+}
+</style>
+</head> 
+<body> 
+<div class="horizontal_scroller"> 
+<div class="scrollingtext"> 
+<strong>BREAKING NEWS:</strong>
+#foreach ($place in $places)
+   #if($place.BreakingNews == true)
+	<a href="http://publishing.wsu.edu/webservices/" target="_blank">The Daily campusMap releases newly redesigned website &raquo;</a> | 
+	<a href="http://wsucougars.com" target="_blank">Athletics releases new brand and showcases new uniforms &raquo;</a> | 
+	<a href="http://commencement.wsu.edu/Commencement/Apps/HomePage.ASP?CurrPage=7" target="_blank">WSU Spring Commencement schedule and event details &raquo;</a> |
+	<a title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title &raquo;</a> 
+   #end
+#end
+</div><!--#.scrollingtext--> 
+</div><!--#.horizontal_scroller--> 
+<div id="wrapper"> 
+<div id="social_media"> 
+<a href="http://www.dailycampusMap.com/contact.php" title="Contact Us"><img src="../images/template/email-icon.png" width="26" height="17" alt="Contact Us" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a> 
+<a href="http://www.facebook.com/pages/The-Daily-campusMap/270217084313" title="Facebook"><img src="../images/template/facebook-icon.png" width="26" height="26" alt="Facebook" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a> 
+<a href="http://twitter.com/DailycampusMap" title="Twitter"><img src="../images/template/twitter-icon.png" width="26" height="24" alt="Twitter" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a> 
+<a href="http://dailycampusMap.wsu.edu/rss" title="RSS Feed"><img src="../images/template/rss-icon.png" width="26" height="27" alt="RSS Feed" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a> 
+</div>
+<!--#social_media--> 
+<div id="masthead"> 
+<a href="#">
+<img src="../images/template/masthead-sm.png" width="690" height="51" alt="The Daily campusMap" border="0" style="color:#981e32; display:block; text-decoration:none; border:none;" /></a> 
+</div><!--#masthead--> 
+<div id="adv_search"> 
+<!-- <a href="#">Advanced Search <img src="../images/template/adv-search-arrow.png" width="5" height="6" alt="adv search" border="0" style="color:#981e32; display:block; text-decoration:none; border:none;" /></a> -->
+</div><!--#adv_search--> 
+
+<div id="search"> 
+<form action="http://dailycampusMap.wsu.edu/search"> 
+<input id="search_field" type="text" name="q" size="20" maxlength="255" /> 
+<input id="search_button" type="image" name="submit" src="../images/template/search-icon.png" alt="Search" title="Search" value="Search" /> 
+<input type="hidden" name="siteURL" value="dailycampusMap.wsu.edu" /> 
+</form>     
+</div><!--#search--> 
+<div id="content">
+<div id="nav-wrap"> 
+<div id="nav"> 
+<ul> 	
+<li class="link ">
+<a href="../public/index.castle">News</a> 
+
+<!--subnav for primary link above--> 
+<ul>
+
+#foreach($place in $places)
+  #if($place.BreakingNews == true)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #end
+#end
+</ul>
+<div class="arrow"></div> 
+</li>
+<!--end subnav--> 
+<li class="link ">
+<a href="../public/list.castle?id=1">Sports</a> 
+<!--subnav for primary link above--> 
+<ul> 
+#foreach($place in $places)
+  #if($place.place_types.Id == 1)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #end
+#end
+</ul><div class="arrow">
+</div></li> 
+<!--end subnav--> 
+<li class="link ">
+<a href="../public/list.castle?id=12">Life</a>
+<!--subnav for primary link above--> 
+<ul> 
+#foreach($place in $places)
+  #if($place.place_types.Id == 12)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #end
+#end
+</ul>
+<div class="arrow">
+</div></li> 
+<!--end subnav--> 
+<li class="link ">
+<a href="../public/list.castle?id=11">Opinion</a> 
+<!--subnav for primary link above--> 
+<ul> 
+#foreach($place in $places)
+  #if($place.place_types.Id == 11)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #end
+#end
+</ul>
+<div class="arrow">
+</div></li> 
+<!--end subnav--> 
+<li class="link ">
+<a href="../public/blogs.castle?id=13">Blogs</a> 
+<!--subnav for primary link above--> 
+<ul> 
+#foreach($place in $places)
+  #if($place.place_types.Id == 11 || $place.place_types.Id == 1)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li> 
+  #end
+#end
+</ul><div class="arrow">
+</div></li> 
+<!--end subnav--> 
+
+<li class="link ">
+<a href="../public/campusMap.castle">campusMap</a> 
+<!--subnav for primary link above--> 
+<ul> 
+<li><a class='' href='../public/workforcampusMap.castle'>Work for The campusMap</a></li> 
+<li><a class='' href='../public/advertisewithus.castle'>Advertise With Us</a></li> 
+<li><a class='' href='../public/studentadvertisingfund.castle'>Student Advertising Fund</a></li> 
+<li><a class='' href='../public/pdf.castle'>Print Version (PDF)</a></li> 
+<li><a class='' href='../public/newsletter.castle'>Newsletter</a></li> 
+</ul><div class="arrow">
+</div></li> 
+<!--end subnav-->            
+
+<li class="link" style="width:134px;">
+<a href="../public/usefullinks.castle">Useful Links</a> 
+<!--subnav for primary link above--> 
+<ul> 
+<li><a class='' href='../public/rss.castle'>RSS Feeds</a></li> 
+<li><a class='' href='http://www.dailycampusMap.com/multimedia/'>Multimedia</a></li> 
+<li><a class='' href='http://alert.wsu.edu/'>WSU Alert</a></li> 
+<li><a class='' href='../public/mallcam.castle'>Weather &amp; Mall Cam</a></li> 
+<li><a class='' href='../public/contactus.castle'>Contact Us</a></li> 
+</ul><div class="arrow">
+</div></li> 
+<!--end subnav--> 
+</ul> 
+</div><!--#nav--> 
+</div><!--#nav-wrap--> 
+
+<div id="expand" class="expand"> 
+ <div id="something"> 
+	<div class="clear">
+	</div><!--#div.clear--> 
+</div><!--#something-->
+</div><!--#expand.expand-->
+
+<div id="two_cols">
+ $childContent
+</div><!--#two_cols--> 
+
+ 
+     
+<!--<div id="left_col"> 
+
+<div class="slidernav"><a href="#" id="prev">Prev</a> 
+<a href="#" id="next">Next</a></div> 
+<div class="headline"></div> 
+<div class="subhead"></div> 
+<div class="byline"><br /> 
+</div> 
+</div><!--#left_col--> 
+      
+<!--<div id="middle_col"> 
+<div class="headline">Cougs could be strong next year</div> 
+<div class="subhead">Basketball must replace key losses to win</div> 
+<div class="byline">By Adam Lewis<br /> 
+Published: 04/28/2011</div> 
+</div><!--#middle_col--> 
+
+
+<div id="ads_col" align="center"> 
+#foreach($Ad in $Ads)
+  #if($Ad.Location.Id !=1) 
+      $controller.IncView($Ad)                         
+      <a href='IncClicked.castle?Id=$!{Ad.Id}'>$Ad.HtmlText</a><br/>
+  #end
+#end
+
+
+
+
+</div><!--#ads_col--> 
+
+<div class="clear_both"></div><!--div.clear_both--> 
+</div><!--#content--> 
+<div id="footer_area"> 
+<a href="http://www.wsucougars.com">
+<img src="../images/template/leaderboard.jpg" width="728" height="90" alt="WSU Cougar Athletics" border="0" /></a> 
+  <div id="local_footer"> 
+     <a href="#">The Daily campusMap</a>, PO Box 642510, 113 Murrow East, Pullman, WA, 99164-2510, <a href="#">Contact Us</a> 
+  </div><!--#local_footer--> 
+  <div id="global_footer">&copy; 2011 WSU Student Publications Board | <a href="#">WSU Student Publications Bylaws</a> 
+</div><!--#global_footer--> 
+</div><!--#footer_area--> 
+</div><!--#wrapper--> 
+<!--google analytics--> 
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> 
+</script> 
+<script type="text/javascript"> _uacct = "UA-397842-1";urchinTracker();
+</script> 
+</body> 
+</html>

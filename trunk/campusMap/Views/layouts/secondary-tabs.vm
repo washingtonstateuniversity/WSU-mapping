@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+#* all the JS and CSS that is site wide *#
+#parse("Public/global_header_html.vm")
+
+</head>
+<body id="sce_tabs">
+
+#parse("Public/leaderboard_ads.vm") 
+
+<div id="wrapper">
+
+	#parse("Public/social_media.vm") 
+	
+	<a href="$siteroot/home" id="logo">The Daily campusMap</a>
+ 
+	#parse("Public/search_bar.vm") 
+	
+	<div id="content"> 
+
+		#parse("Public/menu.vm") 
+
+		<div id="two_cols">
+  			<div id="left_col">
+  				$childContent
+				<hr />
+				#parse("Public/share_this_page.vm")
+			</div><!--#left_col-->
+		</div><!--#two_cols-->
+
+		<div class="right_side">
+			#parse("Public/sidebar_ads.vm") 
+
+			#parse("Public/sidebar_relatedplace_typess.vm") 
+
+			#parse("Public/sidebar_relatedtagsedPlaces.vm") 
+
+			#parse("Public/sidebar_twits.vm") 
+
+		</div>	
+		
+		<div class="clear_both"></div>#* div.clear_both *#
+
+	</div>#* content *#
+
+
+		#parse("Public/footer.vm") 
+</div><!--#wrapper-->
+
+#parse("Public/google-analytics.vm")
+
+
+</body>
+</html>

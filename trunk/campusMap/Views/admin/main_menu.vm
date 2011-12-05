@@ -1,0 +1,28 @@
+<ul id='main_nav'>
+	<li class='ui-button ui-widget ui-state-default ui-state-hover ui-corner-top' style="cursor:default;height:15px;"></li>
+	
+	
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a></li>
+
+
+	
+	 
+	<li class='ui-button ui-widget ui-state-default ui-state-hover' style="cursor:default;height:6px;"></li>
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='image')ui-state-active#end'><a href="../image/list.castle">Images</a></li>
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
+	
+	
+	<li class='ui-button ui-widget ui-state-default ui-state-hover' style="cursor:default;height:6px;"></li>
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">End Users</a></li>
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Comments</a></li>
+	
+	
+	<li class='ui-button ui-widget ui-state-default ui-state-hover' style="cursor:default;height:6px;"></li>
+	#*<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>*#
+	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authors')ui-state-active#end'><a href="../authuser/edit.castle?id=$controller.getUser().Id">Your Profile</a></li>
+	<li class='ui-button ui-widget ui-state-default'><a href="../place/logout.castle">Logout</a></li>
+
+	
+	<li class='ui-button ui-widget ui-state-default ui-state-hover ui-corner-bottom' style="cursor:default;height:15px;"></li>
+</ul>

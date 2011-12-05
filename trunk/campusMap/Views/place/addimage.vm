@@ -1,0 +1,9 @@
+<div>
+  <select name="images[$!count].id" class="imagedropDown"  id="image[$!count]">
+    <option class="" value="">-select-</option>
+    #foreach($image in $images)
+    <option class="image" value="$image.id" #if($storyimage == $image) selected="selected" #end>$!image.FileName</option>
+    #end
+  </select>
+  <br/>
+</div>

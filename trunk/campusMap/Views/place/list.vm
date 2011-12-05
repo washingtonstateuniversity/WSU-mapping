@@ -1,0 +1,74 @@
+
+#if($Flash.massage)
+<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+  <p style="line-height: 15px;padding-bottom: 0;">
+    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.massage
+  </p>
+</div>
+#end
+#if($Flash.error)
+<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+  <p style="line-height: 15px;padding-bottom: 0;">
+    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
+  </p>
+</div>
+#end
+
+<script type="text/javascript">
+  var availableTags = [$!locations];
+</script>
+
+<div id="dialog" title="Basic dialog" style="display:none;">
+  <p>Choose the new state of the story</p>
+</div>
+
+<h3>Story List :</h3>
+<div id="StoryTypeDiv" style="float:right; height: 37px; margin-top: 7px; margin-right: 9px; position: relative; z-index: 1; color:#fff;">
+  Story Types:<br/>
+  <select id="listStoryType">
+    <option value="">Your Sections</option>
+    <option value="-2" #if($searchId == -2) selected="selected" #end>Your Stories</option>
+    <option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
+    #foreach($type in $storytype)
+    <option value="$type.Id" #if($searchId == $type.Id) selected="selected" #end>$type.Name</option>
+    #end
+  </select>
+</div>
+
+<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: 270px; z-index: 1;top:0px;">
+  <p>
+    <a href="$siteroot/story/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+      <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Story
+    </a>&nbsp;
+    <a href="$!siteroot/email/send.castle?id=$!{person.Id}" class="EMAILUSER creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+      <span class="ui-icon ui-icon-transferthick-e-w inlineIcon"></span>Email User
+    </a>
+  </p>
+</div>
+<div id="tabs" class="storylist ui-tabs ui-widget ui-widget-content ui-corner-all">
+  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+      <a href="#tabs-1">Published</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs-2">Review ($reviewStories.TotalItems)</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs-3">Draft ($draftStories.TotalItems)</a>
+    </li>
+  </ul>
+
+
+  <div id="tabs-1">
+    #parse("Story/by_published_status__list.vm")
+  </div>
+
+  <div id="tabs-2">
+    #parse("Story/by_review_status__list.vm")
+  </div>
+
+  <div id="tabs-3">
+    #parse("Story/by_draft_status__list.vm")
+  </div>
+
+</div>

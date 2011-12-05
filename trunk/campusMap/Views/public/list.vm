@@ -1,0 +1,28 @@
+#if($placetype.Name)<h2><a class="section" title="$placetype.Name" href="$siteroot/public/list.castle?id=$placetype.Id">$placetype.Name</a></h2>#end
+<ul id="listings">
+	#set ($c=0)
+	#foreach($place in $placeByType)
+		<li #if($c%2>0) class="even" #else class="odd" #end>
+			#if($place.getFirstImage().id)<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=175&h=175" alt="$!{place.Title}" class="list_img lazy"/>#end
+			<h3 title="$!place.Title" href="$siteroot/read/${place.CustomUrl}" class="headline" #if(!$place.getFirstImage().id)style="display:inline-block;"#end><a href="$siteroot/read/${place.CustomUrl}">$!place.Title</a></h3>
+			
+			#if(!$place.getFirstImage().id)<div class="byline" style="display:inline-block;">-$!{place.Publishtime.toString().Replace('12:00:00 AM','')}</div>#end
+			
+			
+			#if($place.subHead)<h4 class="subhead">$!place.subHead</h4>#end
+			#if($place.getFirstImage().id)<p>#if($place.Location)<span class="upper">$!place.Location - </span>#end $!place.getTeaser()</p>
+			<a href="$siteroot/read/${place.CustomUrl}">more</a>
+			<div class="byline"> 
+				#foreach($author in $place.Authors)
+				$!author.Name<br/>
+				#end
+				$!place.Publishtime.toString().Replace('12:00:00 AM','')<br/>
+			</div>#end
+			<hr/>
+		</li>
+		#set ($c=$c+1)
+	#end
+</ul>
+
+
+

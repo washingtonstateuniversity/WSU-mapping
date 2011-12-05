@@ -1,0 +1,24 @@
+<!--Beginning of the WSU Global Footer Zone. Refer to www.wsu.edu/identity/ for more information. -->
+<noscript>	<div id="wsufooter">Copyright &copy;  Board of Regents, <a href="http://www.wsu.edu">Washington State University</a>  </div><!--wsufooter-->
+</noscript>
+<script language="javascript" type="text/javascript">var strFooter;strFooter = getFooter();document.write(strFooter);</script>
+<!--End of the WSU Global Footer Zone. -->
+#*
+<script type="text/javascript" src="../Scripts/open-collapse.js"></script>
+<script type="text/javascript" src="../Scripts/open-collapseall.js"></script>
+*#
+<script type="text/javascript">
+   // To display the "Print" link pass in true.  To hide the "Print" link pass in false.
+   addPrintLink(true);
+</script> 
+
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu"></script>
+
+<script type="text/javascript">
+var addthis_config = {
+          services_compact: 'email, facebook, twitter, myspace, google, more',
+          services_exclude: 'print',
+		  ui_click: true 
+}
+</script>
+#parse("admin/google-analytics.vm")

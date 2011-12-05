@@ -1,0 +1,191 @@
+/* Photo/Caption Slider for Secondary Pages */
+
+#slider {
+	width:628px;
+	height:245px;
+	background:url("../content/images/template/extra-slider-bkgrd.jpg") no-repeat scroll 0 0 transparent;
+	float:left;
+	overflow:hidden;
+	margin-top:20px;
+	/* position:absolute;
+	top:30px;
+	left:0px; */
+}
+
+.slider_content {
+	width:628px;
+	height:245px;
+	background:none;
+}
+
+.slider_photo {
+	margin:0;
+	width:377px;
+	height:245px;
+	padding:0px;
+}
+
+.slider_text {
+	width:181px;
+	height:190px;
+	margin-bottom:40px;
+	padding:30px 35px 0 35px;
+	color:#262a2d;
+	text-align:left;
+	font-size:16px;
+}
+
+#slider .headline, #slider .subhead, #slider .byline, #slider .caption {
+	width:181px;
+}
+
+#slider div {
+	top:0;
+	left:0;
+	float:left;
+}
+
+.slider_nav {
+	float:left;
+	width:698px;
+	margin:8px 30px 5px 0px;
+	text-align:left;
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:19px;
+}
+/* Photo/Caption Slider */
+
+
+/* Section, Headlines, Bylines, etc. */
+
+.section, .headline, .subhead, .byline, .caption {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+}
+
+.subhead, .byline, .caption {
+	color:#262a2d;
+}
+
+.section {
+	color:#ffffff;
+	font-size:20px;
+	line-height:25px;
+	font-weight:normal;
+	margin-bottom:15px;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	display:block;
+	width:304px;
+	background-color:#7f9d6a;
+	padding:2px 5px 1px 5px;
+}
+
+#slider .headline {
+	color:#526e3f;
+	font-size:16px;
+	line-height:21px;
+	font-weight:bold;
+	margin-bottom:3px;
+	margin-left:0px;
+}
+
+.headline a {
+	color:#526e3f;
+}
+
+.headline a:hover {
+	color:#7f9d6a;
+}
+
+.headline {
+	color:#526e3f;
+	font-size:15px;
+	line-height:18px;
+	font-weight:bold;
+	margin-bottom:3px;
+	margin-left:5px;
+}
+
+#slider .subhead, #slider .caption {
+	padding-top:1px;
+	color:#262a2d;
+	font-size:13px;
+	line-height:18px;
+	font-weight:normal;
+	margin-bottom:10px;
+	margin-left:0px;
+}
+
+.subhead, .caption {
+	padding-top:1px;
+	color:#5e6a71;
+	font-size:13px;
+	line-height:18px;
+	font-weight:normal;
+	margin-bottom:5px;
+	margin-left:5px;
+}
+
+#slider .byline {
+	padding-top:8px;
+	color:#262a2d;
+	font-size:10px;
+	line-height:14px;
+	margin-left:0px;
+}
+
+.byline {
+	padding-top:8px;
+	color:#262a2d;
+	font-size:10px;
+	line-height:14px;
+	margin-left:5px;
+}
+
+#left_col #slider p, #middle_col #slider p {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:19px;
+	margin-bottom:10px;
+	padding:0;
+	text-align:left;
+	margin-left:0px;
+}
+
+#left_col p, #middle_col p {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:19px;
+	margin:4px 0 10px 0;
+	padding:0;
+	text-align:left;
+	margin-left:5px;
+}
+
+ul {
+	margin:0;
+	padding:10px 0 0 22px;
+}
+
+li {
+	margin-bottom:5px;
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:17px;
+}
+
+li a {
+	color:#5e6a71;
+	text-decoration:none;
+}
+
+li a:hover {
+	color:#7f9d6a;
+	text-decoration:underline;
+}
+/* End of Section, Headlines, Bylines, etc. */

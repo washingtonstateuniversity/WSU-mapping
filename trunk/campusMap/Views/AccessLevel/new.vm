@@ -1,0 +1,15 @@
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="update.castle" method="post">
+$Form.HiddenField("accesslevel.Id")
+
+<h3>Access Level</h3>
+<p>Title:</p>
+$Form.TextField("accesslevel.Title") 
+<p><input type="submit" value="Submit" /></p>
+
+</form>

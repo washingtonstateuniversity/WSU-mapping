@@ -1,0 +1,172 @@
+<table width="60%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+  <tr>
+    <td>Showing $publishedStories.FirstItem - $publishedStories.LastItem of $publishedStories.TotalItems</td>
+    <td align="right">
+      #if($publishedStories.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status='published'}" )  #end
+      #if(!$publishedStories.HasPrevious) first #end
+      #if($publishedStories.HasPrevious) | $PaginationHelper.CreatePageLink( $publishedStories.PreviousIndex, "prev",null, "%{searchId=$!searchId,status='published'}" )  #end
+      #if(!$publishedStories.HasPrevious) | prev #end
+      #if($publishedStories.HasNext) | $PaginationHelper.CreatePageLink( $publishedStories.NextIndex, "next",null, "%{searchId=$!searchId,status='published'}" )  #end
+      #if(!$publishedStories.HasNext) | next #end
+      #if($publishedStories.HasNext) | $PaginationHelper.CreatePageLink( $publishedStories.LastIndex, "last",null, "%{searchId=$!searchId,status='published'}" )  #end
+      #if(!$publishedStories.HasNext) | last #end
+    </td>
+  </tr>
+</table>
+
+<ul class="storylistUL list_3">
+
+  #foreach($story in $publishedStories)
+  #* set up authors*#
+  #set($authors='')
+  #capturefor(authors)
+  #foreach ($author in $story.Authors)
+  #each
+  <span class="emailCol" rel="$!author.Id">$!author.Name</span>
+  #between
+  /
+  #end
+  #end
+  #* EOF set up  *#
+
+  <li class="ui-widget-content ui-corner-all story_$!story.Id con">
+    #if($story.CheckedOutBy!=""  && $story.CheckedOutBy != $authusername)<span class="UinEdit ui-corner-bottom">
+      &nbsp;&nbsp;&nbsp;$story.CheckedOutBy is editing this Story <a href="#" title="Published" rel="$story.Id" class="buttons steal ui-button ui-widget ui-state-default ui-corner-all">
+        <span class="ui-icon ui-icon-unlocked"> </span> Click to Release Story
+      </a>
+    </span><div class="inEdit ui-corner-all"> </div>#end
+    <div class="story_aTar story_$!story.Id" title="$!story.Id">
+      <div class='summaryCol'>
+        <ul>
+          #if($story.Title)<li class='Title'>
+            <span>Title: </span>$!story.Title
+          </li>#end
+          #if($authors!='')<li class='Authors'>
+            <span>Authors: </span>$authors
+          </li>#end
+          #if($story.Teaser)<li class='Teaser'>
+            <span>Teaser: </span>
+            <span class="Teaser">
+              $Text.Fold($Controller.StripHtml($!story.Teaser,false),200)<br/>
+            </span>
+            <a href="$!siteroot/story/readmore.castle?id=$!{story.Id}">more</a>
+          </li>#end
+          #if($story.BodyText)<li class="Body">
+            <span>Body: </span>
+            <span class="Body">$Text.Fold($Controller.StripHtml($!story.BodyText,false),100)</span>
+            <a href="$!siteroot/story/readmore.castle?id=$!{story.Id}">more</a>
+          </li>#end
+        </ul>
+      </div>
+      <div class='detailCol'>
+        <ul>
+          #if($story.Publishtime)<li class='date'>
+            <span>Date: </span>$!story.Publishtime.ToString().Replace('12:00:00 AM','')
+          </li>#end
+          #if($story.Status.Title)<li class='Status'>
+            <div>
+              <span>Status: </span>$!story.Status.Title
+            </div>
+          </li>#end
+          #if($story.BreakingNews)<li>
+            <span>Breaking: </span>$!story.BreakingNews
+          </li>#end
+          #if($story.Hottopic)<li>
+            <span>Hottopic: </span>$!story.Hottopic
+          </li>#end
+          #if($story.Location)<li>
+            <span>Location: </span>$!story.Location
+          </li>#end
+          #if($story.StoryType.Name)<li>
+            <span>Type: </span>$!story.StoryType.Name
+          </li>#end
+          #if($story.Id)<li>
+            <span>Id: </span>$!story.Id
+          </li>#end
+        </ul>
+      </div>
+      <div class='actionCol'>
+        <ul>
+          #if($Controller.canEdit($story,$loginUser) || $story.CheckedOutBy == $authusername || $story.isCheckedOutNull())
+          <li>
+            <a href="#if($story.CheckedOutBy=="" || $story.CheckedOutBy == $authusername)$siteroot/story/Edit_story.castle?id=$!{story.Id} #else # #end" title="#if($story.CheckedOutBy)Is being edited by $story.CheckedOutBy #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
+              <span class="ui-button-icon-primary ui-icon ui-icon-pencil"></span>
+              <span class="actionText">Edit</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+          </li>
+          <li>
+            <a href="$siteroot/story/delete.castle?id=$!{story.Id}" title="Delete"  class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
+              <span class="ui-button-icon-primary ui-icon ui-icon-trash"> </span>
+              <span class="actionText">Delete</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+          </li>
+          #end
+          #if($Controller.canPublish($loginUser))
+          <li>
+            <a href="$siteroot/story/setStatus.castle?id=$!{story.Id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
+              <span class="ui-button-icon-primary ui-icon ui-icon-star"> </span>
+              <span class="actionText">Status</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+          </li>
+          <li>
+            <a href="$siteroot/story/send_breaking_single.castle?id=$!{story.Id}" title="Send a breaking News for this ONLY" class="buttons sendBR ui-button ui-widget ui-state-default ui-corner-all">
+              <span class="ui-button-icon-primary ui-icon ui-icon-signal-diag"> </span>
+              <span class="actionText">Broadcast</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+          </li>
+          #end
+          <li>
+            <a href="$siteroot/read/${story.CustomUrl}" target="_blank" title="View" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+              <span class="ui-button-icon-primary ui-icon ui-icon-search"> </span>
+              <span class="actionText">View</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+          </li>
+
+          #if($searchId!=0&&$searchId!=-1)
+          <li>
+            #if($story.Id != $firststory.Id )
+            <a href="$siteroot/story/moveup.castle?searchId=$!searchId&id=$!{story.Id}" title="Move Up"  class="buttons  ui-button ui-widget ui-state-default ui-corner-all">
+              <span class="ui-button-icon-primary ui-icon ui-icon-circle-arrow-n"> </span>
+              <span class="actionText">Up</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+            #end
+          </li>
+          <li>
+            #if($story.Id != $laststory.Id )
+            <a href="$siteroot/story/movedown.castle?searchId=$!searchId&id=$!{story.Id}"  title="Move down" class="buttons  ui-button ui-widget ui-state-default ui-corner-all">
+              <span class="ui-button-icon-primary ui-icon ui-icon-circle-arrow-s"> </span>
+              <span class="actionText">Down</span>
+              <span class="actionpropt">&#187;</span>
+            </a>
+            #end
+          </li>
+          #end
+        </ul>
+      </div>
+    </div>
+  </li>
+  #end
+</ul>
+
+
+<table width="60%" border="0" >
+  <tr>
+    <td>Showing $publishedStories.FirstItem - $publishedStories.LastItem of $publishedStories.TotalItems</td>
+    <td align="right">
+      #if($publishedStories.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$searchId,status='published'}" ) #end
+      #if(!$publishedStories.HasPrevious) first #end
+      #if($publishedStories.HasPrevious) | $PaginationHelper.CreatePageLink( $publishedStories.PreviousIndex, "prev",null, "%{searchId=$searchId,status='published'}" ) #end
+      #if(!$publishedStories.HasPrevious) | prev #end
+      #if($publishedStories.HasNext) | $PaginationHelper.CreatePageLink( $publishedStories.NextIndex, "next",null, "%{searchId=$searchId,status='published'}" ) #end
+      #if(!$publishedStories.HasNext) | next #end
+      #if($publishedStories.HasNext) | $PaginationHelper.CreatePageLink( $publishedStories.LastIndex, "last",null, "%{searchId=$searchId,status='published'}" ) #end
+      #if(!$publishedStories.HasNext) | last #end
+    </td>
+  </tr>
+</table>

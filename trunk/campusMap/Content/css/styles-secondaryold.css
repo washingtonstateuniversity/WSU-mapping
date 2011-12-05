@@ -1,0 +1,302 @@
+/* Daily Evergreen Online - Home */
+
+body {
+	background:#b6bcbf url(../images/templates/bkgrd-nostripe.jpg) repeat-x scroll 0 0;
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:19px;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+
+a {
+	color:#5e6a71;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#7f9d6a;
+	text-decoration:underline;
+}
+
+hr {
+	color:#ffffff;
+	background-color:#ffffff;
+	border:1px dotted #526e3f;
+	border-style:none none dotted;
+	padding-top:3px;
+	margin:20px 0 25px 0;
+}
+
+#leaderboard {
+	padding-top:2px;
+	height:90px;
+	overflow:hidden;
+}
+
+#wrapper {
+	background:none;
+	margin:0 auto;
+	position:relative;
+	width:1020px;
+}
+
+#social_media {
+	width:26px;
+	position:relative;
+	float:left;
+	top:105px;
+	margin-left:13px;
+}
+
+#social_media a {
+	margin-bottom:8px;
+	display:block;
+}
+
+#masthead {
+	text-align:center;
+	width:690px;
+	margin:25px 0 10px 46px;
+	padding:0px;
+	position:relative;
+	height:51px;
+}
+
+
+/* Custom Search Bar */
+
+#adv_search {
+	width:108px;
+	position:absolute;
+	top:12px;
+	right:108px;
+	z-index:4;
+	color:#262a2d;
+	font-size:10px;
+	line-height:14px;
+	text-transform:uppercase;
+	text-align:right;
+	vertical-align:middle;
+}
+
+#adv_search a {
+	color:#262a2d;
+	text-decoration:none;
+	vertical-align:middle;
+}
+
+#adv_search img {
+	float:right;
+	margin-top:2px;
+	margin-left:4px;
+	width:5px;
+	height:10px;
+	vertical-align:middle;
+}
+
+#search {
+	width:189px;
+	position:absolute;
+	top:20px;
+	left:742px;
+	z-index:1;
+	overflow:hidden;
+	text-transform:uppercase;
+}
+
+#search_field {
+	z-index:2;
+	height:12px;
+	padding-right:20px;
+	font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;
+	font-size:10px;
+	line-height:15px;
+	color:#262a2d;
+}
+
+#search_button {
+	z-index:3;
+	position:absolute;
+	left:200px;
+	top:2px;
+}
+/* End of Custom Search Bar */
+
+
+#content {
+	width:926px;
+	background-color:#ffffff;
+	vertical-align:top;
+	text-align:center;
+	border:solid 1px #262a2d;
+	/* min-height:400px; */
+	margin:0 auto;
+	position:relative;
+}
+
+#two_cols, #left_col, #middle_col, #ads_col {
+	float:left;
+	vertical-align:top;
+	background-color:#ffffff;
+}
+
+#two_cols {
+	width:728px;
+}
+
+#left_col {
+	width:628px;
+	text-align:left;
+	padding:30px 10px 20px 30px;
+}
+
+#middle_col {
+	display:none;
+}
+
+.headline, .subhead, .byline, p {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+}
+
+.subhead, .byline {
+	color:#262a2d;
+}
+
+
+/* Section, Headlines, Bylines, etc. */
+
+.section, .headline, .subhead, .byline {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+}
+
+.subhead, .byline {
+	color:#262a2d;
+}
+
+.section {
+	color:#ffffff;
+	font-size:20px;
+	line-height:25px;
+	font-weight:normal;
+	margin-bottom:15px;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	display:block;
+	width:304px;
+	background-color:#7f9d6a;
+	padding:2px 5px 1px 5px;
+}
+/* Story Headlines, Bylines, etc. */
+
+
+.headline {
+	color:#526e3f;
+	font-size:26px;
+	line-height:31px;
+	font-weight:bold;
+}
+
+.subhead {
+	padding-top:1px;
+	color:#262a2d;
+	font-size:20px;
+	line-height:25px;
+}
+
+.byline {
+	padding-top:8px;
+	color:#262a2d;
+	font-size:14px;
+	line-height:18px;
+}
+
+#left_col p, #middle_col p {
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:19px;
+	margin-bottom:10px;
+	padding:0;
+	text-align:left;
+}
+/* End of Story Headlines, Bylines, etc. */
+
+#ads_col {
+	width:198px;
+	text-align:center;
+	padding:20px 0px;
+}
+
+#ads_col img {
+	display:inline-block;
+	text-decoration:none;
+	border:none;
+	margin-top:8px;
+}
+
+.clear_both {
+	clear:both;
+}
+
+#footer_area {
+	clear:both;
+}
+
+#footer_area img {
+	display:inline-block;
+	text-decoration:none;
+	border:none;
+}
+
+#local_footer {
+	padding-top:10px;
+	padding-bottom:0px;
+	color:#262a2d;
+}
+
+#local_footer a {
+	color:#262a2d;
+	text-decoration:none;
+}
+
+#local_footer a:hover {
+	color:#526e3f;
+	text-decoration:none;
+}
+
+#global_footer {
+	padding-bottom:10px;
+	color:#5e6a71;
+}
+
+#global_footer a {
+	color:#5e6a71;
+	text-decoration:none;
+}
+
+#global_footer a:hover {
+	color:#526e3f;
+	text-decoration:none;
+}
+
+
+/* Type Styles */
+
+.dk_green {
+	color:#526e3f;
+}
+
+.lt_green {
+	color:#7f9d6a;
+}
+
+.lt_gray {
+	color:#b6bcbf;
+}
+
+.dk_gray {
+	color:#262a2d;
+}

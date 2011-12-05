@@ -1,0 +1,8 @@
+<select name="authors[$!count].id" id="author[$!count].id">
+								<option class="" value="">-select-</option>
+								#foreach($author in $authors)
+									<option class="author" value="$author.id" #if($storyauthor == $author) selected="selected" #end>$!author.Name</option>
+								#end	
+							</select>
+							<input type="text" class="author" name="newauthor" value="" id="author">
+							<div class="lightLine"></div>

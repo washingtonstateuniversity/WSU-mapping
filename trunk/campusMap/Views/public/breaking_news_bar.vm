@@ -1,0 +1,10 @@
+<div class="horizontal_scroller">
+  <div class="scrollingtext">
+    <strong>BREAKING NEWS</strong>
+    #foreach($place in $BreakingNews)
+        | &nbsp; <a title="$!place.Title" href="$siteroot/read/${place.CustomUrl}">$!place.Title &raquo;</a> &nbsp;&nbsp;
+    #end
+  </div>
+  <!--#.scrollingtext-->
+</div>
+<!--#.horizontal_scroller-->

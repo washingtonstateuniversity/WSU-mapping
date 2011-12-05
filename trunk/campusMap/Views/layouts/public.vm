@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>The Daily campusMap Online</title>
+	<!-- favorites ico -->
+	<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+	<link type="text/css" rel="stylesheet" href="../css/skin.css" />
+	<link type="text/css" rel="stylesheet" href="../css/styles1.css" />
+	<script type="text/javascript" src="../content/js/jquery-1.4.2.min.js" charset="utf-8"></script>
+	<style>
+		#content {overflow:visible; padding:10px;text-align:left;}
+		#nav li {display: inline;  padding-left: 20px;}		
+		#nav img{border:0px; }
+		.block {border-bottom: 1px solid #B6BCBF; padding-bottom:5px;}
+		h5 {font-size:12px;margin:5px;}
+	</style>
+	<style type="text/css">
+ul#navlist
+{
+padding: 0;
+margin: 0;
+list-style-type: none;
+float: left;
+width: 80%;
+color: #fff;
+background-color: #036;
+}
+ul#navlist li { display: inline; }
+ul#navlist li a
+{
+float: left;
+width: 5em;
+color: #fff;
+background-color: #036;
+padding: 0.2em 1em;
+text-decoration: none;
+border-right: 1px solid #fff;
+}
+ul#navlist li a:hover
+{
+background-color: #369;
+color: #fff;
+}
+.rside
+{
+	float: right;
+	width: 50%;
+	padding: 0 0;
+	margin: 52px 0 0;
+	padding-top :10px;
+}
+.lside
+{
+	float:left;
+	width: 45%;
+	padding: 0 0;
+	margin: 0 0px 0 0;
+	text-align:left;
+}
+.lside h2{
+  margin-bottom: 10px;
+ 
+}
+.lside h2 a{
+ text-decoration:none;
+}
+.lside img
+{ float: left;
+    border: 1px solid #CCCCCC;
+    margin-right: 10px;
+}
+.block{
+ float:left;
+ width : 100%;
+}
+.rside li
+{
+text-align:left;
+list-style-type: bullet;
+text-align:left;
+}
+.place-more em{
+	color: #666666
+}
+.place-block{
+float:left;
+}
+</style>
+</head>
+<body>
+<div id="wrapper">
+        <div id="global_header">
+            <div id="stripe1">
+               <div id="breaking_news">
+                BREAKING NEWS:
+                #foreach ($new in $BreakingNews)
+                   $new.Title
+                #end
+                <!-- <a href="/public/breakingNewFromHeaderView.castle?id=$!{new.Id}">$new.Title...</a> -->
+                </div><!-- #breaking_new -->
+            
+            </div><!-- #stripe1 -->
+            <div id="stripe1_border">
+            </div><!-- #stripe1_border -->
+            <div id="stripe2">
+            </div><!-- #stripe2 -->
+        </div><!-- #global_header -->
+        
+        <div id="outer_container">
+	        <div id="inner_container">
+            <div id="social_media">
+            <a href="http://dailycampusMap.com/contact.php" title="Contact Us"><img src="../images/template/email-icon.png" width="26" height="17" alt="Contact Us" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a>
+            <a href="http://www.facebook.com/pages/The-Daily-campusMap/270217084313" title="Facebook"><img src="../images/template/facebook-icon.png" width="26" height="26" alt="Facebook" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a>
+            <a href="http://twitter.com/DailycampusMap" title="Twitter"><img src="../images/template/twitter-icon.png" width="26" height="24" alt="Twitter" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a>
+            <a href="http://dailycampusMap.wsu.edu/rss" title="RSS Feed"><img src="../images/template/rss-icon.png" width="26" height="27" alt="RSS Feed" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" /></a>
+        </div><!-- #social_media -->
+
+            <div id="masthead">
+            <img src="../images/template/masthead.png" width="690" height="82" alt="The Daily campusMap" border="0" style="color:#981e32; display:block; text-decoration:none; border:none;" />
+            
+            <div id="search_bar">
+            </div><!-- #search_bar -->
+            
+            </div><!-- #masthead -->
+            
+            <div id="content">
+            <div id="nav">
+            	<ul>
+            		<li><a href="../">Front Page</a></li>
+            		<li><a href="http://dailycampusMap.com/mallcam">Weather&nbsp;&amp; Mall&nbsp;Cam</a></li>
+					<li><a href="classifiedads.castle">Classifieds</a></li>
+				</ul>
+                </div><!-- #nav -->
+                $childContent
+                <br clear="all"/>
+            </div><!-- #content -->
+        
+            <div id="footer_area">
+                <div id="local_footer">
+                The Daily campusMap, PO Box 642510, 113 Murrow East, Pullman, WA, 99164-2510, Contact Us
+                </div><!-- #local_footer" -->
+            
+                <div id="global_footer">
+                &copy; 2011 WSU Student Publications Board | WSU Student Publications By laws
+                </div><!-- #local_footer" -->
+            </div><!-- #footer_area -->
+                
+	        </div><!-- #inner_container -->
+        </div><!-- #outer_container -->
+	</div><!-- #wrapper -->
+
+</body>
+</html>

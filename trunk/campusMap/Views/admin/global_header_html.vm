@@ -1,0 +1,87 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" /><title>The Daily campusMap</title>
+
+<style type="text/css">
+  body{
+  font: normal 0.8em Verdana, Geneva, Arial, Helvetica, sans-serif;
+  }
+</style>
+<style type="text/css">
+  .at300bs.at15t_compact{
+  background-image:none;
+  }
+  .at300bs{
+  display:inline;
+  }
+</style>
+<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
+#*<link href="../styles.css" rel="stylesheet" type="text/css" />*#
+<link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+  <!--
+#secondary {
+	padding-bottom:180px;
+	
+}
+#content{font-size: 1.4em;}
+-->
+</style>
+
+#*  UI SCRIPTS  *#
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
+<link media='screen' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' type='text/css' rel='stylesheet' />
+#* <link media='screen' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/blitzer/jquery-ui.css' type='text/css' rel='stylesheet' />  *#
+
+#* WSU theme *#
+<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' type='text/css' rel='stylesheet' />
+
+<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&sensor=false&key=ABQIAAAAH8kUMijnAfBj23DnU3MW3RR8i_TK5XmIHwEizrT67KWySjG4FRRqzM9a1HZbnz2PWt429MkEsEQTmA"></script>
+<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAH8kUMijnAfBj23DnU3MW3RR8i_TK5XmIHwEizrT67KWySjG4FRRqzM9a1HZbnz2PWt429MkEsEQTmA" type="text/javascript"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
+<style>
+  .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
+</style>
+
+<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/init_test.js"></script>
+<style>
+  .ui-button { margin-left: -1px; }
+  .ui-button-icon-only .ui-button-text { padding: 0.35em; }
+  .ui-autocomplete-input { margin: 0; padding:0.4em 0 0.4em 0.43em; }
+  .optionsLink{}
+  .options{}
+  .optionsLink:hover .options{}
+</style>
+#capturefor(site)
+#if($siteroot)
+$siteroot
+#else
+http://campusMap.wsu.edu
+#end
+#end
+#capturefor(view)
+$Controller.getView()
+#end
+<script type="text/javascript">
+  var siteroot = '$site.Trim()/';
+  var view = '$view.Trim()/';
+</script>
+#if($admin_js)${admin_js}#end
+<script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
+#*  EOF UI SCRIPTS  *#
+<!--script for print tool-->
+<script src="http://images.wsu.edu/javascripts/print.js" type="text/javascript"></script>
+
+

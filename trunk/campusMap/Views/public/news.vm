@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="0.91">
+<channel>
+<title>The Daily Evergreen News Feed</title>
+<link>http://dailyevergreen.com/news</link>
+<description>News</description>
+<language>en</language>
+<lastBuildDate>Wed, 11 May 2011 16:22:44 PST</lastBuildDate>
+<copyright>Copyright: 
+(C) 2011 The Daily Evergreen</copyright>
+<managingEditor>editor@dailyevergreen.com</managingEditor> 
+<webMaster>webmanager@dailyevergreen.com</webMaster>
+
+#foreach ($place in $places)
+<item>
+<title>$Controller.Escape($!{place.Title})</title>
+<link>http://localhost:2398/public/readmore.castle?id=$!{place.Id}</link>
+<description>$Controller.Escape($!{place.Teaser})</description>
+</item>
+#end 
+</channel>
+</rss>
+

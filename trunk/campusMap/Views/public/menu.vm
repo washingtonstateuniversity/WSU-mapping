@@ -1,0 +1,290 @@
+<ul class="menu">
+  <li class="main has-sub t1">
+    <a href="$siteroot/">Home</a>
+  </li>
+  <li class="main has-sub t2">
+    <a href="$siteroot/public/list.castle?id=1">Sports</a>
+  </li>
+  <li class="main has-sub t3">
+    <a href="$siteroot/public/list.castle?id=12">Life</a>
+  </li>
+  <li class="main has-sub t4">
+    <a href="$siteroot/public/list.castle?id=11">Opinion</a>
+  </li>
+  <li class="main has-sub t5">
+    <a href="$siteroot/public/blogs.castle?id=13">Blogs</a>
+  </li>
+  <li class="main has-sub t6">
+    <a href="$siteroot/public/evergreen.castle">Evergreen</a>
+  </li>
+  <li class="main has-sub t7">
+    <a href="$siteroot/public/usefullinks.castle">Useful Links</a>
+  </li>
+
+  <li class="sub p1">
+    <dl>
+      <dt>Breaking News</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+		  #if($c<6)
+			  <dd>
+				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			  </dd>
+		  #end
+		  #set($c=$c+1)
+      #end
+    
+      <dd>
+        <a href="$siteroot/">Find more articles</a>
+      </dd>
+        </dl>
+    #*<dl>
+      <dt>Most Read</dt>
+      #foreach($place in $places)
+      <dd>
+        <a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),40)</a>
+      </dd>
+      #end
+    </dl>*#
+    <span class="bottomLine">
+      <p>
+        Don't forget to <a href="$siteroot/public/rss.castle" title="RSS Feed">subscribe</a> for more Breaking news alerts!
+      </p>
+    </span>
+  </li>
+  <li class="sub p2">
+    <dl>
+      <dt>Sports</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+		  #if($place.PlaceType.Id == 1)
+			  #if($c<6)
+			  <dd>
+				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			  </dd>
+			#end
+			#set($c=$c+1)
+		  #end
+		
+      #end
+      <dd>
+        <a href="$siteroot/public/list.castle?id=1">Find more articles</a>
+      </dd>
+    </dl>
+    #*<dl>
+      <dt>Highlights</dt>
+      <dd>
+        <a href="#url">Red</a>
+      </dd>
+      <dd>
+        <a href="#url">White</a>
+      </dd>
+      <dd>
+        <a href="#url">Rose</a>
+      </dd>
+      <dd>
+        <a href="#url">Sparkling</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt>Scores</dt>
+      <dd>
+        <a href="#url">Game A 30-0</a>
+      </dd>
+      <dd>
+        <a href="#url">Game WSU vs BYU 17-14</a>
+      </dd>
+      <dd>
+        <a href="#url">Game B 0-3</a>
+      </dd>
+      <dd>
+        <a href="#url">Game C 10-14</a>
+      </dd>
+    </dl>*#
+    <span class="bottomLine">
+      <p>
+        Get more up to date <a href="$siteroot/public/rss.castle" title="RSS Feed">Sports News</a>!
+      </p>
+    </span>
+  </li>
+
+  <li class="sub p3">
+    <dl>
+      <dt>Latest in Life</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+		  #if($place.PlaceType.Id == 12)
+		   #if($c<6)
+			  <dd>
+				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			  </dd>
+			#end
+			#set($c=$c+1)
+		  #end
+		
+      #end
+      <dd>
+        <a href="$siteroot/public/list.castle?id=12">Find more articles</a>
+      </dd>
+    </dl>
+    #*<dl>
+      <dt>WSU Living</dt>
+      <dd>
+        <a href="#url">CUB is the Spot to go</a>
+      </dd>
+      <dd>
+        <a href="#url">WiFi Goes everywhere</a>
+      </dd>
+      <dd>
+        <a href="#url">Grants gives 1/3 off trainers</a>
+      </dd>
+    </dl>
+    *#
+    <span class="bottomLine">
+      <p>
+        More <a href="$siteroot/public/rss.castle" title="RSS Feed">tips and news on WSU life</a> online.
+      </p>
+    </span>
+  </li>
+
+  <li class="sub p4">
+    <dl>
+      <dt>Latest</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+        #if($place.PlaceType.Id == 11)
+		   #if($c<6)
+			<dd>
+			  <a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			</dd>
+			#end
+			#set($c=$c+1)
+		  #end
+		
+      #end
+
+      <dd>
+        <a href="$siteroot/public/list.castle?id=11">Find more articles</a>
+      </dd>
+      
+    </dl>
+ 
+    <span class="bottomLine">
+      <p>
+        Get the lastest Opinion <a href="$siteroot/public/rss.castle" title="RSS Feed">here!</a>
+      </p>
+
+    </span>
+  </li>
+
+  <li class="sub p5">
+    <dl>
+      <dt>Weblogs on Sports</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+		#if($place.PlaceType.Id == 1)
+		   #if($c<6)
+			  <dd>
+				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			  </dd>
+			#end
+			#set($c=$c+1)
+		  #end
+		
+      #end
+
+      <dd>
+        <a href="$siteroot/public/list.castle?id=1">Find more articles</a>
+      </dd>
+
+    </dl>
+    <dl>
+      <dt>Weblogs on Opinions</dt>
+      #set ($c=0)
+      #foreach($place in $places)
+		  #if($place.PlaceType.Id == 11)
+		  	 #if($c<6)
+			  <dd>
+				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
+			  </dd>
+			  
+			#end
+			#set($c=$c+1)
+		  #end
+		
+      #end
+
+      <dd>
+        <a href="$siteroot/public/list.castle?id=11">Find more articles</a>
+      </dd>
+
+    </dl>
+    <span class="bottomLine">
+      <p>
+        Get the lastest Opinion <a href="$siteroot/public/rss.castle" title="RSS Feed">here!</a>
+      </p>
+
+    </span>
+  </li>
+
+  <li class="sub p6">
+    <dl>
+      <dt>Evergreen Related links</dt>
+      <dd>
+        <a href="$siteroot/public/classifiedads.castle">Classifieds</a>
+      </dd>
+      <dd>
+        <a href='$siteroot/public/workforevergreen.castle'>Work for The Evergreen</a>
+      </dd>
+      <dd>
+        <a href='$siteroot/public/advertisewithus.castle'>Advertise With Us</a>
+      </dd>
+      <dd>
+        <a href='$siteroot/public/studentadvertisingfund.castle'>Student Advertising Fund</a>
+      </dd>
+      <dd>
+        <a href='$siteroot/public/pdf.castle'>Print Version (PDF)</a>
+      </dd>
+      <dd>
+        <a href='$siteroot/public/newsletter.castle'>Newsletter</a>
+      </dd>
+
+    </dl>
+    <span class="bottomLine">
+      <p>
+        &nbsp;
+      </p>
+    </span>
+  </li>
+
+  <li class="sub p7">
+    <dl>
+      <dd>
+        <a href="$siteroot/public/rss.castle">RSS Feeds</a>
+      </dd>
+      #*<dd>
+        <a href="http://dailyevergreen.com/multimedia/">Multimedia</a>
+      </dd>*#
+      <dd>
+        <a href="http://www.alert.wsu.edu/">WSU Alert</a>
+      </dd>
+      <dd>
+        <a href="$siteroot/public/mallcam.castle">Weather &amp; Mall Cam</a>
+      </dd>
+      <dd>
+        <a href="$siteroot/public/contactus.castle">Contact Us</a>
+      </dd>
+    </dl>
+
+    <span class="bottomLine">
+      <p>
+        Think a link should be here? <a href="$siteroot/public/contactus.castle" title="Make Contact">Contact us!</a>
+      </p>
+
+    </span>
+  </li>
+
+  <li class="main t8">
+    <a href="#x">Close</a>
+  </li>
+</ul>

@@ -1,0 +1,19 @@
+<div id="ads_col" align="center">
+  <a href="$siteroot/public/breakingnews.castle" title="Get Breaking News">
+    <img src="$siteroot/images/template/BreakingNews.jpg" width="180" height="150" alt="Sign up for breaking news" border="0" />
+  </a>
+  #foreach($Ad in $Ads)
+  #if($Ad.Location.Id ==2)
+	  #if($Ad.HtmlText)
+		  $controller.IncView($Ad)
+		  $Ad.HtmlText<br/>
+	  #else
+        $controller.IncView($Ad)
+        <a href='$siteroot/public/IncClicked.castle?Id=$!{Ad.Id}'>
+          <img width="180px" id="selectedImage" src="$siteroot/image/download.castle?id=${Ad.Images.get_item(0).id}"/>
+        </a><br/>
+      #end
+    #end
+  #end
+</div>
+<!--#ads_col-->
