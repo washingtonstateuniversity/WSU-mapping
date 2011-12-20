@@ -5,5 +5,6 @@ namespace campusMap.Models
     {
         int id { get; set; }
         string name { get; set; }
+        String get_json_data();
     }
 }

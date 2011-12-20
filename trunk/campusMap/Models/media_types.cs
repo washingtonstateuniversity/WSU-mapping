@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace campusMap.Models
 {   [ActiveRecord(Lazy=true, BatchSize=10)]
-    public class media_types : ActiveRecordBase<media_types>
+    public class media_types : json_autocomplete<media_types>, campusMap.Models.Ijson_autocomplete
     {
         public static int ad = 2;
         public static int place = 1;

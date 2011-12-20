@@ -73,11 +73,8 @@
                 CancelView();
                 CancelLayout();
                 Type t = Type.GetType(TYPE);
-                MethodInfo method = t.GetMethod("get_json_data");
-                //MethodInfo generic = method.MakeGenericMethod(t);
-                String s = (String)method.Invoke(this, new object[] { BindingFlags.InvokeMethod | BindingFlags.Public });
-                RenderText(s);
-
+                Ijson_autocomplete theclass = (Ijson_autocomplete)Activator.CreateInstance(t);
+                RenderText(theclass.get_json_data());
             }
             
             /* public void get_json(string type)

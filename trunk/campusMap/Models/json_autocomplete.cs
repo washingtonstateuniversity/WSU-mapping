@@ -46,7 +46,7 @@ namespace campusMap.Models
     public class json_autocomplete<t> where t : campusMap.Models.Ijson_autocomplete
     {
 
-        public String get_json_data()
+        virtual public String get_json_data()
         {
             t[] all_tag = ActiveRecordBase<t>.FindAll();
             List<JsonAutoComplete> tag_list = new List<JsonAutoComplete>();
@@ -60,6 +60,5 @@ namespace campusMap.Models
             }
             return JsonConvert.SerializeObject(tag_list);
         }
-
     }
 }

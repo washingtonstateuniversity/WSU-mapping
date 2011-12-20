@@ -535,3 +535,11 @@ Invalid column name 'Id'.
 2011-12-20 10:55:33,376 [13] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
 2011-12-20 10:57:58,543 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
 2011-12-20 10:59:18,805 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:21:01,625 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:22:00,501 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:23:26,519 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:24:43,114 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:25:12,864 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:27:24,679 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:30:27,417 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:43:00,244 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
