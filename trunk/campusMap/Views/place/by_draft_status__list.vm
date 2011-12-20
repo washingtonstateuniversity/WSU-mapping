@@ -1,100 +1,100 @@
 <table width="60%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
   <tr>
-    <td>Showing $draftStories.FirstItem - $draftStories.LastItem of $draftStories.TotalItems</td>
+    <td>Showing $draftPlaces.FirstItem - $draftPlaces.LastItem of $draftPlaces.TotalItems</td>
     <td align="right">
-      #if($draftStories.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status='draft'}" )  #end
-      #if(!$draftStories.HasPrevious) first #end
-      #if($draftStories.HasPrevious) | $PaginationHelper.CreatePageLink( $draftStories.PreviousIndex, "prev",null, "%{searchId=$!searchId,status='draft'}" )  #end
-      #if(!$draftStories.HasPrevious) | prev #end
-      #if($draftStories.HasNext) | $PaginationHelper.CreatePageLink( $draftStories.NextIndex, "next",null, "%{searchId=$!searchId,status='draft'}" )  #end
-      #if(!$draftStories.HasNext) | next #end
-      #if($draftStories.HasNext) | $PaginationHelper.CreatePageLink( $draftStories.LastIndex, "last",null, "%{searchId=$!searchId,status='draft'}" )  #end
-      #if(!$draftStories.HasNext) | last #end
+      #if($draftPlaces.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if(!$draftPlaces.HasPrevious) first #end
+      #if($draftPlaces.HasPrevious) | $PaginationHelper.CreatePageLink( $draftPlaces.PreviousIndex, "prev",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if(!$draftPlaces.HasPrevious) | prev #end
+      #if($draftPlaces.HasNext) | $PaginationHelper.CreatePageLink( $draftPlaces.NextIndex, "next",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if(!$draftPlaces.HasNext) | next #end
+      #if($draftPlaces.HasNext) | $PaginationHelper.CreatePageLink( $draftPlaces.LastIndex, "last",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if(!$draftPlaces.HasNext) | last #end
     </td>
   </tr>
 </table>
-<ul class="storylistUL list_1">
+<ul class="placelistUL list_1">
 
-  #foreach($story in $draftStories)
+  #foreach($place in $draftPlaces)
   #* set up authors*#
   #set($authors='')
   #capturefor(authors)
-  #foreach ($author in $story.Authors)
+  #foreach ($author in $place.Authors)
   #each
-  <span class="emailCol" rel="$!author.Id">$!author.Name</span>
+  <span class="emailCol" rel="$!author.id">$!author.Name</span>
   #between
   /
   #end
   #end
   #* EOF set up  *#
 
-  <li class="ui-widget-content ui-corner-all story_$!story.Id con">
-    #if($story.CheckedOutBy!="" && $story.CheckedOutBy != $authusername)<span class="UinEdit ui-corner-bottom">
-      &nbsp;&nbsp;&nbsp;$story.CheckedOutBy is editing this Story <a href="#" title="Published" rel="$story.Id" class="buttons steal ui-button ui-widget ui-state-default ui-corner-all">
-        <span class="ui-icon ui-icon-unlocked"> </span> Click to Release Story</a>
+  <li class="ui-widget-content ui-corner-all place_$!place.id con">
+    #if($place.CheckedOutBy!="" && $place.CheckedOutBy != $authorname)<span class="UinEdit ui-corner-bottom">
+      &nbsp;&nbsp;&nbsp;$place.CheckedOutBy is editing this Place <a href="#" title="Published" rel="$place.id" class="buttons steal ui-button ui-widget ui-state-default ui-corner-all">
+        <span class="ui-icon ui-icon-unlocked"> </span> Click to Release Place</a>
     </span><div class="inEdit ui-corner-all"> </div>#end
-    <div class="story_aTar story_$!story.Id" title="$!story.Id">
+    <div class="place_aTar place_$!place.id" title="$!place.id">
       <div class='summaryCol'>
         <ul>
-          #if($story.Title)<li class='Title'>
-            <span>Title: </span>$!story.Title
+          #if($place.Title)<li class='Title'>
+            <span>Title: </span>$!place.Title
           </li>#end
           #if($authors!='')<li class='Authors'>
             <span>Authors: </span>$authors
           </li>#end
-          #if($story.Teaser)<li class='Teaser'>
+          #if($place.Teaser)<li class='Teaser'>
             <span>Teaser: </span>
             <span class="Teaser">
-              $Text.Fold($Controller.StripHtml($!story.Teaser,false),200)<br/>
+              $Text.Fold($Controller.StripHtml($!place.Teaser,false),200)<br/>
             </span>
-            <a href="$!siteroot/story/readmore.castle?id=$!{story.Id}">more</a>
+            <a href="$!siteroot/place/readmore.castle?id=$!{place.id}">more</a>
           </li>#end
-          #if($story.BodyText)<li class="Body">
+          #if($place.BodyText)<li class="Body">
             <span>Body: </span>
-            <span class="Body">$Text.Fold($Controller.StripHtml($!story.BodyText,false),100)</span>
-            <a href="$!siteroot/story/readmore.castle?id=$!{story.Id}">more</a>
+            <span class="Body">$Text.Fold($Controller.StripHtml($!place.BodyText,false),100)</span>
+            <a href="$!siteroot/place/readmore.castle?id=$!{place.id}">more</a>
           </li>#end
         </ul>
       </div>
       <div class='detailCol'>
         <ul>
-          #if($story.Publishtime)<li class='date'>
-            <span>Date: </span>$!story.Publishtime.ToString().Replace('12:00:00 AM','')
+          #if($place.Publishtime)<li class='date'>
+            <span>Date: </span>$!place.Publishtime.ToString().Replace('12:00:00 AM','')
           </li>#end
-          #if($story.Status.Title)<li class='Status'>
+          #if($place.Status.Title)<li class='Status'>
             <div>
-              <span>Status: </span>$!story.Status.Title
+              <span>Status: </span>$!place.Status.Title
             </div>
           </li>#end
-          #if($story.BreakingNews)<li>
-            <span>Breaking: </span>$!story.BreakingNews
+          #if($place.BreakingNews)<li>
+            <span>Breaking: </span>$!place.BreakingNews
           </li>#end
-          #if($story.Hottopic)<li>
-            <span>Hottopic: </span>$!story.Hottopic
+          #if($place.Hottopic)<li>
+            <span>Hottopic: </span>$!place.Hottopic
           </li>#end
-          #if($story.Location)<li>
-            <span>Location: </span>$!story.Location
+          #*#if($place.Location)<li>
+            <span>Location: </span>$!place.Location
+          </li>#end*#
+          #if($place.PlaceType.Name)<li>
+            <span>Type: </span>$!place.PlaceType.Name
           </li>#end
-          #if($story.StoryType.Name)<li>
-            <span>Type: </span>$!story.StoryType.Name
-          </li>#end
-          #if($story.Id)<li>
-            <span>Id: </span>$!story.Id
+          #if($place.id)<li>
+            <span>Id: </span>$!place.id
           </li>#end
         </ul>
       </div>
       <div class='actionCol'>
         <ul>
-          #if($Controller.canEdit($story,$loginUser) || $story.CheckedOutBy == $authusername || $story.isCheckedOutNull())
+          #if($Controller.canEdit($place,$loginUser) || $place.CheckedOutBy == $authorname || $place.isCheckedOutNull())
           <li>
-            <a href="#if($story.CheckedOutBy=="" || $story.CheckedOutBy == $authusername)$siteroot/story/Edit_story.castle?id=$!{story.Id} #else # #end" title="#if($story.CheckedOutBy)Is being edited by $story.CheckedOutBy #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
+            <a href="#if($place.CheckedOutBy=="" || $place.CheckedOutBy == $authorname)$siteroot/place/Edit_place.castle?id=$!{place.id} #else # #end" title="#if($place.CheckedOutBy)Is being edited by $place.CheckedOutBy #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
               <span class="ui-button-icon-primary ui-icon ui-icon-pencil"> </span>
               <span class="actionText">Edit</span>
               <span class="actionpropt">&#187;</span>
             </a>
           </li>
           <li>
-            <a href="$siteroot/story/delete.castle?id=$!{story.Id}" title="Delete"  class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
+            <a href="$siteroot/place/delete.castle?id=$!{place.id}" title="Delete"  class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
               <span class="ui-button-icon-primary ui-icon ui-icon-trash"> </span>
               <span class="actionText">Delete</span>
               <span class="actionpropt">&#187;</span>
@@ -103,7 +103,7 @@
           #end
           #if($Controller.canPublish($loginUser))
           <li>
-            <a href="$siteroot/story/setStatus.castle?id=$!{story.Id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
+            <a href="$siteroot/place/setStatus.castle?id=$!{place.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
               <span class="ui-button-icon-primary ui-icon ui-icon-star"> </span>
               <span class="actionText">Status</span>
               <span class="actionpropt">&#187;</span>
@@ -111,7 +111,7 @@
           </li>
           #end
           <li>
-            <a href="$siteroot/read/${story.CustomUrl}" target="_blank" title="View" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <a href="$siteroot/read/${place.CustomUrl}" target="_blank" title="View" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
               <span class="ui-button-icon-primary ui-icon ui-icon-search"> </span>
               <span class="actionText">View</span>
               <span class="actionpropt">&#187;</span>
@@ -127,16 +127,16 @@
 
 <table width="60%" border="0" >
   <tr>
-    <td>Showing $draftStories.FirstItem - $draftStories.LastItem of $draftStories.TotalItems</td>
+    <td>Showing $draftPlaces.FirstItem - $draftPlaces.LastItem of $draftPlaces.TotalItems</td>
     <td align="right">
-      #if($draftStories.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$searchId,status='draft'}" ) #end
-      #if(!$draftStories.HasPrevious) first #end
-      #if($draftStories.HasPrevious) | $PaginationHelper.CreatePageLink( $draftStories.PreviousIndex, "prev",null, "%{searchId=$searchId,status='draft'}" ) #end
-      #if(!$draftStories.HasPrevious) | prev #end
-      #if($draftStories.HasNext) | $PaginationHelper.CreatePageLink( $draftStories.NextIndex, "next",null, "%{searchId=$searchId,status='draft'}" ) #end
-      #if(!$draftStories.HasNext) | next #end
-      #if($draftStories.HasNext) | $PaginationHelper.CreatePageLink( $draftStories.LastIndex, "last",null, "%{searchId=$searchId,status='draft'}" ) #end
-      #if(!$draftStories.HasNext) | last #end
+      #if($draftPlaces.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$searchId,status='draft'}" ) #end
+      #if(!$draftPlaces.HasPrevious) first #end
+      #if($draftPlaces.HasPrevious) | $PaginationHelper.CreatePageLink( $draftPlaces.PreviousIndex, "prev",null, "%{searchId=$searchId,status='draft'}" ) #end
+      #if(!$draftPlaces.HasPrevious) | prev #end
+      #if($draftPlaces.HasNext) | $PaginationHelper.CreatePageLink( $draftPlaces.NextIndex, "next",null, "%{searchId=$searchId,status='draft'}" ) #end
+      #if(!$draftPlaces.HasNext) | next #end
+      #if($draftPlaces.HasNext) | $PaginationHelper.CreatePageLink( $draftPlaces.LastIndex, "last",null, "%{searchId=$searchId,status='draft'}" ) #end
+      #if(!$draftPlaces.HasNext) | last #end
     </td>
   </tr>
 </table>

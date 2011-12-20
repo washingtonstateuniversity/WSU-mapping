@@ -1,5 +1,5 @@
 <form method="post" enctype="text/plain" onSubmit="this.action = 'advancedsearch.castle?str=' + document.getElementById('search_field').value; return true;"  >
-$Form.HiddenField("place.Id")
+$Form.HiddenField("place.id")
     Search : 
     <select>
          <option value="places">Places</option>

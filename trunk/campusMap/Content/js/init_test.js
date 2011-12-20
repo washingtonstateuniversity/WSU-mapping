@@ -764,17 +764,81 @@ var availableTags = [
 
 
 $(function() {
+$('.quickActions').click(function() {
+  $(this).find('.action_nav').slideToggle('fast', function() {
+    // Animation complete.
+  });
+});
 
 
+
+
+$( "#findPlace" ).click(function(){
+	//if($('#dialog-form').length==0){$('#staging').append('<div id="dialog-form" title="Create new location"></div>');}
+	$( "#mapSearch" ).dialog({
+		minimize:true,
+		maximize:false,
+		autoOpen: false,
+		title:"Map Search",
+		//modal: true,
+		width:475,
+		buttons: {
+			"Add": function() {
+				
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		close: function() {
+			//allFields.val( "" ).removeClass( "ui-state-error" );
+		}
+	});
+	var geocoder = new google.maps.Geocoder();  
+	$("#searchbox").autocomplete({
+		source: function(request, response) {
+			if (geocoder == null){
+				geocoder = new google.maps.Geocoder();
+			}
+			geocoder.geocode( {'address': request.term }, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var searchLoc = results[0].geometry.location;
+					var lat = results[0].geometry.location.lat();
+					var lng = results[0].geometry.location.lng();
+					var latlng = new google.maps.LatLng(lat, lng);
+					var bounds = results[0].geometry.bounds;
+					
+					geocoder.geocode({'latLng': latlng}, function(results1, status1) {
+						if (status1 == google.maps.GeocoderStatus.OK) {
+							if (results1[1]) {
+								response($.map(results1, function(loc) {
+									return {
+										label  : loc.formatted_address,
+										value  : loc.formatted_address,
+										bounds   : loc.geometry.bounds
+									}
+								}));
+							}
+						}
+					});
+				}
+			});
+		},
+		select: function(event,ui){
+			var pos = ui.item.position;
+			var lct = ui.item.locType;
+			var bounds = ui.item.bounds;
+			if (bounds){
+				map.fitBounds(bounds);
+			}
+		}
+	});
+  $( "#mapSearch" ).dialog("open").dialog('widget');
+});
 	
 		var cache = {},
 			lastXhr;	
-		$( ".actions button:first" ).button({
-            icons: {
-                primary: "ui-icon-gear",
-                secondary: "ui-icon-triangle-1-s"
-            }
-        }).click(function(){
+		$( "#addPlace" ).click(function(){
 			if($('#dialog-form').length==0){$('#staging').append('<div id="dialog-form" title="Create new location"></div>');}
 			$( "#dialog-form" ).dialog({
 				minimize:true,
@@ -791,15 +855,15 @@ $(function() {
 					}
 				},
 				close: function() {
-					allFields.val( "" ).removeClass( "ui-state-error" );
+					//allFields.val( "" ).removeClass( "ui-state-error" );
 				}
 			});
 			
 			$('#dialog-form').load('../place/editor.castle',function(){
-					/*if($('#tabs.story_new').length>0){
-						taboptions={cookie:{expires: 1,path:'/story/'}};
+					/*if($('#tabs.place_new').length>0){
+						taboptions={cookie:{expires: 1,path:'/place/'}};
 					} */taboptions={};
-					$( "#tabs" ).tabs(typeof(story_id) !== 'undefined'&&story_id==0?{ disabled: [3] }:taboptions);
+					$( "#tabs" ).tabs(typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:taboptions);
 				});
 			$( "#dialog-form" ).dialog("open").dialog('widget');//.position({my: 'left',at: 'left',of: $('#map_canvas')}); 
 			drop1(); 
@@ -847,7 +911,10 @@ $(function() {
 						return false;
 					}
 				});
-			}).next('button').button({
+			});
+			
+			
+			$('.actions button:first').button({
 				icons: {
 					primary: "ui-icon-gear",
 					secondary: "ui-icon-triangle-1-s"

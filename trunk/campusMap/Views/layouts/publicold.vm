@@ -238,7 +238,7 @@ table tr{ vertical-align: top; }
 <div id="topAdBlock">
 	 #foreach($Ad in $Ads)
 		<div class="post">
-		      #if($Ad.Location.Id !=2) $Ad.HtmlText<br/>
+		      #if($Ad.Location.id !=2) $Ad.HtmlText<br/>
 			  #end
       	</div>
      #end 	
@@ -273,7 +273,7 @@ table tr{ vertical-align: top; }
 
 
 #foreach($Ad in $Ads)
-     #if($Ad.Location.Id !=1) $Ad.HtmlText<br/>
+     #if($Ad.Location.id !=1) $Ad.HtmlText<br/>
      #end
 #end
 </div>

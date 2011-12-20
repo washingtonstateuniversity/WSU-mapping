@@ -13,8 +13,8 @@
 	It's like getting the inside scoop the night before everyone else.</p>
 
 <form name="addForm" action="$siteroot/public/newsletter_add.castle" method="post">
-<input type="hidden" value="2" name="person.PersonType.Id">
-	<input id="person_Id" type="hidden" value="" name="person.Id">
+<input type="hidden" value="2" name="person.PersonType.id">
+	<input id="person_Id" type="hidden" value="" name="person.id">
 	<p>Email Address:<br/>
 	<input type="text" name="person.Email" value=""  class="w300 ui-widget ui-widget-content ui-corner-all " /></p>
 	<p>Name:<br/>

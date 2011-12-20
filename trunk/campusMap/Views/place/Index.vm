@@ -65,7 +65,7 @@
 				<div class="clear"></div>
 				
 				<ul id="blox-search-nav" class="hide">
-					<li><a id="s-stories" title="stories" class="selected" href="#">Search Stories</a></li>
+					<li><a id="s-stories" title="stories" class="selected" href="#">Search Places</a></li>
 					<li><a id="s-web" title="web" href="#">Search Web</a></li>
 
 					<li><a id="s-classifieds" title="classifieds" href="#">Search Classifieds</a></li>
@@ -277,7 +277,7 @@
 	<h3><a href="/news/local/article_74efcd20-4946-11e0-9fcd-001cc4c03286.html" title="Missoula academy specializes in classical education">Missoula academy specializes in classical education</a></h3>
 	<p>At the First Lutheran Classical School, a small upstart academy of "classical education" inside the walls of the South Avenue
 church, students learn grammar, logic and rhetoric. </p>
-	<p class="story-more">
+	<p class="place-more">
 	<em>Mar 07, 2011 | 11:00 pm</em>| 
 	<a id="comment_74efcd20-4946-11e0-9fcd-001cc4c03286" class="blox-comment" href="/news/local/article_74efcd20-4946-11e0-9fcd-001cc4c03286.html?mode=comments">Loading&hellip;</a>
 	</p>
@@ -292,7 +292,7 @@ church, students learn grammar, logic and rhetoric. </p>
 	<h3><a href="/college/griz/article_33dd1cd4-4950-11e0-a6be-001cc4c03286.html" title="Big Sky tournament: Long layoff raises questions for Griz">Big Sky tournament: Long layoff raises questions for Griz</a></h3>
 	<p>GREELEY, Colo. - As the saying goes, be careful what you wish for because it might come true.
     </p>
-   <p class="story-more">
+   <p class="place-more">
    <em>Mar 07, 2011 | 8:00 pm</em>|
    <a id="comment_33dd1cd4-4950-11e0-a6be-001cc4c03286" class="blox-comment" href="/college/griz/article_33dd1cd4-4950-11e0-a6be-001cc4c03286.html?mode=comments">Loading&hellip;</a>
    </p>
@@ -306,7 +306,7 @@ church, students learn grammar, logic and rhetoric. </p>
    <h3><a href="/news/state-and-regional/article_a64e37fc-4947-11e0-aed3-001cc4c03286.html" title="High snowpack should mean near-normal streamflow this summer">High snowpack should mean near-normal streamflow this summer</a></h3>
    <p>We may be ready to see winter gone, but our snowpack should stick with us for most of the summer.
   </p>
-  <p class="story-more">
+  <p class="place-more">
   <em>Mar 07, 2011 | 11:00 pm</em>|
   <a id="comment_a64e37fc-4947-11e0-aed3-001cc4c03286" class="blox-comment" href="/news/state-and-regional/article_a64e37fc-4947-11e0-aed3-001cc4c03286.html?mode=comments">Loading&hellip;</a>
   </p>
@@ -323,7 +323,7 @@ Missoula learning center, enter its giant 80-degree
 temperature-controlled greenhouse and walk among hundreds and
 hundreds of brightly colored, free-flying butterflies. 
 </p>
-<p class="story-more">
+<p class="place-more">
 <em>Mar 07, 2011 | 11:15 pm</em>
 | <a id="comment_eab587a4-4949-11e0-8423-001cc4c03286" class="blox-comment" href="/news/local/article_eab587a4-4949-11e0-8423-001cc4c03286.html?mode=comments">Loading&hellip;</a>
 </p>
@@ -341,7 +341,7 @@ chore. The snow adds to a Bitterroot snowpack that is already
 surpassing the annual average.
 </p>
 					
-					<p class="story-more">
+					<p class="place-more">
 						
 						<em>Mar 07, 2011 | 10:00 pm</em>
 						
@@ -371,11 +371,11 @@ surpassing the annual average.
 
 	
 		
-		<div class="story-block">
+		<div class="place-block">
 			<h3><a href="/news/local/article_63b7bd78-4947-11e0-ba00-001cc4c03286.html" title="Salish Kootenai College officials fear possible state, federal cuts">Salish Kootenai College officials fear possible state, federal cuts</a></h3>
 			
 				
-			<p class="story-more">
+			<p class="place-more">
 				
 				
 				<em>Mar 08, 2011 | 6:30 am</em>
@@ -387,11 +387,11 @@ surpassing the annual average.
 
 	
 		
-		<div class="story-block">
+		<div class="place-block">
 			<h3><a href="/news/local/article_d4cac348-4947-11e0-ade3-001cc4c03286.html" title="Plan to cut Pell grants disappoints Montana college financial aid officials">Plan to cut Pell grants disappoints Montana college financial aid officials</a></h3>
 			
 				
-			<p class="story-more">
+			<p class="place-more">
 				
 				
 				<em>Mar 08, 2011 | 6:15 am</em>
@@ -403,11 +403,11 @@ surpassing the annual average.
 
 	
 		
-		<div class="story-block">
+		<div class="place-block">
 			<h3><a href="/news/local/article_e31ede1a-4948-11e0-abbf-001cc4c03286.html" title="School health trust official tells Montana legislators hospital's prices 'predatory'">School health trust official tells Montana legislators hospital's prices 'predatory'</a></h3>
 			
 				
-			<p class="story-more">
+			<p class="place-more">
 				
 				
 				<em>Mar 08, 2011 | 6:00 am</em>
@@ -831,7 +831,7 @@ for the first time in 30 years to make sure all soldie&hellip;</dd>
 <div class="grid_4 omega">
 <ul class="bull-list">
 <li><a href="/lifestyles/territory/article_7156b506-4695-11e0-8c9e-001cc4c03286.html" title="Satire spreads targets wide: Lit professor’s voyage, inspired by Poe, makes  fun of race in U.S., more">Satire spreads targets wide: Lit professor’s voyage, inspired by Poe, makes  fun of race in U.S., more</a></li>
-<li><a href="/lifestyles/territory/article_c197efe4-4695-11e0-a449-001cc4c03286.html" title="History of exploitation, preservation: Brinkley charts state’s conservation movement">History of exploitation, preservation: Brinkley charts state’s conservation movement</a></li>
+<li><a href="/lifestyles/territory/article_c197efe4-4695-11e0-a449-001cc4c03286.html" title="Hiplace of exploitation, preservation: Brinkley charts state’s conservation movement">Hiplace of exploitation, preservation: Brinkley charts state’s conservation movement</a></li>
 <li><a href="/lifestyles/territory/article_7d318ba4-4694-11e0-b021-001cc4c03286.html" title="Book dates">Book dates</a></li>
 <li><a href="/lifestyles/territory/article_ad256b82-4694-11e0-92b8-001cc4c03286.html" title="SHELF LIFE: Check out catalog of free mp3s">SHELF LIFE: Check out catalog of free mp3s</a></li>
 <li><a href="/news/local/article_8a5a3f16-46ed-11e0-8a53-001cc4c002e0.html" title="Appraiser says works of Montana, regional artists in Collectors Resale auction deserve wider audience ">Appraiser says works of Montana, regional artists in Collectors Resale auction deserve wider audience </a></li>
@@ -850,7 +850,7 @@ for the first time in 30 years to make sure all soldie&hellip;</dd>
 		<dl class="grid_4 alpha">
 		<dd><a href="/news/opinion/columnists/article_f0f0a0de-4996-11e0-b013-001cc4c03286.html" title="HB309 is an attempt to gut state’s stream access law">HB309 is an attempt to gut state’s stream access law</a></dd>
 		<dd>Here we go again! If House Bill 309 passes, Montana's 26-year
-history of public stream access will likely come to an en&hellip;</dd>
+hiplace of public stream access will likely come to an en&hellip;</dd>
 				</dl>
 				<div class="grid_4 omega">
 				<ul class="bull-list">

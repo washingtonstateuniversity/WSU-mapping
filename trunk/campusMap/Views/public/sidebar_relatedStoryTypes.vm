@@ -11,7 +11,7 @@
     #end
   #end
       <li class="last more">
-        <a title="$!placeType.Name" href="$siteroot/Public/list.castle?id=$!{placeType.Id}"> Get more &#187;</a>
+        <a title="$!placeType.Name" href="$siteroot/Public/list.castle?id=$!{placeType.id}"> Get more &#187;</a>
       </li>
   </ul>
 </div>

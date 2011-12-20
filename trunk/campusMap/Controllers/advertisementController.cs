@@ -46,7 +46,7 @@ namespace campusMap.Controllers
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
             PropertyBag["advertisement"] = ActiveRecordBase<advertisement>.Find(id);
             media_types imgtype = ActiveRecordBase<media_types>.Find(2);
-            PropertyBag["images"] = imgtype.media;
+            PropertyBag["images"] = imgtype.media_typed;
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             //PropertyBag["classifiedtype"] = ActiveRecordBase<ClassifiedType>.FindAll();
@@ -65,7 +65,7 @@ namespace campusMap.Controllers
         public void New()
         {
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("ImageTypes", ActiveRecordBase<media_types>.Find(2)));
+            baseEx.Add(Expression.Eq("type", ActiveRecordBase<media_types>.Find(2)));
             PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll(baseEx.ToArray());
             PropertyBag["advertisement"] = ActiveRecordBase<advertisement>.FindAll();
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -77,7 +77,7 @@ namespace campusMap.Controllers
             PropertyBag["count"] = count;
 
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("ImageTypes", ActiveRecordBase<media_types>.Find(2)));
+            baseEx.Add(Expression.Eq("type", ActiveRecordBase<media_types>.Find(2)));
             PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll(baseEx.ToArray());
 
             List<media_repo> images = new List<media_repo>();
@@ -173,9 +173,9 @@ namespace campusMap.Controllers
                     if (image.id > 0)
                         advertisement.Images.Add(image);
                 }
-                /*if (advertisement.Location.Id == 0)
+                /*if (advertisement.Location.id == 0)
                 {
-                    advertisement.Location.Id = 2;
+                    advertisement.Location.id = 2;
                 }*/
                
                 ActiveRecordMediator<advertisement>.Save(advertisement);

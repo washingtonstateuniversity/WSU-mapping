@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Castle.ActiveRecord;
     using Castle.ActiveRecord.Queries;
+    using Castle.ActiveRecord.Framework;
     using Castle.MonoRail.Framework;
     using Castle.MonoRail.ActiveRecordSupport;
     using campusMap.Models;
@@ -19,9 +20,6 @@
     using System.Net.Sockets;
     using System.Web.Mail;
     using campusMap.Services;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Utilities;
-    using Newtonsoft.Json.Linq;
 
     using System.CodeDom;
     using System.CodeDom.Compiler;
@@ -30,81 +28,28 @@
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-    using System.IO;
     using System.Threading;
-    using System.Reflection;
 
-    namespace EvalCSCode
-    {
-        /// <summary>
-        /// Interface that can be run over the remote AppDomain boundary.
-        /// </summary>
-        public interface IRemoteInterface
-        {
-            object Invoke(string lcMethod, object[] Parameters);
-        }
+#endregion
 
 
-        /// <summary>
-        /// Factory class to create objects exposing IRemoteInterface
-        /// </summary>
-        public class RemoteLoaderFactory : MarshalByRefObject
-        {
-            private const BindingFlags bfi = BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
-
-            public RemoteLoaderFactory() { }
-
-            /// <summary> Factory method to create an instance of the type whose name is specified,
-            /// using the named assembly file and the constructor that best matches the specified parameters. </summary>
-            /// <param name="assemblyFile"> The name of a file that contains an assembly where the type named typeName is sought. </param>
-            /// <param name="typeName"> The name of the preferred type. </param>
-            /// <param name="constructArgs"> An array of arguments that match in number, order, and type the parameters of the constructor to invoke, or null for default constructor. </param>
-            /// <returns> The return value is the created object represented as ILiveInterface. </returns>
-            public IRemoteInterface Create(string assemblyFile, string typeName, object[] constructArgs)
-            {
-                return (IRemoteInterface)Activator.CreateInstanceFrom(
-                    assemblyFile, typeName, false, bfi, null, constructArgs,
-                    null, null, null).Unwrap();
-            }
-        }
-    }
 
 
-    #endregion
     namespace campusMap.Controllers
     {
 
-        public class JsonAutoComplete
-        {
-            private int Id;
-            [JsonProperty]
-            public int id
-            {
-                get { return Id; }
-                set { Id = value; }
-            }
-            private string Label;
-            [JsonProperty]
-            public string label
-            {
-                get { return Label; }
-                set { Label = value; }
-            }
-            private string Value;
-            [JsonProperty]
-            public string value
-            {
-                get { return Value; }
-                set { Value = value; }
-            }
-        }
+
+
+
+
 
 
         [Layout("home")]
         public class publicController : BaseController
         {
             #region JSON OUTPUT
-            public void get_pace_type()
+
+            /*public void get_pace_type()
             {
                 CancelView();
                 CancelLayout();
@@ -121,12 +66,25 @@
                 }
                 string json = JsonConvert.SerializeObject(type_list);
                 RenderText(json);
-            }
-            public void get_json(string type)
+            }*/
+
+            public void get_json(String TYPE)
             {
                 CancelView();
                 CancelLayout();
-                /*t[] all_tag = ActiveRecordBase<t>.FindAll();
+                Type t = Type.GetType(TYPE);
+                MethodInfo method = t.GetMethod("get_json_data");
+                //MethodInfo generic = method.MakeGenericMethod(t);
+                String s = (String)method.Invoke(this, new object[] { BindingFlags.InvokeMethod | BindingFlags.Public });
+                RenderText(s);
+
+            }
+            
+            /* public void get_json(string type)
+            {
+                CancelView();
+                CancelLayout();
+                t[] all_tag = ActiveRecordBase<t>.FindAll();
 
                 List<JsonAutoComplete> tag_list = new List<JsonAutoComplete>();
                 foreach (t tag in all_tag)
@@ -136,7 +94,7 @@
                     obj.label = tag.name;
                     obj.value = tag.name;
                     tag_list.Add(obj);
-                }*/
+                }
                 StringBuilder jsonobj = new StringBuilder("");
                 jsonobj.Append(""+type+"[] all_tag = ActiveRecordBase<"+type+">.FindAll();\n");
                 jsonobj.Append("List<JsonAutoComplete> tag_list = new List<JsonAutoComplete>();{\n");
@@ -189,7 +147,7 @@
 
                 string json = JsonConvert.SerializeObject(s);
                 RenderText(json);
-            }/**/
+            }*/
             #endregion
 
         #region URL rendering
@@ -257,25 +215,7 @@
             PropertyBag["places"] = places;
         }
 
-        public void placebyuser() 
-        {
-            PropertyBag["placesbyuser"] = ActiveRecordBase<PlaceByUser>.FindAll();
-        }
 
-        public void placebyuserupdate([ARDataBind("placebyuser", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] PlaceByUser placebyuser)
-        {                          
-            try
-            {             
-              ActiveRecordMediator<PlaceByUser>.Save(placebyuser);
-            }                 
-            catch (Exception ex)
-            {
-                Flash["error"] = ex.Message ;
-                Flash["placebyuser"] = placebyuser;
-
-            }
-            RedirectToAction("thankyou");
-        }
         [Layout("secondary")]
         public void thankyou()
         {
@@ -446,7 +386,7 @@
             place place = ActiveRecordBase<place>.Find(id);
             canView(place);
             PropertyBag["Place"] = place;
-            PropertyBag["comments"] = ActiveRecordBase<place_comments>.FindAll();
+            PropertyBag["comments"] = ActiveRecordBase<comments>.FindAll();
             place[] places = placeService.getPublishedPlaces(Order.Desc("Order"));
             PropertyBag["places"] = places;
             PropertyBag["Ads"] = placeService.getAdvertisements(places);
@@ -464,7 +404,7 @@
              */
         }
 
-        public void userFlag(string flagged, [ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] place_comments comment)
+        public void userFlag(string flagged, [ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment)
         {
             if ( String.IsNullOrEmpty(flagged) )
             {
@@ -482,7 +422,7 @@
             }
         }
 
-        public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] place_comments comment, string Asirra_Ticket)
+        public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment, string Asirra_Ticket)
         {
             // Check if they filled out spam blocker
             if (String.IsNullOrEmpty(Asirra_Ticket))
@@ -509,7 +449,7 @@
             }
 
             //check if blank
-            if (String.IsNullOrEmpty(comment.Comments))
+            if (String.IsNullOrEmpty(comment.comment))
             {
                 Flash["message"] = "You must post something to post something.";
                 RedirectToReferrer();
@@ -517,10 +457,10 @@
             }
 
             //Setup the decode version to check
-            comment.Comments = helperService.decodeString(comment.Comments);
+            comment.comment = helperService.decodeString(comment.comment);
 
             //Check if just spaces
-            if (comment.Comments != null && String.IsNullOrEmpty(comment.Comments.Trim()))
+            if (comment.comment != null && String.IsNullOrEmpty(comment.comment.Trim()))
             {
                 Flash["message"] = "You must post something to post something.";
                 RedirectToReferrer();
@@ -528,12 +468,12 @@
             }
 
             // Strip html elements
-            comment.Comments = helperService.stripHTMLElements(comment.Comments);
+            comment.comment = helperService.stripHTMLElements(comment.comment);
             //ReSetup the decode version to check
-            comment.Comments = helperService.decodeString(comment.Comments);
+            comment.comment = helperService.decodeString(comment.comment);
             
             // Check for links
-            if (helperService.hasLink(comment.Comments))
+            if (helperService.hasLink(comment.comment))
             {
                 comment.Flagged = true;
                 comment.published = false;
@@ -658,7 +598,7 @@
 
         public void canView(place place)
         {
-            if (place != null && place.status != null &&place.status.Id != 3)
+            if (place != null && place.status != null &&place.status.id != 3)
             {
                 authors user = getUser();
                 bool able = false;
@@ -704,7 +644,7 @@
             {
                 PropertyBag["flag"] = false; 
             }
-            PropertyBag["comment"] = new place_comments();         
+            PropertyBag["comment"] = new comments();         
             /*IList<place> breakingplaces = new List<place>();
             foreach (place tempplace in places)
             {
@@ -830,7 +770,7 @@
                 Flash["error"] = ex.Message;
                 Flash["applicant"] = applicant;
             }
-            Redirect("../public/application.castle?id="+applicant.Id);
+            Redirect("../public/application.castle?id="+applicant.id);
         }
         public void Download(int id)
         {
@@ -866,10 +806,10 @@
                     
                     }
                     String uploadPath = Context.ApplicationPhysicalPath + "\\resumeupload\\";
-                    resume.SaveAs(uploadPath + applicant.Id + "resume.ext");
-                    sample1.SaveAs(uploadPath + applicant.Id + "sample1.ext");
-                    sample2.SaveAs(uploadPath + applicant.Id + "sample2.ext");
-                    sample3.SaveAs(uploadPath + applicant.Id + "sample3.ext");   
+                    resume.SaveAs(uploadPath + applicant.id + "resume.ext");
+                    sample1.SaveAs(uploadPath + applicant.id + "sample1.ext");
+                    sample2.SaveAs(uploadPath + applicant.id + "sample2.ext");
+                    sample3.SaveAs(uploadPath + applicant.id + "sample3.ext");   
   
                 }
 

@@ -38,11 +38,11 @@ namespace campusMap.Services
 
         public bool isLogedIn(string username)
         {
-            authors[] authUser_list = getLogedIn();
+            authors[] author_list = getLogedIn();
             bool temp = false;
-            foreach (authors authUser in authUser_list)
+            foreach (authors author in author_list)
             {
-                if (!string.IsNullOrEmpty(authUser.Nid) && authUser.Nid.ToUpper() == username.ToUpper())
+                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
                 { temp = true; }
             }
             return temp;

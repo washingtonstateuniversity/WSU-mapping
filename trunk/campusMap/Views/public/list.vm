@@ -1,4 +1,4 @@
-#if($placetype.Name)<h2><a class="section" title="$placetype.Name" href="$siteroot/public/list.castle?id=$placetype.Id">$placetype.Name</a></h2>#end
+#if($placetype.Name)<h2><a class="section" title="$placetype.Name" href="$siteroot/public/list.castle?id=$placetype.id">$placetype.Name</a></h2>#end
 <ul id="listings">
 	#set ($c=0)
 	#foreach($place in $placeByType)

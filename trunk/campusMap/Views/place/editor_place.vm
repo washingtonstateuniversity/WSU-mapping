@@ -84,10 +84,10 @@
     </p>
     <p>
       Place Status:<br/>
-      $Form.Select("place.status.Id", $statuslists, "%{value='Id', text='Title'}")
+      $Form.Select("place.status.id", $statuslists, "%{value='Id', text='Title'}")
     </p>
     #else
-    <input type="hidden" value="1" name="place.status.Id" />
+    <input type="hidden" value="1" name="place.status.id" />
     #end
     #*<p>
       Show in breaking News: <br/> $FormHelper.CheckboxField("place.BreakingNews")
@@ -152,7 +152,7 @@
   <div id="tabs-3">
 
     <h3>Place Type :</h3>
-    $Form.Select("place.placeType.Id", $placetype, "%{value='Id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
+    $Form.Select("place.placeType.id", $placetype, "%{value='Id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
 
     <div id="AuthorDiv">
       <h3>Authors</h3>
@@ -218,12 +218,12 @@
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>
                             <span class="imgInfo">
-                              <span><lable>Caption:</lable><input type="text" value="$!{placeimage.Caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
-                              <span><lable>Credit:</lable><input type="text" value="$!{placeimage.Credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
+                              <span><lable>Caption:</lable><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
+                              <span><lable>Credit:</lable><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
                               <span><lable>Order:</lable>
-                              <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).Id}" name="PlaceImages[$!{placeimage.id}].Id" class=""/>
+                              <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
                               <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
-                              <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.Id" class="placeOrderId"/>
+                              <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>
                               </span>
                             </span>
                         </span>
@@ -266,17 +266,17 @@
         #set ($c=0)
         #foreach($comment in $comments)
         <tr class="#if($c%2>0) even #else odd #end #if($comment.adminRead==false) ui-state-highlight #end ">
-          <td>$!comment.Place.Id</td>
+          <td>$!comment.Place.id</td>
           <td>$Text.Fold($Controller.StripHtml($!comment.Comments,false),100)</td>
           <td #if($comment.Flagged==true) class="ui-state-error" #end>$!comment.Flagged</td>
           <td>$!comment.published</td>
           <td class='actionArea'>
 
             <span style='font-size:0.7em;'>
-              <a href="../comment/edit.castle?id=$!{comment.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+              <a href="../comment/edit.castle?id=$!{comment.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                 <span class="ui-icon ui-icon-pencil"></span>
               </a>
-              <a href="../comment/delete.castle?id=$!{comment.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+              <a href="../comment/delete.castle?id=$!{comment.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                 <span class="ui-icon ui-icon-trash"></span>
               </a>
             </span>

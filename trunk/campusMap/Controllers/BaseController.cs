@@ -62,12 +62,12 @@ namespace campusMap.Controllers
             try
             {
                 String login_username = getUserName();
-                authors[] authUser_list = ActiveRecordBase<authors>.FindAll();
+                authors[] author_list = ActiveRecordBase<authors>.FindAll();
                 authors temp = null;
-                foreach (authors authUser in authUser_list)
+                foreach (authors author in author_list)
                 {
-                    if (!string.IsNullOrEmpty(authUser.Nid) && authUser.Nid.ToUpper() == login_username.ToUpper())
-                    { temp = authUser; }
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == login_username.ToUpper())
+                    { temp = author; }
                 }
                 return temp;
             }

@@ -9,7 +9,7 @@
 */
 
 /* setup VARS */
-    //var story_id=0;
+    //var place_id=0;
     var timers_arr = new Array();
     var c=0;
     var t;
@@ -184,8 +184,8 @@ function AddTag(){
 }
 
 
-function DeleteImage(image_id,storyId){
-    $.get(siteroot+view+'DeleteImage.castle?id='+image_id+'&storyId='+storyId, function(data){});
+function DeleteImage(image_id,placeId){
+    $.get(siteroot+view+'DeleteImage.castle?id='+image_id+'&placeId='+placeId, function(data){});
     $("#ImageDiv div#" + image_id).remove();
 	//RemoveNode(ImageId);
 	//removeFromImgRoster(image_id);
@@ -217,19 +217,19 @@ function updateaddImageDIV(transport){
 function boxCreation(image_id){
 	var HTML ='<input type="hidden" value="'+image_id+'" name="images['+image_id+'].id" style="">';
 		HTML+='<span class="imageBox">';
-		HTML+='<img src="/image/download.castle?id='+image_id+'&storyid='+story_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
-		HTML+='<a title="'+image_id+'" rel="'+story_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
+		HTML+='<img src="/image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
+		HTML+='<a title="'+image_id+'" rel="'+place_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
 		HTML+='<span class="ui-icon ui-icon-trash"></span>';
 		HTML+='</a>';
 		
 		HTML+='<span class="imgInfo">';
 		HTML+='<span><lable>Caption:</lable><input type="text" value="'+image_Caption+'" name="Caption['+image_id+']" class=""/></span>';
-		HTML+='<span><lable>Credit:</lable><input type="text" value="'+image_Credit+'" name="Credit['+image_id+']" class="storyCredit"/></span>';
+		HTML+='<span><lable>Credit:</lable><input type="text" value="'+image_Credit+'" name="Credit['+image_id+']" class="placeCredit"/></span>';
 		
 		HTML+='<span><lable>Order:</lable>';
-		HTML+='<input type="hidden" class="" name="StoryImages['+image_id+'].Id" value="411">';
-		HTML+='<input type="text" class="storyOrder" name="StoryImages['+image_id+'].storyOrder" value="0">';
-		HTML+='<input type="hidden" class="storyOrderId" name="StoryImages['+image_id+'].Image.Id" value="'+image_id+'">';
+		HTML+='<input type="hidden" class="" name="PlaceImages['+image_id+'].id" value="411">';
+		HTML+='<input type="text" class="placeOrder" name="PlaceImages['+image_id+'].placeOrder" value="0">';
+		HTML+='<input type="hidden" class="placeOrderId" name="PlaceImages['+image_id+'].Image.id" value="'+image_id+'">';
 		HTML+='</span>';
 		
 		
@@ -255,7 +255,7 @@ function boxCreation(image_id){
 function addToImgRoster(id,name){
 	if(typeof(id)==='undefined'||id<=0){return}
 	if(typeof(name)==='undefined'){name="";}
-	tinyMCEImageList.push({id:""+id,name:name,url:"/image/download.castle?id="+id+"&storyid="+story_id+"&m=crop&w=250&h=250&pre=TMP"});	
+	tinyMCEImageList.push({id:""+id,name:name,url:"/image/download.castle?id="+id+"&placeid="+place_id+"&m=crop&w=250&h=250&pre=TMP"});	
 }
 function removeFromImgRoster(id){
 	if(typeof(id)==='undefined'||id<=0){return}
@@ -282,7 +282,7 @@ function openImgUploader(){
 									width:'375px',
 									modal: true,
 									position:['center','center'] ,
-									title:'Story Imagery',
+									title:'Place Imagery',
 									close:function(){
 										$( "#dialog-pickimage" ).dialog( "destroy" );
 										$( "#dialog-pickimage" ).remove();
@@ -297,26 +297,26 @@ function openImgUploader(){
 																var image_id=node.id;
 																optional+='<option value="'+image_id+'">'+name+'</option>';
 														}
-												var HTML  ='<div id="imgPre"></div>';//<h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Story images</h3><select id="imagePicker">'+optional+'</select>';
-													HTML += '<h3 id="inlineStoryImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
+												var HTML  ='<div id="imgPre"></div>';//<h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Place images</h3><select id="imagePicker">'+optional+'</select>';
+													HTML += '<h3 id="inlinePlaceImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
 															
 												return HTML;
 											});
 											
 											$('#imagePicker').live('change',function(){
 												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
-												if( $('#ISIUarea').css('display')!='none'){$('#inlineStoryImageUpload').click();}
+												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&storyid='+story_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
 
 											$('#ISIUarea').load('/image/inlineupload.castle',function(){
-												if(typeof(availableCredits) !== 'undefined'){
+												if(typeof(availablecredits) !== 'undefined'){
 													if($( "#image_Credit" ).length>0){
 														$( "#image_Credit" ).autocomplete({
-															source: availableCredits
+															source: availablecredits
 														});
 													}
 												}	
@@ -337,8 +337,8 @@ function openImgUploader(){
 																'image.FileName':$('input#image_FileName'),
 																'image.Caption':$('input#image_Caption'),
 																'image.Credit':$('input#image_Credit'),
-																'story_id':story_id,
-																'image.ImageTypes.id':1,
+																'place_id':place_id,
+																'image.type.id':1,
 																'ajax':true
 															  }, 
 															  'onComplete': function(response) { 
@@ -362,7 +362,7 @@ function openImgUploader(){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&storyid='+story_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){
@@ -414,13 +414,13 @@ function openImgUploader(){
 															});
 												});
 
-											$('#inlineStoryImageUpload').bind('click',function(e){
+											$('#inlinePlaceImageUpload').bind('click',function(e){
 												e.preventDefault();
 												e.stopPropagation();
 												var imgid=$('#imagePicker :selected').val();
 												 $('#ISIUarea').slideToggle('fast',function(){
-													 $('#inlineStoryImageUpload span').toggleClass('ui-icon-carat-1-n');
-													 $('#inlineStoryImageUpload span').toggleClass('ui-icon-carat-1-s');
+													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
+													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
 												 });
 												if( $('#ISIUarea').css('display')=='none'){
 													$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
@@ -447,7 +447,7 @@ function openImgResource(ed,uploadOnly){
 									width:'375px',
 									modal: true,
 									position:['center','center'] ,
-									title:'Story Imagery',
+									title:'Place Imagery',
 									close:function(){
 										$( "#dialog-pickimage" ).dialog( "destroy" );
 										$( "#dialog-pickimage" ).remove();
@@ -462,18 +462,18 @@ function openImgResource(ed,uploadOnly){
 																var image_id=node.id;
 																optional+='<option value="'+image_id+'">'+name+'</option>';
 														}
-												var HTML  ='<div id="imgPre"></div><h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Story images</h3><select id="imagePicker">'+optional+'</select>';
-													HTML += '<h3 id="inlineStoryImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
+												var HTML  ='<div id="imgPre"></div><h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Place images</h3><select id="imagePicker">'+optional+'</select>';
+													HTML += '<h3 id="inlinePlaceImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
 															
 												return HTML;
 											});
 											
 											$('#imagePicker').live('change',function(){
 												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
-												if( $('#ISIUarea').css('display')!='none'){$('#inlineStoryImageUpload').click();}
+												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&storyid='+story_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
 											$('#ISIUarea').load('/image/inlineupload.castle',function(){
@@ -486,8 +486,8 @@ function openImgResource(ed,uploadOnly){
 																'image.FileName':$('input#image_FileName'),
 																'image.Caption':$('input#image_Caption'),
 																'image.Credit':$('input#image_Credit'),
-																'story_id':story_id,
-																'image.ImageTypes.id':1,
+																'place_id':place_id,
+																'image.type.id':1,
 																'ajax':true
 															  }, 
 															  'onComplete': function(response) { 
@@ -511,7 +511,7 @@ function openImgResource(ed,uploadOnly){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&storyid='+story_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){
@@ -564,13 +564,13 @@ function openImgResource(ed,uploadOnly){
 															});
 												});
 
-											$('#inlineStoryImageUpload').bind('click',function(e){
+											$('#inlinePlaceImageUpload').bind('click',function(e){
 												e.preventDefault();
 												e.stopPropagation();
 												var imgid=$('#imagePicker :selected').val();
 												 $('#ISIUarea').slideToggle('fast',function(){
-													 $('#inlineStoryImageUpload span').toggleClass('ui-icon-carat-1-n');
-													 $('#inlineStoryImageUpload span').toggleClass('ui-icon-carat-1-s');
+													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
+													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
 												 });
 												if( $('#ISIUarea').css('display')=='none'){
 													$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
@@ -628,7 +628,7 @@ function contextmenu_fix(ed) {
 						var orgUrl=imgNode.attr('src');
 						alert(v);
 						alert(orgUrl);
-						var url=orgUrl.split('id='+imgid[1]+'&storyid').join('id='+v+'&storyid');
+						var url=orgUrl.split('id='+imgid[1]+'&placeid').join('id='+v+'&placeid');
 						alert(url);
 						imgNode.css({'opacity':'.65'});
 						
@@ -663,7 +663,7 @@ function contextmenu_fix(ed) {
 function editor_oninit(ed) {
     // Add hook for onContextMenu so that Insert Image can be removed
     ed.plugins.contextmenu.onContextMenu.add(editor_remove_insertImage);
-	if(typeof(story_id) !== 'undefined'&&story_id>0){
+	if(typeof(place_id) !== 'undefined'&&place_id>0){
 		setTimeout(function () {
 			ed.controlManager.setActive('spellchecker', true);
 			ed.execCommand('mceSpellCheck', true);
@@ -714,8 +714,8 @@ function editor_remove_insertImage(sender, menu) {
 
 function get_TinyMCE_InlinImage(image_id){
 	var baseurl='/';
-	var MACRO='#Inline_Iamge('+image_id+' '+story_id+' 250 250 "")';
-	return '<img src="'+baseurl+'image/download.castle?id='+image_id+'&storyid='+story_id+'&m=crop&w=250&h=250&pre=TMP" class="tinyImgHolder" alt="imagingIt|'+image_id+'" title="'+MACRO+'" />'; 
+	var MACRO='#Inline_Iamge('+image_id+' '+place_id+' 250 250 "")';
+	return '<img src="'+baseurl+'image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP" class="tinyImgHolder" alt="imagingIt|'+image_id+'" title="'+MACRO+'" />'; 
 }
 
 function get_TinyMCE_InlinYouTube(yCode,title,w,h,yclass){
@@ -736,8 +736,8 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 		i++;
 	}
 	var baseurl='/';
-	var MACRO="#imagegallery('"+story_id+"' "+w+" "+h+" '"+yclass+"')";
-	var html ='<img src="'+baseurl+'image/download.castle?id='+image_id+'&storyid='+story_id+'&m=crop&w=250&h=250&pre=TMP&mark=SLIDESHOW" class="tinyImgHolder" alt="gallerya|'+image_id+'" title="'+MACRO+'"/>';
+	var MACRO="#imagegallery('"+place_id+"' "+w+" "+h+" '"+yclass+"')";
+	var html ='<img src="'+baseurl+'image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP&mark=SLIDESHOW" class="tinyImgHolder" alt="gallerya|'+image_id+'" title="'+MACRO+'"/>';
     return html;   
 }
 
@@ -746,8 +746,8 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 var FileName='';
 
 function isNumber(n) {   return !isNaN(parseFloat(n)) && isFinite(n); } 
-if(typeof(story_id)!=='undefined'){
-var storyImgBtn = story_id>0?"|,mainImage,|,imagegallery,":"";
+if(typeof(place_id)!=='undefined'){
+var placeImgBtn = place_id>0?"|,mainImage,|,imagegallery,":"";
 }
 
 
@@ -759,11 +759,11 @@ function tinyoptions(which){
             return {
                 mode : "exact", 
                 body_id : "left_col",
-                elements : "story_Bodytext",
+                elements : "place_Bodytext",
                 theme : "advanced",
 				width:"685",
                 plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
-                theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+storyImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
+                theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
                 theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker", 
                 theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect",
                 spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker",
@@ -813,7 +813,7 @@ function tinyoptions(which){
 									//alert(theclass[1]);
 								if(image[0]=="imagingIt"){
 									var image_id = image[1];
-									imgNode.attr('title','#Inline_Iamge('+image_id+' '+story_id+' ' + imgNode.width() + ' ' + imgNode.height()+' \''+ theclass[1] +'\')');
+									imgNode.attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width() + ' ' + imgNode.height()+' \''+ theclass[1] +'\')');
 									contextmenu_fix(ed);
 								}
 								if(image[0]=="youtubingIt"){
@@ -823,7 +823,7 @@ function tinyoptions(which){
 								}
 								if(image[0]=="gallerya"){
 									var image_id = image[1];
-									imgNode.attr('title','#imagegallery(\''+story_id+'\' '+ imgNode.width() +' '+ imgNode.height() +' \''+ theclass[1] +'\')');
+									imgNode.attr('title','#imagegallery(\''+place_id+'\' '+ imgNode.width() +' '+ imgNode.height() +' \''+ theclass[1] +'\')');
 								}
 								
 								
@@ -926,7 +926,7 @@ function tinyoptions(which){
 								theclass=theclass.split('tinyImgHolder');
 						if(image[0]=="imagingIt"){
 							var image_id = image[1];
-								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+story_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
+								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
 						}
 						if(image[0]=="youtubingIt"){
 							var yCode=image[1];
@@ -944,7 +944,7 @@ function tinyoptions(which){
 								theclass=theclass.split('tinyImgHolder');
 						if(image[0]=="imagingIt"){
 							var image_id = image[1];
-								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+story_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
+								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
 						}
 						if(image[0]=="youtubingIt"){
 							var yCode=image[1];
@@ -959,7 +959,7 @@ function tinyoptions(which){
        case "simple":
             return {
                 mode : "exact", 
-                elements : "story_Teaser",
+                elements : "place_Teaser",
                 theme : "advanced",
                 width : "685", 
 				height:  "350",
@@ -1012,26 +1012,26 @@ function load_tiny(which){
         tinyMCE.init(tinyoptions(which));
 }
 
-function loadStat(stat,story_id,diaObj){
+function loadStat(stat,place_id,diaObj){
     $.ajaxSetup ({cache: false}); 
     var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-    //alert(story_id);
-    $.get(siteroot+view+'setStatus.castle?id='+story_id+'&status='+stat , function(response, status, xhr) {
-        var statIs = $("<div>").append(response.replace(rscript, "")).find('.story_'+story_id+' .Status div');
-        $('body .story_'+story_id+' .Status').empty().append(statIs.html());
-        $('body li.story_'+story_id).clone().prependTo('.list_'+stat);
-        $('body li.story_'+story_id).not('.list_'+stat+' li.story_'+story_id+':first').remove();
+    //alert(place_id);
+    $.get(siteroot+view+'setStatus.castle?id='+place_id+'&status='+stat , function(response, status, xhr) {
+        var statIs = $("<div>").append(response.replace(rscript, "")).find('.place_'+place_id+' .Status div');
+        $('body .place_'+place_id+' .Status').empty().append(statIs.html());
+        $('body li.place_'+place_id).clone().prependTo('.list_'+stat);
+        $('body li.place_'+place_id).not('.list_'+stat+' li.place_'+place_id+':first').remove();
         $( ".buttons.pubState" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
         $( "#dialog .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
         diaObj.dialog( "close" );	
     });                       
 }
 
-function sendBr(story_id,diaObj){
+function sendBr(place_id,diaObj){
     $.ajaxSetup ({cache: false}); 
     var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-    //alert(story_id);
-    $.get(siteroot+view+'end_breaking_single.castle?id='+story_id , function(response, status, xhr) {
+    //alert(place_id);
+    $.get(siteroot+view+'end_breaking_single.castle?id='+place_id , function(response, status, xhr) {
         diaObj.dialog( "close" );
         if(response!='true'){
             alertLoadingSaving(response);
@@ -1044,18 +1044,18 @@ function sendBr(story_id,diaObj){
 
 
 
-function clearLock(story_id,diaObj,callback){
+function clearLock(place_id,diaObj,callback){
     $.ajaxSetup ({cache: false,async:false}); 
     var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-    //alert(story_id);
-    $.get(siteroot+view+'clearLock.castle?id='+story_id, function(response, status, xhr) {
+    //alert(place_id);
+    $.get(siteroot+view+'clearLock.castle?id='+place_id, function(response, status, xhr) {
         if(response=='true'){
             if(typeof(diaObj) !== 'undefined'&&diaObj!=''){
-                $('body li.story_'+story_id).find('.inEdit').fadeOut('fast',function(){$('body li.story_'+story_id).find('.inEdit').remove();});
-                $('body li.story_'+story_id).find('.UinEdit').fadeOut('fast',function(){$('body li.story_'+story_id).find('.UinEdit').remove();});
+                $('body li.place_'+place_id).find('.inEdit').fadeOut('fast',function(){$('body li.place_'+place_id).find('.inEdit').remove();});
+                $('body li.place_'+place_id).find('.UinEdit').fadeOut('fast',function(){$('body li.place_'+place_id).find('.UinEdit').remove();});
                 $( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
                 $( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
-                $('body li.story_'+story_id).find('.buttons.editIt').attr('href','Edit_story.castle?id='+story_id);
+                $('body li.place_'+place_id).find('.buttons.editIt').attr('href','Edit_place.castle?id='+place_id);
                 diaObj.dialog( "close" );	
             }
             if($.isFunction(callback)) callback();
@@ -1067,7 +1067,7 @@ function clearLock(story_id,diaObj,callback){
 function Checktitle(title,getid,callback){
     $.ajaxSetup ({cache: false}); 
     var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-    //alert(story_id);
+    //alert(place_id);
     var returnId=getid?'&id=true':''
     $.get(siteroot+view+'checktitle.castle?title='+title+returnId, function(response, status, xhr) {
             if($.isFunction(callback)) callback(response);
@@ -1113,7 +1113,7 @@ $(function() {
 	$(".lazy img,img.lazy").lazyload();
 
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
-        if($("#tabs-2 #story_Bodytext").length>0){
+        if($("#tabs-2 #place_Bodytext").length>0){
             load_tiny("bodytext");
             load_tiny("simple");
         }else{
@@ -1228,16 +1228,16 @@ $(function() {
     if($( "#tabs" ).length>0){
         var  taboptions;
 			
-        if($('#tabs.story_new').length>0){
-            taboptions={cookie:{expires: 1,path:'/story/'}};
+        if($('#tabs.place_new').length>0){
+            taboptions={cookie:{expires: 1,path:'/place/'}};
         } 
-        $( "#tabs" ).tabs(typeof(story_id) !== 'undefined'&&story_id==0?{ disabled: [3] }:taboptions);
+        $( "#tabs" ).tabs(typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:taboptions);
 		
-		if(typeof(story_id) !== 'undefined'&&story_id==0){
-			if($( "#NewStory" ).length==0){
-				$( "body" ).append('<div id="NewStory" title="Starting a New Story"><h4 style="line-height:20px;">Notice:</h4><p> you must Save the story to add images.  When you click save you will be directed back to this story.</div>');
+		if(typeof(place_id) !== 'undefined'&&place_id==0){
+			if($( "#NewPlace" ).length==0){
+				$( "body" ).append('<div id="NewPlace" title="Starting a New Place"><h4 style="line-height:20px;">Notice:</h4><p> you must Save the place to add images.  When you click save you will be directed back to this place.</div>');
 			}
-			$( "#NewStory" ).dialog({
+			$( "#NewPlace" ).dialog({
 				autoOpen: true,
 				height: 250,
 				width:425,
@@ -1262,8 +1262,8 @@ $(function() {
         } 
     }
 
-    if($( "#story_publishtime,#advertisement_expiration,#comment_createtime,#classified_CreateDate,#pdf_Date,#advertisement_startdate" ).length>0){
-	    $( "#story_publishtime,#advertisement_expiration,#comment_createtime,#comment_updatetime,#classified_CreateDate,#classified_ExpirationDate,#pdf_Date,#advertisement_startdate" ).datetimepicker({
+    if($( "#place_publishtime,#advertisement_expiration,#comment_createtime,#classified_CreateDate,#pdf_Date,#advertisement_startdate" ).length>0){
+	    $( "#place_publishtime,#advertisement_expiration,#comment_createtime,#comment_updatetime,#classified_CreateDate,#classified_ExpirationDate,#pdf_Date,#advertisement_startdate" ).datetimepicker({
 	        showOtherMonths: true,
 		    selectOtherMonths: true,
 		    changeMonth: true,
@@ -1298,15 +1298,15 @@ $(function() {
             }
         });
     }
-    if(typeof(availableCredits) !== 'undefined'){
+    if(typeof(availablecredits) !== 'undefined'){
         if($( "#image_Credit" ).length>0){
 			$( "#image_Credit" ).autocomplete({
-				source: availableCredits
+				source: availablecredits
 			});
 		}
-		if($( ".storyCredit" ).length>0){
-			$( ".storyCredit" ).autocomplete({
-				source: availableCredits
+		if($( ".placeCredit" ).length>0){
+			$( ".placeCredit" ).autocomplete({
+				source: availablecredits
 			});	
 		}
 		
@@ -1320,8 +1320,8 @@ $(function() {
 		$('#browserBox').sortable({
 			placeholder: "ui-state-highlight",
 			update: function(event, ui) {
-			$('#browserBox .storyOrder').each(function(){
-				$(this).val($('#browserBox .storyOrder').index($(this)));
+			$('#browserBox .placeOrder').each(function(){
+				$(this).val($('#browserBox .placeOrder').index($(this)));
 				});
 			}
 		});
@@ -1367,7 +1367,7 @@ $('#img_layout_choice').toggle(
     for stories
     ---------------- */
 
-    /* for story listings */
+    /* for place listings */
 		$( "#dialog" ).dialog({
 			autoOpen: false,
 			height: 165,
@@ -1379,16 +1379,16 @@ $('#img_layout_choice').toggle(
 			buttons: {
 				"Draft": function() {
 				    var diaObj=$(this);
-                    loadStat(1,story_id,diaObj);
+                    loadStat(1,place_id,diaObj);
 				},
 				"Review": function() {
 				    var diaObj=$(this);
-					loadStat(2,story_id,diaObj)
+					loadStat(2,place_id,diaObj)
 
 				},
 				"Published": function() {
 				    var diaObj=$(this);
-					loadStat(3,story_id,diaObj)
+					loadStat(3,place_id,diaObj)
 				},
 				Cancel: function() {
 					    $( ".buttons.pubState" ).removeClass('ui-state-focus'); 
@@ -1400,12 +1400,12 @@ $('#img_layout_choice').toggle(
 			.live('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			story_id=$(this).closest('.story_aTar').attr('title');
+			place_id=$(this).closest('.place_aTar').attr('title');
 			$( "#dialog" ).dialog( "open" );
 		});
 
 
-    if($('#sendBR').length==0){$('body').append('<div id="sendBR" title="Send" style="display:none;"><p>Release the Story out in email<br/><strong>Note:</strong>If You don\'t want to over use this.</p></div>')}
+    if($('#sendBR').length==0){$('body').append('<div id="sendBR" title="Send" style="display:none;"><p>Release the Place out in email<br/><strong>Note:</strong>If You don\'t want to over use this.</p></div>')}
 		$( "#sendBR" ).dialog({
 			autoOpen: false,
 			height: 165,
@@ -1417,7 +1417,7 @@ $('#img_layout_choice').toggle(
 			buttons: {
 				"Send": function() {
 				    var diaObj=$(this);
-                    sendBr(story_id,diaObj);
+                    sendBr(place_id,diaObj);
 				},
 				Cancel: function() {
 					    $( ".buttons.sendBR" ).removeClass('ui-state-focus'); 
@@ -1429,7 +1429,7 @@ $('#img_layout_choice').toggle(
 			.live('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			story_id=$(this).closest('.story_aTar').attr('title');
+			place_id=$(this).closest('.place_aTar').attr('title');
 			$( "#sendBR" ).dialog( "open" );
 		});
 
@@ -1437,16 +1437,16 @@ $('#img_layout_choice').toggle(
 
 
 		
-        if($('#listStoryType').length>0){
-            $("#listStoryType").live('change',function () {
+        if($('#listPlaceType').length>0){
+            $("#listPlaceType").live('change',function () {
                 window.location = siteroot+view+"list.castle?searchId="+$(this).find(':selected').val(); 
             });
         }
 		
 
-    /* for story editing */
+    /* for place editing */
     if(typeof(availableTags) !== 'undefined'){
-        $( "#story_Location" ).autocomplete({
+        $( "#place_Location" ).autocomplete({
 		    source: availableTags
 	    });
     }
@@ -1470,9 +1470,9 @@ $('#img_layout_choice').toggle(
     if($('.deleteAuthor').length>0){
         $('.deleteAuthor').live('click',function(){
             var author_id = $(this).attr('title');
-            var StoryId = $(this).attr('rel');
+            var PlaceId = $(this).attr('rel');
             alertLoadingSaving();
-	        $.get(siteroot+view+'DeleteAuthor.castle?id='+author_id+'&storyId='+StoryId, function(data){
+	        $.get(siteroot+view+'DeleteAuthor.castle?id='+author_id+'&placeId='+PlaceId, function(data){
 	             $("div#AuthorDiv #div" + author_id).remove();
 	            setTimeout("removeAlertLoadingSaving()",1500);
 	        });
@@ -1480,10 +1480,10 @@ $('#img_layout_choice').toggle(
 	}
     if($('.DeleteTag').length>0){
         $('.DeleteTag').live('click',function(){
-            var StoryId = $(this).attr('title');
+            var PlaceId = $(this).attr('title');
             var tag_id = $(this).attr('rel');
             alertLoadingSaving();
-	        $.get(siteroot+view+'DeleteTag.castle?id='+tag_id+'&storyId='+StoryId, function(data){
+	        $.get(siteroot+view+'DeleteTag.castle?id='+tag_id+'&placeId='+PlaceId, function(data){
 	            $("#tag_"+ tag_id).closest('li').remove();
 	            setTimeout("removeAlertLoadingSaving()",1500);
 	        });
@@ -1494,8 +1494,8 @@ $('#img_layout_choice').toggle(
    // $(".imagedropDown").change(function (){
    //      $(".selectedImage",$(this).parent()).attr('src','/image/download.castle?id=' + $(this).val());});	   
    //  });
-    /* for story listings */
-    if($('#clearLock').length==0){$('body').append('<div id="clearLock" title="Clear Story Editing Lock" style="display:none;"><p>Release the Story for editing<br/><strong>Note:</strong>If some one is editing it you may wish to ask to make sure they are done.</p></div>')}
+    /* for place listings */
+    if($('#clearLock').length==0){$('body').append('<div id="clearLock" title="Clear Place Editing Lock" style="display:none;"><p>Release the Place for editing<br/><strong>Note:</strong>If some one is editing it you may wish to ask to make sure they are done.</p></div>')}
 		$( "#clearLock" ).dialog({
 			autoOpen: false,
 			height: 165,
@@ -1507,7 +1507,7 @@ $('#img_layout_choice').toggle(
 			buttons: {
 				"Steal": function() {
 				    var diaObj=$(this);
-                    clearLock(story_id,diaObj);
+                    clearLock(place_id,diaObj);
 				},
 				Cancel: function() {
 					    $( ".buttons.steal" ).removeClass('ui-state-focus'); 
@@ -1520,35 +1520,35 @@ $('#img_layout_choice').toggle(
 			.live('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			story_id=$(this).attr('rel');
+			place_id=$(this).attr('rel');
 			$( "#clearLock" ).dialog( "open" );
 		});
 		
 		//This is so that you can use the nav when leaving the editing area.  IE: the same as clicking cancel
-        if(url_parts['path']=='/story/Edit_story.castle'){
+        if(url_parts['path']=='/place/Edit_place.castle'){
 		    $( "#main_nav a,a.PDF.creation " ).live('click',function(e) {
 			    //e.preventDefault();
 			    //e.stopPropagation();
 			    //var obj=$(this);
-			    clearLock($('#story_Id').val(),'',function(){
+			    clearLock($('#place_Id').val(),'',function(){
 					//window.location=obj.attr('href');
 					});
 		    });
         }
-        if(url_parts['path']=='/story/new.castle'){
-            $('input#story_title').keyup(function() {
-                var val=$('input#story_title').val();
+        if(url_parts['path']=='/place/new.castle'){
+            $('input#place_title').keyup(function() {
+                var val=$('input#place_title').val();
                 var val=val.split(' ').join('-');
                 var val=val.split("'").join('');
                 var val=val.split('"').join('');
                 var val=val.split(';').join('');
                 var val=val.split(':').join('');
-                $('#story_CustomUrl').val(val);
+                $('#place_CustomUrl').val(val);
                 clearCount('titleCheck');
                 setCount('titleCheck',200,function(){
-                    Checktitle($('#story_CustomUrl').val(),false,function(data){
+                    Checktitle($('#place_CustomUrl').val(),false,function(data){
                             if(data=='true'){
-                                if($('#hasTitle').length==0){$('#story_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
+                                if($('#hasTitle').length==0){$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
                             }else{
                                 if($('#hasTitle').length>0){$('#hasTitle').remove();}
                             }
@@ -1557,13 +1557,13 @@ $('#img_layout_choice').toggle(
                 });
             });
         }
-        if(url_parts['path']=='/story/new.castle'||url_parts['path']=='/story/Edit_story.castle'){
-            $('#story_CustomUrl').keyup(function() {
+        if(url_parts['path']=='/place/new.castle'||url_parts['path']=='/place/Edit_place.castle'){
+            $('#place_CustomUrl').keyup(function() {
                 clearCount('titleCheck');
                 setCount('titleCheck',200,function(){
-                    Checktitle($('#story_CustomUrl').val(),false,function(data){
+                    Checktitle($('#place_CustomUrl').val(),false,function(data){
                             if(data=='true'){
-                                if($('#hasTitle').length==0){$('#story_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
+                                if($('#hasTitle').length==0){$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
                             }else{
                                 if($('#hasTitle').length>0){$('#hasTitle').remove();}
                             }
@@ -1579,10 +1579,10 @@ $('#img_layout_choice').toggle(
                 e.preventDefault();
                 e.stopPropagation();
                 $('.submit_btn').first().focus();
-                Checktitle($('#story_CustomUrl').val(),false,function(data){
+                Checktitle($('#place_CustomUrl').val(),false,function(data){
                     if(data=='true'){
                         if($('#hasTitle').length==0){
-                            $('#story_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
+                            $('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
                         }
                     }else{
                          $('input[type=submit]').click();
@@ -1597,10 +1597,10 @@ $('#img_layout_choice').toggle(
                 e.stopPropagation();
             }
             var clicked=$(this);
-            Checktitle($('#story_CustomUrl').val(),true,function(data){
-                if(data!='0'&&data!=$('#story_Id').val()&&data!="false"){
+            Checktitle($('#place_CustomUrl').val(),true,function(data){
+                if(data!='0'&&data!=$('#place_Id').val()&&data!="false"){
                     if($('#hasTitle').length==0){
-                        $('#story_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
+                        $('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
                     }
                     if($('#hasTitleAlert').length==0){
                         $('#main').prepend('<div id="hasTitleAlert" style="padding: 0 .7em;" class="ui-state-error ui-corner-all"><p style="line-height: 15px;padding-bottom: 0;"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>This url is in use.</p></div>');

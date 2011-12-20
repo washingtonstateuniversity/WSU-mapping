@@ -5,7 +5,7 @@
 #end
 
 <form action="update.castle" method="post">
-$Form.HiddenField("tag.Id")
+$Form.HiddenField("tag.id")
 
 <h3>New tags</h3>
 <p>tags Name:

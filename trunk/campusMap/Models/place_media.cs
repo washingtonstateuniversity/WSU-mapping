@@ -32,7 +32,7 @@ namespace campusMap.Models
             set { place = value; }
         }
         private media_repo media;
-        [BelongsTo("imageId")]
+        [BelongsTo("media_id")]
         virtual public media_repo Media
         {
             get { return media; }

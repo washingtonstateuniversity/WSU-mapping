@@ -20,7 +20,7 @@ namespace campusMap.Services
         public place[] getPublishedPlaces(Order order, place_types type)
         {
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<place_status>.Find(3)));
+            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<status>.Find(3)));
             baseEx.Add(Expression.Lt("PublishTime", DateTime.Now));
             if (type!=null)
                 baseEx.Add(Expression.Eq("place_types", type));
@@ -34,7 +34,7 @@ namespace campusMap.Services
         public bool placesExistByType(string type)
         {
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<place_status>.Find(3)));
+            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<status>.Find(3)));
             baseEx.Add(Expression.Gt("placeType", ActiveRecordBase<place_types>.FindAllByProperty("Name",type) ) );
             place[] places = ActiveRecordBase<place>.FindAll(baseEx.ToArray());
             if (places.Length > 0)return true;
@@ -91,7 +91,7 @@ namespace campusMap.Services
 
         public int placeIdByURL(string url)
         {
-            String sql = "SELECT s.Id FROM Place AS s WHERE s.CustomUrl = '" + url + "'";
+            String sql = "SELECT s.id FROM Place AS s WHERE s.CustomUrl = '" + url + "'";
             ScalarQuery<int> q = new ScalarQuery<int>(typeof(place), sql);
             int id = q.Execute();
             return id;
@@ -114,7 +114,7 @@ namespace campusMap.Services
 
             ICriterion expression = Expression.Like("Title", str, MatchMode.Anywhere);
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<place_status>.Find(3)));
+            baseEx.Add(Expression.Eq("Status", ActiveRecordBase<status>.Find(3)));
             baseEx.Add(Expression.Lt("PublishTime", DateTime.Now));
 
 

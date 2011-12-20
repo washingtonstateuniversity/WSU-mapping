@@ -571,14 +571,14 @@ namespace campusMap.Services
             media_repo image = ActiveRecordBase<media_repo>.Find(id);
 
             string orgFile=image_name;
-            image_name = Regex.Replace(image_name, ".ext", "."+image.Ext, RegexOptions.IgnoreCase);
+            image_name = Regex.Replace(image_name, ".ext", "."+image.ext, RegexOptions.IgnoreCase);
 
             File.Copy(orgFile,image_name, true);
 
             NameValueCollection nvc = new NameValueCollection();
             //nvc.Add("id", "TTR");
             //nvc.Add("btn-submit-photo", "Upload");
-            String responseData = HttpUploadFile(url, image_name, "files", mimeFinder(image.Ext), nvc);
+            String responseData = HttpUploadFile(url, image_name, "files", mimeFinder(image.ext), nvc);
            
             JObject obj = JObject.Parse(responseData);
             string yurl = (string)obj["dest"]; // what is the path?

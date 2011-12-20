@@ -69,7 +69,7 @@ namespace campusMap.Controllers
             if (type != 0)
             {
                 media_types imgtype = ActiveRecordBase<media_types>.Find(type);
-                items = imgtype.media;
+                items = imgtype.media_typed;
             }
             else
             {
@@ -101,7 +101,7 @@ namespace campusMap.Controllers
 
         public String GetCredit()
         {
-            String sql = "SELECT DISTINCT s.Credit FROM media_repo AS s WHERE NOT s.Credit = 'NULL'";
+            String sql = "SELECT DISTINCT s.credit FROM media_repo AS s WHERE NOT s.credit = 'NULL'";
             SimpleQuery<String> q = new SimpleQuery<String>(typeof(place), sql);
             Array credits = q.Execute();
             String creditsList = "";
@@ -170,11 +170,11 @@ namespace campusMap.Controllers
             {
                     String Fname = System.IO.Path.GetFileName(newimage.FileName);
                     String[] fileparts = Fname.Split('.');
-                    if (String.IsNullOrEmpty(image.FileName))
+                    if (String.IsNullOrEmpty(image.file_name))
                     {
-                        image.FileName = fileparts[0];
+                        image.file_name = fileparts[0];
                     }
-                    image.Ext = fileparts[1];
+                    image.ext = fileparts[1];
 
                 //set up the image up from the stream
                 System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);   
@@ -194,7 +194,7 @@ namespace campusMap.Controllers
 
                 campusMap.Services.LogService.writelog(" in Update " + newFile);
 
-                //helperService.ResizeImage(newimage, uploadPath + image.Id + ".ext", 1000, 1000, true);           
+                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
                 imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
             }
             ActiveRecordMediator<media_repo>.Save(image);
@@ -221,11 +221,11 @@ namespace campusMap.Controllers
             {
                 String Fname = System.IO.Path.GetFileName(newimage.FileName);
                 String[] fileparts = Fname.Split('.');
-                if (String.IsNullOrEmpty(image.FileName))
+                if (String.IsNullOrEmpty(image.file_name))
                 {
-                    image.FileName = fileparts[0];
+                    image.file_name = fileparts[0];
                 }
-                image.Ext = fileparts[1];
+                image.ext = fileparts[1];
 
                 //set up the image up from the stream
                 System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
@@ -238,7 +238,7 @@ namespace campusMap.Controllers
                     System.IO.Directory.CreateDirectory(uploadPath);
                 }
                 string newFile = uploadPath + image.id + ".ext";
-                //helperService.ResizeImage(newimage, uploadPath + image.Id + ".ext", 1000, 1000, true);           
+                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
                 imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
             }
             ActiveRecordMediator<media_repo>.Save(image);
@@ -334,11 +334,11 @@ namespace campusMap.Controllers
 
             Response.ClearContent();
             HttpContext.Response.ClearHeaders();
-            String contentDisposition = "inline; filename=\"" + image.FileName + arg + "." + image.Ext + "\"";
+            String contentDisposition = "inline; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
 
             Response.Clear();
             String contentType = "applicaton/image";
-            switch (image.Ext.ToLower())
+            switch (image.ext.ToLower())
             {
                 case "gif":
                     contentType = "image/gif";
@@ -362,8 +362,8 @@ namespace campusMap.Controllers
                     contentType = "application/postscript";
                     break;
                 default:
-                    contentDisposition = "attachment; filename=\"" + image.FileName + arg + "." + image.Ext + "\"";
-                    contentType = "application/" + image.Ext.ToLower();
+                    contentDisposition = "attachment; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
+                    contentType = "application/" + image.ext.ToLower();
                     break;
             }
 

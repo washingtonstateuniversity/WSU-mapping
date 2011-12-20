@@ -47,7 +47,7 @@ namespace campusMap.Services
         {
             foreach (place place in allPlaces)
             {
-                if (place.Id == id)
+                if (place.id == id)
 
                     return true;
             }
@@ -96,7 +96,7 @@ namespace campusMap.Services
             return DateTime.Now.AddDays(i);
         }
 
-        public String getCommentSpamResultMessage(place_comments comment)
+        public String getCommentSpamResultMessage(comments comment)
         {
             string[] cusin = new string[] { "anal", "anus", "arse", "ass", "ballsack", "balls", "bastard", "bitch", "beoch", "biatch", "bloody", "blowjob", "bollock", "bollok", "boner", "boob", "butt", "buttplug", "clitoris", "cock", "coon", "crap", "cunt", "damn", "dick", "dildo", "dyke", "fag", "feck", "fellate", "fellatio", "felching", "fuck", "fudgepacker", "flange", "Goddamn", "hell", "homo", "jerk", "jizz", "knobend", "labia", "lmao", "lmfao", "muff", "nigger", "nigga", "omg", "penis", "piss", "poop", "prick", "pube", "pussy", "queer", "scrotum", "sex", "shit", "sh1t", "slut", "smegma", "spunk", "tit", "tosser", "turd", "twat", "vagina", "wank", "whore", "wtf" };
 
@@ -123,7 +123,7 @@ namespace campusMap.Services
             kvs.Add(new KeyValue("k", @"\|{"));
 
             //remove the spaces for an attempt at making F  u cK to pass thru
-            string com = comment.Comments.Replace(@" ", string.Empty);
+            string com = comment.comment.Replace(@" ", string.Empty);
             for (int i = 0; i < cusin.Length - 1; i++)
             {
                 string s = cusin[i];
@@ -145,7 +145,7 @@ namespace campusMap.Services
                     {
                         comment.Flagged = true;
                         comment.published = false;
-                        return "It appears you had cursed in your post and your post is awaiting approval. message:951 " + i + " for <div><em>" + comment.Comments + " -- " + com + " for:" + s + "</em></div>";
+                        return "It appears you had cursed in your post and your post is awaiting approval. message:951 " + i + " for <div><em>" + comment.comment + " -- " + com + " for:" + s + "</em></div>";
                     }
                 }
                 if (flagable)

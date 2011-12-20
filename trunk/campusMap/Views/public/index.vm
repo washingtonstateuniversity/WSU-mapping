@@ -50,7 +50,7 @@
 		#set($firstPlace ="")
 		#set($firstPlace = $block.Placetype.getFirstPlace())
 		#if($!block.Placetype.PublishedPlaces.Count > 0)
-			<a title="$!block.Placetype.Name" href="$siteroot/public/list.castle?id=$!{block.Placetype.Id}" class="section">$!block.Placetype.Name</a>
+			<a title="$!block.Placetype.Name" href="$siteroot/public/list.castle?id=$!{block.Placetype.id}" class="section">$!block.Placetype.Name</a>
 			<div class="headline">
 				<a title="$!firstPlace.Title" href="$siteroot/read/${firstPlace.CustomUrl}">$!firstPlace.Title</a>
 			</div> <!--headline-->
@@ -76,7 +76,7 @@
 		#set($firstPlace ="")
 		#set($firstPlace = $block.Placetype.getFirstPlace())
 		#if($!block.Placetype.PublishedPlaces.Count > 0)
-			<a title="$!block.Placetype.Name" href="$siteroot/public/list.castle?id=$!{block.Placetype.Id}" class="section">$!block.Placetype.Name</a>
+			<a title="$!block.Placetype.Name" href="$siteroot/public/list.castle?id=$!{block.Placetype.id}" class="section">$!block.Placetype.Name</a>
 			<div class="headline">
 				<a title="$!firstPlace.Title" href="$siteroot/read/${firstPlace.CustomUrl}">$!firstPlace.Title</a>
 			</div> <!--headline-->

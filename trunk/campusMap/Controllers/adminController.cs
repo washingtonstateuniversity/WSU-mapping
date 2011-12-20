@@ -145,25 +145,6 @@ namespace campusMap.Controllers
             PropertyBag["places"] = places;
         }
 
-        public void placebyuser() 
-        {
-            PropertyBag["placesbyuser"] = ActiveRecordBase<PlaceByUser>.FindAll();
-        }
-
-        public void placebyuserupdate([ARDataBind("placebyuser", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] PlaceByUser placebyuser)
-        {                          
-            try
-            {             
-              ActiveRecordMediator<PlaceByUser>.Save(placebyuser);
-            }                 
-            catch (Exception ex)
-            {
-                Flash["error"] = ex.Message ;
-                Flash["placebyuser"] = placebyuser;
-
-            }
-            RedirectToAction("thankyou");
-        }
         [Layout("secondary")]
         public void thankyou()
         {
@@ -334,7 +315,7 @@ namespace campusMap.Controllers
             place place = ActiveRecordBase<place>.Find(id);
             canView(place);
             PropertyBag["Place"] = place;
-            PropertyBag["comments"] = ActiveRecordBase<place_comments>.FindAll();
+            PropertyBag["comments"] = ActiveRecordBase<comments>.FindAll();
             place[] places = placeService.getPublishedPlaces(Order.Desc("Order"));
             PropertyBag["places"] = places;
             PropertyBag["Ads"] = placeService.getAdvertisements(places);
@@ -352,7 +333,7 @@ namespace campusMap.Controllers
              */
         }
 
-        public void userFlag(string flagged, [ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] place_comments comment)
+        public void userFlag(string flagged, [ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment)
         {
             if ( String.IsNullOrEmpty(flagged) )
             {
@@ -370,7 +351,7 @@ namespace campusMap.Controllers
             }
         }
 
-        public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] place_comments comment, string Asirra_Ticket)
+        public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment, string Asirra_Ticket)
         {
             // Check if they filled out spam blocker
             if (String.IsNullOrEmpty(Asirra_Ticket))
@@ -397,7 +378,7 @@ namespace campusMap.Controllers
             }
 
             //check if blank
-            if (String.IsNullOrEmpty(comment.Comments))
+            if (String.IsNullOrEmpty(comment.comment))
             {
                 Flash["message"] = "You must post something to post something.";
                 RedirectToReferrer();
@@ -405,10 +386,10 @@ namespace campusMap.Controllers
             }
 
             //Setup the decode version to check
-            comment.Comments = helperService.decodeString(comment.Comments);
+            comment.comment = helperService.decodeString(comment.comment);
 
             //Check if just spaces
-            if (comment.Comments != null && String.IsNullOrEmpty(comment.Comments.Trim()))
+            if (comment.comment != null && String.IsNullOrEmpty(comment.comment.Trim()))
             {
                 Flash["message"] = "You must post something to post something.";
                 RedirectToReferrer();
@@ -416,12 +397,12 @@ namespace campusMap.Controllers
             }
 
             // Strip html elements
-            comment.Comments = helperService.stripHTMLElements(comment.Comments);
+            comment.comment = helperService.stripHTMLElements(comment.comment);
             //ReSetup the decode version to check
-            comment.Comments = helperService.decodeString(comment.Comments);
+            comment.comment = helperService.decodeString(comment.comment);
             
             // Check for links
-            if (helperService.hasLink(comment.Comments))
+            if (helperService.hasLink(comment.comment))
             {
                 comment.Flagged = true;
                 comment.published = false;
@@ -546,7 +527,7 @@ namespace campusMap.Controllers
 
         public void canView(place place)
         {
-            if (place != null && place.status != null &&place.status.Id != 3)
+            if (place != null && place.status != null &&place.status.id != 3)
             {
                 authors user = getUser();
                 bool able = false;
@@ -592,7 +573,7 @@ namespace campusMap.Controllers
             {
                 PropertyBag["flag"] = false; 
             }
-            PropertyBag["comment"] = new place_comments();         
+            PropertyBag["comment"] = new comments();         
             /*IList<place> breakingplaces = new List<place>();
             foreach (place tempplace in places)
             {
@@ -718,7 +699,7 @@ namespace campusMap.Controllers
                 Flash["error"] = ex.Message;
                 Flash["applicant"] = applicant;
             }
-            Redirect("../public/application.castle?id="+applicant.Id);
+            Redirect("../public/application.castle?id="+applicant.id);
         }
         public void Download(int id)
         {
@@ -754,10 +735,10 @@ namespace campusMap.Controllers
                     
                     }
                     String uploadPath = Context.ApplicationPhysicalPath + "\\resumeupload\\";
-                    resume.SaveAs(uploadPath + applicant.Id + "resume.ext");
-                    sample1.SaveAs(uploadPath + applicant.Id + "sample1.ext");
-                    sample2.SaveAs(uploadPath + applicant.Id + "sample2.ext");
-                    sample3.SaveAs(uploadPath + applicant.Id + "sample3.ext");   
+                    resume.SaveAs(uploadPath + applicant.id + "resume.ext");
+                    sample1.SaveAs(uploadPath + applicant.id + "sample1.ext");
+                    sample2.SaveAs(uploadPath + applicant.id + "sample2.ext");
+                    sample3.SaveAs(uploadPath + applicant.id + "sample3.ext");   
   
                 }
 

@@ -135,7 +135,7 @@ float:left;
 	<a href="http://publishing.wsu.edu/webservices/" target="_blank">The Daily campusMap releases newly redesigned website &raquo;</a> | 
 	<a href="http://wsucougars.com" target="_blank">Athletics releases new brand and showcases new uniforms &raquo;</a> | 
 	<a href="http://commencement.wsu.edu/Commencement/Apps/HomePage.ASP?CurrPage=7" target="_blank">WSU Spring Commencement schedule and event details &raquo;</a> |
-	<a title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title &raquo;</a> 
+	<a title="$!place.Title" href="readmore.castle?id=$!{place.id}">$!place.title &raquo;</a> 
    #end
 #end
 </div><!--#.scrollingtext--> 
@@ -175,7 +175,7 @@ float:left;
 
 #foreach($place in $places)
   #if($place.BreakingNews == true)
-	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul>
@@ -187,8 +187,8 @@ float:left;
 <!--subnav for primary link above--> 
 <ul> 
 #foreach($place in $places)
-  #if($place.place_types.Id == 1)
-	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #if($place.place_types.id == 1)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.id}">$!place.Title</a></li>      
   #end
 #end
 </ul><div class="arrow">
@@ -199,8 +199,8 @@ float:left;
 <!--subnav for primary link above--> 
 <ul> 
 #foreach($place in $places)
-  #if($place.place_types.Id == 12)
-	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #if($place.place_types.id == 12)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul>
@@ -212,8 +212,8 @@ float:left;
 <!--subnav for primary link above--> 
 <ul> 
 #foreach($place in $places)
-  #if($place.place_types.Id == 11)
-	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #if($place.place_types.id == 11)
+	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul>
@@ -225,8 +225,8 @@ float:left;
 <!--subnav for primary link above--> 
 <ul> 
 #foreach($place in $places)
-  #if($place.place_types.Id == 11 || $place.place_types.Id == 1)
-	<li><a class='' title="$!place.Title" href="../public/readmore.castle?id=$!{place.Id}">$!place.Title</a></li> 
+  #if($place.place_types.id == 11 || $place.place_types.id == 1)
+	<li><a class='' title="$!place.title" href="../public/readmore.castle?id=$!{place.id}">$!place.title</a></li> 
   #end
 #end
 </ul><div class="arrow">
@@ -295,9 +295,9 @@ Published: 04/28/2011</div>
 
 <div id="ads_col" align="center"> 
 #foreach($Ad in $Ads)
-  #if($Ad.Location.Id !=1) 
+  #if($Ad.Location.id !=1) 
       $controller.IncView($Ad)                         
-      <a href='IncClicked.castle?Id=$!{Ad.Id}'>$Ad.HtmlText</a><br/>
+      <a href='IncClicked.castle?Id=$!{Ad.id}'>$Ad.HtmlText</a><br/>
   #end
 #end
 

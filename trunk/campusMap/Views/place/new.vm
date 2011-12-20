@@ -1,13 +1,13 @@
 #capturefor(admin_js)<script type="text/javascript">
-  var author_count =#if($story.Authors.Count)$story.Authors.Count #else 0 #end + 2;
-  var tag_count = #if($story.Tags.Count)$story.Tags.Count #else 0 #end + 2;
-  var image_count = #if($story.Images.Count)$story.Images.Count #else 0 #end  + 2;
+  var author_count =#if($place.Authors.Count)$place.Authors.Count #else 0 #end + 2;
+  var tag_count = #if($place.Tags.Count)$place.Tags.Count #else 0 #end + 2;
+  var image_count = #if($place.Images.Count)$place.Images.Count #else 0 #end  + 2;
 </script>
 
 <script type="text/javascript">
 
 
-  var availableCredits = [$credits];
+  var availablecredits = [$credits];
 
 
 
@@ -16,9 +16,9 @@
   #* set up images*#
   #set($availableImages='')
   #capturefor(availableImages)
-  #foreach ($image in $story.Images)
+  #foreach ($image in $place.Images)
   #each
-  {id:"${Image.Id}",name:"${Image.FileName}",url:"/image/download.castle?id=${Image.id}&storyid=${story.Id}&m=crop&w=250&h=250&pre=TMP"}
+  {id:"${Image.id}",name:"${Image.FileName}",url:"/image/download.castle?id=${Image.id}&placeid=${place.id}&m=crop&w=250&h=250&pre=TMP"}
   #between
   ,
   #end
@@ -27,7 +27,7 @@
 
   var tinyMCEImageList = new Array($!availableImages);
 
-  var story_id=$story.Id;
+  var place_id=$place.id;
 </script>
 #end
 
@@ -37,16 +37,13 @@
     $Flash.error
 </p>
 #end
-#if($story.Id)
-	<a href="$siteroot/Pdf/new.castle" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create a Print Version
-	</a>
-	#if($story.Id!=0)<a href="$siteroot/read/${story.CustomUrl}" style="height:33px" target="_blank" title="View" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+#if($place.id)
+	#if($place.id!=0)<a href="$siteroot/read/${place.CustomUrl}" style="height:33px" target="_blank" title="View" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 		<span class="ui-icon ui-icon-search"  style="margin-top: 3px;"> </span>
 	</a>#end
 #end
 
-<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all story_new">
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
     <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
       <a href="#tabs-1">Basic</a>
@@ -70,21 +67,21 @@
   
   <div id="tabs-1">
     <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn"/>
-    <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" />
     <input type="submit" value="Submit" style="float:right" class="submit_btn" />
     
-    $Form.HiddenField("story.Id")
+    $Form.HiddenField("place.id")
 
-    <h3>Story  #if($story.Id!=0)($story.Id)#end</h3>
+    <h3>Place  #if($place.id!=0)($place.id)#end</h3>
     <p>
       Title:<br/>
-      #*$Form.TextField("story.title")*#
-      <input type="text" value="$!story.title" name="story.title" id="story_title" class="ui-widget ui-widget-content ui-corner-all w500" />
+      #*$Form.TextField("place.title")*#
+      <input type="text" value="$!place.title" name="place.title" id="place_title" class="ui-widget ui-widget-content ui-corner-all w500" />
     </p>
     <p>
       Custom Url:<br/>
-      #*$Form.TextField("story.CustomUrl")*#
-      <input type="text" value="$!story.CustomUrl" name="story.CustomUrl" id="story_CustomUrl" class="ui-widget ui-widget-content ui-corner-all w500" />#if($story.CustomUrl)#if($Controller.NVchecktitle($story.CustomUrl,true)!=$story.Id && $Controller.NVchecktitle($story.CustomUrl,true)!="false")<span id="hasTitle">This url is in use. (story id: $Controller.NVchecktitle($story.CustomUrl,true) )</span>#end#end<br/>
+      #*$Form.TextField("place.CustomUrl")*#
+      <input type="text" value="$!place.CustomUrl" name="place.CustomUrl" id="place_CustomUrl" class="ui-widget ui-widget-content ui-corner-all w500" />#if($place.CustomUrl)#if($Controller.NVchecktitle($place.CustomUrl,true)!=$place.id && $Controller.NVchecktitle($place.CustomUrl,true)!="false")<span id="hasTitle">This url is in use. (place id: $Controller.NVchecktitle($place.CustomUrl,true) )</span>#end#end<br/>
       <span style="font-size:10px;line-height:12px;">
         <strong>Note:</strong>
         <em>This is for SEO friendliness.  A suggested URL is put in for you the first time as you enter you title and publish date.  Once the article is publish, you will want to leave it as is.  If you wish to change it do so before you publish it.  If you change it after the article is published this will hinder the SEO for a bit and may leave any shared links broken.</em>
@@ -94,30 +91,30 @@
 
     <p>
       Sub Head : <br/>
-      #*$Form.TextField("story.subHead")*#
-      <input type="text" value="$!story.subHead" name="story.subHead" id="story_subHead" class="ui-widget ui-widget-content ui-corner-all w500" />
+      #*$Form.TextField("place.subHead")*#
+      <input type="text" value="$!place.subHead" name="place.subHead" id="place_subHead" class="ui-widget ui-widget-content ui-corner-all w500" />
     </p>
-    <p>
-      Story Location:<br/>
-      #*$Form.TextField("story.Location")*#
-      <input type="text" value="$!story.Location" name="story.Location" id="story_Location" class="ui-widget ui-widget-content ui-corner-all " />
+    #*<p>
+      Place Location:<br/>
+      #*$Form.TextField("place.Location")*#
+      <input type="text" value="$!place.Location" name="place.Location" id="place_Location" class="ui-widget ui-widget-content ui-corner-all " />*#
     </p>
     #if($Controller.canPublish($loginUser)) <p class="wsu_ui">
       Publication Date:  <br/>
-      <input type="text" value="$!story.publishtime" name="story.publishtime" id="story_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
+      <input type="text" value="$!place.publishtime" name="place.publishtime" id="place_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
     </p>
     <p>
-      Story Status:<br/>
-      $Form.Select("story.status.Id", $statuslists, "%{value='Id', text='Title'}")
+      Place Status:<br/>
+      $Form.Select("place.status.id", $statuslists, "%{value='Id', text='Title'}")
     </p>
     #else
-    <input type="hidden" value="1" name="story.status.Id" />
+    <input type="hidden" value="1" name="place.status.id" />
     #end
     <p>
-      Show in breaking News: <br/> $FormHelper.CheckboxField("story.BreakingNews")
+      Show in breaking News: <br/> $FormHelper.CheckboxField("place.BreakingNews")
     </p>
     <p>
-      Show in featured News: <br/> $FormHelper.CheckboxField("story.FeaturedNews")
+      Show in featured News: <br/> $FormHelper.CheckboxField("place.FeaturedNews")
     </p>
 
     #set($count = 0)
@@ -129,18 +126,18 @@
       <h6>Type a new tag name if not in the list.</h6>
 
       <ul style="list-style:none;">
-        #foreach($storytag in $storytags)
+        #foreach($placetag in $placetags)
         <li>
-          <select name="tags[$!count].id" id="tag_$storytag.id">
+          <select name="tags[$!count].id" id="tag_$placetag.id">
             <option class="" value="">-select-</option>
             #foreach($tag in $tags)
-            <option class="tag" value="$tag.id" #if($storytag == $tag) selected="selected" #end>$!tag.Name</option>
-            #set($id = $storytag.id)
+            <option class="tag" value="$tag.id" #if($placetag == $tag) selected="selected" #end>$!tag.Name</option>
+            #set($id = $placetag.id)
             #end
           </select>
 
-          #if($storytag.id!=0)
-          <a rel="$storytag.id" title="$story.id" style="cursor:pointer;display: inline-block;" class="DeleteTag ui-state-error ui-corner-all">
+          #if($placetag.id!=0)
+          <a rel="$placetag.id" title="$place.id" style="cursor:pointer;display: inline-block;" class="DeleteTag ui-state-error ui-corner-all">
             <span class="ui-icon ui-icon-trash"></span>
           </a>
           #else
@@ -159,28 +156,28 @@
     <div class="clear">
       <br/>
       <input type="submit" value="Submit"  class="submit_btn"  style="float:left"/>
-      <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+      <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($place.id!=0)Apply #else Save #end and Return" />
       <input type="submit" value="Cancel" name="cancel" style="float:left"  class="cancel_btn"/>
       <br/>
     </div>
   </div>
   <div id="tabs-2">
     <input type="submit" value="Cancel" name="cancel" style="float:right" class="cancel_btn" />
-    <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" />
     <input type="submit" value="Submit" class="submit_btn"  style="float:right" />
 
       <h3>Teaser :</h3>
-      #*$Form.TextArea("story.Teaser")*#
-      <textarea id="story_Teaser" name="story.Teaser"  class="tinyEditor">$!story.Teaser</textarea>  
+      #*$Form.TextArea("place.Teaser")*#
+      <textarea id="place_Teaser" name="place.Teaser"  class="tinyEditor">$!place.Teaser</textarea>  
 
       <h3>Body Text :</h3>
-      #*$Form.TextArea("story.Bodytext")*#
-      <textarea id="story_Bodytext" name="story.Bodytext"  class="tinyEditor">$!story.Bodytext</textarea>
+      #*$Form.TextArea("place.Bodytext")*#
+      <textarea id="place_Bodytext" name="place.Bodytext"  class="tinyEditor">$!place.Bodytext</textarea>
 
     <div class="clear">
       <br/>
       <input type="submit" value="Submit" class="submit_btn"  style="float:left"/>
-      <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+      <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($place.id!=0)Apply #else Save #end and Return" />
       <input type="submit" value="Cancel" name="cancel" style="float:left"  class="cancel_btn"/>
       <br/>
     </div>
@@ -189,29 +186,29 @@
   
   <div id="tabs-3">
     <input type="submit" value="Cancel" name="cancel" style="float:right" class="cancel_btn" />
-    <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" />
     <input type="submit" value="Submit" class="submit_btn"  style="float:right" />
 
-    <h3>Story Type :</h3>
-    $Form.Select("story.storyType.Id", $storytype, "%{value='Id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
+    <h3>Place Type :</h3>
+    $Form.Select("place.placeType.id", $placetype, "%{value='id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
 
     <div id="AuthorDiv">
       <h3>Authors</h3>
       <h4>Select or create new author (if one isn't already created)</h4>
       #set($count = 0)
       #set($id = 0)
-      #foreach($storyauthor in $storyauthors)
-      <div id="div$storyauthor.id">
-        <select name="Authors[$!count].id" id="author$storyauthor" class="authorSelect">
+      #foreach($placeauthor in $placeauthors)
+      <div id="div$placeauthor.id">
+        <select name="Authors[$!count].id" id="author$placeauthor" class="authorSelect">
           <option class="" value="">-select-</option>
           #foreach($author in $authors)
-          <option class="author" value="$author.id" #if($storyauthor == $author) selected="selected" #end>$!author.Name</option>
-          #set($id = $storyauthor.id)
+          <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
+          #set($id = $placeauthor.id)
           #end
         </select>
 
         #if($id!=0)
-        <a title="$id" rel="$story.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
+        <a title="$id" rel="$place.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
           <span class="ui-icon ui-icon-trash"></span>
         </a>
         #end
@@ -223,7 +220,7 @@
       #*<select name="authors[$!count].id" id="author">
         <option class="" value="">-select-</option>
         #foreach($author in $authors)
-        <option class="author" value="$author.id" #if($storyauthor == $author) selected="selected" #end>$!author.Name</option>
+        <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
         #end
       </select>*#
 
@@ -238,7 +235,7 @@
     <div class="clear">
       <br/>
       <input type="submit" value="Submit" class="submit_btn"  style="float:left"/>
-      <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+      <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($place.id!=0)Apply #else Save #end and Return" />
       <input type="submit" value="Cancel" name="cancel" style="float:left"  class="cancel_btn"/>
       <br/>
     </div>
@@ -248,31 +245,31 @@
   
     <div id="tabs-4">
         <input type="submit" value="Cancel" name="cancel" style="float:right" class="cancel_btn" />
-        <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+        <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" />
         <input type="submit" value="Submit" class="submit_btn"  style="float:right" />
     
         <div id="ImageDiv">
-            <h3>Story Images</h3>
+            <h3>Place Images</h3>
         
             <a href="#" class="insotryupload buttons">Upload Images</a>
             <br/><br/>
            <span id="img_layout_choice" class="grid"></span>
             <div id="browserBox" class="ui-corner-all grid">
-                #foreach($storyimage in $storyimages)
-                    #if($storyimage.id!=0)
-                    <input type="hidden" name="images[$!{storyimage.id}].id" value="$!{storyimage.id}" />
+                #foreach($placeimage in $placeimages)
+                    #if($placeimage.id!=0)
+                    <input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" />
                         <span class="imageBox">
-                            <img src="/image/download.castle?id=${storyimage.id}&storyid=${story.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
-                            <a title="$storyimage.id" rel="$story.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
+                            <img src="/image/download.castle?id=${placeimage.id}&placeid=${place.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
+                            <a title="$placeimage.id" rel="$place.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>
                             <span class="imgInfo">
-                              <span><lable>Caption:</lable><input type="text" value="$!{storyimage.Caption}" name="images[$!{storyimage.id}].Caption" class=""/></span>
-                              <span><lable>Credit:</lable><input type="text" value="$!{storyimage.Credit}" name="images[$!{storyimage.id}].Credit" class="storyCredit"/></span>
+                              <span><lable>Caption:</lable><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
+                              <span><lable>Credit:</lable><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
                               <span><lable>Order:</lable>
-                              <input type="hidden" value="$!{storyimage.StoryImages.get_Item(0).Id}" name="StoryImages[$!{storyimage.id}].Id" class=""/>
-                              <input type="text" value="$!{storyimage.StoryImages.get_Item(0).storyOrder}" name="StoryImages[$!{storyimage.id}].storyOrder" class="storyOrder"/>
-                              <input type="hidden" value="$!{storyimage.id}" name="StoryImages[$!{storyimage.id}].Image.Id" class="storyOrderId"/>
+                              <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
+                              <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
+                              <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>
                               </span>
                             </span>
                         </span>
@@ -283,7 +280,7 @@
             <div class="clear">
                 <br/>
                 <input type="submit" value="Submit" class="submit_btn"  style="float:left"/>
-                <input type="submit" value="#if($story.Id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($story.Id!=0)Apply #else Save #end and Return" />
+                <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:left" title="#if($place.id!=0)Apply #else Save #end and Return" />
                 <input type="submit" value="Cancel" name="cancel" style="float:left"  class="cancel_btn"/>
                 <br/>
             </div>
@@ -309,7 +306,7 @@
     <table  width="100%" class="ui-widget ui-widget-content">
       <thead>
         <tr class="ui-widget-header ">
-          <th>Story</th>
+          <th>Place</th>
           <th>Comments</th>
           <th>Flagged</th>
           <th>Published</th>
@@ -321,17 +318,17 @@
         #set ($c=0)
         #foreach($comment in $comments)
         <tr class="#if($c%2>0) even #else odd #end #if($comment.adminRead==false) ui-state-highlight #end ">
-          <td>$!comment.Story.Id</td>
+          <td>$!comment.Place.id</td>
           <td>$Text.Fold($Controller.StripHtml($!comment.Comments,false),100)</td>
           <td #if($comment.Flagged==true) class="ui-state-error" #end>$!comment.Flagged</td>
           <td>$!comment.published</td>
           <td class='actionArea'>
 
             <span style='font-size:0.7em;'>
-              <a href="../comment/edit.castle?id=$!{comment.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+              <a href="../comment/edit.castle?id=$!{comment.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                 <span class="ui-icon ui-icon-pencil"></span>
               </a>
-              <a href="../comment/delete.castle?id=$!{comment.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+              <a href="../comment/delete.castle?id=$!{comment.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                 <span class="ui-icon ui-icon-trash"></span>
               </a>
             </span>

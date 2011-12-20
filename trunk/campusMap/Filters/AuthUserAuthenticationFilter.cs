@@ -46,9 +46,9 @@ namespace campusMap.Filters
                 // Not authenticated, redirect to login
                 String username = Authentication.authenticate();
 
-                authors[] authusers = ActiveRecordBase<authors>.FindAllByProperty("Nid", username);
+                authors[] authors = ActiveRecordBase<authors>.FindAllByProperty("Nid", username);
 
-                if (authusers.Length == 0)
+                if (authors.Length == 0)
                 {
                     controller.Redirect("~/public/notauthorized.castle");
                     return false;

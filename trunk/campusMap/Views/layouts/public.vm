@@ -97,7 +97,7 @@ float:left;
                 #foreach ($new in $BreakingNews)
                    $new.Title
                 #end
-                <!-- <a href="/public/breakingNewFromHeaderView.castle?id=$!{new.Id}">$new.Title...</a> -->
+                <!-- <a href="/public/breakingNewFromHeaderView.castle?id=$!{new.id}">$new.title...</a> -->
                 </div><!-- #breaking_new -->
             
             </div><!-- #stripe1 -->

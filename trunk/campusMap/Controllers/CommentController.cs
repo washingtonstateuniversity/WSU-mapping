@@ -30,20 +30,20 @@ namespace campusMap.Controllers
 		}
         public void adminViewed(int id)
         {   
-            place_comments comment = ActiveRecordBase<place_comments>.Find(id);
+            comments comment = ActiveRecordBase<comments>.Find(id);
             comment.adminRead = true;
             comment.Save();
         }
         public void delete(int id)
         {
-            place_comments comment = ActiveRecordBase<place_comments>.Find(id);
+            comments comment = ActiveRecordBase<comments>.Find(id);
             /*if(comment.Place != null)
                 comment.Place.Comments.Remove(comment);*/
-            ActiveRecordMediator<place_comments>.Delete(comment);
+            ActiveRecordMediator<comments>.Delete(comment);
             RedirectToAction("list");
 
         }
-        public void Update([ARDataBind("comment", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] place_comments comment)
+        public void Update([ARDataBind("comment", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment)
         {   //comment.CreateTime = DateTime.Now;
             //comment.UpdateTime = DateTime.Now;
             if (comment.Flagged == false) {
@@ -55,23 +55,23 @@ namespace campusMap.Controllers
         }
         public void New()
         {            
-            PropertyBag["comments"] = ActiveRecordBase<place_comments>.FindAll();
+            PropertyBag["comments"] = ActiveRecordBase<comments>.FindAll();
         }
         public void List(int page)
         {
 
             if (page == 0)
                 page = 1;
-            IList<place_comments> items;
+            IList<comments> items;
             int pagesize = 30;
-            items = ActiveRecordBase<place_comments>.FindAll(Order.Desc("CreateTime"));
+            items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"));
             PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
 
            //PropertyBag["comments"] = ActiveRecordBase<Comment>.FindAll();         
         }
         public void Edit(int id)
         {   
-            place_comments comment = ActiveRecordBase<place_comments>.Find(id);
+            comments comment = ActiveRecordBase<comments>.Find(id);
             PropertyBag["comment"] = comment;
             RenderView("new");
         }

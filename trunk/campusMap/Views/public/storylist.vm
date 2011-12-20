@@ -4,7 +4,7 @@
 
 #foreach($place in $tag.Places)
  <div class="headline">
-	<a title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title</a>
+	<a title="$!place.Title" href="readmore.castle?id=$!{place.id}">$!place.Title</a>
  </div>
   <div class="subhead">$!place.Teaser</div>
   <div class="byline"> By

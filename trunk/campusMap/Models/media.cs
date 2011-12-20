@@ -22,56 +22,63 @@ namespace campusMap.Models
             get { return media_id; }
             set { media_id = value; }
         }
-        private string credit;
+        private string media_credit;
         [Property]
-        virtual public string Credit
+        virtual public string credit
         {
-            get { return credit; }
-            set { credit = value; }
+            get { return media_credit; }
+            set { media_credit = value; }
         }
-        private string caption;
+        private string media_caption;
         [Property]
-        virtual public string Caption
+        virtual public string caption
         {
-            get { return caption; }
-            set { caption = value; }
+            get { return media_caption; }
+            set { media_caption = value; }
         }
 
-        private DateTime? created;
+        private DateTime? media_created;
         [Property]
-        virtual public DateTime? creation_date
+        virtual public DateTime? created
         {
-            get { return created; }
-            set { created = value; }
+            get { return media_created; }
+            set { media_created = value; }
         }
-        private DateTime? updated;
+        private DateTime? media_updated;
         [Property]
-        virtual public DateTime? updated_date
+        virtual public DateTime? updated
         {
-            get { return updated; }
-            set { updated = value; }
+            get { return media_updated; }
+            set { media_updated = value; }
         }
-             
-        private String fileName;
+
+        private String media_fileName;
         [Property]
-        virtual public String FileName
+        virtual public String file_name
         {
-          get { return fileName; }
-          set { fileName = value; }
+            get { return media_fileName; }
+            set { media_fileName = value; }
         }
-        private String ext;
+        private String media_file_ext;
         [Property]
-        virtual public String Ext
+        virtual public String ext
         {
-            get { return ext; }
-            set { ext = value; }
+            get { return media_file_ext; }
+            set { media_file_ext = value; }
         }
-        private media_types types;
-        [BelongsTo]
-        virtual public media_types media_types
+        private String media_file_path;
+        [Property]
+        virtual public String path
         {
-            get { return types; }
-            set { types = value; }
+            get { return media_file_path; }
+            set { media_file_path = value; }
+        }
+        private media_types media_type;
+        [BelongsTo("media_type_id")]
+        virtual public media_types type
+        {
+            get { return media_type; }
+            set { media_type = value; }
         }
 
         private IList<place_media> Place_Media = new List<place_media>();
@@ -97,14 +104,28 @@ namespace campusMap.Models
         }
 
         private IList<advertisement> advertisements = new List<advertisement>();
-        [HasAndBelongsToMany(typeof(advertisement), Lazy = true, Table = "advertisement_media", ColumnKey = "media_id", ColumnRef = "advertisement_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(advertisement), Lazy = true, Table = "advertisement_to_media", ColumnKey = "media_id", ColumnRef = "ad_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<advertisement> Advertisements
         {
             get { return advertisements; }
             set { advertisements = value; }
         }
-       
-       
+
+        private IList<field_types> Types;
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "media_to_field_types", ColumnKey = "field_type_id", ColumnRef = "media_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return Types; }
+            set { Types = value; }
+        }
+
+        private IList<fields> Fields;
+        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "media_to_fields", ColumnKey = "field_id", ColumnRef = "media_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<fields> field
+        {
+            get { return Fields; }
+            set { Fields = value; }
+        }     
         
  
     }

@@ -57,7 +57,7 @@
       <dt>Sports</dt>
       #set ($c=0)
       #foreach($place in $places)
-		  #if($place.PlaceType.Id == 1)
+		  #if($place.PlaceType.id == 1)
 			  #if($c<6)
 			  <dd>
 				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
@@ -113,7 +113,7 @@
       <dt>Latest in Life</dt>
       #set ($c=0)
       #foreach($place in $places)
-		  #if($place.PlaceType.Id == 12)
+		  #if($place.PlaceType.id == 12)
 		   #if($c<6)
 			  <dd>
 				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
@@ -152,7 +152,7 @@
       <dt>Latest</dt>
       #set ($c=0)
       #foreach($place in $places)
-        #if($place.PlaceType.Id == 11)
+        #if($place.PlaceType.id == 11)
 		   #if($c<6)
 			<dd>
 			  <a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
@@ -182,7 +182,7 @@
       <dt>Weblogs on Sports</dt>
       #set ($c=0)
       #foreach($place in $places)
-		#if($place.PlaceType.Id == 1)
+		#if($place.PlaceType.id == 1)
 		   #if($c<6)
 			  <dd>
 				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>
@@ -202,7 +202,7 @@
       <dt>Weblogs on Opinions</dt>
       #set ($c=0)
       #foreach($place in $places)
-		  #if($place.PlaceType.Id == 11)
+		  #if($place.PlaceType.id == 11)
 		  	 #if($c<6)
 			  <dd>
 				<a title="$!place.Title" href="$siteroot/read/$!{place.CustomUrl}">$Text.Fold($Controller.StripHtml($!place.Title,false),45)</a>

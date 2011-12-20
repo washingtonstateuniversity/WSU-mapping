@@ -21,8 +21,8 @@
 #if($flag)
 #foreach($author in $place.Authors)
 $!author.Name
-#foreach($authuserImages in $author.Images)
-#set ($mug = $authuserImages.Id)
+#foreach($authorImages in $author.Images)
+#set ($mug = $authorImages.id)
 #end
 #set ($iC = $iC+1)
 #between
@@ -31,8 +31,8 @@ $!author.Name
 #else 
 #foreach($author in $place.Authors)
 $!author.Name 
-#foreach($authuserImages in $author.Images)
-#set ($mug = $authuserImages.Id)
+#foreach($authorImages in $author.Images)
+#set ($mug = $authorImages.id)
 #end
 #set ($iC = $iC+1)
 #between
@@ -52,7 +52,7 @@ $!author.Name
 
 
 <div id="bodytext">
-#if($place.Id<=1000 && $place.Id!=434 && $place.getFirstImage().id)
+#if($place.id<=1000 && $place.id!=434 && $place.getFirstImage().id)
 		<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="campusMap" class="img-main " style="float:left;margin-right:5px;margin-bottom:5px;"/>	
 #end
 $!place.renderdBodyText
@@ -62,7 +62,7 @@ $!place.renderdBodyText
 #if($place.tags.Count>0)
 <div class="inPlacetagsLine">
 <h4>tags:</h4>	#foreach($tag in $place.tags)
-<a title="$!tag.Name" href="../Public/placelist.castle?id=$!{tag.Id}">$!tag.Name</a>
+<a title="$!tag.Name" href="../Public/placelist.castle?id=$!{tag.id}">$!tag.Name</a>
 #between
 ,
 #end
@@ -72,8 +72,8 @@ $!place.renderdBodyText
 #end
 
   <form action="$siteroot/public/submitComment.castle" method="post" id="mainForm" onsubmit="return MySubmitForm();">
-    $Form.HiddenField("comment.Id")
-    <input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+    $Form.HiddenField("comment.id")
+    <input type="hidden" name="comment.Place.id" value ="$!{place.id}"/>
     <div class="" style="clear:both">
       <h3>Leave the comment here:</h3>
       <p style="display:inline-block;float:left;margin-left: 1px;margin-top: 0;">
@@ -102,13 +102,13 @@ $!place.renderdBodyText
 <hr/>
 
   #foreach($comment in $Place.comments)
-  #if($comment.published==true)<a name="com_${comment.Id}" id="com_${comment.Id}"></a>
-    <div class="comments #if($comment.FlagNumber>3)uFlaged #end" id="comment$comment.Id">
+  #if($comment.published==true)<a name="com_${comment.id}" id="com_${comment.id}"></a>
+    <div class="comments #if($comment.FlagNumber>3)uFlaged #end" id="comment$comment.id">
     #if($comment.FlagNumber>3)<h3><span>Click to read <em>+</em></span> User flagged </h3>#end
     <div #if($comment.FlagNumber>3)class="comment_closed"#end>
 		<form action="$siteroot/public/userFlag.castle" method="post" class="userFlagging" style="float:right; display:line-block;">
-			<input type="hidden" name="comment.Id" value ="$!comment.Id"/>
-			<input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+			<input type="hidden" name="comment.id" value ="$!comment.id"/>
+			<input type="hidden" name="comment.Place.id" value ="$!{place.id}"/>
 			<input type="submit" value="" class="userFlagged" title="Flag this post"/>
 		</form>
       <h5 class="comment" style="float:right; display:line-block;">Posted: <em>$!comment.CreateTime</em>

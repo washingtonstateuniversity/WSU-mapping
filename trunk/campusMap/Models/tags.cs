@@ -25,6 +25,7 @@ namespace campusMap.Models
         }
 
         private string Name;
+        [Property]
         virtual public string name
         {
             get { return Name; }

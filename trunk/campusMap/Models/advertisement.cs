@@ -45,19 +45,40 @@ namespace campusMap.Models
             set { breakingNews = value; }
         }*/
         private IList<media_repo> images = new List<media_repo>();
-        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, Table = "AdvertisementImage", ColumnKey = "advertisementId", ColumnRef = "imageId", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, Table = "advertisement_to_media", ColumnKey = "ad_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> Images
         {
             get { return images; }
             set { images = value; }
         }
         private IList<tags> tags = new List<tags>();
-        [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "AdvertisementTag", ColumnKey = "advertisementId", ColumnRef = "tagId", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "advertisement_to_tag", ColumnKey = "ad_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<tags> Tags
         {
             get { return tags; }
             set { tags = value; }
         }
+
+        private IList<field_types> Types;
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "view_to_field_types", ColumnKey = "field_type_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return Types; }
+            set { Types = value; }
+        }
+
+        private IList<fields> Fields;
+        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "view_to_fields", ColumnKey = "field_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<fields> field
+        {
+            get { return Fields; }
+            set { Fields = value; }
+        }    
+
+
+
+
+
         private int views = 0;
         [Property]
         virtual public int Views

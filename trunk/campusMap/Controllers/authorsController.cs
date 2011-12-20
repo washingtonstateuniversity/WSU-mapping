@@ -30,25 +30,25 @@ namespace campusMap.Controllers
 
         public void List()
         {
-            PropertyBag["authusers"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();    
         }
 
         public void Edit(int id)
         {
-            authors authuser = ActiveRecordBase<authors>.Find(id);
-            if (!canControl(getUser()) && authuser.id != getUser().id)
+            authors author = ActiveRecordBase<authors>.Find(id);
+            if (!canControl(getUser()) && author.id != getUser().id)
             {
                 Flash["error"] = "Sorry you are not able to edit this user.";
                 RedirectToAction("list");
                 return;
             }
 
-            media_types imgtype = ActiveRecordBase<media_types>.Find(3);
-            PropertyBag["images"] = imgtype.media; //Flash["images"] != null ? Flash["images"] : 
-            PropertyBag["authuserimages"] = authuser.media;
+            media_types imgtype = ActiveRecordBase<media_types>.Find(1);
+            PropertyBag["images"] = imgtype.media_typed; //Flash["images"] != null ? Flash["images"] : 
+            PropertyBag["authorimages"] = author.media;
             PropertyBag["currentUser"] = getUser();
-            PropertyBag["authuser"] = authuser;
+            PropertyBag["author"] = author;
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["sections"] = ActiveRecordBase<place_types>.FindAll();
             RenderView("new");
@@ -57,19 +57,19 @@ namespace campusMap.Controllers
 
         public void New()
         {
-            authors authuser = new authors();
+            authors author = new authors();
             List<media_repo> images = new List<media_repo>();
-            images.AddRange(authuser.media);
+            images.AddRange(author.media);
             if (images.Count == 0)
             {
                 images.Add(new media_repo());
             }
-            PropertyBag["authuserimages"] = images;
-            media_types imgtype = ActiveRecordBase<media_types>.Find(3);
-            PropertyBag["images"] = imgtype.media;
+            PropertyBag["authorimages"] = images;
+            media_types imgtype = ActiveRecordBase<media_types>.Find(1);
+            PropertyBag["images"] = imgtype.media_typed;
             PropertyBag["currentUser"] = getUser();
             PropertyBag["sections"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["authusers"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();  
         }
 
@@ -78,11 +78,10 @@ namespace campusMap.Controllers
             bool flag = false;
             switch (user.access_levels.title)
             {
-                case "Author": flag = false; break;
+                case "Admin": flag = true; break;
 
                 case "Editor": flag = true; break;
 
-                case "Contributor": flag = false; break;
             }
             return flag;
         }
@@ -91,15 +90,14 @@ namespace campusMap.Controllers
             bool flag = false;
             switch (user.access_levels.title)
             {
-                case "Author": flag = false; break;
+                case "Admin": flag = true; break;
 
                 case "Editor": flag = true; break;
 
-                case "Contributor": flag = false; break;
             }
             return flag;
         }
-        public void Update([ARDataBind("authuser", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] authors authuser,
+        public void Update([ARDataBind("author", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] authors author,
                            [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
                            HttpPostedFile newimage,
                            int[] Sections, string apply, string cancel) 
@@ -111,27 +109,27 @@ namespace campusMap.Controllers
                 return;
             }
 
-            authuser.Sections.Clear();
+            author.Sections.Clear();
             foreach (int section in Sections)
             {
                 place_types tmp=ActiveRecordBase<place_types>.Find(section);
-                if (!authuser.Sections.Contains(tmp) && tmp.id > 0)
+                if (!author.Sections.Contains(tmp) && tmp.id > 0)
                 {
-                    authuser.Sections.Add(tmp);
+                    author.Sections.Add(tmp);
                 }
             }
-            authuser.media.Clear();
+            author.media.Clear();
 
 
             try
             {
-                ActiveRecordMediator<authors>.Save(authuser);
+                ActiveRecordMediator<authors>.Save(author);
                
             }
             catch (Exception ex)
             {
                 Flash["error"] = ex.Message;
-                Flash["authuser"] = authuser;
+                Flash["author"] = author;
 
             }
             ActiveRecordMediator<media_repo>.Save(image);
@@ -139,11 +137,11 @@ namespace campusMap.Controllers
             {
                 String Fname = System.IO.Path.GetFileName(newimage.FileName);
                 String[] fileparts = Fname.Split('.');
-                if (String.IsNullOrEmpty(image.FileName))
+                if (String.IsNullOrEmpty(image.file_name))
                 {
-                    image.FileName = fileparts[0];
+                    image.file_name = fileparts[0];
                 }
-                image.Ext = fileparts[1];
+                image.ext = fileparts[1];
 
                 //set up the image up from the stream
                 System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
@@ -156,11 +154,11 @@ namespace campusMap.Controllers
                     System.IO.Directory.CreateDirectory(uploadPath);
                 }
                 string newFile = uploadPath + image.id + ".ext";
-                //helperService.ResizeImage(newimage, uploadPath + image.Id + ".ext", 1000, 1000, true);           
+                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
                 imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
 
                 ActiveRecordMediator<media_repo>.Save(image);
-                authuser.media.Add(image);
+                author.media.Add(image);
             }
 
             

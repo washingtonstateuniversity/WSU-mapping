@@ -4,22 +4,22 @@
 </p>
 
 <table width="100%" border="1" cellpadding="2" cellspacing="0">
-$Form.HiddenField("accesslevel.Id")
+$Form.HiddenField("accesslevel.id")
     <th>Id</th>
     <th>Title</th>
     <th>&nbsp;</th>
 
 #foreach($accesslevel in $accesslevels)
 <tr>
-<td>$!accesslevel.Id</td>
+<td>$!accesslevel.id</td>
 <td>$!accesslevel.Title</td>
 
 <td>
   <span style='font-size:0.7em;'>
-    <a href="edit.castle?id=$!{accesslevel.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+    <a href="edit.castle?id=$!{accesslevel.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
       <span class="ui-icon ui-icon-pencil"></span>
     </a>
-    <a href="delete.castle?id=$!{accesslevel.Id}" title="Delete" #*onclick="return confirm('Are you sure you want to Delete?(Y/N)?')"*# class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+    <a href="delete.castle?id=$!{accesslevel.id}" title="Delete" #*onclick="return confirm('Are you sure you want to Delete?(Y/N)?')"*# class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
       <span class="ui-icon ui-icon-trash"></span>
     </a>
   </span>

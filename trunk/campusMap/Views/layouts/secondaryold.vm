@@ -68,7 +68,7 @@
 <ul>
 #foreach($place in $places)
   #if($place.BreakingNews == true)
-	<li><a class='' title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+	<li><a class='' title="$!place.title" href="readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul><div class="arrow"></div></li>
@@ -86,8 +86,8 @@
 <!--subnav for primary link above-->
 <ul>
 #foreach($place in $places)
-  #if($place.place_types.Id == 12)
-	<li><a class='' title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #if($place.place_types.id == 12)
+	<li><a class='' title="$!place.title" href="readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul><div class="arrow"></div></li>
@@ -97,8 +97,8 @@
 <!--subnav for primary link above-->
 <ul>
 #foreach($place in $places)
-  #if($place.place_types.Id == 11)
-	<li><a class='' title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title</a></li>      
+  #if($place.place_types.id == 11)
+	<li><a class='' title="$!place.title" href="readmore.castle?id=$!{place.id}">$!place.title</a></li>      
   #end
 #end
 </ul><div class="arrow"></div></li>
@@ -108,8 +108,8 @@
 <!--subnav for primary link above-->
 <ul>
 #foreach($place in $places)
-   #if($place.place_types.Id == 11 || $place.place_types.Id == 1)
-	<li><a class='' title="$!place.Title" href="readmore.castle?id=$!{place.Id}">$!place.Title</a></li>  
+   #if($place.place_types.id == 11 || $place.place_types.id == 1)
+	<li><a class='' title="$!place.title" href="readmore.castle?id=$!{place.id}">$!place.title</a></li>  
   #end
 #end
 </ul><div class="arrow"></div></li>
@@ -157,9 +157,9 @@ $childContent
 
 <div id="ads_col" align="center">
 #foreach($Ad in $Ads)
-     #if($Ad.Location.Id !=1) 
+     #if($Ad.Location.id !=1) 
      $controller.IncView($Ad)                         
-     <a href='IncClicked.castle?Id=$!{Ad.Id}'>$Ad.HtmlText</a><br/>
+     <a href='IncClicked.castle?Id=$!{Ad.id}'>$Ad.HtmlText</a><br/>
      #end
 #end
 </div><!--#ads_col-->

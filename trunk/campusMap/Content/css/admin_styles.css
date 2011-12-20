@@ -1,3 +1,48 @@
+/* Lets override the defaults for the tamplates */
+html,body{height:auto;}
+#wrapper{width:100%;min-width: 976px;padding-left:0px;}
+#globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
+#siteID{    background: none repeat scroll 0 0 #981E32;
+    color: #FFFFFF;
+    float: none;
+    height: 55px;
+    width: 100%;}
+#wrapper #toolbar{width: 100%;float: none;}
+#siteID h2 { margin: 0 0 0 180px;width: auto;}
+#siteID h1 {margin: 0 0 0 180px;width: auto;}
+#logo{ display: inline;
+    float: none;
+    height: 105px;
+    left: 0;
+    position: absolute;
+    top:0px;
+    width: 185px;}
+
+#header_bar{position:fixed;top:0px;left:0px;width: 100%;z-index: 2;}
+
+#content{
+	position:relative;
+margin-top: 105px;
+z-index:1;
+width: 100%;
+min-width: 960px;
+}
+#main{padding:0px;
+    width: 100%;position: relative;}
+
+/* Nav */
+#nav {left: 0; padding: 0 0px 0px 0; position: fixed;top: 88px;width: 184px; z-index: 2;}
+#main_nav{}
+#main_nav li{display: block !important;float: left;min-height: 24px;line-height: 23px;width: 153px;}
+#main_nav li a{display: block !important;}
+#main_nav li:hover{border: 1px solid #4D0F1E;font-weight: normal;background: url("../wsu_ui/images/ui-bg_glass_55_ad153b_1x400.png") repeat-x scroll 50% 50% #AD153B;}
+#main_nav li a:hover{color: #FFFFFF !important;}
+#main_nav li.sep{cursor:default;min-height:6px;}
+#main_nav li.endcap{cursor:default;min-height:15px;}
+#main_nav li.quickActions{border-right:3px solid #300;width: 150px;}
+
+#nav ul ul.action_nav{margin-left: -14px;}
+#nav ul ul.action_nav li{width: 147px;}
 /*
   set up for the ui to over power the default css
 */
@@ -19,19 +64,19 @@
 .ui-timepicker-div dl dt{ height: 25px; }
 .ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
-#wsu_ui .storylist.ui-tabs .ui-tabs-panel{padding: 5px 2px;}
-#wsu_ui .storylist.ui-tabs .ui-tabs-nav li{float:left;}
-#wsu_ui .storylist.ui-tabs .ui-tabs-nav{height: 40px;width: 717px;}
+#wsu_ui .placelist.ui-tabs .ui-tabs-panel{padding: 5px 2px;}
+#wsu_ui .placelist.ui-tabs .ui-tabs-nav li{float:left;}
+#wsu_ui .placelist.ui-tabs .ui-tabs-nav{height: 40px;/*width: 717px;*/}
 
 
 /*tinyMCE corrections  */
 
-#story_Teaser_ifr{min-height:150px;}
-#story_Bodytext_ifr{min-height:350px;}
+#place_Teaser_ifr{min-height:150px;}
+#place_Bodytext_ifr{min-height:350px;}
 #advertisement_HtmlText{min-height:350px;}
 #classified_Text{min-height:150px;}
-#story_Bodytext{width:685px;}
-#story_Teaser{width:685px;}
+#place_Bodytext{width:685px;}
+#place_Teaser{width:685px;}
 /*tinyMCE expansions  */
 
 .previewTINY_ELM{}
@@ -72,24 +117,18 @@ table.ui-widget tbody tr.odd td{}
 .nonEdit{ position:absolute; top:-9999em; left:-9999em;}
 
 
-/* Nav */
-#nav{width: 175px;padding: 0 10px 100px 0;}
-#main_nav{}
-#main_nav li{display: block !important;float: left;height: 24px;line-height: 23px;width: 145px;}
-#main_nav li a{}
-#main_nav li:hover{border: 1px solid #4D0F1E;font-weight: normal;background: url("../wsu_ui/images/ui-bg_glass_55_ad153b_1x400.png") repeat-x scroll 50% 50% #AD153B;}
-#main_nav li a:hover{color: #FFFFFF !important;}
 
-/* story listing */
-.storylist{ width: 724px;}
-.storylistUL{    list-style: none outside none !important;
+
+/* place listing */
+.placelist{ /*width: 724px;*/}
+.placelistUL{    list-style: none outside none !important;
     margin-bottom: 0 !important;
     margin-left: 0 !important;
     margin-top: 0 !important;
     padding: 0 5px 0 0 !important;
     width: 721px;}
-.storylistUL li {clear: both;line-height: 15px; margin: 10px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
-.storylistUL li div{
+.placelistUL li {clear: both;line-height: 15px; margin: 10px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
+.placelistUL li div{
     height: 180px;
     left: 0;
     overflow: hidden;
@@ -97,23 +136,23 @@ table.ui-widget tbody tr.odd td{}
     top: 0;
     z-index: 1;
 	}
-.storylistUL li div span{display:inline; font-weight:bold;}
+.placelistUL li div span{display:inline; font-weight:bold;}
 
-.storylistUL li div.summaryCol{float: left;width: 477px;height:180px;border-right: 1px solid #B8B8B8;}
-.storylistUL li div.summaryCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
-.storylistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;    padding: 2px 7px !important;}
-.storylistUL li div.summaryCol li p {display: inline;line-height: 1em !important;padding: 0;}
-.storylistUL li div.summaryCol .Title{background-color: #CCCCCC;height: 30px;}
-.storylistUL li div.summaryCol li span.Body,.storylistUL li div.summaryCol li span.Body span{font-weight:normal !important;}
-.storylistUL li div.summaryCol li span.Teaser,.storylistUL li div.summaryCol li span.Teaser span{font-weight:normal !important;}
+.placelistUL li div.summaryCol{float: left;width: 477px;height:180px;border-right: 1px solid #B8B8B8;}
+.placelistUL li div.summaryCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
+.placelistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;    padding: 2px 7px !important;}
+.placelistUL li div.summaryCol li p {display: inline;line-height: 1em !important;padding: 0;}
+.placelistUL li div.summaryCol .Title{background-color: #CCCCCC;height: 30px;}
+.placelistUL li div.summaryCol li span.Body,.placelistUL li div.summaryCol li span.Body span{font-weight:normal !important;}
+.placelistUL li div.summaryCol li span.Teaser,.placelistUL li div.summaryCol li span.Teaser span{font-weight:normal !important;}
 
 
-.storylistUL li div.detailCol{float: left;width: 188px;height:180px;border-right: 1px solid #B8B8B8;}
-.storylistUL li div.detailCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
-.storylistUL li div.detailCol ul li{margin: 0 !important;padding: 0 !important;padding: 2px 7px !important;}
-.storylistUL li div.detailCol .date{background-color: #CCCCCC;height: 30px;}
+.placelistUL li div.detailCol{float: left;width: 188px;height:180px;border-right: 1px solid #B8B8B8;}
+.placelistUL li div.detailCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
+.placelistUL li div.detailCol ul li{margin: 0 !important;padding: 0 !important;padding: 2px 7px !important;}
+.placelistUL li div.detailCol .date{background-color: #CCCCCC;height: 30px;}
 
-.storylistUL li div.actionCol{background-color: #E0E0E0;
+.placelistUL li div.actionCol{background-color: #E0E0E0;
     border-right: medium none;
     float: left;
     height: 180px;
@@ -121,11 +160,11 @@ table.ui-widget tbody tr.odd td{}
     position: relative;
     width: 50px;
     z-index: 5;}
-.storylistUL li div.actionCol ul{list-style: none outside none !important;margin: 0 !important;padding:4px !important;}
-.storylistUL li div.actionCol ul li{margin: 0 !important;font-size:0.7em;padding: 0 0 3px !important;}
-.storylistUL li div.actionCol ul li a.buttons{float:right;display:inline-block;width:37px;positon:relative;height:24px;}
+.placelistUL li div.actionCol ul{list-style: none outside none !important;margin: 0 !important;padding:4px !important;}
+.placelistUL li div.actionCol ul li{margin: 0 !important;font-size:0.7em;padding: 0 0 3px !important;}
+.placelistUL li div.actionCol ul li a.buttons{float:right;display:inline-block;width:37px;positon:relative;height:24px;}
 
-.storylistUL li div.actionCol ul li a.buttons span.ui-button-text{position:absolute;top:0px; right:0px;display:inline-block;height: 16px;width: 16px;
+.placelistUL li div.actionCol ul li a.buttons span.ui-button-text{position:absolute;top:0px; right:0px;display:inline-block;height: 16px;width: 16px;
     padding-left: 0 !important; 
     padding-right: 0 !important;
     width: 100% !important;
@@ -135,15 +174,15 @@ table.ui-widget tbody tr.odd td{}
 
 
 
-.storylistUL li div.actionCol ul li a.buttons .ui-icon{height: 16px;width: 16px;display:block;float: left;
+.placelistUL li div.actionCol ul li a.buttons .ui-icon{height: 16px;width: 16px;display:block;float: left;
 
     left: 5px;
     position: absolute;
     top: 4px;
 
 }
-.storylistUL li div.actionCol ul li a.buttons span.actionText{width:0px;float: right  !important;overflow: hidden;}
-.storylistUL li div.actionCol ul li a.buttons span.actionpropt{
+.placelistUL li div.actionCol ul li a.buttons span.actionText{width:0px;float: right  !important;overflow: hidden;}
+.placelistUL li div.actionCol ul li a.buttons span.actionpropt{
    color: #8C818A;
     float: right !important;
     overflow: hidden;
@@ -152,7 +191,7 @@ table.ui-widget tbody tr.odd td{}
 }
 
 
-.storylistUL li .Status div{height:auto;}
+.placelistUL li .Status div{height:auto;}
 
 .inEdit{height:180px; width:721px; position:absolute !important;top:0;left:0; z-index:2  !important;filter:alpha(opacity=35);opacity: 0.35; background-color:#AD153B;}
 span.UinEdit{    background-color: #E2E2E2;
@@ -168,7 +207,7 @@ span.UinEdit{    background-color: #E2E2E2;
     font-size: 12px !important;
     margin-top: 3px;}
 .steal span{float: left;margin-right: 0.3em;}
-/* editing story */
+/* editing place */
 .imagedropDown,.authorSelect{margin-top:7px;}
 
 
@@ -193,7 +232,7 @@ span.UinEdit{    background-color: #E2E2E2;
 
 /*  image listing  */
 .typeIcon{display:inline-block;width:24px;height:24px;}
-.type1{background: url("../images/story.png") no-repeat scroll 50% 50% transparent;} 
+.type1{background: url("../images/place.png") no-repeat scroll 50% 50% transparent;} 
 .type2{background: url("../images/advertisement.png") no-repeat scroll 50% 50% transparent;}
 .selectedImage{max-width:300px;display:none;}
 .imagePreview:hover .selectedImage{display:block;}
@@ -210,8 +249,8 @@ span.UinEdit{    background-color: #E2E2E2;
 
 /* comments */
 
-.users_comments .storylist{ width: 454px;}
-#wsu_ui .users_comments  .storylist.ui-tabs .ui-tabs-nav { width: 446px;}
+.users_comments .placelist{ width: 454px;}
+#wsu_ui .users_comments  .placelist.ui-tabs .ui-tabs-nav { width: 446px;}
 
 
 /* media boxes */
@@ -254,7 +293,7 @@ span.UinEdit{    background-color: #E2E2E2;
 #browserBox.list .imgInfo input{width:100%;}
 #browserBox.grid .ui-state-highlight{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:2px; margin-bottom:5px;width:175px;height:173px;}
 #browserBox.list .ui-state-highlight{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;height:175px;}
-.storyOrderId{ position:absolute; top:-9999em; left:-9999em;}
+.placeOrderId{ position:absolute; top:-9999em; left:-9999em;}
 
 
 

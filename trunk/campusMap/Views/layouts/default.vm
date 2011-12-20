@@ -5,42 +5,22 @@
 	#parse("admin/global_header_html.vm")
 </head>
 <body onLoad="initialize()" id='wsu_ui'>
-
 	<div id = "wrapper">
-		<noscript><div id='globalnav'><ul><li>Washington State University</li></ul></div><div id='logo'><a href='http://www.wsu.edu'><img src='http://images.wsu.edu/global/bg-logo.jpg' alt="WSU Logo"/></a></div></noscript>
-		<script language="Javascript" src="http://images.wsu.edu/javascripts/wsuidentifierV2.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript">
-		   var strHeader; strHeader = getHeader(); 
-		   document.write(strHeader);
-		</script>
-		<!--End of the WSU Identifier Zone. -->
-
-		<div id="siteID">
-			<h2></h2>
-			<h1>The Daily campusMap</h1>
-		</div><!--siteID-->
-		<div id="toolbar">
-			<ul><li></li></ul>
+		<div id="header_bar">
+			#parse("admin/header_html.vm")
+		</div>
+		<div id="nav">
+			<div id="featured"></div>
+			#parse("admin/main_menu.vm")
 		</div>
 		<div id="content">
-			<div id="nav">
-				<div id="featured"></div>
-				#parse("admin/main_menu.vm")
-			</div> 
 			<div id="main">
-				$childContent 
-			</div><!--main-->
-
-			<div id="secondary">&nbsp;</div><!--secondary-->
-			<div id="additional">
-				<h1>Life is good at WSU. </h1>
-			</div><!--addtional-->
- 
-			#parse("admin/footer.vm")
-	 
-		</div><!-- end of content div --> 
-	</div><!--wrapper-->
-<div id="staging" style="position:absolute;top:-9999px;left:-9999px;"></div>
+				<div style="min-height:650px;padding:0 0 0 185px;">$childContent</div> 
+			</div>
+		</div>
+		#parse("admin/footer.vm")
+	</div>
+	<div id="staging" style="position:absolute;top:-9999px;left:-9999px;"></div>
 	#parse("admin/global_footer_JS.vm")
 </body>
 </html>

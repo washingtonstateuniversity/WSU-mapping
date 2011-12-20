@@ -31,6 +31,13 @@ namespace campusMap.Models
             get { return City; }
             set { City = value; }
         }
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
         private string State;
         [Property]
         virtual public string state

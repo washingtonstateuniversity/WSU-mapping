@@ -37,7 +37,7 @@ Published: $!place.PublishTime</div><br/>
     </a>
   </li>
 </ol>
-$Form.HiddenField("image.Id")
+$Form.HiddenField("image.id")
 <div class="content">
 
 <div id="link">
@@ -49,7 +49,7 @@ $Form.HiddenField("image.Id")
 </div> <br/>
 <div class="img">
   #foreach($image in $allImages)
-    <a class="selectedImage" href="$siteroot/image/image.castle?Id=$!{place.Id}&photo=$!{place.returnImageIndex($image)}">
+    <a class="selectedImage" href="$siteroot/image/image.castle?Id=$!{place.id}&photo=$!{place.returnImageIndex($image)}">
       <img width='100px' src="$siteroot/image/download.castle?id=$!{image.id}"/>
     </a>
   #end 

@@ -6,14 +6,6 @@
 <div style="position:absolute;top:10%;right:0px; z-index: 1;">
 
     <ul style=" list-style:none;">
-    <li class="optionsLink actions">
-    
-        <button style="display:block;">Add location</button>
-    <button style="display:block;">Edit location</button>
-    </li>
-    
-    
-    
     <li class="optionsLink"><a href="#">MapView Options</a>
     <ul class="options"  style=" list-style:none;">
         <li><button onclick="turnOnPOI()" style="display:block;">Turn on all POI</button>
@@ -24,22 +16,25 @@
     </ul>
 </div>
 
-      <div class="ui-widget ui-widget-content ui-corner-right" style="position:absolute;bottom:10%;left:0px; padding-left:15px; z-index: 1; background: url(http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif) no-repeat scroll left bottom #CCCCCC;">
-<h3>Search types</h3>
-<h4>Geo coded</h4>
-<input type="text" value="" id="searchbox"  />
-<h4>places</h4>
-<input id="searchTextField" type="text" size="50" placeholder="Anything you want!" />
-        <div>
-        <h4>local search</h4>
-          <input type="text" id="queryInput" value="pullman" style="width: 250px;"/>
-          <input type="button" value="Find" onclick="doSearch()"/>
-        </div>
-      </div>
-      <div class="ui-widget ui-widget-content ui-corner-left" style="position:absolute;bottom:10%;right:0px; z-index: 1;  ">
-        <div id="searchwell"></div>
-      </div>
-
-<div style="height:650px;">
-  <div id="map_canvas" style="width:1000em;height:100em;max-width:100%;min-height:100%;max-height:100%;"></div>
+<div style="display:none;">
+  <div id="mapSearch">
+    <h3>Search types</h3>
+    <h4>Geo coded</h4>
+    <input type="text" value="" id="searchbox"  />
+    <h4>places</h4>
+    <input id="searchTextField" type="text" size="50" placeholder="Anything you want!" />
+    <div>
+      <h4>local search</h4>
+      <input type="text" id="queryInput" value="pullman" style="width: 250px;"/>
+      <input type="button" value="Find" onclick="doSearch()"/>
+    </div>
+  </div>
 </div>
+
+<div class="ui-widget ui-widget-content ui-corner-left" style="position:absolute;bottom:10%;right:0px; z-index: 1;  ">
+  <div id="searchwell"></div>
+</div>
+
+
+  <div id="map_canvas" style="width:1000em;height:100em;max-width:100%;min-height:100%;max-height:100%;"></div>
+

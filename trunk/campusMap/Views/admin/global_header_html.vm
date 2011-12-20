@@ -33,8 +33,6 @@
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
 <link media='screen' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' type='text/css' rel='stylesheet' />
-#* <link media='screen' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/blitzer/jquery-ui.css' type='text/css' rel='stylesheet' />  *#
-
 #* WSU theme *#
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' type='text/css' rel='stylesheet' />
 
@@ -42,9 +40,10 @@
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
 
-<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&sensor=false&key=ABQIAAAAH8kUMijnAfBj23DnU3MW3RR8i_TK5XmIHwEizrT67KWySjG4FRRqzM9a1HZbnz2PWt429MkEsEQTmA"></script>
 <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAH8kUMijnAfBj23DnU3MW3RR8i_TK5XmIHwEizrT67KWySjG4FRRqzM9a1HZbnz2PWt429MkEsEQTmA" type="text/javascript"></script>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>

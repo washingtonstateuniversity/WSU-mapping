@@ -1,7 +1,3 @@
-C:\_SVN_\campusMap\campusMap\bin\Castle.MonoRail.Framework.xml
-C:\_SVN_\campusMap\campusMap\bin\Castle.ActiveRecord.xml
-C:\_SVN_\campusMap\campusMap\bin\NHibernate.xml
-C:\_SVN_\campusMap\campusMap\bin\Newtonsoft.Json.Net20.xml
 C:\_SVN_\campusMap\campusMap\bin\campusMap.dll
 C:\_SVN_\campusMap\campusMap\bin\campusMap.pdb
 C:\_SVN_\campusMap\campusMap\bin\anrControls.Markdown.NET.dll

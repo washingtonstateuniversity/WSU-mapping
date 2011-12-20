@@ -56,7 +56,7 @@ namespace campusMap.Models
         }
 
         private IList<authors> authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_place", ColumnKey = "place_id", ColumnRef = "authors_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> Authors
         {
             get { return authors; }
@@ -144,9 +144,10 @@ namespace campusMap.Models
             get { return Place_Types; }
             set { Place_Types = value; }
         }
-        private place_status Status;
+
+        private status Status;
         [BelongsTo("place_status")]
-        virtual public place_status status
+        virtual public status status
         {
             get { return Status; }
             set { Status = value; }
@@ -160,6 +161,23 @@ namespace campusMap.Models
             get { return Media; }
             set { Media = value; }
         }
+
+        private IList<field_types> Types;
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "place_to_field_types", ColumnKey = "field_type_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return Types; }
+            set { Types = value; }
+        }
+
+        private IList<fields> Fields;
+        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "field_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<fields> field
+        {
+            get { return Fields; }
+            set { Fields = value; }
+        }
+
 
         private IList<tags> Tags = new List<tags>();
         [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "place_to_tags", ColumnKey = "place_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
@@ -179,18 +197,18 @@ namespace campusMap.Models
 
 
         private IList<media_repo> images = new List<media_repo>();
-        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize=30, Table = "PlaceImage", ColumnKey = "placeId", ColumnRef = "imageId", OrderBy="placeOrder", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "place_to_media", ColumnKey = "place_id", ColumnRef = "media_id", OrderBy = "placeOrder", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> Images
         {
             get { return images; }
             set { images = value; }
-        }       
-        private IList<place_comments> comments = new List<place_comments>();
-        [HasMany(typeof(place_comments), Lazy = true, Table = "place_comments", ColumnKey = "place_id", Cascade = ManyRelationCascadeEnum.AllDeleteOrphan, Inverse = true)]
-        virtual public IList<place_comments> Comments
+        }
+        private IList<comments> Comments = new List<comments>();
+        [HasMany(typeof(comments), Lazy = true, Table = "place_to_comments", ColumnKey = "place_id", Cascade = ManyRelationCascadeEnum.AllDeleteOrphan, Inverse = true)]
+        virtual public IList<comments> comments
         {
-            get { return comments; }
-            set { comments = value; }
+            get { return Comments; }
+            set { Comments = value; }
         }
 
         private authors author_editing;
@@ -208,12 +226,12 @@ namespace campusMap.Models
             get { return checked_out; }
             set { checked_out = value; }
         }
-        private IList<place_comments> pub_comments = new List<place_comments>();
-        [HasMany(typeof(place_comments), Lazy = true, Table = "place_comments", ColumnKey = "place_id", Where = "published=1", Cascade = ManyRelationCascadeEnum.None)]
-        virtual public IList<place_comments> Pub_comments
+        private IList<comments> Pub_comments = new List<comments>();
+        [HasMany(typeof(comments), Lazy = true, Table = "place_to_comments", ColumnKey = "place_id", Where = "published=1", Cascade = ManyRelationCascadeEnum.None)]
+        virtual public IList<comments> comments_pub
         {
-            get { return pub_comments; }
-            set { pub_comments = value; }
+            get { return Pub_comments; }
+            set { Pub_comments = value; }
         }
 
 
@@ -221,7 +239,7 @@ namespace campusMap.Models
 
         virtual public bool isPublished()
         {
-            if (this.Status == ActiveRecordBase<place_status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
+            if (this.Status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
             {
                 return true;
             }

@@ -123,14 +123,14 @@ body{
    <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='image')ui-state-active#end'><a href="../image/list.castle">Images</a></li>
   <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='block')ui-state-active#end'><a href="../block/list.castle">Place Type Blocks</a></li>
   <li class='ui-button ui-widget ui-state-default ui-state-hover' style="cursor:default;height:6px;"></li>
-  <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authuser')ui-state-active#end'><a href="../authuser/list.castle">Authorized Users</a></li>
+  <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='author')ui-state-active#end'><a href="../author/list.castle">Authorized Users</a></li>
   <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">End Users</a></li>
 <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='placebyuser')ui-state-active#end'><a href="../placebyuser/list.castle">Reader submissions</a></li>
   <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Comments</a></li>
   <li class='ui-button ui-widget ui-state-default ui-state-hover' style="cursor:default;height:6px;"></li>
   #*<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>*#
   <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='applicants')ui-state-active#end'><a href="../applicants/list.castle">Applicants</a></li>
-  <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='applicants')ui-state-active#end'><a href="../authuser/edit.castle?id=$controller.getUser().Id">Your Profile</a></li>
+  <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='applicants')ui-state-active#end'><a href="../author/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
  
   <li class='ui-button ui-widget ui-state-default'><a href="../place/logout.castle">Logout</a></li>
   <li class='ui-button ui-widget ui-state-default ui-state-hover ui-corner-bottom' style="cursor:default;height:15px;"></li>

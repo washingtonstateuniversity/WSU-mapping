@@ -13,11 +13,11 @@
 
 #foreach($tag in $tags)
 <tr>
-    <td align="center">$!tag.Id</td>
+    <td align="center">$!tag.id</td>
     <td align="center">$!tag.Name</td>
     <td align="center">
-        <a href="edit.castle?id=$!{tag.Id}">Edit</a> | 
-        <a href="delete.castle?id=$!{tag.Id}">Delete</a>
+        <a href="edit.castle?id=$!{tag.id}">Edit</a> | 
+        <a href="delete.castle?id=$!{tag.id}">Delete</a>
     </td>
     
 

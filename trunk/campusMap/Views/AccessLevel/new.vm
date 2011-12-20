@@ -5,11 +5,11 @@
 #end
 
 <form action="update.castle" method="post">
-$Form.HiddenField("accesslevel.Id")
+$Form.HiddenField("accesslevel.id")
 
 <h3>Access Level</h3>
 <p>Title:</p>
-$Form.TextField("accesslevel.Title") 
+$Form.TextField("accesslevel.title") 
 <p><input type="submit" value="Submit" /></p>
 
 </form>

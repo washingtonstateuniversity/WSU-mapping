@@ -21,15 +21,8 @@ namespace campusMap.Models
         [PrimaryKey("media_type_id")]
         virtual public int id
         {
-            get { return id; }
+            get { return media_type_id; }
             set { media_type_id = value; }
-        }
-        private string Type;
-        [Property]
-        virtual public string type
-        {
-            get { return Type; }
-            set { Type = value; }
         }
         private string Name;
         [Property]
@@ -45,15 +38,15 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<media_repo> Media;
+        /*private IList<media_repo> Media;
         [HasMany(Lazy=true, BatchSize=30)]
         virtual public IList<media_repo> media
         {
             get { return Media; }
             set { Media = value; }
-        }
+        }*/
         private IList<media_repo> Media_typed;
-        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, Table = "media_to_media_types", ColumnKey = "media_id", ColumnRef = "media_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize=30, Table = "media_to_media_types", ColumnKey = "media_id", ColumnRef = "media_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> media_typed
         {
             get { return Media_typed; }

@@ -57,17 +57,15 @@ namespace campusMap.Controllers
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
             baseEx.Add(Expression.Eq("Email", person.Email));
 
-            IList<place_comments> items;
+            IList<comments> items;
 
-            items = ActiveRecordBase<place_comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
+            items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
             PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
 
 
             List<AbstractCriterion> sbaseEx = new List<AbstractCriterion>();
             sbaseEx.Add(Expression.Eq("Email", person.Email));
-            //IList<StoryByUser> sitems;
-            //sitems = ActiveRecordBase<StoryByUser>.FindAll(Order.Desc("CreateTime"), sbaseEx.ToArray());
-            //PropertyBag["storybyuser"] = PaginationHelper.CreatePagination(sitems, pagesize, page);
+
 
             RenderView("new");
             

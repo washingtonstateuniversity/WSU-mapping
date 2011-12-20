@@ -430,8 +430,8 @@ a.section:hover{background-color:#526E3F;}
 
 
 
-/* story read more */
-.inStoryTagLine{
+/* place read more */
+.inPlaceTagLine{
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px; 
@@ -440,7 +440,7 @@ padding:5px 10px;
 	
 	}
 
-.inStoryTagLine h4{display:inline-block;}
+.inPlaceTagLine h4{display:inline-block;}
 
 
 

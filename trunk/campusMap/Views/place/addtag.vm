@@ -1,7 +1,7 @@
 <select name="tags[$!count].id" id="tag[$!count].id">
 								<option class="" value="">-select-</option>
 								#foreach($tag in $tags)
-									<option class="tag" value="$tag.id" #if($storytag == $tag) selected="selected" #end>$!tag.Name</option>
+									<option class="tag" value="$tag.id" #if($placetag == $tag) selected="selected" #end>$!tag.Name</option>
 								#end	
 							</select>
 							<input type="text" class="tag" name="newtag" value="" id="tag">

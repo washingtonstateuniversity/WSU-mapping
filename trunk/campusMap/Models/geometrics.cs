@@ -26,12 +26,12 @@ namespace campusMap.Models
         public geometrics() { }
 
 
-        private int geometrics_id;
-        [PrimaryKey("geometrics_id")]
+        private int geometric_id;
+        [PrimaryKey("geometric_id")]
         virtual public int id
         {
-            get { return geometrics_id; }
-            set { geometrics_id = value; }
+            get { return geometric_id; }
+            set { geometric_id = value; }
         }
         /* private string Coordinate;
         [Property]
@@ -57,19 +57,35 @@ namespace campusMap.Models
         }
 
         private IList<geometrics_types> Place_Types = new List<geometrics_types>();
-        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometrics_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<geometrics_types> place_types
         {
             get { return Place_Types; }
             set { Place_Types = value; }
         }
         private IList<place> places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometrics_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }
             set { places = value; }
         }
+
+        private IList<field_types> Types;
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "geometrics_to_field_types", ColumnKey = "field_type_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return Types; }
+            set { Types = value; }
+        }
+
+        private IList<fields> Fields;
+        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "geometrics_to_fields", ColumnKey = "field_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<fields> field
+        {
+            get { return Fields; }
+            set { Fields = value; }
+        }    
 
     }
 }

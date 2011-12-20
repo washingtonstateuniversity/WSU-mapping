@@ -14,7 +14,7 @@
 #foreach ($place in $places)
 <item>
 <title>$Controller.Escape($!{place.Title})</title>
-<link>http://localhost:2398/public/readmore.castle?id=$!{place.Id}</link>
+<link>http://localhost:2398/public/readmore.castle?id=$!{place.id}</link>
 <description>$Controller.Escape($!{place.Teaser})</description>
 </item>
 #end 
