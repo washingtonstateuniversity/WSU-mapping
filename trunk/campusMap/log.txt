@@ -543,3 +543,18 @@ Invalid column name 'Id'.
 2011-12-20 11:27:24,679 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
 2011-12-20 11:30:27,417 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
 2011-12-20 11:43:00,244 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 11:53:04,230 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-20 12:22:02,515 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:30:08,231 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:30:23,209 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:30:23,518 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2011-12-21 10:30:23,538 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2011-12-21 10:37:27,507 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:37:31,836 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:37:31,842 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2011-12-21 10:37:31,843 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2011-12-21 10:47:44,377 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:47:46,311 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:48:02,732 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2011-12-21 10:55:53,145 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2011-12-21 10:55:53,153 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.

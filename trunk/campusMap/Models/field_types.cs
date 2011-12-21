@@ -14,7 +14,7 @@ using System.Collections;
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy=true)]
-    public class field_types : ActiveRecordBase<field_types>
+    public class field_types : json_autocomplete<field_types>, campusMap.Models.Ijson_autocomplete
     {
         private int field_type_id;
         [PrimaryKey("field_type_id")]

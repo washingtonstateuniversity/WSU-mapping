@@ -138,7 +138,9 @@
     <Compile Include="Models\colleges.cs" />
     <Compile Include="Models\categories.cs" />
     <Compile Include="Models\campus.cs" />
+    <Compile Include="Models\place_comments.cs" />
     <Compile Include="Models\place_media.cs" />
+    <Compile Include="Models\place_status.cs" />
     <Compile Include="Models\usertags.cs" />
     <Compile Include="Models\programs.cs" />
     <Compile Include="Models\departments.cs" />
