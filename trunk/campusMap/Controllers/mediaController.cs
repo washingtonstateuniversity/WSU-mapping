@@ -57,7 +57,7 @@ namespace campusMap.Controllers
 
 
 
-        public void List(int page, int type, int pagesize)
+        public void index(int page, int type, int pagesize)
         {
             if (page == 0)
                 page = 1;
@@ -78,8 +78,8 @@ namespace campusMap.Controllers
 
             PropertyBag["pagesize"] = pagesize;
             PropertyBag["selected"] = type;
-            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
-            PropertyBag["images"] = PaginationHelper.CreatePagination(items, pagesize, page);
+            PropertyBag["mediatypes"] = ActiveRecordBase<media_types>.FindAll();
+            PropertyBag["media"] = PaginationHelper.CreatePagination(items, pagesize, page);
         }
         public void delete(int id)
         {

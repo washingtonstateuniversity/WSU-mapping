@@ -22,6 +22,7 @@ namespace campusMap.Controllers
         protected ImageService imageService = new ImageService();
         protected UserService userService = new UserService();
         protected LogService logService = new LogService();
+        protected FieldsService fieldsService = new FieldsService();
 
         public string getView()
         {

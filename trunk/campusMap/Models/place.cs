@@ -145,6 +145,15 @@ namespace campusMap.Models
             set { Place_Types = value; }
         }
 
+        private IList<place_models> Place_models = new List<place_models>();
+        [HasAndBelongsToMany(typeof(place_models), Lazy = true, Table = "place_to_place_models", ColumnKey = "place_id", ColumnRef = "place_model_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place_models> place_models
+        {
+            get { return Place_models; }
+            set { Place_models = value; }
+        }
+
+        
         private status Status;
         [BelongsTo("place_status")]
         virtual public status status
@@ -169,6 +178,8 @@ namespace campusMap.Models
             get { return Types; }
             set { Types = value; }
         }
+
+
 
         private IList<fields> Fields;
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "field_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]

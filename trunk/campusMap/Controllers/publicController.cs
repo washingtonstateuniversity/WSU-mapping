@@ -412,8 +412,8 @@
             {
                 comment.Flagged = true;
                 comment.adminRead = false;
-                comment.FlagNumber = comment.FlagNumber + 1; 
-                comment.Save();
+                comment.FlagNumber = comment.FlagNumber + 1;
+                ActiveRecordMediator<comments>.Save(comment);
                 RedirectToReferrer();
                 return;
             }
@@ -495,7 +495,7 @@
             }
             comment.CreateTime = DateTime.Now;
             comment.UpdateTime = DateTime.Now;
-            comment.Save();
+            ActiveRecordMediator<comments>.Save(comment);
             if (((String)Flash["message"]) == "")
             {
                 Flash["message"] = "Your comment has been added.  It will show up when it's been approved.";
@@ -921,13 +921,13 @@
         {
             advertisement adv = ActiveRecordBase<advertisement>.Find(id);
             adv.Clicked = adv.Clicked + 1;
-            adv.Save();
+            ActiveRecordMediator<advertisement>.Save(adv);
             Redirect(adv.Url);
         }
         public void IncView(advertisement adv)
         {
             adv.Views = adv.Views + 1;
-            adv.Save();
+            ActiveRecordMediator<advertisement>.Save(adv);
         }
        #endregion
 

@@ -15,7 +15,7 @@ namespace campusMap.Models
 {   
     
     [ActiveRecord(Lazy=true, BatchSize=5)]
-    public class usertags// : ActiveRecordBase<usertags>
+    public class usertags : ActiveRecordBase<usertags>
     {
         private int usertag_id;
         [PrimaryKey("usertag_id")]

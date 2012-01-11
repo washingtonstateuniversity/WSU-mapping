@@ -33,16 +33,23 @@ min-width: 960px;
 /* Nav */
 #nav {left: 0; padding: 0 0px 0px 0; position: fixed;top: 88px;width: 184px; z-index: 2;}
 #main_nav{}
-#main_nav li{display: block !important;float: left;min-height: 24px;line-height: 23px;width: 153px;}
+#main_nav li{display: block /*!important*/;float: left;min-height: 24px;line-height: 23px;width: 153px;}
 #main_nav li a{display: block !important;}
 #main_nav li:hover{border: 1px solid #4D0F1E;font-weight: normal;background: url("../wsu_ui/images/ui-bg_glass_55_ad153b_1x400.png") repeat-x scroll 50% 50% #AD153B;}
 #main_nav li a:hover{color: #FFFFFF !important;}
-#main_nav li.sep{cursor:default;min-height:6px;}
+#main_nav li.sep{cursor:default;min-height:3px;}
 #main_nav li.endcap{cursor:default;min-height:15px;}
 #main_nav li.quickActions{border-right:3px solid #300;width: 150px;}
 
 #nav ul ul.action_nav{margin-left: -14px;}
 #nav ul ul.action_nav li{width: 147px;}
+#nav ul ul{padding: 0;}
+#nav ul li.ui-state-active ul{
+	 margin: 0 0 0 -14px;
+}
+
+
+
 /*
   set up for the ui to over power the default css
 */
@@ -67,6 +74,11 @@ min-width: 960px;
 #wsu_ui .placelist.ui-tabs .ui-tabs-panel{padding: 5px 2px;}
 #wsu_ui .placelist.ui-tabs .ui-tabs-nav li{float:left;}
 #wsu_ui .placelist.ui-tabs .ui-tabs-nav{height: 40px;/*width: 717px;*/}
+
+
+#wsu_ui .ui-autocomplete.ui-menu{max-height:250px;overflow-y: scroll;}
+
+
 
 
 /*tinyMCE corrections  */
@@ -114,10 +126,10 @@ table.ui-widget tbody tr.odd td{}
 .w150{width:150px !important;}
 .w50{width:50px !important;}
 
-.nonEdit{ position:absolute; top:-9999em; left:-9999em;}
-
-
-
+.push_hide,.nonEdit{position:absolute;top:-9999px;left:-9999px;}
+#content_area{min-height:500px;padding:0 0 0 185px;}
+#content_tar{padding:5px 10px;}
+.home #content_tar{padding:0px;}
 
 /* place listing */
 .placelist{ /*width: 724px;*/}
@@ -305,3 +317,12 @@ span.UinEdit{    background-color: #E2E2E2;
 }
 
 
+
+
+
+
+
+
+
+#content h3.ListingChoices{ cursor:pointer;}
+#content h3.ListingChoices.active{color:#000;}

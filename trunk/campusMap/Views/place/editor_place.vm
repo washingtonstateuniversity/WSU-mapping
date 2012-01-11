@@ -40,25 +40,35 @@
 <p class="validateTips">All form fields are required.</p>
         <form>$Form.HiddenField("place.id")
             <fieldset><legend>Location</legend>
-                <label for="LocationTypeSelect">Location Type</label><br/>
-                <select id="LocationTypeSelect">
-                    <option value="">Select one...</option>
-                    <option value="Parking">Parking</option>
-                    <option value="Stadium">Stadium</option>
-                    <option value="Building">Building</option>
-                    <option value="Landmark">Landmark</option>
-                </select><br/>
-                
-                <label for="Lat">Latitude</label><br/>
-                <input type="text" name="Lat" id="Lat" value="" class="text ui-widget-content ui-corner-all" /><br/>
-                <label for="Long">Longitude</label><br/>
-                <input type="text" name="Long" id="Long" value="" class="text ui-widget-content ui-corner-all" /><br/>
-                
-                
+				<div class="container" style="width:100%;">
+
+						<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
+						<select id="LocationModelSelect">
+							<option value="">Select one...</option>
+							#foreach($model in $models)
+								<option class="model" value="$model.id" #if($place.model == $model) selected="selected" #end>$!model.name</option>
+							#end
+						</select><br/>
+						<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
+						<select id="LocationTypeSelect">
+							<option value="">Select one...</option>
+							#foreach($type in $types)
+								<option class="type" value="$type.id" #if($place.type == $type) selected="selected" #end>$!type.name</option>
+							#end
+						</select><br/> 
+					<div class="col2"  style="width:49%;display:inline-block;">	
+						<label for="Lat"><strong>Latitude</strong></label><br/>
+						<input type="text" name="Lat" id="Lat" value="" class="text ui-widget-content ui-corner-all" />
+					</div>
+					<div class="col2"  style="width:49%;display:inline-block;">
+						<label for="Long"><strong>Longitude</strong></label><br/>
+						<input type="text" name="Long" id="Long" value="" class="text ui-widget-content ui-corner-all" />
+					</div>
+                </div>  
             </fieldset>
             <fieldset><legend>Naming</legend>
                 <label for="name">Preferred Map Name</label><br/>
-                <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all"  size="50"/><br/>
+                <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/><br/>
                 
                 
                 <label for="Official">Official Name</label><br/>
@@ -69,7 +79,10 @@
                 <label for="Abbrev">Bldg Abbrev</label><br/>
                 <input type="text" name="Abbrev" id="Abbrev" value="" class="text ui-widget-content ui-corner-all" /><br/>               
             </fieldset>
-            
+             <fieldset><legend>Geometrics</legend>
+                <label for="name">Preferred Map Name</label><br/>
+                             
+            </fieldset>           
             <fieldset>
             	<label for="tags">Tag location: </label><br/>
 				<input id="tags"  class="text ui-widget-content ui-corner-all" size="50" /><br/>

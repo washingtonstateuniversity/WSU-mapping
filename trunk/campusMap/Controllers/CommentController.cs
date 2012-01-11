@@ -15,9 +15,6 @@ namespace campusMap.Controllers
     public class CommentController : SecureBaseController
 	{
 
-		public void Index()
-		{	}
-
         [AccessibleThrough(Verb.Post)]
 		public void Authenticate(string username, string password, bool autoLogin)
 		{
@@ -32,7 +29,7 @@ namespace campusMap.Controllers
         {   
             comments comment = ActiveRecordBase<comments>.Find(id);
             comment.adminRead = true;
-            comment.Save();
+            ActiveRecordMediator<comments>.Save(comment);
         }
         public void delete(int id)
         {
@@ -49,24 +46,21 @@ namespace campusMap.Controllers
             if (comment.Flagged == false) {
                 comment.FlagNumber = 0;
             }
-
-            comment.Save();
+            ActiveRecordMediator<comments>.Save(comment);
             RedirectToAction("list");
         }
         public void New()
         {            
             PropertyBag["comments"] = ActiveRecordBase<comments>.FindAll();
         }
-        public void List(int page)
+        public void index(int page)
         {
-
             if (page == 0)
                 page = 1;
             IList<comments> items;
             int pagesize = 30;
             items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"));
             PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
-
            //PropertyBag["comments"] = ActiveRecordBase<Comment>.FindAll();         
         }
         public void Edit(int id)

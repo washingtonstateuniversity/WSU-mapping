@@ -119,6 +119,16 @@ namespace campusMap.Models
             get { return places; }
             set { places = value; }
         }
+
+        private IList<geometrics> Geometric = new List<geometrics>();
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, BatchSize = 60, Table = "authors_to_geometrics", ColumnKey = "author_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics> geometric
+        {
+            get { return Geometric; }
+            set { Geometric = value; }
+        }
+
+
         private IList<map_views> Views = new List<map_views>();
         [HasAndBelongsToMany(typeof(map_views), Lazy = true, BatchSize = 60, Table = "authors_to_view", ColumnKey = "author_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<map_views> views

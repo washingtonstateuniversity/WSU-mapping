@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy=true, BatchSize=5)]
-    public class tags : ActiveRecordBase<tags>
+    public class tags : json_autocomplete<tags>, campusMap.Models.Ijson_autocomplete
     {
         private int tag_id;
         [PrimaryKey("tag_id")]

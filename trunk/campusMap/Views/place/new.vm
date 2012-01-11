@@ -96,7 +96,6 @@
     </p>
     #*<p>
       Place Location:<br/>
-      #*$Form.TextField("place.Location")*#
       <input type="text" value="$!place.Location" name="place.Location" id="place_Location" class="ui-widget ui-widget-content ui-corner-all " />*#
     </p>
     #if($Controller.canPublish($loginUser)) <p class="wsu_ui">

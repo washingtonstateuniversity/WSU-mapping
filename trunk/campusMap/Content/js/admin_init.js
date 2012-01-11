@@ -308,11 +308,11 @@ function openImgUploader(){
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src','/media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
 
-											$('#ISIUarea').load('/image/inlineupload.castle',function(){
+											$('#ISIUarea').load('/media/inlineupload.castle',function(){
 												if(typeof(availablecredits) !== 'undefined'){
 													if($( "#image_Credit" ).length>0){
 														$( "#image_Credit" ).autocomplete({
@@ -331,7 +331,7 @@ function openImgUploader(){
 																											
 												var weWantedTo=true;
 													$('input[type=file]').ajaxfileupload({ 
-															  'action': '/Image/update.castle', 
+															  'action': '/media/update.castle', 
 															  'params': { 
 															  	'image.id':'',
 																'image.FileName':$('input#image_FileName'),
@@ -362,7 +362,7 @@ function openImgUploader(){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src','/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){
@@ -473,14 +473,14 @@ function openImgResource(ed,uploadOnly){
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/image/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src','/media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
-											$('#ISIUarea').load('/image/inlineupload.castle',function(){
+											$('#ISIUarea').load('/media/inlineupload.castle',function(){
 																
 												var weWantedTo=true;
 													$('input[type=file]').ajaxfileupload({ 
-															  'action': '/Image/update.castle', 
+															  'action': '/media/update.castle', 
 															  'params': { 
 															  	'image.id':'',
 																'image.FileName':$('input#image_FileName'),
@@ -511,7 +511,7 @@ function openImgResource(ed,uploadOnly){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src','/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){
@@ -1091,6 +1091,14 @@ function removeToggle(){
 	$('.imageBox').unbind('mouseenter mouseleave'); 
 }
 $(function() {
+	
+$('.endcap').dblclick(function(){
+	$('.mItem').each(function(index, element) {
+        $(this).slideToggle('fast');
+    });
+});
+	
+	
 	$('.insotryupload').live('click',function(){
 		openImgUploader();
 	});
@@ -1109,9 +1117,9 @@ $(function() {
 			$(this).find('.actionpropt').stop().animate({width: 10}, 250, function() {});
 		}
 	);
-
+if($(".lazy img,img.lazy").length){
 	$(".lazy img,img.lazy").lazyload();
-
+}
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
         if($("#tabs-2 #place_Bodytext").length>0){
             load_tiny("bodytext");
@@ -1155,20 +1163,23 @@ $(function() {
     
     if($( "a[title='Delete']" ).length>0){
         var deleteing='';
+		var name='';
 	    if($( "#deleteModule" ).length==0){
-	        $( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete this?</h2></div>');
+	        $( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
 	    }
 	    $( "a[title='Delete']" )
 		    .live('click',function(e) {
 		    e.preventDefault();
 		    e.stopPropagation();
-		    deleteing=$(this).attr('href').split('=')[1];
+		    deleteing=$(this).attr('href');
+			name=$(this).closest('tr').find('.name').html();
+			$('#tar_item').html(name!=''&&name!='undfinded'?name:'this');
 		    $( "#deleteModule" ).dialog( "open" );
 	    });
 	    $( "#deleteModule" ).dialog({
 		    autoOpen: false,
-		    height:200,
-		    width:350,
+		    height:225,
+		    width:400,
 		    modal: true,
 		    hide: 'blind',
 		    resizable: false,
@@ -1176,7 +1187,7 @@ $(function() {
 		    buttons: {
 			    "Delete": function() {
 			        $( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-                    window.location= siteroot+view+'delete.castle?id='+deleteing;
+                    window.location = deleteing;
 			    },
 			    Cancel: function() {
 				        $( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
@@ -1224,6 +1235,13 @@ $(function() {
 		    }
 	    });
 	}
+
+
+    if($( "#sub_tabs" ).length>0){
+        $( "#sub_tabs" ).tabs();
+	}
+
+
 
     if($( "#tabs" ).length>0){
         var  taboptions;
@@ -1317,6 +1335,9 @@ $(function() {
 	
 	
 	$(function() {
+		
+		
+		
 		$('#browserBox').sortable({
 			placeholder: "ui-state-highlight",
 			update: function(event, ui) {

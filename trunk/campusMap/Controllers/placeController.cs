@@ -20,18 +20,33 @@ namespace campusMap.Controllers
         using System.Text.RegularExpressions;
         using System.Collections;
         using campusMap.Services;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Utilities;
+    using Newtonsoft.Json.Linq;
+
+
+
     #endregion
 
     [Layout("default")]
     public class placeController : SecureBaseController
     {
 
+    /*
+     * 
+     * MAY BE A FIELDS HELPER SERVICES WOULD BE WISE ?
+     * 
+     */
 
-        public void editor(int id, int page)
-        {
+
+        public void editor(int id, int page){
+            if (id == 0){
+                New();
+            }else{
+                Edit_place(id, page);
+            }
             CancelView();
             CancelLayout();
-            //Edit_place(id, page);
             RenderView("editor_place");
             return;
         }
@@ -153,6 +168,22 @@ namespace campusMap.Controllers
                     PropertyBag["firstplace"] = firstplace;
                     PropertyBag["lastplace"] = lastplace; 
                 }
+
+                pagesize = 100;
+                IList<place_types> place_types_items;
+                place_types_items = ActiveRecordBase<place_types>.FindAll();
+                PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, paging);
+
+
+
+                pagesize = 15;
+                IList<field_types> place_fields_items;
+                List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
+                fieldsEx.AddRange(baseEx);
+                fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
+                place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
+                PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, paging);
+
             RenderView("list");
         }
         public bool canEdit(place place, authors user)
@@ -193,7 +224,7 @@ namespace campusMap.Controllers
             bool flag = false;
             /*switch (user.Accesslevel.Title)
             {
-                case "Author": flag = true; break;
+                case "Author": flag = true;
                                
                 case "Editor": flag = true; break;
 
@@ -202,16 +233,58 @@ namespace campusMap.Controllers
             return flag;        
         }
 
+        public void new_type()
+        {
+            place_types type = new place_types();
+            PropertyBag["type"] = type;
+            RenderView("types/new");
+        }
+        public void new_field()
+        {
+            field_types field = new field_types();
+            PropertyBag["field"] = field;
+            RenderView("fields/new");
+        }
+        public void edit_type(int id)
+        {
+            place_types type = ActiveRecordBase<place_types>.Find(id);
+            PropertyBag["type"] = type;
+            RenderView("types/new");
+        }
 
+        public void edit_field(int id)
+        {
+            field_types field = ActiveRecordBase<field_types>.Find(id);
+            PropertyBag["field"] = field;
 
+            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
+            string ele_str = FieldsService.getfieldmodel(ele);
+
+            PropertyBag["ele_type"] = ele.type;
+            PropertyBag["html_ele"] = ele_str;
+
+            RenderView("fields/new");
+        }
+        public void update_placeType([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_types type)
+        {
+            ActiveRecordMediator<place_types>.Save(type);
+            RedirectToAction("list");
+        }
+        public void update_placeField([ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field, string ele_type)
+        {
+            field.model = this.GetType().Name;
+            field.attr = "{ \"type\": \"" + ele_type + "\", \"lable\": \"test_lable\", \"attr\":{\"title\":\"test_tile\"}, \"options\":{\"foo\":\"bar\",\"footoo\":\"bars\"} }";
+            ActiveRecordMediator<fields>.Save(field);
+            RedirectToAction("list");
+        }
 
         public void setStatus(int id, int status, bool ajax)
         {
-            place place = ActiveRecordBase<place>.Find(id);
-            PropertyBag["place"] = place;
+            place one_place = ActiveRecordBase<place>.Find(id);
+            PropertyBag["place"] = one_place;
             status published = ActiveRecordBase<status>.Find(status);
             //place.Status = published;
-            place.Save();
+            ActiveRecordMediator<place>.Save(one_place);
 
             //if(!ajax)
             //RedirectToReferrer();
@@ -271,16 +344,16 @@ namespace campusMap.Controllers
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
-            place place = ActiveRecordBase<place>.Find(id);
+            place one_place = ActiveRecordBase<place>.Find(id);
             String username = getUserName();
             PropertyBag["authorname"] = username;
-            place.checked_out_by = username;
-            place.Save();
+            one_place.checked_out_by = username;
+            ActiveRecordMediator<place>.Save(one_place);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
             PropertyBag["loginUser"] = getUser();
-            PropertyBag["placeimages"] = place.Images;
+            PropertyBag["placeimages"] = one_place.Images;
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
             if(Flash["place"] !=null)
@@ -291,13 +364,15 @@ namespace campusMap.Controllers
             }
             else
             {
-                PropertyBag["place"] = place;
+                PropertyBag["place"] = one_place;
             }
+
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
-            PropertyBag["placetype"]   = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
 
@@ -305,7 +380,7 @@ namespace campusMap.Controllers
                 page = 1;
             int pagesize = 10;
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Place", place));
+            baseEx.Add(Expression.Eq("Place", one_place));
 
             IList<comments> items;
 
@@ -316,24 +391,23 @@ namespace campusMap.Controllers
             PropertyBag["credits"] = CreditList; 
 
             List<tags> tags = new List<tags>();
-            tags.AddRange(place.tags);
+            tags.AddRange(one_place.tags);
             for (int i = 0; i < 2; i++)
                 tags.Add(new tags());
             PropertyBag["placetags"] = tags;
 
             List<authors> authors = new List<authors>();
-            authors.AddRange(place.Authors);
+            authors.AddRange(one_place.Authors);
             for (int i = 0; i < 2; i++)
                 authors.Add(new authors());
 
             List<media_repo> images = new List<media_repo>();
-            images.AddRange(place.Images);
+            images.AddRange(one_place.Images);
             if (images.Count == 0)
             {
                images.Add(new media_repo());
                 PropertyBag["placeimages"] = images;   
             }
-              
 
             PropertyBag["placeauthors"] = authors; 
             RenderView("new");
@@ -341,7 +415,6 @@ namespace campusMap.Controllers
         }
         public void New()
         {
-
             PropertyBag["credits"] = ""; 
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
@@ -363,13 +436,14 @@ namespace campusMap.Controllers
 
             String availableImagesList = "";
             PropertyBag["availableImages"] = availableImagesList; // string should be "location1","location2","location3"
-            
 
+            
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["place"] = Flash["place"] != null ? Flash["place"] : place;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
             PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
-            PropertyBag["placetype"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
         }
@@ -533,16 +607,14 @@ namespace campusMap.Controllers
             Flash["tags"] = place;
             Flash["images"] = place;
             Flash["authors"] = place;
-
-            if (cancel != null)
-            {
+            
+            if (cancel != null){
                 place.checked_out_by = "";
                 ActiveRecordMediator<place>.Save(place);
                 RedirectToAction("list");
                 return;
             }
-            if (place.prime_name == null || place.prime_name.Length == 0 )
-            {
+            if (place.prime_name == null || place.prime_name.Length == 0 ){
                 Flash["error"] = "You are missing the basic parts of a place";
                 RedirectToReferrer();
                 return;
@@ -567,24 +639,18 @@ namespace campusMap.Controllers
             place.tags.Clear(); 
             //place.Images.Clear();
             place.Authors.Clear();
-            if (apply != null)
-            {
+            if (apply != null){
 
-            }
-            else
-            {
+            }else{
                 place.checked_out_by = "";
             }
 
 
-            if (place.id == 0)
-            {
+            if (place.id == 0){
                 //PlaceStatus stat = ActiveRecordBase<PlaceStatus>.Find(1);
                 //place.Status = stat;
                 place.creation_date = DateTime.Now;
-            }
-            else
-            {
+            }else{
                 place.updated_date = DateTime.Now;
             }
 
@@ -613,7 +679,7 @@ namespace campusMap.Controllers
                 {
                     place_media find = ActiveRecordBase<place_media>.FindFirst(new ICriterion[] { Expression.Eq("media", si.Media), Expression.Eq("place", place) });
                     find.place_order = si.place_order;
-                    find.Save();
+                    ActiveRecordMediator<place_media>.Save(find);
                 }
             }
 
@@ -682,7 +748,21 @@ namespace campusMap.Controllers
             CancelLayout();
             RedirectToAction("list");
         }
-
-
+        public void delete_type(int id)
+        {
+            place_types place_type = ActiveRecordBase<place_types>.Find(id);
+            Flash["massage"] = "Article, <strong>Note:" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<place_types>.Delete(place_type);
+            CancelLayout();
+            RedirectToAction("list");
+        }
+        public void delete_field(int id)
+        {
+            field_types place_fields = ActiveRecordBase<field_types>.Find(id);
+            Flash["massage"] = "Article, <strong>Note:" + place_fields.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<field_types>.Delete(place_fields);
+            CancelLayout();
+            RedirectToAction("list");
+        }
     }
 }

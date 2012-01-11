@@ -55,13 +55,96 @@ namespace campusMap.Models
             get { return Default_Type; }
             set { Default_Type = value; }
         }
-
-        private IList<geometrics_types> Place_Types = new List<geometrics_types>();
-        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<geometrics_types> place_types
+        private DateTime? Publish_Time;
+        [Property]
+        virtual public DateTime? publish_time
         {
-            get { return Place_Types; }
-            set { Place_Types = value; }
+            get { return Publish_Time; }
+            set
+            {
+                //DateTime bla = DateTime.MinValue;
+                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
+                {
+                    // bla is a valid sql datetime
+                    Publish_Time = value;
+
+                }
+            }
+        }
+        private DateTime? Creation_Date;
+        [Property]
+        virtual public DateTime? creation_date
+        {
+            get { return Creation_Date; }
+            set
+            {
+                //DateTime bla = DateTime.MinValue;
+                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
+                {
+                    // bla is a valid sql datetime
+                    Creation_Date = value;
+
+                }
+            }
+        }
+        private DateTime? Updated_Date;
+        [Property]
+        virtual public DateTime? updated_date
+        {
+            get { return Updated_Date; }
+            set
+            {
+                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
+                {
+                    // bla is a valid sql datetime
+                    Updated_Date = value;
+
+                }
+            }
+        }
+
+        private status Status;
+        [BelongsTo("geometrics_status")]
+        virtual public status status
+        {
+            get { return Status; }
+            set { Status = value; }
+        }
+
+
+        private media_repo Media;
+        [BelongsTo]
+        virtual public media_repo media
+        {
+            get { return Media; }
+            set { Media = value; }
+        }
+
+
+
+
+
+        private IList<tags> Tags = new List<tags>();
+        [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "geometric_to_tags", ColumnKey = "geometric_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<tags> tags
+        {
+            get { return Tags; }
+            set { Tags = value; }
+        }
+
+        private IList<usertags> usertags = new List<usertags>();
+        [HasAndBelongsToMany(typeof(usertags), Lazy = true, Table = "geometric_to_usertags", ColumnKey = "geometric_id", ColumnRef = "usertag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<usertags> Usertags
+        {
+            get { return usertags; }
+            set { usertags = value; }
+        }
+        private IList<geometrics_types> Geometric_Types = new List<geometrics_types>();
+        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics_types> geometric_types
+        {
+            get { return Geometric_Types; }
+            set { Geometric_Types = value; }
         }
         private IList<place> places;
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
@@ -85,7 +168,58 @@ namespace campusMap.Models
         {
             get { return Fields; }
             set { Fields = value; }
-        }    
+        }
+        private IList<media_repo> images = new List<media_repo>();
+        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "geometric_to_media", ColumnKey = "geometric_id", ColumnRef = "media_id", OrderBy = "geometric_order", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<media_repo> Images
+        {
+            get { return images; }
+            set { images = value; }
+        }
+
+
+        private IList<authors> authors = new List<authors>();
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<authors> Authors
+        {
+            get { return authors; }
+            set { authors = value; }
+        }
+        private authors author_editing;
+        [BelongsTo("authors_editing")]
+        virtual public authors editing
+        {
+            get { return author_editing; }
+            set { author_editing = value; }
+        }
+
+        private String checked_out;
+        [Property]
+        virtual public String checked_out_by
+        {
+            get { return checked_out; }
+            set { checked_out = value; }
+        }
+        virtual public bool isPublished()
+        {
+            if (this.Status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        virtual public bool isCheckedOutNull()
+        {
+            bool flag = false;
+            if (checked_out_by == null)
+                flag = true;
+
+            return flag;
+        }
+
+
+
 
     }
 }

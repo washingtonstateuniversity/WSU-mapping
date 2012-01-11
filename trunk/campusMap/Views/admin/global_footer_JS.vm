@@ -1,9 +1,10 @@
 <!--Beginning of the WSU Global Footer Zone. Refer to www.wsu.edu/identity/ for more information. -->
 <noscript>	<div id="wsufooter">Copyright &copy;  Board of Regents, <a href="http://www.wsu.edu">Washington State University</a>  </div><!--wsufooter-->
 </noscript>
+#*
 <script language="javascript" type="text/javascript">var strFooter;strFooter = getFooter();document.write(strFooter);</script>
 <!--End of the WSU Global Footer Zone. -->
-#*
+
 <script type="text/javascript" src="../Scripts/open-collapse.js"></script>
 <script type="text/javascript" src="../Scripts/open-collapseall.js"></script>
 *#

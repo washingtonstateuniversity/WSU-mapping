@@ -4,7 +4,7 @@
 	#* all the JS and CSS that is site wide *#
 	#parse("admin/global_header_html.vm")
 </head>
-<body onLoad="initialize()" id='wsu_ui'>
+<body onLoad="initialize()" id='wsu_ui' class="${controller.getView()}">
 	<div id = "wrapper">
 		<div id="header_bar">
 			#parse("admin/header_html.vm")
@@ -15,12 +15,12 @@
 		</div>
 		<div id="content">
 			<div id="main">
-				<div style="min-height:650px;padding:0 0 0 185px;">$childContent</div> 
+				<div id="content_area"><div id="content_tar">$childContent</div></div> 
 			</div>
 		</div>
 		#parse("admin/footer.vm")
 	</div>
-	<div id="staging" style="position:absolute;top:-9999px;left:-9999px;"></div>
+	<div id="staging" class="push_hide"></div>
 	#parse("admin/global_footer_JS.vm")
 </body>
 </html>

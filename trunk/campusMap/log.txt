@@ -558,3 +558,25 @@ Invalid column name 'Id'.
 2011-12-21 10:48:02,732 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
 2011-12-21 10:55:53,145 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
 2011-12-21 10:55:53,153 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to initialize the Common Language Runtime (CLR) v2.0.50727 with HRESULT 0x80004005. You need to restart SQL Server to use CLR integration features.
+2012-01-02 09:58:07,475 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'publish_time'.
+Invalid column name 'creation_date'.
+Invalid column name 'updated_date'.
+Invalid column name 'checked_out_by'.
+Invalid column name 'geometrics_status'.
+Invalid column name 'media'.
+Invalid column name 'authors_editing'.
+Invalid column name 'publish_time'.
+2012-01-02 09:58:07,510 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'publish_time'.
+Invalid column name 'creation_date'.
+Invalid column name 'updated_date'.
+Invalid column name 'checked_out_by'.
+Invalid column name 'geometrics_status'.
+Invalid column name 'media'.
+Invalid column name 'authors_editing'.
+Invalid column name 'publish_time'.
+2012-01-02 10:15:57,339 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'geometrics_status'.
+2012-01-02 10:15:57,365 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'geometrics_status'.

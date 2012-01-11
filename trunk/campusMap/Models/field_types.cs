@@ -39,7 +39,13 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-
+        private string field_model;
+        [Property]
+        virtual public string model
+        {
+            get { return field_model; }
+            set { field_model = value; }
+        }
 
 
 

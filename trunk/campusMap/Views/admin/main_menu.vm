@@ -1,48 +1,66 @@
+#set($baseClass="ui-button ui-widget ui-state-default mItem")
+#set($endcapBaseClass="ui-button ui-widget ui-state-default")
+
 <ul id='main_nav'>
-	<li class='ui-button ui-widget ui-state-default ui-state-hover ui-corner-top endcap'></li>
-<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a></li>
-  <li class='ui-button ui-widget ui-state-default ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+  <li class='$endcapBaseClass ui-state-hover ui-corner-top endcap'></li>
+<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a><ul>
+  <li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
   <ul class='action_nav' style='padding: 0;display: none;'>
     <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add a Place</a></li>
     <li class='ui-button ui-widget ui-state-active' ><a href="#" id='findPlace'>Find a Place</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addGeometrics'>Add a Geometric</a></li>
   </ul>
   </li>
-  <li class='ui-button ui-widget ui-state-default #if($controller.getView()=='view')ui-state-active#end'><a href="../view/list.castle">Map views</a></li>
-  <li class='ui-button ui-widget ui-state-default ui-state-hover sep'></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a></li>
-  <li class='ui-button ui-widget ui-state-default ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='place')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+</ul></li>
+  <li class='$baseClass #if($controller.getView()=='view')ui-state-active#end'><a href="../view/list.castle">Map views</a></li>
+  
+  <li class='$baseClass ui-state-hover sep'></li>
+	<li class='$baseClass #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a><ul>
+  <li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='place')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
   <ul class='action_nav' style='padding: 0;display: none;'>
-    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add a fields</a></li>
-    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='findPlace'>Find a Gemetretics</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add/Edit fields</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add/Edit types</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='findPlace'>Find a Place</a></li>
   </ul>
+  </li></ul></li>
+
+  
+  
+  <li class='$baseClass ui-state-hover sep'></li>
+	<li class='$baseClass #if($controller.getView()=='geometrics')ui-state-active#end'><a href="../geometrics/list.castle">Geometrics</a><ul>
+  <li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='geometrics')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+  <ul class='action_nav' style='padding: 0;display: none;'>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add/Edit fields</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='addPlace'>Add/Edit types</a></li>
+    <li class='ui-button ui-widget ui-state-active' ><a href="#" id='findPlace'>Find Geometric entry</a></li>
+  </ul>
+  </li></ul>
   </li>
 
-
-  <li class='ui-button ui-widget ui-state-default ui-state-hover sep'></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='media')ui-state-active#end'><a href="../media/list.castle">Images</a></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
-
-
+  <li class='$baseClass ui-state-hover sep'></li>
+	<li class='$baseClass #if($controller.getView()=='media')ui-state-active#end'><a href="../media/index.castle">Media</a></li>
+	<li class='$baseClass #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
+	<li class='$baseClass #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">User Media</a></li>
 
 
-  <li class='ui-button ui-widget ui-state-default ui-state-hover sep'></li>  
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
-  
-  
-  
-  
-	
-	<li class='ui-button ui-widget ui-state-default ui-state-hover sep'></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">End Users</a></li>
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Comments</a></li>
-	
-	
-	<li class='ui-button ui-widget ui-state-default ui-state-hover sep'></li>
-	#*<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>*#
-	<li class='ui-button ui-widget ui-state-default #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
-	<li class='ui-button ui-widget ui-state-default'><a href="../place/logout.castle">Logout</a></li>
+
+  <li class='$baseClass ui-state-hover sep'></li>  
+	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/index.castle">Comments</a></li>	
 
 	
-	<li class='ui-button ui-widget ui-state-default ui-state-hover ui-corner-bottom endcap'></li>
+	<li class='$baseClass ui-state-hover sep'></li>
+	<li class='$baseClass #if($controller.getView()=='tags')ui-state-active#end'><a href="../tags/index.castle">Tags</a></li>
+
+	
+	<li class='$baseClass ui-state-hover sep'></li>
+  <li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
+  <li class='$baseClass #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>
+	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
+  <li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>
+	<li class='$baseClass'><a href="../place/logout.castle">Logout</a></li>
+
+  <li class='$baseClass ui-state-hover sep'></li>  
+	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Site Prefences</a></li>	
+	
+	<li class='$endcapBaseClass ui-state-hover ui-corner-bottom endcap'></li>
 </ul>

@@ -192,7 +192,7 @@ namespace campusMap.Controllers
             PropertyBag["view"] = view;
             status published = ActiveRecordBase<status>.Find(status);
             //view.Status = published;
-            view.Save();
+            ActiveRecordMediator<map_views>.Save(view);
 
             //if(!ajax)
             //RedirectToReferrer();
@@ -250,7 +250,7 @@ namespace campusMap.Controllers
             String username = getUserName();
             PropertyBag["authorname"] = username;
             view.checked_out_by = username;
-            view.Save();
+            ActiveRecordMediator<map_views>.Save(view);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
