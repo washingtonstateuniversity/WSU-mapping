@@ -1,0 +1,15 @@
+#* set up images*#
+#set($availableImages='')
+#capturefor(availableImages)
+#foreach ($image in $place.Images)
+#each
+["${Image.caption}","http://localhost:1308/image/download.castle?id=${Image.id}&placeid=${place.id}&m=crop&w=250&h=250&pre=TMP"]
+#between
+,
+#end
+#end
+#* EOF set up  *#
+
+var tinyMCEImageList = new Array($!availableImages);
+
+ 

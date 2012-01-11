@@ -1,0 +1,37 @@
+
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="update_placeField.castle" method="post">
+  $Form.HiddenField("field.Id")
+  <h3>Place Type</h3>
+  <p>Name:<br/>
+    #if($!field.name)
+      $field.name
+    #else
+      <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+    #end
+  </p>
+  
+  
+	<select name="ele_type">
+		<option value="dropdown" #if($ele_type=='dropdown')selected='selected'#end>dropdown</option>
+		<option value="textinput" #if($ele_type=='textinput')selected='selected'#end>text</option>
+		<option value="textarea" #if($ele_type=='textarea')selected='selected'#end>textarea</option>
+		<option value="checkbox" #if($ele_type=='checkbox')selected='selected'#end>checkbox</option>
+		<option value="yes_no" #if($ele_type=='yes_no')selected='selected'#end>yes/no</option>
+	</select>
+	
+	
+	<fieldset>
+	<legend>Sample</legend>
+	$html_ele
+	</fieldset>
+
+
+
+  <p><input type="submit" value="Submit" /></p>
+</form>
