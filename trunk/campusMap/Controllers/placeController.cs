@@ -273,7 +273,7 @@ namespace campusMap.Controllers
         public void update_placeField([ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field, string ele_type)
         {
             field.model = this.GetType().Name;
-            field.attr = "{ \"type\": \"" + ele_type + "\", \"lable\": \"test_lable\", \"attr\":{\"title\":\"test_tile\"}, \"options\":{\"foo\":\"bar\",\"footoo\":\"bars\"} }";
+            field.attr = "{ \"type\": \"" + ele_type + "\", \"lable\": \"test_lable\", \"attr\":{\"title\":\"test_tile\"}, \"options\":[{\"lable\":\"bar\",\"val\":\"bars\"},{\"lable\":\"fooed\",\"val\":\"baring\"}] }";
             ActiveRecordMediator<fields>.Save(field);
             RedirectToAction("list");
         }

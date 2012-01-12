@@ -44,14 +44,8 @@ namespace campusMap.Services{
 
         private IList<Option> Options;
         [JsonProperty]
-        public IList<Option> options
-        {
-            get { return Options; } 
-            set {
-                //Options = (IList<Option>)value;
-                IList<Option> Options = JsonConvert.DeserializeObject<IList<Option>>(JsonConvert.SerializeObject(value)); 
-            }
-        }
+        public IList<Option> options { get { return Options; } set { Options = value; } }
+
         private Events _events;
         [JsonProperty]
         public Events events { get { return _events; } set { _events = value; } }
@@ -99,6 +93,14 @@ namespace campusMap.Services{
         private string Style;
         [JsonProperty]
         public string style { get { return Style; } set { Style = value; } }
+
+        private string Multiple;
+        [JsonProperty]
+        public string multiple { get { return Multiple; } set { Multiple = value; } }
+
+        
+
+
     }
     public class Events
     {
@@ -111,9 +113,6 @@ namespace campusMap.Services{
         public string onchange { get { return onChange; } set { onChange = value; } }
 
     } 
-
-
-
 
     public class FieldsService{
         private static ILog log = log4net.LogManager.GetLogger("FieldsService");
@@ -143,7 +142,6 @@ namespace campusMap.Services{
             return type.GetMethod(methodName) != null; 
         }
 
-
         public static string makeSelect(elementSet ele)
         {
             
@@ -154,29 +152,54 @@ namespace campusMap.Services{
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
             {
 
-                    writer.Write(ele.lable);
-
-                    // The important part:
-
-                    if (!String.IsNullOrEmpty(ele.attr.accesskey)) writer.AddAttribute(HtmlTextWriterAttribute.Accesskey, ele.attr.accesskey);
-                    if (!String.IsNullOrEmpty(ele.attr.dir)) writer.AddAttribute(HtmlTextWriterAttribute.Dir, ele.attr.dir);
-                    if (!String.IsNullOrEmpty(ele.attr.ele_class)) writer.AddAttribute(HtmlTextWriterAttribute.Class, ele.attr.ele_class);
-                    if (!String.IsNullOrEmpty(ele.attr.id)) writer.AddAttribute(HtmlTextWriterAttribute.Id, ele.attr.id);
-                    if (!String.IsNullOrEmpty(ele.attr.style)) writer.AddAttribute(HtmlTextWriterAttribute.Style, ele.attr.style);
-                    if (!String.IsNullOrEmpty(ele.attr.tabindex)) writer.AddAttribute(HtmlTextWriterAttribute.Tabindex, ele.attr.tabindex);
-                    if (!String.IsNullOrEmpty(ele.attr.title)) writer.AddAttribute(HtmlTextWriterAttribute.Title, ele.attr.title);
-                    if (!String.IsNullOrEmpty(ele.attr.name)) writer.AddAttribute(HtmlTextWriterAttribute.Name, ele.attr.name);
+                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                        writer.Write(ele.lable);
+                    writer.RenderEndTag();
+                    // lets set up the attr for the element
+                    SortedDictionary<string, string> attrs = new SortedDictionary<string, string>();
+                    if (!String.IsNullOrEmpty(ele.attr.accesskey))  attrs.Add("Accesskey", ele.attr.accesskey);
+                    if (!String.IsNullOrEmpty(ele.attr.dir))        attrs.Add("Dir", ele.attr.dir);
+                    if (!String.IsNullOrEmpty(ele.attr.ele_class))  attrs.Add("Class", ele.attr.ele_class);
+                    if (!String.IsNullOrEmpty(ele.attr.id))         attrs.Add("Id", ele.attr.id);
+                    if (!String.IsNullOrEmpty(ele.attr.style))      attrs.Add("Style", ele.attr.style);
+                    if (!String.IsNullOrEmpty(ele.attr.tabindex))   attrs.Add("Tabindex", ele.attr.tabindex);
+                    if (!String.IsNullOrEmpty(ele.attr.title))      attrs.Add("Title", ele.attr.title);
+                    if (!String.IsNullOrEmpty(ele.attr.name))       attrs.Add("Name", ele.attr.name);
+                    if (!String.IsNullOrEmpty(ele.attr.multiple))   attrs.Add("Multiple", "multiple");
+                    foreach (KeyValuePair<string, string> attr in attrs)
+                    {
+                        writer.AddAttribute(attr.Key, attr.Value.ToString());
+                    }
 
                     writer.RenderBeginTag(HtmlTextWriterTag.Select); // Begin select
+                    
+                    // need to add default and seleceted
+                    foreach (Option _option in ele.options){
 
-                    foreach (Option _option in ele.options)
+                        if (!String.IsNullOrEmpty(_option.lable))
                         {
                             writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
+                            /*
+                                if (_option.Selected) {
+                                    writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
+                                }
+                             */
                             writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                                writer.Write(_option.lable);
-                            writer.RenderEndTag();
+                            writer.WriteEncodedText(_option.lable);
                         }
-                    writer.RenderEndTag(); // End #1
+                        else
+                        {
+                            /*
+                                if (_option.Selected) {
+                                    writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
+                                }
+                             */
+                            writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
+                            writer.WriteEncodedText(_option.val);
+                        }
+                        writer.RenderEndTag();
+                    }
+                    writer.RenderEndTag();
             }
             // Return the result.
             return stringWriter.ToString();
