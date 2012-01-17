@@ -59,21 +59,33 @@
 
 #end
 <fieldset id="optionsSelection">
-	<legend>Field Options</legend>
-		<div style="width:220px;">
-	<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Class:</span><input type="text" value="$!ele.attr.ele_class" name="ele.attr.ele_class"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Id:</span><input type="text" value="$!ele.attr.id" name="ele.attr.id"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:94px;"/>
-	<span style="float:left;width:100px;">Name:</span><input type="text" value="$!ele.attr.name" name="ele.attr.name"  style="float:left;width:94px;"/>			
+<legend>Field Options</legend>
+	<fieldset>
+		<legend>Element Attributes</legend>
+			<div style="width:220px;">
+		<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Class:</span><input type="text" value="$!ele.attr.ele_class" name="ele.attr.ele_class"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Id:</span><input type="text" value="$!ele.attr.id" name="ele.attr.id"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:94px;"/>
+		<span style="float:left;width:100px;">Name:</span><input type="text" value="$!ele.attr.name" name="ele.attr.name"  style="float:left;width:94px;"/>			
 
-		<div style="clear:both;"></div>
-	</div>	
+			<div style="clear:both;"></div>
+		</div>	
+	</fieldset>
+	<fieldset>
+			<legend>Element Events</legend>
+			<div style="width:220px;">
+				<span style="float:left;width:100px;">onClick:</span><input type="text" value="$!ele.events.onclick" name="ele.events.onclick"  style="float:left;width:94px;"/>
+				<span style="float:left;width:100px;">onChange:</span><input type="text" value="$!ele.events.onchange" name="ele.events.onchange"  style="float:left;width:94px;"/>
+						
+
+			<div style="clear:both;"></div>
+		</div>
+	</fieldset>
 </fieldset>
-
 
 
 	
