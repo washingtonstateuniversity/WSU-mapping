@@ -223,10 +223,10 @@ function boxCreation(image_id){
 		HTML+='</a>';
 		
 		HTML+='<span class="imgInfo">';
-		HTML+='<span><lable>Caption:</lable><input type="text" value="'+image_Caption+'" name="Caption['+image_id+']" class=""/></span>';
-		HTML+='<span><lable>Credit:</lable><input type="text" value="'+image_Credit+'" name="Credit['+image_id+']" class="placeCredit"/></span>';
+		HTML+='<span><label>Caption:</label><input type="text" value="'+image_Caption+'" name="Caption['+image_id+']" class=""/></span>';
+		HTML+='<span><label>Credit:</label><input type="text" value="'+image_Credit+'" name="Credit['+image_id+']" class="placeCredit"/></span>';
 		
-		HTML+='<span><lable>Order:</lable>';
+		HTML+='<span><label>Order:</label>';
 		HTML+='<input type="hidden" class="" name="PlaceImages['+image_id+'].id" value="411">';
 		HTML+='<input type="text" class="placeOrder" name="PlaceImages['+image_id+'].placeOrder" value="0">';
 		HTML+='<input type="hidden" class="placeOrderId" name="PlaceImages['+image_id+'].Image.id" value="'+image_id+'">';

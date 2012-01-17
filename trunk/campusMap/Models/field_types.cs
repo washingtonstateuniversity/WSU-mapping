@@ -47,7 +47,13 @@ namespace campusMap.Models
             set { field_model = value; }
         }
 
-
+        private int field_set;
+        [Property("fieldset")]
+        virtual public int set
+        {
+            get { return field_set; }
+            set { field_set = value; }
+        }
 
 
 

@@ -27,7 +27,7 @@ $.extend($.ui, { timepicker: { version: "0.9.5" } });
    allowing multiple different settings on the same page. */
 
 function Timepicker() {
-	this.regional = []; // Available regional settings, indexed by language code
+	this.regional = []; // Availabel regional settings, indexed by language code
 	this.regional[''] = { // Default regional settings
 		currentText: 'Now',
 		closeText: 'Done',
@@ -690,7 +690,7 @@ $.extend(Timepicker.prototype, {
 			dt = new Date(dp_inst.selectedYear, dp_inst.selectedMonth, dp_inst.selectedDay),
 			dateFmt = $.datepicker._get(dp_inst, 'dateFormat'),
 			formatCfg = $.datepicker._getFormatConfig(dp_inst),
-			timeAvailable = dt !== null && this.timeDefined;
+			timeAvailabel = dt !== null && this.timeDefined;
 		this.formattedDate = $.datepicker.formatDate(dateFmt, (dt === null ? new Date() : dt), formatCfg);
 		var formattedDateTime = this.formattedDate;
 		if (dp_inst.lastVal !== undefined && (dp_inst.lastVal.length > 0 && this.$input.val().length === 0))
@@ -698,7 +698,7 @@ $.extend(Timepicker.prototype, {
 
 		if (this._defaults.timeOnly === true) {
 			formattedDateTime = this.formattedTime;
-		} else if (this._defaults.timeOnly !== true && (this._defaults.alwaysSetTime || timeAvailable)) {
+		} else if (this._defaults.timeOnly !== true && (this._defaults.alwaysSetTime || timeAvailabel)) {
 			formattedDateTime += this._defaults.separator + this.formattedTime;
 		}
 

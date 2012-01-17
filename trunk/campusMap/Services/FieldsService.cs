@@ -27,16 +27,15 @@
 
 namespace campusMap.Services{
 
-
     public class elementSet
     {
         private string Type;
         [JsonProperty]
         public string type  { get{return Type;} set{ Type = value; }}
 
-        private string Lable;
+        private string Label;
         [JsonProperty]
-        public string lable { get { return Lable; } set { Lable = value; } }
+        public string label { get { return Label; } set { Label = value; } }
 
         private Attr Attrs;
         [JsonProperty]
@@ -50,15 +49,31 @@ namespace campusMap.Services{
         [JsonProperty]
         public Events events { get { return _events; } set { _events = value; } }
     }
+    public class selectionSet
+    {
+        private IList<Selection> Selections;
+        [JsonProperty]
+        public IList<Selection> selections { get { return Selections; } set { Selections = value; } }
+    }
+    public class Selection
+    {
+        private string Val;
+        [JsonProperty]
+        public string val { get { return Val; } set { Val = value; } }
+    }
     public class Option
     {
-        private string Lable;
+        private string Label;
         [JsonProperty]
-        public string lable { get { return Lable; } set { Lable = value; } }
+        public string label { get { return Label; } set { Label = value; } }
 
         private string Val;
         [JsonProperty]
         public string val { get { return Val; } set { Val = value; } }
+
+        private bool Selected;
+        [JsonProperty]
+        public bool selected { get { return Selected; } set { Selected = value; } }
     }
     public class Attr
     {
@@ -97,10 +112,6 @@ namespace campusMap.Services{
         private string Multiple;
         [JsonProperty]
         public string multiple { get { return Multiple; } set { Multiple = value; } }
-
-        
-
-
     }
     public class Events
     {
@@ -116,85 +127,127 @@ namespace campusMap.Services{
 
     public class FieldsService{
         private static ILog log = log4net.LogManager.GetLogger("FieldsService");
+
+
         public static string getfieldmodel(elementSet ele)
         {
+            string _ele = "";
+            _ele = getfieldmodel(ele,null);
+            return _ele;
+        }
+
+        public static string getfieldmodel(elementSet ele,selectionSet select_val)
+        {
+            // lets set up the attrs for the element
+            SortedDictionary<string, string> attrs = new SortedDictionary<string, string>();
+            if ( !object.ReferenceEquals(ele.attr, null) )    attrs = attrbase(attrs, ele);
+            if ( !object.ReferenceEquals(ele.events, null) )  attrs = eventbase(attrs, ele);
+
+            SortedDictionary<string, string> vals = new SortedDictionary<string, string>();
+            if (!object.ReferenceEquals(select_val, null)) selectedVal(select_val, ele);
+
             string _ele = "";
             switch (ele.type)
             {
                 case "dropdown":
                     {
-                        _ele = FieldsService.makeSelect(ele); break;
+                        _ele = FieldsService.renderSelect(ele, attrs, vals); break;
                     }
                 case "textinput":
                     {
-                        _ele = FieldsService.makeTextInput(ele); break;
+                        _ele = FieldsService.renderTextInput(ele, attrs, vals); break;
                     }
                 case "textarea":
                     {
-                        _ele = FieldsService.makeTextarera(ele); break;
+                        _ele = FieldsService.renderTextarera(ele, attrs, vals); break;
                     }
             }
             return _ele;
         }
-        public static bool HasMethod( object objectToCheck, string methodName) 
-        { 
-            Type type = objectToCheck.GetType(); 
-            return type.GetMethod(methodName) != null; 
+
+
+
+
+
+        public static SortedDictionary<string, string> attrbase(SortedDictionary<string, string> attrs, elementSet ele)
+        {
+            if (!String.IsNullOrEmpty(ele.attr.accesskey))  attrs.Add("Accesskey", ele.attr.accesskey);
+            if (!String.IsNullOrEmpty(ele.attr.dir))        attrs.Add("Dir", ele.attr.dir);
+            if (!String.IsNullOrEmpty(ele.attr.ele_class))  attrs.Add("Class", ele.attr.ele_class);
+            if (!String.IsNullOrEmpty(ele.attr.id))         attrs.Add("Id", ele.attr.id);
+            if (!String.IsNullOrEmpty(ele.attr.style))      attrs.Add("Style", ele.attr.style);
+            if (!String.IsNullOrEmpty(ele.attr.tabindex))   attrs.Add("Tabindex", ele.attr.tabindex);
+            if (!String.IsNullOrEmpty(ele.attr.title))      attrs.Add("Title", ele.attr.title);
+            if (!String.IsNullOrEmpty(ele.attr.name))       attrs.Add("Name", ele.attr.name);
+
+            return attrs;
         }
 
-        public static string makeSelect(elementSet ele)
+        public static SortedDictionary<string, string> eventbase(SortedDictionary<string, string> attrs, elementSet ele)
         {
-            
+            if (!String.IsNullOrEmpty(ele.events.onclick))  attrs.Add("Onclick", ele.events.onclick);
+            if (!String.IsNullOrEmpty(ele.events.onchange)) attrs.Add("Onchange", ele.events.onchange);
+
+            return attrs;
+        }
+        public static SortedDictionary<string, string> selectedVal(selectionSet select_val,elementSet ele)
+        {
+            SortedDictionary<string, string> sel_val = new SortedDictionary<string, string>();
+            foreach (Option _option in ele.options){
+                foreach (Selection val in select_val.selections)
+                {
+                    if (!String.IsNullOrEmpty(val.val) && _option.val != val.val) sel_val.Add("val", ele.events.onclick);
+                }
+            }
+            return sel_val;
+        }
+
+
+
+
+        public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        {
             // Initialize StringWriter instance.
             StringWriter stringWriter = new StringWriter();
-
             // Put HtmlTextWriter in using block because it needs to call Dispose.
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
             {
+                    if (!String.IsNullOrEmpty(ele.label))
+                    {
+                        writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                        writer.Write(ele.label);
+                        writer.RenderEndTag();
+                    }
+                    if (!String.IsNullOrEmpty(ele.attr.multiple)) attrs.Add("Multiple", "multiple");
 
-                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                        writer.Write(ele.lable);
-                    writer.RenderEndTag();
-                    // lets set up the attr for the element
-                    SortedDictionary<string, string> attrs = new SortedDictionary<string, string>();
-                    if (!String.IsNullOrEmpty(ele.attr.accesskey))  attrs.Add("Accesskey", ele.attr.accesskey);
-                    if (!String.IsNullOrEmpty(ele.attr.dir))        attrs.Add("Dir", ele.attr.dir);
-                    if (!String.IsNullOrEmpty(ele.attr.ele_class))  attrs.Add("Class", ele.attr.ele_class);
-                    if (!String.IsNullOrEmpty(ele.attr.id))         attrs.Add("Id", ele.attr.id);
-                    if (!String.IsNullOrEmpty(ele.attr.style))      attrs.Add("Style", ele.attr.style);
-                    if (!String.IsNullOrEmpty(ele.attr.tabindex))   attrs.Add("Tabindex", ele.attr.tabindex);
-                    if (!String.IsNullOrEmpty(ele.attr.title))      attrs.Add("Title", ele.attr.title);
-                    if (!String.IsNullOrEmpty(ele.attr.name))       attrs.Add("Name", ele.attr.name);
-                    if (!String.IsNullOrEmpty(ele.attr.multiple))   attrs.Add("Multiple", "multiple");
                     foreach (KeyValuePair<string, string> attr in attrs)
                     {
                         writer.AddAttribute(attr.Key, attr.Value.ToString());
                     }
 
                     writer.RenderBeginTag(HtmlTextWriterTag.Select); // Begin select
-                    
+
                     // need to add default and seleceted
                     foreach (Option _option in ele.options){
 
-                        if (!String.IsNullOrEmpty(_option.lable))
+                        if (!String.IsNullOrEmpty(_option.label))
                         {
                             writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
-                            /*
-                                if (_option.Selected) {
-                                    writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                                }
-                             */
-
+                            if (_option.selected)
+                            {
+                                writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
+                            }
                             writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                            writer.WriteEncodedText(_option.lable);
+                            writer.WriteEncodedText(_option.label);
                         }
                         else
                         {
-                            /*
-                                if (_option.Selected) {
-                                    writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                                }
-                             */
+
+                            if (_option.selected)
+                            {
+                                writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
+                            }
+                            
                             writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
                             writer.WriteEncodedText(_option.val);
                         }
@@ -205,17 +258,16 @@ namespace campusMap.Services{
             // Return the result.
             return stringWriter.ToString();
         }
-        public static string makeTextInput(object ele_op)
+        public static string renderTextInput(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
             string tmp = "<input type='text' value='' name='' />";
             return tmp;
         }
-        public static string makeTextarera(object ele_op)
+        public static string renderTextarera(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
             string tmp = "<textarea>All</textarea>";
             return tmp;
         }
-
 
     }
 }

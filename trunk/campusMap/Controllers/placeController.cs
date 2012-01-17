@@ -243,6 +243,10 @@ namespace campusMap.Controllers
         {
             field_types field = new field_types();
             PropertyBag["field"] = field;
+            place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["p_models"] = p_models;
+
+
             RenderView("fields/new");
         }
         public void edit_type(int id)
@@ -257,23 +261,62 @@ namespace campusMap.Controllers
             field_types field = ActiveRecordBase<field_types>.Find(id);
             PropertyBag["field"] = field;
 
+            place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["p_models"] = p_models;
+
             elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
             string ele_str = FieldsService.getfieldmodel(ele);
 
+
+            PropertyBag["html_ele"] = ele_str;
+            PropertyBag["ele"] = ele;
+
+            RenderView("fields/new");
+        }
+
+
+        public void get_field(int id)
+        {
+            fields field = ActiveRecordBase<fields>.Find(id);
+
+            selectionSet sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
+            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.type.attr.ToString(), typeof(elementSet));
+
+            string ele_str = FieldsService.getfieldmodel(ele, sel);
+
+            PropertyBag["field"] = field;
             PropertyBag["ele_type"] = ele.type;
             PropertyBag["html_ele"] = ele_str;
 
             RenderView("fields/new");
         }
+
+        
+
+
         public void update_placeType([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_types type)
         {
             ActiveRecordMediator<place_types>.Save(type);
             RedirectToAction("list");
         }
-        public void update_placeField([ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field, string ele_type)
+        public void update_placeField(
+            [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
+       [DataBind("ele", Validate = true)] elementSet ele,
+            string ele_type,
+        int placemodel
+                )
         {
+            
             field.model = this.GetType().Name;
-            field.attr = "{ \"type\": \"" + ele_type + "\", \"lable\": \"test_lable\", \"attr\":{\"title\":\"test_tile\"}, \"options\":[{\"lable\":\"bar\",\"val\":\"bars\"},{\"lable\":\"fooed\",\"val\":\"baring\"}] }";
+            field.set = ActiveRecordBase<place_models>.Find(placemodel).id;
+            string ele_attr = JsonConvert.SerializeObject(ele.attr);
+
+            char[] endC = {'{'};
+            ele_attr = ele_attr.TrimEnd(endC);
+
+            char[] startC = {'}'};
+            ele_attr = ele_attr.TrimStart(startC);
+            field.attr = "{ \"type\": \"" + ele_type + "\", \"label\": \"test_label\", \"attr\":" + ele_attr + ", \"options\":[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}] }";
             ActiveRecordMediator<fields>.Save(field);
             RedirectToAction("list");
         }
@@ -366,6 +409,17 @@ namespace campusMap.Controllers
             {
                 PropertyBag["place"] = one_place;
             }
+
+
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("model", this.GetType().Name));
+            typeEx.Add(Expression.Eq("fieldset", one_place.model));
+            PropertyBag["fields"] = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+
+
+
+
+
 
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 

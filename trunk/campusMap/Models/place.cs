@@ -137,6 +137,8 @@ namespace campusMap.Models
             set { place_names = value; }
         }
 
+
+
         private IList<place_types> Place_Types = new List<place_types>();
         [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "place_to_place_types", ColumnKey = "place_id", ColumnRef = "place_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place_types> place_types
@@ -145,14 +147,14 @@ namespace campusMap.Models
             set { Place_Types = value; }
         }
 
-        private IList<place_models> Place_models = new List<place_models>();
-        [HasAndBelongsToMany(typeof(place_models), Lazy = true, Table = "place_to_place_models", ColumnKey = "place_id", ColumnRef = "place_model_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place_models> place_models
-        {
-            get { return Place_models; }
-            set { Place_models = value; }
-        }
 
+        private place_models place_model;
+        [BelongsTo]
+        virtual public place_models model
+        {
+            get { return place_model; }
+            set { place_model = value; }
+        }
         
         private status Status;
         [BelongsTo("place_status")]
@@ -171,13 +173,6 @@ namespace campusMap.Models
             set { Media = value; }
         }
 
-        private IList<field_types> Types;
-        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "place_to_field_types", ColumnKey = "field_type_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<field_types> field_types
-        {
-            get { return Types; }
-            set { Types = value; }
-        }
 
 
 

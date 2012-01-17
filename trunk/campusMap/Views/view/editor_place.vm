@@ -218,9 +218,9 @@
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>
                             <span class="imgInfo">
-                              <span><lable>Caption:</lable><input type="text" value="$!{viewimage.caption}" name="images[$!{viewimage.id}].Caption" class=""/></span>
-                              <span><lable>Credit:</lable><input type="text" value="$!{viewimage.credit}" name="images[$!{viewimage.id}].Credit" class="viewCredit"/></span>
-                              <span><lable>Order:</lable>
+                              <span><label>Caption:</label><input type="text" value="$!{viewimage.caption}" name="images[$!{viewimage.id}].Caption" class=""/></span>
+                              <span><label>Credit:</label><input type="text" value="$!{viewimage.credit}" name="images[$!{viewimage.id}].Credit" class="viewCredit"/></span>
+                              <span><label>Order:</label>
                               <input type="hidden" value="$!{viewimage.ViewImages.get_Item(0).id}" name="ViewImages[$!{viewimage.id}].id" class=""/>
                               <input type="text" value="$!{viewimage.ViewImages.get_Item(0).viewOrder}" name="ViewImages[$!{viewimage.id}].viewOrder" class="viewOrder"/>
                               <input type="hidden" value="$!{viewimage.id}" name="ViewImages[$!{viewimage.id}].Image.id" class="viewOrderId"/>

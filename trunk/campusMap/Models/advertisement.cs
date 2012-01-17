@@ -59,14 +59,6 @@ namespace campusMap.Models
             set { tags = value; }
         }
 
-        private IList<field_types> Types;
-        [HasAndBelongsToMany(typeof(field_types), Lazy = true, Table = "view_to_field_types", ColumnKey = "field_type_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<field_types> field_types
-        {
-            get { return Types; }
-            set { Types = value; }
-        }
-
         private IList<fields> Fields;
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "view_to_fields", ColumnKey = "field_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<fields> field

@@ -580,3 +580,33 @@ Invalid column name 'publish_time'.
 Invalid column name 'geometrics_status'.
 2012-01-02 10:15:57,365 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
 Invalid column name 'geometrics_status'.
+2012-01-17 10:35:18,243 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_model_id'.
+2012-01-17 10:35:18,272 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_model_id'.
+2012-01-17 10:36:40,930 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_model_id'.
+2012-01-17 10:36:40,950 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_model_id'.
+2012-01-17 10:40:31,419 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'model_id'.
+2012-01-17 10:40:31,438 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'model_id'.
+2012-01-17 12:42:40,214 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String or binary data would be truncated.
+The statement has been terminated.
+2012-01-17 12:42:40,224 [4] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not update: [campusMap.Models.field_types#1][SQL: UPDATE field_types SET name = ?, attr = ?, model = ?, fieldset = ? WHERE field_type_id = ?] ---> System.Data.SqlClient.SqlException: String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Int32[] dirtyFields, Boolean hasDirtyCollection, Object[] oldFields, Object oldVersion, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()

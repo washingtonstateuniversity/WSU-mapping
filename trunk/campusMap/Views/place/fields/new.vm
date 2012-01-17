@@ -7,7 +7,7 @@
 
 <form action="update_placeField.castle" method="post">
   $Form.HiddenField("field.Id")
-  <h3>Place Type</h3>
+  <h3>#if($field.Id!=0)Edit#else Add #end Place Feild</h3>
   <p>Name:<br/>
     #if($!field.name)
       $field.name
@@ -15,22 +15,74 @@
       <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
     #end
   </p>
-  
-  
-	<select name="ele_type">
-		<option value="dropdown" #if($ele_type=='dropdown')selected='selected'#end>dropdown</option>
-		<option value="textinput" #if($ele_type=='textinput')selected='selected'#end>text</option>
-		<option value="textarea" #if($ele_type=='textarea')selected='selected'#end>textarea</option>
-		<option value="checkbox" #if($ele_type=='checkbox')selected='selected'#end>checkbox</option>
-		<option value="yes_no" #if($ele_type=='yes_no')selected='selected'#end>yes/no</option>
-	</select>
-	
-	
-	<fieldset>
-	<legend>Sample</legend>
-	$html_ele
-	</fieldset>
 
+<p>Place Model:<br/>
+	<select name="placemodel">	
+		#foreach($model in $p_models)
+			<option value="$model.id" #if($field.set==$model.id)selected='selected'#end>$model.name</option>
+		#end
+	</select>
+</p>
+<p>Feild Type:<br/>  
+	<select name="ele_type">
+		<option value="dropdown" #if($ele.type=='dropdown')selected='selected'#end>dropdown</option>
+		<option value="textinput" #if($ele.type=='textinput')selected='selected'#end>text</option>
+		<option value="textarea" #if($ele.type=='textarea')selected='selected'#end>textarea</option>
+		<option value="checkbox" #if($ele.type=='checkbox')selected='selected'#end>checkbox</option>
+		<option value="yes_no" #if($ele.type=='yes_no')selected='selected'#end>yes/no</option>
+	</select>
+</p>
+
+#if($ele_type=='dropdown')
+
+<fieldset id="optionsSelection">
+	<legend>Dropdown/Multi Select Options</legend>
+	<div style="width:220px;">
+		<span >
+		<span style="float:left;width:100px;">Value</span>
+		<span style="float:left;width:100px;">Label</span>
+		</span>
+
+
+		<span class="opRow">
+			<input type="text" value="" name="op[val][0]"  style="float:left;width:94px;"/>
+			<input type="text" value="" name="op[label][0]"  style="float:left;width:94px;"/>
+			<a href="#" title="Delete option" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;">
+            <span class="ui-icon ui-icon-trash"></span>
+          </a>
+		</span>
+
+		<div style="clear:both;"></div>
+	</div>
+</fieldset>
+
+
+#end
+<fieldset id="optionsSelection">
+	<legend>Field Options</legend>
+		<div style="width:220px;">
+	<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Class:</span><input type="text" value="$!ele.attr.ele_class" name="ele.attr.ele_class"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Id:</span><input type="text" value="$!ele.attr.id" name="ele.attr.id"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:94px;"/>
+	<span style="float:left;width:100px;">Name:</span><input type="text" value="$!ele.attr.name" name="ele.attr.name"  style="float:left;width:94px;"/>			
+
+		<div style="clear:both;"></div>
+	</div>	
+</fieldset>
+
+
+
+	
+	#if($html_ele)
+		<fieldset id="html_sample">
+			<legend>Sample</legend>
+			$!html_ele
+		</fieldset>
+	#end
 
 
   <p><input type="submit" value="Submit" /></p>

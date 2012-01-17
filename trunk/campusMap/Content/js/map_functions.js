@@ -90,7 +90,7 @@ function jsonloadPage(id,clear,keepMarkers,keepPolys,keepibLabels) {
 	fractal=0;
 	iterator = 0;
 	points=[];
-	lableStyles=[];
+	labelStyles=[];
 	keysOrder=[];
 	var bkImage='/uploads/siteTheme/backgrounds/lakeside.jpg';
 	var signImage='/uploads/siteTheme/signs/bywaysign.png';
@@ -140,12 +140,12 @@ function jsonloadPage(id,clear,keepMarkers,keepPolys,keepibLabels) {
 			//points=clear_empty(points);
 			//if(debug_action)console.log('calcRoute---- points-->'+points);
 			//if(debug_action)console.log('calcRoute---- points.length-->'+count(points));
-					var pointlable='';
-						if(typeof(rpoints.extensions.pointlable) !== 'undefined'){
-							pointlable=rpoints.extensions.pointlable.data.toString();
+					var pointlabel='';
+						if(typeof(rpoints.extensions.pointlabel) !== 'undefined'){
+							pointlabel=rpoints.extensions.pointlabel.data.toString();
 						}
-					messArray[rpoints.item.toString()]=pointlable;
-					lableStyles[rpoints.item.toString()]=jQuery.parseJSON(rpoints.extensions.lablePosition.data.toString());
+					messArray[rpoints.item.toString()]=pointlabel;
+					labelStyles[rpoints.item.toString()]=jQuery.parseJSON(rpoints.extensions.labelPosition.data.toString());
 					keysOrder.push(rpoints.item.toString());
 					parent_id=rpoints.parents.id.toString();
 				});
@@ -793,7 +793,7 @@ function attachInstructionText(id,marker,text,pID) {
 	if(text!=''){var labelText =text;}
 	var text ="<h1>Click on this point to get more information on</h1><br/>";
 	////console.log('pID -- '+pID);
-	var lOps=lableStyles[pID];
+	var lOps=labelStyles[pID];
 	var tops=lOps.top;
 	var lefts=lOps.left;
 

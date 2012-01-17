@@ -218,9 +218,9 @@
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>
                             <span class="imgInfo">
-                              <span><lable>Caption:</lable><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
-                              <span><lable>Credit:</lable><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
-                              <span><lable>Order:</lable>
+                              <span><label>Caption:</label><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
+                              <span><label>Credit:</label><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
+                              <span><label>Order:</label>
                               <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
                               <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
                               <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>

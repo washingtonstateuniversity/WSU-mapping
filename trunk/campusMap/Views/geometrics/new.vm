@@ -263,9 +263,9 @@
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>
                             <span class="imgInfo">
-                              <span><lable>Caption:</lable><input type="text" value="$!{geometricimage.caption}" name="images[$!{geometricimage.id}].Caption" class=""/></span>
-                              <span><lable>Credit:</lable><input type="text" value="$!{geometricimage.credit}" name="images[$!{geometricimage.id}].Credit" class="geometricCredit"/></span>
-                              <span><lable>Order:</lable>
+                              <span><label>Caption:</label><input type="text" value="$!{geometricimage.caption}" name="images[$!{geometricimage.id}].Caption" class=""/></span>
+                              <span><label>Credit:</label><input type="text" value="$!{geometricimage.credit}" name="images[$!{geometricimage.id}].Credit" class="geometricCredit"/></span>
+                              <span><label>Order:</label>
                               <input type="hidden" value="$!{geometricimage.GeometricImages.get_Item(0).id}" name="GeometricImages[$!{geometricimage.id}].id" class=""/>
                               <input type="text" value="$!{geometricimage.GeometricImages.get_Item(0).geometricOrder}" name="GeometricImages[$!{geometricimage.id}].geometricOrder" class="geometricOrder"/>
                               <input type="hidden" value="$!{geometricimage.id}" name="GeometricImages[$!{geometricimage.id}].Image.id" class="geometricOrderId"/>

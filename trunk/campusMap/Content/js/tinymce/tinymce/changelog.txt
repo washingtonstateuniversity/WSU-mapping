@@ -655,7 +655,7 @@ Version 3.0.5 (2008-03-12)
 	Fixed bug where the search/replace input box wasn't auto focused like the other dialogs.
 	Fixed bug where the old mceAddControl command would use the fullscreen settings next time it created an instance.
 	Fixed bug where multiple lines where added to the target cell if you merged multiple empty cells.
-	Fixed bug where drop down menus would be incorrectly positioned inside scrollable divs.
+	Fixed bug where drop down menus would be incorrectly positioned inside scrollabel divs.
 	Fixed bug where the separators of the silver skin variant didn't display correctly in IE 6.
 	Fixed bug where createStyleSheet seems to load scripts at opposite order in some IE versions.
 	Fixed bug where directionality could produce odd results for the UI and the dialogs.
@@ -866,7 +866,7 @@ Version 3.0rc2 (2008-01-18)
 	Fixed bug where content_css files wasn't loaded in the template preview iframe.
 	Fixed bug where scroll position was incorrect when toggling fullscreen mode.
 	Fixed bug where restoration of overflow didn't work correctly when disabling fullscreen mode in Opera.
-	Fixed bug where drop menus where places at incorrect locations if the editor was placed in a scrollable container element.
+	Fixed bug where drop menus where places at incorrect locations if the editor was placed in a scrollabel container element.
 	Fixed bug where hideMenu didn't hide sub menus correctly. It will now hide all menus recursively.
 	Fixed so theme_advanced_path_location can be used in init options for compatibility reasons.
 	Fixed so the drop menu colors matches the rest of o2k7 theme.
@@ -937,7 +937,7 @@ Version 3.0b3 (2007-12-14)
 	Fixed bug where Safari was production DOM exception if you pressed enter in an empty editor.
 	Fixed bug where media plugin didn't parse script tags correctly patch contributed by Mathieu Campagna.
 	Fixed bug where the drop menus of list boxes like blockformat could produce scrolling of the page.
-	Fixed bug where the drop menus where placed at an incorrect location if TinyMCE was placed in a scrollable div.
+	Fixed bug where the drop menus where placed at an incorrect location if TinyMCE was placed in a scrollabel div.
 	Fixed bug where submit buttons couldn't be named submit, it's not recommended to name submit buttons submit anyway.
 	Fixed bug where the stylelistbox produced an exception if there was only one class in the list box.
 	Fixed bug where the stylelistbox wasn't updated correctly when the current class was removed.
