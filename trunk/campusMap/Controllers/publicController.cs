@@ -76,75 +76,7 @@
                 Ijson_autocomplete theclass = (Ijson_autocomplete)Activator.CreateInstance(t);
                 RenderText(theclass.get_json_data());
             }
-            
-            /* public void get_json(string type)
-            {
-                CancelView();
-                CancelLayout();
-                t[] all_tag = ActiveRecordBase<t>.FindAll();
 
-                List<JsonAutoComplete> tag_list = new List<JsonAutoComplete>();
-                foreach (t tag in all_tag)
-                {
-                    JsonAutoComplete obj = new JsonAutoComplete();
-                    obj.id = tag.id;
-                    obj.label = tag.name;
-                    obj.value = tag.name;
-                    tag_list.Add(obj);
-                }
-                StringBuilder jsonobj = new StringBuilder("");
-                jsonobj.Append(""+type+"[] all_tag = ActiveRecordBase<"+type+">.FindAll();\n");
-                jsonobj.Append("List<JsonAutoComplete> tag_list = new List<JsonAutoComplete>();{\n");
-                jsonobj.Append("foreach ("+type+" tag in all_tag){\n");
-                jsonobj.Append("JsonAutoComplete obj = new JsonAutoComplete();\n");
-                jsonobj.Append("obj.id = tag.id;\n");
-                jsonobj.Append("obj.label = tag.name;\n");
-                jsonobj.Append("obj.value = tag.name;\n");
-                jsonobj.Append("tag_list.Add(obj);\n");
-                jsonobj.Append("}\n");
-
-                CSharpCodeProvider c = new CSharpCodeProvider();
-                ICodeCompiler icc = c.CreateCompiler();
-                CompilerParameters cp = new CompilerParameters();
-
-                cp.ReferencedAssemblies.Add("system.dll");
-                cp.ReferencedAssemblies.Add("Newtonsoft.Json.Net20.dll");
-                cp.ReferencedAssemblies.Add("Castle.ActiveRecord.dll");
-                cp.ReferencedAssemblies.Add("Castle.Components.Binder.dll");
-                cp.ReferencedAssemblies.Add("Castle.Components.Validator.dll");
-                cp.ReferencedAssemblies.Add("Castle.Components.Validator.dll");
-                cp.ReferencedAssemblies.Add("Castle.Core.dll");
-                cp.ReferencedAssemblies.Add("Castle.DynamicProxy.dll");
-                cp.ReferencedAssemblies.Add("Castle.DynamicProxy2.dll");
-                cp.ReferencedAssemblies.Add("Castle.Facilities.ActiveRecordIntegration.dll");
-                cp.ReferencedAssemblies.Add("Castle.Facilities.AutomaticTransactionManagement.dll");
-                cp.ReferencedAssemblies.Add("Castle.MicroKernel.dll");
-                cp.ReferencedAssemblies.Add("Castle.MonoRail.ActiveRecordSupport.dll");
-
-                cp.CompilerOptions = "/t:library";
-                cp.GenerateInMemory = true;
-
-                StringBuilder sb = new StringBuilder("");
-                sb.Append("namespace CSCodeEvaler{ \n");
-                sb.Append("public class CSCodeEvaler{ \n");
-                sb.Append("public object EvalCode(){\n");
-                sb.Append("return " + jsonobj + "; \n");
-                sb.Append("} \n");
-                sb.Append("} \n");
-                sb.Append("}\n");
-
-                CompilerResults cr = icc.CompileAssemblyFromSource(cp, sb.ToString());
-                System.Reflection.Assembly a = cr.CompiledAssembly;
-                object o = a.CreateInstance("CSCodeEvaler.CSCodeEvaler");
-
-                Type t = o.GetType();
-                MethodInfo mi = t.GetMethod("EvalCode");
-
-                object s = mi.Invoke(o, null); 
-
-                string json = JsonConvert.SerializeObject(s);
-                RenderText(json);
-            }*/
             #endregion
 
         #region URL rendering
@@ -232,7 +164,6 @@
         [Layout("secondary")]
         public void blogs()
         {
-
             place[] places =placeService.getPublishedPlaces(Order.Desc("Order"));
             PropertyBag["places"] = places;
             PropertyBag["Ads"] = placeService.getAdvertisements(places);

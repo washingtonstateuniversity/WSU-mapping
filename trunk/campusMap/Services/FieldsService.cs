@@ -145,28 +145,39 @@ namespace campusMap.Services{
 
             SortedDictionary<string, string> vals = new SortedDictionary<string, string>();
             if (!object.ReferenceEquals(select_val, null)) selectedVal(select_val, ele);
+            
+                string _ele = String.Empty;
+                switch (ele.type)
+                {
+                    case "dropdown":
+                        {
+                            _ele = FieldsService.renderSelect(ele, attrs, vals); break;
+                        }
+                    case "textinput":
+                        {
+                            _ele = FieldsService.renderTextInput(ele, attrs, vals); break;
+                        }
+                    case "textarea":
+                        {
+                            _ele = FieldsService.renderTextarera(ele, attrs, vals); break;
+                        }
+                    case "checkbox":
+                        {
+                            _ele = FieldsService.renderCheckbox(ele, attrs, vals); break;
+                        }
+                    case "slider":
+                        {
+                            _ele = FieldsService.renderSlider(ele, attrs, vals); break;
+                        }
+                }
 
-            string _ele = "";
-            switch (ele.type)
-            {
-                case "dropdown":
-                    {
-                        _ele = FieldsService.renderSelect(ele, attrs, vals); break;
-                    }
-                case "textinput":
-                    {
-                        _ele = FieldsService.renderTextInput(ele, attrs, vals); break;
-                    }
-                case "textarea":
-                    {
-                        _ele = FieldsService.renderTextarera(ele, attrs, vals); break;
-                    }
-            }
-            return _ele;
+                // Return the result.
+                return _ele;
+            
         }
 
 
-
+        
 
 
         public static SortedDictionary<string, string> attrbase(SortedDictionary<string, string> attrs, elementSet ele)
@@ -194,8 +205,7 @@ namespace campusMap.Services{
         {
             SortedDictionary<string, string> sel_val = new SortedDictionary<string, string>();
             foreach (Option _option in ele.options){
-                foreach (Selection val in select_val.selections)
-                {
+                foreach (Selection val in select_val.selections){
                     if (!String.IsNullOrEmpty(val.val) && _option.val != val.val) sel_val.Add("val", ele.events.onclick);
                 }
             }
@@ -207,67 +217,130 @@ namespace campusMap.Services{
 
         public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
-            // Initialize StringWriter instance.
+             // Initialize StringWriter instance.
             StringWriter stringWriter = new StringWriter();
             // Put HtmlTextWriter in using block because it needs to call Dispose.
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
             {
-                    if (!String.IsNullOrEmpty(ele.label))
+                if (!String.IsNullOrEmpty(ele.label))
+                {
+                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                    writer.Write(ele.label);
+                    writer.RenderEndTag();
+                }
+                if (!String.IsNullOrEmpty(ele.attr.multiple)) attrs.Add("Multiple", "multiple");
+
+                foreach (KeyValuePair<string, string> attr in attrs)
+                {
+                    writer.AddAttribute(attr.Key, attr.Value.ToString());
+                }
+
+                writer.RenderBeginTag(HtmlTextWriterTag.Select); // Begin select
+
+                // need to add default and seleceted
+                foreach (Option _option in ele.options)
+                {
+
+                    if (!String.IsNullOrEmpty(_option.label))
                     {
-                        writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                        writer.Write(ele.label);
-                        writer.RenderEndTag();
+                        writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
+                        if (_option.selected)
+                        {
+                            writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
+                        }
+                        writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
+                        writer.WriteEncodedText(_option.label);
                     }
-                    if (!String.IsNullOrEmpty(ele.attr.multiple)) attrs.Add("Multiple", "multiple");
-
-                    foreach (KeyValuePair<string, string> attr in attrs)
+                    else
                     {
-                        writer.AddAttribute(attr.Key, attr.Value.ToString());
-                    }
-
-                    writer.RenderBeginTag(HtmlTextWriterTag.Select); // Begin select
-
-                    // need to add default and seleceted
-                    foreach (Option _option in ele.options){
-
-                        if (!String.IsNullOrEmpty(_option.label))
+                        if (_option.selected)
                         {
-                            writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
-                            if (_option.selected)
-                            {
-                                writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                            }
-                            writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                            writer.WriteEncodedText(_option.label);
+                            writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
                         }
-                        else
-                        {
-
-                            if (_option.selected)
-                            {
-                                writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                            }
-                            
-                            writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                            writer.WriteEncodedText(_option.val);
-                        }
-                        writer.RenderEndTag();
+                        writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
+                        writer.WriteEncodedText(_option.val);
                     }
                     writer.RenderEndTag();
+                }
+                writer.RenderEndTag();
             }
-            // Return the result.
             return stringWriter.ToString();
         }
         public static string renderTextInput(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
-            string tmp = "<input type='text' value='' name='' />";
-            return tmp;
+
+            StringWriter stringWriter = new StringWriter();
+            using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
+            {
+                if (!String.IsNullOrEmpty(ele.label))
+                {
+                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                    writer.Write(ele.label);
+                    writer.RenderEndTag();
+                }
+                attrs.Add("Type", "text");
+                attrs.Add("Value", ele.options[0].val);
+                foreach (KeyValuePair<string, string> attr in attrs)
+                {
+                    writer.AddAttribute(attr.Key, attr.Value.ToString());
+                }
+                writer.RenderBeginTag(HtmlTextWriterTag.Input); // Begin select
+                writer.RenderEndTag();
+            }
+            return stringWriter.ToString();
         }
         public static string renderTextarera(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        {
+            StringWriter stringWriter = new StringWriter();
+            using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
+            {
+                if (!String.IsNullOrEmpty(ele.label))
+                {
+                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                    writer.Write(ele.label);
+                    writer.RenderEndTag();
+                }
+                foreach (KeyValuePair<string, string> attr in attrs)
+                {
+                    writer.AddAttribute(attr.Key, attr.Value.ToString());
+                }
+                writer.RenderBeginTag(HtmlTextWriterTag.Textarea); // Begin select
+                writer.Write(ele.options[0].val);
+                writer.RenderEndTag();
+            }
+            return stringWriter.ToString();
+        }
+        public static string renderCheckbox(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        {
+            StringWriter stringWriter = new StringWriter();
+            using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
+            {
+                if (!String.IsNullOrEmpty(ele.label))
+                {
+                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
+                    writer.Write(ele.label);
+                    writer.RenderEndTag();
+                }
+                attrs.Add("Type", "checkbox");
+
+                attrs.Add("Value", ele.options[0].val);
+                if (ele.options[0].selected)
+                {
+                    attrs.Add("Selected", "selected");
+                }
+                foreach (KeyValuePair<string, string> attr in attrs)
+                {
+                    writer.AddAttribute(attr.Key, attr.Value.ToString());
+                }
+                writer.RenderBeginTag(HtmlTextWriterTag.Input); // Begin select
+                writer.RenderEndTag();
+            }
+            return stringWriter.ToString();
+        }
+        public static string renderSlider(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
             string tmp = "<textarea>All</textarea>";
             return tmp;
         }
-
     }
 }

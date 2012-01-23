@@ -275,7 +275,7 @@ namespace campusMap.Controllers
         }
 
 
-        public void get_field(int id)
+        public string get_field(int id)
         {
             fields field = ActiveRecordBase<fields>.Find(id);
 
@@ -283,12 +283,7 @@ namespace campusMap.Controllers
             elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.type.attr.ToString(), typeof(elementSet));
 
             string ele_str = FieldsService.getfieldmodel(ele, sel);
-
-            PropertyBag["field"] = field;
-            PropertyBag["ele_type"] = ele.type;
-            PropertyBag["html_ele"] = ele_str;
-
-            RenderView("fields/new");
+            return ele_str;
         }
 
         
@@ -301,12 +296,16 @@ namespace campusMap.Controllers
         }
         public void update_placeField(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
-       [DataBind("ele", Validate = true)] elementSet ele,
+            [DataBind("ele", Validate = true)] elementSet ele,
             string ele_type,
-        int placemodel
+            int placemodel,
+            string cancel
                 )
         {
-            
+            if (cancel != null){
+                RedirectToAction("list");
+                return;
+            }
             field.model = this.GetType().Name;
             field.set = ActiveRecordBase<place_models>.Find(placemodel).id;
             string ele_attr = JsonConvert.SerializeObject(ele.attr);
@@ -316,7 +315,7 @@ namespace campusMap.Controllers
 
             char[] startC = {'}'};
             ele_attr = ele_attr.TrimStart(startC);
-            field.attr = "{ \"type\": \"" + ele_type + "\", \"label\": \"test_label\", \"attr\":" + ele_attr + ", \"options\":[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}] }";
+            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":" + ele_attr + ", \"options\":[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}] }";
             ActiveRecordMediator<fields>.Save(field);
             RedirectToAction("list");
         }
@@ -414,7 +413,13 @@ namespace campusMap.Controllers
             List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
             typeEx.Add(Expression.Eq("model", this.GetType().Name));
             typeEx.Add(Expression.Eq("fieldset", one_place.model));
-            PropertyBag["fields"] = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> fields = new List<string>();
+
+            foreach(field_types ft_ in ft){
+                fields.Add(get_field(ft_.id));
+            }
+            PropertyBag["fields"] = fields;
 
 
 

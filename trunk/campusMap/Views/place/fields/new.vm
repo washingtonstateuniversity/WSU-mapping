@@ -8,23 +8,28 @@
 <form action="update_placeField.castle" method="post">
   $Form.HiddenField("field.Id")
   <h3>#if($field.Id!=0)Edit#else Add #end Place Feild</h3>
-  <p>Name:<br/>
-    #if($!field.name)
-      $field.name
-    #else
-      <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-    #end
-  </p>
 
-<p>Place Model:<br/>
+<fieldset>
+<fieldset style="float:right;width:46%;"  id="html_sample">
+	#if($html_ele)
+		<legend>Sample:</legend>
+		$!html_ele
+	#end
+</fieldset>
+<fieldset style="float:left;width:46%;">
+<legend>Basic setup:</legend>
+  <p>Name:<br/>
+      <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+<p  style="float:left;width:46%;">Place Model:<br/>
 	<select name="placemodel">	
 		#foreach($model in $p_models)
 			<option value="$model.id" #if($field.set==$model.id)selected='selected'#end>$model.name</option>
 		#end
 	</select>
 </p>
-<p>Feild Type:<br/>  
-	<select name="ele_type">
+<p style="float:right;width:46%;">Feild Type:<br/>  
+	<select name="ele.type">
 		<option value="dropdown" #if($ele.type=='dropdown')selected='selected'#end>dropdown</option>
 		<option value="textinput" #if($ele.type=='textinput')selected='selected'#end>text</option>
 		<option value="textarea" #if($ele.type=='textarea')selected='selected'#end>textarea</option>
@@ -32,11 +37,16 @@
 		<option value="yes_no" #if($ele.type=='yes_no')selected='selected'#end>yes/no</option>
 	</select>
 </p>
+</fieldset>
 
-#if($ele_type=='dropdown')
+
+
+
+</fieldset>
+#if($ele.type=='dropdown')
 
 <fieldset id="optionsSelection">
-	<legend>Dropdown/Multi Select Options</legend>
+	<legend>Dropdown/Multi Select Options:</legend>
 	<div style="width:220px;">
 		<span >
 		<span style="float:left;width:100px;">Value</span>
@@ -60,8 +70,21 @@
 #end
 <fieldset id="optionsSelection">
 <legend>Field Options</legend>
-	<fieldset>
-		<legend>Element Attributes</legend>
+
+	<fieldset style="float:right;width:46%;">
+			<legend>Element Events:</legend>
+			<div style="width:220px;">
+				<span style="float:left;width:100px;">onClick:</span><input type="text" value="$!ele.events.onclick" name="ele.events.onclick"  style="float:left;width:94px;"/>
+				<span style="float:left;width:100px;">onChange:</span><input type="text" value="$!ele.events.onchange" name="ele.events.onchange"  style="float:left;width:94px;"/>
+						
+
+			<div style="clear:both;"></div>
+		</div>
+	</fieldset>
+
+
+	<fieldset style="float:left;width:46%;">
+		<legend>Element Attributes:</legend>
 			<div style="width:220px;">
 		<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:94px;"/>
 		<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:94px;"/>
@@ -75,27 +98,13 @@
 			<div style="clear:both;"></div>
 		</div>	
 	</fieldset>
-	<fieldset>
-			<legend>Element Events</legend>
-			<div style="width:220px;">
-				<span style="float:left;width:100px;">onClick:</span><input type="text" value="$!ele.events.onclick" name="ele.events.onclick"  style="float:left;width:94px;"/>
-				<span style="float:left;width:100px;">onChange:</span><input type="text" value="$!ele.events.onchange" name="ele.events.onchange"  style="float:left;width:94px;"/>
-						
 
-			<div style="clear:both;"></div>
-		</div>
-	</fieldset>
 </fieldset>
 
 
 	
-	#if($html_ele)
-		<fieldset id="html_sample">
-			<legend>Sample</legend>
-			$!html_ele
-		</fieldset>
-	#end
 
 
-  <p><input type="submit" value="Submit" /></p>
+
+  <p><input type="submit" value="Submit" /><input type="submit" value="Cancel" name="cancel" /></p>
 </form>

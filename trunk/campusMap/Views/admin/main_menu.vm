@@ -2,7 +2,7 @@
 #set($endcapBaseClass="ui-button ui-widget ui-state-default")
 
 <ul id='main_nav'>
-  <li class='$endcapBaseClass ui-state-hover ui-corner-top endcap'></li>
+  <li class='$endcapBaseClass ui-state-hover ui-corner-tr endcap'></li>
 <li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a><ul>
   <li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
   <ul class='action_nav' style='padding: 0;display: none;'>
@@ -62,5 +62,5 @@
   <li class='$baseClass ui-state-hover sep'></li>  
 	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Site Prefences</a></li>	
 	
-	<li class='$endcapBaseClass ui-state-hover ui-corner-bottom endcap'></li>
+	<li class='$endcapBaseClass ui-state-hover ui-corner-br endcap'></li>
 </ul>
