@@ -610,3 +610,351 @@ The statement has been terminated.
    at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
    at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
    at NHibernate.Impl.SessionImpl.Execute()
+2012-01-24 08:16:30,241 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'prime_name', table 'campusMap.dbo.place'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-24 08:16:30,383 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 08:16:30,385 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 08:16:41,610 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'prime_name', table 'campusMap.dbo.place'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-24 08:16:41,711 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 08:16:41,713 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 08:19:01,092 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'prime_name', table 'campusMap.dbo.place'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-24 08:19:01,099 [4] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 08:19:01,099 [4] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 11:37:24,142 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'prime_name', table 'campusMap.dbo.place'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-24 11:37:24,200 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 11:37:24,201 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-24 12:57:28,889 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_id'.
+Invalid column name 'author_id'.
+2012-01-24 12:57:28,900 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_id'.
+Invalid column name 'author_id'.
+2012-01-24 12:57:28,900 [8] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Authors#System.Object[]][SQL: SELECT authors0_.place_id as place1___1_, authors0_.author_id as author2_1_, authors1_.author_id as author1_15_0_, authors1_.Nid as Nid15_0_, authors1_.name as name15_0_, authors1_.email as email15_0_, authors1_.phone as phone15_0_, authors1_.active as active15_0_, authors1_.logedin as logedin15_0_, authors1_.LastActive as LastActive15_0_, authors1_.access_levels as access9_15_0_ FROM authors_place authors0_ left outer join authors authors1_ on authors0_.author_id=authors1_.author_id WHERE authors0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'author_id'.
+Invalid column name 'author_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-01-24 12:57:28,924 [8] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Authors#System.Object[]][SQL: SELECT authors0_.place_id as place1___1_, authors0_.author_id as author2_1_, authors1_.author_id as author1_15_0_, authors1_.Nid as Nid15_0_, authors1_.name as name15_0_, authors1_.email as email15_0_, authors1_.phone as phone15_0_, authors1_.active as active15_0_, authors1_.logedin as logedin15_0_, authors1_.LastActive as LastActive15_0_, authors1_.access_levels as access9_15_0_ FROM authors_place authors0_ left outer join authors authors1_ on authors0_.author_id=authors1_.author_id WHERE authors0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'author_id'.
+Invalid column name 'author_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-01-24 13:51:04,029 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'placeOrder'.
+2012-01-24 13:51:04,040 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'placeOrder'.
+2012-01-24 13:51:04,040 [5] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_56_0_, media_repo1_.credit as credit56_0_, media_repo1_.caption as caption56_0_, media_repo1_.created as created56_0_, media_repo1_.updated as updated56_0_, media_repo1_.file_name as file6_56_0_, media_repo1_.ext as ext56_0_, media_repo1_.path as path56_0_, media_repo1_.media_type_id as media9_56_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.placeOrder] ---> System.Data.SqlClient.SqlException: Invalid column name 'placeOrder'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-01-24 13:51:04,042 [5] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_56_0_, media_repo1_.credit as credit56_0_, media_repo1_.caption as caption56_0_, media_repo1_.created as created56_0_, media_repo1_.updated as updated56_0_, media_repo1_.file_name as file6_56_0_, media_repo1_.ext as ext56_0_, media_repo1_.path as path56_0_, media_repo1_.media_type_id as media9_56_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.placeOrder] ---> System.Data.SqlClient.SqlException: Invalid column name 'placeOrder'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-01-24 13:53:12,803 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'placeOrder'.
+2012-01-24 13:53:12,814 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'placeOrder'.
+2012-01-24 13:53:12,814 [5] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_26_0_, media_repo1_.credit as credit26_0_, media_repo1_.caption as caption26_0_, media_repo1_.created as created26_0_, media_repo1_.updated as updated26_0_, media_repo1_.file_name as file6_26_0_, media_repo1_.ext as ext26_0_, media_repo1_.path as path26_0_, media_repo1_.media_type_id as media9_26_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.placeOrder] ---> System.Data.SqlClient.SqlException: Invalid column name 'placeOrder'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-01-24 13:53:12,816 [5] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_26_0_, media_repo1_.credit as credit26_0_, media_repo1_.caption as caption26_0_, media_repo1_.created as created26_0_, media_repo1_.updated as updated26_0_, media_repo1_.file_name as file6_26_0_, media_repo1_.ext as ext26_0_, media_repo1_.path as path26_0_, media_repo1_.media_type_id as media9_26_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.placeOrder] ---> System.Data.SqlClient.SqlException: Invalid column name 'placeOrder'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-01-24 13:59:18,788 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_order'.
+2012-01-24 13:59:18,799 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'place_order'.
+2012-01-24 13:59:18,799 [5] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_60_0_, media_repo1_.credit as credit60_0_, media_repo1_.caption as caption60_0_, media_repo1_.created as created60_0_, media_repo1_.updated as updated60_0_, media_repo1_.file_name as file6_60_0_, media_repo1_.ext as ext60_0_, media_repo1_.path as path60_0_, media_repo1_.media_type_id as media9_60_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.place_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'place_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-01-24 13:59:18,801 [5] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.Images#System.Object[]][SQL: SELECT images0_.place_id as place1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_60_0_, media_repo1_.credit as credit60_0_, media_repo1_.caption as caption60_0_, media_repo1_.created as created60_0_, media_repo1_.updated as updated60_0_, media_repo1_.file_name as file6_60_0_, media_repo1_.ext as ext60_0_, media_repo1_.path as path60_0_, media_repo1_.media_type_id as media9_60_0_ FROM place_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.place_id=? ORDER BY images0_.place_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'place_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-01-25 09:48:47,503 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'campus'.
+Invalid column name 'program'.
+Invalid column name 'college'.
+Invalid column name 'department'.
+2012-01-25 09:48:47,539 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'campus'.
+Invalid column name 'program'.
+Invalid column name 'college'.
+Invalid column name 'department'.
+2012-01-25 10:08:03,139 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String or binary data would be truncated.
+The statement has been terminated.
+2012-01-25 10:08:03,180 [4] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-25 10:08:03,182 [4] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-25 10:57:40,084 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 10:57:40,095 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:04,944 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:04,945 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:05,307 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:05,308 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:06,779 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:02:06,781 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:09,604 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:09,605 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:13,749 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:13,750 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:17,262 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:17,263 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,738 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,739 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,749 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,750 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,761 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,762 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,770 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:19,771 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:24,594 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:03:24,595 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:33:09,050 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:33:09,061 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:45:50,720 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 11:45:50,747 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 12:15:59,013 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-25 12:15:59,037 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'field_type_id'.
+2012-01-26 08:51:02,851 [4] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.StaleStateException: Unexpected row count: 0; expected: 1
+   at NHibernate.AdoNet.Expectations.BasicExpectation.VerifyOutcomeNonBatched(Int32 rowCount, IDbCommand statement)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Int32[] dirtyFields, Boolean hasDirtyCollection, Object[] oldFields, Object oldVersion, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-01-30 08:54:36,526 [11] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: campusMap.Models.place_names
+   at NHibernate.Impl.SessionImpl.ThrowTransientObjectException(Object obj)
+   at NHibernate.Impl.SessionImpl.GetEntityIdentifierIfNotUnsaved(Object obj)
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session)
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-01-30 08:56:19,767 [5] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: campusMap.Models.place_names
+   at NHibernate.Impl.SessionImpl.ThrowTransientObjectException(Object obj)
+   at NHibernate.Impl.SessionImpl.GetEntityIdentifierIfNotUnsaved(Object obj)
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session)
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-01-30 09:07:38,396 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Violation of PRIMARY KEY constraint 'PK_place_names'. Cannot insert duplicate key in object 'dbo.place_names'. The duplicate key value is (7).
+The statement has been terminated.
+2012-01-30 09:07:38,485 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:07:38,487 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:08:11,368 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Violation of PRIMARY KEY constraint 'PK_place_names'. Cannot insert duplicate key in object 'dbo.place_names'. The duplicate key value is (7).
+The statement has been terminated.
+2012-01-30 09:08:11,370 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:08:11,370 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:19:19,367 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'name', table 'campusMap.dbo.place_names'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-30 09:19:19,369 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:19:19,370 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:28:48,700 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'label', table 'campusMap.dbo.place_names'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-01-30 09:28:48,717 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-01-30 09:28:48,719 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)

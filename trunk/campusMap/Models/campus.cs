@@ -79,7 +79,7 @@ namespace campusMap.Models
         }
 
         private IList<place> places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_campus", ColumnKey = "campus_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }

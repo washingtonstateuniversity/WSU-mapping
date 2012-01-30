@@ -326,3 +326,25 @@ span.UinEdit{    background-color: #E2E2E2;
 
 #content h3.ListingChoices{ cursor:pointer;}
 #content h3.ListingChoices.active{color:#000;}
+
+
+
+
+
+
+
+
+
+
+.place .ui-tabs-panel {margin-right:310px; min-height:535px;}
+
+
+
+
+
+.pod{}
+.pod.editing{}
+.editable{position:relative; top:0;left:0;}
+.editzone{position:absolute; top:-999px;left:-999px;}
+.pod.editing .editable{position:absolute; top:-999px;left:-999px;}
+.pod.editing .editzone{position:relative; top:0;left:0;}

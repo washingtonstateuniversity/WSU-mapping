@@ -116,8 +116,6 @@
 	</div>		<h3 style="float: left; display:inline-block;">Place Fields ($fields.TotalItems)</h3>
 
 	  #parse("feilds/list.vm")
-	  <br/><br/><br/><br/><br/><br/><br/>
-		
 	  </div>
 	</div>
 </div>

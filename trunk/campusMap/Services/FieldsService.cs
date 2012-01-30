@@ -204,10 +204,19 @@ namespace campusMap.Services{
         public static SortedDictionary<string, string> selectedVal(selectionSet select_val,elementSet ele)
         {
             SortedDictionary<string, string> sel_val = new SortedDictionary<string, string>();
-            foreach (Option _option in ele.options){
-                foreach (Selection val in select_val.selections){
-                    if (!String.IsNullOrEmpty(val.val) && _option.val != val.val) sel_val.Add("val", ele.events.onclick);
+            if (ele.options != null)
+            {
+                foreach (Option _option in ele.options)
+                {
+                    foreach (Selection _val in select_val.selections)
+                    {
+                        if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) sel_val.Add("val", _val.val);
+                    }
                 }
+            }
+            else
+            {
+                sel_val.Add("val", select_val.selections[0].val);
             }
             return sel_val;
         }
@@ -225,7 +234,7 @@ namespace campusMap.Services{
                 if (!String.IsNullOrEmpty(ele.label))
                 {
                     writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                    writer.Write(ele.label);
+                    writer.Write(ele.label+"<br/>");
                     writer.RenderEndTag();
                 }
                 if (!String.IsNullOrEmpty(ele.attr.multiple)) attrs.Add("Multiple", "multiple");
@@ -263,6 +272,7 @@ namespace campusMap.Services{
                     writer.RenderEndTag();
                 }
                 writer.RenderEndTag();
+                writer.Write("<br/>");
             }
             return stringWriter.ToString();
         }
@@ -275,17 +285,38 @@ namespace campusMap.Services{
                 if (!String.IsNullOrEmpty(ele.label))
                 {
                     writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                    writer.Write(ele.label);
+                    writer.Write(ele.label + "<br/>");
                     writer.RenderEndTag();
                 }
                 attrs.Add("Type", "text");
-                attrs.Add("Value", ele.options[0].val);
+                if (sel_val.Values.Count <0)
+                {
+                    if (ele.options != null)
+                    {
+                        attrs.Add("Value", ele.options[0].val);
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, string> _val in sel_val)
+                    {
+                        attrs.Add("Value", _val.Value.ToString());
+                    }
+                    
+                }
+                foreach (KeyValuePair<string, string> attr in attrs)
+                {
+                    writer.AddAttribute(attr.Key, attr.Value.ToString());
+                }
+
+
                 foreach (KeyValuePair<string, string> attr in attrs)
                 {
                     writer.AddAttribute(attr.Key, attr.Value.ToString());
                 }
                 writer.RenderBeginTag(HtmlTextWriterTag.Input); // Begin select
                 writer.RenderEndTag();
+                writer.Write("<br/>");
             }
             return stringWriter.ToString();
         }
@@ -297,7 +328,7 @@ namespace campusMap.Services{
                 if (!String.IsNullOrEmpty(ele.label))
                 {
                     writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                    writer.Write(ele.label);
+                    writer.Write(ele.label + "<br/>");
                     writer.RenderEndTag();
                 }
                 foreach (KeyValuePair<string, string> attr in attrs)
@@ -307,7 +338,9 @@ namespace campusMap.Services{
                 writer.RenderBeginTag(HtmlTextWriterTag.Textarea); // Begin select
                 writer.Write(ele.options[0].val);
                 writer.RenderEndTag();
+                writer.Write("<br/>");
             }
+           
             return stringWriter.ToString();
         }
         public static string renderCheckbox(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
@@ -318,7 +351,7 @@ namespace campusMap.Services{
                 if (!String.IsNullOrEmpty(ele.label))
                 {
                     writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                    writer.Write(ele.label);
+                    writer.Write(ele.label + "<br/>");
                     writer.RenderEndTag();
                 }
                 attrs.Add("Type", "checkbox");
@@ -333,13 +366,16 @@ namespace campusMap.Services{
                     writer.AddAttribute(attr.Key, attr.Value.ToString());
                 }
                 writer.RenderBeginTag(HtmlTextWriterTag.Input); // Begin select
+                
                 writer.RenderEndTag();
+                writer.Write("<br/>");
             }
             return stringWriter.ToString();
         }
         public static string renderSlider(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
         {
             string tmp = "<textarea>All</textarea>";
+
             return tmp;
         }
     }

@@ -30,7 +30,7 @@
   #* EOF set up  *#
 
   <li class="ui-widget-content ui-corner-all place_$!place.id con">
-    #if($place.CheckedOutBy!=""  && $place.CheckedOutBy != $authorname)<span class="UinEdit ui-corner-bottom">
+    #if($place.editing!=""  && $place.editing != $user)<span class="UinEdit ui-corner-bottom">
       &nbsp;&nbsp;&nbsp;$place.CheckedOutBy is editing this Place <a href="#" title="Published" rel="$place.id" class="buttons steal ui-button ui-widget ui-state-default ui-corner-all">
         <span class="ui-icon ui-icon-unlocked"> </span> Click to Release Place
       </a>
@@ -74,7 +74,7 @@
           #if($place.Hottopic)<li>
             <span>Hottopic: </span>$!place.Hottopic
           </li>#end
-         #* #if($place.Location)<li>
+          #* #if($place.Location)<li>
             <span>Location: </span>$!place.Location
           </li>#end*#
           #if($place.PlaceType.Name)<li>
@@ -87,9 +87,9 @@
       </div>
       <div class='actionCol'>
         <ul>
-          #if($Controller.canEdit($place,$loginUser) || $place.CheckedOutBy == $authorname || $place.isCheckedOutNull())
+          #if($Controller.canEdit($place,$user.id) || $place.editing == $user || $place.isCheckedOutNull())
           <li>
-            <a href="#if($place.CheckedOutBy=="" || $place.CheckedOutBy == $authorname)$siteroot/place/Edit_place.castle?id=$!{place.id} #else # #end" title="#if($place.CheckedOutBy)Is being edited by $place.CheckedOutBy #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
+            <a href="#if($place.editing=="" || $place.editing == $user)$siteroot/place/Edit_place.castle?id=$!{place.id} #else # #end" title="#if($place.editing)Is being edited by $place.editing.name #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
               <span class="ui-button-icon-primary ui-icon ui-icon-pencil"></span>
               <span class="actionText">Edit</span>
               <span class="actionpropt">&#187;</span>
@@ -103,7 +103,7 @@
             </a>
           </li>
           #end
-          #if($Controller.canPublish($loginUser))
+          #if($Controller.canPublish($user))
           <li>
             <a href="$siteroot/place/setStatus.castle?id=$!{place.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
               <span class="ui-button-icon-primary ui-icon ui-icon-star"> </span>

@@ -5,7 +5,7 @@ function resizeBg(obj) {
 $(document).ready(function(){
 	if($('#map_canvas').length){
 		initialize();
-		$(window).resize(function(){resizeBg($('#map_canvas'))}).trigger("resize");
+		if($('.home #map_canvas').length){$(window).resize(function(){resizeBg($('#map_canvas'))}).trigger("resize");}
 	 }
 	$('.quickActions').click(function() {
 		$(this).find('.action_nav').slideToggle('fast', function() {
@@ -125,7 +125,7 @@ $( "#addGeometrics" ).click(function(){
 				}
 			});
 			
-			$('#dialog-form').load('../place/editor.castle',function(){
+			$('#dialog-form').load('../place/editor.castle?ajax=true',function(){
 					/*if($('#tabs.place_new').length>0){
 						taboptions={cookie:{expires: 1,path:'/place/'}};
 					} */taboptions={};

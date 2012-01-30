@@ -405,8 +405,6 @@ function openImgUploader(){
 																$('#ISIUarea form').fadeOut('fast',function(){
 																	if($('#uploadMess').length==0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
 																	});
-																
-																
 															  }, 
 															  'onCancel': function() { 
 																//console.log('no file selected'); 
@@ -663,7 +661,7 @@ function contextmenu_fix(ed) {
 function editor_oninit(ed) {
     // Add hook for onContextMenu so that Insert Image can be removed
     ed.plugins.contextmenu.onContextMenu.add(editor_remove_insertImage);
-	if(typeof(place_id) !== 'undefined'&&place_id>0){
+	if(typeof(place_id) !== 'undefined'&&place_id>0 && $('#place_Bodytext').val()!=''){
 		setTimeout(function () {
 			ed.controlManager.setActive('spellchecker', true);
 			ed.execCommand('mceSpellCheck', true);
@@ -1241,31 +1239,91 @@ if($(".lazy img,img.lazy").length){
         $( "#sub_tabs" ).tabs();
 	}
 
-
-
+	function post_tmp(form_obj,diaObj,callback){
+		$.ajaxSetup ({cache: false,async:false}); 
+		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+		//alert(place_id);
+		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res) {
+			if(res){
+				$('body #content_area').fadeOut('fast',function(){
+					$('#content_area').html($("<div>").append(res.replace(rscript, "")).find("#content_tar"));
+				});
+				$('#content_area').fadeIn('fast',function(){
+					diaObj.dialog( "close" );
+					if($.isFunction(callback)) callback();
+				});
+			}
+		});                       
+	}
     if($( "#tabs" ).length>0){
-        var  taboptions;
-			
-        if($('#tabs.place_new').length>0){
-            taboptions={cookie:{expires: 1,path:'/place/'}};
+        var  taboptions;	
+        if($('#content_tar #tabs').length>0){
+            //taboptions={cookie:{expires: 1,path:'/place/'}};
         } 
         $( "#tabs" ).tabs(typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:taboptions);
 		
-		if(typeof(place_id) !== 'undefined'&&place_id==0){
-			if($( "#NewPlace" ).length==0){
-				$( "body" ).append('<div id="NewPlace" title="Starting a New Place"><h4 style="line-height:20px;">Notice:</h4><p> you must Save the place to add images.  When you click save you will be directed back to this place.</div>');
+		if($('#content_tar #tabs').length>0 || (typeof(place_id) !== 'undefined'&&place_id==0)){
+			$( "#LocationTypeSelect" ).combobox();
+			$( "#LocationModelSelect" ).combobox();
+		}
+		
+		if( (typeof(place_id) !== 'undefined'&&place_id==0) ){
+			if($( "#chooseModel" ).length==0){
+				$( "body" ).append('<div id="chooseModel" title="Choose the place model">'+
+				'<p><strong>Choose a model </strong>'+
+				'that the place will be.  This will set forth all the options it can have.'+
+				'<br/><select name="set_model" id="set_model">'+
+				$('#LocationModelSelect').clone().html()+
+				'</select></div>');
 			}
-			$( "#NewPlace" ).dialog({
+			$("#chooseModel").dialog({
 				autoOpen: true,
-				height: 250,
-				width:425,
+				height: 275,
+				width:300,
 				modal: true,
 				hide: 'blind',
 				resizable: false,
 				draggable: false,
 				buttons: {
-					"Ok": function() {$( this ).dialog( "close" );},
+					"Ok": function() {
+						if($('#set_model :selected').val() !=''){
+							$( this ).dialog( "close" );
+							if($( "#loading_tmp" ).length==0){
+									$( "body" ).append('<div id="loading_tmp" title="Loading">'+
+									'<img src="'+DOMAIN+'/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
+									'</div>');
+								}
+								$( "#loading_tmp" ).dialog({
+									autoOpen: true,
+									height: 155,
+									width:125,
+									modal: true,
+									hide: 'blind',
+									resizable: false,
+									draggable: false
+								});
+								
+								post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){
+									});
+						}else{
+							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+						}
+
+					},
+					
 				}
+			});
+			$('#set_model').combobox();
+			$('#set_model').next('.ui-autocomplete-input').live('change',function(){
+						if($('#set_model :selected').val() !=''){
+							if($('#set_model').next('.ui-autocomplete-input').hasClass('errored')){
+								$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
+							}
+						}else{
+							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+						}
+							$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
+							$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
 			});
 		}
         var stat=$.QueryString["status"];
@@ -1279,6 +1337,35 @@ if($(".lazy img,img.lazy").length){
             $( "#tabs" ).tabs( "select" , moveToTab );
         } 
     }
+
+
+
+$('#PlaceNameCreate').live('click',function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	i=$('#names .pod').size();
+	$('#names').append($('#name_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ) );
+});
+
+
+
+
+
+  $(".pod.name .editable").live('click',function() { 
+    var lable = $(this); 
+    lable.next().val(lable.text()).focus(); 
+    lable.parent().addClass("editing"); 
+    return false; 
+  }); 
+  $(".editzone").live("blur",function() { 
+    var txt = $(this); 
+    txt.prev('.editable').text(txt.val()); 
+    txt.parent(".pod").removeClass("editing"); 
+  }); 
+
+
+
+
 
     if($( "#place_publishtime,#advertisement_expiration,#comment_createtime,#classified_CreateDate,#pdf_Date,#advertisement_startdate" ).length>0){
 	    $( "#place_publishtime,#advertisement_expiration,#comment_createtime,#comment_updatetime,#classified_CreateDate,#classified_ExpirationDate,#pdf_Date,#advertisement_startdate" ).datetimepicker({
@@ -1595,7 +1682,8 @@ $('#img_layout_choice').toggle(
         
         
         var click=0;
-        $('body,html').not('textarea,iframe').bind('keydown', function(e) { 
+        /*
+		$('body,html').not('textarea,iframe').bind('keydown', function(e) { 
             if((e.keyCode || e.which)  == 13) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1611,8 +1699,9 @@ $('#img_layout_choice').toggle(
                 });
             }
         });
+		*/
         var clear=false;
-        $('input[type=submit]:not(".cancel_btn")').live('click', function(e) {
+        /*$('input[type=submit]:not(".cancel_btn")').live('click', function(e) {
             if(clear!=true){
                 e.preventDefault();
                 e.stopPropagation();
@@ -1640,7 +1729,7 @@ $('#img_layout_choice').toggle(
                     click++
                 }
             });
-        }); 
+        }); */
    }
 
 

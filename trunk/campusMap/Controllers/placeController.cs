@@ -39,11 +39,12 @@ namespace campusMap.Controllers
      */
 
 
-        public void editor(int id, int page){
+        public void editor(int id, int page, bool ajax)
+        {
             if (id == 0){
                 New();
             }else{
-                Edit_place(id, page);
+                Edit_place(id, page, ajax);
             }
             CancelView();
             CancelLayout();
@@ -68,11 +69,11 @@ namespace campusMap.Controllers
         public void List(int page, int searchId, string status)
         {
             authors user = getUser();
-            PropertyBag["authorname"] = getUserName();
+            PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["placetype"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["loginUser"] = user;
+            PropertyBag["user"] = user;
             PropertyBag["logedin"] = userService.getLogedIn();
             //user.Sections.Contains(place.place_types);
 
@@ -189,7 +190,7 @@ namespace campusMap.Controllers
         public bool canEdit(place place, authors user)
         {
             bool flag = false;
-           /* switch (user.Accesslevel.Title)
+           switch (user.access_levels.title)
             {
                 case "Author":
                     {
@@ -197,39 +198,30 @@ namespace campusMap.Controllers
                         {
                             if (place.Authors.Contains(user) && user.Sections.Contains(item))
                                 flag = true; break;
-                        }
+                        } break;
                     }
-                case "Contributer":
-                    {
-                        foreach (place_types item in place.place_types)
-                        {
-                            if (place.Authors.Contains(user) && user.Sections.Contains(item))
-                                flag = true; break;
-                        }
-                    }
+
                 case "Editor":
                     {
                         foreach (place_types item in place.place_types)
                         {
                             if (user.Sections.Contains(item))
                                 flag = true; break;
-                        }
+                        } break;
                     }
-             }*/
+             }
 
             return flag;        
         }
         public bool canPublish(authors user)
         {
             bool flag = false;
-            /*switch (user.Accesslevel.Title)
+            switch (user.access_levels.title)
             {
-                case "Author": flag = true;
+                case "Author": flag = true; break;
                                
                 case "Editor": flag = true; break;
-
-                case "Contributor": flag = false; break;
-            }*/
+            }
             return flag;        
         }
 
@@ -275,13 +267,17 @@ namespace campusMap.Controllers
         }
 
 
-        public string get_field(int id)
+        public string get_field(field_types field_type)
         {
-            fields field = ActiveRecordBase<fields>.Find(id);
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("type", field_type));
+            fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
 
-            selectionSet sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.type.attr.ToString(), typeof(elementSet));
-
+            selectionSet sel = null;
+            if( field!=null  && !String.IsNullOrEmpty(field.value)){
+                sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
+            }
+            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field_type.attr.ToString(), typeof(elementSet));
             string ele_str = FieldsService.getfieldmodel(ele, sel);
             return ele_str;
         }
@@ -306,17 +302,25 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
                 return;
             }
+
+            ActiveRecordMediator<fields>.Save(field);
+            
             field.model = this.GetType().Name;
             field.set = ActiveRecordBase<place_models>.Find(placemodel).id;
+
+            ele.attr.name = "fields[" + field.id + "]";
             string ele_attr = JsonConvert.SerializeObject(ele.attr);
 
             char[] endC = {'{'};
             ele_attr = ele_attr.TrimEnd(endC);
-
             char[] startC = {'}'};
+
             ele_attr = ele_attr.TrimStart(startC);
             field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":" + ele_attr + ", \"options\":[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}] }";
+
+
             ActiveRecordMediator<fields>.Save(field);
+
             RedirectToAction("list");
         }
 
@@ -379,24 +383,33 @@ namespace campusMap.Controllers
             }
             return creditsList.TrimEnd(',');
         }
-        public void Edit_place(int id, int page)
+        public void Edit_place(int id, int page, bool ajax)
         {
+            CancelView();
+
+
+            PropertyBag["ajaxed"] = ajax;
+
             campusMap.Services.LogService.writelog("Editing place " + id);
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
-            String username = getUserName();
-            PropertyBag["authorname"] = username;
-            one_place.checked_out_by = username;
+            authors user = getUser();
+
+
+
+            PropertyBag["authorname"] = user.name;
+            one_place.editing = user;
             ActiveRecordMediator<place>.Save(one_place);
+
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["loginUser"] = user;
             PropertyBag["placeimages"] = one_place.Images;
-
+            //$one_place.campus.zipcode
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
             if(Flash["place"] !=null)
             {
@@ -409,21 +422,22 @@ namespace campusMap.Controllers
                 PropertyBag["place"] = one_place;
             }
 
+            
+
 
             List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
             typeEx.Add(Expression.Eq("model", this.GetType().Name));
-            typeEx.Add(Expression.Eq("fieldset", one_place.model));
+            typeEx.Add(Expression.Eq("set", one_place.model.id));
             field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
             List<string> fields = new List<string>();
-
-            foreach(field_types ft_ in ft){
-                fields.Add(get_field(ft_.id));
+            if (ft != null)
+            {
+                foreach (field_types ft_ in ft)
+                {
+                    fields.Add(get_field(ft_));
+                }
             }
             PropertyBag["fields"] = fields;
-
-
-
-
 
 
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
@@ -435,7 +449,17 @@ namespace campusMap.Controllers
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
 
-            if (page == 0)
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+
+
+
+
+
+            /*if (page == 0)
                 page = 1;
             int pagesize = 10;
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
@@ -445,6 +469,7 @@ namespace campusMap.Controllers
 
             items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
             PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
+            */
 
             String CreditList = GetCredit();
             PropertyBag["credits"] = CreditList; 
@@ -469,25 +494,33 @@ namespace campusMap.Controllers
             }
 
             PropertyBag["placeauthors"] = authors; 
-            RenderView("new");
+            //RenderView("new");
+            RenderView("editor_place");
        
         }
         public void New()
         {
+            CancelView();
             PropertyBag["credits"] = ""; 
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             String CreditList = GetCredit();
-            PropertyBag["credits"] = CreditList; 
+            PropertyBag["credits"] = CreditList;
 
             place place = new place();
+
+
             List<media_repo> images = new List<media_repo>();
             images.AddRange(place.Images);
             if (images.Count == 0)
             {
                 images.Add(new media_repo());
             }
+
+
+
+
             PropertyBag["placeimages"] = images;     
             PropertyBag["loginUser"] = getUser();
             //String locationList = Getlocation();
@@ -505,6 +538,8 @@ namespace campusMap.Controllers
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+
+            RenderView("editor_place");
         }
 
         /*public String Getlocation()  // this is to be replaced with get cord logic
@@ -606,7 +641,7 @@ namespace campusMap.Controllers
         public void clearLock(int id, bool ajax)
         {
             place place = ActiveRecordBase<place>.Find(id);
-            place.checked_out_by = "";
+            place.editing = null;
             ActiveRecordMediator<place>.Save(place);
             CancelLayout();
             RenderText("true");
@@ -656,11 +691,20 @@ namespace campusMap.Controllers
                 ImgFile.Delete();
             }
         }
-        public void Update([ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
-            [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
+        public void Update(
+            [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
+            [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
+            String[] newtag,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
-           [ARDataBind("place_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]place_media[] place_media, string apply, string cancel)     
+            [ARDataBind("place_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]place_media[] place_media,
+           [ARDataBind("place_names", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]place_names[] place_names,
+            String[] fields,
+            bool ajaxed_update,
+            bool forced_tmp,
+            string apply,
+            string cancel
+            )     
         {
             Flash["place"] = place;
             Flash["tags"] = place;
@@ -668,15 +712,36 @@ namespace campusMap.Controllers
             Flash["authors"] = place;
             
             if (cancel != null){
-                place.checked_out_by = "";
-                ActiveRecordMediator<place>.Save(place);
+                if (forced_tmp)
+                {
+                    ActiveRecordMediator<place>.DeleteAndFlush(place);
+                }
+                else
+                {
+                    place.editing = null;
+                    ActiveRecordMediator<place>.Save(place);
+                }
                 RedirectToAction("list");
                 return;
             }
-            if (place.prime_name == null || place.prime_name.Length == 0 ){
-                Flash["error"] = "You are missing the basic parts of a place";
-                RedirectToReferrer();
-                return;
+
+            //place.plus_four_code
+            //'99164'
+
+            authors user = getUser();
+            place.editing = user;
+            if ((place.prime_name == null || place.prime_name.Length == 0) )
+            {
+                if (!forced_tmp)
+                {
+                    Flash["error"] = "You are missing the basic parts of a place";
+                    RedirectToReferrer();
+                    return;
+                }
+                else
+                {
+                    place.prime_name = "TEMP NAME";
+                }
             }
 
             /*if (place.place_types == null || place.place_types.place_type_id == 0)
@@ -688,7 +753,7 @@ namespace campusMap.Controllers
 
             
 
-            authors user = getUser();
+            
             /*if (!canPublish(user))
             {
                 PlaceStatus stat= ActiveRecordBase<PlaceStatus>.Find(1);
@@ -701,7 +766,7 @@ namespace campusMap.Controllers
             if (apply != null){
 
             }else{
-                place.checked_out_by = "";
+                place.editing = null;
             }
 
 
@@ -731,6 +796,42 @@ namespace campusMap.Controllers
                 }               
                      
             }
+            /*if (place.field != null)
+            {
+                place.field.Clear();
+            }*/
+            if (fields != null)
+            {
+                foreach (String key in Request.Form.AllKeys)
+                {
+                    if (key.StartsWith("fields") )
+                    {
+                        fields f = new fields();
+                        f.value = "{ \"val\":\""+Request.Form[key]+"\"}";
+
+                        int F_key = Convert.ToInt32(key.Replace("fields[","").Replace("]","")); 
+
+                        f.type = ActiveRecordBase<field_types>.Find(F_key);
+                        ActiveRecordMediator<fields>.Save(f);
+                        place.field.Add(f);
+                    }
+                }
+            }
+
+            place.names.Clear();
+            foreach (place_names pn in place_names)
+            {
+                pn.place_id = place.id;
+                if (pn.name != null && pn.id == 0 && pn.id != 9999)
+                {
+                    ActiveRecordMediator<place_names>.Save(pn);
+                    place.names.Add(pn);
+                }
+                
+            }
+
+
+
 
             foreach (place_media si in place_media)
             {
@@ -782,11 +883,12 @@ namespace campusMap.Controllers
             Flash["authors"] = null;
 
 
-            if (apply != null)
+            if (apply != null || ajaxed_update)
             {
-                if (apply != " Save ")
+                if (place.id>0)
                 {
                     Redirect("Edit_place.castle?id=" + place.id);
+                    return;
                 }
                 else
                 {

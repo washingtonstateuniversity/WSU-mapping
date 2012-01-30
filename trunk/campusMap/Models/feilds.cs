@@ -30,7 +30,7 @@ namespace campusMap.Models
             set { field_id = value; }
         }
         private field_types type_of;
-        [BelongsTo("field_type_id")]
+        [BelongsTo]
         virtual public field_types type
         {
             get { return type_of; }

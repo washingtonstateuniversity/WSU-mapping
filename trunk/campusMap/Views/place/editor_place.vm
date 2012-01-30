@@ -1,3 +1,45 @@
+#capturefor(admin_js)<script type="text/javascript">
+  var author_count =#if($place.Authors.Count)$place.Authors.Count #else 0 #end + 2;
+  var tag_count = #if($place.Tags.Count)$place.Tags.Count #else 0 #end + 2;
+  var image_count = #if($place.Images.Count)$place.Images.Count #else 0 #end  + 2;
+</script>
+
+<script type="text/javascript">
+
+
+  var availablecredits = [$credits];
+
+  var availableTags = [$!locations];
+  #* set up images*#
+  #set($availableImages='')
+  #capturefor(availableImages)
+  #foreach ($image in $place.Images)
+  #each
+  {id:"${Image.id}",name:"${Image.FileName}",url:"/image/download.castle?id=${Image.id}&placeid=${place.id}&m=crop&w=250&h=250&pre=TMP"}
+  #between
+  ,
+  #end
+  #end
+  #* EOF set up  *#
+
+  var tinyMCEImageList = new Array($!availableImages);
+
+  var place_id=$place.id;
+</script>
+#end
+
+
+
+#capturefor(formbuttons)
+    <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
+#end
+
+
+
+
+
 #if($Flash.error)
 <p style="color: red; font-weight: bold;">
     $Flash.error
@@ -11,6 +53,19 @@
 		<span class="ui-icon ui-icon-search"  style="margin-top: 3px;"> </span>
 	</a>#end
 #end
+
+
+
+#if( !$ajaxed )
+<div id="smaple_area" style="position: absolute; z-index: 9; background-color:#fff; right: 15px; top: 54px;">
+            <fieldset><legend>Sample</legend>
+				<div id="map_canvas" style="width:300px;height: 520px;"></div>
+            </fieldset>
+</div>
+#end
+
+
+
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -31,26 +86,30 @@
     </li>#end
   </ul>
   
-<form action="update.castle" method="post">
-  
-  
+<form action="update.castle" method="post" id="editor_form">
+
   <div id="tabs-1">
-  
-  
-<p class="validateTips">All form fields are required.</p>
-        <form>$Form.HiddenField("place.id")
+		$formbuttons
+		<p class="validateTips">All form fields are required.</p>
+        $Form.HiddenField("place.id")
+		#if( $place.id==0 || $place.tmp)
+			<input type="hidden" name="forced_tmp" value="1" />
+		#end
             <fieldset><legend>Location</legend>
 				<div class="container" style="width:100%;">
 
 						<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
-						<select id="LocationModelSelect">
+						<select id="LocationModelSelect" >
 							<option value="">Select one...</option>
 							#foreach($model in $models)
-								<option class="model" value="$model.id" #if($place.model == $model) selected="selected" #end>$!model.name</option>
+								<option class="model" value="$model.id" #if($place.model == $model.id) selected="selected" #end>$!model.name</option>
 							#end
-						</select><br/>
+						</select>#**#
+						
+						<input type="text"  value="2" name="place.model.id" />
+						<br/>
 						<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
-						<select id="LocationTypeSelect">
+						<select id="LocationTypeSelect" name="place.type.id">
 							<option value="">Select one...</option>
 							#foreach($type in $types)
 								<option class="type" value="$type.id" #if($place.type == $type) selected="selected" #end>$!type.name</option>
@@ -58,39 +117,107 @@
 						</select><br/> 
 					<div class="col2"  style="width:49%;display:inline-block;">	
 						<label for="Lat"><strong>Latitude</strong></label><br/>
-						<input type="text" name="Lat" id="Lat" value="" class="text ui-widget-content ui-corner-all" />
+						<input type="text" name="place.coordinate.Length" id="Lat" value="$!place.coordinate.Length" class="text ui-widget-content ui-corner-all" />
 					</div>
 					<div class="col2"  style="width:49%;display:inline-block;">
 						<label for="Long"><strong>Longitude</strong></label><br/>
-						<input type="text" name="Long" id="Long" value="" class="text ui-widget-content ui-corner-all" />
+						<input type="text" name="place.coordinate.LongLength" id="Long" value="$!place.coordinate.LongLength" class="text ui-widget-content ui-corner-all" />
 					</div>
                 </div>  
             </fieldset>
             <fieldset><legend>Naming</legend>
-                <label for="name">Preferred Map Name</label><br/>
-                <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/><br/>
+                <label for="place.prime_name">Preferred Map Name</label><br/>
+                <input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/><br/> 
+                <label for="place.abbrev_name">Bldg Abbrev</label><br/>
+                <input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /><br/>
+                <div id="names">
+					#set($c=0)
+					#foreach($altname in $place_names)
+					<span class="pod name">
+						<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
+						<label for="place_names_9999" class="editable">Inset Lable</label>
+						<input type="text" value="" name="place_names[9999].lable" class="editzone text ui-widget-content ui-corner-all"/>
+						<br/>
+						<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/>
+						#set($c=$c+1)
+						</span>
+					#end   
+				</div>
+	<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
+	</a>
+				<div id="name_clonebed" class="clonebed" style="position:absolute; top:-9999px;left:-left:-9999;">         
+					<span class="pod name">    
+						<input type="hidden" name="place_names[9999].id" value=""/>
+						<label for="place_names_9999" class="editable">Inset Lable</label>
+						<input type="text" value="" name="place_names[9999].lable" class="editzone text ui-widget-content ui-corner-all"/>
+						<br/>
+						<input type="text" name="place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/>
+					</span>
+                </div>
                 
-                
-                <label for="Official">Official Name</label><br/>
-                <input type="text" name="Official" id="Official" value="" class="text ui-widget-content ui-corner-all"  size="50"/><br/>
-                
-                <label for="Alternate">Alternate Name</label><br/>
-                <input type="text" name="Alternate" id="Alternate" value="" class="text ui-widget-content ui-corner-all"  size="50"/><br/>     
-                <label for="Abbrev">Bldg Abbrev</label><br/>
-                <input type="text" name="Abbrev" id="Abbrev" value="" class="text ui-widget-content ui-corner-all" /><br/>               
             </fieldset>
-             <fieldset><legend>Geometrics</legend>
-                <label for="name">Preferred Map Name</label><br/>
+			<fieldset><legend>Geometrics</legend>
+                <label for="name">Preferred Map</label><br/>
                              
-            </fieldset>           
+            </fieldset>    
+			<fieldset><legend>Address Options</legend>
+                <label for="Alternate">Plus Four Code</label><br/>
+                $place.campus.zipcode - <input type="text" name="Alternate" id="Alternate" value="" class="text ui-widget-content ui-corner-all w50"  size="50"/><br/> 
+   
+   
+			<label for="place.campus"><strong>Campus</strong></label><br/>
+			<select id="place.campus" name="place.campus.id">
+				<option value="">Select one...</option>
+				#foreach($campus in $campuses)
+					<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+				#end
+			</select>
+			<br/>  
+			
+			<label for="place.college"><strong>College</strong></label><br/>
+			<select id="place.college" name="place.college.id">
+				<option value="">Select one...</option>
+				#foreach($college in $colleges)
+					<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
+				#end
+			</select> <br/>  
+			
+			
+			<label for="place.department"><strong>Departments</strong></label><br/>
+			<select id="place.department" name="place.department.id">
+				<option value="">Select one...</option>
+				#foreach($department in $departments)
+					<option class="type" value="$department.id" #if($place.department == $department) selected="selected" #end>$!department.name</option>
+				#end
+			</select> <br/>  			
+			
+			<label for="place.program"><strong>Programs</strong></label><br/>
+			<select id="place.program" name="place.program.id">
+				<option value="">Select one...</option>
+				#foreach($program in $programs)
+					<option class="type" value="$program.id" #if($place.program == $program) selected="selected" #end>$!program.name</option>
+				#end
+			</select> <br/>  			
+			
+			
+			         
+            </fieldset>    
+            
+
+            
+                   
             <fieldset>
             	<label for="tags">Tag location: </label><br/>
 				<input id="tags"  class="text ui-widget-content ui-corner-all" size="50" /><br/>
             </fieldset>  
-            
-        </form>
+            <fieldset>
+            	<label for="tags">Place fields: </label><br/>
+				#foreach($field in $fields)          
+					$field
 
-
+				#end
+            </fieldset>  
     #if($Controller.canPublish($loginUser)) <p class="wsu_ui">
       Publication Date:  <br/>
       <input type="text" value="$!place.publishtime" name="place.publishtime" id="place_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
@@ -146,10 +273,11 @@
 
     <a style="cursor:pointer;" onclick="AddTag()">+ add additional tags</a>
     *#
+     $formbuttons
     <div class="clear"></div>
   </div>
   <div id="tabs-2">
-
+ $formbuttons
       <h3>Teaser :</h3>
       #*$Form.TextArea("place.Teaser")*#
       <textarea id="place_Teaser" name="place.Teaser"  class="tinyEditor">$!place.Teaser</textarea>  
@@ -157,13 +285,13 @@
       <h3>Body Text :</h3>
       #*$Form.TextArea("place.Bodytext")*#
       <textarea id="place_Bodytext" name="place.Bodytext"  class="tinyEditor">$!place.Bodytext</textarea>
-
+$formbuttons
     <div class="clear"></div>
   </div>
   
   
   <div id="tabs-3">
-
+$formbuttons
     <h3>Place Type :</h3>
     $Form.Select("place.placeType.id", $placetype, "%{value='Id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
 
@@ -207,13 +335,15 @@
     </div>
 
     <a style="cursor:pointer;" onclick="AddAuthor()">+ add additional authors</a>
+    
+    $formbuttons
     <div class="clear"></div>
   <br/>
     
   </div>
   
     <div id="tabs-4">
-
+$formbuttons
     
         <div id="ImageDiv">
             <h3>Place Images</h3>
@@ -244,6 +374,7 @@
                 #end
                 <div class="clearings" style="clear:both;"></div>
             </div>
+            $formbuttons
     <div class="clear"></div>
         </div>
     </div>
@@ -315,3 +446,485 @@
 
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if( !$ajaxed )
+
+<div style="position:absolute;top:10%;right:0px; z-index: 1;">
+    <ul style=" list-style:none;">
+		<li class="optionsLink"><a href="#">MapView Options</a>
+			<ul class="options"  style=" list-style:none;">
+				<li><button onclick="turnOnPOI()" style="display:block;">Turn on all POI</button></li>
+				<li><button onclick="turnOffPOI()" style="display:block;">Turn Off all POI</button></li>
+				<li><button onclick="applyType('poi.school')" style="display:block;">Turn on just one POI of schools</button></li>
+			</ul>
+		</li>
+    </ul>
+</div>
+
+
+
+<div class="ui-widget ui-widget-content ui-corner-left" style="position:absolute;bottom:10%;right:0px; z-index: 1;  ">
+  <div id="searchwell"></div>
+</div>
+
+
+<div style="position:absolute;top:10%;left:150px; z-index: 1;">
+
+
+<div id="polygonstuff">
+  <div>
+    <a style="padding-left:5px; color: #ffffff;" href="javascript:holecreator()">Hole</a>
+  </div>
+  <div id="stepdiv" style="padding-left:5px">
+    Step 0
+  </div>
+  <div>
+    <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
+  </div>
+</div>
+
+<div id="polylineoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">POLYLINE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('polylineoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:230px">
+    <form id="style1" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="polylineinput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="polylineinput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="polylineinput3" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="polylineinput4" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:polylinestyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:polylinestyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberl">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+<div id="polygonoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">POLYGON/RECTANGLE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('polygonoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:230px">
+    <form id="style2" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="polygoninput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="polygoninput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="polygoninput3" />
+      <div class="clear"></div>
+      <div class="label">fillColor</div>
+      <input class="input" type="text" name="fillcolor" id="polygoninput4" />
+      <div class="clear"></div>
+      <div class="label">fillOpacity</div>
+      <input class="input" type="text" name="fillopacity" id="polygoninput5" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="polygoninput6" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:polygonstyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:polygonstyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberp">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+
+<div id="circleoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">CIRCLE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('circleoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:250px">
+    <form id="rect" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="circinput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="circinput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="circinput3" />
+      <div class="clear"></div>
+      <div class="label">fillColor</div>
+      <input class="input" type="text" name="fillcolor" id="circinput4" />
+      <div class="clear"></div>
+      <div class="label">fillOpacity</div>
+      <input class="input" type="text" name="fillopacity" id="circinput5" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="circinput6" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:circlestyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:circlestyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberc">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+<div id="markeroptions">
+  <div id="iconimages">
+    <table>
+      <tr>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/green.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/red.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/green.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple.png");' /> </td>
+      </tr>
+      <tr>
+        <td><img src="http://maps.google.com/mapfiles/dd-start.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/dd-end.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/markerA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_orangeA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_yellowA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_greenA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_brownA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_purpleA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_blackA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_greyA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_whiteA.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/dd-start.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/dd-end.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/markerA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_orangeA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_yellowA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_greenA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_brownA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_purpleA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_blackA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_greyA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_whiteA.png");' /> </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td><img src="$siteroot/Content/images/marker_20_red.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_orange.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_yellow.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_green.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_brown.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_blue.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_purple.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_black.png" alt="" /> </td>
+        <!--<td><img src="$siteroot/Content/images/marker_20_gray.png" alt="" /> </td>-->
+        <td><img src="$siteroot/Content/images/marker_20_white.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_red.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_orange.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_yellow.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_green.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_brown.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_blue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_purple.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_black.png");' /> </td>
+        <!--<td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_gray.png");' /> </td>-->
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_white.png");' /> </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/bar.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/restaurant.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/lodging.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/golfer.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/sportvenue.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/plane.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/square.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/bar.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/restaurant.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/lodging.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/golfer.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/sportvenue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/plane.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/square.png");' /> </td>
+      </tr>
+    </table>
+  </div>
+  <div id="stylestext">
+    <form action="#" style="padding-top:3px; margin-top:-5px">
+      <div style="float:left;" class="styletitle">MARKER</div>
+      <div style="float:right;">
+        <a class="closebutton" href="javascript:closethis('markeroptions')">X</a>
+      </div>
+      <div class="clear"></div>
+      <div>
+        <br />
+        &lt;Style id =<input type="text" id="st1" value="markerstyle" style="width:100px; border: 2px solid #ccc;" /><br />
+        &nbsp;&nbsp;&lt;Icon&gt;&lt;href&gt;
+        <input type="text" id="st2" value="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" style="width:380px; border: 2px solid #ccc;" /><br />
+        <span id="currenticon" style="height: 35px">
+          <img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png" alt="" />
+        </span>
+        Use default icon, or choose icon from the chart
+        <input style="width:120px; margin-left:8px" type="button" name="button" value="Back to default icon" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png");' />
+        <br /><br />
+      </div>
+      <div style="margin-top:5px">
+        <a class="oklink" href="javascript:markerstyle(0)">Click here to save style changes</a>
+        <a class="oklink" href="javascript:markerstyle(1)">Click here to save as new style</a>
+      </div>
+      <div style="width:100%; text-align:center; margin-top:5px">
+        <input type="button" class="buttons" name="backwards" value="Previous" onclick="stepstyles(-1);"/>
+        Style <span id="stylenumberm">1 </span>
+        <input type="button" class="buttons" name="forwards" value="Next" onclick="stepstyles(1);"/>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="directionstyles">
+  <div style="float:right;">
+    <a class="closebutton" href="javascript:closethis('directionstyles')">X</a>
+  </div>
+  <div class="clear"></div>
+  <div style="width:100%; text-align:center; padding-top:40px">
+    <input type="button" class="buttons" name="markerbutton" value="Markerstyles" onclick="toolID=5;styleoptions();"/>
+  </div>
+  <div style="width:100%; text-align:center; padding-top:15px">
+    <input type="button" class="buttons" name="linebutton" value="Linestyles" onclick="toolID=1;styleoptions();"/>
+  </div>
+</div>
+<div id="toppers">
+  <form action="#">
+    &lt;Document&gt;<br />
+    &nbsp;&nbsp;&lt;name&gt;<input type="text" id="doc1" value="My document" style="width:345px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;description&gt;<input type="text" id="doc2" value="Content" style="width:312px; border:2px solid #ccc;" /><br /><br />
+    &lt;Placemark&gt;<br />
+    &nbsp;&nbsp;&lt;name&gt;<input type="text" id="plm1" value="NAME" style="width:345px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;description&gt;<input type="text" id="plm2" value="YES" style="width:312px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;styleURL&gt;<em> current style</em><br />
+    &nbsp;&nbsp;&lt;tessellate&gt;<input type="text" id="plm3" value="1" style="width:20px; border:2px solid #ccc;" />&lt;/tessellate&gt;
+    &lt;altitudemode&gt;<input type="text" id="plm4" value="clampToGround" style="width:100px; border:2px solid #ccc;" /><br /><br />
+    You may create or change styles with the "Style Options" button.<br />
+    You may press it now or anytime.<br /><br />
+    <input type="button" name="docu" id="docu" value="Save" onclick='savedocudetails();document.getElementById("toppers").style.visibility = "hidden";'/>
+    <input type="button" value="Close" onclick='document.getElementById("toppers").value="";document.getElementById("toppers").style.visibility = "hidden";'/>
+  </form>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display:none;">
+
+
+	<div id="addGeom">
+	<div class="choice">
+		<form id="tools" action="./" method="post" onsubmit="return false">
+		  <select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+			<option selected="selected" value="1">Polyline</option>
+			<option value="2">Polygon</option>
+			<option value="3">Rectangle</option>
+			<option value="4">Circle</option>
+			<option value="5">Marker</option>
+			<option value="6">Directions</option>
+		  </select>
+		</form>
+	</div>
+	<div class="choice">
+		<form id="codes" action="./" method="post" onsubmit="return false">
+		  <select id="codechoice" name="codechoice" style="border:1px solid #000000;" onchange="codeID=parseInt(this.options[this.selectedIndex].value);setCode();">
+			<option selected="selected" value="1">KML</option>
+			<option value="2">Javascript</option>
+		  </select>
+		</form>
+	</div><br/><br/>
+	<div id="middlerow">
+		<form action="#">
+		  <select id="over" style="width:180px; border:1px solid #000000;">
+			<option>LngLat mousemove</option>
+			<option selected="selected">LatLng mousemove</option>
+		  </select>
+		  <input type="button" onclick="mapcenter();" value="Mapcenter"/>
+		  <input type="text" style="width:140px; border: 1px solid #000000;" id="centerofmap" /><br/>
+		  Zoom level:
+		  <input type="text" size="5" name="myzoom" id="myzoom" value="7" style="width:21px; border: 1px solid #000000;" />
+		</form>
+	</div>
+	<div id="buttonrow">
+		<input type="button" onclick="nextshape();" value="Next shape"/>
+		<input type="button" onclick="clearMap();" value="Clear Map"/>
+		<input type="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
+		<input type="button" onclick="styleoptions();" value="Style Options"/>
+		<input type="button" onclick="editlines();" value="Edit lines" id="EditButton"/>
+		<input type="button" onclick='docudetails();document.getElementById("toppers").style.visibility = "visible";' value="KML input"/>
+		<input type="button" onclick="showKML();" value="Show KML"/>
+		<input type="button" onclick="copyTextarea();" value="Select and copy text"/>
+	</div>
+	<div id="presenter">
+		<form style="margin-bottom:5px" action="#">
+		<fieldset><legend>Code Output</legend>
+			&nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
+			<input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked"/><br/>
+			<textarea id="coords1" cols="62" rows="15" style="width:98%" >
+Click on the map. The code for the shape you create will be presented here.
+You may shift from Polyline to Polygon and vice/versa at any time when you draw.
+When finished with a shape, click 'Next shape' and draw another shape, if you wish.
+If you want to draw polygon with hole(-s), choose Polygon and follow the instructions.
+Polyline and polygon may be edited by clicking 'Edit lines'.
+When editing, you may remove a point with a click on it.
+If you want to edit a saved polyline or polygon (including Rectangle), click on it. Then click 'Edit lines'.
+There are style options for everything you draw on the map.
+The complete KML code for what you have created, is always available with Show KML.
+Uncheck 'Live code presentation' for greater speed when you draw shapes with large amount of points.
+Check it when you want to see the code.
+			</textarea>
+			</fieldset>
+		</form>
+	</div>
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="mapSearch">
+		<h3>Search types</h3>
+		<h4>Geo coded</h4>
+		<input type="text" value="" id="searchbox"  />
+		<h4>places</h4>
+		<input id="searchTextField" type="text" size="50" placeholder="Anything you want!" />
+		<div>
+			<h4>local search</h4>
+			<input type="text" id="queryInput" value="pullman" style="width: 250px;"/>
+			<input type="button" value="Find" onclick="doSearch()"/>
+		</div>
+	</div>
+</div>
+#end

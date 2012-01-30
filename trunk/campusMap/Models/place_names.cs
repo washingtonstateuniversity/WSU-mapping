@@ -37,5 +37,12 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
+        private String Labeled;
+        [Property]
+        virtual public String label
+        {
+            get { return Labeled; }
+            set { Labeled = value; }
+        }
     }
 }
