@@ -3231,7 +3231,7 @@ function setBoxHtml(content){
 
 
 function initialize() {
-	
+	if($('#map_canvas').length){
 		boxText.innerHTML = setBoxHtml();
 		
 		myOptions = {
@@ -3478,7 +3478,8 @@ function initialize() {
 			  }
 			   }
 			 });
-		 });   
+		 });  
+	}
 }
 
 

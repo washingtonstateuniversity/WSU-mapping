@@ -146,7 +146,7 @@
 	<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
 	</a>
-				<div id="name_clonebed" class="clonebed" style="position:absolute; top:-9999px;left:-left:-9999;">         
+				<div id="name_clonebed" class="clonebed">         
 					<span class="pod name">    
 						<input type="hidden" name="place_names[9999].id" value=""/>
 						<label for="place_names_9999" class="editable">Inset Lable</label>

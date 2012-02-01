@@ -41,7 +41,7 @@
 <div class="clear"></div>
 
 
-<div id="placeListing" class="tabactive" style="width:100%; overflow:hidden;display: inline-block; float: left;">
+<div id="placeListing" class="tabedArea tabactive" >
 	
 	<div id="PlaceTypeDiv" style="float:right; height: 37px; margin-top: 7px; margin-right: 9px; position: relative; z-index: 1; color:#fff;">
 	  Place Types:<br/>
@@ -87,7 +87,7 @@
 	  </div>
 	</div>
 </div>
-<div id="placeTypes" style="width:0px; overflow:hidden;display: inline-block; float: left;">
+<div id="placeTypes" class="tabedArea">
 
 	<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 	<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
@@ -101,22 +101,24 @@
 		#parse("place/types/list.vm")	
 	  </div>
 	</div>
-</div>
 
 
-<div id="placeFeilds" style="width:0px; overflow:hidden;display: inline-block; float: left;">
 
-	<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
-	<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
-	  <p>
-		<a href="$siteroot/place/new_field.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-		  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Field
-		</a>&nbsp;
-	  </p>
-	</div>		<h3 style="float: left; display:inline-block;">Place Fields ($fields.TotalItems)</h3>
+	<div id="placeFeilds" class="tabedArea" style="">
 
-	  #parse("feilds/list.vm")
-	  </div>
+		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+		<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
+		  <p>
+			<a href="$siteroot/place/new_field.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+			  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Field
+			</a>&nbsp;
+		  </p>
+		</div>
+		
+		<h3 style="float: left; display:inline-block;">Place Fields ($fields.TotalItems)</h3>
+
+		  #parse("feilds/list.vm")
+		  </div>
 	</div>
 </div>
 

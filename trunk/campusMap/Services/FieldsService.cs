@@ -249,7 +249,6 @@ namespace campusMap.Services{
                 // need to add default and seleceted
                 foreach (Option _option in ele.options)
                 {
-
                     if (!String.IsNullOrEmpty(_option.label))
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
@@ -267,7 +266,7 @@ namespace campusMap.Services{
                             writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
                         }
                         writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                        writer.WriteEncodedText(_option.val);
+                        writer.WriteEncodedText(_option.val == "True"?_option.val:String.Empty);
                     }
                     writer.RenderEndTag();
                 }

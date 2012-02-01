@@ -295,33 +295,59 @@ namespace campusMap.Controllers
             [DataBind("ele", Validate = true)] elementSet ele,
             string ele_type,
             int placemodel,
-            string cancel
+           bool ajaxed_update,
+           string apply,
+           string cancel
                 )
         {
             if (cancel != null){
                 RedirectToAction("list");
                 return;
             }
+            char[] startC = { '{' };
+            char[] endC = { '}' };
+
+
 
             ActiveRecordMediator<fields>.Save(field);
             
             field.model = this.GetType().Name;
-            field.set = ActiveRecordBase<place_models>.Find(placemodel).id;
+            field.set = ActiveRecordBase<place_models>.Find(placemodel).id;  // NOTE THIS IS THE ONLY REASON WE CAN ABSTRACT YET... FIX?
 
             ele.attr.name = "fields[" + field.id + "]";
-            string ele_attr = JsonConvert.SerializeObject(ele.attr);
 
-            char[] endC = {'{'};
+            string ele_attr = JsonConvert.SerializeObject(ele.attr);       
             ele_attr = ele_attr.TrimEnd(endC);
-            char[] startC = {'}'};
-
             ele_attr = ele_attr.TrimStart(startC);
-            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":" + ele_attr + ", \"options\":[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}] }";
+            // ele_attr Should match
+            //{\"class\":null,\"id\":null,\"ETC ;)\":null}
+            ele.options.RemoveAt(ele.options.Count - 1); //to remove ele.options[9999] at the end
+            string ele_ops = JsonConvert.SerializeObject(ele.options);
+            ele_ops = ele_ops.TrimEnd(endC);
+            ele_ops = ele_ops.TrimStart(startC);
+            // ele_ops Should match
+            //[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}]
+
+            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":{" + ele_attr + "}, \"options\":"+ele_ops+" }";
 
 
             ActiveRecordMediator<fields>.Save(field);
-
-            RedirectToAction("list");
+            if (apply != null || ajaxed_update)
+            {
+                if (field.id > 0)
+                {
+                    Redirect("edit_field.castle?id=" + field.id);
+                    return;
+                }
+                else
+                {
+                    RedirectToReferrer();
+                }
+            }
+            else
+            {
+                RedirectToAction("list");
+            }
         }
 
         public void setStatus(int id, int status, bool ajax)
@@ -887,7 +913,7 @@ namespace campusMap.Controllers
             {
                 if (place.id>0)
                 {
-                    Redirect("Edit_place.castle?id=" + place.id);
+                    Redirect("edit_place.castle?id=" + place.id);
                     return;
                 }
                 else

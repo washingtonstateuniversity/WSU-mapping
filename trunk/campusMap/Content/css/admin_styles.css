@@ -22,7 +22,7 @@ html,body{height:auto;}
 
 #content{
 	position:relative;
-margin-top: 105px;
+padding-top: 105px;
 z-index:1;
 width: 100%;
 min-width: 960px;
@@ -328,15 +328,15 @@ span.UinEdit{    background-color: #E2E2E2;
 #content h3.ListingChoices.active{color:#000;}
 
 
+.tabedArea{position: relative;width:0px;overflow:hidden;display: inline-block; float: left;}
+.tabactive{width:100%;}
 
 
 
 
 
 
-
-
-.place .ui-tabs-panel {margin-right:310px; min-height:535px;}
+.place.editor_place .ui-tabs-panel {margin-right:310px; min-height:535px;}
 
 
 
@@ -348,3 +348,8 @@ span.UinEdit{    background-color: #E2E2E2;
 .editzone{position:absolute; top:-999px;left:-999px;}
 .pod.editing .editable{position:absolute; top:-999px;left:-999px;}
 .pod.editing .editzone{position:relative; top:0;left:0;}
+
+
+.clonebed{
+	position:absolute; top:-9999px;left:-left:-9999;
+}

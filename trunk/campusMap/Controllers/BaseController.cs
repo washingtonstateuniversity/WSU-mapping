@@ -12,7 +12,6 @@ using log4net.Config;
 #endregion
 namespace campusMap.Controllers
 {
-
     [Filter(ExecuteEnum.BeforeAction, typeof(loggedinFilter))]
     [Layout("default"), Rescue("generalerror")]
     public abstract class BaseController : MonoRailHelper.HelperBaseController
@@ -27,6 +26,10 @@ namespace campusMap.Controllers
         public string getView()
         {
             return SelectedViewName.Split('\\')[0];
+        }
+        public string getAction()
+        {
+            return SelectedViewName.Split('\\')[1];
         }
         public string getViewAndAction()
         {

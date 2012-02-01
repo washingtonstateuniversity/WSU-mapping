@@ -7,6 +7,9 @@
 
 <form action="update_placeField.castle" method="post">
   $Form.HiddenField("field.Id")
+  <input type="hidden" value="$!ele.attr.name" name="ele.attr.name"/>	
+  
+  
   <h3>#if($field.Id!=0)Edit#else Add #end Place Feild</h3>
 
 <fieldset>
@@ -43,31 +46,50 @@
 
 
 </fieldset>
-#if($ele.type=='dropdown')
 
-<fieldset id="optionsSelection">
-	<legend>Dropdown/Multi Select Options:</legend>
+
+<fieldset id="optionsSelection" #if($ele.type!='dropdown')style="display:none;" #end>
+	<legend>#if($ele.type!='dropdown')Dropdown/Multi Select Options:#else Default Value #end</legend>
 	<div style="width:220px;">
+	<span><label for="ele.attr.multiple">Multiple Select</label><input type="checkbox" value="multiple" name="ele.attr.multiple" id="ele_attr_multiple" #if($ele.attr.multiple=="multiple")checked="checked"#end /></span>
 		<span >
 		<span style="float:left;width:100px;">Value</span>
 		<span style="float:left;width:100px;">Label</span>
 		</span>
 
-
-		<span class="opRow">
-			<input type="text" value="" name="op[val][0]"  style="float:left;width:94px;"/>
-			<input type="text" value="" name="op[label][0]"  style="float:left;width:94px;"/>
-			<a href="#" title="Delete option" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;">
-            <span class="ui-icon ui-icon-trash"></span>
-          </a>
-		</span>
+		<div id="ops">
+		#set($o=0)
+		#foreach($opt in $ele.options)
+			#if($opt.val!='')
+				<span class="pod opRow">
+					<input type="text" value="$!opt.val" name="ele.options[$o].val"  style="float:left;width:94px;"/>
+					<input type="text" value="$!opt.label" name="ele.options[$o].label"  style="float:left;width:94px;"/>
+					<input type="radio" value="true" name="ele.options[$o].selected" />
+					<input type="checkbox" value="true" name="ele.options[$o].selected" />
+					<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+				</span>
+			#end
+			#set($o=$o+1)
+		#end
+		</div>
+		
+		
+		
+	<a href="#" id="addOption" #if($ele.type!='dropdown')style="display:none;" #end class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name</a>
 
 		<div style="clear:both;"></div>
 	</div>
 </fieldset>
+		<div id="option_clonebed" class="clonebed">         
+			<span class="pod opRow">    
+				<input type="text" value="" name="ele.options[9999].val"  style="float:left;width:94px;"/>
+				<input type="text" value="" name="ele.options[9999].label"  style="float:left;width:94px;"/>
+				<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+			</span>
+        </div>
 
 
-#end
 <fieldset id="optionsSelection">
 <legend>Field Options</legend>
 
@@ -93,7 +115,7 @@
 		<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:94px;"/>
 		<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:94px;"/>
 		<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Name:</span><input type="text" value="$!ele.attr.name" name="ele.attr.name"  style="float:left;width:94px;"/>			
+				
 
 			<div style="clear:both;"></div>
 		</div>	
@@ -106,5 +128,5 @@
 
 
 
-  <p><input type="submit" value="Submit" /><input type="submit" value="Cancel" name="cancel" /></p>
+  <p><input type="submit" value="#if($field.id!=0) Apply #else Save #end" name="apply" title="#if($field.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" /><input type="submit" value="Submit" /><input type="submit" value="Cancel" name="cancel" /></p>
 </form>

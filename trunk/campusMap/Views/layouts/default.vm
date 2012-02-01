@@ -4,7 +4,7 @@
 	#* all the JS and CSS that is site wide *#
 	#parse("admin/global_header_html.vm")
 </head>
-<body onLoad="initialize()" id='wsu_ui' class="${controller.getView()}">
+<body onLoad="initialize()" id='wsu_ui' class="${controller.getView()} ${controller.getAction()}">
 	<div id = "wrapper">
 		<div id="header_bar">
 			#parse("admin/header_html.vm")

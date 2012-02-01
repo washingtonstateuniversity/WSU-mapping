@@ -5,10 +5,8 @@
 
 <style type="text/css">
   body{
-  font: normal 0.8em Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font: normal 16px/18px Verdana, Geneva, Arial, Helvetica, sans-serif;
   }
-</style>
-<style type="text/css">
   .at300bs.at15t_compact{
   background-image:none;
   }
@@ -18,22 +16,13 @@
 </style>
 <link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
 <link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-  <!--
-#secondary {
-	padding-bottom:180px;
-	
-}
-#content{font-size: 1.4em;}
--->
-</style>
 
 <!-- UI SCRIPTS -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
-<link media='screen' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' type='text/css' rel='stylesheet' />
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 <!-- WSU theme -->
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' type='text/css' rel='stylesheet' />
 
@@ -59,11 +48,6 @@
 
 
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
-
-
-
-
-
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
 <script type="text/javascript" src="$siteroot/content/js/init_test.js"></script>
 
@@ -90,186 +74,12 @@ $Controller.getView()
   var view = '$view.Trim()/';
 </script>
 #if($admin_js)${admin_js}#end
+
+
 <script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
 <!-- EOF UI SCRIPTS -->
 <!--script for print tool-->
 <script src="http://images.wsu.edu/javascripts/print.js" type="text/javascript"></script>
 
+<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
 
-
-
-
-
-
-<style type="text/css">
-  #coords1 {
-  padding: 5px;
-  font-weight: bold;
-  }
-  #polygonstuff {
-  position: absolute;
-  top: 400px;
-  left: 5px;
-  width: 70px;
-  height: 60px;
-  background-color: #ff0000;
-  color: #ffffff;
-  visibility: hidden;
-  }
-
-  .choice {
-  background-color: transparent;
-  width: 100px;
-  float: left;
-  }
-
-  .topbutton {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  float: left;
-  }
-  #googlead {
-  margin: 0 auto;
-  width: 800px;
-  padding-top: 5px;
-  }
-  .clear {
-  clear:both;
-  }
-
-  #polylineoptions {
-  position: absolute;
-  background-color: #ffffff;
-  top: 200px;
-  left: 560px;
-  width: 260px;
-  height: 210px;
-  border: 2px solid #337EB7;
-  visibility: hidden;
-  }
-  #polygonoptions {
-  position: absolute;
-  background-color: #ffffff;
-  top: 200px;
-  left: 560px;
-  width: 260px;
-  height: 255px;
-  border: 2px solid #337EB7;
-  visibility: hidden;
-  }
-  #rectang {
-  position: absolute;
-  background-color: #ffffff;
-  top: 200px;
-  left: 560px;
-  width: 260px;
-  height: 260px;
-  border: 2px solid #337EB7;
-  visibility: hidden;
-  }
-  #circleoptions {
-  position: absolute;
-  background-color: #ffffff;
-  top: 200px;
-  left: 560px;
-  width: 260px;
-  height: 260px;
-  border: 2px solid #337EB7;
-  visibility: hidden;
-  }
-  #markeroptions {
-  width: 950px;
-  height: 310px;
-  background-color: #ffffff;
-  margin: 2px 2px 2px 2px;
-  padding: 8px;
-  border: 1px solid #aaa;
-  position: absolute;
-  top: 45px;
-  left: 10px;
-  z-index:99999;
-  visibility:hidden;
-  }
-  #directionstyles {
-  position: absolute;
-  background-color: #ffffff;
-  top: 200px;
-  left: 560px;
-  width: 260px;
-  height: 210px;
-  border: 2px solid #337EB7;
-  visibility: hidden;
-  }
-  #iconimages {
-  width: 430px;
-  height: 300px;
-  background-color: #ffffff;
-  margin: 2px 2px 2px 2px;
-  padding: 8px;
-  float: left;
-  }
-  #stylestext {
-  width: 485px;
-  height: 280px;
-  background-color: #ffffff;
-  margin: 0px 0px 2px 2px;
-  padding: 5px;
-  float: left;
-  }
-  #toppers {
-  width: 405px;
-  height: 300px;
-  background-color: #ffffff;
-  margin: 2px 2px 2px 2px;
-  padding: 8px;
-  position: absolute;
-  top: 165px;
-  left: 90px;
-  z-index:99999;
-  visibility:hidden;
-  }
-  .styletitle {
-  margin-left:5px;
-  padding:0 3px 0 5px;
-  font-weight:bold;
-  background-color: #CCCCFF;
-  }
-  .closebutton {
-  border:1px solid #000000;
-  padding:1px 4px 1px 4px;
-  margin:1px 3px 1px 0px;
-  color:#ffffff;
-  background-color: #337EB7;
-  }
-  .label {
-  float: left;
-  text-align: right;
-  margin-right: 5px;
-  width: 80px;
-  padding-top: 5px;
-  }
-  .input {
-  float: left;
-  padding-left: 3px;
-  width: 55px;
-  margin: 3px 0px 0px 3px;
-  border: 2px solid #ccc;
-  }
-  .inputlong {
-  float: left;
-  padding-left: 3px;
-  width: 75px;
-  margin: 3px 0px 0px 3px;
-  border: 2px solid #ccc;
-  }
-  .oklink {
-  margin-left: 25px;
-  padding:0px 3px 0px 3px;
-  background-color: #CCFF66;
-  text-decoration: none;
-  }
-  #morelinks td {
-  padding-right: 10px;
-  }
-</style>
