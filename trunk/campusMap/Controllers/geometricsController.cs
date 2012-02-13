@@ -641,7 +641,7 @@ namespace campusMap.Controllers
             SqlBytes udtBinary2 = new SqlBytes(b2);
             SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
             */
-            geometric.boundary = sqlGeometry1;//WKB;//
+            geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
 
 
 
@@ -671,6 +671,13 @@ namespace campusMap.Controllers
             {
                 RedirectToAction("list");
             }
+        }
+
+        public void test()
+        {
+            geometrics geo = ActiveRecordBase<geometrics>.Find(10);
+            SqlGeography spatial = geometrics.AsGeography(geo.boundary);
+            CancelView();
         }
 
         public void delete(int id)

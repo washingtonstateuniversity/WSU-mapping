@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using campusMap.Services;
 using Microsoft.SqlServer.Types;
+using System.IO;
 
 namespace campusMap.Models
 {
@@ -42,29 +43,44 @@ namespace campusMap.Models
             set { Coordinate = value; }
         }*/
 
-        private SqlGeography Boundary;
-        [Property(SqlType = "geography")]
+        private byte[] Boundary;
+        [Property(SqlType = "geography", ColumnType = "BinaryBlob")]
         //[Property]
-        virtual public SqlGeography boundary
+        virtual public byte[] boundary
         {
             get { return Boundary; }
             set { Boundary = value; }
         }
 
+        public static SqlGeography AsGeography( byte[] bytes)
+        {
+            SqlGeography geo = new SqlGeography();
+            using (MemoryStream stream = new System.IO.MemoryStream(bytes))
+            {
+                using (BinaryReader rdr = new System.IO.BinaryReader(stream))
+                {
+                    geo.Read(rdr);
+                }
+            }
+
+            return geo;
+        }
 
 
+        public static byte[] AsByteArray(SqlGeography geography)
+        {
+            if (geography == null)
+                return null;
 
-
-
-
-
-
-
-
-
-
-
-
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                using (BinaryWriter writer = new System.IO.BinaryWriter(stream))
+                {
+                    geography.Write(writer);
+                    return stream.ToArray();
+                }
+            }
+        }
 
 
 
