@@ -1,0 +1,40 @@
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+#capturefor(formbuttons)
+    <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
+#end
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
+	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+			<a href="#Basic">Basic</a>
+		</li>
+	</ul>
+  
+	<form action="update.castle" method="post">
+		$Form.HiddenField("geometric.id")
+		#if( $geometric.id==0 || $geometric.tmp)
+			<input type="hidden" name="forced_tmp" value="1" />
+		#end
+	
+	
+		<div id="Basic">
+		
+		
+		
+		
+		
+			<form>$Form.HiddenField("place.id")
+				<fieldset><legend>Location</legend>
+				<textarea name="geometric.boundary">$!geometric.boundary</textarea>
+				</fieldset>
+			</form>
+			$formbuttons
+		</div>
+	</form>
+</div>

@@ -631,17 +631,17 @@ namespace campusMap.Controllers
             string wkt = "POLYGON ((-145 -45, -55 -45, -55 45, -145 45, -145 -45))";
             SqlChars udtText = new SqlChars(wkt);
             SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
-            /*
+
             MemoryStream ms = new MemoryStream();
             BinaryWriter bw = new BinaryWriter(ms);
             byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
-            bw.Write(WKB);
+            /*bw.Write(WKB);
 
-                  byte[] b2 = ms.ToArray();
-            var udtBinary2 = new System.Data.SqlTypes.SqlBytes(b2);
-            var sqlGeometry2 = Microsoft.SqlServer.Types.SqlGeometry.STGeomFromWKB(udtBinary2, 4326);
+            byte[] b2 = ms.ToArray();
+            SqlBytes udtBinary2 = new SqlBytes(b2);
+            SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
             */
-            geometric.boundary = sqlGeometry1;//WKB;
+            geometric.boundary = sqlGeometry1;//WKB;//
 
 
 
