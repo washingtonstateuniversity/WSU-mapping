@@ -47,21 +47,39 @@ namespace campusMap.Models
             get { return Abbrev_Name; }
             set { Abbrev_Name = value; }
         }
-        private string Street_Address;
+
+        private string _summary;
         [Property]
-        virtual public string street_address
+        virtual public string summary
         {
-            get { return Street_Address; }
-            set { Street_Address = value; }
+            get { return _summary; }
+            set { _summary = value; }
         }
 
-        private IList<authors> authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> Authors
+        private string _details;
+        [Property]
+        virtual public string details
         {
-            get { return authors; }
-            set { authors = value; }
+            get { return _details; }
+            set { _details = value; }
         }
+        
+
+        private string _address;
+        [Property]
+        virtual public string address
+        {
+            get { return _address; }
+            set { _address = value; }
+        }
+        private string _street;
+        [Property]
+        virtual public string street
+        {
+            get { return _street; }
+            set { _street = value; }
+        }
+
 
         private Byte[] Coordinate;
         [Property(SqlType = "geography")]
@@ -163,17 +181,17 @@ namespace campusMap.Models
             get { return place_model; }
             set { place_model = value; }
         }
-        
-        private status Status;
-        [BelongsTo("place_status")]
+
+        private status _status;
+        [BelongsTo("status")]
         virtual public status status
         {
-            get { return Status; }
-            set { Status = value; }
+            get { return _status; }
+            set { _status = value; }
         }
         virtual public bool isPublished()
         {
-            if (this.Status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
+            if (this.status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
             {
                 return true;
             }
@@ -192,7 +210,13 @@ namespace campusMap.Models
 
 
 
-
+        private schools _school;
+        [BelongsTo]
+        virtual public schools school
+        {
+            get { return _school; }
+            set { _school = value; }
+        }
         private colleges _college;
         [BelongsTo]
         virtual public colleges college
@@ -223,10 +247,8 @@ namespace campusMap.Models
         }
 
 
-
-
         private IList<fields> Fields;
-        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "field_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "place_id", ColumnRef = "field_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         virtual public IList<fields> field
         {
             get { return Fields; }
@@ -242,12 +264,12 @@ namespace campusMap.Models
             set { Tags = value; }
         }
 
-        private IList<usertags> usertags = new List<usertags>();
+        private IList<usertags> _usertags = new List<usertags>();
         [HasAndBelongsToMany(typeof(usertags), Lazy = true, Table = "place_to_usertags", ColumnKey = "place_id", ColumnRef = "usertag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<usertags> Usertags
+        virtual public IList<usertags> usertags
         {
-            get { return usertags; }
-            set { usertags = value; }
+            get { return _usertags; }
+            set { _usertags = value; }
         }
 
 
@@ -273,17 +295,19 @@ namespace campusMap.Models
             set { Pub_comments = value; }
         }
 
-
-
-
-
-
-        private authors checked_out;
-        [BelongsTo("checked_out_by")]
+        private IList<authors> _authors = new List<authors>();
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<authors> Authors
+        {
+            get { return _authors; }
+            set { _authors = value; }
+        }
+        private authors _editing;
+        [BelongsTo("author_editing")]
         virtual public authors editing
         {
-            get { return checked_out; }
-            set { checked_out = value; }
+            get { return _editing; }
+            set { _editing = value; }
         }
 
 

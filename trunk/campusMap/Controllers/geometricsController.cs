@@ -20,6 +20,10 @@ namespace campusMap.Controllers
         using System.Text.RegularExpressions;
         using System.Collections;
         using campusMap.Services;
+        using Microsoft.SqlServer.Types;
+    using System.Data.SqlTypes;
+
+
     #endregion
 
     [Layout("default")]
@@ -27,12 +31,16 @@ namespace campusMap.Controllers
     {
 
 
-        public void editor(int id, int page)
+        public void editor(int id, int page, bool ajax)
         {
+            if (id == 0){
+                New();
+            }else{
+                Edit_geometric(id, page, ajax);
+            }
             CancelView();
             CancelLayout();
-            //Edit_place(id, page);
-            RenderView("editor_place");
+            RenderView("editor");
             return;
         }
 
@@ -242,17 +250,22 @@ namespace campusMap.Controllers
             return geometricArray;        
         }
 
-        public void Edit_geometric(int id, int page)
+        public void Edit_geometric(int id, int page, bool ajax)
         {
+            CancelView();
+
+
+            PropertyBag["ajaxed"] = ajax;
+
             campusMap.Services.LogService.writelog("Editing geometric " + id);
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            String username = getUserName();
-            PropertyBag["authorname"] = username;
-            geometric.checked_out_by = username;
+            authors user = getUser();
+            PropertyBag["authorname"] = user;
+            geometric.editing = user;
             ActiveRecordMediator<geometrics>.Save(geometric);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
@@ -311,13 +324,14 @@ namespace campusMap.Controllers
             }
               
 
-            PropertyBag["placeauthors"] = authors; 
-            RenderView("new");
+            PropertyBag["placeauthors"] = authors;
+
+            RenderView("editor");
        
         }
         public void New()
         {
-
+            CancelView();
             PropertyBag["credits"] = ""; 
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
@@ -345,7 +359,9 @@ namespace campusMap.Controllers
             PropertyBag["geometrictype"] = ActiveRecordBase<geometrics_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+            RenderView("editor");
         }
+
 
         /*public String Getlocation()  // this is to be replaced with get cord logic
         {
@@ -446,7 +462,7 @@ namespace campusMap.Controllers
         public void clearLock(int id, bool ajax)
         {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            geometric.checked_out_by = "";
+            geometric.editing = null;
             ActiveRecordMediator<geometrics>.Save(geometric);
             CancelLayout();
             RenderText("true");
@@ -496,7 +512,7 @@ namespace campusMap.Controllers
 
             if (cancel != null)
             {
-                geometric.checked_out_by = "";
+                geometric.editing = null;
                 ActiveRecordMediator<geometrics>.Save(geometric);
                 RedirectToAction("list");
                 return;
@@ -538,7 +554,7 @@ namespace campusMap.Controllers
             }
             else
             {
-                geometric.checked_out_by = "";
+                geometric.editing = null;
             }
 
 
@@ -612,9 +628,27 @@ namespace campusMap.Controllers
             }*/
 
 
+            string wkt = "POLYGON ((-145 -45, -55 -45, -55 45, -145 45, -145 -45))";
+            SqlChars udtText = new SqlChars(wkt);
+            SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
+            /*
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(ms);
+            byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
+            bw.Write(WKB);
+
+                  byte[] b2 = ms.ToArray();
+            var udtBinary2 = new System.Data.SqlTypes.SqlBytes(b2);
+            var sqlGeometry2 = Microsoft.SqlServer.Types.SqlGeometry.STGeomFromWKB(udtBinary2, 4326);
+            */
+            geometric.boundary = sqlGeometry1;//WKB;
+
+
+
+
             ActiveRecordMediator<geometrics>.Save(geometric);
 
-            cleanUpgeometric_media(geometric.id);
+            //cleanUpgeometric_media(geometric.id);
 
             Flash["geometric"] = null;
             Flash["tags"] = null;

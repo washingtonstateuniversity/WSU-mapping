@@ -78,222 +78,267 @@
     <li class="ui-state-default ui-corner-top">
       <a href="#tabs-3">Detail</a>
     </li>
+     #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
+      <a href="#FIELDS">Fields</a>
+    </li>   #end
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs-4">Images</a>
+      <a href="#IMAGES">Images</a>
     </li>
     #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-top">
-      <a href="#tabs-5">Comments</a>
+      <a href="#COMMENTS">Comments</a>
     </li>#end
   </ul>
   
 <form action="update.castle" method="post" id="editor_form">
 
-  <div id="tabs-1">
+  <div id="tabs-1" class="mainAreaTabs">
 		$formbuttons
 		<p class="validateTips">All form fields are required.</p>
         $Form.HiddenField("place.id")
 		#if( $place.id==0 || $place.tmp)
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
-            <fieldset><legend>Location</legend>
-				<div class="container" style="width:100%;">
+		<fieldset>
+		<fieldset style="width:44%;float:right;"><legend>Address Options</legend>
+<div class="col2 w100"  style="display:inline-block;">
+                <label for="street_address">Address</label><br/>
+                <input type="text" name="place.address" id="place.address" value="$!place.address" class="text ui-widget-content ui-corner-all w100"/>
+</div>
+<div class="col2 w200"  style="display:inline-block;">
+                <label for="street_address">Street</label><br/>
+                <input type="text" name="place.street" id="place.street" value="$!place.street" class="text ui-widget-content ui-corner-all w200"/>
+</div>				
+                #if($place.campus.zipcode)<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
+                $place.campus.zipcode - 
+                <input type="text" name="place.plus_four_code" id="place.plus_four_code" value="$!place.plus_four_code" class="text ui-widget-content ui-corner-all w50" />
+				<br/>#end
 
-						<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
-						<select id="LocationModelSelect" >
-							<option value="">Select one...</option>
-							#foreach($model in $models)
-								<option class="model" value="$model.id" #if($place.model == $model.id) selected="selected" #end>$!model.name</option>
-							#end
-						</select>#**#
+
+<div class="col2"  style="display:inline-block;">
+				
+				<label for="place.campus"><strong>Campus</strong></label><br/>
+				<select id="place.campus" class="autoselect" name="place.campus.id">
+					<option value="">Select one...</option>
+					#foreach($campus in $campuses)
+						<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+					#end
+				</select>
+
+</div>
+<div class="col2"  style="display:inline-block;">
+				<label for="place.college"><strong>College</strong></label><br/>
+				<select id="place.college" class="autoselect" name="place.college.id">
+					<option value="">Select one...</option>
+					#foreach($college in $colleges)
+						<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
+					#end
+				</select>
+				
+</div>
+
+				<div id="school" class="col2" style="#if($place.college==0) display:none; #else display:inline-block; #end">
+				<label for="place.school"><strong>School</strong></label><br/>
+				<select id="place.school" class="autoselect" name="place.school.id">
+					<option value="">Select one...</option>
+					#foreach($school in $schools)
+						<option class="type" value="$school.id" #if($place.school == $school) selected="selected" #end>$!school.name</option>
+					#end
+				</select>
+				</div>
+				
+
+<div  style="display:inline-block;">
+				<label for="place.department"><strong>Departments</strong></label><br/>
+				<select id="place.department" class="autoselect" name="place.department.id">
+					<option value="">Select one...</option>
+					#foreach($department in $departments)
+						<option class="type" value="$department.id" #if($place.department == $department) selected="selected" #end>$!department.name</option>
+					#end
+				</select>
+				</div>
+<div  style="display:inline-block;">
+				<label for="place.program"><strong>Programs</strong></label><br/>
+				<select id="place.program" class="autoselect" name="place.program.id">
+					<option value="">Select one...</option>
+					#foreach($program in $programs)
+						<option class="type" value="$program.id" #if($place.program == $program) selected="selected" #end>$!program.name</option>
+					#end
+				</select>
+				</div>
+            </fieldset>
+		
+            <fieldset style="width:44%;float:left;"><legend>Location</legend>
+				<div class="container" style="width:100%;">
+					<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
+					<select id="LocationModelSelect" name="place.model.id">
+						<option value="">Select one...</option>
+						#foreach($model in $models)
+							<option class="model" value="$model.id" #if($place.model.id == $model.id) selected="selected" #end>$!model.name</option>
+						#end
+					</select>#**#
+					<input type="text"  value="2" name="place.model.id" />
+					<br/>
+					<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
+					<select id="LocationTypeSelect" name="place.type.id">
+						<option value="">Select one...</option>
+						#foreach($type in $types)
+							<option class="type" value="$type.id" #if($place.type.id == $type.id) selected="selected" #end>$!type.name</option>
+						#end
+					</select><br/> 
+					<fieldset style="position:relative;"><a href="#" title="Set Latitude/Longitude" id="setLatLong" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="position: absolute; right: 5px; top: 5px;"><span class="ui-icon ui-icon-pin-s"></span></a>
+						<div class="col2"  style="width:49%;display:inline-block;">	
+							<label for="Lat"><strong>Latitude</strong></label><br/>
+							<input type="text" name="place.coordinate.Length" id="Lat" value="$!place.coordinate.Length" class="text ui-widget-content ui-corner-all" />
+						</div>
+						<div class="col2"  style="width:49%;display:inline-block;">
 						
-						<input type="text"  value="2" name="place.model.id" />
-						<br/>
-						<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
-						<select id="LocationTypeSelect" name="place.type.id">
-							<option value="">Select one...</option>
-							#foreach($type in $types)
-								<option class="type" value="$type.id" #if($place.type == $type) selected="selected" #end>$!type.name</option>
-							#end
-						</select><br/> 
-					<div class="col2"  style="width:49%;display:inline-block;">	
-						<label for="Lat"><strong>Latitude</strong></label><br/>
-						<input type="text" name="place.coordinate.Length" id="Lat" value="$!place.coordinate.Length" class="text ui-widget-content ui-corner-all" />
-					</div>
-					<div class="col2"  style="width:49%;display:inline-block;">
-						<label for="Long"><strong>Longitude</strong></label><br/>
-						<input type="text" name="place.coordinate.LongLength" id="Long" value="$!place.coordinate.LongLength" class="text ui-widget-content ui-corner-all" />
-					</div>
+							<label for="Long"><strong>Longitude</strong></label><br/>
+							<input type="text" name="place.coordinate.LongLength" id="Long" value="$!place.coordinate.LongLength" class="text ui-widget-content ui-corner-all" />
+						</div>
+						
+						
+						<fieldset id="estimated_places" style="display:none;"><legend>Places At or Near this point</legend>
+						<div id="local_place_names"></div>
+						</fieldset>
+					</fieldset>
                 </div>  
             </fieldset>
+            
+            
+            </fieldset>
             <fieldset><legend>Naming</legend>
-                <label for="place.prime_name">Preferred Map Name</label><br/>
-                <input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/><br/> 
-                <label for="place.abbrev_name">Bldg Abbrev</label><br/>
-                <input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /><br/>
-                <div id="names">
+                <span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name</label><br/>
+                <input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/></span>
+                <span style="float:left;display:inline-block;"><label for="place.abbrev_name">Bldg Abbrev</label><br/>
+                <input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /></span><br/><br/><br/>
+                
+                #capturefor(nameblock)
 					#set($c=0)
 					#foreach($altname in $place_names)
 					<span class="pod name">
 						<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
-						<label for="place_names_9999" class="editable">Inset Lable</label>
-						<input type="text" value="" name="place_names[9999].lable" class="editzone text ui-widget-content ui-corner-all"/>
+						<label for="place_names_$c" class="editable" rel="namelables">$altname.label</label>
+						<input type="text" value="$altname.label" name="place_names[$c].label" class="editzone text ui-widget-content ui-corner-all"/>
 						<br/>
-						<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/>
+						<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a><input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
 						#set($c=$c+1)
 						</span>
-					#end   
-				</div>
-	<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
-	</a>
-				<div id="name_clonebed" class="clonebed">         
-					<span class="pod name">    
-						<input type="hidden" name="place_names[9999].id" value=""/>
-						<label for="place_names_9999" class="editable">Inset Lable</label>
-						<input type="text" value="" name="place_names[9999].lable" class="editzone text ui-widget-content ui-corner-all"/>
-						<br/>
-						<input type="text" name="place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/>
-					</span>
-                </div>
+					#end  
+				#end
                 
-            </fieldset>
+                
+                
+                
+                <fieldset style="clear:left;"><legend id="customName"><label>Custom Naming</label> (<span id="nameCount">$c</span> name#if($c==0||$c>1)s#end) <em>+</em></legend>
+					<div id="customNames">
+						<div id="names">
+$nameblock
+						</div>
+						
+						<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+							<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
+						</a>
+						<div id="name_clonebed" class="clonebed">         
+							<span class="pod name">    
+								<input type="hidden" name="||place_names[9999].id" value=""/>
+								<label for="place_names_9999" class="editable" rel="namelables">Inset Lable</label>
+								<input type="text" value="" name="||place_names[9999].label" class="editzone text ui-widget-content ui-corner-all"/>
+								<br/>
+								<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a><input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
+							</span>
+						</div>
+					</div>
+				</fieldset>
+			</fieldset>
 			<fieldset><legend>Geometrics</legend>
                 <label for="name">Preferred Map</label><br/>
                              
             </fieldset>    
-			<fieldset><legend>Address Options</legend>
-                <label for="Alternate">Plus Four Code</label><br/>
-                $place.campus.zipcode - <input type="text" name="Alternate" id="Alternate" value="" class="text ui-widget-content ui-corner-all w50"  size="50"/><br/> 
-   
-   
-			<label for="place.campus"><strong>Campus</strong></label><br/>
-			<select id="place.campus" name="place.campus.id">
-				<option value="">Select one...</option>
-				#foreach($campus in $campuses)
-					<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
-				#end
-			</select>
-			<br/>  
 			
-			<label for="place.college"><strong>College</strong></label><br/>
-			<select id="place.college" name="place.college.id">
-				<option value="">Select one...</option>
-				#foreach($college in $colleges)
-					<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
-				#end
-			</select> <br/>  
-			
-			
-			<label for="place.department"><strong>Departments</strong></label><br/>
-			<select id="place.department" name="place.department.id">
-				<option value="">Select one...</option>
-				#foreach($department in $departments)
-					<option class="type" value="$department.id" #if($place.department == $department) selected="selected" #end>$!department.name</option>
-				#end
-			</select> <br/>  			
-			
-			<label for="place.program"><strong>Programs</strong></label><br/>
-			<select id="place.program" name="place.program.id">
-				<option value="">Select one...</option>
-				#foreach($program in $programs)
-					<option class="type" value="$program.id" #if($place.program == $program) selected="selected" #end>$!program.name</option>
-				#end
-			</select> <br/>  			
-			
-			
-			         
-            </fieldset>    
-            
+             
 
-            
-                   
-            <fieldset>
-            	<label for="tags">Tag location: </label><br/>
-				<input id="tags"  class="text ui-widget-content ui-corner-all" size="50" /><br/>
-            </fieldset>  
-            <fieldset>
-            	<label for="tags">Place fields: </label><br/>
-				#foreach($field in $fields)          
-					$field
-
-				#end
-            </fieldset>  
     #if($Controller.canPublish($loginUser)) <p class="wsu_ui">
       Publication Date:  <br/>
-      <input type="text" value="$!place.publishtime" name="place.publishtime" id="place_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
-    </p>
-    <p>
-      Place Status:<br/>
-      $Form.Select("place.status.id", $statuslists, "%{value='Id', text='Title'}")
-    </p>
+			<input type="text" value="$!place.publishtime" name="place.publishtime" id="place_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
+		</p>
+		<p>
+			Place Status:<br/>
+			$Form.Select("place.status.id", $statuslists, "%{value='Id', text='Title'}")
+		</p>
     #else
-    <input type="hidden" value="1" name="place.status.id" />
-    #end
-    #*<p>
-      Show in breaking News: <br/> $FormHelper.CheckboxField("place.BreakingNews")
-    </p>
-    <p>
-      Show in featured News: <br/> $FormHelper.CheckboxField("place.FeaturedNews")
-    </p>*#
+		<input type="hidden" value="1" name="place.status.id" />
+	#end
 
-    #set($count = 0)
-    #set($id = 0)
-    #*<div id="tagArea">
-      <h3>Tags</h3>
-      <h4 style="display:inline-block;">Existing tags</h4>
-      <h5>Select or create new tag (if one isn't already created)</h5>
-      <h6>Type a new tag name if not in the list.</h6>
-
-      <ul style="list-style:none;">
-        #foreach($placetag in $placetags)
-        <li>
-          <select name="tags[$!count].id" id="tag_$placetag.id">
-            <option class="" value="">-select-</option>
-            #foreach($tag in $tags)
-            <option class="tag" value="$tag.id" #if($placetag == $tag) selected="selected" #end>$!tag.Name</option>
-            #set($id = $placetag.id)
-            #end
-          </select>
-
-          #if($placetag.id!=0)
-          <a rel="$placetag.id" title="$place.id" style="cursor:pointer;display: inline-block;" class="DeleteTag ui-state-error ui-corner-all">
-            <span class="ui-icon ui-icon-trash"></span>
-          </a>
-          #else
-          <input type="text" class="tag ui-widget ui-widget-content ui-corner-all " name="newtag" value="" style="cursor:pointer;display: inline-block;" />
-          #end
-        </li>
-        #set($count = $count + 1)
-        #end
-      </ul>
-
-    </div>
-
-    <div id="NewTagHolderDiv"></div>
-
-    <a style="cursor:pointer;" onclick="AddTag()">+ add additional tags</a>
-    *#
      $formbuttons
     <div class="clear"></div>
   </div>
-  <div id="tabs-2">
- $formbuttons
-      <h3>Teaser :</h3>
-      #*$Form.TextArea("place.Teaser")*#
-      <textarea id="place_Teaser" name="place.Teaser"  class="tinyEditor">$!place.Teaser</textarea>  
+  <div id="tabs-2" class="mainAreaTabs">
+$formbuttons
+      <h3>Summary :</h3>
+      #*$Form.TextArea("place.summary")*#
+      <textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>  
 
-      <h3>Body Text :</h3>
-      #*$Form.TextArea("place.Bodytext")*#
-      <textarea id="place_Bodytext" name="place.Bodytext"  class="tinyEditor">$!place.Bodytext</textarea>
+      <h3>Details:</h3>
+      #*$Form.TextArea("place.details")*#
+      <textarea id="place_details" name="place.details"  class="tinyEditor">$!place.details</textarea>
 $formbuttons
     <div class="clear"></div>
   </div>
   
   
-  <div id="tabs-3">
-$formbuttons
-    <h3>Place Type :</h3>
-    $Form.Select("place.placeType.id", $placetype, "%{value='Id', text='Name', firstoption='-select-',firstoptionvalue=''}") 	  	 <br/><br/>
+  <div id="tabs-3" class="mainAreaTabs">
+$formbuttons <div class="clear"></div>
+
+	<fieldset><legend>Tags: </legend>     
+		<div class="sub_tabs ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+				  <a href="#Tags">Main</a>
+				</li>
+				<li class="ui-state-default ui-corner-top">
+				  <a href="#UTags">User added</a>
+				</li>
+			</ul>
+			<div id="Tags">
+                <div id="taged">		
+					#set($T = 0)
+					#foreach($tag in $place.tags) 
+						<span class="pod tags">
+							<input type="hidden" name="tags[$T].id" value="" /> 
+							<label for="place_tags_$T" class="editable" rel="placetags">$!tag.name</label>
+							<input id"place_tags_$T" class="tags editzone text ui-widget-content ui-corner-all" size="50" name="tags[$T].name" value="$!tag.name"/><a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+							#set($T = $T+1)
+						</span><br/>
+					#end
+					#if($T==0)Don't for get that adding tags help the search pick up a place#end
+				</div>
+				<a href="#" id="PlaceTagCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add Tag
+				</a>				
+				<div id="tag_clonebed" class="clonebed">         
+					<span class="pod tags">    
+						<input type="hidden" name="||tags[9999].id" value="" /> 
+						<label for="place_tags_9999" class="editable" rel="placetags">**New Tag**</label>
+						<input id"place_tags_9999" class="tags editzone text ui-widget-content ui-corner-all" size="50" name="||tags[9999].name" value=""/><a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+					</span><br/>
+                </div>
+				
+			</div>
+			<div id="UTags">
+				#set($T = 0)
+				#foreach($tag in $place.usertags) 
+					<input type="hidden" name="place.usertags[$T].id" value="" /> 
+					<input class="tags text ui-widget-content ui-corner-all" size="50" name="place.usertags[$T].name" value="$!tag.name"/>
+					#set($T = $T+1)
+				#between
+					<hr/>
+				#end
+				#if($T==0)There are no user added tags.  Try promoting the place to get it out there.#end
+			</div>
+		</div>
+	</fieldset> 
+
+
 
     <div id="AuthorDiv">
       <h3>Authors</h3>
@@ -342,9 +387,23 @@ $formbuttons
     
   </div>
   
-    <div id="tabs-4">
-$formbuttons
-    
+#if($fields.count>0)<div id="FIELDS" class="mainAreaTabs">
+	$formbuttons <div class="clear"></div>
+        <fieldset><legend>Place fields: </legend>
+
+			#foreach($field in $fields)          
+				$field
+			#between
+			<hr/>
+			#end
+        </fieldset> 
+    $formbuttons
+    <div class="clear"></div>
+  <br/>    
+</div>
+  #end
+    <div id="IMAGES" class="mainAreaTabs">
+$formbuttons     
         <div id="ImageDiv">
             <h3>Place Images</h3>
         
@@ -380,7 +439,8 @@ $formbuttons
     </div>
 </form>
   #if($comments.TotalItems&&$comments.TotalItems!=0)
-  <div id="tabs-5">
+  <div id="COMMENTS" class="mainAreaTabs">
+
 
     <h3>Comment List</h3>
 

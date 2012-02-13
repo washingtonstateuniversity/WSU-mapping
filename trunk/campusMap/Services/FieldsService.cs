@@ -71,9 +71,9 @@ namespace campusMap.Services{
         [JsonProperty]
         public string val { get { return Val; } set { Val = value; } }
 
-        private bool Selected;
+        private string Selected;
         [JsonProperty]
-        public bool selected { get { return Selected; } set { Selected = value; } }
+        public string selected { get { return Selected; } set { Selected = value; } }
     }
     public class Attr
     {
@@ -143,31 +143,30 @@ namespace campusMap.Services{
             if ( !object.ReferenceEquals(ele.attr, null) )    attrs = attrbase(attrs, ele);
             if ( !object.ReferenceEquals(ele.events, null) )  attrs = eventbase(attrs, ele);
 
-            SortedDictionary<string, string> vals = new SortedDictionary<string, string>();
-            if (!object.ReferenceEquals(select_val, null)) selectedVal(select_val, ele);
+            if (!object.ReferenceEquals(select_val, null)) ele = selectedVal(select_val, ele);
             
                 string _ele = String.Empty;
                 switch (ele.type)
                 {
                     case "dropdown":
                         {
-                            _ele = FieldsService.renderSelect(ele, attrs, vals); break;
+                            _ele = FieldsService.renderSelect(ele, attrs); break;
                         }
                     case "textinput":
                         {
-                            _ele = FieldsService.renderTextInput(ele, attrs, vals); break;
+                            _ele = FieldsService.renderTextInput(ele, attrs); break;
                         }
                     case "textarea":
                         {
-                            _ele = FieldsService.renderTextarera(ele, attrs, vals); break;
+                            _ele = FieldsService.renderTextarera(ele, attrs); break;
                         }
                     case "checkbox":
                         {
-                            _ele = FieldsService.renderCheckbox(ele, attrs, vals); break;
+                            _ele = FieldsService.renderCheckbox(ele, attrs); break;
                         }
                     case "slider":
                         {
-                            _ele = FieldsService.renderSlider(ele, attrs, vals); break;
+                            _ele = FieldsService.renderSlider(ele, attrs); break;
                         }
                 }
 
@@ -201,30 +200,36 @@ namespace campusMap.Services{
 
             return attrs;
         }
-        public static SortedDictionary<string, string> selectedVal(selectionSet select_val,elementSet ele)
+        public static elementSet selectedVal(selectionSet select_val, elementSet ele)
         {
             SortedDictionary<string, string> sel_val = new SortedDictionary<string, string>();
-            if (ele.options != null)
+
+            if (select_val.selections != null && ele.type=="dropdown")
             {
                 foreach (Option _option in ele.options)
                 {
+                    _option.selected = "";
                     foreach (Selection _val in select_val.selections)
                     {
-                        if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) sel_val.Add("val", _val.val);
+                        if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) _option.selected = _val.val;
                     }
                 }
+            }else if (select_val.selections[0].val != null){
+                 foreach (Option _option in ele.options){
+                     _option.selected = "";
+                     if (select_val.selections[0].val!="")
+                     {
+                         _option.selected = select_val.selections[0].val;
+                     }
+                 }
             }
-            else
-            {
-                sel_val.Add("val", select_val.selections[0].val);
-            }
-            return sel_val;
+            return ele;
         }
 
 
 
 
-        public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs)
         {
              // Initialize StringWriter instance.
             StringWriter stringWriter = new StringWriter();
@@ -252,7 +257,7 @@ namespace campusMap.Services{
                     if (!String.IsNullOrEmpty(_option.label))
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
-                        if (_option.selected)
+                        if (!String.IsNullOrEmpty(_option.selected))
                         {
                             writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
                         }
@@ -261,7 +266,7 @@ namespace campusMap.Services{
                     }
                     else
                     {
-                        if (_option.selected)
+                        if (!String.IsNullOrEmpty(_option.selected))
                         {
                             writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
                         }
@@ -275,7 +280,7 @@ namespace campusMap.Services{
             }
             return stringWriter.ToString();
         }
-        public static string renderTextInput(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        public static string renderTextInput(elementSet ele, SortedDictionary<string, string> attrs)
         {
 
             StringWriter stringWriter = new StringWriter();
@@ -288,26 +293,7 @@ namespace campusMap.Services{
                     writer.RenderEndTag();
                 }
                 attrs.Add("Type", "text");
-                if (sel_val.Values.Count <0)
-                {
-                    if (ele.options != null)
-                    {
-                        attrs.Add("Value", ele.options[0].val);
-                    }
-                }
-                else
-                {
-                    foreach (KeyValuePair<string, string> _val in sel_val)
-                    {
-                        attrs.Add("Value", _val.Value.ToString());
-                    }
-                    
-                }
-                foreach (KeyValuePair<string, string> attr in attrs)
-                {
-                    writer.AddAttribute(attr.Key, attr.Value.ToString());
-                }
-
+                attrs.Add("Value", ele.options != null && ele.options[0].selected != null ? ele.options[0].selected : String.Empty);
 
                 foreach (KeyValuePair<string, string> attr in attrs)
                 {
@@ -319,7 +305,7 @@ namespace campusMap.Services{
             }
             return stringWriter.ToString();
         }
-        public static string renderTextarera(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        public static string renderTextarera(elementSet ele, SortedDictionary<string, string> attrs)
         {
             StringWriter stringWriter = new StringWriter();
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
@@ -335,14 +321,14 @@ namespace campusMap.Services{
                     writer.AddAttribute(attr.Key, attr.Value.ToString());
                 }
                 writer.RenderBeginTag(HtmlTextWriterTag.Textarea); // Begin select
-                writer.Write(ele.options[0].val);
+                writer.Write((ele.options != null && ele.options[0].selected != null ? ele.options[0].selected : String.Empty));
                 writer.RenderEndTag();
                 writer.Write("<br/>");
             }
            
             return stringWriter.ToString();
         }
-        public static string renderCheckbox(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        public static string renderCheckbox(elementSet ele, SortedDictionary<string, string> attrs)
         {
             StringWriter stringWriter = new StringWriter();
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
@@ -356,7 +342,7 @@ namespace campusMap.Services{
                 attrs.Add("Type", "checkbox");
 
                 attrs.Add("Value", ele.options[0].val);
-                if (ele.options[0].selected)
+                if (!String.IsNullOrEmpty(ele.options[0].selected))
                 {
                     attrs.Add("Selected", "selected");
                 }
@@ -371,7 +357,7 @@ namespace campusMap.Services{
             }
             return stringWriter.ToString();
         }
-        public static string renderSlider(elementSet ele, SortedDictionary<string, string> attrs, SortedDictionary<string, string> sel_val)
+        public static string renderSlider(elementSet ele, SortedDictionary<string, string> attrs)
         {
             string tmp = "<textarea>All</textarea>";
 

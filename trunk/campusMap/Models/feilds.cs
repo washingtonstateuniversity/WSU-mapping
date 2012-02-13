@@ -43,6 +43,13 @@ namespace campusMap.Models
             get { return field_value; }
             set { field_value = value; }
         }
+        private int _owner;
+        [Property]
+        virtual public int owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
     }
 }
 

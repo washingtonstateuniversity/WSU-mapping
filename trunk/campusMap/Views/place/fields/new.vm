@@ -48,33 +48,54 @@
 </fieldset>
 
 
+<fieldset id="optionsSelectionDefaults" #if($ele.type=='dropdown')style="display:none;" #end>
+	<div id="defaults">
+		<span class="">
+			<span style="float:left;width:100px;">Value</span>
+			#set($o=0)
+			#capturefor(opValue)
+				#foreach($opt in $ele.options) 
+					#if($opt.val!='' && $o==0)
+						$!opt.val
+					#end
+					#set($o=$o+1)
+				#end
+			#end
+			<input type="text" value="$opValue.Trim()" name="ele.options[0].val"  class="opVal" style="float:left;width:94px;"/>
+		</span>
+	</div>	
+</fieldset>
+
+
+
 <fieldset id="optionsSelection" #if($ele.type!='dropdown')style="display:none;" #end>
 	<legend>#if($ele.type!='dropdown')Dropdown/Multi Select Options:#else Default Value #end</legend>
-	<div style="width:220px;">
-	<span><label for="ele.attr.multiple">Multiple Select</label><input type="checkbox" value="multiple" name="ele.attr.multiple" id="ele_attr_multiple" #if($ele.attr.multiple=="multiple")checked="checked"#end /></span>
-		<span >
+	<div style="width:250px;">
+		<span>
+			<label for="ele.attr.multiple">Multiple Select</label>
+			<input type="checkbox" value="multiple" name="ele.attr.multiple" id="ele_attr_multiple" #if($ele.attr.multiple=="multiple")checked="checked"#end />
+		</span>
+		<div style="clear:both;">
 		<span style="float:left;width:100px;">Value</span>
 		<span style="float:left;width:100px;">Label</span>
-		</span>
+		</div>
 
 		<div id="ops">
 		#set($o=0)
 		#foreach($opt in $ele.options)
 			#if($opt.val!='')
 				<span class="pod opRow">
-					<input type="text" value="$!opt.val" name="ele.options[$o].val"  style="float:left;width:94px;"/>
+					<input type="text" value="$!opt.val" name="ele.options[$o].val"  class="opVal" style="float:left;width:94px;"/>
 					<input type="text" value="$!opt.label" name="ele.options[$o].label"  style="float:left;width:94px;"/>
-					<input type="radio" value="true" name="ele.options[$o].selected" />
-					<input type="checkbox" value="true" name="ele.options[$o].selected" />
+					<input type="radio" value="$!opt.val" name="ele.options[$o].selected" #if($opt.selected) checked="checked" #end style="float:left;  #if($ele.attr.multiple=="multiple") display:none; #end" />
+					<input type="checkbox" value="$!opt.val" name="ele.options[$o].selected" #if($opt.selected) checked="checked" #end style="float:left; #if($ele.attr.multiple!="multiple") display:none; #end" />
 					<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
 				</span>
 			#end
 			#set($o=$o+1)
 		#end
 		</div>
-		
-		
-		
+
 	<a href="#" id="addOption" #if($ele.type!='dropdown')style="display:none;" #end class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name</a>
 

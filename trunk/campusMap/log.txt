@@ -958,3 +958,100 @@ The statement has been terminated.
 NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
 2012-01-30 09:28:48,719 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
 NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-01 09:56:25,470 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_place_to_fields_place". The conflict occurred in database "campusMap", table "dbo.place", column 'place_id'.
+The statement has been terminated.
+2012-02-01 09:56:25,510 [11] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not insert collection: [campusMap.Models.place.field#16] ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_place_to_fields_place". The conflict occurred in database "campusMap", table "dbo.place", column 'place_id'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-02-02 09:36:54,553 [10] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.StaleStateException: Unexpected row count: 0; expected: 1
+   at NHibernate.AdoNet.Expectations.BasicExpectation.VerifyOutcomeNonBatched(Int32 rowCount, IDbCommand statement)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Int32 j, Object obj, SqlCommandInfo sql, ISessionImplementor session, Object[] loadedState)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledDeletion.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-02-02 09:40:23,397 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'prime_name', table 'campusMap.dbo.place'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-02 09:40:23,483 [10] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-02 09:40:23,486 [10] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-03 07:18:37,414 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'label', table 'campusMap.dbo.place_names'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-03 07:18:37,548 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-03 07:18:37,552 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-03 07:18:50,560 [10] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-02-07 10:37:13,388 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'summary'.
+Invalid column name 'details'.
+2012-02-07 10:37:13,460 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'summary'.
+Invalid column name 'details'.
+2012-02-07 10:51:46,562 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_editing'.
+2012-02-07 10:51:46,573 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_editing'.
+2012-02-07 10:51:54,680 [13] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'geometrics_status'.
+Invalid column name 'author_editing'.
+2012-02-07 10:51:54,694 [13] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometrics_status'.
+Invalid column name 'geometrics_status'.
+Invalid column name 'author_editing'.
+2012-02-07 10:53:57,498 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_editing'.
+2012-02-07 10:53:57,517 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'author_editing'.
+2012-02-13 07:20:29,528 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A .NET Framework error occurred during execution of user-defined routine or aggregate "geography": 
+System.ArgumentException: 24204: The spatial reference identifier (SRID) is not valid. The specified SRID must match one of the supported SRIDs displayed in the sys.spatial_reference_systems catalog view.
+System.ArgumentException: 
+   at Microsoft.SqlServer.Types.SqlGeography.set_Srid(Int32 value)
+   at Microsoft.SqlServer.Types.SqlGeography.Read(BinaryReader r)
+   at SqlGeography::.DeserializeValidate(IntPtr , Int32 , CClrLobContext* )
+.
+The statement has been terminated.
+2012-02-13 07:20:30,550 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 07:20:30,554 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 09:22:22,892 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'boundary', table 'campusMap.dbo.geometrics'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-13 09:22:22,946 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 09:22:22,948 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 09:32:51,922 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'boundary', table 'campusMap.dbo.geometrics'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-13 09:32:51,942 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 09:32:51,995 [11] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 10:16:17,672 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'boundary', table 'campusMap.dbo.geometrics'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-13 10:16:17,677 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 10:16:17,678 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 10:19:42,324 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'boundary', table 'campusMap.dbo.geometrics'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-02-13 10:19:42,343 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-02-13 10:19:42,356 [8] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)

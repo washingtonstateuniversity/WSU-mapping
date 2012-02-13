@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using campusMap.Services;
+using Microsoft.SqlServer.Types;
 
 namespace campusMap.Models
 {
@@ -41,13 +42,32 @@ namespace campusMap.Models
             set { Coordinate = value; }
         }*/
 
-        private Byte[] Boundary;
+        private SqlGeography Boundary;
         [Property(SqlType = "geography")]
-        virtual public Byte[] boundary
+        //[Property]
+        virtual public SqlGeography boundary
         {
             get { return Boundary; }
             set { Boundary = value; }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private int Default_Type;
         [Property]
         virtual public int default_type
@@ -103,12 +123,12 @@ namespace campusMap.Models
             }
         }
 
-        private status Status;
-        [BelongsTo("geometrics_status")]
+        private status _status;
+        [BelongsTo("status")]
         virtual public status status
         {
-            get { return Status; }
-            set { Status = value; }
+            get { return _status; }
+            set { _status = value; }
         }
 
 
@@ -169,31 +189,23 @@ namespace campusMap.Models
         }
 
 
-        private IList<authors> authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        private IList<authors> _authors = new List<authors>();
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometric", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> Authors
         {
-            get { return authors; }
-            set { authors = value; }
+            get { return _authors; }
+            set { _authors = value; }
         }
-        private authors author_editing;
-        [BelongsTo("authors_editing")]
+        private authors _editing;
+        [BelongsTo("author_editing")]
         virtual public authors editing
         {
-            get { return author_editing; }
-            set { author_editing = value; }
-        }
-
-        private String checked_out;
-        [Property]
-        virtual public String checked_out_by
-        {
-            get { return checked_out; }
-            set { checked_out = value; }
+            get { return _editing; }
+            set { _editing = value; }
         }
         virtual public bool isPublished()
         {
-            if (this.Status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
+            if (this.status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
             {
                 return true;
             }
@@ -203,7 +215,7 @@ namespace campusMap.Models
         virtual public bool isCheckedOutNull()
         {
             bool flag = false;
-            if (checked_out_by == null)
+            if (editing == null)
                 flag = true;
 
             return flag;

@@ -68,6 +68,7 @@
     <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
     <Reference Include="Mark.Tidy, Version=1.0.0.1244, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MonoRailHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>T:\Tools\MonoRailHelper\MonoRailHelper\bin\Debug\MonoRailHelper.dll</HintPath>
@@ -125,6 +126,7 @@
     <Compile Include="Models\access_levels.cs" />
     <Compile Include="Models\advertisement.cs" />
     <Compile Include="Models\authors.cs" />
+    <Compile Include="Models\schools.cs" />
     <Compile Include="Models\place_models.cs" />
     <Compile Include="Models\geometrics_status.cs" />
     <Compile Include="Models\geometrics_media.cs" />
@@ -948,7 +950,7 @@
     <None Include="Views\geometrics\by_draft_status__list.vm" />
     <None Include="Views\geometrics\by_published_status__list.vm" />
     <None Include="Views\geometrics\by_review_status__list.vm" />
-    <None Include="Views\geometrics\editor_geometric.vm" />
+    <None Include="Views\geometrics\editor.vm" />
     <None Include="Views\geometrics\Index.vm" />
     <None Include="Views\geometrics\list.vm" />
     <None Include="Views\geometrics\movedown.vm" />

@@ -266,11 +266,17 @@ namespace campusMap.Controllers
             RenderView("fields/new");
         }
 
-
-        public string get_field(field_types field_type)
+        public static string get_field(field_types field_type)
+        {
+            string _ele = "";
+            _ele = get_field(field_type,null);
+            return _ele;
+        }
+        public static string get_field(field_types field_type, place _place)
         {
             List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
             typeEx.Add(Expression.Eq("type", field_type));
+            if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
             fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
 
             selectionSet sel = null;
@@ -314,7 +320,7 @@ namespace campusMap.Controllers
             field.model = this.GetType().Name;
             field.set = ActiveRecordBase<place_models>.Find(placemodel).id;  // NOTE THIS IS THE ONLY REASON WE CAN ABSTRACT YET... FIX?
 
-            ele.attr.name = "fields[" + field.id + "]";
+            ele.attr.name = "fields[" + field.id + "]" ;//+ (ele.type == "dropdown"?"[]":"");
 
             string ele_attr = JsonConvert.SerializeObject(ele.attr);       
             ele_attr = ele_attr.TrimEnd(endC);
@@ -397,6 +403,51 @@ namespace campusMap.Controllers
             PropertyBag["placeimages"] = place.Images;
             CancelLayout();
         }
+        public void namelables(string term)
+        {
+            CancelView();
+            CancelLayout();
+
+            String sql = "SELECT DISTINCT s.label FROM place_names AS s WHERE NOT s.label = 'NULL'";
+            if (String.IsNullOrEmpty(term))
+            {
+                sql += " AND s.label LIKE  '" + term + "%'";
+            }
+
+            SimpleQuery<String> q = new SimpleQuery<String>(typeof(place), sql);
+            Array labels = q.Execute();
+            String labelsList = "";
+            foreach (String s in labels)
+            {
+                labelsList += @"{""label"":""" + s.ToString() + @""",";
+                labelsList += @"""value"":""" + s.ToString() + @"""},";
+            }
+            RenderText("["+labelsList.TrimEnd(',')+"]");
+        }
+
+        public void get_placetags(string term)
+        {
+            CancelView();
+            CancelLayout();
+
+            String sql = "SELECT DISTINCT s.name FROM tags AS s WHERE NOT s.name = 'NULL'";
+            if (String.IsNullOrEmpty(term))
+            {
+                sql += " AND s.name LIKE  '" + term + "%'";
+            }
+
+            SimpleQuery<String> q = new SimpleQuery<String>(typeof(place), sql);
+            Array labels = q.Execute();
+            String labelsList = "";
+            foreach (String s in labels)
+            {
+                labelsList += @"{""label"":""" + s.ToString() + @""",";
+                labelsList += @"""value"":""" + s.ToString() + @"""},";
+            }
+            RenderText("[" + labelsList.TrimEnd(',') + "]");
+        }
+
+
         public String GetCredit()
         {
             String sql = "SELECT DISTINCT s.credit FROM media_repo AS s WHERE NOT s.credit = 'NULL'";
@@ -454,13 +505,14 @@ namespace campusMap.Controllers
             List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
             typeEx.Add(Expression.Eq("model", this.GetType().Name));
             typeEx.Add(Expression.Eq("set", one_place.model.id));
+
             field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
             List<string> fields = new List<string>();
             if (ft != null)
             {
                 foreach (field_types ft_ in ft)
                 {
-                    fields.Add(get_field(ft_));
+                    fields.Add(get_field(ft_, one_place));
                 }
             }
             PropertyBag["fields"] = fields;
@@ -480,10 +532,14 @@ namespace campusMap.Controllers
             PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
             PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
+            
 
+            PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
+            
 
-
+            
 
             /*if (page == 0)
                 page = 1;
@@ -724,8 +780,8 @@ namespace campusMap.Controllers
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
             [ARDataBind("place_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]place_media[] place_media,
-           [ARDataBind("place_names", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]place_names[] place_names,
-            String[] fields,
+            [ARDataBind("place_names", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]place_names[] place_names,
+            String[][] fields,
             bool ajaxed_update,
             bool forced_tmp,
             string apply,
@@ -738,11 +794,11 @@ namespace campusMap.Controllers
             Flash["authors"] = place;
             
             if (cancel != null){
-                if (forced_tmp)
+                if (forced_tmp && place.id!=0)
                 {
                     ActiveRecordMediator<place>.DeleteAndFlush(place);
                 }
-                else
+                else if (!forced_tmp)
                 {
                     place.editing = null;
                     ActiveRecordMediator<place>.Save(place);
@@ -750,7 +806,10 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
                 return;
             }
-
+            if (forced_tmp && place.id==0)
+            { 
+                place.tmp = true;
+            }
             //place.plus_four_code
             //'99164'
 
@@ -770,24 +829,15 @@ namespace campusMap.Controllers
                 }
             }
 
-            /*if (place.place_types == null || place.place_types.place_type_id == 0)
+            /*if (place.place_types == null || place.place_types.Count == 0)
             {
                 Flash["error"] = "You must choose a Place type.";
                 RedirectToReferrer();
                 return;
             }*/
-
-            
-
-            
-            /*if (!canPublish(user))
-            {
-                PlaceStatus stat= ActiveRecordBase<PlaceStatus>.Find(1);
-                place.Status = stat;
-            }*/
-
+            place.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : place.status;
             place.tags.Clear(); 
-            //place.Images.Clear();
+            place.Images.Clear();
             place.Authors.Clear();
             if (apply != null){
 
@@ -822,10 +872,11 @@ namespace campusMap.Controllers
                 }               
                      
             }
-            /*if (place.field != null)
+            /**/
+            if (place.field != null)
             {
                 place.field.Clear();
-            }*/
+            }
             if (fields != null)
             {
                 foreach (String key in Request.Form.AllKeys)
@@ -833,31 +884,37 @@ namespace campusMap.Controllers
                     if (key.StartsWith("fields") )
                     {
                         fields f = new fields();
-                        f.value = "{ \"val\":\""+Request.Form[key]+"\"}";
-
+                        //f.value = "{ \"val\":\""++"\"}";
+                        string vals = "";
+                        foreach (String val in Request.Form[key].Split(',') )
+                        {
+                            vals = vals + @"{""val"":"+(!String.IsNullOrEmpty(val)?("\""+ val +"\""):"null")+"},";
+                        }
+                        char[] endC = { ',' };
+                        vals = vals.TrimEnd(endC);
+                        f.value = @"{""selections"":[" + vals + "]}";
                         int F_key = Convert.ToInt32(key.Replace("fields[","").Replace("]","")); 
 
                         f.type = ActiveRecordBase<field_types>.Find(F_key);
+                        f.owner = place.id;
                         ActiveRecordMediator<fields>.Save(f);
                         place.field.Add(f);
+                        
                     }
                 }
             }
-
+            
             place.names.Clear();
             foreach (place_names pn in place_names)
             {
+                if (pn.label == null) pn.label = "Generic Name";
                 pn.place_id = place.id;
-                if (pn.name != null && pn.id == 0 && pn.id != 9999)
+                if (pn.name != null && pn.id == 0)
                 {
                     ActiveRecordMediator<place_names>.Save(pn);
-                    place.names.Add(pn);
                 }
-                
+                place.names.Add(pn);
             }
-
-
-
 
             foreach (place_media si in place_media)
             {
@@ -869,11 +926,23 @@ namespace campusMap.Controllers
                 }
             }
 
+
+            place.tags.Clear();
             foreach (tags tag in tags)
             {
-                if (tag.id > 0)
-                   place.tags.Add(tag);        
+                if (tag.name != null)
+                {
+                    if (tag.id == 0)
+                    {
+                        ActiveRecordMediator<tags>.Save(tag);
+                    }
+                    place.tags.Add(tag);
+                }
             }
+
+
+
+
             foreach (media_repo media in images)
             {
                 if (media.id > 0 && !place.Images.Contains(media))
@@ -913,17 +982,19 @@ namespace campusMap.Controllers
             {
                 if (place.id>0)
                 {
-                    Redirect("edit_place.castle?id=" + place.id);
+                    Redirect("~/place/edit_place.castle?id=" + place.id);
                     return;
                 }
                 else
                 {
                     RedirectToReferrer();
+                    return;
                 }
             }
             else
             {
                 RedirectToAction("list");
+                return;
             }
         }
 

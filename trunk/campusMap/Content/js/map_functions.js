@@ -1,11 +1,12 @@
 ﻿var sensor=false;
 var lang='';
+var vbtimer;
 
 function detectBrowser() {
   var useragent = navigator.userAgent;
   var mapdiv = document.getElementById("map_canvas");
     
-  if (useragent.indexOf('iPad') != -1 || useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+  if (isTouch()) {
     addMetaSupport();
     mapdiv.style.width = '100%';
     mapdiv.style.height = '100%';
@@ -3145,36 +3146,7 @@ function copyTextarea(){
     copiedTxt = document.selection.createRange();
     copiedTxt.execCommand("Copy");
 }
-function color_html2kml(color){
-    var newcolor ="FFFFFF";
-    if(color.length == 7) newcolor = color.substring(5,7)+color.substring(3,5)+color.substring(1,3);
-    return newcolor;
-}
-function color_hex2dec(color) {
-    var deccolor = "255,0,0";
-    var dec1 = parseInt(color.substring(1,3),16);
-    var dec2 = parseInt(color.substring(3,5),16);
-    var dec3 = parseInt(color.substring(5,7),16);
-    if(color.length == 7) deccolor = dec1+','+dec2+','+dec3;
-    return deccolor;
-}
-function getopacityhex(opa){
-    var hexopa = "66";
-    if(opa == 0) hexopa = "00";
-    if(opa == .0) hexopa = "00";
-    if(opa >= .1) hexopa = "1A";
-    if(opa >= .2) hexopa = "33";
-    if(opa >= .3) hexopa = "4D";
-    if(opa >= .4) hexopa = "66";
-    if(opa >= .5) hexopa = "80";
-    if(opa >= .6) hexopa = "9A";
-    if(opa >= .7) hexopa = "B3";
-    if(opa >= .8) hexopa = "CD";
-    if(opa >= .9) hexopa = "E6";
-    if(opa == 1.0) hexopa = "FF";
-    if(opa == 1) hexopa = "FF";
-    return hexopa;
-}
+
 function directionsintroduction() {
     gob('coords1').value = 'Ready for Directions. Create a route along roads with markers at chosen locations.\n'
             +'Click on the map, or enter an address and click "Search", to place a marker.\n'
@@ -3228,13 +3200,8 @@ function setBoxHtml(content){
 	return (typeof(content)!=="undefined"&&content!=""?"<div style='padding:15px;'>"+content+"</div>":"<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>")+"<h1 style='margin-right: 96px;text-align: right;'>Jeremys <br/>super simple <br/>Example</h1><p style='margin-right: 96px;text-align: right;font-size:10px;'><em><strong>Note:</strong>all labels are hidden. MapTypeStyleElementType:geometry</em></p>";	
 }
 
-
-
-function initialize() {
-	if($('#map_canvas').length){
-		boxText.innerHTML = setBoxHtml();
-		
-		myOptions = {
+function generic_infoBox() {
+		option = {
 			content: boxText,
 			disableAutoPan: false,
 			maxWidth: 0,
@@ -3244,17 +3211,25 @@ function initialize() {
 			boxStyle: { 
 				background: "#ccc url('http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif') no-repeat left bottom",
 				opacity: 1.0,
-				width: "500px"//,
-				//height:"500px"
+				"font-size": ".5em",
+				width: "23em"
 			},
-			closeBoxMargin: "10px 2px 2px 2px",
+			closeBoxMargin: "1em .2em .2em .2em",
 			closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
 			infoBoxClearance: new google.maps.Size(1, 1),
 			isHidden: false,
 			pane: "floatPane",
 			enableEventPropagation: false
 		};
-		ib = new InfoBox(myOptions);
+		return new InfoBox(option);
+}
+
+function initialize() {
+	if($('#map_canvas').length){
+		boxText.innerHTML = setBoxHtml();
+		
+
+		ib = generic_infoBox();
 	
 	
 	
@@ -3436,6 +3411,7 @@ function initialize() {
 	 
 		var geocoder = new google.maps.Geocoder();  
 		 $(function() {
+
 			 $("#searchbox").autocomplete({
 			 
 			   source: function(request, response) {
@@ -3465,20 +3441,28 @@ function initialize() {
 							}
 						  }
 						});
-				}
+					}
 				  });
 			   },
 			   select: function(event,ui){
-			  var pos = ui.item.position;
-			  var lct = ui.item.locType;
-			  var bounds = ui.item.bounds;
-		
-			  if (bounds){
-			   map.fitBounds(bounds);
-			  }
+				  var pos = ui.item.position;
+				  var lct = ui.item.locType;
+				  var bounds = ui.item.bounds;
+			
+				  if (bounds){
+				   map.fitBounds(bounds);
+				  }
 			   }
 			 });
-		 });  
+			if($('.place.editor_place').length){
+				if($('#Lat').val()!='' && $('#Long').val()!='')drop1(); 
+				
+				$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
+					drop1();
+					$(this).addClass('ui-state-disabled');
+				});
+			}
+		});
 	}
 }
 
@@ -3511,7 +3495,13 @@ function initialize() {
 				//setTimeout(function() {},  200);
 				var loca = new google.maps.LatLng(this.getPosition().lat(),this.getPosition().lng());
 				
-				var types = ['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar','beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer','car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store','courthouse','dentist','department_store','doctor','electrician','electronics_store','embassy','establishment','finance','fire_station','florist','food','funeral_home','furniture_store','gas_station','general_contractor','geocode','grocery_or_supermarket','gym','hair_care','hardware_store','health','hindu_temple','home_goods_store','hospital','insurance_agency','jewelry_store','laundry','lawyer','library','liquor_store','local_government_office','locksmith','lodging','meal_delivery','meal_takeaway','mosque','movie_rental','movie_theater','moving_company','museum','night_club','painter','park','parking','pet_store','pharmacy','physiotherapist','place_of_worship','plumber','police','post_office','real_estate_agency','restaurant','roofing_contractor','rv_park','school','shoe_store','shopping_mall','spa','stadium','storage','store','subway_station','synagogue','taxi_stand','train_station','travel_agency','university','veterinary_care','zoo','administrative_area_level_1','administrative_area_level_2','administrative_area_level_3','colloquial_area','country','floor','intersection','locality','natural_feature','neighborhood','political','point_of_interest','post_box','postal_code','postal_code_prefix','postal_town','premise','room','route','street_address','street_number','sublocality','sublocality_level_4','sublocality_level_5','sublocality_level_3','sublocality_level_2','sublocality_level_1','subpremise','transit_station']
+				var types = ['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar','beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer','car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store','courthouse','dentist','department_store','doctor','electrician','electronics_store','embassy','establishment','finance','fire_station','florist','food','funeral_home','furniture_store','gas_station','general_contractor','geocode','grocery_or_supermarket','gym','hair_care','hardware_store','health','hindu_temple','home_goods_store','hospital','insurance_agency','jewelry_store','laundry','lawyer','library','liquor_store','local_government_office','locksmith','lodging','meal_delivery','meal_takeaway','mosque','movie_rental','movie_theater','moving_company','museum','night_club','painter','park','parking','pet_store','pharmacy','physiotherapist','place_of_worship','plumber','police','post_office','real_estate_agency','restaurant','roofing_contractor','rv_park','school','shoe_store','shopping_mall','spa','stadium','storage','store','subway_station','synagogue','taxi_stand','train_station','travel_agency','university','veterinary_care','zoo','administrative_area_level_1','administrative_area_level_2','administrative_area_level_3','colloquial_area','country','floor','intersection','locality','natural_feature','neighborhood','political','point_of_interest','post_box','postal_code','postal_code_prefix','postal_town','premise','room','route','street_address','street_number','sublocality','sublocality_level_4','sublocality_level_5','sublocality_level_3','sublocality_level_2','sublocality_level_1','subpremise','transit_station'];
+				$('#estimated_places').show('fast');
+				$('#local_place_names').html('loading<span class="blink1">.</span><span class="blink2">.</span><span class="blink3">.</span>');
+				$('.blink1').blink(100);
+				$('.blink2').blink(150);
+				$('.blink3').blink(200);
+				
 for(i = 0; i < types.length; i++){
 	var requested = {
 	  location: loca,
@@ -3544,6 +3534,7 @@ for(i = 0; i < types.length; i++){
      function updating(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
 			
+				
 			//alert(JSON.stringify(results));
 			
           for (var i = 0; i < 1; i++) {
@@ -3557,10 +3548,13 @@ for(i = 0; i < types.length; i++){
 				  //alert(JSON.stringify(place));
 				var marker = markers[0];
 				
-				if(place.name){$('#name').val($('#name').val()+','+place.name);}
+				if(place.name){
+					if($('.blink1').length)$('#local_place_names').html('');
+					$('#local_place_names').html($('#local_place_names').html()+','+place.name);
+				}
 				
 				google.maps.event.addListener(marker, 'click', function() {
-					ib.close();
+				ib.close();
 				  ib.setContent(setBoxHtml(JSON.stringify(place)));
 				  ib.open(map, this);
 				});
