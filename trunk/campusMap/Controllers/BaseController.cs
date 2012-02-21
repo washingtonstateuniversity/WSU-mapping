@@ -22,6 +22,9 @@ namespace campusMap.Controllers
         protected UserService userService = new UserService();
         protected LogService logService = new LogService();
         protected FieldsService fieldsService = new FieldsService();
+        protected StylesService StylesService = new StylesService();
+        
+
 
         public string getView()
         {
@@ -35,6 +38,14 @@ namespace campusMap.Controllers
         {
             return SelectedViewName.Replace("\\", "/");
         }
+
+
+        public object getVar(string var)
+        {
+            return PropertyBag[var];
+        }
+
+
 
         public String Escape(String str)
         {

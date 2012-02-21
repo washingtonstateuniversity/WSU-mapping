@@ -1,0 +1,30 @@
+<div class='detailCol'>
+	<a href="#" class='detailInfoBut'>Info</a> 
+	<div class='detailArea'>
+		<ul>
+			#if($item.Publishtime)<li class='date'>
+				<span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','')
+			</li>#end
+			#if($item.Status.Title)<li class='Status'>
+				<div>
+					<span>Status: </span>$!item.Status.Title
+				</div>
+			</li>#end
+			#if($item.BreakingNews)<li>
+				<span>Breaking: </span>$!item.BreakingNews
+			</li>#end
+			#if($item.Hottopic)<li>
+				<span>Hottopic: </span>$!item.Hottopic
+			</li>#end
+			#*#if($item.Location)<li>
+				<span>Location: </span>$!item.Location
+			</li>#end*#
+			#if($item.itemType.Name)<li>
+				<span>Type: </span>$!item.itemType.Name
+			</li>#end
+			#if($item.id)<li>
+				<span>Id: </span>$!item.id
+			</li>#end
+		</ul>
+	</div>
+</div>

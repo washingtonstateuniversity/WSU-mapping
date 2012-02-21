@@ -1,0 +1,74 @@
+#*<!-- NOTE: DUE TO VS AND IT'S AUTO FORMATING THE LOGIC BELOW IN THE tr GETTS MESSED UP should be <tr #if($c%2>0) class="even" #else class="odd" #end> -->*#
+
+
+
+
+<table width="50%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+  <tr>
+    <td>Showing $types.FirstItem - $types.LastItem of $types.TotalItems</td>
+    <td align="right">
+      #if($types.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$types.HasPrevious) first #end
+      #if($types.HasPrevious) | $PaginationHelper.CreatePageLink( $types.PreviousIndex, "prev" ) #end
+      #if(!$types.HasPrevious) | prev #end
+      #if($types.HasNext) | $PaginationHelper.CreatePageLink( $types.NextIndex, "next" ) #end
+      #if(!$types.HasNext) | next #end
+      #if($types.HasNext) | $PaginationHelper.CreatePageLink( $types.LastIndex, "last" ) #end
+      #if(!$types.HasNext) | last #end
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+<table  width="100%" class="ui-widget ui-widget-content">
+  <thead>
+    <tr class="ui-widget-header ">
+    <th>Name</th>
+    <th style="width:75px;">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    #set ($c=0)
+    #foreach($type in $types)
+    <tr class="#if($c%2>0) even #else odd #end #if($type.adminRead==false) ui-state-highlight #end ">
+      <td><a href="edit_type.castle?id=$!{type.Id}" title="Edit" class="name">
+            $type.name
+          </a></td>
+      <td>
+        <span style='font-size:0.7em;'>
+          <a href="edit_type.castle?id=$!{type.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-pencil"></span>
+          </a>
+          <a href="delete_type.castle?id=$!{type.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-trash"></span>
+          </a>
+        </span>
+      </td>
+    </tr>
+    #set ($c=$c+1)
+    #end
+  </tbody>
+</table>
+
+
+
+<table width="50%" border="0" >
+  <tr>
+    <td>Showing $types.FirstItem - $types.LastItem of $types.TotalItems</td>
+    <td align="right">
+      #if($types.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$types.HasPrevious) first #end
+      #if($types.HasPrevious) | $PaginationHelper.CreatePageLink( $types.PreviousIndex, "prev" ) #end
+      #if(!$types.HasPrevious) | prev #end
+      #if($types.HasNext) | $PaginationHelper.CreatePageLink( $types.NextIndex, "next" ) #end
+      #if(!$types.HasNext) | next #end
+      #if($types.HasNext) | $PaginationHelper.CreatePageLink( $types.LastIndex, "last" ) #end
+      #if(!$types.HasNext) | last #end
+    </td>
+  </tr>
+</table>
+

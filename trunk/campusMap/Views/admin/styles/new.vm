@@ -1,0 +1,209 @@
+
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="update_style.castle" method="post">
+  $Form.Hiddenfield("style.Id")
+  <input type="hidden" value="$!ele.attr.name" name="ele.attr.name"/>	
+  
+  
+  <h3>#if($style.Id!=0)Edit#else Add #end Place Field</h3>
+
+<fieldset>
+	<fieldset style="float:right;width:46%;"  id="html_sample">
+		#if($html_ele)
+			<legend>Sample:</legend>
+			$!html_ele
+		#end
+	</fieldset>
+	<fieldset style="float:left;width:46%;">
+		<legend>Basic setup:</legend>
+		<p style="float:right;width:46%;">Field Type:<br/>  
+			<select name="ele.type" id="style_of">
+				<option value="marker" #if($ele.type=='marker')selected='selected'#end>Marker</option>
+				<option value="polyline" #if($ele.type=='polyline')selected='selected'#end>Line</option>
+				<option value="polygon" #if($ele.type=='polygon')selected='selected'#end>Polygon</option>
+				<option value="rectangle" #if($ele.type=='rectangle')selected='selected'#end>Rectangle</option>
+				<option value="circle" #if($ele.type=='circle')selected='selected'#end>Circle</option>
+			</select>
+		</p>
+		
+		<p>Name:<br/>
+			<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+		</p>
+
+		
+		
+		
+#*
+	<!--
+	Marker/Polyline/Polygon/Rectangle/Circle
+	-----------------------------
+	visible		bool
+	zIndex		int
+	
+	
+	
+	Polyline/Polygon/Rectangle/Circle
+	-----------------------------
+	strokeColor	#hex
+	strokeOpacity	float
+	strokeWeight	int
+	
+	
+	
+	Polygon/Rectangle/Circle
+	-----------------------------
+	fillColor	#hex
+	fillOpacity	float
+	
+	Polyline/Polygon
+	-----------------------------
+	geodesic	bool
+	
+	
+	
+	Marker
+	-----------------------------
+	flat		bool
+	cursor		String
+	clickable	bool
+	animation - 
+			BOUNCE
+			DROP
+	icon	  - 
+			anchor 	Point(x:number, y:number)
+			origin  	(0, 0)  Point(x:number, y:number)
+			scaledSize 	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+			size	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+			url		string
+	raiseOnDrag	bool
+	shadow	  - 
+			anchor 	Point(x:number, y:number)
+			origin  	(0, 0)  Point(x:number, y:number)
+			scaledSize 	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+			size	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+			url		string
+	title		String
+	shape	  -
+			coords	Array.<number>
+			type	string //circle, poly or rect.
+			
+	-->
+	*#
+	
+	
+	
+	
+	
+	
+	
+	<fieldset id="optionsSelection" >
+		<legend>Style options</legend>
+		<div>
+	
+		
+		<div style="width:100px;display:inline-block;float:right;" >
+			<ul id="sortable2" class="connectedSortable"  style="width:100px;display:inline-block;" >
+				<li class="pod opRow ui-state-highlight op_marker op_polyline op_polygon op_rectangle op_circle">
+					<span class="lable">Visible</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="visible" name="ele.options[0].label"/>
+						<input type="checkbox" value="$!ele.options[0].val" name="ele.options[0].val"/>
+					</span>
+				</li>
+				<li class="pod opRow ui-state-highlight op_marker op_polyline op_polygon op_rectangle op_circle">
+					<span class="lable">zIndex</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="zIndex" name="ele.options[1].label"/>
+						<input type="text" value="$!ele.options[1].val" name="ele.options[1].val"/>
+					</span>
+				</li>
+				
+				
+				<li class="pod opRow ui-state-highlight op_polyline op_polygon op_rectangle op_circle">
+					<span class="lable">Stroke Color</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="strokeColor" name="ele.options[2].label"/>
+						<input type="text" value="$!ele.options[2].val" name="ele.options[2].val"  class="color_picker"/>
+					</span>
+				</li>
+				<li class="pod opRow ui-state-highlight op_polyline op_polygon op_rectangle op_circle">
+					<span class="lable">Stroke Opacity</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="strokeOpacity" name="ele.options[3].label"/>
+						<input type="text" value="$!ele.options[3].val" name="ele.options[3].val"/>
+					</span>
+				</li>				
+				<li class="pod opRow ui-state-highlight op_polyline op_polygon op_rectangle op_circle">
+					<span class="lable">Stroke Weight</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="strokeWeight" name="ele.options[4].label"/>
+						<input type="text" value="$!ele.options[4].val" name="ele.options[4].val"/>
+					</span>
+				</li>					
+
+				<li class="pod opRow ui-state-highlight op_polygon op_rectangle op_circle">
+					<span class="lable">Fill Color</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="fillColor" name="ele.options[5].label"/>
+						<input type="text" value="$!ele.options[5].val" name="ele.options[5].val" class="color_picker"/>
+					</span>
+				</li>
+				<li class="pod opRow ui-state-highlight op_polygon op_rectangle op_circle">
+					<span class="lable">Fill Opacity</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="fillOpacity" name="ele.options[6].label"/>
+						<input type="text" value="$!ele.options[6].val" name="ele.options[6].val"/>
+					</span>
+				  </li>
+				<li class="pod opRow ui-state-highlight op_polyline op_polygon">
+					<span class="lable">geodesic</span>
+					<span class="controll"><br/>
+						<input type="hidden" value="geodesic" name="ele.options[7].label"/>
+						<input type="checkbox" value="$!ele.options[7].val" name="ele.options[7].val"/>
+					</span>
+				</li>
+			</ul>
+		</div>
+
+			<div style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;" >
+			<ul id="sortable1" class="connectedSortable" >
+				#set($o=0)
+				#foreach($opt in $ele.options)
+					#if($opt.val!='')
+						<li class="pod opRow ui-state-default">
+
+							<span class="lable">$opt.label</span>
+							<span class="controll"><br/>
+								<input type="hidden" value="$opt.label" name="ele.options[$o].label"/>
+								<input type="text" value="$!opt.val" name="ele.options[$o].val"/>
+							</span>
+						</li>
+					#end
+					#set($o=$o+1)
+				#end
+			</ul>
+			</div>
+	
+			<div style="clear:both;"></div>
+		</div>
+	</fieldset>		
+		
+		
+	</fieldset>
+	
+
+</fieldset>
+
+
+	
+
+
+
+	<p>
+	<input type="submit" value="#if($style.id!=0) Apply #else Save #end" name="apply" title="#if($style.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" /><input type="submit" value="Submit" /><input type="submit" value="Cancel" name="cancel" /></p>
+</form>

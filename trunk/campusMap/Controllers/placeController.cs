@@ -44,7 +44,7 @@ namespace campusMap.Controllers
             if (id == 0){
                 New();
             }else{
-                Edit_place(id, page, ajax);
+                _edit(id, page, ajax);
             }
             CancelView();
             CancelLayout();
@@ -71,8 +71,11 @@ namespace campusMap.Controllers
             authors user = getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["placetype"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+
+            PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
+
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = userService.getLogedIn();
             //user.Sections.Contains(place.place_types);
@@ -122,7 +125,16 @@ namespace campusMap.Controllers
                 {
                     items = ActiveRecordBase<place>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
                 }
-                PropertyBag["publishedPlaces"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                IList<string> buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                buttons.Add("broadcast");
+                buttons.Add("view");
+                buttons.Add("order");
+                PropertyBag["publishedButtonSet"] = buttons;  
+
 
             //REVIEW
                 if (status == "review"){
@@ -135,8 +147,13 @@ namespace campusMap.Controllers
                 revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-                PropertyBag["reviewPlaces"] = PaginationHelper.CreatePagination(items, pagesize, paging);
-
+                PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                buttons.Add("view");
+                PropertyBag["reviewButtonSet"] = buttons;  
 
             //DRAFT
                 if (status == "draft"){
@@ -148,8 +165,15 @@ namespace campusMap.Controllers
                 draftEx.AddRange(baseEx);
                 draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
-                PropertyBag["draftPlaces"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
+                buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                buttons.Add("view");
+                buttons.Add("ho");
+                PropertyBag["draftButtonSet"] = buttons;  
 
             //SETUP SEARCHID and parts
                 if (searchId.Equals(0)){
@@ -185,7 +209,7 @@ namespace campusMap.Controllers
                 place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
                 PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, paging);
 
-            RenderView("list");
+                RenderView("../admin/listings/list");
         }
         public bool canEdit(place place, authors user)
         {
@@ -229,7 +253,7 @@ namespace campusMap.Controllers
         {
             place_types type = new place_types();
             PropertyBag["type"] = type;
-            RenderView("types/new");
+            RenderView("../admin/types/new");
         }
         public void new_field()
         {
@@ -239,13 +263,13 @@ namespace campusMap.Controllers
             PropertyBag["p_models"] = p_models;
 
 
-            RenderView("fields/new");
+            RenderView("../admin/fields/new");
         }
         public void edit_type(int id)
         {
             place_types type = ActiveRecordBase<place_types>.Find(id);
             PropertyBag["type"] = type;
-            RenderView("types/new");
+            RenderView("../admin/fields/types/new");
         }
 
         public void edit_field(int id)
@@ -263,7 +287,7 @@ namespace campusMap.Controllers
             PropertyBag["html_ele"] = ele_str;
             PropertyBag["ele"] = ele;
 
-            RenderView("fields/new");
+            RenderView("../admin/fields/new");
         }
 
         public static string get_field(field_types field_type)
@@ -291,12 +315,12 @@ namespace campusMap.Controllers
         
 
 
-        public void update_placeType([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_types type)
+        public void update_type([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_types type)
         {
             ActiveRecordMediator<place_types>.Save(type);
             RedirectToAction("list");
         }
-        public void update_placeField(
+        public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
             [DataBind("ele", Validate = true)] elementSet ele,
             string ele_type,
@@ -460,7 +484,7 @@ namespace campusMap.Controllers
             }
             return creditsList.TrimEnd(',');
         }
-        public void Edit_place(int id, int page, bool ajax)
+        public void _edit(int id, int page, bool ajax)
         {
             CancelView();
 
@@ -773,7 +797,7 @@ namespace campusMap.Controllers
                 ImgFile.Delete();
             }
         }
-        public void Update(
+        public void update(
             [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
             String[] newtag,
@@ -982,7 +1006,7 @@ namespace campusMap.Controllers
             {
                 if (place.id>0)
                 {
-                    Redirect("~/place/edit_place.castle?id=" + place.id);
+                    Redirect("~/place/_edit.castle?id=" + place.id);
                     return;
                 }
                 else

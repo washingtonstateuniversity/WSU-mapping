@@ -12,11 +12,12 @@ var localSearches;
 var selectedResults = [];
 var currentResults = [];
 var searchForm;
-
+var overlay_pool = [];
 var waypts = [],
 	markers = [],
 	checkboxArray = [],
 	polylineOptions = [],
+
 	depth=0,
 	fractal=0,
 	iterator = 0,

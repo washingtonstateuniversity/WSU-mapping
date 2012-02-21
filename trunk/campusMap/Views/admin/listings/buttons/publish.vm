@@ -1,0 +1,9 @@
+#if($Controller.canPublish($user))
+  <li>
+	<a href="$siteroot/${controller.getView()}/setStatus.castle?id=$!{item.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
+	  <span class="ui-button-icon-primary ui-icon ui-icon-star"></span>
+	  <span class="actionText">Status</span>
+	  <span class="actionpropt">&#187;</span>
+	</a>
+  </li>
+#end

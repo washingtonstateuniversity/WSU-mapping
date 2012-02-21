@@ -1,0 +1,15 @@
+<table class="pagination $Pagination_location">
+  <tr>
+    <td>Showing $list_items.FirstItem - $list_items.LastItem of $list_items.TotalItems</td>
+    <td align="right">
+      #if($list_items.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status=$status}" )  #end
+      #if(!$list_items.HasPrevious) first #end
+      #if($list_items.HasPrevious) | $PaginationHelper.CreatePageLink( $list_items.PreviousIndex, "prev",null, "%{searchId=$!searchId,status=$STATUS}" )  #end
+      #if(!$list_items.HasPrevious) | prev #end
+      #if($list_items.HasNext) | $PaginationHelper.CreatePageLink( $list_items.NextIndex, "next",null, "%{searchId=$!searchId,status=$STATUS}" )  #end
+      #if(!$list_items.HasNext) | next #end
+      #if($list_items.HasNext) | $PaginationHelper.CreatePageLink( $list_items.LastIndex, "last",null, "%{searchId=$!searchId,status=$STATUS}" )  #end
+      #if(!$list_items.HasNext) | last #end
+    </td>
+  </tr>
+</table>

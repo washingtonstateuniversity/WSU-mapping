@@ -21,6 +21,12 @@
 
 <!-- jQuery CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+<link media='screen' href='$siteroot/content/js/colorpicker/jquery.miniColors.css' type='text/css' rel='stylesheet' />
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jquery.miniColors.js"></script>
+
+
 <!-- Jeremy Bass's General Utilities script -->
 <script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
 <!-- UI SCRIPTS -->
@@ -34,6 +40,10 @@
 <script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+
+
+
+
 
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>

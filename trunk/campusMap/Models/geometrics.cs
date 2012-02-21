@@ -196,6 +196,19 @@ namespace campusMap.Models
             get { return Fields; }
             set { Fields = value; }
         }
+
+
+
+        private IList<style> _style;
+        [HasAndBelongsToMany(typeof(style), Lazy = true, Table = "geometrics_to_style", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<style> style
+        {
+            get { return _style; }
+            set { _style = value; }
+        }
+
+
+
         private IList<media_repo> images = new List<media_repo>();
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "geometric_to_media", ColumnKey = "geometric_id", ColumnRef = "media_id", OrderBy = "geometric_order", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> Images
@@ -206,7 +219,7 @@ namespace campusMap.Models
 
 
         private IList<authors> _authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometric", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> Authors
         {
             get { return _authors; }
@@ -219,6 +232,7 @@ namespace campusMap.Models
             get { return _editing; }
             set { _editing = value; }
         }
+
         virtual public bool isPublished()
         {
             if (this.status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)

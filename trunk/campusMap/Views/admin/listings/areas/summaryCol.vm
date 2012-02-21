@@ -1,0 +1,22 @@
+<div class='summaryCol'>
+	<ul>
+	  #if($item.Title)<li class='Title'>
+		<span>Title: </span>$!item.Title
+	  </li>#end
+	  #if($authors!='')<li class='Authors'>
+		<span>Authors: </span>$authors
+	  </li>#end
+	  #if($item.Teaser)<li class='Teaser'>
+		<span>Teaser: </span>
+		<span class="Teaser">
+		  $Text.Fold($Controller.StripHtml($!item.Teaser,false),200)<br/>
+		</span>
+		<a href="$!siteroot/itemmetrics/readmore.castle?id=$!{item.id}">more</a>
+	  </li>#end
+	  #if($item.BodyText)<li class="Body">
+		<span>Body: </span>
+		<span class="Body">$Text.Fold($Controller.StripHtml($!item.BodyText,false),100)</span>
+		<a href="$!siteroot/itemmetrics/readmore.castle?id=$!{item.id}">more</a>
+	  </li>#end
+	</ul>
+</div>

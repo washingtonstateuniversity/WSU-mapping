@@ -11,12 +11,12 @@ var referenceId;
 var localSearches;
 var selectedResults = [];
 var currentResults = [];
-var searchForm;
-
+var searchForm; 
 var waypts = [],
 	markers = [],
 	checkboxArray = [],
 	polylineOptions = [],
+	overlay_pool = [],
 	depth=0,
 	fractal=0,
 	iterator = 0,

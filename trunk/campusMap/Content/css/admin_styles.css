@@ -1,5 +1,9 @@
 /* Lets override the defaults for the tamplates */
 html,body{height:auto;}
+
+.clear{clear:both;}
+
+
 #wrapper{width:100%;min-width: 976px;padding-left:0px;}
 #globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
 #siteID{    background: none repeat scroll 0 0 #981E32;
@@ -133,38 +137,59 @@ table.ui-widget tbody tr.odd td{}
 
 /* place listing */
 .placelist{ /*width: 724px;*/}
-.placelistUL{    list-style: none outside none !important;
+.editablelistUL{    list-style: none outside none !important;
     margin-bottom: 0 !important;
     margin-left: 0 !important;
     margin-top: 0 !important;
     padding: 0 5px 0 0 !important;
-    width: 721px;}
-.placelistUL li {clear: both;line-height: 15px; margin: 10px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
-.placelistUL li div{
+    width: 721px;
+	display:inline;
+	}
+.editablelistUL li {float:left;display:inline-block;line-height: 15px; margin: 10px 5px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
+.editablelistUL li li{float:none;display: inline;margin: 10px 0 0 !important;}
+.editablelistUL li div{
     height: 180px;
-    left: 0;
+    /*left: 0;*/
     overflow: hidden;
     position: relative;
     top: 0;
     z-index: 1;
 	}
-.placelistUL li div span{display:inline; font-weight:bold;}
+.editablelistUL li div span{display:inline; font-weight:bold;}
 
-.placelistUL li div.summaryCol{float: left;width: 477px;height:180px;border-right: 1px solid #B8B8B8;}
-.placelistUL li div.summaryCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
-.placelistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;    padding: 2px 7px !important;}
-.placelistUL li div.summaryCol li p {display: inline;line-height: 1em !important;padding: 0;}
-.placelistUL li div.summaryCol .Title{background-color: #CCCCCC;height: 30px;}
-.placelistUL li div.summaryCol li span.Body,.placelistUL li div.summaryCol li span.Body span{font-weight:normal !important;}
-.placelistUL li div.summaryCol li span.Teaser,.placelistUL li div.summaryCol li span.Teaser span{font-weight:normal !important;}
+.editablelistUL li div.summaryCol{float: left;width: 250px;height:180px;border-right: 1px solid #B8B8B8;}
+.editablelistUL li div.summaryCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
+.editablelistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;    padding: 2px 7px !important;}
+.editablelistUL li div.summaryCol li p {display: inline;line-height: 1em !important;padding: 0;}
+.editablelistUL li div.summaryCol .Title{background-color: #CCCCCC;height: 30px;}
+.editablelistUL li div.summaryCol li span.Body,.editablelistUL li div.summaryCol li span.Body span{font-weight:normal !important;}
+.editablelistUL li div.summaryCol li span.Teaser,.editablelistUL li div.summaryCol li span.Teaser span{font-weight:normal !important;}
 
 
-.placelistUL li div.detailCol{float: left;width: 188px;height:180px;border-right: 1px solid #B8B8B8;}
-.placelistUL li div.detailCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
-.placelistUL li div.detailCol ul li{margin: 0 !important;padding: 0 !important;padding: 2px 7px !important;}
-.placelistUL li div.detailCol .date{background-color: #CCCCCC;height: 30px;}
+.editablelistUL li div.detailCol{/*float: left;width: 125px;height:180px;border-right: 1px solid #B8B8B8;*/	
+	border-right: 1px solid #B8B8B8;
+	float: left;
+	height: 180px;
+	padding-left: 16px;
+	position: absolute;
+	right:50px;
+	width:0px;/* if opened 125px; */
+	overflow: visible;
+}
+.detailInfoBut{position:absolute;bottom:5px;left:0px; width:16px;height:36px;display:inline-block;
+text-indent:-9999px;
 
-.placelistUL li div.actionCol{background-color: #E0E0E0;
+background: url(/content/images/infoTab.png) no-repeat left center transparent;
+
+}
+.detailInfoBut:hover{ background-position:right center;}
+.detailArea{border-left: 1px solid #B8B8B8;}
+
+.editablelistUL li div.detailCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
+.editablelistUL li div.detailCol ul li{margin: 0 !important;padding: 0 !important;padding: 2px 7px !important;}
+.editablelistUL li div.detailCol .date{background-color: #CCCCCC;height: 30px;}
+
+.editablelistUL li div.actionCol{background-color: #E0E0E0;
     border-right: medium none;
     float: left;
     height: 180px;
@@ -172,11 +197,11 @@ table.ui-widget tbody tr.odd td{}
     position: relative;
     width: 50px;
     z-index: 5;}
-.placelistUL li div.actionCol ul{list-style: none outside none !important;margin: 0 !important;padding:4px !important;}
-.placelistUL li div.actionCol ul li{margin: 0 !important;font-size:0.7em;padding: 0 0 3px !important;}
-.placelistUL li div.actionCol ul li a.buttons{float:right;display:inline-block;width:37px;positon:relative;height:24px;}
+.editablelistUL li div.actionCol ul{list-style: none outside none !important;margin: 0 !important;padding:4px !important;}
+.editablelistUL li div.actionCol ul li{margin: 0 !important;font-size:0.7em;padding: 0 0 3px !important;}
+.editablelistUL li div.actionCol ul li a.buttons{float:right;display:inline-block;width:37px;positon:relative;height:24px;}
 
-.placelistUL li div.actionCol ul li a.buttons span.ui-button-text{position:absolute;top:0px; right:0px;display:inline-block;height: 16px;width: 16px;
+.editablelistUL li div.actionCol ul li a.buttons span.ui-button-text{position:absolute;top:0px; right:0px;display:inline-block;height: 16px;width: 16px;
     padding-left: 0 !important; 
     padding-right: 0 !important;
     width: 100% !important;
@@ -186,15 +211,15 @@ table.ui-widget tbody tr.odd td{}
 
 
 
-.placelistUL li div.actionCol ul li a.buttons .ui-icon{height: 16px;width: 16px;display:block;float: left;
+.editablelistUL li div.actionCol ul li a.buttons .ui-icon{height: 16px;width: 16px;display:block;float: left;
 
     left: 5px;
     position: absolute;
     top: 4px;
 
 }
-.placelistUL li div.actionCol ul li a.buttons span.actionText{width:0px;float: right  !important;overflow: hidden;}
-.placelistUL li div.actionCol ul li a.buttons span.actionpropt{
+.editablelistUL li div.actionCol ul li a.buttons span.actionText{width:0px;float: right  !important;overflow: hidden;}
+.editablelistUL li div.actionCol ul li a.buttons span.actionpropt{
    color: #8C818A;
     float: right !important;
     overflow: hidden;
@@ -203,9 +228,23 @@ table.ui-widget tbody tr.odd td{}
 }
 
 
-.placelistUL li .Status div{height:auto;}
+.editablelistUL li .Status div{height:auto;}
 
-.inEdit{height:180px; width:721px; position:absolute !important;top:0;left:0; z-index:2  !important;filter:alpha(opacity=35);opacity: 0.35; background-color:#AD153B;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.inEdit{height:180px; width:302px; position:absolute !important;top:0;left:0; z-index:2  !important;filter:alpha(opacity=35);opacity: 0.35; background-color:#AD153B;}
 span.UinEdit{    background-color: #E2E2E2;
     bottom: 0;
     font-size: 20px;
@@ -213,7 +252,7 @@ span.UinEdit{    background-color: #E2E2E2;
     left: 0;
     line-height: 35px;
     position: absolute;
-    width:721px;
+    width:302px;
     z-index: 3;display:inline-block;float:left;}
 .steal {float: right;
     font-size: 12px !important;
@@ -336,11 +375,17 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.place.editor_place .ui-tabs-panel {margin-right:310px; min-height:535px;}
+.place.editor_place .ui-tabs-panel{margin-right:310px; min-height:535px;}
 
 .place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
+#map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
 
+
+
+.geometrics.editor .ui-tabs-panel {margin-right:510px; min-height:535px;}
+.geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 54px; z-index: 9;}
+.geometrics.editor #map_canvas{width:500px;}
 
 .pod{  display: inline-block;
     min-height: 29px;}
@@ -363,4 +408,15 @@ label{ font-weight:bold; font-size:1.1em;}
 
 
 fieldset{padding: 4px 8px 10px;}
-/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(/Content/images/feildset_bk.png) repeat center center;}
+/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(/Content/images/fieldset_bk.png) repeat center center;}
+
+
+
+
+
+.pagination.top{float:right;margin-right:5px;margin-top:7px;width:100%}
+#sortable1,#sortable2 { min-height:75px; margin:0px !important;padding:0px !important;}
+#sortable2 .controll{display:none;}
+.connectedSortable li{width:100%;}
+#sortable2.connectedSortable li{width:100px; cursor:move;}
+

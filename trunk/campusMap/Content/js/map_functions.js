@@ -223,6 +223,11 @@ function jsonloadPage(id,clear,keepMarkers,keepPolys,keepibLabels) {
 				//console.log('+++++++++++++++++++++++++++\r\n\tjsonloadPage--END-----zoom==>>'+parseInt(map.getZoom()));
 }
 
+
+
+
+
+
 function mapOverlay(){
 	var triangleCoords = [
 		new google.maps.LatLng(69.53,-157.5),
@@ -1339,8 +1344,6 @@ from the editing
 
 function polystyle() {
     this.name = "Lump";
-    this.kmlcolor = "CD0000FF";
-    this.kmlfill = "9AFF0000";
     this.color = "#FF0000";
     this.fill = "#0000FF";
     this.width = 2;
@@ -1349,7 +1352,6 @@ function polystyle() {
 }
 function linestyle() {
     this.name = "Path";
-    this.kmlcolor = "FF0000FF";
     this.color = "#FF0000";
     this.width = 3;
     this.lineopac = 1;
@@ -1362,6 +1364,19 @@ function circstyle() {
     this.lineopac = 0.8;
     this.fillopac = 0.6;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 function markerstyleobject() {
     this.name = "markerstyle";
     this.icon = "http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png";
@@ -1376,6 +1391,7 @@ function placemarkobject() {
     this.plmtext = "";
     this.jstext = "";
     this.jscode = [];
+	this.latLongArray = [];
     this.kmlcode = [];
     this.poly = "pl";
     this.shape = null;
@@ -1483,15 +1499,19 @@ function addLatLng(point){
     if(polyPoints.length == 2 && toolID == 3) createrectangle(point);
     if(polyPoints.length == 2 && toolID == 4) createcircle(point);
     if(toolID == 1 || toolID == 2) { // if polyline or polygon
+	
+	 var shapeObesaved =point.latLng.lng().toFixed(6) + ',' +  point.latLng.lat().toFixed(6);
         var stringtobesaved = point.latLng.lat().toFixed(6) + ',' + point.latLng.lng().toFixed(6);
         var kmlstringtobesaved = point.latLng.lng().toFixed(6) + ',' + point.latLng.lat().toFixed(6);
         if(adder == 0) {
+			shapeArray.push(shapeObesaved);
             pointsArray.push(stringtobesaved);
             pointsArrayKml.push(kmlstringtobesaved);
             if(polyPoints.length == 1 && toolID == 2) closethis('polygonstuff');
             if(codeID == 1 && toolID == 1) logCode1(); // write kml for polyline
             if(codeID == 1 && toolID == 2) logCode2(); // write kml for polygon
             if(codeID == 2) logCode4(); // write Google javascript
+			dump_latLongs();
         }
         if(adder == 1) {
             outerArray.push(stringtobesaved);
@@ -1507,6 +1527,10 @@ function drawMarkers(point) {
     if(startMarker) startMarker.setMap(null);
     if(polyShape) polyShape.setMap(null);
     var id = plmcur;
+	
+	placemarks[plmcur].latLongArray =  point.lng().toFixed(6) + ',' + point.lat().toFixed(6);
+	
+	
     placemarks[plmcur].jscode = point.lat().toFixed(6) + ',' + point.lng().toFixed(6);
     placemarks[plmcur].kmlcode = point.lng().toFixed(6) + ',' + point.lat().toFixed(6);
     activateMarker();
@@ -1593,6 +1617,7 @@ function RenderCustomDirections(response, status) {
         directionsDisplay.setDirections(response);
         polyPoints = [];
         pointsArray = [];
+		shapeArray = [];
         pointsArrayKml = [];
         markersArray = [];
         markersArrayKml = [];
@@ -1600,6 +1625,7 @@ function RenderCustomDirections(response, status) {
         var result = directionsDisplay.getDirections().routes[0];
         for(var i = 0; i < result.overview_path.length; i++) {
             polyPoints.push(result.overview_path[i]);
+			shapeArray.push(result.overview_path[i].lng().toFixed(6) + ',' + result.overview_path[i].lat().toFixed(6));
             pointsArray.push(result.overview_path[i].lat().toFixed(6) + ',' + result.overview_path[i].lng().toFixed(6));
             pointsArrayKml.push(result.overview_path[i].lng().toFixed(6) + ',' + result.overview_path[i].lat().toFixed(6));
         }
@@ -1643,6 +1669,7 @@ function createdirMarker(latlng, label, html, color) {
     }
     activateMarker();
     markerShape.setPosition(latlng);
+	placemarks[plmcur].latLongArray =  latlng.lng().toFixed(6) + ' ' + latlng.lat().toFixed(6);
     placemarks[plmcur].jscode = latlng.lat().toFixed(6) + ',' + latlng.lng().toFixed(6);
     placemarks[plmcur].kmlcode = latlng.lng().toFixed(6) + ',' + latlng.lat().toFixed(6);
     placemarks[plmcur].desc = html;
@@ -1746,11 +1773,16 @@ function drawRectangle() {
     var southEast = new google.maps.LatLng(northEast.lat(), southWest.lng());
     polyPoints = [];
     pointsArray = [];
+	shapeArray = [];
     pointsArrayKml = [];
     polyPoints.push(southWest);
     polyPoints.push(northWest);
     polyPoints.push(northEast);
     polyPoints.push(southEast);
+	
+	/*    ------ FIND ME ---- FIX ME  ----*/
+	
+	
     var stringtobesaved = southWest.lng().toFixed(6)+','+southWest.lat().toFixed(6);
     pointsArrayKml.push(stringtobesaved);
     stringtobesaved = southWest.lng().toFixed(6)+','+northEast.lat().toFixed(6);
@@ -1856,6 +1888,7 @@ function logCode1(){
     kmltext2 = '</coordinates>\n</LineString>\n</Placemark>\n';
     placemarks[plmcur].plmtext = kmlcode = kmltext1+code+kmltext2;
     placemarks[plmcur].poly = "pl";
+	placemarks[plmcur].latLongArray = shapeArray;
     placemarks[plmcur].jscode = pointsArray;
     placemarks[plmcur].kmlcode = pointsArrayKml;
     gob('coords1').value = kmlheading()+kmltext1+code+kmltext2+kmlend();
@@ -1917,6 +1950,7 @@ function logCode2(){
             code += pointsArrayKml[i] + ',0\n';
         }
         code += pointsArrayKml[0] + ',0\n';
+		placemarks[plmcur].latLongArray = shapeArray;
         placemarks[plmcur].jscode = pointsArray;
         placemarks[plmcur].kmlcode = pointsArrayKml;
     }
@@ -1941,6 +1975,7 @@ function logCode3(){
     }
     kmltext += outerArrayKml[0]+',0\n';
     code += outerArrayKml[0]+',0\n';
+	placemarks[plmcur].latLongArray = shapeArray;
     placemarks[plmcur].jscode = pointsArray;
     placemarks[plmcur].kmlcode = outerArrayKml;
     kmltext += '</coordinates></LinearRing></outerBoundaryIs>\n';
@@ -1957,6 +1992,20 @@ function logCode3(){
     gob('coords1').value = kmlheading()+kmltext+kmlend();
 }
 // write javascript
+function dump_latLongs(){
+    if (notext === true) return;
+    gob('latLong').value = '';
+    for(var i=0; i<shapeArray.length; i++){
+        if(i == shapeArray.length-1){
+            gob('latLong').value += shapeArray[i]+ ',\n';
+			gob('latLong').value += shapeArray[0]+ '\n';
+        }else{
+            gob('latLong').value +=  shapeArray[i]+ ',\n';
+        }
+    }
+    javacode = gob('latLong').value;
+}
+
 function logCode4(){
     if (notext === true) return;
     gob('coords1').value = 'var myCoordinates = [\n';
@@ -2175,6 +2224,7 @@ function setTool(){
             placemarks[plmcur].stylecur = polylinestyles.length-1;
             if(polyShape) polyShape.setMap(null);
             preparePolyline(); //if a polygon exists, it will be redrawn as polylines
+			dump_latLongs();
             if(codeID == 1) logCode1(); // KML
             if(codeID == 2) logCode4(); // Javascipt
         }
@@ -2212,6 +2262,7 @@ function setTool(){
             placemarks[plmcur].stylecur = polygonstyles.length-1;
             if(polyShape) polyShape.setMap(null);
             preparePolygon(); //if a polyline exists, it will be redrawn as a polygon
+			dump_latLongs();
             if(codeID == 1) logCode2(); // KML
             if(codeID == 2) logCode4(); // Javascript
         }
@@ -2238,6 +2289,7 @@ function setCode(){
         if(codeID == 1 && toolID == 1) logCode1();
         if(codeID == 1 && toolID == 2 && outerArray.length == 0) logCode2();
         if(codeID == 1 && toolID == 2 && outerArray.length > 0) logCode3();
+		dump_latLongs();
         if(codeID == 2 && toolID == 1) logCode4(); // write Google javascript
         if(codeID == 2 && toolID == 2 && outerArray.length == 0) logCode4();
         if(codeID == 2 && toolID == 2 && outerArray.length > 0) logCode5();
@@ -2310,17 +2362,20 @@ function addpolyShapelistener() {
         if(startMarker) startMarker.setMap(null);
         setstartMarker(placemarks[thisshape].point);
         plmcur = thisshape;
+		shapeArray = placemarks[plmcur].latLongArray;
         pointsArray = placemarks[plmcur].jscode;
         pointsArrayKml = placemarks[plmcur].kmlcode;
         closethis('polygonstuff');
         if(placemarks[plmcur].poly == "pl") {
             toolID = gob('toolchoice').value = 1;
             lcur = placemarks[plmcur].stylecur;
+			dump_latLongs();
             if(codeID == 1) logCode1();
             if(codeID == 2) logCode4(); // write Google javascript
         }else{
             toolID = gob('toolchoice').value = 2;
             pcur = placemarks[plmcur].stylecur;
+			dump_latLongs();
             if(codeID == 1) logCode2();
             if(codeID == 2) logCode4(); // write Google javascript
         }
@@ -2347,6 +2402,7 @@ function newstart() {
     polyPoints = [];
     outerPoints = [];
     pointsArray = [];
+	shapeArray = [];
     markersArray = [];
     pointsArrayKml = [];
     markersArrayKml = [];
@@ -2430,6 +2486,7 @@ function deleteLastPoint(){
             if(polyPoints.length > 0) {
                 polyPoints.removeAt(polyPoints.length-1);
                 pointsArrayKml.pop();
+				dump_latLongs();
                 if(codeID == 1) logCode1();
                 if(codeID == 2) logCode4();
             }
@@ -2451,6 +2508,7 @@ function deleteLastPoint(){
                     polyPoints.removeAt(polyPoints.length-1);
                     pointsArrayKml.pop();
                     if(adder == 0) {
+						dump_latLongs();
                         if(codeID == 1) logCode2();
                         if(codeID == 2) logCode4();
                     }
@@ -2627,9 +2685,11 @@ function setmarkers(point) {
             }
         }
         polyPoints = polyShape.getPath();
+		 var shapeObesaved = marker.getPosition().lat().toFixed(6) + ',' + marker.getPosition().lat().toFixed(6);
         var stringtobesaved = marker.getPosition().lat().toFixed(6) + ',' + marker.getPosition().lng().toFixed(6);
         var kmlstringtobesaved = marker.getPosition().lng().toFixed(6) + ',' + marker.getPosition().lat().toFixed(6);
         pointsArray.splice(i,1,stringtobesaved);
+		shapeArray.splice(i,1,shapeObesaved);
         pointsArrayKml.splice(i,1,kmlstringtobesaved);
         logCode1();
     });
@@ -2645,6 +2705,7 @@ function setmarkers(point) {
         }
         polyPoints = polyShape.getPath();
         if(markers.length > 0) {
+			shapeArray.splice(i,1);
             pointsArray.splice(i,1);
             pointsArrayKml.splice(i,1);
             logCode1();
@@ -2724,9 +2785,12 @@ function setmidmarkers(point) {
     		}
     	}
         polyPoints = polyShape.getPath();
+		
+		var shapeObesaved = newpos.lng().toFixed(6) + ',' + newpos.lat().toFixed(6);
         var stringtobesaved = newpos.lat().toFixed(6) + ',' + newpos.lng().toFixed(6);
         var kmlstringtobesaved = newpos.lng().toFixed(6) + ',' + newpos.lat().toFixed(6);
         pointsArray.splice(i+1,0,stringtobesaved);
+		shapeArray.splice(i+1,0,shapeObesaved);
         pointsArrayKml.splice(i+1,0,kmlstringtobesaved);
         logCode1();
     });
@@ -2883,6 +2947,7 @@ function polylinestyle(e){ //save style
     if(polyShape) polyShape.setMap(null);
     preparePolyline();
     if(polyPoints.length > 0) {
+		dump_latLongs();
         if(codeID == 1) logCode1();
         if(codeID == 2) logCode4();
     }else{
@@ -2920,6 +2985,7 @@ function polygonstyle(e) {
     if(holePolyArray.length == 0) {
         preparePolygon();
         if(polyPoints.length > 0) {
+			dump_latLongs();
             if(codeID == 1) logCode2();
             if(codeID == 2) logCode4();
         }else{
@@ -2990,6 +3056,7 @@ function stepstyles(a) {
         if(polyShape) polyShape.setMap(null);
         preparePolyline();
         if(polyPoints.length) {
+			dump_latLongs();
             if(codeID == 1) logCode1();
             if(codeID == 2) logCode4();
         }
@@ -3015,6 +3082,7 @@ function stepstyles(a) {
             polyShape.setMap(null);
             preparePolygon();
             if(polyPoints.length) {
+				dump_latLongs();
                 if(codeID == 1) logCode2();
                 if(codeID == 2) logCode4();
             }
@@ -3023,6 +3091,7 @@ function stepstyles(a) {
             rectangle.setMap(null);
             activateRectangle();
             if(polyPoints.length) {
+				dump_latLongs();
                 if(codeID == 1) logCode2();
                 if(codeID == 2) logCode4();
             }
@@ -3110,6 +3179,7 @@ function showCodeintextarea(){
         notext = false;
         if(polyPoints.length > 0){
             if(toolID==1) { // Polyline
+			dump_latLongs();
                 if(codeID==1) logCode1();
                 if(codeID==2) logCode4();
             }
@@ -3119,6 +3189,7 @@ function showCodeintextarea(){
                     if(codeID == 1) logCode3();
                     if(codeID == 2) logCode5();
                 }else{
+					dump_latLongs();
                     if(codeID==1) logCode2();
                     if(codeID==2) logCode4();
                 }
@@ -3201,28 +3272,67 @@ function setBoxHtml(content){
 }
 
 function generic_infoBox() {
-		option = {
-			content: boxText,
-			disableAutoPan: false,
-			maxWidth: 0,
-			pixelOffset: new google.maps.Size(-15,-15),
-			boxClass:"infoBoxin",
-			zIndex:1,
-			boxStyle: { 
-				background: "#ccc url('http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif') no-repeat left bottom",
-				opacity: 1.0,
-				"font-size": ".5em",
-				width: "23em"
-			},
-			closeBoxMargin: "1em .2em .2em .2em",
-			closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-			infoBoxClearance: new google.maps.Size(1, 1),
-			isHidden: false,
-			pane: "floatPane",
-			enableEventPropagation: false
-		};
-		return new InfoBox(option);
+	option = {
+		content: boxText,
+		disableAutoPan: false,
+		maxWidth: 0,
+		pixelOffset: new google.maps.Size(-15,-15),
+		boxClass:"infoBoxin",
+		zIndex:1,
+		boxStyle: { 
+			background: "#ccc url('http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif') no-repeat left bottom",
+			opacity: 1.0,
+			"font-size": ".5em",
+			width: "23em"
+		},
+		closeBoxMargin: "1em .2em .2em .2em",
+		closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+		infoBoxClearance: new google.maps.Size(1, 1),
+		isHidden: false,
+		pane: "floatPane",
+		enableEventPropagation: false
+	};
+	return new InfoBox(option);
 }
+
+function create_overlay(map,style){
+	overlay = new google.maps.Polygon(style);
+	overlay_pool.push(overlay);
+	overlay.setMap(map);
+}
+
+
+
+
+function addpoly_poly(map){
+	if($('#Basic textarea').length){
+		var Coords = [];
+		if($('#Basic textarea').val()!=''){
+			var Rows=$('#Basic textarea').val().split('\n');
+			if(Rows.length){
+				for(i=0; i<=Rows.length-1; i++){
+					var cord=Rows[i].split(',');
+					Coords.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+				}
+			}
+		}
+		style = {
+			paths: Coords,
+			strokeColor: "#5f1212",
+			strokeOpacity: 0.15,
+			strokeWeight: 2,
+			fillColor: "#5f1212",
+			fillOpacity: 0.42
+		};
+		create_overlay(map,style);
+	}
+}
+
+
+
+
+
+
 
 function initialize() {
 	if($('#map_canvas').length){
@@ -3237,6 +3347,9 @@ function initialize() {
 	
 		var styles_0 = [{"featureType":"all","stylers":[{"saturation":"-30"}]},{"featureType":"poi.park","stylers":[{"saturation":"10"},{"hue":"#990000"}]}];
 		var styles_0 = new google.maps.StyledMapType(styles_0, {name:"Red Parks"});
+		
+		
+		
 		var styles_1 = [{"featureType":"all","stylers":[{"saturation":"-70"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#000000"}]}];
 		var styles_1 = new google.maps.StyledMapType(styles_1, {name:"Black Roads"});
 		var styles_2 = [{"featureType":"poi.business","elementType":"labels","stylers":[{"visibility":"off"}]}];
@@ -3464,6 +3577,7 @@ function initialize() {
 			}
 		});
 	}
+	addpoly_poly(map);
 }
 
 

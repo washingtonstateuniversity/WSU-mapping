@@ -9,6 +9,15 @@
     <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
 #end
 
+
+#if( !$ajaxed )
+<div id="smaple_area">
+            <fieldset><legend>Sample</legend>
+				<div id="map_canvas"></div>
+            </fieldset>
+</div>
+#end
+
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
 	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
@@ -21,20 +30,548 @@
 		#if( $geometric.id==0 || $geometric.tmp)
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
-	
-	
+		$sp_type
+<select name="geom_type">
+					<option value="">Select one...</option>
+					#foreach($_type in $spatial_types)
+						<option class="type" value="$_type" #if($sp_type == $_type) selected="selected" #end>$_type</option>
+					#end
+<!--
+	<option>LINESTRING</option>
+	<option>POLYGON</option>
+	<option>MULTIPOINT</option>
+	<option>MULTILINESTRING</option>
+	<option>MULTIPOLYGON</option>
+	<option>GEOMETRYCOLLECTION</option>
+	-->
+</select>
 		<div id="Basic">
-		
-		
-		
-		
-		
 			<form>$Form.HiddenField("place.id")
 				<fieldset><legend>Location</legend>
-				<textarea name="geometric.boundary">$!geometric.boundary</textarea>
+				<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>
 				</fieldset>
 			</form>
 			$formbuttons
 		</div>
 	</form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if( !$ajaxed )
+
+<div style="position:absolute;top:10%;right:0px; z-index: 1;">
+    <ul style=" list-style:none;">
+		<li class="optionsLink"><a href="#">MapView Options</a>
+			<ul class="options"  style=" list-style:none;">
+				<li><button onclick="turnOnPOI()" style="display:block;">Turn on all POI</button></li>
+				<li><button onclick="turnOffPOI()" style="display:block;">Turn Off all POI</button></li>
+				<li><button onclick="applyType('poi.school')" style="display:block;">Turn on just one POI of schools</button></li>
+			</ul>
+		</li>
+    </ul>
+</div>
+
+
+
+<div class="ui-widget ui-widget-content ui-corner-left" style="position:absolute;bottom:10%;right:0px; z-index: 1;  ">
+  <div id="searchwell"></div>
+</div>
+
+
+<div style="position:absolute;top:10%;left:150px; z-index: 1;">
+
+
+<div id="polygonstuff">
+  <div>
+    <a style="padding-left:5px; color: #ffffff;" href="javascript:holecreator()">Hole</a>
+  </div>
+  <div id="stepdiv" style="padding-left:5px">
+    Step 0
+  </div>
+  <div>
+    <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
+  </div>
+</div>
+
+<div id="polylineoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">POLYLINE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('polylineoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:230px">
+    <form id="style1" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="polylineinput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="polylineinput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="polylineinput3" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="polylineinput4" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:polylinestyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:polylinestyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberl">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+<div id="polygonoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">POLYGON/RECTANGLE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('polygonoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:230px">
+    <form id="style2" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="polygoninput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="polygoninput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="polygoninput3" />
+      <div class="clear"></div>
+      <div class="label">fillColor</div>
+      <input class="input" type="text" name="fillcolor" id="polygoninput4" />
+      <div class="clear"></div>
+      <div class="label">fillOpacity</div>
+      <input class="input" type="text" name="fillopacity" id="polygoninput5" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="polygoninput6" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:polygonstyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:polygonstyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberp">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+
+<div id="circleoptions">
+  <div style="padding-top:5px; margin-bottom:10px;">
+    <div style="float:left;" class="styletitle">CIRCLE</div>
+    <div style="float:right;">
+      <a class="closebutton" href="javascript:closethis('circleoptions')">X</a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div style="float:left; padding-left:5px; width:250px">
+    <form id="rect" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
+      <div class="label">strokeColor</div>
+      <input class="input" type="text" name="color" id="circinput1" />
+      <div class="clear"></div>
+      <div class="label">strokeOpacity</div>
+      <input class="input" type="text" name="opacity" id="circinput2" />
+      <div class="clear"></div>
+      <div class="label">strokeWeight</div>
+      <input class="input" type="text" name="weight" id="circinput3" />
+      <div class="clear"></div>
+      <div class="label">fillColor</div>
+      <input class="input" type="text" name="fillcolor" id="circinput4" />
+      <div class="clear"></div>
+      <div class="label">fillOpacity</div>
+      <input class="input" type="text" name="fillopacity" id="circinput5" />
+      <div class="clear"></div>
+      <div class="label">Style id</div>
+      <input class="inputlong" type="text" name="styleid" id="circinput6" />
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div>
+    <a class="oklink" href="javascript:circlestyle(0)">Click here to save style changes</a>
+  </div>
+  <div style="margin-top:5px">
+    <a class="oklink" href="javascript:circlestyle(1)">Click here to save as new style</a>
+  </div>
+  <div style="width:100%; text-align:center; margin-top:5px">
+    <input type="button" class="buttons" name="backwards" id="backwards" value="Previous" onclick="stepstyles(-1);"/>
+    Style <span id="stylenumberc">1 </span>
+    <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
+  </div>
+</div>
+<div id="markeroptions">
+  <div id="iconimages">
+    <table>
+      <tr>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/green.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/red.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/green.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple.png");' /> </td>
+      </tr>
+      <tr>
+        <td><img src="http://maps.google.com/mapfiles/dd-start.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/dd-end.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/markerA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_orangeA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_yellowA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_greenA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_brownA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_purpleA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_blackA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_greyA.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/marker_whiteA.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/dd-start.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/dd-end.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/markerA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_orangeA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_yellowA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_greenA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_brownA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_purpleA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_blackA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_greyA.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/marker_whiteA.png");' /> </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td><img src="$siteroot/Content/images/marker_20_red.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_orange.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_yellow.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_green.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_brown.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_blue.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_purple.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/marker_20_black.png" alt="" /> </td>
+        <!--<td><img src="$siteroot/Content/images/marker_20_gray.png" alt="" /> </td>-->
+        <td><img src="$siteroot/Content/images/marker_20_white.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_red.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_orange.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_yellow.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_green.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_brown.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_blue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_purple.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_black.png");' /> </td>
+        <!--<td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_gray.png");' /> </td>-->
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/marker_20_white.png");' /> </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/bar.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/restaurant.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/lodging.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/golfer.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/sportvenue.png" alt="" /> </td>
+        <td><img src="http://maps.google.com/mapfiles/ms/micons/plane.png" alt="" /> </td>
+        <td><img src="$siteroot/Content/images/square.png" alt="" /> </td>
+      </tr>
+      <tr>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/bar.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/restaurant.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/lodging.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/golfer.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/sportvenue.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("http://maps.google.com/mapfiles/ms/micons/plane.png");' /> </td>
+        <td><input type="button" name="button" value="Use" onclick='iconoptions("$siteroot/Content/images/square.png");' /> </td>
+      </tr>
+    </table>
+  </div>
+  <div id="stylestext">
+    <form action="#" style="padding-top:3px; margin-top:-5px">
+      <div style="float:left;" class="styletitle">MARKER</div>
+      <div style="float:right;">
+        <a class="closebutton" href="javascript:closethis('markeroptions')">X</a>
+      </div>
+      <div class="clear"></div>
+      <div>
+        <br />
+        &lt;Style id =<input type="text" id="st1" value="markerstyle" style="width:100px; border: 2px solid #ccc;" /><br />
+        &nbsp;&nbsp;&lt;Icon&gt;&lt;href&gt;
+        <input type="text" id="st2" value="http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" style="width:380px; border: 2px solid #ccc;" /><br />
+        <span id="currenticon" style="height: 35px">
+          <img src="http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png" alt="" />
+        </span>
+        Use default icon, or choose icon from the chart
+        <input style="width:120px; margin-left:8px" type="button" name="button" value="Back to default icon" onclick='iconoptions("http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png");' />
+        <br /><br />
+      </div>
+      <div style="margin-top:5px">
+        <a class="oklink" href="javascript:markerstyle(0)">Click here to save style changes</a>
+        <a class="oklink" href="javascript:markerstyle(1)">Click here to save as new style</a>
+      </div>
+      <div style="width:100%; text-align:center; margin-top:5px">
+        <input type="button" class="buttons" name="backwards" value="Previous" onclick="stepstyles(-1);"/>
+        Style <span id="stylenumberm">1 </span>
+        <input type="button" class="buttons" name="forwards" value="Next" onclick="stepstyles(1);"/>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="directionstyles">
+  <div style="float:right;">
+    <a class="closebutton" href="javascript:closethis('directionstyles')">X</a>
+  </div>
+  <div class="clear"></div>
+  <div style="width:100%; text-align:center; padding-top:40px">
+    <input type="button" class="buttons" name="markerbutton" value="Markerstyles" onclick="toolID=5;styleoptions();"/>
+  </div>
+  <div style="width:100%; text-align:center; padding-top:15px">
+    <input type="button" class="buttons" name="linebutton" value="Linestyles" onclick="toolID=1;styleoptions();"/>
+  </div>
+</div>
+<div id="toppers">
+  <form action="#">
+    &lt;Document&gt;<br />
+    &nbsp;&nbsp;&lt;name&gt;<input type="text" id="doc1" value="My document" style="width:345px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;description&gt;<input type="text" id="doc2" value="Content" style="width:312px; border:2px solid #ccc;" /><br /><br />
+    &lt;Placemark&gt;<br />
+    &nbsp;&nbsp;&lt;name&gt;<input type="text" id="plm1" value="NAME" style="width:345px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;description&gt;<input type="text" id="plm2" value="YES" style="width:312px; border:2px solid #ccc;" /><br />
+    &nbsp;&nbsp;&lt;styleURL&gt;<em> current style</em><br />
+    &nbsp;&nbsp;&lt;tessellate&gt;<input type="text" id="plm3" value="1" style="width:20px; border:2px solid #ccc;" />&lt;/tessellate&gt;
+    &lt;altitudemode&gt;<input type="text" id="plm4" value="clampToGround" style="width:100px; border:2px solid #ccc;" /><br /><br />
+    You may create or change styles with the "Style Options" button.<br />
+    You may press it now or anytime.<br /><br />
+    <input type="button" name="docu" id="docu" value="Save" onclick='savedocudetails();document.getElementById("toppers").style.visibility = "hidden";'/>
+    <input type="button" value="Close" onclick='document.getElementById("toppers").value="";document.getElementById("toppers").style.visibility = "hidden";'/>
+  </form>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display:none;">
+
+
+	<div id="addGeom">
+	<div class="choice">
+		<form id="tools" action="./" method="post" onsubmit="return false">
+		  <select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+			<option selected="selected" value="1">Polyline</option>
+			<option value="2">Polygon</option>
+			<option value="3">Rectangle</option>
+			<option value="4">Circle</option>
+			<option value="5">Marker</option>
+			<option value="6">Directions</option>
+		  </select>
+		</form>
+	</div>
+	<div class="choice">
+		<form id="codes" action="./" method="post" onsubmit="return false">
+		  <select id="codechoice" name="codechoice" style="border:1px solid #000000;" onchange="codeID=parseInt(this.options[this.selectedIndex].value);setCode();">
+			<option selected="selected" value="1">KML</option>
+			<option value="2">Javascript</option>
+		  </select>
+		</form>
+	</div><br/><br/>
+	<div id="middlerow">
+		<form action="#">
+		  <select id="over" style="width:180px; border:1px solid #000000;">
+			<option>LngLat mousemove</option>
+			<option selected="selected">LatLng mousemove</option>
+		  </select>
+		  <input type="button" onclick="mapcenter();" value="Mapcenter"/>
+		  <input type="text" style="width:140px; border: 1px solid #000000;" id="centerofmap" /><br/>
+		  Zoom level:
+		  <input type="text" size="5" name="myzoom" id="myzoom" value="7" style="width:21px; border: 1px solid #000000;" />
+		</form>
+	</div>
+	<div id="buttonrow">
+		<input type="button" onclick="nextshape();" value="Next shape"/>
+		<input type="button" onclick="clearMap();" value="Clear Map"/>
+		<input type="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
+		<input type="button" onclick="styleoptions();" value="Style Options"/>
+		<input type="button" onclick="editlines();" value="Edit lines" id="EditButton"/>
+		<input type="button" onclick='docudetails();document.getElementById("toppers").style.visibility = "visible";' value="KML input"/>
+		<input type="button" onclick="showKML();" value="Show KML"/>
+		<input type="button" onclick="copyTextarea();" value="Select and copy text"/>
+	</div>
+	<div id="presenter">
+		<form style="margin-bottom:5px" action="#">
+		<fieldset><legend>Code Output</legend>
+			&nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
+			<input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked"/><br/>
+			<textarea id="coords1" cols="62" rows="15" style="width:98%" >
+Click on the map. The code for the shape you create will be presented here.
+You may shift from Polyline to Polygon and vice/versa at any time when you draw.
+When finished with a shape, click 'Next shape' and draw another shape, if you wish.
+If you want to draw polygon with hole(-s), choose Polygon and follow the instructions.
+Polyline and polygon may be edited by clicking 'Edit lines'.
+When editing, you may remove a point with a click on it.
+If you want to edit a saved polyline or polygon (including Rectangle), click on it. Then click 'Edit lines'.
+There are style options for everything you draw on the map.
+The complete KML code for what you have created, is always available with Show KML.
+Uncheck 'Live code presentation' for greater speed when you draw shapes with large amount of points.
+Check it when you want to see the code.
+			</textarea>
+			</fieldset>
+		</form>
+	</div>
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="mapSearch">
+		<h3>Search types</h3>
+		<h4>Geo coded</h4>
+		<input type="text" value="" id="searchbox"  />
+		<h4>places</h4>
+		<input id="searchTextField" type="text" size="50" placeholder="Anything you want!" />
+		<div>
+			<h4>local search</h4>
+			<input type="text" id="queryInput" value="pullman" style="width: 250px;"/>
+			<input type="button" value="Find" onclick="doSearch()"/>
+		</div>
+	</div>
+</div>
+#end

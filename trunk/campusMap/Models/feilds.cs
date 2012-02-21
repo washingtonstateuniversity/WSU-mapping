@@ -22,26 +22,26 @@ namespace campusMap.Models
         protected HelperService helperService = new HelperService();
         public fields() { }
 
-        private int field_id;
+        private int _id;
         [PrimaryKey("field_id")]
         virtual public int id
         {
-            get { return field_id; }
-            set { field_id = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-        private field_types type_of;
+        private field_types _of;
         [BelongsTo]
         virtual public field_types type
         {
-            get { return type_of; }
-            set { type_of = value; }
+            get { return _of; }
+            set { _of = value; }
         }
-        private string field_value;
+        private string _value;
         [Property]
         virtual public string value
         {
-            get { return field_value; }
-            set { field_value = value; }
+            get { return _value; }
+            set { _value = value; }
         }
         private int _owner;
         [Property]
