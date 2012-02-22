@@ -1080,7 +1080,8 @@ if($(".lazy img,img.lazy").length){
 
 	if($( "#sortable1" ).length){
 		$( "#sortable1, #sortable2" ).sortable({
-			connectWith: ".connectedSortable"
+			connectWith: ".connectedSortable",
+			placeholder: "ui-state-highlight"
 		});
 		$('#style_of').change(function(){
 			var sel = $(this).val();

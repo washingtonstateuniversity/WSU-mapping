@@ -1,0 +1,11 @@
+<li class="pod opRow ui-state-highlight op_marker">
+	<span class="lable">Animation</span>
+	<span class="controll"><br/>
+		<input type="hidden" value="animation" name="ele.options[$o].label"/>
+		<select name="ele.options[$o].val" >
+			<option value="">None</option>
+			<option value="BOUNCE">Bounce</option>
+			<option value="DROP">Drop</option>
+		</select>
+	</span>
+</li>

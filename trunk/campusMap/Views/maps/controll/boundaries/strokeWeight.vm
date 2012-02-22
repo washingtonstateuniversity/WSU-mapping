@@ -1,0 +1,7 @@
+<li class="pod opRow ui-state-highlight op_polyline op_polygon op_rectangle op_circle">
+	<span class="lable">Stroke Weight</span>
+	<span class="controll"><br/>
+		<input type="hidden" value="strokeWeight" name="ele.options[$o].label"/>
+		<input type="text" value="$!ele.options[$o].val" name="ele.options[$o].val"/>
+	</span>
+</li>

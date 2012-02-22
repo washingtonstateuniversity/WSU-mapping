@@ -127,8 +127,7 @@
     <Compile Include="Models\access_levels.cs" />
     <Compile Include="Models\advertisement.cs" />
     <Compile Include="Models\authors.cs" />
-    <Compile Include="Models\styled.cs" />
-    <Compile Include="Models\styles.cs" />
+    <Compile Include="Models\style.cs" />
     <Compile Include="Models\schools.cs" />
     <Compile Include="Models\place_models.cs" />
     <Compile Include="Models\geometrics_status.cs" />

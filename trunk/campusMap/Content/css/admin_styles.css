@@ -416,7 +416,18 @@ fieldset{padding: 4px 8px 10px;}
 
 .pagination.top{float:right;margin-right:5px;margin-top:7px;width:100%}
 #sortable1,#sortable2 { min-height:75px; margin:0px !important;padding:0px !important;}
+
+#sortable1{
+	background-color: #E2E2E2;
+    border: 2px dashed #CCCCCC;
+    padding: 10px !important;
+}
+#sortable1 .ui-sortable-placeholder {
+	background-color: #f18989;
+    border: 2px dashed #5f1212;	
+}
+
 #sortable2 .controll{display:none;}
 .connectedSortable li{width:100%;}
-#sortable2.connectedSortable li{width:100px; cursor:move;}
+#sortable2.connectedSortable li {cursor: move;font-size: 11px;line-height: 11px;width: 75px;}
 

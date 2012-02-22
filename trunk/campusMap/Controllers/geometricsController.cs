@@ -218,11 +218,11 @@ namespace campusMap.Controllers
 
 
                 pagesize = 15;
-                IList<styles> geometrics_styles_items;
+                IList<style_types> geometrics_styles_items;
                 List<AbstractCriterion> stylesEx = new List<AbstractCriterion>();
                 stylesEx.AddRange(baseEx);
                 stylesEx.Add(Expression.Eq("model", this.GetType().Name));
-                geometrics_styles_items = ActiveRecordBase<styles>.FindAll(stylesEx.ToArray());
+                geometrics_styles_items = ActiveRecordBase<style_types>.FindAll(stylesEx.ToArray());
                 PropertyBag["styles"] = PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
             
 
@@ -701,7 +701,7 @@ namespace campusMap.Controllers
 
         public void new_style()
         {
-            styles style = new styles();
+            style_types style = new style_types();
             PropertyBag["style"] = style;
             //place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
             //PropertyBag["p_models"] = p_models;
@@ -739,46 +739,42 @@ namespace campusMap.Controllers
 
         public void edit_style(int id)
         {
-            styles style = ActiveRecordBase<styles>.Find(id);
-            PropertyBag["style"] = style;
+            style STYLE = ActiveRecordBase<style>.Find(id);
+            PropertyBag["style"] = STYLE;
 
-            //place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
-            //PropertyBag["p_models"] = p_models;
-
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(style.attr.ToString(), typeof(elementSet));
-            string ele_str = FieldsService.getfieldmodel(ele);
-
-
-            PropertyBag["html_ele"] = ele_str;
-            PropertyBag["ele"] = ele;
+            style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
+            IList<style_options> used = null;
+            IList<style_options> unused = null;
+            IList<style_options> remaining = null;
+            foreach (style_option_types ops in all_op)
+            {
+                if (ops.style_type.Contains(STYLE.type))
+                {
+                    foreach (style_options op in STYLE.value)
+                    {
+                        if (op.value != "")
+                        {
+                            used.Add(op);
+                        }
+                        else
+                        {
+                            unused.Add(op);
+                        }
+                    }
+                }
+                else
+                {
+                    remaining.Add(ActiveRecordBase<style_options>.Find(ops.id));
+                }
+            }
+            PropertyBag["options_used"] = used;
+            PropertyBag["options_unused"] = unused;
+            PropertyBag["options_remaining"] = remaining;
 
             RenderView("../admin/styles/new");
         }
 
 
-
-        public static string get_style(styles styles)
-        {
-            string _ele = "";
-            _ele = get_style(styles, null);
-            return _ele;
-        }
-        public static string get_style(styles styles, geometrics _geo)
-        {
-            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
-            typeEx.Add(Expression.Eq("type", styles));
-            if (!object.ReferenceEquals(_geo, null)) typeEx.Add(Expression.Eq("owner", _geo.id));
-            style style = ActiveRecordBase<style>.FindFirst(typeEx.ToArray());
-
-            selectionSet sel = null;
-            if (style != null && !String.IsNullOrEmpty(style.value))
-            {
-                sel = (selectionSet)JsonConvert.DeserializeObject(style.value.ToString(), typeof(selectionSet));
-            }
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(styles.attr.ToString(), typeof(elementSet));
-            string ele_str = StylesService.getstylemodel(ele, sel);
-            return ele_str;
-        }
 
 
         public void GetAddAuthor(int count)
@@ -1182,7 +1178,7 @@ namespace campusMap.Controllers
 
 
         public void update_style(
-                [ARDataBind("style", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] styles style,
+                [ARDataBind("style", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] style_types style,
                 [DataBind("ele", Validate = true)] elementSet ele,
                 string ele_type,
                 int placemodel,
@@ -1199,28 +1195,7 @@ namespace campusMap.Controllers
                 char[] startC = { '{' };
                 char[] endC = { '}' };
 
-
-
                 ActiveRecordMediator<style>.Save(style);
-
-                style.model = this.GetType().Name;
-                style.set = 1;  // NOTE THIS IS THE ONLY REASON WE CAN ABSTRACT YET... FIX?
-
-                ele.attr.name = "styles[" + style.id + "]";//+ (ele.type == "dropdown"?"[]":"");
-
-                string ele_attr = JsonConvert.SerializeObject(ele.attr);
-                ele_attr = ele_attr.TrimEnd(endC);
-                ele_attr = ele_attr.TrimStart(startC);
-                // ele_attr Should match
-                //{\"class\":null,\"id\":null,\"ETC ;)\":null}
-                ele.options.RemoveAt(ele.options.Count - 1); //to remove ele.options[9999] at the end
-                string ele_ops = JsonConvert.SerializeObject(ele.options);
-                ele_ops = ele_ops.TrimEnd(endC);
-                ele_ops = ele_ops.TrimStart(startC);
-                // ele_ops Should match
-                //[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}]
-
-                style.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":{" + ele_attr + "}, \"options\":" + ele_ops + " }";
 
 
                 ActiveRecordMediator<style>.Save(style);

@@ -26,150 +26,119 @@
 #endregion
 
 namespace campusMap.Services{
+    /*
+    <!--
+    Marker/Polyline/Polygon/Rectangle/Circle
+    -----------------------------
+    visible		bool
+    zIndex		int
+	
+	
+	
+    Polyline/Polygon/Rectangle/Circle
+    -----------------------------
+    strokeColor	#hex
+    strokeOpacity	float
+    strokeWeight	int
+	
+	
+	
+    Polygon/Rectangle/Circle
+    -----------------------------
+    fillColor	#hex
+    fillOpacity	float
+	
+    Polyline/Polygon
+    -----------------------------
+    geodesic	bool
+	
+	
+	
+    Marker
+    -----------------------------
+    flat		bool
+    cursor		String
+    clickable	bool
+    animation - 
+            BOUNCE
+            DROP
+    icon	  - 
+            anchor 	Point(x:number, y:number)
+            origin  	(0, 0)  Point(x:number, y:number)
+            scaledSize 	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+            size	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+            url		string
+    raiseOnDrag	bool
+    shadow	  - 
+            anchor 	Point(x:number, y:number)
+            origin  	(0, 0)  Point(x:number, y:number)
+            scaledSize 	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+            size	Size(width:number, height:number, widthUnit?:string, heightUnit?:string)
+            url		string
+    title		String
+    shape	  -
+            coords	Array.<number>
+            type	string //circle, poly or rect.
+			
+    -->
 
-    
+    enum BOUNDARY_TYPES     { MARKER, POLYLINE, POLYGON, RECTANGLE, CIRCLE };
+
+
+    enum all_OPTIONS { visible, zIndex, strokeColor, strokeOpacity, strokeWeight, fillColor, fillOpacity, geodesic, flat, cursor, clickable, animation, icon, raiseOnDrag, shadow, title, shape, anchor, origin, scaledSize, size, url, coords, type };
+
+    enum POLYLINE_OPTIONS   { visible, zIndex, strokeColor, strokeOpacity, strokeWeight, geodesic };
+    enum POLYGON_OPTIONS    { visible, zIndex, strokeColor, strokeOpacity, strokeWeight, fillColor, fillOpacity, geodesic };
+    enum RECTANGLE_OPTIONS  { visible, zIndex, strokeColor, strokeOpacity, strokeWeight, fillColor, fillOpacity };
+    enum CIRCLE_OPTIONS     { visible, zIndex, strokeColor, strokeOpacity, strokeWeight, fillColor, fillOpacity };
+    enum MARKER_OPTIONS     { visible, zIndex, flat, cursor, clickable, animation, icon, raiseOnDrag, shadow, title, shape };
+                            enum ICON_OPTIONS       { anchor, origin, scaledSize, size, url };
+                            enum SHADOW_OPTIONS     { anchor, origin, scaledSize, size, url };
+                            enum SHAPE_OPTIONS      { coords, type };
+
+    public class boundary
+    {
+        private boundary_type _type;
+        [JsonProperty]
+        public boundary_type type { get { return _type; } set { _type = value; } }
+
+        private IList<boundary_option> _options;
+        [JsonProperty]
+        public IList<boundary_option> options { get { return _options; } set { _options = value; } }
+
+    }
+    public class boundary_type
+    {
+        private string _name;
+        [JsonProperty]
+        public string type { get { return _type; } set { _type = value; } }
+
+        private string _options;
+        [JsonProperty]
+        public IList<boundary_option> options { get { return _options; } set { _options = value; } }
+
+    }
+    public class boundary_option
+    {
+        private string _op;
+        [JsonProperty]
+        public string op { get { return _op; } set { _op = value; } }
+        private string Val;
+        [JsonProperty]
+        public string val { get { return Val; } set { Val = value; } }
+        private string Val;
+        [JsonProperty]
+        public string val { get { return Val; } set { Val = value; } }
+    }
+    */
+
 
     public class StylesService
     {
         private static ILog log = log4net.LogManager.GetLogger("StylesService");
 
 
-        public static string getstylemodel(elementSet ele)
-        {
-            string _ele = "";
-            _ele = getstylemodel(ele, null);
-            return _ele;
-        }
-
-        public static string getstylemodel(elementSet ele,selectionSet select_val)
-        {
-            // lets set up the attrs for the element
-            SortedDictionary<string, string> attrs = new SortedDictionary<string, string>();
-            //if ( !object.ReferenceEquals(ele.attr, null) )    attrs = attrbase(attrs, ele);
-            //if ( !object.ReferenceEquals(ele.events, null) )  attrs = eventbase(attrs, ele);
-
-            if (!object.ReferenceEquals(select_val, null)) ele = selectedVal(select_val, ele);
-            
-                string _ele = String.Empty;
-                switch (ele.type)
-                {
-                    case "marker":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "polyline":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "polygon":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "rectangle":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "circle":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "ground":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-                    case "info":
-                        {
-                            _ele = FieldsService.renderSelect(ele, attrs); break;
-                        }
-
-                }
-
-                // Return the result.
-                return _ele;
-            
-        }
-
-
-        public static elementSet selectedVal(selectionSet select_val, elementSet ele)
-        {
-            SortedDictionary<string, string> sel_val = new SortedDictionary<string, string>();
-
-            if (select_val.selections != null && ele.type=="dropdown")
-            {
-                foreach (Option _option in ele.options)
-                {
-                    _option.selected = "";
-                    foreach (Selection _val in select_val.selections)
-                    {
-                        if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) _option.selected = _val.val;
-                    }
-                }
-            }else if (select_val.selections[0].val != null){
-                 foreach (Option _option in ele.options){
-                     _option.selected = "";
-                     if (select_val.selections[0].val!="")
-                     {
-                         _option.selected = select_val.selections[0].val;
-                     }
-                 }
-            }
-            return ele;
-        }
-
-
-
-
-        public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs)
-        {
-             // Initialize StringWriter instance.
-            StringWriter stringWriter = new StringWriter();
-            // Put HtmlTextWriter in using block because it needs to call Dispose.
-            using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
-            {
-                if (!String.IsNullOrEmpty(ele.label))
-                {
-                    writer.RenderBeginTag(HtmlTextWriterTag.Label);
-                    writer.Write(ele.label+"<br/>");
-                    writer.RenderEndTag();
-                }
-                if (!String.IsNullOrEmpty(ele.attr.multiple)) attrs.Add("Multiple", "multiple");
-
-                foreach (KeyValuePair<string, string> attr in attrs)
-                {
-                    writer.AddAttribute(attr.Key, attr.Value.ToString());
-                }
-
-                writer.RenderBeginTag(HtmlTextWriterTag.Select); // Begin select
-
-                // need to add default and seleceted
-                foreach (Option _option in ele.options)
-                {
-                    if (!String.IsNullOrEmpty(_option.label))
-                    {
-                        writer.AddAttribute(HtmlTextWriterAttribute.Value, _option.val);
-                        if (!String.IsNullOrEmpty(_option.selected))
-                        {
-                            writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                        }
-                        writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                        writer.WriteEncodedText(_option.label);
-                    }
-                    else
-                    {
-                        if (!String.IsNullOrEmpty(_option.selected))
-                        {
-                            writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
-                        }
-                        writer.RenderBeginTag(HtmlTextWriterTag.Option); // Begin Option
-                        writer.WriteEncodedText(_option.val == "True"?_option.val:String.Empty);
-                    }
-                    writer.RenderEndTag();
-                }
-                writer.RenderEndTag();
-                writer.Write("<br/>");
-            }
-            return stringWriter.ToString();
-        }
+ 
 
     }
 }
