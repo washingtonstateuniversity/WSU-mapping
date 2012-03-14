@@ -13,7 +13,6 @@ using System.Collections.Generic;
 
 namespace campusMap.Models
 {   
-    
     [ActiveRecord(Lazy=true, BatchSize=5)]
     public class categories : ActiveRecordBase<categories>
     {
@@ -24,7 +23,6 @@ namespace campusMap.Models
             get { return category_id; }
             set { category_id = value; }
         }
-
         private string Name;
         [Property]
         virtual public string name
@@ -32,7 +30,6 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
         private string Attr;
         [Property]
         virtual public string attr

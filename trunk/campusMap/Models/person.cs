@@ -97,4 +97,40 @@ namespace campusMap.Models
             set { personType = value; }
         }
     }
+
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class person_types : ActiveRecordBase<person_types>
+    {
+        private int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+        private bool deleted;
+
+        [Property]
+        virtual public bool Deleted
+        {
+            get { return deleted; }
+            set { deleted = value; }
+        }
+        private string Attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return Attr; }
+            set { Attr = value; }
+        }
+    }
+
+
 }

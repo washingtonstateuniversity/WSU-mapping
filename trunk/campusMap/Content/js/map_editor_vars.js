@@ -1,6 +1,12 @@
 var tinyMCEImageList = [];
 
 var DOMAIN='http://localhost:50759';
+var DEFAULT_overlay;
+var DEFAULT_polylines = [];
+var	rest_Options={fillColor: "#a90533"};
+var	hover_Options={fillColor: "#5f1212"};	
+
+var element_pool = [];
 
 // Our global state
 var map;
@@ -27,6 +33,12 @@ var waypts = [],
 
 
 function gob(e){if(typeof(e)=='object')return(e);if(document.getElementById)return(document.getElementById(e));return(eval(e))}
+
+	//to show and hide controls base
+	var controlsOut = {scaleControl: false,mapTypeControl:false,zoomControl:false,panControl:false,streetViewControl:false};
+	var controlsIn  = {scaleControl: true,mapTypeControl:true,zoomControl:true,panControl:true,streetViewControl:true};
+
+
 
 var polyShape;
 var markerShape;

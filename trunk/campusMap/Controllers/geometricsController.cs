@@ -193,20 +193,10 @@ namespace campusMap.Controllers
                     PropertyBag["lastgeometric"] = lastgeometric; 
                 }
 
-
-
-
-
-
-
-
-
-                pagesize = 100;
+                pagesize = 50;
                 IList<geometrics_types> geometrics_types_items;
                 geometrics_types_items = ActiveRecordBase<geometrics_types>.FindAll();
                 PropertyBag["types"] = PaginationHelper.CreatePagination(geometrics_types_items, pagesize, paging);
-
-
 
                 pagesize = 15;
                 IList<field_types> geometrics_fields_items;
@@ -216,19 +206,11 @@ namespace campusMap.Controllers
                 geometrics_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
                 PropertyBag["fields"] = PaginationHelper.CreatePagination(geometrics_fields_items, pagesize, paging);
 
-
                 pagesize = 15;
-                IList<style_types> geometrics_styles_items;
-                List<AbstractCriterion> stylesEx = new List<AbstractCriterion>();
-                stylesEx.AddRange(baseEx);
-                stylesEx.Add(Expression.Eq("model", this.GetType().Name));
-                geometrics_styles_items = ActiveRecordBase<style_types>.FindAll(stylesEx.ToArray());
+                IList<styles> geometrics_styles_items;
+                geometrics_styles_items = ActiveRecordBase<styles>.FindAll();
                 PropertyBag["styles"] = PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
             
-
-
-
-
                 RenderView("../admin/listings/list");
         }
         public bool canEdit(geometrics geometric, authors user)
@@ -541,28 +523,42 @@ namespace campusMap.Controllers
             SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
             string sp_type = spatial.STGeometryType().ToString().ToUpper();
             PropertyBag["sp_type"] = sp_type;
-
-
             string gem = "";
 
+            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
             switch (sp_type)
-                {
-                    case "POINT":
-                        gem = outputRawPoint(spatial);
-                        break;
-                    case "LINESTRING":
-                        gem = outputRawLineString(spatial);
-                        break;
-                    case "POLYGON":
-                        gem = outputRawPolygon(spatial);
-                        break;
-                    case "MULTIPOINT":
+            {
+                case "POINT":
+                    gem = outputRawPoint(spatial);
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "marker")));
+                    break;
+                case "LINESTRING":
+                    gem = outputRawLineString(spatial);
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polyline")));
+                    break;
+                case "POLYGON":
+                    gem = outputRawPolygon(spatial);
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polygon")));
+                    break;
+                case "MULTIPOINT":
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "marker")));
+                    break;
+                case "MULTILINESTRING":
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polyline")));
+                    break;
+                case "MULTIPOLYGON":
+                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polygon")));
+                    break;
+            }
 
-                    case "MULTILINESTRING":
-                    case "MULTIPOLYGON":
-                    case "GEOMETRYCOLLECTION":
-                        break;
-                }
+
+            PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
+            IList<styles> items;
+            items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
+            PropertyBag["_styles"] = items;
+            
+
+            
 
 
 
@@ -701,21 +697,27 @@ namespace campusMap.Controllers
 
         public void new_style()
         {
-            style_types style = new style_types();
-            PropertyBag["style"] = style;
-            //place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
-            //PropertyBag["p_models"] = p_models;
+            styles STYLE = new styles();
+                PropertyBag["style"] = STYLE;
+                PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
+                PropertyBag["style_events"] = ActiveRecordBase<style_events>.FindAll();
+            style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
+            IList<style_options> used = new List<style_options>();
+            IList<style_option_types> unused = new List<style_option_types>();
+            IList<style_option_types> remaining = new List<style_option_types>();
+                PropertyBag["options_used"] = used;
+                PropertyBag["options_unused"] = unused;
+                PropertyBag["options_remaining"] = all_op;
 
-
-            RenderView("../admin/styles/new");
+            RenderView("../admin/maps/styles/new");
         }
 
 
         public void edit_type(int id)
         {
-            place_types type = ActiveRecordBase<place_types>.Find(id);
+            geometrics_types type = ActiveRecordBase<geometrics_types>.Find(id);
             PropertyBag["type"] = type;
-            RenderView("../admin/fields/types/new");
+            RenderView("../admin/types/new");
         }
 
         public void edit_field(int id)
@@ -723,8 +725,8 @@ namespace campusMap.Controllers
             field_types field = ActiveRecordBase<field_types>.Find(id);
             PropertyBag["field"] = field;
 
-            place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
-            PropertyBag["p_models"] = p_models;
+            geometrics_types[] g_type = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["p_models"] = g_type;
 
             elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
             string ele_str = FieldsService.getfieldmodel(ele);
@@ -737,45 +739,41 @@ namespace campusMap.Controllers
         }
 
 
-        public void edit_style(int id)
-        {
-            style STYLE = ActiveRecordBase<style>.Find(id);
+        public void edit_style(int id){
+            styles STYLE = ActiveRecordBase<styles>.Find(id);
             PropertyBag["style"] = STYLE;
+            PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["style_events"] = ActiveRecordBase<style_events>.FindAll();
+
+            
 
             style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-            IList<style_options> used = null;
-            IList<style_options> unused = null;
-            IList<style_options> remaining = null;
-            foreach (style_option_types ops in all_op)
-            {
-                if (ops.style_type.Contains(STYLE.type))
-                {
-                    foreach (style_options op in STYLE.value)
-                    {
-                        if (op.value != "")
-                        {
-                            used.Add(op);
+            IList<style_options> used = new List<style_options>();
+            IList<style_option_types> unused = new List<style_option_types>();
+            IList<style_option_types> remaining = new List<style_option_types>();
+            foreach (style_option_types ops in all_op){
+                if (ops.style_type.Contains(STYLE.type)){
+                    if (STYLE.value.Count > 0){
+                        foreach (style_options op in STYLE.value){ 
+                            if (op.value != ""){
+                                used.Add(op);
+                            }else{
+                                unused.Add(ops);
+                            }
                         }
-                        else
-                        {
-                            unused.Add(op);
-                        }
+                    }else{
+                        unused.Add(ops);
                     }
-                }
-                else
-                {
-                    remaining.Add(ActiveRecordBase<style_options>.Find(ops.id));
+                }else{
+                    remaining.Add(ops);
                 }
             }
             PropertyBag["options_used"] = used;
             PropertyBag["options_unused"] = unused;
             PropertyBag["options_remaining"] = remaining;
 
-            RenderView("../admin/styles/new");
+            RenderView("../admin/maps/styles/new");
         }
-
-
-
 
         public void GetAddAuthor(int count)
         {
@@ -1037,29 +1035,35 @@ namespace campusMap.Controllers
             }*/
 
 
-
+           
             string gemSql="";
-
+            string gemtype = "";
             switch (geom_type)
-                {
-                    case "POINT":
-                        gemSql = geom_type + " (" + normaliz_latsLongs(boundary) + ")";
-                        break;
-                    case "LINESTRING":
-                        gemSql = geom_type + " (" + normaliz_latsLongs(boundary) + ")";
-                        break;
-                    case "POLYGON":
-                        gemSql = geom_type + " ((" + normaliz_latsLongs(boundary) + "))";
-                        break;
-                    case "MULTIPOINT":
+            {
+                case "marker": //case "POINT":
+                    gemSql = "POINT (" + normaliz_latsLongs(boundary) + ")";
+                    gemtype = "Marker";
+                    break;
+                case "polyline": //case "LINESTRING":
+                    gemSql = "LINESTRING (" + normaliz_latsLongs(boundary) + ")";
+                    gemtype = "Line";
+                    break;
+                case "polygon": //case "POLYGON":
+                case "rectangle":
+                case "circle":
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemtype = "Shape";
+                    break;
+                case "MULTIPOINT":
 
-                    case "MULTILINESTRING":
-                    case "MULTIPOLYGON":
-                    case "GEOMETRYCOLLECTION":
-                        break;
-                }
+                case "MULTILINESTRING":
+                case "MULTIPOLYGON":
+                case "GEOMETRYCOLLECTION":
+                    break;
+            }
+            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", gemtype)}).id;
 
-                string wkt = gemSql;
+            string wkt = gemSql;
 
            // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
             SqlChars udtText = new SqlChars(wkt);
@@ -1178,10 +1182,7 @@ namespace campusMap.Controllers
 
 
         public void update_style(
-                [ARDataBind("style", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] style_types style,
-                [DataBind("ele", Validate = true)] elementSet ele,
-                string ele_type,
-                int placemodel,
+                [ARDataBind("style", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] styles style,
                 bool ajaxed_update,
                 string apply,
                 string cancel
@@ -1195,10 +1196,10 @@ namespace campusMap.Controllers
                 char[] startC = { '{' };
                 char[] endC = { '}' };
 
-                ActiveRecordMediator<style>.Save(style);
+                ActiveRecordMediator<styles>.Save(style);
 
 
-                ActiveRecordMediator<style>.Save(style);
+                ActiveRecordMediator<styles>.Save(style);
                 if (apply != null || ajaxed_update){
                     if (style.id > 0){
                         Redirect("edit_style.castle?id=" + style.id);

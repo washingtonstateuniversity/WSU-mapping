@@ -23,9 +23,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 
-<link media='screen' href='$siteroot/content/js/colorpicker/jquery.miniColors.css' type='text/css' rel='stylesheet' />
-<script type="text/javascript" src="$siteroot/content/js/colorpicker/jquery.miniColors.js"></script>
-
+<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
 
 <!-- Jeremy Bass's General Utilities script -->
 <script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
@@ -42,19 +41,16 @@
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
 
 
-
-
-
-
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>
 <!-- &amp;key=ABQIAAAAH8kUMijnAfBj23DnU3MW3RR8i_TK5XmIHwEizrT67KWySjG4FRRqzM9a1HZbnz2PWt429MkEsEQTmA -->
 <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0" type="text/javascript"></script>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
 <script type="text/javascript" src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
+
+
+<script type="text/javascript" src="$siteroot/content/js/polygonEdit/src/polygonEdit.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/polylineEdit/src/polylineEdit.js"></script>
 <style>
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
 </style>

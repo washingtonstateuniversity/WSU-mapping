@@ -1,7 +1,0 @@
-<li class="pod opRow ui-state-highlight op_marker">
-	<span class="lable">Clickable</span>
-	<span class="controll"><br/>
-		<input type="hidden" value="clickable" name="ele.options[$o].label"/>
-		<input type="checkbox" value="$!ele.options[$o].val" name="ele.options[$o].val"/>
-	</span>
-</li>

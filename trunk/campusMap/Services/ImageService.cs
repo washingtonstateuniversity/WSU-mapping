@@ -51,6 +51,53 @@ namespace campusMap.Services
             Crop
         }
 
+        public bool isByteACMYK(Stream image)
+        {
+            using (StreamReader sr = new StreamReader(image))
+            {
+                string contents = sr.ReadToEnd();
+                if (contents.ToLower().Contains("cmyk"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool isFileACMYKJpeg(System.Drawing.Image image)
+        {
+            System.Drawing.Imaging.ImageFlags flagValues = (System.Drawing.Imaging.ImageFlags)Enum.Parse(typeof(System.Drawing.Imaging.ImageFlags), image.Flags.ToString());
+            if (flagValues.ToString().ToLower().IndexOf("ycck") == -1)
+            {
+                // based on http://www.maxostudio.com/Tut_CS_CMYK.cfm
+
+                bool ret = false;
+                try
+                {
+                    int cmyk = (image.Flags & (int)ImageFlags.ColorSpaceCmyk);
+                    int ycck = (image.Flags & (int)ImageFlags.ColorSpaceYcck);
+
+                    ret = ((cmyk > 0) || (ycck > 0));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return ret;
+            }
+            return true;
+        } 
+
+
+
+
+
+
+
+
+
+
+
         public void saveIamge(int id, string NewFile, Image imgPhoto)
         {
             //log.Info("saving photo to filepath: " + NewFile);

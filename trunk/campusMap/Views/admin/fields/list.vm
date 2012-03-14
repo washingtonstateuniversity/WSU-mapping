@@ -35,15 +35,15 @@
     #set ($c=0)
     #foreach($field in $fields)
     <tr class="#if($c%2>0) even #else odd #end #if($field.adminRead==false) ui-state-highlight #end ">
-      <td><a href="edit_type.castle?id=$!{type.Id}" title="Edit" class="name">
-            $type.name
+      <td><a href="edit_field.castle?id=$!{field.id}" title="Edit" class="name">
+            $field.name
           </a></td>
       <td>
         <span style='font-size:0.7em;'>
-          <a href="edit_field.castle?id=$!{field.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+          <a href="edit_field.castle?id=$!{field.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
             <span class="ui-icon ui-icon-pencil"></span>
           </a>
-          <a href="delete_field.castle?id=$!{field.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+          <a href="delete_field.castle?id=$!{field.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
             <span class="ui-icon ui-icon-trash"></span>
           </a>
         </span>

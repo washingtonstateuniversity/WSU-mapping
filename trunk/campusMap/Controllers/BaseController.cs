@@ -32,7 +32,15 @@ namespace campusMap.Controllers
         }
         public string getAction()
         {
-            return SelectedViewName.Split('\\')[1];
+            if (SelectedViewName.Split('\\')[1].Contains("../"))
+            {
+                string[] act = SelectedViewName.Split('\\')[1].Split('/');
+                return act[act.Length-1];
+            }
+            else
+            {
+                return SelectedViewName.Split('\\')[1];
+            }
         }
         public string getViewAndAction()
         {

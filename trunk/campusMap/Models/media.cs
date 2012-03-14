@@ -120,4 +120,51 @@ namespace campusMap.Models
         
  
     }
+
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class media_types : json_autocomplete<media_types>, campusMap.Models.Ijson_autocomplete
+    {
+        public static int ad = 2;
+        public static int place = 1;
+
+        private int media_type_id;
+        [PrimaryKey("media_type_id")]
+        virtual public int id
+        {
+            get { return media_type_id; }
+            set { media_type_id = value; }
+        }
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+        private string Attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return Attr; }
+            set { Attr = value; }
+        }
+        /*private IList<media_repo> Media;
+        [HasMany(Lazy=true, BatchSize=30)]
+        virtual public IList<media_repo> media
+        {
+            get { return Media; }
+            set { Media = value; }
+        }*/
+        private IList<media_repo> Media_typed;
+        [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "media_to_media_types", ColumnKey = "media_id", ColumnRef = "media_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<media_repo> media_typed
+        {
+            get { return Media_typed; }
+            set { Media_typed = value; }
+        }
+
+
+    }
+
 }

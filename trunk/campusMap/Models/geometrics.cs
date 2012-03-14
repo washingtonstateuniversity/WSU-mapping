@@ -20,7 +20,7 @@ namespace campusMap.Models
 {
 
     [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class geometrics : ActiveRecordBase<place>
+    public class geometrics : ActiveRecordBase<geometrics>
     {
         protected HelperService helperService = new HelperService();
 
@@ -199,9 +199,9 @@ namespace campusMap.Models
 
 
 
-        private IList<style> _style;
-        [HasAndBelongsToMany(typeof(style), Lazy = true, Table = "geometrics_to_style", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<style> style
+        private IList<styles> _style;
+        [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_style", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<styles> style
         {
             get { return _style; }
             set { _style = value; }
@@ -255,5 +255,104 @@ namespace campusMap.Models
 
 
     }
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class geometrics_types : ActiveRecordBase<geometrics_types>
+    {
+        private int geometrics_type_id;
+        [PrimaryKey("geometrics_type_id")]
+        virtual public int id
+        {
+            get { return geometrics_type_id; }
+            set { geometrics_type_id = value; }
+        }
+
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+
+        private string Attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return Attr; }
+            set { Attr = value; }
+        }
+        private IList<geometrics> geometrics;
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics> Geometrics
+        {
+            get { return geometrics; }
+            set { geometrics = value; }
+        }
+
+        private IList<style_option_types> _ops;
+        [HasAndBelongsToMany(typeof(style_option_types), Lazy = true, Table = "style_option_types_to_geometrics_to_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<style_option_types> ops
+        {
+            get { return _ops; }
+            set { _ops = value; }
+        }
+
+
+    }
+
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class geometrics_media : ActiveRecordBase<geometrics_media>
+    {
+        private int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        private geometrics Geometric;
+        [BelongsTo("geometric_id")]
+        virtual public geometrics geometric
+        {
+            get { return Geometric; }
+            set { Geometric = value; }
+        }
+        private media_repo media;
+        [BelongsTo("media_id")]
+        virtual public media_repo Media
+        {
+            get { return media; }
+            set { media = value; }
+        }
+        private int order;
+        [Property]
+        virtual public int geometric_order
+        {
+            get { return order; }
+            set { order = value; }
+        }
+    }
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class geometrics_status
+    {
+        private int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        private String title;
+        [Property]
+        virtual public String Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
+    }
+
 }
 

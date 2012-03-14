@@ -183,4 +183,26 @@ namespace campusMap.Models
 
 
     }
+
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class access_levels
+    {
+        private int access_level_id;
+        [PrimaryKey("access_level_id")]
+        virtual public int id
+        {
+            get { return access_level_id; }
+            set { access_level_id = value; }
+        }
+        private String Title;
+        [Property]
+        virtual public String title
+        {
+            get { return Title; }
+            set { Title = value; }
+        }
+    }
+
+
 }

@@ -1,0 +1,10 @@
+<li class="pod opRow ui-state-highlight op_polygon op_rectangle op_circle" #if($hidden) style="display: none;"#end>
+<span class="option_handle"></span>
+
+	<span class="lable">Fill Color</span>
+	<span class="controll">
+		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" />
+<br/>
+		<input type="text"  value="$!{opt.value}" name="style.value[${opt.id}].${opt.name}"  class="color_picker"  rel="${opt.name}"/>
+	</span>
+</li>

@@ -1,0 +1,10 @@
+<li class="pod opRow ui-state-highlight op_marker" #if($hidden) style="display: none;"#end>
+<span class="option_handle"></span>
+
+	<span class="lable">Clickable</span>
+	<span class="controll">
+		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" />
+<br/>
+		<input type="checkbox"  value="$!{opt.value}" name="style.value[${opt.id}].${opt.name}"   rel="${opt.name}"/>
+	</span>
+</li>

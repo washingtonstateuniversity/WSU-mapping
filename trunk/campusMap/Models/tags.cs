@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace campusMap.Models
 {
-    [ActiveRecord(Lazy=true, BatchSize=5)]
+    [ActiveRecord(Lazy=true, BatchSize=30)]
     public class tags : json_autocomplete<tags>, campusMap.Models.Ijson_autocomplete
     {
         private int tag_id;
@@ -23,7 +23,6 @@ namespace campusMap.Models
             get { return tag_id; }
             set { tag_id = value; }
         }
-
         private string Name;
         [Property]
         virtual public string name
@@ -47,4 +46,39 @@ namespace campusMap.Models
             set { places = value; }
         }
      }
+
+    [ActiveRecord(Lazy = true, BatchSize =30)]
+    public class usertags : ActiveRecordBase<usertags>
+    {
+        private int usertag_id;
+        [PrimaryKey("usertag_id")]
+        virtual public int id
+        {
+            get { return usertag_id; }
+            set { usertag_id = value; }
+        }
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+
+        private string Attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return Attr; }
+            set { Attr = value; }
+        }
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_usertags", ColumnKey = "usertag_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
+        }
+    }
+
 }

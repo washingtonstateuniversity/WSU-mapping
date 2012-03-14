@@ -1688,3 +1688,5 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
    --- End of inner exception stack trace ---
 2012-02-21 10:41:39,603 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'style_id'.
 2012-02-21 10:41:39,645 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'style_id'.
+2012-03-06 13:06:47,735 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'type'.
+2012-03-06 13:06:47,789 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'type'.

@@ -30,22 +30,36 @@
 		#if( $geometric.id==0 || $geometric.tmp)
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
-		$sp_type
-<select name="geom_type">
-					<option value="">Select one...</option>
-					#foreach($_type in $spatial_types)
-						<option class="type" value="$_type" #if($sp_type == $_type) selected="selected" #end>$_type</option>
-					#end
-<!--
-	<option>LINESTRING</option>
-	<option>POLYGON</option>
-	<option>MULTIPOINT</option>
-	<option>MULTILINESTRING</option>
-	<option>MULTIPOLYGON</option>
-	<option>GEOMETRYCOLLECTION</option>
-	-->
-</select>
+
 		<div id="Basic">
+		$sp_type - <br/>
+		<p style="float:right;width:46%;">Geometry Type:<br/>  
+			<select name="geom_type" id="style_of">
+				<option value="" #if($ele.type=='')selected='selected'#end>Select a geometry type</option>
+				<option value="marker" #if($ele.type=='marker')selected='selected'#end>Marker</option>
+				<option value="polyline" #if($ele.type=='polyline')selected='selected'#end>Line</option>
+				<option value="polygon" #if($ele.type=='polygon')selected='selected'#end>Polygon</option>
+				<option value="rectangle" #if($ele.type=='rectangle')selected='selected'#end>Rectangle</option>
+				<option value="circle" #if($ele.type=='circle')selected='selected'#end>Circle</option>
+			</select>
+		</p>	
+		<p>Name:<br/>
+			<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+		</p>
+		
+		<p style="width:46%;">Geometry Style:<br/>  
+			<select name="$geometric.style" id="style_of">
+				<option value="" #if($ele.type=='')selected='selected'#end>using this style</option>
+				
+				
+					#foreach($style in $_styles)
+						<option class="type" value="$style.id" #if($geo_style == $style) selected="selected" #end>$style.name</option>
+					#end
+				
+			</select>
+		</p>
+		
+		
 			<form>$Form.HiddenField("place.id")
 				<fieldset><legend>Location</legend>
 				<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>

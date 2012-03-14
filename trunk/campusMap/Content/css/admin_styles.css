@@ -387,6 +387,12 @@ span.UinEdit{    background-color: #E2E2E2;
 .geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 54px; z-index: 9;}
 .geometrics.editor #map_canvas{width:500px;}
 
+.geometrics.new .ui-tabs-panel {margin-right:510px; min-height:535px;}
+.geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:82px; z-index: 9;}
+.geometrics.new #map_canvas{width:500px;}
+
+
+
 .pod{  display: inline-block;
     min-height: 29px;}
 .pod.editing{}
@@ -415,19 +421,43 @@ fieldset{padding: 4px 8px 10px;}
 
 
 .pagination.top{float:right;margin-right:5px;margin-top:7px;width:100%}
-#sortable1,#sortable2 { min-height:75px; margin:0px !important;padding:0px !important;}
+.sortStyleOps{ min-height:75px; margin:0px !important;padding:0px !important;}
 
-#sortable1{
+.sortStyleOps.orgin{
 	background-color: #E2E2E2;
     border: 2px dashed #CCCCCC;
     padding: 10px !important;
 }
-#sortable1 .ui-sortable-placeholder {
+.sortStyleOps.orgin .ui-sortable-placeholder {
 	background-color: #f18989;
     border: 2px dashed #5f1212;	
 }
 
-#sortable2 .controll{display:none;}
+.sortStyleOps.pool .controll{display:none;}
 .connectedSortable li{width:100%;}
-#sortable2.connectedSortable li {cursor: move;font-size: 11px;line-height: 11px;width: 75px;}
+.sortStyleOps.pool.connectedSortable li {cursor: move;font-size: 11px;line-height: 11px;width: 75px;overflow: hidden;}
+.opacity_area{}
+.opacity_area .controll input{width:35px;}
+.opacity{width:150px;display:inline-block;}
 
+.weight_area .controll input{width:35px;}
+.weight{width:150px;display:inline-block;}
+
+
+
+/*#smaple_area fieldset {background: url("/Content/images/big_logo.png") no-repeat scroll center center transparent;}
+#smaple_area fieldset:hover {background: url("/Content/images/big_logo.png") no-repeat scroll center center transparent;}
+#map_canvas{opacity: 0.5;}*/
+
+.option_handle{
+    background: url(/Content/images/drag_handle.png) repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #E2E2E2;
+    display: inline-block;
+    float: left;
+    height: 45px;
+    width: 15px;
+	cursor:move;
+}
+.sortStyleOps .lable{
+	
+	}

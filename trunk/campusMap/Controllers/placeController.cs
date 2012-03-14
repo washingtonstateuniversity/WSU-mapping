@@ -172,7 +172,6 @@ namespace campusMap.Controllers
                 buttons.Add("delete");
                 buttons.Add("publish");
                 buttons.Add("view");
-                buttons.Add("ho");
                 PropertyBag["draftButtonSet"] = buttons;  
 
             //SETUP SEARCHID and parts

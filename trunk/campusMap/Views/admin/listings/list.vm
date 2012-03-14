@@ -86,19 +86,19 @@
 		</div>
 	</div>
 	#if($styles)
-	<div id="_styles" class="tabedArea">
-		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
-			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
-			  <p>
-				<a href="$siteroot/${controller.getView()}/new_style.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create style
-				</a>&nbsp;
-			  </p>
+		<div id="_styles" class="tabedArea">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
+				  <p>
+					<a href="$siteroot/${controller.getView()}/new_style.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create style
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.TotalItems)</h3>
+				#parse("/admin/maps/styles/list.vm")	
 			</div>
-			<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.TotalItems)</h3>
-			#parse("/admin/styles/list.vm")	
-		</div>
-	</div>	
+		</div>	
 	#end
 	
 	<div id="_Fields" class="tabedArea" style="">

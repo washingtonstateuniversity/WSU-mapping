@@ -6,9 +6,9 @@ var c=0;
     utility functions 
     -----------------------*/
 function async_load_css(url,callback){var headID = document.getElementsByTagName("head")[0],node = document.createElement('link');node.type = 'text/css';node.rel = 'stylesheet';node.href = url;node.media = 'screen';headID.appendChild(node);}
-function async_load_js(url,callback){var headID = document.getElementsByTagName("head")[0], s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;var x = document.getElementsByTagName('script')[0];if(typeof(callback.onreadystatechange)==='undefined'){s.onreadystatechange = callback.onreadystatechange;s.onload = callback.onload; }
-
-headID.appendChild(s);}
+function async_load_js(url,callback){var headID = document.getElementsByTagName("head")[0], s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;var x = document.getElementsByTagName('script')[0];if(typeof(callback)!=='undefined' && typeof(callback.onreadystatechange)==='undefined'){s.onreadystatechange = callback.onreadystatechange;s.onload = callback.onload; } headID.appendChild(s);}
+function defined(obj){return typeof(obj)!=='undefined';}
+function shuffle(ary){return ary.sort(function(){ Math.random() - 0.5})}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // jeremy's URL funtions
@@ -109,11 +109,13 @@ Array.prototype.remove = function(from, to) {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function clearCount(timer){
-	/// clear the time from timer
-	clearTimeout(timers_arr[timer]);
-	/// Make sure it's clear  
-	timers_arr[''+timer+'']=0;
-	delete timers_arr[''+timer+''];
+	if(typeof(timers_arr)!=='undefined' && typeof(timers_arr[timer])!=='undefined'){
+		/// clear the time from timer
+		clearTimeout(timers_arr[timer]);
+		/// Make sure it's clear  
+		timers_arr[''+timer+'']=0;
+		delete timers_arr[''+timer+''];
+	}
 }
 function setCount(timer,time,func){
 	if(typeof(timers_arr)==='undefined'){var timers_arr = new Array();}

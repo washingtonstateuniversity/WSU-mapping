@@ -226,6 +226,302 @@ function jsonloadPage(id,clear,keepMarkers,keepPolys,keepibLabels) {
 
 
 
+function get_wsu_logo_shape(){
+
+	var Coords = [];
+
+	var shaped = [];
+	var shape = "-117.151680,46.737567,\n-117.152281,46.737390,\n-117.152753,46.737067,\n-117.153225,46.736655,\n-117.153397,46.736155,\n-117.153482,46.735449,\n-117.153268,46.734831,\n-117.153053,46.733949,\n-117.152710,46.732919,\n-117.152581,46.732331,\n-117.152538,46.731743,\n-117.152710,46.731066,\n-117.153010,46.730684,\n-117.153568,46.730390,\n-117.154341,46.730272,\n-117.155242,46.730272,\n-117.155199,46.730860,\n-117.155199,46.731301,\n-117.155800,46.730772,\n-117.156572,46.730125,\n-117.157817,46.729537,\n-117.156658,46.729448,\n-117.155199,46.729331,\n-117.153826,46.729213,\n-117.152796,46.729095,\n-117.151937,46.729125,\n-117.151251,46.729389,\n-117.150650,46.729860,\n-117.150350,46.730419,\n-117.150307,46.731184,\n-117.150650,46.732272,\n-117.150865,46.733155,\n-117.151165,46.734243,\n-117.151079,46.734978,\n-117.150693,46.735419,\n-117.150092,46.735861,\n-117.149405,46.736037,\n-117.148547,46.736008,\n-117.148204,46.735861,\n-117.147861,46.735567,\n-117.147560,46.735184,\n-117.147517,46.735684,\n-117.147646,46.736155,\n-117.147517,46.736390,\n-117.147517,46.736655,\n-117.145371,46.736684,\n-117.145371,46.736861,\n-117.147517,46.736890,\n-117.147560,46.737008,\n-117.145500,46.737272,\n-117.145543,46.737449,\n-117.147646,46.737243,\n-117.147646,46.737361,\n-117.145715,46.737831,\n-117.145844,46.738037,\n-117.147903,46.737596,\n-117.148204,46.737831,\n-117.150393,46.737714,\n-117.150092,46.738714,\n-117.150393,46.738714,\n-117.150865,46.737655,\n-117.151294,46.737655,\n-117.150865,46.738772,\n-117.151122,46.738743";
+	
+	var Rows=shape.split('\n');
+	if(Rows.length){
+		for(i=0; i<=Rows.length-1; i++){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		}
+	}
+	Coords.push(shaped.reverse());
+
+	var shaped = [];
+	var shape = "-117.149577,46.736390,\n-117.150435,46.736537,\n-117.150908,46.736508,\n-117.151508,46.736449,\n-117.151937,46.736243,\n-117.152238,46.735949,\n-117.152367,46.735537,\n-117.152023,46.735743,\n-117.151594,46.736037,\n-117.151122,46.736184,\n-117.150564,46.736302,\n-117.150221,46.736361";
+	
+	var Rows=shape.split('\n');
+	if(Rows.length){
+		for(i=0; i<=Rows.length-1; i++){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		}
+	}
+	Coords.push(shaped);
+
+	var shaped = [];
+	var shape = "-117.153010,46.737331,\n-117.154212,46.737037,\n-117.155070,46.736625,\n-117.156014,46.736155,\n-117.156487,46.735831,\n-117.155628,46.735214,\n-117.155328,46.735449,\n-117.155285,46.734802,\n-117.155242,46.734008,\n-117.155714,46.734449,\n-117.156143,46.734772,\n-117.155929,46.734978,\n-117.156658,46.735625,\n-117.157130,46.735214,\n-117.157688,46.734537,\n-117.157903,46.734096,\n-117.156873,46.733508,\n-117.156744,46.733772,\n-117.156487,46.733361,\n-117.156487,46.732919,\n-117.156572,46.732507,\n-117.156701,46.732213,\n-117.156959,46.732655,\n-117.157216,46.732890,\n-117.157044,46.733272,\n-117.157946,46.733802,\n-117.158418,46.733066,\n-117.158976,46.732302,\n-117.159662,46.731566,\n-117.160220,46.731154,\n-117.159019,46.731301,\n-117.158074,46.731478,\n-117.158160,46.730860,\n-117.158504,46.730095,\n-117.159019,46.729507,\n-117.158160,46.729684,\n-117.157130,46.730154,\n-117.156229,46.730860,\n-117.155457,46.731625,\n-117.155156,46.732184,\n-117.154899,46.731596,\n-117.154813,46.730566,\n-117.154427,46.730537,\n-117.153912,46.730566,\n-117.153482,46.730743,\n-117.153654,46.730713,\n-117.153225,46.731007,\n-117.153010,46.731507,\n-117.153010,46.732184,\n-117.153139,46.733008,\n-117.153397,46.733713,\n-117.153654,46.734537,\n-117.153869,46.735302,\n-117.153869,46.735919,\n-117.153783,46.736419,\n-117.153482,46.736802,\n-117.153311,46.737067,\n-117.153010,46.737331";	
+	var Rows=shape.split('\n');
+	if(Rows.length){
+		for(i=0; i<=Rows.length-1; i++){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		}
+	}
+	Coords.push(shaped);
+	
+	var shaped = [];
+	var shape = "-117.150521,46.733684,\n-117.150435,46.733066,\n-117.150307,46.732537,\n-117.150092,46.732096,\n-117.149792,46.731596,\n-117.149448,46.731213,\n-117.148976,46.730919,\n-117.148461,46.730801,\n-117.148075,46.730772,\n-117.147689,46.730801,\n-117.147346,46.730949,\n-117.147045,46.731125,\n-117.146745,46.731449,\n-117.146616,46.731860,\n-117.146616,46.732243,\n-117.146702,46.732743,\n-117.146788,46.733213,\n-117.146916,46.733508,\n-117.147131,46.733919,\n-117.147088,46.733537,\n-117.147088,46.733155,\n-117.147217,46.732802,\n-117.147431,46.732478,\n-117.147818,46.732272,\n-117.148290,46.732184,\n-117.148719,46.732213,\n-117.149277,46.732419,\n-117.149620,46.732625,\n-117.150006,46.732919,\n-117.150221,46.733155,\n-117.150350,46.733390,\n-117.150521,46.733684";	
+	var Rows=shape.split('\n');
+	if(Rows.length){
+		for(i=0; i<=Rows.length-1; i++){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		}
+	}
+	Coords.push(shaped);
+
+	var shaped = [];
+	var shape = "-117.150006,46.730154,\n-117.150221,46.729684,\n-117.150693,46.729331,\n-117.151165,46.729125,\n-117.149706,46.729095,\n-117.149749,46.729566,\n-117.149835,46.729890,\n-117.150006,46.730154";	
+	var Rows=shape.split('\n');
+	if(Rows.length){
+		for(i=0; i<=Rows.length-1; i++){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		}
+	}
+	Coords.push(shaped);
+	return Coords;
+}
+
+function create_default_shape(map,type,option){
+	switch(type){
+		case "polygon" :
+			// default ploygon style
+				_option = {paths: get_wsu_logo_shape(),strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24};
+				DEFAULT_overlay=apply_element(map,type,_option);
+						google.maps.event.addListener(DEFAULT_overlay,"mouseover",function(){ 
+							this.setOptions({fillColor: "#a90533"}); 
+						});  
+						google.maps.event.addListener(DEFAULT_overlay,"mouseout",function(){ 
+							this.setOptions({fillColor: "#5f1212"}); 
+						});
+				return DEFAULT_overlay;
+			break;
+		case "rectangle" :
+				return null;
+			break;
+		case "circle" :
+				return null;
+			break;			
+		case "polyline" :
+			// default ploygon style
+			DEFAULT_polylines = [];
+			var polyline =get_wsu_logo_shape();
+					if(polyline.length){
+						for(i=0; i<=polyline.length-1; i++){
+							_option = {path: polyline[i],strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2};
+							DEFAULT_overlay=apply_element(map,type,_option);
+							DEFAULT_polylines.push(DEFAULT_overlay);
+							google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
+								for(i=0; i<=DEFAULT_polylines.length-1; i++){
+									DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
+								}
+							});  
+							google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
+								for(i=0; i<=DEFAULT_polylines.length-1; i++){
+									DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
+								}
+							});
+						}
+					}
+					_option = {path:[
+						new google.maps.LatLng("46.732537","-117.160091"),
+						new google.maps.LatLng("46.732596","-117.146745")
+						]
+					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
+					apply_element(map,type,_option);
+				return polyline;
+			break;				
+		case "marker" :
+				return null;
+			break;
+	};
+}
+
+
+function empty_input_recursive(obj){
+	(typeof obj.val() === 'function')
+		?obj.val(''):(typeof obj.find(':input').val() === 'function')
+			?obj.find(':input').val(''):null;
+}
+
+
+function rebuild_example(obj,map,user_event){
+	var rest_Options=[];
+	empty_input_recursive( obj );
+	
+	obj.each(function(){
+		if(
+			$(this).closest('.pod').css('display') != 'none' 
+			&& ( $(this).is(':checked') 
+				|| $(this).is(':selected') 
+				|| ($(this).val()!='' 
+					&& ($(this).not('[type=checkbox]')
+						&&$(this).not('[type=select]'))
+					)
+				) 
+			&& $(this).not('[type=hidden]') 
+			&& typeof( $(this).attr('rel') ) !== 'undefined' 
+			){
+			//alert($(this).attr('rel'));
+		   rest_Options[ $(this).attr('rel') ] = ($(this).hasClass('color_picker') ? '#' : '') +''+$(this).val();
+		}
+	});
+	if(user_event == "rest"){user_event="mouseout";}
+	google.maps.event.clearListeners(DEFAULT_overlay, user_event); 
+	google.maps.event.addListener(DEFAULT_overlay,user_event,function(){ 
+		this.setOptions(rest_Options); 
+	});
+	google.maps.event.trigger(DEFAULT_overlay, 'mouseover'); 
+	google.maps.event.trigger(DEFAULT_overlay, 'mouseout'); 
+}
+function apply_element(map,type,style){
+	element = create_map_element(type,style,map);
+	//apply_events(map,element,style.events);
+	element_pool.push(element);
+	//alert(dump(element));
+	element.setMap(map);
+	return element;
+}
+function create_map_element(type,op,map){
+	var _op={};
+	defined(map)				?_op.map=map:null;
+	defined(op.clickable)		?_op.clickable=op.clickable:null;
+	defined(op.visible)			?_op.visible=op.visible:null;
+	defined(op.zIndex)			?_op.zIndex=op.zIndex:null;
+	
+	switch(type){
+		case "polygon" :
+					defined(op.editable)		?_op.editable=op.editable:null;
+					defined(op.geodesic)		?_op.geodesic=op.geodesic:null;
+					defined(op.paths)			?_op.paths=op.paths:null;
+					defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+					defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+					defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+					defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+					defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+				return new google.maps.Polygon(_op);
+			break;
+		case "rectangle" :
+					defined(op.editable)		?_op.editable=op.editable:null;
+					defined(op.bounds)			?_op.bounds=op.bounds:null;
+					defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+					defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+					defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+					defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+					defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+				return new google.maps.Rectangle(_op);
+			break;
+		case "circle" :
+					defined(op.editable)		?_op.editable=op.editable:null;
+					defined(op.center)			?_op.center=op.center:null;
+					defined(op.radius)			?_op.radius=op.radius:null;
+					defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+					defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+					defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+					defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+					defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+				return new google.maps.Circle(_op);
+			break;			
+		case "polyline" :
+					defined(op.editable)		?_op.editable=op.editable:null;
+					defined(op.geodesic)		?_op.geodesic=op.geodesic:null;
+					defined(op.path)			?_op.path=op.path:null;
+					defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+					defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+					defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+				return new google.maps.Polyline(_op);
+			break;				
+		case "marker" :
+					defined(op.animation)		?_op.animation=op.animation:null;
+					defined(op.cursor)			?_op.cursor=op.cursor:null;
+					defined(op.draggable)		?_op.draggable=op.draggable:null;
+					defined(op.flat)			?_op.flat=op.flat:null;
+					defined(op.icon)			?_op.icon=op.icon:null;
+					defined(op.optimized)		?_op.optimized=op.optimized:null;
+					defined(op.position)		?_op.position=op.position:null;					
+					defined(op.raiseOnDrag)		?_op.raiseOnDrag=op.raiseOnDrag:null;					
+					defined(op.shadow)			?_op.shadow=op.shadow:null;	
+					defined(op.shape)			?_op.shape=op.shape:null;						
+					defined(op.title)			?_op.title=op.title:null;	
+				return new google.maps.Marker(_op);
+			break;
+	};
+}
+
+
+	function create_map_element__________(type,op,map){
+		var _op={};
+		defined(map)?_op.map=map:null;
+		defined(op.clickable)		?_op.clickable=op.clickable:null;
+		defined(op.visible)			?_op.visible=op.visible:null;
+		defined(op.zIndex)			?_op.zIndex=op.zIndex:null;
+	
+		if( ["polygon","polyline","rectangle","circle"].indexOf(type)!== -1  ){
+						defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+						defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+						defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+		}
+		if( ["polygon","rectangle","circle"].indexOf(type)!== -1  ){
+						defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+						defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+		}
+		if( ["polygon","polyline"].indexOf(type)!== -1  ){
+						defined(op.geodesic)		?_op.geodesic=op.geodesic:null;			
+		}
+		if(type == "marker"){
+						defined(op.animation)		?_op.animation=op.animation:null;
+						defined(op.cursor)			?_op.cursor=op.cursor:null;
+						defined(op.draggable)		?_op.draggable=op.draggable:null;
+						defined(op.flat)			?_op.flat=op.flat:null;
+						defined(op.icon)			?_op.icon=op.icon:null;
+						defined(op.optimized)		?_op.optimized=op.optimized:null;
+						defined(op.position)		?_op.position=op.position:null;					
+						defined(op.raiseOnDrag)		?_op.raiseOnDrag=op.raiseOnDrag:null;					
+						defined(op.shadow)			?_op.shadow=op.shadow:null;	
+						defined(op.shape)			?_op.shape=op.shape:null;						
+						defined(op.title)			?_op.title=op.title:null;	
+		}
+		switch(type){
+			case "polygon" :
+					return new google.maps.Polygon(_op);
+				break;
+			case "rectangle" :
+					return new google.maps.Rectangle(_op);
+				break;
+			case "circle" :
+					return new google.maps.Circle(_op);
+				break;			
+			case "polyline" :
+					return new google.maps.Polyline(_op);
+				break;				
+			case "marker" :
+					return new google.maps.Marker(_op);
+				break;	
+		};
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function mapOverlay(){
@@ -1400,6 +1696,9 @@ function placemarkobject() {
     this.hole = 0;
     this.ID = 0;
 }
+
+
+
 function createplacemarkobject() {
     var thisplacemark = new placemarkobject();
     placemarks.push(thisplacemark);
@@ -3299,9 +3598,20 @@ function create_overlay(map,style){
 	overlay = new google.maps.Polygon(style);
 	overlay_pool.push(overlay);
 	overlay.setMap(map);
+	return overlay;
 }
 
-
+function create_line(map,style){
+	overlay = new google.maps.Polyline(style);
+	if (typeof(google.maps.Polyline.prototype.runEdit) === "undefined") {
+		async_load_js('/Content/js/polylineEdit/src/polylineEdit.js',function(){overlay.runEdit(true);});
+	}else{
+		overlay.runEdit(true);
+	}
+	
+	overlay_pool.push(overlay);
+	overlay.setMap(map);
+}
 
 
 function addpoly_poly(map){
@@ -3324,7 +3634,17 @@ function addpoly_poly(map){
 			fillColor: "#5f1212",
 			fillOpacity: 0.42
 		};
-		create_overlay(map,style);
+		/*$('#style_of').change(function(){
+			var sel = $(this).val();
+			 $('.pod').fadeOut('fast');
+			 $('.pod.op_'+sel).fadeIn('fast');
+			if(defined(DEFAULT_overlay)){
+				DEFAULT_overlay.setMap(null);
+				DEFAULT_overlay.delete;
+			}
+			create_map_element($('#style_of :selected').text(),style,map);
+		});*/
+		create_map_element($('#style_of :selected').text(),style,map);
 	}
 }
 
@@ -3355,16 +3675,17 @@ function initialize() {
 		var styles_2 = [{"featureType":"poi.business","elementType":"labels","stylers":[{"visibility":"off"}]}];
 		var styles_2 = new google.maps.StyledMapType(styles_2, {name:"No Businesses"});	  
 	
-		var myOptions = {
+	
+	var baseOptions = {
 			zoom: 15,
-			center: pullman,
+			center: pullman
+		}
+	
+	
+	
+		var myOptions = {
 			draggableCursor: 'default',
 			draggingCursor: 'pointer',
-			scaleControl: true,
-			mapTypeControl: true,
-			mapTypeControlOptions:{style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			mapTypeControlOptions: {mapTypeIds: ["style0", "style1", "style2"]}	
 		}
 		var noPOIbiz = [
 			{
@@ -3375,11 +3696,28 @@ function initialize() {
 				]
 			}
 		];
-	
+
+	var controlState = controlsIn;//($('.sortStyleOps.orgin').length)?controlsOut:controlsIn;
+
    geocoder = new google.maps.Geocoder();
     //var latlng = new google.maps.LatLng(59.914063, 10.737874);//(45.0,7.0);//45.074723, 7.656433
 
-    map = new google.maps.Map(gob('map_canvas'),myOptions);
+    map = new google.maps.Map(gob('map_canvas'), jQuery.extend(jQuery.extend(baseOptions,myOptions),controlState));
+
+	var mapTypeControls= {		mapTypeControlOptions:{style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeControlOptions: {mapTypeIds: ["style0", "style1", "style2"]}	
+	};
+	map.setOptions(mapTypeControls); 
+	
+	/*
+	if (typeof(google.maps.Polygon.prototype.runEdit) === "undefined") {
+		async_load_js('/Content/js/polygonEdit/src/polygonEdit.js');
+	}
+	if (typeof(google.maps.Polyline.prototype.runEdit) === "undefined") {
+		async_load_js('/Content/js/polylineEdit/src/polylineEdit.js');
+	}	
+	*/
     polyPoints = new google.maps.MVCArray(); // collects coordinates
     createplacemarkobject();
     createlinestyleobject();
@@ -3397,6 +3735,14 @@ function initialize() {
         gob('over').options[1].text = latLngStr6;
     });
 		
+
+
+
+
+
+
+
+
 
 		map.mapTypes.set("style0", styles_0);
 		map.mapTypes.set("style1", styles_1);
@@ -3578,6 +3924,79 @@ function initialize() {
 		});
 	}
 	addpoly_poly(map);
+	if($('.sortStyleOps.orgin').length){
+		//make_wsu_logo_map(map,"polygon");
+		if($('#style_of').val()!=''){
+			create_default_shape(map,$('#style_of :selected').text());
+			$('#style_of').trigger('change');
+		}
+		
+		
+   //add listeners to show or hide the controls
+   /*     google.maps.event.addDomListener(map.getDiv(),
+                                 'mouseover', 
+                                 function(e) {
+                                    e.cancelBubble=true;
+                                    if(!map.hover){
+                                      map.hover=true;
+                                      map.setOptions(jQuery.extend(myOptions,controlsIn));
+                                    }
+                                  });
+
+        google.maps.event.addDomListener($('body'), 
+                                 'mouseover', 
+                                 function(e){
+									 if(map.hover){
+										 map.setOptions(jQuery.extend(myOptions,controlsOut));
+										 map.hover=false;
+										}
+								  });
+        google.maps.event.addDomListener(map.getDiv(), 
+                                 'mouseout', 
+                                 function(e){
+									 if(map.hover){
+										 map.setOptions(jQuery.extend(myOptions,controlsOut));
+										 map.hover=false;
+									  }
+								  });
+*/
+		
+		google.maps.event.addListener(map, 'mouseover', function() { 
+												 //map.setOptions(); 
+												// map.setOptions(jQuery.extend(myOptions,controlsIn));
+										  });
+		google.maps.event.addListener(map, 'mouseout', function() { 
+												 //map.setOptions({disableDefaultUI:false}); 
+												 //map.setOptions(jQuery.extend(myOptions,controlsOut));
+												 setZoomTooltip;
+										  });	  
+		google.maps.event.addListener(map, 'zoom_changed', setZoomTooltip);
+	}
+}
+
+function getResolution(lat, zoom, tile_side){
+  var grid = tile_side || 256;
+  var ret = {};
+  ret.meterPerPixel = 2 * Math.PI * 6378100 * Math.cos(lat * Math.PI/180) / Math.pow(2, zoom) / grid;
+  ret.cmPerPixel = ret.meterPerPixel * 100;
+  ret.mmPerPixel = ret.meterPerPixel * 1000;
+  ret.pretty = ( Math.round(ret.meterPerPixel) ) + ' meters/px';
+  if (ret.meterPerPixel < 10)	{ ret.pretty = ( Math.round( ret.meterPerPixel * 10 ) / 10 ) +' meters/px';}
+  if (ret.meterPerPixel < 2)	{ ret.pretty = ( Math.round( ret.cmPerPixel ) ) + ' cm/px';}
+  if (ret.cmPerPixel < 10)		{ ret.pretty = ( Math.round( ret.cmPerPixel * 10 ) / 10 ) + ' cm/px';}
+  if (ret.cmPerPixel < 2) 		{ ret.pretty = ( Math.round( ret.mmPerPixel ) ) + ' mm/px';}
+  return ret;
+}
+
+function setZoomTooltip(){
+	var res = getResolution(map.getCenter().lat(), map.getZoom()).pretty;
+	var text = 'Zoom = ' + map.getZoom() + '  (' + res + ')';
+	var divs = map.getDiv().getElementsByTagName('div');
+	for (var i=0, len=divs.length; i<len; i++){
+		if (divs[i].title.toLowerCase().indexOf("zoom") > -1) {
+			divs[i].title = text;
+		}
+	}
 }
 
 
