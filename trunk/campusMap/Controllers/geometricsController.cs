@@ -51,15 +51,11 @@ namespace campusMap.Controllers
             return;
         }
 
-
-
         public void Index()
         {
             //ActiveRecordBase<Block>.FindAll();
             PropertyBag["AccessDate"] = DateTime.Now;           
         }
-
-
 
         public void List(int page, int searchId, string status)
         {
@@ -261,7 +257,71 @@ namespace campusMap.Controllers
         }
 
 
+        public void new_field()
+        {
+            field_types field = new field_types();
+            PropertyBag["field"] = field;
+            place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["p_models"] = p_models;
 
+
+            RenderView("../admin/fields/new");
+        }
+        public void edit_field(int id)
+        {
+            field_types field = ActiveRecordBase<field_types>.Find(id);
+            PropertyBag["field"] = field;
+
+            geometrics_types[] g_type = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["p_models"] = g_type;
+
+            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
+            string ele_str = FieldsService.getfieldmodel(ele);
+
+
+            PropertyBag["html_ele"] = ele_str;
+            PropertyBag["ele"] = ele;
+
+            RenderView("../admin/fields/new");
+        }
+
+        public void new_type()
+        {
+            place_types type = new place_types();
+            PropertyBag["type"] = type;
+            RenderView("../admin/types/new");
+        }
+        public void edit_type(int id)
+        {
+            geometrics_types type = ActiveRecordBase<geometrics_types>.Find(id);
+            PropertyBag["type"] = type;
+            RenderView("../admin/types/new");
+        }
+
+        public void new_style()
+        {
+            styles STYLE = new styles();
+            zoom_levels level = ActiveRecordBase<zoom_levels>.Find(1);
+            List<zoom_levels> levels = new List<zoom_levels>();
+            levels.Add(level);
+            STYLE.zoom = levels; // priming the levels with the all zoom level
+
+            PropertyBag["style"] = STYLE;
+            PropertyBag["style_types"]  = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["style_events"] = ActiveRecordBase<geometric_events>.FindAll();
+            PropertyBag["zoom_levels"]  = ActiveRecordBase<zoom_levels>.FindAll();
+            RenderView("../admin/maps/styles/new");
+        }
+        public void edit_style(int id)
+        {
+            styles STYLE = ActiveRecordBase<styles>.Find(id);
+            PropertyBag["style"] = STYLE;
+            PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
+            geometric_events[] events = ActiveRecordBase<geometric_events>.FindAll();
+            PropertyBag["style_events"] = events;
+            PropertyBag["zoom_levels"] = ActiveRecordBase<zoom_levels>.FindAll();
+            RenderView("../admin/maps/styles/new");
+        }
 
         public void setStatus(int id, int status, bool ajax)
         {
@@ -421,7 +481,6 @@ namespace campusMap.Controllers
             pointNode.AppendChild(coordsNode);
             return pointNode;
         }
-
         public XmlElement createLineString(XmlDocument kmlDoc, SqlGeography shape, String Z)
         {
             XmlElement lineStringNode = kmlDoc.CreateElement("LineString");
@@ -436,7 +495,6 @@ namespace campusMap.Controllers
             lineStringNode.AppendChild(coordsNode);
             return lineStringNode;
         }
-
         public XmlElement createPolygon(XmlDocument kmlDoc, SqlGeography shape, String Z)
         {
             XmlElement polygonNode = kmlDoc.CreateElement("Polygon");
@@ -485,14 +543,12 @@ namespace campusMap.Controllers
             }
             return coordsString.ToString();
         }
-
         public string outputRawPoint(SqlGeography shape)
         {
             StringBuilder coordsString = new StringBuilder("");
             coordsString.Append(string.Format("{0},{1},{2}", shape.Lat.ToString(), shape.Long.ToString(), 0));
             return coordsString.ToString();
         }
-
         public string outputRawLineString(SqlGeography shape)
         {
             StringBuilder coordsString = new StringBuilder("");
@@ -506,15 +562,12 @@ namespace campusMap.Controllers
 
 
 
-
         public void _edit(int id, int page, bool ajax)
         {
             CancelView();
-
-
             PropertyBag["ajaxed"] = ajax;
-
-            campusMap.Services.LogService.writelog("Editing geometric " + id);
+            LogService.writelog("Editing geometric " + id);
+            
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
@@ -522,7 +575,7 @@ namespace campusMap.Controllers
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
             string sp_type = spatial.STGeometryType().ToString().ToUpper();
-            PropertyBag["sp_type"] = sp_type;
+            PropertyBag["sp_type"] = geometric.default_type;
             string gem = "";
 
             List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
@@ -530,41 +583,30 @@ namespace campusMap.Controllers
             {
                 case "POINT":
                     gem = outputRawPoint(spatial);
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "marker")));
                     break;
                 case "LINESTRING":
                     gem = outputRawLineString(spatial);
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polyline")));
                     break;
                 case "POLYGON":
                     gem = outputRawPolygon(spatial);
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polygon")));
                     break;
                 case "MULTIPOINT":
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "marker")));
                     break;
                 case "MULTILINESTRING":
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polyline")));
                     break;
                 case "MULTIPOLYGON":
-                    pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("name", "polygon")));
                     break;
             }
 
-
+            
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             IList<styles> items;
+
+            pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type)));
             items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = items;
-            
 
-            
-
-
-
-
-                PropertyBag["spatial"] = gem;
-            
+           PropertyBag["spatial"] = gem;
 
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
@@ -665,7 +707,6 @@ namespace campusMap.Controllers
             RenderView("editor");
         }
 
-
         /*public String Getlocation()  // this is to be replaced with get cord logic
         {
             String sql = "SELECT DISTINCT s.Location FROM Place AS s WHERE NOT s.Location = 'NULL'";
@@ -678,143 +719,6 @@ namespace campusMap.Controllers
             }
             return locationsList.TrimEnd(',');
         }*/
-        public void new_type()
-        {
-            place_types type = new place_types();
-            PropertyBag["type"] = type;
-            RenderView("../admin/types/new");
-        }
-        public void new_field()
-        {
-            field_types field = new field_types();
-            PropertyBag["field"] = field;
-            place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
-            PropertyBag["p_models"] = p_models;
-
-
-            RenderView("../admin/fields/new");
-        }
-
-        public void new_style()
-        {
-            styles STYLE = new styles();
-                PropertyBag["style"] = STYLE;
-                PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
-                PropertyBag["style_events"] = ActiveRecordBase<style_events>.FindAll();
-            style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-            IList<style_options> used = new List<style_options>();
-            IList<style_option_types> unused = new List<style_option_types>();
-            IList<style_option_types> remaining = new List<style_option_types>();
-                PropertyBag["options_used"] = used;
-                PropertyBag["options_unused"] = unused;
-                PropertyBag["options_remaining"] = all_op;
-
-            RenderView("../admin/maps/styles/new");
-        }
-
-
-        public void edit_type(int id)
-        {
-            geometrics_types type = ActiveRecordBase<geometrics_types>.Find(id);
-            PropertyBag["type"] = type;
-            RenderView("../admin/types/new");
-        }
-
-        public void edit_field(int id)
-        {
-            field_types field = ActiveRecordBase<field_types>.Find(id);
-            PropertyBag["field"] = field;
-
-            geometrics_types[] g_type = ActiveRecordBase<geometrics_types>.FindAll();
-            PropertyBag["p_models"] = g_type;
-
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
-            string ele_str = FieldsService.getfieldmodel(ele);
-
-
-            PropertyBag["html_ele"] = ele_str;
-            PropertyBag["ele"] = ele;
-
-            RenderView("../admin/fields/new");
-        }
-
-
-        public void edit_style(int id){
-            styles STYLE = ActiveRecordBase<styles>.Find(id);
-            PropertyBag["style"] = STYLE;
-            PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
-            PropertyBag["style_events"] = ActiveRecordBase<style_events>.FindAll();
-
-            
-
-            style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-            IList<style_options> used = new List<style_options>();
-            IList<style_option_types> unused = new List<style_option_types>();
-            IList<style_option_types> remaining = new List<style_option_types>();
-            foreach (style_option_types ops in all_op){
-                if (ops.style_type.Contains(STYLE.type)){
-                    if (STYLE.value.Count > 0){
-                        foreach (style_options op in STYLE.value){ 
-                            if (op.value != ""){
-                                used.Add(op);
-                            }else{
-                                unused.Add(ops);
-                            }
-                        }
-                    }else{
-                        unused.Add(ops);
-                    }
-                }else{
-                    remaining.Add(ops);
-                }
-            }
-            PropertyBag["options_used"] = used;
-            PropertyBag["options_unused"] = unused;
-            PropertyBag["options_remaining"] = remaining;
-
-            RenderView("../admin/maps/styles/new");
-        }
-
-        public void GetAddAuthor(int count)
-        {
-            PropertyBag["count"] = count;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            List<authors> authors = new List<authors>();
-            authors.Add(new authors());
-            authors.Add(new authors());
-            PropertyBag["geometricauthors"] = authors;
-            RenderView("addauthor", true);
-        }
-        public void DeleteAuthor(int id, int geometricId)
-        {
-            authors author = ActiveRecordBase<authors>.Find(id);
-            geometrics geometric = ActiveRecordBase<geometrics>.Find(geometricId);
-            geometric.Authors.Remove(author);
-            ActiveRecordMediator<geometrics>.Save(geometric);
-            CancelLayout();
-            RenderText("true");
-        }
-        public void GetAddtags(int count)
-        {
-            PropertyBag["count"] = count;
-            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            List<tags> tags = new List<tags>();
-            tags.Add(new tags());
-            tags.Add(new tags());
-            PropertyBag["geometrictags"] = tags;
-            RenderView("addtag", true);
-        }
-
-        public void Deletetags(int id, int imageid)
-        {
-            tags tag = ActiveRecordBase<tags>.Find(imageid);
-            geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            geometric.tags.Remove(tag);
-            ActiveRecordMediator<geometrics>.Save(geometric);
-            CancelLayout();
-            RenderText("true");
-        }
-
 
 
         public void GetAddImage(int count)
@@ -848,14 +752,7 @@ namespace campusMap.Controllers
             RenderText("true");
         }
 
-        public void readmore(int id)
-        {
-            PropertyBag["geometric"] = id == 0 ? null : ActiveRecordBase<geometrics>.Find(id);   
-        }
-        public void view(int id)
-        {
-            PropertyBag["geometric"] = ActiveRecordBase<geometrics>.Find(id);
-        }
+
         public void clearLock(int id, bool ajax)
         {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
@@ -863,38 +760,6 @@ namespace campusMap.Controllers
             ActiveRecordMediator<geometrics>.Save(geometric);
             CancelLayout();
             RenderText("true");
-        }
-        string NVchecktitle(string title, bool id)
-        {
-            int SID = placeService.placeByURL_id(title);
-            if (SID == 0 )
-            {
-                return "false";
-            }
-            else
-            {
-                if (id) {
-                    return SID.ToString();
-                } else {
-                    return "true";
-                }
-            }
-        }
-        public void cleanUpgeometric_media(int id)
-        {
-            string uploadPath = Context.ApplicationPath + @"\uploads\";
-                   uploadPath += @"place\" + id + @"\";
-            if (!HelperService.DirExists(uploadPath))
-            {
-                return;
-            }
-
-            //ok the place has image as the dir was created already to hold them
-            string[] filePaths = Directory.GetFiles(uploadPath, "*_TMP_*");
-            foreach(string file in filePaths){
-                FileInfo ImgFile = new FileInfo(file);
-                ImgFile.Delete();
-            }
         }
 
         public string normaliz_latsLongs(string latLong)
@@ -905,7 +770,6 @@ namespace campusMap.Controllers
             latLong = latLong.Replace("\r\n", "");
             return latLong;
         }
-
 
         public void Update([ARDataBind("geometric", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics geometric,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
@@ -1110,12 +974,6 @@ namespace campusMap.Controllers
             }
         }
 
-
-
-
-
-
-
         public void update_field(
                    [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
                    [DataBind("ele", Validate = true)] elementSet ele,
@@ -1177,10 +1035,6 @@ namespace campusMap.Controllers
             }
         }
 
-
-
-
-
         public void update_style(
                 [ARDataBind("style", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] styles style,
                 bool ajaxed_update,
@@ -1198,7 +1052,6 @@ namespace campusMap.Controllers
 
                 ActiveRecordMediator<styles>.Save(style);
 
-
                 ActiveRecordMediator<styles>.Save(style);
                 if (apply != null || ajaxed_update){
                     if (style.id > 0){
@@ -1211,12 +1064,6 @@ namespace campusMap.Controllers
                     RedirectToAction("list");
                 }
             }
-
-
-
-
-
-
 
         public void test()
         {

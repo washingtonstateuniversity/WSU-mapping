@@ -383,11 +383,11 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.geometrics.editor .ui-tabs-panel {margin-right:510px; min-height:535px;}
+.geometrics.editor .LEVEL_TABS {margin-right:510px; min-height:535px;}
 .geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 54px; z-index: 9;}
 .geometrics.editor #map_canvas{width:500px;}
 
-.geometrics.new .ui-tabs-panel {margin-right:510px; min-height:535px;}
+.geometrics.new .LEVEL_TABS {margin-right:510px; min-height:535px;}
 .geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:82px; z-index: 9;}
 .geometrics.new #map_canvas{width:500px;}
 
@@ -401,7 +401,7 @@ span.UinEdit{    background-color: #E2E2E2;
 .pod.editing .editable{position:absolute; top:-999px;left:-999px;}
 .pod.editing .editzone{position:relative; top:0;left:0;}
 
-
+.ZoomChoice{ width:175px; margin-left:15px;}
 .clonebed{
 	position:absolute; top:-9999px;left:-left:-9999;
 }
@@ -461,3 +461,8 @@ fieldset{padding: 4px 8px 10px;}
 .sortStyleOps .lable{
 	
 	}
+.clone_pool{display:none;}
+
+
+
+.LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }

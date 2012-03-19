@@ -11,8 +11,24 @@ using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Collections.Generic;
 
+
+
+
+/** <summary>All models that discribe the location the is under WSU</summary>
+ *  <remarks>Models that occur here are of items that are not 
+ *           abstract but are of the nature of being related to a 
+ *           education based location.
+ * </remarks> 
+ **/
 namespace campusMap.Models
 {
+    /** <summary>A summary of the model programs.</summary>
+    *  <param name="id">int as obj id</param>
+     * <param name="name">string of ununiformity</param>
+     * <param name="attr">a json string of the settings of entry</param>
+     * <param name="places">a HasMany of the place obj</param>
+    *  <remarks>Remarks about the method.</remarks> 
+    **/
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class programs : ActiveRecordBase<programs>
     {
@@ -38,12 +54,12 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<place> places;
+        private IList<place> _places;
         [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places
+        virtual public IList<place> places
         {
-            get { return places; }
-            set { places = value; }
+            get { return _places; }
+            set { _places = value; }
         }
     }
 

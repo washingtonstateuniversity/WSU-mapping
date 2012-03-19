@@ -200,7 +200,7 @@ namespace campusMap.Models
 
 
         private IList<styles> _style;
-        [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_style", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_styles", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<styles> style
         {
             get { return _style; }
@@ -291,13 +291,153 @@ namespace campusMap.Models
         }
 
         private IList<style_option_types> _ops;
-        [HasAndBelongsToMany(typeof(style_option_types), Lazy = true, Table = "style_option_types_to_geometrics_to_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(style_option_types), Lazy = true, Table = "style_option_types_to_geometrics_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<style_option_types> ops
         {
             get { return _ops; }
             set { _ops = value; }
         }
+    }
 
+    [ActiveRecord(Lazy = true)]
+    public class geometric_events : ActiveRecordBase<geometric_events>
+    {
+        private int _id;
+        [PrimaryKey("geometric_event_id")]
+        virtual public int id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        private string _name;
+        [Property]
+        virtual public string name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        private string _f_name;
+        [Property]
+        virtual public string friendly_name
+        {
+            get { return _f_name; }
+            set { _f_name = value; }
+        }
+        private IList<style_options> _options;
+        [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "geometric_events_to_style_options", ColumnKey = "geometric_event_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
+        virtual public IList<style_options> options
+        {
+            get { return _options; }
+            set { _options = value; }
+        }
+        private IList<zoom_levels> _zoom;
+        [HasAndBelongsToMany(typeof(zoom_levels), Lazy = true, Table = "geometric_events_to_zoom", ColumnKey = "zoom_id", ColumnRef = "geometric_event_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
+        virtual public IList<zoom_levels> zoom
+        {
+            get { return _zoom; }
+            set { _zoom = value; }
+        }
+        virtual public IList<style_options> getUsed(styles style, zoom_levels zoom)
+        {
+            IList<style_options> used = new List<style_options>();
+            if (style.id > 0)
+            {
+                style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
+                foreach (style_option_types ops in all_op)
+                {
+                    if (style.value != null && ops.style_type.Contains(style.type) && style.value.Count > 0)
+                    {
+                        foreach (style_options op in style.value)
+                        {
+                            if (this._id == op.user_event.id)
+                            {
+                                if (op.value != "")
+                                {
+                                    used.Add(op);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return used;
+        }
+
+        virtual public IList<style_option_types> getUnUsed(styles style,zoom_levels zoom){
+            IList<style_option_types> unUsed = new List<style_option_types>();
+            //IList<style_options> used = getUsed();
+            if (style.id > 0)
+            {
+                style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
+                foreach (style_option_types ops in all_op)
+                {
+                    if (ops.style_type.Contains(style.type))
+                    {
+                        if (style.value != null && style.value.Count > 0)
+                        {
+                            foreach (style_options op in style.value)
+                            {
+                                if (this._id == op.user_event.id)
+                                {
+                                    if (op.value == "")
+                                    {
+                                        unUsed.Add(ops);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            unUsed.Add(ops);
+                        }
+                    }
+                }
+            }
+            return unUsed;
+        }
+
+        virtual public IList<style_option_types> getRemaining(styles style, zoom_levels zoom)
+        {
+            IList<style_option_types> remaining = new List<style_option_types>();
+
+            style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
+            if (style.id > 0)
+            {
+                IList<style_options> used = getUsed(style,zoom);
+                IList<style_option_types> unUsed = getUnUsed(style,zoom);
+                foreach (style_option_types ops in all_op)
+                {
+                    bool op_added = false;
+                    if (used != null)
+                    {
+                        foreach (style_options op in used)
+                        {
+                            if (op.type != ops)
+                            {
+                                remaining.Add(ops);
+                                op_added = true;
+                            }
+                        }
+                        if (!op_added && (unUsed == null || !unUsed.Contains(ops)))
+                        {
+                            remaining.Add(ops);
+                        }
+                    }
+                    else if (unUsed == null || !unUsed.Contains(ops))
+                    {
+                        remaining.Add(ops);
+                    }
+                }
+            }
+            else
+            {
+                 foreach (style_option_types ops in all_op)
+                {
+                    remaining.Add(ops);
+                }
+            }
+            return remaining;
+        }
 
     }
 

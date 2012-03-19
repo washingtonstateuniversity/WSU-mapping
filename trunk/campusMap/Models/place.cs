@@ -346,6 +346,40 @@ namespace campusMap.Models
             get { return places; }
             set { places = value; }
         }
+        private IList<google_types> _type;
+        [HasAndBelongsToMany(typeof(google_types), Lazy = true, Table = "google_types_to_place_types", ColumnKey = "google_type_id", ColumnRef = "place_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<google_types> google_type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+    }
+
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class google_types : json_autocomplete<google_types>, campusMap.Models.Ijson_autocomplete
+    {
+        private int google_type_id;
+        [PrimaryKey("google_type_id")]
+        virtual public int id
+        {
+            get { return google_type_id; }
+            set { google_type_id = value; }
+        }
+
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+        private IList<place_types> _type;
+        [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "google_types_to_place_types", ColumnKey = "google_type_id", ColumnRef = "place_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place_types> place_type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
 
     }
 

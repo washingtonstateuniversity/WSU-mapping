@@ -44,14 +44,21 @@ namespace campusMap.Models
             set { _of = value; }
         }
         private IList<style_options> _value;
-        [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "style_to_style_options", ColumnKey = "style_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
+        [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "style_to_style_options", ColumnKey = "style_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<style_options> value
         {
             get { return _value; }
             set { _value = value; }
         }
-    }
 
+        private IList<zoom_levels> _levels;
+        [HasAndBelongsToMany(typeof(zoom_levels), Lazy = true, Table = "style_to_zoom", ColumnKey = "style_id", ColumnRef = "zoom_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<zoom_levels> zoom
+        {
+            get { return _levels; }
+            set { _levels = value; }
+        }
+    }
 
     [ActiveRecord(Lazy = true)]
     public class style_options : ActiveRecordBase<style_options>
@@ -70,12 +77,19 @@ namespace campusMap.Models
             get { return _of; }
             set { _of = value; }
         }
-        private style_events _event;
-        [BelongsTo]
-        virtual public style_events user_event
+        private geometric_events _event;
+        [BelongsTo("event")]
+        virtual public geometric_events user_event
         {
             get { return _event; }
             set { _event = value; }
+        }
+        private zoom_levels _level;
+        [BelongsTo("zoom")]
+        virtual public zoom_levels zoom
+        {
+            get { return _level; }
+            set { _level = value; }
         }
         private string _value;
         [Property]
@@ -83,41 +97,6 @@ namespace campusMap.Models
         {
             get { return _value; }
             set { _value = value; }
-        }
-    }
-
-
-    [ActiveRecord(Lazy = true)]
-    public class style_events : ActiveRecordBase<style_events>
-    {
-        private int _id;
-        [PrimaryKey("style_event_id")]
-        virtual public int id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-        private string _name;
-        [Property]
-        virtual public string name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private string _f_name;
-        [Property]
-        virtual public string friendly_name
-        {
-            get { return _f_name; }
-            set { _f_name = value; }
-        }
-
-        private geometrics_types _of;
-        [BelongsTo]
-        virtual public geometrics_types type
-        {
-            get { return _of; }
-            set { _of = value; }
         }
     }
 
@@ -139,12 +118,13 @@ namespace campusMap.Models
             set { _name = value; }
         }
         private IList<geometrics_types> _types;
-        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "style_option_types_to_geometrics_to_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "style_option_types_to_geometrics_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<geometrics_types> style_type
         {
             get { return _types; }
             set { _types = value; }
         }
     }
+
 }
 

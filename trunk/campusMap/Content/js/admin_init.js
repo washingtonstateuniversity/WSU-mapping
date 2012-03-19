@@ -1171,6 +1171,14 @@ $(function() {
 	}
 
 
+
+
+
+
+
+
+
+
     if($( "#sub_tabs" ).length>0){
         $( "#sub_tabs" ).tabs();
 	}
@@ -1180,6 +1188,95 @@ $(function() {
 			
 			});
 	}
+	
+	
+	
+	
+
+    if($( ".TABS" ).length>0){
+		var $tab_title_input = $( "#tab_title"),
+			$tab_content_input = $( "#tab_content" );
+		var tab_counter = 2;
+
+		
+		
+		var $tabs = $('.LEVEL_TABS').tabs({
+			tabTemplate: "<li><span class='ui-icon ui-icon-close'>Remove Tab</span><a href='#{href}'>#{label}</a> </li>",
+			add: function( event, ui ) {
+				var tab_content =$('.clone_pool').html();
+				$( ui.panel ).append(tab_content);
+				$( ui.panel ).find('.TABS:last').tabs();
+				
+				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
+				
+			}
+		});
+		$( ".LEVEL_TABS span.ui-icon-close" ).live( "click", function() {
+			var index = $( "li", $tabs ).index( $( this ).parent() );
+			$tabs.tabs( "remove", index );
+		});
+		
+		// actual addTab function: adds new tab using the title input from the form above
+		function  addTab(){
+			var tab_title = 'Zoom level:<span class="name__start">0</span><span class="name__endarea"> to <span class="name__end">14</span></span>';
+			$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+			tab_counter++;
+		}
+
+		// addTab button: just opens the dialog
+		$( "#add_tab" )
+			.button()
+			.on('click',function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				addTab()
+			});
+		
+		
+		
+		
+        $( ".TABS:not(.clone_pool .TABS)" ).each(function(i){
+			$(this).tabs();
+			// close icon: removing the tab on click
+			// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+
+		});
+	}	
+		$( ".slider-range" ).each(function(){
+			set_slider( $(this) );
+		});
+		function set_slider(obj){
+			obj.slider({
+				range: true,
+				min: 0,
+				max: 14,
+				values: [ 0, 14 ],
+				slide: function( event, ui ) {
+					var start 	= ui.values[ 0 ];
+					var end 	= ui.values[ 1 ];
+					
+					obj.next( ".__start" ).val(start);
+					obj.next( "._end" ).val(end);
+					
+					var i = obj.closest('.tabed').index(obj.closest('.LEVEL_TABS').find('.tabed'));
+					//alert(i);
+					obj.closest('.LEVEL_TABS').find('.name__start:eq('+i+')').text(start);
+					obj.closest('.LEVEL_TABS').find('.name__end:eq('+i+')').text(end);
+					if(start==end){
+						obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').hide();
+					}else{
+						obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').show();
+					}
+						
+					obj.closest('.ZoomChoice').find('.name__start').text(start);
+					obj.closest('.ZoomChoice').find('.name__end').text(end);
+					
+				}
+			});
+		}
+	
+	
+	
 	function post_tmp(form_obj,diaObj,callback){
 		$.ajaxSetup ({cache: false,async:false}); 
 		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
