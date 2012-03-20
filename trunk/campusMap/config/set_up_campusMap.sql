@@ -838,16 +838,6 @@ GO
 
 
 
-
-
- 
-
-
-
-
-
-
-
 	CREATE TABLE [dbo].[programs](
 		[program_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,

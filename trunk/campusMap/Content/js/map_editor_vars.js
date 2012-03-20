@@ -193,3 +193,4 @@ var availableTags = [
 			"Far",
 			"From"
 		];
+		var geocoder; 

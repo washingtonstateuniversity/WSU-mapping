@@ -381,14 +381,14 @@ span.UinEdit{    background-color: #E2E2E2;
 
 #map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
 
-
-
-.geometrics.editor .LEVEL_TABS {margin-right:510px; min-height:535px;}
-.geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 54px; z-index: 9;}
+.geometrics.editor .style_controlls{margin-right:525px; min-height:535px;}
+/*.geometrics.editor .LEVEL_TABS {margin-right:510px; min-height:535px;}*/
+.geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 0px; z-index: 9;}
 .geometrics.editor #map_canvas{width:500px;}
 
-.geometrics.new .LEVEL_TABS {margin-right:510px; min-height:535px;}
-.geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:82px; z-index: 9;}
+.geometrics.new .style_controlls{margin-right:525px; min-height:535px;}
+/*.geometrics.new .LEVEL_TABS {margin-right:510px; min-height:535px;}*/
+.geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:0px; z-index: 9;}
 .geometrics.new #map_canvas{width:500px;}
 
 

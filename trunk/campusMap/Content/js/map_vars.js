@@ -102,7 +102,7 @@ var polygonstyles = [];
 //var rectanglestyles = [];
 var circlestyles = [];
 var markerstyles = [];
-var geocoder; // = new google.maps.Geocoder();
+
 //var startLocation;
 var endLocation;
 //var dircount;
@@ -175,4 +175,4 @@ var boxText = document.createElement("div");
 //boxText.style.cssText = "border:none; background:transparent url('http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif') no-repeat left bottom;";
 				
 
-
+var geocoder; // = new google.maps.Geocoder();

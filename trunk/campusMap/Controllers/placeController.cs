@@ -807,6 +807,7 @@ namespace campusMap.Controllers
             String[][] fields,
             bool ajaxed_update,
             bool forced_tmp,
+            int set_model,
             string apply,
             string cancel
             )     
@@ -991,6 +992,14 @@ namespace campusMap.Controllers
             }*/
 
 
+            if (set_model <= 0)
+            {
+                place_models model = ActiveRecordBase<place_models>.Find(set_model);
+                place.model = model;
+            }
+
+
+
             ActiveRecordMediator<place>.Save(place);
 
             cleanUpplace_media(place.id);
@@ -1005,7 +1014,15 @@ namespace campusMap.Controllers
             {
                 if (place.id>0)
                 {
-                    Redirect("~/place/_edit.castle?id=" + place.id);
+                    if (ajaxed_update)
+                    {
+                        CancelLayout();
+                        RenderText(place.id.ToString());
+                    }
+                    else
+                    {
+                        Redirect("~/place/_edit.castle?id=" + place.id);
+                    }
                     return;
                 }
                 else

@@ -1,3 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if($place.id!=0)
+
+
+
 #capturefor(admin_js)<script type="text/javascript">
   var author_count =#if($place.Authors.Count)$place.Authors.Count #else 0 #end + 2;
   var tag_count = #if($place.Tags.Count)$place.Tags.Count #else 0 #end + 2;
@@ -987,4 +1005,174 @@ Check it when you want to see the code.
 		</div>
 	</div>
 </div>
+#end
+
+
+#else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#capturefor(formbuttons)
+    <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
+    <input type="submit" value="#if($place.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($place.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
+#end
+
+
+
+
+  
+<form action="update.castle" method="post" id="editor_form">
+
+
+		$formbuttons
+		<p class="validateTips">All form fields are required.</p>
+        $Form.HiddenField("place.id")
+		<input type="hidden" name="forced_tmp" value="1" />
+		<fieldset>
+		<fieldset style="width:44%;float:right;"><legend>Address Options</legend>
+<div class="col2 w100"  style="display:inline-block;">
+                <label for="street_address">Address</label><br/>
+                <input type="text" name="place.address" id="place.address" value="$!place.address" class="text ui-widget-content ui-corner-all w100"/>
+</div>
+<div class="col2 w200"  style="display:inline-block;">
+                <label for="street_address">Street</label><br/>
+                <input type="text" name="place.street" id="place.street" value="$!place.street" class="text ui-widget-content ui-corner-all w200"/>
+</div>				
+                #if($place.campus.zipcode)<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
+                $place.campus.zipcode - 
+                <input type="text" name="place.plus_four_code" id="place.plus_four_code" value="$!place.plus_four_code" class="text ui-widget-content ui-corner-all w50" />
+				<br/>#end
+
+
+			<div class="col2"  style="display:inline-block;">
+							
+				<label for="place.campus"><strong>Campus</strong></label><br/>
+				<select id="place.campus" class="autoselect" name="place.campus.id">
+					<option value="">Select one...</option>
+					#foreach($campus in $campuses)
+						<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+					#end
+				</select>
+			
+			</div>
+			<div class="col2"  style="display:inline-block;">
+				<label for="place.college"><strong>College</strong></label><br/>
+				<select id="place.college" class="autoselect" name="place.college.id">
+					<option value="">Select one...</option>
+					#foreach($college in $colleges)
+						<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
+					#end
+				</select>
+							
+			</div>
+
+				<div id="school" class="col2" style="#if($place.college==0) display:none; #else display:inline-block; #end">
+				<label for="place.school"><strong>School</strong></label><br/>
+				<select id="place.school" class="autoselect" name="place.school.id">
+					<option value="">Select one...</option>
+					#foreach($school in $schools)
+						<option class="type" value="$school.id" #if($place.school == $school) selected="selected" #end>$!school.name</option>
+					#end
+				</select>
+				</div>
+				
+
+			<div  style="display:inline-block;">
+				<label for="place.department"><strong>Departments</strong></label><br/>
+				<select id="place.department" class="autoselect" name="place.department.id">
+					<option value="">Select one...</option>
+					#foreach($department in $departments)
+						<option class="type" value="$department.id" #if($place.department == $department) selected="selected" #end>$!department.name</option>
+					#end
+				</select>
+				</div>
+			<div  style="display:inline-block;">
+				<label for="place.program"><strong>Programs</strong></label><br/>
+				<select id="place.program" class="autoselect" name="place.program.id">
+					<option value="">Select one...</option>
+					#foreach($program in $programs)
+						<option class="type" value="$program.id" #if($place.program == $program) selected="selected" #end>$!program.name</option>
+					#end
+				</select>
+				</div>
+            </fieldset>
+		
+            <fieldset style="width:44%;float:left;"><legend>Location</legend>
+				<div class="container" style="width:100%;">
+					<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
+					<select id="LocationModelSelect" name="place.model.id">
+						<option value="">Select one...</option>
+						#foreach($model in $models)
+							<option class="model" value="$model.id" #if($place.model.id == $model.id) selected="selected" #end>$!model.name</option>
+						#end
+					</select>#**#
+					<input type="text"  value="2" name="place.model.id" />
+					<br/>
+					<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
+					<select id="LocationTypeSelect" name="place.type.id">
+						<option value="">Select one...</option>
+						#foreach($type in $types)
+							<option class="type" value="$type.id" #if($place.type.id == $type.id) selected="selected" #end>$!type.name</option>
+						#end
+					</select>
+                </div>  
+            </fieldset>
+    </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #end

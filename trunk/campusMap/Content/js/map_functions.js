@@ -3698,8 +3698,8 @@ function initialize() {
 		];
 
 	var controlState = controlsIn;//($('.sortStyleOps.orgin').length)?controlsOut:controlsIn;
-
-   geocoder = new google.maps.Geocoder();
+setGeoCoder();
+   //geocoder = new google.maps.Geocoder();
     //var latlng = new google.maps.LatLng(59.914063, 10.737874);//(45.0,7.0);//45.074723, 7.656433
 
     map = new google.maps.Map(gob('map_canvas'), jQuery.extend(jQuery.extend(baseOptions,myOptions),controlState));
@@ -3974,30 +3974,7 @@ function initialize() {
 	}
 }
 
-function getResolution(lat, zoom, tile_side){
-  var grid = tile_side || 256;
-  var ret = {};
-  ret.meterPerPixel = 2 * Math.PI * 6378100 * Math.cos(lat * Math.PI/180) / Math.pow(2, zoom) / grid;
-  ret.cmPerPixel = ret.meterPerPixel * 100;
-  ret.mmPerPixel = ret.meterPerPixel * 1000;
-  ret.pretty = ( Math.round(ret.meterPerPixel) ) + ' meters/px';
-  if (ret.meterPerPixel < 10)	{ ret.pretty = ( Math.round( ret.meterPerPixel * 10 ) / 10 ) +' meters/px';}
-  if (ret.meterPerPixel < 2)	{ ret.pretty = ( Math.round( ret.cmPerPixel ) ) + ' cm/px';}
-  if (ret.cmPerPixel < 10)		{ ret.pretty = ( Math.round( ret.cmPerPixel * 10 ) / 10 ) + ' cm/px';}
-  if (ret.cmPerPixel < 2) 		{ ret.pretty = ( Math.round( ret.mmPerPixel ) ) + ' mm/px';}
-  return ret;
-}
 
-function setZoomTooltip(){
-	var res = getResolution(map.getCenter().lat(), map.getZoom()).pretty;
-	var text = 'Zoom = ' + map.getZoom() + '  (' + res + ')';
-	var divs = map.getDiv().getElementsByTagName('div');
-	for (var i=0, len=divs.length; i<len; i++){
-		if (divs[i].title.toLowerCase().indexOf("zoom") > -1) {
-			divs[i].title = text;
-		}
-	}
-}
 
 
 
@@ -4023,10 +4000,15 @@ function setZoomTooltip(){
 			$('#Long').val(markers[0].position.lng());
 	
 			google.maps.event.addListener(markers[0], 'dragend', function(event){
-				$('#Lat').val(this.getPosition().lat());
-				$('#Long').val(this.getPosition().lng());
+				var lat = this.getPosition().lat();
+				var lng = this.getPosition().lng();
+				
+				
+				$('#Lat').val(lat);
+				$('#Long').val(lng);
 				//setTimeout(function() {},  200);
-				var loca = new google.maps.LatLng(this.getPosition().lat(),this.getPosition().lng());
+				var loca = new google.maps.LatLng(lat,lng);
+				$('#place.address').val(codeLatLng(lat,lng));
 				
 				var types = ['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar','beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer','car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store','courthouse','dentist','department_store','doctor','electrician','electronics_store','embassy','establishment','finance','fire_station','florist','food','funeral_home','furniture_store','gas_station','general_contractor','geocode','grocery_or_supermarket','gym','hair_care','hardware_store','health','hindu_temple','home_goods_store','hospital','insurance_agency','jewelry_store','laundry','lawyer','library','liquor_store','local_government_office','locksmith','lodging','meal_delivery','meal_takeaway','mosque','movie_rental','movie_theater','moving_company','museum','night_club','painter','park','parking','pet_store','pharmacy','physiotherapist','place_of_worship','plumber','police','post_office','real_estate_agency','restaurant','roofing_contractor','rv_park','school','shoe_store','shopping_mall','spa','stadium','storage','store','subway_station','synagogue','taxi_stand','train_station','travel_agency','university','veterinary_care','zoo','administrative_area_level_1','administrative_area_level_2','administrative_area_level_3','colloquial_area','country','floor','intersection','locality','natural_feature','neighborhood','political','point_of_interest','post_box','postal_code','postal_code_prefix','postal_town','premise','room','route','street_address','street_number','sublocality','sublocality_level_4','sublocality_level_5','sublocality_level_3','sublocality_level_2','sublocality_level_1','subpremise','transit_station'];
 				$('#estimated_places').show('fast');
@@ -4035,17 +4017,17 @@ function setZoomTooltip(){
 				$('.blink2').blink(150);
 				$('.blink3').blink(200);
 				
-for(i = 0; i < types.length; i++){
-	var requested = {
-	  location: loca,
-	  radius:.1,
-	  keyword:types[i]//,
-	  //types : [types[i]]
-	
-	};
-	var service = new google.maps.places.PlacesService(map);
-	service.search(requested, updating);
-}
+				for(i = 0; i < types.length; i++){
+					var requested = {
+					  location: loca,
+					  radius:.1,
+					  keyword:types[i]//,
+					  //types : [types[i]]
+					
+					};
+					var service = new google.maps.places.PlacesService(map);
+					service.search(requested, updating);
+				}
 
 
 			});
@@ -4083,7 +4065,8 @@ for(i = 0; i < types.length; i++){
 				
 				if(place.name){
 					if($('.blink1').length)$('#local_place_names').html('');
-					$('#local_place_names').html($('#local_place_names').html()+','+place.name);
+					var txt = $.trim($('#local_place_names').html());
+					$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' :   place.name + (txt==""?'':',') ));
 				}
 				
 				google.maps.event.addListener(marker, 'click', function() {
@@ -4469,3 +4452,77 @@ function applyType(type){
 	function extractLast( term ) {
 		return split( term ).pop();
 	}
+	
+	
+	
+	
+	function codeAddress(address) {
+	setGeoCoder();
+		  geocoder.geocode( { 'address': address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+									map: map,
+									position: results[0].geometry.location
+								});
+				} else {
+					alert("Geocode was not successful for the following reason: " + status);
+				}
+		  });
+	}
+	
+	
+  function codeLatLng(lat,lng) {
+	setGeoCoder();
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          return results[1].formatted_address;
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+	
+	
+	
+	
+	function setGeoCoder(){
+		if(typeof(geocoder)==='undefined'){
+			geocoder = new google.maps.Geocoder();	
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+function getResolution(lat, zoom, tile_side){
+  var grid = tile_side || 256;
+  var ret = {};
+  ret.meterPerPixel = 2 * Math.PI * 6378100 * Math.cos(lat * Math.PI/180) / Math.pow(2, zoom) / grid;
+  ret.cmPerPixel = ret.meterPerPixel * 100;
+  ret.mmPerPixel = ret.meterPerPixel * 1000;
+  ret.pretty = ( Math.round(ret.meterPerPixel) ) + ' meters/px';
+  if (ret.meterPerPixel < 10)	{ ret.pretty = ( Math.round( ret.meterPerPixel * 10 ) / 10 ) +' meters/px';}
+  if (ret.meterPerPixel < 2)	{ ret.pretty = ( Math.round( ret.cmPerPixel ) ) + ' cm/px';}
+  if (ret.cmPerPixel < 10)		{ ret.pretty = ( Math.round( ret.cmPerPixel * 10 ) / 10 ) + ' cm/px';}
+  if (ret.cmPerPixel < 2) 		{ ret.pretty = ( Math.round( ret.mmPerPixel ) ) + ' mm/px';}
+  return ret;
+}
+
+function setZoomTooltip(){
+	var res = getResolution(map.getCenter().lat(), map.getZoom()).pretty;
+	var text = 'Zoom = ' + map.getZoom() + '  (' + res + ')';
+	var divs = map.getDiv().getElementsByTagName('div');
+	for (var i=0, len=divs.length; i<len; i++){
+		if (divs[i].title.toLowerCase().indexOf("zoom") > -1) {
+			divs[i].title = text;
+		}
+	}
+}

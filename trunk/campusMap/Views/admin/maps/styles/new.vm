@@ -17,7 +17,7 @@
 
 <form action="update_style.castle" method="post">
 	$Form.Hiddenfield("style.id")
-
+<div class="style_controlls">
 	<fieldset>
 		<legend>Basic setup:</legend>
 		<p style="float:right;width:46%;">Field Type:<br/>  
@@ -33,16 +33,14 @@
 			<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
 		</p>
 	</fieldset>
-		
-		
-		
-#if( !$ajaxed )
-<div id="smaple_area">
-            <fieldset><legend>Sample</legend>
-				<div id="map_canvas"></div>
-            </fieldset>
-</div>
-#end
+
+	#if( !$ajaxed )
+	<div id="smaple_area">
+				<fieldset><legend>Sample</legend>
+					<div id="map_canvas"></div>
+				</fieldset>
+	</div>
+	#end
 
 
 
@@ -120,7 +118,7 @@
 		
 
 
-
+</div>
 </form>
 
 <div class="clone_pool">

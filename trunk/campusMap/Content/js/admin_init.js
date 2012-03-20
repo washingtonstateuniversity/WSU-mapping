@@ -1206,9 +1206,7 @@ $(function() {
 				var tab_content =$('.clone_pool').html();
 				$( ui.panel ).append(tab_content);
 				$( ui.panel ).find('.TABS:last').tabs();
-				
 				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
-				
 			}
 		});
 		$( ".LEVEL_TABS span.ui-icon-close" ).live( "click", function() {
@@ -1220,6 +1218,7 @@ $(function() {
 		function  addTab(){
 			var tab_title = 'Zoom level:<span class="name__start">0</span><span class="name__endarea"> to <span class="name__end">14</span></span>';
 			$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+			set_slider( $("#tabs-" + tab_counter).find('.slider-range') );
 			tab_counter++;
 		}
 
@@ -1281,17 +1280,19 @@ $(function() {
 		$.ajaxSetup ({cache: false,async:false}); 
 		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 		//alert(place_id);
-		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res) {
-			if(res){
-				$('body #content_area').fadeOut('fast',function(){
-					$('#content_area').html($("<div>").append(res.replace(rscript, "")).find("#content_tar"));
-				});
-				$('#content_area').fadeIn('fast',function(){
-					diaObj.dialog( "close" );
-					if($.isFunction(callback)) callback();
-				});
-			}
-		});                       
+		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res, status, request) {
+				  var Location = '/place/_edit.castle?id='+res; 
+
+								window.location= Location; 
+				$('body #content_area').fadeTo('fast',25);
+
+		}); 
+		
+		
+
+		
+		
+		                    
 	}
     if($( "#tabs" ).length>0){
         var  taboptions;	
@@ -1323,7 +1324,7 @@ $(function() {
 			$("#chooseModel").dialog({
 				autoOpen: true,
 				height: 275,
-				width:300,
+				width:350,
 				modal: true,
 				hide: 'blind',
 				resizable: false,
@@ -1334,7 +1335,7 @@ $(function() {
 							$( this ).dialog( "close" );
 							if($( "#loading_tmp" ).length==0){
 									$( "body" ).append('<div id="loading_tmp" title="Loading">'+
-									'<img src="'+DOMAIN+'/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
+									'<img src="/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
 									'</div>');
 								}
 								$( "#loading_tmp" ).dialog({
