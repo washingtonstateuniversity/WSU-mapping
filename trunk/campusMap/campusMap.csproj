@@ -889,6 +889,7 @@
     <Content Include="obj\campusMap.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\campusMap.dll" />
     <Content Include="obj\Debug\campusMap.pdb" />
+    <None Include="config\set_up_campusMap.sql" />
     <None Include="Content\js\tinymce\tinymce\build.bat" />
     <None Include="Content\js\tinymce\tinymce\examples\media\sample.dcr" />
     <None Include="Content\js\tinymce\tinymce\examples\media\sample.rm" />
