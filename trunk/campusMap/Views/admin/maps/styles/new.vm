@@ -52,42 +52,43 @@
 	<button id="add_tab">Add level</button>
 
 	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-		#foreach($level in $style.zoom)
+		#foreach($zoom in $style.zoom)
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-				<span class='ui-icon ui-icon-close'>Remove Tab</span><a href="#z_${level.id}">Zoom level:<span class="name__start">${level.start}</span>#if(${level.end}!='')<span class="name__endarea"> to <span class="name__end">${level.end}</span></span>#end </a>
+				<span class='ui-icon ui-icon-close'>Remove Tab</span><a href="#z_${zoom.id}">Zoom level:<span class="name__start">${zoom.start}</span>#if(${zoom.end}!='')<span class="name__endarea"> to <span class="name__end">${zoom.end}</span></span>#end </a>
 			</li>
 		#end
 		
 	</ul>
 	#set($c=0)
-	#foreach($level in $style.zoom)
-		<div class="tabed" id="z_${level.id}">
+	#foreach($zoom in $style.zoom)
+		<div class="tabed" id="z_${zoom.id}">
 			#if($c<=0)
 				<div class="ZoomChoice">
-					Set zoom levels: <span class="name__start">${level.start}</span>#if(${level.end}!='') to <span class="name__end">${level.end}</span>#end 
+					Set zoom levels: <span class="name__start">${zoom.start}</span>#if(${zoom.end}!='') to <span class="name__end">${zoom.end}</span>#end 
 					<br/><br/>
 					<div class="slider-range"></div><br/>
-					<input type="hidden" name="level.start" class="__start" value="${level.start}"/>
-					<input type="hidden" name="level.end" class="__end" value="$!{level.end}"/>
+					$Form.Hiddenfield("zoom.id")
+					<input type="hidden" name="zoom.start" class="__start" value="${zoom.start}"/>
+					<input type="hidden" name="zoom.end" class="__end" value="$!{zoom.end}"/>
 				</div>
 			#end
 			<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
 				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 					#foreach($event in $style.zoom.events)
 						<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-							<a href="#z__${level.id}_${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
+							<a href="#z__${zoom.id}_${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
 						</li>
 					#end
 				</ul>
 				#foreach($event in $style.zoom.events)
-					<div class="tabed" id="z__${level.id}_${event.name}">
+					<div class="tabed" id="z__${zoom.id}_${event.name}">
 						<fieldset>
 							<legend>#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end setup:</legend>
 							<fieldset id="optionsSelection_hover" >
 								<legend>Style options</legend>
 								<div>
 									#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
-									<ul id="sortable2___${level.id}_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
+									<ul id="sortable2___${zoom.id}_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
 										#foreach($opt in $event.getUnUsed($style,$style.zoom))
 											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 										#end
@@ -96,7 +97,7 @@
 											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 										#end
 									</ul>
-									<ul id="sortable1_z__${level.id}_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
+									<ul id="sortable1_z__${zoom.id}_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
 										#foreach($opt in $event.getUsed($style,$style.zoom))
 											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 										#end
@@ -124,11 +125,11 @@
 
 <div class="clone_pool">
 	<div class="ZoomChoice">
-		Set zoom levels: <span class="name__start">0</span>#if(${level.end}!='') to <span class="name__end">14</span>#end 
+		Set zoom levels: <span class="name__start">0</span>#if(${zoom.end}!='') to <span class="name__end">14</span>#end 
 		<br/><br/>
 		<div class="slider-range"></div><br/>
-		<input type="hidden" name="level.start" class="__start" value="0"/>
-		<input type="hidden" name="level.end" class="__end" value="14"/>
+		<input type="hidden" name="zoom.start" class="__start" value="0"/>
+		<input type="hidden" name="zoom.end" class="__end" value="14"/>
 	</div>
 	<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -147,16 +148,16 @@
 						<div>
 							#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
 							<ul id="sortable2_z__9999_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
-								#foreach($opt in $event.getUnUsed($style,$level))
+								#foreach($opt in $event.getUnUsed($style,$zoom))
 									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 								#end
-								#foreach($opt in $event.getRemaining($style,$level))
+								#foreach($opt in $event.getRemaining($style,$zoom))
 									#set($hidden=true)
 									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 								#end
 							</ul>
 							<ul id="sortable1_z__9999_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
-								#foreach($opt in $event.getUsed($style,$level))
+								#foreach($opt in $event.getUsed($style,$zoom))
 									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 								#end
 							</ul>

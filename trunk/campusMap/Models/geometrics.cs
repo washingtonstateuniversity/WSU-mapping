@@ -299,6 +299,96 @@ namespace campusMap.Models
         }
     }
 
+
+
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class geometrics_media : ActiveRecordBase<geometrics_media>
+    {
+        private int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        private geometrics Geometric;
+        [BelongsTo("geometric_id")]
+        virtual public geometrics geometric
+        {
+            get { return Geometric; }
+            set { Geometric = value; }
+        }
+        private media_repo media;
+        [BelongsTo("media_id")]
+        virtual public media_repo Media
+        {
+            get { return media; }
+            set { media = value; }
+        }
+        private int order;
+        [Property]
+        virtual public int geometric_order
+        {
+            get { return order; }
+            set { order = value; }
+        }
+    }
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class geometrics_status
+    {
+        private int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        private String title;
+        [Property]
+        virtual public String Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
+    }
+
+
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class events_set : ActiveRecordBase<events_set>
+    {
+        private int events_set_id;
+        [PrimaryKey("events_set_id")]
+        virtual public int id
+        {
+            get { return events_set_id; }
+            set { events_set_id = value; }
+        }
+        private styles _style;
+        [BelongsTo("style_id")]
+        virtual public styles style
+        {
+            get { return _style; }
+            set { _style = value; }
+        }
+        private zoom_levels _zoom;
+        [BelongsTo("zoom_id")]
+        virtual public zoom_levels zoom
+        {
+            get { return _zoom; }
+            set { _zoom = value; }
+        }
+        private IList<geometric_events> _events;
+        [HasAndBelongsToMany(typeof(geometric_events), Lazy = true, Table = "geometric_events_to_events_set", ColumnKey = "geometric_event_id", ColumnRef = "events_set_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
+        virtual public IList<geometric_events> events
+        {
+            get { return _events; }
+            set { _events = value; }
+        }
+    }
+
+
     [ActiveRecord(Lazy = true)]
     public class geometric_events : ActiveRecordBase<geometric_events>
     {
@@ -309,6 +399,7 @@ namespace campusMap.Models
             get { return _id; }
             set { _id = value; }
         }
+
         private string _name;
         [Property]
         virtual public string name
@@ -316,6 +407,7 @@ namespace campusMap.Models
             get { return _name; }
             set { _name = value; }
         }
+
         private string _f_name;
         [Property]
         virtual public string friendly_name
@@ -323,6 +415,11 @@ namespace campusMap.Models
             get { return _f_name; }
             set { _f_name = value; }
         }
+
+
+
+
+        /* not sure on these ties  */
         private IList<style_options> _options;
         [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "geometric_events_to_style_options", ColumnKey = "geometric_event_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
         virtual public IList<style_options> options
@@ -337,6 +434,12 @@ namespace campusMap.Models
             get { return _zoom; }
             set { _zoom = value; }
         }
+        /* EOF not sure on these ties  */
+
+
+
+
+
         virtual public IList<style_options> getUsed(styles style, zoom_levels zoom)
         {
             IList<style_options> used = new List<style_options>();
@@ -345,9 +448,9 @@ namespace campusMap.Models
                 style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
                 foreach (style_option_types ops in all_op)
                 {
-                    if (style.value != null && ops.style_type.Contains(style.type) && style.value.Count > 0)
+                    if (style._option != null && ops.style_type.Contains(style.type) && style._option.Count > 0)
                     {
-                        foreach (style_options op in style.value)
+                        foreach (style_options op in style._option)
                         {
                             if (this._id == op.user_event.id)
                             {
@@ -373,9 +476,9 @@ namespace campusMap.Models
                 {
                     if (ops.style_type.Contains(style.type))
                     {
-                        if (style.value != null && style.value.Count > 0)
+                        if (style._option != null && style._option.Count > 0)
                         {
-                            foreach (style_options op in style.value)
+                            foreach (style_options op in style._option)
                             {
                                 if (this._id == op.user_event.id)
                                 {
@@ -440,59 +543,5 @@ namespace campusMap.Models
         }
 
     }
-
-    [ActiveRecord(Lazy = true, BatchSize = 10)]
-    public class geometrics_media : ActiveRecordBase<geometrics_media>
-    {
-        private int id;
-        [PrimaryKey]
-        virtual public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        private geometrics Geometric;
-        [BelongsTo("geometric_id")]
-        virtual public geometrics geometric
-        {
-            get { return Geometric; }
-            set { Geometric = value; }
-        }
-        private media_repo media;
-        [BelongsTo("media_id")]
-        virtual public media_repo Media
-        {
-            get { return media; }
-            set { media = value; }
-        }
-        private int order;
-        [Property]
-        virtual public int geometric_order
-        {
-            get { return order; }
-            set { order = value; }
-        }
-    }
-
-    [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class geometrics_status
-    {
-        private int id;
-        [PrimaryKey]
-        virtual public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        private String title;
-        [Property]
-        virtual public String Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
-    }
-
 }
 

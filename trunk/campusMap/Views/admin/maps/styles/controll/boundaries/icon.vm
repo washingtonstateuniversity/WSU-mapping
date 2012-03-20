@@ -1,12 +1,11 @@
 <li class="pod opRow ui-state-highlight op_marker" #if($hidden) style="display: none;"#end>
 <span class="option_handle"></span>
 	<span class="lable">Icon</span>
-	<span class="controll">
-		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" /><br/>
-		<lable>url</lable><input type="text" value="" name="style.value[${opt.id}].${opt.name}.url"  rel="${opt.name}.url" class="required"/><br/>
-		<lable>anchor</lable><input type="text" value="" name="style.value[${opt.id}].${opt.name}.anchor"  rel="${opt.name}.anchor"/><br/>
-		<lable>origin</lable><input type="text" value="" name="style.value[${opt.id}].${opt.name}.origin"  rel="${opt.name}.origin"/><br/>
-		<lable>scaledSize</lable><input type="text" value="" name="style.value[${opt.id}].${opt.name}.scaledSize"  rel="${opt.name}.scaledSize"/><br/>
-		<lable>size</lable><input type="text" value="" name="style.value[${opt.id}].${opt.name}.size"  rel="${opt.name}.size"/>
+	<span class="controll"><br/>
+		<lable>url</lable><input type="text" value="" name="style._zoom[1].events[${event.id}].options[${opt.id}].url"  rel="${opt.name}.url" class="required"/><br/>
+		<lable>anchor</lable><input type="text" value="" name="style._zoom[1].events[${event.id}].options[${opt.id}].anchor"  rel="${opt.name}.anchor"/><br/>
+		<lable>origin</lable><input type="text" value="" name="style._zoom[1].events[${event.id}].options[${opt.id}].origin"  rel="${opt.name}.origin"/><br/>
+		<lable>scaledSize</lable><input type="text" value="" name="style._zoom[1].events[${event.id}].options[${opt.id}].scaledSize"  rel="${opt.name}.scaledSize"/><br/>
+		<lable>size</lable><input type="text" value="" name="style._zoom[1].events[${event.id}].options[${opt.id}].size"  rel="${opt.name}.size"/>
 	</span>
 </li>

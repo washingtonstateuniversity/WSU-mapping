@@ -3,9 +3,8 @@
 
 	<span class="lable">Animation</span>
 	<span class="controll">
-		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" />
 <br/>
-		<select name="style.value[${opt.id}].${opt.name}" rel="${opt.name}">
+		<select name="style._zoom[1].events[${event.id}].options[${opt.id}]" rel="${opt.name}">
 			<option value="">None</option>
 			<option value="BOUNCE">Bounce</option>
 			<option value="DROP">Drop</option>

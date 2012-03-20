@@ -4,13 +4,12 @@
 
 	<span class="lable">Shape</span>
 	<span class="controll">
-		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" />
 <br/>
-		<lable>Type</lable><select name="style.value[${opt.id}].${opt.name}"  rel="${opt.name}">
+		<lable>Type</lable><select name="style._zoom[1].events[${event.id}].options[${opt.id}]"  rel="${opt.name}">
 								<option value="circle">Circle</option>
 								<option value="poly">Poly</option>
 								<option value="rect">Rect</option>
 							</select><br/>
-		<lable>coords</lable><input type="text" value="$!{style.options[${event}].coords.val}" name="style.value[${opt.id}].${opt.name}.coords"  rel="${opt.name}.coords"/>
+		<lable>coords</lable><input type="text" value="$!{style.options[${event}].coords.val}" name="style._zoom[1].events[${event.id}].options[${opt.id}].coords"  rel="${opt.name}.coords"/>
 	</span>
 </li>

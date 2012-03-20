@@ -3,8 +3,7 @@
 
 	<span class="lable">Fill Color</span>
 	<span class="controll">
-		<input type="hidden" value="$!{event.id}" title="${event.name}" name="style.value[${opt.id}].${opt.name}.user_event[${event.id}]" />
 <br/>
-		<input type="text"  value="$!{opt.value}" name="style.value[${opt.id}].${opt.name}"  class="color_picker"  rel="${opt.name}"/>
+		<input type="text"  value="$!{opt.value}" name="style._zoom[1].events[${event.id}].options[${opt.id}]"  class="color_picker"  rel="${opt.name}"/>
 	</span>
 </li>

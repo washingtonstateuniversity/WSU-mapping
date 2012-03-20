@@ -304,7 +304,7 @@ namespace campusMap.Controllers
             zoom_levels level = ActiveRecordBase<zoom_levels>.Find(1);
             List<zoom_levels> levels = new List<zoom_levels>();
             levels.Add(level);
-            STYLE.zoom = levels; // priming the levels with the all zoom level
+            STYLE._zoom = levels; // priming the levels with the all zoom level
 
             PropertyBag["style"] = STYLE;
             PropertyBag["style_types"]  = ActiveRecordBase<geometrics_types>.FindAll();
@@ -1050,9 +1050,40 @@ namespace campusMap.Controllers
                 char[] startC = { '{' };
                 char[] endC = { '}' };
 
+
+
+            /* first add zoom levels */
+                foreach (zoom_levels zoom in style._zoom)
+                {
+                    List<AbstractCriterion> revEx = new List<AbstractCriterion>();
+                    revEx.Add(Expression.Eq("start", zoom.start));
+                    revEx.Add(Expression.Eq("end", zoom.end));
+                    zoom_levels zoomed = ActiveRecordBase<zoom_levels>.FindFirst(Order.Desc("creation_date"), revEx.ToArray());
+                    if (zoomed.id <= 0)
+                    {
+                        ActiveRecordMediator<zoom_levels>.Save(zoom);
+                        style._zoom.Add(zoom);
+                    }
+                }
+
+                /* 
+                 * everthing from here should be inherently saved with the 
+                 * ActiveRecordMediator<styles>.Save(style);
+                 * 
+                 * 
+                 * FORM INPUT NAME for an option on
+                 * 'fillColor' under the 'rest' event under Zoom 0,14
+                 * EXMAPLE: 
+                 *   so:
+                 * style._zoom[1]        id:1  -  '0,14'
+                 * style._event[6]       id:2  -  'hover'
+                 * style._value[6]       id:6  -  'fillColor'
+                 * <input type="hidden" value="$!{event.id}" name="style._zoom[${zoom.id}].events[${event.id}]._value[${opt.id}]" />
+                 * 
+                 * */
+                /* finish up by finalizing the style */
                 ActiveRecordMediator<styles>.Save(style);
 
-                ActiveRecordMediator<styles>.Save(style);
                 if (apply != null || ajaxed_update){
                     if (style.id > 0){
                         Redirect("edit_style.castle?id=" + style.id);
