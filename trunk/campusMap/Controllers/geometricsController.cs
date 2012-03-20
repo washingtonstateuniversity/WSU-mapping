@@ -1078,7 +1078,7 @@ namespace campusMap.Controllers
                  * style._zoom[1]        id:1  -  '0,14'
                  * style._event[6]       id:2  -  'hover'
                  * style._value[6]       id:6  -  'fillColor'
-                 * <input type="hidden" value="$!{event.id}" name="style._zoom[${zoom.id}].events[${event.id}]._value[${opt.id}]" />
+                 * <input type="hidden" value="$!{opt.value}" name="style._zoom[${zoom.id}].events[${event.id}]._value[${opt.id}]" />
                  * 
                  * */
                 /* finish up by finalizing the style */
