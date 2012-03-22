@@ -65,9 +65,9 @@
 					Set zoom levels: <span class="name__start">${zoom.start}</span>#if(${zoom.end}!='') to <span class="name__end">${zoom.end}</span>#end 
 					<br/><br/>
 					<div class="slider-range"></div><br/>
-					$Form.Hiddenfield("zoom.id")
-					<input type="hidden" name="zoom.start" class="__start" value="${zoom.start}"/>
-					<input type="hidden" name="zoom.end" class="__end" value="$!{zoom.end}"/>
+					<input type="hidden" name="zoom[0].id" class="__id" value="#if($zoom.id)${zoom.id}#else0#end"/>
+					<input type="hidden" name="zoom[0].start" class="__start" value="${zoom.start}"/>
+					<input type="hidden" name="zoom[0].end" class="__end" value="$!{zoom.end}"/>
 				</div>
 			#end
 			<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
@@ -126,8 +126,9 @@
 		Set zoom levels: <span class="name__start">0</span>#if(${zoom.end}!='') to <span class="name__end">14</span>#end 
 		<br/><br/>
 		<div class="slider-range"></div><br/>
-		<input type="hidden" name="zoom.start" class="__start" value="0"/>
-		<input type="hidden" name="zoom.end" class="__end" value="14"/>
+		<input type="hidden" name="zoom[9999].id" class="__id" value="0"/>
+		<input type="hidden" name="zoom[9999].start" class="__start" value="0"/>
+		<input type="hidden" name="zoom[9999].end" class="__end" value="14"/>
 	</div>
 	<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">

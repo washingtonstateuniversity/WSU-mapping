@@ -1176,15 +1176,14 @@ $(function() {
     if($( ".TABS" ).length>0){
 		var $tab_title_input = $( "#tab_title"),
 			$tab_content_input = $( "#tab_content" );
-		var tab_counter = 2;
+		var tab_counter = 0;
 
 		
 		
 		var $tabs = $('.LEVEL_TABS').tabs({
 			tabTemplate: "<li><span class='ui-icon ui-icon-close'>Remove Tab</span><a href='#{href}'>#{label}</a> </li>",
 			add: function( event, ui ) {
-				var tab_content =$('.clone_pool').html();
-				$( ui.panel ).append(tab_content);
+				$( ui.panel ).append($('.clone_pool').html().replace(/[9]{4}/g, (tab_counter>-1?tab_counter:tab_counter+1) ).replace(/\|\|/g, '' ) );
 				$( ui.panel ).find('.TABS:last').tabs();
 				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
 			}

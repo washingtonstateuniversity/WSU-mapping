@@ -4,6 +4,6 @@
 	<span class="lable">Visible</span>
 	<span class="controll">
 <br/>
-	#*	<input type="checkbox" value="true" name="style._zoom[1].events[${event.id}].options[${opt.id}]" rel="${opt.name}"/> *#
+		<input type="checkbox" value="true" name="style._zoom[1].events[${event.id}].options[${opt.id}]" rel="${opt.name}"/> 
 	</span>
 </li>

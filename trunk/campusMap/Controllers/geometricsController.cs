@@ -1100,6 +1100,7 @@ namespace campusMap.Controllers
         {
             geometrics geo = ActiveRecordBase<geometrics>.Find(10);
             SqlGeography spatial = geometrics.AsGeography(geo.boundary);
+
             CancelView();
         }
 
