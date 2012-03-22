@@ -24,29 +24,12 @@ function addMetaSupport(){
     mt = mt.length ? mt : $('<meta name="viewport" />').appendTo('head');
     mt.attr('content', 'initial-scale=1.0, user-scalable=no');
 }
-function loadScript() {
+function loadScript(){
     detectBrowser();
-    loadingLang();
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "http://maps.googleapis.com/maps/api/js?sensor="+sensor+"&callback=initialize"+lang;
-    document.body.appendChild(script);
-    
-    script.type = "text/javascript";
-    script.src = "http://nwpassagescenicbyway.org/ScriptDeploy/path/uploads/lib/TEST/infoPanel.js";
-    document.body.appendChild(script);
-    
-    script.type = "text/javascript";
-    script.src = "http://nwpassagescenicbyway.org/ScriptDeploy/path/uploads/lib/TEST/vars.js";
-    document.body.appendChild(script);
-    
-    script.type = "text/javascript";
-    script.src = "http://nwpassagescenicbyway.org/ScriptDeploy/path/uploads/lib/TEST/overlays.js";
-    document.body.appendChild(script);
-    
-    script.type = "text/javascript";
-    script.src = "http://nwpassagescenicbyway.org/ScriptDeploy/path/uploads/lib/TEST/utilities.js";
-    document.body.appendChild(script);
+    loadingLang();  
+  	async_load_js("http://maps.googleapis.com/maps/api/js?sensor="+sensor+"&callback=initialize"+lang,function(){
+		async_load_js(url,callback);
+	});
     
 }
 function set_up_addThis(){
@@ -59,6 +42,51 @@ function set_up_addThis(){
 	addthis.update('share', 'url', url);
 	addthis.update('share', 'title', title);
 }
+
+
+
+
+
+/* set up parts of the map */
+
+
+function setGeoCoder(){
+	if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
+	return geocoder;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -455,7 +483,7 @@ function create_map_element(type,op,map){
 	};
 }
 
-
+/* this should replace the above script.. just had to stop working on this to push the project forward  */
 	function create_map_element__________(type,op,map){
 		var _op={};
 		defined(map)?_op.map=map:null;
@@ -508,126 +536,6 @@ function create_map_element(type,op,map){
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function mapOverlay(){
-	var triangleCoords = [
-		new google.maps.LatLng(69.53,-157.5),
-		new google.maps.LatLng(13.23,-157.5),
-		new google.maps.LatLng(13.23,17.97),
-		new google.maps.LatLng(69.53,17.97),
-		new google.maps.LatLng(69.53,-157.5)
-		];
-
-	// Construct the polygon
-	color1 = new google.maps.Polygon({
-			paths: triangleCoords,
-			strokeColor: "#f4f5c7",
-			strokeOpacity: 0.15,
-			strokeWeight: 2,
-			fillColor: "#f7f3e2",
-			fillOpacity: 0.42
-		});
-	color1.setMap(map);
-	// Construct the polygon
-	color2 = new google.maps.Polygon({
-			paths: triangleCoords,
-			strokeColor: "#a0ecff",
-			strokeOpacity: 0.15,
-			strokeWeight: 2,
-			fillColor: "#f3e8b2",
-			fillOpacity: 0.23
-		});
-	color2.setMap(map);
-	// Construct the polygon
-	color3 = new google.maps.Polygon({
-			paths: triangleCoords,
-			strokeColor: "#f4f5c7",
-			strokeOpacity: 0.15,
-			strokeWeight: 2,
-			fillColor: "#aff5ea",
-			fillOpacity: 0.11
-		});
-	color3.setMap(map);
-	
-	
-	var myCoordinates = state();
-	var polyOptions = {
-			path: myCoordinates,
-			strokeColor: "#d1cec5",
-			strokeOpacity: 1,
-			strokeWeight: 10
-		}
-	var it = new google.maps.Polyline(polyOptions);
-	it.setMap(map);
-	
-	/////nez ind trib land
-	var myCoordinates = [
-			new google.maps.LatLng(46.535203,-116.899312),
-			new google.maps.LatLng(46.565425,-116.259358),
-			new google.maps.LatLng(46.133173,-115.905049),
-			new google.maps.LatLng(45.997871,-115.959981),
-			new google.maps.LatLng(46.220657,-116.841634),
-			new google.maps.LatLng(46.442307,-116.877339),
-			new google.maps.LatLng(46.435919,-116.908582),
-			new google.maps.LatLng(46.534731,-116.910985)
-		];
-	var polyOptions = {
-			path: myCoordinates,
-			strokeColor: "#dbc9b1",
-			strokeOpacity: 1,
-			strokeWeight:0.25,
-			fillColor: "#dbc9b1",
-			fillOpacity: 0.25
-		}
-	var it = new google.maps.Polyline(polyOptions);
-	it.setMap(map);
-	
-	/// map part -- windchaster
-	var myCoordinates = road_I95();
-	var polyOptions = {
-			path: myCoordinates,
-			strokeColor: "#000000",
-			strokeOpacity: 1,
-			strokeWeight:1
-		}
-	var it = new google.maps.Polyline(polyOptions);
-	it.setMap(map);
-	
-	var myCoordinates = river();
-	var polyOptions = {
-			path: myCoordinates,
-			strokeColor: "#1d8bda",
-			strokeOpacity: 1,
-			strokeWeight: 2
-		}
-	var it = new google.maps.Polyline(polyOptions);
-	it.setMap(map);
-	
-	var myCoordinates = riverSnake();
-	var polyOptions = {
-			path: myCoordinates,
-			strokeColor: "#0e5eb8",
-			strokeOpacity: 1,
-			strokeWeight: 2
-		}
-	var it = new google.maps.Polyline(polyOptions);
-	it.setMap(map);
-}
 
 function optionize() {
 
@@ -722,57 +630,6 @@ function optionize() {
 		jsonloadPage(id,true);
 }
 
-
-
-
-/* the frame of the map*/
-function makeMainOverlay(OverlayDiv, map) {
-	var JmapTop = document.createElement('DIV');
-	JmapTop.setAttribute('id','JmapTop');
-	JmapTop.style.zIndex  = '1';
-	OverlayDiv.appendChild(JmapTop);
-  
-	var JmapLeft = document.createElement('DIV');
-	JmapLeft.setAttribute('id','JmapLeft');
-	JmapLeft.style.zIndex  = '1';
-	OverlayDiv.appendChild(JmapLeft);
-	
-	var JmapRight = document.createElement('DIV');
-	JmapRight.setAttribute('id','JmapRight');
-	JmapRight.style.zIndex  = '1';
-	OverlayDiv.appendChild(JmapRight);
-	
-	var JmapBottom = document.createElement('DIV');
-	JmapBottom.setAttribute('id','JmapBottom');
-	JmapBottom.style.zIndex  = '1';
-	OverlayDiv.appendChild(JmapBottom);
-}
-/* example button for map*/
-function HomeControl(controlDiv, map) {
-	// Set CSS styles for the DIV containing the control
-	// Setting padding to 5 px will offset the control
-	// from the edge of the map
-	controlDiv.style.padding = '5px';
-  
-	// Set CSS for the control border
-	var controlUI = document.createElement('DIV');
-	controlUI.style.backgroundColor = 'white';
-	controlUI.style.borderStyle = 'solid';
-	controlUI.style.borderWidth = '2px';
-	controlUI.style.cursor = 'pointer';
-	controlUI.style.textAlign = 'center';
-	controlUI.title = 'Click to set the map to Home';
-	controlDiv.appendChild(controlUI);
-  
-	// Set CSS for the control interior
-	var controlText = document.createElement('DIV');
-	controlText.style.fontFamily = 'Arial,sans-serif';
-	controlText.style.fontSize = '12px';
-	controlText.style.paddingLeft = '4px';
-	controlText.style.paddingRight = '4px';
-	controlText.innerHTML = '<b>Home</b>';
-	controlUI.appendChild(controlText);
-}
 
 
 
@@ -3150,7 +3007,7 @@ function showKML() {
     gob('coords1').value += kmlend();
 }
 function showAddress(address) {
-    geocoder.geocode({'address': address}, function(results, status) {
+    setGeoCoder().geocode({'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             var pos = results[0].geometry.location;
             map.setCenter(pos);
@@ -3698,7 +3555,7 @@ function initialize() {
 		];
 
 	var controlState = controlsIn;//($('.sortStyleOps.orgin').length)?controlsOut:controlsIn;
-setGeoCoder();
+//setGeoCoder();
    //geocoder = new google.maps.Geocoder();
     //var latlng = new google.maps.LatLng(59.914063, 10.737874);//(45.0,7.0);//45.074723, 7.656433
 
@@ -3868,17 +3725,17 @@ setGeoCoder();
 		
 		});		
 	 
-		var geocoder = new google.maps.Geocoder();  
+		//var geocoder = new google.maps.Geocoder();  
 		 $(function() {
 
 			 $("#searchbox").autocomplete({
 			 
 			   source: function(request, response) {
 	
-			  if (geocoder == null){
-			   geocoder = new google.maps.Geocoder();
-			  }
-				 geocoder.geocode( {'address': request.term }, function(results, status) {
+			 // if (geocoder == null){
+			 //  geocoder = new google.maps.Geocoder();
+			 // }
+				 setGeoCoder().geocode( {'address': request.term }, function(results, status) {
 				   if (status == google.maps.GeocoderStatus.OK) {
 	
 						var searchLoc = results[0].geometry.location;
@@ -3887,7 +3744,7 @@ setGeoCoder();
 						var latlng = new google.maps.LatLng(lat, lng);
 						var bounds = results[0].geometry.bounds;
 	
-					  geocoder.geocode({'latLng': latlng}, function(results1, status1) {
+					  setGeoCoder().geocode({'latLng': latlng}, function(results1, status1) {
 						  if (status1 == google.maps.GeocoderStatus.OK) {
 							if (results1[1]) {
 							 response($.map(results1, function(loc) {
@@ -4008,7 +3865,20 @@ setGeoCoder();
 				$('#Long').val(lng);
 				//setTimeout(function() {},  200);
 				var loca = new google.maps.LatLng(lat,lng);
-				$('#place.address').val(codeLatLng(lat,lng));
+				
+				$('#place.address').val(function() {
+							var obj = $(this);
+							setGeoCoder().geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
+							  if (status == google.maps.GeocoderStatus.OK) {
+								if (results[1]) {
+									//alert( results[1].formatted_address);
+									obj.val(results[1].formatted_address );
+								}
+							  } else {
+								alert("Geocoder failed due to: " + status);
+							  }
+							});
+	   				});
 				
 				var types = ['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar','beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer','car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store','courthouse','dentist','department_store','doctor','electrician','electronics_store','embassy','establishment','finance','fire_station','florist','food','funeral_home','furniture_store','gas_station','general_contractor','geocode','grocery_or_supermarket','gym','hair_care','hardware_store','health','hindu_temple','home_goods_store','hospital','insurance_agency','jewelry_store','laundry','lawyer','library','liquor_store','local_government_office','locksmith','lodging','meal_delivery','meal_takeaway','mosque','movie_rental','movie_theater','moving_company','museum','night_club','painter','park','parking','pet_store','pharmacy','physiotherapist','place_of_worship','plumber','police','post_office','real_estate_agency','restaurant','roofing_contractor','rv_park','school','shoe_store','shopping_mall','spa','stadium','storage','store','subway_station','synagogue','taxi_stand','train_station','travel_agency','university','veterinary_care','zoo','administrative_area_level_1','administrative_area_level_2','administrative_area_level_3','colloquial_area','country','floor','intersection','locality','natural_feature','neighborhood','political','point_of_interest','post_box','postal_code','postal_code_prefix','postal_town','premise','room','route','street_address','street_number','sublocality','sublocality_level_4','sublocality_level_5','sublocality_level_3','sublocality_level_2','sublocality_level_1','subpremise','transit_station'];
 				$('#estimated_places').show('fast');
@@ -4048,14 +3918,9 @@ setGeoCoder();
 
      function updating(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-			
-				
 			//alert(JSON.stringify(results));
-			
           for (var i = 0; i < 1; i++) {
-			  
 			var request = {reference:results[i].reference};
-
 			var service = new google.maps.places.PlacesService(map);
 			//service.search(request, serach_callback);
 			service.getDetails(request, function(place, status) {
@@ -4066,9 +3931,8 @@ setGeoCoder();
 				if(place.name){
 					if($('.blink1').length)$('#local_place_names').html('');
 					var txt = $.trim($('#local_place_names').html());
-					$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' :   place.name + (txt==""?'':',') ));
+					$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' : (txt==""?'':',') +  place.name ));
 				}
-				
 				google.maps.event.addListener(marker, 'click', function() {
 				ib.close();
 				  ib.setContent(setBoxHtml(JSON.stringify(place)));
@@ -4457,8 +4321,7 @@ function applyType(type){
 	
 	
 	function codeAddress(address) {
-	setGeoCoder();
-		  geocoder.geocode( { 'address': address}, function(results, status) {
+		  setGeoCoder().geocode( { 'address': address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					map.setCenter(results[0].geometry.location);
 					var marker = new google.maps.Marker({
@@ -4470,30 +4333,32 @@ function applyType(type){
 				}
 		  });
 	}
-	
-	
+  function setTmp(_var) {	
+  	temp_var = _var;
+  }
+  function getTmp() {	
+  	alert(temp_var);
+  	return temp_var;
+  }	
   function codeLatLng(lat,lng) {
-	setGeoCoder();
     var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
+    setGeoCoder().geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[1]) {
-          return results[1].formatted_address;
+			//alert( results[1].formatted_address);
+			setTmp( results[1].formatted_address );
         }
       } else {
         alert("Geocoder failed due to: " + status);
       }
     });
+	return getTmp();
   }
 	
 	
 	
 	
-	function setGeoCoder(){
-		if(typeof(geocoder)==='undefined'){
-			geocoder = new google.maps.Geocoder();	
-		}
-	}
+
 	
 	
 	

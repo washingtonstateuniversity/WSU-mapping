@@ -113,7 +113,7 @@ var polygonstyles = [];
 //var rectanglestyles = [];
 var circlestyles = [];
 var markerstyles = [];
-var geocoder; // = new google.maps.Geocoder();
+ //var geocoder; = new google.maps.Geocoder();
 //var startLocation;
 var endLocation;
 //var dircount;
@@ -193,4 +193,5 @@ var availableTags = [
 			"Far",
 			"From"
 		];
-		var geocoder; 
+		//var geocoder; 
+		var temp_var;

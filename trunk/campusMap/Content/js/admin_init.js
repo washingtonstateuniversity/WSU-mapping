@@ -13,28 +13,6 @@
 	var image_Credit='';
 	var image_Caption='';
 
-
-  
-//function changeLinksToDevelop(){
-//    var url = document.URL.split("//");
-//    var path = url[1];
-//    var loc = path.indexOf('/');
-//    //If the path is like 134.121.0.239/cleantech/ lets save all the way to the second '/'
-//    if( path.substring(path.indexOf('/')+1).indexOf('/') > 0)
-//    {
-//        loc = (path.indexOf('/')+1) + path.substring(path.indexOf('/')+1).indexOf('/');            
-//    }
-//    path = url[0] + '//' + path.substring(0, loc) + '/';
-//    var div = document.getElementById('nav');
-//    var a = div.getElementsByTagName("a");
-//    var path2 = 'http://identity.wsu.edu/';
-//    for(var i=0; i < a.length; i++)
-//    {   
-//        // CHANGE THE PATH2 VARIABLE TO THE PATH OF YOUR PROJECT            
-//        a[i].href = a[i].href.replace(path2, path);              
-//    }  
-//    initNav();      
-//}     
 (function($){
 	$.fn.blink = function(options){
 		var defaults = { delay:500 };
@@ -51,7 +29,9 @@
 			}, options.delay);
 		});
 	}
-}(jQuery))
+}(jQuery));
+  
+
 function typedown(mySelection){  
     window.location = siteroot+view+"list.castle?type="+mySelection;   
 }
@@ -1294,6 +1274,9 @@ $(function() {
 		
 		                    
 	}
+	if($('.autoselect').length){
+		$( ".autoselect" ).each(function(){$(this).combobox();});
+	}
     if($( "#tabs" ).length>0){
         var  taboptions;	
         if($('#content_tar #tabs').length>0){
@@ -1303,12 +1286,10 @@ $(function() {
 		
 		if($('#content_tar #tabs').length>0 || (typeof(place_id) !== 'undefined'&&place_id==0)){
 			if($( "#LocationTypeSelect" ).length){
-				$( "#LocationTypeSelect" ).combobox();
-				$( "#LocationModelSelect" ).combobox();
+				//$( "#LocationTypeSelect" ).combobox();
+				//$( "#LocationModelSelect" ).combobox();
 			}
-			if($('.autoselect').length){
-				$( ".autoselect" ).each(function(){$(this).combobox();});
-			}
+
 			
 		}
 		

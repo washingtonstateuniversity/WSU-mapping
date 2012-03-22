@@ -2,6 +2,9 @@ var tinyMCEImageList = [];
 
 var DOMAIN='http://localhost:50759';
 
+
+
+
 // Our global state
 var map;
 var infowindow,
@@ -175,4 +178,4 @@ var boxText = document.createElement("div");
 //boxText.style.cssText = "border:none; background:transparent url('http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/movie_clouds.gif') no-repeat left bottom;";
 				
 
-var geocoder; // = new google.maps.Geocoder();
+//var geocoder; // = new google.maps.Geocoder();

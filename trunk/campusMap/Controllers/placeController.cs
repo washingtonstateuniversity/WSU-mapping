@@ -639,10 +639,17 @@ namespace campusMap.Controllers
             PropertyBag["place"] = Flash["place"] != null ? Flash["place"] : place;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
             PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
-            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
             RenderView("editor_place");
         }
@@ -807,7 +814,6 @@ namespace campusMap.Controllers
             String[][] fields,
             bool ajaxed_update,
             bool forced_tmp,
-            int set_model,
             string apply,
             string cancel
             )     
@@ -990,14 +996,6 @@ namespace campusMap.Controllers
                 RedirectToReferrer();
                 return;
             }*/
-
-
-            if (set_model <= 0)
-            {
-                place_models model = ActiveRecordBase<place_models>.Find(set_model);
-                place.model = model;
-            }
-
 
 
             ActiveRecordMediator<place>.Save(place);
