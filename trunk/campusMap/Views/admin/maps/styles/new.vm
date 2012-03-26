@@ -126,6 +126,11 @@
 		Set zoom levels: <span class="name__start">0</span>#if(${zoom.end}!='') to <span class="name__end">14</span>#end 
 		<br/><br/>
 		<div class="slider-range"></div><br/>
+		<select class='zoom_select'>
+			#foreach($level in $zoom_levels)
+				<option value="$level.start,$level.end">$level.id</option>
+			#end
+			</select>
 		<input type="hidden" name="zoom[9999].id" class="__id" value="0"/>
 		<input type="hidden" name="zoom[9999].start" class="__start" value="0"/>
 		<input type="hidden" name="zoom[9999].end" class="__end" value="14"/>

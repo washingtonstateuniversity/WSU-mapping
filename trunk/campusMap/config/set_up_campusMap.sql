@@ -1110,13 +1110,30 @@ GO
 		[zoom_end] INT null,
 		primary key (zoom_id)
 	)
-	/* add some defaults */
+	/* add some defaults 
+	*/
+	
+	/* Set up first */
 	INSERT INTO [campusMap].[dbo].[zoom_levels]
 			   ([zoom_start],[zoom_end])
 		 VALUES
 				('0','14')
 	GO
-
+	/* iterate over the to produce the rest */
+	;WITH Numbers (Number) AS  
+	( 
+		SELECT 0  
+		UNION ALL 
+		SELECT 1 + Number FROM Numbers  
+		WHERE 1 + Number <= 14 
+	) 
+	INSERT INTO [campusMap].[dbo].[zoom_levels] ([zoom_start],[zoom_end]) 
+	SELECT n1.Number, n2.Number  
+	FROM 
+		Numbers n1 CROSS JOIN 
+		Numbers n2 
+	WHERE 
+		NOT (n1.Number = 0 AND n2.Number = 14) 
 
 
  
@@ -1941,17 +1958,5 @@ GO */
 
 
 
-	DECLARE @z_start INT
-	SET @z_start = 0
-	DECLARE @z_end INT
-	SET @z_end = 0
-	WHILE (@z_start <= 14) BEGIN
-		IF(@z_start != 0 AND @z_end != 14)
-			WHILE (@z_end <= 14) BEGIN
-				INSERT INTO [campusMap].[dbo].[zoom_levels] ([zoom_start],[zoom_end]) VALUES (@z_start,@z_end)
-				SET @z_end = @z_end + 1
-			END
-			SET @z_start = @z_start + 1
-		END
-	END
+
 

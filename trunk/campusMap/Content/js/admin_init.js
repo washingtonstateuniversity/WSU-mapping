@@ -2024,6 +2024,16 @@ function set_slider(obj){
 			obj.closest('.ZoomChoice').find('.name__start').text(start);
 			obj.closest('.ZoomChoice').find('.name__end').text(end);
 			
+			id=parseInt(obj.closest('.ZoomChoice').find('.zoom_select').find('[value="'+start+','+end+'"]').text());
+			obj.closest('.ZoomChoice').find('.zoom_select').find('[value="'+start+','+end+'"]').attr('selected',true);
+			
+			obj.closest('.ZoomChoice').find('.__id').val(id);
+			obj.closest('.ZoomChoice').find('.__start').val(start);
+			obj.closest('.ZoomChoice').find('.__end').val(end);
+			
+
+			
+			
 		}
 	});
 }
