@@ -1173,86 +1173,7 @@ $(function() {
 	
 	
 
-    if($( ".TABS" ).length>0){
-		var $tab_title_input = $( "#tab_title"),
-			$tab_content_input = $( "#tab_content" );
-		var tab_counter = 0;
-
-		
-		
-		var $tabs = $('.LEVEL_TABS').tabs({
-			tabTemplate: "<li><span class='ui-icon ui-icon-close'>Remove Tab</span><a href='#{href}'>#{label}</a> </li>",
-			add: function( event, ui ) {
-				$( ui.panel ).append($('.clone_pool').html().replace(/[9]{4}/g, (tab_counter>-1?tab_counter:tab_counter+1) ).replace(/\|\|/g, '' ) );
-				$( ui.panel ).find('.TABS:last').tabs();
-				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
-			}
-		});
-		$( ".LEVEL_TABS span.ui-icon-close" ).live( "click", function() {
-			var index = $( "li", $tabs ).index( $( this ).parent() );
-			$tabs.tabs( "remove", index );
-		});
-		
-		// actual addTab function: adds new tab using the title input from the form above
-		function  addTab(){
-			var tab_title = 'Zoom level:<span class="name__start">0</span><span class="name__endarea"> to <span class="name__end">14</span></span>';
-			$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
-			set_slider( $("#tabs-" + tab_counter).find('.slider-range') );
-			tab_counter++;
-		}
-
-		// addTab button: just opens the dialog
-		$( "#add_tab" )
-			.button()
-			.on('click',function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				addTab()
-			});
-		
-		
-		
-		
-        $( ".TABS:not(.clone_pool .TABS)" ).each(function(i){
-			$(this).tabs();
-			// close icon: removing the tab on click
-			// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-
-		});
-	}	
-		$( ".slider-range" ).each(function(){
-			set_slider( $(this) );
-		});
-		function set_slider(obj){
-			obj.slider({
-				range: true,
-				min: 0,
-				max: 14,
-				values: [ 0, 14 ],
-				slide: function( event, ui ) {
-					var start 	= ui.values[ 0 ];
-					var end 	= ui.values[ 1 ];
-					
-					obj.next( ".__start" ).val(start);
-					obj.next( "._end" ).val(end);
-					
-					var i = obj.closest('.tabed').index(obj.closest('.LEVEL_TABS').find('.tabed'));
-					//alert(i);
-					obj.closest('.LEVEL_TABS').find('.name__start:eq('+i+')').text(start);
-					obj.closest('.LEVEL_TABS').find('.name__end:eq('+i+')').text(end);
-					if(start==end){
-						obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').hide();
-					}else{
-						obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').show();
-					}
-						
-					obj.closest('.ZoomChoice').find('.name__start').text(start);
-					obj.closest('.ZoomChoice').find('.name__end').text(end);
-					
-				}
-			});
-		}
-	
+    
 	
 	
 	function post_tmp(form_obj,diaObj,callback){
@@ -1902,8 +1823,213 @@ $('#img_layout_choice').toggle(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// actual addTab function: adds new tab using the title input from the form above
+		function  addTab(tab_title,tab_counter,callback){
+			$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+			typeof(callback)!=="undefined"?(callback)($("#tabs-" + tab_counter)):null;
+		}
+
+
+
+	if($( ".TABS" ).length>0){
+		var $tab_title_input = $( "#tab_title"),
+			$tab_content_input = $( "#tab_content" );
+		var tab_counter = 0;
+		var $tabs = $('.LEVEL_TABS').tabs({
+			tabTemplate: "<li><span class='ui-icon ui-icon-close'>Remove Tab</span><a href='#{href}'>#{label}</a> </li>",
+			add: function( event, ui ) {
+				tab_counter++;
+				$( ui.panel ).append($('.clone_pool').html().replace(/[9]{4}/g, (tab_counter>0?tab_counter:tab_counter+1) ).replace(/\|\|/g, '' ) );
+				$( ui.panel ).find('.TABS:last').tabs();
+				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
+			}
+		});
+		$( ".LEVEL_TABS span.ui-icon-close" ).live( "click", function() {
+			var index = $( "li", $tabs ).index( $( this ).parent() );
+			$tabs.tabs( "remove", index );
+		});
+
+		// addTab button: just opens the dialog
+		$( "#add_tab" )
+			.button()
+			.on('click',function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				var tab_title = 'Zoom level:<span class="name__start">0</span><span class="name__endarea"> to <span class="name__end">14</span></span>';
+				addTab(tab_title,tab_counter,function(tab){
+					set_slider( tab.find('.slider-range') );
+				});
+			});
+        $( ".TABS:not(.clone_pool .TABS)" ).each(function(i){
+			$(this).tabs();
+		});
+	}	
+	
+	
+
+$( ".slider-range" ).each(function(){ set_slider( $(this) ); });		
+function set_slider(obj){
+	obj.slider({
+		range: true,
+		min: 0,
+		max: 14,
+		values: [ 0, 14 ],
+		slide: function( event, ui ) {
+			var start 	= ui.values[ 0 ];
+			var end 	= ui.values[ 1 ];
+			
+			obj.next( ".__start" ).val(start);
+			obj.next( "._end" ).val(end);
+			
+			var i = obj.closest('.ui-tabs-panel').index(obj.closest('.LEVEL_TABS').find('.ui-tabs-panel'));
+			//alert(i);
+			obj.closest('.LEVEL_TABS').find('.name__start:eq('+i+')').text(start);
+			obj.closest('.LEVEL_TABS').find('.name__end:eq('+i+')').text(end);
+			if(start==end){
+				obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').hide();
+			}else{
+				obj.closest('.LEVEL_TABS').find('.name__endarea:eq('+i+')').show();
+			}
+				
+			obj.closest('.ZoomChoice').find('.name__start').text(start);
+			obj.closest('.ZoomChoice').find('.name__end').text(end);
+			
+		}
+	});
+}
+	
 function set_up_style_list(obj){
-		var mode = obj.attr('id');
+		var mode = obj.attr('id').split('__')[1].split('_')[1];
 		var objs_to_rebuild = obj.find('.sortStyleOps :input');	
 			
 		obj.find('.sortStyleOps').sortable({
@@ -1915,7 +2041,6 @@ function set_up_style_list(obj){
 				}
 				rebuild_example(objs_to_rebuild,map,mode);
 			}
-
 		});
 
 		objs_to_rebuild.live('change', function(){

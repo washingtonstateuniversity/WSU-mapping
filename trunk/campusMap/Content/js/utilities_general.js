@@ -64,7 +64,7 @@ Array.prototype.remove = function(from, to) {
   this.length = from < 0 ? this.length + from : from;
   return this.push.apply(this, rest);
 };
-	function param( name ){name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");var regexS = "[\\?&]"+name+"=([^&#]*)";var regex = new RegExp( regexS );var results = regex.exec( window.location.href );if( results == null ) return false; else return results[1];}
+	function param(name,url){url=(typeof(url)==='undefined'?window.location.href:url);name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");var regexS = "[\\?&]"+name+"=([^&#]*)";var regex = new RegExp( regexS );var results = regex.exec( url );if( results == null ) return false; else return results[1];}
 	
 ///* hash handlings  *///
 	$(window).bind('load', function() {

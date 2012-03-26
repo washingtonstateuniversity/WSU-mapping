@@ -1114,12 +1114,15 @@ GO
 	INSERT INTO [campusMap].[dbo].[zoom_levels]
 			   ([zoom_start],[zoom_end])
 		 VALUES
-				('0','14'),('0','0'),
-				('1','1'),('2','2'),('3','3'),('4','4'),
-				('5','5'),('6','6'),('7','7'),('8','8'),
-				('9','9'),('10','10'),('11','11'),('12','12'),
-				('13','13'),('14','14')
+				('0','14')
 	GO
+
+
+
+ 
+
+
+
 	
 
 	
@@ -1924,3 +1927,31 @@ CREATE TABLE [dbo].[ad_to_field_types] (
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	DECLARE @z_start INT
+	SET @z_start = 0
+	DECLARE @z_end INT
+	SET @z_end = 0
+	WHILE (@z_start <= 14) BEGIN
+		IF(@z_start != 0 AND @z_end != 14)
+			WHILE (@z_end <= 14) BEGIN
+				INSERT INTO [campusMap].[dbo].[zoom_levels] ([zoom_start],[zoom_end]) VALUES (@z_start,@z_end)
+				SET @z_end = @z_end + 1
+			END
+			SET @z_start = @z_start + 1
+		END
+	END
+
