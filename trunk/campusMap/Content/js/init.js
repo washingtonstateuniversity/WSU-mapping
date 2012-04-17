@@ -8,8 +8,7 @@ function isTouch() {
   return false;
 }
 
-function MySubmitForm()
-{
+function MySubmitForm(){
      if (passThroughFormSubmit) {
           return true;
      }
@@ -17,19 +16,26 @@ function MySubmitForm()
      Asirra_CheckIfHuman(HumanCheckComplete);
      return false;
 }
-function HumanCheckComplete(isHuman)
-{
-     if (!isHuman)
-     {
-          alert("Please correctly identify the cats.");
-     }
-     else
-     {
+function HumanCheckComplete(isHuman){
+     if (!isHuman){
+         if($('#fb_uid').length>0 && $('#fb_uid').val()!=''){
+                passThroughFormSubmit = true;
+              formElt = document.getElementById("mainForm");
+              formElt.submit();
+         }else{
+            if($('#fb_uid').length>0){
+                alert("Please try to log in to facebook.");
+              }else{
+                alert("Please correctly identify the cats.");
+              }
+          }
+     }else{
           passThroughFormSubmit = true;
           formElt = document.getElementById("mainForm");
           formElt.submit();
      }
 }
+
 $(function() {
 
 

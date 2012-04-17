@@ -603,8 +603,8 @@ namespace campusMap.Controllers
             IList<styles> items;
 
             pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type)));
-            items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
-            PropertyBag["_styles"] = items;
+            //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
+            PropertyBag["_styles"] = "";//items;
 
            PropertyBag["spatial"] = gem;
 
@@ -913,7 +913,13 @@ namespace campusMap.Controllers
                     gemtype = "Line";
                     break;
                 case "polygon": //case "POLYGON":
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemtype = "Shape";
+                    break;
                 case "rectangle":
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemtype = "Shape";
+                    break;
                 case "circle":
                     gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
                     gemtype = "Shape";
@@ -925,8 +931,8 @@ namespace campusMap.Controllers
                 case "GEOMETRYCOLLECTION":
                     break;
             }
-            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", gemtype)}).id;
-
+            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) }).id;
+            //geometric.geometric_types = geom_type;
             string wkt = gemSql;
 
            // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";

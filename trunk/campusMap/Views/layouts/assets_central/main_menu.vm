@@ -1,0 +1,20 @@
+#set($baseClass="")
+#set($endcapBaseClass="")
+#set($quickaction_BaseClass="")
+<ul id='main_nav'>
+	<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a></li>
+	<li class='$baseClass #if($controller.getView()=='view')ui-state-active#end'><a href="../view/list.castle">Map views</a></li>
+	<li class='$baseClass #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a></li>
+	<li class='$baseClass #if($controller.getView()=='geometrics')ui-state-active#end'><a href="../geometrics/list.castle">Geometrics</a></li>
+	<li class='$baseClass #if($controller.getView()=='media')ui-state-active#end'><a href="../media/index.castle">Media</a></li>
+	<li class='$baseClass #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
+	<li class='$baseClass #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">User Media</a></li>
+	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/index.castle">Comments</a></li>	
+	<li class='$baseClass #if($controller.getView()=='tags')ui-state-active#end'><a href="../tags/index.castle">Tags</a></li>
+	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
+	<li class='$baseClass #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>
+	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
+	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>
+	<li class='$baseClass'><a href="../place/logout.castle">Logout</a></li>
+	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Site Prefences</a></li>	
+</ul>

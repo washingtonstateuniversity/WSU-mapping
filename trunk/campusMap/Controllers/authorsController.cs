@@ -155,7 +155,7 @@ namespace campusMap.Controllers
                 }
                 string newFile = uploadPath + image.id + ".ext";
                 //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
+                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
 
                 ActiveRecordMediator<media_repo>.Save(image);
                 author.media.Add(image);

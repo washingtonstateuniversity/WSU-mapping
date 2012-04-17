@@ -31,6 +31,124 @@
 
 namespace campusMap.Services
 {
+
+
+    public class Censor
+    {
+        private List<string> _CensoredWords;
+        public List<string> CensoredWords { get { return _CensoredWords; } set { _CensoredWords = value; } }
+
+        private List<string> _dontCensoredWords;
+        public List<string> dontCensoredWords { get { return _dontCensoredWords; } set { _dontCensoredWords = value; } }
+
+        private List<KeyValue> _txtin_spelling;
+        public List<KeyValue> txtin_spelling { get { return _txtin_spelling; } set { _txtin_spelling = value; } }
+
+        private String _comments_action;
+        public String comments_action { get { return _comments_action; } set { _comments_action = value; } }
+
+        public Censor(IEnumerable<string> censoredWords, IEnumerable<string> dontCensoredWords, IEnumerable<KeyValue> txtin_spelling, String comments_action)
+        {
+            if (censoredWords == null) throw new ArgumentNullException("censoredWords");
+            CensoredWords = new List<string>(censoredWords);
+            dontCensoredWords = new List<string>(dontCensoredWords);
+            comments_action = comments_action;
+        }
+        public string CensorText(string text)
+        {
+            if (text == null)
+                throw new ArgumentNullException("text");
+            if (needsCensor(text))
+            {
+                foreach (string censoredWord in CensoredWords)
+                {
+                    string regularExpression = ToRegexPattern(censoredWord);
+                    text = Regex.Replace(text, regularExpression, StarCensoredMatch, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                }
+            }
+            return text;
+        }
+        public bool needsCensor(string text)
+        {
+            bool result = false;
+            for (int i = 0; i < CensoredWords.ToArray().Length - 1; i++)
+            {
+                string regularExpression = ToRegexPattern(CensoredWords[i]);
+                bool flagable = Regex.IsMatch(text, regularExpression, RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant); // check for ass
+                if (flagable)
+                {
+                    result = true;
+                    break;
+                }
+                //checked for variations of the word ie: @$$ a$$ @ss a$s as$
+                for (int j = 0; j < txtin_spelling.Count - 1; j++)
+                {
+
+                    string subed = Regex.Replace(CensoredWords[i], txtin_spelling[j].Key, txtin_spelling[j].Value, RegexOptions.IgnoreCase);
+                    string regularExpression2 = ToRegexPattern(subed);
+                    flagable = Regex.IsMatch(text, regularExpression2, RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    if (flagable)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+                if (result)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            /*
+            foreach (string censoredWord in CensoredWords)
+            {
+                string regularExpression = ToRegexPattern(censoredWord);
+                censoredText = Regex.Replace(text, regularExpression, StarCensoredMatch, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            }*/
+            return result;
+        }
+        public object processText(string text)
+        {
+            if (text == null)
+                throw new ArgumentNullException("text");
+            object result = null;
+            switch (comments_action)
+            {
+                case "censor":
+                    result = CensorText(text);
+                    break;
+                case "remove":
+                    result = CensorText(text);
+                    break;
+                case "check":
+                    result = needsCensor(text);
+                    break;
+            }
+            return result;
+        }
+
+        private static string StarCensoredMatch(Match m)
+        {
+            string word = m.Captures[0].Value;
+            return new string('*', word.Length);
+        }
+        private string ToRegexPattern(string wildcardSearch)
+        {
+            string regexPattern = Regex.Escape(wildcardSearch);
+            regexPattern = regexPattern.Replace(@"\*", ".*?");
+            regexPattern = regexPattern.Replace(@"\?", ".");
+            if (regexPattern.StartsWith(".*?"))
+            {
+                regexPattern = regexPattern.Substring(3);
+                regexPattern = @"(^\b)*?" + regexPattern;
+            }
+            regexPattern = @"\b" + regexPattern + @"\b";
+            return regexPattern;
+        }
+    }
+
+
+
     public class HelperService
     {
         ILog log = log4net.LogManager.GetLogger("HelperService");
@@ -173,6 +291,87 @@ namespace campusMap.Services
             return null;
         }
 
+        public List<string> get_censoredWords()
+        {
+            string[] _censoredWords = new string[] { "anal", "anus", "arse", "ass", "ballsack", "balls", "bastard", "bitch", "beoch", "biatch", "bloody", "blowjob", "bollock", "bollok", "boner", "boob", "butt", "buttplug", "clitoris", "cock", "cuckold", "cockold", "cuckoldry", "coon", "crap", "cunt", "damn", "dick", "dildo", "dyke", "fag", "feck", "fellate", "fellatio", "felching", "fuck", "fudgepacker", "flange", "Goddamn", "hell", "homo", "jerk", "jizz", "knobend", "labia", "lmao", "lmfao", "muff", "nigger", "nigga", "omg", "penis", "piss", "poop", "prick", "pube", "pussy", "queer", "scrotum", "sex", "shit", "sh1t", "slut", "smegma", "spunk", "tit", "tosser", "turd", "twat", "vag", "vagina", "wank", "whore", "wtf" };
+            List<string> censoredWords = new List<string>(_censoredWords);
+            return censoredWords;
+        }
+
+        public List<string> get_dontCensoredWords()
+        {
+
+            string[] _dontCensoredWords = new string[] { "bass", "class", "sexy", "assu", "asso", "assi", "assw", "assr", "assy", "assp", "assl", "assh", "assn", "assb", "butte", "cocka", "cockbu", "cockcr", "cockch", "cockt", "cockr", "cocksc", "titl", "titi", "titw", "titt", "tita", "analo" };
+
+            List<string> dontCensoredWords = new List<string>(_dontCensoredWords);
+            return dontCensoredWords;
+        }
+        public List<KeyValue> get_txtin_spelling()
+        {
+            List<KeyValue> kvs = new List<KeyValue>();
+            kvs.Add(new KeyValue("a", "@"));
+            kvs.Add(new KeyValue("s", @"\$"));
+            kvs.Add(new KeyValue("ss", @"\$\$"));
+            kvs.Add(new KeyValue("ass", @"@\$\$"));
+            kvs.Add(new KeyValue("ass", @"@\$s"));
+            kvs.Add(new KeyValue("ass", @"@s\$"));
+            kvs.Add(new KeyValue("ass", @"as\$"));
+            kvs.Add(new KeyValue("ass", @"a\$s"));
+            kvs.Add(new KeyValue("k", @"\|<"));
+            kvs.Add(new KeyValue("i", @"\|"));
+            kvs.Add(new KeyValue("i", "1"));
+            kvs.Add(new KeyValue("i", "!"));
+            kvs.Add(new KeyValue("l", @"\|"));
+            kvs.Add(new KeyValue("l", "1"));
+            kvs.Add(new KeyValue("l", "!"));
+            kvs.Add(new KeyValue("o", "0"));
+            kvs.Add(new KeyValue("b", "i3"));
+            kvs.Add(new KeyValue("f", "ph"));
+            kvs.Add(new KeyValue("g", "6"));
+            kvs.Add(new KeyValue("z", "2"));
+            kvs.Add(new KeyValue("c", "k"));
+            kvs.Add(new KeyValue("u", "*"));
+            kvs.Add(new KeyValue("c", "*"));
+            kvs.Add(new KeyValue("k", @"\|{"));
+            return kvs;
+        }
+        public String setCensorMessage(comments comment)
+        {
+            List<string> censoredWords = get_censoredWords();
+            List<string> dontCensoredWords = get_dontCensoredWords();
+            List<KeyValue> txtin_spelling = get_txtin_spelling();
+
+
+            Censor censor = new Censor(censoredWords, dontCensoredWords, txtin_spelling, "censor");
+            object result;
+            result = censor.processText(comment.comment);
+
+            if (result != null && result.GetType() == typeof(bool)) //if the flaged number is great then the skiped number then it's flagable
+            {
+                comment.Flagged = (bool)result;
+                if ((bool)result)
+                {
+                    comment.published = false; // replace with method that returns bool from a site pref
+                }
+                else
+                {
+                    comment.published = true;
+                }
+                return "It appears you had cursed in your post and your post is awaiting approval.";
+            }
+            else if (result != null && result.GetType() == typeof(string))
+            {
+                comment.censored = (string)result;
+                comment.Flagged = true;
+                comment.published = true;
+            }
+            else if (result == null)
+            {
+                comment.Flagged = false;
+                comment.published = true;
+            }
+            return null;
+        }
         public String stripHTMLElements(String str){
             List<KeyValue> htmlElments = new List<KeyValue>();
             htmlElments.Add(new KeyValue("<div(.*?)>", "</div>"));
@@ -212,7 +411,35 @@ namespace campusMap.Services
             }
             return true;
         }
+        public bool passedHasFb(String uid, String accessToken)
+        {
+            /*
+             * FIX THIS SO CHECK IF TRUE
+             * 
+             * XmlDocument doc = new XmlDocument();
+            doc.Load(@"http://graph.facebook.com/" + uid);
+            String Result = doc.GetElementsByTagName("Result")[0].Value;
+            if (Result == "Fail")
+            {
+                return false;
+            }*/
 
+            //look to this as the format of what is retruned
+            /*
+               {
+                   "id": "1330497256",
+                   "name": "Jeremy Bass",
+                   "first_name": "Jeremy",
+                   "last_name": "Bass",
+                   "link": "http://www.facebook.com/jeremy.bass2",
+                   "username": "jeremy.bass2",
+                   "gender": "male",
+                   "locale": "en_US"
+                }
+             */
+
+            return true;
+        }
         public String decodeString(String text)
         {
             StringWriter str = new StringWriter();

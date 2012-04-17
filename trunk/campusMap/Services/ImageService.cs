@@ -50,6 +50,14 @@ namespace campusMap.Services
             Fixed,
             Crop
         }
+        public bool isUploadAJpeg(HttpPostedFile someFile){
+            if (someFile.ContentType == "image/jpg" || someFile.ContentType == "image/jpeg" || someFile.ContentType == "image/pjpeg")
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public bool isByteACMYK(Stream image)
         {
@@ -64,8 +72,9 @@ namespace campusMap.Services
             return false;
         }
 
-        public bool isFileACMYKJpeg(System.Drawing.Image image)
-        {
+
+
+        public bool isFileACMYKJpeg(System.Drawing.Image image){
             System.Drawing.Imaging.ImageFlags flagValues = (System.Drawing.Imaging.ImageFlags)Enum.Parse(typeof(System.Drawing.Imaging.ImageFlags), image.Flags.ToString());
             if (flagValues.ToString().ToLower().IndexOf("ycck") == -1)
             {
@@ -96,8 +105,6 @@ namespace campusMap.Services
 
 
 
-
-
         public void saveIamge(int id, string NewFile, Image imgPhoto)
         {
             //log.Info("saving photo to filepath: " + NewFile);
@@ -117,7 +124,7 @@ namespace campusMap.Services
             campusMap.Services.LogService.writelog("Deleting Images: " + image_path);
             File.Delete(image_path);
         }
-        public void process(int id, Image OriginalFile, string NewFile, imageMethod method, int percent, int height, int width, Dimensions dimensions, bool protect, string mark)
+        public void process(int id, Image OriginalFile, string NewFile, imageMethod method, int percent, int height, int width, Dimensions dimensions, bool protect, string mark, string ext)
 		{
             /* example usage
             imgPhoto = ScaleByPercent(imgPhotoVert, 50);
@@ -127,10 +134,12 @@ namespace campusMap.Services
             imgPhoto = Crop(imgPhotoHoriz, 200, 200, AnchorPosition.Center);
             */
 
-            // Prevent using images internal thumbnail
-            OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
-            OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
-
+            if (ext != "gif")
+            {
+                // Prevent using images internal thumbnail
+                OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+                OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+            }
 			Image imgPhoto = null;
             ImageFormat type = get_image_type(OriginalFile);
 

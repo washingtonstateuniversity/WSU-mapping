@@ -27,6 +27,13 @@ namespace campusMap.Models
             get { return Comment; }
             set { Comment = value; }
         }
+        private string _censored;
+        [Property]
+        virtual public string censored
+        {
+            get { return _censored; }
+            set { _censored = value; }
+        }
         private bool publish;
         [Property]
         virtual public bool published

@@ -120,11 +120,11 @@ namespace campusMap.Controllers
             string nameNpath = Regex.Replace(imageByPath, "."+Ext, "", RegexOptions.IgnoreCase);
 
             string newFile = nameNpath + "_500." + Ext;
-            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 500, ImageService.Dimensions.Width, true, "");
+            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 500, ImageService.Dimensions.Width, true, "", Ext);
             newFile = nameNpath + "_350." + Ext;
-            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 350, ImageService.Dimensions.Width, true, "");
+            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 350, ImageService.Dimensions.Width, true, "", Ext);
             newFile = nameNpath + "_250." + Ext;
-            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 250, ImageService.Dimensions.Width, true, "");
+            imageService.process(id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 250, ImageService.Dimensions.Width, true, "", Ext);
         }
 
        /**/ public void removeImage(int image_id, int place_id, bool ajax)
@@ -159,6 +159,18 @@ namespace campusMap.Controllers
             Flash["message"] = "Image Added";
             RedirectToAction("list");
         }
+
+        public static void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[32768];
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, read);
+            }
+        } 
+
+
         public void Update(
             [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
             HttpPostedFile newimage,
@@ -176,8 +188,30 @@ namespace campusMap.Controllers
                     }
                     image.ext = fileparts[1];
 
+                    Stream stream = newimage.InputStream;
+                    MemoryStream memoryStream = new MemoryStream();
+                    CopyStream(stream, memoryStream);
+                    memoryStream.Position = 0;
+                    stream = memoryStream;
+
+
                 //set up the image up from the stream
-                System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);   
+                System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+
+                if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
+                {
+                    if (ajax)
+                    {
+                        CancelView();
+                        CancelLayout();
+                        RenderText("You have uploaded a CMYK image.  Please conver to RGB first.");
+                        return;
+                    }
+                    Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
+                    RedirectToReferrer();
+                    return;
+                }
+
 
                 // a var for uploads will start here
                 String uploadPath = Context.ApplicationPhysicalPath + @"uploads\";
@@ -195,7 +229,7 @@ namespace campusMap.Controllers
                 campusMap.Services.LogService.writelog(" in Update " + newFile);
 
                 //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
+                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
             }
             ActiveRecordMediator<media_repo>.Save(image);
             if (place_id != 0)
@@ -227,8 +261,37 @@ namespace campusMap.Controllers
                 }
                 image.ext = fileparts[1];
 
+                // Make a copy of the stream to stop the destrustion of the gif animation per
+                // http://stackoverflow.com/questions/8763630/c-sharp-gif-image-to-memorystream-and-back-lose-animation
+                Stream stream = newimage.InputStream;
+                MemoryStream memoryStream = new MemoryStream();
+                CopyStream(stream, memoryStream);
+                memoryStream.Position = 0;
+                stream = memoryStream;
+
                 //set up the image up from the stream
-                System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+                //System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+
+                System.Drawing.Image processed_image = null;
+
+                if (image.ext == "gif")
+                {
+                    //set up the image up from the stream
+                    processed_image = System.Drawing.Image.FromStream(stream);//newimage.InputStream);
+                }
+                else
+                {
+                    processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+
+                    if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
+                    {
+                        Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
+                        RedirectToReferrer();
+                        return;
+                    }
+                }
+
+
 
                 // a var for uploads will start here
                 String uploadPath = Context.ApplicationPhysicalPath + @"\uploads\";
@@ -239,7 +302,7 @@ namespace campusMap.Controllers
                 }
                 string newFile = uploadPath + image.id + ".ext";
                 //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "");
+                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
             }
             ActiveRecordMediator<media_repo>.Save(image);
             RedirectToAction("list");
@@ -318,7 +381,7 @@ namespace campusMap.Controllers
                         methodChoice=ImageService.imageMethod.Crop;
                         break;
                 }
-                imageService.process(id, processed_image, newFile, methodChoice, p, h, w, dimensional, protect, mark);
+                imageService.process(id, processed_image, newFile, methodChoice, p, h, w, dimensional, protect, mark, image.ext);
             }
 
             // Read in the file into a byte array

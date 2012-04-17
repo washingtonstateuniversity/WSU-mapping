@@ -39,11 +39,6 @@
     {
 
 
-
-
-
-
-
         [Layout("home")]
         public class publicController : BaseController
         {
@@ -135,6 +130,23 @@
             }*/
         }
         #endregion
+
+
+
+
+        [Layout("central")]
+        public void central()
+        {
+
+            RenderView("central");
+        }
+
+
+
+
+
+
+
 
 
 
@@ -350,19 +362,33 @@
             }
         }
 
-        public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment, string Asirra_Ticket)
+            public void submitComment([ARDataBind("place_comments", AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] comments comment,
+                string Asirra_Ticket,
+                string uid,
+                string accessToken
+                )
         {
             // Check if they filled out spam blocker
-            if (String.IsNullOrEmpty(Asirra_Ticket))
-            {
+            if (String.IsNullOrEmpty(Asirra_Ticket) && String.IsNullOrEmpty(uid) && String.IsNullOrEmpty(accessToken)){
                 Flash["message"] = "You may not try to by pass the spam protection.  Please fill out the form and choose the species and directed.";
                 RedirectToReferrer();
                 return;
             }
-            
+
             // Check the kitties
-            if (!helperService.passedCaptcha(Asirra_Ticket))
-            {
+            if (!helperService.passedCaptcha(Asirra_Ticket) && String.IsNullOrEmpty(uid) && String.IsNullOrEmpty(accessToken)){
+                Flash["message"] = "Please try again.";
+                RedirectToReferrer();
+                return;
+            }else if (!String.IsNullOrEmpty(uid) && !String.IsNullOrEmpty(accessToken)){
+                if (!helperService.passedHasFb(uid, accessToken))
+                {
+                    Flash["message"] = "Please try again.";
+                    RedirectToReferrer();
+                    return;
+                }
+
+            }else{
                 Flash["message"] = "Please try again.";
                 RedirectToReferrer();
                 return;
@@ -411,7 +437,12 @@
             }
 
             //Start chack for cursing
-            String spamresults = helperService.getCommentSpamResultMessage(comment);
+            //String spamresults = helperService.getCommentSpamResultMessage(comment);
+
+            String spamresults = helperService.setCensorMessage(comment);
+
+
+
             if (!String.IsNullOrEmpty(spamresults))
             {
                 Flash["message"] = spamresults;

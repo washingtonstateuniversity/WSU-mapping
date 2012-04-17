@@ -13,7 +13,7 @@
 #if( !$ajaxed )
 <div id="smaple_area">
             <fieldset><legend>Sample</legend>
-				<div id="map_canvas"></div>
+				<div id="drawing_map"></div>
             </fieldset>
 </div>
 #end
@@ -32,32 +32,40 @@
 		#end
 
 		<div id="Basic">
-		$sp_type - <br/>
-		<p style="float:right;width:46%;">Geometry Type:<br/>  
-			<select name="geom_type" id="style_of">
-				<option value="" #if($ele.type=='')selected='selected'#end>Select a geometry type</option>
-				<option value="marker" #if($ele.type=='marker')selected='selected'#end>Marker</option>
-				<option value="polyline" #if($ele.type=='polyline')selected='selected'#end>Line</option>
-				<option value="polygon" #if($ele.type=='polygon')selected='selected'#end>Polygon</option>
-				<option value="rectangle" #if($ele.type=='rectangle')selected='selected'#end>Rectangle</option>
-				<option value="circle" #if($ele.type=='circle')selected='selected'#end>Circle</option>
-			</select>
-		</p>	
-		<p>Name:<br/>
-			<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-		</p>
-		
-		<p style="width:46%;">Geometry Style:<br/>  
-			<select name="$geometric.style" id="style_of">
-				<option value="" #if($ele.type=='')selected='selected'#end>using this style</option>
-				
-				
-					#foreach($style in $_styles)
-						<option class="type" value="$style.id" #if($geo_style == $style) selected="selected" #end>$style.name</option>
-					#end
-				
-			</select>
-		</p>
+			<p style="float:right;width:46%;">Geometry Type:<br/>  
+				<select name="geom_type" id="style_of">
+					<option value="" #if($geometric.default_type=='')selected='selected'#end>Select a geometry type</option>
+					<option value="marker" #if($geometric.default_type=='1')selected='selected'#end>Marker</option>
+					<option value="polyline" #if($geometric.default_type=='2')selected='selected'#end>Line</option>
+					<option value="polygon" #if($geometric.default_type=='3')selected='selected'#end>Polygon</option>
+					<option value="rectangle" #if($geometric.default_type=='4')selected='selected'#end>Rectangle</option>
+					<option value="circle" #if($geometric.default_type=='5')selected='selected'#end>Circle</option>
+				</select>
+			</p>	
+			
+			
+			<button id="drawingcontrolls" class="showing">Hide controlls</button>
+			<button id="restart" >Restart</button>
+			<button id="update" >Update</button>
+			<button id="unselect" >un select selected</button>
+			
+			
+			
+			<p>Name:<br/>
+				<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+			</p>
+			
+			<p style="width:46%;">Geometry Style:<br/>  
+				<select name="$geometric.style" id="style_of">
+					<option value="" #if($ele.type=='')selected='selected'#end>using this style</option>
+					
+					
+						#foreach($style in $_styles)
+							<option class="type" value="$style.id" #if($geo_style == $style) selected="selected" #end>$style.name</option>
+						#end
+					
+				</select>
+			</p>
 		
 		
 			<form>$Form.HiddenField("place.id")

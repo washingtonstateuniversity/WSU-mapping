@@ -1,4 +1,5 @@
 if(typeof(loading)==='undefined'){var loading='';}
+utilities={};
 /* setup VARS */
 var c=0;
 
@@ -9,6 +10,9 @@ function async_load_css(url,callback){var headID = document.getElementsByTagName
 function async_load_js(url,callback){var headID = document.getElementsByTagName("head")[0], s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;var x = document.getElementsByTagName('script')[0];if(typeof(callback)!=='undefined' && typeof(callback.onreadystatechange)==='undefined'){s.onreadystatechange = callback.onreadystatechange;s.onload = callback.onload; } headID.appendChild(s);}
 function defined(obj){return typeof(obj)!=='undefined';}
 function shuffle(ary){return ary.sort(function(){ Math.random() - 0.5})}
+function isNumber(n) {   return !isNaN(parseFloat(n)) && isFinite(n); } 
+function split( val ) {return val.split( /,\s*/ );}
+function extractLast( term ) {return split( term ).pop();}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // jeremy's URL funtions

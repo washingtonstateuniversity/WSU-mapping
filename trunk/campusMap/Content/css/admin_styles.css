@@ -6,12 +6,12 @@ html,body{height:auto;}
 
 #wrapper{width:100%;min-width: 976px;padding-left:0px;}
 #globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
-#siteID{    background: none repeat scroll 0 0 #981E32;
+#siteID{    background: none repeat scroll 0 0 #262A2D;
     color: #FFFFFF;
     float: none;
-    height: 55px;
+    height: 80px;
     width: 100%;}
-#wrapper #toolbar{width: 100%;float: none;}
+#wrapper #toolbar{width: 100%;float: none;background-color: #5E6A71;}
 #siteID h2 { margin: 0 0 0 180px;width: auto;}
 #siteID h1 {margin: 0 0 0 180px;width: auto;}
 #logo{ display: inline;
@@ -19,23 +19,29 @@ html,body{height:auto;}
     height: 105px;
     left: 0;
     position: absolute;
-    top:0px;
+    top:30px;
     width: 185px;}
 
-#header_bar{position:fixed;top:0px;left:0px;width: 100%;z-index: 2;}
+.admin #header_bar{position:fixed;top:0px;left:0px;width: 100%;z-index: 2;}
 
-#content{
+.admin #content{
 	position:relative;
-padding-top: 105px;
+padding-top: 130px;
 z-index:1;
 width: 100%;
 min-width:1026px;
 }
+
+
+.central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
+
+
+
 #main{padding:0px;
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {left: 0; padding: 0 0px 0px 0; position: fixed;top: 88px;width: 184px; z-index: 2;}
+.admin #nav {left: 0; padding: 0 0px 0px 0; position: fixed;top:115px;width: 184px; z-index: 2;}
 #main_nav{}
 #main_nav li{display: block /*!important*/;float: left;min-height: 24px;line-height: 23px;width: 153px;}
 #main_nav li a{display: block !important;}
@@ -133,7 +139,8 @@ table.ui-widget tbody tr.odd td{}
 
 .push_hide,.nonEdit{position:absolute;top:-9999px;left:-9999px;}
 #content_area{min-height:500px;padding:0 0 0 185px;}
-#content_tar{padding:5px 10px;}
+.admin #content_tar{padding: 0 0 0 10px;}
+.central #content_tar{padding:0px;}
 .home #content_tar{padding:0px;}
 
 /* place listing */
@@ -386,12 +393,18 @@ span.UinEdit{    background-color: #E2E2E2;
 /*.geometrics.editor .LEVEL_TABS {margin-right:510px; min-height:535px;}*/
 .geometrics.editor #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top: 0px; z-index: 9;}
 .geometrics.editor #map_canvas{width:500px;}
+.geometrics.editor #drawing_map{width:500px;min-height:535px;}
+
+
 
 .geometrics.new .style_controlls{margin-right:525px; min-height:535px;}
 /*.geometrics.new .LEVEL_TABS {margin-right:510px; min-height:535px;}*/
 .geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:0px; z-index: 9;}
 .geometrics.new #map_canvas{width:500px;}
+.geometrics.new #drawing_map{width:500px;min-height:535px;}
 
+
+.geometrics.editor .place_new{margin-right:525px; min-height:535px;}
 
 
 .pod{  display: inline-block;
@@ -467,3 +480,4 @@ fieldset{padding: 4px 8px 10px;}
 
 
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#centralMap{width:100%;min-height:350px;height:auto;max-height:100%;}

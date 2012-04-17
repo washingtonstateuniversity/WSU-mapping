@@ -947,21 +947,22 @@ create table advertisement (
 )
 create table comments (
 	comment_id INT IDENTITY NOT NULL,
-   comment NVARCHAR(255) null,
-   published BIT null,
-   Flagged BIT null,
-   FlagNumber INT null,
-   adminRead BIT null,
-   CreateTime DATETIME null,
-   UpdateTime DATETIME null,
-   Deleted BIT null,
-   Nid NVARCHAR(255) null,
-   commentorName NVARCHAR(255) null,
-   Email NVARCHAR(255) null,
-   place INT null,
-   place_id INT null,
-   view_id INT null,
-   primary key (comment_id)
+	comment NVARCHAR(255) null,
+	censored NVARCHAR(255) null,
+	published BIT null,
+	Flagged BIT null,
+	FlagNumber INT null,
+	adminRead BIT null,
+	CreateTime DATETIME null,
+	UpdateTime DATETIME null,
+	Deleted BIT null,
+	Nid NVARCHAR(255) null,
+	commentorName NVARCHAR(255) null,
+	Email NVARCHAR(255) null,
+	place INT null,
+	place_id INT null,
+	view_id INT null,
+	primary key (comment_id)
 )
 
 create table styles (
@@ -1117,7 +1118,7 @@ GO
 	INSERT INTO [campusMap].[dbo].[zoom_levels]
 			   ([zoom_start],[zoom_end])
 		 VALUES
-				('0','14')
+				('0','23')
 	GO
 	/* iterate over the to produce the rest */
 	;WITH Numbers (Number) AS  
@@ -1125,7 +1126,7 @@ GO
 		SELECT 0  
 		UNION ALL 
 		SELECT 1 + Number FROM Numbers  
-		WHERE 1 + Number <= 14 
+		WHERE 1 + Number <= 23 
 	) 
 	INSERT INTO [campusMap].[dbo].[zoom_levels] ([zoom_start],[zoom_end]) 
 	SELECT n1.Number, n2.Number  
@@ -1133,7 +1134,7 @@ GO
 		Numbers n1 CROSS JOIN 
 		Numbers n2 
 	WHERE 
-		NOT (n1.Number = 0 AND n2.Number = 14) 
+		NOT (n1.Number = 0 AND n2.Number = 23) 
 
 
  

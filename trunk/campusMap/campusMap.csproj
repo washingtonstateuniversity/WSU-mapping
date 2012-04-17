@@ -221,11 +221,15 @@
     <Content Include="config\properties.config" />
     <Content Include="config\components.config" />
     <Content Include="Content\css\admin_styles.css" />
+    <Content Include="Content\css\central_main.css" />
     <Content Include="Content\css\datepickstyle.css" />
     <Content Include="Content\css\ipad.css" />
     <Content Include="Content\css\jquery.datepick.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\main_tinymce.css" />
+    <Content Include="Content\css\map_admin.css" />
+    <Content Include="Content\css\map_base.css" />
+    <Content Include="Content\css\map_front.css" />
     <Content Include="Content\css\mbTabset.css" />
     <Content Include="Content\css\styles-3cols.css" />
     <Content Include="Content\css\styles-home.css" />
@@ -968,6 +972,7 @@
     <None Include="Views\geometrics\types\index.vm" />
     <None Include="Views\geometrics\types\list.vm" />
     <None Include="Views\geometrics\types\new.vm" />
+    <None Include="Views\layouts\central.vm" />
     <None Include="Views\place\fields\index.vm" />
     <None Include="Views\place\fields\list.vm" />
     <None Include="Views\place\fields\new.vm" />
@@ -984,6 +989,7 @@
     <None Include="Views\geometrics\new.vm" />
     <None Include="Views\geometrics\readmore.vm" />
     <None Include="Views\geometrics\tinyimagelist.vm" />
+    <None Include="Views\public\central.vm" />
     <None Include="Views\tags\usertags\list.vm" />
     <None Include="Views\tags\usertags\new.vm" />
     <None Include="Views\view\addauthor.vm" />

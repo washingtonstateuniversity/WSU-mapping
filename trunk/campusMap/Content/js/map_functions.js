@@ -3,15 +3,14 @@ var lang='';
 var vbtimer;
 
 function detectBrowser() {
-  var useragent = navigator.userAgent;
-  var mapdiv = document.getElementById("map_canvas");
-    
-  if (isTouch()) {
-    addMetaSupport();
-    mapdiv.style.width = '100%';
-    mapdiv.style.height = '100%';
-    sensor=true;
-  }
+	var useragent = navigator.userAgent;
+	var mapdiv = document.getElementById("map_canvas");
+	if (isTouch()) {
+		addMetaSupport();
+		mapdiv.style.width = '100%';
+		mapdiv.style.height = '100%';
+		sensor=true;
+	}
 }
 function loadingLang(){
     if($("meta[name=locale]").length>0){
@@ -44,7 +43,11 @@ function set_up_addThis(){
 }
 
 
-
+function empty_input_recursive(obj){
+	(typeof obj.val() === 'function')
+		?obj.val(''):(typeof obj.find(':input').val() === 'function')
+			?obj.find(':input').val(''):null;
+}
 
 
 /* set up parts of the map */
@@ -54,6 +57,47 @@ function setGeoCoder(){
 	if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
 	return geocoder;
 }
+function setDirectionsRenderer(){
+	if(typeof(directionsDisplay)==='undefined'){
+		directionsDisplay = new google.maps.DirectionsRenderer({ 
+			map: map, 
+			suppressPolylines:true,
+			suppressMarkers:true
+			//markerOptions: markerOptions
+		}); 
+		google.maps.event.addListener(directionsDisplay, 'directions_changed', function(){});
+	}
+	return directionsDisplay;
+}
+
+
+
+
+/* SET */
+function mapzoom(){
+    var mapZoom = map.getZoom();
+    gob("myzoom").value = mapZoom;
+}
+function mapcenter(){
+    var mapCenter = map.getCenter();
+    var latLngStr = mapCenter.lat().toFixed(6) + ', ' + mapCenter.lng().toFixed(6);
+    gob("centerofmap").value = latLngStr;
+}
+
+
+
+
+
+/* GET */
+function get_mapzoom(){
+    var mapZoom = map.getZoom();
+    return mapZoom;
+}
+function get_mapcenter(){
+    var mapCenter = map.getCenter();
+    var latLngStr = mapCenter.lat().toFixed(6) + ', ' + mapCenter.lng().toFixed(6);
+    return latLngStr;
+}
 
 
 
@@ -62,6 +106,221 @@ function setGeoCoder(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------
+   Clean up functions
+    ---------------------------*/
+function clear_highlights(mark) {    /// this one needs to be abstracted
+	var tmplastMarker=typeof(lastMarker)!="undefined"&&lastMarker!=null?lastMarker:null;
+	mark=typeof(mark)!="undefined"&&mark!=null?mark:tmplastMarker;
+	if (mark==null||typeof(mark)=="undefined") return false;
+	
+	mark.setAnimation(null);
+	var image = new google.maps.MarkerImage(
+		'/uploads/siteTheme/mock-point-sm.png',
+		new google.maps.Size(16, 15),
+		new google.maps.Point(0,0),
+		new google.maps.Point(8,7)
+		);      
+	var markerOptions = {
+		map:map,
+		visible:true,
+		icon: image,
+		position:mark.getPosition()
+		};	  
+	mark.setOptions(markerOptions);
+}
+function clearDirections(directionsDisplay) {
+	deleteMarkers();
+	deletePolys();
+	deleteibLabels();
+	//directionsDisplay.setMap(null);
+	//directionsDisplay=null;
+	waypts = [];
+	checkboxArray = [];
+	polylineOptions = [];  
+	
+	depth=0;
+	fractal=0;
+	iterator = 0;
+}
+function deletePolys() {
+	if (polys) {
+		for (i in polys) {
+			polys[i].setMap(null);
+		}
+		polys.length = 0;
+	}
+	polys = [];
+}
+function deleteibLabels() {
+	if (ibLabels) {
+		for (i in ibLabels) {
+			ibLabels[i].setMap(null);
+		}
+		ibLabels.length = 0;
+	}
+	ibLabels = [];
+}
+// Deletes all markers in the array by removing references to them
+function deleteMarkers() {
+	if (markers) {
+		for (i in markers) {
+			markers[i].setMap(null);
+		}
+		markers.length = 0;
+	}
+	markers = [];
+}
+
+
+// Clear current Map
+function clearMap(){
+    if(editing == true) stopediting();
+    if(polyShape) polyShape.setMap(null); // polyline or polygon
+    if(outerShape) outerShape.setMap(null);
+    if(rectangle) rectangle.setMap(null);
+    if(circle) circle.setMap(null);
+    if(drawnShapes.length > 0) {
+        for(var i = 0; i < drawnShapes.length; i++) {
+            drawnShapes[i].setMap(null);
+        }
+    }
+    plmcur = 0;
+    newstart();
+    placemarks = [];
+    createplacemarkobject();
+}
+function newstart() {
+    polyPoints = [];
+    outerPoints = [];
+    pointsArray = [];
+	shapeArray = [];
+    markersArray = [];
+    pointsArrayKml = [];
+    markersArrayKml = [];
+    addresssArray = [];
+    outerArray = [];
+    innerArray = [];
+    outerArrayKml = [];
+    innerArrayKml = [];
+    holePolyArray = [];
+    innerArrays = [];
+    innerArraysKml = [];
+    waypts = [];
+    destinations = [];
+    adder = 0;
+    directionsYes = 0;
+    dirpointend = 0;
+    dirpointstart = null;
+    oldpoint = null;
+    closethis('polylineoptions');
+    closethis('polygonoptions');
+    closethis('circleoptions');
+    if(toolID != 2) closethis('polygonstuff');
+    if(directionsDisplay) directionsDisplay.setMap(null);
+    if(startMarker) startMarker.setMap(null);
+    if(nemarker) nemarker.setMap(null);
+    if(tinyMarker) tinyMarker.setMap(null);
+    if(toolID == 1) {
+        placemarks[plmcur].style = polylinestyles[polylinestyles.length-1].name;
+        placemarks[plmcur].stylecur = polylinestyles.length-1;
+        preparePolyline();
+        polylineintroduction();
+    }
+    if(toolID == 2){
+        showthis('polygonstuff');
+        gob('stepdiv').innerHTML = "Step 0";
+        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
+        placemarks[plmcur].stylecur = polygonstyles.length-1;
+        preparePolygon();
+        polygonintroduction();
+    }
+    if(toolID == 3) {
+        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
+        placemarks[plmcur].stylecur = polygonstyles.length-1;
+        preparePolyline(); // use Polyline to collect clicked point
+        activateRectangle();
+        rectangleintroduction();
+    }
+    if(toolID == 4) {
+        placemarks[plmcur].style = circlestyles[circlestyles.length-1].name;
+        placemarks[plmcur].stylecur = circlestyles.length-1;
+        preparePolyline(); // use Polyline to collect clicked point
+        activateCircle();
+        circleintroduction();
+        codeID = gob('codechoice').value = 2; // javascript, no KML for circle
+    }
+    if(toolID == 5) {
+        placemarks[plmcur].style = markerstyles[markerstyles.length-1].name;
+        placemarks[plmcur].stylecur = markerstyles.length-1;
+        preparePolyline();
+        markerintroduction();
+    }
+    if(toolID == 6){
+        directionsYes = 1;
+        preparePolyline();
+        directionsintroduction();
+        codeID = gob('codechoice').value = 1;
+    }
+    kmlcode = "";
+    javacode = "";
+}
+
+function deleteLastPoint(){
+    if(directionsYes == 1) {
+        if(destinations.length == 1) return;
+        undo();
+        return;
+    }
+    if(toolID == 1) {
+        if(polyShape) {
+            polyPoints = polyShape.getPath();
+            if(polyPoints.length > 0) {
+                polyPoints.removeAt(polyPoints.length-1);
+                pointsArrayKml.pop();
+				dump_latLongs();
+                if(codeID == 1) logCode1();
+                if(codeID == 2) logCode4();
+            }
+        }
+    }
+    if(toolID == 2) {
+        if(innerArrayKml.length>0) {
+            innerArrayKml.pop();
+            polyPoints.removeAt(polyPoints.length-1);
+        }
+        if(outerArrayKml.length>0 && innerArrayKml.length==0) {
+            outerArrayKml.pop();
+            //polyPoints.removeAt(polyPoints.length-1);
+        }
+        if(outerPoints.length===0) {
+            if(polyShape) {
+                polyPoints = polyShape.getPath();
+                if(polyPoints.length > 0) {
+                    polyPoints.removeAt(polyPoints.length-1);
+                    pointsArrayKml.pop();
+                    if(adder == 0) {
+						dump_latLongs();
+                        if(codeID == 1) logCode2();
+                        if(codeID == 2) logCode4();
+                    }
+                }
+            }
+        }
+    }
+    if(polyPoints.length === 0) nextshape();
+}
 
 
 
@@ -255,9 +514,7 @@ function jsonloadPage(id,clear,keepMarkers,keepPolys,keepibLabels) {
 
 
 function get_wsu_logo_shape(){
-
 	var Coords = [];
-
 	var shaped = [];
 	var shape = "-117.151680,46.737567,\n-117.152281,46.737390,\n-117.152753,46.737067,\n-117.153225,46.736655,\n-117.153397,46.736155,\n-117.153482,46.735449,\n-117.153268,46.734831,\n-117.153053,46.733949,\n-117.152710,46.732919,\n-117.152581,46.732331,\n-117.152538,46.731743,\n-117.152710,46.731066,\n-117.153010,46.730684,\n-117.153568,46.730390,\n-117.154341,46.730272,\n-117.155242,46.730272,\n-117.155199,46.730860,\n-117.155199,46.731301,\n-117.155800,46.730772,\n-117.156572,46.730125,\n-117.157817,46.729537,\n-117.156658,46.729448,\n-117.155199,46.729331,\n-117.153826,46.729213,\n-117.152796,46.729095,\n-117.151937,46.729125,\n-117.151251,46.729389,\n-117.150650,46.729860,\n-117.150350,46.730419,\n-117.150307,46.731184,\n-117.150650,46.732272,\n-117.150865,46.733155,\n-117.151165,46.734243,\n-117.151079,46.734978,\n-117.150693,46.735419,\n-117.150092,46.735861,\n-117.149405,46.736037,\n-117.148547,46.736008,\n-117.148204,46.735861,\n-117.147861,46.735567,\n-117.147560,46.735184,\n-117.147517,46.735684,\n-117.147646,46.736155,\n-117.147517,46.736390,\n-117.147517,46.736655,\n-117.145371,46.736684,\n-117.145371,46.736861,\n-117.147517,46.736890,\n-117.147560,46.737008,\n-117.145500,46.737272,\n-117.145543,46.737449,\n-117.147646,46.737243,\n-117.147646,46.737361,\n-117.145715,46.737831,\n-117.145844,46.738037,\n-117.147903,46.737596,\n-117.148204,46.737831,\n-117.150393,46.737714,\n-117.150092,46.738714,\n-117.150393,46.738714,\n-117.150865,46.737655,\n-117.151294,46.737655,\n-117.150865,46.738772,\n-117.151122,46.738743";
 	
@@ -269,7 +526,6 @@ function get_wsu_logo_shape(){
 		}
 	}
 	Coords.push(shaped.reverse());
-
 	var shaped = [];
 	var shape = "-117.149577,46.736390,\n-117.150435,46.736537,\n-117.150908,46.736508,\n-117.151508,46.736449,\n-117.151937,46.736243,\n-117.152238,46.735949,\n-117.152367,46.735537,\n-117.152023,46.735743,\n-117.151594,46.736037,\n-117.151122,46.736184,\n-117.150564,46.736302,\n-117.150221,46.736361";
 	
@@ -281,7 +537,6 @@ function get_wsu_logo_shape(){
 		}
 	}
 	Coords.push(shaped);
-
 	var shaped = [];
 	var shape = "-117.153010,46.737331,\n-117.154212,46.737037,\n-117.155070,46.736625,\n-117.156014,46.736155,\n-117.156487,46.735831,\n-117.155628,46.735214,\n-117.155328,46.735449,\n-117.155285,46.734802,\n-117.155242,46.734008,\n-117.155714,46.734449,\n-117.156143,46.734772,\n-117.155929,46.734978,\n-117.156658,46.735625,\n-117.157130,46.735214,\n-117.157688,46.734537,\n-117.157903,46.734096,\n-117.156873,46.733508,\n-117.156744,46.733772,\n-117.156487,46.733361,\n-117.156487,46.732919,\n-117.156572,46.732507,\n-117.156701,46.732213,\n-117.156959,46.732655,\n-117.157216,46.732890,\n-117.157044,46.733272,\n-117.157946,46.733802,\n-117.158418,46.733066,\n-117.158976,46.732302,\n-117.159662,46.731566,\n-117.160220,46.731154,\n-117.159019,46.731301,\n-117.158074,46.731478,\n-117.158160,46.730860,\n-117.158504,46.730095,\n-117.159019,46.729507,\n-117.158160,46.729684,\n-117.157130,46.730154,\n-117.156229,46.730860,\n-117.155457,46.731625,\n-117.155156,46.732184,\n-117.154899,46.731596,\n-117.154813,46.730566,\n-117.154427,46.730537,\n-117.153912,46.730566,\n-117.153482,46.730743,\n-117.153654,46.730713,\n-117.153225,46.731007,\n-117.153010,46.731507,\n-117.153010,46.732184,\n-117.153139,46.733008,\n-117.153397,46.733713,\n-117.153654,46.734537,\n-117.153869,46.735302,\n-117.153869,46.735919,\n-117.153783,46.736419,\n-117.153482,46.736802,\n-117.153311,46.737067,\n-117.153010,46.737331";	
 	var Rows=shape.split('\n');
@@ -292,7 +547,6 @@ function get_wsu_logo_shape(){
 		}
 	}
 	Coords.push(shaped);
-	
 	var shaped = [];
 	var shape = "-117.150521,46.733684,\n-117.150435,46.733066,\n-117.150307,46.732537,\n-117.150092,46.732096,\n-117.149792,46.731596,\n-117.149448,46.731213,\n-117.148976,46.730919,\n-117.148461,46.730801,\n-117.148075,46.730772,\n-117.147689,46.730801,\n-117.147346,46.730949,\n-117.147045,46.731125,\n-117.146745,46.731449,\n-117.146616,46.731860,\n-117.146616,46.732243,\n-117.146702,46.732743,\n-117.146788,46.733213,\n-117.146916,46.733508,\n-117.147131,46.733919,\n-117.147088,46.733537,\n-117.147088,46.733155,\n-117.147217,46.732802,\n-117.147431,46.732478,\n-117.147818,46.732272,\n-117.148290,46.732184,\n-117.148719,46.732213,\n-117.149277,46.732419,\n-117.149620,46.732625,\n-117.150006,46.732919,\n-117.150221,46.733155,\n-117.150350,46.733390,\n-117.150521,46.733684";	
 	var Rows=shape.split('\n');
@@ -303,7 +557,6 @@ function get_wsu_logo_shape(){
 		}
 	}
 	Coords.push(shaped);
-
 	var shaped = [];
 	var shape = "-117.150006,46.730154,\n-117.150221,46.729684,\n-117.150693,46.729331,\n-117.151165,46.729125,\n-117.149706,46.729095,\n-117.149749,46.729566,\n-117.149835,46.729890,\n-117.150006,46.730154";	
 	var Rows=shape.split('\n');
@@ -373,11 +626,7 @@ function create_default_shape(map,type,option){
 }
 
 
-function empty_input_recursive(obj){
-	(typeof obj.val() === 'function')
-		?obj.val(''):(typeof obj.find(':input').val() === 'function')
-			?obj.find(':input').val(''):null;
-}
+
 
 
 function rebuild_example(obj,map,user_event){
@@ -618,15 +867,10 @@ function optionize() {
 	// google.maps.event.addDomListener(controlUI, 'click', function() {
 	// map.setCenter(chicago)
 	//});
-		directionsDisplay = new google.maps.DirectionsRenderer({ 
-				map: map, 
-				suppressPolylines:true,
-				suppressMarkers:true
-				//markerOptions: markerOptions
-			}); 
+		setDirectionsRenderer();
 		//directionsDisplay.setMap(map);
 		stepDisplay = new google.maps.InfoWindow();
-		google.maps.event.addListener(directionsDisplay, 'directions_changed', function(){});
+		
 		jsonloadPage(id,true);
 }
 
@@ -687,74 +931,6 @@ function highlight(i,mark,type,time) {
 
 
 
-/*------------------------
-   Clean up functions
-    ---------------------------*/
-function clear_highlights(mark) {
-	var tmplastMarker=typeof(lastMarker)!="undefined"&&lastMarker!=null?lastMarker:null;
-	mark=typeof(mark)!="undefined"&&mark!=null?mark:tmplastMarker;
-	if (mark==null||typeof(mark)=="undefined") return false;
-	
-	mark.setAnimation(null);
-	var image = new google.maps.MarkerImage(
-		'/uploads/siteTheme/mock-point-sm.png',
-		new google.maps.Size(16, 15),
-		new google.maps.Point(0,0),
-		new google.maps.Point(8,7)
-		);      
-	var markerOptions = {
-		map:map,
-		visible:true,
-		icon: image,
-		position:mark.getPosition()
-		};	  
-	mark.setOptions(markerOptions);
-}
-
-function clearDirections(directionsDisplay) {
-	deleteMarkers();
-	deletePolys();
-	deleteibLabels();
-	var summaryPanel = document.getElementById("directions_panel");
-	summaryPanel.innerHTML = "";
-	//directionsDisplay.setMap(null);
-	//directionsDisplay=null;
-	waypts = [];
-	checkboxArray = [];
-	polylineOptions = [];  
-	
-	depth=0;
-	fractal=0;
-	iterator = 0;
-}
-function deletePolys() {
-	if (polys) {
-		for (i in polys) {
-			polys[i].setMap(null);
-		}
-		polys.length = 0;
-	}
-	polys = [];
-}
-function deleteibLabels() {
-	if (ibLabels) {
-		for (i in ibLabels) {
-			ibLabels[i].setMap(null);
-		}
-		ibLabels.length = 0;
-	}
-	ibLabels = [];
-}
-// Deletes all markers in the array by removing references to them
-function deleteMarkers() {
-	if (markers) {
-		for (i in markers) {
-			markers[i].setMap(null);
-		}
-		markers.length = 0;
-	}
-	markers = [];
-}
 
 
 
@@ -2537,143 +2713,7 @@ function addpolyShapelistener() {
         }
     });
 }
-// Clear current Map
-function clearMap(){
-    if(editing == true) stopediting();
-    if(polyShape) polyShape.setMap(null); // polyline or polygon
-    if(outerShape) outerShape.setMap(null);
-    if(rectangle) rectangle.setMap(null);
-    if(circle) circle.setMap(null);
-    if(drawnShapes.length > 0) {
-        for(var i = 0; i < drawnShapes.length; i++) {
-            drawnShapes[i].setMap(null);
-        }
-    }
-    plmcur = 0;
-    newstart();
-    placemarks = [];
-    createplacemarkobject();
-}
-function newstart() {
-    polyPoints = [];
-    outerPoints = [];
-    pointsArray = [];
-	shapeArray = [];
-    markersArray = [];
-    pointsArrayKml = [];
-    markersArrayKml = [];
-    addresssArray = [];
-    outerArray = [];
-    innerArray = [];
-    outerArrayKml = [];
-    innerArrayKml = [];
-    holePolyArray = [];
-    innerArrays = [];
-    innerArraysKml = [];
-    waypts = [];
-    destinations = [];
-    adder = 0;
-    directionsYes = 0;
-    dirpointend = 0;
-    dirpointstart = null;
-    oldpoint = null;
-    closethis('polylineoptions');
-    closethis('polygonoptions');
-    closethis('circleoptions');
-    if(toolID != 2) closethis('polygonstuff');
-    if(directionsDisplay) directionsDisplay.setMap(null);
-    if(startMarker) startMarker.setMap(null);
-    if(nemarker) nemarker.setMap(null);
-    if(tinyMarker) tinyMarker.setMap(null);
-    if(toolID == 1) {
-        placemarks[plmcur].style = polylinestyles[polylinestyles.length-1].name;
-        placemarks[plmcur].stylecur = polylinestyles.length-1;
-        preparePolyline();
-        polylineintroduction();
-    }
-    if(toolID == 2){
-        showthis('polygonstuff');
-        gob('stepdiv').innerHTML = "Step 0";
-        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
-        placemarks[plmcur].stylecur = polygonstyles.length-1;
-        preparePolygon();
-        polygonintroduction();
-    }
-    if(toolID == 3) {
-        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
-        placemarks[plmcur].stylecur = polygonstyles.length-1;
-        preparePolyline(); // use Polyline to collect clicked point
-        activateRectangle();
-        rectangleintroduction();
-    }
-    if(toolID == 4) {
-        placemarks[plmcur].style = circlestyles[circlestyles.length-1].name;
-        placemarks[plmcur].stylecur = circlestyles.length-1;
-        preparePolyline(); // use Polyline to collect clicked point
-        activateCircle();
-        circleintroduction();
-        codeID = gob('codechoice').value = 2; // javascript, no KML for circle
-    }
-    if(toolID == 5) {
-        placemarks[plmcur].style = markerstyles[markerstyles.length-1].name;
-        placemarks[plmcur].stylecur = markerstyles.length-1;
-        preparePolyline();
-        markerintroduction();
-    }
-    if(toolID == 6){
-        directionsYes = 1;
-        preparePolyline();
-        directionsintroduction();
-        codeID = gob('codechoice').value = 1;
-    }
-    kmlcode = "";
-    javacode = "";
-}
 
-function deleteLastPoint(){
-    if(directionsYes == 1) {
-        if(destinations.length == 1) return;
-        undo();
-        return;
-    }
-    if(toolID == 1) {
-        if(polyShape) {
-            polyPoints = polyShape.getPath();
-            if(polyPoints.length > 0) {
-                polyPoints.removeAt(polyPoints.length-1);
-                pointsArrayKml.pop();
-				dump_latLongs();
-                if(codeID == 1) logCode1();
-                if(codeID == 2) logCode4();
-            }
-        }
-    }
-    if(toolID == 2) {
-        if(innerArrayKml.length>0) {
-            innerArrayKml.pop();
-            polyPoints.removeAt(polyPoints.length-1);
-        }
-        if(outerArrayKml.length>0 && innerArrayKml.length==0) {
-            outerArrayKml.pop();
-            //polyPoints.removeAt(polyPoints.length-1);
-        }
-        if(outerPoints.length===0) {
-            if(polyShape) {
-                polyPoints = polyShape.getPath();
-                if(polyPoints.length > 0) {
-                    polyPoints.removeAt(polyPoints.length-1);
-                    pointsArrayKml.pop();
-                    if(adder == 0) {
-						dump_latLongs();
-                        if(codeID == 1) logCode2();
-                        if(codeID == 2) logCode4();
-                    }
-                }
-            }
-        }
-    }
-    if(polyPoints.length === 0) nextshape();
-}
 function counter(num){
     return adder = adder + num;
 }
@@ -3317,15 +3357,7 @@ function savedocudetails(){
     if(placemarks[plmcur].poly == "pl") logCode1();
     if(placemarks[plmcur].poly == "pg") logCode2();
 }
-function mapzoom(){
-    var mapZoom = map.getZoom();
-    gob("myzoom").value = mapZoom;
-}
-function mapcenter(){
-    var mapCenter = map.getCenter();
-    var latLngStr = mapCenter.lat().toFixed(6) + ', ' + mapCenter.lng().toFixed(6);
-    gob("centerofmap").value = latLngStr;
-}
+
 function showCodeintextarea(){
     if (notext === false){
         gob("presentcode").checked = false;
@@ -3507,6 +3539,150 @@ function addpoly_poly(map){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function load_editor() {
+     $('#drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
+		 var controlOn=true;
+		 var drawingMode = false;
+		 
+		 var type= $('#style_of').val();
+		 var coords=$('#latLong').val();
+		 var pointHolder = {};
+		 if(coords!='' && type=='polyline'){ 
+		 	var pointHolder = {'path' : coords };
+		 }
+		  if(coords!='' && type=='polygon'){ 
+		 	var pointHolder = {'paths' : coords };
+		 }
+		 if(!$.isEmptyObject(pointHolder)){
+			var shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+		 }else{
+			var shape = {};
+		 }
+
+		$('#drawing_map').gmap('init_drawing', 
+			{ 
+				drawingControl: controlOn,
+				polylineOptions:{editable: true} 
+			}, $.extend( {
+					limit:1,
+					limit_reached:function(gmap){},
+					encodePaths:false, // always a string
+					data_return:'str', // "str" , "obj" (gmap obj) and others to come
+					data_pattern:'{lat} {lng}{delimiter}\n',   //
+					delimiter:',',
+					overlaycomplete:function(data){
+							if(data!=null){
+								$('#latLong').val(data);
+							}
+						},
+					onDrag:function(data){
+							$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
+						},
+					drawingmode_changed:function(type){
+							if(type!=null){
+								$('#style_of').val(type);
+							}
+						}
+				},
+				$('#style_of').val()==''?{}:{
+					loaded_type: ($('#style_of').val()[0].toUpperCase() + $('#style_of').val().slice(1)),
+					loaded_shape:shape
+				}
+			)
+		);
+
+		$('#drawingcontrolls.showing').live('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#drawing_map').gmap('hide_drawingControl');
+			$(this).removeClass('showing').addClass('hidden').text('Show controlls');
+		});
+		$('#drawingcontrolls.hidden').live('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#drawing_map').gmap('show_drawingControl');
+			$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
+		});
+		$('#restart').live('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#drawing_map').gmap('refresh_drawing',false);
+		});
+		$('#update').live('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
+		});
+		
+		$('#unselect').live('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#latLong').val($('#drawing_map').gmap('unset_drawingSelection'));
+		});
+		
+		
+		
+		
+		var selected_type = '';
+		$('#style_of').live('change',function(){
+			var totals = $('#drawing_map').gmap('get_drawnElementCount',$(this).val());
+			if(totals>=1){
+				var r=confirm('You are about to clear the element from the map.\r\n id this ok?');
+				if (r==true){
+					$('#drawing_map').gmap('clear_drawings');
+					selected_type = $(this).val();
+				}else{
+					$(this).val('selected_type');
+					return false;
+				}
+			}
+			$('#drawing_map').gmap('set_drawingMode', $(this).val());
+			$('#drawing_map').gmap('show_drawingControl');
+		});
+
+	});
+	
+}
 
 
 
@@ -3771,7 +3947,7 @@ function initialize() {
 			   }
 			 });
 			if($('.place.editor_place').length){
-				if($('#Lat').val()!='' && $('#Long').val()!='')drop1(); 
+				//if($('#Lat').val()!='' && $('#Long').val()!='')drop1(); 
 				
 				$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
 					drop1();
@@ -3836,14 +4012,14 @@ function initialize() {
 
 
 
-	function drop1() {
+	function drop1(location) {
 	  var sw = map.getBounds().getSouthWest();
 	  var ne = map.getBounds().getNorthEast();
 	  for (var i = 0; i < 1; i++) {
 		setTimeout(function() {
 		  //var lat = Math.random() * (ne.lat() - sw.lat()) + sw.lat();
 		  //var lng = Math.random() * (ne.lng() - sw.lng()) + sw.lng();
-		  markers.push(createLocationMarker(pullman,true));
+		  markers.push(createLocationMarker(typeof(location)==='undefined'?pullman:location,true));
 			/*
 			var loca = new google.maps.LatLng(markers[0].position.lat(),markers[0].position.lng());
 			var requested = {
@@ -3866,18 +4042,74 @@ function initialize() {
 				//setTimeout(function() {},  200);
 				var loca = new google.maps.LatLng(lat,lng);
 				
-				$('#place.address').val(function() {
-							var obj = $(this);
+
 							setGeoCoder().geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
 							  if (status == google.maps.GeocoderStatus.OK) {
+								  
+								  				
+								  
+								var arrAddress = results[0].address_components;
+			
+			
+								var itemRoute='';
+								var itemLocality='';
+								var itemCountry='';
+								var itemPc='';
+								var itemSnumber='';
+			
+								// iterate through address_component array
+								$.each(arrAddress, function (i, address_component) {
+			
+									console.log('address_component:'+i);
+			
+									if (address_component.types[0] == "route"){
+										console.log(i+": route:"+address_component.long_name);
+										itemRoute = address_component.long_name;
+										$('#place_street').val(itemRoute);
+									}
+			
+									if (address_component.types[0] == "locality"){
+										console.log("town:"+address_component.long_name);
+										itemLocality = address_component.long_name;
+									}
+			
+									if (address_component.types[0] == "country"){ 
+										console.log("country:"+address_component.long_name); 
+										itemCountry = address_component.long_name;
+									}
+			
+									if (address_component.types[0] == "postal_code_prefix"){ 
+										console.log("pc:"+address_component.long_name);  
+										itemPc = address_component.long_name;
+									}
+			
+									if (address_component.types[0] == "street_number"){ 
+										console.log("street_number:"+address_component.long_name);  
+										itemSnumber = address_component.long_name;
+										$('#place_address').val(itemSnumber);
+									}
+									//return false; // break the loop
+			
+								});
+
+						 		
+								  
+								  
+								  
+								  
+								  
+								  
+								  
+								  
+								  
 								if (results[1]) {
 									//alert( results[1].formatted_address);
-									obj.val(results[1].formatted_address );
+									obj.val(itemSnumber);
 								}
 							  } else {
 								alert("Geocoder failed due to: " + status);
 							  }
-							});
+							
 	   				});
 				
 				var types = ['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar','beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer','car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store','courthouse','dentist','department_store','doctor','electrician','electronics_store','embassy','establishment','finance','fire_station','florist','food','funeral_home','furniture_store','gas_station','general_contractor','geocode','grocery_or_supermarket','gym','hair_care','hardware_store','health','hindu_temple','home_goods_store','hospital','insurance_agency','jewelry_store','laundry','lawyer','library','liquor_store','local_government_office','locksmith','lodging','meal_delivery','meal_takeaway','mosque','movie_rental','movie_theater','moving_company','museum','night_club','painter','park','parking','pet_store','pharmacy','physiotherapist','place_of_worship','plumber','police','post_office','real_estate_agency','restaurant','roofing_contractor','rv_park','school','shoe_store','shopping_mall','spa','stadium','storage','store','subway_station','synagogue','taxi_stand','train_station','travel_agency','university','veterinary_care','zoo','administrative_area_level_1','administrative_area_level_2','administrative_area_level_3','colloquial_area','country','floor','intersection','locality','natural_feature','neighborhood','political','point_of_interest','post_box','postal_code','postal_code_prefix','postal_town','premise','room','route','street_address','street_number','sublocality','sublocality_level_4','sublocality_level_5','sublocality_level_3','sublocality_level_2','sublocality_level_1','subpremise','transit_station'];
@@ -4107,9 +4339,7 @@ function turnOnPOI(){
 'No Stations' });	
 	map.mapTypes.set('nostations', mapType);
 	map.setMapTypeId('nostations');
-	
-	
-	}
+}
 function turnOffPOI(){
 	var offPOIbiz = [
 	  {
@@ -4310,12 +4540,7 @@ function applyType(type){
     }
 
     //GSearch.setOnLoadCallback(OnLoad);
-	function split( val ) {
-		return val.split( /,\s*/ );
-	}
-	function extractLast( term ) {
-		return split( term ).pop();
-	}
+
 	
 	
 	
@@ -4324,15 +4549,62 @@ function applyType(type){
 		  setGeoCoder().geocode( { 'address': address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
+					/*var marker = new google.maps.Marker({
 									map: map,
 									position: results[0].geometry.location
-								});
+								});*/
+					drop1(results[0].geometry.location)	
+					var latitude = results[0].geometry.location.lat(); 
+					var longitude = results[0].geometry.location.lng(); 
+					$('#Lat').val(latitude);		
+					$('#Long').val(longitude);			
 				} else {
 					alert("Geocode was not successful for the following reason: " + status);
 				}
 		  });
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*delete */
   function setTmp(_var) {	
   	temp_var = _var;
   }
