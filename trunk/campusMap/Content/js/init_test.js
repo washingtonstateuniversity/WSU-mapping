@@ -5,10 +5,38 @@ function resizeBg(obj,height) {
 $(document).ready(function(){
 	
 	if($('#centralMap').length){
-		$('#centralMap').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {});
-		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");
-		}
+		
+			var winH = $(window).height()-160;
+			var winW = $(window).width();
+			var zoom = 15;
+			if(winW>=500 && winH>=200){zoom = 13;}
+			if(winW>=700 && winH>=400){zoom = 14;}
+			if(winW>=900 && winH>=600){zoom = 15;}
+			var _load = false;
+			var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
+			$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) { 
+
+				if( $.isEmptyObject( data.mapOptions )){
+					var map_op = {'center': pullman_str , 'zoom':zoom };
+				}else{
+					var map_op = data.mapOptions;
+				}
+				$('#centralMap').gmap(map_op).bind('init', function() { 
+					// This URL won't work on your localhost, so you need to change it
+					// see http://en.wikipedia.org/wiki/Same_origin_policy
+					
+					$.each( data.markers, function(i, marker) {
+						$('#centralMap').gmap('addMarker', $.extend({ 
+							'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude), 
+						},marker.style)).click(function() {
+							$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+						});
+					});
+				});/**/
+			});
+			if($('#centralMap').length){
+				$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");
+			}
 	}	
 	
 

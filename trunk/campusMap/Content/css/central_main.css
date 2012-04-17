@@ -23,22 +23,19 @@ html,body{height:100%; background-color:#edefee;}
     width: 185px;
 	background:#fff url("http://images.wsu.edu/global/bg-logo3.jpg") no-repeat center center;
 	text-indent:-9999em;
-	
-	
-	
-	}
+}
 
 #header_bar{background-color: #5E6A71; height:130px;}
 
 .admin #content{
-	position:relative;
+position:relative;
 padding-top: 130px;
 z-index:1;
 width: 100%;
 min-width:1026px;
 }
 
-#localfooter{font-size: 10px;color:#5e6a71; height:30px;}
+#localfooter{font-size: 10px;color:#5e6a71; height:25px;text-align: center;padding-top:5px;}
 #localfooter a{font-size: 10px;color:#4d565c;}
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 
