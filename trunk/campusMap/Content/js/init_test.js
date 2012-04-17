@@ -15,24 +15,82 @@ $(document).ready(function(){
 			var _load = false;
 			var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
 			$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) { 
-
 				if( $.isEmptyObject( data.mapOptions )){
 					var map_op = {'center': pullman_str , 'zoom':zoom };
 				}else{
 					var map_op = data.mapOptions;
+					if(winW>=500 && winH>=200){map_op.zoom = map_op.zoom-1;}
+					if(winW>=700 && winH>=400){map_op.zoom = map_op.zoom;}
+					if(winW>=900 && winH>=600){map_op.zoom = map_op.zoom+1;}
 				}
 				$('#centralMap').gmap(map_op).bind('init', function() { 
-					// This URL won't work on your localhost, so you need to change it
-					// see http://en.wikipedia.org/wiki/Same_origin_policy
-					
+				
+				
+				var ib = [];
+				
 					$.each( data.markers, function(i, marker) {
+		
+		
+		
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+
+					'<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">First</a></li>'+
+				'	<li class="ui-state-default ui-corner-top"><a href="#tabs-2">Second</a></li>'+
+				'	<li class="ui-state-default ui-corner-top"><a href="#tabs-3">Third</a></li>'+
+				'</ul>'+
+				'<div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">'+marker.info.content+'</div>'+
+				'<div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div>'+
+				'<div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>'+
+			'</div>';
+		
+		
+		
+		
+		
+		
+		
+		
+						
+						/* so need to remove this and create the class for it */
+						var boxText = document.createElement("div");
+						boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+						boxText.innerHTML = marker.info.content;
+				
+						var myOptions = {
+							alignBottom:true,
+							 content: box//boxText
+							,disableAutoPan: false
+							,maxWidth: 0
+							,pixelOffset: new google.maps.Size(-200, -36)
+							,zIndex: 99
+							,boxStyle: {
+							  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
+							  ,width: "400px"
+							 }
+							,closeBoxMargin: "10px 2px 2px 2px"
+							,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+							,infoBoxClearance: new google.maps.Size(1, 1)
+							,isHidden: false
+							,pane: "floatPane"
+							,enableEventPropagation: false
+						};
+						ib[i] = new InfoBox(myOptions,function(content_){
+							$('#taby'+i).tabs();
+						});
+						//end of the bs that is well.. bs of a implamentation
+						
+						
+						
 						$('#centralMap').gmap('addMarker', $.extend({ 
-							'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude), 
+							'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
 						},marker.style)).click(function() {
-							$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+							$.each(ib, function(i) {ib[i].close();});
+							ib[i].open($('#centralMap').gmap('get','map'), this);
+							
+							//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
 						});
 					});
-				});/**/
+				});
 			});
 			if($('#centralMap').length){
 				$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");

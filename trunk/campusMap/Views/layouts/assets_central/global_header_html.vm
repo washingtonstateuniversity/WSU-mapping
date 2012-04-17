@@ -39,21 +39,23 @@ $Controller.getView()
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
 <script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
 
-<script type="text/javascript"  src="$siteroot/Content/js/utilities_general.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
 
-<script type="text/javascript"  src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
-<script type="text/javascript"  src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
+<script type="text/javascript" src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
 
+
+<script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/jquery.ui.map.extensions.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/jquery.ui.map.services.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.extensions.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
 
-<script type="text/javascript"  src="$siteroot/Content/js/map_editor_vars.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/map_functions.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/init_test.js"></script>
-<script type="text/javascript"  src="$siteroot/Content/js/admin_init.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
 
 
 
