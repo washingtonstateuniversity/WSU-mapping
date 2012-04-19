@@ -192,12 +192,12 @@
 #nav #main_nav ul li{padding-bottom: 2px;}
 
 #nav #main_nav li.active li{
-	background: url("/Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;
+	background: url("../Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;
 	padding-left:13px;
 	}
 #nav #main_nav li.active li a{color:#5E6A71;}
 #nav #main_nav li.active li.checked {
-	background: url("/Content/images/assests_central/checked_menu.png") no-repeat scroll left center transparent;
+	background: url("../Content/images/assests_central/checked_menu.png") no-repeat scroll left center transparent;
 	}
 #nav #main_nav li.active li.checked a{color:#981e32;}
 #nav #main_nav ul li.subNarrow{font-style:italic;background: none repeat scroll 0 0 transparent;}
@@ -232,19 +232,19 @@
 #toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
 
 #placeSearch{height:23px; position:relative;width:147px;}
-#placeSearch input{color:#3cb6ce;background: url("/Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
+#placeSearch input{color:#3cb6ce;background: url("../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
 #placeSearch input[type=text]{left:0px;}
 #placeSearch input:focus{ background-position:left bottom;}
 #placeSearch .submit{background-position:right top;width:22px;font-size:0px;overflow:hidden; border:none;padding: 0; cursor:pointer;right:0px;}
 #placeSearch .submit:focus,#placeSearch .submit:hover{background-position:right bottom;}
 
 #getDirections{}
-#directionsFrom input{color:#3cb6ce;background: url("/Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
+#directionsFrom input{color:#3cb6ce;background: url("../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
     margin-top: 5px;
     padding: 0 15px 0 5px;
     width: 127px;
 }
-#directionsTo input{color:#3cb6ce;background: url("/Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
+#directionsTo input{color:#3cb6ce;background: url("../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
     margin-top: 5px;
     padding: 0 15px 0 5px;
     width: 127px;
@@ -280,7 +280,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel{font-size:12px; color:#262a2d;max-height: 240px; padding:5px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content{width:395px;max-height: 240px;overflow-x:hidden; overflow-y: auto;}
 #campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;}
-#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left; background: url("/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left; background: url("../Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	
 #campusmap .infoClose{ right: 4px;top: -3px;z-index: 1;}
 		
 	
