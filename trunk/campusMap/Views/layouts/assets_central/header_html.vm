@@ -6,6 +6,4 @@
 	<h2></h2>
 	<h1>Campus Map</h1>
 </div>
-<div id="toolbar">
-	<ul><li></li></ul>
-</div>
+<div id="toolbar"><ul><li><a href="#">Link/Embed</a></li><li><a href="#">Share</a></li></ul></div>

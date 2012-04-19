@@ -30,6 +30,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
+        private int Level;
+        [Property]
+        virtual public int level
+        {
+            get { return Level; }
+            set { Level = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr

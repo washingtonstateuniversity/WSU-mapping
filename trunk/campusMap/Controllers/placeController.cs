@@ -20,6 +20,10 @@ namespace campusMap.Controllers
         using System.Text.RegularExpressions;
         using System.Collections;
         using campusMap.Services;
+    using Microsoft.SqlServer.Types;
+    using System.Data.SqlTypes;
+    using System.Xml;
+    using System.Text;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
@@ -125,6 +129,10 @@ namespace campusMap.Controllers
                 {
                     items = ActiveRecordBase<place>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
                 }
+
+
+
+            
                 PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 IList<string> buttons = new List<string>();
                 buttons.Add("edit");
@@ -147,6 +155,7 @@ namespace campusMap.Controllers
                 revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
+
                 PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 buttons = new List<string>();
                 buttons.Add("edit");
@@ -814,6 +823,8 @@ namespace campusMap.Controllers
             String[][] fields,
             bool ajaxed_update,
             bool forced_tmp,
+          string LongLength,
+          string Length,
             string apply,
             string cancel
             )     
@@ -836,9 +847,21 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
                 return;
             }
-            if (forced_tmp && place.id==0)
-            { 
+            if (forced_tmp && place.id == 0)
+            {
                 place.tmp = true;
+            }
+            else
+            {
+                string gemSql = "POINT (" + LongLength + " " + Length + ")";
+                string wkt = gemSql;
+                SqlChars udtText = new SqlChars(wkt);
+                SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
+
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter bw = new BinaryWriter(ms);
+                byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
+                place.coordinate = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
             //place.plus_four_code
             //'99164'
@@ -996,6 +1019,9 @@ namespace campusMap.Controllers
                 RedirectToReferrer();
                 return;
             }*/
+
+
+
 
 
             ActiveRecordMediator<place>.Save(place);

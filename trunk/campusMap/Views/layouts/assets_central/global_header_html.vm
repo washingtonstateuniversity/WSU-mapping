@@ -52,6 +52,9 @@ $Controller.getView()
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.services.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
 
+<script type="text/javascript" src="$siteroot/Content/js/jquery.defaultvalue.js"></script>
+
+
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
@@ -64,7 +67,10 @@ $Controller.getView()
 <link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 <!-- WSU theme -->
-<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' type='text/css' rel='stylesheet' />
+<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
+<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
+
+
 
 <style>
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}

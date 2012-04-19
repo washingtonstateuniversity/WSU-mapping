@@ -2026,3 +2026,100 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
 2012-03-19 08:27:29,387 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'end'.
 2012-03-19 08:30:35,550 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'end'.
 2012-03-19 08:30:35,550 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'end'.
+2012-04-19 07:53:11,591 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid object name 'geometric_to_tags'.
+2012-04-19 07:53:12,343 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid object name 'geometric_to_tags'.
+2012-04-19 07:53:12,360 [9] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection: [campusMap.Models.geometrics.tags#1][SQL: SELECT tags0_.geometric_id as geometric1___1_, tags0_.tag_id as tag2_1_, tags1_.tag_id as tag1_33_0_, tags1_.name as name33_0_, tags1_.attr as attr33_0_ FROM geometric_to_tags tags0_ left outer join tags tags1_ on tags0_.tag_id=tags1_.tag_id WHERE tags0_.geometric_id=?] ---> System.Data.SqlClient.SqlException: Invalid object name 'geometric_to_tags'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   at NHibernate.Loader.Collection.CollectionLoader.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-04-19 07:53:12,958 [9] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection: [campusMap.Models.geometrics.tags#1][SQL: SELECT tags0_.geometric_id as geometric1___1_, tags0_.tag_id as tag2_1_, tags1_.tag_id as tag1_33_0_, tags1_.name as name33_0_, tags1_.attr as attr33_0_ FROM geometric_to_tags tags0_ left outer join tags tags1_ on tags0_.tag_id=tags1_.tag_id WHERE tags0_.geometric_id=?] ---> System.Data.SqlClient.SqlException: Invalid object name 'geometric_to_tags'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   at NHibernate.Loader.Collection.CollectionLoader.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-04-19 07:56:36,542 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid object name 'geometric_to_usertags'.
+2012-04-19 07:56:36,542 [9] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not delete collection: [campusMap.Models.geometrics.Usertags#2] ---> System.Data.SqlClient.SqlException: Invalid object name 'geometric_to_usertags'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Remove(Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Remove(Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionRemove.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-04-19 07:57:08,547 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid object name 'geometric_to_usertags'.
+2012-04-19 07:57:08,547 [11] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not delete collection: [campusMap.Models.geometrics.Usertags#1] ---> System.Data.SqlClient.SqlException: Invalid object name 'geometric_to_usertags'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Remove(Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Remove(Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionRemove.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-04-19 08:44:40,173 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session

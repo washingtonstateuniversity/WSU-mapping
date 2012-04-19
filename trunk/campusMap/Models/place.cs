@@ -13,7 +13,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using campusMap.Services;
-
+using Microsoft.SqlServer.Types;
+using System.Xml;
+using System.Text;
+using System.IO;
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy = true, BatchSize=30)]
@@ -97,6 +100,35 @@ namespace campusMap.Models
                 }
             }
         }
+
+
+        public static SqlGeography AsGeography(byte[] bytes)
+        {
+            SqlGeography geo = new SqlGeography();
+            using (MemoryStream stream = new System.IO.MemoryStream(bytes))
+            {
+                using (BinaryReader rdr = new System.IO.BinaryReader(stream))
+                {
+                    geo.Read(rdr);
+                }
+            }
+
+            return geo;
+        }
+        virtual public string getLat()
+        {
+            SqlGeography spatial = place.AsGeography(this.coordinate);
+            return spatial.Lat.ToString();
+        }
+
+        virtual public string getLong()
+        {
+            SqlGeography spatial = place.AsGeography(this.coordinate);
+            return spatial.Long.ToString();
+        }
+
+
+
         private DateTime? Creation_Date;
         [Property]
         virtual public DateTime? creation_date

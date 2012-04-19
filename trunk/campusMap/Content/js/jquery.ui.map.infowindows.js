@@ -11,7 +11,12 @@
 
 
 	$.extend($.ui.gmap.prototype, {
-		init_drawing: function(drawingOptions , handling) {
+		
+		
+		
+		
+		
+		init_infowindow: function(windowOptions , handling) {
 			var self = this;	
 
 			
@@ -190,43 +195,6 @@
 			return points;
 		},	
 		
-		
-		
-		/*    
-		
-		reFACTOR IT
-		
-		*/
-		
-		get_updated_data_encoded:function() {
-			var overlay = this.get('selected');
-			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
-				var points = overlay.getRadius();
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
-				var points = overlay.getPath();
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
-				if($.isArray(overlay.getPaths())){
-					/*
-					* i think this needs to move somewhere.. in regrades to the 
-					* way i think google handle drawing complex shapes.  
-					* they don't let you and we need to fake it
-					*/
-					//alert('is a array so you are making holes');
-					var paths = overlay.getPaths();
-					if(paths.length){
-						for(i=0; i<=paths.length-1; i++){
-							var path = self.convert_gmap_LatLng(paths[i])
-							i % 2 > 0 ? path.reverse() : '';
-							points.push();
-						}
-					}
-				}else{
-					var points = overlay.getPath();
-				}
-			}
-			points = google.maps.geometry.encoding.encodePath(points);
-			return points;
-		},	
 		// Polygon containsLatLng - method to determine if a latLng is within a polygon
 		polygon_containsLatLng:function(polygon,latLng) {
 		  // Exclude points outside of bounds as there is no way they are in the poly

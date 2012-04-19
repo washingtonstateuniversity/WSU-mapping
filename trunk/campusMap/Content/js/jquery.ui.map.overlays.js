@@ -19,8 +19,13 @@
 		 */
 		addShape: function(shapeType, shapeOptions) {
 			var flip = typeof(shapeOptions.coordsFlip)!=='undefined' ? shapeOptions.coordsFlip : false;
-			if(typeof(shapeOptions.paths)=='string'){shapeOptions.paths = this.process_coords(shapeOptions.paths,flip);}
-			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = this.process_coords(shapeOptions.path,flip);}
+			var objLength = this.get('overlays > ' + shapeType, []).length;
+			
+			var reverse_array = false;
+			if(objLength>=1 && objLength % 2 > 0){reverse_array = true}
+			
+			if(typeof(shapeOptions.paths)=='string'){shapeOptions.paths = this.process_coords(shapeOptions.paths,flip,reverse_array);}
+			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = this.process_coords(shapeOptions.path,flip,reverse_array);}
 			var shape = new google.maps[shapeType](jQuery.extend({'map': this.get('map')}, shapeOptions));
 			this.get('overlays > ' + shapeType, []).push(shape);
 			return $(shape);
@@ -32,7 +37,7 @@
 		
 		
 		
-		process_coords: function(coordinates,flip) {
+		process_coords: function(coordinates,flip,reverse_array) {
 			var Coords=[];
 			if( typeof(google.maps.geometry)!=='undefined' && coordinates.match(/[\||\@|\_|\`]+/i) ){ // only encoded has @ | _ `
 				Coords = google.maps.geometry.encoding.decodePath(coordinates);
@@ -45,7 +50,6 @@
 				var coordArray = coordinates.match(/\((-?\d+\.\d+\s?,\s?-?\d+\.\d+)\)/gim);
 				//(-122.8 ,47.653) (-122.358 , 47.47) (-32.348,47.649)
 				if ( coordArray != null) {
-					
 					/* returns value
 					*	myArray[0] = "(-122.8 ,47.653)"
 					*	myArray[1] = "(122.358 , 47.47)"
@@ -66,7 +70,7 @@
 							var long = parseFloat(cord[1]);
 						}
 						Coords.push(new google.maps.LatLng(lat,long));
-					}
+					}Coords = (reverse_array ? Coords.reverse() : Coords);
 				}else{
 					var coordArray = coordinates.match(/(-?\d+\.\d+\s?-?\d+\.\d+)\s?,?/gim);
 					// from many online coord output generators
@@ -92,7 +96,7 @@
 								var long = parseFloat(cord[1]);
 							}
 								Coords.push(new google.maps.LatLng(lat,long));
-						}
+						}Coords = (reverse_array ? Coords.reverse() : Coords);
 					}else{
 						var coordArray = coordinates.match(/(-?\d+\.\d+\s?,\s?-?\d+\.\d+)\s?,?\n?/gim);
 						// matches what would come from MS SQL geography
@@ -103,6 +107,7 @@
 							*	myArray[1] = "-117.154212,46.737037,"
 							*	myArray[2] = "-117.155070,46.736625"
 							*/
+							
 							for ( i = 0; i < coordArray.length; i++ ) { 
 							var cord='';
 								var l_str=coordArray[i].substring(coordArray[i].length - 1); 
@@ -121,12 +126,13 @@
 									var long = parseFloat(cord[0]);
 								}
 								Coords.push(new google.maps.LatLng(lat,long));
-							}
+								
+							}Coords = (reverse_array ? Coords.reverse() : Coords);
 						}
 					}	
 				}			
 			}
-			return Coords.length ? Coords : false;
+			return Coords.length ? Coords  : false;
 		},
 		get_shapeCount: function(shapeType){
 			return this.get('overlays > ' + shapeType, []).length;

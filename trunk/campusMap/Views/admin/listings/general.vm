@@ -18,10 +18,9 @@
 		#parse("admin/listings/areas/inedit.vm")
 		
 		<div class="item_aTar item_$!item.id" title="$!item.id">
-		
-		  #parse("admin/listings/areas/summaryCol.vm")
-		  #parse("admin/listings/areas/detailCol.vm")
-		  
+			#parse("admin/listings/areas/summaryCol.vm")
+			#parse("admin/listings/areas/detailCol.vm")
+		   
 		  <div class='actionCol'>
 			<ul>
 				#foreach($button in $buttons)

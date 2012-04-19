@@ -1,20 +1,49 @@
-#set($baseClass="")
-#set($endcapBaseClass="")
-#set($quickaction_BaseClass="")
+#set($baseClass="parent")
+#set($subULClass="")
+#set($subNarrowClass="subNarrow")
+#set($subClass="")
+
+
+
+<form action="#" id="placeSearch">
+<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+</form>
 <ul id='main_nav'>
-	<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a></li>
-	<li class='$baseClass #if($controller.getView()=='view')ui-state-active#end'><a href="../view/list.castle">Map views</a></li>
-	<li class='$baseClass #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a></li>
-	<li class='$baseClass #if($controller.getView()=='geometrics')ui-state-active#end'><a href="../geometrics/list.castle">Geometrics</a></li>
-	<li class='$baseClass #if($controller.getView()=='media')ui-state-active#end'><a href="../media/index.castle">Media</a></li>
-	<li class='$baseClass #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
-	<li class='$baseClass #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">User Media</a></li>
-	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/index.castle">Comments</a></li>	
-	<li class='$baseClass #if($controller.getView()=='tags')ui-state-active#end'><a href="../tags/index.castle">Tags</a></li>
-	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
-	<li class='$baseClass #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>
-	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
-	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>
-	<li class='$baseClass'><a href="../place/logout.castle">Logout</a></li>
-	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Site Prefences</a></li>	
+	<li class='$baseClass' ><a href="?cat=Academics">Academics</a>
+		<ul class='$subULClass' >
+			<li class='$subNarrowClass' >Narrow view to:</li>
+			<li class='$subClass' ><a href="?cat=Academics,Agriculture">Agriculture</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Art_%20Music_%20Design">Art, Music, Design</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Bio-Phys-Math%20Sci">Bio/Phys/Math Sci</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Business%20&amp;%20Econ">Business &amp; Econ</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Communication">Communication</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Education">Education</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Engineering">Engineering</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Health%20Sciences">Health Sciences</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Hist-Lit-Philosophy">Hist/Lit/Philosophy</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Social%20Sciences">Social Sciences</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Sports%20&amp;%20Fitness">Sports &amp; Fitness</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Libraries%20&amp;%20Comp%20Labs">Libraries &amp; Comp Labs</a></li>
+			<li class='$subClass' ><a href="?cat=Academics,Tutoring%20&amp;%20Support">Tutoring &amp; Support</a></li>
+		</ul>
+	</li>
+	<li class='$baseClass' ><a href="?cat=Arts%20&amp;%20Culture">Arts &amp; Culture</a></li>
+	<li class='$baseClass' ><a href="?cat=Athletics%20&amp;%20Recreation">Athletics &amp; Recreation</a></li>
+	<li class='$baseClass' ><a href="?cat=Food%20&amp;%20Shopping">Food &amp; Shopping</a></li>
+	<li class='$baseClass' ><a href="?cat=Housing">Housing</a></li>
+	<li class='$baseClass' ><a href="?cat=Landmarks">Landmarks</a></li>
+	<li class='$baseClass' ><a href="?cat=Services%20&amp;%20Admin">Services &amp; Admin</a></li>
+	<li class='$baseClass' ><a href="?cat=Parking">Parking</a></li>	
+	<li class='$baseClass' ><a href="?cat=Bus%20Routes">Bus Routes</a></li>
+	<li class='$baseClass' ><br/></li>
+	<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>
+	<li class='$baseClass' ><a href="?cat=Printable%20PDF%20Maps">Printable PDF Maps</a></li>
 </ul>
+
+<form action="#" id="getDirections">
+<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
+<span id="directionsTo"><input type="text" value="" placeholder="Directions To..." /></span>
+</form>
+
+
+   

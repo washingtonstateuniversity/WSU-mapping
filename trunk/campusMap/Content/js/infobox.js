@@ -120,7 +120,10 @@ function InfoBox(opt_opts,callback) {
   this.moveListener_ = null;
   this.contextListener_ = null;
   this.fixedWidthSet_ = null;
-  if(typeof(callback)!=='undefined')callback(this.content_);
+  
+  this.onOpen = opt_opts.onOpen || callback;
+  
+  if(typeof(callback)!=='undefined')callback();
 }
 
 /* InfoBox extends OverlayView in the Google Maps API v3.
@@ -242,6 +245,7 @@ InfoBox.prototype.getCloseBoxImg_ = function () {
     img  = "<img";
     img += " src='" + this.closeBoxURL_ + "'";
     img += " align=right"; // Do this because Opera chokes on style='float: right;'
+	img += " class='infoClose'";
     img += " style='";
     img += " position: relative;"; // Required by MSIE
     img += " cursor: pointer;";
@@ -363,6 +367,7 @@ InfoBox.prototype.panBox_ = function (disablePan) {
       }
     }
   }
+  this.onOpen();
 };
 
 /**
@@ -731,7 +736,10 @@ InfoBox.prototype.open = function (map, anchor) {
   if (this.div_) {
 
     this.panBox_();
+  }else{
+	this.onOpen();  
   }
+  
 };
 
 /**

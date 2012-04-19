@@ -138,11 +138,23 @@
         public void central()
         {
 
+
+
+
+
+
+
+
+
             RenderView("central");
         }
 
-
-
+            public void get_category_menu()
+            {
+                PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+                CancelLayout();
+                RenderView("assets_central/main_menu");
+            }
 
 
 

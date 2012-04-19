@@ -191,7 +191,7 @@ background: url(/content/images/infoTab.png) no-repeat left center transparent;
 
 }
 .detailInfoBut:hover{ background-position:right center;}
-.detailArea{border-left: 1px solid #B8B8B8;}
+.detailArea{border-left: 1px solid #B8B8B8;background-color: #FFFFFF;}
 
 .editablelistUL li div.detailCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
 .editablelistUL li div.detailCol ul li{margin: 0 !important;padding: 0 !important;padding: 2px 7px !important;}
@@ -481,3 +481,10 @@ fieldset{padding: 4px 8px 10px;}
 
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #centralMap{width:100%;min-height:350px;height:auto;max-height:100%;}
+
+ #content .summaryCol ul h3{    height: 20px;
+    line-height: 20px;
+    margin: -12px 0 0;
+    padding: 0 0 0 5px; font-weight:bold;}
+
+ #content .summaryCol ul h3 span{ font-size:13px;color:#262A2D;}

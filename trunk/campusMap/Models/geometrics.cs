@@ -52,6 +52,25 @@ namespace campusMap.Models
             set { Boundary = value; }
         }
 
+        private string _name;
+        [Property]
+        virtual public string name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        private string _encoded;
+        [Property]
+        virtual public string encoded
+        {
+            get { return _encoded; }
+            set { _encoded = value; }
+        }
+
+        
+
+
+
         public static SqlGeography AsGeography( byte[] bytes)
         {
             SqlGeography geo = new SqlGeography();
@@ -168,13 +187,7 @@ namespace campusMap.Models
             set { Tags = value; }
         }
 
-        private IList<usertags> usertags = new List<usertags>();
-        [HasAndBelongsToMany(typeof(usertags), Lazy = true, Table = "geometric_to_usertags", ColumnKey = "geometric_id", ColumnRef = "usertag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<usertags> Usertags
-        {
-            get { return usertags; }
-            set { usertags = value; }
-        }
+        
         private IList<geometrics_types> Geometric_Types = new List<geometrics_types>();
         [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<geometrics_types> geometric_types
@@ -298,8 +311,6 @@ namespace campusMap.Models
             set { _ops = value; }
         }
     }
-
-
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class geometrics_media : ActiveRecordBase<geometrics_media>

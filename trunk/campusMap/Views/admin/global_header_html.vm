@@ -31,11 +31,46 @@ $Controller.getView()
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
+<script type="text/javascript" src="/content/js/jquery.dialog.extra.js"></script>
+<script type="text/javascript" src="/Content/js/utilities_general.js"></script>
+<script type="text/javascript" src="/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
+<script type="text/javascript" src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
+<script type="text/javascript" src="/Content/js/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+
+
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.drawingmanager.js"></script>
 
 
-<script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script>
+<script type="text/javascript" src="/Content/js/jquery.ui.map.extensions.js"></script>
+<script type="text/javascript" src="/Content/js/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="/Content/js/jquery.ui.map.overlays.js"></script>
+<script type="text/javascript" src="/Content/js/map_editor_vars.js"></script>
+<script type="text/javascript" src="/Content/js/map_functions.js"></script>
+<script type="text/javascript" src="/Content/js/admin_ui__media.js"></script>
+<script type="text/javascript" src="/Content/js/admin_ui__tinymce.js"></script>
+<script type="text/javascript" src="/Content/js/init_test.js"></script>
+<script type="text/javascript" src="/Content/js/admin_init.js"></script>
+
+
+
+
+
+
+
+
+<!-- <script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script> -->
 
 #if($admin_js)${admin_js}#end
 

@@ -230,9 +230,7 @@ $(function() {
     if($( ".buttons" ).length > 0){
         $( ".buttons" ).button({text:false});
     }
-    if($( "input[type='submit']" ).length > 0){
-        $( "input[type='submit']" ).button();
-    }
+    if($( ".admin input[type='submit']" ).length > 0){$("input[type='submit']" ).button();}
 
 
     

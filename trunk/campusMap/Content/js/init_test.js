@@ -1,100 +1,171 @@
+var ib = [];
+
+
 function resizeBg(obj,height) {
 	obj.height($(window).height()-height);
 } 
+function iniMap(url){
+	var winH = $(window).height()-160;
+	var winW = $(window).width();
+	var zoom = 15;
+	if(winW>=500 && winH>=200){zoom = 13;}
+	if(winW>=700 && winH>=400){zoom = 14;}
+	if(winW>=900 && winH>=600){zoom = 15;}
+	var _load = false;
+	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
+	$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
+		if( $.isEmptyObject( data.mapOptions )){
+			var map_op = {'center': pullman_str , 'zoom':zoom };
+		}else{
+			var map_op = data.mapOptions;
+			if(winW>=500 && winH>=300){map_op.zoom = map_op.zoom-1;}
+			if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom;}
+			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom+1;}
+		}
+		$('#centralMap').gmap(map_op).bind('init', function() { 
+			loadData(data);
+		});
+	});
+}
+function updateMap(_load){
+	if(typeof(_load)==='undefined') var _load = false;
+	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
+	$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
+		loadData(data);
+	});
+}
+function loadData(data){	
+if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
+		$.each( data.shapes, function(i, shape) {	
+			 var pointHolder = {};
+			 if(shape.coords!='' && shape.type=='polyline'){ 
+				var pointHolder = {'path' : shape.coords };
+			 }
+			  if(shape.coords!='' && shape.type=='polygon'){ 
+				var pointHolder = {'paths' : shape.coords };
+			 }
+			 if(!$.isEmptyObject(pointHolder)){
+				var ele = $.extend( { 'fillOpacity':.25,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+			 }else{
+				var ele = {};
+			 }
+			$('#centralMap').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), ele);
+		});
+}
+		$.each( data.markers, function(i, marker) {	
+				if($.isArray(marker.info.content)){
+					var nav='';
+					$.each(marker.info.content, function(j, html) {	
+						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
+					});
+					var content='';
+					$.each( marker.info.content, function(j, html) {
+						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
+					});				
+				
+				}else{
+					var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
+					var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
+				}
+	
+			var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+						'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+						content+
+					'</div>';
+
+			/* so need to remove this and create the class for it */
+			var boxText = document.createElement("div");
+			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+			boxText.innerHTML = marker.info.content;
+	
+			var myOptions = {
+				alignBottom:true,
+				 content: box//boxText
+				,disableAutoPan: false
+				,maxWidth: 0
+				,pixelOffset: new google.maps.Size(-200, -36)
+				,zIndex: 99
+				,boxStyle: {
+				  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
+				  ,width: "400px"
+				 }
+				,closeBoxMargin: "10px 2px 2px 2px"
+				,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+				,infoBoxClearance: new google.maps.Size(1, 1)
+				,isHidden: false
+				,pane: "floatPane"
+				,enableEventPropagation: false
+				,onOpen:function(){
+							$('#taby'+i).tabs();
+							$('#taby'+i).hover(function(){
+									ib[i].setOptions({enableEventPropagation: true});
+								},function(){
+									ib[i].setOptions({enableEventPropagation: false});
+								});
+							//alert('tring to tab it, dabnab it');
+						}
+			};
+			ib[i] = new InfoBox(myOptions,function(){
+				//$('#taby'+i).tabs();
+				//alert('tring to tab it, dabnab it, from the INI');
+			});
+			//end of the bs that is well.. bs of a implamentation
+			
+			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+			$('#centralMap').gmap('addMarker', $.extend({ 
+				'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
+			},marker.style)).click(function() {
+				$.each(ib, function(i) {ib[i].close();});
+				ib[i].open($('#centralMap').gmap('get','map'), this);
+				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+			});
+		});
+				
+			
+	
+}
+
+
 
 $(document).ready(function(){
-	
+		$("a").each(function() {
+			$(this).attr("hideFocus", "true").css("outline", "none");
+		});		
 	if($('#centralMap').length){
-		
-			var winH = $(window).height()-160;
-			var winW = $(window).width();
-			var zoom = 15;
-			if(winW>=500 && winH>=200){zoom = 13;}
-			if(winW>=700 && winH>=400){zoom = 14;}
-			if(winW>=900 && winH>=600){zoom = 15;}
-			var _load = false;
-			var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
-			$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) { 
-				if( $.isEmptyObject( data.mapOptions )){
-					var map_op = {'center': pullman_str , 'zoom':zoom };
-				}else{
-					var map_op = data.mapOptions;
-					if(winW>=500 && winH>=200){map_op.zoom = map_op.zoom-1;}
-					if(winW>=700 && winH>=400){map_op.zoom = map_op.zoom;}
-					if(winW>=900 && winH>=600){map_op.zoom = map_op.zoom+1;}
-				}
-				$('#centralMap').gmap(map_op).bind('init', function() { 
-				
-				
-				var ib = [];
-				
-					$.each( data.markers, function(i, marker) {
-		
-		
-		
-		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
-				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+
-					'<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">First</a></li>'+
-				'	<li class="ui-state-default ui-corner-top"><a href="#tabs-2">Second</a></li>'+
-				'	<li class="ui-state-default ui-corner-top"><a href="#tabs-3">Third</a></li>'+
-				'</ul>'+
-				'<div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">'+marker.info.content+'</div>'+
-				'<div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div>'+
-				'<div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>'+
-			'</div>';
-		
-		
-		
-		
-		
-		
-		
-		
-						
-						/* so need to remove this and create the class for it */
-						var boxText = document.createElement("div");
-						boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-						boxText.innerHTML = marker.info.content;
-				
-						var myOptions = {
-							alignBottom:true,
-							 content: box//boxText
-							,disableAutoPan: false
-							,maxWidth: 0
-							,pixelOffset: new google.maps.Size(-200, -36)
-							,zIndex: 99
-							,boxStyle: {
-							  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
-							  ,width: "400px"
-							 }
-							,closeBoxMargin: "10px 2px 2px 2px"
-							,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-							,infoBoxClearance: new google.maps.Size(1, 1)
-							,isHidden: false
-							,pane: "floatPane"
-							,enableEventPropagation: false
-						};
-						ib[i] = new InfoBox(myOptions,function(content_){
-							$('#taby'+i).tabs();
-						});
-						//end of the bs that is well.. bs of a implamentation
-						
-						
-						
-						$('#centralMap').gmap('addMarker', $.extend({ 
-							'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-						},marker.style)).click(function() {
-							$.each(ib, function(i) {ib[i].close();});
-							ib[i].open($('#centralMap').gmap('get','map'), this);
-							
-							//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-						});
-					});
-				});
-			});
+			iniMap();
 			if($('#centralMap').length){
 				$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");
 			}
+			$(' [placeholder] ').defaultValue();
+
+			$('#directionsTo').slideToggle();
+			$('#directionsFrom input').live('blur',function(){
+				if($('#directionsFrom input').val() !='')$('#directionsTo').slideToggle();
+			});
+
+			$('#main_nav li.parent a:first').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				$('.active').removeClass('active');
+				$('.checked').removeClass('checked');
+				$(this).closest('li').addClass('active');
+				e.stopPropagation();
+				e.preventDefault();
+				$.each(ib, function(i) {ib[i].close();});
+				$('#centralMap').gmap('clear','markers');
+				$('#centralMap').gmap('clear','overlays');
+				updateMap('Academics');
+			});
+			
+			$('#main_nav .parent li a').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				$(this).closest('li').toggleClass('checked');
+				$.each(ib, function(i) {ib[i].close();});
+				$('#centralMap').gmap('clear','markers');
+				$('#centralMap').gmap('clear','overlays');
+				updateMap('Agriculture');
+			});
 	}	
 	
 
@@ -291,7 +362,7 @@ $( "#addGeometrics" ).click(function(){
 			});
 		});
 			
-			$('.actions button:first').button({
+/*			$('.actions button:first').button({
 				icons: {
 					primary: "ui-icon-gear",
 					secondary: "ui-icon-triangle-1-s"
@@ -328,7 +399,7 @@ $( "#addGeometrics" ).click(function(){
 					secondary: "ui-icon-triangle-1-s"
 				}
 			});	
-
+*/
 
 
 	

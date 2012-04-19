@@ -614,6 +614,7 @@ namespace campusMap.Controllers
             authors user = getUser();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
+            
             ActiveRecordMediator<geometrics>.Save(geometric);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
@@ -632,6 +633,7 @@ namespace campusMap.Controllers
             {
                 PropertyBag["geometric"] = geometric;
             }
+            
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
@@ -762,13 +764,34 @@ namespace campusMap.Controllers
             RenderText("true");
         }
 
-        public string normaliz_latsLongs(string latLong)
+        public string normaliz_latsLongs(string latLong, string type)
         {
+
+            latLong = latLong.Trim();
+
+            bool longFirst = true;
+            if (!latLong.StartsWith("-")) { longFirst = false; }
+
             latLong = latLong.Replace(",", "|");
             latLong = latLong.Replace("|\r\n", ",");
             latLong = latLong.Replace("|", " ");
             latLong = latLong.Replace("\r\n", "");
-            return latLong;
+
+            if (!longFirst)
+            {
+                string pattern = @"(\d+\.\d+)\s?(-?\d+\.\d+),?";
+                string replacement = "$2 $1,";
+                Regex rgx = new Regex(pattern);
+                latLong = rgx.Replace(latLong, replacement);
+            }
+            if (type == "polygon"){ /* this is to avoid an error where the ring needs to be closed in MS SQL */
+                string[] tmp = latLong.Split(','); 
+                if(tmp[0] != tmp[tmp.Length-1]){
+                    latLong = latLong.TrimEnd(',') + "," + tmp[0];
+                }
+            }
+
+            return latLong.TrimEnd(',');
         }
 
         public void Update([ARDataBind("geometric", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics geometric,
@@ -815,6 +838,14 @@ namespace campusMap.Controllers
             authors user = getUser();
             geometric.editing = user;
             geometric.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : geometric.status;
+
+
+            if (String.IsNullOrEmpty(geometric.name))
+            {
+                geometric.name = "Untitled";
+            }
+
+
 
            // geometric.tags.Clear(); 
             //place.Images.Clear();
@@ -905,23 +936,23 @@ namespace campusMap.Controllers
             switch (geom_type)
             {
                 case "marker": //case "POINT":
-                    gemSql = "POINT (" + normaliz_latsLongs(boundary) + ")";
+                    gemSql = "POINT (" + normaliz_latsLongs(boundary, geom_type) + ")";
                     gemtype = "Marker";
                     break;
                 case "polyline": //case "LINESTRING":
-                    gemSql = "LINESTRING (" + normaliz_latsLongs(boundary) + ")";
+                    gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
                     gemtype = "Line";
                     break;
                 case "polygon": //case "POLYGON":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     gemtype = "Shape";
                     break;
                 case "rectangle":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     gemtype = "Shape";
                     break;
                 case "circle":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary) + "))";
+                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     gemtype = "Shape";
                     break;
                 case "MULTIPOINT":

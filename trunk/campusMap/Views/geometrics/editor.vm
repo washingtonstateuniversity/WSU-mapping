@@ -13,6 +13,7 @@
 #if( !$ajaxed )
 <div id="smaple_area">
             <fieldset><legend>Sample</legend>
+				<button id="drawingcontrolls" class="showing">Hide controlls</button><button id="restart" >Restart</button><button id="update" >Update</button><button id="unselect" >un select selected</button>
 				<div id="drawing_map"></div>
             </fieldset>
 </div>
@@ -32,7 +33,16 @@
 		#end
 
 		<div id="Basic">
-			<p style="float:right;width:46%;">Geometry Type:<br/>  
+
+			
+
+			
+			
+			
+			<p>Name:<br/>
+				<input type="text" value="$!geometric.name" name="geometric.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+			</p>
+			<p style="width:46%;">Geometry Type:<br/>  
 				<select name="geom_type" id="style_of">
 					<option value="" #if($geometric.default_type=='')selected='selected'#end>Select a geometry type</option>
 					<option value="marker" #if($geometric.default_type=='1')selected='selected'#end>Marker</option>
@@ -43,21 +53,9 @@
 				</select>
 			</p>	
 			
-			
-			<button id="drawingcontrolls" class="showing">Hide controlls</button>
-			<button id="restart" >Restart</button>
-			<button id="update" >Update</button>
-			<button id="unselect" >un select selected</button>
-			
-			
-			
-			<p>Name:<br/>
-				<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-			</p>
-			
 			<p style="width:46%;">Geometry Style:<br/>  
 				<select name="$geometric.style" id="style_of">
-					<option value="" #if($ele.type=='')selected='selected'#end>using this style</option>
+					<option value="" #if($ele.type=='')selected='selected'#end>Defaults</option>
 					
 					
 						#foreach($style in $_styles)
@@ -66,13 +64,15 @@
 					
 				</select>
 			</p>
-		
-		
-			<form>$Form.HiddenField("place.id")
-				<fieldset><legend>Location</legend>
-				<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>
-				</fieldset>
-			</form>
+
+			<fieldset><legend>Latitude and Longitude</legend>
+			<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>
+			</fieldset>
+			
+			
+			<p>Encoded:<br/>
+			<input type="text" value="$!geometric.encoded" name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all " />
+			</p>
 			$formbuttons
 		</div>
 	</form>

@@ -2,6 +2,23 @@
 	<a href="#" class='detailInfoBut'>Info</a> 
 	<div class='detailArea'>
 		<ul>
+		
+		
+ 		#if($item.coordinate)	 
+		  #if($item.authors!='')<li class='Authors'>
+			<span>Authors: </span>$!item.authors
+		  </li>#end
+		  #if($item.tags && $item.tags!="")<li class="Body">
+			<span>Tag: </span>
+		#foreach($tag in $item.tags)
+			$!tag.name
+		#between
+			,
+		#end
+		  </li>#end
+	  	#end
+		
+		
 			#if($item.Publishtime)<li class='date'>
 				<span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','')
 			</li>#end

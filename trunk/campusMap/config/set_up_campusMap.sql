@@ -474,6 +474,8 @@ GO
 	CREATE TABLE [dbo].[geometrics](
 		[geometric_id] [int] IDENTITY(1,1) NOT NULL,
 		[boundary] [geography] NOT NULL,
+		[name] [nvarchar](max) NULL,
+		[encoded] [nvarchar](max) NULL,
 		[default_type] [tinyint] NULL,
 		[publish_time] [datetime] DEFAULT GETDATE(),
 		[creation_date] [datetime] DEFAULT GETDATE(),
@@ -489,10 +491,10 @@ GO
 	GO
 	/* add some defaults */
 	INSERT INTO [campusMap].[dbo].[geometrics]
-			   ([boundary])
+			   ([name],[boundary],[default_type],[status])
 		 VALUES
-			   (geography::STGeomFromText('LINESTRING(-122.360 47.656, -122.343 47.656 )', 4326)),/*LINE*/
-			   (geography::STGeomFromText('POLYGON ((-145 -45, -55 -45, -55 45, -145 45, -145 -45))', 4326))/*Polygon*/
+			   ('test line',geography::STGeomFromText('LINESTRING(-122.360 47.656, -122.343 47.656 )', 4326),2,1),/*LINE*/
+			   ('test polygon',geography::STGeomFromText('POLYGON ((-145 -45, -55 -45, -55 45, -145 45, -145 -45))', 4326),3,1)/*Polygon*/
 	GO
 
 
@@ -689,6 +691,7 @@ GO
 	CREATE TABLE [dbo].[categories](
 		[category_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
+		[level][int] NOT NULL,
 		[attr] [nvarchar](max) NULL,
 		CONSTRAINT [PK_categories] PRIMARY KEY CLUSTERED 
 		(
@@ -703,6 +706,29 @@ GO
 		KEY INDEX ui_cat_name 
 		WITH STOPLIST = SYSTEM;
 	GO
+	/* add some defaults */
+	INSERT INTO [campusMap].[dbo].[categories]
+			   ([name],[level])
+		 VALUES
+			   ('Arts & Culture',1),
+			   ('Academics',1),
+			   ('Services & Admin',1),
+			   ('Athletics & Recreation',1),
+			   ('Housing',1),
+			   ('Landmarks',1),
+			   ('Food & Shopping',1),
+			   ('Parking',1),
+			   ('Food & Shopping',1),
+	GO
+
+
+
+
+
+
+
+ 
+
 
 
 	
@@ -1870,7 +1896,20 @@ CREATE TABLE [dbo].[geometrics_to_styles] (
 	) ON [PRIMARY]
 GO
 
-
+CREATE TABLE [dbo].[geometric_to_tags] (
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[tag_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_geometric_to_tags_style] FOREIGN KEY ([tag_id])
+		REFERENCES [tags] ([tag_id]),
+	[geometric_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_geometric_to_tags_geometrics] FOREIGN KEY ([geometric_id])
+		REFERENCES [geometrics] ([geometric_id]),
+	CONSTRAINT [PK_geometric_to_tags] PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC 
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+GO
 
 
 

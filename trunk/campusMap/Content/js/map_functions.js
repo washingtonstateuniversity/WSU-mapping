@@ -3613,10 +3613,12 @@ function load_editor() {
 					overlaycomplete:function(data){
 							if(data!=null){
 								$('#latLong').val(data);
+								$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
 							}
 						},
 					onDrag:function(data){
 							$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
+							$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
 						},
 					drawingmode_changed:function(type){
 							if(type!=null){
@@ -3652,6 +3654,7 @@ function load_editor() {
 			e.preventDefault();
 			e.stopPropagation();
 			$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
+			$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
 		});
 		
 		$('#unselect').live('click',function(e){
@@ -4104,7 +4107,7 @@ function initialize() {
 								  
 								if (results[1]) {
 									//alert( results[1].formatted_address);
-									obj.val(itemSnumber);
+									//obj.val(itemSnumber);
 								}
 							  } else {
 								alert("Geocoder failed due to: " + status);

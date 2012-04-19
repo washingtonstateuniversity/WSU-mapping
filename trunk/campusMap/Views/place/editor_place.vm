@@ -206,15 +206,13 @@
 					<fieldset style="position:relative;"><a href="#" title="Set Latitude/Longitude" id="setLatLong" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="position: absolute; right: 5px; top: 5px;"><span class="ui-icon ui-icon-pin-s"></span></a>
 						<div class="col2"  style="width:49%;display:inline-block;">	
 							<label for="Lat"><strong>Latitude</strong></label><br/>
-							<input type="text" name="place.coordinate.Length" id="Lat" value="$!place.coordinate.Length" class="text ui-widget-content ui-corner-all" />
+							<input type="text" name="Length" id="Lat" value="${place.getLat()}" class="text ui-widget-content ui-corner-all" />
 						</div>
 						<div class="col2"  style="width:49%;display:inline-block;">
 						
 							<label for="Long"><strong>Longitude</strong></label><br/>
-							<input type="text" name="place.coordinate.LongLength" id="Long" value="$!place.coordinate.LongLength" class="text ui-widget-content ui-corner-all" />
+							<input type="text" name="LongLength" id="Long" value="${place.getLong()}" class="text ui-widget-content ui-corner-all" />
 						</div>
-						
-						
 						<fieldset id="estimated_places" style="display:none;"><legend>Places At or Near this point</legend>
 						<div id="local_place_names"></div>
 						</fieldset>
