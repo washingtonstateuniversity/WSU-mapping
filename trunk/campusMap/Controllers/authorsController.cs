@@ -132,7 +132,7 @@ namespace campusMap.Controllers
                 Flash["author"] = author;
 
             }
-            ActiveRecordMediator<media_repo>.Save(image);
+            /*ActiveRecordMediator<media_repo>.Save(image);
             if (newimage.ContentLength != 0)
             {
                 String Fname = System.IO.Path.GetFileName(newimage.FileName);
@@ -159,7 +159,7 @@ namespace campusMap.Controllers
 
                 ActiveRecordMediator<media_repo>.Save(image);
                 author.media.Add(image);
-            }
+            }*/
 
             
             RedirectToAction("list");
