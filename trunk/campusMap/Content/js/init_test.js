@@ -86,7 +86,7 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 				,pixelOffset: new google.maps.Size(-200, -36)
 				,zIndex: 99
 				,boxStyle: {
-				  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
+				  background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom"
 				  ,width: "400px"
 				 }
 				,closeBoxMargin: "10px 2px 2px 2px"
