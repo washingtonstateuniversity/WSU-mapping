@@ -14,10 +14,6 @@ C:\natedev\campusMap\campusMap\obj\Debug\campusMap.dll
 C:\natedev\campusMap\campusMap\obj\Debug\campusMap.pdb
 C:\_SVN_\campusMap\campusMap\bin\campusMap.dll
 C:\_SVN_\campusMap\campusMap\bin\campusMap.pdb
-C:\_SVN_\campusMap\campusMap\bin\anrControls.Markdown.NET.dll
-C:\_SVN_\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.dll
-C:\_SVN_\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.dll
-C:\_SVN_\campusMap\campusMap\bin\Castle.MonoRail.ActiveRecordSupport.dll
 C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.dll
 C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.xml
 C:\_SVN_\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml

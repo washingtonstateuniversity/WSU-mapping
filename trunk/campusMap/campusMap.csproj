@@ -151,6 +151,7 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\anrControls.Markdown.NET.dll" />
     <Content Include="bin\campusMap.dll" />
     <Content Include="bin\campusMap.pdb" />
     <Content Include="bin\Castle.ActiveRecord.dll" />
@@ -159,6 +160,10 @@
     <Content Include="bin\Castle.Components.Binder.xml" />
     <Content Include="bin\Castle.Components.Common.EmailSender.dll" />
     <Content Include="bin\Castle.Components.Common.EmailSender.xml" />
+    <Content Include="bin\Castle.Components.Common.TemplateEngine.dll" />
+    <Content Include="bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.dll" />
+    <Content Include="bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml" />
+    <Content Include="bin\Castle.Components.Common.TemplateEngine.xml" />
     <Content Include="bin\Castle.Components.Validator.dll" />
     <Content Include="bin\Castle.Components.Validator.xml" />
     <Content Include="bin\Castle.Core.dll" />
@@ -175,6 +180,8 @@
     <Content Include="bin\Castle.Facilities.Logging.xml" />
     <Content Include="bin\Castle.MicroKernel.dll" />
     <Content Include="bin\Castle.MicroKernel.xml" />
+    <Content Include="bin\Castle.MonoRail.ActiveRecordSupport.dll" />
+    <Content Include="bin\Castle.MonoRail.ActiveRecordSupport.xml" />
     <Content Include="bin\Castle.MonoRail.Framework.dll" />
     <Content Include="bin\Castle.MonoRail.Framework.Views.NVelocity.dll" />
     <Content Include="bin\Castle.MonoRail.Framework.Views.NVelocity.xml" />
