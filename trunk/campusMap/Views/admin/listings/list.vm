@@ -1,73 +1,79 @@
 
 #if($Flash.massage)
-<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
-  <p style="line-height: 15px;padding-bottom: 0;">
-    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.massage
-  </p>
-</div>
-#end
-#if($Flash.error)
-<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-  <p style="line-height: 15px;padding-bottom: 0;">
-    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
-  </p>
-</div>
-#end
-
-<div style="height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;">
-	  <p>
-<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active"  style="width:auto;display:inline-block;"><span style="padding: 0.5em 1em;">${controller.getView()} List</span></a>
-<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;"><span style="padding: 0.5em 1em;">Types</span></a>
-
-#if($styles)
-<a href="#_styles" id="styles_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;"><span style="padding: 0.5em 1em;">Styles</span></a>
-#end
-
-<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices " style="width:auto;display:inline-block;"><span style="padding: 0.5em 1em;">Fields</span></a>
+	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+	  <p style="line-height: 15px;padding-bottom: 0;">
+		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.massage
 	  </p>
 	</div>
-<div class="clear"></div>
+#end
+#if($Flash.error)
+	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+	  <p style="line-height: 15px;padding-bottom: 0;">
+		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
+	  </p>
+	</div>
+#end
 
-
+	<div style="height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;">
+		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active"  style="width:auto;display:inline-block;">
+			<span style="padding: 0.5em 1em;">${controller.getView()} List</span>
+		</a>
+		<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;">
+			<span style="padding: 0.5em 1em;">Types</span>
+		</a>
+		
+		#if($styles)
+			<a href="#_styles" id="styles_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;">
+				<span style="padding: 0.5em 1em;">Styles</span>
+			</a>
+		#end
+		
+		<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices " style="width:auto;display:inline-block;">
+			<span style="padding: 0.5em 1em;">Fields</span>
+		</a>
+	</div>
+	<div class="clear"></div>
+	
 	<div id="_Listing" class="tabedArea tabactive" >
 		<h3>${controller.getView()} List :</h3>
-		<div id="${controller.getView()}TypeDiv" style="float:right; height: 37px; margin-top: 7px; margin-right: 9px; position: relative; z-index: 1; color:#fff;">
-		  Geometric Types:<br/>
-		  <select id="list${controller.getView()}Type">
-			<option value="">Your Sections</option>
-			<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
-			<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
-			#foreach($type in $listtypes)
-			<option value="$type.id" #if($searchId == $type.id) selected="selected" #end>$type.name</option>
-			#end
-		  </select>
-		</div>
-	
-		<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: 270px; z-index: 1;top:0px;">
-		  <p>
-			<a href="$siteroot/${controller.getView()}/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-			  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
-			</a>&nbsp;
-		  </p>
-		</div>
-		<div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
-			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-			#set($c=0)
-				#foreach($status in $statuses)
-					<li class="ui-state-default ui-corner-top #if($c<=0) ui-tabs-selected ui-state-active #end">
-						<a href="#${status.title}">${status.title} ($controller.getVar("${status.title}_list").TotalItems)</a>
-					</li>
-					#set($c=$c+1)
+		<div style="position:relative;" >
+			<div id="${controller.getView()}TypeDiv" style="position: absolute; right:5px; top:5px; z-index: 1; color:#fff;">
+			
+				<a href="$siteroot/${controller.getView()}/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;">
+				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
+				</a>
+			<span style="display:inline-block;">
+			  Geometric Types:<br/>
+			  <select id="list${controller.getView()}Type">
+				<option value="">Your Sections</option>
+				<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
+				<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
+				#foreach($type in $listtypes)
+				<option value="$type.id" #if($searchId == $type.id) selected="selected" #end>$type.name</option>
 				#end
-			</ul>
-			#foreach($STATUS in $statuses)
-			  <div id="${STATUS.title}">
-					#set($buttons=$controller.getVar("${STATUS.title}ButtonSet"))
-					#set($list_items=$controller.getVar("${STATUS.title}_list"))
-					#parse("admin/listings/general.vm")
-					<div class="clear"></div>
-			  </div>
-			#end
+			  </select>
+			  </span>
+			</div>
+			
+			<div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+					#set($c=0)
+					#foreach($status in $statuses)
+						<li class="ui-state-default ui-corner-top #if($c<=0) ui-tabs-selected ui-state-active #end">
+							<a href="#${status.title}">${status.title} ($controller.getVar("${status.title}_list").TotalItems)</a>
+						</li>
+						#set($c=$c+1)
+					#end
+				</ul>
+				#foreach($STATUS in $statuses)
+				  <div id="${STATUS.title}">
+						#set($buttons=$controller.getVar("${STATUS.title}ButtonSet"))
+						#set($list_items=$controller.getVar("${STATUS.title}_list"))
+						#parse("admin/listings/general.vm")
+						<div class="clear"></div>
+				  </div>
+				#end
+			</div>
 		</div>
 	</div>
 
@@ -114,4 +120,4 @@
 			#parse("/admin/fields/list.vm")
 		</div>
 	</div>
-</div>
+<!-- <div> -->

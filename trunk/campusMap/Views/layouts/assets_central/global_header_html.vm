@@ -29,22 +29,18 @@ $Controller.getView()
 
 
 
-<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&sensor=false"></script>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
-<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
-
-<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
-
-<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
-<script type="text/javascript" src="http://dev-mcweb.it.wsu.edu/jeremys%20sandbox/gMaps/infobox.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
-
 
 <script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
@@ -53,7 +49,6 @@ $Controller.getView()
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
 
 <script type="text/javascript" src="$siteroot/Content/js/jquery.defaultvalue.js"></script>
-
 
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
@@ -72,11 +67,8 @@ $Controller.getView()
 
 
 
-<style>
+<style type="text/css" >
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
-</style>
-
-<style>
   .ui-button { margin-left: -1px; }
   .ui-button-icon-only .ui-button-text { padding: 0.35em; }
   .ui-autocomplete-input { margin: 0; padding:0.4em 0 0.4em 0.43em; }

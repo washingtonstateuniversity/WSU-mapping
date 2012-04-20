@@ -1,49 +1,31 @@
 <div class='summaryCol'>
 	<ul>
-	  #if($item.prime_name)<li class='name'>
-		<h3><span>Name: </span>$!item.prime_name</h3>
-		<hr/>
-	  </li>
-	  #elseif($item.name)<li class='name'>
-		<h3><span>Name: </span>$!item.name</h3>
-		<hr/>
-	  </li>#end
-	  
-
-	  #if($item.coordinate || $item.encoded)	
-	  
-	  #if($item.coordinate)
-	  
-	   
+	#if($item.prime_name)
+		  <li class='name'><h3><span>Name: </span>$!item.prime_name</h3><hr/></li>
+	#elseif($item.name)
+		  <li class='name'><h3><span>Name: </span>$!item.name</h3><hr/></li>
+	#end
+	#if($item.coordinate || $item.encoded)
+		#if($item.coordinate)
 			<li class='previewMap'>
-				<img src="http://maps.google.com/staticmap?center=${item.getLat()},${item.getLong()}&zoom=14&size=250x145&maptype=mobile&markers=${item.getLat()},${item.getLong()},red&sensor=false" style="margin-top: -23px;"/>
-				</li>
+				<img src="http://maps.google.com/staticmap?center=${item.getLat()},${item.getLong()}&amp;size=250x145&amp;maptype=mobile&amp;markers=${item.getLat()},${item.getLong()},red&amp;sensor=false" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end @${item.getLat()},${item.getLong()}"/>
+			</li>
 		#else
 			<li class='previewMap'>
-			<img src="http://maps.googleapis.com/maps/api/staticmap?size=250x145&path=fillcolor:0xAA000033%7Ccolor:0xFFFFFF00%7Cenc:${item.encoded}&sensor=false" style="margin-top: -23px;"/>
+				<img src="http://maps.googleapis.com/maps/api/staticmap?size=250x145&amp;path=fillcolor:0xAA000033%7Ccolor:0xFFFFFF00%7Cenc:${item.encoded}&amp;sensor=false" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end"/>
 			</li>
-	#end
-
-
-	#else
-
- 
-		  #if($item.authors!='')<li class='Authors'>
-			<span>Authors: </span>$!item.authors
-		  </li>#end
-		  #if($item.tags && $item.tags!="")<li class="Body">
-			<span>Tag: </span>
-		#foreach($tag in $item.tags)
-			$!tag.name
-		#between
-			,
 		#end
-		  </li>#end
+	#else
+		  #if($item.authors!='')<li class='Authors'><span>Authors: </span>$!item.authors</li>#end
+		  #if($item.tags && $item.tags!="")
+			  <li class="Body"><span>Tag: </span>
+				#foreach($tag in $item.tags)
+					$!tag.name
+				#between
+					,
+				#end
+			  </li>
+		  #end
 	  #end
-	  
-	  
-	  
-	  
-	  
 	</ul>
 </div>

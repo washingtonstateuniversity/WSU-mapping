@@ -7,10 +7,10 @@
 	<li class='$endcapBaseClass ui-state-hover ui-corner-tr endcap'></li>
 	<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a>
 		<ul>
-			<li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+			<li class='$baseClass ui-button-text-icons quickActions' #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
 				<ul class='action_nav' style='padding: 0;display: none;'>
-					<li class='$quickaction_BaseClass' ><a href="#" id='addPlace'>Add a Place</a></li>
-					<li class='$quickaction_BaseClass' ><a href="#" id='findPlace'>Find a Place</a></li>
+					<li class='$quickaction_BaseClass' ><a href="#" class='addPlace'>Add a Place</a></li>
+					<li class='$quickaction_BaseClass' ><a href="#" class='findPlace'>Find a Place</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -20,13 +20,13 @@
 	<li class='$baseClass ui-state-hover sep'></li>
 	<li class='$baseClass #if($controller.getView()=='place')ui-state-active#end'><a href="../place/list.castle">Places</a>
 	<ul>
-		<li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='place')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+		<li class='$baseClass ui-button-text-icons quickActions' #if($controller.getView()!='place')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
 			<ul class='action_nav' style='padding: 0;display: none;'>
-				<li class='$quickaction_BaseClass' ><a href="place/new.castle" id='findPlace'>Add a Place</a></li>
-				<li class='$quickaction_BaseClass' ><a href="#" id='findPlace'>Find a Place</a></li>
+				<li class='$quickaction_BaseClass' ><a href="place/new.castle" class='addPlace'>Add a Place</a></li>
+				<li class='$quickaction_BaseClass' ><a href="#" class='findPlace'>Find a Place</a></li>
 				<li class='$baseClass ui-state-hover sep'></li>
-				<li class='$quickaction_BaseClass' ><a href="place/new_field.castle" id='addPlace'>Add fields</a></li>
-				<li class='$quickaction_BaseClass' ><a href="place/new_type.castle" id='addPlace'>Add types</a></li>
+				<li class='$quickaction_BaseClass' ><a href="place/new_field.castle" class='addPlace'>Add fields</a></li>
+				<li class='$quickaction_BaseClass' ><a href="place/new_type.castle" class='addPlace'>Add types</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -37,14 +37,14 @@
 	<li class='$baseClass ui-state-hover sep'></li>
 	<li class='$baseClass #if($controller.getView()=='geometrics')ui-state-active#end'><a href="../geometrics/list.castle">Geometrics</a>
 		<ul>
-			<li class='$baseClass ui-button-text-icons quickActions' role="button"  #if($controller.getView()!='geometrics')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
+			<li class='$baseClass ui-button-text-icons quickActions'  #if($controller.getView()!='geometrics')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
 				<ul class='action_nav' style='padding: 0;display: none;'>
-					<li class='$quickaction_BaseClass' ><a href="geometrics/new.castle" id='findPlace'>Add Geometric entry</a></li>
-					<li class='$quickaction_BaseClass' ><a href="#" id='findPlace'>Find Geometric entry</a></li>
+					<li class='$quickaction_BaseClass' ><a href="geometrics/new.castle" class='findPlace'>Add Geometric entry</a></li>
+					<li class='$quickaction_BaseClass' ><a href="#" class='findPlace'>Find Geometric entry</a></li>
 					<li class='$baseClass ui-state-hover sep'></li>
-					<li class='$quickaction_BaseClass' ><a href="geometrics/new_field.castle" id='addPlace'>Add fields</a></li>
-					<li class='$quickaction_BaseClass' ><a href="geometrics/new_type.castle" id='addPlace'>Add types</a></li>
-					<li class='$quickaction_BaseClass' ><a href="geometrics/new_style.castle" id='addPlace'>Add style</a></li>
+					<li class='$quickaction_BaseClass' ><a href="geometrics/new_field.castle" class='addPlace'>Add fields</a></li>
+					<li class='$quickaction_BaseClass' ><a href="geometrics/new_type.castle" class='addPlace'>Add types</a></li>
+					<li class='$quickaction_BaseClass' ><a href="geometrics/new_style.castle" class='addPlace'>Add style</a></li>
 				</ul>
 			</li>
 		</ul>

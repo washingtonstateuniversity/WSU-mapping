@@ -124,44 +124,42 @@ namespace campusMap.Controllers
             try
             {
                 ActiveRecordMediator<authors>.Save(author);
-               
             }
             catch (Exception ex)
             {
                 Flash["error"] = ex.Message;
                 Flash["author"] = author;
-
             }
-            /*ActiveRecordMediator<media_repo>.Save(image);
-            if (newimage.ContentLength != 0)
-            {
-                String Fname = System.IO.Path.GetFileName(newimage.FileName);
-                String[] fileparts = Fname.Split('.');
-                if (String.IsNullOrEmpty(image.file_name))
-                {
-                    image.file_name = fileparts[0];
-                }
-                image.ext = fileparts[1];
-
-                //set up the image up from the stream
-                System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
-
-                // a var for uploads will start here
-                String uploadPath = Context.ApplicationPhysicalPath + @"\uploads\mugshots\";
-
-                if (!HelperService.DirExists(uploadPath))
-                {
-                    System.IO.Directory.CreateDirectory(uploadPath);
-                }
-                string newFile = uploadPath + image.id + ".ext";
-                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
-
+            /*
                 ActiveRecordMediator<media_repo>.Save(image);
-                author.media.Add(image);
-            }*/
+                if (newimage.ContentLength != 0)
+                {
+                    String Fname = System.IO.Path.GetFileName(newimage.FileName);
+                    String[] fileparts = Fname.Split('.');
+                    if (String.IsNullOrEmpty(image.file_name))
+                    {
+                        image.file_name = fileparts[0];
+                    }
+                    image.ext = fileparts[1];
 
-            
+                    //set up the image up from the stream
+                    System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+
+                    // a var for uploads will start here
+                    String uploadPath = Context.ApplicationPhysicalPath + @"\uploads\mugshots\";
+
+                    if (!HelperService.DirExists(uploadPath))
+                    {
+                        System.IO.Directory.CreateDirectory(uploadPath);
+                    }
+                    string newFile = uploadPath + image.id + ".ext";
+                    //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
+                    imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
+
+                    ActiveRecordMediator<media_repo>.Save(image);
+                    author.media.Add(image);
+                }
+            */
             RedirectToAction("list");
         }
 

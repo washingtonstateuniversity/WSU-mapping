@@ -167,7 +167,7 @@ table.ui-widget tbody tr.odd td{}
 
 .editablelistUL li div.summaryCol{float: left;width: 250px;height:180px;border-right: 1px solid #B8B8B8;}
 .editablelistUL li div.summaryCol ul{list-style: none outside none !important;margin: 0 !important;padding:0px !important;}
-.editablelistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;    padding: 2px 7px !important;}
+.editablelistUL li div.summaryCol ul li{margin: 0 !important;padding: 0 !important;}
 .editablelistUL li div.summaryCol li p {display: inline;line-height: 1em !important;padding: 0;}
 .editablelistUL li div.summaryCol .Title{background-color: #CCCCCC;height: 30px;}
 .editablelistUL li div.summaryCol li span.Body,.editablelistUL li div.summaryCol li span.Body span{font-weight:normal !important;}
@@ -482,9 +482,16 @@ fieldset{padding: 4px 8px 10px;}
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #centralMap{width:100%;min-height:350px;height:auto;max-height:100%;}
 
- #content .summaryCol ul h3{    height: 20px;
-    line-height: 20px;
-    margin: -12px 0 0;
-    padding: 0 0 0 5px; font-weight:bold;}
+#content #main .summaryCol ul h3{    
+	height: 20px;
+	line-height: 20px;
+	padding: 0 0 0 5px; font-weight:bold;
+}
+#content #main .summaryCol ul .name{display: inline-block;height: 28px;width: 100%;}
+#content #main .summaryCol ul .previewMap{display: inline-block;}
+#content #main .summaryCol ul h3 span{
+	font-size:13px;
+	color:#262A2D;
+}
 
- #content .summaryCol ul h3 span{ font-size:13px;color:#262A2D;}
+

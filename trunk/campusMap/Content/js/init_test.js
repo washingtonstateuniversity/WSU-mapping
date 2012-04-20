@@ -275,7 +275,7 @@ $( "#addGeometrics" ).click(function(){
 
 		var cache = {},
 			lastXhr;	
-		$( "#addPlace" ).click(function(){
+		$( ".addPlace" ).click(function(){
 			if($('#dialog-form').length==0){$('#staging').append('<div id="dialog-form" title="Create new location"></div>');}
 			$( "#dialog-form" ).dialog({
 				minimize:true,
