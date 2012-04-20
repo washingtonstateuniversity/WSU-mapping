@@ -496,18 +496,18 @@ namespace campusMap.Controllers
         {
             CancelView();
 
-
             PropertyBag["ajaxed"] = ajax;
 
             campusMap.Services.LogService.writelog("Editing place " + id);
             PropertyBag["credits"] = "";
+            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
             authors user = getUser();
 
-
+            
 
             PropertyBag["authorname"] = user.name;
             one_place.editing = user;
@@ -530,9 +530,11 @@ namespace campusMap.Controllers
             {
                 PropertyBag["place"] = one_place;
             }
-
-            
-
+            if (one_place.coordinate != null)
+            {
+                PropertyBag["lat"] = one_place.getLat();
+                PropertyBag["long"] = one_place.getLong();
+            }
 
             List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
             typeEx.Add(Expression.Eq("model", this.GetType().Name));

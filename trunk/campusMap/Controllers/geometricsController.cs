@@ -119,11 +119,11 @@ namespace campusMap.Controllers
                 PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 IList<string> buttons = new List<string>();
                 buttons.Add("edit");
-                buttons.Add("delete");
+                //buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("broadcast");
-                buttons.Add("view");
-                buttons.Add("order");
+                //buttons.Add("broadcast");
+                //buttons.Add("view");
+                //buttons.Add("order");
                 PropertyBag["publishedButtonSet"] = buttons;  
 
 
@@ -146,7 +146,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("view");
+                //buttons.Add("view");
                 PropertyBag["reviewButtonSet"] = buttons;  
 
 
@@ -167,7 +167,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("view");
+                //buttons.Add("view");
                 PropertyBag["draftButtonSet"] = buttons;  
 
             //SETUP SEARCHID and parts
@@ -572,36 +572,36 @@ namespace campusMap.Controllers
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
-            geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
-            string sp_type = spatial.STGeometryType().ToString().ToUpper();
-            PropertyBag["sp_type"] = geometric.default_type;
             string gem = "";
-
-            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-            switch (sp_type)
+            geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
+            if (geometric.boundary != null)
             {
-                case "POINT":
-                    gem = outputRawPoint(spatial);
-                    break;
-                case "LINESTRING":
-                    gem = outputRawLineString(spatial);
-                    break;
-                case "POLYGON":
-                    gem = outputRawPolygon(spatial);
-                    break;
-                case "MULTIPOINT":
-                    break;
-                case "MULTILINESTRING":
-                    break;
-                case "MULTIPOLYGON":
-                    break;
+                SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
+                string sp_type = spatial.STGeometryType().ToString().ToUpper();
+                switch (sp_type)
+                {
+                    case "POINT":
+                        gem = outputRawPoint(spatial);
+                        break;
+                    case "LINESTRING":
+                        gem = outputRawLineString(spatial);
+                        break;
+                    case "POLYGON":
+                        gem = outputRawPolygon(spatial);
+                        break;
+                    case "MULTIPOINT":
+                        break;
+                    case "MULTILINESTRING":
+                        break;
+                    case "MULTIPOLYGON":
+                        break;
+                }
             }
-
-            
+            PropertyBag["sp_type"] = geometric.default_type;
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             IList<styles> items;
 
+            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
             pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type)));
             //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = "";//items;
@@ -930,29 +930,40 @@ namespace campusMap.Controllers
             }*/
 
 
-           
-            string gemSql="";
+            
+            string gemSql = "";
             string gemtype = "";
             switch (geom_type)
             {
                 case "marker": //case "POINT":
-                    gemSql = "POINT (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    if (boundary != null)
+                    {
+                        gemSql = "POINT (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    }
                     gemtype = "Marker";
                     break;
                 case "polyline": //case "LINESTRING":
-                    gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    if (boundary != null)
+                    {gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    }
                     gemtype = "Line";
                     break;
                 case "polygon": //case "POLYGON":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null)
+                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    }
                     gemtype = "Shape";
                     break;
                 case "rectangle":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null)
+                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    }
                     gemtype = "Shape";
                     break;
                 case "circle":
-                    gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null)
+                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    }
                     gemtype = "Shape";
                     break;
                 case "MULTIPOINT":
@@ -962,26 +973,28 @@ namespace campusMap.Controllers
                 case "GEOMETRYCOLLECTION":
                     break;
             }
+            
             geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) }).id;
             //geometric.geometric_types = geom_type;
-            string wkt = gemSql;
+            if (boundary != null)
+            {
+                string wkt = gemSql;
 
-           // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
-            SqlChars udtText = new SqlChars(wkt);
-            SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
+               // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
+                SqlChars udtText = new SqlChars(wkt);
+                SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
 
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(ms);
-            byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
-            /*bw.Write(WKB);
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter bw = new BinaryWriter(ms);
+                byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
+                /*bw.Write(WKB);
 
-            byte[] b2 = ms.ToArray();
-            SqlBytes udtBinary2 = new SqlBytes(b2);
-            SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
-            */
-            geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
-
-
+                byte[] b2 = ms.ToArray();
+                SqlBytes udtBinary2 = new SqlBytes(b2);
+                SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
+                */
+                geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
+            }
 
 
             ActiveRecordMediator<geometrics>.Save(geometric);

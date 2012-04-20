@@ -120,7 +120,6 @@ namespace campusMap.Controllers
             }
             author.media.Clear();
 
-
             try
             {
                 ActiveRecordMediator<authors>.Save(author);

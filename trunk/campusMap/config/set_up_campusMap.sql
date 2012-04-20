@@ -329,6 +329,7 @@ GO
 		[status] [tinyint] NULL,
 		[media] [tinyint] NULL,
 		[model] [tinyint] NULL,
+		[geometrics] [tinyint] NULL,
 		[tmp] [bit] DEFAULT 1,
 		[college] [tinyint] NULL,
 		[school] [tinyint] NULL,
@@ -473,7 +474,7 @@ GO
 
 	CREATE TABLE [dbo].[geometrics](
 		[geometric_id] [int] IDENTITY(1,1) NOT NULL,
-		[boundary] [geography] NOT NULL,
+		[boundary] [geography] NULL,
 		[name] [nvarchar](max) NULL,
 		[encoded] [nvarchar](max) NULL,
 		[default_type] [tinyint] NULL,
@@ -491,10 +492,10 @@ GO
 	GO
 	/* add some defaults */
 	INSERT INTO [campusMap].[dbo].[geometrics]
-			   ([name],[boundary],[default_type],[status])
+			   ([name],[encoded],[default_type],[status])
 		 VALUES
-			   ('test line',geography::STGeomFromText('LINESTRING(-122.360 47.656, -122.343 47.656 )', 4326),2,1),/*LINE*/
-			   ('test polygon',geography::STGeomFromText('POLYGON ((-145 -45, -55 -45, -55 45, -145 45, -145 -45))', 4326),3,1)/*Polygon*/
+			   ('WSU vortex action','icg|Ghq`jUp\nc@fL}b@qSap@cPd_@vOza@|JqNqJ}ZaEbHhFpNqCgNdAmArE|PmC~EeHcWrE_JpOpYcI`ZeZoX',2,1),/*LINE*/
+			   ('a long name for a long place','{cg|Glv`jUsNlP~Pa@wAhVfKuN|BdVbDcW`JbO}AmSrN?aJqKzKkDoKeI`JeLkMnBPyRkH`OwFkWUbWoIyQ|CxUsNyJvHfQkQ|A|OpFVqCx@qCdAkBhByAvAzCSbVwAhFZVjAmCdD}@LsGoB}@CwBHy@bBc@@{G{Cc@aAkB~ByAzBGjCPvBDrB|BbA|AZzC\~E]bGs@vE{AlDeBh@aC\gCb@iC?cDaA{BoC_AwEc@mG',3,1)/*Polygon*/
 	GO
 
 
@@ -526,7 +527,6 @@ GO
 		[zipcode] [int] NULL
 			CONSTRAINT [CK_campus_zipcode_check] 
 			CHECK ([zipcode] LIKE '[0-9][0-9][0-9][0-9][0-9]' AND [zipcode] NOT LIKE '00000'),
-		
 		CONSTRAINT [PK_campus] PRIMARY KEY CLUSTERED
 		(
 			[campus_id] ASC

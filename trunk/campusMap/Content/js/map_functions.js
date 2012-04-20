@@ -3586,6 +3586,7 @@ function load_editor() {
 		 
 		 var type= $('#style_of').val();
 		 var coords=$('#latLong').val();
+		 if(coords=='')coords=$('#geometric_encoded').val();
 		 var pointHolder = {};
 		 if(coords!='' && type=='polyline'){ 
 		 	var pointHolder = {'path' : coords };

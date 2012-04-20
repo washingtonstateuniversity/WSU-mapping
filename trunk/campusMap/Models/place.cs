@@ -320,6 +320,13 @@ namespace campusMap.Models
             set { _editing = value; }
         }
 
+        private IList<geometrics> _geometrics;
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics> geometrics
+        {
+            get { return _geometrics; }
+            set { _geometrics = value; }
+        }
 
         virtual public bool isCheckedOutNull()
         {

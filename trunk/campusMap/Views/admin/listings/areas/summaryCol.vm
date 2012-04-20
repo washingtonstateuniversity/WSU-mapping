@@ -1,9 +1,22 @@
 <div class='summaryCol'>
 	<ul>
 	#if($item.prime_name)
-		  <li class='name'><h3><span>Name: </span>$!item.prime_name</h3><hr/></li>
+		 #set($name=$!item.prime_name) 
 	#elseif($item.name)
-		  <li class='name'><h3><span>Name: </span>$!item.name</h3><hr/></li>
+		  #set($name=$!item.name)
+	#end
+	
+	#if($name)<li class='name #if($name.Length>35)
+	fsize_1
+	#elseif($name.Length>30)
+	fsize_2
+	#elseif($name.Length>25)
+	fsize_3
+	#elseif($name.Length>20)
+	fsize_4
+	#elseif($name.Length>15)
+	fsize_5
+	#end'><h3><span>Name: </span>$!name</h3><hr/></li>
 	#end
 	#if($item.coordinate || $item.encoded)
 		#if($item.coordinate)
