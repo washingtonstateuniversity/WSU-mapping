@@ -70,6 +70,12 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place
 DROP TABLE [dbo].[place_to_place_names]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_fields]') AND type in (N'U'))
 DROP TABLE [dbo].[place_to_fields]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_comments]') AND type in (N'U'))
+DROP TABLE [dbo].[place_to_comments]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_infotabs]') AND type in (N'U'))
+DROP TABLE [dbo].[place_to_infotabs]
+
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_names]') AND type in (N'U'))
 DROP TABLE [dbo].[place_names]
 
@@ -237,7 +243,8 @@ DROP TABLE [dbo].[advertisement]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[comments]') AND type in (N'U'))
 DROP TABLE [dbo].[comments]
 
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[infotabs]') AND type in (N'U'))
+DROP TABLE [dbo].[infotabs]
 
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[person_types]') AND type in (N'U'))
@@ -494,7 +501,7 @@ GO
 	INSERT INTO [campusMap].[dbo].[geometrics]
 			   ([name],[encoded],[default_type],[status])
 		 VALUES
-			   ('WSU vortex action','icg|Ghq`jUp\nc@fL}b@qSap@cPd_@vOza@|JqNqJ}ZaEbHhFpNqCgNdAmArE|PmC~EeHcWrE_JpOpYcI`ZeZoX',2,1),/*LINE*/
+			   ('WSU vortex action','icg|Ghq`jUp\nc@fL}b@qSap@cPd_@vOza@|JqNqJ}ZaEbHhFpNqCgNdAmArE|PmC~EeHcWrE_JpOpYcI`ZeZoX',3,1),/*LINE*/
 			   ('a long name for a long place','{cg|Glv`jUsNlP~Pa@wAhVfKuN|BdVbDcW`JbO}AmSrN?aJqKzKkDoKeI`JeLkMnBPyRkH`OwFkWUbWoIyQ|CxUsNyJvHfQkQ|A|OpFVqCx@qCdAkBhByAvAzCSbVwAhFZVjAmCdD}@LsGoB}@CwBHy@bBc@@{G{Cc@aAkB~ByAzBGjCPvBDrB|BbA|AZzC\~E]bGs@vE{AlDeBh@aC\gCb@iC?cDaA{BoC_AwEc@mG',3,1)/*Polygon*/
 	GO
 
@@ -718,7 +725,7 @@ GO
 			   ('Landmarks',1),
 			   ('Food & Shopping',1),
 			   ('Parking',1),
-			   ('Food & Shopping',1),
+			   ('Food & Shopping',1)
 	GO
 
 
@@ -990,6 +997,20 @@ create table comments (
 	view_id INT null,
 	primary key (comment_id)
 )
+
+create table infotabs (
+	infotab_id INT IDENTITY NOT NULL,
+	content NVARCHAR(MAX) null,
+	title NVARCHAR(MAX) null,
+	sort INT null,
+	place INT null,
+	place_id INT null
+	primary key (infotab_id)
+)
+
+
+
+
 
 create table styles (
 	style_id INT IDENTITY NOT NULL,
@@ -1910,6 +1931,55 @@ CREATE TABLE [dbo].[geometric_to_tags] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
+
+
+
+
+
+
+
+CREATE TABLE [dbo].[place_to_comments] (
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[place_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_place_to_comments_place] FOREIGN KEY ([place_id])
+		REFERENCES [place] ([place_id]),
+	[comment_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_place_to_comments_comment] FOREIGN KEY ([comment_id])
+		REFERENCES [comments] ([comment_id]),
+	CONSTRAINT [PK_place_to_comments] PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC 
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[place_to_infotabs] (
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[place_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_place_to_infotabs_place] FOREIGN KEY ([place_id])
+		REFERENCES [place] ([place_id]),
+	[infotab_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_place_to_infotabs_infotab] FOREIGN KEY ([infotab_id])
+		REFERENCES [infotabs] ([infotab_id]),
+	CONSTRAINT [PK_place_to_infotabs] PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC 
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

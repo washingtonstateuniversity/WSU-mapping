@@ -103,9 +103,9 @@ namespace campusMap.Models
 
 
 
-        private int Default_Type;
-        [Property]
-        virtual public int default_type
+        private geometrics_types Default_Type;
+        [BelongsTo("default_type")]
+        virtual public geometrics_types default_type
         {
             get { return Default_Type; }
             set { Default_Type = value; }

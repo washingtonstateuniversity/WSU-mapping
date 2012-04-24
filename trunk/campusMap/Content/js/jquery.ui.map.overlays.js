@@ -18,15 +18,23 @@
 		 * @return object
 		 */
 		addShape: function(shapeType, shapeOptions) {
+			var self = this;
 			var flip = typeof(shapeOptions.coordsFlip)!=='undefined' ? shapeOptions.coordsFlip : false;
-			var objLength = this.get('overlays > ' + shapeType, []).length;
+
+
+			if(typeof(shapeOptions.paths)!='string'){
+				var reverse_array = false;
+				var paths_array = [];
+				$.each(shapeOptions.paths, function(i,v){
+					if(i>=1 && i % 2 > 0){reverse_array=true}
+					paths_array.push(self.process_coords(v,flip,reverse_array));
+				});
+				shapeOptions.paths = paths_array;
+			}
+			if(typeof(shapeOptions.paths)=='string'){shapeOptions.paths = self.process_coords(shapeOptions.paths,flip,false);}
+			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = self.process_coords(shapeOptions.path,flip,false);}
 			
-			var reverse_array = false;
-			if(objLength>=1 && objLength % 2 > 0){reverse_array = true}
-			
-			if(typeof(shapeOptions.paths)=='string'){shapeOptions.paths = this.process_coords(shapeOptions.paths,flip,reverse_array);}
-			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = this.process_coords(shapeOptions.path,flip,reverse_array);}
-			var shape = new google.maps[shapeType](jQuery.extend({'map': this.get('map')}, shapeOptions));
+			var shape = new google.maps[shapeType](jQuery.extend({'map': self.get('map')}, shapeOptions));
 			this.get('overlays > ' + shapeType, []).push(shape);
 			return $(shape);
 		},

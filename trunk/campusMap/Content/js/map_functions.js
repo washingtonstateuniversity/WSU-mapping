@@ -3574,13 +3574,319 @@ function addpoly_poly(map){
 
 
 
+function load_place_editor() {
+	$('#place_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
+
+		 var Long=$('#Long').val();
+		 var Lat=$('#Lat').val();
+
+		 var pointHolder = {};
+		 if(coords!='' && type=='polyline'){ 
+		 	var pointHolder = {'path' : coords };
+		 }
+		  if(coords!='' && type=='polygon'){ 
+		 	var pointHolder = {'paths' : coords };
+		 }
+		 if(!$.isEmptyObject(pointHolder)){
+			var shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+		 }else{
+			var shape = {};
+		 }
+
+		if($.isArray(marker.info.content)){
+			var nav='';
+			$.each(marker.info.content, function(j, html) {	
+				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
+			});
+			var content='';
+			$.each( marker.info.content, function(j, html) {
+				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
+			});				
+		
+		}else{
+			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
+			var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
+		}
+
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+					content+
+				'</div>';
+
+		/* so need to remove this and create the class for it */
+		var boxText = document.createElement("div");
+		boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+		boxText.innerHTML = marker.info.content;
+
+		var myOptions = {
+			alignBottom:true,
+			 content: box//boxText
+			,disableAutoPan: false
+			,maxWidth: 0
+			,pixelOffset: new google.maps.Size(-200, -36)
+			,zIndex: 99
+			,boxStyle: {
+			  background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom"
+			  ,width: "400px"
+			 }
+			,closeBoxMargin: "10px 2px 2px 2px"
+			,closeBoxURL: "/Content/images/close.png"
+			,infoBoxClearance: new google.maps.Size(1, 1)
+			,isHidden: false
+			,pane: "floatPane"
+			,enableEventPropagation: false
+			,onOpen:function(){
+						$('#taby'+i).tabs();
+						$('#taby'+i).hover(function(){
+								ib[i].setOptions({enableEventPropagation: true});
+							},function(){
+								ib[i].setOptions({enableEventPropagation: false});
+							});
+						//alert('tring to tab it, dabnab it');
+					}
+		};
+		ib[i] = new InfoBox(myOptions,function(){
+			//$('#taby'+i).tabs();
+			//alert('tring to tab it, dabnab it, from the INI');
+		});
+		//end of the bs that is well.. bs of a implamentation
+		
+		if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+		$('#place_drawing_map').gmap('addMarker', $.extend({ 
+			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
+		},marker.style)).click(function() {
+			$.each(ib, function(i) {ib[i].close();});
+			ib[i].open($('#place_drawing_map').gmap('get','map'), this);
+			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+		});
+
+	});
+	
+	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
+		$('#place_drawing_map').gmap('addMarker', $.extend({ 
+			'position': $('#place_drawing_map').gmap('get_map_center')//new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
+		},{'draggable':true})).click(function() {
+			var ib_total = 0;
+			$.each(ib, function(i) {ib[i].close(); ib_total=i; });
+			ib[ib_total+1].open($('#place_drawing_map').gmap('get','map'), this);
+			// need to finish this class
+			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+		}).dragend(function(e) {
+			var lat = this.getPosition().lat();
+			var lng = this.getPosition().lng();
+			
+			$('#Lat').val(lat);
+			$('#Long').val(lng);
+			//setTimeout(function() {},  200);
+			var loca = new google.maps.LatLng(lat,lng);
+			setGeoCoder().geocode({'latLng':loca}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) { 
+					var arrAddress = results[0].address_components;
+					
+					var itemRoute='';
+					var itemLocality='';
+					var itemCountry='';
+					var itemPc='';
+					var itemSnumber='';
+					$('#place_address').val('');
+					$('#place_street').val('');			
+					// iterate through address_component array
+					$.each(arrAddress, function (i, address_component) {
+						if (address_component.types[0] == "route"){//": route:"
+							itemRoute = address_component.long_name;
+							$('#place_street').val(itemRoute);
+						}
+						if (address_component.types[0] == "locality"){//"town:"
+							itemLocality = address_component.long_name;
+						}
+						if (address_component.types[0] == "country"){ //"country:"
+							itemCountry = address_component.long_name;
+						}
+						if (address_component.types[0] == "postal_code_prefix"){ //"pc:"
+							itemPc = address_component.long_name;
+						}
+						if (address_component.types[0] == "street_number"){ //"street_number:"
+							itemSnumber = address_component.long_name;
+							$('#place_address').val(itemSnumber);
+						}
+					});
+					if (results[1]) {
+						//alert( results[1].formatted_address);
+						//obj.val(itemSnumber);
+					}
+				} else {
+					alert("Geocoder failed due to: " + status);
+				}
+			});
+				
+			
+			$('#estimated_places').show('fast');
+			$('#local_place_names').html('loading<span class="blink1">.</span><span class="blink2">.</span><span class="blink3">.</span>');
+
+			$('.blink1').blink(100);
+			$('.blink2').blink(150);
+			$('.blink3').blink(200);
+			$.each(gmap_location_types.length,function(i,v){
+				var requested = {
+				  location: loca,
+				  radius:.1,
+				  keyword:gmap_location_types[i]//,
+				  //types : [gmap_location_types[i]]
+				};
+				var gmap = $('#place_drawing_map').gmap('get','map');
+				var service = new google.maps.places.PlacesService(gmap);
+				service.search(requested, function (results, status) {
+					var gmap = $('#place_drawing_map').gmap('get','map');
+					if (status == google.maps.places.PlacesServiceStatus.OK) {
+						alert('sereching');
+						for (var i = 0; i < 1; i++) {
+							var request = {reference:results[i].reference};
+							var service = new google.maps.places.PlacesService(gmap);
+							service.getDetails(request, function(place, status) {
+								if (status == google.maps.places.PlacesServiceStatus.OK) {
+									if(place.name){
+										if($('.blink1').length)$('#local_place_names').html('');
+										var txt = $.trim($('#local_place_names').html());
+										$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' : (txt==""?'':',') +  place.name ));
+									}
+								}
+							});
+						}
+					}
+				});
+			});
+		});
+		$(this).addClass('ui-state-disabled');
+	});
+	
+	
+	
+	
+	
+	
+	$.each('.dyno_tabs',function(i,v){
+		load_tiny("bodytext","tab_"+i);
+	});
+	var $tab_title_input = $( "#tab_title"),
+		$tab_content_input = $( "#tab_content" );
+	var tab_counter =  $("#infotabs li.ui-state-default").size();
+
+	// tabs init with a custom tab template and an "add" callback filling in the content
+	var $tabs = $( "#infotabs").tabs({
+		tabTemplate: "<li><a href='#{href}'>#{label}</a><input type='hidden' name='tabs["+tab_counter+"].id' value='' /><input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' /><input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />  <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
+		add: function( event, ui ) {
+			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
+			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
+		}
+	});
+
+	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
+		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
+				$(this).find('.sort').val(i);
+			});
+	}});
 
 
 
 
 
-function load_editor() {
-     $('#drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
+	// modal dialog init: custom buttons and a "close" callback reseting the form inside
+	var $dialog = $( "#page_dialog" ).dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Add: function() {
+				addTab();
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			//$("#taber").get(0).reset();
+			$tab_title_input.focus();
+		},
+		close: function() {
+			$("#taber")[0].reset();
+		}
+	});
+
+	// addTab form: calls addTab function on submit and closes the dialog
+	var $form = $( "form#taber", $dialog ).submit(function() {
+		tab_counter++;
+		addTab();
+		$dialog.dialog( "close" );
+		return false;
+	});
+
+	// actual addTab function: adds new tab using the title input from the form above
+	function addTab() {
+		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
+		$tabs.tabs( "option" , "tabTemplate" , "<li><a href='#{href}'>#{label}</a><input type='hidden' name='tabs["+tab_counter+"].id' value='' /><input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' /><input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />  <span class='ui-icon ui-icon-close'>Remove Tab</span></li>" );
+		
+		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
+		load_tiny("bodytext","tab_"+tab_counter);
+		$.each($("#infotabs li.ui-state-default"),function(i,v){
+			$(this).find('.sort').val(i);
+		});
+		tab_counter++;
+	}
+
+	// addTab button: just opens the dialog
+	$( "#add_tab" )
+		.button()
+		.click(function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			$dialog.dialog( "open" );
+		});
+
+	// close icon: removing the tab on click
+	// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
+		var index = $( "li", $tabs ).index( $( this ).parent() );
+		$tabs.tabs( "remove", index );
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+function load_geometrics_editor() {
+     $('#geometrics_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
 		 var controlOn=true;
 		 var drawingMode = false;
 		 
@@ -3600,7 +3906,7 @@ function load_editor() {
 			var shape = {};
 		 }
 
-		$('#drawing_map').gmap('init_drawing', 
+		$('#geometrics_drawing_map').gmap('init_drawing', 
 			{ 
 				drawingControl: controlOn,
 				polylineOptions:{editable: true} 
@@ -3614,12 +3920,12 @@ function load_editor() {
 					overlaycomplete:function(data){
 							if(data!=null){
 								$('#latLong').val(data);
-								$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+								$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
 							}
 						},
 					onDrag:function(data){
 							$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
-							$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+							$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
 						},
 					drawingmode_changed:function(type){
 							if(type!=null){
@@ -3637,31 +3943,31 @@ function load_editor() {
 		$('#drawingcontrolls.showing').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#drawing_map').gmap('hide_drawingControl');
+			$('#geometrics_drawing_map').gmap('hide_drawingControl');
 			$(this).removeClass('showing').addClass('hidden').text('Show controlls');
 		});
 		$('#drawingcontrolls.hidden').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#drawing_map').gmap('show_drawingControl');
+			$('#geometrics_drawing_map').gmap('show_drawingControl');
 			$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
 		});
 		$('#restart').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#drawing_map').gmap('refresh_drawing',false);
+			$('#geometrics_drawing_map').gmap('refresh_drawing',false);
 		});
 		$('#update').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#latLong').val($('#drawing_map').gmap('get_updated_data'));
-			$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+			$('#latLong').val($('#geometrics_drawing_map').gmap('get_updated_data'));
+			$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
 		});
 		
 		$('#unselect').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#latLong').val($('#drawing_map').gmap('unset_drawingSelection'));
+			$('#latLong').val($('#geometrics_drawing_map').gmap('unset_drawingSelection'));
 		});
 		
 		
@@ -3669,19 +3975,19 @@ function load_editor() {
 		
 		var selected_type = '';
 		$('#style_of').live('change',function(){
-			var totals = $('#drawing_map').gmap('get_drawnElementCount',$(this).val());
+			var totals = $('#geometrics_drawing_map').gmap('get_drawnElementCount',$(this).val());
 			if(totals>=1){
 				var r=confirm('You are about to clear the element from the map.\r\n id this ok?');
 				if (r==true){
-					$('#drawing_map').gmap('clear_drawings');
+					$('#geometrics_drawing_map').gmap('clear_drawings');
 					selected_type = $(this).val();
 				}else{
 					$(this).val('selected_type');
 					return false;
 				}
 			}
-			$('#drawing_map').gmap('set_drawingMode', $(this).val());
-			$('#drawing_map').gmap('show_drawingControl');
+			$('#geometrics_drawing_map').gmap('set_drawingMode', $(this).val());
+			$('#geometrics_drawing_map').gmap('show_drawingControl');
 		});
 
 	});
@@ -3953,10 +4259,10 @@ function initialize() {
 			if($('.place.editor_place').length){
 				//if($('#Lat').val()!='' && $('#Long').val()!='')drop1(); 
 				
-				$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
+				/*$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
 					drop1();
 					$(this).addClass('ui-state-disabled');
-				});
+				});*/
 			}
 		});
 	}
@@ -4152,7 +4458,7 @@ function initialize() {
 		if(typeof(returnIt)!=='undefined'){return marker};
 	}
 
-     function updating(results, status) {
+     function updating(results, status, callback) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
 			//alert(JSON.stringify(results));
           for (var i = 0; i < 1; i++) {
@@ -4161,19 +4467,7 @@ function initialize() {
 			//service.search(request, serach_callback);
 			service.getDetails(request, function(place, status) {
 			  if (status == google.maps.places.PlacesServiceStatus.OK) {
-				  //alert(JSON.stringify(place));
-				var marker = markers[0];
-				
-				if(place.name){
-					if($('.blink1').length)$('#local_place_names').html('');
-					var txt = $.trim($('#local_place_names').html());
-					$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' : (txt==""?'':',') +  place.name ));
-				}
-				google.maps.event.addListener(marker, 'click', function() {
-				ib.close();
-				  ib.setContent(setBoxHtml(JSON.stringify(place)));
-				  ib.open(map, this);
-				});
+				if(typeof(callback)!=='undefined')callback(place);
 			  }
 			});
             //createMarked(results[i]);

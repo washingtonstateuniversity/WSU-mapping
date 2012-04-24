@@ -480,7 +480,7 @@ namespace campusMap.Services
 
         public string cleanTinyCode(string text){
             bool has = text.IndexOf("tinyImgHolder") >= 0;
-            //<img class="tinyImgHolder fLeft" style="opacity: 1;" title="#Inline_Iamge(210 434 180 336 ' fLeft')" src="../image/download.castle?id=210&amp;placeid=434&amp;m=crop&amp;w=180&amp;h=336&amp;pre=TMP" alt="imagingIt|210" width="180" height="336" />
+            //<img class="tinyImgHolder fLeft" style="opacity: 1;" title="#Inline_Iamge(210 434 180 336 ' fLeft')" src="../media/download.castle?id=210&amp;placeid=434&amp;m=crop&amp;w=180&amp;h=336&amp;pre=TMP" alt="imagingIt|210" width="180" height="336" />
             string strRegex = @"<img(.*?)class=\""tinyImgHolder(.*?)title=\""(.*?)\""(.*?)\/\>";
             RegexOptions myRegexOptions = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace;
             Regex myRegex = new Regex(strRegex, myRegexOptions);

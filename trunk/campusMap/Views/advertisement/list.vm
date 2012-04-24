@@ -59,7 +59,7 @@
 					#if($advertisement.HtmlText)
 						$!advertisement.HtmlText
 					#else
-						<img id="selectedImage" src="$siteroot/image/download.castle?id=$advertisement.Images.get_item(0).id"/>
+						<img id="selectedImage" src="$siteroot/media/download.castle?id=$advertisement.Images.get_item(0).id"/>
 					#end
 				</span>
 			</a>

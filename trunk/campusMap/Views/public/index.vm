@@ -13,7 +13,7 @@
 				<div class="slider_content">
 					<div class="slider_photo"> 
 						<a href="$siteroot/read/${place.CustomUrl}">
-							<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="Evergreen" class="img-main "/>
+							<img src="$siteroot/media/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="Evergreen" class="img-main "/>
 						</a> 
 					</div>
 					<div class="slider_text">

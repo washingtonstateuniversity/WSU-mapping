@@ -3,7 +3,7 @@
 #capturefor(availableImages)
 #foreach ($image in $view.Images)
 #each
-["${Image.caption}","http://localhost:1308/image/download.castle?id=${Image.id}&viewid=${view.id}&m=crop&w=250&h=250&pre=TMP"]
+["${Image.caption}","http://localhost:1308/media/download.castle?id=${Image.id}&viewid=${view.id}&m=crop&w=250&h=250&pre=TMP"]
 #between
 ,
 #end

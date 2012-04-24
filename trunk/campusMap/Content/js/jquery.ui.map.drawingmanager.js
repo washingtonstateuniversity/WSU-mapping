@@ -166,7 +166,7 @@
 			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
 				var points = overlay.getRadius();
 			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
-				var points = overlay.getPath();
+				var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
 			}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
 				if($.isArray(overlay.getPaths())){
 					/*

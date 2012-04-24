@@ -25,7 +25,11 @@
 			</li>
 		#else
 			<li class='previewMap'>
-				<img src="http://maps.googleapis.com/maps/api/staticmap?size=250x145&amp;path=fillcolor:0xAA000033%7Ccolor:0xFFFFFF00%7Cenc:${item.encoded}&amp;sensor=false" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end"/>
+			#if($item.default_type.name == 'polygon')
+				<img src="http://maps.googleapis.com/maps/api/staticmap?size=250x145&amp;path=weight:0%7Cfillcolor:0xAA000033%7Cenc:${item.encoded}&amp;sensor=false" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end"/>
+				#elseif($item.default_type.name == 'polyline')
+				<img src="http://maps.googleapis.com/maps/api/staticmap?size=250x145&amp;path=weight:3%7Ccolor:0xAA000033%7Cenc:${item.encoded}&amp;sensor=false" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end"/>
+				#end
 			</li>
 		#end
 	#else

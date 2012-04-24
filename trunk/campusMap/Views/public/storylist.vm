@@ -14,7 +14,7 @@
   </div>
   <div class="byline"> Published : $!place.Publishtime.toString().Replace('12:00:00 AM','')</div>
   #foreach ($image in $!place.images)
-	<img id="selectedImage" width='100px' src="$siteroot/image/download.castle?id=$!image.id"/>
+	<img id="selectedImage" width='100px' src="$siteroot/media/download.castle?id=$!image.id"/>
   #end
   <hr/>
 #end

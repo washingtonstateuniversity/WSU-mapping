@@ -125,6 +125,7 @@
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Models\advertisement.cs" />
     <Compile Include="Models\authors.cs" />
+    <Compile Include="Models\infotabs.cs" />
     <Compile Include="Models\zoom_levels.cs" />
     <Compile Include="Models\wsu_matrix.cs" />
     <Compile Include="Models\style.cs" />

@@ -149,7 +149,7 @@ namespace campusMap.Controllers
                 //buttons.Add("view");
                 PropertyBag["reviewButtonSet"] = buttons;  
 
-
+ 
 
             //DRAFT
                 if (status == "draft"){
@@ -974,7 +974,7 @@ namespace campusMap.Controllers
                     break;
             }
             
-            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) }).id;
+            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) });
             //geometric.geometric_types = geom_type;
             if (boundary != null)
             {

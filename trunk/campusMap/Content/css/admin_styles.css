@@ -383,7 +383,7 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.place.editor_place .ui-tabs-panel{margin-right:310px; min-height:535px;}
+.place.editor_place .ui-tabs-panel{margin-right:335px; min-height:535px;}
 
 .place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
@@ -404,7 +404,7 @@ span.UinEdit{    background-color: #E2E2E2;
 .geometrics.new #drawing_map{width:500px;min-height:535px;}
 
 
-.geometrics.editor .place_new{margin-right:525px; min-height:535px;}
+.geometrics.editor .place_new{min-height:535px;}
 
 
 .pod{  display: inline-block;

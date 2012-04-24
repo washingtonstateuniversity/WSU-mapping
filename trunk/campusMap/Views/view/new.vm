@@ -18,7 +18,7 @@
   #capturefor(availableImages)
   #foreach ($image in $view.Images)
   #each
-  {id:"${Image.id}",name:"${Image.FileName}",url:"/image/download.castle?id=${Image.id}&viewid=${view.id}&m=crop&w=250&h=250&pre=TMP"}
+  {id:"${Image.id}",name:"${Image.FileName}",url:"/media/download.castle?id=${Image.id}&viewid=${view.id}&m=crop&w=250&h=250&pre=TMP"}
   #between
   ,
   #end
@@ -259,7 +259,7 @@
                     #if($viewimage.id!=0)
                     <input type="hidden" name="images[$!{viewimage.id}].id" value="$!{viewimage.id}" />
                         <span class="imageBox">
-                            <img src="/image/download.castle?id=${viewimage.id}&viewid=${view.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
+                            <img src="/media/download.castle?id=${viewimage.id}&viewid=${view.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
                             <a title="$viewimage.id" rel="$view.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
                                 <span class="ui-icon ui-icon-trash"></span>
                             </a>

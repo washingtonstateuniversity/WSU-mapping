@@ -41,7 +41,7 @@ $Form.HiddenField("image.id")
 #if($image.id)
   <p>
     Image:<br/>
-    <img id="selectedImage" width='300px' src="$siteroot/image/download.castle?id=$image.id" alt=""/>
+    <img id="selectedImage" width='300px' src="$siteroot/media/download.castle?id=$image.id" alt=""/>
   </p>
 #end
 <p>

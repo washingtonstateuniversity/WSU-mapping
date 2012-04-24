@@ -254,7 +254,8 @@
 
 /* info boxes */
 #campusmap .ui-tabs {padding: 0;border: medium none;width:100%;}
-#campusmap .ui-widget-header{height:25px;}
+#campusmap .ui-widget-header{height:17px;}
+#campusmap .infoClose{ right: 4px;top: -5px;z-index: 1;}
 #campusmap .ui-tabs .ui-tabs-nav{padding: 0.2em 0 0;
 -moz-border-radius-bottomleft: 0px;
 -webkit-border-bottom-left-radius: 0px;
@@ -265,7 +266,7 @@ border-bottom-left-radius: 0px;
 -khtml-border-bottom-right-radius: 0px;
 border-bottom-right-radius: 0px;
 }
-#campusmap .ui-tabs .ui-tabs-nav li{ background: none repeat scroll 0 0 transparent;border: medium none;top: -7px;}
+#campusmap .ui-tabs .ui-tabs-nav li{ background: none repeat scroll 0 0 transparent;border: medium none;top: -7px;font-size: 13px;}
 #campusmap .ui-tabs .ui-tabs-nav li.ui-state-active{    background: url("images/ui-bg_flat_65_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;border: 1px solid #4C545A;}
 
 #campusmap .ui-tabs .ui-tabs-nav li {
@@ -281,7 +282,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content{width:395px;max-height: 240px;overflow-x:hidden; overflow-y: auto;}
 #campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left; background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	
-#campusmap .infoClose{ right: 4px;top: -3px;z-index: 1;}
+
 		
 	
 	

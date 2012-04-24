@@ -130,8 +130,7 @@ namespace campusMap.Controllers
                     items = ActiveRecordBase<place>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
                 }
 
-
-
+                
             
                 PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 IList<string> buttons = new List<string>();
@@ -513,6 +512,9 @@ namespace campusMap.Controllers
             one_place.editing = user;
             ActiveRecordMediator<place>.Save(one_place);
 
+           
+
+
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -571,9 +573,6 @@ namespace campusMap.Controllers
             
 
             PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
-            
-
-            
 
             /*if (page == 0)
                 page = 1;
@@ -595,6 +594,10 @@ namespace campusMap.Controllers
             for (int i = 0; i < 2; i++)
                 tags.Add(new tags());
             PropertyBag["placetags"] = tags;
+
+            List<infotabs> tabs = new List<infotabs>();
+            if (one_place.infotabs.Count>0) tabs.AddRange(one_place.infotabs);
+            PropertyBag["tabs"] = tabs;
 
             List<authors> authors = new List<authors>();
             authors.AddRange(one_place.Authors);
@@ -817,7 +820,9 @@ namespace campusMap.Controllers
         public void update(
             [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
+            [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
             String[] newtag,
+            String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
             [ARDataBind("place_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]place_media[] place_media,
@@ -825,14 +830,15 @@ namespace campusMap.Controllers
             String[][] fields,
             bool ajaxed_update,
             bool forced_tmp,
-          string LongLength,
-          string Length,
+            string LongLength,
+            string Length,
             string apply,
             string cancel
             )     
         {
             Flash["place"] = place;
             Flash["tags"] = place;
+            Flash["tabs"] = place;
             Flash["images"] = place;
             Flash["authors"] = place;
             
@@ -891,7 +897,8 @@ namespace campusMap.Controllers
                 return;
             }*/
             place.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : place.status;
-            place.tags.Clear(); 
+            place.tags.Clear();
+            place.infotabs.Clear();
             place.Images.Clear();
             place.Authors.Clear();
             if (apply != null){
@@ -927,6 +934,7 @@ namespace campusMap.Controllers
                 }               
                      
             }
+
             /**/
             if (place.field != null)
             {
@@ -995,7 +1003,18 @@ namespace campusMap.Controllers
                 }
             }
 
-
+            place.infotabs.Clear();
+            foreach (infotabs tab in tabs)
+            {
+                if (tab.title != null)
+                {
+                    if (tab.id == 0)
+                    {
+                        ActiveRecordMediator<infotabs>.Save(tab);
+                    }
+                    place.infotabs.Add(tab);
+                }
+            }
 
 
             foreach (media_repo media in images)
@@ -1032,6 +1051,7 @@ namespace campusMap.Controllers
 
             Flash["place"] = null;
             Flash["tags"] = null;
+            Flash["tabs"] = null;
             Flash["images"] = null;
             Flash["authors"] = null;
 

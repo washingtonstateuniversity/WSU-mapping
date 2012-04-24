@@ -6,7 +6,7 @@
 
 
 <form action="#" id="placeSearch">
-<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+	<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
 </form>
 <ul id='main_nav'>
 	<li class='$baseClass' ><a href="?cat=Academics">Academics</a>
@@ -41,8 +41,8 @@
 </ul>
 
 <form action="#" id="getDirections">
-<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
-<span id="directionsTo"><input type="text" value="" placeholder="Directions To..." /></span>
+	<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
+	<span id="directionsTo"><input type="text" value="" placeholder="To..." /></span>
 </form>
 
 

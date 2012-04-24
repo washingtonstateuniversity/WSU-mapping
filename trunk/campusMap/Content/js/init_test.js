@@ -90,7 +90,7 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 				  ,width: "400px"
 				 }
 				,closeBoxMargin: "10px 2px 2px 2px"
-				,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+				,closeBoxURL: "/Content/images/close.png"
 				,infoBoxClearance: new google.maps.Size(1, 1)
 				,isHidden: false
 				,pane: "floatPane"
@@ -120,9 +120,6 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
 			});
 		});
-				
-			
-	
 }
 
 
@@ -169,10 +166,16 @@ $(document).ready(function(){
 	}	
 	
 
-	if($('#drawing_map').length){
-		load_editor();
-		
+	if($('#geometrics_drawing_map').length){
+		load_geometrics_editor();
 	 }	
+	if($('#place_drawing_map').length){
+		load_place_editor();
+	 }	
+	
+	
+
+	
 	
 	if($('#map_canvas').length){
 		initialize();

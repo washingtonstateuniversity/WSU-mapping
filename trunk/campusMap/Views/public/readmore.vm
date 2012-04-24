@@ -42,7 +42,7 @@ $!author.Name
 #if(${mug}==""||${mug}==0)
 #* just in case we want to put a fake placeholder *#
 #else
-<img id="selectedImage" class="mugArea" style="max-width:180px;float:left;margin-right:5px;margin-bottom:5px;" src="$siteroot/image/download.castle?id=${mug}&mug=true&m=crop&w=100&h=150" alt=""/>
+<img id="selectedImage" class="mugArea" style="max-width:180px;float:left;margin-right:5px;margin-bottom:5px;" src="$siteroot/media/download.castle?id=${mug}&mug=true&m=crop&w=100&h=150" alt=""/>
 #end
 <em class="subhead">$!place.subHead</em>
 <div class="pubDate">Published $!place.PublishTime.toString().Replace('12:00:00 AM','')</div>
@@ -53,7 +53,7 @@ $!author.Name
 
 <div id="bodytext">
 #if($place.id<=1000 && $place.id!=434 && $place.getFirstImage().id)
-		<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="campusMap" class="img-main " style="float:left;margin-right:5px;margin-bottom:5px;"/>	
+		<img src="$siteroot/media/download.castle?id=${place.getFirstImage().id}&m=crop&w=377&h=245" alt="campusMap" class="img-main " style="float:left;margin-right:5px;margin-bottom:5px;"/>	
 #end
 $!place.renderdBodyText
 

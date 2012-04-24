@@ -3,7 +3,7 @@
 	#set ($c=0)
 	#foreach($place in $placeByType)
 		<li #if($c%2>0) class="even" #else class="odd" #end>
-			#if($place.getFirstImage().id)<img src="$siteroot/image/download.castle?id=${place.getFirstImage().id}&m=crop&w=175&h=175" alt="$!{place.Title}" class="list_img lazy"/>#end
+			#if($place.getFirstImage().id)<img src="$siteroot/media/download.castle?id=${place.getFirstImage().id}&m=crop&w=175&h=175" alt="$!{place.Title}" class="list_img lazy"/>#end
 			<h3 title="$!place.Title" href="$siteroot/read/${place.CustomUrl}" class="headline" #if(!$place.getFirstImage().id)style="display:inline-block;"#end><a href="$siteroot/read/${place.CustomUrl}">$!place.Title</a></h3>
 			
 			#if(!$place.getFirstImage().id)<div class="byline" style="display:inline-block;">-$!{place.Publishtime.toString().Replace('12:00:00 AM','')}</div>#end

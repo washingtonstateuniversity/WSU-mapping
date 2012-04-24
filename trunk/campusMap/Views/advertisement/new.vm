@@ -126,7 +126,7 @@ $Form.HiddenField("advertisement.Id")
         </a>#end
         <br/>
         #if($advertisementimage.id)
-          <img class="selectedImage" width='100px' src="$siteroot/image/download.castle?id=$!advertisementimage.id"/>
+          <img class="selectedImage" width='100px' src="$siteroot/media/download.castle?id=$!advertisementimage.id"/>
         #end
       </div>
       #set($count = $count + 1)

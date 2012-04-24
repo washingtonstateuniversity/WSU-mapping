@@ -58,7 +58,7 @@ $Form.HiddenField("image.id")
 
   <span>
     Image:<br/>
-    <img id="selectedImage" style="max-width:180px" src="$siteroot/image/download.castle?id=${authorImages.id}&mug=true&m=crop&w=180&h=180" alt=""/>
+    <img id="selectedImage" style="max-width:180px" src="$siteroot/media/download.castle?id=${authorImages.id}&mug=true&m=crop&w=180&h=180" alt=""/>
   </span>
   #end
 #end

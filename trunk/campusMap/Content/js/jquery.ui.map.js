@@ -321,6 +321,19 @@
 		},
 		
 		/**
+		 * Helper method for getting the center of a viewport
+		 * @param latLng:string/google.maps.LatLng
+		 */
+		get_map_center: function() {
+			var center = this.get('map').getCenter();
+			if ( center ) {
+				return center;
+			} else {
+				return false;
+			}
+		},		
+		
+		/**
 		 * Helper method for unwrapping jQuery/DOM/string elements
 		 * @param obj:string/node/jQuery
 		 */

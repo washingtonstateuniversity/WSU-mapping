@@ -22,7 +22,7 @@
 			<span style="width:${w}px; #if($c>0) display:none; #end" class="inlineImagery">
 				<span class="slide_next"></span>
 				<span class="slide_prev"></span>
-				<img src="/image/download.castle?id=$!{image.id}&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}"  class="lazy"/>
+				<img src="/media/download.castle?id=$!{image.id}&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}"  class="lazy"/>
 				<span class="credit" style="top:${h}px;">$!{image.credit}<em class="flare"></em></span><span class="caption">$!{image.caption}</span>
 			</span>
 			#set ($c=$c+1)
@@ -34,7 +34,7 @@
 #if($w==0)#set($w=250)#end
 #if($h==0)#set($h=250)#end
     <span style="width:${w}px;" class="inlineImagery ${classes}">
-    <img class="inlineImage lazy" src="/image/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}#end&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />
+    <img class="inlineImage lazy" src="/media/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}#end&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />
 	#foreach($image in $imagerepo)
 		#if(${image.id}==$id)
 			<span class="credit" style="top:${h}px;">$!{image.credit}<em class="flare"></em></span><span class="caption">$!{image.caption}</span>
@@ -49,7 +49,7 @@
 	#if($h==0)#set($h=250)#end
     <span style="width:${w}px;" class="inlineImagery ${classes}">
     #if(${mainImage.id}&&${mainImage.id}!=0)
-		<img class="inlineImage lazy" src="/image/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}&placeid=${place.id}#end&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />#end
+		<img class="inlineImage lazy" src="/media/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}&placeid=${place.id}#end&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />#end
     <span class="credit" style="top:${h}px;">${mainImage.credit}<em class="flare"></em></span><span class="caption">${mainImage.caption}</span>
     </span>
 #end

@@ -691,7 +691,7 @@ $('.detailInfoBut').toggle(
     if($('.imagedropDown').length>0){
         $(".imagedropDown").live('change',function () {
             if($(this).closest('div').find(".selectedImage").length==0){$(this).closest('div').append('<img src="" class="selectedImage" width="100" />') }
-            $(this).closest('div').find(".selectedImage").attr('src', siteroot+'image/download.castle?id=' + $(this).val());
+            $(this).closest('div').find(".selectedImage").attr('src', siteroot+'media/download.castle?id=' + $(this).val());
         });
     }
     
@@ -730,7 +730,7 @@ $('.detailInfoBut').toggle(
 
 
    // $(".imagedropDown").change(function (){
-   //      $(".selectedImage",$(this).parent()).attr('src','/image/download.castle?id=' + $(this).val());});	   
+   //      $(".selectedImage",$(this).parent()).attr('src','/media/download.castle?id=' + $(this).val());});	   
    //  });
     /* for place listings */
     if($('#clearLock').length==0){$('body').append('<div id="clearLock" title="Clear Place Editing Lock" style="display:none;"><p>Release the Place for editing<br/><strong>Note:</strong>If some one is editing it you may wish to ask to make sure they are done.</p></div>')}

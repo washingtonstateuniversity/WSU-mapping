@@ -6,7 +6,7 @@
 	<script type="text/javascript">
         $(document).ready(function()
         { $(".imagedropDown").change(function () 
-			{ $(".selectedImage",$(this).parent()).attr('src','/image/download.castle?id=' + $(this).val());
+			{ $(".selectedImage",$(this).parent()).attr('src','/media/download.castle?id=' + $(this).val());
 			});
          });
     </script>

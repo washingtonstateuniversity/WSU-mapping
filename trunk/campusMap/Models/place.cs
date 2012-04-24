@@ -305,6 +305,14 @@ namespace campusMap.Models
             set { Pub_comments = value; }
         }
 
+        private IList<infotabs> _infotabs = new List<infotabs>();
+        [HasAndBelongsToMany(typeof(infotabs), Lazy = true, BatchSize = 5, Table = "place_to_infotabs", ColumnKey = "place_id", ColumnRef = "infotab_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<infotabs> infotabs
+        {
+            get { return _infotabs; }
+            set { _infotabs = value; }
+        }
+
         private IList<authors> _authors = new List<authors>();
         [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> Authors

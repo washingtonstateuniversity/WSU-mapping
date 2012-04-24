@@ -43,14 +43,14 @@ $Form.HiddenField("image.id")
 <div id="link">
 </div>
 <br/>
-<img id="main_Image" width='300px' src="$siteroot/image/download.castle?id=$!{mainImage.id}"/>
+<img id="main_Image" width='300px' src="$siteroot/media/download.castle?id=$!{mainImage.id}"/>
 <div id="caption">
     $!mainImage.Caption
 </div> <br/>
 <div class="img">
   #foreach($image in $allImages)
-    <a class="selectedImage" href="$siteroot/image/image.castle?Id=$!{place.id}&photo=$!{place.returnImageIndex($image)}">
-      <img width='100px' src="$siteroot/image/download.castle?id=$!{image.id}"/>
+    <a class="selectedImage" href="$siteroot/media/image.castle?Id=$!{place.id}&photo=$!{place.returnImageIndex($image)}">
+      <img width='100px' src="$siteroot/media/download.castle?id=$!{image.id}"/>
     </a>
   #end 
 </div>

@@ -443,7 +443,7 @@ function editor_remove_insertImage(sender, menu) {
 function get_TinyMCE_InlinImage(image_id){
 	var baseurl='/';
 	var MACRO='#Inline_Iamge('+image_id+' '+place_id+' 250 250 "")';
-	return '<img src="'+baseurl+'image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP" class="tinyImgHolder" alt="imagingIt|'+image_id+'" title="'+MACRO+'" />'; 
+	return '<img src="'+baseurl+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP" class="tinyImgHolder" alt="imagingIt|'+image_id+'" title="'+MACRO+'" />'; 
 }
 
 function get_TinyMCE_InlinYouTube(yCode,title,w,h,yclass){
@@ -465,7 +465,7 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 	}
 	var baseurl='/';
 	var MACRO="#imagegallery('"+place_id+"' "+w+" "+h+" '"+yclass+"')";
-	var html ='<img src="'+baseurl+'image/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP&mark=SLIDESHOW" class="tinyImgHolder" alt="gallerya|'+image_id+'" title="'+MACRO+'"/>';
+	var html ='<img src="'+baseurl+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP&mark=SLIDESHOW" class="tinyImgHolder" alt="gallerya|'+image_id+'" title="'+MACRO+'"/>';
     return html;   
 }
 
@@ -476,13 +476,17 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 
 
 
-function tinyoptions(which){
+function tinyoptions(which,id){
+	
+	var id = typeof(id)!=='undefined'||id!=null?id:false;
+	
+	
     switch(which){
        case "bodytext":
             return {
                 mode : "exact", 
                 body_id : "left_col",
-                elements : "place_details",
+                elements : id?id:"place_details",
                 theme : "advanced",
 				width:"685",
                 plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
@@ -682,7 +686,7 @@ function tinyoptions(which){
        case "simple":
             return {
                 mode : "exact", 
-                elements : "place_summary",
+                elements : id?id:"place_summary",
                 theme : "advanced",
                 width : "685", 
 				height:  "350",
@@ -706,7 +710,7 @@ function tinyoptions(which){
         case "default":
             return {
                 mode : "exact", 
-                elements : "tinyedit",
+                elements : id?id:"tinyedit",
                 theme : "advanced",
 				width : "685", 
 				height:  "350",
@@ -730,7 +734,8 @@ function tinyoptions(which){
 }
 
 
-function load_tiny(which){
+function load_tiny(which,id){
         if(typeof(which)==='undefined'){which="default";}
-        tinyMCE.init(tinyoptions(which));
+		if(typeof(id)==='undefined'){id=null;}
+        tinyMCE.init(tinyoptions(which,id));
 }
