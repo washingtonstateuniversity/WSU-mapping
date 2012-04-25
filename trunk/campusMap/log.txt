@@ -2962,3 +2962,5 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
    --- End of inner exception stack trace ---
 2012-04-24 11:42:05,228 [16] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-04-24 13:38:09,521 [22] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session

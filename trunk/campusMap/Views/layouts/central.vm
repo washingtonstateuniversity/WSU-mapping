@@ -12,6 +12,7 @@
 			#parse("layouts/assets_central/header_html.vm")
 		</div>
 		<div id="nav">
+			#* $Controller.get_category_menu() *#
 			#parse("layouts/assets_central/main_menu.vm")
 		</div>
 		$childContent

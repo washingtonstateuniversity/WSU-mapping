@@ -140,7 +140,7 @@
 
 
 
-
+            PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
 
 
 
@@ -149,12 +149,137 @@
             RenderView("central");
         }
 
-            public void get_category_menu()
+            public void get_place_by_category(string[] cat,string callback)
             {
-                PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+                CancelView();
                 CancelLayout();
-                RenderView("assets_central/main_menu");
+
+                IList<place> items;
+                IList<categories> cats = new List<categories>();
+                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+                List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
+                foreach (string category in cat)
+                {
+                    IList<categories>  c = ActiveRecordBase<categories>.FindAllByProperty("name", category);
+                    foreach(categories item in c){
+                        cats.Add(item);
+                    }
+                    baseEx.Add(Expression.Eq("categories", cats));
+                }
+                pubEx.AddRange(baseEx);
+                items = ActiveRecordBase<place>.FindAll(Order.Desc("prime_name"), pubEx.ToArray());
+
+/*
+{
+
+	"mapOptions":{
+					"center":"46.73191920826778,-117.15296745300293",
+					"zoom":15
+				},
+	"markers":[
+
+		{
+			"position":{
+						"latitude":"46.73041903634809",
+						"longitude":"-117.15635776519775"
+						},
+			"style":{
+					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
+					},
+			"info":{
+					"content":[
+							{"block":"<h2 class='header'>The CUB - Compton Union Building</h2><span class='headImage'><img src='http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_head_image.jpg' /></span><p>Whether you need food, games, a place to study, meeting space, catering service, a wireless internet connection, or just a friendly place to hang out, the CUB has something for you.</p><p> A complete remodel in 2008 made the CUB a LEED-certified \"green\" building and built new features that connect it even more closely to campus life. A hallway connects the ground floor directly to Terrell Library, and a movable wall of windows lets the first-floor frontage open directly onto Terrell Mall for fresh air and a seamless indoor/outdoor transition. cub.wsu.edu<p>"},
+							{"block":"<h2 class='header'>The CUB - Compton Union Building</h2><h3>Shopping and services</h3><ul><li>ATMs</li><li>Bookie (Bookstore)</li><li>CougarCard Center</li><li>Cougar Copies</li><li>Cougar Express Mail</li><li>Meeting and event facilities</li><li>Redbox</li><li>US Bank</li><li>WSECU</li></ul><h3>Dining</h3><ul><li>Bookie Market & Café</li><li>Carlita's</li><li>Dupus Boomer's</li><li>Freshëns</li><li>Markel Coffee House</li><li>Panda Express</li><li>Sea Swiper</li><li>Subway</li><li>Villa Fresh Italian Kitchen</li></ul>"}
+							]
+					,
+					"title":"Hello World!"
+					}
+
+		},
+		{
+			"position":{
+						"latitude":"46.7279260113145",
+						"longitude":"-117.15891122818"
+						},
+			"style":{
+					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
+					},
+			"info":{
+					"content":"testafy to the html",
+					"title":"Hello World!"
+					}
+
+		},{
+			"position":{
+						"latitude":"46.730271958423685",
+						"longitude":"-117.15811729431152"
+						},
+			"style":{
+					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
+					},
+			"info":{
+					"content":"<h2 class='header'>The CUB - Compton Union Building</h2><span class='headImage'><img src='http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_head_image.jpg' /></span><p>Whether you need food, games, a place to study, meeting space, catering service, a wireless internet connection, or just a friendly place to hang out, the CUB has something for you.</p><p> A complete remodel in 2008 made the CUB a LEED-certified \"green\" building and built new features that connect it even more closely to campus life. A hallway connects the ground floor directly to Terrell Library, and a movable wall of windows lets the first-floor frontage open directly onto Terrell Mall for fresh air and a seamless indoor/outdoor transition. cub.wsu.edu<p>",
+					"title":"Hello World!"
+					}
+
+		},
+		{
+			"position":{
+						"latitude":"46.73430174849347",
+						"longitude":"-117.15966200000003"
+						},
+			"style":{
+					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
+					},
+			"info":{
+					"content":"testafy to the html",
+					"title":"Hello World!"
+					}
+
+		}
+		]
+}
+ */
+                
+
+                String json = "";
+
+                json += @"{";
+
+
+                String placeList = "";
+                foreach (place item in items)
+                {
+
+
+                    if (item.coordinate != null)
+                    {
+
+                        placeList += @"{
+		                            ""position"":{
+					                            ""latitude"":""" + item.getLat() + @""",
+					                            ""longitude"":""" + item.getLong() + @"""
+					                            },
+		                            ""style"":{
+				                            ""icon"":""http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png""
+				                            },
+		                            ""info"":{
+				                            ""content"":""testafy to the html"",
+				                            ""title"":""Hello World!""
+				                            }
+                                },";
+                    }
+                }
+                json += placeList.TrimEnd(',');
+
+                json += @"}";
+
+
+                RenderText(callback + "[" + json + "]");
+                //RenderView("layouts/assets_central/main_menu");
             }
+
 
 
 

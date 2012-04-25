@@ -562,7 +562,7 @@ namespace campusMap.Controllers
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
             PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
             PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
@@ -657,7 +657,7 @@ namespace campusMap.Controllers
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
             PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
             PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
@@ -821,6 +821,7 @@ namespace campusMap.Controllers
             [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
             [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
+            int[] cats,
             String[] newtag,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
@@ -839,6 +840,7 @@ namespace campusMap.Controllers
             Flash["place"] = place;
             Flash["tags"] = place;
             Flash["tabs"] = place;
+            Flash["cats"] = place;
             Flash["images"] = place;
             Flash["authors"] = place;
             
@@ -899,6 +901,7 @@ namespace campusMap.Controllers
             place.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : place.status;
             place.tags.Clear();
             place.infotabs.Clear();
+            place.categories.Clear();
             place.Images.Clear();
             place.Authors.Clear();
             if (apply != null){
@@ -1017,6 +1020,13 @@ namespace campusMap.Controllers
             }
 
 
+            place.categories.Clear();
+            foreach (int cat in cats)
+            {
+                categories c = ActiveRecordBase<categories>.Find(cat);
+                place.categories.Add(c);
+            }
+
             foreach (media_repo media in images)
             {
                 if (media.id > 0 && !place.Images.Contains(media))
@@ -1052,6 +1062,7 @@ namespace campusMap.Controllers
             Flash["place"] = null;
             Flash["tags"] = null;
             Flash["tabs"] = null;
+            Flash["cats"] = null;
             Flash["images"] = null;
             Flash["authors"] = null;
 

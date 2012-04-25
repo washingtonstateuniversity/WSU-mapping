@@ -172,8 +172,12 @@ $(document).ready(function(){
 	if($('#place_drawing_map').length){
 		load_place_editor();
 	 }	
+	if($('#style_map').length){
+		load_style_editor();
+	 }	
 	
 	
+
 
 	
 	

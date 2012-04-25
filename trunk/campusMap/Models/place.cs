@@ -256,6 +256,13 @@ namespace campusMap.Models
             set { _department = value; }
         }
 
+        private IList<categories> _categories = new List<categories>();
+        [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "place_to_categories", ColumnKey = "place_id", ColumnRef = "category_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<categories> categories
+        {
+            get { return _categories; }
+            set { _categories = value; }
+        }
 
         private IList<fields> Fields;
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "place_id", ColumnRef = "field_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]

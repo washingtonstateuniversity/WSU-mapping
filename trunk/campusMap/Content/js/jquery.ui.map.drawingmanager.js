@@ -164,7 +164,8 @@
 		get_updated_data:function() {
 			var overlay = this.get('selected');
 			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
-				var points = overlay.getRadius();
+				var paths = overlay.getBounds();
+				var points = paths.toString();
 			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
 				var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
 			}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
@@ -178,7 +179,7 @@
 					var paths = overlay.getPaths();
 					if(paths.length){
 						for(i=0; i<=paths.length-1; i++){
-							var path = self.convert_gmap_LatLng(paths[i])
+							var path = this.convert_gmap_LatLng(paths[i])
 							i % 2 > 0 ? path.reverse() : '';
 							points.push();
 						}
@@ -186,6 +187,9 @@
 				}else{
 					var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
 				}
+			}else if(overlay.type == google.maps.drawing.OverlayType.RECTANGLE || overlay.type == 'Rectangle'){
+					var paths = overlay.getBounds();					
+					var points = paths.toString();
 			}
 			return points;
 		},	

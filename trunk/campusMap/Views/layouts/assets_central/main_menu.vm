@@ -8,37 +8,42 @@
 <form action="#" id="placeSearch">
 	<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
 </form>
+
+#set($lastLevel=1)
+#set($ulOpen="false")
+#set($liOpen="false")
+#set($c=0)
 <ul id='main_nav'>
-	<li class='$baseClass' ><a href="?cat=Academics">Academics</a>
-		<ul class='$subULClass' >
-			<li class='$subNarrowClass' >Narrow view to:</li>
-			<li class='$subClass' ><a href="?cat=Academics,Agriculture">Agriculture</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Art_%20Music_%20Design">Art, Music, Design</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Bio-Phys-Math%20Sci">Bio/Phys/Math Sci</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Business%20&amp;%20Econ">Business &amp; Econ</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Communication">Communication</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Education">Education</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Engineering">Engineering</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Health%20Sciences">Health Sciences</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Hist-Lit-Philosophy">Hist/Lit/Philosophy</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Social%20Sciences">Social Sciences</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Sports%20&amp;%20Fitness">Sports &amp; Fitness</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Libraries%20&amp;%20Comp%20Labs">Libraries &amp; Comp Labs</a></li>
-			<li class='$subClass' ><a href="?cat=Academics,Tutoring%20&amp;%20Support">Tutoring &amp; Support</a></li>
-		</ul>
-	</li>
-	<li class='$baseClass' ><a href="?cat=Arts%20&amp;%20Culture">Arts &amp; Culture</a></li>
-	<li class='$baseClass' ><a href="?cat=Athletics%20&amp;%20Recreation">Athletics &amp; Recreation</a></li>
-	<li class='$baseClass' ><a href="?cat=Food%20&amp;%20Shopping">Food &amp; Shopping</a></li>
-	<li class='$baseClass' ><a href="?cat=Housing">Housing</a></li>
-	<li class='$baseClass' ><a href="?cat=Landmarks">Landmarks</a></li>
-	<li class='$baseClass' ><a href="?cat=Services%20&amp;%20Admin">Services &amp; Admin</a></li>
-	<li class='$baseClass' ><a href="?cat=Parking">Parking</a></li>	
-	<li class='$baseClass' ><a href="?cat=Bus%20Routes">Bus Routes</a></li>
+	#foreach($item in $menuItems)
+		<!--level = ${item.level} || lastLevel = $lastLevel  || ulOpen = ${ulOpen} -->
+		#if($lastLevel == ${item.level} && $liOpen=="true" && $c>0)
+			</li>
+		#end
+		#if($lastLevel > ${item.level} && $ulOpen=="true")
+			#set($deepth=${lastLevel}-${item.level})
+			$Controller.repeatStr("</li></ul>",$deepth)
+			#set($ulOpen="false")
+		#end
+		#if($lastLevel != ${item.level} && $c>0)
+			#if($lastLevel < ${item.level})
+				<ul class='$subULClass'><li class='$subNarrowClass'>Narrow view to:</li>#set($ulOpen="true")
+			#end
+		#end
+		
+		<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end' ><a href="?cat=$!item.name">$!item.name</a>
+
+		#*$Controller.repeatStr("- ",$cat.level)*#
+		#set($lastLevel=${item.level})
+		#set($liOpen="true")
+		#set($c=$c+1)
+	#end
+		#if($ulOpen=="true")</li></ul>#end
+		</li>
 	<li class='$baseClass' ><br/></li>
 	<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>
 	<li class='$baseClass' ><a href="?cat=Printable%20PDF%20Maps">Printable PDF Maps</a></li>
 </ul>
+
 
 <form action="#" id="getDirections">
 	<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>

@@ -602,7 +602,7 @@ namespace campusMap.Controllers
             IList<styles> items;
 
             List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-            pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type)));
+            pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type.id)));
             //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = "";//items;
 

@@ -194,8 +194,7 @@
 						#foreach($model in $models)
 							<option class="model" value="$model.id" #if($place.model.id == $model.id) selected="selected" #end>$!model.name</option>
 						#end
-					</select>#*
-					<input type="text"  value="2" name="place.model.id" />*#
+					</select>
 					<br/>
 					<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
 					<select id="LocationTypeSelect" name="place.type.id" class="autoselect">
@@ -220,7 +219,25 @@
 					</fieldset>
                 </div>  
             </fieldset>
-            
+           
+
+			
+            <fieldset style="width:44%;float:left;"><legend>Categories</legend>
+				<div class="container" style="width:100%;">
+						#foreach($cat in $place.categories)
+							$cat.id,
+						#end
+						
+				
+					<label for="LocationModelSelect"><strong>Choose the Categories:</strong></label><br/>
+					<select id="LocationModelSelect" name="cats[]"  class="" multiple="multiple" size="9">
+						#foreach($cat in $categories)
+							<option class="model" value="$cat.id" #foreach($c in $place.categories)#if($c.id == $cat.id) selected="selected" #end#end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
+						#end
+					</select>
+                </div>  
+            </fieldset>
+
             
             </fieldset>
             <fieldset><legend>Naming</legend>
@@ -249,7 +266,7 @@
                 <fieldset style="clear:left;"><legend id="customName"><label>Custom Naming</label> (<span id="nameCount">$c</span> name#if($c==0||$c>1)s#end) <em>+</em></legend>
 					<div id="customNames">
 						<div id="names">
-$nameblock
+							$nameblock
 						</div>
 						
 						<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
@@ -305,7 +322,6 @@ $formbuttons
 	#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 	#add_tab { cursor: pointer; }
 	</style>
-
 
 
 

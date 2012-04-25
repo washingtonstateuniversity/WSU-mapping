@@ -37,7 +37,7 @@
 	#if( !$ajaxed )
 	<div id="smaple_area">
 				<fieldset><legend>Sample</legend>
-					<div id="map_canvas"></div>
+					<div id="style_map" style="width: 500px;height: 520px;"></div>
 				</fieldset>
 	</div>
 	#end

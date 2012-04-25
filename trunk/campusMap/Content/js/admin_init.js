@@ -669,16 +669,7 @@ $('.detailInfoBut').toggle(
 	
 	
 	
-	if($('#place_street').length>0){
-		$("#place_street,#place_address").live('keyup',function () {
-			clearCount('codeAddress');
-			setCount('codeAddress',500,function(){
-				var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+$('#place_campus').val()+' WA '+$('#zcode').text()+' USA'; 
-				if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) codeAddress(lookup);
-				$('#setLatLong').addClass('ui-state-disabled');
-			});
-		});
-	}
+
 	
 	
 	

@@ -9,6 +9,7 @@ using MonoRailHelper;
 using campusMap.Filters;
 using log4net;
 using log4net.Config;
+using System.Text;
 #endregion
 namespace campusMap.Controllers
 {
@@ -23,9 +24,18 @@ namespace campusMap.Controllers
         protected LogService logService = new LogService();
         protected FieldsService fieldsService = new FieldsService();
         protected StylesService StylesService = new StylesService();
-        
 
-
+        public string Tabs(int n)
+        {
+            return new String('\t', n);
+        }
+        public string repeatStr(string str,int n)
+        {
+            StringBuilder sb = new StringBuilder(str.Length * n);
+            for (int i = 0; i < n; i++)
+                sb.Append(str);
+            return sb.ToString();
+        } 
         public string getView()
         {
             return SelectedViewName.Split('\\')[0];
