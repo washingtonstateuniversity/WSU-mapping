@@ -155,20 +155,24 @@
                 CancelView();
                 CancelLayout();
 
-                IList<place> items;
-                IList<categories> cats = new List<categories>();
-                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-                List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
+                String sql = "from place p where ";
+                int id = 1;
                 foreach (string category in cat)
                 {
-                    IList<categories>  c = ActiveRecordBase<categories>.FindAllByProperty("name", category);
-                    foreach(categories item in c){
-                        cats.Add(item);
-                    }
-                    baseEx.Add(Expression.Eq("categories", cats));
+                    sql += " :p"+id+" in elements(p.categories) ";
+                    id = id +1;
+                    sql += " or ";
                 }
-                pubEx.AddRange(baseEx);
-                items = ActiveRecordBase<place>.FindAll(Order.Desc("prime_name"), pubEx.ToArray());
+                sql += " 1=0 ";
+                SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+                id = 1;
+                foreach (string category in cat)
+                {
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", category);
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
+                place[] items = q.Execute();
 
 /*
 {
