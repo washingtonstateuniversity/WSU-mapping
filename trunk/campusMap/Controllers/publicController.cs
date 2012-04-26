@@ -161,9 +161,9 @@
                 {
                     sql += " :p"+id+" in elements(p.categories) ";
                     id = id +1;
-                    sql += " or ";
+                    sql += " and ";
                 }
-                sql += " 1=0 ";
+                sql += " 1=1 ";
                 SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
                 id = 1;
                 foreach (string category in cat)
@@ -249,38 +249,86 @@
 
                 String json = "";
 
-                json += @"{";
+                json += @"  {
+";
 
 
                 String placeList = "";
+                int count = 0;
                 foreach (place item in items)
                 {
 
 
                     if (item.coordinate != null)
                     {
+                        if (count == 0)
+                        {
+                            placeList += @"""markers"":[";
+                        }
+                        String infotabs = "";
+                        if (item.infotabs.Count > 0)
+                        {
+                            infotabs += @"[";
 
-                        placeList += @"{
-		                            ""position"":{
-					                            ""latitude"":""" + item.getLat() + @""",
-					                            ""longitude"":""" + item.getLong() + @"""
-					                            },
-		                            ""style"":{
-				                            ""icon"":""http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png""
-				                            },
-		                            ""info"":{
-				                            ""content"":""testafy to the html"",
-				                            ""title"":""Hello World!""
-				                            }
-                                },";
+                            String tabStr = "";
+
+                            infotabs += @"
+                        {
+                            ""block"":""" + item.details + @""",
+                            ""title"":""Overview""
+                        },";
+
+
+                            foreach (infotabs tab in item.infotabs) {
+							    tabStr += @"
+                        {
+                            ""block"":"""+tab.content+@""",
+                            ""title"":"""+tab.title+@"""
+                        },";
+                            }
+                            infotabs += tabStr.TrimEnd(',');
+                            infotabs += @"]";
+                        }
+                        else
+                        {
+                            infotabs += @""""+item.details+@"""";
+                        }
+
+
+
+
+                        placeList += @"
+        {
+            ""position"":{
+                        ""latitude"":""" + item.getLat() + @""",
+                        ""longitude"":""" + item.getLong() + @"""
+                        },
+            ""style"":{
+                    ""icon"":""http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png""
+                    },
+            ""info"":{
+                    ""content"":" + infotabs + @",
+                    ""title"":""" + item.prime_name + @"""
+                    }
+        },";
+                        count++;
                     }
                 }
                 json += placeList.TrimEnd(',');
-
-                json += @"}";
-
-
-                RenderText(callback + "[" + json + "]");
+                if (count > 0)
+                {
+                    json += @"]";
+                }
+                
+                json += @"
+    }";
+                
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
                 //RenderView("layouts/assets_central/main_menu");
             }
 

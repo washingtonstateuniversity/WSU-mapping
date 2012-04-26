@@ -75,7 +75,7 @@
 
 
 #if( !$ajaxed )
-<div id="smaple_area" style="position: absolute; z-index: 9; background-color:#fff; right: 15px; top: 54px;">
+<div id="smaple_area" style="position:absolute; z-index:9; background-color:#fff; right:15px; top:65px;">
             <fieldset><legend>Sample</legend>
 				<!--<div id="map_canvas" style="width:300px;height: 520px;"></div>-->
 				<div id="place_drawing_map" style="width:300px;height: 520px;"></div>
@@ -224,11 +224,6 @@
 			
             <fieldset style="width:44%;float:left;"><legend>Categories</legend>
 				<div class="container" style="width:100%;">
-						#foreach($cat in $place.categories)
-							$cat.id,
-						#end
-						
-				
 					<label for="LocationModelSelect"><strong>Choose the Categories:</strong></label><br/>
 					<select id="LocationModelSelect" name="cats[]"  class="" multiple="multiple" size="9">
 						#foreach($cat in $categories)

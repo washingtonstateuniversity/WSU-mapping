@@ -29,8 +29,9 @@ function iniMap(url){
 }
 function updateMap(_load){
 	if(typeof(_load)==='undefined') var _load = false;
-	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
-	$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
+	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
+	var url="http://localhost:61788/public/get_place_by_category.castle";
+	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		loadData(data);
 	});
 }
@@ -56,7 +57,7 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 				if($.isArray(marker.info.content)){
 					var nav='';
 					$.each(marker.info.content, function(j, html) {	
-						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
+						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">'+html.title+'</a></li>';
 					});
 					var content='';
 					$.each( marker.info.content, function(j, html) {
@@ -64,7 +65,7 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 					});				
 				
 				}else{
-					var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
+					var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Overview</a></li>';
 					var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
 				}
 	
@@ -140,20 +141,19 @@ $(document).ready(function(){
 				if($('#directionsFrom input').val() !='')$('#directionsTo').slideToggle();
 			});
 
-			$('#main_nav li.parent a:first').live('click',function(e){
+			$('#main_nav li.parent').live('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
 				$('.active').removeClass('active');
 				$('.checked').removeClass('checked');
-				$(this).closest('li').addClass('active');
+				$(this).addClass('active');
 				e.stopPropagation();
 				e.preventDefault();
 				$.each(ib, function(i) {ib[i].close();});
 				$('#centralMap').gmap('clear','markers');
 				$('#centralMap').gmap('clear','overlays');
-				updateMap('Academics');
+				updateMap(encodeURI($(this).find('a:first').text()));
 			});
-			
 			$('#main_nav .parent li a').live('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
@@ -161,7 +161,11 @@ $(document).ready(function(){
 				$.each(ib, function(i) {ib[i].close();});
 				$('#centralMap').gmap('clear','markers');
 				$('#centralMap').gmap('clear','overlays');
-				updateMap('Agriculture');
+				var params='';
+				$.each($('li.checked a'),function(){
+					params=params+$(this).text()+',';
+				});
+				updateMap(encodeURI(params.substring(0, params.length - 1)));
 			});
 	}	
 	

@@ -1753,6 +1753,25 @@ function addpoly_poly(map){
 
 
 
+function build_infobox_content(item){
+	var tabCount=$('#infotabs .ui-tabs-nav li').size();
+	if(tabCount>1){
+		$.each($('#infotabs .ui-tabs-nav li'),function(i,v){
+			var liSelf=$(this);
+				$.extend(item.info.content,{
+					block:function(){
+							tinyMCE.triggerSave();
+							var index=liSelf.index('#infotabs .ui-tabs-nav li');
+							return $('#infotabs .ui-tabs-panel:eq('+index+')').find('textarea').val();
+						}(),
+					title:liSelf.text()
+				});
+			});
+	}else{
+		item.info.content="";
+	}
+	return item;
+}
 
 
 
@@ -1760,17 +1779,60 @@ function addpoly_poly(map){
 
 
 
+function build_infobox(item){
+	
+	if(typeof(item.info.content)==='undefined')
+			item=build_infobox_content(item);
 
-
-
-
-
-
-
-
-
-
-
+	if($.isArray(item.info.content)){
+		var nav='';
+		$.each(item.info.content, function(j, html) {	
+			nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
+		});
+		var content='';
+		$.each( item.info.content, function(j, html) {
+			content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'">'+
+							'<div class="content">'+html.block+'</div>'+
+						'</div>';
+		});
+	}else{
+		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
+		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+item.info.content+'</div></div>';
+	}
+	var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+				content+
+			'</div>';
+	var myOptions = {
+		alignBottom:true,
+		 content: box//boxText
+		,disableAutoPan: false
+		,maxWidth: 0
+		,pixelOffset: new google.maps.Size(-200, -36)
+		,zIndex: 99
+		,boxStyle: {
+		  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
+		  ,width: "400px"
+		 }
+		,closeBoxMargin: "10px 2px 2px 2px"
+		,closeBoxURL: "/Content/images/close.png"
+		,infoBoxClearance: new google.maps.Size(1, 1)
+		,isHidden: false
+		,pane: "floatPane"
+		,enableEventPropagation: false
+		,onOpen:function(){
+					$('#taby'+i).tabs();
+					$('#taby'+i).hover(function(){
+							ib[i].setOptions({enableEventPropagation: true});
+						},function(){
+							ib[i].setOptions({enableEventPropagation: false});
+						});
+					//alert('tring to tab it, dabnab it');
+				}
+	};
+	ib[i] = new InfoBox(myOptions,function(){});
+	return item;
+}
 
 
 
@@ -1782,97 +1844,26 @@ function addpoly_poly(map){
 
 
 function load_place_editor() {
-	$('#place_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
-
-		 var Long=$('#Long').val();
-		 var Lat=$('#Lat').val();
-
-		 var pointHolder = {};
-		 if(coords!='' && type=='polyline'){ 
-		 	var pointHolder = {'path' : coords };
-		 }
-		  if(coords!='' && type=='polygon'){ 
-		 	var pointHolder = {'paths' : coords };
-		 }
-		 if(!$.isEmptyObject(pointHolder)){
-			var shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
-		 }else{
-			var shape = {};
-		 }
-
-		if($.isArray(marker.info.content)){
-			var nav='';
-			$.each(marker.info.content, function(j, html) {	
-				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
-			});
-			var content='';
-			$.each( marker.info.content, function(j, html) {
-				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
-			});				
-		
-		}else{
-			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
-			var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
-		}
-
-		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
-					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-					content+
-				'</div>';
-
-		/* so need to remove this and create the class for it */
-		var boxText = document.createElement("div");
-		boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-		boxText.innerHTML = marker.info.content;
-
-		var myOptions = {
-			alignBottom:true,
-			 content: box//boxText
-			,disableAutoPan: false
-			,maxWidth: 0
-			,pixelOffset: new google.maps.Size(-200, -36)
-			,zIndex: 99
-			,boxStyle: {
-			  background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom"
-			  ,width: "400px"
-			 }
-			,closeBoxMargin: "10px 2px 2px 2px"
-			,closeBoxURL: "/Content/images/close.png"
-			,infoBoxClearance: new google.maps.Size(1, 1)
-			,isHidden: false
-			,pane: "floatPane"
-			,enableEventPropagation: false
-			,onOpen:function(){
-						$('#taby'+i).tabs();
-						$('#taby'+i).hover(function(){
-								ib[i].setOptions({enableEventPropagation: true});
-							},function(){
-								ib[i].setOptions({enableEventPropagation: false});
-							});
-						//alert('tring to tab it, dabnab it');
-					}
-		};
-		ib[i] = new InfoBox(myOptions,function(){
-			//$('#taby'+i).tabs();
-			//alert('tring to tab it, dabnab it, from the INI');
-		});
-		//end of the bs that is well.. bs of a implamentation
-		
-		if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
-		$('#place_drawing_map').gmap('addMarker', $.extend({ 
-			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-		},marker.style)).click(function() {
-			$.each(ib, function(i) {ib[i].close();});
-			ib[i].open($('#place_drawing_map').gmap('get','map'), this);
-			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-		});
-
+	var lat = $('#Lat').val();
+	var lng = $('#Long').val();	
+	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15 }).bind('init', function () {
+		if(lat!='')add_place_point(lat,lng);
 	});
 	
 	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
+		add_place_point(lat,lng);
+	});
+
+	function add_place_point(lat,lng){
+		i=0;
+		var marker = {};
+		marker.style={"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"};
+		//marker=$.extend(marker,build_infobox(marker));
+		
+		if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
 		$('#place_drawing_map').gmap('addMarker', $.extend({ 
-			'position': $('#place_drawing_map').gmap('get_map_center')//new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-		},{'draggable':true})).click(function() {
+			'position': (typeof(lat)==='undefined' || lat=='')?$('#place_drawing_map').gmap('get_map_center'):new google.maps.LatLng(lat,lng)
+		},{'draggable':true},marker.style)).click(function() {
 			var ib_total = 0;
 			$.each(ib, function(i) {ib[i].close(); ib_total=i; });
 			ib[ib_total+1].open($('#place_drawing_map').gmap('get','map'), this);
@@ -1881,7 +1872,6 @@ function load_place_editor() {
 		}).dragend(function(e) {
 			var lat = this.getPosition().lat();
 			var lng = this.getPosition().lng();
-			
 			$('#Lat').val(lat);
 			$('#Long').val(lng);
 			//setTimeout(function() {},  200);
@@ -1964,10 +1954,9 @@ function load_place_editor() {
 			});
 		});
 		$(this).addClass('ui-state-disabled');
-	});
-	
-	
-	
+		
+		
+		}
 	
 	
 	
@@ -1984,7 +1973,8 @@ function load_place_editor() {
 		add: function( event, ui ) {
 			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
 			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
-		}
+		},
+		select: function(event, ui) {tinyMCE.triggerSave();}
 	});
 
 	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {

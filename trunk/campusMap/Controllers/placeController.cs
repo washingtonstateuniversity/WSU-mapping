@@ -901,7 +901,7 @@ namespace campusMap.Controllers
             place.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : place.status;
             place.tags.Clear();
             place.infotabs.Clear();
-            place.categories.Clear();
+            //place.categories.Clear();
             place.Images.Clear();
             place.Authors.Clear();
             if (apply != null){
@@ -933,9 +933,8 @@ namespace campusMap.Controllers
                             ActiveRecordMediator<tags>.Save(t);
                             place.tags.Add(t);                                                                                  
                         }
-                    }                        
-                }               
-                     
+                    }
+                }
             }
 
             /**/
@@ -1020,7 +1019,7 @@ namespace campusMap.Controllers
             }
 
 
-            place.categories.Clear();
+
             foreach (int cat in cats)
             {
                 categories c = ActiveRecordBase<categories>.Find(cat);

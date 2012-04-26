@@ -257,7 +257,7 @@ namespace campusMap.Models
         }
 
         private IList<categories> _categories = new List<categories>();
-        [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "place_to_categories", ColumnKey = "place_id", ColumnRef = "category_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "place_to_categories", ColumnKey = "place_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<categories> categories
         {
             get { return _categories; }
