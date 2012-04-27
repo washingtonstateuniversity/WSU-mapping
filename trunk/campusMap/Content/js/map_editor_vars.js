@@ -1,4 +1,6 @@
 var tinyMCEImageList = [];
+var ib = [];
+var timeouts;
 
 var DOMAIN='http://localhost:50759';
 var DEFAULT_overlay;

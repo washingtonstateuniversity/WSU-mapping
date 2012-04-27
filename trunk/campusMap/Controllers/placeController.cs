@@ -1019,7 +1019,7 @@ namespace campusMap.Controllers
             }
 
 
-
+            place.categories.Clear();
             foreach (int cat in cats)
             {
                 categories c = ActiveRecordBase<categories>.Find(cat);

@@ -76,9 +76,9 @@
 
 #if( !$ajaxed )
 <div id="smaple_area" style="position:absolute; z-index:9; background-color:#fff; right:15px; top:65px;">
-            <fieldset><legend>Sample</legend>
+            <fieldset id='campusmap'><legend>Sample</legend>
 				<!--<div id="map_canvas" style="width:300px;height: 520px;"></div>-->
-				<div id="place_drawing_map" style="width:300px;height: 520px;"></div>
+				<div id="place_drawing_map" style="width:425px;height: 520px;"></div>
             </fieldset>
 </div>
 #end
@@ -89,28 +89,28 @@
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
     <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-      <a href="#tabs-1">Basic</a>
+      <a href="#tabs_Basic">Basic</a>
     </li>
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs-2">Text</a>
+      <a href="#tabs_Text">Text</a>
     </li>
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs-3">Detail</a>
+      <a href="#tabs_Detail">Detail</a>
     </li>
      #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
-      <a href="#FIELDS">Fields</a>
+      <a href="#tabs_FIELDS">Fields</a>
     </li>   #end
     <li class="ui-state-default ui-corner-top">
-      <a href="#IMAGES">Images</a>
+      <a href="#tabs_IMAGES">Images</a>
     </li>
     #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-top">
-      <a href="#COMMENTS">Comments</a>
+      <a href="#tabs_COMMENTS">Comments</a>
     </li>#end
   </ul>
   
 <form action="update.castle" method="post" id="editor_form">
 
-  <div id="tabs-1" class="mainAreaTabs">
+  <div id="tabs_Basic" class="mainAreaTabs">
 		$formbuttons
 		<p class="validateTips">All form fields are required.</p>
         $Form.HiddenField("place.id")
@@ -306,7 +306,7 @@
      $formbuttons
     <div class="clear"></div>
   </div>
-  <div id="tabs-2" class="mainAreaTabs">
+  <div id="tabs_Text" class="mainAreaTabs">
 $formbuttons
 
 	<style>
@@ -357,7 +357,7 @@ $formbuttons
   </div>
   
   
-  <div id="tabs-3" class="mainAreaTabs">
+  <div id="tabs_Detail" class="mainAreaTabs">
 $formbuttons <div class="clear"></div>
 
 	<fieldset><legend>Tags: </legend>     
@@ -473,7 +473,7 @@ $formbuttons <div class="clear"></div>
   <br/>    
 </div>
   #end
-    <div id="IMAGES" class="mainAreaTabs">
+    <div id="tabs_IMAGES" class="mainAreaTabs">
 $formbuttons     
         <div id="ImageDiv">
             <h3>Place Images</h3>
@@ -510,7 +510,7 @@ $formbuttons
     </div>
 </form>
   #if($comments.TotalItems&&$comments.TotalItems!=0)
-  <div id="COMMENTS" class="mainAreaTabs">
+  <div id="tabs_COMMENTS" class="mainAreaTabs">
 
 
     <h3>Comment List</h3>

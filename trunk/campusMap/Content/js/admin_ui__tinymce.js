@@ -472,10 +472,6 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 
 
 
-
-
-
-
 function tinyoptions(which,id){
 	
 	var id = typeof(id)!=='undefined'||id!=null?id:false;

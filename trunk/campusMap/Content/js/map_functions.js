@@ -70,9 +70,6 @@ function setDirectionsRenderer(){
 	return directionsDisplay;
 }
 
-
-
-
 /* SET */
 function mapzoom(){
     var mapZoom = map.getZoom();
@@ -93,262 +90,6 @@ function get_mapzoom(){
     var mapZoom = map.getZoom();
     return mapZoom;
 }
-function get_mapcenter(){
-    var mapCenter = map.getCenter();
-    var latLngStr = mapCenter.lat().toFixed(6) + ', ' + mapCenter.lng().toFixed(6);
-    return latLngStr;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*------------------------
-   Clean up functions
-    ---------------------------*/
-function clear_highlights(mark) {    /// this one needs to be abstracted
-	var tmplastMarker=typeof(lastMarker)!="undefined"&&lastMarker!=null?lastMarker:null;
-	mark=typeof(mark)!="undefined"&&mark!=null?mark:tmplastMarker;
-	if (mark==null||typeof(mark)=="undefined") return false;
-	
-	mark.setAnimation(null);
-	var image = new google.maps.MarkerImage(
-		'/uploads/siteTheme/mock-point-sm.png',
-		new google.maps.Size(16, 15),
-		new google.maps.Point(0,0),
-		new google.maps.Point(8,7)
-		);      
-	var markerOptions = {
-		map:map,
-		visible:true,
-		icon: image,
-		position:mark.getPosition()
-		};	  
-	mark.setOptions(markerOptions);
-}
-function clearDirections(directionsDisplay) {
-	deleteMarkers();
-	deletePolys();
-	deleteibLabels();
-	//directionsDisplay.setMap(null);
-	//directionsDisplay=null;
-	waypts = [];
-	checkboxArray = [];
-	polylineOptions = [];  
-	
-	depth=0;
-	fractal=0;
-	iterator = 0;
-}
-function deletePolys() {
-	if (polys) {
-		for (i in polys) {
-			polys[i].setMap(null);
-		}
-		polys.length = 0;
-	}
-	polys = [];
-}
-function deleteibLabels() {
-	if (ibLabels) {
-		for (i in ibLabels) {
-			ibLabels[i].setMap(null);
-		}
-		ibLabels.length = 0;
-	}
-	ibLabels = [];
-}
-// Deletes all markers in the array by removing references to them
-function deleteMarkers() {
-	if (markers) {
-		for (i in markers) {
-			markers[i].setMap(null);
-		}
-		markers.length = 0;
-	}
-	markers = [];
-}
-
-
-// Clear current Map
-function clearMap(){
-    if(editing == true) stopediting();
-    if(polyShape) polyShape.setMap(null); // polyline or polygon
-    if(outerShape) outerShape.setMap(null);
-    if(rectangle) rectangle.setMap(null);
-    if(circle) circle.setMap(null);
-    if(drawnShapes.length > 0) {
-        for(var i = 0; i < drawnShapes.length; i++) {
-            drawnShapes[i].setMap(null);
-        }
-    }
-    plmcur = 0;
-    newstart();
-    placemarks = [];
-    createplacemarkobject();
-}
-function newstart() {
-    polyPoints = [];
-    outerPoints = [];
-    pointsArray = [];
-	shapeArray = [];
-    markersArray = [];
-    pointsArrayKml = [];
-    markersArrayKml = [];
-    addresssArray = [];
-    outerArray = [];
-    innerArray = [];
-    outerArrayKml = [];
-    innerArrayKml = [];
-    holePolyArray = [];
-    innerArrays = [];
-    innerArraysKml = [];
-    waypts = [];
-    destinations = [];
-    adder = 0;
-    directionsYes = 0;
-    dirpointend = 0;
-    dirpointstart = null;
-    oldpoint = null;
-    closethis('polylineoptions');
-    closethis('polygonoptions');
-    closethis('circleoptions');
-    if(toolID != 2) closethis('polygonstuff');
-    if(directionsDisplay) directionsDisplay.setMap(null);
-    if(startMarker) startMarker.setMap(null);
-    if(nemarker) nemarker.setMap(null);
-    if(tinyMarker) tinyMarker.setMap(null);
-    if(toolID == 1) {
-        placemarks[plmcur].style = polylinestyles[polylinestyles.length-1].name;
-        placemarks[plmcur].stylecur = polylinestyles.length-1;
-        preparePolyline();
-        polylineintroduction();
-    }
-    if(toolID == 2){
-        showthis('polygonstuff');
-        gob('stepdiv').innerHTML = "Step 0";
-        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
-        placemarks[plmcur].stylecur = polygonstyles.length-1;
-        preparePolygon();
-        polygonintroduction();
-    }
-    if(toolID == 3) {
-        placemarks[plmcur].style = polygonstyles[polygonstyles.length-1].name;
-        placemarks[plmcur].stylecur = polygonstyles.length-1;
-        preparePolyline(); // use Polyline to collect clicked point
-        activateRectangle();
-        rectangleintroduction();
-    }
-    if(toolID == 4) {
-        placemarks[plmcur].style = circlestyles[circlestyles.length-1].name;
-        placemarks[plmcur].stylecur = circlestyles.length-1;
-        preparePolyline(); // use Polyline to collect clicked point
-        activateCircle();
-        circleintroduction();
-        codeID = gob('codechoice').value = 2; // javascript, no KML for circle
-    }
-    if(toolID == 5) {
-        placemarks[plmcur].style = markerstyles[markerstyles.length-1].name;
-        placemarks[plmcur].stylecur = markerstyles.length-1;
-        preparePolyline();
-        markerintroduction();
-    }
-    if(toolID == 6){
-        directionsYes = 1;
-        preparePolyline();
-        directionsintroduction();
-        codeID = gob('codechoice').value = 1;
-    }
-    kmlcode = "";
-    javacode = "";
-}
-
-function deleteLastPoint(){
-    if(directionsYes == 1) {
-        if(destinations.length == 1) return;
-        undo();
-        return;
-    }
-    if(toolID == 1) {
-        if(polyShape) {
-            polyPoints = polyShape.getPath();
-            if(polyPoints.length > 0) {
-                polyPoints.removeAt(polyPoints.length-1);
-                pointsArrayKml.pop();
-				dump_latLongs();
-                if(codeID == 1) logCode1();
-                if(codeID == 2) logCode4();
-            }
-        }
-    }
-    if(toolID == 2) {
-        if(innerArrayKml.length>0) {
-            innerArrayKml.pop();
-            polyPoints.removeAt(polyPoints.length-1);
-        }
-        if(outerArrayKml.length>0 && innerArrayKml.length==0) {
-            outerArrayKml.pop();
-            //polyPoints.removeAt(polyPoints.length-1);
-        }
-        if(outerPoints.length===0) {
-            if(polyShape) {
-                polyPoints = polyShape.getPath();
-                if(polyPoints.length > 0) {
-                    polyPoints.removeAt(polyPoints.length-1);
-                    pointsArrayKml.pop();
-                    if(adder == 0) {
-						dump_latLongs();
-                        if(codeID == 1) logCode2();
-                        if(codeID == 2) logCode4();
-                    }
-                }
-            }
-        }
-    }
-    if(polyPoints.length === 0) nextshape();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1365,300 +1106,6 @@ if(typeof(point) === 'undefined')continue;
 
 }
 
-/*
-
-$(function () {
-	$(window).scroll(function(){
-	  x= 0;
-	  y= -($(window).scrollTop()*.04);//alert("background-position" +  x + " " + y);
-	  $('body,#bk_tmp').css("background-position", x + "px " + y + "px");
-	}); 
-	link_corrections();
-
-  	if( $('.jqueryFileTree').length > 0){
-		$('.jqueryFileTree').fileTree({ 
-			root: '/uploads/member_dir',
-			script: "http://"+maindomain+"/nwpsb-area/about-us.html?showtemplate=false",
-			folderEvent: 'click',
-			expandSpeed: 1000,
-			collapseSpeed: 750
-		},function(){
-			$('.jqueryFileTree li.file').find('a').live('click',function(){
-						window.open($(this).find('a').attr('href'),'_blank');
-				});
-		return false;});  
-	}
-	if($('a.gallery').length>0){
-		$('a.gallery').colorbox({photo:true,rel:'gallery',maxHeight:'95%',maxWidth:'95%'});
-		$('#viewGal').live('click',function(){
-			$('a.gallery:first').click();
-		
-		});
-	}
-
-	if( $('#side_trips ul li a:last').html()==$('#side_trips ul li a:first').html()){
-		$('#side_trips ul li a:last').remove();	
-	}  
- // fix this.. what a cheat 
- 
- 	$("#route_menu_link a").live('click',function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		$('#menu_mid h2').text('Points Of Interest');
-		$("#route_menu_link").fadeOut();
-		$('#sub_menu_link').fadeIn();
-		$('#side_trips ul li ul').hide();
-		$('#side_trips ul li').fadeOut();
-		$('#main_route ul li').fadeIn();	  
-		$('#main_route ul li a:first').click();
-	}); 
-	$("#sub_menu_link a").live('click',function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		$('#sub_menu_link').fadeOut();
-		$('#route_menu_link').fadeIn();
-		$('#menu_mid h2').text('Super Side Trip Points Of Interest');
-		$("#main").html(show_subroute_text());
-		$('#main_route ul li').fadeOut();
-		$('#side_trips ul li').fadeIn();	
-	});  
-
-//		$('#drop').live('click',function(e){
-//				e.preventDefault();
-//				drop();
-//			});
-//
-//		$('#highlight').live('click',function(e){e.preventDefault();
-//				makeBounce();
-//			});
-
-set_up_gal();
-
-
-
-
-
-
-
-});*/
-
-function set_up_audio(){
-		$("#accordion").tabs("#accordion div.pane", {tabs: 'h3', effect: 'slide', initialIndex: null});
-		// default options
-		//$(".mp3").jmp3();
-		// custom options
-		$(".mp3").jmp3({
-		  showfilename: "false",
-		  backcolor: "293415",
-		  forecolor: "82a444",
-		  width: 150,
-		  showdownload: "false"
-		});
-}
-
-
-/*
-$(document).ready(function(){
-			  
-	$('#audio').colorbox({
-			resize:true,
-			href:function(){
-				return $(this).attr('href')+' #accordion';
-				},
-			onComplete:function(){
-					set_up_audio();
-				}
-	});	
-						   
-						   
-   if($("#accordion").length>0){
-	   set_up_audio();
-   }
-});
-
-*/
-
-
-
-function show_subroute_text(){
- var txt = '<h1 class="title">Northwest Passage Scenic Byway - All American Road</h1><h2>Super Side Trips</h2><img src="/uploads/siteTheme/super-side-trip.png" alt="" style="float:right;"/><span class="main_image"><a class="group" href="uploads/images/Gallery/15/Iron%20horses.jpg" title="Iron Horses at the Entrance to Lewiston" rel="gallery-68"><img src="http://173.203.188.221/uploads/SuperSizerTmp/Iron horses.-w302-h0-p0-q75-F-----S1-c.jpg?1304343620" alt="Iron Horses at the Entrance to Lewiston" /><span class="credit">Photo: Digital Barn</span></a><span class="titlename">Iron Horses at the Entrance to Lewiston</span></span><p>The Northwest Passage Scenic Byway has an additional six "Super Side Trips".  These additional drives will take you from the main route of the Northwest Passage Scenic Byway on linear and loop routes.  These "Super Side Trips" will give you the opportunity to discover new sights, topography, communities, and culture that make north central Idaho unique.  You will travel through rich farm lands, forests, prairies, river canyons, and mountains on these drives:</p><ul><li>Elk River Backcountry Byway</li><li>Gold Rush Scenic Byway</li><li>The Palouse Loop</li><li>Clearwater River & Camas Prairie Loop</li><li>Hells Canyon & Seven Devils - Segment 1 & 2</li></ul><p>Click on the "Super Side Trips - Points of Interest" menu to the right to access particular information, points of interest, miles, and map for each Super Side Trip.</p><p>Enjoy your travels!</p>';	
- return txt;
-}
-
-
-
-function set_up_gal(){
-	if($('#gal_cats').length>0){
-		//alert('loading gal');
-		var flashvars = {
-		  xmlFile: 'http://'+maindomain+'/feeds/area-photos.xml?cats='+$('#gal_cats').text()
-		};
-		var params = {
-		  allownetworking: "all",
-		  allowscriptaccess:'always',
-		  allowfullscreen:'true',
-		  swliveconnect:'true',
-		  seamlesstabbing:'false',
-		  wmode:'transparent',
-		  salign:'tl',
-		  scale:'noscale',
-		  bgcolor:'#d9dcd8'
-		};
-		var attributes = {};
-		swfobject.embedSWF("uploads/gal/main.swf", "myContent", "100%", "100%", "9.0.0","expressInstall.swf", flashvars, params, attributes);
-	}
-	if($('a.gallery').length>0){
-		$('a.gallery').colorbox({photo:true,rel:'gallery',maxHeight:'95%',maxWidth:'95%'});
-		$('#viewGal').live('click',function(e){
-		    e.stopPropagation();
-		    e.preventDefault();
-			$('a.gallery:first').click();
-		});
-	}
-}
-
-/*
-
-(function($){
-			var $body = $(document.body),
-				$menu = $('#menu_mid'),
-				$content = $('#main'),
-				$current = $('#current');
-				$selector= '#ajaxTar';
-			$.Ajaxy.configure({
-				'Controllers': {
-					'_generic': {
-						debug: false,
-						classname: 'ajaxy-page',
-						matches: /^\/pages\/?/,
-						request: function(){
-							$('#MapArea').scrollView();
-							var Ajaxy = $.Ajaxy;
-							//if ( debug_action &&  Ajaxy.options.debug ) window.console.debug('$.Ajaxy.Controllers.page.request', [this,arguments]);
-							$menu.find('.active').removeClass('active');
-							$content.stop(true,true).fadeOut(400);
-							// Return true
-							return true;
-						},
-						response: function(){
-							// Prepare
-							var Ajaxy = $.Ajaxy; var data = this.State.Response.data; var state = this.state; var State = this.State;
-							//if ( debug_action && Ajaxy.options.debug ) window.console.debug('$.Ajaxy.Controllers.page.response', [this,arguments], data, state);
-							var url=State.raw.state;
-							var i=$menu.find('a[href$="'+url+'"]').attr('id');
-							// Show Content
-							var Action = this;
-							var $responseText=data.content.toString();
-								$responseText=$responseText.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
-							$("body").append('<div id="temtar" style="position: absolute; overflow: hidden; width: 0%; height:0%;">'+$responseText+'</div>');
-							var $wanted=$('#temtar').find($selector).html();
-							$('#temtar').remove();
-							$content.html($wanted).fadeIn(400,function(){
-									Action.documentReady($content);
-									//pID=parseInt(i.replace('p_',''));
-									pID=i.replace('p_','');
-									var parent_id=$menu.find('a[href$="'+url+'"]').closest('ul').prev('a:first').attr('id');
-									//if(debug_action)console.log('id===>'+parent_id);
-									parent_id=typeof(parent_id)!="undefined"&&parent_id!=null?parseInt(parent_id.replace('p_','')):'';
-									//if(debug_action)console.log('corrected='+corrected);
-									//if(debug_action)console.log('midsite='+midsite);
-									//if(debug_action)console.log('hash===>'+hash);
-									//if(debug_action)console.log('i===>'+i);
-									//if(debug_action)console.log('pID===>'+pID);
-									//if(debug_action)console.log('parent_id===>'+parent_id);
-									
-									
-									//if(midsite&&!corrected){
-//										if(i=='p_37'||i=='p_44'||i=='p_61'||i=='p_67'||i=='p_84'||i=='p_99'){
-//											$("#sub_menu_link a").click();
-//											//jsonloadPage(pID,true);
-//											//jsonloadPage(pID,true,keepMarkers,keepPolys,keepibLabels)
-//											jsonloadPage(pID,true,false,true,false);
-//											$('#side_trips ul li ul').hide();
-//											$menu.find('a[href$="'+url+'"]').closest('li').find('ul:first').show("slow");
-//											$menu.find('a#'+pID).addClass('active');
-//											$menu.find('a[href$="'+url+'"]').addClass('active');
-//										}
-//										if(i!='p_15'&&i!='p_37'&&i!='p_44'&&i!='p_61'&&i!='p_67'&&i!='p_84'&&i!='p_99'){
-//											if(midsite&&!corrected){
-//												$("#sub_menu_link a").click();
-//												$('#menu_mid').find('a[href$="'+url+'"]').closest('li').find('ul:first').show("slow");
-//												jsonloadPage(parent_id,true);
-//												corrected=true;
-//											}
-//											//console.log('pID==>'+pID);
-//											//console.log('markers==>'+dump(markers));
-//											var mark = markers[pID];
-//											clear_highlights();
-//											
-//											
-//											//console.log('mark==>'+dump(mark));
-//											set_up_gal();
-//											var center = mark.getPosition();
-//											//recenter(center);
-//											zoom_to(center);
-//											highlight(i+'_navd',mark,'bounce',5000);
-//											lastMarker=mark;
-//											get_background(pID);
-//											
-//											$menu.find('a#'+pID).closest('li').find('ul:first').show("slow");	
-//											$menu.find('a').removeClass('active');
-//											$menu.find('a#'+pID).addClass('active');
-//										}
-//									}else{
-										$menu.find('a').removeClass('active');
-										
-										$menu.find('a[href$="'+url+'"]').addClass('active');
-										//if(debug_action)console.log('Ajaxy-Controllers-_generic-response==>'+url);//if(debug_action)
-										//if(i!='p_15'&&i!='p_37'&&i!='p_44'&&i!='p_61'&&i!='p_67'&&i!='p_84'&&i!='p_99'){
-										var test=parseInt(pID);
-										if($.inArray(test,parental)==-1){
-											//console.log('Ajaxy-Controllers-_generic-response==>'+parental[test]);
-											var mark = markers[pID];
-											clear_highlights();
-											var center = mark.getPosition();
-											//recenter(center);
-											zoom_to(center);
-											highlight(i+'_navd',mark,'bounce',5000);
-											lastMarker=mark;
-											get_background(pID);
-										}else{
-											if(i=='p_15'){
-												jsonloadPage(pID,true);
-											}else{
-												//if(i=='p_37'||i=='p_44'||i=='p_61'||i=='p_67'||i=='p_84'||i=='p_99'){
-												if($.inArray(test,parental)>-1){
-													//jsonloadPage(pID,true);
-													//jsonloadPage(pID,true,keepMarkers,keepPolys,keepibLabels)
-													jsonloadPage(pID,true,false,true,false);
-													$('#side_trips ul li ul').hide();
-													$menu.find('a[href$="'+url+'"]').closest('li').find('ul:first').show("slow");
-												}
-											}
-										}
-									//}
-									
-
-									if($("#sub_menu_link a.active").length>0){
-										if($('#menu_mid').find('a[href$="'+url+'"]').closest('li').find('ul:first').has(':visable')){
-											$("#sub_menu_link a").click();
-											$('#menu_mid').find('a[href$="'+url+'"]').closest('li').find('ul:first').show("slow");
-										}
-									}
-									set_up_addThis();
-									set_up_gal();
-
-									link_corrections();
-							});
-							return true;
-						}
-					}
-				}
-			});
-})(jQuery);
-
-*/
-
 
 
 /// CURENT TRY
@@ -1754,17 +1201,19 @@ function addpoly_poly(map){
 
 
 function build_infobox_content(item){
+	if(typeof(item.info)==='undefined'){item.info={};}
+	if(typeof(item.info.content)==='undefined'){item.info.content=[];}
 	var tabCount=$('#infotabs .ui-tabs-nav li').size();
 	if(tabCount>1){
 		$.each($('#infotabs .ui-tabs-nav li'),function(i,v){
 			var liSelf=$(this);
-				$.extend(item.info.content,{
+				item.info.content.push({
 					block:function(){
 							tinyMCE.triggerSave();
 							var index=liSelf.index('#infotabs .ui-tabs-nav li');
 							return $('#infotabs .ui-tabs-panel:eq('+index+')').find('textarea').val();
 						}(),
-					title:liSelf.text()
+					title:liSelf.find('a').text()
 				});
 			});
 	}else{
@@ -1772,37 +1221,31 @@ function build_infobox_content(item){
 	}
 	return item;
 }
-
-
-
-
-
-
-
 function build_infobox(item){
-	
-	if(typeof(item.info.content)==='undefined')
-			item=build_infobox_content(item);
+	if(typeof(item.info)==='undefined' || $.isEmptyObject(item.info) || typeof(item.info.content)==='undefined' || $.isEmptyObject(item.info.content)){
+		item=build_infobox_content(item);
+	}
 
 	if($.isArray(item.info.content)){
-		var nav='';
-		$.each(item.info.content, function(j, html) {	
-			nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">Nav '+j+'</a></li>';
-		});
-		var content='';
-		$.each( item.info.content, function(j, html) {
-			content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'">'+
-							'<div class="content">'+html.block+'</div>'+
-						'</div>';
-		});
+			var nav='';
+			$.each( item.info.content, function(j, html) {	
+				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">'+html.title+'</a></li>';
+			});
+			var content='';
+			$.each( item.info.content, function(j, html) {
+				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
+			});				
+		
 	}else{
-		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Nav</a></li>';
+		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Overview</a></li>';
 		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+item.info.content+'</div></div>';
 	}
-	var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
-				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-				content+
-			'</div>';
+
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+					content+
+				'</div>';
+			
 	var myOptions = {
 		alignBottom:true,
 		 content: box//boxText
@@ -1823,14 +1266,14 @@ function build_infobox(item){
 		,onOpen:function(){
 					$('#taby'+i).tabs();
 					$('#taby'+i).hover(function(){
-							ib[i].setOptions({enableEventPropagation: true});
+							ib[0].setOptions({enableEventPropagation: true});
 						},function(){
-							ib[i].setOptions({enableEventPropagation: false});
+							ib[0].setOptions({enableEventPropagation: false});
 						});
 					//alert('tring to tab it, dabnab it');
 				}
 	};
-	ib[i] = new InfoBox(myOptions,function(){});
+	ib[0] = new InfoBox(myOptions,function(){});
 	return item;
 }
 
@@ -1839,127 +1282,162 @@ function build_infobox(item){
 
 
 
+function add_place_point(lat,lng,clear){
+	i=0;
+	var marker = {};
+	marker.style={"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"};
+	if(typeof(clear)!=='undefined'&&clear) marker.info={};
+	marker=$.extend(marker,build_infobox(marker));
+	
+	if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+	$('#place_drawing_map').gmap('addMarker', $.extend({ 
+		'position': (typeof(lat)==='undefined' || lat=='')?$('#place_drawing_map').gmap('get_map_center'):new google.maps.LatLng(lat,lng)
+	},{'draggable':true},marker.style)).click(function() {
+		var ib_total = 0;
+		//$.each(ib, function(i) {ib[i].close(); ib_total=i; });
+		ib[0].open($('#place_drawing_map').gmap('get','map'), this);
+		// need to finish this class
+		//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+	}).dragend(function(e) {
+		var lat = this.getPosition().lat();
+		var lng = this.getPosition().lng();
+		$('#Lat').val(lat);
+		$('#Long').val(lng);
+		//setTimeout(function() {},  200);
+		var loca = new google.maps.LatLng(lat,lng);
+		setGeoCoder().geocode({'latLng':loca}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) { 
+				var arrAddress = results[0].address_components;
+				
+				var itemRoute='';
+				var itemLocality='';
+				var itemCountry='';
+				var itemPc='';
+				var itemSnumber='';
+				$('#place_address').val('');
+				$('#place_street').val('');			
+				// iterate through address_component array
+				$.each(arrAddress, function (i, address_component) {
+					if (address_component.types[0] == "route"){//": route:"
+						itemRoute = address_component.long_name;
+						$('#place_street').val(itemRoute);
+					}
+					if (address_component.types[0] == "locality"){//"town:"
+						itemLocality = address_component.long_name;
+					}
+					if (address_component.types[0] == "country"){ //"country:"
+						itemCountry = address_component.long_name;
+					}
+					if (address_component.types[0] == "postal_code_prefix"){ //"pc:"
+						itemPc = address_component.long_name;
+					}
+					if (address_component.types[0] == "street_number"){ //"street_number:"
+						itemSnumber = address_component.long_name;
+						$('#place_address').val(itemSnumber);
+					}
+				});
+				if (results[1]) {
+					//alert( results[1].formatted_address);
+					//obj.val(itemSnumber);
+				}
+			} else {
+				alert("Geocoder failed due to: " + status);
+			}
+		});
+			
+		
+		$('#estimated_places').show('fast');
+		$('#local_place_names').html('loading<span class="blink1">.</span><span class="blink2">.</span><span class="blink3">.</span>');
 
+		$('.blink1').blink(100);
+		$('.blink2').blink(150);
+		$('.blink3').blink(200);
+		$.each(gmap_location_types.length,function(i,v){
+			var requested = {
+			  location: loca,
+			  radius:.1,
+			  keyword:gmap_location_types[i]//,
+			  //types : [gmap_location_types[i]]
+			};
+			var gmap = $('#place_drawing_map').gmap('get','map');
+			var service = new google.maps.places.PlacesService(gmap);
+			service.search(requested, function (results, status) {
+				var gmap = $('#place_drawing_map').gmap('get','map');
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					alert('sereching');
+					for (var i = 0; i < 1; i++) {
+						var request = {reference:results[i].reference};
+						var service = new google.maps.places.PlacesService(gmap);
+						service.getDetails(request, function(place, status) {
+							if (status == google.maps.places.PlacesServiceStatus.OK) {
+								if(place.name){
+									if($('.blink1').length)$('#local_place_names').html('');
+									var txt = $.trim($('#local_place_names').html());
+									$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' : (txt==""?'':',') +  place.name ));
+								}
+							}
+						});
+					}
+				}
+			});
+		});
+	});
+	$(this).addClass('ui-state-disabled');
+	
+	
+}
+
+function get_Address_latlng(map,address) {
+	  setGeoCoder().geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				/*var marker = new google.maps.Marker({
+								map: map,
+								position: results[0].geometry.location
+							});*/
+				//drop1(results[0].geometry.location)	
+				var latitude = results[0].geometry.location.lat(); 
+				var longitude = results[0].geometry.location.lng(); 
+				$('#Lat').val(latitude);		
+				$('#Long').val(longitude);		
+				
+				$('#place_drawing_map').gmap('addMarker', $.extend({ 
+					'position': new google.maps.LatLng(latitude,longitude)
+				},{})).click(function() {
+					//$.each(ib, function(i) {ib[i].close();});
+					//ib[i].open($('#place_drawing_map').gmap('get','map'), this);
+					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+				});
+			} else {
+				alert("Geocode was not successful for the following reason: " + status);
+			}
+	  });
+}
+function infoUpdate(){
+	var lat = $('#Lat').val();
+	var lng = $('#Long').val();	
+		ib[0].close();
+		tinyMCE.triggerSave();
+		$('#place_drawing_map').gmap('clear','markers');
+		$('#place_drawing_map').gmap('clear','services');
+		$('#place_drawing_map').gmap('clear','overlays');	
+		add_place_point(lat,lng,true);
+}
 
 
 
 function load_place_editor() {
 	var lat = $('#Lat').val();
 	var lng = $('#Long').val();	
-	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15 }).bind('init', function () {
+	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15,'zoomControl': false,'mapTypeControl': false,'streetViewControl': false }).bind('init', function () {
 		if(lat!='')add_place_point(lat,lng);
+		autoUpdate();
 	});
 	
 	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
 		add_place_point(lat,lng);
 	});
 
-	function add_place_point(lat,lng){
-		i=0;
-		var marker = {};
-		marker.style={"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"};
-		//marker=$.extend(marker,build_infobox(marker));
-		
-		if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
-		$('#place_drawing_map').gmap('addMarker', $.extend({ 
-			'position': (typeof(lat)==='undefined' || lat=='')?$('#place_drawing_map').gmap('get_map_center'):new google.maps.LatLng(lat,lng)
-		},{'draggable':true},marker.style)).click(function() {
-			var ib_total = 0;
-			$.each(ib, function(i) {ib[i].close(); ib_total=i; });
-			ib[ib_total+1].open($('#place_drawing_map').gmap('get','map'), this);
-			// need to finish this class
-			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-		}).dragend(function(e) {
-			var lat = this.getPosition().lat();
-			var lng = this.getPosition().lng();
-			$('#Lat').val(lat);
-			$('#Long').val(lng);
-			//setTimeout(function() {},  200);
-			var loca = new google.maps.LatLng(lat,lng);
-			setGeoCoder().geocode({'latLng':loca}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) { 
-					var arrAddress = results[0].address_components;
-					
-					var itemRoute='';
-					var itemLocality='';
-					var itemCountry='';
-					var itemPc='';
-					var itemSnumber='';
-					$('#place_address').val('');
-					$('#place_street').val('');			
-					// iterate through address_component array
-					$.each(arrAddress, function (i, address_component) {
-						if (address_component.types[0] == "route"){//": route:"
-							itemRoute = address_component.long_name;
-							$('#place_street').val(itemRoute);
-						}
-						if (address_component.types[0] == "locality"){//"town:"
-							itemLocality = address_component.long_name;
-						}
-						if (address_component.types[0] == "country"){ //"country:"
-							itemCountry = address_component.long_name;
-						}
-						if (address_component.types[0] == "postal_code_prefix"){ //"pc:"
-							itemPc = address_component.long_name;
-						}
-						if (address_component.types[0] == "street_number"){ //"street_number:"
-							itemSnumber = address_component.long_name;
-							$('#place_address').val(itemSnumber);
-						}
-					});
-					if (results[1]) {
-						//alert( results[1].formatted_address);
-						//obj.val(itemSnumber);
-					}
-				} else {
-					alert("Geocoder failed due to: " + status);
-				}
-			});
-				
-			
-			$('#estimated_places').show('fast');
-			$('#local_place_names').html('loading<span class="blink1">.</span><span class="blink2">.</span><span class="blink3">.</span>');
-
-			$('.blink1').blink(100);
-			$('.blink2').blink(150);
-			$('.blink3').blink(200);
-			$.each(gmap_location_types.length,function(i,v){
-				var requested = {
-				  location: loca,
-				  radius:.1,
-				  keyword:gmap_location_types[i]//,
-				  //types : [gmap_location_types[i]]
-				};
-				var gmap = $('#place_drawing_map').gmap('get','map');
-				var service = new google.maps.places.PlacesService(gmap);
-				service.search(requested, function (results, status) {
-					var gmap = $('#place_drawing_map').gmap('get','map');
-					if (status == google.maps.places.PlacesServiceStatus.OK) {
-						alert('sereching');
-						for (var i = 0; i < 1; i++) {
-							var request = {reference:results[i].reference};
-							var service = new google.maps.places.PlacesService(gmap);
-							service.getDetails(request, function(place, status) {
-								if (status == google.maps.places.PlacesServiceStatus.OK) {
-									if(place.name){
-										if($('.blink1').length)$('#local_place_names').html('');
-										var txt = $.trim($('#local_place_names').html());
-										$('#local_place_names').html(txt+ (txt.indexOf(place.name)>-1 ? '' : (txt==""?'':',') +  place.name ));
-									}
-								}
-							});
-						}
-					}
-				});
-			});
-		});
-		$(this).addClass('ui-state-disabled');
-		
-		
-		}
-	
-	
-	
 	$.each('.dyno_tabs',function(i,v){
 		load_tiny("bodytext","tab_"+i);
 	});
@@ -1973,19 +1451,46 @@ function load_place_editor() {
 		add: function( event, ui ) {
 			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
 			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
+			$( ui.panel ).attr('role',tab_counter);
 		},
 		select: function(event, ui) {tinyMCE.triggerSave();}
 	});
-
+	// actual addTab function: adds new tab using the title input from the form above
+	function addTab() {
+	
+		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
+		$tabs.tabs( "option" , "tabTemplate" , "<li>"+
+													"<a href='#{href}'>#{label}</a>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' />"+
+													"<input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' />"+
+													"<input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />"+
+													"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+												"</li>" );
+		
+		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
+		load_tiny("bodytext","tab_"+tab_counter);
+		$.each($("#infotabs li.ui-state-default"),function(i,v){
+			$(this).find('.sort').val(i);
+		});
+		tab_counter++;
+	}
 	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
 		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
 			$(this).find('.sort').val(i);
+			var href = $(this).find('a').attr('href');
+			$(''+href).attr('role',i);
+			var id=$(''+href).find('textarea:first').attr('id');
+			tinyMCE.triggerSave();	
+			if (tinyMCE.getInstanceById(id)){tinymce.execCommand('mceRemoveControl',true,id); }
+		});
+		var tabs = $('#infotabs');
+		var panels = tabs.children('.ui-tabs-panel');
+		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
+  		$.each(panels, function(i, v) {
+			var id=$(this).find('textarea:first').attr('id');
+			load_tiny("bodytext",id);
 		});
 	}});
-
-
-
-
 
 	// modal dialog init: custom buttons and a "close" callback reseting the form inside
 	var $dialog = $( "#page_dialog" ).dialog({
@@ -2017,18 +1522,6 @@ function load_place_editor() {
 		return false;
 	});
 
-	// actual addTab function: adds new tab using the title input from the form above
-	function addTab() {
-		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
-		$tabs.tabs( "option" , "tabTemplate" , "<li><a href='#{href}'>#{label}</a><input type='hidden' name='tabs["+tab_counter+"].id' value='' /><input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' /><input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />  <span class='ui-icon ui-icon-close'>Remove Tab</span></li>" );
-		
-		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
-		load_tiny("bodytext","tab_"+tab_counter);
-		$.each($("#infotabs li.ui-state-default"),function(i,v){
-			$(this).find('.sort').val(i);
-		});
-		tab_counter++;
-	}
 
 	// addTab button: just opens the dialog
 	$( "#add_tab" )
@@ -2045,12 +1538,7 @@ function load_place_editor() {
 		var index = $( "li", $tabs ).index( $( this ).parent() );
 		$tabs.tabs( "remove", index );
 	});
-	
-	
-	
-	
-	
-	
+
 	if($('#place_street').length>0){
 		$("#place_street,#place_address").live('keyup',function () {
 			clearCount('codeAddress');
@@ -2063,34 +1551,22 @@ function load_place_editor() {
 			});
 		});
 	}
-	function get_Address_latlng(map,address) {
-		  setGeoCoder().geocode( { 'address': address}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					map.setCenter(results[0].geometry.location);
-					/*var marker = new google.maps.Marker({
-									map: map,
-									position: results[0].geometry.location
-								});*/
-					//drop1(results[0].geometry.location)	
-					var latitude = results[0].geometry.location.lat(); 
-					var longitude = results[0].geometry.location.lng(); 
-					$('#Lat').val(latitude);		
-					$('#Long').val(longitude);		
-					
-					$('#place_drawing_map').gmap('addMarker', $.extend({ 
-						'position': new google.maps.LatLng(latitude,longitude)
-					},{})).click(function() {
-						//$.each(ib, function(i) {ib[i].close();});
-						//ib[i].open($('#place_drawing_map').gmap('get','map'), this);
-						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-					});
-				} else {
-					alert("Geocode was not successful for the following reason: " + status);
-				}
-		  });
-	}	
 }
-
+var formdata = "";
+function autoUpdate(){
+	if (timeouts) {clearTimeout(timeouts);} 
+	timeouts = setTimeout(function(){ 
+		timeout=null;
+		tinyMCE.triggerSave();
+		var newData = $("#editor_form").serialize();
+		if(formdata!=newData){
+			infoUpdate();
+			formdata=newData;
+		}
+		//alert('hello');
+		autoUpdate();
+	}, 500); 
+}
 
 function load_geometrics_editor() {
      $('#geometrics_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {

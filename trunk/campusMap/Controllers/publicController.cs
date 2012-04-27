@@ -168,7 +168,8 @@
                 id = 1;
                 foreach (string category in cat)
                 {
-                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", category);
+                    string cats = HttpUtility.UrlDecode(category.Replace("__", "&"));
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", cats);
                     q.SetParameter("p" + id, c[0]);
                     id = id + 1;
                 }
@@ -274,7 +275,7 @@
 
                             infotabs += @"
                         {
-                            ""block"":""" + item.details + @""",
+                            ""block"":""" + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
                             ""title"":""Overview""
                         },";
 
@@ -282,8 +283,8 @@
                             foreach (infotabs tab in item.infotabs) {
 							    tabStr += @"
                         {
-                            ""block"":"""+tab.content+@""",
-                            ""title"":"""+tab.title+@"""
+                            ""block"":""" + tab.content.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                            ""title"":""" +tab.title+@"""
                         },";
                             }
                             infotabs += tabStr.TrimEnd(',');
@@ -291,7 +292,14 @@
                         }
                         else
                         {
-                            infotabs += @""""+item.details+@"""";
+                            if (String.IsNullOrEmpty(item.details))
+                            {
+                                infotabs += @"""""";
+                            }
+                            else
+                            {
+                                infotabs += @"""" + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
+                            }
                         }
 
 

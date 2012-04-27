@@ -36,7 +36,7 @@ function updateMap(_load){
 	});
 }
 function loadData(data){	
-if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
+	if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			 var pointHolder = {};
 			 if(shape.coords!='' && shape.type=='polyline'){ 
@@ -52,124 +52,134 @@ if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 			 }
 			$('#centralMap').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), ele);
 		});
-}
-		$.each( data.markers, function(i, marker) {	
-				if($.isArray(marker.info.content)){
-					var nav='';
-					$.each(marker.info.content, function(j, html) {	
-						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">'+html.title+'</a></li>';
-					});
-					var content='';
-					$.each( marker.info.content, function(j, html) {
-						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
-					});				
-				
-				}else{
-					var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Overview</a></li>';
-					var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
-				}
-	
-			var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
-						'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-						content+
-					'</div>';
+	}
+	$.each( data.markers, function(i, marker) {	
+		if($.isArray(marker.info.content)){
+			var nav='';
+			$.each( marker.info.content, function(j, html) {	
+				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">'+html.title+'</a></li>';
+			});
+			var content='';
+			$.each( marker.info.content, function(j, html) {
+				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+html.block+'</div></div>';
+			});				
+		
+		}else{
+			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Overview</a></li>';
+			var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
+		}
 
-			/* so need to remove this and create the class for it */
-			var boxText = document.createElement("div");
-			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-			boxText.innerHTML = marker.info.content;
-	
-			var myOptions = {
-				alignBottom:true,
-				 content: box//boxText
-				,disableAutoPan: false
-				,maxWidth: 0
-				,pixelOffset: new google.maps.Size(-200, -36)
-				,zIndex: 99
-				,boxStyle: {
-				  background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom"
-				  ,width: "400px"
-				 }
-				,closeBoxMargin: "10px 2px 2px 2px"
-				,closeBoxURL: "/Content/images/close.png"
-				,infoBoxClearance: new google.maps.Size(1, 1)
-				,isHidden: false
-				,pane: "floatPane"
-				,enableEventPropagation: false
-				,onOpen:function(){
-							$('#taby'+i).tabs();
-							$('#taby'+i).hover(function(){
-									ib[i].setOptions({enableEventPropagation: true});
-								},function(){
-									ib[i].setOptions({enableEventPropagation: false});
-								});
-							//alert('tring to tab it, dabnab it');
-						}
-			};
-			ib[i] = new InfoBox(myOptions,function(){
-				//$('#taby'+i).tabs();
-				//alert('tring to tab it, dabnab it, from the INI');
-			});
-			//end of the bs that is well.. bs of a implamentation
-			
-			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
-			$('#centralMap').gmap('addMarker', $.extend({ 
-				'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-			},marker.style)).click(function() {
-				$.each(ib, function(i) {ib[i].close();});
-				ib[i].open($('#centralMap').gmap('get','map'), this);
-				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-			});
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+					content+
+				'</div>';
+
+		/* so need to remove this and create the class for it */
+		var boxText = document.createElement("div");
+		boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+		boxText.innerHTML = marker.info.content;
+
+		var myOptions = {
+			alignBottom:true,
+			 content: box//boxText
+			,disableAutoPan: false
+			,maxWidth: 0
+			,pixelOffset: new google.maps.Size(-200, -36)
+			,zIndex: 99
+			,boxStyle: {
+			  background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom"
+			  ,width: "400px"
+			 }
+			,closeBoxMargin: "10px 2px 2px 2px"
+			,closeBoxURL: "/Content/images/close.png"
+			,infoBoxClearance: new google.maps.Size(1, 1)
+			,isHidden: false
+			,pane: "floatPane"
+			,enableEventPropagation: false
+			,onOpen:function(){
+						$('#taby'+i).tabs();
+						$('#taby'+i).hover(function(){
+								ib[i].setOptions({enableEventPropagation: true});
+								$('#centralMap').gmap('stop_scroll_zoom');
+							},function(){
+								ib[i].setOptions({enableEventPropagation: false});
+								$('#centralMap').gmap('set_scroll_zoom');
+							});
+						//alert('tring to tab it, dabnab it');
+					}
+		};
+		ib[i] = new InfoBox(myOptions,function(){
+			//$('#taby'+i).tabs();
+			//alert('tring to tab it, dabnab it, from the INI');
 		});
+		//end of the bs that is well.. bs of a implamentation
+		
+		if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+		$('#centralMap').gmap('addMarker', $.extend({ 
+			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
+		},marker.style)).click(function() {
+			$.each(ib, function(i) {ib[i].close();});
+			ib[i].open($('#centralMap').gmap('get','map'), this);
+			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+		});
+	});
 }
 
-
+/*
+*
+*
+*
+**
+**
+**
+**
+*
+*
+*/
 
 $(document).ready(function(){
 		$("a").each(function() {
 			$(this).attr("hideFocus", "true").css("outline", "none");
 		});		
 	if($('#centralMap').length){
-			iniMap();
-			if($('#centralMap').length){
-				$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");
-			}
-			$(' [placeholder] ').defaultValue();
+		iniMap();
+		if($('#centralMap').length){
+			$(window).resize(function(){resizeBg($('#centralMap'),160)}).trigger("resize");
+		}
+		$(' [placeholder] ').defaultValue();
 
-			$('#directionsTo').slideToggle();
-			$('#directionsFrom input').live('blur',function(){
-				if($('#directionsFrom input').val() !='')$('#directionsTo').slideToggle();
-			});
+		$('#directionsTo').slideToggle();
+		$('#directionsFrom input').live('blur',function(){
+			if($('#directionsFrom input').val() !='')$('#directionsTo').slideToggle();
+		});
 
-			$('#main_nav li.parent').live('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				$('.active').removeClass('active');
-				$('.checked').removeClass('checked');
-				$(this).addClass('active');
-				e.stopPropagation();
-				e.preventDefault();
-				$.each(ib, function(i) {ib[i].close();});
-				$('#centralMap').gmap('clear','markers');
-				$('#centralMap').gmap('clear','overlays');
-				updateMap(encodeURI($(this).find('a:first').text()));
+		$('#main_nav li.parent').live('click',function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$('.active').removeClass('active');
+			$('.checked').removeClass('checked');
+			$(this).addClass('active');
+			e.stopPropagation();
+			e.preventDefault();
+			$.each(ib, function(i) {ib[i].close();});
+			$('#centralMap').gmap('clear','markers');
+			$('#centralMap').gmap('clear','overlays');
+			updateMap(encodeURI($(this).find('a:first').attr('href').replace('?cat[]=','')).replace('&','__'));
+		});
+		$('#main_nav .parent li a').live('click',function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).closest('li').toggleClass('checked');
+			$.each(ib, function(i) {ib[i].close();});
+			$('#centralMap').gmap('clear','markers');
+			$('#centralMap').gmap('clear','overlays');
+			var params='';
+			$.each($('li.checked a'),function(){
+				params=params+$(this).attr('href').replace('?cat[]=','')+',';
 			});
-			$('#main_nav .parent li a').live('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				$(this).closest('li').toggleClass('checked');
-				$.each(ib, function(i) {ib[i].close();});
-				$('#centralMap').gmap('clear','markers');
-				$('#centralMap').gmap('clear','overlays');
-				var params='';
-				$.each($('li.checked a'),function(){
-					params=params+$(this).text()+',';
-				});
-				updateMap(encodeURI(params.substring(0, params.length - 1)));
-			});
+			updateMap(encodeURI(params.substring(0, params.length - 1)).replace('&','__'));
+		});
 	}	
-	
-
 	if($('#geometrics_drawing_map').length){
 		load_geometrics_editor();
 	 }	
@@ -179,12 +189,6 @@ $(document).ready(function(){
 	if($('#style_map').length){
 		load_style_editor();
 	 }	
-	
-	
-
-
-	
-	
 	if($('#map_canvas').length){
 		initialize();
 		if($('.home #map_canvas').length){$(window).resize(function(){resizeBg($('#map_canvas'),170)}).trigger("resize");}

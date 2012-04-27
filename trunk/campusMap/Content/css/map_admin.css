@@ -278,8 +278,8 @@ border-bottom-right-radius: 0px;
 
 	
 /* info boxes content */	
-#campusmap .ui-tabs .ui-tabs-panel{font-size:12px; color:#262a2d;max-height: 240px; padding:5px;}	
-#campusmap .ui-tabs .ui-tabs-panel .content{width:395px;max-height: 240px;overflow-x:hidden; overflow-y: auto;}
+#campusmap .ui-tabs .ui-tabs-panel{font-size:12px; color:#262a2d;max-height: 240px;min-height:0px; padding:5px;}	
+#campusmap .ui-tabs .ui-tabs-panel .content{width:395px;min-height:0px;max-height: 240px;overflow-x:hidden; overflow-y: auto;}
 #campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left; background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	
 

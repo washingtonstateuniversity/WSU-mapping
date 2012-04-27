@@ -1013,7 +1013,7 @@ $('.detailInfoBut').toggle(
 
 
 		// actual addTab function: adds new tab using the title input from the form above
-		function  addTab(tab_title,tab_counter,callback){
+		function  addTab(tab_title,tab_counter,callback){		
 			$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
 			typeof(callback)!=="undefined"?(callback)($("#tabs-" + tab_counter)):null;
 		}
@@ -1030,7 +1030,7 @@ $('.detailInfoBut').toggle(
 				tab_counter++;
 				$( ui.panel ).append($('.clone_pool').html().replace(/[9]{4}/g, (tab_counter>0?tab_counter:tab_counter+1) ).replace(/\|\|/g, '' ) );
 				$( ui.panel ).find('.TABS:last').tabs();
-				set_slider( $( ui.panel ).find('.TABS:last').find('.slider-range') );
+				set_slider( $( ui.panel ).find('.TABS:last').find(".slider-range") );
 			}
 		});
 		$( ".LEVEL_TABS span.ui-icon-close" ).live( "click", function() {

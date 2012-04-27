@@ -1,7 +1,7 @@
 /* Daily Evergreen Online - Home */
 
 body {background:#b6bcbf url("../../images/template/bkgrd-nostripe.jpg") repeat-x scroll 0 0;font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;color:#262a2d;font-size:12px;line-height:19px;margin:0;padding:0;text-align:center;}
-body#home{background:#b6bcbf url(../../images/template/bkgrd.jpg) repeat-x scroll 0 0;}
+body#home{/*background:#b6bcbf url(../../images/template/bkgrd.jpg) repeat-x scroll 0 0;*/}
 .img-main{max-width :377px;max-height: 245px;border :0 ;}
 a{color:#5e6a71;text-decoration:none;}
 a:hover{color:#7f9d6a;text-decoration:underline;}

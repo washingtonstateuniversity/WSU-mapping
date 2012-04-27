@@ -320,10 +320,7 @@
 			}
 		},
 		
-		/**
-		 * Helper method for getting the center of a viewport
-		 * @param latLng:string/google.maps.LatLng
-		 */
+
 		get_map_center: function() {
 			var center = this.get('map').getCenter();
 			if ( center ) {
@@ -332,7 +329,15 @@
 				return false;
 			}
 		},		
+		stop_scroll_zoom: function() {
+			this.get('map').setOptions({'scrollwheel':false});
+		},	
+		set_scroll_zoom: function() {
+			this.get('map').setOptions({'scrollwheel':true});
+		},			
 		
+		
+				
 		/**
 		 * Helper method for unwrapping jQuery/DOM/string elements
 		 * @param obj:string/node/jQuery

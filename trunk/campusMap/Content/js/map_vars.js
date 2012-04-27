@@ -1,5 +1,6 @@
 var tinyMCEImageList = [];
-
+var ib = [];
+var timeouts;
 var DOMAIN='http://localhost:50759';
 
 
