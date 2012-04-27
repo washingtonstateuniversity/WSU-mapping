@@ -409,7 +409,10 @@ $formbuttons <div class="clear"></div>
 		</div>
 	</fieldset> 
 
-
+	<div id="StatusDiv">
+	  <h3 style="display:inline-block;">Place Status:</h3>$Form.Select("place.status.id", $statuslists, "%{value='id', text='title'}")
+	  <h5>Changing this will tell whether or not the public can see this place in a map view.</h5>
+	</div>
 
     <div id="AuthorDiv">
       <h3>Authors</h3>

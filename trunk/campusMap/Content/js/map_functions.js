@@ -1217,7 +1217,7 @@ function build_infobox_content(item){
 				});
 			});
 	}else{
-		item.info.content="";
+		item.info.content=$('#infotabs .ui-tabs-panel:eq(0)').find('textarea').val();
 	}
 	return item;
 }
@@ -1441,6 +1441,18 @@ function load_place_editor() {
 	$.each('.dyno_tabs',function(i,v){
 		load_tiny("bodytext","tab_"+i);
 	});
+	
+	$(window).resize(function(){
+		var tabs = $('#infotabs');
+		var panels = tabs.children('.ui-tabs-panel');
+  		$.each(panels, function(i, v) {
+			var id=$(this).find('textarea:first').attr('id');
+			$('#'+id+"_tbl").width($('#infotabs').width()-40);
+		});
+	}).trigger("resize");
+	
+	
+	
 	var $tab_title_input = $( "#tab_title"),
 		$tab_content_input = $( "#tab_content" );
 	var tab_counter =  $("#infotabs li.ui-state-default").size();
