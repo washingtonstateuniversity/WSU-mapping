@@ -32,7 +32,13 @@ namespace campusMap.Models
             get { return place_id; }
             set { place_id = value; }
         }
-
+        private string _infoTitle;
+        [Property]
+        virtual public string infoTitle
+        {
+            get { return _infoTitle; }
+            set { _infoTitle = value; }
+        }
         private string Prime_Name;
         [Property]
         virtual public string prime_name
@@ -40,7 +46,6 @@ namespace campusMap.Models
             get { return Prime_Name; }
             set { Prime_Name = value; }
         }
-
         private string Abbrev_Name;
         [Property]
         virtual public string abbrev_name

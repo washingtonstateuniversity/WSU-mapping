@@ -324,6 +324,7 @@ GO
 
 	CREATE TABLE [dbo].[place](
 		[place_id] [int] IDENTITY(1,1) NOT NULL,
+		[infoTitle] [nvarchar](max) NULL,
 		[prime_name] [nvarchar](max) NOT NULL,
 		[abbrev_name] [nchar](10) NULL,
 		[address] [nvarchar](max) NULL,

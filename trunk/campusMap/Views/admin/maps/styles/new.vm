@@ -47,7 +47,7 @@
 
 
 <div class="LEVEL_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
-	<button id="add_tab">Add level</button>
+	<button id="add_zoom">Add level</button>
 
 	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 		#foreach($zoom in $style.zoom)
@@ -55,7 +55,6 @@
 				<span class='ui-icon ui-icon-close'>Remove Tab</span><a href="#z_${zoom.id}">Zoom level:<span class="name__start">${zoom.start}</span>#if(${zoom.end}!='')<span class="name__endarea"> to <span class="name__end">${zoom.end}</span></span>#end </a>
 			</li>
 		#end
-		
 	</ul>
 	#set($c=0)
 	#foreach($zoom in $style.zoom)
@@ -147,7 +146,7 @@
 			<div class="tabed" id="z__9999_${event.name}">
 				<fieldset>
 					<legend>#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end setup:</legend>
-					<fieldset id="optionsSelection_hover" >
+					<fieldset id="optionsSelection_${event.name}" >
 						<legend>Style options</legend>
 						<div>
 							#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
@@ -160,7 +159,7 @@
 									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 								#end
 							</ul>
-							<ul id="sortable1_z__9999_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
+							<ul id="sortable1_z__9999_${event.name}" class="sortStyleOps orgin ${event.name} connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
 								#foreach($opt in $event.getUsed($style,$zoom))
 									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
 								#end

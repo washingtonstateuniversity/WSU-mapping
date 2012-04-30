@@ -2,46 +2,33 @@
 	<a href="#" class='detailInfoBut'>Info</a> 
 	<div class='detailArea'>
 		<ul>
-		
-		
- 		#if($item.coordinate)	 
-		  #if($item.authors!='')<li class='Authors'>
-			<span>Authors: </span>$!item.authors
-		  </li>#end
-		  #if($item.tags && $item.tags!="")<li class="Body">
-			<span>Tag: </span>
-		#foreach($tag in $item.tags)
-			$!tag.name
-		#between
-			,
-		#end
-		  </li>#end
-	  	#end
-		
-		
-			#if($item.Publishtime)<li class='date'>
-				<span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','')
-			</li>#end
-			#if($item.Status.Title)<li class='Status'>
-				<div>
-					<span>Status: </span>$!item.Status.Title
-				</div>
-			</li>#end
-			#if($item.BreakingNews)<li>
-				<span>Breaking: </span>$!item.BreakingNews
-			</li>#end
-			#if($item.Hottopic)<li>
-				<span>Hottopic: </span>$!item.Hottopic
-			</li>#end
-			#*#if($item.Location)<li>
-				<span>Location: </span>$!item.Location
-			</li>#end*#
-			#if($item.itemType.Name)<li>
-				<span>Type: </span>$!item.itemType.Name
-			</li>#end
-			#if($item.id)<li>
-				<span>Id: </span>$!item.id
-			</li>#end
+			#if($item.coordinate)
+			<li class='Authors'>
+			#if($item.authors.Count>0)
+				<span>Authors: </span><br/>
+					#foreach($author in $item.authors)
+						$!author.name
+					#between
+						,
+					#end
+				#else
+					<em>currently unassigned</em>
+			#end
+			</li>
+			  <li class="tags">
+				<span>Tag: </span>
+					#if($item.tags.Count>0)
+						$item.tags.Count
+					#else
+						<em>currently none</em>
+					#end
+			  </li>
+			#end
+			#if($item.Publishtime)<li class='date'> <span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','') </li>#end
+			#if($item.Status.Title)<li class='Status'><span>Status: </span>$!item.Status.Title</li>#end
+			#*#if($item.Location)<li> <span>Location: </span>$!item.Location </li>#end*#
+			#if($item.infotabs)<li> <span>Tabs: </span>#set($c=$item.infotabs.Count+1)$c</li>#end
+			#if($item.id)<li> <span>Id: </span>$!item.id </li>#end
 		</ul>
 	</div>
 </div>

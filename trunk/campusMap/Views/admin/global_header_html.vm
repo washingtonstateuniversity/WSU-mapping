@@ -47,8 +47,8 @@ $Controller.getView()
 <script type="text/javascript" src="/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
-
-
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
 
 
 <script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>

@@ -249,8 +249,7 @@ namespace campusMap.Controllers
             bool flag = false;
             switch (user.access_levels.title)
             {
-                case "Author": flag = true; break;
-                               
+                case "Admin": flag = true; break;        
                 case "Editor": flag = true; break;
             }
             return flag;        
@@ -600,9 +599,10 @@ namespace campusMap.Controllers
             PropertyBag["tabs"] = tabs;
 
             List<authors> authors = new List<authors>();
+            if (!one_place.Authors.Contains(user)) authors.Add(user); 
             authors.AddRange(one_place.Authors);
-            for (int i = 0; i < 2; i++)
-                authors.Add(new authors());
+           // for (int i = 0; i < 2; i++)
+           //     authors.Add(new authors());
 
             List<media_repo> images = new List<media_repo>();
             images.AddRange(one_place.Images);
@@ -898,7 +898,8 @@ namespace campusMap.Controllers
                 RedirectToReferrer();
                 return;
             }*/
-            place.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : place.status;
+            int requestedStatus = canPublish(user) ? place.status.id : 1;
+            place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             place.infotabs.Clear();
             //place.categories.Clear();
@@ -1033,13 +1034,13 @@ namespace campusMap.Controllers
                     place.Images.Add(media);
                 }
             }
-            
+            if (!place.Authors.Contains(user) && authors==null) place.Authors.Add(user); 
             foreach (authors author in authors)
             {
-                if (author.id > 0)
+                if (author.id > 0 && !place.Authors.Contains(author))
                     place.Authors.Add(author);   
             }
-
+            
             /*string requested_url = place.CustomUrl;
             if (placeService.placeByURL(place.CustomUrl).Length > 1)
             {

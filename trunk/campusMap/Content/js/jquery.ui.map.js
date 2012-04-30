@@ -78,7 +78,20 @@
 			}
 			return this.options[key];
 		},
-		
+		/**
+		 * setOptions
+		 * @param options:object
+		 */
+		setOptions: function(options,element) {
+			if (options) {
+				if(element){
+					this._unwrap(element).setOptions(options);
+				}else{
+					this.get('map').setOptions(options);
+				}
+			}
+			return this;
+		},
 		/**
 		 * Setup plugin basics, 
 		 * @param options:object
@@ -285,7 +298,13 @@
 			map.setCenter(latLng);
 			return this;
 		},
-		
+
+		/**
+		 * Destroys map elements.
+		 */
+		clear_map: function() {
+			this.clear('markers').clear('services').clear('overlays');
+		},
 		/**
 		 * Destroys the plugin.
 		 */

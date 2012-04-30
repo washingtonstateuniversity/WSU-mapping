@@ -397,6 +397,7 @@ function editor_oninit(ed) {
 			//ed.execCommand('mceSpellCheck', true);
 		}, 1);
 	}
+	tinyResize(ed.id);
 }
 
 // replace your editor_remove_insertImage function with this:
@@ -487,7 +488,7 @@ function tinyoptions(which,id){
 				width:"685",
                 plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
                 theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
-                theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker", 
+                theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace", 
                 theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect",
                 spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker",
 				theme_advanced_toolbar_location : "top", 
@@ -497,7 +498,6 @@ function tinyoptions(which,id){
 				content_css : "/Content/css/main_tinymce.css", 
 				//execcommand_callback : "CustomExecCommandHandler",
 				setupcontent_callback:function(){
-					
 					//myCustomSetupContent();
 				},				
 				// Style formats
@@ -685,14 +685,15 @@ function tinyoptions(which,id){
                 elements : id?id:"place_summary",
                 theme : "advanced",
                 width : "685", 
-				height:  "350",
+				height:  "150",
 				theme_advanced_resizing_min_height :150,
 				setup : function(ed) {
 					ed.onInit.add(function() {
 						var e = tinymce.DOM.get(ed.id + '_tbl'), ifr = tinymce.DOM.get(ed.id + '_ifr'), w = ed.getWin(), dh;
 						var h = 200; //new height of edit area
 						dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
-						ed.theme.resizeTo(685, h + dh);
+						//ed.theme.resizeTo(685, h + dh);
+						tinyResize(ed.id);
 					});
 				},
                 plugins : "paste, spellchecker, autoresize",
@@ -716,7 +717,8 @@ function tinyoptions(which,id){
 						var e = tinymce.DOM.get(ed.id + '_tbl'), ifr = tinymce.DOM.get(ed.id + '_ifr'), w = ed.getWin(), dh;
 						var h = 200; //new height of edit area
 						dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
-						ed.theme.resizeTo(685, h + dh);
+						//ed.theme.resizeTo(685, h + dh);
+						tinyResize(ed.id);
 					});
 				},
                 plugins : "paste, spellchecker, autoresize,advlink",

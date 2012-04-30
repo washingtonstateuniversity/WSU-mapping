@@ -51,8 +51,8 @@ function removeFromImgRoster(id){
 }
 
 function boxCreation(image_id){
-	var HTML ='<input type="hidden" value="'+image_id+'" name="images['+image_id+'].id" style="">';
-		HTML+='<span class="imageBox">';
+	var HTML ='<span class="imageBox">';
+		HTML+='<input type="hidden" value="'+image_id+'" name="images['+image_id+'].id"  class="placeImages">';
 		HTML+='<img src="/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
 		HTML+='<a title="'+image_id+'" rel="'+place_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
 		HTML+='<span class="ui-icon ui-icon-trash"></span>';

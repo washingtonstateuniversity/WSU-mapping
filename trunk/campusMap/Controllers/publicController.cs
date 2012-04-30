@@ -161,9 +161,9 @@
                 {
                     sql += " :p"+id+" in elements(p.categories) ";
                     id = id +1;
-                    sql += " and ";
+                    sql += " or ";
                 }
-                sql += " 1=1 ";
+                sql += " 1=0 ";
                 SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
                 id = 1;
                 foreach (string category in cat)
@@ -256,49 +256,49 @@
 
                 String placeList = "";
                 int count = 0;
-                foreach (place item in items)
-                {
-
-
+                foreach (place item in items){
                     if (item.coordinate != null)
                     {
-                        if (count == 0)
+                        String mainimage = "";
+                        if (item.Images.Count >0 )
                         {
+                            /* note the width and height should be abstracted out into a map preference*/
+                            mainimage = "<span class='headImage'><img src='/media/download.castle?placeid=" + item.id+ "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' alt='Evergreen' class='img-main'/></span>";
+                        }
+                        String infoTitle = "";
+                        if (!string.IsNullOrEmpty(item.infoTitle))
+                        {
+                            infoTitle = "<h2 class='header'>" + item.infoTitle + "</h2>";
+                        }
+
+                        if (count == 0){
                             placeList += @"""markers"":[";
                         }
                         String infotabs = "";
-                        if (item.infotabs.Count > 0)
-                        {
+                        if (item.infotabs.Count > 0){
                             infotabs += @"[";
 
                             String tabStr = "";
 
                             infotabs += @"
                         {
-                            ""block"":""" + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                            ""block"":""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
                             ""title"":""Overview""
                         },";
-
-
                             foreach (infotabs tab in item.infotabs) {
 							    tabStr += @"
                         {
-                            ""block"":""" + tab.content.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                            ""block"":""" + infoTitle + tab.content.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
                             ""title"":""" +tab.title+@"""
                         },";
                             }
                             infotabs += tabStr.TrimEnd(',');
                             infotabs += @"]";
-                        }
-                        else
-                        {
-                            if (String.IsNullOrEmpty(item.details))
-                            {
+                        }else{
+                            if (String.IsNullOrEmpty(item.details)){
                                 infotabs += @"""""";
-                            }
-                            else
-                            {
-                                infotabs += @"""" + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
+                            } else{
+                                infotabs += @"""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
                             }
                         }
 

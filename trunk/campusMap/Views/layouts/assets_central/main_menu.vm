@@ -23,7 +23,7 @@
 		#end
 		#if($lastLevel != ${item.level} && $c>0)
 			#if($lastLevel < ${item.level})
-				<ul class='$subULClass'><li class='$subNarrowClass'>Narrow view to:</li>#set($ulOpen="true")
+				<ul class='$subULClass'><!--<li class='$subNarrowClass'>Narrow view to:</li>-->#set($ulOpen="true")
 			#end
 		#end
 		

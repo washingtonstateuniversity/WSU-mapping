@@ -33,7 +33,9 @@ function updateMap(_load){
 	var url="http://localhost:61788/public/get_place_by_category.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		loadData(data);
+		prep();
 	});
+	
 }
 function loadData(data){	
 	if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
@@ -57,7 +59,7 @@ function loadData(data){
 		if($.isArray(marker.info.content)){
 			var nav='';
 			$.each( marker.info.content, function(j, html) {	
-				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'">'+html.title+'</a></li>';
+				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 			});
 			var content='';
 			$.each( marker.info.content, function(j, html) {
@@ -65,7 +67,7 @@ function loadData(data){
 			});				
 		
 		}else{
-			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1">Overview</a></li>';
+			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
 			var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+marker.info.content+'</div></div>';
 		}
 
@@ -136,11 +138,11 @@ function loadData(data){
 *
 *
 */
-
+function prep(){
+	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
+}
 $(document).ready(function(){
-		$("a").each(function() {
-			$(this).attr("hideFocus", "true").css("outline", "none");
-		});		
+	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
 		iniMap();
 		if($('#centralMap').length){
@@ -185,9 +187,11 @@ $(document).ready(function(){
 	 }	
 	if($('#place_drawing_map').length){
 		load_place_editor();
+		tinyResize();
 	 }	
 	if($('#style_map').length){
 		load_style_editor();
+		
 	 }	
 	if($('#map_canvas').length){
 		initialize();
@@ -328,7 +332,7 @@ $( "#addGeometrics" ).click(function(){
 					$( "#LocationModelSelect" ).combobox();
 				});
 			$( "#dialog-form" ).dialog("open").dialog('widget');//.position({my: 'left',at: 'left',of: $('#map_canvas')}); 
-			drop1(); 
+			//drop1(); 
 
 			$( "#tags" )
 				// don't navigate away from the field on tab when selecting an item
@@ -377,47 +381,7 @@ $( "#addGeometrics" ).click(function(){
 			});
 		});
 			
-/*			$('.actions button:first').button({
-				icons: {
-					primary: "ui-icon-gear",
-					secondary: "ui-icon-triangle-1-s"
-				}
-			});
-			$('.optionsLink a').button({
-				icons: {
-					primary: "ui-icon-gear",
-					secondary: "ui-icon-triangle-1-s"
-				}
-			}).click(function(){
-			
-			});
-		
-		
-		
-			$( ".options button:first" ).button({
-				icons: {
-					primary: "ui-icon-gear",
-					secondary: "ui-icon-triangle-1-s"
-				}
-			}).click(function(){
-			
-			}).next('button').button({
-				icons: {
-					primary: "ui-icon-gear",
-					secondary: "ui-icon-triangle-1-s"
-				}
-			}).click(function(){
-			
-			}).next('button').button({
-				icons: {
-					primary: "ui-icon-gear",
-					secondary: "ui-icon-triangle-1-s"
-				}
-			});	
-*/
 
-
-	
 	$('.ListingChoices').click(function(e) {
 		var obj=$(this);
 		if(!$(this).hasClass('active')){
@@ -440,5 +404,5 @@ $( "#addGeometrics" ).click(function(){
 		}
 		return false;
 	});
-
+			
 });

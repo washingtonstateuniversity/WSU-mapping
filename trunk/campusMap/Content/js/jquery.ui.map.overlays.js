@@ -10,7 +10,22 @@
 ( function($) {
 
 	$.extend($.ui.gmap.prototype, {
-		
+	
+		/*
+		 * This is just a short cut to addShape
+		 */
+		addPolygon: function(shapeOptions) {
+			return this.addShape('Polygon', shapeOptions);
+		},
+		addPolyline: function(shapeOptions) {
+			return this.addShape('Polyline', shapeOptions);
+		},
+		addRectangle: function(shapeOptions) {
+			return this.addShape('Rectangle', shapeOptions);
+		},
+		addCircle: function(shapeOptions) {
+			return this.addShape('Circle', shapeOptions);
+		},
 		/**
 		 * Adds a shape to the map
 		 * @param shapeType:string Polygon, Polyline, Rectangle, Circle
@@ -22,7 +37,7 @@
 			var flip = typeof(shapeOptions.coordsFlip)!=='undefined' ? shapeOptions.coordsFlip : false;
 
 
-			if(typeof(shapeOptions.paths)!='string'){
+			if(typeof(shapeOptions.paths)!='string' && !$.isArray(shapeOptions.paths) ){
 				var reverse_array = false;
 				var paths_array = [];
 				$.each(shapeOptions.paths, function(i,v){

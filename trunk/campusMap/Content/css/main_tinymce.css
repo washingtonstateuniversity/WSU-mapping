@@ -97,7 +97,7 @@ a.section:hover{background-color:#526E3F;}
     margin:0px;
     padding: 30px 10px 20px 30px;
     text-align: left;
-    width: 626px;
+    /*width: 626px;*/
 	
 	
 	
@@ -329,4 +329,6 @@ a.section:hover{background-color:#526E3F;}
 
 
 
-
+body *{font-size:12px; color:#262a2d;padding:5px;}
+.header{font-size:14px; color:#981e32; font-weight:bold;}
+.headImage{float:left; background: url("/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	

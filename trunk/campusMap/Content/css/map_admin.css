@@ -253,7 +253,7 @@
 
 
 /* info boxes */
-#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;}
+#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65); box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65);}
 #campusmap .ui-widget-header{height:17px;}
 #campusmap .infoClose{ right: 4px;top: -5px;z-index: 1;}
 #campusmap .ui-tabs .ui-tabs-nav{padding: 0.2em 0 0;
@@ -287,5 +287,5 @@ border-bottom-right-radius: 0px;
 	
 	.defaultSkin table.mceToolbar, .defaultSkin tr.mceFirst .mceToolbar tr td, .defaultSkin tr.mceLast .mceToolbar tr td { float: left; } 
 	
-	
+	[hideFocus="true"]{outline:none;}
 	

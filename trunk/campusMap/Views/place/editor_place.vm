@@ -117,7 +117,7 @@
 		#if( $place.id==0 || $place.tmp)
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
-		<fieldset>
+		<fieldset style="min-width:455px;">
 		<fieldset style="width:44%;float:right;"><legend>Address Options</legend>
 <div class="col2 w100"  style="display:inline-block;">
                 <label for="street_address">Address</label><br/>
@@ -225,7 +225,7 @@
             <fieldset style="width:44%;float:left;"><legend>Categories</legend>
 				<div class="container" style="width:100%;">
 					<label for="LocationModelSelect"><strong>Choose the Categories:</strong></label><br/>
-					<select id="LocationModelSelect" name="cats[]"  class="" multiple="multiple" size="9">
+					<select id="LocationModelSelect" name="cats[]"  class="" multiple="multiple" size="9" style="width:205px;">
 						#foreach($cat in $categories)
 							<option class="model" value="$cat.id" #foreach($c in $place.categories)#if($c.id == $cat.id) selected="selected" #end#end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
 						#end
@@ -291,17 +291,7 @@
 			
              
 
-    #if($Controller.canPublish($loginUser)) <p class="wsu_ui">
-      Publication Date:  <br/>
-			<input type="text" value="$!place.publishtime" name="place.publishtime" id="place_publishtime" class="ui-widget ui-widget-content ui-corner-all w150" />
-		</p>
-		<p>
-			Place Status:<br/>
-			$Form.Select("place.status.id", $statuslists, "%{value='Id', text='Title'}")
-		</p>
-    #else
-		<input type="hidden" value="1" name="place.status.id" />
-	#end
+
 
      $formbuttons
     <div class="clear"></div>
@@ -324,14 +314,19 @@ $formbuttons
 			<h3>Summary :</h3>
 			#*$Form.TextArea("place.summary")*#
 			<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
-			</hr>
+			<br/>
+			<hr/>
+			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/>
+			<h6><em>Shows up on all tabs of the info window; if it’s to only show on one tab, leave this blank while using the wysiwyg to do so.</em></h6>
+			<hr/>
+			<br/>
 			<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
 			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 				<li class="ui-state-default ui-corner-top nonsort"><a href="#dyno_tab1">Overview</a></li>
 				#set($T = 0)
 				#foreach($tab in $tabs) 
 					<li class="ui-state-default ui-corner-top">
-						<a href="#dyno_tabs_$T">$tab.title</a>
+						<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
 						<input type="hidden" name="tabs[$T].id" value="" />
 						<input type="hidden" name="tabs[$T].title" value="$!tab.title" /> 
 						<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' />
@@ -408,15 +403,17 @@ $formbuttons <div class="clear"></div>
 			</div>
 		</div>
 	</fieldset> 
-
-	<div id="StatusDiv">
-	  <h3 style="display:inline-block;">Place Status:</h3>$Form.Select("place.status.id", $statuslists, "%{value='id', text='title'}")
-	  <h5>Changing this will tell whether or not the public can see this place in a map view.</h5>
-	</div>
-
+ 	#if($Controller.canPublish($loginUser))
+		<div id="StatusDiv">
+		  <h3 style="display:inline-block;">Place Status:</h3>
+		  $Form.Select("place.status.id", $statuslists, "%{value='id', text='title'}")
+		  <h6><em>Changing this will tell whether or not the public can see this place in a map view.</em></h6>
+		</div>
+		<hr/>
+	#end
     <div id="AuthorDiv">
       <h3>Authors</h3>
-      <h4>Select or create new author (if one isn't already created)</h4>
+      <h6><em>Select or create new author (if one isn't already created)</em></h6>
       #set($count = 0)
       #set($id = 0)
       #foreach($placeauthor in $placeauthors)
@@ -461,7 +458,7 @@ $formbuttons <div class="clear"></div>
     
   </div>
   
-#if($fields.count>0)<div id="FIELDS" class="mainAreaTabs">
+#if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
 	$formbuttons <div class="clear"></div>
         <fieldset><legend>Place fields: </legend>
 
@@ -482,13 +479,17 @@ $formbuttons
             <h3>Place Images</h3>
         
             <a href="#" class="insotryupload buttons">Upload Images</a>
-            <br/><br/>
-           <span id="img_layout_choice" class="grid"></span>
+            
+			 
+           
+		   <h6><strong>Note:</strong><em>The first image in the list is the main image.  Any layout that calls the Main image will be calling this first image.  To make another image be the main image, simply drag the desired image before the first.</em></h6>
+		   <span id="img_layout_choice" class="grid"></span><br/>
             <div id="browserBox" class="ui-corner-all grid">
                 #foreach($placeimage in $placeimages)
                     #if($placeimage.id!=0)
-                    <input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" />
+                    
                         <span class="imageBox">
+							<input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" class="placeImages"/>
                             <img src="/media/download.castle?id=${placeimage.id}&placeid=${place.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
                             <a title="$placeimage.id" rel="$place.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
                                 <span class="ui-icon ui-icon-trash"></span>
@@ -584,30 +585,6 @@ $formbuttons
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	#if( !$ajaxed )
 		<div style="position:absolute;top:-9999em;left:-9999em; z-index: 1;">
@@ -630,7 +607,16 @@ $formbuttons
 		</div>
 	#end
 
-
+	<div id="page_dialog">
+		<form id="taber" name="">
+			<fieldset class="ui-helper-reset">
+				<label for="tab_title">Title</label>
+				<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+				<label for="tab_content">Content</label>
+				<textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
+			</fieldset>
+		</form>
+	</div>
 #else
 
 	#capturefor(formbuttons)
@@ -672,18 +658,14 @@ $formbuttons
 			
 			
 			
-			<fieldset style="width:44%;"><legend>Address Options</legend>
-	
-								
+			<fieldset style="width:44%;"><legend>Address Options</legend>		
 					<label for="place.campus"><strong>Campus</strong></label><br/>
 					<select id="place.campus" class="autoselect" name="place.campus.id">
 						<option value="">Select one...</option>
 						#foreach($campus in $campuses)
-							<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+							<option class="type" value="$campus.id" #if($place.campus.name == 'Pullman') selected="selected" #end>$!campus.name</option>
 						#end
 					</select><br/>
-				
-	
 					<label for="place.college"><strong>College</strong></label><br/>
 					<select id="place.college" class="autoselect" name="place.college.id">
 						<option value="">Select one...</option>
@@ -691,8 +673,6 @@ $formbuttons
 							<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
 						#end
 					</select><br/>
-								
-	
 					<label for="place.school"><strong>School</strong></label><br/>
 					<select id="place.school" class="autoselect" name="place.school.id">
 						<option value="">Select one...</option>
@@ -700,7 +680,6 @@ $formbuttons
 							<option class="type" value="$school.id" #if($place.school == $school) selected="selected" #end>$!school.name</option>
 						#end
 					</select><br/>
-	
 					<label for="place.department"><strong>Departments</strong></label><br/>
 					<select id="place.department" class="autoselect" name="place.department.id">
 						<option value="">Select one...</option>
@@ -708,7 +687,6 @@ $formbuttons
 							<option class="type" value="$department.id" #if($place.department == $department) selected="selected" #end>$!department.name</option>
 						#end
 					</select><br/>
-	
 					<label for="place.program"><strong>Programs</strong></label><br/>
 					<select id="place.program" class="autoselect" name="place.program.id">
 						<option value="">Select one...</option>
@@ -716,26 +694,10 @@ $formbuttons
 							<option class="type" value="$program.id" #if($place.program == $program) selected="selected" #end>$!program.name</option>
 						#end
 					</select>
-	
 				</fieldset>
-			
-				
 		</fieldset>
 	</form>
-
-
-
 #end
 
 
 
-	<div id="page_dialog">
-		<form id="taber" name="">
-			<fieldset class="ui-helper-reset">
-				<label for="tab_title">Title</label>
-				<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
-				<label for="tab_content">Content</label>
-				<textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
-			</fieldset>
-		</form>
-	</div>

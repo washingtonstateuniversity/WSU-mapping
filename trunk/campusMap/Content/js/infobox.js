@@ -121,6 +121,7 @@ function InfoBox(opt_opts,callback) {
   this.contextListener_ = null;
   this.fixedWidthSet_ = null;
   
+  this.onClose = opt_opts.onClose || callback;
   this.onOpen = opt_opts.onOpen || callback;
   
   if(typeof(callback)!=='undefined')callback();
@@ -268,9 +269,9 @@ InfoBox.prototype.addClickHandler_ = function () {
 
     closeBox = this.div_.firstChild;
     this.closeListener_ = google.maps.event.addDomListener(closeBox, 'click', this.getCloseClickHandler_());
-
+	
   } else {
-
+	
     this.closeListener_ = null;
   }
 };
@@ -294,7 +295,7 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
     }
 
     me.close();
-
+	me.onClose();
     /**
      * This event is fired when the InfoBox's close box is clicked.
      * @name InfoBox#closeclick
