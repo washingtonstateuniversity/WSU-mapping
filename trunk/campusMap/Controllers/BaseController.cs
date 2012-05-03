@@ -29,11 +29,25 @@ namespace campusMap.Controllers
         {
             return new String('\t', n);
         }
+
+
+        //-jb || this will repeate str and {$i} is a the number pattern insertion
         public string repeatStr(string str,int n)
         {
             StringBuilder sb = new StringBuilder(str.Length * n);
             for (int i = 0; i < n; i++)
-                sb.Append(str);
+            {
+                string tmp = "";
+                if (str.Contains("{$i}"))
+                {
+                    tmp = str.Replace("{$i}", "" + i);
+                }
+                else
+                {
+                    tmp = str;
+                }
+                sb.Append(tmp);
+            }
             return sb.ToString();
         } 
         public string getView()

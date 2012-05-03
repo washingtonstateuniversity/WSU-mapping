@@ -129,40 +129,47 @@ namespace campusMap.Models
         }
 
 
-        private IList<map_views> Views = new List<map_views>();
+        private IList<map_views> _views = new List<map_views>();
         [HasAndBelongsToMany(typeof(map_views), Lazy = true, BatchSize = 60, Table = "authors_to_view", ColumnKey = "author_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<map_views> views
         {
-            get { return Views; }
-            set { Views = value; }
+            get { return _views; }
+            set { _views = value; }
         }
-        private IList<place_types> sections = new List<place_types>();
-        [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "authors_to_place_type", ColumnKey = "place_type_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place_types> Sections
+        private IList<place_types> _place_types = new List<place_types>();
+        [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "authors_to_place_type", ColumnKey = "author_id", ColumnRef = "place_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place_types> place_types
         {
-            get { return sections; }
-            set { sections = value; }
+            get { return _place_types; }
+            set { _place_types = value; }
         }
-        private IList<colleges> colleges = new List<colleges>();
+        private IList<colleges> _colleges = new List<colleges>();
         [HasAndBelongsToMany(typeof(colleges), Lazy = true, Table = "authors_to_colleges", ColumnKey = "college_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<colleges> Colleges
+        virtual public IList<colleges> colleges
         {
-            get { return colleges; }
-            set { colleges = value; }
+            get { return _colleges; }
+            set { _colleges = value; }
         }
-        private IList<campus> campus = new List<campus>();
-        [HasAndBelongsToMany(typeof(campus), Lazy = true, Table = "authors_to_campus", ColumnKey = "campus_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<campus> Campus
+        private IList<campus> _campus = new List<campus>();
+        [HasAndBelongsToMany(typeof(campus), Lazy = true, Table = "authors_to_campus", ColumnKey = "author_id", ColumnRef = "campus_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<campus> campus
         {
-            get { return campus; }
-            set { campus = value; }
+            get { return _campus; }
+            set { _campus = value; }
         }
-        private IList<programs> programs = new List<programs>();
-        [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "authors_to_programs", ColumnKey = "program_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<programs> Programs
+        private IList<programs> _programs = new List<programs>();
+        [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "authors_to_programs", ColumnKey = "author_id", ColumnRef = "program_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<programs> programs
         {
-            get { return programs; }
-            set { programs = value; }
+            get { return _programs; }
+            set { _programs = value; }
+        }
+        private IList<categories> _categories = new List<categories>();
+        [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "authors_to_categories", ColumnKey = "author_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<categories> categories
+        {
+            get { return _categories; }
+            set { _categories = value; }
         }
        /* private Positions position;
         [BelongsTo]

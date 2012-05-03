@@ -1,3 +1,6 @@
+/* note this is in major need of clean up.. */
+
+
 #coords1 {
 	padding: 5px;
 	font-weight: bold;
@@ -192,48 +195,26 @@
 #nav #main_nav ul li{padding-bottom: 2px;}
 
 #nav #main_nav li.active li{
-	background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;
-	padding-left:13px;
+	
+	
 	}
-#nav #main_nav li.active li a{color:#5E6A71;}
+#nav #main_nav li.active li a{padding-left:13px;color:#5E6A71;background: url("/Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;}
 #nav #main_nav li.active li.checked {
-	background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/assests_central/checked_menu.png") no-repeat scroll left center transparent;
+	
 	}
-#nav #main_nav li.active li.checked a{color:#981e32;}
+#nav #main_nav li.active li.checked a{color:#981e32;background: url("/Content/images/assests_central/checked_menu.png") no-repeat scroll left center transparent;}
 #nav #main_nav ul li.subNarrow{font-style:italic;background: none repeat scroll 0 0 transparent;}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #toolbar ul {float:right; padding:0px; margin:0 15px 0 0;height:20px;}
-#toolbar ul li{}
+#toolbar ul li{ display: block;float: left;line-height: 15px;}
 #toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
 
 #placeSearch{height:23px; position:relative;width:147px;}
 #placeSearch input{color:#3cb6ce;background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
-#placeSearch input[type=text]{left:0px;}
+#placeSearch input[type=text]{left:0px;padding-left: 5px;}
 #placeSearch input:focus{ background-position:left bottom;}
 #placeSearch .submit{background-position:right top;width:22px;font-size:0px;overflow:hidden; border:none;padding: 0; cursor:pointer;right:0px;}
 #placeSearch .submit:focus,#placeSearch .submit:hover{background-position:right bottom;}
@@ -253,7 +234,16 @@
 
 
 /* info boxes */
-#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65); box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65);}
+#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65); box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65);
+-moz-border-radius-bottomleft: 0px;
+-webkit-border-bottom-left-radius: 0px;
+-khtml-border-bottom-left-radius: 0px;
+border-bottom-left-radius: 0px;
+-moz-border-radius-bottomright: 0px;
+-webkit-border-bottom-right-radius: 0px;
+-khtml-border-bottom-right-radius: 0px;
+border-bottom-right-radius: 0px;
+}
 #campusmap .ui-widget-header{height:17px;}
 #campusmap .infoClose{ right: 4px;top: -5px;z-index: 1;}
 #campusmap .ui-tabs .ui-tabs-nav{padding: 0.2em 0 0;
@@ -267,25 +257,68 @@ border-bottom-left-radius: 0px;
 border-bottom-right-radius: 0px;
 }
 #campusmap .ui-tabs .ui-tabs-nav li{ background: none repeat scroll 0 0 transparent;border: medium none;top: -7px;font-size: 13px;}
-#campusmap .ui-tabs .ui-tabs-nav li.ui-state-active{    background: url("images/ui-bg_flat_65_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;border: 1px solid #4C545A;}
+#campusmap .ui-tabs .ui-tabs-nav li.ui-state-active{    background: none repeat scroll 0 0 #FFFFFF;border: 1px solid #4C545A;}
 
-#campusmap .ui-tabs .ui-tabs-nav li {
-    
-}
-#campusmap .ui-tabs .ui-tabs-nav li a {
-    padding:0.3em 0.75em 0.15em;
-}
+#campusmap .ui-tabs .ui-tabs-nav li {}
+#campusmap .ui-tabs .ui-tabs-nav li.first {margin-left: -1px;}
+#campusmap .ui-tabs .ui-tabs-nav li a {font-size:12px;font-weight:normal;line-height:19px;padding: 0.3em 0.75em 0.15em;color:#cfd4d7;}
+#campusmap .ui-tabs .ui-tabs-nav li a:hover {color:#b6bf00;}
+#campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected{ padding-bottom: 1px;}
+#campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected a{color:#262a2d;}
+#campusmap .ui-tabs .ui-tabs-panel-cap{background-color: #262A2D;bottom: -7px;height: 7px;left: 0;position: absolute;width: 100%;z-index: 9;}
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow{background: url("/Content/images/iw_arrow.png") no-repeat scroll center center transparent;bottom:-78px;display: block; height: 86px;left:162.5px; position: absolute;width:74px;} 	
 
-	
 /* info boxes content */	
 #campusmap .ui-tabs .ui-tabs-panel{font-size:12px; color:#262a2d;max-height: 240px;min-height:0px; padding:5px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content{width:395px;min-height:0px;max-height: 240px;overflow-x:hidden; overflow-y: auto;}
-#campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;}
-#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left; background: url("http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF; padding:10px;margin-right:3px;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;margin-top: 0;padding-top: 0; padding-left: 15px;}
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:3px; position:relative; cursor:pointer;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_h,
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_{
+	background: url("/Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF;}
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage .imgEnlarge{
+	background: url("/Content/images/imgEnlarge.png") no-repeat scroll center center transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;}
+	
+  /* info boxes gallery */		
+	#campusmap .cycle{position:relative;width:344px;height:182px;margin-left:23px;}	
+	#campusmap .cycle .cWrap {margin: 0 auto;height:182px;width: 263px !important;}
+	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:182px;}
+	#campusmap .cycle .cWrap ul li{width: 344px !important;height:182px;}
+	
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage{float: left;position: relative;}	
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h,
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_{
+		background: url("/Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_v{
+		background: url("/Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
+	
+	#campusmap .cycle .prev{
+		left:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("/Content/images/tab_next_prev.png") no-repeat scroll left top transparent; }
+	#campusmap .cycle .next{
+		right:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("/Content/images/tab_next_prev.png") no-repeat scroll right top transparent;}
+	#campusmap .cycle .prev:hover{ background-position:left bottom; }
+	#campusmap .cycle .next:hover{background-position:right bottom;}
+	
+	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;}
+	#campusmap .navArea ul.cNav{display:inline;margin:5px;padding:0;}
+	#campusmap .navArea ul.cNav li{display:inline;padding: 0 4px;line-height: 8px;height: 8px;}
+	#campusmap .navArea ul.cNav li a{display:inline-block;margin:0 2px; width:8px; height:8px;text-indent:-9999em;background: url("/Content/images/jCellNav_btn.png") no-repeat scroll right center transparent;}
+	#campusmap .navArea ul.cNav li.active a{ background-position:left center;}
+	#campusmap .navArea ul.cNav li a:hover{background-position:center center;}
+	#campusmap .navArea .photos{color:#5e6a71; font-size:12px; text-transform:uppercase; text-decoration:none;}
+	#campusmap .navArea .photos.active{color:#3cb6ce;}
+	#campusmap .navArea .photos:hover{color:#b6bf00}
+	#campusmap .navArea .vids{color:#5e6a71;font-size:12px; text-transform:uppercase;text-decoration:none;margin-right: 18px;}
+	#campusmap .navArea .vids.active{color:#3cb6ce;}
+	#campusmap .navArea .vids:hover{color:#b6bf00}
 
-		
+/* for admin */
+.defaultSkin table.mceToolbar, .defaultSkin tr.mceFirst .mceToolbar tr td, .defaultSkin tr.mceLast .mceToolbar tr td { float: left; } 
 	
-	.defaultSkin table.mceToolbar, .defaultSkin tr.mceFirst .mceToolbar tr td, .defaultSkin tr.mceLast .mceToolbar tr td { float: left; } 
 	
+	
+	
+	/* for all */
 	[hideFocus="true"]{outline:none;}
 	

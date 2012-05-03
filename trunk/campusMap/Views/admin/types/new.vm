@@ -9,17 +9,10 @@
   $Form.HiddenField("type.Id")
   <h3>Place Type</h3>
   <p>Name:<br/>
-    #if($!type.name)
-      $type.name
-    #else
       <input type="text" value="$!type.name" name="type.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-    #end
   </p>
-	
-	
-	<div>$comment.comments </div>
-
-
-
+  <p>Friendly name:<br/>
+      <input type="text" value="$!type.friendly" name="type.friendly" id="type_friendly" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
   <p><input type="submit" value="Submit" /></p>
 </form>

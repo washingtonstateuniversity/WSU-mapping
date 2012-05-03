@@ -311,9 +311,9 @@ $(function() {
     if($( "#tabs" ).length>0){
         var  taboptions;	
         if($('#content_tar #tabs').length>0){
-            taboptions={cookie:{expires: 1,path:'/place/'}};
+            taboptions={cookie:{expires: 1,path:'/'+view+mcv_action}};
         } 
-        $( "#tabs" ).tabs($.extend( typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:taboptions, {
+        $( "#tabs" ).tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:{}, {
 				show: function(event, ui) {
 					if($('#place_id').length){
 						tinyMCE.triggerSave();

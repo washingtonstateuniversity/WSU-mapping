@@ -43,13 +43,13 @@
 				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
 				</a>
 			<span style="display:inline-block;">
-			  Geometric Types:<br/>
+			  Categories:<br/>
 			  <select id="list${controller.getView()}Type">
 				<option value="">Your Sections</option>
 				<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
 				<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
-				#foreach($type in $listtypes)
-				<option value="$type.id" #if($searchId == $type.id) selected="selected" #end>$type.name</option>
+				#foreach($cat in $listcats)
+				<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
 				#end
 			  </select>
 			  </span>

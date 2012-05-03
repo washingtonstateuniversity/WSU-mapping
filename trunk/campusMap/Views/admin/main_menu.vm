@@ -5,7 +5,7 @@
 
 <ul id='main_nav'>
 	<li class='$endcapBaseClass ui-state-hover ui-corner-tr endcap'></li>
-	#if($Controller.getUser().name=='Jeremy Bass')<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a>
+	#if($Controller.getUser().name=='JeremyBass')<li class='$baseClass #if($controller.getView()=='home')ui-state-active#end'><a href="../home/index.castle">Map Interface</a>
 		<ul>
 			<li class='$baseClass ui-button-text-icons quickActions' #if($controller.getView()!='home')style='display: none !important;'#end><a href="#" class='quickActions'><span class="ui-button-icon-primary ui-icon ui-icon-gear"></span><span class="ui-button-text">Quick Actions</span><span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span></a>
 				<ul class='action_nav' style='padding: 0;display: none;'>
@@ -51,7 +51,7 @@
 	</li>
 	
 	
-	#if($Controller.getUser().name=='Jeremy Bass')<li class='$baseClass ui-state-hover sep'></li>
+	#if($Controller.getUser().name=='JeremyBass')<li class='$baseClass ui-state-hover sep'></li>
 	<li class='$baseClass #if($controller.getView()=='media')ui-state-active#end'><a href="../media/index.castle">Media</a></li>
 	<li class='$baseClass #if($controller.getView()=='advertisement')ui-state-active#end'><a href="../advertisement/list.castle">Advertising</a></li>
 	<li class='$baseClass #if($controller.getView()=='person')ui-state-active#end'><a href="../person/list.castle">User Media</a></li>#end
@@ -69,10 +69,10 @@
 	<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/list.castle">Authorized Users</a></li>
 	<li class='$baseClass #if($controller.getView()=='accesslevel')ui-state-active#end'><a href="../accesslevel/list.castle">Access Levels</a></li>
 	<li class='$baseClass #if($controller.getView()=='authors' && $controller.getAction()=='edit')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
-	#if($Controller.getUser().name=='Jeremy Bass')<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
+	#if($Controller.getUser().name=='JeremyBass')<li class='$baseClass #if($controller.getView()=='authors')ui-state-active#end'><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
 
 	
-	#if($Controller.getUser().name=='Jeremy Bass')<li class='$baseClass ui-state-hover sep'></li>  
+	#if($Controller.getUser().name=='JeremyBass')<li class='$baseClass ui-state-hover sep'></li>  
 	<li class='$baseClass #if($controller.getView()=='comment')ui-state-active#end'><a href="../comment/list.castle">Site Prefences</a></li>#end	
 	
 	<li class='$baseClass ui-state-hover sep'></li> 

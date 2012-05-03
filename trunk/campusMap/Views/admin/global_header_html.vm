@@ -22,9 +22,16 @@ http://campusMap.wsu.edu
 #capturefor(view)
 $Controller.getView()
 #end
+#capturefor(mcv_action)
+${controller.getAction()}
+#end
+
+
+
 <script type="text/javascript">
   var siteroot = '$site.Trim()/';
-  var view = '$view.Trim()/';
+  var view = #if($mcv_action!="")'$view.Trim()/'#else""#end;
+  var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
 </script>
 
 
@@ -59,6 +66,8 @@ $Controller.getView()
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
 
 <script type="text/javascript" src="$siteroot/Content/js/jquery.defaultvalue.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.colorbox-min.js"></script>
+
 
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
@@ -97,4 +106,4 @@ $Controller.getView()
 <script src="http://images.wsu.edu/javascripts/print.js" type="text/javascript"></script>
 
 <link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
-
+<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />

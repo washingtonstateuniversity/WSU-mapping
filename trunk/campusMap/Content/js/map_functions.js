@@ -557,16 +557,16 @@ function build_infobox(item){
 	}
 	var mainimage = "";
 	if($(".placeImages").length){
-		mainimage = "<span class='headImage'><img src='/media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' alt='Evergreen' class='img-main'/></span>";
+		mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='/media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='/media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Evergreen' class='img-main'/></span>";
 	}
 	var infoTitle = "";
-	if($("#infoTitle").val()!==''){
-		infoTitle = '<h2 class="header">'+$("#infoTitle").val()+'</h2>';
+	if($('#hideTitles:checked').length==0){
+		infoTitle = '<h2 class="header">'+ ($("#infoTitle").val()!==''?$("#infoTitle").val():$("#name").val())+'</h2>';
 	}
 	if($.isArray(item.info.content)){
 			var nav='';
 			$.each( item.info.content, function(j, html) {	
-				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?' ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+				nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 			});
 			var content='';
 			$.each( item.info.content, function(j, html) {
@@ -574,13 +574,14 @@ function build_infobox(item){
 			});				
 		
 	}else{
-		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
+		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
 		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+item.info.content+'</div></div>';
 	}
 
-		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:73px;">'+
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="margin-bottom:67px;">'+
 					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
 					content+
+					'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow"></span></div>'+
 				'</div>';
 			
 	var myOptions = {
@@ -591,8 +592,8 @@ function build_infobox(item){
 		,pixelOffset: new google.maps.Size(-200, -36)
 		,zIndex: 99
 		,boxStyle: {
-		  background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom"
-		  ,width: "400px"
+		 // background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom",
+		  width: "400px"
 		 }
 		,closeBoxMargin: "10px 2px 2px 2px"
 		,closeBoxURL: "/Content/images/close.png"
@@ -611,6 +612,33 @@ function build_infobox(item){
 							ib[0].setOptions({enableEventPropagation: false});
 						});
 					ibOpen=true;
+					$('.headImage').on('click',function(e){
+						e.preventDefault();
+						var trigger=$(this);
+						$.colorbox({
+							rel:'gouped',
+							html:function(){
+								return '<img src="'+trigger.find('img').attr('title')+'" style="height:100%;margin:0 auto;display:block;" />';
+							},
+							photo:true,
+							scrolling:false,
+							opacity:0.7,
+							transition:"none",
+							width:"75%",
+							height:"75%",
+							slideshow:true
+						});
+					});
+					if($(".cWrap").length){
+						$(".cWrap").jCell({
+							btnNext: ".next",
+							btnPrev: ".prev",
+							speed: 1000,
+							visible: 1,
+							navTemplate:'<li><a href="#">{$i}</a></li>',
+							nav:$('.cNav')
+						});
+					}
 					//alert('tring to tab it, dabnab it');
 				}
 	};
@@ -782,7 +810,7 @@ function tinyResize(id){
 function load_place_editor() {
 	var lat = $('#Lat').val();
 	var lng = $('#Long').val();	
-	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15,'zoomControl': false,'mapTypeControl': false,'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},'streetViewControl': false }).bind('init', function () {
+	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15,'zoomControl': false,'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},'streetViewControl': false }).bind('init', function () {
 		if(lat!='')add_place_point(lat,lng);
 		//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 		$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
@@ -796,11 +824,6 @@ function load_place_editor() {
 		load_tiny("bodytext","tab_"+i);
 		tinyResize();
 	});
-	
-
-	
-	
-	
 	var $tab_title_input = $( "#tab_title"),
 		$tab_content_input = $( "#tab_content" );
 	var tab_counter =  $("#infotabs li.ui-state-default").size();
@@ -927,6 +950,28 @@ function load_place_editor() {
 			$('#campusmap').removeClass('fixed');   
 		}  
 	});
+	
+	
+	
+	$.each($('.switch'),function(i,v){
+		var self = $(this);
+		self.find('a').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				self.find('.active').removeClass('active');
+				var tar=$(this).attr('id');
+				$(this).addClass('active');
+				self.find('.'+tar).addClass('active');
+			});
+	});
+	
+	$('#massTagging').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				$('#massTaggingarea').slideToggle();
+			});
+	
+	
 }
 function load_geometrics_editor() {
      $('#geometrics_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {

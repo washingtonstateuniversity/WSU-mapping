@@ -27,7 +27,7 @@
 			#end
 		#end
 		
-		<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end' ><a href="?cat[]=$!item.name.Replace("&","__")">$!item.name</a>
+		<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end' ><a href="?cat[]=$!item.name.Replace("&","__").Replace(",","_|_")">$!item.name</a>
 
 		#*$Controller.repeatStr("- ",$cat.level)*#
 		#set($lastLevel=${item.level})
@@ -43,7 +43,7 @@
 
 <form action="#" id="getDirections">
 	<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
-	<span id="directionsTo"><input type="text" value="" placeholder="To..." /></span>
+	<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
 </form>
 
 

@@ -97,6 +97,10 @@ namespace campusMap.Services{
         [JsonProperty]
         public string accesskey { get { return Accesskey; } set { Accesskey = value; } }
 
+        private string Placeholder;
+        [JsonProperty]
+        public string placeholder { get { return Placeholder; } set { Placeholder = value; } }
+
         private string Tabindex;
         [JsonProperty]
         public string tabindex { get { return Tabindex; } set { Tabindex = value; } }
@@ -181,6 +185,7 @@ namespace campusMap.Services{
 
         public static SortedDictionary<string, string> attrbase(SortedDictionary<string, string> attrs, elementSet ele)
         {
+            if (!String.IsNullOrEmpty(ele.attr.placeholder)) attrs.Add("Placeholder", ele.attr.placeholder);
             if (!String.IsNullOrEmpty(ele.attr.accesskey))  attrs.Add("Accesskey", ele.attr.accesskey);
             if (!String.IsNullOrEmpty(ele.attr.dir))        attrs.Add("Dir", ele.attr.dir);
             if (!String.IsNullOrEmpty(ele.attr.ele_class))  attrs.Add("Class", ele.attr.ele_class);

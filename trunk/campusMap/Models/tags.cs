@@ -23,20 +23,20 @@ namespace campusMap.Models
             get { return tag_id; }
             set { tag_id = value; }
         }
-        private string Name;
+        private string _name;
         [Property]
         virtual public string name
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
-        private string Attr;
+        private string _attr;
         [Property]
         virtual public string attr
         {
-            get { return Attr; }
-            set { Attr = value; }
+            get { return _attr; }
+            set { _attr = value; }
         }
         private IList<place>  places;
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_tags", ColumnKey = "tag_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]

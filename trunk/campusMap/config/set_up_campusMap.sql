@@ -138,7 +138,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[autho
 DROP TABLE [dbo].[authors_to_media]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_geometrics]') AND type in (N'U'))
 DROP TABLE [dbo].[authors_to_geometrics]
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_categories]') AND type in (N'U'))
+DROP TABLE [dbo].[authors_to_categories]
 
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[view_to_usertags]') AND type in (N'U'))
@@ -286,6 +287,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place
 DROP TABLE [dbo].[place_media]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_names]') AND type in (N'U'))
 DROP TABLE [dbo].[place_names]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_name_types]') AND type in (N'U'))
+DROP TABLE [dbo].[place_name_types]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PlaceByUser]') AND type in (N'U'))
 DROP TABLE [dbo].[PlaceByUser]
 
@@ -333,20 +336,22 @@ GO
 		[creation_date] [datetime] DEFAULT GETDATE(),
 		[updated_date] [datetime] DEFAULT GETDATE(),
 		[coordinate] [geography] NULL,
-		[author_editing] [tinyint] NULL,
-		[status] [tinyint] NULL,
-		[media] [tinyint] NULL,
-		[model] [tinyint] NULL,
-		[geometrics] [tinyint] NULL,
+		[author_editing] [int] NULL,
+		[status] [int] NULL,
+		[media] [int] NULL,
+		[model] [int] NULL,
+		[geometrics] [int] NULL,
 		[tmp] [bit] DEFAULT 1,
-		[college] [tinyint] NULL,
-		[school] [tinyint] NULL,
+		[isPublic] [bit] DEFAULT 1,
+		[hideTitles] [bit] DEFAULT 0,
+		[college] [int] NULL,
+		[school] [int] NULL,
 		[summary] [nvarchar](max) NULL,		
 		[details] [nvarchar](max) NULL,				
-		[campus] [tinyint] NULL,
-		[program] [tinyint] NULL,
-		[department] [tinyint] NULL,
-		[plus_four_code] [tinyint] NULL  DEFAULT '99164',
+		[campus] [int] NULL,
+		[program] [int] NULL,
+		[department] [int] NULL,
+		[plus_four_code] [int] NULL  DEFAULT '99164',
 			/*CONSTRAINT [CK_plus_four_code_check] 
 			CHECK ([plus_four_code] LIKE '[0-9][0-9][0-9][0-9]' AND [plus_four_code] NOT LIKE '0000'),*/
 		/* COME BACK TO AND CHECK THIS */
@@ -400,10 +405,10 @@ GO
 		[updated] [datetime] DEFAULT GETDATE(),
 		[center] [geography] NULL,
 		[checked_out_by] [nvarchar](max) NOT NULL,
-		[width] [tinyint] NULL,
-		[height] [tinyint] NULL,
-		[view_status] [tinyint] NULL,
-		[authors_editing] [tinyint] NULL,
+		[width] [int] NULL,
+		[height] [int] NULL,
+		[view_status] [int] NULL,
+		[authors_editing] [int] NULL,
 		[commentable] [BIT] NULL,
 		[sharable] [BIT] NULL,
 		CONSTRAINT [PK_view] PRIMARY KEY CLUSTERED 
@@ -471,7 +476,7 @@ GO
 			CONSTRAINT [FK_place_to_names] FOREIGN KEY ([place_id])
 			REFERENCES [place] ([place_id]),
 		[name] [nvarchar](max)  NOT NULL,
-		[label] [nvarchar](max)  NOT NULL
+		[label] [int] NOT NULL
 		CONSTRAINT [PK_place_names] PRIMARY KEY CLUSTERED 
 		(
 			[name_id] ASC 
@@ -479,19 +484,35 @@ GO
 		) ON [PRIMARY]
 		CREATE UNIQUE INDEX ui_place_names ON [place_names]([name_id]);
 	GO
+	CREATE TABLE [dbo].[place_name_types](
+		[type_id] [int] IDENTITY(1,1) NOT NULL,
+		[type] [nvarchar](max)  NOT NULL
+		CONSTRAINT [PK_place_name_types] PRIMARY KEY CLUSTERED 
+		(
+			[type_id] ASC 
+		)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+	GO
+	INSERT INTO [campusMap].[dbo].[place_name_types]
+			   ([type])
+		 VALUES
+			   ('Official Name'),
+			   ('Local Name'),
+			   ('Obscure or Historic Name')
+	GO
 
 	CREATE TABLE [dbo].[geometrics](
 		[geometric_id] [int] IDENTITY(1,1) NOT NULL,
 		[boundary] [geography] NULL,
 		[name] [nvarchar](max) NULL,
 		[encoded] [nvarchar](max) NULL,
-		[default_type] [tinyint] NULL,
+		[default_type] [int] NULL,
 		[publish_time] [datetime] DEFAULT GETDATE(),
 		[creation_date] [datetime] DEFAULT GETDATE(),
 		[updated_date] [datetime] DEFAULT GETDATE(),
-		[author_editing] [tinyint] NULL,
-		[status] [tinyint] NULL,
-		[media] [tinyint] NULL,
+		[author_editing] [int] NULL,
+		[status] [int] NULL,
+		[media] [int] NULL,
 		CONSTRAINT [PK_geometrics] PRIMARY KEY CLUSTERED 
 		(
 			[geometric_id] ASC
@@ -614,40 +635,184 @@ GO
 	CREATE TABLE [dbo].[place_types](
 		[place_type_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
-		[attr] [nvarchar](max) NULL,
+		[friendly_name] [nvarchar](max) NULL,
 		CONSTRAINT [PK_place_type] PRIMARY KEY CLUSTERED 
 		(
 			[place_type_id] ASC
 		)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 		) ON [PRIMARY]
 	GO
-	/* add some defaults */
+	/* add some defaults  --- this is google types now.. respect that..  */
 	INSERT INTO [campusMap].[dbo].[place_types]
-			   ([name])
+			   ([name],[friendly_name])
 		 VALUES
-			   ('accounting'),('airport'),('aquarium'),('art_gallery'),('atm'),('bakery'),('bank'),('bar'),
-			   ('beauty_salon'),('bicycle_store'),('book_store'),('bowling_alley'),('building'),
-			   ('bus_station'),('cafe'),('campground'),('car_dealer'),('car_rental'),('car_repair'),
-			   ('car_wash'),('casino'),('cemetery'),('church'),('city_hall'),('clothing_store'),
-			   ('convenience_store'),('courthouse'),('dentist'),('department_store'),('doctor'),
-			   ('electrician'),('electronics_store'),('embassy'),('establishment'),('finance'),('fire_station'),
-			   ('florist'),('food'),('funeral_home'),('furniture_store'),('gas_station'),('general_contractor'),
-			   ('geocode'),('grocery_or_supermarket'),('gym'),('hair_care'),('hardware_store'),('health'),
-			   ('hindu_temple'),('home_goods_store'),('hospital'),('insurance_agency'),('jewelry_store'),
-			   ('laundry'),('lawyer'),('library'),('liquor_store'),('local_government_office'),('locksmith'),
-			   ('lodging'),('meal_delivery'),('meal_takeaway'),('mosque'),('movie_rental'),('movie_theater'),
-			   ('moving_company'),('museum'),('night_club'),('painter'),('park'),('parking'),('pet_store'),
-			   ('pharmacy'),('physiotherapist'),('place_of_worship'),('plumber'),('police'),('post_office'),
-			   ('real_estate_agency'),('restaurant'),('roofing_contractor'),('rv_park'),('school'),('shoe_store'),
-			   ('shopping_mall'),('spa'),('stadium'),('storage'),('store'),('subway_station'),('synagogue'),
-			   ('taxi_stand'),('train_station'),('travel_agency'),('university'),('veterinary_care'),('zoo'),
-			   ('administrative_area_level_1'),('administrative_area_level_2'),('administrative_area_level_3'),
-			   ('colloquial_area'),('country'),('floor'),('intersection'),('locality'),('natural_feature'),
-			   ('neighborhood'),('political'),('point_of_interest'),('post_box'),('postal_code'),
-			   ('postal_code_prefix'),('postal_town'),('premise'),('room'),('route'),('street_address'),
-			   ('street_number'),('sublocality'),('sublocality_level_4'),('sublocality_level_5'),
-			   ('sublocality_level_3'),('sublocality_level_2'),('sublocality_level_1'),('subpremise'),('transit_station')
-
+('accounting','Accounting'),
+('administrative_area_level_1','Administrative area level 1'),
+('administrative_area_level_2','Administrative area level 2'),
+('administrative_area_level_3','Administrative area level 3'),
+('airport','Airport'),
+('apartments','Apartments'),
+('aquarium','Aquarium'),
+('art_gallery','Art gallery'),
+('athletic_facilities','Athletic Facilities'),
+('athletic_field','Athletic Field'),
+('atm','ATM'),
+('auditorium','Auditorium'),
+('bakery','Bakery'),
+('bank','Bank'),
+('bar','Bar'),
+('basketball_court','Basketball Court'),
+('beauty_salon','Beauty Salon'),
+('bicycle_store','Bicycle Store'),
+('bike_sharing_station','Bike Sharing Station'),
+('book_store','Book Store'),
+('bowling_alley','Bowling Alley'),
+('building','Building'),
+('bus_station','Bus Station'),
+('cafe','Cafe'),
+('campground','Campground'),
+('car_dealer','Car dealer'),
+('car_rental','Car rental'),
+('car_repair','Car repair'),
+('car_wash','Car wash'),
+('casino','Casino'),
+('cemetery','Cemetery'),
+('childcare_services','Childcare services'),
+('church','Church'),
+('city_hall','City hall'),
+('classrooms','Classrooms'),
+('clothing_store','Clothing store'),
+('coffee_shop','Coffee shop'),
+('colloquial_area','Colloquial area'),
+('convenience_store','Convenience store'),
+('counselors','Counselors'),
+('country','Country'),
+('courthouse','Courthouse'),
+('cultural_center','Cultural center'),
+('dentist','Dentist'),
+('department_store','Department store'),
+('doctor','Doctor'),
+('electrician','Electrician'),
+('electronics_store','Electronics store'),
+('embassy','Embassy'),
+('arenas','Arenas'),
+('stadiums','Stadiums'),
+('ballrooms','Ballrooms'),
+('performing_arts_theaters','Performing arts theaters'),
+('playhouses','Playhouses'),
+('espresso_bar','Espresso bar'),
+('establishment','Establishment'),
+('event_ticket_outlet','Event ticket outlet'),
+('faculty','Faculty'),
+('fast_food','Fast food'),
+('finance','Finance'),
+('fire_station','Fire station'),
+('floor','Floor'),
+('florist','Florist'),
+('food','Food'),
+('funeral_home','Funeral home'),
+('furniture_store','Furniture store'),
+('gas_station','Gas station'),
+('general_contractor','General contractor'),
+('geocode','Geocode'),
+('gift_shop','Gift shop'),
+('greenhouse','Greenhouse'),
+('supermarket','Supermarket'),
+('grocery','Grocery'),
+('gym','Gym'),
+('hair_care','Hair care'),
+('hardware_store','Hardware store'),
+('health','Health'),
+('hindu_temple','Hindu temple'),
+('historical_landmark','Historical landmark'),
+('home_goods_store','Home goods store'),
+('hospital','Hospital'),
+('instruction','Instruction'),
+('insurance_agency','Insurance agency'),
+('intersection','Intersection'),
+('jewelry_store','Jewelry store'),
+('laboratories','Laboratories'),
+('laundry','Laundry'),
+('lawyer','Lawyer'),
+('library','Library'),
+('liquor_store','Liquor store'),
+('local_government_office','Local government office'),
+('locality','Locality'),
+('locksmith','Locksmith'),
+('lodging','Lodging'),
+('meal_delivery','Meal delivery'),
+('meal_takeaway','Meal takeaway'),
+('meeting_room','Meeting room'),
+('monument','Monument'),
+('mosque','Mosque'),
+('movie_rental','Movie rental'),
+('movie_theater','Movie theater'),
+('moving_company','Moving company'),
+('museum','Museum'),
+('natural_feature','Natural feature'),
+('neighborhood','Neighborhood'),
+('night_club','Night club'),
+('painter','Painter'),
+('park','Park'),
+('parking','Parking'),
+('pet_store','Pet store'),
+('pharmacy','Pharmacy'),
+('physiotherapist','Physiotherapist'),
+('place_of_worship','Place of worship'),
+('plumber','Plumber'),
+('point_of_interest','Point of interest'),
+('police','Police'),
+('political','Political'),
+('post_box','Post_box'),
+('post_office','Post_office'),
+('postal_code','Postal_code'),
+('postal_code_prefix','Postal code prefix'),
+('postal_town','Postal town'),
+('premise','Premise'),
+('preschool','Preschool'),
+('print_services','Print services'),
+('printer','Printer'),
+('printing_press','Printing press'),
+('real_estate_agency','Real estate agency'),
+('residence_hall','Residence hall'),
+('restaurant','Restaurant'),
+('roofing_contractor','Roofing contractor'),
+('room','Room'),
+('route','Route'),
+('rv_park','Rv park'),
+('school','School'),
+('school_administrator','School administrator'),
+('sculpture','Sculpture'),
+('shoe_store','Shoe store'),
+('shopping_destination','Shopping destination'),
+('shopping_mall','Shopping mall'),
+('spa','Spa'),
+('stadium','Stadium'),
+('statue','Statue'),
+('storage','Storage'),
+('store','Store'),
+('street_address','Street address'),
+('street_number','Street number'),
+('student_housing_center','Student housing center'),
+('sublocality','Sublocality'),
+('sublocality_level_1','Sublocality level 1'),
+('sublocality_level_2','Sublocality level 2'),
+('sublocality_level_3','Sublocality level 3'),
+('sublocality_level_4','Sublocality level 4'),
+('sublocality_level_5','Sublocality level 5'),
+('subpremise','Subpremise'),
+('subway_station','Subway station'),
+('synagogue','Synagogue'),
+('taxi_stand','Taxi stand'),
+('train_station','Train station'),
+('transit_station','Transit station'),
+('travel_agency','Travel agency'),
+('tutoring_services','Tutoring services'),
+('university','University'),
+('veterinary_care','Veterinary care'),
+('warehouse','Warehouse'),
+('web_services','Web services'),
+('zoo','Zoo')
 	GO
 
 
@@ -927,7 +1092,30 @@ GO
 		KEY INDEX ui_program_name 
 		WITH STOPLIST = SYSTEM;
 	GO
-
+		/* add some defaults */
+	INSERT INTO [campusMap].[dbo].[programs]
+			   ([name])
+		 VALUES
+			('Program in Genetics and Cell Biology'),
+			('Program in Microbiology'),
+			('International Programs'),
+			('Education Abroad'),
+			('Early Childhood Development'),
+			('Department of Human Development'),
+			('High School Equivalency Program'),
+			('Eclipse Alternative High School Program'),
+			('Program in Communication'),
+			('Center for Assessment and Innovation in Teaching'),
+			('General Education Program'),
+			('University Writing Program'),
+			('Liberal Arts General Studies Program'),
+			('Engineering Management Graduate Program'),
+			('MFA'),
+			('Summer Session'),
+			('Materials Science Program'),
+			('Viticulture and Enology Program'),
+			('WWAMI Medical Education Program')
+		GO
 
 	CREATE TABLE [dbo].[usertags](
 		[usertag_id] [int] IDENTITY(1,1) NOT NULL,
@@ -949,12 +1137,13 @@ GO
 /* media tables */	
 	CREATE TABLE [dbo].[media_repo](
 		[media_id] [int] IDENTITY(1,1) NOT NULL,
-		[media_type_id] [tinyint] NOT NULL,
+		[media_type_id] [int] NOT NULL,
 		[credit] [nvarchar](max) NULL,
 		[caption] [nvarchar](max) NULL,
 		[created] [datetime] DEFAULT GETDATE(),
 		[updated] [datetime] DEFAULT GETDATE(),
 		[file_name] [nvarchar](max) NULL,
+		[orientation] [nvarchar](max) NULL,
 		[ext] [nvarchar](max) NULL,
 		[path] [nvarchar](max) NULL,
 		CONSTRAINT [PK_media] PRIMARY KEY CLUSTERED 
@@ -991,8 +1180,6 @@ GO
 			   ('general_image',null),
 			   ('general_video',null)
 	GO
-	
-
 
 	
 /* needed but needs adjusments */
@@ -1335,6 +1522,7 @@ GO
 	create table field_types (
 	  field_type_id INT IDENTITY NOT NULL,
 	   name NVARCHAR(255) null,
+	   alias NVARCHAR(255) null,
 	   attr [nvarchar](max) null,
 	   model NVARCHAR(255) null,
 	   fieldset INT null,
@@ -1342,9 +1530,22 @@ GO
 	)
 	/* add some defaults */
 	INSERT INTO [campusMap].[dbo].[field_types]
-			   ([name],[attr],[model],[fieldset])
+			   ([name],[alias],[attr],[model],[fieldset])
 		 VALUES
-			   ('ADA Access', '{ "type": "textinput", "label": "ADA Access", "attr":{"ele_class":null,"name":"fields[1]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2')
+('ADA Entrance', 'ada_entrance','{ "type": "textinput", "label": "ADA Entrance", "attr":{"ele_class":null,"placeholder":null,"name":"fields[1]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('ADA Parking', 'ada_parking','{ "type": "textinput", "label": "ADA Parking", "attr":{"ele_class":null,"placeholder":null,"name":"fields[2]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('ADA Other', 'ada_other','{ "type": "textinput", "label": "ADA Other", "attr":{"ele_class":null,"placeholder":null,"name":"fields[3]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('Amenities', 'amenities','{ "type": "textinput", "label": "Amenities", "attr":{"ele_class":null,"placeholder":null,"name":"fields[4]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('Classrooms', 'classroom','{ "type": "dropdown", "label": "Classrooms", "attr":{"ele_class":null,"name":"fields[5]","title":null,"dir":null,"accesskey":null,"placeholder":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"Yes","val":"yes","selected":null},{"label":"No","val":"no","selected":"no"}] }',	'placeController',	'2'),
+('Research Labs', 'research_labs','{ "type": "dropdown", "label": "Research Labs", "attr":{"ele_class":null,"name":"fields[6]","title":null,"dir":null,"accesskey":null,"placeholder":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"Yes","val":"yes","selected":null},{"label":"No","val":"no","selected":"no"}] }',	'placeController',	'2'),
+('Notes & Comments', 'notes_comments','{ "type": "textarea", "label": "Notes & Comments", "attr":{"ele_class":null,"placeholder":null,"name":"fields[7]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('Shopping, Dining, Etc.', 'shopping_dining_etc','{ "type": "textinput", "label": "Shopping, Dining, Etc.", "attr":{"ele_class":null,"placeholder":null,"name":"fields[8]","title":null,"dir":null,"accesskey":null,"tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":"bar","val":"bars"},{"label":"fooed","val":"baring"}] }',	'placeController',	'2'),
+('Research Centers', 'research_centers','{ "type": "textinput", "label": "Research Centers", "attr":{"ele_class":null,"name":"fields[9]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of Research Centers","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2'),
+('Libraries', 'libraries','{ "type": "textinput", "label": "Libraries", "attr":{"ele_class":null,"name":"fields[10]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of Libraries","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2'),
+('Major Labs/Facilities', 'major_labs_facilities','{ "type": "textinput", "label": "Major Labs/Facilities", "attr":{"ele_class":null,"name":"fields[11]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of Major Labs/Facilities","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2'),
+('Student Services & Advising', 'student_services_advising','{ "type": "textinput", "label": "Student Services & Advising", "attr":{"ele_class":null,"name":"fields[12]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of Student Services & Advising","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2'),
+('University Administration & Non-Academic Units', 'university_administration_non_academic_units','{ "type": "textinput", "label": "University Administration & Non-Academic Units", "attr":{"ele_class":null,"name":"fields[13]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of University Administration & Non-Academic Units","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2'),
+('Special Facilities & Public Venues', 'special_facilities_public_venues','{ "type": "textinput", "label": "Special Facilities & Public Venues", "attr":{"ele_class":null,"name":"fields[14]","title":null,"dir":null,"accesskey":null,"placeholder":"Names of Special Facilities & Public Venues","tabindex":null,"id":null,"style":null,"multiple":null}, "options":[{"label":null,"val":null,"selected":null}] }','placeController','2')
 	GO
 
 
@@ -1870,7 +2071,20 @@ CREATE TABLE [dbo].[authors_to_place] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-
+CREATE TABLE [dbo].[authors_to_categories] (
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[author_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_authors_to_categories_authors] FOREIGN KEY ([author_id])
+		REFERENCES [authors] ([author_id]),
+	[category_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_authors_to_categories_categories] FOREIGN KEY ([category_id])
+		REFERENCES [categories] ([category_id]),
+	CONSTRAINT [PK_authors_to_categories] PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC 
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+GO
 
 
 

@@ -196,19 +196,13 @@
 						#end
 					</select>
 					<br/>
-					<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
-					<select id="LocationTypeSelect" name="place.type.id" class="autoselect">
-						<option value="">Select one...</option>
-						#foreach($type in $types)
-							<option class="type" value="$type.id" #if($place.type.id == $type.id) selected="selected" #end>$!type.name</option>
-						#end
-					</select><br/> 
+					
 					<fieldset style="position:relative;"><a href="#" title="Set Latitude/Longitude" id="setLatLong" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="position: absolute; right: 5px; top: 5px;"><span class="ui-icon ui-icon-pin-s"></span></a>
-						<div class="col2"  style="width:49%;display:inline-block;">	
+						<div class="col2"  style="">	
 							<label for="Lat"><strong>Latitude</strong></label><br/>
 							<input type="text" name="Length" id="Lat" value="$!lat" class="text ui-widget-content ui-corner-all" />
-						</div>
-						<div class="col2"  style="width:49%;display:inline-block;">
+						</div><br/> 
+						<div class="col2"  style="">
 
 							<label for="Long"><strong>Longitude</strong></label><br/>
 							<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" />
@@ -222,15 +216,23 @@
            
 
 			
-            <fieldset style="width:44%;float:left;"><legend>Categories</legend>
-				<div class="container" style="width:100%;">
+            <fieldset style="width:44%;float:left;" class="switch"><legend><a href="#" id="cat" class="active">Categories</a>/<a href="#" id="types">Types</a></legend>
+				<div class="container cat active" style="width:100%;">
 					<label for="LocationModelSelect"><strong>Choose the Categories:</strong></label><br/>
-					<select id="LocationModelSelect" name="cats[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					<select id="LocationModelSelect" name="place.categories[]"  class="" multiple="multiple" size="9" style="width:205px;">
 						#foreach($cat in $categories)
-							<option class="model" value="$cat.id" #foreach($c in $place.categories)#if($c.id == $cat.id) selected="selected" #end#end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
+							<option class="model" value="$cat.id" #if($place.categories.Contains($cat)) selected="selected" #end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
 						#end
 					</select>
                 </div>  
+				<div class="container types" style="width:100%;">
+				<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
+					<select id="LocationTypeSelect" name="place.place_types[]"  class="" multiple="multiple" size="9" style="width:205px;">
+						#foreach($type in $types)
+							<option class="type" value="$type.id" #if($place.place_types.Contains($type)) selected="selected" #end>$!type.friendly</option>
+						#end
+					</select>
+                </div>
             </fieldset>
 
             
@@ -246,10 +248,16 @@
 					#foreach($altname in $place_names)
 					<span class="pod name">
 						<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
-						<label for="place_names_$c" class="editable" rel="namelables">$altname.label</label>
-						<input type="text" value="$altname.label" name="place_names[$c].label" class="editzone text ui-widget-content ui-corner-all"/>
-						<br/>
-						<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a><input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
+						<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+						<span>Type:</span>
+						<select id="LocationModelSelect" name="place_names[$c].label.id"  class="" >
+							#set($pt=$altname.label.id)
+							#foreach($pTypes in $place_name_types)
+								<option class="model" value="$pTypes.id" #if($pt == $pTypes.id) selected="selected" #end> $!pTypes.type</option>
+							#end
+						</select>
+						<br/><span>Name:</span>
+						<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
 						#set($c=$c+1)
 						</span>
 					#end  
@@ -270,10 +278,15 @@
 						<div id="name_clonebed" class="clonebed">         
 							<span class="pod name">    
 								<input type="hidden" name="||place_names[9999].id" value=""/>
-								<label for="place_names_9999" class="editable" rel="namelables">Inset Lable</label>
-								<input type="text" value="" name="||place_names[9999].label" class="editzone text ui-widget-content ui-corner-all"/>
-								<br/>
-								<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a><input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
+								<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+								<span>Type:</span>
+								<select id="LocationModelSelect" name="||place_names[9999].label.id"  class="" >
+									#foreach($pTypes in $place_name_types)
+										<option class="model" value="$pTypes.id">$!pTypes.type</option>
+									#end
+								</select>
+								<br/><span>Name:</span>
+								<input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
 							</span>
 						</div>
 					</div>
@@ -316,8 +329,8 @@ $formbuttons
 			<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
 			<br/>
 			<hr/>
-			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/>
-			<h6><em>Shows up on all tabs of the info window; if it’s to only show on one tab, leave this blank while using the wysiwyg to do so.</em></h6>
+			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label><input type="checkbox" id="hideTitles" name="place.hideTitles" value="1" #if($place.hideTitles==true)checked="checked"#end />:Hide</label>
+			<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the place.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
 			<hr/>
 			<br/>
 			<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
@@ -380,7 +393,18 @@ $formbuttons <div class="clear"></div>
 				</div>
 				<a href="#" id="PlaceTagCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 					<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add Tag
-				</a>				
+				</a>		
+				
+				
+				<a href="#" id="massTagging" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add Tags in mass
+				</a>		
+				<div id="massTaggingarea" style="display: none;">
+				<h6><em>Use this to add a bunch of tags at in lieu of one at a time (CSV)</em></h6>
+				<textarea name="massTag[]"></textarea>
+				</div>
+				
+						
 				<div id="tag_clonebed" class="clonebed">         
 					<span class="pod tags">    
 						<input type="hidden" name="||tags[9999].id" value="" /> 
@@ -411,6 +435,18 @@ $formbuttons <div class="clear"></div>
 		</div>
 		<hr/>
 	#end
+	
+		<div id="publicDiv">
+		  <h3 style="display:inline-block;">Public:</h3>
+			<select name="place.isPublic" >
+				<option class="author" value="true" #if(${place.isPublic}!=false) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(${place.isPublic} && ${place.isPublic}==false) selected="selected" #end>No</option>
+			</select>
+		  <h6><em>Changing this will tell whether or not the public can see this place in a map view <strong>even thou it's published</strong> ie: Internal to WSU only.</em></h6>
+		</div>
+		<hr/>
+	
+	
     <div id="AuthorDiv">
       <h3>Authors</h3>
       <h6><em>Select or create new author (if one isn't already created)</em></h6>
@@ -626,22 +662,22 @@ $formbuttons
 
 	<form action="update.castle" method="post" id="editor_form">
 			$formbuttons
-			<p class="validateTips">All form fields are required.</p>
+			<p class="validateTips">*Form fields are required.</p>
 			$Form.HiddenField("place.id")
 			<input type="hidden" name="forced_tmp" value="1" />
 			<fieldset>
 			<fieldset style="width:44%;"><legend>Location</legend>
 	
-					<span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name</label><br/>
+					<span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name *</label><br/>
 					<input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/></span>
 					<br/><br/><br/>
 	
 					<div class="container" style="width:100%;">
-						<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
+						<label for="LocationModelSelect"><strong>Location Model *</strong></label><br/>
 						<select id="LocationModelSelect" name="place.model.id"  class="autoselect">
 							<option value="">Select one...</option>
 							#foreach($model in $models)
-								<option class="model" value="$model.id" #if($place.model.id == $model.id) selected="selected" #end>$!model.name</option>
+								<option class="model" value="$model.id" #if($model.name == "Building") selected="selected" #end>$!model.name</option>
 							#end
 						</select>#*
 						<input type="text"  value="2" name="place.model.id" />*#
@@ -659,11 +695,11 @@ $formbuttons
 			
 			
 			<fieldset style="width:44%;"><legend>Address Options</legend>		
-					<label for="place.campus"><strong>Campus</strong></label><br/>
+					<label for="place.campus"><strong>Campus *</strong></label><br/>
 					<select id="place.campus" class="autoselect" name="place.campus.id">
 						<option value="">Select one...</option>
 						#foreach($campus in $campuses)
-							<option class="type" value="$campus.id" #if($place.campus.name == 'Pullman') selected="selected" #end>$!campus.name</option>
+							<option class="type" value="$campus.id" #if($campus.name == 'Pullman') selected="selected" #end>$!campus.name</option>
 						#end
 					</select><br/>
 					<label for="place.college"><strong>College</strong></label><br/>

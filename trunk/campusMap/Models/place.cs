@@ -176,6 +176,23 @@ namespace campusMap.Models
             get { return Tmp; }
             set { Tmp = value; }
         }
+
+
+        private bool _isPublic;
+        [Property]
+        virtual public bool isPublic
+        {
+            get { return _isPublic; }
+            set { _isPublic = value; }
+        }
+        private bool _hideTitles;
+        [Property]
+        virtual public bool hideTitles
+        {
+            get { return _hideTitles; }
+            set { _hideTitles = value; }
+        }
+        
         private IList<place_names> place_names = new List<place_names>();
         [HasAndBelongsToMany(typeof(place_names), Lazy = true, Table = "place_to_place_names", ColumnKey = "place_id", ColumnRef = "name_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         virtual public IList<place_names> names
@@ -382,28 +399,26 @@ namespace campusMap.Models
             get { return place_type_id; }
             set { place_type_id = value; }
         }
-
-        private string Name;
+        private string _name;
         [Property]
         virtual public string name
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
-
-        private string Attr;
-        [Property]
-        virtual public string attr
+        private string _friendly;
+        [Property("friendly_name")]
+        virtual public string friendly
         {
-            get { return Attr; }
-            set { Attr = value; }
+            get { return _friendly; }
+            set { _friendly = value; }
         }
-        private IList<place> places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_place_models", ColumnKey = "place_model_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places
+        private IList<place> _places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_place_types", ColumnKey = "place_type_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> places
         {
-            get { return places; }
-            set { places = value; }
+            get { return _places; }
+            set { _places = value; }
         }
         private IList<google_types> _type;
         [HasAndBelongsToMany(typeof(google_types), Lazy = true, Table = "google_types_to_place_types", ColumnKey = "google_type_id", ColumnRef = "place_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
@@ -485,12 +500,31 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-        private String Labeled;
-        [Property]
-        virtual public String label
+        private place_name_types _label;
+        [BelongsTo]
+        virtual public place_name_types label
         {
-            get { return Labeled; }
-            set { Labeled = value; }
+            get { return _label; }
+            set { _label = value; }
+        }
+    }
+
+    [ActiveRecord(Lazy = true)]
+    public class place_name_types
+    {
+        private int type_id;
+        [PrimaryKey("type_id")]
+        virtual public int id
+        {
+            get { return type_id; }
+            set { type_id = value; }
+        }
+        private string _type;
+        [Property]
+        virtual public string type
+        {
+            get { return _type; }
+            set { _type = value; }
         }
     }
 
@@ -661,6 +695,5 @@ namespace campusMap.Models
             set { Place = value; }
         }
     }
-
 }
 

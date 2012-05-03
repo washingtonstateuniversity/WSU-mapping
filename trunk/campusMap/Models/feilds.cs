@@ -71,7 +71,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _alias;
+        [Property]
+        virtual public string alias
+        {
+            get { return _alias; }
+            set { _alias = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr

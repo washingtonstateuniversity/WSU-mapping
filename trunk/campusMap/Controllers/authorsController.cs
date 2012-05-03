@@ -50,7 +50,17 @@ namespace campusMap.Controllers
             PropertyBag["currentUser"] = getUser();
             PropertyBag["author"] = author;
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["sections"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
             RenderView("new");
         }
 
@@ -68,9 +78,24 @@ namespace campusMap.Controllers
             media_types imgtype = ActiveRecordBase<media_types>.Find(1);
             PropertyBag["images"] = imgtype.media_typed;
             PropertyBag["currentUser"] = getUser();
-            PropertyBag["sections"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();  
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+
+
+
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+
         }
 
         public bool canControl(authors user)
@@ -109,15 +134,15 @@ namespace campusMap.Controllers
                 return;
             }
 
-            author.Sections.Clear();
+            /*author.place_types.Clear();
             foreach (int section in Sections)
             {
                 place_types tmp=ActiveRecordBase<place_types>.Find(section);
-                if (!author.Sections.Contains(tmp) && tmp.id > 0)
+                if (!author.place_types.Contains(tmp) && tmp.id > 0)
                 {
-                    author.Sections.Add(tmp);
+                    author.place_types.Add(tmp);
                 }
-            }
+            }*/
             author.media.Clear();
 
             try

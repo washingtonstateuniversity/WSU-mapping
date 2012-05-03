@@ -1,3 +1,4 @@
+/* note this is in major need of clean up.. */
 /* Lets override the defaults for the tamplates */
 html,body{height:auto;}
 
@@ -153,7 +154,7 @@ table.ui-widget tbody tr.odd td{}
     width: 721px;
 	display:inline;
 	}
-.editablelistUL li {float:left;display:inline-block;line-height: 15px; margin: 10px 5px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
+.editablelistUL li {float:left;display:inline-block;line-height: 15px; margin: 10px 3px 0 0 !important;padding: 0 !important; position:relative; z-index:1;}
 .editablelistUL li li{float:none;display: inline;margin: 10px 0 0 !important;}
 .editablelistUL li div{
     height: 180px;
@@ -387,6 +388,15 @@ span.UinEdit{    background-color: #E2E2E2;
 
 .place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
+
+.switch a.active{ font-weight:bold;}
+.switch .container{display:none;}
+.switch .container.active{display:block;}
+
+
+
+
+
 #map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
 
 .geometrics.editor .style_controlls{margin-right:525px; min-height:535px;}
@@ -405,6 +415,11 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 .geometrics.editor .place_new{min-height:535px;}
+
+
+
+
+
 
 
 .pod{  display: inline-block;

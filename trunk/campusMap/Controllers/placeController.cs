@@ -70,19 +70,22 @@ namespace campusMap.Controllers
             PropertyBag["BreakingNews"] = place;
         }
 
-        public void List(int page, int searchId, string status)
+        public void List(int page, int searchId, int status)
         {
             authors user = getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["listcats"] = ActiveRecordBase<categories>.FindAll();
+            
+
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
 
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = userService.getLogedIn();
-            //user.Sections.Contains(place.place_types);
+            //user.categories.Contains(place.categories);
 
                 IList<place> items;
                 int pagesize = 15;
@@ -90,13 +93,13 @@ namespace campusMap.Controllers
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
                /* if (searchId > 0)
                 {
-                    baseEx.Add(Expression.Eq("place_types", ActiveRecordBase<place_types>.Find(searchId)));
+                    baseEx.Add(Expression.Eq("categories", ActiveRecordBase<categories>.Find(searchId)));
                 }
                 else if (!searchId.Equals(-1))
                 {
-                    place_types[] array1 = new place_types[user.Sections.Count];
-                    user.Sections.CopyTo(array1, 0);
-                    baseEx.Add(Expression.In("place_types", array1));
+                    categories[] array1 = new categories[user.categories.Count];
+                    user.categories.CopyTo(array1, 0);
+                    baseEx.Add(Expression.In("categories", array1));
                 }*/
 
                 if (searchId.Equals(-2))
@@ -104,15 +107,15 @@ namespace campusMap.Controllers
                     IList<place> userplaces = user.Places;
                     object[] obj = new object[userplaces.Count];
                     int i = 0;
-                    foreach(place place in userplaces){
-                        obj[i] = place.id;
+                    foreach(place p in userplaces){
+                        obj[i] = p.id;
                         i++;
                     }
                     baseEx.Add(Expression.In("place_id", obj));
                 }
 
             //PUBLISHED
-                if (status == "published"){
+                if (status == 3){
                     paging = page;
                 }else{
                     paging = 1;
@@ -144,7 +147,7 @@ namespace campusMap.Controllers
 
 
             //REVIEW
-                if (status == "review"){
+                if (status == 2){
                     paging = page;
                 }else{
                     paging = 1;
@@ -164,7 +167,7 @@ namespace campusMap.Controllers
                 PropertyBag["reviewButtonSet"] = buttons;  
 
             //DRAFT
-                if (status == "draft"){
+                if (status == 1){
                     paging = page;
                 }else{
                     paging = 1;
@@ -227,18 +230,27 @@ namespace campusMap.Controllers
                     {
                         foreach (place_types item in place.place_types)
                         {
-                            if (place.Authors.Contains(user) && user.Sections.Contains(item))
+                            if (place.Authors.Contains(user) && user.place_types.Contains(item))
                                 flag = true; break;
-                        } break;
+                        } 
+                        
+                        
+                        
+                        
+                        break;
                     }
 
                 case "Editor":
                     {
                         foreach (place_types item in place.place_types)
                         {
-                            if (user.Sections.Contains(item))
+                            if (user.place_types.Contains(item))
                                 flag = true; break;
-                        } break;
+                        } 
+                        
+                        
+                        
+                        break;
                     }
              }
 
@@ -275,7 +287,7 @@ namespace campusMap.Controllers
         {
             place_types type = ActiveRecordBase<place_types>.Find(id);
             PropertyBag["type"] = type;
-            RenderView("../admin/fields/types/new");
+            RenderView("../admin/types/new");
         }
 
         public void edit_field(int id)
@@ -364,7 +376,7 @@ namespace campusMap.Controllers
             // ele_ops Should match
             //[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}]
 
-            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":{" + ele_attr + "}, \"options\":"+ele_ops+" }";
+            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"" + ((ele.label == "") ? field.name : ele.label) + "\", \"attr\":{" + ele_attr + "}, \"options\":" + ele_ops + " }";
 
 
             ActiveRecordMediator<fields>.Save(field);
@@ -511,7 +523,6 @@ namespace campusMap.Controllers
             one_place.editing = user;
             ActiveRecordMediator<place>.Save(one_place);
 
-           
 
 
             //String locationList = Getlocation();
@@ -569,7 +580,7 @@ namespace campusMap.Controllers
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
-            
+            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
 
             PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
 
@@ -664,6 +675,8 @@ namespace campusMap.Controllers
             PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
 
             RenderView("editor_place");
         }
@@ -822,7 +835,7 @@ namespace campusMap.Controllers
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
             [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
             int[] cats,
-            String[] newtag,
+            String[] massTag,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
@@ -891,14 +904,13 @@ namespace campusMap.Controllers
                     place.prime_name = "TEMP NAME";
                 }
             }
-
             /*if (place.place_types == null || place.place_types.Count == 0)
             {
                 Flash["error"] = "You must choose a Place type.";
                 RedirectToReferrer();
                 return;
             }*/
-            int requestedStatus = canPublish(user) ? place.status.id : 1;
+            int requestedStatus = canPublish(user) && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             place.infotabs.Clear();
@@ -920,23 +932,7 @@ namespace campusMap.Controllers
                 place.updated_date = DateTime.Now;
             }
 
-            if (newtag != null)
-            {
-                foreach (String onetags in newtag)
-                {
-                    if (onetags != "")
-                    {
-                        tags t = new tags();
-                        t.name = onetags;
-                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("Name", onetags);
-                        if (temp.Length == 0)
-                        {
-                            ActiveRecordMediator<tags>.Save(t);
-                            place.tags.Add(t);                                                                                  
-                        }
-                    }
-                }
-            }
+
 
             /**/
             if (place.field != null)
@@ -965,7 +961,6 @@ namespace campusMap.Controllers
                         f.owner = place.id;
                         ActiveRecordMediator<fields>.Save(f);
                         place.field.Add(f);
-                        
                     }
                 }
             }
@@ -973,7 +968,6 @@ namespace campusMap.Controllers
             place.names.Clear();
             foreach (place_names pn in place_names)
             {
-                if (pn.label == null) pn.label = "Generic Name";
                 pn.place_id = place.id;
                 if (pn.name != null && pn.id == 0)
                 {
@@ -1005,7 +999,23 @@ namespace campusMap.Controllers
                     place.tags.Add(tag);
                 }
             }
-
+            if (massTag != null)
+            {
+                foreach (String onetags in massTag)
+                {
+                    if (onetags != "")
+                    {
+                        tags t = new tags();
+                        t.name = onetags;
+                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("name", onetags);
+                        if (temp.Length == 0)
+                        {
+                            ActiveRecordMediator<tags>.Save(t);
+                            place.tags.Add(t);
+                        }
+                    }
+                }
+            }
             place.infotabs.Clear();
             foreach (infotabs tab in tabs)
             {
@@ -1020,12 +1030,12 @@ namespace campusMap.Controllers
             }
 
 
-            place.categories.Clear();
+            /*place.categories.Clear();
             foreach (int cat in cats)
             {
                 categories c = ActiveRecordBase<categories>.Find(cat);
                 place.categories.Add(c);
-            }
+            }*/
 
             foreach (media_repo media in images)
             {

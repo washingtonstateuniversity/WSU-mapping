@@ -24,6 +24,9 @@
   <p>Name:<br/>
       <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
   </p>
+  <p>Alias:<br/>
+      <input type="text" value="$!field.alias" name="field.alias" id="type_alias" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
 <p  style="float:left;width:46%;">Place Model:<br/>
 	<select name="placemodel">	
 		#foreach($model in $p_models)
@@ -128,14 +131,16 @@
 
 	<fieldset style="float:left;width:46%;">
 		<legend>Element Attributes:</legend>
-			<div style="width:220px;">
-		<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Class:</span><input type="text" value="$!ele.attr.ele_class" name="ele.attr.ele_class"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Id:</span><input type="text" value="$!ele.attr.id" name="ele.attr.id"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:94px;"/>
-		<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:94px;"/>
+			<div style="width:100%;">
+		<span style="float:left;width:100px;">Label:</span><input type="text" value="$!ele.label" name="ele.label"  style="float:left;width:150px; margin-right:10px;"/>
+		<span style="float:left;width:100px;">Placeholder:</span><input type="text" value="$!ele.attr.placeholder" name="ele.attr.placeholder"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Accesskey:</span><input type="text" value="$!ele.attr.accesskey" name="ele.attr.accesskey"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Dir:</span><input type="text" value="$!ele.attr.dir" name="ele.attr.dir"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Class:</span><input type="text" value="$!ele.attr.ele_class" name="ele.attr.ele_class"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Id:</span><input type="text" value="$!ele.attr.id" name="ele.attr.id"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Style:</span><input type="text" value="$!ele.attr.style" name="ele.attr.style"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Tabindex:</span><input type="text" value="$!ele.attr.tabindex" name="ele.attr.tabindex"  style="float:left;width:150px;margin-right:10px;"/>
+		<span style="float:left;width:100px;">Title:</span><input type="text" value="$!ele.attr.title" name="ele.attr.title"  style="float:left;width:150px;margin-right:10px;"/>
 				
 
 			<div style="clear:both;"></div>

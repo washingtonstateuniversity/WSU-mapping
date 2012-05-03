@@ -168,7 +168,7 @@
                 id = 1;
                 foreach (string category in cat)
                 {
-                    string cats = HttpUtility.UrlDecode(category.Replace("__", "&"));
+                    string cats = HttpUtility.UrlDecode(category.Replace("__", "&").Replace("_|_", ","));
                     IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", cats);
                     q.SetParameter("p" + id, c[0]);
                     id = id + 1;
@@ -263,19 +263,61 @@
                         if (item.Images.Count >0 )
                         {
                             /* note the width and height should be abstracted out into a map preference*/
-                            mainimage = "<span class='headImage'><img src='/media/download.castle?placeid=" + item.id+ "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' alt='Evergreen' class='img-main'/></span>";
+                            mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
                         }
+
+
                         String infoTitle = "";
-                        if (!string.IsNullOrEmpty(item.infoTitle))
+                        if (!item.hideTitles)
                         {
-                            infoTitle = "<h2 class='header'>" + item.infoTitle + "</h2>";
+                            infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + "</h2>";
                         }
+
+
+
+                        String imgGallery = "";
+                        if (item.Images.Count > 1)
+                        {
+                            String galImg = "";
+                            int c = 0;
+                            foreach (media_repo media in item.Images)
+                            {
+                                if (c > 0)
+                                {
+                                  /* note the width and height should be abstracted out into a map preference*/
+                                    galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
+                                        "<a href='#' class='imgEnlarge'></a>"+
+                                        "<img src='/media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>"+
+                                    "</span></li>";
+                                }
+                                c++;
+                            }
+                            String nav = "<div class='navArea'><a href='#' class='photos active'>Photos</a><ul class='cNav'>" + repeatStr("<li><a href='#'>{$i}</a></li>", item.Images.Count-1) + "</ul><a href='#' class='vids'>Video</a></div>";
+                            String gallery = "<div class='cycle'><a href='#' class='prev'>Prev</a><div class='cWrap'><ul class='items'>" + galImg + "</ul></div><a href='#' class='next'>Next</a></div>" + nav;
+
+
+
+
+                            imgGallery += @"
+                            ,{
+                                ""block"":""" + infoTitle + gallery + @""",
+                                ""title"":""Views/Vids""
+                            }";
+                        }
+
+
+
+
+
+
+
 
                         if (count == 0){
                             placeList += @"""markers"":[";
                         }
                         String infotabs = "";
-                        if (item.infotabs.Count > 0){
+                        if (item.infotabs.Count > 0 || imgGallery!="")
+                        {
                             infotabs += @"[";
 
                             String tabStr = "";
@@ -285,20 +327,25 @@
                             ""block"":""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
                             ""title"":""Overview""
                         },";
-                            foreach (infotabs tab in item.infotabs) {
-							    tabStr += @"
+                            if (item.infotabs.Count > 0 )
+                            {
+                                foreach (infotabs tab in item.infotabs)
+                                {
+                                    tabStr += @"
                         {
                             ""block"":""" + infoTitle + tab.content.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
-                            ""title"":""" +tab.title+@"""
+                            ""title"":""" + tab.title + @"""
                         },";
+                                }
                             }
                             infotabs += tabStr.TrimEnd(',');
+                            infotabs += imgGallery;
                             infotabs += @"]";
                         }else{
                             if (String.IsNullOrEmpty(item.details)){
                                 infotabs += @"""""";
                             } else{
-                                infotabs += @"""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
+                                infotabs += @"""" + infoTitle + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
                             }
                         }
 

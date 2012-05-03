@@ -35,7 +35,7 @@ $Form.HiddenField("image.id")
 
 	#if($controller.canChangeLevel($currentUser))
 	<p> Access Levels :<br/>
-		$Form.Select("author.AccessLevel.id", $accesslevels, "%{value='Id', text='Title', firstoption='-select-',firstoptionvalue=''}") <br/>
+		$Form.Select("author.access_levels.id", $accesslevels, "%{value='Id', text='title', firstoption='-select-',firstoptionvalue=''}") <br/>
 		<div class="right">
 			1.)  A <strong>Contributor</strong> can submit places but can't publish it.<br/>
 			2.)  An <strong>Author</strong> can submit places and publish their own places.<br/>
@@ -63,13 +63,25 @@ $Form.HiddenField("image.id")
   #end
 #end
 <br/>
-	<p>Sections :<br/>
-		<select name="Sections" id="sections" class="authorSelect" multiple="multiple">
-			#foreach($section in $sections)
-				<option class="section" value="$section.id" #if($author.Sections.Contains($section)) selected="selected" #end>$section.Name</option>
-			#end
-		</select>
-	</p>
+<p>Place Types :<br/>
+	<select name="author.place_types[]" id="sections" class="authorSelect" multiple="multiple">
+		#foreach($type in $types)
+			<option class="section" value="$type.id" #if($author.place_types.Contains($type)) selected="selected" #end>$type.Name</option>
+		#end
+	</select>
+</p>
+<p>Categories:<br/>
+	<select name="author.categories[]" id="categories" class="authorSelect" multiple="multiple">
+		#foreach($category in $categories)
+			<option class="section" value="$category.id" #if($author.categories.Contains($category)) selected="selected" #end>$Controller.repeatStr("- ",$category.level) $category.name</option>
+		#end
+	</select>
+</p>
+
+
+
+
+
 
 <p><input type="submit" value="Submit" /></p>
 

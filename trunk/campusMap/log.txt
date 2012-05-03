@@ -2964,3 +2964,113 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
 2012-04-24 13:38:09,521 [22] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-02 20:12:14,466 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-02 20:48:19,108 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_authors_to_categories_authors". The conflict occurred in database "campusMap", table "dbo.authors", column 'author_id'.
+The statement has been terminated.
+2012-05-02 20:48:19,119 [9] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not insert collection: [campusMap.Models.authors.categories#1] ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_authors_to_categories_authors". The conflict occurred in database "campusMap", table "dbo.authors", column 'author_id'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionRecreate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-02 20:49:56,135 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_authors_to_categories_authors". The conflict occurred in database "campusMap", table "dbo.authors", column 'author_id'.
+The statement has been terminated.
+2012-05-02 20:49:56,135 [10] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not insert collection: [campusMap.Models.authors.categories#1] ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_authors_to_categories_authors". The conflict occurred in database "campusMap", table "dbo.authors", column 'author_id'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionRecreate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-03 07:00:39,581 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Arithmetic overflow error for data type tinyint, value = 307.
+The statement has been terminated.
+2012-05-03 07:00:39,632 [5] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not update: [campusMap.Models.place#5][SQL: UPDATE place SET infoTitle = ?, prime_name = ?, abbrev_name = ?, summary = ?, details = ?, address = ?, street = ?, coordinate = ?, publish_time = ?, creation_date = ?, updated_date = ?, plus_four_code = ?, model = ?, status = ?, media = ?, school = ?, college = ?, campus = ?, program = ?, department = ?, author_editing = ? WHERE place_id = ?] ---> System.Data.SqlClient.SqlException: Arithmetic overflow error for data type tinyint, value = 307.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Int32[] dirtyFields, Boolean hasDirtyCollection, Object[] oldFields, Object oldVersion, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-03 07:43:37,428 [13] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-03 08:01:31,139 [13] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-03 08:29:55,797 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 08:29:55,808 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 08:30:01,765 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 08:30:01,765 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 08:30:05,267 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 08:30:05,268 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'public'.
+2012-05-03 11:20:44,339 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String or binary data would be truncated.
+The statement has been terminated.
+2012-05-03 11:20:44,393 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:20:44,395 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:20:44,395 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:20:44,395 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:20:44,396 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:20:53,888 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-03 11:24:16,554 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String or binary data would be truncated.
+The statement has been terminated.
+2012-05-03 11:24:16,557 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:24:16,558 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:24:16,558 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:24:16,558 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 11:24:16,559 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-03 14:00:16,679 [9] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session

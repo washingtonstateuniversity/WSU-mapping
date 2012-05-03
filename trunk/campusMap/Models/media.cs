@@ -73,6 +73,13 @@ namespace campusMap.Models
             get { return media_file_path; }
             set { media_file_path = value; }
         }
+        private String _orientation;
+        [Property]
+        virtual public String orientation 
+        {
+            get { return _orientation; }
+            set { _orientation = value; }
+        }
         private media_types media_type;
         [BelongsTo("media_type_id")]
         virtual public media_types type

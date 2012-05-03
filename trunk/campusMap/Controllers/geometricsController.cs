@@ -1063,7 +1063,7 @@ namespace campusMap.Controllers
             // ele_ops Should match
             //[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}]
 
-            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"test_label\", \"attr\":{" + ele_attr + "}, \"options\":" + ele_ops + " }";
+            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"" + ((ele.label == "") ? field.name : ele.label) + "\", \"attr\":{" + ele_attr + "}, \"options\":" + ele_ops + " }";
 
 
             ActiveRecordMediator<fields>.Save(field);

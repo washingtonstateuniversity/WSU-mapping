@@ -3,26 +3,26 @@
 	<div class='detailArea'>
 		<ul>
 			#if($item.coordinate)
-			<li class='Authors'>
-			#if($item.authors.Count>0)
-				<span>Authors: </span><br/>
-					#foreach($author in $item.authors)
-						$!author.name
-					#between
-						,
-					#end
-				#else
-					<em>currently unassigned</em>
-			#end
-			</li>
-			  <li class="tags">
-				<span>Tag: </span>
+				<li class='Authors'>
+				#if($item.authors.Count>0)
+					<span>Authors: </span><br/>
+						#foreach($author in $item.authors)
+							$!author.name
+						#between
+							,
+						#end
+					#else
+						<em>currently unassigned</em>
+				#end
+				</li>
+				<li class="tags">
+					<span>Tag: </span>
 					#if($item.tags.Count>0)
 						$item.tags.Count
 					#else
 						<em>currently none</em>
 					#end
-			  </li>
+				</li>
 			#end
 			#if($item.Publishtime)<li class='date'> <span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','') </li>#end
 			#if($item.Status.Title)<li class='Status'><span>Status: </span>$!item.Status.Title</li>#end
