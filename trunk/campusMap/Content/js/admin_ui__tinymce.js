@@ -38,7 +38,7 @@ function openImgUploader(){
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
 
@@ -61,7 +61,7 @@ function openImgUploader(){
 																											
 												var weWantedTo=true;
 													$('input[type=file]').ajaxfileupload({ 
-															  'action': '/media/update.castle', 
+															  'action': siteroot+'media/update.castle', 
 															  'params': { 
 															  	'image.id':'',
 																'image.FileName':$('input#image_FileName'),
@@ -92,7 +92,7 @@ function openImgUploader(){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){
@@ -201,14 +201,14 @@ function openImgResource(ed,uploadOnly){
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src','/media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+													$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
-											$('#ISIUarea').load('/media/inlineupload.castle',function(){
+											$('#ISIUarea').load(siteroot+'media/inlineupload.castle',function(){
 																
 												var weWantedTo=true;
 													$('input[type=file]').ajaxfileupload({ 
-															  'action': '/media/update.castle', 
+															  'action': siteroot+'media/update.castle', 
 															  'params': { 
 															  	'image.id':'',
 																'image.FileName':$('input#image_FileName'),
@@ -564,7 +564,7 @@ function tinyoptions(which,id){
 					 // Add a custom button
 						ed.addButton('mainImage', {
 							title : 'Main Image',
-							image : '/Content/images/insert_image.png',
+							image : siteroot+'Content/images/insert_image.png',
 							onclick : function() {
 								// Add you own code to execute something on click
 								ed.focus();
@@ -573,7 +573,7 @@ function tinyoptions(which,id){
 						});
 						ed.addButton('youTube', {
 							title : 'Add YouTube',
-							image : '/Content/images/insert_youtube.png',
+							image : siteroot+'Content/images/insert_youtube.png',
 							onclick : function() {
 								// Add you own code to execute something on click
 								ed.focus();
@@ -611,7 +611,7 @@ function tinyoptions(which,id){
 						
 						ed.addButton('imagegallery', {
 							title : 'Add Gallery',
-							image : '/Content/images/insert_gallery.png',
+							image : siteroot+'Content/images/insert_gallery.png',
 							onclick : function() {
 								// Add you own code to execute something on click
 								ed.focus();

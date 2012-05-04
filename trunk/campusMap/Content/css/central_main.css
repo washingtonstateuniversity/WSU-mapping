@@ -113,9 +113,9 @@ min-width:1026px;
 .change{}
 .MACRO{}
 
-#imgPre img{width:150px;height:150px;background: url(/content/images/loading-icon.gif) no-repeat center center;}
+#imgPre img{width:150px;height:150px;background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
 #imagePicker{max-width:180px;}
-#uploadMess{height:150px;background: url(/content/images/loading-icon.gif) no-repeat center center;}
+#uploadMess{height:150px;background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
 #uploadMess h2{font-size:24px;margin-top:35px;}
 
 #imgPre{float:right;width:150px;}
@@ -191,7 +191,7 @@ table.ui-widget tbody tr.odd td{}
 .detailInfoBut{position:absolute;bottom:5px;left:0px; width:16px;height:36px;display:inline-block;
 text-indent:-9999px;
 
-background: url(/content/images/infoTab.png) no-repeat left center transparent;
+background: url(../../Content/images/infoTab.png) no-repeat left center transparent;
 
 }
 .detailInfoBut:hover{ background-position:right center;}
@@ -318,17 +318,17 @@ span.UinEdit{    background-color: #E2E2E2;
 
 /* media boxes */
 #browserBox.grid{border:1px solid #CCCCCC;padding: 15px;width: 540px; margin:15px auto 0px; background-color:#fff;}
-#browserBox.grid .imageBox{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width:175px;height:175px;background: url(/content/images/loading-icon.gif) no-repeat 40px center;}
-#browserBox.grid .previewImg{background: url(/content/images/loading-icon.gif) no-repeat center center;}
+#browserBox.grid .imageBox{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width:175px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
+#browserBox.grid .previewImg{background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
 #browserBox.grid .DeleteImage{position:absolute; top:5px; right:5px;diplay:none;}
-#browserBox.grid .imgInfo{background: url(/Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;padding:2px 5px;position:absolute; bottom:0px; left:0px;}
+#browserBox.grid .imgInfo{background: url(../../Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;padding:2px 5px;position:absolute; bottom:0px; left:0px;}
 #browserBox.grid .imgInfo span{font-size:12px;}
 #browserBox.grid .imgInfo label{font-size:10px;font-weight:bold;}
 #browserBox.grid .imgInfo input{width:160px;}
 
 #img_layout_choice{width:32px; height:32px; cursor:pointer; display:inline-block; float:right;
-					background: url(/Content/images/grid_list_choices.png) no-repeat scroll left bottom transparent;}
-#img_layout_choice.list{background: url(/Content/images/grid_list_choices.png) no-repeat scroll left top transparent;}
+					background: url(../../Content/images/grid_list_choices.png) no-repeat scroll left bottom transparent;}
+#img_layout_choice.list{background: url(../../Content/images/grid_list_choices.png) no-repeat scroll left top transparent;}
 
 
 
@@ -336,11 +336,11 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 #browserBox.list{border:1px solid #CCCCCC;padding: 15px;width: 540px; margin:15px auto 0px; background-color:#fff;}
-#browserBox.list .imageBox{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;max-width:540px;height:175px;background: url(/content/images/loading-icon.gif) no-repeat 40px center;}
+#browserBox.list .imageBox{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;max-width:540px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
 #browserBox.list .previewImg{}
 #browserBox.list .DeleteImage{position:absolute; top:5px; right:5px;display:block !important;}
 #browserBox.list .imgInfo{
-	background: url(/Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;
+	background: url(../../Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;
     display: block !important;
     float: right;
     height: 171px;
@@ -432,7 +432,7 @@ label{ font-weight:bold; font-size:1.1em;}
 
 
 fieldset{padding: 4px 8px 10px;}
-/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(/Content/images/fieldset_bk.png) repeat center center;}
+/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk.png) repeat center center;}
 
 
 
@@ -463,12 +463,12 @@ fieldset{padding: 4px 8px 10px;}
 
 
 
-/*#smaple_area fieldset {background: url("/Content/images/big_logo.png") no-repeat scroll center center transparent;}
-#smaple_area fieldset:hover {background: url("/Content/images/big_logo.png") no-repeat scroll center center transparent;}
+/*#smaple_area fieldset {background: url("../../Content/images/big_logo.png") no-repeat scroll center center transparent;}
+#smaple_area fieldset:hover {background: url("../../Content/images/big_logo.png") no-repeat scroll center center transparent;}
 #map_canvas{opacity: 0.5;}*/
 
 .option_handle{
-    background: url(/Content/images/drag_handle.png) repeat scroll 0 0 #EEEEEE;
+    background: url(../../Content/images/drag_handle.png) repeat scroll 0 0 #EEEEEE;
     border: 1px solid #E2E2E2;
     display: inline-block;
     float: left;
