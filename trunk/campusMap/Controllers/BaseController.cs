@@ -59,11 +59,12 @@ namespace campusMap.Controllers
         public string getRootUrl()
         {
             String root = "";
-            if (Request.IsLocal == false)
+            if (!Request.IsLocal)
             {
                 root = "http://dev-mcweb.it.wsu.edu/campusmap.com";
             }
-
+            campusMap.Services.LogService.writelog(" getRootUrl" + Request.IsLocal);
+            campusMap.Services.LogService.writelog(" making" + root);
             return root;
         }
 
