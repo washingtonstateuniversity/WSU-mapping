@@ -263,7 +263,7 @@
                         if (item.Images.Count >0 )
                         {
                             /* note the width and height should be abstracted out into a map preference*/
-                            mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
+                            mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
                         }
 
 
@@ -287,7 +287,7 @@
                                   /* note the width and height should be abstracted out into a map preference*/
                                     galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
                                         "<a href='#' class='imgEnlarge'></a>"+
-                                        "<img src='/media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>"+
+                                        "<img src='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
                                     "</span></li>";
                                 }
                                 c++;
@@ -359,7 +359,7 @@
                         ""longitude"":""" + item.getLong() + @"""
                         },
             ""style"":{
-                    ""icon"":""http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png""
+                    ""icon"":""" + getRootUrl() + @"/Content/images/default_icon_{$i}.png""
                     },
             ""info"":{
                     ""content"":" + infotabs + @",

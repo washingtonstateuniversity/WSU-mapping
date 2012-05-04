@@ -54,6 +54,20 @@ namespace campusMap.Controllers
         {
             return SelectedViewName.Split('\\')[0];
         }
+
+
+        public string getRootUrl()
+        {
+            String root = "";
+            if (isLocal() == false)
+            {
+                root = "http://dev-mcweb.it.wsu.edu/campusmap.com";
+            }
+
+            return root;
+        }
+
+
         public bool isLocal()
         {
             return Request.IsLocal;
