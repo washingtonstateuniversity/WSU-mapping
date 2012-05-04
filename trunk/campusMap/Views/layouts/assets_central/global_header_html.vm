@@ -9,7 +9,7 @@
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		http://dev-mcweb.it.wsu.edu/campusmap.com/
+		http://dev-mcweb.it.wsu.edu/campusmap.com
 	#else
 		#if($siteroot)
 			$siteroot
@@ -25,8 +25,7 @@ $Controller.getView()
   var siteroot = '$site.Trim()/';
   var view = '$view.Trim()/';
 </script>
-
-
+#set($siteroot=$site.Trim())
 
 <style type="text/css">
   body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
@@ -43,8 +42,8 @@ $Controller.getView()
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
-<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
+<script type="text/javascript" src="$site/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
+<script type="text/javascript" src="$site/Content/js/utilities_general.js"></script>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
