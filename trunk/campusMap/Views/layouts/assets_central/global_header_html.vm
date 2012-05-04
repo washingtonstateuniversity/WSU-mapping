@@ -4,7 +4,7 @@
 #end
 
 
-<title>The Daily campusMap</title>
+<title>The WSU Campus Map</title>
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
 #capturefor(site)

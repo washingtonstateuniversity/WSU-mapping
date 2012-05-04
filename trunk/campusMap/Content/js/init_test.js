@@ -95,7 +95,7 @@ function loadData(data){
 			  width: "400px"
 			 }
 			,closeBoxMargin: "10px 2px 2px 2px"
-			,closeBoxURL: "/Content/images/close.png"
+			,closeBoxURL: siteroot + "Content/images/close.png"
 			,infoBoxClearance: new google.maps.Size(1, 1)
 			,isHidden: false
 			,pane: "floatPane"

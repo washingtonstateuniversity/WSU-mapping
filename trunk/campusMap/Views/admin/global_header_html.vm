@@ -13,20 +13,24 @@
 <link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
 
 #capturefor(site)
-#if($siteroot)
-$siteroot
-#else
-http://campusMap.wsu.edu
-#end
+	#if($Controller.isLocal()==false)
+		http://dev-mcweb.it.wsu.edu/campusmap.com
+	#else
+		#if($siteroot)
+			$siteroot
+		#else
+			http://dev-mcweb.it.wsu.edu/campusmap.com
+		#end
+	#end
 #end
 #capturefor(view)
 $Controller.getView()
 #end
-#capturefor(mcv_action)
-${controller.getAction()}
-#end
-
-
+<script type="text/javascript">
+  var siteroot = '$site.Trim()/';
+  var view = '$view.Trim()/';
+</script>
+#set($siteroot=$site.Trim())
 
 <script type="text/javascript">
   var siteroot = '$site.Trim()/';
@@ -50,8 +54,8 @@ ${controller.getAction()}
 <script type="text/javascript" src="/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
 
 
-<script type="text/javascript" src="/Content/js/external/jquery.cookie.js"></script>
-<script type="text/javascript" src="/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
@@ -68,17 +72,12 @@ ${controller.getAction()}
 <script type="text/javascript" src="$siteroot/Content/js/jquery.defaultvalue.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.colorbox-min.js"></script>
 
-
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
-<script type="text/javascript" src="/Content/js/admin_ui__media.js"></script>
-<script type="text/javascript" src="/Content/js/admin_ui__tinymce.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_ui__media.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_ui__tinymce.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
-
-
-
-
 
 <!-- <script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script> -->
 
