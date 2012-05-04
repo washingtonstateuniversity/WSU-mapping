@@ -49,9 +49,9 @@ $Controller.getView()
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
-<script type="text/javascript" src="/content/js/jquery.dialog.extra.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
 
-<script type="text/javascript" src="/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
 
 
 <script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
