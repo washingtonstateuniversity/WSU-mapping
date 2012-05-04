@@ -54,7 +54,7 @@ namespace campusMap.Controllers
         {
             return SelectedViewName.Split('\\')[0];
         }
-        public bool Loacal()
+        public bool isLocal()
         {
             return Request.IsLocal;
         }

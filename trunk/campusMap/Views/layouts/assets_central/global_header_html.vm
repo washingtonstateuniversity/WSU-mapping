@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-#if($Controller.isLoacal()==false)
+#if($Controller.isLocal()==false)
 	<base href="http://dev-mcweb.it.wsu.edu/campusmap.com/" />
 #end
 
