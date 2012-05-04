@@ -634,10 +634,16 @@ namespace campusMap.Services
             NameValueCollection nvc = new NameValueCollection();
             //nvc.Add("id", "TTR");
             //nvc.Add("btn-submit-photo", "Upload");
-            String responseData = HttpUploadFile(url, image_name, "files", mimeFinder(image.ext), nvc);
-           
-            JObject obj = JObject.Parse(responseData);
-            string yurl = (string)obj["dest"]; // what is the path?
+            string yurl = "";
+            try
+            {
+                String responseData = HttpUploadFile(url, image_name, "files", mimeFinder(image.ext), nvc);
+                JObject obj = JObject.Parse(responseData);
+                yurl = (string)obj["dest"]; // what is the path?
+            }
+            catch
+            {
+            }
             if (!String.IsNullOrEmpty(yurl))
             {
                 byte[] imagebytes = DownloadBinary(yurl);
