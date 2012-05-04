@@ -28,7 +28,7 @@ namespace campusMap.Controllers
     [Layout("default")]
     public class mediaController : SecureBaseController
     {
-        ILog log = log4net.LogManager.GetLogger("ImageController");
+        ILog log = log4net.LogManager.GetLogger("mediaController");
 
         public void Index()
         {
@@ -225,7 +225,7 @@ namespace campusMap.Controllers
                     System.IO.Directory.CreateDirectory(uploadPath);
                 }
                 string newFile = uploadPath + image.id + ".ext";
-
+                log.Info("uploadfilename: " + newFile);
                 campusMap.Services.LogService.writelog(" in Update " + newFile);
 
                 //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
