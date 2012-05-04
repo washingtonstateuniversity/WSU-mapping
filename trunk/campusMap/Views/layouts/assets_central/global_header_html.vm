@@ -8,11 +8,15 @@
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
 #capturefor(site)
-#if($siteroot)
-$siteroot
-#else
-http://campusMap.wsu.edu
-#end
+	#if($Controller.isLocal()==false)
+		http://dev-mcweb.it.wsu.edu/campusmap.com/
+	#else
+		#if($siteroot)
+			$siteroot
+		#else
+			http://dev-mcweb.it.wsu.edu/campusmap.com
+		#end
+	#end
 #end
 #capturefor(view)
 $Controller.getView()
