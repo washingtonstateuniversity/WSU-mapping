@@ -17,6 +17,9 @@ namespace campusMap.Controllers
     [Layout("default"), Rescue("generalerror")]
     public abstract class BaseController : MonoRailHelper.HelperBaseController
 	{
+
+        ILog log = log4net.LogManager.GetLogger("baseController");
+
         protected PlaceService placeService = new PlaceService();
         protected HelperService helperService = new HelperService();
         protected ImageService imageService = new ImageService();
