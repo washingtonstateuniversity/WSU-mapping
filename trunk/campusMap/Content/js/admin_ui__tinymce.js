@@ -42,7 +42,7 @@ function openImgUploader(){
 													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 												});
 
-											$('#ISIUarea').load('/media/inlineupload.castle',function(){
+											$('#ISIUarea').load(siteroot+'media/inlineupload.castle',function(){
 												if(typeof(availablecredits) !== 'undefined'){
 													if($( "#image_Credit" ).length>0){
 														$( "#image_Credit" ).autocomplete({
