@@ -119,41 +119,41 @@
 		#end
 		<fieldset style="min-width:455px;">
 		<fieldset style="width:44%;float:right;"><legend>Address Options</legend>
-<div class="col2 w100"  style="display:inline-block;">
-                <label for="street_address">Address</label><br/>
-                <input type="text" name="place.address" id="place_address" value="$!place.address" class="text ui-widget-content ui-corner-all w100"/>
-</div>
-<div class="col2 w200"  style="display:inline-block;">
-                <label for="street_address">Street</label><br/>
-                <input type="text" name="place.street" id="place_street" value="$!place.street" class="text ui-widget-content ui-corner-all w300"/>
-</div>				
+				<div class="col2 w100"  style="display:inline-block;">
+					<label for="street_address">Address</label><br/>
+					<input type="text" name="place.address" id="place_address" value="$!place.address" class="text ui-widget-content ui-corner-all w100"/>
+				</div>
+				<div class="col2 w200"  style="display:inline-block;">
+					<label for="street_address">Street</label><br/>
+					<input type="text" name="place.street" id="place_street" value="$!place.street" class="text ui-widget-content ui-corner-all w300"/>
+				</div>	
+				<hr/>
+				<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/><em style="font-size:8px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em></label>		
+				<hr/>	
                 #if($place.campus.zipcode)<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
                 <span id="zcode">$place.campus.zipcode</span> - 
                 <input type="text" name="place.plus_four_code" id="place_plus_four_code" value="$!place.plus_four_code" class="text ui-widget-content ui-corner-all w50" />
 				<br/>#end
 
-
-<div class="col2"  style="display:inline-block;">
+				<div class="col2"  style="display:inline-block;">
+					<label for="place.campus"><strong>Campus</strong></label><br/>
+					<select id="place_campus" class="autoselect" name="place.campus.id">
+						<option value="">Select one...</option>
+						#foreach($campus in $campuses)
+							<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+						#end
+					</select>
 				
-				<label for="place.campus"><strong>Campus</strong></label><br/>
-				<select id="place_campus" class="autoselect" name="place.campus.id">
-					<option value="">Select one...</option>
-					#foreach($campus in $campuses)
-						<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
-					#end
-				</select>
-
-</div>
-<div class="col2"  style="display:inline-block;">
-				<label for="place.college"><strong>College</strong></label><br/>
-				<select id="place_college" class="autoselect" name="place.college.id">
-					<option value="">Select one...</option>
-					#foreach($college in $colleges)
-						<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
-					#end
-				</select>
-				
-</div>
+				</div>
+				<div class="col2"  style="display:inline-block;">
+					<label for="place.college"><strong>College</strong></label><br/>
+					<select id="place_college" class="autoselect" name="place.college.id">
+						<option value="">Select one...</option>
+						#foreach($college in $colleges)
+							<option class="type" value="$college.id" #if($place.college == $college) selected="selected" #end>$!college.name</option>
+						#end
+					</select>	
+				</div>
 
 				<div id="school" class="col2" style="#if($place.college==0) display:none; #else display:inline-block; #end">
 				<label for="place.school"><strong>School</strong></label><br/>

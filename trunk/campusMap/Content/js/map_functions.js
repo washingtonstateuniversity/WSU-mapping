@@ -571,8 +571,7 @@ function build_infobox(item){
 			var content='';
 			$.each( item.info.content, function(j, html) {
 				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j==0?mainimage:'')+html.block+'</div></div>';
-			});				
-		
+			});
 	}else{
 		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
 		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+item.info.content+'</div></div>';
@@ -674,47 +673,48 @@ function add_place_point(lat,lng,clear){
 		$('#Lat').val(lat);
 		$('#Long').val(lng);
 		//setTimeout(function() {},  200);
-		var loca = new google.maps.LatLng(lat,lng);
-		setGeoCoder().geocode({'latLng':loca}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) { 
-				var arrAddress = results[0].address_components;
-				
-				var itemRoute='';
-				var itemLocality='';
-				var itemCountry='';
-				var itemPc='';
-				var itemSnumber='';
-				$('#place_address').val('');
-				$('#place_street').val('');			
-				// iterate through address_component array
-				$.each(arrAddress, function (i, address_component) {
-					if (address_component.types[0] == "route"){//": route:"
-						itemRoute = address_component.long_name;
-						$('#place_street').val(itemRoute);
+		if($('#revGoeLookup').is(":checked")){
+			var loca = new google.maps.LatLng(lat,lng);
+			setGeoCoder().geocode({'latLng':loca}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) { 
+					var arrAddress = results[0].address_components;
+					
+					var itemRoute='';
+					var itemLocality='';
+					var itemCountry='';
+					var itemPc='';
+					var itemSnumber='';
+					$('#place_address').val('');
+					$('#place_street').val('');			
+					// iterate through address_component array
+					$.each(arrAddress, function (i, address_component) {
+						if (address_component.types[0] == "route"){//": route:"
+							itemRoute = address_component.long_name;
+							$('#place_street').val(itemRoute);
+						}
+						if (address_component.types[0] == "locality"){//"town:"
+							itemLocality = address_component.long_name;
+						}
+						if (address_component.types[0] == "country"){ //"country:"
+							itemCountry = address_component.long_name;
+						}
+						if (address_component.types[0] == "postal_code_prefix"){ //"pc:"
+							itemPc = address_component.long_name;
+						}
+						if (address_component.types[0] == "street_number"){ //"street_number:"
+							itemSnumber = address_component.long_name;
+							$('#place_address').val(itemSnumber);
+						}
+					});
+					if (results[1]) {
+						//alert( results[1].formatted_address);
+						//obj.val(itemSnumber);
 					}
-					if (address_component.types[0] == "locality"){//"town:"
-						itemLocality = address_component.long_name;
-					}
-					if (address_component.types[0] == "country"){ //"country:"
-						itemCountry = address_component.long_name;
-					}
-					if (address_component.types[0] == "postal_code_prefix"){ //"pc:"
-						itemPc = address_component.long_name;
-					}
-					if (address_component.types[0] == "street_number"){ //"street_number:"
-						itemSnumber = address_component.long_name;
-						$('#place_address').val(itemSnumber);
-					}
-				});
-				if (results[1]) {
-					//alert( results[1].formatted_address);
-					//obj.val(itemSnumber);
+				} else {
+					alert("Geocoder failed due to: " + status);
 				}
-			} else {
-				alert("Geocoder failed due to: " + status);
-			}
-		});
-			
+			});
+		}
 		
 		$('#estimated_places').show('fast');
 		$('#local_place_names').html('loading<span class="blink1">.</span><span class="blink2">.</span><span class="blink3">.</span>');
@@ -817,7 +817,7 @@ function load_place_editor() {
 	});
 	
 	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
-		add_place_point(lat,lng);
+			add_place_point(lat,lng);
 	});
 
 	$.each('.dyno_tabs',function(i,v){
@@ -929,16 +929,30 @@ function load_place_editor() {
 		$tabs.tabs( "remove", index );
 	});
 
+
+function revGoeLookup(){
+	$("#place_street,#place_address").live('keyup',function () {
+		clearCount('codeAddress');
+		setCount('codeAddress',500,function(){
+			var zip = $('#zcode').length?$('#zcode').text():'';
+			var campus = $('#campus').length?$('#place_campus').val():'';
+			var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
+			if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
+			$('#setLatLong').addClass('ui-state-disabled');
+		});
+	});
+}
+function killRevGoeLookup(){
+	$("#place_street,#place_address").die();
+}
+
 	if($('#place_street').length>0){
-		$("#place_street,#place_address").live('keyup',function () {
-			clearCount('codeAddress');
-			setCount('codeAddress',500,function(){
-				var zip = $('#zcode').length?$('#zcode').text():'';
-				var campus = $('#campus').length?$('#place_campus').val():'';
-				var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
-				if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
-				$('#setLatLong').addClass('ui-state-disabled');
-			});
+		$('#revGoeLookup').on('change',function(){
+			if($(this).is(":checked")){
+				revGoeLookup();
+			}else{
+				killRevGoeLookup();
+			}
 		});
 	}
 	tinyResize();

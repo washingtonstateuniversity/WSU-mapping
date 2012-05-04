@@ -3074,3 +3074,5 @@ NHibernate.AssertionFailure: null id in entry (don't flush the Session after an 
 NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
 2012-05-03 14:00:16,679 [9] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-04 08:37:04,535 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
