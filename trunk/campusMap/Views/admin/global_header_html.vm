@@ -9,8 +9,7 @@
   .at300bs.at15t_compact{background-image:none;}
   .at300bs{display:inline;}
 </style>
-<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
-<link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
+
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
@@ -38,6 +37,8 @@ $Controller.getView()
   var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
 </script>
 
+<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
+<link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
