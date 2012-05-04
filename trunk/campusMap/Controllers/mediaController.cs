@@ -214,7 +214,10 @@ namespace campusMap.Controllers
 
 
                 // a var for uploads will start here
-                String uploadPath = Context.ApplicationPhysicalPath + @"uploads\";
+                String uploadPath = Context.ApplicationPhysicalPath;
+                if(!uploadPath.EndsWith("\\"))
+                    uploadPath+="\\";
+                uploadPath += @"uploads\";
 
                 if (place_id != 0)
                 {
