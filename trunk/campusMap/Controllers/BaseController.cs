@@ -54,6 +54,10 @@ namespace campusMap.Controllers
         {
             return SelectedViewName.Split('\\')[0];
         }
+        public bool Loacal()
+        {
+            return Request.IsLocal;
+        }
         public string getAction()
         {
             if (SelectedViewName.Split('\\')[1].Contains("../"))
