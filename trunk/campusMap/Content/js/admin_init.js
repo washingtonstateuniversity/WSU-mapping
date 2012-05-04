@@ -131,18 +131,18 @@ function sendBr(place_id,diaObj){
 
 
 
-function clearLock(place_id,diaObj,callback){
+function clearLock(item_id,diaObj,callback){
     $.ajaxSetup ({cache: false,async:false}); 
     var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
     //alert(place_id);
-    $.get(siteroot+view+'clearLock.castle?id='+place_id, function(response, status, xhr) {
+    $.get(siteroot+view+'clearLock.castle?id='+item_id, function(response, status, xhr) {
         if(response=='true'){
             if(typeof(diaObj) !== 'undefined'&&diaObj!=''){
-                $('body li.place_'+place_id).find('.inEdit').fadeOut('fast',function(){$('body li.place_'+place_id).find('.inEdit').remove();});
-                $('body li.place_'+place_id).find('.UinEdit').fadeOut('fast',function(){$('body li.place_'+place_id).find('.UinEdit').remove();});
+                $('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){$('body li.item_'+item_id).find('.inEdit').remove();});
+                $('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){$('body li.item_'+item_id).find('.UinEdit').remove();});
                 $( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
                 $( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
-                $('body li.place_'+place_id).find('.buttons.editIt').attr('href','Edit_place.castle?id='+place_id);
+                $('body li.item_'+item_id).find('.buttons.editIt').attr('href','_edit.castle?id='+item_id);
                 diaObj.dialog( "close" );	
             }
             if($.isFunction(callback)) callback();
