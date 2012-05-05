@@ -1,7 +1,6 @@
 alter table place_to_infotabs  drop constraint FK5829AFCD7214611
 alter table view_to_usertags  drop constraint FK42F0059B983E6244
 alter table authors_to_place_type  drop constraint FK457B0CD554A0A173
-alter table authors_to_media  drop constraint FK765FB0C254A0A173
 alter table map_views  drop constraint FK7803751867805983
 alter table map_views  drop constraint FK780375186F90B8EB
 alter table geometrics_to_types  drop constraint FKFFB888DD95CCB313
@@ -31,7 +30,7 @@ alter table comments  drop constraint FK909B6323983E6244
 alter table comments  drop constraint FK909B6323D7214611
 alter table authors_to_view  drop constraint FK3FDBF52C983E6244
 alter table geometric_to_tags  drop constraint FKA745E41B95CCB313
-alter table place_to_fields  drop constraint FKA8D27D4DD7214611
+alter table authors_to_media  drop constraint FK765FB0C254A0A173
 alter table person  drop constraint FK8C55D4CB5C8254F3
 alter table person  drop constraint FK8C55D4CB8772812E
 alter table advertisement_to_media  drop constraint FKBFD8318AAD5E0F0
@@ -41,6 +40,7 @@ alter table events_set  drop constraint FK81190F62BB078B2E
 alter table place_to_tags  drop constraint FK94806F6BD7214611
 alter table advertisement  drop constraint FK3C482F677BBD9EE3
 alter table place_names  drop constraint FKEEB16F14E9D91D06
+alter table place_to_fields  drop constraint FKA8D27D4DD7214611
 alter table place_to_categories  drop constraint FKA7B4C45DD7214611
 alter table authors_to_campus  drop constraint FK5D9478D454A0A173
 alter table place_to_usertags  drop constraint FK84A60889D7214611
@@ -65,13 +65,13 @@ if exists (select * from dbo.sysobjects where id = object_id(N'tags') and OBJECT
 if exists (select * from dbo.sysobjects where id = object_id(N'google_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table google_types
 if exists (select * from dbo.sysobjects where id = object_id(N'departments') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table departments
 if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_place_type') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_place_type
-if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_media') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_media
+if exists (select * from dbo.sysobjects where id = object_id(N'usertags') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table usertags
 if exists (select * from dbo.sysobjects where id = object_id(N'style_to_events_set') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_to_events_set
+if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_types
 if exists (select * from dbo.sysobjects where id = object_id(N'map_views') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table map_views
 if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_to_types
-if exists (select * from dbo.sysobjects where id = object_id(N'geometrics') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics
 if exists (select * from dbo.sysobjects where id = object_id(N'style_option_types_to_geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_option_types_to_geometrics_types
-if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_types
+if exists (select * from dbo.sysobjects where id = object_id(N'geometrics') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics
 if exists (select * from dbo.sysobjects where id = object_id(N'style_to_style_options') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_to_style_options
 if exists (select * from dbo.sysobjects where id = object_id(N'styles') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table styles
 if exists (select * from dbo.sysobjects where id = object_id(N'fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table fields
@@ -91,7 +91,6 @@ if exists (select * from dbo.sysobjects where id = object_id(N'authors') and OBJ
 if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_geometrics') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_geometrics
 if exists (select * from dbo.sysobjects where id = object_id(N'media_repo') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table media_repo
 if exists (select * from dbo.sysobjects where id = object_id(N'categories') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table categories
-if exists (select * from dbo.sysobjects where id = object_id(N'usertags') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table usertags
 if exists (select * from dbo.sysobjects where id = object_id(N'style_options') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_options
 if exists (select * from dbo.sysobjects where id = object_id(N'place_to_place_models') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_place_models
 if exists (select * from dbo.sysobjects where id = object_id(N'comments') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table comments
@@ -102,7 +101,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_view')
 if exists (select * from dbo.sysobjects where id = object_id(N'infotabs') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table infotabs
 if exists (select * from dbo.sysobjects where id = object_id(N'geometric_to_tags') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometric_to_tags
 if exists (select * from dbo.sysobjects where id = object_id(N'style_to_zoom') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_to_zoom
-if exists (select * from dbo.sysobjects where id = object_id(N'place_to_fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_fields
+if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_media') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_media
 if exists (select * from dbo.sysobjects where id = object_id(N'person') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table person
 if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_to_fields
 if exists (select * from dbo.sysobjects where id = object_id(N'google_types_to_place_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table google_types_to_place_types
@@ -118,6 +117,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'place_to_tags') a
 if exists (select * from dbo.sysobjects where id = object_id(N'media_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table media_types
 if exists (select * from dbo.sysobjects where id = object_id(N'advertisement') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table advertisement
 if exists (select * from dbo.sysobjects where id = object_id(N'place_names') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_names
+if exists (select * from dbo.sysobjects where id = object_id(N'place_to_fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_fields
 if exists (select * from dbo.sysobjects where id = object_id(N'place_to_categories') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_categories
 if exists (select * from dbo.sysobjects where id = object_id(N'view_to_fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table view_to_fields
 if exists (select * from dbo.sysobjects where id = object_id(N'person_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table person_types
@@ -138,8 +138,8 @@ if exists (select * from dbo.sysobjects where id = object_id(N'place_status') an
 if exists (select * from dbo.sysobjects where id = object_id(N'place') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place
 if exists (select * from dbo.sysobjects where id = object_id(N'place_to_place_names') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_place_names
 create table place_to_infotabs (
-  place_id INT not null,
-   infotab_id INT not null
+  infotab_id INT not null,
+   place_id INT not null
 )
 create table place_name_types (
   type_id INT IDENTITY NOT NULL,
@@ -171,13 +171,21 @@ create table authors_to_place_type (
   author_id INT not null,
    place_type_id INT not null
 )
-create table authors_to_media (
-  author_id INT not null,
-   media_id INT not null
+create table usertags (
+  usertag_id INT IDENTITY NOT NULL,
+   name NVARCHAR(255) null,
+   attr NVARCHAR(255) null,
+   primary key (usertag_id)
 )
 create table style_to_events_set (
   style_id INT not null,
    events_set_id INT not null
+)
+create table geometrics_types (
+  geometrics_type_id INT IDENTITY NOT NULL,
+   name NVARCHAR(255) null,
+   attr NVARCHAR(255) null,
+   primary key (geometrics_type_id)
 )
 create table map_views (
   view_id INT IDENTITY NOT NULL,
@@ -200,6 +208,10 @@ create table geometrics_to_types (
   geometric_id INT not null,
    geometrics_type_id INT not null
 )
+create table style_option_types_to_geometrics_types (
+  geometrics_type_id INT not null,
+   style_option_type_id INT not null
+)
 create table geometrics (
   geometric_id INT IDENTITY NOT NULL,
    boundary geography null,
@@ -213,16 +225,6 @@ create table geometrics (
    media INT null,
    author_editing INT null,
    primary key (geometric_id)
-)
-create table style_option_types_to_geometrics_types (
-  geometrics_type_id INT not null,
-   style_option_type_id INT not null
-)
-create table geometrics_types (
-  geometrics_type_id INT IDENTITY NOT NULL,
-   name NVARCHAR(255) null,
-   attr NVARCHAR(255) null,
-   primary key (geometrics_type_id)
 )
 create table style_to_style_options (
   style_id INT not null,
@@ -329,8 +331,8 @@ create table authors (
    primary key (author_id)
 )
 create table authors_to_geometrics (
-  geometric_id INT not null,
-   author_id INT not null
+  author_id INT not null,
+   geometric_id INT not null
 )
 create table media_repo (
   media_id INT IDENTITY NOT NULL,
@@ -351,12 +353,6 @@ create table categories (
    level INT null,
    attr NVARCHAR(255) null,
    primary key (category_id)
-)
-create table usertags (
-  usertag_id INT IDENTITY NOT NULL,
-   name NVARCHAR(255) null,
-   attr NVARCHAR(255) null,
-   primary key (usertag_id)
 )
 create table style_options (
   style_option_id INT IDENTITY NOT NULL,
@@ -423,9 +419,9 @@ create table style_to_zoom (
   style_id INT not null,
    zoom_id INT not null
 )
-create table place_to_fields (
-  place_id INT not null,
-   field_id INT not null
+create table authors_to_media (
+  author_id INT not null,
+   media_id INT not null
 )
 create table person (
   Id INT IDENTITY NOT NULL,
@@ -522,6 +518,10 @@ create table place_names (
    label INT null,
    primary key (name_id)
 )
+create table place_to_fields (
+  place_id INT not null,
+   field_id INT not null
+)
 create table place_to_categories (
   category_id INT not null,
    place_id INT not null
@@ -573,16 +573,16 @@ create table colleges (
    primary key (college_id)
 )
 create table place_to_usertags (
-  place_id INT not null,
-   usertag_id INT not null
+  usertag_id INT not null,
+   place_id INT not null
 )
 create table authors_to_place (
   author_id INT not null,
    place_id INT not null
 )
 create table place_to_place_types (
-  place_id INT not null,
-   place_type_id INT not null
+  place_type_id INT not null,
+   place_id INT not null
 )
 create table view_to_tags (
   view_id INT not null,
@@ -642,7 +642,6 @@ create table place_to_place_names (
 alter table place_to_infotabs  add constraint FK5829AFCD7214611 foreign key (place_id) references place 
 alter table view_to_usertags  add constraint FK42F0059B983E6244 foreign key (view_id) references map_views 
 alter table authors_to_place_type  add constraint FK457B0CD554A0A173 foreign key (author_id) references authors 
-alter table authors_to_media  add constraint FK765FB0C254A0A173 foreign key (author_id) references authors 
 alter table map_views  add constraint FK7803751867805983 foreign key (view_status) references status 
 alter table map_views  add constraint FK780375186F90B8EB foreign key (authors_editing) references authors 
 alter table geometrics_to_types  add constraint FKFFB888DD95CCB313 foreign key (geometric_id) references geometrics 
@@ -672,7 +671,7 @@ alter table comments  add constraint FK909B6323983E6244 foreign key (view_id) re
 alter table comments  add constraint FK909B6323D7214611 foreign key (place_id) references place 
 alter table authors_to_view  add constraint FK3FDBF52C983E6244 foreign key (view_id) references map_views 
 alter table geometric_to_tags  add constraint FKA745E41B95CCB313 foreign key (geometric_id) references geometrics 
-alter table place_to_fields  add constraint FKA8D27D4DD7214611 foreign key (place_id) references place 
+alter table authors_to_media  add constraint FK765FB0C254A0A173 foreign key (author_id) references authors 
 alter table person  add constraint FK8C55D4CB5C8254F3 foreign key (personTypeId) references person_types 
 alter table person  add constraint FK8C55D4CB8772812E foreign key (AccessLevelStatus) references access_levels 
 alter table advertisement_to_media  add constraint FKBFD8318AAD5E0F0 foreign key (ad_id) references advertisement 
@@ -682,6 +681,7 @@ alter table events_set  add constraint FK81190F62BB078B2E foreign key (zoom_id) 
 alter table place_to_tags  add constraint FK94806F6BD7214611 foreign key (place_id) references place 
 alter table advertisement  add constraint FK3C482F677BBD9EE3 foreign key (place_types) references place_types 
 alter table place_names  add constraint FKEEB16F14E9D91D06 foreign key (label) references place_name_types 
+alter table place_to_fields  add constraint FKA8D27D4DD7214611 foreign key (place_id) references place 
 alter table place_to_categories  add constraint FKA7B4C45DD7214611 foreign key (place_id) references place 
 alter table authors_to_campus  add constraint FK5D9478D454A0A173 foreign key (author_id) references authors 
 alter table place_to_usertags  add constraint FK84A60889D7214611 foreign key (place_id) references place 

@@ -68,8 +68,8 @@ namespace campusMap.Controllers
             }
             //campusMap.Services.LogService.writelog(" getRootUrl" + Request.IsLocal);
             //campusMap.Services.LogService.writelog(" making" + root);
-            log.Info(" getRootUrl" + Request.IsLocal);
-            log.Info(" making" + root);
+            log.Info(" getRootUrl:" + Request.IsLocal);
+            log.Info(" making:" + root);
             return root;
         }
 
