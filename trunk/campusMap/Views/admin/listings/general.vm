@@ -1,3 +1,4 @@
+<div class="tab_tar">
 #set($c=0)#foreach($item in $list_items)#set($c=$c+1)#end
 #if($list_items && $c>0)
 
@@ -39,3 +40,4 @@
 	#set($Pagination_location='bottom')
 	#parse("listing_parts/areas/pagination.vm")
 #end
+</div>

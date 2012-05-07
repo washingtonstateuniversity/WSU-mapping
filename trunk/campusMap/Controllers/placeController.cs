@@ -134,7 +134,7 @@ namespace campusMap.Controllers
                 }
                 foreach (place item in items)
                 {
-                    if (string.IsNullOrEmpty(item.staticMap))
+                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
                         makePlaceStaticMap(item);
                     }
@@ -163,7 +163,7 @@ namespace campusMap.Controllers
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
                 foreach (place item in items)
                 {
-                    if (string.IsNullOrEmpty(item.staticMap))
+                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
                         makePlaceStaticMap(item);
                     }
@@ -188,7 +188,7 @@ namespace campusMap.Controllers
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
                 foreach (place item in items)
                 {
-                    if (string.IsNullOrEmpty(item.staticMap))
+                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
                         makePlaceStaticMap(item);
                     }
@@ -902,7 +902,14 @@ namespace campusMap.Controllers
                 BinaryWriter bw = new BinaryWriter(ms);
                 byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
                 place.coordinate = geometrics.AsByteArray(sqlGeometry1);//WKB;//
+
+
+
             }
+
+            
+
+
             //place.plus_four_code
             //'99164'
 
@@ -1079,7 +1086,9 @@ namespace campusMap.Controllers
             }*/
 
             ActiveRecordMediator<place>.Save(place);
-            makePlaceStaticMap(place);
+            if (place.coordinate != null){
+                makePlaceStaticMap(place);
+            }
 
 
 

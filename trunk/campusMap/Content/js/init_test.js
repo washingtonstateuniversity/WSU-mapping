@@ -173,6 +173,10 @@ function prep(){
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
 $(document).ready(function(){
+	
+
+	
+	
 	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
 		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');

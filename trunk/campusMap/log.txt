@@ -3123,3 +3123,5 @@ System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.ReadAllBytes(String path)
    at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 13:50:22,195 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session

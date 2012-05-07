@@ -9,7 +9,7 @@
   .at300bs.at15t_compact{background-image:none;}
   .at300bs{display:inline;}
 </style>
-$Controller.getRootUrl();
+
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
