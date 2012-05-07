@@ -310,8 +310,66 @@ namespace campusMap.Controllers
             ActiveRecordMediator<media_repo>.Save(image);
             RedirectToAction("list");
         }
-        
 
+        public void getmap(string path)
+        {
+            // Read in the file into a byte array
+            byte[] contents = null;
+            try
+            {
+                contents = File.ReadAllBytes(HttpContext.Server.MapPath(path));
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error uploading file", ex);
+            }
+
+            Response.ClearContent();
+            HttpContext.Response.ClearHeaders();
+            String contentDisposition = "inline; filename=\"" + path + "\"";
+
+            Response.Clear();
+            String contentType = "image/gif";
+
+            // Setup the response
+            HttpContext.Response.Buffer = true;
+            HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
+            DateTime dt = DateTime.Now.AddYears(-1);
+            HttpContext.Response.Cache.SetExpires(dt);
+            HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
+            HttpContext.Response.Cache.SetValidUntilExpires(true);
+            HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+            //HttpContext.Response.Expires = 0;
+            Response.ContentType = contentType;
+            //HttpContext.Response.AddHeader("Content-Disposition", "inline; filename=\"" + path + "\"");
+
+            int maxage = 0;
+
+            //set for cache controll
+            if (maxage == 0)
+            {
+                /*if (nocache)
+                {*/
+
+                //Context.Response.CacheControlHeader = "max-age=7257600";
+                //Context.Response.AppendHeader("Cache-Control", "Max-age=7257600");
+
+                //Context.Response.AppendHeader("Cache-Control", "max-age=7257600");
+                /*}
+                else
+                {
+                    Context.Response.CacheControlHeader = "max-age = 7257600";
+                }*/
+            }
+            else
+            {
+                Context.Response.CacheControlHeader = "max-age=" + maxage;
+            }
+            // Write the file to the response
+            Response.BinaryWrite(contents);
+            //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+            HttpContext.Response.End();
+        }
 
 
         // h = height , w = width , p = percent, m = method , protect= stop sizing up of image, pre = prefix to image name 

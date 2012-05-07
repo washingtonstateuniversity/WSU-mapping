@@ -132,9 +132,13 @@ namespace campusMap.Controllers
                 {
                     items = ActiveRecordBase<place>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
                 }
-
-                
-            
+                foreach (place item in items)
+                {
+                    if (string.IsNullOrEmpty(item.staticMap))
+                    {
+                        makePlaceStaticMap(item);
+                    }
+                }
                 PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 IList<string> buttons = new List<string>();
                 buttons.Add("edit");
@@ -157,7 +161,13 @@ namespace campusMap.Controllers
                 revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-
+                foreach (place item in items)
+                {
+                    if (string.IsNullOrEmpty(item.staticMap))
+                    {
+                        makePlaceStaticMap(item);
+                    }
+                }
                 PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
                 buttons = new List<string>();
                 buttons.Add("edit");
@@ -176,6 +186,13 @@ namespace campusMap.Controllers
                 draftEx.AddRange(baseEx);
                 draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
                 items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
+                foreach (place item in items)
+                {
+                    if (string.IsNullOrEmpty(item.staticMap))
+                    {
+                        makePlaceStaticMap(item);
+                    }
+                }
                 PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
                 buttons = new List<string>();
@@ -1061,11 +1078,12 @@ namespace campusMap.Controllers
                 return;
             }*/
 
-
-
-
-
             ActiveRecordMediator<place>.Save(place);
+            makePlaceStaticMap(place);
+
+
+
+
 
             cleanUpplace_media(place.id);
 
@@ -1075,7 +1093,6 @@ namespace campusMap.Controllers
             Flash["cats"] = null;
             Flash["images"] = null;
             Flash["authors"] = null;
-
 
             if (apply != null || ajaxed_update)
             {
@@ -1104,7 +1121,30 @@ namespace campusMap.Controllers
                 return;
             }
         }
+        public void makePlaceStaticMap(place place)
+        {
+            string url = "http://maps.google.com/staticmap?center=" + place.getLat() + "," + place.getLong() + "&size=250x145&maptype=mobile&markers=" + place.getLat() + "," + place.getLong() + ",red&sensor=false";
+            String uploadPath = Context.ApplicationPhysicalPath;
+            if (!uploadPath.EndsWith("\\"))
+                uploadPath += "\\";
 
+            String imagePath = @"";
+            imagePath += @"uploads\";
+            imagePath += @"googleStaticMaps\places\";
+
+            uploadPath += imagePath;
+
+            if (!HelperService.DirExists(uploadPath))
+            {
+                System.IO.Directory.CreateDirectory(uploadPath);
+            }
+            string newFile = uploadPath + place.id.ToString() + ".ext";
+            string finImagePath = @"\" + imagePath + place.id.ToString() + ".ext";
+
+            googleService.createStaticPlaceMap(url, newFile);
+            place.staticMap = finImagePath;
+            ActiveRecordMediator<place>.Save(place);
+        }
         public void delete(int id)
         {
             place place = ActiveRecordBase<place>.Find(id);

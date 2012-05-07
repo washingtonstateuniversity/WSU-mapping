@@ -347,7 +347,8 @@ GO
 		[college] [int] NULL,
 		[school] [int] NULL,
 		[summary] [nvarchar](max) NULL,		
-		[details] [nvarchar](max) NULL,				
+		[details] [nvarchar](max) NULL,	
+		[staticMap] [nvarchar](max) NULL,				
 		[campus] [int] NULL,
 		[program] [int] NULL,
 		[department] [int] NULL,
@@ -506,6 +507,7 @@ GO
 		[boundary] [geography] NULL,
 		[name] [nvarchar](max) NULL,
 		[encoded] [nvarchar](max) NULL,
+		[staticMap] [nvarchar](max) NULL,	
 		[default_type] [int] NULL,
 		[publish_time] [datetime] DEFAULT GETDATE(),
 		[creation_date] [datetime] DEFAULT GETDATE(),
@@ -1178,7 +1180,8 @@ GO
 			   ('marker_icon',null),
 			   ('user_image',null),
 			   ('general_image',null),
-			   ('general_video',null)
+			   ('general_video',null),
+			   ('google_static_map',null)
 	GO
 
 	

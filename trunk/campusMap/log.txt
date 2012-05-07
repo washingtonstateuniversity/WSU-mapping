@@ -3076,3 +3076,50 @@ NHibernate.AssertionFailure: null id in entry (don't flush the Session after an 
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
 2012-05-04 08:37:04,535 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-07 07:26:38,084 [4] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.Web.HttpException: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\65.ext' is not a valid virtual path.
+   at System.Web.VirtualPath.Create(String virtualPath, VirtualPathOptions options)
+   at System.Web.HttpServerUtility.MapPath(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:28:41,823 [13] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\uploads\googleStaticMaps\places\65.ext'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:30:56,312 [13] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\${item.staticMap}'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:30:58,680 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\${item.staticMap}'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:36:09,508 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\${item.staticMap}'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:36:19,225 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\${item.staticMap}'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
+2012-05-07 07:36:52,163 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN_\campusMap\campusMap\media\${item.staticMap}'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321

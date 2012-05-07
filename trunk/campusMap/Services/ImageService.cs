@@ -105,7 +105,7 @@ namespace campusMap.Services
 
 
 
-        public void saveIamge(int id, string NewFile, Image imgPhoto)
+        public static void saveIamge(int id, string NewFile, Image imgPhoto)
         {
             //log.Info("saving photo to filepath: " + NewFile);
             // create a writer and open the file
@@ -114,10 +114,10 @@ namespace campusMap.Services
 
             imgPhoto.Save(NewFile);
             //compress the file
-            smushit(id, NewFile, GetMimeType(imgPhoto));
+            ImageService.smushit(id, NewFile, GetMimeType(imgPhoto));
             imgPhoto.Dispose();
         }
-        public void deleteTmpIamges(string image_path)
+        public static void deleteTmpIamges(string image_path)
         {
             //log.Info("saving photo to filepath: " + NewFile);
             // create a writer and open the file
@@ -619,7 +619,7 @@ namespace campusMap.Services
 
         #endregion
 
-        public bool smushit(int id, string image_name, String mimeType){
+        public static bool smushit(int id, string image_name, String mimeType){
             // sent file to yahoo
             string url = "http://www.smushit.com/ysmush.it/ws.php?";// "http://www.smushit.com/ysmush.it/ws.php?";
 
@@ -666,7 +666,7 @@ namespace campusMap.Services
         /// <param name="_FileName">File name to save byte array</param>
         /// <param name="_ByteArray">Byte array to save to external file</param>
         /// <returns>Return true if byte array save successfully, if not return false</returns>
-        public bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
+        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
         {
             try
             {
@@ -763,7 +763,7 @@ namespace campusMap.Services
             //return "false";
         }
 
-        public byte[] DownloadBinary(string url)
+        public static byte[] DownloadBinary(string url)
         {
             byte[] image;
             using (WebClient wc = new WebClient())

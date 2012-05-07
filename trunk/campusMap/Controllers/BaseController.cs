@@ -17,7 +17,6 @@ namespace campusMap.Controllers
     [Layout("default"), Rescue("generalerror")]
     public abstract class BaseController : MonoRailHelper.HelperBaseController
 	{
-
         ILog log = log4net.LogManager.GetLogger("baseController");
 
         protected PlaceService placeService = new PlaceService();
@@ -27,6 +26,7 @@ namespace campusMap.Controllers
         protected LogService logService = new LogService();
         protected FieldsService fieldsService = new FieldsService();
         protected StylesService StylesService = new StylesService();
+        protected googleService googleService = new googleService();
 
         public string Tabs(int n)
         {

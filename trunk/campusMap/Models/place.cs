@@ -239,7 +239,13 @@ namespace campusMap.Models
             get { return Media; }
             set { Media = value; }
         }
-
+        private string _staticMap;
+        [Property]
+        virtual public string staticMap
+        {
+            get { return _staticMap; }
+            set { _staticMap = value; }
+        }
 
 
         private schools _school;
