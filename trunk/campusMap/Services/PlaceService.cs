@@ -48,7 +48,7 @@ namespace campusMap.Services
             
             foreach(tags tag in place.tags){
                 tags taged = ActiveRecordBase<tags>.Find(tag.id);
-                list.AddRange(taged.Places);
+                list.AddRange(taged.places);
             }
             place[] places = list.ToArray(); 
             return places;

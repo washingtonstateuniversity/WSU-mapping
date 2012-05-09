@@ -39,48 +39,59 @@
 
 
   <div id="tabs-1">
-<p>
-<a href="new.castle">Create tags</a>
-</p>
-<table width="60%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
-  <tr>
-    <td>Showing $tags.FirstItem - $tags.LastItem of $tags.TotalItems</td>
-    <td align="right">
-      #if($tags.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='tag'}" )  #end
-      #if(!$tags.HasPrevious) first #end
-      #if($tags.HasPrevious) | $PaginationHelper.CreatePageLink( $tags.PreviousIndex, "prev",null,  "%{target='tag'}"  )  #end
-      #if(!$tags.HasPrevious) | prev #end
-      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.NextIndex, "next",null,  "%{target='tag'}"  )  #end
-      #if(!$tags.HasNext) | next #end
-      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.LastIndex, "last",null,  "%{target='tag'}"  )  #end
-      #if(!$tags.HasNext) | last #end
-    </td>
-  </tr>
-</table>
-
-
-
-<form action="merge.castle" method="post" id="editor_form">
-	<table width="100%" border="1" cellpadding="2" cellspacing="0">
-	<tr>
-		<th></th>
-		<th>Name</th>
-		<th>&nbsp;</th>
-	</tr>
-	
-	#foreach($tag in $tags)
-	<tr>
-		<td align="center"><input name="ids[]" type="checkbox" value="$tag.id"/></td>
-		<td align="center">$!tag.Name</td>
-		<td align="center">
-			<a href="edit.castle?id=$!{tag.id}">Edit</a> | 
-			<a href="delete.castle?id=$!{tag.id}">Delete</a>
+	<table width="60%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+	  <tr>
+		<td>Showing $tags.FirstItem - $tags.LastItem of $tags.TotalItems</td>
+		<td align="right">
+		  #if($tags.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='tag'}" )  #end
+		  #if(!$tags.HasPrevious) first #end
+		  #if($tags.HasPrevious) | $PaginationHelper.CreatePageLink( $tags.PreviousIndex, "prev",null,  "%{target='tag'}"  )  #end
+		  #if(!$tags.HasPrevious) | prev #end
+		  #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.NextIndex, "next",null,  "%{target='tag'}"  )  #end
+		  #if(!$tags.HasNext) | next #end
+		  #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.LastIndex, "last",null,  "%{target='tag'}"  )  #end
+		  #if(!$tags.HasNext) | last #end
 		</td>
-	</tr>
-	#end
+	  </tr>
 	</table>
-	<input type="submit" name="mergeTags" value="Merge Tags" />
-</form>
+	<p>
+		<a href="new.castle">Create tags</a>
+	</p>
+	<form action="merge.castle" method="post">
+
+		<table width="100%" class="ui-widget ui-widget-content">
+		  <thead>
+			<tr class="ui-widget-header ">
+				<th></th>
+				<th>Name</th>
+				<th>&nbsp;</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			#set ($c=0)
+			#foreach($tag in $tags)
+			<tr #if($c%2>0) class="even" #else class="odd" #end>
+				<td align="center"><input name="ids[]" type="checkbox" value="$tag.id"/></td>
+				<td align="center">$!tag.Name</td>
+			  <td class='actionArea'>
+		
+				<span style='font-size:0.7em;'>
+				  <a href="edit.castle?id=$!{tag.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-pencil"></span>
+				  </a>
+				  <a href="delete.castle?id=$!{tag.id}" title="Delete" #*onclick="return confirm('Are you sure you want to Delete?(Y/N)?')"*# class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-trash"></span>
+				  </a>
+				</span>
+			  </td>
+			</tr>
+			#set ($c=$c+1)
+			#end
+		  </tbody>
+		</table>
+		<label>New Tag name:<input type="text" name="newname" value="" /></label>
+		<input type="submit" name="mergeTags" value="Merge Tags" />
+	</form>
   </div>
 
   <div id="tabs-2">

@@ -1018,7 +1018,11 @@ namespace campusMap.Controllers
                 {
                     if (tag.id == 0)
                     {
-                        ActiveRecordMediator<tags>.Save(tag);
+                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("name", tag.name);
+                        if (temp.Length == 0)
+                        {
+                            ActiveRecordMediator<tags>.Save(tag);
+                        }
                     }
                     place.tags.Add(tag);
                 }

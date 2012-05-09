@@ -3125,3 +3125,130 @@ System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\_SVN
    at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 321
 2012-05-07 13:50:22,195 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
 NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-09 10:29:22,020 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,094 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:29:22,192 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,192 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:29:22,193 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,193 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:29:22,194 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,194 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:29:22,194 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,194 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:29:22,195 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:29:22,195 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,416 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,416 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,421 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,421 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,422 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,422 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,422 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,422 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,423 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,423 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:30:26,424 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:30:26,424 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,971 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,971 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,974 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,974 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,974 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,974 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-09 10:34:57,975 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-09 11:09:53,399 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - The DELETE statement conflicted with the REFERENCE constraint "FK_place_to_tags_tag". The conflict occurred in database "campusMap", table "dbo.place_to_tags", column 'tag_id'.
+The statement has been terminated.
+2012-05-09 11:09:53,418 [4] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not delete: [campusMap.Models.tags#177][SQL: DELETE FROM tags WHERE tag_id = ?] ---> System.Data.SqlClient.SqlException: The DELETE statement conflicted with the REFERENCE constraint "FK_place_to_tags_tag". The conflict occurred in database "campusMap", table "dbo.place_to_tags", column 'tag_id'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Int32 j, Object obj, SqlCommandInfo sql, ISessionImplementor session, Object[] loadedState)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Int32 j, Object obj, SqlCommandInfo sql, ISessionImplementor session, Object[] loadedState)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledDeletion.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-09 11:21:26,075 [14] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: no collection snapshot for orphan delete
+2012-05-09 11:21:26,093 [14] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: no collection snapshot for orphan delete
+2012-05-09 11:21:26,094 [14] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: no collection snapshot for orphan delete
+2012-05-09 11:21:26,094 [14] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: no collection snapshot for orphan delete
+2012-05-09 11:21:26,094 [14] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: no collection snapshot for orphan delete
+2012-05-09 11:27:44,338 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - The DELETE statement conflicted with the REFERENCE constraint "FK_place_to_tags_tag". The conflict occurred in database "campusMap", table "dbo.place_to_tags", column 'tag_id'.
+The statement has been terminated.
+2012-05-09 11:27:44,349 [14] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.ADOException: could not delete: [campusMap.Models.tags#356][SQL: DELETE FROM tags WHERE tag_id = ?] ---> System.Data.SqlClient.SqlException: The DELETE statement conflicted with the REFERENCE constraint "FK_place_to_tags_tag". The conflict occurred in database "campusMap", table "dbo.place_to_tags", column 'tag_id'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
+   at NHibernate.Impl.NonBatchingBatcher.AddToBatch(IExpectation expectation)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Int32 j, Object obj, SqlCommandInfo sql, ISessionImplementor session, Object[] loadedState)
+   --- End of inner exception stack trace ---
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Int32 j, Object obj, SqlCommandInfo sql, ISessionImplementor session, Object[] loadedState)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.Delete(Object id, Object version, Object obj, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledDeletion.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-09 11:42:26,190 [14] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: campusMap.Models.tags
+   at NHibernate.Impl.SessionImpl.ThrowTransientObjectException(Object obj)
+   at NHibernate.Impl.SessionImpl.GetEntityIdentifierIfNotUnsaved(Object obj)
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session)
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-09 11:46:59,061 [14] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: campusMap.Models.tags
+   at NHibernate.Impl.SessionImpl.ThrowTransientObjectException(Object obj)
+   at NHibernate.Impl.SessionImpl.GetEntityIdentifierIfNotUnsaved(Object obj)
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session)
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()
+2012-05-09 11:47:48,767 [13] ERROR NHibernate.Impl.SessionImpl [(null)] <(null)> - could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: campusMap.Models.tags
+   at NHibernate.Impl.SessionImpl.ThrowTransientObjectException(Object obj)
+   at NHibernate.Impl.SessionImpl.GetEntityIdentifierIfNotUnsaved(Object obj)
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session)
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session)
+   at NHibernate.Impl.ScheduledCollectionUpdate.Execute()
+   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
+   at NHibernate.Impl.SessionImpl.ExecuteAll(IList list)
+   at NHibernate.Impl.SessionImpl.Execute()

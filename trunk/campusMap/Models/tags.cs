@@ -38,12 +38,12 @@ namespace campusMap.Models
             get { return _attr; }
             set { _attr = value; }
         }
-        private IList<place>  places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_tags", ColumnKey = "tag_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places
+        private IList<place>  _places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_tags", ColumnKey = "tag_id", ColumnRef = "place_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> places
         {
-            get { return places; }
-            set { places = value; }
+            get { return _places; }
+            set { _places = value; }
         }
      }
 

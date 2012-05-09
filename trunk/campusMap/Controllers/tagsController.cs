@@ -74,19 +74,24 @@ namespace campusMap.Controllers
             RedirectToReferrer();
         }
 
-        public void merge(int[] ids)
+        public void merge(int[] ids, string newname)
         {
             List<place> places = new List<place>();
             string name = "";
             foreach(int id in ids){
                 tags tag = ActiveRecordBase<tags>.Find(id);
                 name = tag.name;
-                places.AddRange(tag.Places);
+                places.AddRange(tag.places);
+                foreach (place p in tag.places)
+                {
+                    p.tags.Remove(tag);
+                    ActiveRecordMediator<place>.Save(p);
+                }     
                 ActiveRecordMediator<tags>.Delete(tag);
             }
 
             tags t = new tags();
-            t.name = name;
+            t.name = String.IsNullOrEmpty(newname) ? name : newname;
             ActiveRecordMediator<tags>.Save(t);
 
             foreach(place p in places){

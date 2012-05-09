@@ -9,7 +9,7 @@ $Form.HiddenField("tag.id")
 
 <h3>New tags</h3>
 <p>tags Name:
-$Form.TextField("tag.Name")
+$Form.TextField("tag.name")
 <p>
 </br>    
 </p>
@@ -17,3 +17,4 @@ $Form.TextField("tag.Name")
     </p>
 
 </form>
+
