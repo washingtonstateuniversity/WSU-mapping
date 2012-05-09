@@ -39,7 +39,7 @@ namespace campusMap.Models
             set { _attr = value; }
         }
         private IList<place>  _places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_tags", ColumnKey = "tag_id", ColumnRef = "place_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_tags", ColumnKey = "tag_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> places
         {
             get { return _places; }

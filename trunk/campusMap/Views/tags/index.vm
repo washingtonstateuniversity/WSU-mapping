@@ -72,7 +72,7 @@
 			#foreach($tag in $tags)
 			<tr #if($c%2>0) class="even" #else class="odd" #end>
 				<td align="center"><input name="ids[]" type="checkbox" value="$tag.id"/></td>
-				<td align="center">$!tag.Name</td>
+				<td align="center">$!tag.name</td>
 			  <td class='actionArea'>
 		
 				<span style='font-size:0.7em;'>

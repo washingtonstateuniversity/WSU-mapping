@@ -73,7 +73,6 @@ namespace campusMap.Controllers
             ActiveRecordMediator<tags>.Delete(tag);
             RedirectToReferrer();
         }
-
         public void merge(int[] ids, string newname)
         {
             List<place> places = new List<place>();

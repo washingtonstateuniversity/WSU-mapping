@@ -383,7 +383,7 @@ $formbuttons <div class="clear"></div>
 					#set($T = 0)
 					#foreach($tag in $place.tags) 
 						<span class="pod tags">
-							<input type="hidden" name="tags[$T].id" value="" /> 
+							<input type="hidden" name="tags[$T].id" value="$!tag.id" /> 
 							<label for="place_tags_$T" class="editable" rel="placetags">$!tag.name</label>
 							<input id"place_tags_$T" class="tags editzone text ui-widget-content ui-corner-all" size="50" name="tags[$T].name" value="$!tag.name"/><a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
 							#set($T = $T+1)

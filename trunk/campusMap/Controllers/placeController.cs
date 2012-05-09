@@ -902,9 +902,6 @@ namespace campusMap.Controllers
                 BinaryWriter bw = new BinaryWriter(ms);
                 byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
                 place.coordinate = geometrics.AsByteArray(sqlGeometry1);//WKB;//
-
-
-
             }
 
             
@@ -1009,8 +1006,6 @@ namespace campusMap.Controllers
                     ActiveRecordMediator<place_media>.Save(find);
                 }
             }
-
-
             place.tags.Clear();
             foreach (tags tag in tags)
             {
@@ -1023,6 +1018,26 @@ namespace campusMap.Controllers
                         {
                             ActiveRecordMediator<tags>.Save(tag);
                         }
+                        else
+                        {
+                            place.tags.Add(temp[0]);
+                        }
+                    }
+                    else
+                    {
+                        place.tags.Add(tag);
+                    }
+                }
+            }
+            place.tags.Clear();
+            foreach (tags tag in tags)
+            {
+                if (tag.name != null)
+                {
+                    if (tag.id == 0)
+                    {
+                        tag.name = tag.name.Trim();
+                        ActiveRecordMediator<tags>.Save(tag);
                     }
                     place.tags.Add(tag);
                 }
@@ -1034,7 +1049,7 @@ namespace campusMap.Controllers
                     if (onetags != "")
                     {
                         tags t = new tags();
-                        t.name = onetags;
+                        t.name = onetags.Trim();
                         tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("name", onetags);
                         if (temp.Length == 0)
                         {
