@@ -21,21 +21,26 @@ namespace campusMap.Controllers
     [Layout("default")]
     public class tagsController : SecureBaseController
     {
-        public void index(int page)
+        public void index(int page, string target)
         {
             IList<tags> items;
             IList<usertags> usertags_items;
-            int pagesize = 15;
+            int pagesize = 100;
             int paging = 1;
+            int uPaging = 1;
 
             //this needs to be fixes some how to set them speperatly.  
-            paging = page;
+            if (target=="tag"){
+                paging = page;
+            }else{
+                uPaging = page;
+            }
 
-            items = ActiveRecordBase<tags>.FindAll();
+            items = ActiveRecordBase<tags>.FindAll(Order.Asc("name"));
             PropertyBag["tags"] = PaginationHelper.CreatePagination(items, pagesize, paging);
-            
-            usertags_items = ActiveRecordBase<usertags>.FindAll();
-            PropertyBag["usertags"] = PaginationHelper.CreatePagination(usertags_items, pagesize, paging);
+
+            usertags_items = ActiveRecordBase<usertags>.FindAll(Order.Asc("name"));
+            PropertyBag["usertags"] = PaginationHelper.CreatePagination(usertags_items, pagesize, uPaging);
         }
         public void Edit(int id)
         {
@@ -69,7 +74,28 @@ namespace campusMap.Controllers
             RedirectToReferrer();
         }
 
+        public void merge(int[] ids)
+        {
+            List<place> places = new List<place>();
+            string name = "";
+            foreach(int id in ids){
+                tags tag = ActiveRecordBase<tags>.Find(id);
+                name = tag.name;
+                places.AddRange(tag.Places);
+                ActiveRecordMediator<tags>.Delete(tag);
+            }
 
+            tags t = new tags();
+            t.name = name;
+            ActiveRecordMediator<tags>.Save(t);
+
+            foreach(place p in places){
+                p.tags.Add(t);
+                ActiveRecordMediator<place>.Save(p);
+            }             
+            
+            RedirectToReferrer();
+        }
 
 
 

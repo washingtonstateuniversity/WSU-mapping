@@ -46,37 +46,41 @@
   <tr>
     <td>Showing $tags.FirstItem - $tags.LastItem of $tags.TotalItems</td>
     <td align="right">
-      #if($tags.HasPrevious) $tags.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($tags.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='tag'}" )  #end
       #if(!$tags.HasPrevious) first #end
-      #if($tags.HasPrevious) | $tags.CreatePageLink( $tags.PreviousIndex, "prev",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($tags.HasPrevious) | $PaginationHelper.CreatePageLink( $tags.PreviousIndex, "prev",null,  "%{target='tag'}"  )  #end
       #if(!$tags.HasPrevious) | prev #end
-      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.NextIndex, "next",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.NextIndex, "next",null,  "%{target='tag'}"  )  #end
       #if(!$tags.HasNext) | next #end
-      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.LastIndex, "last",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($tags.HasNext) | $PaginationHelper.CreatePageLink( $tags.LastIndex, "last",null,  "%{target='tag'}"  )  #end
       #if(!$tags.HasNext) | last #end
     </td>
   </tr>
 </table>
-<table width="100%" border="1" cellpadding="2" cellspacing="0">
-<tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>&nbsp;</th>
-</tr>
 
-#foreach($tag in $tags)
-<tr>
-    <td align="center">$!tag.id</td>
-    <td align="center">$!tag.Name</td>
-    <td align="center">
-        <a href="edit.castle?id=$!{tag.id}">Edit</a> | 
-        <a href="delete.castle?id=$!{tag.id}">Delete</a>
-    </td>
-    
 
-</tr>
-#end
-</table>
+
+<form action="merge.castle" method="post" id="editor_form">
+	<table width="100%" border="1" cellpadding="2" cellspacing="0">
+	<tr>
+		<th></th>
+		<th>Name</th>
+		<th>&nbsp;</th>
+	</tr>
+	
+	#foreach($tag in $tags)
+	<tr>
+		<td align="center"><input name="ids[]" type="checkbox" value="$tag.id"/></td>
+		<td align="center">$!tag.Name</td>
+		<td align="center">
+			<a href="edit.castle?id=$!{tag.id}">Edit</a> | 
+			<a href="delete.castle?id=$!{tag.id}">Delete</a>
+		</td>
+	</tr>
+	#end
+	</table>
+	<input type="submit" name="mergeTags" value="Merge Tags" />
+</form>
   </div>
 
   <div id="tabs-2">

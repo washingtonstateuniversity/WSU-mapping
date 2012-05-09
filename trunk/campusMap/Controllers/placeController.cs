@@ -586,7 +586,7 @@ namespace campusMap.Controllers
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
-            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll(Order.Asc("friendly"));
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();

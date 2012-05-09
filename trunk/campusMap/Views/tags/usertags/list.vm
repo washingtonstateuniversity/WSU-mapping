@@ -5,13 +5,13 @@
   <tr>
     <td>Showing $usertags.FirstItem - $usertags.LastItem of $usertags.TotalItems</td>
     <td align="right">
-      #if($usertags.HasPrevious) $usertags.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($usertags.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null,"%{target='utag'}" )  #end
       #if(!$usertags.HasPrevious) first #end
-      #if($usertags.HasPrevious) | $usertags.CreatePageLink( $usertags.PreviousIndex, "prev",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($usertags.HasPrevious) | $PaginationHelper.CreatePageLink( $usertags.PreviousIndex, "prev",null,"%{target='utag'}" )  #end
       #if(!$usertags.HasPrevious) | prev #end
-      #if($usertags.HasNext) | $PaginationHelper.CreatePageLink( $usertags.NextIndex, "next",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($usertags.HasNext) | $PaginationHelper.CreatePageLink( $usertags.NextIndex, "next",null,"%{target='utag'}" )  #end
       #if(!$usertags.HasNext) | next #end
-      #if($usertags.HasNext) | $PaginationHelper.CreatePageLink( $usertags.LastIndex, "last",null, "%{searchId=$!searchId,status='draft'}" )  #end
+      #if($usertags.HasNext) | $PaginationHelper.CreatePageLink( $usertags.LastIndex, "last",null,"%{target='utag'}" )  #end
       #if(!$usertags.HasNext) | last #end
     </td>
   </tr>
