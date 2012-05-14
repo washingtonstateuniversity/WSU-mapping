@@ -520,9 +520,10 @@ $(function() {
 	$('.deleteOption').live('click',function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		$(this).closest('.pod').remove();
-	
-		$('#ops .pod').each(function(i){
+		var tar = $(this).closest('.pod');
+		var tarParent = tar.closest('.podContainer');
+		tar.remove();
+		tarParent.find('.pod').each(function(i){
 			$(this).find('input').each(function(j){
 				$(this).attr('name',$(this).attr('name').replace(/[\d+]/g, (i>-1?i:i+1)) );
 			});

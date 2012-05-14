@@ -37,12 +37,12 @@ namespace campusMap.Models
             get { return Level; }
             set { Level = value; }
         }
-        private string Attr;
+        private string _friendly_name;
         [Property]
-        virtual public string attr
+        virtual public string friendly_name
         {
-            get { return Attr; }
-            set { Attr = value; }
+            get { return _friendly_name; }
+            set { _friendly_name = value; }
         }
         private IList<place> places;
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_categories", ColumnKey = "category_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]

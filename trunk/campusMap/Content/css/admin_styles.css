@@ -424,6 +424,10 @@ span.UinEdit{    background-color: #E2E2E2;
 
 .pod{  display: inline-block;
     min-height: 29px;}
+	
+#taged .pod{display: block;
+    min-height: 25px;}
+	
 .pod.editing{}
 .editable{position:relative; top:0;left:0;}
 .editzone{position:absolute; top:-999px;left:-999px;}
@@ -495,7 +499,7 @@ fieldset{padding: 4px 8px 10px;}
 
 
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
-#centralMap{width:100%;min-height:350px;height:auto;max-height:100%;}
+
 
 #content #main .summaryCol ul h3{    
 	height: 20px;

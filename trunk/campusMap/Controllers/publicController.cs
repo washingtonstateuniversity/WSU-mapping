@@ -168,8 +168,8 @@
                 id = 1;
                 foreach (string category in cat)
                 {
-                    string cats = HttpUtility.UrlDecode(category.Replace("__", "&").Replace("_|_", ","));
-                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", cats);
+                    string cats = HttpUtility.UrlDecode(category);
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
                     q.SetParameter("p" + id, c[0]);
                     id = id + 1;
                 }
@@ -358,6 +358,8 @@
                         ""latitude"":""" + item.getLat() + @""",
                         ""longitude"":""" + item.getLong() + @"""
                         },
+            ""summary"":""" + item.summary + @""",
+            ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + @""",
             ""style"":{
                     ""icon"":""" + getRootUrl() + @"/Content/images/default_icon_{$i}.png""
                     },

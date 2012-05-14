@@ -1,4 +1,12 @@
+<div id="centralMap_wrap">
+<div id='selectedPlaceList' class='cAssest'>
+	<a href="#" id='selectedPlaceList_btn'>Info</a> 
+	<div id='selectedPlaceList_area' class='cAssest'>
+	</div>
+</div>
 <div id="centralMap"></div>
+</div>
+
 
 
 

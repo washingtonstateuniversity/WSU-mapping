@@ -70,7 +70,7 @@ namespace campusMap.Controllers
             PropertyBag["BreakingNews"] = place;
         }
 
-        public void List(int page, int searchId, int status)
+        public void List(int page, int searchId, string target)
         {
             authors user = getUser();
             PropertyBag["authorname"] = user.name;
@@ -85,6 +85,34 @@ namespace campusMap.Controllers
 
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = userService.getLogedIn();
+
+
+            int typesPaging = 1;
+            int fieldsPaging = 1;
+            int draftPaging = 1;
+            int reviewPaging = 1;
+            int publishedPaging = 1;
+
+            switch (target){
+                case "types":{
+                    typesPaging = page; break;
+                    }
+                case "fields":{
+                    fieldsPaging = page; break;
+                    }
+                case "draft":{
+                    draftPaging = page; break;
+                    }
+                case "review":{
+                    reviewPaging = page; break;
+                    }
+                case "published":{
+                    publishedPaging = page; break;
+                    }
+            }
+
+
+
             //user.categories.Contains(place.categories);
 
                 IList<place> items;
@@ -115,11 +143,6 @@ namespace campusMap.Controllers
                 }
 
             //PUBLISHED
-                if (status == 3){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
                 List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
                 pubEx.AddRange(baseEx);
                 pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
@@ -139,7 +162,7 @@ namespace campusMap.Controllers
                         makePlaceStaticMap(item);
                     }
                 }
-                PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, publishedPaging);
                 IList<string> buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
@@ -151,11 +174,6 @@ namespace campusMap.Controllers
 
 
             //REVIEW
-                if (status == 2){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
                 List<AbstractCriterion> revEx = new List<AbstractCriterion>();
                 revEx.AddRange(baseEx);
                 revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
@@ -168,7 +186,7 @@ namespace campusMap.Controllers
                         makePlaceStaticMap(item);
                     }
                 }
-                PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, reviewPaging);
                 buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
@@ -177,11 +195,6 @@ namespace campusMap.Controllers
                 PropertyBag["reviewButtonSet"] = buttons;  
 
             //DRAFT
-                if (status == 1){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
                 List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
                 draftEx.AddRange(baseEx);
                 draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
@@ -193,7 +206,7 @@ namespace campusMap.Controllers
                         makePlaceStaticMap(item);
                     }
                 }
-                PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+                PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, draftPaging);
 
                 buttons = new List<string>();
                 buttons.Add("edit");
@@ -224,9 +237,9 @@ namespace campusMap.Controllers
                 pagesize = 100;
                 IList<place_types> place_types_items;
                 place_types_items = ActiveRecordBase<place_types>.FindAll();
-                PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, paging);
+                PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, typesPaging);
 
-
+                
 
                 pagesize = 15;
                 IList<field_types> place_fields_items;
@@ -234,7 +247,7 @@ namespace campusMap.Controllers
                 fieldsEx.AddRange(baseEx);
                 fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
                 place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
-                PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, paging);
+                PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
 
                 RenderView("../admin/listings/list");
         }

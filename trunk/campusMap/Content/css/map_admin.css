@@ -213,19 +213,19 @@
 #toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
 
 #placeSearch{height:23px; position:relative;width:147px;}
-#placeSearch input{color:#3cb6ce;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
+#placeSearch input{color:#1f4799;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; font-size:12px; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
 #placeSearch input[type=text]{left:0px;padding-left: 5px;}
 #placeSearch input:focus{ background-position:left bottom;}
 #placeSearch .submit{background-position:right top;width:22px;font-size:0px;overflow:hidden; border:none;padding: 0; cursor:pointer;right:0px;}
 #placeSearch .submit:focus,#placeSearch .submit:hover{background-position:right bottom;}
 
 #getDirections{}
-#directionsFrom input{color:#3cb6ce;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
+#directionsFrom input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
     margin-top: 5px;
     padding: 0 15px 0 5px;
     width: 127px;
 }
-#directionsTo input{color:#3cb6ce;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
+#directionsTo input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
     margin-top: 5px;
     padding: 0 15px 0 5px;
     width: 127px;

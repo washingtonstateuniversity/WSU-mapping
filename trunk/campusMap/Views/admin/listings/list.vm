@@ -78,7 +78,7 @@
 	</div>
 
 
-	<div id="_Types" class="tabedArea">
+	<div id="_Types" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
 			  <p>
@@ -90,9 +90,9 @@
 			<h3 style="float: left; display:inline-block;">${controller.getView()} Types ($types.TotalItems)</h3>
 			#parse("/admin/types/list.vm")	
 		</div>
-	</div>
+	</div></div>
 	#if($styles)
-		<div id="_styles" class="tabedArea">
+		<div id="_styles" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
 				  <p>
@@ -104,10 +104,9 @@
 				<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.TotalItems)</h3>
 				#parse("/admin/maps/styles/list.vm")	
 			</div>
-		</div>	
+		</div></div>	
 	#end
-	
-	<div id="_Fields" class="tabedArea" style="">
+	<div id="_Fields" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
 			  <p>
@@ -119,5 +118,5 @@
 			<h3 style="float: left; display:inline-block;">${controller.getView()} Fields ($fields.TotalItems)</h3>
 			#parse("/admin/fields/list.vm")
 		</div>
-	</div>
+	</div></div>
 <!-- <div> -->

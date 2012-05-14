@@ -45,7 +45,7 @@ min-width:1026px;
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {padding:0 10px 10px 24px;}
+#nav {padding:0 10px 10px 24px;position: relative; z-index: 9;}
 #main_nav{}
 #main_nav li{display: block /*!important*/;float: left;min-height:15px;line-height:12px;width: 153px;}
 #main_nav li a{display: block !important; color:#5e6a71;}
@@ -484,4 +484,45 @@ fieldset{padding: 4px 8px 10px;}
 
 
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
-#centralMap{min-height:350px;height:auto;max-height:100%;}
+#centralMap{width:100%;min-height:350px;height:auto;max-height:100%;border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;}
+#centralMap_wrap{    display: block;
+    height: auto;
+    margin-left: 185px;
+    max-height: 100%;
+    min-height: 350px;
+    position: relative;
+    /*width: 100%;*/}
+
+#selectedPlaceList{
+ border-left: 1px solid #B8B8B8;
+	float: left;
+	padding-right: 28px;
+	position: absolute;
+	left:0px;
+	width:0px;/* if opened 125px; */
+	overflow: visible;
+	min-height:350px;
+	height:auto;
+	z-index: 9;
+	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
+	}
+#selectedPlaceList_btn{position:absolute;top:5px;right:0px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
+#selectedPlaceList_btn:hover{ background-position:left bottom;}
+#selectedPlaceList_btn.active{ background-position:right top;}
+#selectedPlaceList_btn.active:hover{ background-position:right bottom;}
+#selectedPlaceList_area{background: url(../../Content/images/placelist_bk.png) repeat left center transparent;
+	overflow: hidden;
+
+    min-height:350px;height:auto;max-height:100%;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
+
+}
+#selectedPlaceList_area ul{list-style: none outside none; margin: 0px; padding: 0px;}
+#selectedPlaceList_area ul li{ position:relative; padding-left:28px; min-height:28px;}
+#selectedPlaceList_area ul li a{color:#003c69;font-size:12px;}
+#selectedPlaceList_area ul li a.active{color:#981e32;}
+#selectedPlaceList_area ul li a img{ position:absolute; top:2px; left:2px;}
+#selectedPlaceList_area ul li div{font-size:12px;}
