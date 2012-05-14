@@ -32,6 +32,14 @@ namespace campusMap.Controllers
         {
             return new String('\t', n);
         }
+        public static string Truncate(string source, int length)
+        {
+            if (source.Length > length)
+            {
+                source = source.Substring(0, length);
+            }
+            return source;
+        }
 
 
         //-jb || this will repeate str and {$i} is a the number pattern insertion

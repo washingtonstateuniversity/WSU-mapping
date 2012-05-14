@@ -358,7 +358,7 @@
                         ""latitude"":""" + item.getLat() + @""",
                         ""longitude"":""" + item.getLong() + @"""
                         },
-            ""summary"":""" + item.summary + @""",
+            ""summary"":""" +((!string.IsNullOrEmpty(item.summary)) ? Truncate(StripHtml(item.details,false), 3) : StripHtml(item.summary,false))  + @""",
             ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + @""",
             ""style"":{
                     ""icon"":""" + getRootUrl() + @"/Content/images/default_icon_{$i}.png""

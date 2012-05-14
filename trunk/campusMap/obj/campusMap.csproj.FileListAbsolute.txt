@@ -16,7 +16,6 @@ C:\_SVN_\campusMap\campusMap\bin\campusMap.dll
 C:\_SVN_\campusMap\campusMap\bin\campusMap.pdb
 C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.dll
 C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.xml
-C:\_SVN_\campusMap\campusMap\bin\Castle.MonoRail.ActiveRecordSupport.xml
 C:\_SVN_\campusMap\campusMap\obj\Debug\ResolveAssemblyReference.cache
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.dll
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.pdb
