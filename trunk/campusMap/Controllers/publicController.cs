@@ -345,7 +345,7 @@
                             if (String.IsNullOrEmpty(item.details)){
                                 infotabs += @"""""";
                             } else{
-                                infotabs += @"""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"""";
+                                infotabs += @"""" + infoTitle + mainimage + ((!string.IsNullOrEmpty(item.details)) ? item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "") + @"""";
                             }
                         }
 

@@ -712,6 +712,7 @@ GO
 ('florist','Florist'),
 ('food','Food'),
 ('football_field','Football Field'),
+('football_stadium','Football Stadium'),
 ('funeral_home','Funeral home'),
 ('furniture_store','Furniture store'),
 ('garden','Garden'),
