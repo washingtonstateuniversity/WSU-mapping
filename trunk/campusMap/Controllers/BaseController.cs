@@ -72,7 +72,7 @@ namespace campusMap.Controllers
             String root = "";
             if (!Request.IsLocal)
             {
-                root = "http://dev-mcweb.it.wsu.edu/campusmap.com";
+                root = "http://dev-mcweb.it.wsu.edu/campusmap.com/";
             }
             else
             {
