@@ -13,14 +13,14 @@
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		http://dev-mcweb.it.wsu.edu/campusmap.com
+		http://dev-mcweb.it.wsu.edu/campusmap.com/
 	#else
 		#if($siteroot && $siteroot !='/')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			http://dev-mcweb.it.wsu.edu/campusmap.com
+			http://dev-mcweb.it.wsu.edu/campusmap.com/
 		#end
 	#end
 #end
