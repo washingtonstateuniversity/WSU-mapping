@@ -32,7 +32,7 @@ function iniMap(url,callback){
 function updateMap(_load){
 	if(typeof(_load)==='undefined') var _load = false;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
-	var url=siteroot+"/public/get_place_by_category.castle";
+	var url=siteroot+"public/get_place_by_category.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		loadData(data);
 		loadListings(data);

@@ -29,7 +29,13 @@
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Threading;
-
+using Microsoft.SqlServer.Types;
+using System.Data.SqlTypes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Utilities;
+using Newtonsoft.Json.Linq;
+using log4net;
+using log4net.Config;
 #endregion
 
 
@@ -42,6 +48,9 @@
         [Layout("home")]
         public class publicController : BaseController
         {
+            ILog log = log4net.LogManager.GetLogger("publicController");
+            
+
             #region JSON OUTPUT
 
             /*public void get_pace_type()
@@ -137,17 +146,94 @@
         [Layout("central")]
         public void central()
         {
-
-
-
             PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
-
-
-
-
-
             RenderView("central");
         }
+
+
+
+            /*
+             * Get the value of a field that is attached to the 
+             * place.
+             */
+            public static string getFieldVal(field_types field_type, place _place)
+            {
+
+                string value = "";
+
+                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                typeEx.Add(Expression.Eq("type", field_type));
+                if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
+                fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
+
+                selectionSet sel = null;
+                if (field != null && !String.IsNullOrEmpty(field.value))
+                {
+                    sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
+                }
+                elementSet ele = (elementSet)JsonConvert.DeserializeObject(field_type.attr.ToString(), typeof(elementSet));
+
+                if (sel.selections != null && ele.type == "dropdown")
+                {
+                    foreach (Option _option in ele.options)
+                    {
+                        foreach (Selection _val in sel.selections)
+                        {
+                            if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) value = _val.val;
+                        }
+                    }
+                }
+                else if (sel.selections[0].val != null)
+                {
+                    foreach (Option _option in ele.options)
+                    {
+                        _option.selected = "";
+                        if (sel.selections[0].val != "")
+                        {
+                            value = sel.selections[0].val;
+                        }
+                    }
+                }
+                return value;
+            }
+
+            /*
+             * Take a string loop over all the fields 
+             * test if the pattern with the field.alias is in
+             * the text.  if in text replace with value.
+             */
+            public string processFields(string text,place place)
+            {
+                String result = text;
+                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                typeEx.Add(Expression.Eq("model", "placeController"));
+                typeEx.Add(Expression.Eq("set", place.model.id));
+
+                field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+                List<string> fields = new List<string>();
+
+
+                //log.Error(" place:" + place.prime_name);
+                
+
+                if (ft != null)
+                {
+                    foreach (field_types ft_ in ft)
+                    {
+                        string value = "";
+                        if (text.Contains("$!{" + ft_.alias + "}"))
+                        {
+                            //log.Error("on field:" + ft_.alias);
+                            value = getFieldVal(ft_, place);
+                            result = result.Replace("$!{" + ft_.alias + "}", value);
+                        }
+                    }
+                }
+                return result;
+            }
+
+
+
 
             public void get_place_by_category(string[] cat,string callback)
             {
@@ -175,7 +261,27 @@
                 }
                 place[] items = q.Execute();
 
-/*
+                String defaultAccessibility = @"<ul>
+    <li><strong>ADA Entrance</strong>:$!{ada_entrance}</li>
+    <li><strong>ADA Parking</strong>:$!{ada_parking}</li>
+    <li><strong>ADA Other</strong>:$!{ada_other}</li>
+    <li><strong>Amenities</strong>:$!{amenities}</li>
+    <li><strong>Classrooms</strong>:$!{classroom}</li>
+    <li><strong>Research Labs</strong>:$!{research_labs}</li>
+    <li><strong>Notes &amp; Comments</strong>:$!{notes_comments}</li>
+    <li><strong>Shopping, Dining, Etc.</strong>:$!{shopping_dining_etc}</li>
+    <li><strong>Research Centers</strong>:$!{research_centers}</li>
+    <li><strong>Libraries</strong>:$!{libraries}</li>
+    <li><strong>Major Labs/Facilities</strong>:$!{major_labs_facilities}</li>
+    <li><strong>Student Services &amp; Advising</strong>:$!{student_services_advising}</li>
+    <li><strong>University Administration &amp; Non-Academic Units</strong>:$!{university_administration_non_academic_units}</li>
+    <li><strong>Special Facilities &amp; Public Venues</strong>:$!{special_facilities_public_venues}</li>
+</ul>";
+
+
+
+
+/* SAMPLE -- TOO REMOVE
 {
 
 	"mapOptions":{
@@ -215,33 +321,6 @@
 					"title":"Hello World!"
 					}
 
-		},{
-			"position":{
-						"latitude":"46.730271958423685",
-						"longitude":"-117.15811729431152"
-						},
-			"style":{
-					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
-					},
-			"info":{
-					"content":"<h2 class='header'>The CUB - Compton Union Building</h2><span class='headImage'><img src='http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_head_image.jpg' /></span><p>Whether you need food, games, a place to study, meeting space, catering service, a wireless internet connection, or just a friendly place to hang out, the CUB has something for you.</p><p> A complete remodel in 2008 made the CUB a LEED-certified \"green\" building and built new features that connect it even more closely to campus life. A hallway connects the ground floor directly to Terrell Library, and a movable wall of windows lets the first-floor frontage open directly onto Terrell Mall for fresh air and a seamless indoor/outdoor transition. cub.wsu.edu<p>",
-					"title":"Hello World!"
-					}
-
-		},
-		{
-			"position":{
-						"latitude":"46.73430174849347",
-						"longitude":"-117.15966200000003"
-						},
-			"style":{
-					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
-					},
-			"info":{
-					"content":"testafy to the html",
-					"title":"Hello World!"
-					}
-
 		}
 		]
 }
@@ -259,11 +338,13 @@
                 foreach (place item in items){
                     if (item.coordinate != null)
                     {
+                        string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
+
                         String mainimage = "";
                         if (item.Images.Count >0 )
                         {
                             /* note the width and height should be abstracted out into a map preference*/
-                            mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
+                            mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
                         }
 
 
@@ -287,7 +368,7 @@
                                   /* note the width and height should be abstracted out into a map preference*/
                                     galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
                                         "<a href='#' class='imgEnlarge'></a>"+
-                                        "<img src='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
+                                        "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
                                     "</span></li>";
                                 }
                                 c++;
@@ -299,11 +380,31 @@
 
 
                             imgGallery += @"
-                            ,{
+                            {
                                 ""block"":""" + infoTitle + gallery + @""",
                                 ""title"":""Views/Vids""
                             }";
                         }
+
+
+                        String autoAccessibility = "";
+                        if (item.autoAccessibility)
+                        {
+                            autoAccessibility += @"
+                            {
+                                ""block"":""" + infoTitle + processFields(defaultAccessibility, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                                ""title"":""Accessibility""
+                            }";
+                        }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -316,7 +417,7 @@
                             placeList += @"""markers"":[";
                         }
                         String infotabs = "";
-                        if (item.infotabs.Count > 0 || imgGallery!="")
+                        if (item.infotabs.Count > 0 || imgGallery != "" || autoAccessibility != "")
                         {
                             infotabs += @"[";
 
@@ -324,31 +425,34 @@
 
                             infotabs += @"
                         {
-                            ""block"":""" + infoTitle + mainimage + item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                            ""block"":""" + infoTitle + mainimage + details + @""",
                             ""title"":""Overview""
-                        },";
+                        }";
                             if (item.infotabs.Count > 0 )
                             {
                                 foreach (infotabs tab in item.infotabs)
                                 {
+                                    string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+
                                     tabStr += @"
                         {
-                            ""block"":""" + infoTitle + tab.content.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                            ""block"":""" + infoTitle + content + @""",
                             ""title"":""" + tab.title + @"""
                         },";
                                 }
                             }
-                            infotabs += tabStr.TrimEnd(',');
-                            infotabs += imgGallery;
+                            if (!string.IsNullOrEmpty(imgGallery)) infotabs += "," + tabStr.TrimEnd(',');
+                            if (!string.IsNullOrEmpty(imgGallery)) infotabs += ","+imgGallery;
+                            if (!string.IsNullOrEmpty(autoAccessibility)) infotabs += "," + autoAccessibility;
                             infotabs += @"]";
                         }else{
                             if (String.IsNullOrEmpty(item.details)){
                                 infotabs += @"""""";
                             } else{
-                                infotabs += @"""" + infoTitle + mainimage + ((!string.IsNullOrEmpty(item.details)) ? item.details.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "") + @"""";
+                                infotabs += @"""" + infoTitle + mainimage + details + @"""";
                             }
                         }
-
+                        
 
 
 
@@ -358,10 +462,10 @@
                         ""latitude"":""" + item.getLat() + @""",
                         ""longitude"":""" + item.getLong() + @"""
                         },
-            ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(item.details, false), 80)+"...") + @""",
+            ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(details, false), 80) + "...") + @""",
             ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + @""",
             ""style"":{
-                    ""icon"":""" + getRootUrl() + @"/Content/images/default_icon_{$i}.png""
+                    ""icon"":""" + getRootUrl() + @"Content/images/default_icon_{$i}.png""
                     },
             ""info"":{
                     ""content"":" + infotabs + @",

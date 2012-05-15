@@ -984,7 +984,7 @@ namespace campusMap.Controllers
                         string vals = "";
                         foreach (String val in Request.Form[key].Split(',') )
                         {
-                            vals = vals + @"{""val"":"+(!String.IsNullOrEmpty(val)?("\""+ val +"\""):"null")+"},";
+                            vals = vals + @"{""val"":"+(!String.IsNullOrEmpty(val)?("\""+ val.Trim('"') +"\""):"null")+"},";
                         }
                         char[] endC = { ',' };
                         vals = vals.TrimEnd(endC);

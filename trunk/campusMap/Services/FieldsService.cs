@@ -232,8 +232,6 @@ namespace campusMap.Services{
         }
 
 
-
-
         public static string renderSelect(elementSet ele, SortedDictionary<string, string> attrs)
         {
              // Initialize StringWriter instance.

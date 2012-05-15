@@ -74,10 +74,11 @@ namespace campusMap.Controllers
             {
                 root = "http://dev-mcweb.it.wsu.edu/campusmap.com";
             }
-            //campusMap.Services.LogService.writelog(" getRootUrl" + Request.IsLocal);
-            //campusMap.Services.LogService.writelog(" making" + root);
-            log.Info(" getRootUrl:" + Request.IsLocal);
-            log.Info(" making:" + root);
+            else
+            {
+                root = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(System.Web.HttpContext.Current.Request.Url.PathAndQuery, "/"); 
+            }
+            
             return root;
         }
 

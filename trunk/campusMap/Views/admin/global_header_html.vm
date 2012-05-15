@@ -15,8 +15,10 @@
 	#if($Controller.isLocal()==false)
 		http://dev-mcweb.it.wsu.edu/campusmap.com
 	#else
-		#if($siteroot)
+		#if($siteroot && $siteroot !='/')
 			$siteroot
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl()
 		#else
 			http://dev-mcweb.it.wsu.edu/campusmap.com
 		#end
@@ -26,10 +28,10 @@
 $Controller.getView()
 #end
 <script type="text/javascript">
-  var siteroot = '$site.Trim()/';
+  var siteroot = '$site.Trim()';
   var view = '$view.Trim()/';
 </script>
-#set($siteroot=$site.Trim())
+#set($siteroot=$site.Trim().TrimEnd("/"))
 
 <script type="text/javascript">
   var siteroot = '$site.Trim()/';

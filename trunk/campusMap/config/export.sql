@@ -138,8 +138,8 @@ if exists (select * from dbo.sysobjects where id = object_id(N'place_status') an
 if exists (select * from dbo.sysobjects where id = object_id(N'place') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place
 if exists (select * from dbo.sysobjects where id = object_id(N'place_to_place_names') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table place_to_place_names
 create table place_to_infotabs (
-  place_id INT not null,
-   infotab_id INT not null
+  infotab_id INT not null,
+   place_id INT not null
 )
 create table place_name_types (
   type_id INT IDENTITY NOT NULL,
@@ -578,12 +578,12 @@ create table place_to_usertags (
    place_id INT not null
 )
 create table authors_to_place (
-  place_id INT not null,
-   author_id INT not null
+  author_id INT not null,
+   place_id INT not null
 )
 create table place_to_place_types (
-  place_id INT not null,
-   place_type_id INT not null
+  place_type_id INT not null,
+   place_id INT not null
 )
 create table view_to_tags (
   view_id INT not null,
@@ -625,6 +625,7 @@ create table place (
    plus_four_code tinyint null,
    isPublic BIT null,
    hideTitles BIT null,
+   autoAccessibility BIT null,
    staticMap NVARCHAR(255) null,
    model INT null,
    status INT null,

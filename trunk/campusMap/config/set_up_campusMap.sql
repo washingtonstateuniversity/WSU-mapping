@@ -344,6 +344,7 @@ GO
 		[tmp] [bit] DEFAULT 1,
 		[isPublic] [bit] DEFAULT 1,
 		[hideTitles] [bit] DEFAULT 0,
+		[autoAccessibility] [bit] DEFAULT 1,
 		[college] [int] NULL,
 		[school] [int] NULL,
 		[summary] [nvarchar](max) NULL,		
