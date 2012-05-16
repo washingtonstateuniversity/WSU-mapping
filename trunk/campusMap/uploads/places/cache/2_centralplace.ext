@@ -1,0 +1,20 @@
+
+        {
+            "position":{
+                        "latitude":"46.7298628",
+                        "longitude":"-117.1648888"
+                        },
+            "summary":"Abelson Hall is a multipurpose building dedicated to science.",
+            "title":"Abelson (ABEL)",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Abelson (ABEL)</h2><p>Abelson Hall is a multipurpose building dedicated to science. It houses classrooms, departmental offices, faculty offices, research labs, an aviary, and several rooftop greenhouses. Enclosed skybridges connect Abelson to the Owen Science Library across the street and to Heald Hall next door. The building is named in honor of Philip and Neva Abelson, a husband and wife team who taught at WSU for 30+ years and did groundbreaking research in (respectively) physics and medical biology.</p>",
+                            "title":"Overview"
+                        }],
+                    "title":"Abelson"
+                    }
+        }

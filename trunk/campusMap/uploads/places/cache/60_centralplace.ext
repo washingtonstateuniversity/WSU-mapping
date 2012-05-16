@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7294336065962",
+                        "longitude":"-117.169500589371"
+                        },
+            "summary":"Though its name still denotes engineering, this building now houses design studi...",
+            "title":"Eng Lab Bldg",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Eng Lab Bldg</h2><p>Though its name still denotes engineering, this building now houses design studios for interior design and the apparel merchandising and design program.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Eng Lab Bldg</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Eng Lab Bldg"
+                    }
+        }

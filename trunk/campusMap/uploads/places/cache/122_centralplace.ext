@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7295953948058",
+                        "longitude":"-117.166743278503"
+                        },
+            "summary":"The Math Learning Annex houses classrooms and space for tutoring and study....",
+            "title":"Math Annex",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Math Annex</h2><p>The Math Learning Annex houses classrooms and space for tutoring and study.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Math Annex</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Math Annex"
+                    }
+        }

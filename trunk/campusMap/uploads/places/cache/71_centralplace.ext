@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7294115445301",
+                        "longitude":"-117.169768810272"
+                        },
+            "summary":"This building, known by its intials, ETRL, houses labs for chemical, electrical ...",
+            "title":"ETRL",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>ETRL</h2><p>This building, known by its intials, ETRL, houses labs for chemical, electrical mechanical, and materials engineering research. It also holds several lab classrooms where engineering students can get their hands on some of the same sophisticated equipment used by industry and academic researchers (aka their professors). Spacious and with plenty of natural light, ETRL is not just about machines and technology--it's a place made especially for *people* who invent machines and technology.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>ETRL</h2><ul>      <li><strong>ADA Entrance</strong>:East side (main entrance)</li>      <li><strong>ADA Parking</strong>:East side (behind Dana Hall)</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:Richard Crain Mechanical Laboratory; O.H. Reaugh Advanced Processing Lab for Fuel and Energy Research</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"ETRL"
+                    }
+        }

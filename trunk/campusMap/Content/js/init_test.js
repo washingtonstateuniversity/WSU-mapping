@@ -3,7 +3,7 @@ var markerLog = [];
 
 function resizeBg(obj,height,width) {
 	obj.height($(window).height()-height);
-	if(typeof(width)!=='undefined')obj.width($(window).width()-width);
+	if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);
 } 
 function iniMap(url,callback){
 	var winH = $(window).height()-160;
@@ -216,13 +216,11 @@ $(document).ready(function(){
 			$('#loading').remove();
 			});
 		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('#centralMap'),160,185)}).trigger("resize");
+			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,185)}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 				}
 			).trigger("resize");
-			
-			
 		}
 		$('#selectedPlaceList_btn').live('click', function(){
 			var btn=$(this);

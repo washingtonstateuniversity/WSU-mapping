@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7288379276423",
+                        "longitude":"-117.162773609161"
+                        },
+            "summary":"The Shock Physics building is home to Washington State University's Institute fo...",
+            "title":"Shock Physics",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>The Shock Physics building is home to Washington State University's Institute for Shock Physics. Faculty at the institute conduct interdisciplinary research that primarily focuses on understanding physical and chemical changes that occur when materials are subjected to rapid, intense compression (as in shock waves).</p>",
+                    "title":"Shock Physics"
+                    }
+        }

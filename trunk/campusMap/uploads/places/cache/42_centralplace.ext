@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7295921",
+                        "longitude":"-117.1666389"
+                        },
+            "summary":"The Communication Addition, built in 2004, provides a learning lab for communica...",
+            "title":"Com Addition",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Com Addition</h2><p>The Communication Addition, built in 2004, provides a learning lab for communication students, study space, an auditorium classroom, and office space for faculty and staff in the Edward R. Murrow College of Communication.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Com Addition</h2><ul>      <li><strong>ADA Entrance</strong>:All entrances are ADA accessible</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Com Addition"
+                    }
+        }

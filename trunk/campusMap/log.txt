@@ -8650,3 +8650,7 @@ NHibernate.TransientObjectException: object references an unsaved transient inst
 2012-05-15 10:45:46,590 [13] ERROR publicController [(null)] <(null)> - on field:student_services_advising
 2012-05-15 10:45:46,600 [13] ERROR publicController [(null)] <(null)> - on field:university_administration_non_academic_units
 2012-05-15 10:45:46,608 [13] ERROR publicController [(null)] <(null)> - on field:special_facilities_public_venues
+2012-05-16 07:46:34,826 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-16 09:37:09,318 [5] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session

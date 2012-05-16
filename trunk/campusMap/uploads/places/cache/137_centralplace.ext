@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7261168413547",
+                        "longitude":"-117.166260480881"
+                        },
+            "summary":"...",
+            "title":"Neuro Ctr",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"",
+                    "title":"Neuro Ctr"
+                    }
+        }

@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7308308524027",
+                        "longitude":"-117.151937484741"
+                        },
+            "summary":"This greenhouse provides growing space and research plots for faculty in the WSU...",
+            "title":"IBC Grnhse",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>IBC Grnhse</h2><p>This greenhouse provides growing space and research plots for faculty in the WSU Institute of Biological Chemistry. The specimens grown here are used in research that probes the inner molecular workings of plant life.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>IBC Grnhse</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom (first floor)</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"IBC Grnhse"
+                    }
+        }

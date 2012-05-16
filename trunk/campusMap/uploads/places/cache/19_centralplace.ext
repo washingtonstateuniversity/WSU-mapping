@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7357087",
+                        "longitude":"-117.159861"
+                        },
+            "summary":"One of the newest buildings on campus, the Biotech/Life Sciences Building is a c...",
+            "title":"Biotech/Life Sci (PBS2)",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Biotech/Life Sci (PBS2)</h2><p>One of the newest buildings on campus, the Biotech/Life Sciences Building is a companion to the Vogel Plant Biosciences Building, and the second in what will eventually be a complex of six interconnected biotechnology buildings.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Biotech/Life Sci (PBS2)</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Biotech/Life Sci"
+                    }
+        }

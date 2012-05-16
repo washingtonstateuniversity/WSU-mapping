@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7309911",
+                        "longitude":"-117.154782"
+                        },
+            "summary":"A lot goes on in Clark Hall. It houses WSU Extension Service offices. It houses ...",
+            "title":"Clark",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Clark</h2><p>A lot goes on in Clark Hall. It houses WSU Extension Service offices. It houses faculty offices and research labs for the the animal science and plant physiology departments and the Institute of Biological Chemistry. And there are teaching labs and classrooms here, too.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Clark</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:North of building</li>      <li><strong>ADA Other</strong>:Accessible drinking fountain on first floor</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:Institute of Biological Chemistry</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Clark"
+                    }
+        }

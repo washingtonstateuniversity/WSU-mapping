@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.729963093477",
+                        "longitude":"-117.154040336609"
+                        },
+            "summary":"...",
+            "title":"Plant Sci Grnhs",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"",
+                    "title":"Plant Sci Grnhs"
+                    }
+        }

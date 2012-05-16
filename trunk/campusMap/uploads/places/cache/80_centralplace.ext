@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7327281071829",
+                        "longitude":"-117.155606746674"
+                        },
+            "summary":"The Food Science and Human Nutrition Building (often called FSHN for short; you ...",
+            "title":"Food Sci/Nutrition",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Food Sci/Nutrition</h2><p>The Food Science and Human Nutrition Building (often called FSHN for short; you can pronounce the letters or just say fishin') is home to the Bi-State School of Food Science, a unique cooperation between WSU and the neighboring University of Idaho, which is just 8 miles away across the state line. It also houses the entomology department, a videoconferencing classroom/meeting center, and the vast James Entomological Collection.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Food Sci/Nutrition</h2><ul>      <li><strong>ADA Entrance</strong>:Ground and first floors</li>      <li><strong>ADA Parking</strong>:South side of building</li>      <li><strong>ADA Other</strong>:Assisted listening in teleconferencing center</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:M. James Entomology Collection</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Teleconferencing/ videoconferencing center</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Food Sci/Nutrition"
+                    }
+        }

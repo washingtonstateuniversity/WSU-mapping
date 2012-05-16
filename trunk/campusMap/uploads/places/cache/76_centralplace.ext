@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7303896207953",
+                        "longitude":"-117.160220146179"
+                        },
+            "summary":"The Fine Arts Center houses the WSU Museum of Art and the Department of Fine Art...",
+            "title":"Fine Arts",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Fine Arts</h2><p>The Fine Arts Center houses the WSU Museum of Art and the Department of Fine Arts. With classroom and studio facilities that range from digital media and traditional photo labs to ceramics kilns and sculpture fabrication shops, this building is dedicated to making art come to life and bringing it to the public.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Fine Arts</h2><ul>      <li><strong>ADA Entrance</strong>:Main entrance (fifth floor) access via Wilson Rd plaza; Fourth floor via parking garage north-side loading dock</li>      <li><strong>ADA Parking</strong>:Fine Arts parking garage; enter garage from Stadium Way</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom (fourth floor)</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Museum of Art; Undergrad Art Gallery; Auditorium</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Fine Arts"
+                    }
+        }

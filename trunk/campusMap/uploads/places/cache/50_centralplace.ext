@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7298821999844",
+                        "longitude":"-117.161663174629"
+                        },
+            "summary":"The CUE (officially named the Smith Center for Undergraduate Education) is dedic...",
+            "title":"CUE",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>CUE</h2><p>The CUE (officially named the Smith Center for Undergraduate Education) is dedicated entirely to undergraduate education. Many of the University's general education courses are taught here. The CUE also houses some important student services--including the Pre-Health &amp; STEM Advising Center, which advises all students, in any major, who are preparing for careers in health care and related areas; and the Writing Center, which offers free walk-in peer tutoring to help all students with any type of writing.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>CUE</h2><ul>      <li><strong>ADA Entrance</strong>:All entrances are ADA accessible</li>      <li><strong>ADA Parking</strong>:CUE parking garage (access from Stadium Way)</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:Cyber Cafe</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:Pre-Health Advising; Writing Center</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:CougTech (computing & networking help desk)</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"CUE"
+                    }
+        }

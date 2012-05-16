@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.6967571549961",
+                        "longitude":"-117.240407466888"
+                        },
+            "summary":"The Stock Pavilion building--or expo barn as it is also called-- was of the firs...",
+            "title":"Livestock Pavilion",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Livestock Pavilion</h2><p>The Stock Pavilion building--or expo barn as it is also called-- was of the first purely agricultural buildings constructed at WSU, and it serves the same purpose today. (Not to be confused with Ensminger Pavilion, which once served a similar purpose, but has been remodeled and made into a meeting hall and event space.)</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Livestock Pavilion</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Livestock Pavilion"
+                    }
+        }

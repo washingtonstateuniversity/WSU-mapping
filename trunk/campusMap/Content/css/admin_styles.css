@@ -143,7 +143,7 @@ table.ui-widget tbody tr.odd td{}
 .admin #content_tar{padding: 0 0 0 10px;}
 .central #content_tar{padding:0px;}
 .home #content_tar{padding:0px;}
-
+.admin.place.editor_place #content_tar{min-width: 962px;position: relative;}
 /* place listing */
 .placelist{ /*width: 724px;*/}
 .editablelistUL{    list-style: none outside none !important;

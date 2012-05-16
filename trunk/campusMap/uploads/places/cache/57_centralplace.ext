@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7298821999844",
+                        "longitude":"-117.166067361832"
+                        },
+            "summary":"Eastlick Hall is connected to Heald Hall, so they function practically as one; s...",
+            "title":"Eastlick",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Eastlick</h2><p>Eastlick Hall is connected to Heald Hall, so they function practically as one; sometimes they're referred to together as \"Heald/Eastlick.\" Devoted mainly to biological sciences, Eastlick is part of the University's science hub, a short walk from the center of campus and right next to Abelson, Heald, Webster, and the Owen Science Library.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Eastlick</h2><ul>      <li><strong>ADA Entrance</strong>:First and second floors via Heald Hall</li>      <li><strong>ADA Parking</strong>:Northeast of building</li>      <li><strong>ADA Other</strong>:Accessible restrooms on ground and first floors; drinking fountain on second floor; elevator access to all floors via Heald Hall</li>      <li><strong>Amenities</strong>:TDD phone</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:College of Sciences Technical Services Shop</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:Science</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Eastlick"
+                    }
+        }

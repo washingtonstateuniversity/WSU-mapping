@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7293894824549",
+                        "longitude":"-117.169489860535"
+                        },
+            "summary":"Also simply called by its initials, EME, the Electrical/Mechanical Engineering B...",
+            "title":"Elect/Mech Eng",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Elect/Mech Eng</h2><p>Also simply called by its initials, EME, the Electrical/Mechanical Engineering Building is the centerpiece of the University's engineering complex. It sits between Sloan and Dana Halls, sharing a nearly seamless connection with them. An enclosed walkway connects EME to the Engineering Teaching/Research Laboratory Building (also better known by its initials: ETRL). The EME building is home to the departments of electrical engineering and mechanical engineering, as well as research labs and classroom space.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Elect/Mech Eng</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom (5th floor)</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Elect/Mech Eng"
+                    }
+        }

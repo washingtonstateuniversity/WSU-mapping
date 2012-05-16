@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7314338630952",
+                        "longitude":"-117.152452468872"
+                        },
+            "summary":"The WSU Meats Lab is a teaching facility where animal science students and indus...",
+            "title":"Meats Lab",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<h2 class='header'>Meats Lab</h2><p>The WSU Meats Lab is a teaching facility where animal science students and industry pros learn and practice how to evaluate, grade, and process agricultural animals for meat. It's also a USDA inspected and approved plant that produces Cougar Brand meat products. The lab's Cougar Brand Smokies sausages are available on-campus at Ferdinand's and at several Pullman area grocery stores. Read more about the Meats Lab in <a href=\"http://wsm.wsu.edu/s/index.php?id=814\" target=\"_blank\">Washington State Magazine</a></p>",
+                    "title":"Meats Lab"
+                    }
+        }

@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7317280122062",
+                        "longitude":"-117.157505750656"
+                        },
+            "summary":"Johnson Hall (not to be confused with Johnson Tower) is dedicated to plant and s...",
+            "title":"Johnson Hall",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Johnson Hall</h2><p>Johnson Hall (not to be confused with Johnson Tower) is dedicated to plant and soil science. It is home to the departments of crop and soil sciences, horticulture and landscape architecture, natural resource sciences, and plant pathology. It also houses several USDA research units.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Johnson Hall</h2><ul>      <li><strong>ADA Entrance</strong>:Ground floor</li>      <li><strong>ADA Parking</strong>:North of building or on Wilson Rd (south side of bldg)</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:Agricultural Sciences Library</li>      <li><strong>Major Labs/Facilities</strong>:Plant Introduction and Testing</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Johnson Hall"
+                    }
+        }

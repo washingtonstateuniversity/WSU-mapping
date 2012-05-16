@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7307131909936",
+                        "longitude":"-117.166442871094"
+                        },
+            "summary":"This building, commonly called Murrow West, is the newer (and larger) half of th...",
+            "title":"Murrow West",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>This building, commonly called Murrow West, is the newer (and larger) half of the Murrow Communications Center. It holds faculty offices, many classrooms, and studios for Northwest Public Television and the student-run Cable 8 channel.</p>",
+                    "title":"Murrow West"
+                    }
+        }

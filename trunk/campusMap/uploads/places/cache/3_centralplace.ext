@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7318679",
+                        "longitude":"-117.1709891"
+                        },
+            "summary":"The Albrook Hydraulics Lab building provides research facilities for civil and e...",
+            "title":"Albrook (ALBR)",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Albrook (ALBR)</h2><p>The Albrook Hydraulics Lab building provides research facilities for civil and environmental engineering projects that involve modeling the behavior and effects of water -- for instance, planning bridges and evaluating dams.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Albrook (ALBR)</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom on basement/ground floor</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:Water Research Center</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:Office of Research Assurances</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Albrook"
+                    }
+        }

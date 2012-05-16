@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7290217798731",
+                        "longitude":"-117.165455818176"
+                        },
+            "summary":"Owen Science and Engineering Library, located close to most of the University's ...",
+            "title":"Owen Library",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>Owen Science and Engineering Library, located close to most of the University's major science and engineering buildings, focuses on biological, physical, and engineering science. It houses a map room, internet-wired study carrels (and of course a wireless network), and has computers (both desktops and laptops) available for free in-library use.</p>",
+                    "title":"Owen Library"
+                    }
+        }

@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.728389325569",
+                        "longitude":"-117.164136171341"
+                        },
+            "summary":"Neill Hall is home to the University's mathematics department, which includes fa...",
+            "title":"Neill",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>Neill Hall is home to the University's mathematics department, which includes faculty in statistics. It's a rather modest building compared to its looming neighbors, but its academic importance is inversely proportional to its relatively small square footage.</p>",
+                    "title":"Neill"
+                    }
+        }

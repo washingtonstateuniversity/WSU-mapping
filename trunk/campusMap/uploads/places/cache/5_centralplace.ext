@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7295261",
+                        "longitude":"-117.1491717"
+                        },
+            "summary":"The Animal Disease Biotechnology Facility (or ADBF building) is home to some of ...",
+            "title":"Animal Disease Biotechnology Facility (ADBF)",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Animal Disease Biotechnology Facility (ADBF)</h2><p>The Animal Disease Biotechnology Facility (or ADBF building) is home to some of the core research done by the College of Veterinary Medicne and the University's Paul G. Allen School for Global Animal Health. Researchers in this building focus on using molecular biology to solve diseases in agricultural animals.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Animal Disease Biotechnology Facility (ADBF)</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:Northeast of building</li>      <li><strong>ADA Other</strong>:Assisted listening device, room 1002</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Animal Disease Biotech"
+                    }
+        }

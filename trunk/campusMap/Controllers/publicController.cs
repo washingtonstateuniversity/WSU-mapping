@@ -232,6 +232,14 @@ using log4net.Config;
                 return result;
             }
 
+            public void setJsonCache(string uploadPath, string file, string blob)
+            {
+                if (!HelperService.DirExists(uploadPath))
+                {
+                    System.IO.Directory.CreateDirectory(uploadPath);
+                }
+                System.IO.File.WriteAllText(uploadPath + file, blob);
+            }
 
 
 
@@ -261,6 +269,9 @@ using log4net.Config;
                 }
                 place[] items = q.Execute();
 
+
+
+                // THIS REALLY SHOULD BE A TEMPLATE WITH SOME TEMP LEVEL LOGIC TO TEST OF BLANKS
                 String defaultAccessibility = @"<ul>
     <li><strong>ADA Entrance</strong>:$!{ada_entrance}</li>
     <li><strong>ADA Parking</strong>:$!{ada_parking}</li>
@@ -325,19 +336,30 @@ using log4net.Config;
 		]
 }
  */
-                
 
-                String json = "";
+                String cachePath = Context.ApplicationPhysicalPath;
+                if (!cachePath.EndsWith("\\"))
+                    cachePath += "\\";
+                    cachePath += @"uploads\";
+                    cachePath += @"places\cache\";
 
-                json += @"  {
-";
+
+
+
+
 
 
                 String placeList = "";
+                String jsonStr = "";
                 int count = 0;
                 foreach (place item in items){
                     if (item.coordinate != null)
                     {
+
+                        string file = item.id + "_centralplace" + ".ext";
+                        if (!File.Exists(cachePath+file))
+                        {
+
                         string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
 
                         String mainimage = "";
@@ -396,23 +418,6 @@ using log4net.Config;
                                 ""title"":""Accessibility""
                             }";
                         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         if (count == 0){
                             placeList += @"""markers"":[";
                         }
@@ -456,7 +461,7 @@ using log4net.Config;
 
 
 
-                        placeList += @"
+                        placeList = @"
         {
             ""position"":{
                         ""latitude"":""" + item.getLat() + @""",
@@ -471,13 +476,24 @@ using log4net.Config;
                     ""content"":" + infotabs + @",
                     ""title"":""" + item.prime_name + @"""
                     }
-        },";
+        }";
+                        setJsonCache(cachePath, file, placeList);
+                    }
+
+
+
+
+                    jsonStr += System.IO.File.ReadAllText(cachePath+file) + ",";
+
                         count++;
                     }
                 }
-                json += placeList.TrimEnd(',');
-                if (count > 0)
-                {
+                String json = "";
+                    json += @"  {
+";                
+                if (count > 0){
+                    json += @"""markers"":[";
+                    json += jsonStr.TrimEnd(',');
                     json += @"]";
                 }
                 

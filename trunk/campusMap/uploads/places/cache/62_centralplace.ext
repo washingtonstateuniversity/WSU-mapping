@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.6969705503375",
+                        "longitude":"-117.240128517151"
+                        },
+            "summary":"The Ensminger Beef Center is a unique teaching and research facility that focuse...",
+            "title":"Ensminger Beef Ctr",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Ensminger Beef Ctr</h2><p>The Ensminger Beef Center is a unique teaching and research facility that focuses on improving beef cow-calf systems. It is specially designed to accommodate teaching, research, and statewide extension activities.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Ensminger Beef Ctr</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Ensminger Beef Ctr"
+                    }
+        }

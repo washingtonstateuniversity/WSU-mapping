@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7287144168682",
+                        "longitude":"-117.166629536771"
+                        },
+            "summary":"Cleveland Hall is the center of the University's education program. The College ...",
+            "title":"Cleveland",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>Cleveland</h2><p>Cleveland Hall is the center of the University's education program. The College of Education's central offices and faculty call Cleveland home, and it is also home to the aptly named George B. Brain Education Library, which is dedicated to educational resources and scholarship.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>Cleveland</h2><ul>      <li><strong>ADA Entrance</strong>:Ground and first floors</li>      <li><strong>ADA Parking</strong>:NE College Ave and SE Idaho St (south side of building)</li>      <li><strong>ADA Other</strong>:Accessible restrooms and drinking fountains on ground</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:Cleveland Espresso Cart</li>      <li><strong>Research Centers</strong>:Center for Educational Partnerships</li>      <li><strong>Libraries</strong>:George B. Brain Education Library</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:Teacher Education Student Services</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"Cleveland"
+                    }
+        }

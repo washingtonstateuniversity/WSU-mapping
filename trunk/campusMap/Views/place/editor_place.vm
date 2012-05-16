@@ -331,6 +331,10 @@ $formbuttons
 			<hr/>
 			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label><input type="checkbox" id="hideTitles" name="place.hideTitles" value="1" #if($place.hideTitles==true)checked="checked"#end />:Hide</label>
 			<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the place.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
+			<br/>
+			<hr/>
+			<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label><input type="checkbox" id="usAutoAccessibility" name="place.hideTitles" value="1" #if($place.autoAccessibility!=false)checked="checked"#end />:Enable</label>
+			<h6><em>By using the Auto Accessibility feature, a default template is used to display all feilds defined.  You can always use the short codes and disableing this to design your own tab layout.</em></h6>
 			<hr/>
 			<br/>
 			<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>

@@ -67,11 +67,11 @@ if exists (select * from dbo.sysobjects where id = object_id(N'departments') and
 if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_place_type') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_place_type
 if exists (select * from dbo.sysobjects where id = object_id(N'authors_to_media') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table authors_to_media
 if exists (select * from dbo.sysobjects where id = object_id(N'style_to_events_set') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_to_events_set
-if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_types
 if exists (select * from dbo.sysobjects where id = object_id(N'map_views') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table map_views
 if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_to_types
-if exists (select * from dbo.sysobjects where id = object_id(N'style_option_types_to_geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_option_types_to_geometrics_types
 if exists (select * from dbo.sysobjects where id = object_id(N'geometrics') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics
+if exists (select * from dbo.sysobjects where id = object_id(N'style_option_types_to_geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_option_types_to_geometrics_types
+if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_types') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table geometrics_types
 if exists (select * from dbo.sysobjects where id = object_id(N'style_to_style_options') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table style_to_style_options
 if exists (select * from dbo.sysobjects where id = object_id(N'styles') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table styles
 if exists (select * from dbo.sysobjects where id = object_id(N'fields') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table fields
@@ -179,12 +179,6 @@ create table style_to_events_set (
   style_id INT not null,
    events_set_id INT not null
 )
-create table geometrics_types (
-  geometrics_type_id INT IDENTITY NOT NULL,
-   name NVARCHAR(255) null,
-   attr NVARCHAR(255) null,
-   primary key (geometrics_type_id)
-)
 create table map_views (
   view_id INT IDENTITY NOT NULL,
    name NVARCHAR(255) null,
@@ -206,10 +200,6 @@ create table geometrics_to_types (
   geometric_id INT not null,
    geometrics_type_id INT not null
 )
-create table style_option_types_to_geometrics_types (
-  geometrics_type_id INT not null,
-   style_option_type_id INT not null
-)
 create table geometrics (
   geometric_id INT IDENTITY NOT NULL,
    boundary geography null,
@@ -224,6 +214,16 @@ create table geometrics (
    media INT null,
    author_editing INT null,
    primary key (geometric_id)
+)
+create table style_option_types_to_geometrics_types (
+  geometrics_type_id INT not null,
+   style_option_type_id INT not null
+)
+create table geometrics_types (
+  geometrics_type_id INT IDENTITY NOT NULL,
+   name NVARCHAR(255) null,
+   attr NVARCHAR(255) null,
+   primary key (geometrics_type_id)
 )
 create table style_to_style_options (
   style_id INT not null,
@@ -463,8 +463,8 @@ create table logs (
    primary key (Id)
 )
 create table advertisement_to_media (
-  media_id INT not null,
-   ad_id INT not null
+  ad_id INT not null,
+   media_id INT not null
 )
 create table geometric_events (
   geometric_event_id INT IDENTITY NOT NULL,
@@ -578,8 +578,8 @@ create table place_to_usertags (
    place_id INT not null
 )
 create table authors_to_place (
-  author_id INT not null,
-   place_id INT not null
+  place_id INT not null,
+   author_id INT not null
 )
 create table place_to_place_types (
   place_type_id INT not null,

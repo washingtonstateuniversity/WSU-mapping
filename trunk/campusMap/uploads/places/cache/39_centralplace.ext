@@ -1,0 +1,24 @@
+
+        {
+            "position":{
+                        "latitude":"46.7306894",
+                        "longitude":"-117.1645683"
+                        },
+            "summary":"College Hall holds the Department of Anthropology, an anthropology museum, archa...",
+            "title":"College Hall",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":[
+                        {
+                            "block":"<h2 class='header'>College Hall</h2><p>College Hall holds the Department of Anthropology, an anthropology museum, archaeological research space, and several classrooms. One of the University's most classically styled academic buildings, College Hall anchors Terrell Mall to the historic core of campus.</p>",
+                            "title":"Overview"
+                        },
+                            {
+                                "block":"<h2 class='header'>College Hall</h2><ul>      <li><strong>ADA Entrance</strong>:Ground floor</li>      <li><strong>ADA Parking</strong>:Library Garage</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:Plateau Center for American Indian Study</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Anthropology Museum</li>  </ul>",
+                                "title":"Accessibility"
+                            }],
+                    "title":"College Hall"
+                    }
+        }
