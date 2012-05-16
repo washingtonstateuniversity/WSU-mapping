@@ -428,11 +428,11 @@ using log4net.Config;
 
                             String tabStr = "";
 
-                            infotabs += @"
-                        {
-                            ""block"":""" + infoTitle + mainimage + details + @""",
-                            ""title"":""Overview""
-                        }";
+                                infotabs += @"
+                            {
+                                ""block"":""" + infoTitle + mainimage + details + @""",
+                                ""title"":""Overview""
+                            }";
                             if (item.infotabs.Count > 0 )
                             {
                                 int c = 0;
@@ -449,9 +449,11 @@ using log4net.Config;
                                     if (c < item.infotabs.Count) tabStr += ",";
                                 }
                             }
-                            if (!string.IsNullOrEmpty(imgGallery)) infotabs += "," + tabStr.TrimEnd(',');
+
+                            if (!string.IsNullOrEmpty(tabStr)) infotabs += "," + tabStr.TrimEnd(',');
                             if (!string.IsNullOrEmpty(imgGallery)) infotabs += ","+imgGallery;
                             if (!string.IsNullOrEmpty(autoAccessibility)) infotabs += "," + autoAccessibility;
+
                             infotabs += @"]";
                         }else{
                             if (String.IsNullOrEmpty(item.details)){
