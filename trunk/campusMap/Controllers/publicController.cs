@@ -470,7 +470,7 @@ using log4net.Config;
             ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(details, false), 80) + "...") + @""",
             ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + @""",
             ""style"":{
-                    ""icon"":""" + getRootUrl() + @"Content/images/default_icon_{$i}.png""
+                    ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
                     },
             ""info"":{
                     ""content"":" + infotabs + @",
