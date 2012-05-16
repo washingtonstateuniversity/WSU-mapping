@@ -435,15 +435,18 @@ using log4net.Config;
                         }";
                             if (item.infotabs.Count > 0 )
                             {
+                                int c = 0;
                                 foreach (infotabs tab in item.infotabs)
                                 {
+                                    c++;
                                     string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
 
                                     tabStr += @"
                         {
                             ""block"":""" + infoTitle + content + @""",
                             ""title"":""" + tab.title + @"""
-                        },";
+                        }";
+                                    if (c < item.infotabs.Count) tabStr += ",";
                                 }
                             }
                             if (!string.IsNullOrEmpty(imgGallery)) infotabs += "," + tabStr.TrimEnd(',');
