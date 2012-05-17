@@ -7,18 +7,10 @@
             "summary":"The Beef Barn is...wait for it...a barn that houses beef cattle. Students in ani...",
             "title":"Beef Barn (BEEF)",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
-                    "content":[
-                        {
-                            "block":"<h2 class='header'>Beef Barn (BEEF)</h2><p>The Beef Barn is...wait for it...a barn that houses beef cattle. Students in animal science raise these cattle to provide tasty food for the campus community.</p>",
-                            "title":"Overview"
-                        },
-                            {
-                                "block":"<h2 class='header'>Beef Barn (BEEF)</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
-                                "title":"Accessibility"
-                            }],
+                    "content":"<h2 class='header'>Beef Barn (BEEF)</h2><p>The Beef Barn is...wait for it...a barn that houses beef cattle. Students in animal science raise these cattle to provide tasty food for the campus community.</p>",
                     "title":"Beef Barn"
                     }
         }

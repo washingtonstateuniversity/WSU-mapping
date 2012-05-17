@@ -7,16 +7,16 @@
             "summary":"Holland Library is joined to the newer Terrell Library so that they function as ...",
             "title":"Holland",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Holland</h2><p>Holland Library is joined to the newer Terrell Library so that they function as one. The main library entrance on Terrell Mall serves both buildings (the libraries are also accessible directly from the CUB). Holland-Terrell is the University's main library. It holds more than 2 million books--including many rare and one-of-a-kind items in its Manuscripts, Archives, and Special Collections section--and provides access to nearly unlimited digital knowledge sources. Holland Library is a favorite place for students looking to study in quiet and solitude (and there's plenty of room for group study, too).</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Holland</h2><ul>      <li><strong>ADA Entrance</strong>:Via Terrell Library front entrance (from Terrell Mall)</li>      <li><strong>ADA Parking</strong>:Terrell Library Parking garage (access from Colorado Street)</li>      <li><strong>ADA Other</strong>:Restrooms accessible on ground and first floors only; all restrooms in adjoining Terrell Library are accessible</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:Libraries Administration</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Holland</h2><p>Holland Library is joined to the newer Terrell Library so that they function as one. The main library entrance on Terrell Mall serves both buildings (the libraries are also accessible directly from the CUB). Holland-Terrell is the University's main library. It holds more than 2 million books--including many rare and one-of-a-kind items in its Manuscripts, Archives, and Special Collections section--and provides access to nearly unlimited digital knowledge sources. Holland Library is a favorite place for students looking to study in quiet and solitude (and there's plenty of room for group study, too).</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Holland</h2><ul><li><strong>ADA Entrance</strong><span>Via Terrell Library front entrance (from Terrell Mall)</span></li>    <li><strong>ADA Parking</strong><span>Terrell Library Parking garage (access from Colorado Street)</span></li>    <li><strong>ADA Other</strong><span>Restrooms accessible on ground and first floors only; all restrooms in adjoining Terrell Library are accessible</span></li>                                       	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Libraries Administration</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Holland"

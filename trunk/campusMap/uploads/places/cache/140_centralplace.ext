@@ -7,7 +7,7 @@
             "summary":"Jewett Observatory hosts public \"star parties,\" where anyone interested in vie...",
             "title":"Observatory",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":"<p>Jewett Observatory hosts public \"star parties,\" where anyone interested in viewing the cosmos can come look through the powerful 12-inch refracting telescope (the second-largest in the state of Washington) or one of 10 portable telescopes. Its main use, however, is for astronomy and physics student labs.</p>",

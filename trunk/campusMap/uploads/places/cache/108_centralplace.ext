@@ -7,16 +7,16 @@
             "summary":"Johnson Tower (not to be confused with Johnson Hall) sits just south of Terrell ...",
             "title":"Johnson Tower",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Johnson Tower</h2><p>Johnson Tower (not to be confused with Johnson Hall) sits just south of Terrell Mall, between Todd and Wilson-Short halls. It is connected with Todd Hall by an enclosed walkway on the third floor. Johnson Tower houses social science and business faculty.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Johnson Tower</h2><ul>      <li><strong>ADA Entrance</strong>:Second floor (main entrance); third floor  (via elevated walkway from Terrell Mall or through Todd Hall)</li>      <li><strong>ADA Parking</strong>:College Avenue</li>      <li><strong>ADA Other</strong>:Accessible restrooms in Todd Hall (via 3rd floor walkway)</li>      <li><strong>Amenities</strong>:Unisex restrooms (floors 1</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:Alcohol and Drug Abuse Program; Center for Entrepreneurial Studies; Thomas S. Foley Institute</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Johnson Tower</h2><p>Johnson Tower (not to be confused with Johnson Hall) sits just south of Terrell Mall, between Todd and Wilson-Short halls. It is connected with Todd Hall by an enclosed walkway on the third floor. Johnson Tower houses social science and business faculty.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Johnson Tower</h2><ul><li><strong>ADA Entrance</strong><span>Second floor (main entrance); third floor  (via elevated walkway from Terrell Mall or through Todd Hall)</span></li>    <li><strong>ADA Parking</strong><span>College Avenue</span></li>    <li><strong>ADA Other</strong><span>Accessible restrooms in Todd Hall (via 3rd floor walkway)</span></li>    <li><strong>Amenities</strong><span>Unisex restrooms (floors 1</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Alcohol and Drug Abuse Program; Center for Entrepreneurial Studies; Thomas S. Foley Institute</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Johnson Tower"

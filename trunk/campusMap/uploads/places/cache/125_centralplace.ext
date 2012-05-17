@@ -7,16 +7,16 @@
             "summary":"McCoy Hall provides lab space for veterinary science and animal health research....",
             "title":"McCoy",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<p>McCoy Hall provides lab space for veterinary science and animal health research.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<ul>      <li><strong>ADA Entrance</strong>:Ground floor</li>      <li><strong>ADA Parking</strong>:West side parking lot</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restrooms (first and second floors)</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:VCAPP Museum Display and Anatomy Lab</li>  </ul>",
+                                "block":"<p>McCoy Hall provides lab space for veterinary science and animal health research.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<ul><li><strong>ADA Entrance</strong><span>Ground floor</span></li>    <li><strong>ADA Parking</strong><span>West side parking lot</span></li>        <li><strong>Amenities</strong><span>Unisex restrooms (first and second floors)</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                           	    <li><strong>Special Facilities &amp; Public Venues</strong><span>VCAPP Museum Display and Anatomy Lab</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"McCoy"

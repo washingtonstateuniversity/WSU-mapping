@@ -268,7 +268,7 @@ using log4net.Config;
 
 
 
-                return helperService.proccessText(hashtable, text, true);
+                return helperService.proccessText(hashtable, text, true).Trim();
             }
             public void setJsonCache(string uploadPath, string file, string blob)
             {
@@ -409,9 +409,9 @@ using log4net.Config;
 
 
                         String infoTitle = "";
-                        if (!item.hideTitles)
+                        if (item.hideTitles!=true)
                         {
-                            infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle : item.prime_name) + "</h2>";
+                            infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle:item.prime_name) + "</h2>";
                         }
 
 
@@ -450,13 +450,17 @@ using log4net.Config;
                         String autoAccessibility = "";
                         if (item.autoAccessibility)
                         {
+                            string renderedTxt = autoProcessFeilds(item);
                             //autoProcessFeilds(item)
                             //processFields(defaultAccessibility, item)
-                            autoAccessibility += @"
+                            if (!String.IsNullOrEmpty(renderedTxt.Trim()))
                             {
-                                ""block"":""" + infoTitle + autoProcessFeilds(item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                                autoAccessibility += @"
+                            {
+                                ""block"":""" + infoTitle + "<ul>" + renderedTxt.Trim().Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"</ul>"",
                                 ""title"":""Accessibility""
                             }";
+                            }
                         }
                         if (count == 0){
                             placeList += @"""markers"":[";
@@ -497,7 +501,7 @@ using log4net.Config;
                             infotabs += @"]";
                         }else{
                             if (String.IsNullOrEmpty(item.details)){
-                                infotabs += @"""""";
+                                infotabs += @"""" + infoTitle + @"""";
                             } else{
                                 infotabs += @"""" + infoTitle + mainimage + details + @"""";
                             }

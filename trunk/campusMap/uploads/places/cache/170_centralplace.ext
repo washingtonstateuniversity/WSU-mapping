@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7295806868067",
+                        "longitude":"-117.156851291656"
+                        },
+            "summary":"Dedicated to agricultural research, L.J. Smith Hall is home to the graduate prog...",
+            "title":"Smith Hall",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>Dedicated to agricultural research, L.J. Smith Hall is home to the graduate program in biological systems engineering.</p>",
+                    "title":"Smith Hall"
+                    }
+        }

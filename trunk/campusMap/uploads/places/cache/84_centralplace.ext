@@ -7,16 +7,16 @@
             "summary":"Some of the University's most high-tech research goes on in Fulmer Hall, which i...",
             "title":"Fulmer",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Fulmer</h2><p>Some of the University's most high-tech research goes on in Fulmer Hall, which is home to the chemistry department, the School of Molecular Biosciences, the materials science program, and numerous research labs, teaching labs, and classrooms.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Fulmer</h2><ul>      <li><strong>ADA Entrance</strong>:Fulmer Annex and Synthesis Unit</li>      <li><strong>ADA Parking</strong>:College Ave (on street); Troy Hall parking lot</li>      <li><strong>ADA Other</strong>:Assisted listening device in room 125</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:Bioanalytical Center;NMR (Nuclear Magnetic Resonance) Spectroscopy Center</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:Mass Spectrometry Laboratory</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Fulmer</h2><p>Some of the University's most high-tech research goes on in Fulmer Hall, which is home to the chemistry department, the School of Molecular Biosciences, the materials science program, and numerous research labs, teaching labs, and classrooms.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Fulmer</h2><ul><li><strong>ADA Entrance</strong><span>Fulmer Annex and Synthesis Unit</span></li>    <li><strong>ADA Parking</strong><span>College Ave (on street); Troy Hall parking lot</span></li>    <li><strong>ADA Other</strong><span>Assisted listening device in room 125</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Bioanalytical Center;NMR (Nuclear Magnetic Resonance) Spectroscopy Center</span></li>        <li><strong>Major Labs/Facilities</strong><span>Mass Spectrometry Laboratory</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Fulmer"

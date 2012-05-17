@@ -7,16 +7,16 @@
             "summary":"Kimbrough Music Building is home to the WSU School of Music. It houses a state-o...",
             "title":"Kimbrough",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Kimbrough</h2><p>Kimbrough Music Building is home to the WSU School of Music. It houses a state-of-the-art professional digital recording studio, numerous piano-equipped practice and instruction rooms, rehearsal space for the University's symphonies and ensembles, and a concert hall.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Kimbrough</h2><ul>      <li><strong>ADA Entrance</strong>:First floor (front entrance)</li>      <li><strong>ADA Parking</strong>:Library Parking Garage (take elevator to Terrell Mall follow Terrell Mall to Kimbrough Hall); Smith Center (CUE) parking garage (take elevator to 3rd floor follow Terrell Mall to Kimbrough) </li>      <li><strong>ADA Other</strong>:Assisted listening device; room 101</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Kimbrough Concert Hall (capacity 382)</li>  </ul>",
+                                "block":"<h2 class='header'>Kimbrough</h2><p>Kimbrough Music Building is home to the WSU School of Music. It houses a state-of-the-art professional digital recording studio, numerous piano-equipped practice and instruction rooms, rehearsal space for the University's symphonies and ensembles, and a concert hall.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Kimbrough</h2><ul><li><strong>ADA Entrance</strong><span>First floor (front entrance)</span></li>    <li><strong>ADA Parking</strong><span>Library Parking Garage (take elevator to Terrell Mall follow Terrell Mall to Kimbrough Hall); Smith Center (CUE) parking garage (take elevator to 3rd floor follow Terrell Mall to Kimbrough)</span></li>    <li><strong>ADA Other</strong><span>Assisted listening device; room 101</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>                               	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Kimbrough Concert Hall (capacity 382)</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Kimbrough"

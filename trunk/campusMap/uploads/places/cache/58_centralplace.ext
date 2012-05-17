@@ -7,16 +7,16 @@
             "summary":"The Education Addition, completed in 2007, sits next to Cleveland Hall and featu...",
             "title":"Education Addition",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Education Addition</h2><p>The Education Addition, completed in 2007, sits next to Cleveland Hall and features the latest in innovative teaching technology and classroom facilities. The plaza between Cleveland Addition and Cleveland Hall is a popular place for students to relax, study, and eat.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Education Addition</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:NE College Ave and SE Idaho St (south of Cleveland Hall)</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Education Addition</h2><p>The Education Addition, completed in 2007, sits next to Cleveland Hall and features the latest in innovative teaching technology and classroom facilities. The plaza between Cleveland Addition and Cleveland Hall is a popular place for students to relax, study, and eat.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Education Addition</h2><ul><li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>NE College Ave and SE Idaho St (south of Cleveland Hall)</span></li>            <li><strong>Classrooms</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Education Addition"

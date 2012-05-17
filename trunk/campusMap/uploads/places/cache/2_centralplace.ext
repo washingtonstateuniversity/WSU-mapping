@@ -7,13 +7,17 @@
             "summary":"Abelson Hall is a multipurpose building dedicated to science.",
             "title":"Abelson (ABEL)",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
+                            {
+                                "block":"<h2 class='header'>Abelson (ABEL)</h2><p>Abelson Hall is a multipurpose building dedicated to science. It houses classrooms, departmental offices, faculty offices, research labs, an aviary, and several rooftop greenhouses. Enclosed skybridges connect Abelson to the Owen Science Library across the street and to Heald Hall next door. The building is named in honor of Philip and Neva Abelson, a husband and wife team who taught at WSU for 30+ years and did groundbreaking research in (respectively) physics and medical biology.</p>",
+                                "title":"Overview"
+                            },
                         {
-                            "block":"<h2 class='header'>Abelson (ABEL)</h2><p>Abelson Hall is a multipurpose building dedicated to science. It houses classrooms, departmental offices, faculty offices, research labs, an aviary, and several rooftop greenhouses. Enclosed skybridges connect Abelson to the Owen Science Library across the street and to Heald Hall next door. The building is named in honor of Philip and Neva Abelson, a husband and wife team who taught at WSU for 30+ years and did groundbreaking research in (respectively) physics and medical biology.</p>",
-                            "title":"Overview"
+                            "block":"<h2 class='header'>Abelson (ABEL)</h2><ul>  <li><strong>ADA Entrance</strong>:First floor</li>  <li><strong>ADA Parking</strong>:North of building</li>  <li><strong>ADA Other</strong>:</li>  <li><strong>Amenities</strong>:Unisex restroom 7th floor</li>  <li><strong>Classrooms</strong>:yes</li>  <li><strong>Research Labs</strong>:yes</li>  <li><strong>Notes &amp; Comments</strong>:</li>  <li><strong>Shopping, Dining, Etc.</strong>:</li>  <li><strong>Research Centers</strong>:</li>  <li><strong>Libraries</strong>:</li>  <li><strong>Major Labs/Facilities</strong>:Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center</li>  <li><strong>Student Services &amp; Advising</strong>:Science</li>  <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>  <li><strong>Special Facilities &amp; Public Venues</strong>:Conner Museum of Zoology</li>  </ul>",
+                            "title":"Accessibility"
                         }],
                     "title":"Abelson"
                     }

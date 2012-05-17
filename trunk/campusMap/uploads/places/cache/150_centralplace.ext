@@ -7,7 +7,7 @@
             "summary":"The Plant Growth Center includes greenhouses, controlled environmental growth ro...",
             "title":"Plant Growth Ctr",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":"<p>The Plant Growth Center includes greenhouses, controlled environmental growth rooms, and growth chambers. It serves the College of Agricultural, Human, and Natural Resource Sciences (CAHNRS) and the University's USDA Agricultural Research Center with space for both teaching and research.</p>",

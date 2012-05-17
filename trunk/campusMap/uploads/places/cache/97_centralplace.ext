@@ -7,16 +7,16 @@
             "summary":"These greenhouses provide growing space for WSU horticultural research projects....",
             "title":"Hort Research Greenhouses",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Hort Research Greenhouses</h2><p>These greenhouses provide growing space for WSU horticultural research projects. All sorts of plants, from ornamental flowers to turfgrass to fruits and vegetables, are grown here. Research includes pest/disease prevention, maximizing crop yields, developing new plant varieties for agriculture or ornamental use, and more.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Hort Research Greenhouses</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Hort Research Greenhouses</h2><p>These greenhouses provide growing space for WSU horticultural research projects. All sorts of plants, from ornamental flowers to turfgrass to fruits and vegetables, are grown here. Research includes pest/disease prevention, maximizing crop yields, developing new plant varieties for agriculture or ornamental use, and more.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Hort Research Greenhouses</h2><ul><li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Hort Research Greenhouses"

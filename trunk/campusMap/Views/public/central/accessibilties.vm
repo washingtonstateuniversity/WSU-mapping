@@ -1,16 +1,14 @@
-<ul>
-    #if($ada_entrance)<li><strong>ADA Entrance</strong>:$!{ada_entrance}</li>#end
-    #if($ada_parking)<li><strong>ADA Parking</strong>:$!{ada_parking}</li>#end
-    #if($ada_other)<li><strong>ADA Other</strong>:$!{ada_other}</li>#end
-    #if($amenities)<li><strong>Amenities</strong>:$!{amenities}</li>#end
-    #if($classroom)<li><strong>Classrooms</strong>:$!{classroom}</li>#end
-    #if($research_labs)<li><strong>Research Labs</strong>:$!{research_labs}</li>#end
-    #if($notes_comments)<li><strong>Notes &amp; Comments</strong>:$!{notes_comments}</li>#end
-    #if($shopping_dining_etc)<li><strong>Shopping, Dining, Etc.</strong>:$!{shopping_dining_etc}</li>#end
-    #if($research_centers)<li><strong>Research Centers</strong>:$!{research_centers}</li>#end
-    #if($libraries)<li><strong>Libraries</strong>:$!{libraries}</li>#end
-    #if($major_labs_facilities)<li><strong>Major Labs/Facilities</strong>:$!{major_labs_facilities}</li>#end
-    #if($student_services_advising)<li><strong>Student Services &amp; Advising</strong>:$!{student_services_advising}</li>#end
-   	#if($university_administration_non_academic_units)<li><strong>University Administration &amp; Non-Academic Units</strong>:$!{university_administration_non_academic_units}</li>#end
-    #if($special_facilities_public_venues)<li><strong>Special Facilities &amp; Public Venues</strong>:$!{special_facilities_public_venues}</li>#end
-</ul>
+    #if($ada_entrance)<li><strong>ADA Entrance</strong><span>$!{ada_entrance}</span></li>#end
+    #if($ada_parking)<li><strong>ADA Parking</strong><span>$!{ada_parking}</span></li>#end
+    #if($ada_other)<li><strong>ADA Other</strong><span>$!{ada_other}</span></li>#end
+    #if($amenities)<li><strong>Amenities</strong><span>$!{amenities}</span></li>#end
+    #if($classroom && $classroom=="yes")<li><strong>Classrooms</strong><span>$!{classroom}</span></li>#end
+    #if($research_labs && $research_labs=="yes")<li><strong>Research Labs</strong><span>$!{research_labs}</span></li>#end
+    #if($notes_comments)<li><strong>Notes &amp; Comments</strong><span>$!{notes_comments}</span></li>#end
+    #if($shopping_dining_etc)<li><strong>Shopping, Dining, Etc.</strong><span>$!{shopping_dining_etc}</span></li>#end
+    #if($research_centers)<li><strong>Research Centers</strong><span>$!{research_centers}</span></li>#end
+    #if($libraries)<li><strong>Libraries</strong><span>$!{libraries}</span></li>#end
+    #if($major_labs_facilities)<li><strong>Major Labs/Facilities</strong><span>$!{major_labs_facilities}</span></li>#end
+    #if($student_services_advising)<li><strong>Student Services &amp; Advising</strong><span>$!{student_services_advising}</span></li>#end
+   	#if($university_administration_non_academic_units)<li><strong>University Administration &amp; Non-Academic Units</strong><span>$!{university_administration_non_academic_units}</span></li>#end
+    #if($special_facilities_public_venues)<li><strong>Special Facilities &amp; Public Venues</strong><span>$!{special_facilities_public_venues}</span></li>#end

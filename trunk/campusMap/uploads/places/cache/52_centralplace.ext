@@ -7,16 +7,16 @@
             "summary":"Daggy Hall houses the Department of Interior Design, the Liberal Arts General St...",
             "title":"Daggy",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Daggy</h2><p>Daggy Hall houses the Department of Interior Design, the Liberal Arts General Studies Program, several classrooms, and two theaters that host stage plays. A plan is in the works to convert the building's currently unused space into a center for performing arts that will serve the wider eastern Washington community.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Daggy</h2><ul>      <li><strong>ADA Entrance</strong>:First and second floors</li>      <li><strong>ADA Parking</strong>:Parking garage next to building</li>      <li><strong>ADA Other</strong>:Assisted listening devices for Jones Theatre available from Daggy Hall ticket office</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Jones Versatile Theatre (capacity 394); Wadleigh Exploratory Theatre (capacity 144)</li>  </ul>",
+                                "block":"<h2 class='header'>Daggy</h2><p>Daggy Hall houses the Department of Interior Design, the Liberal Arts General Studies Program, several classrooms, and two theaters that host stage plays. A plan is in the works to convert the building's currently unused space into a center for performing arts that will serve the wider eastern Washington community.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Daggy</h2><ul><li><strong>ADA Entrance</strong><span>First and second floors</span></li>    <li><strong>ADA Parking</strong><span>Parking garage next to building</span></li>    <li><strong>ADA Other</strong><span>Assisted listening devices for Jones Theatre available from Daggy Hall ticket office</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>                               	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Jones Versatile Theatre (capacity 394); Wadleigh Exploratory Theatre (capacity 144)</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Daggy"

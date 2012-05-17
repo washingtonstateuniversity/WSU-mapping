@@ -7,7 +7,7 @@
             "summary":"This building, usually called Murrow East, is the older half of the Murrow Commu...",
             "title":"Murrow East",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":"<p>This building, usually called Murrow East, is the older half of the Murrow Communications Center. It is most recognizable for the round turrets on its front corners. It is connected to the newer Murrow West building by an enclosed walkway; the two buildings may look different from the outside, but on the inside they function as one. Murrow East holds faculty offices, and the administrative offices of Northwest Public Radio, Northwest Public Television, and Student Publications (e.g., the Daily Evergreen newspaper).</p>",

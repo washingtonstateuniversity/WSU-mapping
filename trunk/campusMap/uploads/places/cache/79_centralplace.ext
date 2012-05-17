@@ -7,16 +7,16 @@
             "summary":"Quality is everywhere in this building! USDA researchers and food scientists in ...",
             "title":"Food Quality",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Food Quality</h2><p>Quality is everywhere in this building! USDA researchers and food scientists in the Food Quality Building study, define, and refine the qualities of food crops ranging from wheat to wine grapes. The WSU Creamery makes ice cream and unique Cougar Cheeses here (including the international award-winning Cougar Gold). And at Ferdinand's Ice Cream Shoppe you can taste the the creamery's delicious results for yourself.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Food Quality</h2><ul>      <li><strong>ADA Entrance</strong>:Second floor (south side plaza); Ferdinand's Ice Cream Shoppe (first floor</li>      <li><strong>ADA Parking</strong>:North side</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom (first floor)</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:Western Wheat Quality Laboratory; WSU Creamery</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Ferdinand's Ice Cream Shoppe</li>  </ul>",
+                                "block":"<h2 class='header'>Food Quality</h2><p>Quality is everywhere in this building! USDA researchers and food scientists in the Food Quality Building study, define, and refine the qualities of food crops ranging from wheat to wine grapes. The WSU Creamery makes ice cream and unique Cougar Cheeses here (including the international award-winning Cougar Gold). And at Ferdinand's Ice Cream Shoppe you can taste the the creamery's delicious results for yourself.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Food Quality</h2><ul><li><strong>ADA Entrance</strong><span>Second floor (south side plaza); Ferdinand's Ice Cream Shoppe (first floor</span></li>    <li><strong>ADA Parking</strong><span>North side</span></li>        <li><strong>Amenities</strong><span>Unisex restroom (first floor)</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>                    <li><strong>Major Labs/Facilities</strong><span>Western Wheat Quality Laboratory; WSU Creamery</span></li>       	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Ferdinand's Ice Cream Shoppe</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Food Quality"

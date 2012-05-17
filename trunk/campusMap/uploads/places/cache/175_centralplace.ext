@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7428456721575",
+                        "longitude":"-117.110459804535"
+                        },
+            "summary":"The E.H. Steffen Center is a 58-acre ecology laboratory. It includes forest plan...",
+            "title":"Steffen Ctr",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>The E.H. Steffen Center is a 58-acre ecology laboratory. It includes forest plantations, wetlands, greenhouses, wildlife ecology facilities, and parts of the unique, highly endangered native Palouse Prairie ecosystem. The Steffen Center's research primarily focuses on wild herbivore and large carnivore nutrition, behavior, and disease prevention. The center also is an outdoor classroom where students get hands-on practice in plant identification, forest and range measurement, habitat evaluation, and more.</p>",
+                    "title":"Steffen Ctr"
+                    }
+        }

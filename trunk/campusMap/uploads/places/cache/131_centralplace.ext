@@ -7,7 +7,7 @@
             "summary":"Morrill Hall, a traditional red-brick academic building, houses the College of S...",
             "title":"Morrill",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":"<p>Morrill Hall, a traditional red-brick academic building, houses the College of Sciences administration, advising for science majors, and the WWAMI program for first-and second-year medical school students. Factoid: WSU is only one of many universities across the nation to have a Morrill building. Most of the multitude of Morrill halls are named in honor of Congressman Justin Smith Morrill, whose bill established the first land-grant colleges in 1862; being a land-grant university (established in 1890), WSU honors the man who started it all.</p>",

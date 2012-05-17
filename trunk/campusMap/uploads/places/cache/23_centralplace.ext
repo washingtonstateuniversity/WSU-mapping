@@ -7,16 +7,16 @@
             "summary":"With its iconic clock tower, Bryan Hall is not only one of the oldest buildings ...",
             "title":"Bryan Hall (BRYN)",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Bryan Hall (BRYN)</h2><p>With its iconic clock tower, Bryan Hall is not only one of the oldest buildings on campus, but also one of the most recognizable. It is home to the University's international programs and philosophy department. The Bryan Auditorium, with its classic Schanz pipe organ, hosts musical performances, stage plays, and various university events.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Bryan Hall (BRYN)</h2><ul>      <li><strong>ADA Entrance</strong>:First floor (west side); Second floor (east side)</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:International Students and Scholars</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:Governmental Studies and Services</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Bryan Hall Auditorium (capacity 778) </li>  </ul>",
+                                "block":"<h2 class='header'>Bryan Hall (BRYN)</h2><p>With its iconic clock tower, Bryan Hall is not only one of the oldest buildings on campus, but also one of the most recognizable. It is home to the University's international programs and philosophy department. The Bryan Auditorium, with its classic Schanz pipe organ, hosts musical performances, stage plays, and various university events.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Bryan Hall (BRYN)</h2><ul><li><strong>ADA Entrance</strong><span>First floor (west side); Second floor (east side)</span></li>        <li><strong>ADA Other</strong><span>Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>                            <li><strong>Student Services &amp; Advising</strong><span>International Students and Scholars</span></li>   	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Governmental Studies and Services</span></li>    <li><strong>Special Facilities &amp; Public Venues</strong><span>Bryan Hall Auditorium (capacity 778)</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Bryan"

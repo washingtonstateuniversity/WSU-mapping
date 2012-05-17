@@ -141,8 +141,9 @@ function addCentralControlls(){
 
 
 
-function updateMap(_load){
+function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
+	if(typeof(showSum)==='undefined') var showSum = false;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
@@ -151,7 +152,7 @@ function updateMap(_load){
 			$('#selectedPlaceList_btn').trigger('click');
 		}
 		loadData(data);
-		loadListings(data);
+		loadListings(data,showSum);
 		prep();
 	});
 	
@@ -277,13 +278,12 @@ function loadData(data){
 		});
 	});
 }
-function loadListings(data){
-	
+function loadListings(data,showSum){
 	var listing="";
 	$.each( data.markers, function(i, marker) {	
 		var sum="";
 		if(typeof(marker.summary)!=='undfined' && !$.isEmptyObject(marker.summary)){
-			sum='<div class="" style="display:none;">'+marker.summary+'</div>';
+			sum='<div class="" '+(showSum?'':'style="display:none;')+'">'+marker.summary+'</div>';
 		}
 
 		listing+='<li class="">'+
@@ -410,7 +410,7 @@ $(document).ready(function(){
 			$.each(ib, function(i) {ib[i].close();});
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');
-			updateMap(encodeURI($(this).find('a:first').attr('href').replace('?cat[]=','')).replace('&','__'));
+			updateMap(encodeURI($(this).find('a:first').attr('href').replace('?cat[]=','')));
 		});
 		$('#main_nav .parent li a').live('click',function(e){
 			e.stopPropagation();
@@ -423,7 +423,7 @@ $(document).ready(function(){
 			$.each($('li.checked a'),function(){
 				params=params+$(this).attr('href').replace('?cat[]=','')+',';
 			});
-			updateMap(encodeURI(params.substring(0, params.length - 1)).replace('&','__'));
+			updateMap(encodeURI(params.substring(0, params.length - 1)),true);
 		});
 	}	
 	if($('#geometrics_drawing_map').length){

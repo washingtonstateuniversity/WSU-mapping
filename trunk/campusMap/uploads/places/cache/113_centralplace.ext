@@ -7,16 +7,16 @@
             "summary":"This building connects Kruegel and McAllister halls, providing ADA access to bot...",
             "title":"Kruegel-McAllister Bldg",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Kruegel-McAllister Bldg</h2><p>This building connects Kruegel and McAllister halls, providing ADA access to both buildings. When it was built in the 1950s money was tight and elevators were very expensive, so a large part of this building consists of a series of ramps connecting every floor of the adjoining buildings. It also contains faculty offices and classrooms.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Kruegel-McAllister Bldg</h2><ul>      <li><strong>ADA Entrance</strong>:Northeast entrance</li>      <li><strong>ADA Parking</strong>:North side of Kruegel Hall</li>      <li><strong>ADA Other</strong>:No elevators; all floors are accessible by ramps</li>      <li><strong>Amenities</strong>:Unisex restroom (ground floor)</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Kruegel-McAllister Bldg</h2><p>This building connects Kruegel and McAllister halls, providing ADA access to both buildings. When it was built in the 1950s money was tight and elevators were very expensive, so a large part of this building consists of a series of ramps connecting every floor of the adjoining buildings. It also contains faculty offices and classrooms.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Kruegel-McAllister Bldg</h2><ul><li><strong>ADA Entrance</strong><span>Northeast entrance</span></li>    <li><strong>ADA Parking</strong><span>North side of Kruegel Hall</span></li>    <li><strong>ADA Other</strong><span>No elevators; all floors are accessible by ramps</span></li>    <li><strong>Amenities</strong><span>Unisex restroom (ground floor)</span></li>    <li><strong>Classrooms</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Kruegel-McAllister Bldg"

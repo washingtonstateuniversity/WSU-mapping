@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7306102370502",
+                        "longitude":"-117.168953418732"
+                        },
+            "summary":"Sloan Hall is one of the busiest buildings in the University's engineering compl...",
+            "title":"Sloan",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>Sloan Hall is one of the busiest buildings in the University's engineering complex. It holds faculty and staff offices, graduate student offices, research labs, and classrooms. And the planetarium in Sloan is one of the University's little hidden gems.</p>",
+                    "title":"Sloan"
+                    }
+        }

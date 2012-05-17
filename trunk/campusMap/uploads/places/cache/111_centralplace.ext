@@ -7,16 +7,16 @@
             "summary":"Knott Dairy is both a productive dairy and a first-class teaching and research f...",
             "title":"Knott Dairy Ctr",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Knott Dairy Ctr</h2><p>Knott Dairy is both a productive dairy and a first-class teaching and research facility. WSU students participate in all phases of the dairy's operation. All milk from the dairy's 180 cows goes to the WSU Creamery, where (again with student help) it is made into award-winning Cougar Gold cheese and delicious Ferdinand's ice cream.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Knott Dairy Ctr</h2><ul>      <li><strong>ADA Entrance</strong>:</li>      <li><strong>ADA Parking</strong>:</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom (office/milk parlor)</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Knott Dairy Ctr</h2><p>Knott Dairy is both a productive dairy and a first-class teaching and research facility. WSU students participate in all phases of the dairy's operation. All milk from the dairy's 180 cows goes to the WSU Creamery, where (again with student help) it is made into award-winning Cougar Gold cheese and delicious Ferdinand's ice cream.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Knott Dairy Ctr</h2><ul><li><strong>Amenities</strong><span>Unisex restroom (office/milk parlor)</span></li>        <li><strong>Research Labs</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Knott Dairy Ctr"

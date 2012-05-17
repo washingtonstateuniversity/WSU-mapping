@@ -1,16 +1,16 @@
 
         {
             "position":{
-                        "latitude":"46.729963093477",
-                        "longitude":"-117.154040336609"
+                        "latitude":"46.7096770903933",
+                        "longitude":"-117.162237167358"
                         },
             "summary":"...",
-            "title":"Plant Sci Grnhs",
+            "title":"Spillman Farm",
             "style":{
                     "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
-                    "content":"<h2 class='header'>Plant Sci Grnhs</h2>",
-                    "title":"Plant Sci Grnhs"
+                    "content":"<h2 class='header'>Spillman Farm</h2>",
+                    "title":"Spillman Farm"
                     }
         }

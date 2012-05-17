@@ -7,16 +7,16 @@
             "summary":"The Animal Science Lab Building houses research labs for faculty in the Departme...",
             "title":"Animal Sci Labs",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Animal Sci Labs</h2><p>The Animal Science Lab Building houses research labs for faculty in the Department of Animal Sciences.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Animal Sci Labs</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:North of building</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:Unisex restroom 2nd floor</li>      <li><strong>Classrooms</strong>:no</li>      <li><strong>Research Labs</strong>:yes</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Animal Sci Labs</h2><p>The Animal Science Lab Building houses research labs for faculty in the Department of Animal Sciences.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Animal Sci Labs</h2><ul><li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 2nd floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Animal Sci Labs"

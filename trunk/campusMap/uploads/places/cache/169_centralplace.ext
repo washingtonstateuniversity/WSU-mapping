@@ -1,0 +1,16 @@
+
+        {
+            "position":{
+                        "latitude":"46.7329266532439",
+                        "longitude":"-117.164007425308"
+                        },
+            "summary":"Smith Gym is truly a multipurpose building. It houses a gym, dance/exercise stud...",
+            "title":"Smith Gym",
+            "style":{
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
+                    },
+            "info":{
+                    "content":"<p>Smith Gym is truly a multipurpose building. It houses a gym, dance/exercise studios, a swimming pool, general university classrooms, the intramural sports office, and faculty offices. Built in the 1920s, it was the first building on campus to be constructed specifically with women's athletics and education in mind (a very progressive notion at the time). If you get a chance, check out the sculptural relief above the main entrance; it's one of the more unique and classic pieces of art on campus.</p>",
+                    "title":"Smith Gym"
+                    }
+        }

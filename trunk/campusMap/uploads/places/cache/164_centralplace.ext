@@ -7,7 +7,7 @@
             "summary":"The Seed House is where seeds are sorted, shipped, and prepared for storage. Man...",
             "title":"Seed House",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":"<p>The Seed House is where seeds are sorted, shipped, and prepared for storage. Many of the seeds processed here come from (or go to) WSU research farms, where new varieties of wheat and other plants are constantly being researched and improved.</p>",

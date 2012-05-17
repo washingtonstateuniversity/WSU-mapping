@@ -7,16 +7,16 @@
             "summary":"This greenhouse, built in 2007, provides updated facilities where students in ho...",
             "title":"Instruction Greenhouse",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Instruction Greenhouse</h2><p>This greenhouse, built in 2007, provides updated facilities where students in horticulture and landscape architecture study the growth and cultivation of ornamental plants--and grow the plants themselves. The products of the greenhouse are planted on campus or sold by the Horticulture Club as fundraisers.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Instruction Greenhouse</h2><ul>      <li><strong>ADA Entrance</strong>:South end of greenhouse </li>      <li><strong>ADA Parking</strong>:South end of greenhouse</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:No public restrooms</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:</li>  </ul>",
+                                "block":"<h2 class='header'>Instruction Greenhouse</h2><p>This greenhouse, built in 2007, provides updated facilities where students in horticulture and landscape architecture study the growth and cultivation of ornamental plants--and grow the plants themselves. The products of the greenhouse are planted on campus or sold by the Horticulture Club as fundraisers.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Instruction Greenhouse</h2><ul><li><strong>ADA Entrance</strong><span>South end of greenhouse</span></li>    <li><strong>ADA Parking</strong><span>South end of greenhouse</span></li>        <li><strong>Amenities</strong><span>No public restrooms</span></li>    <li><strong>Classrooms</strong><span>yes</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Instruction Greenhouse"

@@ -7,16 +7,16 @@
             "summary":"Carpenter Hall is home to one of the best-equipped schools of architecture in th...",
             "title":"Carpenter (CARP)",
             "style":{
-                    "icon":"http://localhost:61788/Content/images/default_icon_{$i}.png"
+                    "icon":"http://localhost:61788/Content/images/map_icons/default_icon_{$i}.png"
                     },
             "info":{
                     "content":[
-                        {
-                            "block":"<h2 class='header'>Carpenter (CARP)</h2><p>Carpenter Hall is home to one of the best-equipped schools of architecture in the country--and one of the finest in the Western U.S. And appropriately enough, it was designed by the first chair of the architecture department (in 1913). Upper level architecture students have their own workstations supplied with specialized software, and with a complete architecture library right in the building, vital resources are always close at hand.</p>",
-                            "title":"Overview"
-                        },
                             {
-                                "block":"<h2 class='header'>Carpenter (CARP)</h2><ul>      <li><strong>ADA Entrance</strong>:First floor</li>      <li><strong>ADA Parking</strong>:Daggy Hall parking garage</li>      <li><strong>ADA Other</strong>:</li>      <li><strong>Amenities</strong>:</li>      <li><strong>Classrooms</strong>:yes</li>      <li><strong>Research Labs</strong>:no</li>      <li><strong>Notes &amp; Comments</strong>:</li>      <li><strong>Shopping, Dining, Etc.</strong>:Carpenter Coffee Cart</li>      <li><strong>Research Centers</strong>:</li>      <li><strong>Libraries</strong>:Architecture Library</li>      <li><strong>Major Labs/Facilities</strong>:</li>      <li><strong>Student Services &amp; Advising</strong>:</li>      <li><strong>University Administration &amp; Non-Academic Units</strong>:</li>      <li><strong>Special Facilities &amp; Public Venues</strong>:Architecture exhibition room and architecture gallery</li>  </ul>",
+                                "block":"<h2 class='header'>Carpenter (CARP)</h2><p>Carpenter Hall is home to one of the best-equipped schools of architecture in the country--and one of the finest in the Western U.S. And appropriately enough, it was designed by the first chair of the architecture department (in 1913). Upper level architecture students have their own workstations supplied with specialized software, and with a complete architecture library right in the building, vital resources are always close at hand.</p>",
+                                "title":"Overview"
+                            },
+                            {
+                                "block":"<h2 class='header'>Carpenter (CARP)</h2><ul><li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>Daggy Hall parking garage</span></li>            <li><strong>Classrooms</strong><span>yes</span></li>            <li><strong>Shopping, Dining, Etc.</strong><span>Carpenter Coffee Cart</span></li>        <li><strong>Libraries</strong><span>Architecture Library</span></li>           	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Architecture exhibition room and architecture gallery</span></li></ul>",
                                 "title":"Accessibility"
                             }],
                     "title":"Carpenter"
