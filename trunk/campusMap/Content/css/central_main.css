@@ -520,7 +520,7 @@ fieldset{padding: 4px 8px 10px;}
 	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
 
 }
-#selectedPlaceList_area ul{list-style: none outside none; margin: 0px; padding: 0px;}
+#selectedPlaceList_area ul{list-style: none outside none; margin: 45px 0 0; padding: 0px;}
 #selectedPlaceList_area ul li{ position:relative; padding-left:28px; min-height:28px;}
 #selectedPlaceList_area ul li a{color:#003c69;font-size:12px;}
 #selectedPlaceList_area ul li a.active{color:#981e32;}
