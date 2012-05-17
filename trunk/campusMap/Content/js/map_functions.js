@@ -648,7 +648,7 @@ function build_infobox(item){
 function add_place_point(lat,lng,clear){
 	i=0;
 	var marker = {};
-	marker.style={"icon":siteroot+"Content/images/default_icon_{$i}.png"};
+	marker.style={"icon":siteroot+"Content/images/map_icons/default_icon_{$i}.png"};
 	if(typeof(clear)!=='undefined'&&clear) marker.info={};
 	marker=$.extend(marker,build_infobox(marker));
 	

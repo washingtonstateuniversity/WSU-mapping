@@ -23,12 +23,178 @@ function iniMap(url,callback){
 			if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom;}
 			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom+1;}
 		}
+		
+		map_op = $.extend(map_op,{"mapTypeControl":false});
+		
+		
 		$('#centralMap').gmap(map_op).bind('init', function() { 
+			addCentralControlls();
 			loadData(data);
 			callback();
 		});
 	});
 }
+function addCentralControlls(){
+	
+
+	var controlDiv = document.createElement('div');
+	controlDiv.style.padding = '5px';
+	
+	// Set CSS for the control border.
+	var controlUI = document.createElement('div');
+	controlUI.style.backgroundColor = 'white';
+	controlUI.style.borderStyle = 'solid';
+	controlUI.style.borderWidth = '0px';
+	controlUI.style.marginTop = '20px';
+	controlUI.style.marginRight = '20px';
+	controlUI.style.width = '65px';
+	controlUI.style.boxShadow = '0px 0px 8px 1px rgba(0, 0, 0, .25)';
+	controlUI.style.cursor = 'pointer';
+	controlUI.style.textAlign = 'center';
+	controlUI.title = 'Click to set the map to Home';
+	controlDiv.appendChild(controlUI);
+	
+	// Set CSS for the control interior.
+	var controlText = document.createElement('div');
+	controlText.style.fontFamily = '"Lucida Grande","Lucida Sans Unicode",Arial,san-serif';
+	controlText.style.fontSize = '12px';
+	controlText.style.lineHeight = '12px';
+	controlText.style.paddingTop = '3px';
+	controlText.style.paddingBottom = '3px';
+	controlText.innerHTML = 'Aerial Photo';
+	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
+		alert('hello');
+		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	var controlDiv = document.createElement('div');
+	controlDiv.style.padding = '5px';
+	
+	// Set CSS for the control border.
+	var controlUI = document.createElement('div');
+	controlUI.style.backgroundColor = 'white';
+	controlUI.style.borderStyle = 'solid';
+	controlUI.style.borderWidth = '0px';
+	controlUI.style.marginTop = '10px';
+	controlUI.style.marginRight = '20px';
+	controlUI.style.width = '65px';
+	controlUI.style.boxShadow = '0px 0px 8px 1px rgba(0, 0, 0, .25)';
+	controlUI.style.cursor = 'pointer';
+	controlUI.style.textAlign = 'center';
+	controlUI.title = 'Click to set the map to Home';
+	controlDiv.appendChild(controlUI);
+	
+	// Set CSS for the control interior.
+	var controlText = document.createElement('div');
+	controlText.style.fontFamily = '"Lucida Grande","Lucida Sans Unicode",Arial,san-serif';
+	controlText.style.fontSize = '12px';
+	controlText.style.lineHeight = '12px';
+	controlText.style.paddingTop = '3px';
+	controlText.style.paddingBottom = '3px';
+	controlText.innerHTML = 'Map';
+	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
+		alert('hello');
+		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	});
+	
+	
+	var controlDiv = document.createElement('div');
+	controlDiv.style.padding = '5px';
+	
+	// Set CSS for the control border.
+	var controlUI = document.createElement('div');
+	controlUI.style.backgroundColor = 'white';
+	controlUI.style.borderStyle = 'solid';
+	controlUI.style.borderWidth = '0px';
+	controlUI.style.marginTop = '5px';
+	controlUI.style.marginRight = '20px';
+	controlUI.style.width = '65px';
+	controlUI.style.boxShadow = '0px 0px 8px 1px rgba(0, 0, 0, .25)';
+	controlUI.style.cursor = 'pointer';
+	controlUI.style.textAlign = 'center';
+	controlUI.title = 'Click to set the map to Home';
+	controlDiv.appendChild(controlUI);
+	
+	// Set CSS for the control interior.
+	var controlText = document.createElement('div');
+	controlText.style.fontFamily = '"Lucida Grande","Lucida Sans Unicode",Arial,san-serif';
+	controlText.style.fontSize = '12px';
+	controlText.style.lineHeight = '12px';
+	controlText.style.paddingTop = '3px';
+	controlText.style.paddingBottom = '3px';
+	controlText.innerHTML = 'Satellite';
+	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
+		alert('hello');
+		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	});
+	
+	
+		
+	var controlDiv = document.createElement('div');
+	controlDiv.style.padding = '5px';
+	
+	// Set CSS for the control border.
+	var controlUI = document.createElement('div');
+	controlUI.style.backgroundColor = 'white';
+	controlUI.style.borderStyle = 'solid';
+	controlUI.style.borderWidth = '0px';
+	controlUI.style.marginTop = '5px';
+	controlUI.style.marginRight = '20px';
+	controlUI.style.width = '65px';
+	controlUI.style.boxShadow = '0px 0px 8px 1px rgba(0, 0, 0, .25)';
+	controlUI.style.cursor = 'pointer';
+	controlUI.style.textAlign = 'center';
+	controlUI.title = 'Click to set the map to Home';
+	controlDiv.appendChild(controlUI);
+	
+	// Set CSS for the control interior.
+	var controlText = document.createElement('div');
+	controlText.style.fontFamily = '"Lucida Grande","Lucida Sans Unicode",Arial,san-serif';
+	controlText.style.fontSize = '12px';
+	controlText.style.lineHeight = '12px';
+	controlText.style.paddingTop = '3px';
+	controlText.style.paddingBottom = '3px';
+	controlText.innerHTML = 'Hybrid';
+	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
+		alert('hello');
+		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+
 function updateMap(_load){
 	if(typeof(_load)==='undefined') var _load = false;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	

@@ -143,7 +143,7 @@
 		 */
 		addControl: function(panel, position) {
 			this.get('map').controls[position].push(this._unwrap(panel));
-			return this;
+			return $(this);
 		},
 		
 		/**
