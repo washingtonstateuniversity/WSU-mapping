@@ -2,7 +2,7 @@
     #if($ada_entrance)<li><strong>ADA Entrance</strong>:$!{ada_entrance}</li>#end
     #if($ada_parking)<li><strong>ADA Parking</strong>:$!{ada_parking}</li>#end
     #if($ada_other)<li><strong>ADA Other</strong>:$!{ada_other}</li>#end
-    #if($amenities!='')<li><strong>Amenities</strong>:$!{amenities}</li>#end
+    #if($amenities)<li><strong>Amenities</strong>:$!{amenities}</li>#end
     #if($classroom)<li><strong>Classrooms</strong>:$!{classroom}</li>#end
     #if($research_labs)<li><strong>Research Labs</strong>:$!{research_labs}</li>#end
     #if($notes_comments)<li><strong>Notes &amp; Comments</strong>:$!{notes_comments}</li>#end
