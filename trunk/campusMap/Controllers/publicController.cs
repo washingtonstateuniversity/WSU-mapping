@@ -226,12 +226,50 @@ using log4net.Config;
                             //log.Error("on field:" + ft_.alias);
                             value = getFieldVal(ft_, place);
                             result = result.Replace("$!{" + ft_.alias + "}", value);
+                            PropertyBag["" + ft_.alias] = value ;
                         }
                     }
                 }
                 return result;
             }
+            /*
+             * Take a string loop over all the fields 
+             * test if the pattern with the field.alias is in
+             * the text.  if in text replace with value.
+             */
+            public string autoProcessFeilds(place place)
+            {
+                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                typeEx.Add(Expression.Eq("model", "placeController"));
+                typeEx.Add(Expression.Eq("set", place.model.id));
 
+                field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+                List<string> fields = new List<string>();
+
+
+                //log.Error(" place:" + place.prime_name);
+                Hashtable hashtable = new Hashtable();
+                hashtable["place"] = place;
+
+                if (ft != null)
+                {
+                    foreach (field_types ft_ in ft)
+                    {
+                        string value = "";
+                        value = getFieldVal(ft_, place);
+                        hashtable["" + ft_.alias] = value;
+                    }
+                }
+                String renderPath = Context.ApplicationPhysicalPath;
+                if (!renderPath.EndsWith("\\"))
+                    renderPath += "\\";
+
+                String text = System.IO.File.ReadAllText(renderPath + "Views/public/central/accessibilties.vm");
+
+
+
+                return helperService.proccessText(hashtable, text, true);
+            }
             public void setJsonCache(string uploadPath, string file, string blob)
             {
                 if (!HelperService.DirExists(uploadPath))
@@ -412,9 +450,11 @@ using log4net.Config;
                         String autoAccessibility = "";
                         if (item.autoAccessibility)
                         {
+                            //autoProcessFeilds(item)
+                            //processFields(defaultAccessibility, item)
                             autoAccessibility += @"
                             {
-                                ""block"":""" + infoTitle + processFields(defaultAccessibility, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
+                                ""block"":""" + infoTitle + autoProcessFeilds(item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @""",
                                 ""title"":""Accessibility""
                             }";
                         }

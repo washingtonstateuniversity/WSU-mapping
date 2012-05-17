@@ -334,7 +334,9 @@ $(document).ready(function(){
 				}
 			).trigger("resize");
 		}
-		$('#selectedPlaceList_btn').live('click', function(){
+		$('#selectedPlaceList_btn').live('click', function(e){
+			e.stopPropagation();
+			e.preventDefault();
 			var btn=$(this);
 			if(btn.closest('#selectedPlaceList').width()<=1){
 				btn.closest('#selectedPlaceList').stop().animate({
@@ -405,8 +407,6 @@ $(document).ready(function(){
 			$('.active').removeClass('active');
 			$('.checked').removeClass('checked');
 			$(this).addClass('active');
-			e.stopPropagation();
-			e.preventDefault();
 			$.each(ib, function(i) {ib[i].close();});
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');

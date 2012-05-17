@@ -198,7 +198,8 @@ namespace campusMap.Models
         {
             get { return _autoAccessibility; }
             set { _autoAccessibility = value; }
-        }        
+        }
+
         private IList<place_names> place_names = new List<place_names>();
         [HasAndBelongsToMany(typeof(place_names), Lazy = true, Table = "place_to_place_names", ColumnKey = "place_id", ColumnRef = "name_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         virtual public IList<place_names> names

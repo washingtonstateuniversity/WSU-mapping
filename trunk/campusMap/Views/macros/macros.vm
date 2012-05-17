@@ -2,10 +2,6 @@
     $!proxyservice.renderProxyByName($name) 
 #end
 
-
-
-
-
 #macro(youtube $videoId $title $w $h $classes)
 	<span style="width:${w}px;" class="inlineImagery ${classes}">
 		<a href='http://www.youtube.com/v/${videoId}?autoplay=1&rel=0' title='$title' class='mediaLinks youtube'>
