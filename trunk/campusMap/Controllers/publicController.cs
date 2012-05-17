@@ -428,7 +428,7 @@ using log4net.Config;
                                   /* note the width and height should be abstracted out into a map preference*/
                                     galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
                                         "<a href='#' class='imgEnlarge'></a>"+
-                                        "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "/media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
+                                        "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
                                     "</span></li>";
                                 }
                                 c++;
