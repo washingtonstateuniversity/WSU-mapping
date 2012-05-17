@@ -297,7 +297,8 @@ border-bottom-right-radius: 0px;
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage{float: left;position: relative;}	
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h,
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_{
-		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
+		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;    margin-left: 0;
+    padding: 12px 13px;}
 	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycle ul li span{padding: 12px 10px; }
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_v{
 		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
