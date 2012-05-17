@@ -314,6 +314,12 @@ border-bottom-right-radius: 0px;
 	#campusmap .navArea .vids.active{color:#3cb6ce;}
 	#campusmap .navArea .vids:hover{color:#b6bf00}
 
+
+
+
+.control.active{background-color:#3cb6ce !important; color:#fff  !important;}
+
+
 /* for admin */
 .defaultSkin table.mceToolbar, .defaultSkin tr.mceFirst .mceToolbar tr td, .defaultSkin tr.mceLast .mceToolbar tr td { float: left; } 
 	

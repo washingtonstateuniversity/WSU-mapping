@@ -37,9 +37,7 @@ function iniMap(url,callback){
 function addCentralControlls(){
 	
 
-	var controlDiv = document.createElement('div');
-	controlDiv.style.padding = '5px';
-	
+
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 	controlUI.style.backgroundColor = 'white';
@@ -52,7 +50,7 @@ function addCentralControlls(){
 	controlUI.style.cursor = 'pointer';
 	controlUI.style.textAlign = 'center';
 	controlUI.title = 'Click to set the map to Home';
-	controlDiv.appendChild(controlUI);
+controlUI.className = 'control';
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
@@ -63,21 +61,29 @@ function addCentralControlls(){
 	controlText.style.paddingBottom = '3px';
 	controlText.innerHTML = 'Aerial Photo';
 	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
-		alert('hello');
-		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	google.maps.event.addDomListener(controlUI, 'click', function() {
+			$('.control').removeClass('active');
+			$(this).addClass('active');
+		 $('#centralMap').gmap("setOptions",{'setMapTypeId': 'ROADMAP'});
 	});
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	
 	
 	
 	
 	
+
+
+
+
+
+
+
+
 	
 	
 	
-	var controlDiv = document.createElement('div');
-	controlDiv.style.padding = '5px';
-	
+
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 	controlUI.style.backgroundColor = 'white';
@@ -90,7 +96,8 @@ function addCentralControlls(){
 	controlUI.style.cursor = 'pointer';
 	controlUI.style.textAlign = 'center';
 	controlUI.title = 'Click to set the map to Home';
-	controlDiv.appendChild(controlUI);
+		controlUI.className = 'control active';
+
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
@@ -101,15 +108,15 @@ function addCentralControlls(){
 	controlText.style.paddingBottom = '3px';
 	controlText.innerHTML = 'Map';
 	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
-		alert('hello');
-		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	google.maps.event.addDomListener(controlUI, 'click', function() {
+			$('.control').removeClass('active');
+			$(this).addClass('active');
+		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
 	});
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	
 	
-	var controlDiv = document.createElement('div');
-	controlDiv.style.padding = '5px';
-	
+
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 	controlUI.style.backgroundColor = 'white';
@@ -122,7 +129,8 @@ function addCentralControlls(){
 	controlUI.style.cursor = 'pointer';
 	controlUI.style.textAlign = 'center';
 	controlUI.title = 'Click to set the map to Home';
-	controlDiv.appendChild(controlUI);
+		controlUI.className = 'control';
+
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
@@ -133,16 +141,16 @@ function addCentralControlls(){
 	controlText.style.paddingBottom = '3px';
 	controlText.innerHTML = 'Satellite';
 	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
-		alert('hello');
-		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	google.maps.event.addDomListener(controlUI, 'click', function() {
+			$('.control').removeClass('active');
+			$(this).addClass('active');
+		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
 	});
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	
 	
 		
-	var controlDiv = document.createElement('div');
-	controlDiv.style.padding = '5px';
-	
+
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 	controlUI.style.backgroundColor = 'white';
@@ -155,7 +163,8 @@ function addCentralControlls(){
 	controlUI.style.cursor = 'pointer';
 	controlUI.style.textAlign = 'center';
 	controlUI.title = 'Click to set the map to Home';
-	controlDiv.appendChild(controlUI);
+	controlUI.className = 'control';
+
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
@@ -166,10 +175,12 @@ function addCentralControlls(){
 	controlText.style.paddingBottom = '3px';
 	controlText.innerHTML = 'Hybrid';
 	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP).click(function(){
-		alert('hello');
-		 $('#centralMap').gmap("setOptions",{"center":pullman_str});
+	google.maps.event.addDomListener(controlUI, 'click', function() {
+			$('.control').removeClass('active');
+			$(this).addClass('active');
+		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
 	});
+	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	
 	
 	
