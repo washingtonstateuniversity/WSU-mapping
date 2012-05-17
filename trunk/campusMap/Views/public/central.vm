@@ -1,6 +1,6 @@
 <div id="centralMap_wrap">
 <div id='selectedPlaceList' class='cAssest'>
-	<a href="#" id='selectedPlaceList_btn'>Info</a> 
+	<a href="#" id='selectedPlaceList_btn' style="display:none;">Info</a> 
 	<div id='selectedPlaceList_area' class='cAssest'>
 	</div>
 </div>

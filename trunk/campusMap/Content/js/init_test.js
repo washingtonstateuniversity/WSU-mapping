@@ -150,7 +150,6 @@ function updateMap(_load){
 			$('#selectedPlaceList_btn').css({'display':'block'});
 			$('#selectedPlaceList_btn').trigger('click');
 		}
-		
 		loadData(data);
 		loadListings(data);
 		prep();
