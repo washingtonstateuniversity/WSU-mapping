@@ -317,7 +317,7 @@ border-bottom-right-radius: 0px;
 
 
 
-.control.active{background-color:#3cb6ce !important; color:#fff  !important;}
+.control.activeControl{background-color:#3cb6ce !important; color:#fff  !important;}
 
 
 /* for admin */

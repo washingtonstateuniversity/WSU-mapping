@@ -62,8 +62,8 @@ controlUI.className = 'control';
 	controlText.innerHTML = 'Aerial Photo';
 	controlUI.appendChild(controlText);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.control').removeClass('active');
-			$(this).addClass('active');
+			$('.control').removeClass('activeControl');
+			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'setMapTypeId': 'ROADMAP'});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
@@ -96,7 +96,7 @@ controlUI.className = 'control';
 	controlUI.style.cursor = 'pointer';
 	controlUI.style.textAlign = 'center';
 	controlUI.title = 'Click to set the map to Home';
-		controlUI.className = 'control active';
+		controlUI.className = 'control activeControl';
 
 	
 	// Set CSS for the control interior.
@@ -109,8 +109,8 @@ controlUI.className = 'control';
 	controlText.innerHTML = 'Map';
 	controlUI.appendChild(controlText);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.control').removeClass('active');
-			$(this).addClass('active');
+			$('.control').removeClass('activeControl');
+			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
@@ -142,8 +142,8 @@ controlUI.className = 'control';
 	controlText.innerHTML = 'Satellite';
 	controlUI.appendChild(controlText);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.control').removeClass('active');
-			$(this).addClass('active');
+			$('.control').removeClass('activeControl');
+			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
@@ -176,8 +176,8 @@ controlUI.className = 'control';
 	controlText.innerHTML = 'Hybrid';
 	controlUI.appendChild(controlText);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.control').removeClass('active');
-			$(this).addClass('active');
+			$('.control').removeClass('activeControl');
+			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
