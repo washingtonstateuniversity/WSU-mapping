@@ -25,12 +25,12 @@ function iniMap(url,callback){
 		}
 		
 		map_op = $.extend(map_op,{"mapTypeControl":false});
-		
-		
+
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			addCentralControlls();
 			loadData(data);
 			callback();
+			$('[controlheight]:first').css({'margin-left':'15px'});
 		});
 	});
 }
@@ -146,6 +146,11 @@ function updateMap(_load){
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
+		if(!$('#selectedPlaceList_btn').is(':visible')){
+			$('#selectedPlaceList_btn').css({'display':'block'});
+			$('#selectedPlaceList_btn').trigger('click');
+		}
+		
 		loadData(data);
 		loadListings(data);
 		prep();
@@ -317,16 +322,12 @@ function prep(){
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
 $(document).ready(function(){
-	
-
-	
-	
 	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
 		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		iniMap("",function(){
 			$('#loading').remove();
-			});
+		});
 		if($('#centralMap').length){
 			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,185)}).trigger("resize");
 			$(window).resize(function(){
@@ -343,13 +344,16 @@ $(document).ready(function(){
 						btn.addClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'scroll'});
 				});
+				$('[controlheight]:first').stop().animate({'margin-left':'200px'}, 500, function() {});
 			}else{
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"0px"
 					}, 500, function() {
 						btn.removeClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
+						//$('[controlheight]:first').css({'margin-left':'5px'});
 				});
+				$('[controlheight]:first').stop().animate({'margin-left':'15px'}, 500, function() {});
 			}
 		});
 		var kStroke;
