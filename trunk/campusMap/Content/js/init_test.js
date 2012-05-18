@@ -297,10 +297,12 @@ function loadListings(data,showSum){
 		btn.live('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
-			$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
-			$('#selectedPlaceList_area .active').removeClass('active');
-			btn.next('div').toggle('showOrHide');
-			btn.addClass('active');
+			if(!btn.hasClass('active') && !btn.next('div').is(':visible')){
+				$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
+				$('#selectedPlaceList_area .active').removeClass('active');
+				btn.next('div').toggle('showOrHide');
+				btn.addClass('active');
+			}
 			$.each(ib, function(i) {ib[i].close();});
 			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
 		});

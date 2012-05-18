@@ -12,3 +12,4 @@
     #if($student_services_advising)<li><strong>Student Services &amp; Advising</strong><span>$!{student_services_advising}</span></li>#end
    	#if($university_administration_non_academic_units)<li><strong>University Administration &amp; Non-Academic Units</strong><span>$!{university_administration_non_academic_units}</span></li>#end
     #if($special_facilities_public_venues)<li><strong>Special Facilities &amp; Public Venues</strong><span>$!{special_facilities_public_venues}</span></li>#end
+	<li></li>

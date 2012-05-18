@@ -36,7 +36,7 @@ function updateaddImageDIV(transport){
 function addToImgRoster(id,name){
 	if(typeof(id)==='undefined'||id<=0){return}
 	if(typeof(name)==='undefined'){name="";}
-	tinyMCEImageList.push({id:""+id,name:name,url:siteroot+"/media/download.castle?id="+id+"&placeid="+place_id+"&m=crop&w=250&h=250&pre=TMP"});	
+	tinyMCEImageList.push({id:""+id,name:name,url:siteroot+"media/download.castle?id="+id+"&placeid="+place_id+"&m=crop&w=250&h=250&pre=TMP"});	
 }
 function removeFromImgRoster(id){
 	if(typeof(id)==='undefined'||id<=0){return}
@@ -53,7 +53,7 @@ function removeFromImgRoster(id){
 function boxCreation(image_id){
 	var HTML ='<span class="imageBox">';
 		HTML+='<input type="hidden" value="'+image_id+'" name="images['+image_id+'].id"  class="placeImages">';
-		HTML+='<img src="'+siteroot+'/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
+		HTML+='<img src="'+siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
 		HTML+='<a title="'+image_id+'" rel="'+place_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
 		HTML+='<span class="ui-icon ui-icon-trash"></span>';
 		HTML+='</a>';

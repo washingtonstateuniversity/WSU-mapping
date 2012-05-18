@@ -981,24 +981,36 @@ namespace campusMap.Controllers
                     {
                         fields f = new fields();
                         //f.value = "{ \"val\":\""++"\"}";
+
+                        int F_key = Convert.ToInt32(key.Replace("fields[", "").Replace("]", ""));
+                        f.type = ActiveRecordBase<field_types>.Find(F_key);
+
                         string vals = "";
-                        foreach (String val in Request.Form[key].Split(',') )
+                        if (f.type.attr.Contains(@"""type"": ""dropdown"""))
                         {
-                            vals = vals + @"{""val"":"+(!String.IsNullOrEmpty(val)?("\""+ val.Trim('"') +"\""):"null")+"},";
+                            foreach (String val in Request.Form[key].Split(','))
+                            {
+                                vals = vals + @"{""val"":" + (!String.IsNullOrEmpty(val) ? ("\"" + val.Trim('"') + "\"") : "null") + "},";
+                            }
+                        }
+                        else
+                        {
+                            vals = @"{""val"":" + (!String.IsNullOrEmpty(Request.Form[key]) ? ("\"" + Request.Form[key].Trim('"') + "\"") : "null") + "},";
                         }
                         char[] endC = { ',' };
                         vals = vals.TrimEnd(endC);
                         f.value = @"{""selections"":[" + vals + "]}";
-                        int F_key = Convert.ToInt32(key.Replace("fields[","").Replace("]","")); 
 
-                        f.type = ActiveRecordBase<field_types>.Find(F_key);
                         f.owner = place.id;
                         ActiveRecordMediator<fields>.Save(f);
                         place.field.Add(f);
                     }
                 }
             }
-            
+
+
+            if (!String.IsNullOrEmpty(place.abbrev_name)) place.abbrev_name = place.abbrev_name.Trim();
+            if (!String.IsNullOrEmpty(place.prime_name)) place.prime_name = place.prime_name.Trim();
             place.names.Clear();
             foreach (place_names pn in place_names)
             {
@@ -1009,6 +1021,11 @@ namespace campusMap.Controllers
                 }
                 place.names.Add(pn);
             }
+            //if (place.hideTitles==0) place.hideTitles = false;
+
+
+
+
 
             foreach (place_media si in place_media)
             {

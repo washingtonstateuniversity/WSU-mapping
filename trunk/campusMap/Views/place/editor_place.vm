@@ -324,16 +324,23 @@ $formbuttons
 
 
 <div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+$formbuttons
 			<h3>Summary :</h3>
 			#*$Form.TextArea("place.summary")*#
 			<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
 			<br/>
 			<hr/>
-			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label><input type="checkbox" id="hideTitles" name="place.hideTitles" value="1" #if($place.hideTitles==true)checked="checked"#end />:Hide</label>
+			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="place.hideTitles" >
+				<option class="author" value="true" #if(${place.hideTitles}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${place.hideTitles}) selected="selected" #end>No</option>
+			</select></label>
 			<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the place.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
 			<br/>
 			<hr/>
-			<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label><input type="checkbox" id="usAutoAccessibility" name="place.hideTitles" value="1" #if($place.autoAccessibility!=false)checked="checked"#end />:Enable</label>
+			<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label>Enable: <select name="place.autoAccessibility" >
+				<option class="author" value="true" #if(${place.autoAccessibility}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${place.autoAccessibility}) selected="selected" #end>No</option>
+			</select></label>
 			<h6><em>By using the Auto Accessibility feature, a default template is used to display all feilds defined.  You can always use the short codes and disableing this to design your own tab layout.</em></h6>
 			<hr/>
 			<br/>
@@ -443,8 +450,8 @@ $formbuttons <div class="clear"></div>
 		<div id="publicDiv">
 		  <h3 style="display:inline-block;">Public:</h3>
 			<select name="place.isPublic" >
-				<option class="author" value="true" #if(${place.isPublic}!=false) selected="selected" #end>Yes</option>
-				<option class="author" value="false" #if(${place.isPublic} && ${place.isPublic}==false) selected="selected" #end>No</option>
+				<option class="author" value="true" #if(${place.isPublic}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${place.isPublic}) selected="selected" #end>No</option>
 			</select>
 		  <h6><em>Changing this will tell whether or not the public can see this place in a map view <strong>even thou it's published</strong> ie: Internal to WSU only.</em></h6>
 		</div>

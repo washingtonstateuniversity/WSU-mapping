@@ -239,7 +239,7 @@ function openImgResource(ed,uploadOnly){
 																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src','/media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+																		$('#imgPre img').attr('src','media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
 																	   $('#again').live('click',function(e){

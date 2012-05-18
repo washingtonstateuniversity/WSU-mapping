@@ -711,7 +711,7 @@ $(function() {
 
 
    // $(".imagedropDown").change(function (){
-   //      $(".selectedImage",$(this).parent()).attr('src','/media/download.castle?id=' + $(this).val());});	   
+   //      $(".selectedImage",$(this).parent()).attr('src','media/download.castle?id=' + $(this).val());});	   
    //  });
     /* for place listings */
     if($('#clearLock').length==0){$('body').append('<div id="clearLock" title="Clear Place Editing Lock" style="display:none;"><p>Release the Place for editing<br/><strong>Note:</strong>If some one is editing it you may wish to ask to make sure they are done.</p></div>')}
