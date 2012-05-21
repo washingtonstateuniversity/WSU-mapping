@@ -32,11 +32,9 @@
 		 * @param shapeOptions:object
 		 * @return object
 		 */
-		addShape: function(shapeType, shapeOptions) {
+		addShape: function(shapeType, shapeOptions, callback) {
 			var self = this;
 			var flip = typeof(shapeOptions.coordsFlip)!=='undefined' ? shapeOptions.coordsFlip : false;
-
-
 			if(typeof(shapeOptions.paths)!='string' && !$.isArray(shapeOptions.paths) ){
 				var reverse_array = false;
 				var paths_array = [];
@@ -51,6 +49,7 @@
 			
 			var shape = new google.maps[shapeType](jQuery.extend({'map': self.get('map')}, shapeOptions));
 			this.get('overlays > ' + shapeType, []).push(shape);
+			this._call(callback, shape);
 			return $(shape);
 		},
 		
@@ -161,13 +160,45 @@
 			return this.get('overlays > ' + shapeType, []).length;
 		},
 				
-		
-		
-		
+		move_shape: function(shape,latlng, callback){
+			//alert('starting the move');
+			var self = this;
+			
+			var bounds= new google.maps.LatLngBounds();
+			var MVCArray_latLng = shape.getPath().getArray();
+			for (i = 0; i < MVCArray_latLng.length; i++) {
+				bounds.extend(MVCArray_latLng[i]);
+			}
+  
+			var currentCenter = bounds.getCenter();
+			//calculate the offsets 
+			var xoff = Math.abs(latlng.lng() - currentCenter.lng()); 
+			var yoff = Math.abs(latlng.lat() - currentCenter.lat()); 
 
-		
-		
-		
+			if (latlng.lng() < currentCenter.lng()) { xoff *= -1; } 
+			if (latlng.lat() < currentCenter.lat()) { yoff *= -1; } 
+
+			//alert(xoff);
+			//alert(yoff);
+
+			var newPath = [];
+
+			for (var i = 0; i < MVCArray_latLng.length; i++) { 
+				var old = MVCArray_latLng[i];
+				newPath.push(new google.maps.LatLng(( old.lat() + yoff ),( old.lng() + xoff ))); 
+			}
+
+			shape.setPath(newPath);
+			
+			this._call(callback, shape);
+			
+			return $(shape);
+		},	
+		stop_shapeMove: function(polygon){},
+
+		attach_shape_to_marker:function(shape,marker){
+			return this.move_shape(shape,marker.getPosition());
+		},
 		/**
 		 * Adds fusion data to the map.
 		 * @param fusionTableOptions:google.maps.FusionTablesLayerOptions, http://code.google.com/intl/sv-SE/apis/maps/documentation/javascript/reference.html#FusionTablesLayerOptions

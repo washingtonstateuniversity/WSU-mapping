@@ -9397,3 +9397,525 @@ Loading feilds For:Steffen Ctr(175)
 2012-05-18 08:49:25,284 [5] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
 2012-05-18 08:49:25,296 [5] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
 2012-05-18 08:49:25,299 [5] INFO  publicController [(null)] <(null)> - text:<li><strong>Amenities</strong><span>Unisex restrooms (office bldg. and botany greenhouse)</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Magpie Forest Ecological Reserve; Wild Ungulate Facility; Bear Research, Education, and Conservation Program</span></li>        <li><strong>Major Labs/Facilities</strong><span>Endangered Species Lab; Large Carnivore Conservation Lab</span></li>       	    	<li></li>
+2012-05-21 07:16:29,763 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Abelson(2)
+
+2012-05-21 07:16:29,909 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor, west side
+2012-05-21 07:16:29,917 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:16:29,924 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:16:29,932 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 7th floor
+2012-05-21 07:16:29,945 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:16:29,952 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:16:29,960 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:16:29,968 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:16:29,976 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:16:29,984 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:16:29,991 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center
+2012-05-21 07:16:30,000 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]Science
+2012-05-21 07:16:30,008 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:16:30,016 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Conner Museum of Zoology
+2012-05-21 07:16:30,030 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor, west side</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 7th floor</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                    <li><strong>Major Labs/Facilities</strong><span>Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center</span></li>    <li><strong>Student Services &amp; Advising</strong><span>Science</span></li>   	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Conner Museum of Zoology</span></li>	<li></li>
+2012-05-21 07:16:30,087 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Albrook(3)
+
+2012-05-21 07:16:30,100 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:16:30,108 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:16:30,115 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:16:30,121 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom on basement/ground floor
+2012-05-21 07:16:30,128 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:16:30,134 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:16:30,141 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:16:30,147 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:16:30,154 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]Water Research Center
+2012-05-21 07:16:30,162 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:16:30,168 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:16:30,175 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:16:30,181 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]Office of Research Assurances
+2012-05-21 07:16:30,188 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:16:30,191 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Amenities</strong><span>Unisex restroom on basement/ground floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Water Research Center</span></li>               	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Office of Research Assurances</span></li>    	<li></li>
+2012-05-21 07:16:30,201 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Disease Biotech(5)
+
+2012-05-21 07:16:30,216 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:16:30,222 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]Northeast of building
+2012-05-21 07:16:30,229 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]Assisted listening device, room 1002
+2012-05-21 07:16:30,235 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:16:30,241 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:16:30,248 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:16:30,254 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:16:30,262 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:16:30,268 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:16:30,275 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:16:30,281 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:16:30,288 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:16:30,294 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:16:30,300 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:16:30,305 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>Northeast of building</span></li>    <li><strong>ADA Other</strong><span>Assisted listening device, room 1002</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:16:30,314 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Lab(6)
+
+2012-05-21 07:16:30,328 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:16:30,335 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:16:30,341 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:16:30,348 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:16:30,356 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:16:30,363 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:16:30,370 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]Check with Capital Planning or central admin before publishing name & address! Not open to the public.
+2012-05-21 07:16:30,376 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:16:30,383 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:16:30,389 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:16:30,396 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:16:30,403 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:16:30,410 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:16:30,417 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:16:30,422 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>    <li><strong>Notes &amp; Comments</strong><span>Check with Capital Planning or central admin before publishing name & address! Not open to the public.</span></li>                       	    	<li></li>
+2012-05-21 07:16:30,432 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Sci Labs(9)
+
+2012-05-21 07:16:30,446 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:16:30,453 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:16:30,460 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:16:30,466 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 2nd floor
+2012-05-21 07:16:30,473 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:16:30,480 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:16:30,487 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:16:30,494 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:16:30,500 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:16:30,508 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:16:30,515 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:16:30,521 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:16:30,528 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:16:30,534 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:16:30,537 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 2nd floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:17:42,677 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Abelson(2)
+
+2012-05-21 07:17:42,826 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor, west side
+2012-05-21 07:17:42,835 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:17:42,842 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:42,851 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 7th floor
+2012-05-21 07:17:42,859 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:17:42,867 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:42,875 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:42,884 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:42,891 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:42,899 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:42,907 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center
+2012-05-21 07:17:42,916 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]Science
+2012-05-21 07:17:42,924 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:42,932 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Conner Museum of Zoology
+2012-05-21 07:17:42,962 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor, west side</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 7th floor</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                    <li><strong>Major Labs/Facilities</strong><span>Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center</span></li>    <li><strong>Student Services &amp; Advising</strong><span>Science</span></li>   	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Conner Museum of Zoology</span></li>	<li></li>
+2012-05-21 07:17:42,989 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Albrook(3)
+
+2012-05-21 07:17:43,002 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:43,009 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:43,016 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,023 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom on basement/ground floor
+2012-05-21 07:17:43,029 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,036 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,042 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,049 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,056 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]Water Research Center
+2012-05-21 07:17:43,063 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,070 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,076 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,083 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]Office of Research Assurances
+2012-05-21 07:17:43,092 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,095 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>Amenities</strong><span>Unisex restroom on basement/ground floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Water Research Center</span></li>               	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Office of Research Assurances</span></li>    	<li></li>
+2012-05-21 07:17:43,105 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Disease Biotech(5)
+
+2012-05-21 07:17:43,118 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:17:43,125 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]Northeast of building
+2012-05-21 07:17:43,131 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]Assisted listening device, room 1002
+2012-05-21 07:17:43,138 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,144 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:17:43,151 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,158 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,165 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,171 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,178 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,185 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,194 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,201 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,207 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,210 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>Northeast of building</span></li>    <li><strong>ADA Other</strong><span>Assisted listening device, room 1002</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:17:43,220 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Lab(6)
+
+2012-05-21 07:17:43,233 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:43,256 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:43,263 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,270 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,277 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,284 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,290 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]Check with Capital Planning or central admin before publishing name & address! Not open to the public.
+2012-05-21 07:17:43,297 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,304 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,311 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,318 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,324 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,331 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,338 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,341 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>    <li><strong>Notes &amp; Comments</strong><span>Check with Capital Planning or central admin before publishing name & address! Not open to the public.</span></li>                       	    	<li></li>
+2012-05-21 07:17:43,351 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Sci Labs(9)
+
+2012-05-21 07:17:43,365 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:17:43,372 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:17:43,379 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,386 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 2nd floor
+2012-05-21 07:17:43,392 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,399 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,408 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,415 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,421 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,428 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,435 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,442 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,448 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,455 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,487 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 2nd floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:17:43,497 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Avery(12)
+
+2012-05-21 07:17:43,511 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:17:43,518 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:43,525 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,536 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,543 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:17:43,549 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:17:43,556 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,563 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,570 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,577 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,586 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,593 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]Avery Microcomputer Lab (AML)
+2012-05-21 07:17:43,600 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,610 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Bundy Reading Room
+2012-05-21 07:17:43,614 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>                <li><strong>Classrooms</strong><span>yes</span></li>                            <li><strong>Student Services &amp; Advising</strong><span>Avery Microcomputer Lab (AML)</span></li>   	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Bundy Reading Room</span></li>	<li></li>
+2012-05-21 07:17:43,625 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Bear Facility(16)
+
+2012-05-21 07:17:43,640 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:43,647 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]East of building
+2012-05-21 07:17:43,654 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,661 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,668 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,675 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,682 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,693 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,701 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]Center for Bear Research, Education, and Outreach
+2012-05-21 07:17:43,707 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,714 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,721 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,728 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,735 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Short-term public parking for public viewing of bears.
+2012-05-21 07:17:43,741 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Parking</strong><span>East of building</span></li>                <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Center for Bear Research, Education, and Outreach</span></li>               	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Short-term public parking for public viewing of bears.</span></li>	<li></li>
+2012-05-21 07:17:43,752 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Beef Barn(18)
+
+2012-05-21 07:17:43,766 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:43,773 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:43,780 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,787 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,797 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,805 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:17:43,812 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,819 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,826 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,833 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,840 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,849 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,856 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,863 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,867 [20] INFO  publicController [(null)] <(null)> - text:<li></li>
+2012-05-21 07:17:43,877 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Biotech/Life Sci(19)
+
+2012-05-21 07:17:43,893 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:43,900 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:43,907 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:43,914 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:43,921 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:43,929 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:43,936 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:43,943 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:43,950 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:43,957 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:43,964 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:43,971 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:43,978 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:43,986 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:43,995 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:17:44,005 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Bryan(23)
+
+2012-05-21 07:17:44,020 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor (west side); Second floor (east side)
+2012-05-21 07:17:44,027 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:44,035 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor
+2012-05-21 07:17:44,042 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:44,054 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:17:44,062 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:17:44,069 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:44,077 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:44,084 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:44,092 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:44,100 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:44,110 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]International Students and Scholars
+2012-05-21 07:17:44,118 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]Governmental Studies and Services
+2012-05-21 07:17:44,126 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Bryan Hall Auditorium (capacity 778) 
+2012-05-21 07:17:44,131 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor (west side); Second floor (east side)</span></li>        <li><strong>ADA Other</strong><span>Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>                            <li><strong>Student Services &amp; Advising</strong><span>International Students and Scholars</span></li>   	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Governmental Studies and Services</span></li>    <li><strong>Special Facilities &amp; Public Venues</strong><span>Bryan Hall Auditorium (capacity 778)</span></li>	<li></li>
+2012-05-21 07:17:44,142 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Carpenter(26)
+
+2012-05-21 07:17:44,160 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor, south side
+2012-05-21 07:17:44,167 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]Daggy Hall parking garage
+2012-05-21 07:17:44,175 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:44,182 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:44,189 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:17:44,197 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:17:44,204 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:44,213 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]Carpenter Coffee Cart
+2012-05-21 07:17:44,221 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:44,228 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]Architecture Library
+2012-05-21 07:17:44,235 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:44,243 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:44,250 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:44,257 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Architecture exhibition room and architecture gallery
+2012-05-21 07:17:44,261 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor, south side</span></li>    <li><strong>ADA Parking</strong><span>Daggy Hall parking garage</span></li>            <li><strong>Classrooms</strong><span>yes</span></li>            <li><strong>Shopping, Dining, Etc.</strong><span>Carpenter Coffee Cart</span></li>        <li><strong>Libraries</strong><span>Architecture Library</span></li>           	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Architecture exhibition room and architecture gallery</span></li>	<li></li>
+2012-05-21 07:17:44,273 [20] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Carver Farm(27)
+
+2012-05-21 07:17:44,288 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:17:44,295 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:17:44,303 [20] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:17:44,315 [20] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:17:44,324 [20] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:17:44,332 [20] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:17:44,339 [20] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:17:44,347 [20] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:17:44,355 [20] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:17:44,362 [20] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:17:44,373 [20] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:17:44,380 [20] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:17:44,388 [20] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:17:44,395 [20] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:17:44,400 [20] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:22:49,083 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Abelson(2)
+
+2012-05-21 07:22:49,236 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor, west side
+2012-05-21 07:22:49,245 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:22:49,254 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:49,262 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 7th floor
+2012-05-21 07:22:49,271 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:22:49,279 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:49,288 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:49,298 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,312 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:49,321 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,331 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center
+2012-05-21 07:22:49,339 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]Science
+2012-05-21 07:22:49,347 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:49,355 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Conner Museum of Zoology
+2012-05-21 07:22:49,370 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor, west side</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 7th floor</span></li>    <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                    <li><strong>Major Labs/Facilities</strong><span>Aviary; Botanical Greenhouses; Center for Reproductive Biology; Franceschi Microscopy and Imaging Center</span></li>    <li><strong>Student Services &amp; Advising</strong><span>Science</span></li>   	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Conner Museum of Zoology</span></li>	<li></li>
+2012-05-21 07:22:49,398 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Albrook(3)
+
+2012-05-21 07:22:49,414 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:49,422 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:49,431 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:49,438 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom on basement/ground floor
+2012-05-21 07:22:49,445 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:49,452 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:49,460 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:49,467 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,474 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]Water Research Center
+2012-05-21 07:22:49,481 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,487 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:49,498 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:49,506 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]Office of Research Assurances
+2012-05-21 07:22:49,514 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:49,520 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Amenities</strong><span>Unisex restroom on basement/ground floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Water Research Center</span></li>               	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Office of Research Assurances</span></li>    	<li></li>
+2012-05-21 07:22:49,534 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Disease Biotech(5)
+
+2012-05-21 07:22:49,549 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:22:49,556 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]Northeast of building
+2012-05-21 07:22:49,563 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]Assisted listening device, room 1002
+2012-05-21 07:22:49,570 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:49,577 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:22:49,585 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:49,592 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:49,599 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,606 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:49,613 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,620 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:49,630 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:49,637 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:49,644 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:49,647 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>Northeast of building</span></li>    <li><strong>ADA Other</strong><span>Assisted listening device, room 1002</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>    <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:22:49,657 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Lab(6)
+
+2012-05-21 07:22:49,671 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:49,679 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:49,686 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:49,693 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:49,699 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:49,706 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:49,713 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]Check with Capital Planning or central admin before publishing name & address! Not open to the public.
+2012-05-21 07:22:49,720 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,726 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:49,734 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,740 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:49,748 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:49,755 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:49,762 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:49,769 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>    <li><strong>Notes &amp; Comments</strong><span>Check with Capital Planning or central admin before publishing name & address! Not open to the public.</span></li>                       	    	<li></li>
+2012-05-21 07:22:49,779 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Animal Sci Labs(9)
+
+2012-05-21 07:22:49,793 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:22:49,800 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]North of building
+2012-05-21 07:22:49,807 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:49,814 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restroom 2nd floor
+2012-05-21 07:22:49,821 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:49,828 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:49,837 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:49,844 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,851 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:49,858 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,865 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:49,872 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:49,879 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:49,886 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:49,891 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>    <li><strong>ADA Parking</strong><span>North of building</span></li>        <li><strong>Amenities</strong><span>Unisex restroom 2nd floor</span></li>        <li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:22:49,901 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Avery(12)
+
+2012-05-21 07:22:49,916 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor
+2012-05-21 07:22:49,923 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:49,930 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:49,937 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:49,944 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:22:49,952 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:22:49,959 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:49,966 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:49,974 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:49,981 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:49,993 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,001 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]Avery Microcomputer Lab (AML)
+2012-05-21 07:22:50,008 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,015 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Bundy Reading Room
+2012-05-21 07:22:50,018 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor</span></li>                <li><strong>Classrooms</strong><span>yes</span></li>                            <li><strong>Student Services &amp; Advising</strong><span>Avery Microcomputer Lab (AML)</span></li>   	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Bundy Reading Room</span></li>	<li></li>
+2012-05-21 07:22:50,030 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Bear Facility(16)
+
+2012-05-21 07:22:50,046 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:50,053 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]East of building
+2012-05-21 07:22:50,061 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:50,068 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,075 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:50,083 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:50,090 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,097 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:50,105 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]Center for Bear Research, Education, and Outreach
+2012-05-21 07:22:50,112 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:50,120 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,127 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:50,134 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,142 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Short-term public parking for public viewing of bears.
+2012-05-21 07:22:50,167 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Parking</strong><span>East of building</span></li>                <li><strong>Research Labs</strong><span>yes</span></li>            <li><strong>Research Centers</strong><span>Center for Bear Research, Education, and Outreach</span></li>               	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Short-term public parking for public viewing of bears.</span></li>	<li></li>
+2012-05-21 07:22:50,178 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Beef Barn(18)
+
+2012-05-21 07:22:50,192 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:50,200 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:50,207 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:50,214 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,221 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:50,228 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:22:50,236 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,243 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:50,250 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:50,257 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:50,265 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,274 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:50,282 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,289 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:50,292 [19] INFO  publicController [(null)] <(null)> - text:<li></li>
+2012-05-21 07:22:50,302 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Biotech/Life Sci(19)
+
+2012-05-21 07:22:50,316 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:50,323 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:50,331 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:50,338 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,345 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:50,352 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:50,360 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,367 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:50,379 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:50,386 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:50,393 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,400 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:50,408 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,415 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:50,419 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-21 07:22:50,429 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Bryan(23)
+
+2012-05-21 07:22:50,444 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor (west side); Second floor (east side)
+2012-05-21 07:22:50,452 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:50,460 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor
+2012-05-21 07:22:50,467 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,475 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:22:50,482 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:22:50,489 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,497 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:50,504 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:50,512 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:50,520 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,546 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]International Students and Scholars
+2012-05-21 07:22:50,554 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]Governmental Studies and Services
+2012-05-21 07:22:50,562 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Bryan Hall Auditorium (capacity 778) 
+2012-05-21 07:22:50,566 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor (west side); Second floor (east side)</span></li>        <li><strong>ADA Other</strong><span>Accessible restrooms and drinking fountain on 2nd floor; Text telephone on first floor</span></li>        <li><strong>Classrooms</strong><span>yes</span></li>                            <li><strong>Student Services &amp; Advising</strong><span>International Students and Scholars</span></li>   	<li><strong>University Administration &amp; Non-Academic Units</strong><span>Governmental Studies and Services</span></li>    <li><strong>Special Facilities &amp; Public Venues</strong><span>Bryan Hall Auditorium (capacity 778)</span></li>	<li></li>
+2012-05-21 07:22:50,577 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Carpenter(26)
+
+2012-05-21 07:22:50,592 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]First floor, south side
+2012-05-21 07:22:50,600 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]Daggy Hall parking garage
+2012-05-21 07:22:50,608 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:50,615 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,623 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]yes
+2012-05-21 07:22:50,631 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-21 07:22:50,638 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,648 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]Carpenter Coffee Cart
+2012-05-21 07:22:50,656 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:50,663 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]Architecture Library
+2012-05-21 07:22:50,670 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,678 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:50,685 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,693 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]Architecture exhibition room and architecture gallery
+2012-05-21 07:22:50,698 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>ADA Entrance</strong><span>First floor, south side</span></li>    <li><strong>ADA Parking</strong><span>Daggy Hall parking garage</span></li>            <li><strong>Classrooms</strong><span>yes</span></li>            <li><strong>Shopping, Dining, Etc.</strong><span>Carpenter Coffee Cart</span></li>        <li><strong>Libraries</strong><span>Architecture Library</span></li>           	    <li><strong>Special Facilities &amp; Public Venues</strong><span>Architecture exhibition room and architecture gallery</span></li>	<li></li>
+2012-05-21 07:22:50,709 [19] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Carver Farm(27)
+
+2012-05-21 07:22:50,724 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-21 07:22:50,732 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-21 07:22:50,739 [19] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-21 07:22:50,746 [19] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-21 07:22:50,754 [19] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-21 07:22:50,761 [19] INFO  publicController [(null)] <(null)> - hashtable[research_labs]yes
+2012-05-21 07:22:50,768 [19] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-21 07:22:50,776 [19] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-21 07:22:50,784 [19] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-21 07:22:50,824 [19] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-21 07:22:50,832 [19] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-21 07:22:50,840 [19] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-21 07:22:50,848 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-21 07:22:50,856 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-21 07:22:50,860 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>

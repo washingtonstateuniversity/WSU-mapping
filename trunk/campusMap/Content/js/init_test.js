@@ -1,6 +1,6 @@
 var ib = [];
 var markerLog = [];
-
+var shapes = [];
 function resizeBg(obj,height,width) {
 	obj.height($(window).height()-height);
 	if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);

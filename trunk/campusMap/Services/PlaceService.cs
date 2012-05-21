@@ -197,6 +197,13 @@ namespace campusMap.Services
             return advertisements;
 
         }
+
+
+
+
+
+
+
     }
 
 }

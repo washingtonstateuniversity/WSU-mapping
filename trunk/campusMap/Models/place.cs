@@ -371,7 +371,7 @@ namespace campusMap.Models
         }
 
         private IList<geometrics> _geometrics;
-        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<geometrics> geometrics
         {
             get { return _geometrics; }

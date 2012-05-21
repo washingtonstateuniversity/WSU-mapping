@@ -27,6 +27,7 @@ namespace campusMap.Controllers
         protected FieldsService fieldsService = new FieldsService();
         protected StylesService StylesService = new StylesService();
         protected googleService googleService = new googleService();
+        protected geometricService geometricService = new geometricService();
 
         public string Tabs(int n)
         {

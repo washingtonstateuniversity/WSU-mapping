@@ -294,10 +294,10 @@
 			</fieldset>
 			<fieldset><legend>Geometrics</legend>
                 <label for="name">Geometric Object to repersent this place.</label><br/>
-				<select name="place.geometrics">   
+				<select name="place.geometrics[]" id="placeShape">   
 					<option class="geometric" value="" >Select an optional shape.</option> 
 					#foreach($geo in $geometrics)
-						<option class="geometric" value="$geo.id" #if($place.geometrics.id == $geo.id) selected="selected" #end>$!geo.name</option>
+						<option class="geometric" value="$geo.id" #if($place.geometrics.Contains($geo)) selected="selected" #end>$!geo.name</option>
 					#end
 				</select>
             </fieldset>    

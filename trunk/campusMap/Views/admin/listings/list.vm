@@ -37,7 +37,7 @@
 	<div id="_Listing" class="tabedArea tabactive" >
 		<h3>${controller.getView()} List :</h3>
 		<div style="position:relative;" >
-			<div id="${controller.getView()}TypeDiv" style="position: absolute; right:5px; top:5px; z-index: 1; color:#fff;">
+			<div id="${controller.getView()}TypeDiv" style="position: absolute; top: 5px; z-index: 1; line-height: 15px; right: 8px;color:#fff;">
 			
 				<a href="$siteroot/${controller.getView()}/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;">
 				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}

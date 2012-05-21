@@ -3,6 +3,9 @@ var lang='';
 var vbtimer;
 var ibOpen=false;
 var reopen=false;
+
+
+
 /* fix by removing the hardcoded id */
 function detectBrowser() {
 	var useragent = navigator.userAgent;
@@ -645,6 +648,48 @@ function build_infobox(item){
 	return item;
 }
 
+
+function loadPlaceShape(_load,callback){
+	if(typeof(_load)==='undefined') var _load = false;
+	if(typeof(showSum)==='undefined') var showSum = false;
+	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
+	var url=siteroot+"place/loadPlaceShape.castle";
+	$.getJSON(url+'?callback=?'+(_load!=false?'&id='+_load:''), function(data) {
+
+		if(typeof(data.shape)!=='undfined' && !$.isEmptyObject(data.shape)){
+			$.each( data, function(i, shape) {	
+
+			//alert(shape.latlng_str);
+				 var pointHolder = {};
+				 var coord = shape.latlng_str;//(typeof(shape.encoded)!=="undefined"&& shape.encoded!="")?shape.encoded:shape.latlng_str;
+				 var type = "polygon";typeof(shape.type)!=="undefined"?shape.type:"polygon";
+				 //alert(coord);
+				 
+				 
+				 if(coord!='' && shape.type=='polyline'){ 
+					var pointHolder = {'path' : coord };
+				 }
+				  if(coord!='' && shape.type=='polygon'){ 
+					var pointHolder = {'paths' : coord};
+				 }
+				 //alert(shape.type);
+				 if(!$.isEmptyObject(pointHolder)){
+					var ele = $.extend( { 'fillOpacity':.25,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+				 }else{
+					var ele = {};
+				 }
+
+				 $('#place_drawing_map').gmap('addShape',(type[0].toUpperCase() + type.slice(1)), ele,function(shape){
+						 //alert('added shape');
+						shapes.push(shape);
+						if($.isFunction(callback))callback(shape);
+				});
+			});
+		}
+	});
+	
+}
+
 function add_place_point(lat,lng,clear){
 	i=0;
 	var marker = {};
@@ -653,6 +698,7 @@ function add_place_point(lat,lng,clear){
 	marker=$.extend(marker,build_infobox(marker));
 	
 	if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+	
 	$('#place_drawing_map').gmap('addMarker', $.extend({ 
 		'position': (typeof(lat)==='undefined' || lat=='')?$('#place_drawing_map').gmap('get_map_center'):new google.maps.LatLng(lat,lng)
 	},{'draggable':true},marker.style),function(markerOptions, marker){
@@ -660,7 +706,13 @@ function add_place_point(lat,lng,clear){
 				ib[0].open($('#place_drawing_map').gmap('get','map'), marker);
 				reopen = false;
 			}
-		}).click(function() {
+			if($("#placeShape :selected").length && $("#placeShape :selected").val()!=""){
+				shapes=[];
+				loadPlaceShape($("#placeShape :selected").val(),function(shape){
+					$('#place_drawing_map').gmap("attach_shape_to_marker",shapes[0],marker);
+				});
+			}			
+	}).click(function() {
 		var ib_total = 0;
 		//$.each(ib, function(i) {ib[i].close(); ib_total=i; });
 		ib[0].open($('#place_drawing_map').gmap('get','map'), this);
@@ -668,8 +720,12 @@ function add_place_point(lat,lng,clear){
 		// need to finish this class
 		//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
 	}).dragend(function(e) {
-		var lat = this.getPosition().lat();
-		var lng = this.getPosition().lng();
+		var placePos = this.getPosition();
+		var lat = placePos.lat();
+		var lng = placePos.lng();
+		if(shapes.length>0){
+			$('#place_drawing_map').gmap("move_shape",shapes[0],placePos);
+		}
 		$('#Lat').val(lat);
 		$('#Long').val(lng);
 		//setTimeout(function() {},  200);
@@ -929,22 +985,22 @@ function load_place_editor() {
 		$tabs.tabs( "remove", index );
 	});
 
-
-function revGoeLookup(){
-	$("#place_street,#place_address").live('keyup',function () {
-		clearCount('codeAddress');
-		setCount('codeAddress',500,function(){
-			var zip = $('#zcode').length?$('#zcode').text():'';
-			var campus = $('#campus').length?$('#place_campus').val():'';
-			var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
-			if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
-			$('#setLatLong').addClass('ui-state-disabled');
+	
+	function revGoeLookup(){
+		$("#place_street,#place_address").live('keyup',function () {
+			clearCount('codeAddress');
+			setCount('codeAddress',500,function(){
+				var zip = $('#zcode').length?$('#zcode').text():'';
+				var campus = $('#campus').length?$('#place_campus').val():'';
+				var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
+				if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
+				$('#setLatLong').addClass('ui-state-disabled');
+			});
 		});
-	});
-}
-function killRevGoeLookup(){
-	$("#place_street,#place_address").die();
-}
+	}
+	function killRevGoeLookup(){
+		$("#place_street,#place_address").die();
+	}
 
 	if($('#place_street').length>0){
 		$('#revGoeLookup').on('change',function(){
@@ -984,8 +1040,6 @@ function killRevGoeLookup(){
 				e.preventDefault();
 				$('#massTaggingarea').slideToggle();
 			});
-	
-	
 }
 function load_geometrics_editor() {
      $('#geometrics_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {

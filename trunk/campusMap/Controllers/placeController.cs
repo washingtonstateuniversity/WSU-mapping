@@ -711,6 +711,31 @@ namespace campusMap.Controllers
             RenderView("editor_place");
         }
 
+        public void loadPlaceShape(int id,string callback)
+        {
+            CancelLayout();
+            CancelView();
+            String json = "";
+                    json += @"  {
+";
+                    json += @"""shape"":";
+                    // this vodo of the new line is wrong
+                    json += geometricService.getShapeLatLng_json_str(id, true).Replace(@"
+",String.Empty);
+                json += @"
+    }";
+                
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
+        }
+
+
+
+
         /*public String Getlocation()  // this is to be replaced with get cord logic
         {
             String sql = "SELECT DISTINCT s.Location FROM Place AS s WHERE NOT s.Location = 'NULL'";

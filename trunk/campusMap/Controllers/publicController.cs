@@ -281,6 +281,26 @@ using log4net.Config;
             }
 
 
+            public string loadPlaceShape(place place)
+            {
+                IList<geometrics> tmpGeo = place.geometrics;
+                String json = "";
+                json += @"  [";
+                int i=0;
+                foreach (geometrics geo in tmpGeo)
+                {
+                    json += @"{""shape"":";
+                    json += geometricService.getShapeLatLng_json_str(geo.id, false);
+                    json += "}";
+                    if (i < tmpGeo.Count - 1) json += ",";
+                    i++;
+                }
+                if (tmpGeo.Count == 0) json += "{}";
+                json += @"]";
+                
+                return json;
+            }
+            
 
             public void get_place_by_category(string[] cat,string callback)
             {
@@ -517,7 +537,8 @@ using log4net.Config;
                                     ""info"":{
                                             ""content"":" + infotabs + @",
                                             ""title"":""" + item.prime_name + @"""
-                                            }
+                                            },
+                                    ""shapes"":" + loadPlaceShape(item) + @"
                                 }";
                             setJsonCache(cachePath, file, placeList);
                         }
