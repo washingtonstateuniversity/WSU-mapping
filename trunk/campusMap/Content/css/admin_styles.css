@@ -23,18 +23,53 @@ html,body{height:auto;}
     top:30px;
     width: 185px;}
 
-.admin #header_bar{position:fixed;top:0px;left:0px;width: 100%;z-index: 2;}
+.admin #header_bar{width: 100%;z-index: 2;}
 
 .admin #content{
 	position:relative;
-padding-top: 130px;
 z-index:1;
 width: 100%;
 min-width:1026px;
 }
-
-
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
+.admin #adminNav{width: 100%;background: none repeat scroll 0 0 #981E32;height:35px; position: relative;z-index:10;}
+
+
+ul.menu {padding:0; margin:0; list-style:none; position:relative; z-index:500; margin-right:1px; float:left;}
+ul.posLeft {margin-left:10px;}
+ul.menu ul {padding:0; margin:0; list-style:none; position:absolute; left:-9999px; top:35px; width:170px; background:url(../../Content/images/background1.png) no-repeat left bottom; padding:2px 2px 10px 2px;}
+ul.menu a {font:normal 12px arial, sans-serif; color:#fff; text-decoration:none;}
+ul.menu a:hover {color:#000; text-decoration:none;}
+ul.menu li:hover > a {color:#000;}
+
+ul.menu li.liTop {float:left;}
+ul.menu li.close {position:absolute; right:0; top:0; width:30px; height:35px; z-index:-1;}
+ul.menu li.close a {display:block; height:35px; width:30px; background:url(../../Content/images/close_menu.png) no-repeat top right;}
+
+ul.menu li.nosub a {display:block; height:35px; line-height:35px; background:url(../../Content/images/background1.png) no-repeat right top; padding:0 12px 0 0; float:left;}
+ul.menu li.nosub a b {display:block; height:35px; background:url(../../Content/images/background1.png) no-repeat left top; padding:0 0 0 12px; cursor:pointer; float:left;}
+ul.menu li.liTop a.open {display:block; height:100%; line-height:35px; background:#981E32 url(../../Content/images/down.png) no-repeat right top; padding:0 30px 0 0; float:left;}
+ul.menu li.liTop:hover a.open {background:#981E32 url(../../Content/images/down_hover.png) no-repeat right top;}
+ul.menu li.liTop a.open b {display:block; background:url(../../Content/images/background1.png) no-repeat left top; padding:0 0 0 12px; cursor:pointer}
+
+ul.menu ul li a {display:block; padding:2px 10px; height:auto; line-height:16px;}
+ul.menu ul li a:hover {background:#fffffe;}
+
+ul.menu li.liTop:hover {position:relative; height:35px;}
+ul.menu li.liTop:hover ul {left:0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -139,7 +174,7 @@ table.ui-widget tbody tr.odd td{}
 .w50{width:50px !important;}
 
 .push_hide,.nonEdit{position:absolute;top:-9999px;left:-9999px;}
-#content_area{min-height:500px;padding:0 0 0 185px;}
+#content_area{min-height:500px;padding:0 5px;}
 .admin #content_tar{padding: 0 0 0 10px;}
 .central #content_tar{padding:0px;}
 .home #content_tar{padding:0px;}

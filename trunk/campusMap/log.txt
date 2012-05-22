@@ -9919,3 +9919,11 @@ Loading feilds For:Carver Farm(27)
 2012-05-21 07:22:50,848 [19] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
 2012-05-21 07:22:50,856 [19] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
 2012-05-21 07:22:50,860 [19] INFO  publicController [(null)] <(null)> - text:<li><strong>Research Labs</strong><span>yes</span></li>                           	    	<li></li>
+2012-05-22 10:40:19,783 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\180.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\180.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 320

@@ -3,16 +3,24 @@
 <head>
 	#* all the JS and CSS that is site wide *#
 	#parse("admin/global_header_html.vm")
+	
+	
+
+<style media="only screen and (max-device-width:768px)" type="text/css">
+/* for iPhone, iPod Touch and iPad */
+ul.menu li.liTop:hover + li.close {z-index:10;}
+</style>
+	
+	
 </head>
 <body id='wsu_ui' class="admin ${controller.getView()} ${controller.getAction()}">
 	<div id = "wrapper">
 		<div id="header_bar">
 			#parse("admin/header_html.vm")
 		</div>
-		<div id="nav">
-			<div id="featured"></div>
-			#parse("admin/main_menu.vm")
-		</div>
+		
+		#parse("admin/main_menu.vm")
+		
 		<div id="content">
 			<div id="main">
 				<div id="content_area"><div id="content_tar">$childContent</div></div> 
