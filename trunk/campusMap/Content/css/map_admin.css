@@ -255,7 +255,11 @@
 .contextmenu div{
     padding-left: 5px
     }
-
+.contextmenu #to{}
+.contextmenu #from{}
+.contextmenu a{display:block; cursor:pointer; color:#5e6a71;}
+.contextmenu a:hover{color:#1f4799;}
+.contextmenu a.active{display:none;}
 
 
 

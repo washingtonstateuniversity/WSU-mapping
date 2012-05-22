@@ -205,17 +205,25 @@ function showContextMenu(caurrentLatLng  ) {
 	$(map.getDiv()).append(contextmenuDir);
 	setMenuXY(caurrentLatLng);
 	contextmenuDir.style.visibility = "visible";
-	hereToThere()
+	
+	
+
+	if(cTo!==null){$('.contextmenu #to').addClass('active');}
+	if(cFrom!==null){$('.contextmenu #from').addClass('active');}
 	$('.contextmenu #to').live('click',function(){
-		cTo='46.73191920826778,-117.15296745300293';
+		cTo=caurrentLatLng.lat()+","+caurrentLatLng.lng();
+		alert(cTo);
 		$(this).addClass('active');
 		 hereToThere();
-		});
+		 hideContextMenu();
+	});
 	$('.contextmenu #from').live('click',function(){
-		cFrom='46.73191920826778,-117.15296745300293';
+		cFrom=caurrentLatLng.lat()+","+caurrentLatLng.lng();
+		alert(cFrom);
 		$(this).addClass('active');
 		 hereToThere();
-		});
+		 hideContextMenu();
+	});
 	
 }
 function hideContextMenu() {
