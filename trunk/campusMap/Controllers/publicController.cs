@@ -280,6 +280,13 @@ using log4net.Config;
                 System.IO.File.WriteAllText(uploadPath + file, blob);
             }
 
+            public place[] searchAndAddResultsToHashtable(String hql, String searchterm)
+            {
+                SimpleQuery<place> query = new SimpleQuery<place>(typeof(place), hql);
+                query.SetParameter("searchterm", "%" + searchterm + "%");
+                return query.Execute();                
+            }
+
             public void keywordAutoComplete(string name_startsWith, string callback)
             {
                 CancelView();
@@ -287,60 +294,80 @@ using log4net.Config;
 
                 String term = name_startsWith.Trim();
 
+                // Use hashtable to store name/value pairs
+                Hashtable results = new Hashtable();
 
-                /* this seems like a very hacky way.. come on.. think boy think... */
-
-                String sql = "SELECT DISTINCT s.name FROM tags AS s WHERE NOT s.name = 'NULL'";
-                if (String.IsNullOrEmpty(term))
+                // Trying a different Query method
+                // Here was the all inclusive query (not used for now except for reference)
+                String overallsqlstring = @"from place p where 
+                   p.abbrev_name LIKE :searchterm 
+                or p.prime_name like :searchterm
+                or (p in (select p from p.tags as t where t.name like :searchterm)) 
+                or (p in (select p from p.names as n where n.name like :searchterm))
+                ";
+                // Search place abbrev
+                String searchabbrev = @"from place p where 
+                   p.abbrev_name LIKE :searchterm 
+                ";
+                foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
                 {
-                    sql += " AND s.name LIKE  '%" + term + "%'";
+                    results[place.abbrev_name] = place.id;
                 }
-                SimpleQuery<String> q = new SimpleQuery<String>(typeof(tags), sql);
-                Array labels = q.Execute();
-
-                String psql = "SELECT DISTINCT s.prime_name FROM place AS s WHERE NOT s.prime_name = 'NULL'";
-                if (String.IsNullOrEmpty(term))
+                // Search place prime name
+                String searchprime_name = @"from place p where 
+                   p.prime_name LIKE :searchterm 
+                ";
+                foreach (place place in searchAndAddResultsToHashtable(searchprime_name, term))
                 {
-                    psql += " AND s.prime_name LIKE  '%" + term + "%'";
+                    results[place.prime_name] = place.id;
                 }
-                SimpleQuery<String> pq = new SimpleQuery<String>(typeof(place), psql);
-                Array plabels = pq.Execute();
-                plabels.CopyTo(labels, 0);
-
-
-                String asql = "SELECT DISTINCT s.abbrev_name FROM place AS s WHERE NOT s.abbrev_name = 'NULL'";
-                if (String.IsNullOrEmpty(term))
+                // Search tags
+                String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
+                if (!String.IsNullOrEmpty(term))
                 {
-                    asql += " AND s.abbrev_name LIKE  '%" + term + "%'";
+                    sql += " AND t.name LIKE  '%" + term + "%'";
                 }
-                SimpleQuery<String> aq = new SimpleQuery<String>(typeof(place), asql);
-                Array alabels = aq.Execute();
-                alabels.CopyTo(labels, 0);
-
-
-                String nsql = "SELECT DISTINCT s.name FROM place_names AS s WHERE NOT s.name = 'NULL'";
-                if (String.IsNullOrEmpty(term))
+                SimpleQuery<tags> q = new SimpleQuery<tags>(typeof(tags), sql);
+                tags[] tags = q.Execute();
+                // Loop through the tags' places
+                foreach (tags tag in tags)
                 {
-                    nsql += " AND s.name LIKE  '%" + term + "%'";
+                    String ids = "";
+                    foreach (place place in tag.places)
+                    {
+                        if (String.IsNullOrEmpty(ids))
+                            ids = place.id.ToString();
+                        else
+                            ids += "," + place.id.ToString();
+                    }
+                    results[tag.name] = ids;
                 }
-                SimpleQuery<String> nq = new SimpleQuery<String>(typeof(place_names), nsql);
-                Array nlabels = nq.Execute();
-                nlabels.CopyTo(labels, 0);
-                
+                // Search place names
+                String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
+                if (!String.IsNullOrEmpty(term))
+                {
+                    nsql += " AND pn.name LIKE  '%" + term + "%'";
+                }
+                SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
+                place_names[] placenames = nq.Execute();
+                // Loop through the place names
+                foreach (place_names placename in placenames)
+                {
+                    results[placename.name] = placename.id;
+                }
 
                 /* end of this hacky thing.. now you need to return a place id tied so un hack it */
-
                 String labelsList = "";
-                foreach (String s in labels)
+                foreach (String key in results.Keys)
                 {
                     labelsList += @"{";
-                    labelsList += @"""label"":""" + s.ToString() + @""",";
-                    labelsList += @"""value"":""" + s.ToString() + @""",";
-                    labelsList += @"""id"":""" + s.ToString() + @"""";
+                    labelsList += @"""label"":""" + key + @""",";
+                    labelsList += @"""value"":""" + key + @""",";
+                    labelsList += @"""id"":""" + results[key] + @"""";
                     labelsList += @"},";
                 }
-                String json = "[" + labelsList.TrimEnd(',') + "]";
 
+                String json = "[" + labelsList.TrimEnd(',') + "]";
 
                 if (!string.IsNullOrEmpty(callback))
                 {
