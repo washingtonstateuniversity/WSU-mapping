@@ -175,7 +175,7 @@ namespace campusMap.Controllers
                 {
                     if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
-                        //makePlaceStaticMap(item);
+                        makePlaceStaticMap(item);
                     }
                 }
                 PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, publishedPaging);
@@ -199,7 +199,7 @@ namespace campusMap.Controllers
                 {
                     if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
-                        //makePlaceStaticMap(item);
+                        makePlaceStaticMap(item);
                     }
                 }
                 PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, reviewPaging);
@@ -219,7 +219,7 @@ namespace campusMap.Controllers
                 {
                     if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
                     {
-                       // makePlaceStaticMap(item);
+                        makePlaceStaticMap(item);
                     }
                 }
                 PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, draftPaging);
@@ -1176,9 +1176,9 @@ namespace campusMap.Controllers
             }*/
 
             ActiveRecordMediator<place>.Save(place);
-            if (place.coordinate != null && isLocal())
+            if (place.coordinate != null)
             {
-                //makePlaceStaticMap(place);
+                makePlaceStaticMap(place);
             }
 
 
