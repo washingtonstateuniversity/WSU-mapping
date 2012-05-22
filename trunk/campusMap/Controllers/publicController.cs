@@ -280,36 +280,64 @@ using log4net.Config;
                 System.IO.File.WriteAllText(uploadPath + file, blob);
             }
 
-            public void keywordAutoComplete(string term, string callback)
+            public void keywordAutoComplete(string name_startsWith, string callback)
             {
                 CancelView();
                 CancelLayout();
+
+                String term = name_startsWith.Trim();
+
+
+                /* this seems like a very hacky way.. come on.. think boy think... */
 
                 String sql = "SELECT DISTINCT s.name FROM tags AS s WHERE NOT s.name = 'NULL'";
                 if (String.IsNullOrEmpty(term))
                 {
                     sql += " AND s.name LIKE  '%" + term + "%'";
                 }
-
-                SimpleQuery<String> q = new SimpleQuery<String>(typeof(place), sql);
+                SimpleQuery<String> q = new SimpleQuery<String>(typeof(tags), sql);
                 Array labels = q.Execute();
 
                 String psql = "SELECT DISTINCT s.prime_name FROM place AS s WHERE NOT s.prime_name = 'NULL'";
                 if (String.IsNullOrEmpty(term))
                 {
                     psql += " AND s.prime_name LIKE  '%" + term + "%'";
-                    psql += " OR s.abbrev_name LIKE  '%" + term + "%'";
                 }
-
                 SimpleQuery<String> pq = new SimpleQuery<String>(typeof(place), psql);
                 Array plabels = pq.Execute();
                 plabels.CopyTo(labels, 0);
 
+
+                String asql = "SELECT DISTINCT s.abbrev_name FROM place AS s WHERE NOT s.abbrev_name = 'NULL'";
+                if (String.IsNullOrEmpty(term))
+                {
+                    asql += " AND s.abbrev_name LIKE  '%" + term + "%'";
+                }
+                SimpleQuery<String> aq = new SimpleQuery<String>(typeof(place), asql);
+                Array alabels = aq.Execute();
+                alabels.CopyTo(labels, 0);
+
+
+                String nsql = "SELECT DISTINCT s.name FROM place_names AS s WHERE NOT s.name = 'NULL'";
+                if (String.IsNullOrEmpty(term))
+                {
+                    nsql += " AND s.name LIKE  '%" + term + "%'";
+                }
+                SimpleQuery<String> nq = new SimpleQuery<String>(typeof(place_names), nsql);
+                Array nlabels = nq.Execute();
+                nlabels.CopyTo(labels, 0);
+                
+
+                /* end of this hacky thing.. now you need to return a place id tied so un hack it */
+
                 String labelsList = "";
                 foreach (String s in labels)
                 {
-                    labelsList += @"{""label"":""" + s.ToString() + @""",";
-                    labelsList += @"""value"":""" + s.ToString() + @"""},";
+                    labelsList += @"{";
+                    labelsList += @"""label"":""" + s.ToString() + @""",";
+                    labelsList += @"""value"":""" + s.ToString() + @""",";
+                    labelsList += @"""id"":""" + s.ToString() + @"""";
+                    labelsList += @"},";
                 }
                 String json = "[" + labelsList.TrimEnd(',') + "]";
 
@@ -320,9 +348,6 @@ using log4net.Config;
                 }
                 Response.ContentType = "application/json; charset=UTF-8";
                 RenderText(json);
-
-
-
             }
             public string loadPlaceShape(place place)
             {
@@ -376,15 +401,14 @@ using log4net.Config;
 
             public void get_place_by_keyword(string[] str, string callback)
             {
-
                 CancelView();
                 CancelLayout();
 
                 String sql = "from place p where ";
                 int id = 1;
-                foreach (string category in str)
+                foreach (string name in str)
                 {
-                    sql += " :p" + id + " in elements(p.categories) ";
+                    sql += " :p" + id + " in elements(p.tags) ";
                     id = id + 1;
                     sql += " or ";
                 }
@@ -394,7 +418,7 @@ using log4net.Config;
                 foreach (string category in str)
                 {
                     string cats = HttpUtility.UrlDecode(category);
-                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                    IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
                     q.SetParameter("p" + id, c[0]);
                     id = id + 1;
                 }
@@ -408,73 +432,6 @@ using log4net.Config;
 
             public void sendPlaceJson(place[] items, string callback)
             {
-
-                // THIS REALLY SHOULD BE A TEMPLATE WITH SOME TEMP LEVEL LOGIC TO TEST OF BLANKS
-                String defaultAccessibility = @"<ul>
-    <li><strong>ADA Entrance</strong>:$!{ada_entrance}</li>
-    <li><strong>ADA Parking</strong>:$!{ada_parking}</li>
-    <li><strong>ADA Other</strong>:$!{ada_other}</li>
-    <li><strong>Amenities</strong>:$!{amenities}</li>
-    <li><strong>Classrooms</strong>:$!{classroom}</li>
-    <li><strong>Research Labs</strong>:$!{research_labs}</li>
-    <li><strong>Notes &amp; Comments</strong>:$!{notes_comments}</li>
-    <li><strong>Shopping, Dining, Etc.</strong>:$!{shopping_dining_etc}</li>
-    <li><strong>Research Centers</strong>:$!{research_centers}</li>
-    <li><strong>Libraries</strong>:$!{libraries}</li>
-    <li><strong>Major Labs/Facilities</strong>:$!{major_labs_facilities}</li>
-    <li><strong>Student Services &amp; Advising</strong>:$!{student_services_advising}</li>
-    <li><strong>University Administration &amp; Non-Academic Units</strong>:$!{university_administration_non_academic_units}</li>
-    <li><strong>Special Facilities &amp; Public Venues</strong>:$!{special_facilities_public_venues}</li>
-</ul>";
-
-
-
-
-/* SAMPLE -- TOO REMOVE
-{
-
-	"mapOptions":{
-					"center":"46.73191920826778,-117.15296745300293",
-					"zoom":15
-				},
-	"markers":[
-
-		{
-			"position":{
-						"latitude":"46.73041903634809",
-						"longitude":"-117.15635776519775"
-						},
-			"style":{
-					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
-					},
-			"info":{
-					"content":[
-							{"block":"<h2 class='header'>The CUB - Compton Union Building</h2><span class='headImage'><img src='http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/samples/in_info_head_image.jpg' /></span><p>Whether you need food, games, a place to study, meeting space, catering service, a wireless internet connection, or just a friendly place to hang out, the CUB has something for you.</p><p> A complete remodel in 2008 made the CUB a LEED-certified \"green\" building and built new features that connect it even more closely to campus life. A hallway connects the ground floor directly to Terrell Library, and a movable wall of windows lets the first-floor frontage open directly onto Terrell Mall for fresh air and a seamless indoor/outdoor transition. cub.wsu.edu<p>"},
-							{"block":"<h2 class='header'>The CUB - Compton Union Building</h2><h3>Shopping and services</h3><ul><li>ATMs</li><li>Bookie (Bookstore)</li><li>CougarCard Center</li><li>Cougar Copies</li><li>Cougar Express Mail</li><li>Meeting and event facilities</li><li>Redbox</li><li>US Bank</li><li>WSECU</li></ul><h3>Dining</h3><ul><li>Bookie Market & Café</li><li>Carlita's</li><li>Dupus Boomer's</li><li>Freshëns</li><li>Markel Coffee House</li><li>Panda Express</li><li>Sea Swiper</li><li>Subway</li><li>Villa Fresh Italian Kitchen</li></ul>"}
-							]
-					,
-					"title":"Hello World!"
-					}
-
-		},
-		{
-			"position":{
-						"latitude":"46.7279260113145",
-						"longitude":"-117.15891122818"
-						},
-			"style":{
-					"icon":"http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/default_icon_{$i}.png"
-					},
-			"info":{
-					"content":"testafy to the html",
-					"title":"Hello World!"
-					}
-
-		}
-		]
-}
- */
-
                 String cachePath = Context.ApplicationPhysicalPath;
                 if (!cachePath.EndsWith("\\"))
                     cachePath += "\\";
@@ -643,7 +600,6 @@ using log4net.Config;
                 }
                 Response.ContentType = "application/json; charset=UTF-8";
                 RenderText(json);
-                //RenderView("layouts/assets_central/main_menu");
             }
 
 

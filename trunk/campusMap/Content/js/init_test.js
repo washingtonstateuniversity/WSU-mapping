@@ -430,18 +430,10 @@ $(document).ready(function(){
 		
 		
 		var termTemplate = "<strong>%s</strong>";
-		var cache = {},
-			lastXhr;
 		$( "#placeSearch [type=text]" ).autocomplete({
 			source: function( request, response ) {
-			var term = request.term;
-				if ( term in cache ) {
-					response( cache[ term ] );
-					return;
-				}
-
 				var term = request.term;
-				lastXhr = $.ajax({
+				$.ajax({
 					url: siteroot+"public/keywordAutoComplete.castle",
 					dataType: "jsonp",
 					data: {
@@ -453,19 +445,16 @@ $(document).ready(function(){
 					success: function( data, status, xhr  ) {
 
 						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-						cache[ term ] = data;
-						if ( xhr === lastXhr ) {
-							response( $.map( data, function( item ) {
-								var text = item.label;
-								if ( item.value && ( !request.term || matcher.test(text) ) ){
-									return {
-										label: item.label,
-										value: item.value
-									}
+						response( $.map( data, function( item ) {
+							var text = item.label;
+							if ( item.value && ( !request.term || matcher.test(text) ) ){
+								return {
+									label: item.label,
+									value: item.value
 								}
-							
-							}));
-						}
+							}
+						
+						}));
 						/*var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 						response( $.map(data, function(item) {
 							var text = item.label;
