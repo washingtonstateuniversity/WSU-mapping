@@ -326,8 +326,8 @@ create table authors (
    primary key (author_id)
 )
 create table authors_to_geometrics (
-  geometric_id INT not null,
-   author_id INT not null
+  author_id INT not null,
+   geometric_id INT not null
 )
 create table media_repo (
   media_id INT IDENTITY NOT NULL,
@@ -459,8 +459,8 @@ create table logs (
    primary key (Id)
 )
 create table advertisement_to_media (
-  media_id INT not null,
-   ad_id INT not null
+  ad_id INT not null,
+   media_id INT not null
 )
 create table geometric_events (
   geometric_event_id INT IDENTITY NOT NULL,

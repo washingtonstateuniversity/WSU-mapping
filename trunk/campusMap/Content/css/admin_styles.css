@@ -417,8 +417,8 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.place.editor_place #campusmap.fixed{position:fixed;top:135px;right:15px;}
-
+.place.editor_place #campusmap.fixed{position:fixed;top:45px;right:15px;}
+.place.editor_place #campusmap.fixed_min{position:fixed;top:45px;left:615px;}
 .place.editor_place .ui-tabs-panel{margin-right:460px; min-height:535px;}
 
 .place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}

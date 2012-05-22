@@ -25,8 +25,11 @@ function iniMap(url,callback){
 		}
 		
 		map_op = $.extend(map_op,{"mapTypeControl":false});
-
 		$('#centralMap').gmap(map_op).bind('init', function() { 
+			var map = $('#centralMap').gmap("get","map");
+			google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
+			google.maps.event.addListener(map, "click",function(event){ hideContextMenu() });
+			google.maps.event.addListener(map, "drag",function(event){ hideContextMenu() });
 			addCentralControlls();
 			loadData(data);
 			callback();
@@ -140,6 +143,84 @@ function addCentralControlls(){
 }
 
 
+var cTo;
+var cFrom;
+
+function hereToThere(){
+	if(cTo || cFrom)return false
+
+	$('#centralMap').gmap('displayDirections',
+		{origin:cFrom,destination:cTo,travelMode: google.maps.DirectionsTravelMode.WALKING},
+		{draggable: true},
+		function(){
+			$('.contextmenu .active').removeClass('active');
+			cFrom=null;
+			cTo=null;
+			$('#loading').remove();
+	});
+}
+
+function showContextMenu(caurrentLatLng  ) {
+	/* this need to be abstracked out into the jMap plugin */
+	function setMenuXY(caurrentLatLng){
+		function getCanvasXY(caurrentLatLng){
+			var map = $('#centralMap').gmap("get","map");
+			var scale = Math.pow(2, map.getZoom());
+			var nw = new google.maps.LatLng(
+				map.getBounds().getNorthEast().lat(),
+				map.getBounds().getSouthWest().lng()
+			);
+			var worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw);
+			var worldCoordinate = map.getProjection().fromLatLngToPoint(caurrentLatLng);
+			var caurrentLatLngOffset = new google.maps.Point(
+				Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale),
+				Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
+			);
+			return caurrentLatLngOffset;
+		}
+		var mapWidth = $('#centralMap').width();
+		var mapHeight = $('#centralMap').height();
+		var menuWidth = $('.contextmenu').width();
+		var menuHeight = $('.contextmenu').height();
+		var clickedPosition = getCanvasXY(caurrentLatLng);
+		var x = clickedPosition.x ;
+		var y = clickedPosition.y ;
+		
+		if((mapWidth - x ) < menuWidth)
+			x = x - menuWidth;
+		if((mapHeight - y ) < menuHeight)
+			y = y - menuHeight;
+		
+		$('.contextmenu').css('left',x  );
+		$('.contextmenu').css('top',y );
+	};
+	var map = $('#centralMap').gmap("get","map");
+	var projection;
+	var contextmenuDir;
+	projection = map.getProjection();
+	hideContextMenu();
+	contextmenuDir = document.createElement("div");
+	contextmenuDir.className  = 'contextmenu';
+	contextmenuDir.innerHTML = '<a id="to">Directions TO</a><a id="menu2">Directions FROM</a>';
+	$(map.getDiv()).append(contextmenuDir);
+	setMenuXY(caurrentLatLng);
+	contextmenuDir.style.visibility = "visible";
+	hereToThere()
+	$('.contextmenu #to').live('click',function(){
+		cTo='46.73191920826778,-117.15296745300293';
+		$(this).addClass('active');
+		 hereToThere();
+		});
+	$('.contextmenu #from').live('click',function(){
+		cFrom='46.73191920826778,-117.15296745300293';
+		$(this).addClass('active');
+		 hereToThere();
+		});
+	
+}
+function hideContextMenu() {
+	$('.contextmenu').remove();
+}
 
 function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
@@ -275,7 +356,7 @@ function loadData(data){
 			
 	
 			//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-		});
+		}).rightclick(function(event){showContextMenu(event.latLng);});
 	});
 }
 function loadListings(data,showSum){
@@ -443,7 +524,6 @@ $(document).ready(function(){
 						name_startsWith: request.term
 					},
 					success: function( data, status, xhr  ) {
-
 						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 						response( $.map( data, function( item ) {
 							var text = item.label;
@@ -455,24 +535,6 @@ $(document).ready(function(){
 							}
 						
 						}));
-						/*var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-						response( $.map(data, function(item) {
-							var text = item.label;
-							if ( item.value && ( !request.term || matcher.test(text) ) )
-							
-							 var label=text.replace(
-										new RegExp(
-											"(?![^&;]+;)(?!<[^<>]*)(" +
-											$.ui.autocomplete.escapeRegex(request.term) +
-											")(?![^<>]*>)(?![^&;]+;)", "gi"
-										), "<b>$1</b>" )
-							
-							
-								return {
-									label:label ,
-									value: item.value
-								};
-						}) );*/
 					}
 				});
 			},
@@ -482,28 +544,21 @@ $(document).ready(function(){
 			},
 			open: function(e,ui) {
 				$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
-            var
-                acData = $(this).data('autocomplete'),
-                styledTerm = termTemplate.replace('%s', acData.term);
-
-            acData
-                .menu
-                .element
-                .find('li')
-                .each(function() {
-                    var me = $(this);
-                    me.html( me.text().replace(acData.term, styledTerm) );
-                });
-        }
-
-			
+				var
+					acData = $(this).data('autocomplete'),
+					styledTerm = termTemplate.replace('%s', acData.term);
+	
+				acData
+					.menu
+					.element
+					.find('li')
+					.each(function() {
+						var me = $(this);
+						me.html( me.text().replace(acData.term, styledTerm) );
+					});
+       		 }
 		});
-
-		
-		
-		
-		
-		
+	
 	}	
 	if($('#geometrics_drawing_map').length){
 		load_geometrics_editor();

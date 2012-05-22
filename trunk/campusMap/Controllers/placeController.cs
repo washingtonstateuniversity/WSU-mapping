@@ -120,12 +120,9 @@ namespace campusMap.Controllers
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
                if (searchId > 0)
                 {
-                    categories[] array1 = new categories[1];
-                    array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
+                    //categories[] array1 = new categories[1];
+                    //array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
                     //baseEx.Add(Expression.In("categories", array1));
-
-
-
 
                     IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
                     object[] obj = new object[cats.Count];

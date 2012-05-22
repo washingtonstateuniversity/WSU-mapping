@@ -1012,11 +1012,12 @@ function load_place_editor() {
 		});
 	}
 	tinyResize();
-	if ($(window).scrollTop()>= 61) { $('#campusmap').addClass('fixed'); }
+	if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
 	$(window).scroll(function (event) {
-		if ($(this).scrollTop()>= 61) {      
-			$('#campusmap').addClass('fixed');    
-		} else {       
+		if ($(this).scrollTop()>= 175) {     
+			if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');}
+		} else { 
+			$('#campusmap').removeClass('fixed_min');       
 			$('#campusmap').removeClass('fixed');   
 		}  
 	});
