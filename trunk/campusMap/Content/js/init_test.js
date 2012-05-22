@@ -427,6 +427,94 @@ $(document).ready(function(){
 			});
 			updateMap(encodeURI(params.substring(0, params.length - 1)),true);
 		});
+		
+		
+		var termTemplate = "<strong>%s</strong>";
+		var cache = {},
+			lastXhr;
+		$( "#placeSearch [type=text]" ).autocomplete({
+			source: function( request, response ) {
+			var term = request.term;
+				if ( term in cache ) {
+					response( cache[ term ] );
+					return;
+				}
+
+				var term = request.term;
+				lastXhr = $.ajax({
+					url: siteroot+"public/keywordAutoComplete.castle",
+					dataType: "jsonp",
+					data: {
+						featureClass: "P",
+						style: "full",
+						maxRows: 12,
+						name_startsWith: request.term
+					},
+					success: function( data, status, xhr  ) {
+
+						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+						cache[ term ] = data;
+						if ( xhr === lastXhr ) {
+							response( $.map( data, function( item ) {
+								var text = item.label;
+								if ( item.value && ( !request.term || matcher.test(text) ) ){
+									return {
+										label: item.label,
+										value: item.value
+									}
+								}
+							
+							}));
+						}
+						/*var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+						response( $.map(data, function(item) {
+							var text = item.label;
+							if ( item.value && ( !request.term || matcher.test(text) ) )
+							
+							 var label=text.replace(
+										new RegExp(
+											"(?![^&;]+;)(?!<[^<>]*)(" +
+											$.ui.autocomplete.escapeRegex(request.term) +
+											")(?![^<>]*>)(?![^&;]+;)", "gi"
+										), "<b>$1</b>" )
+							
+							
+								return {
+									label:label ,
+									value: item.value
+								};
+						}) );*/
+					}
+				});
+			},
+			minLength: 2,
+			select: function( event, ui ) {
+				
+			},
+			open: function(e,ui) {
+				$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
+            var
+                acData = $(this).data('autocomplete'),
+                styledTerm = termTemplate.replace('%s', acData.term);
+
+            acData
+                .menu
+                .element
+                .find('li')
+                .each(function() {
+                    var me = $(this);
+                    me.html( me.text().replace(acData.term, styledTerm) );
+                });
+        }
+
+			
+		});
+
+		
+		
+		
+		
+		
 	}	
 	if($('#geometrics_drawing_map').length){
 		load_geometrics_editor();

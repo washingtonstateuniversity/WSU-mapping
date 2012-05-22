@@ -212,12 +212,22 @@
 #toolbar ul li{ display: block;float: left;line-height: 15px;}
 #toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
 
-#placeSearch{height:23px; position:relative;width:147px;}
+#placeSearch{height:23px; position:relative;width:147px;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent;}
 #placeSearch input{color:#1f4799;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; font-size:12px; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
 #placeSearch input[type=text]{left:0px;padding-left: 5px;}
 #placeSearch input:focus{ background-position:left bottom;}
 #placeSearch .submit{background-position:right top;width:22px;font-size:0px;overflow:hidden; border:none;padding: 0; cursor:pointer;right:0px;}
 #placeSearch .submit:focus,#placeSearch .submit:hover{background-position:right bottom;}
+
+#campusmap .ui-autocomplete.ui-menu {max-height:285px;overflow-y: auto;overflow-x: hidden;padding-left:5px;padding-right: 20px;width:120px;border:1px solid #b6bcbf;}
+
+#campusmap .ui-autocomplete-loading { background: url("../../Content/images/ui-anim_basic_16x16.gif") no-repeat scroll right center transparent !important; }
+* html .ui-autocomplete {height: 285px;}
+#campusmap .ui-autocomplete.ui-menu .ui-menu-item{font-size:10.5px;color:#788790;margin:5px 0 4px;}
+#campusmap .ui-autocomplete.ui-menu:hover  .ui-menu-item{color:#5e6a71;}
+#campusmap .ui-autocomplete.ui-menu .ui-menu-item:hover{color:#981e32;}
+
+
 
 #getDirections{}
 #directionsFrom input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;

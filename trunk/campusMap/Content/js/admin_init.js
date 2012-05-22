@@ -177,6 +177,24 @@ function addToggle(){
 function removeToggle(){
 	$('.imageBox').unbind('mouseenter mouseleave'); 
 }
+function addLiveActionAnimation(){
+    if($( ".buttons" ).length > 0){
+        $( ".buttons" ).button({text:false});
+    }
+	$('div.actionCol a').hover(
+		function(){
+			$(this).find('.actionText').stop().animate({width: '100%'}, 500, function() {});
+			$(this).stop().animate({width:85}, 500, function() {});
+			$(this).find('.actionpropt').stop().animate({width: 0}, 250, function() {});
+		},
+		function(){
+			$(this).find('.actionText').stop().animate({width: 0}, 250, function() {});
+			$(this).stop().animate({width:37}, 250, function() {});
+			$(this).find('.actionpropt').stop().animate({width: 10}, 250, function() {});
+		}
+	);	
+	
+}
 $(function() {
 	
 	$('.endcap').dblclick(function(){
@@ -192,18 +210,7 @@ $(function() {
 		$('.imgInfo').slideToggle();
 	$('.DeleteImage').fadeToggle();	
 	addToggle();
-	$('div.actionCol a').hover(
-		function(){
-			$(this).find('.actionText').stop().animate({width: '100%'}, 500, function() {});
-			$(this).stop().animate({width:85}, 500, function() {});
-			$(this).find('.actionpropt').stop().animate({width: 0}, 250, function() {});
-		},
-		function(){
-			$(this).find('.actionText').stop().animate({width: 0}, 250, function() {});
-			$(this).stop().animate({width:37}, 250, function() {});
-			$(this).find('.actionpropt').stop().animate({width: 10}, 250, function() {});
-		}
-	);
+	addLiveActionAnimation();
 	if($(".lazy img,img.lazy").length){
 		$(".lazy img,img.lazy").lazyload();
 	}
@@ -308,6 +315,7 @@ $(function() {
 					$('#'+panleId).find('.tab_tar').load( $(this).attr('href')+' #'+panleId,function(){pagLoad()});
 				});
 			});
+			addLiveActionAnimation();
 		}
 	}
 
@@ -573,6 +581,13 @@ $(function() {
     ---------------- */
 
     /* for place listings */
+	
+        if($('.fliterList').length>0){
+            $(".fliterList").live('change',function () {
+                window.location = siteroot+view+"list.castle?searchId="+$(this).find(':selected').val(); 
+            });
+        }
+	
 		$( "#dialog" ).dialog({
 			autoOpen: false,
 			height: 165,
@@ -642,11 +657,7 @@ $(function() {
 
 
 		
-        if($('#listPlaceType').length>0){
-            $("#listPlaceType").live('change',function () {
-                window.location = siteroot+view+"list.castle?searchId="+$(this).find(':selected').val(); 
-            });
-        }
+
 		
 
     /* for place editing */

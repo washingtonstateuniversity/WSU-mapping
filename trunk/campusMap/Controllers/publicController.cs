@@ -280,7 +280,50 @@ using log4net.Config;
                 System.IO.File.WriteAllText(uploadPath + file, blob);
             }
 
+            public void keywordAutoComplete(string term, string callback)
+            {
+                CancelView();
+                CancelLayout();
 
+                String sql = "SELECT DISTINCT s.name FROM tags AS s WHERE NOT s.name = 'NULL'";
+                if (String.IsNullOrEmpty(term))
+                {
+                    sql += " AND s.name LIKE  '%" + term + "%'";
+                }
+
+                SimpleQuery<String> q = new SimpleQuery<String>(typeof(place), sql);
+                Array labels = q.Execute();
+
+                String psql = "SELECT DISTINCT s.prime_name FROM place AS s WHERE NOT s.prime_name = 'NULL'";
+                if (String.IsNullOrEmpty(term))
+                {
+                    psql += " AND s.prime_name LIKE  '%" + term + "%'";
+                    psql += " OR s.abbrev_name LIKE  '%" + term + "%'";
+                }
+
+                SimpleQuery<String> pq = new SimpleQuery<String>(typeof(place), psql);
+                Array plabels = pq.Execute();
+                plabels.CopyTo(labels, 0);
+
+                String labelsList = "";
+                foreach (String s in labels)
+                {
+                    labelsList += @"{""label"":""" + s.ToString() + @""",";
+                    labelsList += @"""value"":""" + s.ToString() + @"""},";
+                }
+                String json = "[" + labelsList.TrimEnd(',') + "]";
+
+
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
+
+
+
+            }
             public string loadPlaceShape(place place)
             {
                 IList<geometrics> tmpGeo = place.geometrics;
@@ -300,9 +343,9 @@ using log4net.Config;
                 
                 return json;
             }
-            
 
-            public void get_place_by_category(string[] cat,string callback)
+
+            public void get_place_by_category(string[] cat, string callback)
             {
 
                 CancelView();
@@ -312,8 +355,8 @@ using log4net.Config;
                 int id = 1;
                 foreach (string category in cat)
                 {
-                    sql += " :p"+id+" in elements(p.categories) ";
-                    id = id +1;
+                    sql += " :p" + id + " in elements(p.categories) ";
+                    id = id + 1;
                     sql += " or ";
                 }
                 sql += " 1=0 ";
@@ -327,8 +370,44 @@ using log4net.Config;
                     id = id + 1;
                 }
                 place[] items = q.Execute();
+                sendPlaceJson(items,callback);
+            }
 
 
+            public void get_place_by_keyword(string[] str, string callback)
+            {
+
+                CancelView();
+                CancelLayout();
+
+                String sql = "from place p where ";
+                int id = 1;
+                foreach (string category in str)
+                {
+                    sql += " :p" + id + " in elements(p.categories) ";
+                    id = id + 1;
+                    sql += " or ";
+                }
+                sql += " 1=0 ";
+                SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+                id = 1;
+                foreach (string category in str)
+                {
+                    string cats = HttpUtility.UrlDecode(category);
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
+                place[] items = q.Execute();
+                sendPlaceJson(items, callback);
+            }
+
+
+
+
+
+            public void sendPlaceJson(place[] items, string callback)
+            {
 
                 // THIS REALLY SHOULD BE A TEMPLATE WITH SOME TEMP LEVEL LOGIC TO TEST OF BLANKS
                 String defaultAccessibility = @"<ul>

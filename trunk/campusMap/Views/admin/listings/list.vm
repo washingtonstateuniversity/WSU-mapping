@@ -44,7 +44,7 @@
 				</a>
 			<span style="display:inline-block;">
 			  Categories:<br/>
-			  <select id="list${controller.getView()}Type">
+			  <select id="list${controller.getView()}Type" class="fliterList">
 				<option value="">Your Sections</option>
 				<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
 				<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>

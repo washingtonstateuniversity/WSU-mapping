@@ -117,18 +117,34 @@ namespace campusMap.Controllers
 
                 IList<place> items;
                 int pagesize = 15;
-                int paging = 1;
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-               /* if (searchId > 0)
+               if (searchId > 0)
                 {
-                    baseEx.Add(Expression.Eq("categories", ActiveRecordBase<categories>.Find(searchId)));
+                    categories[] array1 = new categories[1];
+                    array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
+                    //baseEx.Add(Expression.In("categories", array1));
+
+
+
+
+                    IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
+                    object[] obj = new object[cats.Count];
+                    int i = 0;
+                    foreach (categories c in cats)
+                    {
+                        obj[i] = c;
+                        i++;
+                    }
+                    baseEx.Add(Expression.In("categories", obj));
+
+
                 }
                 else if (!searchId.Equals(-1))
                 {
                     categories[] array1 = new categories[user.categories.Count];
                     user.categories.CopyTo(array1, 0);
-                    baseEx.Add(Expression.In("categories", array1));
-                }*/
+                    //baseEx.Add(Expression.In("categories", array1));
+                }
 
                 if (searchId.Equals(-2))
                 {
@@ -139,7 +155,7 @@ namespace campusMap.Controllers
                         obj[i] = p.id;
                         i++;
                     }
-                    baseEx.Add(Expression.In("place_id", obj));
+                    baseEx.Add(Expression.In("id", obj));
                 }
 
             //PUBLISHED
@@ -149,7 +165,7 @@ namespace campusMap.Controllers
 
                 if (searchId > 0)
                 {
-                    items = ActiveRecordBase<place>.FindAll(Order.Desc("order"), pubEx.ToArray());
+                    items = ActiveRecordBase<place>.FindAll(Order.Desc("updated_date"), pubEx.ToArray());
                 }
                 else
                 {
@@ -167,9 +183,9 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("broadcast");
-                buttons.Add("view");
-                buttons.Add("order");
+                //buttons.Add("broadcast");
+                //buttons.Add("view");
+                //buttons.Add("order");
                 PropertyBag["publishedButtonSet"] = buttons;  
 
 
