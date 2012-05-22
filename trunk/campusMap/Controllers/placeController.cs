@@ -1178,7 +1178,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<place>.Save(place);
             if (place.coordinate != null && isLocal())
             {
-                makePlaceStaticMap(place);
+                //makePlaceStaticMap(place);
             }
 
 
