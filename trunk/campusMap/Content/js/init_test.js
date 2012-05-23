@@ -143,19 +143,30 @@ function addCentralControlls(){
 }
 
 
-var cTo;
-var cFrom;
+var cTo="";
+var cFrom="";
+var hasDirection=false;
+
+function clearHereToThere(){
+	if(hasDirection){
+		hasDirection=false;
+		cFrom="";
+		cTo="";
+		$('#centralMap').gmap('clear','overlays');
+		$('#centralMap').gmap('clear','serivces');
+	}
+}
 
 function hereToThere(){
-	if(cTo || cFrom)return false
-
+	if(cTo=="" || cFrom =="")return false
+	clearHereToThere();
 	$('#centralMap').gmap('displayDirections',
-		{origin:cFrom,destination:cTo,travelMode: google.maps.DirectionsTravelMode.WALKING},
+		{origin:cFrom,destination:cTo,travelMode: google.maps.DirectionsTravelMode.BICYCLING},
 		{draggable: true},
 		function(){
-			$('.contextmenu .active').removeClass('active');
-			cFrom=null;
-			cTo=null;
+			cFrom="";
+			cTo="";
+			hasDirection=true;
 			$('#loading').remove();
 	});
 }
@@ -201,28 +212,35 @@ function showContextMenu(caurrentLatLng  ) {
 	hideContextMenu();
 	contextmenuDir = document.createElement("div");
 	contextmenuDir.className  = 'contextmenu';
-	contextmenuDir.innerHTML = '<a id="to">Directions TO</a><a id="menu2">Directions FROM</a>';
+	contextmenuDir.innerHTML = '<a id="from">Directions from here...</a><a id="to">Directions to here...</a>';
 	$(map.getDiv()).append(contextmenuDir);
 	setMenuXY(caurrentLatLng);
 	contextmenuDir.style.visibility = "visible";
 	
 	
 
-	if(cTo!==null){$('.contextmenu #to').addClass('active');}
-	if(cFrom!==null){$('.contextmenu #from').addClass('active');}
-	$('.contextmenu #to').live('click',function(){
+	if(cTo!=""){$('.contextmenu #to').addClass('active');}
+	if(cFrom!=""){$('.contextmenu #from').addClass('active');}
+	$('.contextmenu #to').click(function(){
 		cTo=caurrentLatLng.lat()+","+caurrentLatLng.lng();
-		alert(cTo);
+		//alert(cTo);
 		$(this).addClass('active');
-		 hereToThere();
+		 
 		 hideContextMenu();
+		 
+		 if(cTo=="" || cFrom =="")return false
+		 clearHereToThere();
+		 hereToThere();
 	});
-	$('.contextmenu #from').live('click',function(){
+	$('.contextmenu #from').click(function(){
 		cFrom=caurrentLatLng.lat()+","+caurrentLatLng.lng();
-		alert(cFrom);
+		//alert(cFrom);
 		$(this).addClass('active');
-		 hereToThere();
 		 hideContextMenu();
+		 
+		 if(cTo=="" || cFrom =="")return false
+		 clearHereToThere();
+		 hereToThere();
 	});
 	
 }
@@ -246,7 +264,7 @@ function updateMap(_load,showSum){
 	});
 	
 }
-function loadData(data){
+function loadData(data,callback){
 	if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			 var pointHolder = {};
@@ -358,6 +376,7 @@ function loadData(data){
 			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
 		},marker.style),function(ops,marker){
 			markerLog[i]=marker;
+			if($.isFunction(callback))callback(marker);
 			}).click(function() {
 			$.each(ib, function(i) {ib[i].close();});
 			ib[i].open($('#centralMap').gmap('get','map'), this);
@@ -408,6 +427,25 @@ function loadListings(data,showSum){
 *
 *
 */
+function getSignlePlace(id){
+	var url=siteroot+"public/get_place.castle";
+	$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
+		if(!$('#selectedPlaceList_btn').is(':visible')){
+			$('#selectedPlaceList_btn').css({'display':'block'});
+			$('#selectedPlaceList_btn').trigger('click');
+		}
+		$.each(ib, function(i) {ib[i].close();});
+		$('#centralMap').gmap('clear','markers');
+		$('#centralMap').gmap('clear','overlays');
+		loadData(data,function(marker){
+			ib[0].open($('#centralMap').gmap('get','map'), marker);
+			});
+		
+		loadListings(data,true);
+		prep();
+		
+	});
+}
 function prep(){
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
@@ -419,7 +457,7 @@ $(document).ready(function(){
 			$('#loading').remove();
 		});
 		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,185)}).trigger("resize");
+			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=450?155:185))}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 				}
@@ -538,7 +576,8 @@ $(document).ready(function(){
 							if ( item.value && ( !request.term || matcher.test(text) ) ){
 								return {
 									label: item.label,
-									value: item.value
+									value: item.value,
+									place_id: item.place_id
 								}
 							}
 						
@@ -548,11 +587,15 @@ $(document).ready(function(){
 			},
 			minLength: 2,
 			select: function( event, ui ) {
-				
+				getSignlePlace(ui.item.place_id);
+			},
+			focus: function( event, ui ) {
+				$( "#placeSearch [type=text]" ).val( ui.item.label );
+				return false;
 			},
 			open: function(e,ui) {
 				$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
-				var
+				/*var
 					acData = $(this).data('autocomplete'),
 					styledTerm = termTemplate.replace('%s', acData.term);
 	
@@ -563,9 +606,46 @@ $(document).ready(function(){
 					.each(function() {
 						var me = $(this);
 						me.html( me.text().replace(acData.term, styledTerm) );
-					});
+					});*/
        		 }
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			var text =item.label;
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>" )
+				.appendTo( ul );
+		};
+	
+	
+		$('#embed').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+
+				e.preventDefault();
+				var trigger=$(this);
+				$.colorbox({
+					rel:'gouped',
+					html:function(){
+						return '<h2>Page Link</h2><h3>http://dev.campusmap.wsu.edu/central/</h3><h2>Embed code</h2><textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>';
+					},
+					photo:true,
+					scrolling:false,
+					opacity:0.7,
+					transition:"none",
+					width:450,
+					height:350,
+					slideshow:true
+				});
+
 		});
+	
+		$('#share').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+		
+		});	
+	
+	
 	
 	}	
 	if($('#geometrics_drawing_map').length){

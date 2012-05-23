@@ -110,7 +110,7 @@ namespace campusMap.Controllers
 
                 if (searchId > 0)
                 {
-                    items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("order"), pubEx.ToArray());
+                    items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), pubEx.ToArray());
                 }
                 else
                 {

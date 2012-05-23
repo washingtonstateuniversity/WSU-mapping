@@ -120,12 +120,23 @@ namespace campusMap.Controllers
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
                if (searchId > 0)
                 {
-                    //categories[] array1 = new categories[1];
-                    //array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
-                    //baseEx.Add(Expression.In("categories", array1));
+                    /*
+                     //categories[] array1 = new categories[1];
+                     //array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
+                     //baseEx.Add(Expression.In("categories", array1));
 
+                     IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
+                     object[] obj = new object[cats.Count];
+                     int i = 0;
+                     foreach (categories c in cats)
+                     {
+                         obj[i] = c.id;
+                         i++;
+                     }
+                     baseEx.Add(Expression.In("categories", obj));
+                   */
                     IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
-                    object[] obj = new object[cats.Count];
+                    categories[] obj = new categories[cats.Count];
                     int i = 0;
                     foreach (categories c in cats)
                     {
@@ -133,8 +144,6 @@ namespace campusMap.Controllers
                         i++;
                     }
                     baseEx.Add(Expression.In("categories", obj));
-
-
                 }
                 else if (!searchId.Equals(-1))
                 {
@@ -545,6 +554,30 @@ namespace campusMap.Controllers
             }
             return creditsList.TrimEnd(',');
         }
+
+        public string[] get_feild_short_codes(place place)
+        {
+            //log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("model", "placeController"));
+            typeEx.Add(Expression.Eq("set", place.model.id));
+
+            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> fields = new List<string>();
+
+            string[] codes = new string[ft.Length];
+            int i = 0;
+            if (ft != null)
+            {
+                foreach (field_types ft_ in ft)
+                {
+                    codes[i]="${"+ft_.alias+"}";
+                    i++;
+                }
+            }
+            return codes;
+        }
+
         public void _edit(int id, int page, bool ajax)
         {
             CancelView();
@@ -665,7 +698,7 @@ namespace campusMap.Controllers
                images.Add(new media_repo());
                 PropertyBag["placeimages"] = images;   
             }
-
+            PropertyBag["short_codes"] = get_feild_short_codes(one_place);
             PropertyBag["placeauthors"] = authors; 
             //RenderView("new");
             RenderView("editor_place");
@@ -1245,7 +1278,7 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
             place place = ActiveRecordBase<place>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + place.prime_name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["massage"] = "A Place, <strong>" + place.prime_name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place>.Delete(place);
             CancelLayout();
             RedirectToAction("list");
@@ -1253,7 +1286,7 @@ namespace campusMap.Controllers
         public void delete_type(int id)
         {
             place_types place_type = ActiveRecordBase<place_types>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["massage"] = "A Place type, <strong>" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place_types>.Delete(place_type);
             CancelLayout();
             RedirectToAction("list");
@@ -1261,7 +1294,7 @@ namespace campusMap.Controllers
         public void delete_field(int id)
         {
             field_types place_fields = ActiveRecordBase<field_types>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + place_fields.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["massage"] = "A field for places, <strong>" + place_fields.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<field_types>.Delete(place_fields);
             CancelLayout();
             RedirectToAction("list");

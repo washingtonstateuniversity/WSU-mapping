@@ -239,7 +239,7 @@ using log4net.Config;
              */
             public string autoProcessFeilds(place place)
             {
-                log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
+                //log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
                 List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
                 typeEx.Add(Expression.Eq("model", "placeController"));
                 typeEx.Add(Expression.Eq("set", place.model.id));
@@ -259,7 +259,7 @@ using log4net.Config;
                         string value = "";
                         value = getFieldVal(ft_, place);
                         hashtable["" + ft_.alias] = value;
-                        log.Info("hashtable[" + ft_.alias+"]" + value);
+                        //log.Info("hashtable[" + ft_.alias+"]" + value);
                     }
                 }
                 String renderPath = Context.ApplicationPhysicalPath;
@@ -268,9 +268,13 @@ using log4net.Config;
 
                 String text = System.IO.File.ReadAllText(renderPath + "Views/public/central/accessibilties.vm");
                 text = helperService.proccessText(hashtable, text, true).Trim();
-                log.Info("text:" + text);
+                //log.Info("text:" + text);
                 return text;
             }
+
+
+
+
             public void setJsonCache(string uploadPath, string file, string blob)
             {
                 if (!HelperService.DirExists(uploadPath))
@@ -363,7 +367,7 @@ using log4net.Config;
                     labelsList += @"{";
                     labelsList += @"""label"":""" + key + @""",";
                     labelsList += @"""value"":""" + key + @""",";
-                    labelsList += @"""id"":""" + results[key] + @"""";
+                    labelsList += @"""place_id"":""" + results[key] + @"""";
                     labelsList += @"},";
                 }
 
@@ -424,7 +428,19 @@ using log4net.Config;
                 place[] items = q.Execute();
                 sendPlaceJson(items,callback);
             }
+            public void get_place(int id, string callback)
+            {
 
+                CancelView();
+                CancelLayout();
+                //String sql = "from place p where place_id="+id.ToString();
+                //SimpleQuery<place> p = new SimpleQuery<place>(typeof(place), sql);
+                place item = ActiveRecordBase<place>.Find(id);
+                place[] obj = new place[1];
+                obj[0] = item;
+                sendPlaceJson(obj, callback);
+            }
+            
 
             public void get_place_by_keyword(string[] str, string callback)
             {

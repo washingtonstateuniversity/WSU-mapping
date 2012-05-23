@@ -5,30 +5,46 @@
 			#if($item.coordinate)
 				<li class='Authors'>
 				#if($item.authors.Count>0)
-					<span>Authors: </span><br/>
+					<span>Author#if($item.authors.Count>1)s#end: </span><br/>
 						#foreach($author in $item.authors)
-							$!author.name
+						$!author.name
 						#between
-							,
+						,
 						#end
 					#else
-						<em>currently unassigned</em>
+						<em>unassigned</em>
 				#end
 				</li>
 				<li class="tags">
-					<span>Tag: </span>
+					<span>Tag#if($item.tags.Count>1)s#end: </span>
 					#if($item.tags.Count>0)
-						$item.tags.Count
+					#set($t="")
+#capturefor(t)
+#foreach($tag in $item.tags)$!tag.name,#end
+#end
+						$item.tags.Count <b title="$t.Trim()" class="tips">?</b>
 					#else
-						<em>currently none</em>
+						<em>none</em>
 					#end
 				</li>
 			#end
 			#if($item.Publishtime)<li class='date'> <span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','') </li>#end
-			#if($item.Status.Title)<li class='Status'><span>Status: </span>$!item.Status.Title</li>#end
+			
 			#*#if($item.Location)<li> <span>Location: </span>$!item.Location </li>#end*#
-			#if($item.infotabs)<li> <span>Tabs: </span>#set($c=$item.infotabs.Count+1)$c</li>#end
+			
+			#set($media=0)
+			#if($Controller.getView()!="geometrics") #if($item.Images && $item.Images.Count>1) #set($media=1) #end #end
+			#set($c= $item.infotabs.Count + 1)
+			#set($c= $c + $media )
+			#if($item.autoAccessibility)#set($c= $c +1)#end
+			
+			#if($c>0)<li> <span>Tab#if($c>1)s#end: </span>$c</li>#end
 			#if($item.id)<li> <span>Id: </span>$!item.id </li>#end
+			#if($Controller.getView()!="geometrics") #if($item.Images)<li class='Status'><span>Image#if($item.Images.Count>1)s#end: </span>$item.Images.Count</li>#end #end
+			
+			
+			
+			
 		</ul>
 	</div>
 </div>

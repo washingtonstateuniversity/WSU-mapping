@@ -9927,3 +9927,644 @@ File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\180.ext
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.ReadAllBytes(String path)
    at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 320
+2012-05-22 20:52:27,687 [10] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:AAPI Cultural House(1)
+
+2012-05-22 20:52:28,628 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-22 20:52:28,633 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-22 20:52:28,635 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-22 20:52:28,638 [10] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restrooms
+2012-05-22 20:52:28,642 [10] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-22 20:52:28,645 [10] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-22 20:52:28,647 [10] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-22 20:52:28,650 [10] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-22 20:52:28,653 [10] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-22 20:52:28,656 [10] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-22 20:52:28,658 [10] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-22 20:52:28,661 [10] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-22 20:52:28,664 [10] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-22 20:52:28,667 [10] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-22 20:58:58,563 [5] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:AAPI Cultural House(1)
+
+2012-05-22 20:58:58,736 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-22 20:58:58,738 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-22 20:58:58,741 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-22 20:58:58,743 [5] INFO  publicController [(null)] <(null)> - hashtable[amenities]Unisex restrooms
+2012-05-22 20:58:58,746 [5] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-22 20:58:58,749 [5] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-22 20:58:58,751 [5] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-22 20:58:58,754 [5] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-22 20:58:58,756 [5] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-22 20:58:58,758 [5] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-22 20:58:58,761 [5] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-22 20:58:58,763 [5] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-22 20:58:58,765 [5] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-22 20:58:58,768 [5] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-22 21:00:56,030 [14] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:CUE Parking(51)
+
+2012-05-22 21:00:56,037 [14] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]Enter garage from Stadium Way
+2012-05-22 21:00:56,039 [14] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-22 21:00:56,041 [14] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-22 21:00:56,046 [14] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-22 21:00:56,051 [14] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-22 21:00:56,055 [14] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-22 21:00:56,057 [14] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-22 21:00:56,058 [14] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-22 21:00:56,060 [14] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-22 21:00:56,065 [14] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-22 21:00:56,069 [14] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-22 21:00:56,074 [14] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-22 21:00:56,077 [14] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-22 21:00:56,079 [14] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-22 21:02:51,576 [5] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Compost Facility(46)
+
+2012-05-22 21:02:51,580 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-22 21:02:51,582 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-22 21:02:51,584 [5] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-22 21:02:51,586 [5] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-22 21:02:51,588 [5] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-22 21:02:51,589 [5] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-22 21:02:51,591 [5] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-22 21:02:51,593 [5] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-22 21:02:51,594 [5] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-22 21:02:51,596 [5] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-22 21:02:51,598 [5] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-22 21:02:51,600 [5] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-22 21:02:51,601 [5] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-22 21:02:51,604 [5] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-22 21:03:08,514 [10] INFO  publicController [(null)] <(null)> - ________________________________________________________________________________
+Loading feilds For:Compost Facility(46)
+
+2012-05-22 21:03:08,517 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_entrance]
+2012-05-22 21:03:08,519 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_parking]
+2012-05-22 21:03:08,520 [10] INFO  publicController [(null)] <(null)> - hashtable[ada_other]
+2012-05-22 21:03:08,522 [10] INFO  publicController [(null)] <(null)> - hashtable[amenities]
+2012-05-22 21:03:08,524 [10] INFO  publicController [(null)] <(null)> - hashtable[classroom]no
+2012-05-22 21:03:08,526 [10] INFO  publicController [(null)] <(null)> - hashtable[research_labs]no
+2012-05-22 21:03:08,528 [10] INFO  publicController [(null)] <(null)> - hashtable[notes_comments]
+2012-05-22 21:03:08,529 [10] INFO  publicController [(null)] <(null)> - hashtable[shopping_dining_etc]
+2012-05-22 21:03:08,532 [10] INFO  publicController [(null)] <(null)> - hashtable[research_centers]
+2012-05-22 21:03:08,537 [10] INFO  publicController [(null)] <(null)> - hashtable[libraries]
+2012-05-22 21:03:08,539 [10] INFO  publicController [(null)] <(null)> - hashtable[major_labs_facilities]
+2012-05-22 21:03:08,542 [10] INFO  publicController [(null)] <(null)> - hashtable[student_services_advising]
+2012-05-22 21:03:08,544 [10] INFO  publicController [(null)] <(null)> - hashtable[university_administration_non_academic_units]
+2012-05-22 21:03:08,546 [10] INFO  publicController [(null)] <(null)> - hashtable[special_facilities_public_venues]
+2012-05-23 06:45:19,771 [16] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection - no session
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection - no session
+2012-05-23 07:36:11,570 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to convert parameter value from a place to a Int32.
+2012-05-23 07:36:11,581 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
+2012-05-23 07:36:11,582 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to convert parameter value from a place to a Int32.
+2012-05-23 07:36:11,582 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
+2012-05-23 09:37:10,370 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:37:10,402 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:37:10,403 [14] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_25_0_, media_repo1_.credit as credit25_0_, media_repo1_.caption as caption25_0_, media_repo1_.created as created25_0_, media_repo1_.updated as updated25_0_, media_repo1_.file_name as file6_25_0_, media_repo1_.ext as ext25_0_, media_repo1_.path as path25_0_, media_repo1_.orientation as orientat9_25_0_, media_repo1_.media_type_id as media10_25_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:37:10,448 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_25_0_, media_repo1_.credit as credit25_0_, media_repo1_.caption as caption25_0_, media_repo1_.created as created25_0_, media_repo1_.updated as updated25_0_, media_repo1_.file_name as file6_25_0_, media_repo1_.ext as ext25_0_, media_repo1_.path as path25_0_, media_repo1_.orientation as orientat9_25_0_, media_repo1_.media_type_id as media10_25_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:37:38,369 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:37:38,369 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:37:38,369 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_25_0_, media_repo1_.credit as credit25_0_, media_repo1_.caption as caption25_0_, media_repo1_.created as created25_0_, media_repo1_.updated as updated25_0_, media_repo1_.file_name as file6_25_0_, media_repo1_.ext as ext25_0_, media_repo1_.path as path25_0_, media_repo1_.orientation as orientat9_25_0_, media_repo1_.media_type_id as media10_25_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:37:38,370 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_25_0_, media_repo1_.credit as credit25_0_, media_repo1_.caption as caption25_0_, media_repo1_.created as created25_0_, media_repo1_.updated as updated25_0_, media_repo1_.file_name as file6_25_0_, media_repo1_.ext as ext25_0_, media_repo1_.path as path25_0_, media_repo1_.orientation as orientat9_25_0_, media_repo1_.media_type_id as media10_25_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:38:58,974 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:38:58,985 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:38:58,985 [14] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:38:58,987 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:41:01,793 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:01,793 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:01,793 [14] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:41:01,794 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:41:03,999 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:03,999 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:03,999 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:41:04,000 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:41:47,882 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:47,882 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:47,882 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:41:47,882 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:41:50,470 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:50,470 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:50,470 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:41:50,471 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:41:53,690 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:53,690 [14] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:41:53,690 [14] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:41:53,690 [14] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:44:58,792 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:44:58,792 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:44:58,792 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:44:58,793 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-05-23 09:46:22,648 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:46:22,648 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'geometric_order'.
+2012-05-23 09:46:22,648 [8] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-05-23 09:46:22,649 [8] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.geometrics.Images#System.Object[]][SQL: SELECT images0_.geometric_id as geometric1___1_, images0_.media_id as media2_1_, media_repo1_.media_id as media1_48_0_, media_repo1_.credit as credit48_0_, media_repo1_.caption as caption48_0_, media_repo1_.created as created48_0_, media_repo1_.updated as updated48_0_, media_repo1_.file_name as file6_48_0_, media_repo1_.ext as ext48_0_, media_repo1_.path as path48_0_, media_repo1_.orientation as orientat9_48_0_, media_repo1_.media_type_id as media10_48_0_ FROM geometric_to_media images0_ left outer join media_repo media_repo1_ on images0_.media_id=media_repo1_.media_id WHERE images0_.geometric_id in (?, ?, ?) ORDER BY images0_.geometric_order] ---> System.Data.SqlClient.SqlException: Invalid column name 'geometric_order'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---

@@ -31,7 +31,7 @@ namespace campusMap.Filters
             // Redirect to dailycampusMap.wsu.edu because dailycampusMap.com can't catch the cookie
             if (context.Request.Uri.ToString().ToLower().Contains("dailycampusMap.com"))
             {
-                context.Response.Redirect("http://dailycampusMap.wsu.edu/manager");
+                context.Response.Redirect("http://dev.campusmap.wsu.edu/manager");
                 return false;
             }
 

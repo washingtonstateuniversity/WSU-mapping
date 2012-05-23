@@ -47,7 +47,7 @@ min-width:1026px;
 /* Nav */
 #nav {padding:0 10px 10px 24px;position: relative; z-index: 9;}
 #main_nav{}
-#main_nav li{display: block /*!important*/;float: left;min-height:15px;line-height:12px;width: 153px;}
+#main_nav li{display: block /*!important*/;/*float: left;*/min-height:15px;line-height:12px;width: 153px;}
 #main_nav li a{display: block !important; color:#5e6a71;}
 #main_nav li:hover{font-weight: normal;}
 #main_nav li a:hover{color: #981e32 !important;}

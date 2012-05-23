@@ -14,22 +14,22 @@
 	</div>
 #end
 
-	<div style="height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;">
-		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active"  style="width:auto;display:inline-block;">
-			<span style="padding: 0.5em 1em;">${controller.getView()} List</span>
+	<div class="listing_switch">
+		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active">
+			<span>${controller.getView()} List</span>
 		</a>
-		<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;">
-			<span style="padding: 0.5em 1em;">Types</span>
+		<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices ">
+			<span>Types</span>
 		</a>
 		
 		#if($styles)
-			<a href="#_styles" id="styles_choice" class="ui-state-default ListingChoices " style="width:auto;display:inline-block;">
-				<span style="padding: 0.5em 1em;">Styles</span>
+			<a href="#_styles" id="styles_choice" class="ui-state-default ListingChoices ">
+				<span>Styles</span>
 			</a>
 		#end
 		
-		<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices " style="width:auto;display:inline-block;">
-			<span style="padding: 0.5em 1em;">Fields</span>
+		<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices ">
+			<span>Fields</span>
 		</a>
 	</div>
 	<div class="clear"></div>

@@ -33,9 +33,16 @@ min-width:1026px;
 }
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 .admin #adminNav{width: 100%;background: none repeat scroll 0 0 #981E32;height:35px; position: relative;z-index:10;}
-
+.admin #adminNav.fixed{position: fixed; top:0px; left:0px;}
 
 ul.menu {padding:0; margin:0; list-style:none; position:relative; z-index:500; margin-right:1px; float:left;}
+
+.admin #adminNav .Cancel,.admin #adminNav .Apply,.admin #adminNav .Submit{display:none;float:right;}
+.admin #adminNav.fixed .Cancel,.admin #adminNav.fixed .Apply,.admin #adminNav.fixed .Submit{display:block;float:right;}
+
+
+
+
 ul.posLeft {margin-left:10px;}
 ul.menu ul {padding:0; margin:0; list-style:none; position:absolute; left:-9999px; top:35px; width:170px; background:url(../../Content/images/background1.png) no-repeat left bottom; padding:2px 2px 10px 2px;}
 ul.menu a {font:normal 12px arial, sans-serif; color:#fff; text-decoration:none;}
@@ -173,6 +180,10 @@ table.ui-widget tbody tr.odd td{}
 .w150{width:150px !important;}
 .w50{width:50px !important;}
 
+.listing_switch{height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;}
+.listing_switch a {width:auto;display:inline-block;padding-bottom: 4px;}
+.listing_switch a span{padding: 0.5em 1em;}
+
 .push_hide,.nonEdit{position:absolute;top:-9999px;left:-9999px;}
 #content_area{min-height:500px;padding:0 5px;}
 .admin #content_tar{padding: 0 0 0 10px;}
@@ -220,6 +231,21 @@ table.ui-widget tbody tr.odd td{}
 	width:0px;/* if opened 125px; */
 	overflow: visible;
 }
+
+.tips{
+    background-color: #0033FF;
+    border-radius: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    cursor: help;
+    display: inline-block;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 9px;
+    padding: 1px 3px 3px 4px;
+	-webkit-border-radius: 10px;
+	}
+.tips:hover{background-color: #FFFFFF;color: #0033FF;border: 1px solid #0033FF;padding: 0px 2px 2px 3px;}
+
 .detailInfoBut{position:absolute;bottom:5px;left:0px; width:16px;height:36px;display:inline-block;
 text-indent:-9999px;
 

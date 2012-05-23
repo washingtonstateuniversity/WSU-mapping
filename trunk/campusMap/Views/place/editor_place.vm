@@ -64,12 +64,12 @@
 </p>
 #end
 #if($place.id)
-	<a href="$siteroot/Pdf/new.castle" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+	#*<a href="$siteroot/Pdf/new.castle" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 		<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create a Print Version
 	</a>
 	#if($place.id!=0)<a href="$siteroot/read/${place.CustomUrl}" style="height:33px" target="_blank" title="View" class="PDF creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 		<span class="ui-icon ui-icon-search"  style="margin-top: 3px;"> </span>
-	</a>#end
+	</a>#end*#
 #end
 
 
@@ -233,6 +233,7 @@
 						#end
 					</select>
                 </div>
+				<h6><em>Use Ctrl/Option + click to select or deselect items in the lists.</em></h6>
             </fieldset>
 
             
@@ -325,9 +326,20 @@ $formbuttons
 
 <div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 $formbuttons
+
+
 			<h3>Summary :</h3>
 			#*$Form.TextArea("place.summary")*#
 			<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
+			<h3>Short codes</h3>
+<div style="height: 150px; overflow-y: scroll; border: 1px solid rgb(204, 204, 204); margin: 5px 10px;">
+
+	#foreach($short_code in $short_codes)
+		$short_code<br/>
+	#end
+	
+</div>
+<h6><em>When using the short codes, adding the ! mark between the $ and { ( ie: $!{notes_comments} ) will let the code retrun nothing if there is a value is unset.</em></h6>
 			<br/>
 			<hr/>
 			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="place.hideTitles" >
