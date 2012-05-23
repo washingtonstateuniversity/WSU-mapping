@@ -19,6 +19,7 @@
     <th>Id</th>
     <th>Network ID</th>
     <th>Access Level</th>
+	<th>Email</th>
     <th>&nbsp;</th>
     </tr>
   </thead>
@@ -29,7 +30,10 @@
       <td>$!author.id</td>
       <td>$!author.Nid</td>
       <td>
-        $!author.Accesslevel.Title
+        $!author.access_levels.title
+      </td>
+      <td>
+        #if($author.email)<a href="mailto:$!author.email">$!author.email</a>
       </td>
       <td class='actionArea'>
 

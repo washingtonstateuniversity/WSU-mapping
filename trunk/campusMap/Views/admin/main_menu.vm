@@ -68,7 +68,7 @@
 	<ul class="menu">
 		<li class="liTop"><a class="open #if($controller.getView()=='authors')active#end" href="../authors/list.castle"><b>Authorized Users</b></a>
 			<ul class="drop">
-				<li><a href="geometrics/new.castle">New User</a></li>
+				<li><a href="../authors/new.castle">New User</a></li>
 				<li><a href="../accesslevel/list.castle">Access Levels</a></li>
 				<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
 				#if($Controller.getUser().name==$user)<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
