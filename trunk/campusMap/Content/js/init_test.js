@@ -432,7 +432,7 @@ function getSignlePlace(id){
 	$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
 		if(!$('#selectedPlaceList_btn').is(':visible')){
 			$('#selectedPlaceList_btn').css({'display':'block'});
-			$('#selectedPlaceList_btn').trigger('click');
+			//$('#selectedPlaceList_btn').trigger('click');
 		}
 		$.each(ib, function(i) {ib[i].close();});
 		$('#centralMap').gmap('clear','markers');
@@ -440,10 +440,8 @@ function getSignlePlace(id){
 		loadData(data,function(marker){
 			ib[0].open($('#centralMap').gmap('get','map'), marker);
 			});
-		
 		loadListings(data,true);
 		prep();
-		
 	});
 }
 function prep(){
