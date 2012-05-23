@@ -92,8 +92,12 @@ namespace campusMap.Controllers
             int draftPaging = 1;
             int reviewPaging = 1;
             int publishedPaging = 1;
+            int name_typesPaging = 1;
 
             switch (target){
+                case "name_types":{
+                    name_typesPaging = page; break;
+                    }
                 case "types":{
                     typesPaging = page; break;
                     }
@@ -261,7 +265,10 @@ namespace campusMap.Controllers
                 place_types_items = ActiveRecordBase<place_types>.FindAll();
                 PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, typesPaging);
 
-                
+                pagesize = 15;
+                IList<place_name_types> place_name_types_items;
+                place_name_types_items = ActiveRecordBase<place_name_types>.FindAll();
+                PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
 
                 pagesize = 15;
                 IList<field_types> place_fields_items;
@@ -325,6 +332,12 @@ namespace campusMap.Controllers
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
+        public void new_name_types()
+        {
+            place_name_types type = new place_name_types();
+            PropertyBag["type"] = type;
+            RenderView("../admin/place_name_type/new");
+        }
         public void new_field()
         {
             field_types field = new field_types();
@@ -341,6 +354,15 @@ namespace campusMap.Controllers
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
+        public void edit_name_type(int id)
+        {
+            place_name_types type = ActiveRecordBase<place_name_types>.Find(id);
+            PropertyBag["type"] = type;
+            RenderView("../admin/place_name_type/new");
+        }
+        
+
+
 
         public void edit_field(int id)
         {
@@ -390,6 +412,16 @@ namespace campusMap.Controllers
             ActiveRecordMediator<place_types>.Save(type);
             RedirectToAction("list");
         }
+
+        public void update_name_type([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_name_types type)
+        {
+            ActiveRecordMediator<place_name_types>.Save(type);
+            RedirectToAction("list");
+        }
+
+        
+
+
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
             [DataBind("ele", Validate = true)] elementSet ele,
@@ -1288,6 +1320,15 @@ namespace campusMap.Controllers
             place_types place_type = ActiveRecordBase<place_types>.Find(id);
             Flash["massage"] = "A Place type, <strong>" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place_types>.Delete(place_type);
+            CancelLayout();
+            RedirectToAction("list");
+        }
+
+        public void delete_name_type(int id)
+        {
+            place_name_types place_type = ActiveRecordBase<place_name_types>.Find(id);
+            Flash["massage"] = "A Place type, <strong>" + place_type.type + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<place_name_types>.Delete(place_type);
             CancelLayout();
             RedirectToAction("list");
         }
