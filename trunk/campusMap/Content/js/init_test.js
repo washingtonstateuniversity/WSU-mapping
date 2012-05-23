@@ -27,7 +27,7 @@ function iniMap(url,callback){
 		map_op = $.extend(map_op,{"mapTypeControl":false});
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			var map = $('#centralMap').gmap("get","map");
-			google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
+			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
 			google.maps.event.addListener(map, "click",function(event){ hideContextMenu() });
 			google.maps.event.addListener(map, "drag",function(event){ hideContextMenu() });
 			addCentralControlls();
