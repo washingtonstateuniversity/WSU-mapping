@@ -332,7 +332,7 @@ namespace campusMap.Controllers
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
-        public void new_name_types()
+        public void new_name_type()
         {
             place_name_types type = new place_name_types();
             PropertyBag["type"] = type;

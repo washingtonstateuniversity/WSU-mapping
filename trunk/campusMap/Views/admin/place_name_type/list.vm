@@ -27,7 +27,7 @@
 		#foreach($type in $place_name_types)
 		<tr class="#if($c%2>0) even #else odd #end #if($type.adminRead==false) ui-state-highlight #end ">
 		  <td><a href="edit_name_type.castle?id=$!{type.Id}" title="Edit" class="name">
-				$type.name
+				$type.type
 			  </a></td>
 		  <td>
 			<span style='font-size:0.7em;'>

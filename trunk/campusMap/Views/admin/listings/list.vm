@@ -128,7 +128,7 @@
 					</a>&nbsp;
 				  </p>
 				</div>
-				<h3 style="float: left; display:inline-block;">${controller.getView()} Types ($place_name_types.TotalItems)</h3>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Name Types ($place_name_types.TotalItems)</h3>
 				#parse("/admin/place_name_type/list.vm")	
 			</div>
 		</div></div>	
