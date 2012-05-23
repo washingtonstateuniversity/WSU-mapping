@@ -33,7 +33,7 @@
         $!author.access_levels.title
       </td>
       <td>
-        #if($author.email)<a href="mailto:$!author.email">$!author.email</a>
+        #if($author.email) <a href="mailto:$!author.email">$!author.email</a> #else -- #end
       </td>
       <td class='actionArea'>
 
