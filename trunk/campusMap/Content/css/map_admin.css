@@ -313,7 +313,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content ul span{padding-left:35px;}
 
 
-#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:9px; position:relative; cursor:pointer;margin-left: -4px;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:9px; position:relative; cursor:pointer;margin-left: -4px;margin-top: -1px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}	
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_h,
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_{

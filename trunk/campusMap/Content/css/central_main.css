@@ -531,4 +531,4 @@ fieldset{padding: 4px 8px 10px;}
     text-decoration: none;}
 #selectedPlaceList_area ul li a.active{color:#981e32; font-weight:bold;}
 #selectedPlaceList_area ul li a img{ position:absolute; top:2px; left:2px;}
-#selectedPlaceList_area ul li div{font-size: 0.7em;font-weight: normal;line-height: 1.2em;}
+#selectedPlaceList_area ul li div{font-size: 0.7em;font-weight: normal;line-height: 1.2em;padding-left: 5px;}
