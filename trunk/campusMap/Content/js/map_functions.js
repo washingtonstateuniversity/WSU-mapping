@@ -560,7 +560,7 @@ function build_infobox(item){
 	}
 	var mainimage = "";
 	if($(".placeImages").length){
-		mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Evergreen' class='img-main'/></span>";
+		mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
 	}
 	var infoTitle = "";
 	if($('#hideTitles:checked').length==0){
@@ -1050,7 +1050,13 @@ function load_place_editor() {
 			e.preventDefault();
 			$("input[value='Apply']:first").trigger('click');
 		});
-
+	$('#shortcode').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$('#shortcodes').toggle(0,function(){ 
+				$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
+			});
+		}).trigger('click');
 	
 	
 	$.each($('.switch'),function(i,v){

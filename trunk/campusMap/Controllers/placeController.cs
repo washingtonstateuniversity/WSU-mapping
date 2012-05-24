@@ -1327,7 +1327,7 @@ namespace campusMap.Controllers
         public void delete_name_type(int id)
         {
             place_name_types place_type = ActiveRecordBase<place_name_types>.Find(id);
-            Flash["massage"] = "A Place type, <strong>" + place_type.type + "</strong>, has been <strong>deleted</strong>.";
+            Flash["massage"] = "A Name Type for places, <strong>" + place_type.type + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place_name_types>.Delete(place_type);
             CancelLayout();
             RedirectToAction("list");

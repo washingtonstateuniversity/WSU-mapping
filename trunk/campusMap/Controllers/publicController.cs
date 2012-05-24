@@ -205,28 +205,31 @@ using log4net.Config;
             public string processFields(string text,place place)
             {
                 String result = text;
-                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
-                typeEx.Add(Expression.Eq("model", "placeController"));
-                typeEx.Add(Expression.Eq("set", place.model.id));
-
-                field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
-                List<string> fields = new List<string>();
-
-
-                //log.Error(" place:" + place.prime_name);
-                
-
-                if (ft != null)
+                if (place.model != null)
                 {
-                    foreach (field_types ft_ in ft)
+                    List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                    typeEx.Add(Expression.Eq("model", "placeController"));
+                    typeEx.Add(Expression.Eq("set", place.model.id));
+
+                    field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+                    List<string> fields = new List<string>();
+
+
+                    //log.Error(" place:" + place.prime_name);
+
+
+                    if (ft != null)
                     {
-                        string value = "";
-                        if (text.Contains("$!{" + ft_.alias + "}"))
+                        foreach (field_types ft_ in ft)
                         {
-                            //log.Error("on field:" + ft_.alias);
-                            value = getFieldVal(ft_, place);
-                            result = result.Replace("$!{" + ft_.alias + "}", value);
-                            PropertyBag["" + ft_.alias] = value ;
+                            string value = "";
+                            if (text.Contains("$!{" + ft_.alias + "}"))
+                            {
+                                //log.Error("on field:" + ft_.alias);
+                                value = getFieldVal(ft_, place);
+                                result = result.Replace("$!{" + ft_.alias + "}", value);
+                                PropertyBag["" + ft_.alias] = value;
+                            }
                         }
                     }
                 }
@@ -239,36 +242,40 @@ using log4net.Config;
              */
             public string autoProcessFeilds(place place)
             {
-                //log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
-                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
-                typeEx.Add(Expression.Eq("model", "placeController"));
-                typeEx.Add(Expression.Eq("set", place.model.id));
-
-                field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
-                List<string> fields = new List<string>();
-
-
-                //log.Error(" place:" + place.prime_name);
-                Hashtable hashtable = new Hashtable();
-                hashtable["place"] = place;
-
-                if (ft != null)
+                String text = "";
+                if (place.model != null)
                 {
-                    foreach (field_types ft_ in ft)
-                    {
-                        string value = "";
-                        value = getFieldVal(ft_, place);
-                        hashtable["" + ft_.alias] = value;
-                        //log.Info("hashtable[" + ft_.alias+"]" + value);
-                    }
-                }
-                String renderPath = Context.ApplicationPhysicalPath;
-                if (!renderPath.EndsWith("\\"))
-                    renderPath += "\\";
+                    //log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
+                    List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                    typeEx.Add(Expression.Eq("model", "placeController"));
+                    typeEx.Add(Expression.Eq("set", place.model.id));
 
-                String text = System.IO.File.ReadAllText(renderPath + "Views/public/central/accessibilties.vm");
-                text = helperService.proccessText(hashtable, text, true).Trim();
-                //log.Info("text:" + text);
+                    field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+                    List<string> fields = new List<string>();
+
+
+                    //log.Error(" place:" + place.prime_name);
+                    Hashtable hashtable = new Hashtable();
+                    hashtable["place"] = place;
+
+                    if (ft != null)
+                    {
+                        foreach (field_types ft_ in ft)
+                        {
+                            string value = "";
+                            value = getFieldVal(ft_, place);
+                            hashtable["" + ft_.alias] = value;
+                            //log.Info("hashtable[" + ft_.alias+"]" + value);
+                        }
+                    }
+                    String renderPath = Context.ApplicationPhysicalPath;
+                    if (!renderPath.EndsWith("\\"))
+                        renderPath += "\\";
+
+                    text = System.IO.File.ReadAllText(renderPath + "Views/public/central/accessibilties.vm");
+                    text = helperService.proccessText(hashtable, text, true).Trim();
+                    //log.Info("text:" + text);
+                }
                 return text;
             }
 
@@ -520,7 +527,7 @@ using log4net.Config;
                                     {
                                       /* note the width and height should be abstracted out into a map preference*/
                                         galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
-                                            "<a href='#' class='imgEnlarge'></a>"+
+                                            "<a href='#' class='imgEnlarge' hidefocus='true'></a>" +
                                             "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
                                         "</span></li>";
                                         if(media.type.name=="general_image")hasImg = true;
@@ -531,8 +538,8 @@ using log4net.Config;
                                     }
                                     c++;
                                 }
-                                String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active'>Photos</a>" : "") + "<ul class='cNav'>" + repeatStr("<li><a href='#'>{$i}</a></li>", item.Images.Count - 1) + "</ul>" + (hasImg && hasVid ? "<a href='#' class='vids'>Video</a>" : "") + "</div>";
-                                String gallery = "<div class='cycle'><a href='#' class='prev'>Prev</a><div class='cWrap'><ul class='items'>" + galImg + "</ul></div><a href='#' class='next'>Next</a></div>" + nav;
+                                String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") + "<ul class='cNav'>" + repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) + "</ul>" + (hasImg && hasVid ? "<a href='#' class='vids' hidefocus='true'>Video</a>" : "") + "</div>";
+                                String gallery = "<div class='cycle'><a href='#' class='prev' hidefocus='true'>Prev</a><div class='cWrap'><ul class='items'>" + galImg + "</ul></div><a href='#' class='next' hidefocus='true'>Next</a></div>" + nav;
 
                                 imgGallery += @"
                                         {
@@ -608,7 +615,7 @@ using log4net.Config;
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
-                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(details, false), 80) + "...") + @""",
+                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(details, false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
                                             ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""

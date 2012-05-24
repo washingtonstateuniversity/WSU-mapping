@@ -27,7 +27,7 @@
 			#end
 		#end
 		
-		<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end' ><a href="?cat[]=$!item.friendly_name">$!item.name</a>
+		<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end' ><a href="?cat[]=$!item.friendly_name" #if($item.level==1)class="parentalLink"#end>$!item.name</a>
 
 		#*$Controller.repeatStr("- ",$cat.level)*#
 		#set($lastLevel=${item.level})

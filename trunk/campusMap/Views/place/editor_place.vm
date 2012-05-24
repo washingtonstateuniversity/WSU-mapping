@@ -331,8 +331,10 @@ $formbuttons
 			<h3>Summary :</h3>
 			#*$Form.TextArea("place.summary")*#
 			<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
-			<h3>Short codes</h3>
-<div style="height: 150px; overflow-y: scroll; border: 1px solid rgb(204, 204, 204); margin: 5px 10px;">
+						<br/>
+			<hr/>
+			<h3>Short codes <a href="#" title="show" id="shortcode">+</a></h3>
+<div id="shortcodes">
 
 	#foreach($short_code in $short_codes)
 		$short_code<br/>

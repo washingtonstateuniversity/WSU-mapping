@@ -181,7 +181,7 @@ table.ui-widget tbody tr.odd td{}
 .w50{width:50px !important;}
 
 .listing_switch{height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;}
-.listing_switch a {width:auto;display:inline-block;padding-bottom: 4px;}
+.listing_switch a {width:auto;display:inline-block;padding-bottom:1px;}
 .listing_switch a span{padding: 0.5em 1em;}
 
 .push_hide,.nonEdit{position:absolute;top:-9999px;left:-9999px;}
@@ -478,8 +478,8 @@ span.UinEdit{    background-color: #E2E2E2;
 .geometrics.editor .place_new{min-height:535px;}
 
 
-
-
+#shortcode{font-size:.75em; text-decoration:none;}
+#shortcodes{height: 150px; overflow-y: scroll; border: 1px solid rgb(204, 204, 204); margin: 5px 10px;}
 
 
 

@@ -198,6 +198,7 @@
 	
 	
 	}
+#nav #main_nav li.active a.parentalLink.childSelected{ font-weight:bold;}
 #nav #main_nav li.active li a{padding-left:13px;color:#5E6A71;background: url("../../Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;}
 #nav #main_nav li.active li.checked {
 	
@@ -211,7 +212,7 @@
 #toolbar ul {float:right; padding:0px; margin:0 15px 0 0;height:20px;}
 #toolbar ul li{ display: block;float: left;line-height: 15px;}
 #toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
-
+#toolbar a:hover {color: #5e6a71 !important;}
 #placeSearch{height:23px; position:relative;width:147px;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent;}
 #placeSearch input{color:#1f4799;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent; font-size:12px; height:23px;width:125px;border: medium none;position:absolute; top:0px;padding: 0;}
 #placeSearch input[type=text]{left:0px;padding-left: 5px;}
@@ -267,7 +268,7 @@
 
 /* info boxes */
 .infoBox{margin-bottom:67px;}
-#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65); box-shadow:  0px 0px 15px 5px rgba(0, 0, 0, .65);
+#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4); box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
 -moz-border-radius-bottomleft: 0px;
 -webkit-border-bottom-left-radius: 0px;
 -khtml-border-bottom-left-radius: 0px;
@@ -290,11 +291,11 @@ border-bottom-left-radius: 0px;
 border-bottom-right-radius: 0px;
 }
 #campusmap .ui-tabs .ui-tabs-nav li{ background: none repeat scroll 0 0 transparent;border: medium none;top: -7px;font-size: 13px;}
-#campusmap .ui-tabs .ui-tabs-nav li.ui-state-active{    background: none repeat scroll 0 0 #FFFFFF;border: 1px solid #4C545A;}
+#campusmap .ui-tabs .ui-tabs-nav li.ui-state-active{border: medium none;background: none repeat scroll 0 0 #FFFFFF;}
 
 #campusmap .ui-tabs .ui-tabs-nav li {}
 #campusmap .ui-tabs .ui-tabs-nav li.first {margin-left: -1px;}
-#campusmap .ui-tabs .ui-tabs-nav li a {font-size:12px;font-weight:normal;line-height:19px;padding: 0.3em 1.5em 0.15em;color:#cfd4d7;}
+#campusmap .ui-tabs .ui-tabs-nav li a {font-size:12px;font-weight:normal;line-height:19px;padding:4px 1.5em 0.15em;color:#cfd4d7;}
 #campusmap .ui-tabs .ui-tabs-nav li a:hover {color:#b6bf00;}
 #campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected{ padding-bottom: 1px;}
 #campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected a{color:#262a2d;}
@@ -302,7 +303,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel-cap .arrow{background: url("../../Content/images/iw_arrow.png") no-repeat scroll center center transparent;bottom:-78px;display: block; height: 86px;left:162.5px; position: absolute;width:74px;} 	
 
 /* info boxes content */	
-#campusmap .ui-tabs .ui-tabs-panel{font-size:12px; color:#262a2d;max-height: 240px;min-height:0px; padding:5px;}	
+#campusmap .ui-tabs .ui-tabs-panel{font-size:12px; line-height:16px; color:#262a2d;max-height: 240px;min-height:0px; padding:5px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content{width:365px;min-height:0px;max-height: 240px;overflow-x:hidden; overflow-y: auto;padding:0px 15px;}
 #campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids{padding:0px 4px; }
 #campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;margin-top: 0;padding-top: 0;}
@@ -312,25 +313,25 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content ul span{padding-left:35px;}
 
 
-#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:3px; position:relative; cursor:pointer;}	
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:9px; position:relative; cursor:pointer;margin-left: -4px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}	
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_h,
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_{
-	background: url("../../Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% 50% #FFFFFF;}
+	background: url("../../Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% top #FFFFFF;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage .imgEnlarge{
 	background: url("../../Content/images/imgEnlarge.png") no-repeat scroll center center transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;}
 	
   /* info boxes gallery */		
-	#campusmap .cycle{position:relative;width:344px;height:182px;margin-left:23px;}	
-	#campusmap .cycle .cWrap {margin: 0 auto;height:182px;width: 263px !important;}
-	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:182px;}
-	#campusmap .cycle .cWrap ul li{width: 344px !important;height:182px;}
+	#campusmap .cycle{position:relative;width:344px;height:190px;margin-left:10px;}	
+	#campusmap .cycle .cWrap {margin: 0 auto;height:190px;width: 263px !important;}
+	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
+	#campusmap .cycle .cWrap ul li{width: 344px !important;height:190px;}
 	
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage{float: left;position: relative;}	
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h,
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_{
 		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;    margin-left: 0;
-    padding: 12px 13px;}
+    padding: 13px 13px;}
 	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycle ul li span{padding: 12px 10px; }
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_v{
 		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
@@ -342,7 +343,7 @@ border-bottom-right-radius: 0px;
 	#campusmap .cycle .prev:hover{ background-position:left bottom; }
 	#campusmap .cycle .next:hover{background-position:right bottom;}
 	
-	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;}
+	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}
 	#campusmap .navArea ul.cNav{display:inline;margin:5px;padding:0;}
 	#campusmap .navArea ul.cNav li{display:inline;padding: 0 4px;line-height: 8px;height: 8px;}
 	#campusmap .navArea ul.cNav li a{display:inline-block;margin:0 2px; width:8px; height:8px;text-indent:-9999em;background: url("../../Content/images/jCellNav_btn.png") no-repeat scroll right center transparent;}
