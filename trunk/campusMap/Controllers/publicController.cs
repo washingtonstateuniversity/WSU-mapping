@@ -364,7 +364,7 @@ using log4net.Config;
                 // Loop through the place names
                 foreach (place_names placename in placenames)
                 {
-                    results[placename.name] = placename.id;
+                    results[placename.name] = placename.place_id;
                 }
 
                 /* end of this hacky thing.. now you need to return a place id tied so un hack it */
