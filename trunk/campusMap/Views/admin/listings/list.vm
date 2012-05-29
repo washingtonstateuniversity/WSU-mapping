@@ -55,7 +55,7 @@
 			<span style="display:inline-block;">
 			  Categories:<br/>
 			  <select id="list${controller.getView()}Type" class="fliterList">
-				<option value="">Your Sections</option>
+				<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
 				<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
 				<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
 				#foreach($cat in $listcats)
@@ -101,6 +101,7 @@
 			#parse("/admin/types/list.vm")	
 		</div>
 	</div></div>
+	
 	#if($styles)
 		<div id="_styles" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
@@ -116,25 +117,11 @@
 			</div>
 		</div></div>	
 	#end
-	
-	
+
 	#if($place_name_types)
-		<div id="_name_types" class="tabedArea ui-tabs-panel"><div class="tab_tar">
-			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
-				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
-				  <p>
-					<a href="$siteroot/${controller.getView()}/new_name_type.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Name Type
-					</a>&nbsp;
-				  </p>
-				</div>
-				<h3 style="float: left; display:inline-block;">${controller.getView()} Name Types ($place_name_types.TotalItems)</h3>
-				#parse("/admin/place_name_type/list.vm")	
-			</div>
-		</div></div>	
+		<div id="_name_types" class="tabedArea ui-tabs-panel">	
 	#end
-	
-	
+
 	<div id="_Fields" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">

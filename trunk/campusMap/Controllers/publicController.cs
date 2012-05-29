@@ -437,11 +437,8 @@ using log4net.Config;
             }
             public void get_place(int id, string callback)
             {
-
                 CancelView();
                 CancelLayout();
-                //String sql = "from place p where place_id="+id.ToString();
-                //SimpleQuery<place> p = new SimpleQuery<place>(typeof(place), sql);
                 place item = ActiveRecordBase<place>.Find(id);
                 place[] obj = new place[1];
                 obj[0] = item;

@@ -114,171 +114,165 @@ namespace campusMap.Controllers
                     publishedPaging = page; break;
                     }
             }
+            //SETUP SEARCHID and parts
+            if (searchId.Equals(0)){
+                searchId = -3;
+            }else{
+                place_types type = new place_types();
+            }
+            PropertyBag["searchId"] = searchId;
 
+        //user.categories.Contains(place.categories);
 
-
-            //user.categories.Contains(place.categories);
-
-                IList<place> items;
-                int pagesize = 15;
-                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-               if (searchId > 0)
+            IList<place> items;
+            int pagesize = 15;
+            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+           if (searchId > 0)
+            {
+               // find all places of cat
+                IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
+                IList<place> pitems = new List<place>();
+                foreach (categories c in cats)
                 {
-                    /*
-                     //categories[] array1 = new categories[1];
-                     //array1[0] = ActiveRecordBase<categories>.FindFirst(new ICriterion[] { Expression.Eq("id", searchId) });
-                     //baseEx.Add(Expression.In("categories", array1));
-
-                     IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
-                     object[] obj = new object[cats.Count];
-                     int i = 0;
-                     foreach (categories c in cats)
-                     {
-                         obj[i] = c.id;
-                         i++;
-                     }
-                     baseEx.Add(Expression.In("categories", obj));
-                   */
-                    IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
-                    categories[] obj = new categories[cats.Count];
-                    int i = 0;
-                    foreach (categories c in cats)
-                    {
-                        obj[i] = c;
-                        i++;
-                    }
-                    baseEx.Add(Expression.In("categories", obj));
-                }
-                else if (!searchId.Equals(-1))
-                {
-                    categories[] array1 = new categories[user.categories.Count];
-                    user.categories.CopyTo(array1, 0);
-                    //baseEx.Add(Expression.In("categories", array1));
-                }
-
-                if (searchId.Equals(-2))
-                {
-                    IList<place> userplaces = user.Places;
-                    object[] obj = new object[userplaces.Count];
-                    int i = 0;
-                    foreach(place p in userplaces){
-                        obj[i] = p.id;
-                        i++;
-                    }
-                    baseEx.Add(Expression.In("id", obj));
-                }
-
-            //PUBLISHED
-                List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-                pubEx.AddRange(baseEx);
-                pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
-
-                if (searchId > 0)
-                {
-                    items = ActiveRecordBase<place>.FindAll(Order.Desc("updated_date"), pubEx.ToArray());
-                }
-                else
-                {
-                    items = ActiveRecordBase<place>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
-                }
-                foreach (place item in items)
-                {
-                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
-                    {
-                        makePlaceStaticMap(item);
+                    foreach(place p in c.Places){
+                        pitems.Add(p);
                     }
                 }
-                PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, publishedPaging);
-                IList<string> buttons = new List<string>();
+                int[] obj = new int[pitems.Count];
+                int i = 0;
+                foreach (place p in pitems)
+                {
+                    obj[i] = p.id;
+                    i++;
+                }
+                baseEx.Add(Expression.In("id", obj));
+            }
+            if (searchId.Equals(-3))
+            {
+                IList<place> pitems = new List<place>();
+                foreach (categories ucats in user.categories){
+                    IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", ucats.id) });
+                    foreach (categories c in cats){
+                        foreach (place p in c.Places)
+                        {
+                            pitems.Add(p);
+                        }
+                    }
+                }
+                int[] obj = new int[pitems.Count];
+                int i = 0;
+                foreach (place p in pitems)
+                {
+                    obj[i] = p.id;
+                    i++;
+                }
+                baseEx.Add(Expression.In("id", obj));
+            }
+
+            if (searchId.Equals(-2)){
+                IList<place> userplaces = user.Places;
+                object[] obj = new object[userplaces.Count];
+                int i = 0;
+                foreach(place p in userplaces){
+                    obj[i] = p.id;
+                    i++;
+                }
+                baseEx.Add(Expression.In("id", obj));
+            }
+
+
+        //REVIEW
+            IList<place> reviewItems;
+            List<AbstractCriterion> revEx = new List<AbstractCriterion>();
+            revEx.AddRange(baseEx);
+            revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
+            reviewItems = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
+
+        //PUBLISHED
+            IList<place> publishedItems;
+            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
+            pubEx.AddRange(baseEx);
+            pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
+            publishedItems = ActiveRecordBase<place>.FindAll(Order.Desc("updated_date"), pubEx.ToArray());
+
+        //DRAFT
+            IList<place> draftItems;
+            List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
+            draftEx.AddRange(baseEx);
+            draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
+            draftItems = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
+
+
+
+
+        //PUBLISHED
+            foreach (place item in publishedItems){
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+                    makePlaceStaticMap(item);
+                }
+            }
+            PropertyBag["published_list"] = PaginationHelper.CreatePagination(publishedItems, pagesize, publishedPaging);
+            IList<string> buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
                 //buttons.Add("broadcast");
-                //buttons.Add("view");
+                //buttons.Add("view"); //NOTE:coming so TODO
                 //buttons.Add("order");
-                PropertyBag["publishedButtonSet"] = buttons;  
+            PropertyBag["publishedButtonSet"] = buttons;  
 
 
-            //REVIEW
-                List<AbstractCriterion> revEx = new List<AbstractCriterion>();
-                revEx.AddRange(baseEx);
-                revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
-
-                items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-                foreach (place item in items)
-                {
-                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
-                    {
-                        makePlaceStaticMap(item);
-                    }
+        //REVIEW
+            foreach (place item in reviewItems){
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+                    makePlaceStaticMap(item);
                 }
-                PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, reviewPaging);
-                buttons = new List<string>();
+            }
+            PropertyBag["review_list"] = PaginationHelper.CreatePagination(reviewItems, pagesize, reviewPaging);
+            buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("view");
-                PropertyBag["reviewButtonSet"] = buttons;  
+                //buttons.Add("view");
+            PropertyBag["reviewButtonSet"] = buttons;  
 
-            //DRAFT
-                List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
-                draftEx.AddRange(baseEx);
-                draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
-                items = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
-                foreach (place item in items)
-                {
-                    if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
-                    {
-                        makePlaceStaticMap(item);
-                    }
+        //DRAFT
+            foreach (place item in draftItems){
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+                    makePlaceStaticMap(item);
                 }
-                PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, draftPaging);
+            }
+            PropertyBag["draft_list"] = PaginationHelper.CreatePagination(draftItems, pagesize, draftPaging);
 
-                buttons = new List<string>();
+            buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
-                buttons.Add("view");
-                PropertyBag["draftButtonSet"] = buttons;  
+                //buttons.Add("view");
+            PropertyBag["draftButtonSet"] = buttons;  
 
-            //SETUP SEARCHID and parts
-                if (searchId.Equals(0)){
-                    PropertyBag["searchId"] = 0;
-                }else{
-                    place_types type = new place_types();
-                    PropertyBag["searchId"] = searchId;
-                    place firstplace = new place();
-                    place lastplace = new place();
-                    /*if (type.Places.Count.Equals(0)){
-                        firstplace = null;
-                        lastplace = null;
-                    }else{
-                        firstplace = type.Places[0];
-                        lastplace = type.Places[type.Places.Count - 1];
-                    }*/
-                    PropertyBag["firstplace"] = firstplace;
-                    PropertyBag["lastplace"] = lastplace; 
-                }
+        //place types
+            pagesize = 100;
+            IList<place_types> place_types_items;
+            place_types_items = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, typesPaging);
 
-                pagesize = 100;
-                IList<place_types> place_types_items;
-                place_types_items = ActiveRecordBase<place_types>.FindAll();
-                PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, typesPaging);
+        //place name types
+            pagesize = 15;
+            IList<place_name_types> place_name_types_items;
+            place_name_types_items = ActiveRecordBase<place_name_types>.FindAll();
+            PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
 
-                pagesize = 15;
-                IList<place_name_types> place_name_types_items;
-                place_name_types_items = ActiveRecordBase<place_name_types>.FindAll();
-                PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
+        //place feilds
+            pagesize = 15;
+            IList<field_types> place_fields_items;
+            List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
+            fieldsEx.AddRange(baseEx);
+            fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
+            place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
+            PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
 
-                pagesize = 15;
-                IList<field_types> place_fields_items;
-                List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
-                fieldsEx.AddRange(baseEx);
-                fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
-                place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
-                PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
-
-                RenderView("../admin/listings/list");
+            RenderView("../admin/listings/list");
         }
         public bool canEdit(place place, authors user)
         {

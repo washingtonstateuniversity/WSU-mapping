@@ -10568,3 +10568,7 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
    at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
    at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
    --- End of inner exception stack trace ---
+2012-05-29 11:26:54,363 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to convert parameter value from a place to a Int32.
+2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
+2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to convert parameter value from a place to a Int32.
+2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
