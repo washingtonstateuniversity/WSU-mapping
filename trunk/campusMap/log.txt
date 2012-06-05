@@ -10572,3 +10572,612 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
 2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
 2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Failed to convert parameter value from a place to a Int32.
 2012-05-29 11:26:54,426 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Object must implement IConvertible.
+2012-05-31 08:09:27,758 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path Abelson_2852
+2012-05-31 08:10:34,394 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path Abelson_3160-1.jpg
+2012-05-31 08:13:55,214 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\22.ext
+2012-05-31 08:17:06,392 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\23.ext
+2012-05-31 08:40:40,984 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Alumni-Arboretum_2670.jpg
+2012-05-31 08:42:07,648 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-05-31 08:42:07,900 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-05-31 08:42:08,146 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-05-31 08:42:08,148 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-05-31 08:42:08,646 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-05-31 08:42:08,669 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-05-31 08:42:16,721 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-05-31 08:42:16,723 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-05-31 08:43:03,094 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:49:18,485 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:50:28,891 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:50:54,229 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:51:42,522 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:57:27,005 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:57:49,997 [9] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The request was aborted: The operation has timed out.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-05-31 08:57:50,049 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 24, length: 29520 bytes
+2012-05-31 08:57:50,241 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:57:50,268 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 24, length: 29520 bytes
+2012-05-31 08:57:50,760 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 08:57:50,762 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 24, length: 29520 bytes
+2012-05-31 08:59:33,652 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Animal-Science-Lab-Building_2690-1.jpg
+2012-05-31 09:04:45,842 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg
+2012-05-31 09:17:39,040 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg withLuminance Table  0
+2012-05-31 09:17:39,051 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg withICC Profile  0
+2012-05-31 09:17:39,051 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg withChrominance Table  0
+2012-05-31 09:19:01,498 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 28
+2012-05-31 09:19:17,368 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 28
+2012-05-31 09:20:31,862 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_3193.jpg withLuminance Table  0
+2012-05-31 09:20:31,873 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_3193.jpg withICC Profile  0
+2012-05-31 09:20:31,873 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_3193.jpg withChrominance Table  0
+2012-05-31 09:20:54,169 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 29
+2012-05-31 09:21:08,405 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 29
+2012-05-31 09:25:02,929 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg withLuminance Table  0
+2012-05-31 09:25:02,941 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg withCopyright                                                         
+2012-05-31 09:25:02,941 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg withICC Profile  0
+2012-05-31 09:25:02,941 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg withChrominance Table  0
+2012-05-31 09:25:14,099 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 30
+2012-05-31 09:25:19,536 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 30
+2012-05-31 09:26:13,157 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 30
+2012-05-31 09:26:13,405 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 30, length: 1162213 bytes
+2012-05-31 09:26:13,758 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 30
+2012-05-31 09:26:14,298 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 30, length: 1162213 bytes
+2012-05-31 09:26:14,786 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 30
+2012-05-31 09:26:14,821 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 30, length: 1162213 bytes
+2012-05-31 09:26:57,370 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg withLuminance Table  0
+2012-05-31 09:26:57,381 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg withCopyright  ??2008 Washington State University Photo Services 
+2012-05-31 09:26:57,381 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg withICC Profile  0
+2012-05-31 09:26:57,381 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg withChrominance Table  0
+2012-05-31 09:27:06,184 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 31
+2012-05-31 09:27:10,363 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 31
+2012-05-31 09:30:01,531 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg withLuminance Table  0
+2012-05-31 09:30:01,542 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg withICC Profile  0
+2012-05-31 09:30:01,542 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg withChrominance Table  0
+2012-05-31 09:30:16,698 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 32
+2012-05-31 09:31:29,372 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 32, length: 31995 bytes
+2012-05-31 09:31:29,611 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 32
+2012-05-31 09:31:29,615 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 32, length: 1338091 bytes
+2012-05-31 09:31:30,103 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 32
+2012-05-31 09:31:30,106 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 32, length: 1338091 bytes
+2012-05-31 09:31:30,128 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 32
+2012-05-31 09:31:30,131 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 32, length: 1338091 bytes
+2012-05-31 10:00:23,356 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 24
+2012-05-31 10:00:23,372 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 24, length: 29520 bytes
+2012-05-31 10:03:05,009 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild-Scoreboard_2722.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:03:15,291 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 33
+2012-05-31 10:03:16,693 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 33, length: 25413 bytes
+2012-05-31 10:15:00,050 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:15:12,018 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 34
+2012-05-31 10:16:41,635 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 34, length: 23093 bytes
+2012-05-31 10:19:20,292 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-Addition_6739.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:20:46,777 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 35
+2012-05-31 10:21:09,897 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 35, length: 24773 bytes
+2012-05-31 10:32:01,785 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-Life-Sciences-PBSII-3780.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:33:00,363 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 36
+2012-05-31 10:34:40,460 [9] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-05-31 10:34:40,470 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 36, length: 33546 bytes
+2012-05-31 10:48:29,693 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:48:37,496 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_3193.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:48:45,855 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:48:53,589 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:49:01,058 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 37
+2012-05-31 10:49:02,069 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 37, length: 31995 bytes
+2012-05-31 10:49:02,228 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 40
+2012-05-31 10:49:03,425 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 40, length: 27843 bytes
+2012-05-31 10:49:03,508 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 39
+2012-05-31 10:49:04,630 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 39, length: 23093 bytes
+2012-05-31 10:49:05,388 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild-Scoreboard_2722.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 10:49:13,413 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 41
+2012-05-31 10:49:14,466 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 41, length: 25413 bytes
+2012-05-31 10:49:14,552 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 38
+2012-05-31 10:49:15,638 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 38, length: 26756 bytes
+2012-05-31 11:17:26,773 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ADBF_2876.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 11:17:43,033 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Animal-Science-Lab-Building_2690-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 11:17:50,933 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 42
+2012-05-31 11:18:40,330 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 42, length: 30040 bytes
+2012-05-31 11:18:40,352 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 43
+2012-05-31 11:18:50,046 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 43, length: 27579 bytes
+2012-05-31 11:18:51,664 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ADBF_6705-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  Chrominance Table  0
+2012-05-31 11:19:02,094 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Alumni-Arboretum_2670.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 11:19:17,807 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 44
+2012-05-31 11:19:19,210 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 44, length: 25345 bytes
+2012-05-31 11:19:19,241 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 45
+2012-05-31 11:19:20,397 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 45, length: 22873 bytes
+2012-05-31 11:19:21,439 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Agronomy-Seed-House_2660-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 11:19:29,512 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 46
+2012-05-31 11:19:30,414 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 46, length: 25516 bytes
+2012-05-31 11:42:47,192 [17] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,220 [17] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,220 [17] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,220 [17] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,220 [17] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,875 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,875 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,876 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,876 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:47,876 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,346 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,346 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,346 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,346 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,346 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,851 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,851 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,852 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,852 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:48,852 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,431 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,431 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,431 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,431 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,431 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,982 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,982 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,982 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,982 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:49,982 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:50,476 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:50,476 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:50,476 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:50,476 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:42:50,476 [9] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-05-31 11:45:43,808 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,809 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:45:43,871 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,871 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:45:43,872 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,872 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:45:43,873 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,873 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:45:43,873 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,874 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:45:43,874 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - cannot open connection
+2012-05-31 11:45:43,874 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2012-05-31 11:57:14,838 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-_0695.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 11:57:15,340 [17] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-05-31 11:57:32,667 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-Addition_6739.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 11:57:33,113 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-05-31 11:57:42,319 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-Addition-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 11:57:42,513 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:1612 & H:1096  --- producing:h
+2012-05-31 11:59:14,604 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 48
+2012-05-31 11:59:35,930 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 48, length: 24773 bytes
+2012-05-31 11:59:35,978 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 47
+2012-05-31 11:59:37,423 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 47, length: 28739 bytes
+2012-05-31 11:59:38,107 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-2432-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 11:59:38,509 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-05-31 12:01:19,282 [9] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-05-31 12:01:20,301 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-2433.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-05-31 12:01:20,796 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-05-31 12:01:55,778 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 49
+2012-05-31 12:03:27,150 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 49, length: 23647 bytes
+2012-05-31 12:03:27,285 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 50
+2012-05-31 12:03:40,850 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 50, length: 33102 bytes
+2012-05-31 12:03:41,012 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 51
+2012-05-31 12:03:46,243 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 51, length: 34002 bytes
+2012-05-31 13:48:52,906 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2834.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 13:48:53,496 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-05-31 13:49:38,127 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2852.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-05-31 13:49:38,606 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-05-31 13:49:47,302 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 53
+2012-05-31 13:50:56,216 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 53, length: 28583 bytes
+2012-05-31 13:50:56,420 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 52
+2012-05-31 13:52:36,520 [5] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-05-31 13:52:36,530 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 52, length: 41894 bytes
+2012-06-01 07:10:37,368 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 53
+2012-06-01 07:10:37,521 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 53, length: 28583 bytes
+2012-06-01 07:10:37,947 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 52
+2012-06-01 07:10:37,974 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 52, length: 41894 bytes
+2012-06-01 08:15:28,299 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2834.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 08:15:28,878 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 08:15:55,085 [12] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 08:15:55,859 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 54
+2012-06-01 08:16:17,378 [13] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 08:16:17,454 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 54, length: 41894 bytes
+2012-06-01 09:05:19,135 [13] INFO  mediaController [(null)] <(null)> - Q is 
+2012-06-01 09:05:20,938 [13] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2834.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 09:05:21,525 [13] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 09:05:45,421 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 55
+2012-06-01 09:05:51,779 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 55, length: 35979 bytes
+2012-06-01 09:06:18,345 [12] INFO  mediaController [(null)] <(null)> - Q is 
+2012-06-01 09:06:19,256 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2852.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 09:06:19,802 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 09:06:27,770 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 56
+2012-06-01 09:06:36,327 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 56, length: 28583 bytes
+2012-06-01 09:55:50,545 [12] INFO  mediaController [(null)] <(null)> - Q is 
+2012-06-01 09:55:51,141 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2834.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 09:55:51,710 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 09:56:14,227 [12] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 09:56:15,186 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 57
+2012-06-01 09:56:30,269 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 57, length: 35979 bytes
+2012-06-01 10:04:19,873 [17] INFO  mediaController [(null)] <(null)> - Q is 
+2012-06-01 10:04:20,653 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_3160-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:04:21,130 [17] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:05:56,268 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 58
+2012-06-01 10:06:39,736 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 58, length: 28724 bytes
+2012-06-01 10:07:09,182 [16] INFO  mediaController [(null)] <(null)> - Q is 3
+2012-06-01 10:07:09,785 [16] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2834.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 10:07:10,412 [16] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:07:32,704 [16] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 10:07:33,172 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 59
+2012-06-01 10:07:54,574 [16] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 10:07:54,575 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 59, length: 41894 bytes
+2012-06-01 10:10:27,189 [17] INFO  mediaController [(null)] <(null)> - Q is pool[Abelson_2852.jpg]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is pool_place[Abelson_2852.jpg]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is foo[]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is mediatype[Abelson_2852.jpg]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is d[]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is pool[Abelson_3160-1.jpg]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is pool_place[Abelson_3160-1.jpg]
+2012-06-01 10:10:27,203 [17] INFO  mediaController [(null)] <(null)> - Q is mediatype[Abelson_3160-1.jpg]
+2012-06-01 10:10:28,144 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2852.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 10:10:28,623 [17] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:12:09,600 [17] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 10:12:10,061 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 60
+2012-06-01 10:13:38,455 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 60, length: 28583 bytes
+2012-06-01 10:14:02,508 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 61
+2012-06-01 10:15:39,992 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 61, length: 28583 bytes
+2012-06-01 10:15:58,690 [12] INFO  mediaController [(null)] <(null)> - Q is 3
+2012-06-01 10:15:59,195 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2852.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 10:15:59,680 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:16:26,195 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 62
+2012-06-01 10:17:40,638 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 62, length: 28583 bytes
+2012-06-01 10:23:12,177 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_2852.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 10:23:12,732 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:23:35,115 [12] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (502) Bad Gateway.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 10:23:35,527 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 63
+2012-06-01 10:23:57,378 [12] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The remote server returned an error: (504) Gateway Timeout.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 10:23:57,379 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 63, length: 35200 bytes
+2012-06-01 10:23:58,143 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Abelson_3160-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:23:58,607 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:24:29,718 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 64
+2012-06-01 10:24:31,278 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 64, length: 28724 bytes
+2012-06-01 10:39:38,420 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-2432-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:39:38,836 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 10:39:42,866 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-2433.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:39:43,365 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:39:50,816 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 10:39:52,511 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 33102 bytes
+2012-06-01 10:39:52,672 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 66
+2012-06-01 10:39:54,201 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 66, length: 34002 bytes
+2012-06-01 10:39:54,999 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-2632.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:39:55,443 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 10:39:58,903 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bookin-3428.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 10:39:59,376 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 10:40:07,023 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 68
+2012-06-01 10:40:09,385 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 68, length: 28991 bytes
+2012-06-01 10:40:09,676 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 67
+2012-06-01 10:40:11,148 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 67, length: 28238 bytes
+2012-06-01 10:41:52,445 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 10:42:32,023 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 63678 bytes
+2012-06-01 10:42:32,519 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 66
+2012-06-01 10:42:53,499 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 66, length: 69094 bytes
+2012-06-01 10:42:53,827 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 67
+2012-06-01 10:44:31,617 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 67, length: 54567 bytes
+2012-06-01 10:44:31,695 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 10:44:31,698 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 33102 bytes
+2012-06-01 10:44:32,196 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 68
+2012-06-01 10:44:53,714 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 68, length: 57632 bytes
+2012-06-01 10:44:54,481 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 10:44:54,483 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 33102 bytes
+2012-06-01 10:44:54,941 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 10:44:54,943 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 63678 bytes
+2012-06-01 10:44:54,951 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 66
+2012-06-01 10:44:54,953 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 66, length: 69094 bytes
+2012-06-01 10:44:54,958 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 67
+2012-06-01 10:44:54,960 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 67, length: 54567 bytes
+2012-06-01 10:44:55,468 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 68
+2012-06-01 10:44:55,490 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 68, length: 57632 bytes
+2012-06-01 11:34:03,800 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:34:04,267 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 11:34:19,381 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences-PBSII-3494.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:34:19,828 [17] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 11:35:55,192 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-Life-Sciences-PBSII-3780.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:35:55,625 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 11:36:57,031 [12] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences- PBSII-3523-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:36:57,504 [12] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 11:38:24,634 [17] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-LIfe-Sciences-PBSII-3494.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:38:25,075 [17] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 11:40:05,974 [17] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 11:40:06,729 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bio-Life-Sciences-PBSII-3780.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 11:40:07,145 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 11:40:46,025 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 11:42:23,828 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-01 11:42:24,175 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 11:42:25,733 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 25643 bytes
+2012-06-01 11:42:25,796 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 11:42:28,037 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 25708 bytes
+2012-06-01 11:43:49,743 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 11:43:51,897 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 48425 bytes
+2012-06-01 11:43:52,278 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 11:43:54,343 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 51659 bytes
+2012-06-01 11:43:54,819 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 11:43:56,760 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 49309 bytes
+2012-06-01 11:43:58,082 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 11:43:58,084 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 48425 bytes
+2012-06-01 11:43:58,090 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 11:43:58,091 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 51659 bytes
+2012-06-01 11:43:58,099 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 11:43:58,146 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 49309 bytes
+2012-06-01 11:44:05,579 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 11:44:05,581 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-01 12:20:27,776 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 12:20:27,801 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 48425 bytes
+2012-06-01 12:20:27,806 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 12:20:27,808 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 51659 bytes
+2012-06-01 12:20:28,286 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 12:20:28,292 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 49309 bytes
+2012-06-01 12:20:34,004 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 12:20:34,005 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 48425 bytes
+2012-06-01 12:20:34,008 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 12:20:34,010 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 49309 bytes
+2012-06-01 12:20:34,013 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 12:20:34,014 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 51659 bytes
+2012-06-01 12:20:57,596 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-01 12:20:57,598 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-01 12:20:58,097 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 12:21:00,534 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 28139 bytes
+2012-06-01 12:21:00,639 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 12:21:22,353 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 57588 bytes
+2012-06-01 12:33:56,761 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-01 12:33:56,773 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 33102 bytes
+2012-06-01 12:33:57,277 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 66
+2012-06-01 12:34:00,267 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 66, length: 79499 bytes
+2012-06-01 12:34:00,320 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 67
+2012-06-01 12:34:02,016 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 67, length: 29947 bytes
+2012-06-01 12:34:02,348 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 68
+2012-06-01 12:34:04,439 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 68, length: 65794 bytes
+2012-06-01 12:35:19,545 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-01 12:35:19,596 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-01 12:35:20,046 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-01 12:35:20,085 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-01 12:35:20,562 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-01 12:35:20,598 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-01 12:36:00,154 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-01 12:36:00,715 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 2928541 bytes
+2012-06-01 12:36:14,416 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-01 12:36:14,423 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 928908 bytes
+2012-06-01 12:39:43,833 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ADBF_6705-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  Chrominance Table  0
+2012-06-01 12:39:44,308 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 12:41:04,840 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ADBF_2876.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 12:41:05,363 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 12:41:12,059 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:41:13,487 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-01 12:41:13,727 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-01 12:41:15,751 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 30040 bytes
+2012-06-01 12:41:16,544 [13] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Animal-Science-Lab-Building_2690-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 12:41:17,014 [13] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 12:41:29,664 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Alumni-Arboretum_2670.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-01 12:41:30,111 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 12:41:38,518 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:41:41,968 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-01 12:41:42,181 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 78
+2012-06-01 12:41:45,753 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 78, length: 22873 bytes
+2012-06-01 12:41:46,752 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Arch1762-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 12:41:47,232 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 12:41:56,522 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Arch_3102.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 12:41:56,956 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-01 12:42:03,289 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Avery-Hall_4227-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-01 12:42:03,752 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 12:42:14,957 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:42:16,867 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-01 12:42:17,046 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:42:18,505 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 34867 bytes
+2012-06-01 12:42:18,651 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 80
+2012-06-01 12:42:20,183 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 80, length: 32833 bytes
+2012-06-01 12:44:55,786 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:45:10,652 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 55526 bytes
+2012-06-01 12:45:10,789 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:45:10,790 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-01 12:45:11,869 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:45:11,870 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-01 12:45:12,025 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:45:12,026 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 55526 bytes
+2012-06-01 12:46:04,004 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:47:23,682 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 56696 bytes
+2012-06-01 12:47:23,695 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:47:23,697 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-01 12:47:24,478 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:47:24,479 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-01 12:47:24,702 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:47:24,704 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 56696 bytes
+2012-06-01 12:47:55,120 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:49:26,689 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 50646 bytes
+2012-06-01 12:49:26,835 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:49:26,838 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-01 12:49:26,912 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 78
+2012-06-01 12:49:29,383 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 78, length: 41957 bytes
+2012-06-01 12:49:29,454 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-01 12:49:31,265 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 53804 bytes
+2012-06-01 12:49:32,036 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:49:32,038 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-01 12:49:32,190 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:49:32,191 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 50646 bytes
+2012-06-01 12:49:32,194 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 78
+2012-06-01 12:49:32,195 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 78, length: 41957 bytes
+2012-06-01 12:49:32,691 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-01 12:49:32,693 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 53804 bytes
+2012-06-01 12:50:44,773 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-01 12:50:44,774 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-01 12:51:41,907 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:51:52,285 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 72522 bytes
+2012-06-01 12:51:52,578 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 80
+2012-06-01 12:52:54,677 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:52:54,690 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 34867 bytes
+2012-06-01 12:53:32,686 [13] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 12:53:32,710 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 80, length: 66892 bytes
+2012-06-01 12:53:33,446 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:53:33,448 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 34867 bytes
+2012-06-01 12:53:33,853 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:53:33,855 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 72522 bytes
+2012-06-01 12:53:33,860 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 80
+2012-06-01 12:53:33,861 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 80, length: 66892 bytes
+2012-06-01 12:54:10,626 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-01 12:54:10,628 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-01 12:54:16,053 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-01 12:54:16,055 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-01 12:54:27,439 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 79
+2012-06-01 12:54:27,442 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 79, length: 34867 bytes
+2012-06-01 12:54:27,946 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 80
+2012-06-01 12:55:42,422 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 80, length: 34378 bytes
+2012-06-01 13:05:55,013 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild_2718-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:05:55,578 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:06:22,184 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Brayton-Feild-Scoreboard_2722.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:06:22,599 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:06:38,479 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 82
+2012-06-01 13:08:15,743 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 82, length: 31995 bytes
+2012-06-01 13:08:16,487 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bailey-Field-Indoor-Batting-bldg_2727.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:08:16,941 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:08:27,280 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_4265-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:08:27,725 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:10:08,483 [5] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-01 13:10:09,329 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Beasley_3193.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:10:09,788 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:10:33,662 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 83
+2012-06-01 13:10:37,376 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 83, length: 25413 bytes
+2012-06-01 13:10:38,033 [13] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-_0695.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:10:38,525 [13] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:11:46,135 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 86
+2012-06-01 13:12:26,374 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 86, length: 26756 bytes
+2012-06-01 13:12:26,382 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 84
+2012-06-01 13:12:32,706 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 84, length: 23093 bytes
+2012-06-01 13:12:33,058 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-Addition-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:12:33,248 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1612 & H:1096  --- producing:h
+2012-06-01 13:12:48,065 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bohler-Addition_6739.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-01 13:12:48,514 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-01 13:13:14,645 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 85
+2012-06-01 13:14:32,234 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 85, length: 27843 bytes
+2012-06-01 13:14:32,735 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 87
+2012-06-01 13:14:43,230 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 87, length: 28739 bytes
+2012-06-01 13:14:43,390 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 88
+2012-06-01 13:14:47,821 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 88, length: 23647 bytes
+2012-06-01 13:14:48,552 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 89
+2012-06-01 13:15:07,064 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 89, length: 24773 bytes
+2012-06-01 13:46:19,752 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-01 13:46:20,004 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-01 13:46:20,252 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-01 13:46:20,267 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-01 13:46:20,752 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-01 13:46:20,771 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-01 13:51:02,350 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 82
+2012-06-01 13:51:02,352 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 82, length: 31995 bytes
+2012-06-01 13:51:02,864 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 83
+2012-06-01 13:51:05,384 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 83, length: 58297 bytes
+2012-06-01 13:51:05,406 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 84
+2012-06-01 13:51:07,325 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 84, length: 54864 bytes
+2012-06-01 13:51:11,712 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 86
+2012-06-01 13:51:13,758 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 86, length: 61733 bytes
+2012-06-01 13:51:14,252 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 85
+2012-06-01 13:51:14,257 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 85, length: 27843 bytes
+2012-06-01 13:51:21,275 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 88
+2012-06-01 13:51:21,276 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 88, length: 23647 bytes
+2012-06-01 13:51:21,786 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 89
+2012-06-01 13:51:23,676 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 89, length: 56858 bytes
+2012-06-04 06:15:50,914 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 84
+2012-06-04 06:15:51,075 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 84, length: 1104537 bytes
+2012-06-04 06:16:23,953 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 65
+2012-06-04 06:16:23,988 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 65, length: 33102 bytes
+2012-06-04 06:16:24,483 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 67
+2012-06-04 06:16:24,494 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 67, length: 29947 bytes
+2012-06-04 06:16:24,998 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 66
+2012-06-04 06:16:25,025 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 66, length: 79499 bytes
+2012-06-04 06:16:25,498 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 68
+2012-06-04 06:16:25,513 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 68, length: 65794 bytes
+2012-06-04 09:28:15,312 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-04 09:28:15,545 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-04 09:28:15,815 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-04 09:28:15,823 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-04 09:28:16,315 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-04 09:28:16,330 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-04 09:28:17,332 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-04 09:28:56,828 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 69849 bytes
+2012-06-04 09:28:56,864 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-04 09:28:56,877 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 28139 bytes
+2012-06-04 09:28:56,893 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-04 09:28:56,965 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-04 09:28:56,971 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-04 09:28:57,006 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-04 09:28:57,128 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-04 09:28:57,144 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-04 09:28:57,174 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-04 09:28:57,188 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-04 09:28:57,642 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-04 09:28:57,655 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 57588 bytes
+2012-06-04 09:30:50,042 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'media_format_id'.
+2012-06-04 09:30:50,044 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'media_format_id'.

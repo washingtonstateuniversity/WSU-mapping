@@ -186,21 +186,21 @@ namespace campusMap.Controllers
             List<AbstractCriterion> revEx = new List<AbstractCriterion>();
             revEx.AddRange(baseEx);
             revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
-            reviewItems = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
+            reviewItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), revEx.ToArray());
 
         //PUBLISHED
             IList<place> publishedItems;
             List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
             pubEx.AddRange(baseEx);
             pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
-            publishedItems = ActiveRecordBase<place>.FindAll(Order.Desc("updated_date"), pubEx.ToArray());
+            publishedItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), pubEx.ToArray());
 
         //DRAFT
             IList<place> draftItems;
             List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
             draftEx.AddRange(baseEx);
             draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
-            draftItems = ActiveRecordBase<place>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
+            draftItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), draftEx.ToArray());
 
 
 
@@ -1238,8 +1238,18 @@ namespace campusMap.Controllers
             }
 
 
+            String cachePath = Context.ApplicationPhysicalPath;
+            if (!cachePath.EndsWith("\\"))
+                cachePath += "\\";
+                cachePath += @"uploads\";
+                cachePath += @"places\cache\";
 
-
+            string file = place.id + "_centralplace" + ".ext";
+            String file_path = cachePath + file;
+            if (File.Exists(file_path))
+            {
+                File.Delete(file_path);
+            }
 
             cleanUpplace_media(place.id);
 

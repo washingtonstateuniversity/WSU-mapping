@@ -156,6 +156,17 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
+
+
+        private media_format media_format;
+        [BelongsTo("media_format_id")]
+        virtual public media_format format
+        {
+            get { return media_format; }
+            set { media_format = value; }
+        }
+
+
         /*private IList<media_repo> Media;
         [HasMany(Lazy=true, BatchSize=30)]
         virtual public IList<media_repo> media
@@ -170,8 +181,38 @@ namespace campusMap.Models
             get { return Media_typed; }
             set { Media_typed = value; }
         }
-
-
     }
+    [ActiveRecord(Lazy = true, BatchSize = 5)]
+    public class media_format : json_autocomplete<media_format>, campusMap.Models.Ijson_autocomplete
+    {
 
+        private int media_format_id;
+        [PrimaryKey("media_format_id")]
+        virtual public int id
+        {
+            get { return media_format_id; }
+            set { media_format_id = value; }
+        }
+        private string _name;
+        [Property]
+        virtual public string name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        private string _attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return _attr; }
+            set { _attr = value; }
+        }
+        private IList<media_types> _media_types;
+        [HasAndBelongsToMany(typeof(media_types), Lazy = true, BatchSize = 30, Table = "media_types_to_media_format", ColumnKey = "media_type_id", ColumnRef = "media_format_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<media_types> media_types
+        {
+            get { return _media_types; }
+            set { _media_types = value; }
+        }
+    }
 }

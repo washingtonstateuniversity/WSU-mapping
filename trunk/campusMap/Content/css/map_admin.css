@@ -334,7 +334,10 @@ border-bottom-right-radius: 0px;
     padding: 13px 13px;}
 	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycle ul li span{padding: 12px 10px; }
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_v{
-		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;margin-left: 6px; padding: 12px 21px; }
+		    background: url("../../Content/images/gallery_bk_ver.png") no-repeat scroll center top transparent;
+			margin-left: 67px;
+			padding: 12px 9px;
+	}
 	
 	#campusmap .cycle .prev{
 		left:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent; }

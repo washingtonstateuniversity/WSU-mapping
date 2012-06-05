@@ -502,7 +502,14 @@ using log4net.Config;
                             if (item.Images.Count >0 )
                             {
                                 /* note the width and height should be abstracted out into a map preference*/
-                                mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'><a href='#' class='imgEnlarge'></a><img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='" + item.Images[0].caption + "' class='img-main'/></span>";
+                                mainimage = "<span class='headImage orientation_" + item.Images[0].orientation + "'>";
+                                mainimage += "<a href='#' class='imgEnlarge'></a>";
+                                mainimage += "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id;
+                                mainimage += "&id=" + item.Images[0].id + "&m=crop&w=148&h=100' rel='gouped' title='" + getRootUrl();
+                                mainimage += "media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='";
+                                mainimage += (String.IsNullOrEmpty(item.Images[0].caption) ? "" : item.Images[0].caption);
+                                mainimage += "' class='img-main'/>";
+                                mainimage += "</span>";
                             }
 
                             String infoTitle = "";

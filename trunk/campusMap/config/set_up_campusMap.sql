@@ -185,7 +185,8 @@ DROP TABLE [dbo].[media_to_field_types] */
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_to_fields]') AND type in (N'U'))
 DROP TABLE [dbo].[media_to_fields]
 GO
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_types_to_media_format]') AND type in (N'U'))
+DROP TABLE [dbo].[media_types_to_media_format]
 
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[logs]') AND type in (N'U'))
@@ -201,6 +202,8 @@ DROP TABLE [dbo].[authors]
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_types]') AND type in (N'U'))
 DROP TABLE [dbo].[media_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_format]') AND type in (N'U'))
+DROP TABLE [dbo].[media_format]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_repo]') AND type in (N'U'))
 DROP TABLE [dbo].[media_repo]
 
@@ -1174,6 +1177,7 @@ GO
 
 	CREATE TABLE [dbo].[media_types](
 		[media_type_id] [int] IDENTITY(1,1) NOT NULL,
+		[media_format_id] [int] NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
 		CONSTRAINT [PK_media_type] PRIMARY KEY CLUSTERED 
@@ -1190,14 +1194,60 @@ GO
 	GO
 	/* add some defaults */
 	INSERT INTO [campusMap].[dbo].[media_types]
-			   ([name],[attr])
+			   ([name],[media_format_id])
 		 VALUES
-			   ('marker_icon',null),
-			   ('user_image',null),
-			   ('general_image',null),
-			   ('general_video',null),
-			   ('google_static_map',null)
+			   ('marker_icon',1),
+			   ('user_image',1),
+			   ('general_image',1),
+			   ('general_video',2),
+			   ('google_static_map',1)
 	GO
+	CREATE TABLE [campusMap].[dbo].[media_format](
+		[media_format_id] [int] IDENTITY(1,1) NOT NULL,
+		[name] [nvarchar](max) NOT NULL,
+		[attr] [nvarchar](max) NULL,
+		CONSTRAINT [PK_media_format] PRIMARY KEY CLUSTERED 
+		(
+			[media_format_id] ASC
+		)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+	GO
+	/* add some defaults */
+	INSERT INTO [campusMap].[dbo].[media_format]
+			   ([name])
+		 VALUES
+			   ('image'),
+			   ('video'),
+			   ('audio')
+	GO
+CREATE TABLE [campusMap].[dbo].[media_to_media_types](
+    [id] [int] IDENTITY(1,1) NOT NULL,
+    [media_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_media_to_media_media] FOREIGN KEY ([media_id])
+        REFERENCES [media_repo] ([media_id]),
+    [media_type_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_media_to_media_types] FOREIGN KEY ([media_type_id])
+        REFERENCES [media_types] ([media_type_id]),
+    CONSTRAINT [PK_media_to_media_types] PRIMARY KEY CLUSTERED 
+    (
+        [id] ASC 
+    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+GO
+CREATE TABLE [campusMap].[dbo].[media_types_to_media_format](
+    [id] [int] IDENTITY(1,1) NOT NULL,
+    [media_type_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_media_types_to_media_format_media] FOREIGN KEY ([media_type_id])
+        REFERENCES [media_types] ([media_type_id]),
+    [media_format_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_media_types_to_media_format_format] FOREIGN KEY ([media_format_id])
+        REFERENCES [media_format] ([media_format_id]),
+    CONSTRAINT [PK_media_types_to_media_format] PRIMARY KEY CLUSTERED 
+    (
+        [id] ASC 
+    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+GO
 
 	
 /* needed but needs adjusments */
@@ -1864,21 +1914,6 @@ CREATE TABLE [dbo].[place_to_usertags](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO	
-CREATE TABLE [dbo].[media_to_media_types](
-    [id] [int] IDENTITY(1,1) NOT NULL,
-    [media_id] [int] NOT NULL DEFAULT 1
-        CONSTRAINT [FK_media_to_media_media] FOREIGN KEY ([media_id])
-        REFERENCES [media_repo] ([media_id]),
-    [media_type_id] [int] NOT NULL DEFAULT 1
-        CONSTRAINT [FK_media_to_media_types] FOREIGN KEY ([media_type_id])
-        REFERENCES [media_types] ([media_type_id]),
-    CONSTRAINT [PK_media_to_media_types] PRIMARY KEY CLUSTERED 
-    (
-        [id] ASC 
-    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-    ) ON [PRIMARY]
-GO
-
 
 
 

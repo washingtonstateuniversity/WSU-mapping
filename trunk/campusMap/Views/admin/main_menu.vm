@@ -4,7 +4,7 @@
 
 
 
-#set($user="JeremyBass")
+#set($user="Jeremy Bass")
 <div id="adminNav">
 
 <ul class="menu Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
@@ -45,7 +45,7 @@
 	</ul>
 	#if($Controller.getUser().name==$user)
 	<ul class="menu">
-		<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/index.castle"><b>Media</b></a>
+		<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle"><b>Media</b></a>
 			<ul class="drop">
 				<li><a href="geometrics/new.castle">New Media</a></li>
 				<li><a href="#url">User Media</a></li>
