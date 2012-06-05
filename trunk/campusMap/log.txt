@@ -11181,3 +11181,819 @@ System.Net.WebException: The operation has timed out
 2012-06-04 09:28:57,655 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 57588 bytes
 2012-06-04 09:30:50,042 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'media_format_id'.
 2012-06-04 09:30:50,044 [9] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'media_format_id'.
+2012-06-05 07:00:22,682 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Stephenson-Towers-Complex.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  Chrominance Table  0
+2012-06-05 07:00:23,213 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:02:04,173 [4] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 07:02:05,001 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\South-Fairway-Playfield_0756-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:02:05,456 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:02:15,901 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-Gym_4933-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:02:16,396 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:03:17,494 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE-5-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:03:18,007 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:04:19,755 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE-4.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:04:20,244 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:05:05,946 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE-3.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:05:06,372 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:06:12,094 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Sloan_1079-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:06:12,489 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2316 & H:1576  --- producing:h
+2012-06-05 07:06:21,405 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Sloan_Hall_4406.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:06:21,825 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:06:43,884 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:06:44,318 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:06:56,169 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE_3808.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:06:56,655 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:08:29,747 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Smith-CUE-2.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:08:30,230 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:08:36,741 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Shock-Physics_3959-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:08:37,137 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:08:44,148 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Scott-and-Coman-Halls_4244-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:08:44,514 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:09:01,492 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Rotunda-Southside-Cafe_0834-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:09:01,924 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:10:35,767 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Stephenson-Complex_2860-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:10:36,213 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:10:43,601 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Southside-3673.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:10:43,966 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:10:58,073 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Shock-Physics6709.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  Chrominance Table  0
+2012-06-05 07:10:58,495 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:11:12,543 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Steam-Plant-Grimes-Way_2886-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:11:12,899 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:12:33,873 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Rogers-Feild_3816-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:12:34,341 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:12:42,011 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Southside-3637.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:12:42,398 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:12:54,550 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Regents-Hall_4248-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:12:54,945 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:03,804 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Southside-Cafe_0805-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:13:04,229 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:12,999 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Presidents-Residence-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:13:13,483 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:20,496 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona-2858.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:13:20,847 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:13:23,532 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona-2209.jpg with  -  Luminance Table  0  -  Copyright  Washington State University   -  Chrominance Table  0
+2012-06-05 07:13:23,873 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:33,550 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona-3645-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:13:33,888 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1473 & H:2421  --- producing:v
+2012-06-05 07:13:37,256 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona_1498.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:13:37,651 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:46,616 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\PEB_4254-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:13:46,987 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:13:55,248 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\PEB_4930.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:13:55,691 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:03,137 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Parking-and-Transportation-Svs-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:14:03,528 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:12,358 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Palouse-Ridge_0750-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:14:12,784 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:20,920 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Palouse-Ridge-Golf-Course-Club-House_9703.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:14:21,397 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:28,582 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Palouse-Ridge-Golf-Course-Club-House-9689.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:14:29,063 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:35,992 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Palouse-Ridge_0739.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:14:36,381 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:14:45,622 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Palouse-Ridge_0738.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:14:46,010 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:15:01,462 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Owen-Sci-Li_2836-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:15:01,907 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:15:31,190 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Owen-Sci.-Lib-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:15:31,689 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:15:49,330 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Olympia-Hall-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:15:49,731 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:16:50,158 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Northside-2335-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:16:50,716 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:17:57,131 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Northside-2336.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:17:57,587 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:18:59,306 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Northside-2334.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:18:59,772 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:19:19,689 [4] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The request was aborted: The operation has timed out.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 07:19:20,172 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Northside-_3573.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:19:20,564 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:20:07,936 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Neil-Hall_3962-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:20:08,357 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:20:42,459 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Neil-Hall_3980.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:20:42,833 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:22:10,053 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Murrow-Complex-East_3871-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:22:10,482 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:22:32,808 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Morrill_4210-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:22:33,270 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:22:46,349 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Murrow_3940.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:22:46,859 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:24:19,614 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Mooberry-Track_3204-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:24:20,061 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:24:46,275 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Meats-Lab_2675-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:24:46,745 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:26:15,771 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\McEachern-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:26:16,240 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:26:39,396 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\McEeachern_3142.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:26:39,872 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:26:41,083 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Meats-Lab_2674.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:26:41,539 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:27:04,572 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\McCoy_3983-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:27:05,034 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:28:28,785 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\McCroskey-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:28:29,247 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:28:50,071 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Math-Learning-Annex_4206-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:28:50,568 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:30:28,607 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Martin-Stadium_6703-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:30:29,077 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:30:36,950 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Martin-Stadium_2728.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:30:37,330 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:30:46,929 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Markley-Services-Complex_2899-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:30:47,245 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:30:52,875 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Lower-Soccer-Field_4241-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:30:53,369 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:31:03,349 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Lighty_6616-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:31:03,808 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:32:20,626 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Library-Road-9_29_10_6998.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:32:21,088 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:32:31,763 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Library-Road_4228-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:32:32,160 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:32:42,836 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Library-Road_3641.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:32:43,256 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:32:52,847 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Kimbrough_4225-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:32:53,316 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:01,567 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Lewis-Alumni-Ctr_0145.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:02,116 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:11,016 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Lewis-Alumni-Ctr_2667-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:11,466 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:20,211 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Johnson-Tower_4705-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:20,609 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:33:24,918 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Kimbrough_3929.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:25,294 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:34,665 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Jewett-Observatory_0789-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:35,063 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:44,505 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Johnson_Hall_3818-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:44,971 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:33:52,256 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\IT-Building_2640-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:33:52,745 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:01,343 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Indoor-Practice-Facility-IPF_2700-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:01,729 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:10,666 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\IT-Bldg_4010.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:11,173 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:19,820 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\IT-BLDG_316453.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:20,368 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:28,179 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Hulbert_6628-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:28,617 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:37,877 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Honors-Hall_2494-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:38,329 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:46,309 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Hulbert_2680.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:46,731 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:34:55,155 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Honors-Hall-3752.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:34:55,687 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:35:03,443 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Holland-Nature-Boy-259-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:35:03,891 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:35:11,468 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Holland-Nature-Boy-1395.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:35:11,878 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:36:31,026 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\HLA-Display-Garden_4006-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:36:31,478 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:36:41,867 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Hillside-1892-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:36:42,389 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:36:50,908 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Hillside-1893.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:36:51,392 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:36:58,608 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Hillside-1894.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:36:59,136 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:37:06,880 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Heald_3223-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:37:07,397 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:37:14,623 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Grimes-Way-Field_1094-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:37:15,039 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:37:24,662 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Grimes-Way-Field_3989.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:37:25,115 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:38:31,060 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Gannon-Goldsworthy_3967-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:38:31,552 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:38:43,055 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Grimes-Way-Feild_1055.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:38:43,564 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:38:51,086 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Gannon-Goldsworthy_3948.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:38:51,528 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:38:58,865 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Fulmer_2846-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:38:59,359 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:39:06,816 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Regents-Hall_4259.jpg with  -  Luminance Table  0  -  Copyright                                                           -  Chrominance Table  0
+2012-06-05 07:39:07,237 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:39:15,494 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Rogers-Orton_3233-1.jpg with  -  Luminance Table  0  -  Chrominance Table  0
+2012-06-05 07:39:15,965 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:39:25,075 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Plant-Bio-Sci-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  Chrominance Table  0
+2012-06-05 07:39:25,513 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:40:51,626 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona_5024.jpg with  -  Luminance Table  0  -  Copyright  Washington State University   -  Chrominance Table  0
+2012-06-05 07:40:51,943 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:41:01,776 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Persona_2426.jpg with  -  Luminance Table  0  -  Copyright  Washington State University   -  Chrominance Table  0
+2012-06-05 07:41:02,105 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:41:15,706 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Fulmer_2848.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:41:16,203 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:41:31,794 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\FSHN_2693.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:41:32,166 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:41:53,693 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\FSHN_2698-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:41:54,124 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:42:33,954 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\French-Ad-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:42:34,506 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:43:03,428 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Flix-0200.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:43:03,930 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:43:16,301 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Food-Services-Bldg-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:43:16,658 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:43:25,222 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Flix-0198-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:43:25,763 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:43:53,093 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\French-AD_2646.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:43:53,641 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:44:30,542 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Football-Practice-Field_3817-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:44:31,036 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:44:54,566 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Ferdinands_2710-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:44:54,989 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:45:12,621 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\FineArts_6444-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:45:13,041 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:45:26,677 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ETRL__3207.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:45:27,156 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:45:52,320 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Ferdinands_2714.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:45:52,799 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:46:11,906 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\EEME_0732-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:46:12,378 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:46:29,595 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Eastlik_2827-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:46:30,155 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:46:39,414 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Environmental-Health-&-Safety_2904-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:46:39,822 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:47:18,071 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Fine-Arts_3946.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:47:18,520 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:47:38,893 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\ETRL__3211-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:47:39,346 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:47:54,479 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Eastlik_2830.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:47:54,962 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:07,231 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Daggy-Hall_3964-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:07,696 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:17,221 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\EEME_0731.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:17,759 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:25,362 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Ensminger_2684-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:25,680 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:34,385 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\CUB_6636-1.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:34,771 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:43,321 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Dana-Hall_3205.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:43,809 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:48:47,068 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cougar-Pride_0057-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:47,429 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 07:48:50,137 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cougar-Pride_9599.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:50,482 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:48:58,134 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cougar-Pride-3354.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:48:58,504 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:49:06,383 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cooper-Publications_0778-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:49:06,851 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:49:16,548 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cooper-Publications_0777.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:49:17,018 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:49:24,915 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Dodgen-NuclearCenter_0762-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:49:25,359 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:49:41,280 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\College-Hall_2812-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:49:41,772 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:51:07,181 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\College-Hall_0192.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:51:07,701 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:51:43,472 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Commons_4204-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:51:43,971 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:51:53,187 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland-Education-Addition_3236.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:51:53,657 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:53:25,711 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland-Education-Addition_3225-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:53:26,225 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:53:40,508 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\CUB_6651.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:53:40,884 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:53:49,520 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland_3975-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:53:49,945 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:53:58,298 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Clark-Hall-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:53:58,801 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:54:09,577 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Childrens-Center_0796-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:54:10,010 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:55:34,335 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland_2838.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:55:34,893 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:55:44,775 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Dodgen-NuclearCenter_0766.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:55:45,171 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:55:53,313 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cougar-Pride_0059.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:55:53,638 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:56:04,285 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland_1062.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:56:04,767 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:56:17,390 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Dana-Hall_3213-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:56:17,856 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:57:41,003 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\CADD_4213-1.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:57:41,443 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:57:51,725 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Carpenter-Hall_3202-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:57:52,174 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:58:02,336 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Clark_2688.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:58:02,794 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:58:15,139 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-9_29_10_7071.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:58:15,600 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:58:34,376 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall_2817-1.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:58:34,820 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:59:18,030 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Cleveland-Education-Addition_3965.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:59:18,474 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 07:59:56,545 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\CADD-Communications-Addition_3952.jpg with  -  Luminance Table  0  -  Copyright                                                           -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 07:59:56,949 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 08:00:05,193 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-0658.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:00:05,685 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 08:00:09,219 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Carpenter_D316727.jpg with  -  Luminance Table  0  -  Copyright  ??2008 Washington State University Photo Services   -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:00:09,673 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 08:00:12,568 [5] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The underlying connection was closed: The connection was closed unexpectedly.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 08:00:13,223 [9] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-1632.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:00:13,578 [9] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 08:00:23,167 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
+2012-06-05 08:00:24,525 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes
+2012-06-05 08:00:24,532 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 93
+2012-06-05 08:00:27,062 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 93, length: 35280 bytes
+2012-06-05 08:00:27,069 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 94
+2012-06-05 08:00:35,676 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 94, length: 30994 bytes
+2012-06-05 08:00:35,683 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 95
+2012-06-05 08:00:36,871 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 95, length: 32340 bytes
+2012-06-05 08:00:36,878 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 96
+2012-06-05 08:00:37,918 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 96, length: 26896 bytes
+2012-06-05 08:00:37,925 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 98
+2012-06-05 08:00:39,478 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 98, length: 31490 bytes
+2012-06-05 08:00:39,485 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 99
+2012-06-05 08:00:50,639 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 99, length: 31357 bytes
+2012-06-05 08:00:50,651 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 100
+2012-06-05 08:00:51,887 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 32384 bytes
+2012-06-05 08:00:51,894 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 101
+2012-06-05 08:00:53,065 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 101, length: 20875 bytes
+2012-06-05 08:00:53,072 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 102
+2012-06-05 08:00:55,647 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 102, length: 22696 bytes
+2012-06-05 08:00:55,653 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 103
+2012-06-05 08:01:05,544 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 103, length: 28044 bytes
+2012-06-05 08:01:05,551 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 104
+2012-06-05 08:01:06,680 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 104, length: 29658 bytes
+2012-06-05 08:01:06,687 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 105
+2012-06-05 08:01:07,917 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 105, length: 31579 bytes
+2012-06-05 08:01:07,924 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 106
+2012-06-05 08:01:09,036 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 106, length: 28320 bytes
+2012-06-05 08:01:09,043 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 107
+2012-06-05 08:01:10,981 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 107, length: 21566 bytes
+2012-06-05 08:01:10,988 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 108
+2012-06-05 08:02:51,060 [9] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 08:02:51,062 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 108, length: 37672 bytes
+2012-06-05 08:02:51,069 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 109
+2012-06-05 08:03:12,322 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 109, length: 41165 bytes
+2012-06-05 08:03:12,328 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 110
+2012-06-05 08:03:14,550 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 110, length: 28737 bytes
+2012-06-05 08:03:14,557 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 111
+2012-06-05 08:03:16,676 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 111, length: 29000 bytes
+2012-06-05 08:03:16,680 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 112
+2012-06-05 08:03:21,061 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 112, length: 33473 bytes
+2012-06-05 08:03:21,068 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 113
+2012-06-05 08:03:22,211 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 113, length: 16860 bytes
+2012-06-05 08:03:22,218 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 114
+2012-06-05 08:03:23,389 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 114, length: 25545 bytes
+2012-06-05 08:03:23,396 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 115
+2012-06-05 08:03:24,803 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 115, length: 15337 bytes
+2012-06-05 08:03:24,810 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 116
+2012-06-05 08:05:04,884 [5] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 08:05:04,887 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 116, length: 33483 bytes
+2012-06-05 08:05:04,896 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 117
+2012-06-05 08:05:23,948 [4] ERROR ImageService [(null)] <(null)> - Error uploading file
+System.Net.WebException: The request was aborted: The operation has timed out.
+   at System.Net.HttpWebRequest.GetResponse()
+   at campusMap.Services.ImageService.HttpUploadFile(String url, String file, String paramName, String contentType, NameValueCollection nvc) in C:\_SVN_\campusMap\campusMap\Services\ImageService.cs:line 739
+2012-06-05 08:05:23,949 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 117, length: 34674 bytes
+2012-06-05 08:05:23,956 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 118
+2012-06-05 08:05:25,366 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 118, length: 32093 bytes
+2012-06-05 08:05:25,373 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 119
+2012-06-05 08:05:26,409 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 119, length: 26191 bytes
+2012-06-05 08:05:26,416 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 120
+2012-06-05 08:05:27,546 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 120, length: 23251 bytes
+2012-06-05 08:05:27,553 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 121
+2012-06-05 08:05:28,690 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 121, length: 30797 bytes
+2012-06-05 08:05:28,697 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 122
+2012-06-05 08:05:29,990 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 122, length: 31448 bytes
+2012-06-05 08:05:29,997 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 123
+2012-06-05 08:05:31,142 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 123, length: 21212 bytes
+2012-06-05 08:05:31,148 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 124
+2012-06-05 08:05:32,413 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 124, length: 21377 bytes
+2012-06-05 08:05:32,420 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 125
+2012-06-05 08:05:33,476 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 125, length: 25852 bytes
+2012-06-05 08:05:33,483 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 126
+2012-06-05 08:05:34,607 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 126, length: 26493 bytes
+2012-06-05 08:05:34,614 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 127
+2012-06-05 08:05:35,809 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 127, length: 26568 bytes
+2012-06-05 08:05:35,818 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 128
+2012-06-05 08:05:37,249 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 128, length: 30495 bytes
+2012-06-05 08:05:37,256 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 129
+2012-06-05 08:05:38,801 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 129, length: 32334 bytes
+2012-06-05 08:05:38,808 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 131
+2012-06-05 08:05:43,224 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 131, length: 32002 bytes
+2012-06-05 08:05:43,232 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 132
+2012-06-05 08:07:18,289 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 132, length: 26532 bytes
+2012-06-05 08:07:18,297 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 133
+2012-06-05 08:07:25,399 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 133, length: 23680 bytes
+2012-06-05 08:07:25,408 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 134
+2012-06-05 08:07:26,844 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 134, length: 28165 bytes
+2012-06-05 08:07:26,851 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 135
+2012-06-05 08:07:28,404 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 135, length: 29751 bytes
+2012-06-05 08:07:28,411 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 136
+2012-06-05 08:07:30,153 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 136, length: 33011 bytes
+2012-06-05 08:07:30,160 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 137
+2012-06-05 08:07:33,385 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 137, length: 29121 bytes
+2012-06-05 08:07:33,392 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 138
+2012-06-05 08:07:36,139 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 138, length: 35510 bytes
+2012-06-05 08:07:36,146 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 139
+2012-06-05 08:07:38,700 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 139, length: 32253 bytes
+2012-06-05 08:07:38,707 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 141
+2012-06-05 08:07:40,121 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 141, length: 24519 bytes
+2012-06-05 08:07:40,128 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 142
+2012-06-05 08:07:42,491 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 142, length: 30041 bytes
+2012-06-05 08:07:42,497 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 143
+2012-06-05 08:07:46,965 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 143, length: 29839 bytes
+2012-06-05 08:07:46,972 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 144
+2012-06-05 08:07:52,798 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 144, length: 34685 bytes
+2012-06-05 08:07:52,805 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 145
+2012-06-05 08:08:02,430 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 145, length: 30466 bytes
+2012-06-05 08:08:02,438 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 146
+2012-06-05 08:09:25,638 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 146, length: 21113 bytes
+2012-06-05 08:09:25,642 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 147
+2012-06-05 08:09:29,638 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 147, length: 15143 bytes
+2012-06-05 08:09:29,642 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-05 08:09:31,882 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-05 08:09:31,886 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 149
+2012-06-05 08:09:35,029 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 149, length: 27241 bytes
+2012-06-05 08:09:35,033 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 150
+2012-06-05 08:09:37,993 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 150, length: 32660 bytes
+2012-06-05 08:09:37,997 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 151
+2012-06-05 08:09:40,274 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 151, length: 25191 bytes
+2012-06-05 08:09:40,278 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 152
+2012-06-05 08:09:41,801 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 152, length: 26027 bytes
+2012-06-05 08:09:41,805 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 153
+2012-06-05 08:09:43,235 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 153, length: 33881 bytes
+2012-06-05 08:09:43,238 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 154
+2012-06-05 08:09:44,797 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 154, length: 34087 bytes
+2012-06-05 08:09:44,801 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 155
+2012-06-05 08:09:46,197 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 155, length: 27119 bytes
+2012-06-05 08:09:46,200 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 156
+2012-06-05 08:09:47,554 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 156, length: 25660 bytes
+2012-06-05 08:09:47,558 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 157
+2012-06-05 08:09:48,922 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 157, length: 22110 bytes
+2012-06-05 08:09:48,926 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 158
+2012-06-05 08:09:50,277 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 158, length: 28320 bytes
+2012-06-05 08:09:50,281 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 159
+2012-06-05 08:09:51,686 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 159, length: 31658 bytes
+2012-06-05 08:09:51,689 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 160
+2012-06-05 08:09:53,029 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 160, length: 28460 bytes
+2012-06-05 08:09:53,033 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 161
+2012-06-05 08:09:54,150 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 161, length: 23375 bytes
+2012-06-05 08:09:54,154 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 162
+2012-06-05 08:09:55,428 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 162, length: 33657 bytes
+2012-06-05 08:09:55,432 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 163
+2012-06-05 08:09:56,881 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 163, length: 33305 bytes
+2012-06-05 08:09:56,885 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 164
+2012-06-05 08:09:58,050 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 164, length: 30389 bytes
+2012-06-05 08:09:58,054 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 165
+2012-06-05 08:09:59,341 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 165, length: 30146 bytes
+2012-06-05 08:09:59,345 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 166
+2012-06-05 08:10:00,853 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 166, length: 29622 bytes
+2012-06-05 08:10:00,857 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 167
+2012-06-05 08:10:02,512 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 167, length: 32373 bytes
+2012-06-05 08:10:02,516 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 168
+2012-06-05 08:10:05,598 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 168, length: 27405 bytes
+2012-06-05 08:10:05,602 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 169
+2012-06-05 08:10:07,598 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 169, length: 35075 bytes
+2012-06-05 08:10:07,602 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 170
+2012-06-05 08:10:11,832 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 170, length: 29112 bytes
+2012-06-05 08:10:11,836 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 171
+2012-06-05 08:10:20,047 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 171, length: 32015 bytes
+2012-06-05 08:10:20,051 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 172
+2012-06-05 08:10:28,017 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 172, length: 30177 bytes
+2012-06-05 08:10:28,021 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 173
+2012-06-05 08:10:36,510 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 173, length: 29591 bytes
+2012-06-05 08:10:36,513 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 174
+2012-06-05 08:11:30,166 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 174, length: 32351 bytes
+2012-06-05 08:11:30,170 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 175
+2012-06-05 08:11:33,534 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 175, length: 20353 bytes
+2012-06-05 08:11:33,538 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 176
+2012-06-05 08:11:35,395 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 176, length: 26080 bytes
+2012-06-05 08:11:35,399 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 177
+2012-06-05 08:11:36,918 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 177, length: 28678 bytes
+2012-06-05 08:11:36,922 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 178
+2012-06-05 08:11:38,269 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 178, length: 33644 bytes
+2012-06-05 08:11:38,273 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 179
+2012-06-05 08:11:39,628 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 179, length: 27592 bytes
+2012-06-05 08:11:39,632 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 180
+2012-06-05 08:11:40,807 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 180, length: 29570 bytes
+2012-06-05 08:11:40,811 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 181
+2012-06-05 08:11:42,106 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 181, length: 26943 bytes
+2012-06-05 08:11:42,110 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 182
+2012-06-05 08:11:43,231 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 182, length: 27014 bytes
+2012-06-05 08:11:43,234 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 183
+2012-06-05 08:11:44,449 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 183, length: 24162 bytes
+2012-06-05 08:11:44,455 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 184
+2012-06-05 08:11:45,613 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 184, length: 23969 bytes
+2012-06-05 08:11:45,616 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 185
+2012-06-05 08:11:46,817 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 185, length: 27614 bytes
+2012-06-05 08:11:46,821 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 186
+2012-06-05 08:11:47,998 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 186, length: 29693 bytes
+2012-06-05 08:11:48,002 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 187
+2012-06-05 08:11:49,225 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 187, length: 22342 bytes
+2012-06-05 08:11:49,229 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 188
+2012-06-05 08:11:50,331 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 188, length: 27349 bytes
+2012-06-05 08:11:50,335 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 189
+2012-06-05 08:11:51,572 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 189, length: 32293 bytes
+2012-06-05 08:11:51,576 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 190
+2012-06-05 08:11:52,838 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 190, length: 32893 bytes
+2012-06-05 08:11:52,842 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 191
+2012-06-05 08:11:53,802 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 191, length: 20522 bytes
+2012-06-05 08:11:53,806 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 192
+2012-06-05 08:11:55,003 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 192, length: 32096 bytes
+2012-06-05 08:11:55,007 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 193
+2012-06-05 08:11:56,292 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 193, length: 31354 bytes
+2012-06-05 08:11:56,296 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 194
+2012-06-05 08:11:57,625 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 194, length: 30982 bytes
+2012-06-05 08:11:57,630 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 195
+2012-06-05 08:11:59,027 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 195, length: 24954 bytes
+2012-06-05 08:11:59,031 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 196
+2012-06-05 08:12:00,523 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 196, length: 24035 bytes
+2012-06-05 08:12:00,530 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 197
+2012-06-05 08:12:01,899 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 197, length: 29359 bytes
+2012-06-05 08:12:01,904 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 198
+2012-06-05 08:12:03,122 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 198, length: 31391 bytes
+2012-06-05 08:12:03,129 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 199
+2012-06-05 08:12:04,345 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 199, length: 29731 bytes
+2012-06-05 08:12:04,352 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 200
+2012-06-05 08:12:05,624 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 200, length: 29704 bytes
+2012-06-05 08:12:05,631 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 201
+2012-06-05 08:12:07,088 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 201, length: 24669 bytes
+2012-06-05 08:12:07,095 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 202
+2012-06-05 08:12:08,277 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 202, length: 28353 bytes
+2012-06-05 08:12:08,284 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 203
+2012-06-05 08:12:09,463 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 203, length: 28593 bytes
+2012-06-05 08:12:10,029 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-4196.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:12:10,447 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:1644 & H:2418  --- producing:v
+2012-06-05 08:12:13,446 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 90
+2012-06-05 08:12:14,827 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 90, length: 27096 bytes
+2012-06-05 08:12:14,831 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 206
+2012-06-05 08:12:16,164 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 206, length: 34562 bytes
+2012-06-05 08:12:16,170 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 207
+2012-06-05 08:12:17,420 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 207, length: 15614 bytes
+2012-06-05 08:12:17,426 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 208
+2012-06-05 08:12:18,642 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 208, length: 22608 bytes
+2012-06-05 08:12:18,646 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 209
+2012-06-05 08:12:20,190 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 209, length: 28016 bytes
+2012-06-05 08:12:20,203 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 210
+2012-06-05 08:12:21,730 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 210, length: 25140 bytes
+2012-06-05 08:12:21,737 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 211
+2012-06-05 08:12:23,202 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 211, length: 29210 bytes
+2012-06-05 08:12:23,208 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 212
+2012-06-05 08:12:24,653 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 212, length: 23707 bytes
+2012-06-05 08:12:24,660 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 213
+2012-06-05 08:12:26,122 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 213, length: 30329 bytes
+2012-06-05 08:12:26,129 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 214
+2012-06-05 08:12:27,353 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 214, length: 28148 bytes
+2012-06-05 08:12:27,360 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 215
+2012-06-05 08:12:28,668 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 215, length: 26401 bytes
+2012-06-05 08:12:28,675 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 216
+2012-06-05 08:12:29,894 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 216, length: 28038 bytes
+2012-06-05 08:12:29,898 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 217
+2012-06-05 08:12:31,288 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 217, length: 33755 bytes
+2012-06-05 08:12:31,295 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 218
+2012-06-05 08:12:32,663 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 218, length: 32031 bytes
+2012-06-05 08:12:32,669 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 219
+2012-06-05 08:12:33,929 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 219, length: 30397 bytes
+2012-06-05 08:12:33,935 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 220
+2012-06-05 08:12:35,305 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 220, length: 30555 bytes
+2012-06-05 08:12:35,314 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 221
+2012-06-05 08:12:36,720 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 221, length: 25971 bytes
+2012-06-05 08:12:36,727 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 222
+2012-06-05 08:12:38,092 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 222, length: 28406 bytes
+2012-06-05 08:12:38,099 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 223
+2012-06-05 08:12:39,718 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 223, length: 32217 bytes
+2012-06-05 08:12:39,725 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 224
+2012-06-05 08:12:41,172 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 224, length: 24254 bytes
+2012-06-05 08:12:41,179 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 225
+2012-06-05 08:12:42,684 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 225, length: 32009 bytes
+2012-06-05 08:12:42,691 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 226
+2012-06-05 08:12:44,105 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 226, length: 27182 bytes
+2012-06-05 08:12:44,112 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 227
+2012-06-05 08:12:45,585 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 227, length: 20456 bytes
+2012-06-05 08:12:45,591 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 228
+2012-06-05 08:12:47,171 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 228, length: 34504 bytes
+2012-06-05 08:12:47,178 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 229
+2012-06-05 08:12:48,533 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 229, length: 26068 bytes
+2012-06-05 08:12:48,540 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 230
+2012-06-05 08:12:49,895 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 230, length: 27579 bytes
+2012-06-05 08:12:49,902 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 231
+2012-06-05 08:12:51,352 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 231, length: 26813 bytes
+2012-06-05 08:12:51,359 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 232
+2012-06-05 08:12:52,662 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 232, length: 29160 bytes
+2012-06-05 08:12:52,669 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 233
+2012-06-05 08:12:54,150 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 233, length: 27546 bytes
+2012-06-05 08:12:54,157 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 234
+2012-06-05 08:12:55,482 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 234, length: 23895 bytes
+2012-06-05 08:12:55,489 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 235
+2012-06-05 08:12:56,852 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 235, length: 26144 bytes
+2012-06-05 08:12:56,858 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 236
+2012-06-05 08:12:58,413 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 236, length: 25933 bytes
+2012-06-05 08:12:58,420 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 237
+2012-06-05 08:12:59,831 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 237, length: 26174 bytes
+2012-06-05 08:12:59,840 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 238
+2012-06-05 08:13:01,041 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 238, length: 27730 bytes
+2012-06-05 08:13:01,047 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 239
+2012-06-05 08:13:02,461 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 239, length: 17192 bytes
+2012-06-05 08:13:02,468 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 240
+2012-06-05 08:13:03,952 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 240, length: 23046 bytes
+2012-06-05 08:13:04,726 [5] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-1565.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:13:05,151 [5] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 08:13:13,830 [4] INFO  mediaController [(null)] <(null)> - setOrientation at path C:\_SVN_\campusMap\campusMap\uploads\media\image\tmp\Bryan-Hall-Tower-3746.jpg with  -  Luminance Table  0  -  ICC Profile  0  -  Chrominance Table  0
+2012-06-05 08:13:14,199 [4] INFO  mediaController [(null)] <(null)> - exif was null so W:2418 & H:1644  --- producing:h
+2012-06-05 08:13:23,011 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 204
+2012-06-05 08:13:24,097 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 204, length: 27288 bytes
+2012-06-05 08:13:24,103 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 205
+2012-06-05 08:13:25,411 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 205, length: 30012 bytes
+2012-06-05 08:13:25,540 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 91
+2012-06-05 08:13:26,735 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 91, length: 23955 bytes
+2012-06-05 08:13:26,834 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 241
+2012-06-05 08:13:28,153 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 241, length: 17129 bytes
+2012-06-05 08:13:28,237 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 242
+2012-06-05 08:13:29,649 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 242, length: 28661 bytes
+2012-06-05 08:23:46,032 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 155
+2012-06-05 08:23:49,949 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 155, length: 48911 bytes
+2012-06-05 08:23:50,083 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 154
+2012-06-05 08:23:52,887 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 154, length: 67637 bytes
+2012-06-05 08:23:53,484 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 154
+2012-06-05 08:23:53,486 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 154, length: 67637 bytes
+2012-06-05 08:23:53,999 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 155
+2012-06-05 08:23:54,003 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 155, length: 48911 bytes
+2012-06-05 08:23:55,979 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 154
+2012-06-05 08:23:55,980 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 154, length: 34087 bytes
+2012-06-05 08:26:02,655 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 167
+2012-06-05 08:26:05,025 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 167, length: 75958 bytes
+2012-06-05 08:26:05,172 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 165
+2012-06-05 08:26:05,174 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 165, length: 30146 bytes
+2012-06-05 08:26:09,309 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 96
+2012-06-05 08:26:09,310 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 96, length: 26896 bytes
+2012-06-05 08:26:10,726 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 209
+2012-06-05 08:26:10,728 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 209, length: 28016 bytes
+2012-06-05 08:26:11,240 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 229
+2012-06-05 08:26:12,989 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 229, length: 60600 bytes
+2012-06-05 08:26:34,444 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 209
+2012-06-05 08:26:34,445 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 209, length: 28016 bytes
+2012-06-05 08:37:20,398 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 229
+2012-06-05 08:37:20,473 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 229, length: 60600 bytes
+2012-06-05 08:39:17,543 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 209
+2012-06-05 08:39:19,642 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 209, length: 27333 bytes
+2012-06-05 08:39:20,077 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 229
+2012-06-05 08:39:20,080 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 229, length: 60600 bytes
+2012-06-05 08:39:34,861 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-05 08:39:34,879 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-05 08:39:37,195 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-05 08:39:37,211 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-05 08:39:40,866 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-05 08:39:40,880 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-05 08:39:41,371 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-05 08:39:41,385 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 69849 bytes
+2012-06-05 08:39:42,939 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-05 08:39:42,951 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-05 08:39:43,447 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-05 08:39:43,454 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 57588 bytes
+2012-06-05 08:39:43,947 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-05 08:39:43,958 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 28139 bytes
+2012-06-05 08:39:44,187 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 234
+2012-06-05 08:39:45,859 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 234, length: 55695 bytes
+2012-06-05 08:39:46,210 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 233
+2012-06-05 08:39:46,212 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 233, length: 27546 bytes
+2012-06-05 08:39:46,723 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 239
+2012-06-05 08:39:48,475 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 239, length: 37758 bytes
+2012-06-05 08:39:48,627 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 231
+2012-06-05 08:39:48,629 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 231, length: 26813 bytes
+2012-06-05 08:39:48,751 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 240
+2012-06-05 08:39:49,876 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 240, length: 22003 bytes
+2012-06-05 08:39:50,154 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 238
+2012-06-05 08:39:51,901 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 238, length: 64463 bytes
+2012-06-05 08:39:52,293 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 237
+2012-06-05 08:39:53,575 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 237, length: 30347 bytes
+2012-06-05 08:39:53,720 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 232
+2012-06-05 08:39:55,580 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 232, length: 65794 bytes
+2012-06-05 08:39:55,741 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 223
+2012-06-05 08:39:55,743 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 223, length: 32217 bytes
+2012-06-05 08:39:55,849 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 241
+2012-06-05 08:39:57,302 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 241, length: 41892 bytes
+2012-06-05 08:39:57,310 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 235
+2012-06-05 08:39:58,907 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 235, length: 59956 bytes
+2012-06-05 08:39:59,205 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 222
+2012-06-05 08:40:01,080 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 222, length: 65155 bytes
+2012-06-05 08:40:01,233 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 219
+2012-06-05 08:40:01,235 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 219, length: 30397 bytes
+2012-06-05 08:40:01,747 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 220
+2012-06-05 08:40:03,551 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 220, length: 72349 bytes
+2012-06-05 08:40:03,618 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 216
+2012-06-05 08:40:03,620 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 216, length: 28038 bytes
+2012-06-05 08:40:03,774 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 228
+2012-06-05 08:40:05,594 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 228, length: 81706 bytes
+2012-06-05 08:40:05,646 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 217
+2012-06-05 08:40:07,323 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 217, length: 79808 bytes
+2012-06-05 08:40:07,472 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 236
+2012-06-05 08:40:09,170 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 236, length: 59274 bytes
+2012-06-05 08:40:09,345 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 225
+2012-06-05 08:40:11,004 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 225, length: 74197 bytes
+2012-06-05 08:40:11,029 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 230
+2012-06-05 08:40:11,031 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 230, length: 27579 bytes
+2012-06-05 08:40:12,078 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 94
+2012-06-05 08:40:13,787 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 94, length: 73192 bytes
+2012-06-05 08:40:14,103 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 93
+2012-06-05 08:40:14,105 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 93, length: 35280 bytes
+2012-06-05 08:40:14,617 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 95
+2012-06-05 08:40:15,926 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 95, length: 33208 bytes
+2012-06-05 08:40:15,944 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 205
+2012-06-05 08:40:15,946 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 205, length: 30012 bytes
+2012-06-05 08:40:16,131 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 99
+2012-06-05 08:40:17,884 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 99, length: 73438 bytes
+2012-06-05 08:40:18,159 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 98
+2012-06-05 08:40:19,837 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 98, length: 74088 bytes
+2012-06-05 08:40:20,187 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 100
+2012-06-05 08:40:21,756 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 36828 bytes
+2012-06-05 08:40:22,215 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 215
+2012-06-05 08:40:22,217 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 215, length: 26401 bytes
+2012-06-05 08:40:22,729 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 226
+2012-06-05 08:40:24,535 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 226, length: 62404 bytes
+2012-06-05 08:40:24,633 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 200
+2012-06-05 08:40:24,635 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 200, length: 29704 bytes
+2012-06-05 08:40:25,147 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 204
+2012-06-05 08:40:26,866 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 204, length: 63257 bytes
+2012-06-05 08:40:30,334 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 199
+2012-06-05 08:40:30,335 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 199, length: 29731 bytes
+2012-06-05 08:40:30,842 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 206
+2012-06-05 08:40:32,464 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 206, length: 80933 bytes
+2012-06-05 08:40:33,802 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 207
+2012-06-05 08:40:33,804 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 207, length: 15614 bytes
+2012-06-05 08:40:39,464 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 197
+2012-06-05 08:40:39,465 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 197, length: 29359 bytes
+2012-06-05 08:40:39,969 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 203
+2012-06-05 08:40:41,684 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 203, length: 65523 bytes
+2012-06-05 08:40:44,050 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 202
+2012-06-05 08:40:45,703 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 202, length: 65727 bytes
+2012-06-05 08:40:46,100 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 196
+2012-06-05 08:40:46,102 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 196, length: 24035 bytes
+2012-06-05 08:40:48,936 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 187
+2012-06-05 08:40:48,938 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 187, length: 22342 bytes
+2012-06-05 08:40:49,438 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 188
+2012-06-05 08:40:51,200 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 188, length: 62489 bytes
+2012-06-05 08:40:51,514 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 180
+2012-06-05 08:40:51,516 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 180, length: 29570 bytes
+2012-06-05 08:40:52,028 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 186
+2012-06-05 08:40:53,843 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 186, length: 68435 bytes
+2012-06-05 08:40:54,289 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 174
+2012-06-05 08:40:54,291 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 174, length: 32351 bytes
+2012-06-05 08:40:54,304 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 168
+2012-06-05 08:40:54,305 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 168, length: 27405 bytes
+2012-06-05 08:40:54,820 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 169
+2012-06-05 08:40:56,622 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 169, length: 80950 bytes
+2012-06-05 08:40:57,664 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 167
+2012-06-05 08:40:57,666 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 167, length: 75958 bytes
+2012-06-05 08:40:58,175 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 165
+2012-06-05 08:40:58,177 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 165, length: 30146 bytes
+2012-06-05 08:41:01,869 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 164
+2012-06-05 08:41:01,871 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 164, length: 30389 bytes
+2012-06-05 08:41:02,371 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 166
+2012-06-05 08:41:04,232 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 166, length: 65757 bytes
+2012-06-05 08:41:05,561 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 159
+2012-06-05 08:41:05,562 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 159, length: 31658 bytes
+2012-06-05 08:41:06,811 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 156
+2012-06-05 08:41:07,963 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 156, length: 24114 bytes
+2012-06-05 08:41:08,688 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 153
+2012-06-05 08:41:08,689 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 153, length: 33881 bytes
+2012-06-05 08:41:09,189 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 157
+2012-06-05 08:41:10,846 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 157, length: 50992 bytes
+2012-06-05 08:41:18,319 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 144
+2012-06-05 08:41:18,320 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 144, length: 34685 bytes
+2012-06-05 08:41:21,718 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 142
+2012-06-05 08:41:21,720 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 142, length: 30041 bytes
+2012-06-05 08:41:23,892 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 138
+2012-06-05 08:41:23,893 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 138, length: 35510 bytes
+2012-06-05 08:41:23,897 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 141
+2012-06-05 08:41:25,452 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 141, length: 58908 bytes
+2012-06-05 08:41:25,855 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 134
+2012-06-05 08:41:25,856 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 134, length: 28165 bytes
+2012-06-05 08:41:25,928 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 135
+2012-06-05 08:41:25,930 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 135, length: 29751 bytes
+2012-06-05 08:41:28,160 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 133
+2012-06-05 08:41:29,752 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 133, length: 53518 bytes
+2012-06-05 08:41:29,781 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 136
+2012-06-05 08:41:29,783 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 136, length: 33011 bytes
+2012-06-05 08:41:30,187 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 132
+2012-06-05 08:41:30,189 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 132, length: 26532 bytes
+2012-06-05 08:41:33,524 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 158
+2012-06-05 08:41:33,525 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 158, length: 28320 bytes
+2012-06-05 08:41:35,081 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 126
+2012-06-05 08:41:36,664 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 126, length: 61606 bytes
+2012-06-05 08:41:37,130 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 125
+2012-06-05 08:41:37,132 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 125, length: 25852 bytes
+2012-06-05 08:41:38,359 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 118
+2012-06-05 08:41:40,232 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 118, length: 74475 bytes
+2012-06-05 08:41:40,406 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 117
+2012-06-05 08:41:40,408 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 117, length: 34674 bytes
+2012-06-05 08:41:42,313 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 183
+2012-06-05 08:41:42,315 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 183, length: 24162 bytes
+2012-06-05 08:41:46,712 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 101
+2012-06-05 08:41:46,714 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 101, length: 20875 bytes
+2012-06-05 08:41:47,223 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 106
+2012-06-05 08:41:48,834 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 106, length: 63840 bytes
+2012-06-05 08:41:48,907 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 96
+2012-06-05 08:41:48,909 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 96, length: 26896 bytes
+2012-06-05 08:41:50,256 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
+2012-06-05 08:41:50,257 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes

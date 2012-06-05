@@ -318,6 +318,8 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_h,
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_{
 	background: url("../../Content/images/samples/in_info_image_bk.png") repeat-x scroll 50% top #FFFFFF;}
+#campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_v{
+	background: url("../../Content/images/samples/in_info_image_bk_v.png") repeat-x scroll 50% top #FFFFFF;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage .imgEnlarge{
 	background: url("../../Content/images/imgEnlarge.png") no-repeat scroll center center transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;}
 	
