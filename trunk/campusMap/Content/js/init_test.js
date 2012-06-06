@@ -362,17 +362,19 @@ function loadData(data,callback){
 							}
 							var pos = markerLog[i].getPosition();
 							var z = $('#centralMap').gmap('get','map').getZoom(); 
+							var mH = $('#centralMap').height();
 							var latOffset = 0;
-							if(z==21)latOffset = .000035;
-							if(z==20)latOffset = .00007;
-							if(z==19)latOffset = .0002;
-							if(z==18)latOffset = .0005;
-							if(z==17)latOffset = .001;
-							if(z==16)latOffset = .002;
-							if(z==15)latOffset = .0035;
-							if(z==14)latOffset = .005;
-							if(z==13)latOffset = .009;
-							if(z==12)latOffset = .014;
+							if(z==21)latOffset = mH<600?.00004:.000035;
+							if(z==20)latOffset = mH<600?.00008:.00007;
+							if(z==19)latOffset = mH<600?.0003:.0002;
+							if(z==18)latOffset = mH<600?.00055:.0005;
+							if(z==17)latOffset = mH<600?.002:.001;
+							if(z==16)latOffset = mH<600?.003:.002;
+							if(z==15)latOffset = mH<600?.005:.0035;
+							if(z==14)latOffset = mH<600?.0075:.005;
+							if(z==13)latOffset = mH<600?.0155:.009;
+							if(z==12)latOffset = mH<600?.0165:.014;
+							
 							var	newpos = new google.maps.LatLng((pos.lat()+latOffset), pos.lng());
 							$('#centralMap').gmap('get','map').setCenter(newpos);
 						}
