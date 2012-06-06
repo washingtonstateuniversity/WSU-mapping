@@ -400,6 +400,7 @@ function loadData(data,callback){
 				,pane: "floatPane"
 				,boxClass:"hoverbox"
 				,enableEventPropagation: false
+				,disableAutoPan:true
 				,onOpen:function(){}
 			};
 			ibh[i] = new InfoBox(myHoverOptions,function(){});
