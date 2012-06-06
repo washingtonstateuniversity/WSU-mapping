@@ -242,11 +242,11 @@
     width: 127px;
 }
 
-#directionsTo ::-webkit-input-placeholder { 
-    color:    #5e6a71; 
+input::-webkit-input-placeholder { 
+    color:    #5e6a71 !important; 
 } 
-#directionsTo :-moz-placeholder { 
-    color:    #5e6a71; 
+input:-moz-placeholder { 
+    color:    #5e6a71 !important; 
 } 
 
 /* menu */
