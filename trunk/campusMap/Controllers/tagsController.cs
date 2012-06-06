@@ -21,9 +21,8 @@ namespace campusMap.Controllers
     [Layout("default")]
     public class tagsController : SecureBaseController
     {
-        public void index(int page, string target)
+        public void index(int page, string filter, string target)
         {
-            IList<tags> items;
             IList<usertags> usertags_items;
             int pagesize = 100;
             int paging = 1;
@@ -36,7 +35,26 @@ namespace campusMap.Controllers
                 uPaging = page;
             }
 
-            items = ActiveRecordBase<tags>.FindAll(Order.Asc("name"));
+            if(String.IsNullOrEmpty(filter))filter="all";
+            String by = String.Empty;
+            switch (filter)
+            {
+                case "unassigned":
+                    {
+                        by = "NOT exists"; break;
+                    }
+                case "assigned":
+                    {
+                        by = "exists"; break;
+                    }
+                case "all":
+                    {
+                        by = String.Empty; break;
+                    }
+            }
+            String sql = "from tags t " + (String.IsNullOrEmpty(by) ? "" : " where " + by + " elements(t.places)") + " Order BY name Asc";
+            SimpleQuery<tags> q = new SimpleQuery<tags>(typeof(tags), sql);
+            IList<tags> items = q.Execute();
             PropertyBag["tags"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
             usertags_items = ActiveRecordBase<usertags>.FindAll(Order.Asc("name"));
@@ -137,6 +155,23 @@ namespace campusMap.Controllers
             RedirectToReferrer();
         }
 
-
+        public void massDeleteTags(int[] ids)
+        {
+            foreach (int id in ids)
+            {
+                tags tag = ActiveRecordBase<tags>.Find(id);
+                ActiveRecordMediator<tags>.Delete(tag);
+            }
+            RedirectToReferrer();
+        }
+        public void massDeleteUserTags(int[] ids)
+        {
+            foreach (int id in ids)
+            {
+                usertags tag = ActiveRecordBase<usertags>.Find(id);
+                ActiveRecordMediator<usertags>.Delete(tag);
+            }
+            RedirectToReferrer();
+        }
     }
 }

@@ -242,7 +242,12 @@
     width: 127px;
 }
 
-
+#directionsTo ::-webkit-input-placeholder { 
+    color:    #5e6a71; 
+} 
+#directionsTo :-moz-placeholder { 
+    color:    #5e6a71; 
+} 
 
 /* menu */
 .contextmenu{
