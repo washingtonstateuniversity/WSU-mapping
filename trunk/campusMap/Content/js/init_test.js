@@ -1,4 +1,5 @@
 var ib = [];
+var ibh = [];
 var markerLog = [];
 var shapes = [];
 function resizeBg(obj,height,width) {
@@ -381,7 +382,27 @@ function loadData(data,callback){
 				//alert('tring to tab it, dabnab it, from the INI');
 			});
 			//end of the bs that is well.. bs of a implamentation
-			
+/* so need to remove this and create the class for it */
+			var boxText = document.createElement("div");
+			boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
+			boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
+			var myHoverOptions = {
+				alignBottom:true,
+				 content: boxText//boxText
+				,disableAutoPan: false
+				,pixelOffset: new google.maps.Size(15,-15)
+				,zIndex: 99
+				,boxStyle: {
+				  minWidth: "250px"
+				 }
+				,infoBoxClearance: new google.maps.Size(1, 1)
+				,isHidden: false
+				,pane: "floatPane"
+				,boxClass:"hoverbox"
+				,enableEventPropagation: false
+				,onOpen:function(){}
+			};
+			ibh[i] = new InfoBox(myHoverOptions,function(){});
 			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
 			$('#centralMap').gmap('addMarker', $.extend({ 
 				'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
@@ -394,7 +415,9 @@ function loadData(data,callback){
 				
 		
 				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-			}).rightclick(function(event){showContextMenu(event.latLng);});
+			}).rightclick(function(event){showContextMenu(event.latLng);})
+			.mouseover(function(event){$.each(ibh, function(i) {ibh[i].close();});ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);})
+			.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
 		});
 	}
 }
@@ -608,6 +631,8 @@ $(document).ready(function(){
 			minLength: 2,
 			select: function( event, ui ) {
 				getSignlePlace(ui.item.place_id);
+				$( "#placeSearch [type=text]" ).blur();
+				$( "#placeSearch [type=text]" ).val("");
 			},
 			focus: function( event, ui ) {
 				$( "#placeSearch [type=text]" ).val( ui.item.label );

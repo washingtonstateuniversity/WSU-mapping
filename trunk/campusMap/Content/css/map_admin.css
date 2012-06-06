@@ -273,6 +273,8 @@
 
 /* info boxes */
 .infoBox{margin-bottom:67px;}
+.hoverbox{}
+.hoverbox .infoClose{display:none;}
 #campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4); box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
 -moz-border-radius-bottomleft: 0px;
 -webkit-border-bottom-left-radius: 0px;
