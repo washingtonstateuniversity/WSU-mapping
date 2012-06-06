@@ -1,16 +1,8 @@
 <div id="localfooter">
-  &copy; Washington State University | <a href="mailto:webeditor@dailycampusMap.com">
-    <b>Accessiblility</b>
-  </a>
-   | <a href="mailto:webmanager@dailycampusMap.com">
-    <b>Policies</b>
-  </a>
-  | <a href="mailto:webmanager@dailycampusMap.com">
-    <b>Copyright</b>
-  </a>
-  | <a href="">
-    <b>Contact Us</b>
-  </a> 
-
+ <a href="http://publishing.wsu.edu/copyright/WSU.html">&copy; 2012</a>
+ <a href="http://www.wsu.edu">Washington State University</a> | 
+ <a href="http://access.wsu.edu/">Accessibility</a> | 
+ <a href="http://policies.wsu.edu/">Policies</a> | 
+ <a href="http://publishing.wsu.edu/copyright/WSU.html">Copyright</a> | 
+ <a href="">Contact Us</a> 
 </div>
-<!--localfooter-->

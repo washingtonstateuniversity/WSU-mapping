@@ -21,7 +21,7 @@ html,body{height:100%; background-color:#edefee;}
     position: absolute;
     top:30px;
     width: 185px;
-	background:#fff url("http://images.wsu.edu/global/bg-logo3.jpg") no-repeat center center;
+	background:#fff url("../../Content/images/bg-logo3.jpg") no-repeat center center;
 	text-indent:-9999em;
 }
 
@@ -35,8 +35,8 @@ width: 100%;
 min-width:1026px;
 }
 
-#localfooter{font-size: 10px;color:#5e6a71; height:25px;text-align: center;padding-top:5px;}
-#localfooter a{font-size: 10px;color:#4d565c;}
+#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;padding-left: 250px;}
+#localfooter a{font-size: 10px;color: #868F95; text-decoration:none;}
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 
 
@@ -484,7 +484,14 @@ fieldset{padding: 4px 8px 10px;}
 
 
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
-#centralMap{width:100%;min-height:350px;height:auto;max-height:100%;border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;}
+#centralMap{width:100%;min-height:350px;height:auto;max-height:100%;border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
+
+        -webkit-box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
+        
+        box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
+        
+
+}
 #centralMap_wrap{    display: block;
     height: auto;
     margin-left: 201px;
