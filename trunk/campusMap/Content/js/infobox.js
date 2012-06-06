@@ -735,12 +735,10 @@ InfoBox.prototype.open = function (map, anchor) {
   this.setMap(map);
 
   if (this.div_) {
-
     this.panBox_();
   }else{
 	this.onOpen();  
   }
-  
 };
 
 /**

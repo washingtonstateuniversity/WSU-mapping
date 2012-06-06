@@ -198,7 +198,7 @@
 	
 	
 	}
-#nav #main_nav li.active a.parentalLink.childSelected{ font-weight:bold;}
+#nav #main_nav li.active a.parentalLink.childSelected{ color:#5E6A71;}
 #nav #main_nav li.active li a{padding-left:13px;color:#5E6A71;background: url("../../Content/images/assests_central/unchecked_menu.png") no-repeat scroll left center transparent;}
 #nav #main_nav li.active li.checked {
 	

@@ -11997,3 +11997,349 @@ System.Net.WebException: The request was aborted: The operation has timed out.
 2012-06-05 08:41:48,909 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 96, length: 26896 bytes
 2012-06-05 08:41:50,256 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
 2012-06-05 08:41:50,257 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes
+2012-06-06 06:14:41,679 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:14:41,917 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:14:42,185 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:14:42,196 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:14:42,685 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:14:42,711 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:18:48,857 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:18:48,858 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:18:49,370 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:18:49,372 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:18:49,886 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:18:49,889 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:19:22,211 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:19:22,213 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:19:22,217 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:19:22,218 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:19:22,236 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:19:22,238 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:19:50,744 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:19:50,748 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:19:51,245 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:19:51,246 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:19:51,752 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:19:51,754 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:20:04,390 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:20:04,391 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:20:04,890 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:20:04,891 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:20:05,401 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:20:05,403 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:20:07,808 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-06 06:20:07,810 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-06 06:20:08,317 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-06 06:20:08,319 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 69849 bytes
+2012-06-06 06:20:10,144 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-06 06:20:10,145 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-06 06:20:11,473 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 81
+2012-06-06 06:20:11,475 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 81, length: 27777 bytes
+2012-06-06 06:20:15,157 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 72
+2012-06-06 06:20:15,158 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 72, length: 24246 bytes
+2012-06-06 06:20:15,666 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 73
+2012-06-06 06:20:15,668 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 73, length: 28139 bytes
+2012-06-06 06:20:15,954 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 234
+2012-06-06 06:20:15,966 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 234, length: 55695 bytes
+2012-06-06 06:20:15,971 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 241
+2012-06-06 06:20:15,981 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 241, length: 41892 bytes
+2012-06-06 06:20:16,175 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 74
+2012-06-06 06:20:16,177 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 74, length: 57588 bytes
+2012-06-06 06:20:16,461 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 239
+2012-06-06 06:20:16,478 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 239, length: 37758 bytes
+2012-06-06 06:20:16,976 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 237
+2012-06-06 06:20:16,989 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 237, length: 30347 bytes
+2012-06-06 06:20:17,491 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 233
+2012-06-06 06:20:17,509 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 233, length: 27546 bytes
+2012-06-06 06:20:18,005 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 240
+2012-06-06 06:20:18,021 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 240, length: 22003 bytes
+2012-06-06 06:20:18,271 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 231
+2012-06-06 06:20:18,272 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 231, length: 26813 bytes
+2012-06-06 06:20:18,785 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 238
+2012-06-06 06:20:18,803 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 238, length: 64463 bytes
+2012-06-06 06:20:22,090 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 232
+2012-06-06 06:20:22,110 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 232, length: 65794 bytes
+2012-06-06 06:20:22,592 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 223
+2012-06-06 06:20:22,595 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 223, length: 32217 bytes
+2012-06-06 06:20:23,458 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 219
+2012-06-06 06:20:23,459 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 219, length: 30397 bytes
+2012-06-06 06:20:23,461 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 222
+2012-06-06 06:20:23,479 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 222, length: 65155 bytes
+2012-06-06 06:20:23,964 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 220
+2012-06-06 06:20:23,980 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 220, length: 72349 bytes
+2012-06-06 06:20:24,479 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 225
+2012-06-06 06:20:24,490 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 225, length: 74197 bytes
+2012-06-06 06:20:24,712 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 217
+2012-06-06 06:20:24,721 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 217, length: 79808 bytes
+2012-06-06 06:20:24,978 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 228
+2012-06-06 06:20:24,991 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 228, length: 81706 bytes
+2012-06-06 06:20:25,213 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 216
+2012-06-06 06:20:25,215 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 216, length: 28038 bytes
+2012-06-06 06:20:25,493 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 235
+2012-06-06 06:20:25,507 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 235, length: 59956 bytes
+2012-06-06 06:20:26,144 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 236
+2012-06-06 06:20:26,152 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 236, length: 59274 bytes
+2012-06-06 06:20:26,647 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 230
+2012-06-06 06:20:26,650 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 230, length: 27579 bytes
+2012-06-06 06:20:29,303 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 93
+2012-06-06 06:20:29,315 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 93, length: 35280 bytes
+2012-06-06 06:20:29,317 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 94
+2012-06-06 06:20:29,336 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 94, length: 73192 bytes
+2012-06-06 06:20:29,819 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 95
+2012-06-06 06:20:29,832 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 95, length: 33208 bytes
+2012-06-06 06:20:30,329 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 99
+2012-06-06 06:20:30,344 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 99, length: 73438 bytes
+2012-06-06 06:20:30,643 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 205
+2012-06-06 06:20:30,645 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 205, length: 30012 bytes
+2012-06-06 06:20:30,828 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 100
+2012-06-06 06:20:30,843 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 36828 bytes
+2012-06-06 06:20:31,343 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 98
+2012-06-06 06:20:31,360 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 98, length: 74088 bytes
+2012-06-06 06:20:31,774 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 209
+2012-06-06 06:20:31,780 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 209, length: 27333 bytes
+2012-06-06 06:20:32,279 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 229
+2012-06-06 06:20:32,296 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 229, length: 60600 bytes
+2012-06-06 06:20:32,653 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 215
+2012-06-06 06:20:32,655 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 215, length: 26401 bytes
+2012-06-06 06:20:33,168 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 226
+2012-06-06 06:20:33,180 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 226, length: 62404 bytes
+2012-06-06 06:20:34,163 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 200
+2012-06-06 06:20:34,165 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 200, length: 29704 bytes
+2012-06-06 06:20:34,664 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 204
+2012-06-06 06:20:34,676 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 204, length: 63257 bytes
+2012-06-06 06:20:36,591 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 199
+2012-06-06 06:20:36,592 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 199, length: 29731 bytes
+2012-06-06 06:20:37,099 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 206
+2012-06-06 06:20:37,116 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 206, length: 80933 bytes
+2012-06-06 06:20:44,770 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 207
+2012-06-06 06:20:44,772 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 207, length: 15614 bytes
+2012-06-06 06:20:47,708 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 197
+2012-06-06 06:20:47,710 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 197, length: 29359 bytes
+2012-06-06 06:20:48,221 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 203
+2012-06-06 06:20:48,239 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 203, length: 65523 bytes
+2012-06-06 06:20:59,848 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 202
+2012-06-06 06:20:59,863 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 202, length: 65727 bytes
+2012-06-06 06:21:00,357 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 196
+2012-06-06 06:21:00,377 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 196, length: 24035 bytes
+2012-06-06 06:21:02,371 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 187
+2012-06-06 06:21:02,373 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 187, length: 22342 bytes
+2012-06-06 06:21:02,883 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 188
+2012-06-06 06:21:02,902 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 188, length: 62489 bytes
+2012-06-06 06:21:07,541 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 186
+2012-06-06 06:21:07,556 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 186, length: 68435 bytes
+2012-06-06 06:21:08,048 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 180
+2012-06-06 06:21:08,062 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 180, length: 29570 bytes
+2012-06-06 06:21:08,458 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 174
+2012-06-06 06:21:08,472 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 174, length: 32351 bytes
+2012-06-06 06:21:10,165 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 169
+2012-06-06 06:21:10,179 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 169, length: 80950 bytes
+2012-06-06 06:21:10,666 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 168
+2012-06-06 06:21:10,669 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 168, length: 27405 bytes
+2012-06-06 06:21:11,500 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 167
+2012-06-06 06:21:11,513 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 167, length: 75958 bytes
+2012-06-06 06:21:12,010 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 165
+2012-06-06 06:21:12,012 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 165, length: 30146 bytes
+2012-06-06 06:25:24,570 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:25:24,572 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:25:25,075 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:25:25,077 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:25:25,575 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:25:25,577 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:36:20,870 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 134
+2012-06-06 06:36:20,891 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 134, length: 28165 bytes
+2012-06-06 06:36:24,700 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 117
+2012-06-06 06:36:24,717 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 117, length: 34674 bytes
+2012-06-06 06:36:25,201 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 118
+2012-06-06 06:36:25,215 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 118, length: 74475 bytes
+2012-06-06 06:36:53,143 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:36:53,147 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:36:53,643 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:36:53,648 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:36:54,159 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:36:54,163 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:38:39,277 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:38:39,279 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:38:39,780 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:38:39,782 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:38:40,291 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:38:40,294 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:39:09,933 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:39:09,935 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:39:10,448 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:39:10,451 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:39:10,948 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:39:10,951 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:39:25,853 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:39:25,855 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:39:26,361 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:39:26,363 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:39:26,876 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:39:26,879 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:40:39,026 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:40:39,028 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:40:39,528 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:40:39,531 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:40:40,043 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:40:40,046 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:41:32,813 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:41:32,815 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:41:33,315 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:41:33,317 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:41:33,818 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:41:33,820 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:42:02,376 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:42:02,377 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:42:02,882 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:42:02,884 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:42:03,382 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:42:03,384 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:43:31,876 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:43:31,878 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:43:32,384 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:43:32,386 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:43:32,899 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:43:32,901 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:44:49,996 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:44:49,997 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:44:50,498 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:44:50,500 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:44:51,012 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:44:51,014 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:45:07,817 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:45:07,819 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:45:08,330 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:45:08,333 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:45:08,844 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:45:08,846 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:45:45,531 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:45:45,533 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:45:46,033 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:45:46,039 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:45:46,535 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:45:46,536 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:46:55,317 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:46:55,322 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:46:55,818 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:46:55,821 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:46:55,834 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:46:55,836 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:47:37,920 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:47:37,922 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:47:37,947 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:47:37,949 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:47:38,423 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:47:38,424 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:52:15,563 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:52:15,564 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:52:16,064 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:52:16,067 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:52:16,571 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:52:16,574 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:53:22,616 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:53:22,618 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:53:23,121 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:53:23,123 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:53:23,621 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:53:23,623 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:54:46,950 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:54:46,951 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:54:47,454 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:54:47,458 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:54:47,965 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:54:47,967 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:55:35,212 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:55:35,214 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:55:35,714 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:55:35,717 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:55:36,214 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:55:36,217 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:56:52,766 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:56:52,768 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:56:53,274 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:56:53,276 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:56:53,788 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:56:53,790 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:58:01,273 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:58:01,275 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:58:01,785 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:58:01,788 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:58:02,300 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:58:02,303 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:58:37,367 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:58:37,368 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:58:37,869 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:58:37,871 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:58:38,381 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:58:38,383 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 06:58:57,906 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 06:58:57,908 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 06:58:58,410 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 06:58:58,413 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 06:58:58,925 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 06:58:58,927 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:04:11,905 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:04:11,908 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:04:12,407 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:04:12,410 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:04:12,906 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:04:12,908 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:04:52,626 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:04:52,627 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:04:53,136 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:04:53,138 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:04:53,636 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:04:53,638 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:05:43,796 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:05:43,797 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:05:43,804 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:05:43,805 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:05:44,301 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:05:44,302 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:06:38,865 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:06:38,866 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:06:39,366 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:06:39,368 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:06:39,882 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:06:39,884 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:07:16,365 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:07:16,367 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:07:16,868 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:07:16,870 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:07:17,382 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:07:17,384 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:07:52,162 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:07:52,164 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:07:52,668 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:07:52,670 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:07:53,181 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:07:53,183 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:08:28,854 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:08:28,856 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:08:29,356 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:08:29,358 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:08:29,856 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:08:29,859 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:09:00,090 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:09:00,092 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:09:00,591 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:09:00,592 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:09:01,101 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:09:01,103 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:09:47,803 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:09:47,805 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:09:48,305 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:09:48,307 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:09:48,320 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:09:48,322 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:10:16,784 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-06 07:10:16,786 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-06 07:10:17,288 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-06 07:10:17,290 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-06 07:10:17,787 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-06 07:10:17,790 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-06 07:17:45,636 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-06 07:17:45,645 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes
+2012-06-06 07:17:56,207 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 164
+2012-06-06 07:17:56,219 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 164, length: 30389 bytes
+2012-06-06 07:17:56,716 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 166
+2012-06-06 07:17:56,739 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 166, length: 65757 bytes

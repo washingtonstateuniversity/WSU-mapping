@@ -45,7 +45,7 @@ min-width:1026px;
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {padding:0 10px 10px 24px;position: relative; z-index: 9;margin-left: 16px;}
+#nav {padding:23px 10px 10px 24px;position: relative; z-index: 9;margin-left: 16px;}
 #main_nav{}
 #main_nav li{width: 153px;}
 #main_nav li a{display: block !important; color:#5e6a71;}

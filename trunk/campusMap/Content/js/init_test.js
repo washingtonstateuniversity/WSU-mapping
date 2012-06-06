@@ -24,7 +24,7 @@ function iniMap(url,callback){
 			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom+1;}
 		}
 		
-		map_op = $.extend(map_op,{"mapTypeControl":false});
+		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			var map = $('#centralMap').gmap("get","map");
 			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
@@ -33,7 +33,7 @@ function iniMap(url,callback){
 			addCentralControlls();
 			loadData(data);
 			callback();
-			$('[controlheight]:first').css({'margin-left':'15px'});
+			$('[controlheight]:first').css({'margin-left':'25px'});
 		});
 	});
 }
@@ -158,10 +158,10 @@ function clearHereToThere(){
 }
 
 function hereToThere(){
-	if(cTo=="" || cFrom =="")return false
+	if(cTo==""||cFrom =="")return false
 	clearHereToThere();
 	$('#centralMap').gmap('displayDirections',
-		{origin:cFrom,destination:cTo,travelMode: google.maps.DirectionsTravelMode.BICYCLING},
+		{origin:cFrom,destination:cTo,travelMode: google.maps.DirectionsTravelMode.WALKING},
 		{draggable: true},
 		function(){
 			cFrom="";
@@ -216,7 +216,7 @@ function showContextMenu(caurrentLatLng  ) {
 	$(map.getDiv()).append(contextmenuDir);
 	setMenuXY(caurrentLatLng);
 	contextmenuDir.style.visibility = "visible";
-	
+	if(cTo=="" && cFrom ==""){clearHereToThere();}
 	
 
 	if(cTo!=""){$('.contextmenu #to').addClass('active');}
@@ -225,9 +225,7 @@ function showContextMenu(caurrentLatLng  ) {
 		cTo=caurrentLatLng.lat()+","+caurrentLatLng.lng();
 		//alert(cTo);
 		$(this).addClass('active');
-		 
 		 hideContextMenu();
-		 
 		 if(cTo=="" || cFrom =="")return false
 		 clearHereToThere();
 		 hereToThere();
@@ -237,12 +235,10 @@ function showContextMenu(caurrentLatLng  ) {
 		//alert(cFrom);
 		$(this).addClass('active');
 		 hideContextMenu();
-		 
 		 if(cTo=="" || cFrom =="")return false
 		 clearHereToThere();
 		 hereToThere();
 	});
-	
 }
 function hideContextMenu() {
 	$('.contextmenu').remove();
@@ -363,7 +359,21 @@ function loadData(data,callback){
 									nav:$('.cNav')
 								});
 							}
-							//alert('tring to tab it, dabnab it');
+							var pos = markerLog[i].getPosition();
+							var z = $('#centralMap').gmap('get','map').getZoom(); 
+							var latOffset = 0;
+							if(z==21)latOffset = .000035;
+							if(z==20)latOffset = .00007;
+							if(z==19)latOffset = .0002;
+							if(z==18)latOffset = .0005;
+							if(z==17)latOffset = .001;
+							if(z==16)latOffset = .002;
+							if(z==15)latOffset = .0035;
+							if(z==14)latOffset = .005;
+							if(z==13)latOffset = .009;
+							if(z==12)latOffset = .014;
+							var	newpos = new google.maps.LatLng((pos.lat()+latOffset), pos.lng());
+							$('#centralMap').gmap('get','map').setCenter(newpos);
 						}
 			};
 			ib[i] = new InfoBox(myOptions,function(){
@@ -417,9 +427,6 @@ function loadListings(data,showSum){
 			}
 			$.each(ib, function(i) {ib[i].close();});
 			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
-			var pos = markerLog[i].getPosition();
-			var	newpos = new google.maps.LatLng((pos.lat()-2), pos.lng());
-			$('#centralMap').gmap('get','map').setCenter(newpos); 
 		});
 	});
 }
@@ -479,7 +486,7 @@ $(document).ready(function(){
 						btn.addClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
 				});
-				$('[controlheight]:first').stop().animate({'margin-left':'200px'}, 500, function() {});
+				$('[controlheight]:first').stop().animate({'margin-left':'215px'}, 500, function() {});
 			}else{
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"0px"
@@ -488,7 +495,7 @@ $(document).ready(function(){
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 						//$('[controlheight]:first').css({'margin-left':'5px'});
 				});
-				$('[controlheight]:first').stop().animate({'margin-left':'15px'}, 500, function() {});
+				$('[controlheight]:first').stop().animate({'margin-left':'25px'}, 500, function() {});
 			}
 		});
 		var kStroke;
@@ -558,10 +565,14 @@ $(document).ready(function(){
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');
 			var params='';
-			$.each($('li.checked a'),function(){
-				params=params+$(this).attr('href').replace('?cat[]=','')+',';
-			});
-			updateMap(encodeURI(params.substring(0, params.length - 1)),true);
+			if($('li.checked a').length){
+				$.each($('li.checked a'),function(){
+					params=params+$(this).attr('href').replace('?cat[]=','')+',';
+				});
+				updateMap(encodeURI(params.substring(0, params.length - 1)),true);
+			}else{
+				$(this).closest('.parent').find('.parentalLink').trigger('click');
+			}
 		});
 		
 		
