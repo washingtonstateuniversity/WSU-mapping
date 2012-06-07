@@ -394,18 +394,27 @@ function loadData(data,callback){
 			ibh[i] = new InfoBox(myHoverOptions,function(){});
 			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
 			$('#centralMap').gmap('addMarker', $.extend({ 
-				'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-			},marker.style),function(ops,marker){
-				markerLog[i]=marker;
-				if($.isFunction(callback))callback(marker);
-				}).click(function() {
-				$.each(ib, function(i) {ib[i].close();});
-				ib[i].open($('#centralMap').gmap('get','map'), this);
-				
-		
-				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
-			}).rightclick(function(event){showContextMenu(event.latLng);})
-			.mouseover(function(event){$.each(ibh, function(i) {ibh[i].close();});ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);})
+					'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
+					'z-index':1
+				},marker.style),function(ops,marker){
+					markerLog[i]=marker;
+					if($.isFunction(callback))callback(marker);
+				})
+			.click(function() {
+					$.each(ib, function(i) {
+						ib[i].close();
+						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
+					});
+					ib[i].open($('#centralMap').gmap('get','map'), this);
+					$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
+					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+				})
+			.rightclick(function(event){showContextMenu(event.latLng);})
+			.mouseover(function(event){
+				$.each(ibh, function(i) {ibh[i].close();});
+				ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
+				//$(markerLog[i]).css({"box-shadow":"0px 5px 10px -5px rgba(0, 0, 0, 0.25)"});
+			})
 			.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
 		});
 	}
@@ -432,9 +441,9 @@ function loadListings(data,showSum){
 			e.stopPropagation();
 			e.preventDefault();
 			if(!btn.hasClass('active') && !btn.next('div').is(':visible')){
-				$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
+				//$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
 				$('#selectedPlaceList_area .active').removeClass('active');
-				btn.next('div').toggle('showOrHide');
+				//btn.next('div').toggle('showOrHide');
 				btn.addClass('active');
 			}
 			$.each(ib, function(i) {ib[i].close();});
@@ -500,19 +509,18 @@ $(document).ready(function(){
 					}, 500, function() {
 						btn.addClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
-						
 				});
-				$('.central_layout.public.central #centralMap').animate({'margin-left':'192px','width':$('.central_layout.public.central #centralMap').width()-192}, 500, function() {}).addClass("opended");
-				listOffset=192;
+				$('.central_layout.public.central #centralMap').animate({'margin-left':'190px','width':$('.central_layout.public.central #centralMap').width()-190}, 500, function() {}).addClass("opended");
+				listOffset=190;
+				$(window).trigger("resize");
 			}else{
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"0px"
 					}, 500, function() {
 						btn.removeClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
-						//$('[controlheight]:first').css({'margin-left':'5px'});
 				});
-				$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+192}, 500, function() {}).removeClass("opended");
+				$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
 				listOffset=0;
 			}
 		});
@@ -565,7 +573,7 @@ $(document).ready(function(){
 		$('#main_nav li.parent').live('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
-			$('.active').removeClass('active');
+			$('#main_nav .active').removeClass('active');
 			$('.checked').removeClass('checked');
 			$('.childSelected').removeClass('childSelected');
 			$(this).addClass('active');
@@ -654,7 +662,7 @@ $(document).ready(function(){
 				$.colorbox({
 					rel:'gouped',
 					html:function(){
-						return '<h2>Page Link</h2><h3>http://dev.campusmap.wsu.edu/central/</h3><h2>Embed code</h2><textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>';
+						return '<div id="embedArea"><h2>Page Link</h2><h3>http://dev.campusmap.wsu.edu/central/</h3><h2>Embed code</h2><textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea></div>';
 					},
 					photo:true,
 					scrolling:false,

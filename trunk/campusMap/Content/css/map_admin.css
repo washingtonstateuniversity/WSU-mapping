@@ -242,12 +242,25 @@
     width: 127px;
 }
 
-input::-webkit-input-placeholder { 
+#getDirections input::-webkit-input-placeholder { 
     color:    #5e6a71 !important; 
 } 
-input:-moz-placeholder { 
+#getDirections input:-moz-placeholder { 
     color:    #5e6a71 !important; 
 } 
+
+#placeSearch input::-webkit-input-placeholder { 
+    color:    #1f4799 !important; 
+} 
+#placeSearch input:-moz-placeholder { 
+    color:    #1f4799 !important; 
+} 
+
+
+
+
+
+
 
 /* menu */
 .contextmenu{
