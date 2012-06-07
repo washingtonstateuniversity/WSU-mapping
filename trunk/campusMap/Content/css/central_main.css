@@ -486,18 +486,23 @@ fieldset{padding: 4px 8px 10px;}
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #centralMap{width:100%;min-height:350px;height:auto;max-height:100%;border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
 
-        -webkit-box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
         
-        box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
         
 
 }
+
+#centralMap.opended{border-radius: 0px 0px 0px 0px;-webkit-border-radius: 0px 0px 0px 0px;}
+
+
 #centralMap_wrap{    display: block;
     height: auto;
     margin-left: 201px;
     max-height: 100%;
     min-height: 350px;
     position: relative;
+	-webkit-box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
+    box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
+	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
     /*width: 100%;*/}
 
 #selectedPlaceList{

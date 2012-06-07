@@ -276,7 +276,6 @@ input:-moz-placeholder {
 .hoverbox{}
 .hoverbox .infoClose{display:none;}
 #campusmap .ui-tabs {
-	/*margin-bottom:67px;*/
 	padding: 0;
 	border: medium none;
 	width:100%;

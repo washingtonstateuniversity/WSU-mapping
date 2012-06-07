@@ -12745,3 +12745,21 @@ System.Net.WebException: The request was aborted: The operation has timed out.
 2012-06-07 07:28:27,293 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 36828 bytes
 2012-06-07 07:28:27,793 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 94
 2012-06-07 07:28:27,829 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 94, length: 73192 bytes
+2012-06-07 08:28:22,131 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-07 08:28:22,132 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-07 08:28:22,631 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-07 08:28:22,633 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-07 08:28:23,145 [13] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-07 08:28:23,147 [13] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-07 08:42:22,383 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-07 08:42:22,385 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-07 08:42:22,889 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-07 08:42:22,891 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-07 08:42:23,404 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-07 08:42:23,406 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-07 08:42:41,499 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-07 08:42:41,500 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-07 08:42:42,000 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-07 08:42:42,002 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 69849 bytes
+2012-06-07 08:42:43,758 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 77
+2012-06-07 08:42:43,759 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 77, length: 27579 bytes

@@ -34,7 +34,7 @@ function iniMap(url,callback){
 			addCentralControlls();
 			loadData(data);
 			callback();
-			$('[controlheight]:first').css({'margin-left':'25px'});
+			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 		});
 	});
 }
@@ -147,7 +147,6 @@ function addCentralControlls(){
 var cTo="";
 var cFrom="";
 var hasDirection=false;
-
 function clearHereToThere(){
 	if(hasDirection){
 		hasDirection=false;
@@ -157,7 +156,6 @@ function clearHereToThere(){
 		$('#centralMap').gmap('clear','serivces');
 	}
 }
-
 function hereToThere(){
 	if(cTo==""||cFrom =="")return false
 	clearHereToThere();
@@ -171,7 +169,6 @@ function hereToThere(){
 			$('#loading').remove();
 	});
 }
-
 function showContextMenu(caurrentLatLng  ) {
 	/* this need to be abstracked out into the jMap plugin */
 	function setMenuXY(caurrentLatLng){
@@ -244,6 +241,7 @@ function showContextMenu(caurrentLatLng  ) {
 function hideContextMenu() {
 	$('.contextmenu').remove();
 }
+
 
 function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
@@ -476,14 +474,16 @@ function prep(){
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
 $(document).ready(function(){
+	var listOffset=0;
 	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
 		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		iniMap("",function(){
 			$('#loading').remove();
+			
 		});
 		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=450?155:201))}).trigger("resize");
+			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=450?155:201)+listOffset)}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 				}
@@ -493,14 +493,17 @@ $(document).ready(function(){
 			e.stopPropagation();
 			e.preventDefault();
 			var btn=$(this);
+			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 			if(btn.closest('#selectedPlaceList').width()<=1){
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"190px"
 					}, 500, function() {
 						btn.addClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
+						
 				});
-				$('[controlheight]:first').stop().animate({'margin-left':'215px'}, 500, function() {});
+				$('.central_layout.public.central #centralMap').animate({'margin-left':'192px','width':$('.central_layout.public.central #centralMap').width()-192}, 500, function() {}).addClass("opended");
+				listOffset=192;
 			}else{
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"0px"
@@ -509,7 +512,8 @@ $(document).ready(function(){
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 						//$('[controlheight]:first').css({'margin-left':'5px'});
 				});
-				$('[controlheight]:first').stop().animate({'margin-left':'25px'}, 500, function() {});
+				$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+192}, 500, function() {}).removeClass("opended");
+				listOffset=0;
 			}
 		});
 		var kStroke;
@@ -631,18 +635,6 @@ $(document).ready(function(){
 			},
 			open: function(e,ui) {
 				$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
-				/*var
-					acData = $(this).data('autocomplete'),
-					styledTerm = termTemplate.replace('%s', acData.term);
-	
-				acData
-					.menu
-					.element
-					.find('li')
-					.each(function() {
-						var me = $(this);
-						me.html( me.text().replace(acData.term, styledTerm) );
-					});*/
        		 }
 		}).data( "autocomplete" )._renderItem = function( ul, item ) {
 			var text =item.label;
