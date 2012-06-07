@@ -312,15 +312,15 @@ function loadData(data,callback){
 				 content: box//boxText
 				,disableAutoPan: false
 				,maxWidth: 0
-				,pixelOffset: new google.maps.Size(-200, -36)
+				,height:"340px"
+				,pixelOffset: new google.maps.Size(-200, -103)
 				,zIndex: 99
 				,boxStyle: {
-				  //background: "url('http://dev-mcweb.it.wsu.edu/campusmap.com/Content/images/sudo_infobottom.png') no-repeat center bottom",
 				  width: "400px"
 				 }
 				,closeBoxMargin: "10px 2px 2px 2px"
 				,closeBoxURL: siteroot + "Content/images/close.png"
-				,infoBoxClearance: new google.maps.Size(1, 1)
+				,infoBoxClearance: new google.maps.Size(1,1)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
@@ -364,19 +364,7 @@ function loadData(data,callback){
 							var z = $('#centralMap').gmap('get','map').getZoom(); 
 							var mH = $('#centralMap').height();
 							var latOffset = 0;
-							if(z==21)latOffset = mH<600?.00004:.000035;
-							if(z==20)latOffset = mH<600?.00008:.00007;
-							if(z==19)latOffset = mH<600?.0003:.0002;
-							if(z==18)latOffset = mH<600?.00055:.0005;
-							if(z==17)latOffset = mH<600?.002:.001;
-							if(z==16)latOffset = mH<600?.003:.002;
-							if(z==15)latOffset = mH<600?.005:.0035;
-							if(z==14)latOffset = mH<600?.0075:.005;
-							if(z==13)latOffset = mH<600?.0155:.009;
-							if(z==12)latOffset = mH<600?.0165:.014;
-							
-							var	newpos = new google.maps.LatLng((pos.lat()+latOffset), pos.lng());
-							$('#centralMap').gmap('get','map').setCenter(newpos);
+							ib[i].rePosition();
 						}
 			};
 			ib[i] = new InfoBox(myOptions,function(){

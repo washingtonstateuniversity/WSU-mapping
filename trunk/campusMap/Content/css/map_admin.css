@@ -272,18 +272,24 @@ input:-moz-placeholder {
 
 
 /* info boxes */
-.infoBox{margin-bottom:67px;}
+.infoBox{}
 .hoverbox{}
 .hoverbox .infoClose{display:none;}
-#campusmap .ui-tabs {padding: 0;border: medium none;width:100%;  -webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4); box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
--moz-border-radius-bottomleft: 0px;
--webkit-border-bottom-left-radius: 0px;
--khtml-border-bottom-left-radius: 0px;
-border-bottom-left-radius: 0px;
--moz-border-radius-bottomright: 0px;
--webkit-border-bottom-right-radius: 0px;
--khtml-border-bottom-right-radius: 0px;
-border-bottom-right-radius: 0px;
+#campusmap .ui-tabs {
+	/*margin-bottom:67px;*/
+	padding: 0;
+	border: medium none;
+	width:100%;
+	-webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
+	box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-khtml-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-khtml-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 #campusmap .ui-widget-header{height:17px;}
 #campusmap .infoClose{ right: 4px;top: -5px;z-index: 1;}

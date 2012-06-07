@@ -479,6 +479,10 @@ using log4net.Config;
 
             public void sendPlaceJson(place[] items, string callback)
             {
+                /* the responsable thing to do here is to remove the html into a template */
+                /* secound make the feed a template too so there should be 3 templates */ 
+
+
                 String cachePath = Context.ApplicationPhysicalPath;
                 if (!cachePath.EndsWith("\\"))
                     cachePath += "\\";
@@ -507,15 +511,19 @@ using log4net.Config;
                                 mainimage += "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id;
 
                                 //NOTE THIS IS AN EXAMPLE OF WHERE THE DEFAULTS WOULD COME INTO PLAY
-                                String size = "w=148&h=100";
+                                int width = 148;
+                                int height = 100;
                                 if (item.Images[0].orientation == "v"){
-                                    size = "w=100&h=148";
+                                    width = 100;
+                                    height = 148;
                                 }
 
+                                String size = "w=" + width + "&h=" + height + "";
+                                
                                 mainimage += "&id=" + item.Images[0].id + "&m=crop&" + size + "' rel='gouped' title='" + getRootUrl();
                                 mainimage += "media/download.castle?placeid=" + item.id + "&id=" + item.Images[0].id + "' alt='";
                                 mainimage += (String.IsNullOrEmpty(item.Images[0].caption) ? "" : item.Images[0].caption);
-                                mainimage += "' class='img-main'/>";
+                                mainimage += "' class='img-main' width='" + width + "' height='" + height + "'/>";
                                 mainimage += "</span>";
                             }
 

@@ -309,11 +309,11 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
  * Pans the map so that the InfoBox appears entirely within the map's visible area.
  * @private
  */
-InfoBox.prototype.panBox_ = function (disablePan) {
-
+InfoBox.prototype.panBox_ = function (disablePan,skipOnOpen) {
   var map;
   var bounds;
   var xOffset = 0, yOffset = 0;
+  if(typeof(skipOnOpen)=="undefined")skipOnOpen=false;
 
   if (!disablePan) {
 
@@ -368,7 +368,7 @@ InfoBox.prototype.panBox_ = function (disablePan) {
       }
     }
   }
-  this.onOpen();
+  if(!skipOnOpen)this.onOpen();
 };
 
 /**
@@ -712,6 +712,15 @@ InfoBox.prototype.hide = function () {
   }
 };
 
+
+InfoBox.prototype.rePosition = function () {
+  if (this.div_) {
+    this.panBox_(this.disableAutoPan_,true);
+  }
+};
+
+
+
 /**
  * Adds the InfoBox to the specified map or Street View panorama. If <tt>anchor</tt>
  *  (usually a <tt>google.maps.Marker</tt>) is specified, the position
@@ -739,6 +748,7 @@ InfoBox.prototype.open = function (map, anchor) {
   }else{
 	this.onOpen();  
   }
+  
 };
 
 /**
