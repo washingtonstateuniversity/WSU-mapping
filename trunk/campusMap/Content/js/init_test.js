@@ -398,6 +398,7 @@ function loadData(data,callback){
 					'z-index':1
 				},marker.style),function(ops,marker){
 					markerLog[i]=marker;
+					$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
 					if($.isFunction(callback))callback(marker);
 				})
 			.click(function() {
