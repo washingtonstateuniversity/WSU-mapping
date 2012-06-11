@@ -106,6 +106,9 @@ function InfoBox(opt_opts,callback) {
   if (opt_opts.closeBoxURL === "") {
     this.closeBoxURL_ = "";
   }
+  this.closeBoxHTML_ = opt_opts.closeBoxHTML || false;
+
+  
   this.infoBoxClearance_ = opt_opts.infoBoxClearance || new google.maps.Size(1, 1);
   this.isHidden_ = opt_opts.isHidden || false;
   this.alignBottom_ = opt_opts.alignBottom || false;
@@ -240,20 +243,22 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
 InfoBox.prototype.getCloseBoxImg_ = function () {
 
   var img = "";
-
-  if (this.closeBoxURL_ !== "") {
-
-    img  = "<img";
-    img += " src='" + this.closeBoxURL_ + "'";
-    img += " align=right"; // Do this because Opera chokes on style='float: right;'
-	img += " class='infoClose'";
-    img += " style='";
-    img += " position: relative;"; // Required by MSIE
-    img += " cursor: pointer;";
-    img += " margin: " + this.closeBoxMargin_ + ";";
-    img += "'>";
-  }
-
+	if(this.closeBoxHTML_){
+		img = this.closeBoxHTML_;
+	}else{
+	  if (this.closeBoxURL_ !== "") {
+	
+		img  = "<img";
+		img += " src='" + this.closeBoxURL_ + "'";
+		img += " align=right"; // Do this because Opera chokes on style='float: right;'
+		img += " class='infoClose'";
+		img += " style='";
+		img += " position: relative;"; // Required by MSIE
+		img += " cursor: pointer;";
+		img += " margin: " + this.closeBoxMargin_ + ";";
+		img += "'>";
+	  }
+	}
   return img;
 };
 

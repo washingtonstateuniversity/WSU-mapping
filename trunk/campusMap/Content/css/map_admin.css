@@ -298,6 +298,15 @@
 .infoBox{}
 .hoverbox{}
 .hoverbox .infoClose{display:none;}
+#campusmap .infoClose{     right: 4px;
+    top: 3px;
+    z-index: 1;}
+#campusmap .infoClose{background: url("../../Content/images/close_n_hover.png") no-repeat scroll center top transparent;     cursor: pointer;
+    display: block;
+    height: 13px;
+    position: absolute;
+    width: 14px;}
+#campusmap .infoClose:hover{ background-position:center bottom;}
 #campusmap .ui-tabs {
 	padding: 0;
 	border: medium none;
@@ -314,7 +323,7 @@
 	border-bottom-right-radius: 0px;
 }
 #campusmap .ui-widget-header{height:17px;}
-#campusmap .infoClose{ right: 4px;top: -5px;z-index: 1;}
+
 #campusmap .ui-tabs .ui-tabs-nav{padding: 0.2em 0 0;
 -moz-border-radius-bottomleft: 0px;
 -webkit-border-bottom-left-radius: 0px;
@@ -365,6 +374,13 @@ border-bottom-right-radius: 0px;
 	#campusmap .cycle .cWrap {margin: 0 auto;height:190px;width: 263px !important;}
 	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
 	#campusmap .cycle .cWrap ul li{width: 344px !important;height:190px;}
+
+	#campusmap #cboxContent .cycle{position:relative;width:75%;height:100%;margin: 0 auto;}	
+	#campusmap #cboxContent .cycle .cWrap {margin: 0 auto;height:100%;width: auto !important;}
+	#campusmap #cboxContent .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:100%;}
+	#campusmap #cboxContent .cycle .cWrap ul li{width: auto !important;height:100%;padding-left: 24px;}
+	#campusmap #cboxContent .cycle .cWrap ul li img{height:100%;}
+	#cboxLoadedContent{ overflow:visible  !important;}
 	
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage{float: left;position: relative;}	
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h,
@@ -379,17 +395,32 @@ border-bottom-right-radius: 0px;
 	}
 	
 	#campusmap .cycle .prev{
-		left:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent; }
+		left:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent;z-index: 9; }
 	#campusmap .cycle .next{
-		right:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;}
+		right:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;z-index: 9;}
+		
+		#campusmap #cboxContent .cycle .prev , #campusmap #cboxContent .cycle .next {top:50%;}
+		
 	#campusmap .cycle .prev:hover{ background-position:left bottom; }
 	#campusmap .cycle .next:hover{background-position:right bottom;}
+
+
+
+	#campusmap #cboxContent #cboxPrevious{
+		left:0px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent;z-index: 9; }
+	#campusmap #cboxContent #cboxNext{
+		right:0px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;z-index: 9;}
+	
+	#campusmap #cboxContent #cboxPrevious:hover{ background-position:left bottom; }
+	#campusmap #cboxContent #cboxNext:hover{background-position:right bottom;}
+
+
 	
 	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}
 	#campusmap .navArea ul.cNav{display:inline;margin:5px;padding:0;}
 	#campusmap .navArea ul.cNav li{display:inline;padding: 0 4px;line-height: 8px;height: 8px;}
 	#campusmap .navArea ul.cNav li a{display:inline-block;margin:0 2px; width:8px; height:8px;text-indent:-9999em;background: url("../../Content/images/jCellNav_btn.png") no-repeat scroll right center transparent;}
-	#campusmap .navArea ul.cNav li.active a{ background-position:left center;}
+	#campusmap .navArea ul.cNav li.activeSlide a{ background-position:left center;}
 	#campusmap .navArea ul.cNav li a:hover{background-position:center center;}
 	#campusmap .navArea .photos{color:#5e6a71; font-size:12px; text-transform:uppercase; text-decoration:none;}
 	#campusmap .navArea .photos.active{color:#3cb6ce;}

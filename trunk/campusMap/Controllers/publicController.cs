@@ -545,17 +545,20 @@ using log4net.Config;
                                     if (c > 0)
                                     {
                                       /* note the width and height should be abstracted out into a map preference*/
-                                        galImg += "<li><span class='headImage orientation_" + media.orientation + "' rel='gouped'>"+
-                                            "<a href='#' class='imgEnlarge' hidefocus='true'></a>" +
-                                            "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' title='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "' class='img-main'/>" +
-                                        "</span></li>";
+                                        galImg += "<li><a href='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "'  hidefocus='true' rel='gouped' class='gouped headImage orientation_" + media.orientation + "'>" +
+                                            "<span class=' imgEnlarge'></span>" +
+                                            "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' alt='" + media.caption + "' class='img-main' />" +
+                                        "</a></li>";
                                         if(media.type.name=="general_image")hasImg = true;
                                         if(media.type.name=="general_video")hasVid = true;
                                     }
                                     c++;
                                 }
-                                String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") + (c>2?"<ul class='cNav'>" + repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) + "</ul>":"") + (hasImg && hasVid ? "<a href='#' class='vids' hidefocus='true'>Video</a>" : "") + "</div>";
-                                String gallery = "<div class='cycle'>"+(c>2?"<a href='#' class='prev' hidefocus='true'>Prev</a>":"")+"<div class='cWrap'><ul class='items'>" + galImg + "</ul></div>"+(c>2?"<a href='#' class='next' hidefocus='true'>Next</a>":"")+"</div>" + nav;
+                                String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") +
+                                    (c>2?"<ul class='cNav'>" +
+                                    //repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) +
+                                    "</ul>":"") + (hasImg && hasVid ? "<a href='#' class='vids' hidefocus='true'>Video</a>" : "") + "</div>";
+                                String gallery = "<div class='cycleArea'><div class='cycle'>" + (c > 2 ? "<a href='#' class='prev' hidefocus='true'>Prev</a>" : "") + "<div class='cWrap'><ul class='items'>" + galImg + "</ul></div>" + (c > 2 ? "<a href='#' class='next' hidefocus='true'>Next</a>" : "") + "</div>" + nav + "</div>";
 
                                 imgGallery += @"
                                         {

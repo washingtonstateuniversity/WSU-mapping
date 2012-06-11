@@ -43,6 +43,9 @@
  *      afterEnd: function(a) {
  *          alert("After animation ends:" + a); // callback
  *      }
+ *      onInt: function(a) {
+ *          alert("After int:" + a); // callback
+ *      }
  * });
  */
 
@@ -66,7 +69,8 @@ $.fn.jCell = function(o) {
 		navTemplate:'<li><a href="#">&bull;</a></li>',
 		navActive:'active',
         beforeStart: null,
-        afterEnd: null
+        afterEnd: null,
+		onInt:null
     }, o || {});
 
     return this.each(function() {
@@ -131,6 +135,10 @@ $.fn.jCell = function(o) {
 				});
 			});
 		}
+		
+		if(o.onInt) o.onInt.call(this, div);
+		
+		
 		function selectNav(i){
 			o.nav.find("."+o.navActive).removeClass(o.navActive);
 			o.nav.children().eq(i).addClass(o.navActive);

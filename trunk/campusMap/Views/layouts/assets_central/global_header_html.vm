@@ -62,6 +62,7 @@ $Controller.getView()
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jCell.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.cycle.all.js"></script>
 
 <script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
