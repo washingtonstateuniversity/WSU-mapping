@@ -318,7 +318,7 @@ function loadData(data,callback){
 				 }
 				//,closeBoxMargin: "10px 2px 2px 2px"
 				//,closeBoxURL: siteroot + "Content/images/close.png"
-				,closeBoxHTML:"<span class='infoClose'></span>"
+				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
 				,infoBoxClearance: new google.maps.Size(1,1)
 				,isHidden: false
 				,pane: "floatPane"

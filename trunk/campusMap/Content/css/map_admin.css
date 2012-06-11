@@ -298,15 +298,16 @@
 .infoBox{}
 .hoverbox{}
 .hoverbox .infoClose{display:none;}
-#campusmap .infoClose{     right: 4px;
-    top: 3px;
-    z-index: 1;}
-#campusmap .infoClose{background: url("../../Content/images/close_n_hover.png") no-repeat scroll center top transparent;     cursor: pointer;
+#campusmap .tabedBox.infoClose{     right: 4px;
+    top: 4px;
+    z-index: 1;
+}
+#campusmap .tabedBox.infoClose{background: url("../../Content/images/close_n_hover.png") no-repeat scroll center top transparent;     cursor: pointer;
     display: block;
     height: 13px;
     position: absolute;
     width: 14px;}
-#campusmap .infoClose:hover{ background-position:center bottom;}
+#campusmap .tabedBox.infoClose:hover{ background-position:center bottom;}
 #campusmap .ui-tabs {
 	padding: 0;
 	border: medium none;
@@ -367,7 +368,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage.orientation_v{
 	background: url("../../Content/images/samples/in_info_image_bk_v.png") repeat-x scroll 50% top #FFFFFF;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage .imgEnlarge{
-	background: url("../../Content/images/imgEnlarge.png") no-repeat scroll center center transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;}
+	background: url("../../Content/images/imgEnlarge.png") no-repeat scroll center center transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;padding: 0;}
 	
   /* info boxes gallery */		
 	#campusmap .cycle{position:relative;width:344px;height:190px;margin-left:10px;}	
