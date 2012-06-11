@@ -324,6 +324,13 @@ function loadData(data,callback){
 				,enableEventPropagation: false
 				,onOpen:function(){
 							$('#taby'+i).tabs();
+							var minHeight=0;
+							$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+								minHeight = Math.max(minHeight, $(this).find('.content').height()); 
+							}).css('min-height',minHeight); 
+
+							
+							
 							$('#taby'+i).hover(function(){
 								ib[i].setOptions({enableEventPropagation: true});
 								$('#centralMap').gmap('stop_scroll_zoom');
@@ -381,7 +388,7 @@ function loadData(data,callback){
 				,pixelOffset: new google.maps.Size(15,-15)
 				,zIndex: 99
 				,boxStyle: {
-				  minWidth: "250px"
+					minWidth: "250px"
 				 }
 				,infoBoxClearance: new google.maps.Size(1, 1)
 				,isHidden: false
