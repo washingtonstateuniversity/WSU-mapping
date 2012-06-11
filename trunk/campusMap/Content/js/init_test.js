@@ -2,6 +2,11 @@ var ib = [];
 var ibh = [];
 var markerLog = [];
 var shapes = [];
+
+var ibHover = false;
+
+
+
 function resizeBg(obj,height,width) {
 	obj.height($(window).height()-height);
 	if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);
@@ -316,15 +321,14 @@ function loadData(data,callback){
 				,boxStyle: {
 				  width: "400px"
 				 }
-				//,closeBoxMargin: "10px 2px 2px 2px"
-				//,closeBoxURL: siteroot + "Content/images/close.png"
 				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
 				,infoBoxClearance: new google.maps.Size(1,1)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
+				,onClose:function(){ibHover =  false;}
 				,onOpen:function(){
-
+					ibHover =  true;
 						if($(".cWrap").length){
 							$('.cWrap a.gouped').on('click',function(e){
 								e.preventDefault();
@@ -348,72 +352,15 @@ function loadData(data,callback){
 								pause:1,
 								pager:'.cNav',
 								prev:   '.prev',     next:   '.next', 
-								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#">'+idx+'</a></li>';} 
+								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 							});
-							
-
-							
-							/*var html = $('.cycleArea').html();
-							$('body').append('<div id="tmp" style="display:none;">');
-							$('#tmp').append(html);
-							$.each($('#tmp img'),function(){
-								$(this).attr('src',$(this).attr('title'));
-							});
-							html = $('#tmp').html();
-							$('#tmp').remove();
-							$(".cWrap").jCell({
-								btnNext: ".next",
-								btnPrev: ".prev",
-								speed: 1000,
-								visible: 1,
-								navTemplate:'<li><a href="#">{$i}</a></li>',
-								nav:$('.cNav'),
-								onInt:function(){
-									$('.headImage').on('click',function(e){
-										e.preventDefault();
-										trigger=$(this);
-										$.colorbox({
-											rel:'gouped',
-											html:function(){ return html },//trigger.closest('.content.Views .cycleArea').html(); },
-											photo:true,
-											scrolling:false,
-											opacity:0.7,
-											transition:"none",
-											width:"75%",
-											height:"75%",
-											slideshow:true,
-											onComplete:function(){
-												$(".cWrap").jCell({
-													btnNext: ".next",
-													btnPrev: ".prev",
-													speed: 1000,
-													visible: 1,
-													navTemplate:'<li><a href="#">{$i}</a></li>',
-													nav:$('.cNav')
-												});
-											}
-										});
-									});	
-									
-								}
-							});*/
+							prep();
 						}
-		
-					
-				
-						$('#taby'+i).tabs({
-						   create: function(event, ui) {
-
-							   
-							 }
-						});
+						$('#taby'+i).tabs();
 						var minHeight=0;
 						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
 							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
 						}).css('min-height',minHeight); 
-
-						
-						
 						$('#taby'+i).hover(function(){
 							ib[i].setOptions({enableEventPropagation: true});
 							$('#centralMap').gmap('stop_scroll_zoom');
@@ -421,9 +368,6 @@ function loadData(data,callback){
 							ib[i].setOptions({enableEventPropagation: false});
 							$('#centralMap').gmap('set_scroll_zoom');
 						});
-
-
-						
 						var pos = markerLog[i].getPosition();
 						var z = $('#centralMap').gmap('get','map').getZoom(); 
 						var mH = $('#centralMap').height();
@@ -436,7 +380,7 @@ function loadData(data,callback){
 				//alert('tring to tab it, dabnab it, from the INI');
 			});
 			//end of the bs that is well.. bs of a implamentation
-/* so need to remove this and create the class for it */
+			/* so need to remove this and create the class for it */
 			var boxText = document.createElement("div");
 			boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
 			boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
@@ -456,6 +400,7 @@ function loadData(data,callback){
 				,enableEventPropagation: false
 				,disableAutoPan:true
 				,onOpen:function(){}
+				
 			};
 			ibh[i] = new InfoBox(myHoverOptions,function(){});
 			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
@@ -474,13 +419,16 @@ function loadData(data,callback){
 					});
 					ib[i].open($('#centralMap').gmap('get','map'), this);
 					$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
-					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
 				})
 			.rightclick(function(event){showContextMenu(event.latLng);})
 			.mouseover(function(event){
 				$.each(ibh, function(i) {ibh[i].close();});
-				ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
-				//$(markerLog[i]).css({"box-shadow":"0px 5px 10px -5px rgba(0, 0, 0, 0.25)"});
+				$('.infoBox').hover( 
+					function() { ibHover =  true; }, 
+					function() { ibHover =  false;  } 
+				); 
+				if(ibHover!=true)ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
 			})
 			.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
 		});
