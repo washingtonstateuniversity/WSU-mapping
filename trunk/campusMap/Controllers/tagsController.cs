@@ -57,6 +57,19 @@ namespace campusMap.Controllers
             IList<tags> items = q.Execute();
             PropertyBag["tags"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
+            sql = "from tags t where NOT exists elements(t.places)";
+            q = new SimpleQuery<tags>(typeof(tags), sql);
+            items = q.Execute();
+            PropertyBag["unassignedCount"] = items.Count;
+
+            sql = "SELECT t.name FROM tags t GROUP BY t.name HAVING ( COUNT(t.name) > 1 )";
+            SimpleQuery<String> dub = new SimpleQuery<String>(typeof(tags), sql);
+            String[] dubItems = dub.Execute();
+            PropertyBag["doubledCount"] = dubItems.Length;
+
+            PropertyBag["selected"] = filter;
+
+
             usertags_items = ActiveRecordBase<usertags>.FindAll(Order.Asc("name"));
             PropertyBag["usertags"] = PaginationHelper.CreatePagination(usertags_items, pagesize, uPaging);
         }
@@ -93,6 +106,7 @@ namespace campusMap.Controllers
         }
         public void merge(int[] ids, string newname)
         {
+            if (!String.IsNullOrEmpty(Request.Params["deleteTags"])) massDeleteTags(ids); return;
             List<place> places = new List<place>();
             string name = "";
             foreach(int id in ids){

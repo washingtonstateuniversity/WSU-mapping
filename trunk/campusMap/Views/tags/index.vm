@@ -14,6 +14,28 @@
 </div>
 #end
 
+
+
+#if($unassignedCount)
+<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+  <p style="line-height: 15px;padding-bottom: 0;">
+    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>There are currently $unassignedCount unassigned tags
+  </p>
+</div>
+#end
+
+
+#if($doubledCount)
+<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+  <p style="line-height: 15px;padding-bottom: 0;">
+    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>There are currently $doubledCount tags with the same name
+  </p>
+</div>
+#end
+
+
+
+
 <script type="text/javascript">
   var availableTags = [$!locations];
 </script>
@@ -26,7 +48,11 @@
 
 
 
-
+<select name="filter" onChange="window.location='/tags/index.castle?filter='+$(this).val()" style="float: right; z-index: 1; position: relative; margin: 16px 16px 0px 0px;">
+	<option value="all" #if($selected=="all")selected="selected"#end>All</option>
+	<option value="unassigned" #if($selected=="unassigned")selected="selected"#end>Un-Assigned</option>
+	<option value="assigned" #if($selected=="assigned")selected="selected"#end>Assigned</option>
+</select>
 <div id="tabs" class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
     <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
@@ -39,6 +65,7 @@
 
 
   <div id="tabs-1">
+
    <div class="tab_tar">
 		<table class="pagination" width="60%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
 		  <tr>
@@ -62,7 +89,7 @@
 			<table width="100%" class="ui-widget ui-widget-content">
 			  <thead>
 				<tr class="ui-widget-header ">
-					<th></th>
+					<th align="center"><input type="checkbox" onClick="$('.checkable').attr('checked', $(this).attr('checked')?true:false )" /></th>
 					<th>Name</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -71,7 +98,7 @@
 				#set ($c=0)
 				#foreach($tag in $tags)
 				<tr #if($c%2>0) class="even" #else class="odd" #end>
-					<td align="center"><input name="ids[]" type="checkbox" value="$tag.id"/></td>
+					<td align="center"><input name="ids[]" type="checkbox" class="checkable" value="$tag.id"/></td>
 					<td align="center">$!tag.name</td>
 				  <td class='actionArea'>
 			
@@ -91,6 +118,7 @@
 			</table>
 			<label>New Tag name:<input type="text" name="newname" value="" /></label>
 			<input type="submit" name="mergeTags" value="Merge Tags" />
+			<input type="submit" name="deleteTags" value="Delete Tags" />
 		</form>
 	</div>
   </div>

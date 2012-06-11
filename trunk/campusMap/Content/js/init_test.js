@@ -328,7 +328,7 @@ function loadData(data,callback){
 				,enableEventPropagation: false
 				,onClose:function(){ibHover =  false;}
 				,onOpen:function(){
-					ibHover =  true;
+						ibHover =  true;
 						if($(".cWrap").length){
 							$('.cWrap a.gouped').on('click',function(e){
 								e.preventDefault();

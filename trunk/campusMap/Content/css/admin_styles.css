@@ -33,7 +33,7 @@ min-width:1026px;
 }
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 .admin #adminNav{width: 100%;background: none repeat scroll 0 0 #981E32;height:35px; position: relative;z-index:10;}
-.admin #adminNav.fixed{position: fixed; top:0px; left:0px;}
+.admin #adminNav.fixed{position: fixed; top:0px; left:0px;min-width: 1087px;}
 
 ul.menu {padding:0; margin:0; list-style:none; position:relative; z-index:500; margin-right:1px; float:left;}
 
