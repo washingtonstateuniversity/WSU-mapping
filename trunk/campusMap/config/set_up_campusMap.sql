@@ -12,142 +12,145 @@ GO
 
 /* clear functions */
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CalculateDistance]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-DROP FUNCTION [dbo].[CalculateDistance]
+DROP FUNCTION [campusMap].[dbo].[CalculateDistance]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LatitudePlusDistance]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-DROP FUNCTION [dbo].[LatitudePlusDistance]
+DROP FUNCTION [campusMap].[dbo].[LatitudePlusDistance]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LongitudePlusDistance]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-DROP FUNCTION [dbo].[LongitudePlusDistance]
+DROP FUNCTION [campusMap].[dbo].[LongitudePlusDistance]
 GO
 
 IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_place_geography_coordinate]')
-DROP INDEX [SIndx_place_geography_coordinate] ON [dbo].[place]
+DROP INDEX [SIndx_place_geography_coordinate] ON [campusMap].[dbo].[place]
 GO
 IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_place_geography_coordinate2]')
-DROP INDEX [SIndx_place_geography_coordinate2] ON [dbo].[place]
+DROP INDEX [SIndx_place_geography_coordinate2] ON [campusMap].[dbo].[place]
 GO
 IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_place_geography_coordinate3]')
-DROP INDEX [SIndx_place_geography_coordinate3] ON [dbo].[place]
+DROP INDEX [SIndx_place_geography_coordinate3] ON [campusMap].[dbo].[place]
 GO
 
+
+
 /* */
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[google_types_to_place_types]') AND type in (N'U'))
-DROP TABLE [dbo].[google_types_to_place_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[google_types]') AND type in (N'U'))
-DROP TABLE [dbo].[google_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[google_types_to_place_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[google_types_to_place_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[google_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[google_types]
 
 
 /* delete ties the are using Fkeys first */
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_media]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_campus]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_campus]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_campus]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_campus]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_place_types]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_place_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_place_models]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_place_models]
-
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_categories]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_categories]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_tags]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_tags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_departments]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_departments]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_colleges]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_colleges]	
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_schools]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_schools]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_programs]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_programs]	
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_geometrics]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_geometrics]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_usertags]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_usertags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_place_names]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_place_names]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_fields]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_fields]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_comments]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_comments]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_to_infotabs]') AND type in (N'U'))
-DROP TABLE [dbo].[place_to_infotabs]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_place_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_place_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_place_models]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_place_models]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_names]') AND type in (N'U'))
-DROP TABLE [dbo].[place_names]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_categories]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_categories]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_tags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_tags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_departments]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_departments]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_colleges]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_colleges]	
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_schools]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_schools]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_programs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_programs]	
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_geometrics]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_geometrics]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_usertags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_usertags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_place_names]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_place_names]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_fields]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_fields]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_comments]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_comments]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_to_infotabs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_infotabs]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[campusMap].[dbo].[place_to_view]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_to_view]
 
-
-
-
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics_to_styles]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics_to_styles]
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_to_style_options]') AND type in (N'U'))
-DROP TABLE [dbo].[style_to_style_options]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_events_to_geometrics_types]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_events_to_geometrics_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_option_types_to_geometrics_types]') AND type in (N'U'))
-DROP TABLE [dbo].[style_option_types_to_geometrics_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_option_types_to_geometrics_to_types]') AND type in (N'U'))
-DROP TABLE [dbo].[style_option_types_to_geometrics_to_types]
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_events_to_style_options]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_events_to_style_options]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_names]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_names]
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics_to_types]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics_to_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics_to_fields]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics_to_fields]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_to_tags]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_to_tags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_to_usertags]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_to_usertags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_to_media]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_to_media]
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics_to_styles]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics_to_styles]
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_to_style_options]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_to_style_options]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_events_to_geometrics_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_events_to_geometrics_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_option_types_to_geometrics_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_option_types_to_geometrics_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_option_types_to_geometrics_to_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_option_types_to_geometrics_to_types]
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_events_to_style_options]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_events_to_style_options]
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[advertisement_to_media]') AND type in (N'U'))
-DROP TABLE [dbo].[advertisement_to_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[advertisement_to_tag]') AND type in (N'U'))
-DROP TABLE [dbo].[advertisement_to_tag]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ad_to_field_types]') AND type in (N'U'))
-DROP TABLE [dbo].[ad_to_field_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics_to_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics_to_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics_to_fields]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics_to_fields]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_to_tags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_to_tags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_to_usertags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_to_usertags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_to_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_to_media]
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_programs]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_programs]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_campus]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_campus]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_place_type]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_place_type]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_colleges]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_colleges]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_place]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_place]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_view]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_view]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_media]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_geometrics]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_geometrics]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors_to_categories]') AND type in (N'U'))
-DROP TABLE [dbo].[authors_to_categories]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[advertisement_to_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[advertisement_to_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[advertisement_to_tag]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[advertisement_to_tag]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[ad_to_field_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[ad_to_field_types]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[view_to_usertags]') AND type in (N'U'))
-DROP TABLE [dbo].[view_to_usertags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[view_to_tags]') AND type in (N'U'))
-DROP TABLE [dbo].[view_to_tags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[view_to_fields]') AND type in (N'U'))
-DROP TABLE [dbo].[view_to_fields]
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_programs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_programs]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_campus]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_campus]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_place_type]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_place_type]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_colleges]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_colleges]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_place]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_place]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_view]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_view]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_geometrics]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_geometrics]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors_to_categories]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors_to_categories]
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[view_to_usertags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[view_to_usertags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[view_to_tags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[view_to_tags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[view_to_fields]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[view_to_fields]
 /* IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[view_to_field_types]') AND type in (N'U'))
 DROP TABLE [dbo].[view_to_field_types] */
 
@@ -159,148 +162,164 @@ DROP TABLE [dbo].[category_to_field_types]*/
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_to_events_set]') AND type in (N'U'))
-DROP TABLE [dbo].[style_to_events_set]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_events_to_events_set]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_events_to_events_set]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[events_set]') AND type in (N'U'))
-DROP TABLE [dbo].[events_set]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_to_events_set]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_to_events_set]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_events_to_events_set]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_events_to_events_set]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[events_set]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[events_set]
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_events_to_zoom]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_events_to_zoom]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_to_zoom]') AND type in (N'U'))
-DROP TABLE [dbo].[style_to_zoom]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[zoom_levels]') AND type in (N'U'))
-DROP TABLE [dbo].[zoom_levels]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_events_to_zoom]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_events_to_zoom]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_to_zoom]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_to_zoom]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[zoom_levels]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[zoom_levels]
 	
 	
 	
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_to_media_types]') AND type in (N'U'))
-DROP TABLE [dbo].[media_to_media_types]
-/* IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_to_field_types]') AND type in (N'U'))
-DROP TABLE [dbo].[media_to_field_types] */
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_to_fields]') AND type in (N'U'))
-DROP TABLE [dbo].[media_to_fields]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_to_media_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_to_media_types]
+/* IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_to_field_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_to_field_types] */
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_to_fields]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_to_fields]
 GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_types_to_media_format]') AND type in (N'U'))
-DROP TABLE [dbo].[media_types_to_media_format]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_types_to_media_format]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_types_to_media_format]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[logs]') AND type in (N'U'))
-DROP TABLE [dbo].[logs]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[status]') AND type in (N'U'))
-DROP TABLE [dbo].[status]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[access_levels]') AND type in (N'U'))
-DROP TABLE [dbo].[access_levels]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[logs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[logs]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[status]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[status]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[access_levels]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[access_levels]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[authors]') AND type in (N'U'))
-DROP TABLE [dbo].[authors]
-
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_types]') AND type in (N'U'))
-DROP TABLE [dbo].[media_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_format]') AND type in (N'U'))
-DROP TABLE [dbo].[media_format]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[media_repo]') AND type in (N'U'))
-DROP TABLE [dbo].[media_repo]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[authors]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[authors]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[categories]') AND type in (N'U'))
-DROP TABLE [dbo].[categories]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_format]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_format]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[media_repo]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[media_repo]
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[categories]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[categories]
 
 
 
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_campus_zipcode_check]') AND parent_object_id = OBJECT_ID(N'[dbo].[campus]'))
-ALTER TABLE [dbo].[campus] DROP CONSTRAINT [CK_campus_zipcode_check]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[campus]') AND type in (N'U'))
-DROP TABLE [dbo].[campus]
+ALTER TABLE [campusMap].[dbo].[campus] DROP CONSTRAINT [CK_campus_zipcode_check]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[campus]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[campus]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[departments]') AND type in (N'U'))
-DROP TABLE [dbo].[departments]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[colleges]') AND type in (N'U'))
-DROP TABLE [dbo].[colleges]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[schools]') AND type in (N'U'))
-DROP TABLE [dbo].[schools]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[programs]') AND type in (N'U'))
-DROP TABLE [dbo].[programs]
-
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[departments]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[departments]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[colleges]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[colleges]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[schools]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[schools]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[programs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[programs]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usertags]') AND type in (N'U'))
-DROP TABLE [dbo].[usertags]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tags]') AND type in (N'U'))
-DROP TABLE [dbo].[tags]
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[map_views]') AND type in (N'U'))
-DROP TABLE [dbo].[map_views]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[usertags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[usertags]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[tags]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[tags]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[advertisement_media]') AND type in (N'U'))
-DROP TABLE [dbo].[advertisement_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[advertisement]') AND type in (N'U'))
-DROP TABLE [dbo].[advertisement]
+
+
+
+
+IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_view_geography_coordinate]')
+DROP INDEX [SIndx_view_geography_coordinate] ON [campusMap].[dbo].[map_views]
+IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_view_geography_coordinate2]')
+DROP INDEX [SIndx_view_geography_coordinate2] ON [campusMap].[dbo].[map_views]
+IF  EXISTS (SELECT * FROM sys.indexes  WHERE name  = N'[SIndx_view_geography_coordinate3]')
+DROP INDEX [SIndx_view_geography_coordinate3] ON [campusMap].[dbo].[map_views]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[map_views_options]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[map_views_options]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[map_views]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[map_views]
+GO
+
+
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[advertisement_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[advertisement_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[advertisement]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[advertisement]
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[comments]') AND type in (N'U'))
-DROP TABLE [dbo].[comments]
+DROP TABLE [campusMap].[dbo].[comments]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[infotabs]') AND type in (N'U'))
-DROP TABLE [dbo].[infotabs]
-
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[person_types]') AND type in (N'U'))
-DROP TABLE [dbo].[person_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[person]') AND type in (N'U'))
-DROP TABLE [dbo].[person]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[infotabs]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[infotabs]
 
 
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[field_to_field_types]') AND type in (N'U'))
-DROP TABLE [dbo].[field_to_field_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[field_types]') AND type in (N'U'))
-DROP TABLE [dbo].[field_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[fields]') AND type in (N'U'))
-DROP TABLE [dbo].[fields]
-
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_option_types]') AND type in (N'U'))
-DROP TABLE [dbo].[style_option_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[style_options]') AND type in (N'U'))
-DROP TABLE [dbo].[style_options]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[styles]') AND type in (N'U'))
-DROP TABLE [dbo].[styles]
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometric_events]') AND type in (N'U'))
-DROP TABLE [dbo].[geometric_events]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics_media]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics_types]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[person_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[person_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[person]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[person]
 
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_models]') AND type in (N'U'))
-DROP TABLE [dbo].[place_models]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_types]') AND type in (N'U'))
-DROP TABLE [dbo].[place_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_media]') AND type in (N'U'))
-DROP TABLE [dbo].[place_media]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_names]') AND type in (N'U'))
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[field_to_field_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[field_to_field_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[field_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[field_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[fields]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[fields]
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_option_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_option_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[style_options]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[style_options]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[styles]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[styles]
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometric_events]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometric_events]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics_types]
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_models]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_models]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_media]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_media]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_names]') AND type in (N'U'))
 DROP TABLE [dbo].[place_names]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place_name_types]') AND type in (N'U'))
-DROP TABLE [dbo].[place_name_types]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PlaceByUser]') AND type in (N'U'))
-DROP TABLE [dbo].[PlaceByUser]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place_name_types]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place_name_types]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[PlaceByUser]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[PlaceByUser]
 
 
 /* do this last as everything is keyed to it */
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[geometrics]') AND type in (N'U'))
-DROP TABLE [dbo].[geometrics]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[place]') AND type in (N'U'))
-DROP TABLE [dbo].[place]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[geometrics]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[geometrics]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[campusMap].[dbo].[place]') AND type in (N'U'))
+DROP TABLE [campusMap].[dbo].[place]
 GO
 
 /* dorp catalogs */
@@ -400,7 +419,7 @@ GO
 	   ON [place]([coordinate])
 	   WITH ( GRIDS = ( LEVEL_3 = HIGH, LEVEL_2 = HIGH ) );
 	GO */
-	CREATE TABLE [dbo].[map_views](
+	CREATE TABLE [campusMap].[dbo].[map_views](
 		[view_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[cache_path] [nchar](10) NULL,
@@ -409,13 +428,20 @@ GO
 		[created] [datetime] DEFAULT GETDATE(),
 		[updated] [datetime] DEFAULT GETDATE(),
 		[center] [geography] NULL,
-		[checked_out_by] [nvarchar](max) NOT NULL,
+		[checked_out_by] [int] NULL,
 		[width] [int] NULL,
 		[height] [int] NULL,
 		[view_status] [int] NULL,
 		[authors_editing] [int] NULL,
 		[commentable] [BIT] NULL,
 		[sharable] [BIT] NULL,
+		[tmp] [bit] DEFAULT 1,
+		[isPublic] [bit] DEFAULT 1,
+		[staticMap] [nvarchar](max) NULL,	
+		[alias] [nvarchar](max) NULL,			
+		[idkey] [nvarchar](max) NULL,
+		[options] [int] NULL,
+		[media] [int] NULL, /*i think this is a not needed col */
 		CONSTRAINT [PK_view] PRIMARY KEY CLUSTERED 
 		(
 			[view_id] ASC
@@ -423,8 +449,8 @@ GO
 		) ON [PRIMARY]
 	GO
 	/* create the indexing by long and lats (note this highlights the server's low resources) */
-	CREATE SPATIAL INDEX SIndx_place_geography_coordinate2
-	   ON [place]([coordinate])
+	CREATE SPATIAL INDEX SIndx_view_geography_coordinate2
+	   ON [campusMap].[dbo].[map_views]([center])
 	   USING GEOGRAPHY_GRID
 	   WITH (
 		GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), 
@@ -437,26 +463,87 @@ GO
 	GO  
 	
 	/* create the indexing by primary name */
-	CREATE UNIQUE INDEX ui_view_name ON [map_views]([view_id]);
-	CREATE FULLTEXT CATALOG ft_viewbyname AS DEFAULT;
+	CREATE UNIQUE INDEX [ui_view_name] ON [campusMap].[dbo].[map_views]([view_id]);
+	CREATE FULLTEXT CATALOG [ft_viewbyname] AS DEFAULT;
 	CREATE FULLTEXT INDEX ON [map_views]([name])
 		KEY INDEX ui_view_name 
 		WITH STOPLIST = SYSTEM;
 	GO
 
 	/* create the indexing by long and lats */
-	CREATE SPATIAL INDEX SIndx_SpatialTable_place_geography_coordinate
-	   ON [place]([coordinate]);
+	CREATE SPATIAL INDEX SIndx_SpatialTable_view_geography_coordinate
+	   ON [campusMap].[dbo].[map_views]([center]);
 	GO
 
 	/* */
-	CREATE SPATIAL INDEX SIndx_place_geography_coordinate3 
-	   ON [place]([coordinate])
+	CREATE SPATIAL INDEX SIndx_view_geography_coordinate3 
+	   ON [campusMap].[dbo].[map_views]([center])
 	   WITH ( GRIDS = ( LEVEL_3 = HIGH, LEVEL_2 = HIGH ) );
 	GO 
+
+	CREATE TABLE [campusMap].[dbo].[map_views_options](
+		[option_id] [int] IDENTITY(1,1) NOT NULL,
+		[backgroundColor] [nvarchar](max) NULL,
+		[disableDefaultUI] [BIT] DEFAULT 0,
+		[disableDoubleClickZoom] [BIT] DEFAULT 0,
+		[draggable] [BIT] DEFAULT 1,
+		[draggableCursor][nvarchar](max) NULL,
+		[draggingCursor][nvarchar](max) NULL,
+		[heading] [int] NULL,
+		[keyboardShortcuts] [BIT] NULL,
+		[mapMaker] [BIT] DEFAULT 0,
+		[mapTypeControl] [BIT] DEFAULT 1,
+		[mapTypeControlOptions][nvarchar](max) NULL,
+		[mapTypeId][nvarchar](max) NULL,
+		[maxZoom] [int] NULL,
+		[minZoom] [int] NULL,
+		[noClear] [BIT] DEFAULT 0,
+		[overviewMapControl] [BIT] DEFAULT 1,
+		[overviewMapControlOptions][nvarchar](max) NULL,
+		[panControl] [BIT] DEFAULT 1,
+		[panControlOptions][nvarchar](max) NULL,
+		[rotateControl] [BIT] DEFAULT 1,
+		[rotateControlOptions][nvarchar](max) NULL,
+		[scaleControl][BIT] DEFAULT 1,
+		[scaleControlOptions][nvarchar](max) NULL,
+		[scrollwheel] [BIT] DEFAULT 1,
+		[streetView][nvarchar](max) NULL,
+		[streetViewControl][BIT] DEFAULT 1,
+		[styles][nvarchar](max) NULL,
+		[tilt][int] NULL,
+		[zoom][int] NULL,
+		[zoomControl][BIT] DEFAULT 1,
+		[zoomControlOptions][nvarchar](max) NULL,
+		CONSTRAINT [PK_view_ops] PRIMARY KEY CLUSTERED 
+		(
+			[option_id] ASC
+		)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+	GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 
-	CREATE TABLE [dbo].[status](
+	CREATE TABLE [campusMap].[dbo].[status](
 		[status_id] [int] IDENTITY(1,1) NOT NULL,
 		[title] [nvarchar](max) NOT NULL
    		CONSTRAINT [PK_status] PRIMARY KEY CLUSTERED 
@@ -475,7 +562,7 @@ GO
 	GO
 
 
-	CREATE TABLE [dbo].[place_names](
+	CREATE TABLE [campusMap].[dbo].[place_names](
 		[name_id] [int] IDENTITY(1,1) NOT NULL,
 		[place_id] [int] NOT NULL DEFAULT 1
 			CONSTRAINT [FK_place_to_names] FOREIGN KEY ([place_id])
@@ -489,7 +576,7 @@ GO
 		) ON [PRIMARY]
 		CREATE UNIQUE INDEX ui_place_names ON [place_names]([name_id]);
 	GO
-	CREATE TABLE [dbo].[place_name_types](
+	CREATE TABLE [campusMap].[dbo].[place_name_types](
 		[type_id] [int] IDENTITY(1,1) NOT NULL,
 		[type] [nvarchar](max)  NOT NULL
 		CONSTRAINT [PK_place_name_types] PRIMARY KEY CLUSTERED 
@@ -506,7 +593,7 @@ GO
 			   ('Obscure or Historic Name')
 	GO
 
-	CREATE TABLE [dbo].[geometrics](
+	CREATE TABLE [campusMap].[dbo].[geometrics](
 		[geometric_id] [int] IDENTITY(1,1) NOT NULL,
 		[boundary] [geography] NULL,
 		[name] [nvarchar](max) NULL,
@@ -534,7 +621,7 @@ GO
 	GO
 
 
-	CREATE TABLE [dbo].[geometrics_types](
+	CREATE TABLE [campusMap].[dbo].[geometrics_types](
 		[geometrics_type_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -551,7 +638,7 @@ GO
 			   ('marker'),('polyline'),('polygon'),('rectangle'),('circle')
 	GO
 
-	CREATE TABLE [dbo].[campus](
+	CREATE TABLE [campusMap].[dbo].[campus](
 		[campus_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [VARCHAR](200) NULL,
 		[city] [VARCHAR](200) NULL,
@@ -572,7 +659,7 @@ GO
 	GO
 
 /* Make functions to set up the searching but radius of a zip */
-	CREATE FUNCTION [dbo].[CalculateDistance]
+	CREATE FUNCTION [campusMap].[dbo].[CalculateDistance]
 		(@Longitude1 DECIMAL(8,5), 
 		@Latitude1   DECIMAL(8,5),
 		@Longitude2  DECIMAL(8,5),
@@ -597,7 +684,7 @@ GO
 		END
 	GO
 
-	CREATE FUNCTION [dbo].[LongitudePlusDistance]
+	CREATE FUNCTION [campusMap].[dbo].[LongitudePlusDistance]
 		(@StartLongitude FLOAT,
 		@StartLatitude FLOAT,
 		@Distance FLOAT)
@@ -617,7 +704,7 @@ GO
 			   ('Riverpoint','Spokane','Washington','WA',47.66110972448931,-117.40625381469726,'99210')
 	GO
 
-	CREATE TABLE [dbo].[place_models](
+	CREATE TABLE [campusMap].[dbo].[place_models](
 		[place_model_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -638,7 +725,7 @@ GO
 	GO
 
 
-	CREATE TABLE [dbo].[place_types](
+	CREATE TABLE [campusMap].[dbo].[place_types](
 		[place_type_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[friendly_name] [nvarchar](max) NULL,
@@ -836,7 +923,7 @@ GO
 	GO
 
 
-	CREATE TABLE [dbo].[authors](
+	CREATE TABLE [campusMap].[dbo].[authors](
 		[author_id] [int] IDENTITY(1,1) NOT NULL,
 		[Nid] [nvarchar](max) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
@@ -862,7 +949,7 @@ GO
 	
 	
 	
-	CREATE TABLE [dbo].[access_levels](
+	CREATE TABLE [campusMap].[dbo].[access_levels](
 		[access_level_id] [int] IDENTITY(1,1) NOT NULL,
 		[title] [nvarchar](max) NOT NULL,
    		CONSTRAINT [PK_access_level] PRIMARY KEY CLUSTERED 
@@ -872,7 +959,7 @@ GO
 		) ON [PRIMARY]
 	GO
 	/* add some defaults */
-	INSERT INTO [campusMap].[dbo].[access_levels]
+	INSERT INTO [campusMap].[campusMap].[dbo].[access_levels]
 			   ([title])
 		 VALUES
 			   ('Admin'),
@@ -881,11 +968,13 @@ GO
 	
 
 
-	CREATE TABLE [dbo].[categories](
+	CREATE TABLE [campusMap].[dbo].[categories](
 		[category_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[level][int] NOT NULL,
 		[friendly_name] [nvarchar](max) NULL,
+		[active] [BIT] DEFAULT 1,
+		[position] [int] NOT NULL,
 		CONSTRAINT [PK_categories] PRIMARY KEY CLUSTERED 
 		(
 			[category_id] ASC
@@ -901,56 +990,56 @@ GO
 	GO
 	/* add some defaults */
 	INSERT INTO [campusMap].[dbo].[categories]
-			   ([name],[level],[friendly_name])
+			   ([name],[level],[friendly_name],[active])
 		 VALUES
 			
-			('Academics',1,'academics'),
-				('Agriculture',2,'agriculture'),
-				('Art, Music, Design',2,'art_music_design'),
-				('Bio/Phys/Math Sci',2,'bio_phys_math_sci'),
-				('Business & Econ',2,'business_econ'),
-				('Communication',2,'communication'),
-				('Education',2,'education'),
-				('Engineering',2,'engineering'),
-				('Health Sciences',2,'health_sciences'),
-				('Hist/Lit/Lang/Philosophy',2,'hist_lit_lang_philosophy'),
-				('Social Sciences',2,'social_sciences'),
-				('Sport & Fitness',2,'sport_fitness'),
-				('Veterinary Medicine',2,'veterinary_medicine'),
-				('Libraries & Computer Labs',2,'libraries_computer_labs'),
-				('Tutoring & Support',2,'tutoring_support'),
-			('Arts & Culture',1,'arts_culture'),
-				('Museums & Exhibits',2,'museums_exhibits'),
-				('Performing Arts',2,'performing_arts'),
-				('Outdoor Sculpture',2,'outdoor_sculpture'),
-				('Monuments & Sculpture',2,'monuments_sculpture'),
-			('Athletics & Recreation',1,'athletics_recreation'),
-				('Sports Venues',2,'sports_venues'),
-				('Recreation',2,'recreation'),
-				('Athletic Training',2,'athletic_training'),
-				('Entertainment Venues',2,'entertainment_venues'),
-			('Food & Shopping',1,'food_shopping'),
-				('Espresso & Snacks',2,'espresso_snacks'), 
-				('Dining',2,'dining'),
-				('Shopping',2,'shopping'),
-				('Convenience',2,'convenience'),
-			('Housing',1,'housing'),
-				('Residence Halls',2,'residence_halls'),
-					('Co-ed',3,'co_ed'),
-					('Men-only',3,'men_only'),
-					('Women-only',3,'women_only'),
-					('Age-Specific',3,'age_specific'),
-				('Apartments',2,'apartments'),
-					('Single Student',3,'single_student'),
-					('Family & Granduate',3,'family_granduate'),
-			('Landmarks',1,'landmarks'),
-			('Services & Admin',1,'services_admin'),
-				('Student Services',2,'student_services'),
-				('Staff Services',2,'staff_services'),
-				('Central Admin',2,'central_admin'),
-				('Utilities & Maint',2,'utilities_maint'),
-			('Parking',1,'parking'),
-			('Bus Routes',1,'bus_routes')
+			('Academics',1,'academics','TRUE'),
+				('Agriculture',2,'agriculture','TRUE'),
+				('Art, Music, Design',2,'art_music_design','TRUE'),
+				('Bio/Phys/Math Sci',2,'bio_phys_math_sci','TRUE'),
+				('Business & Econ',2,'business_econ','TRUE'),
+				('Communication',2,'communication','TRUE'),
+				('Education',2,'education','TRUE'),
+				('Engineering',2,'engineering','TRUE'),
+				('Health Sciences',2,'health_sciences','TRUE'),
+				('Hist/Lit/Lang/Philosophy',2,'hist_lit_lang_philosophy','TRUE'),
+				('Social Sciences',2,'social_sciences','TRUE'),
+				('Sport & Fitness',2,'sport_fitness','TRUE'),
+				('Veterinary Medicine',2,'veterinary_medicine','TRUE'),
+				('Libraries & Computer Labs',2,'libraries_computer_labs','TRUE'),
+				('Tutoring & Support',2,'tutoring_support','TRUE'),
+			('Arts & Culture',1,'arts_culture','TRUE'),
+				('Museums & Exhibits',2,'museums_exhibits','TRUE'),
+				('Performing Arts',2,'performing_arts','TRUE'),
+				('Outdoor Sculpture',2,'outdoor_sculpture','TRUE'),
+				('Monuments & Sculpture',2,'monuments_sculpture','TRUE'),
+			('Athletics & Recreation',1,'athletics_recreation','TRUE'),
+				('Sports Venues',2,'sports_venues','TRUE'),
+				('Recreation',2,'recreation','TRUE'),
+				('Athletic Training',2,'athletic_training','TRUE'),
+				('Entertainment Venues',2,'entertainment_venues','TRUE'),
+			('Food & Shopping',1,'food_shopping','TRUE'),
+				('Espresso & Snacks',2,'espresso_snacks','TRUE'), 
+				('Dining',2,'dining','TRUE'),
+				('Shopping',2,'shopping','TRUE'),
+				('Convenience',2,'convenience','TRUE'),
+			('Housing',1,'housing','TRUE'),
+				('Residence Halls',2,'residence_halls','TRUE'),
+					('Co-ed',3,'co_ed','TRUE'),
+					('Men-only',3,'men_only','TRUE'),
+					('Women-only',3,'women_only','TRUE'),
+					('Age-Specific',3,'age_specific','TRUE'),
+				('Apartments',2,'apartments','TRUE'),
+					('Single Student',3,'single_student','TRUE'),
+					('Family & Granduate',3,'family_granduate','TRUE'),
+			('Landmarks',1,'landmarks','TRUE'),
+			('Services & Admin',1,'services_admin','TRUE'),
+				('Student Services',2,'student_services','TRUE'),
+				('Staff Services',2,'staff_services','TRUE'),
+				('Central Admin',2,'central_admin','TRUE'),
+				('Utilities & Maint',2,'utilities_maint','TRUE'),
+			('Parking',1,'parking','TRUE'),
+			('Bus Routes',1,'bus_routes','TRUE')
 	GO
 
 
@@ -965,7 +1054,7 @@ GO
 
 	
 	
-	CREATE TABLE [dbo].[tags](
+	CREATE TABLE [campusMap].[dbo].[tags](
 		[tag_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -987,7 +1076,7 @@ GO
 
 	
 	
-	CREATE TABLE [dbo].[departments](
+	CREATE TABLE [campusMap].[dbo].[departments](
 		[department_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -1017,7 +1106,7 @@ GO
 
 	
 	
-	CREATE TABLE [dbo].[colleges](
+	CREATE TABLE [campusMap].[dbo].[colleges](
 		[college_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -1059,7 +1148,7 @@ GO
 	
 	
 	
-	CREATE TABLE [dbo].[schools](
+	CREATE TABLE [campusMap].[dbo].[schools](
 		[school_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -1096,7 +1185,7 @@ GO
 
 
 
-	CREATE TABLE [dbo].[programs](
+	CREATE TABLE [campusMap].[dbo].[programs](
 		[program_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -1137,7 +1226,7 @@ GO
 			('WWAMI Medical Education Program')
 		GO
 
-	CREATE TABLE [dbo].[usertags](
+	CREATE TABLE [campusMap].[dbo].[usertags](
 		[usertag_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		[attr] [nvarchar](max) NULL,
@@ -1155,7 +1244,7 @@ GO
 	GO
 	
 /* media tables */	
-	CREATE TABLE [dbo].[media_repo](
+	CREATE TABLE [campusMap].[dbo].[media_repo](
 		[media_id] [int] IDENTITY(1,1) NOT NULL,
 		[media_type_id] [int] NOT NULL,
 		[credit] [nvarchar](max) NULL,
@@ -1175,7 +1264,7 @@ GO
 		CREATE NONCLUSTERED INDEX IX_media_by_type ON dbo.[media_repo]([media_type_id])
 	GO
 
-	CREATE TABLE [dbo].[media_types](
+	CREATE TABLE [campusMap].[dbo].[media_types](
 		[media_type_id] [int] IDENTITY(1,1) NOT NULL,
 		[media_format_id] [int] NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
@@ -1251,14 +1340,13 @@ GO
 
 	
 /* needed but needs adjusments */
-create table logs (
+CREATE TABLE [campusMap].[dbo].[logs](
   Id INT IDENTITY NOT NULL,
    logentry NVARCHAR(255) null,
    dtOfLog DATETIME null,
    primary key (Id)
 )
-
-create table advertisement (
+CREATE TABLE [campusMap].[dbo].[advertisement](
 	ad_id INT IDENTITY NOT NULL,
 	Clicked INT null,
 	Url NVARCHAR(255) null,
@@ -1273,7 +1361,7 @@ create table advertisement (
 	place_types INT null,
 	primary key (ad_id)
 )
-create table comments (
+CREATE TABLE [campusMap].[dbo].[comments](
 	comment_id INT IDENTITY NOT NULL,
 	comment NVARCHAR(255) null,
 	censored NVARCHAR(255) null,
@@ -1292,15 +1380,22 @@ create table comments (
 	view_id INT null,
 	primary key (comment_id)
 )
-
-create table infotabs (
+CREATE TABLE [campusMap].[dbo].[infotabs](
 	infotab_id INT IDENTITY NOT NULL,
 	content NVARCHAR(MAX) null,
 	title NVARCHAR(MAX) null,
 	sort INT null,
 	place INT null,
-	place_id INT null
+	place_id INT null,
+	template INT null,
 	primary key (infotab_id)
+)
+CREATE TABLE [campusMap].[dbo].[infotabs_templates](
+	template_id INT IDENTITY NOT NULL,
+	content NVARCHAR(MAX) null,
+	alias NVARCHAR(MAX) null,
+	process BIT null,
+	primary key (template_id)
 )
 
 
@@ -1330,7 +1425,7 @@ create table geometric_events (
 		 VALUES
 			   ('rest','Base'),('mouseover','Hover'),('click','Clicked'),('dblclick','Double Clicked')
 	GO
-CREATE TABLE [dbo].[geometric_events_to_geometrics_types](
+CREATE TABLE [campusMap].[dbo].[geometric_events_to_geometrics_types](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [geometric_event_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_geometric_events_to_geometrics_types_event] FOREIGN KEY ([geometric_event_id])
@@ -1429,7 +1524,7 @@ GO
 			   (9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1),(18,1),(19,1),(20,1),(21,1),(22,1),(23,1),(24,1)
 	GO
 
-CREATE TABLE [dbo].[geometric_events_to_style_options](
+CREATE TABLE [campusMap].[dbo].[geometric_events_to_style_options](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [geometric_event_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_geometric_events_to_style_options_style_events] FOREIGN KEY ([geometric_event_id])
@@ -1447,7 +1542,7 @@ GO
 
 
 
-	create table [zoom_levels] (
+	create table [campusMap].[dbo].[zoom_levels] (
 		[zoom_id] INT IDENTITY NOT NULL,
 		[zoom_start] INT null,
 		[zoom_end] INT null,
@@ -1486,7 +1581,7 @@ GO
 	
 
 	
-CREATE TABLE [dbo].[style_to_zoom](
+CREATE TABLE [campusMap].[dbo].[style_to_zoom](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [zoom_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_style_to_zoom_zoom] FOREIGN KEY ([zoom_id])
@@ -1509,7 +1604,7 @@ GO
 //
 //
 */
-CREATE TABLE [dbo].[geometric_events_to_zoom](
+CREATE TABLE [campusMap].[dbo].[geometric_events_to_zoom](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [zoom_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_geometric_events_to_zoom_zoom] FOREIGN KEY ([zoom_id])
@@ -1533,13 +1628,13 @@ GO
 	
 
 
-create table [events_set] (
+create table [campusMap].[dbo].[events_set] (
 	[events_set_id] INT IDENTITY NOT NULL,
 	[style_id] INT null,
 	[zoom_id] INT null,
 	primary key (events_set_id)
 )
-CREATE TABLE [dbo].[geometric_events_to_events_set](
+CREATE TABLE [campusMap].[dbo].[geometric_events_to_events_set](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [geometric_event_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK__geometric_events_to_events_set___geometric_event] FOREIGN KEY ([geometric_event_id])
@@ -1554,7 +1649,7 @@ CREATE TABLE [dbo].[geometric_events_to_events_set](
     ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[style_to_events_set](
+CREATE TABLE [campusMap].[dbo].[style_to_events_set](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [style_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK__style_to_events_set___style] FOREIGN KEY ([style_id])
@@ -1617,7 +1712,7 @@ GO
 	GO
 
 
-CREATE TABLE [dbo].[field_to_field_types] (
+CREATE TABLE [campusMap].[dbo].[field_to_field_types] (
     [id] [int] IDENTITY(1,1) NOT NULL,
 	[field_type_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_field_to_field_types_field_type] FOREIGN KEY ([field_type_id])
@@ -1670,7 +1765,7 @@ create table place_media (
 
 
 /* from to */
-CREATE TABLE [dbo].[place_to_geometrics](
+CREATE TABLE [campusMap].[dbo].[place_to_geometrics](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_geometrics_place] FOREIGN KEY ([place_id])
@@ -1684,7 +1779,7 @@ CREATE TABLE [dbo].[place_to_geometrics](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[geometrics_to_types](
+CREATE TABLE [campusMap].[dbo].[geometrics_to_types](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [geometric_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_geometrics_to_types_geo] FOREIGN KEY ([geometric_id])
@@ -1698,7 +1793,7 @@ CREATE TABLE [dbo].[geometrics_to_types](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_place_types](
+CREATE TABLE [campusMap].[dbo].[place_to_place_types](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_place_types_place] FOREIGN KEY ([place_id])
@@ -1712,7 +1807,7 @@ CREATE TABLE [dbo].[place_to_place_types](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_place_models](
+CREATE TABLE [campusMap].[dbo].[place_to_place_models](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_place_models_place] FOREIGN KEY ([place_id])
@@ -1728,7 +1823,7 @@ CREATE TABLE [dbo].[place_to_place_models](
 GO
 
 
-	CREATE TABLE [dbo].[google_types](
+	CREATE TABLE [campusMap].[dbo].[google_types](
 		[google_type_id] [int] IDENTITY(1,1) NOT NULL,
 		[name] [nvarchar](max) NOT NULL,
 		CONSTRAINT [PK_google_type] PRIMARY KEY CLUSTERED 
@@ -1766,7 +1861,7 @@ GO
 
 	GO
 
-CREATE TABLE [dbo].[google_types_to_place_types](
+CREATE TABLE [campusMap].[dbo].[google_types_to_place_types](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [google_type_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_google_types_to_place_types_place] FOREIGN KEY ([google_type_id])
@@ -1784,7 +1879,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[authors_to_media](
+CREATE TABLE [campusMap].[dbo].[authors_to_media](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [author_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_authors_to_media_authors] FOREIGN KEY ([author_id])
@@ -1798,7 +1893,27 @@ CREATE TABLE [dbo].[authors_to_media](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO	
-CREATE TABLE [dbo].[place_to_categories](
+
+
+
+
+CREATE TABLE [campusMap].[dbo].[place_to_view](
+    [id] [int] IDENTITY(1,1) NOT NULL,
+    [place_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_place_to_view_place] FOREIGN KEY ([place_id])
+        REFERENCES [place] ([place_id]),
+    [view_id] [int] NOT NULL DEFAULT 1
+        CONSTRAINT [FK_place_to_view_cat] FOREIGN KEY ([view_id])
+        REFERENCES [map_views] ([view_id]),
+    CONSTRAINT [PK_place_to_view] PRIMARY KEY CLUSTERED 
+    (
+        [id] ASC 
+    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [campusMap].[dbo].[place_to_categories](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_categories_place] FOREIGN KEY ([place_id])
@@ -1812,7 +1927,7 @@ CREATE TABLE [dbo].[place_to_categories](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_campus](
+CREATE TABLE [campusMap].[dbo].[place_to_campus](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_campus_place] FOREIGN KEY ([place_id])
@@ -1826,7 +1941,7 @@ CREATE TABLE [dbo].[place_to_campus](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_tags](
+CREATE TABLE [campusMap].[dbo].[place_to_tags](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_tags_place] FOREIGN KEY ([place_id])
@@ -1840,7 +1955,7 @@ CREATE TABLE [dbo].[place_to_tags](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_departments](
+CREATE TABLE [campusMap].[dbo].[place_to_departments](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_departments_place] FOREIGN KEY ([place_id])
@@ -1854,7 +1969,7 @@ CREATE TABLE [dbo].[place_to_departments](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO	
-CREATE TABLE [dbo].[place_to_colleges](
+CREATE TABLE [campusMap].[dbo].[place_to_colleges](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_colleges_place] FOREIGN KEY ([place_id])
@@ -1869,7 +1984,7 @@ CREATE TABLE [dbo].[place_to_colleges](
     ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[place_to_schools](
+CREATE TABLE [campusMap].[dbo].[place_to_schools](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_schools_place] FOREIGN KEY ([place_id])
@@ -1886,7 +2001,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[place_to_programs](
+CREATE TABLE [campusMap].[dbo].[place_to_programs](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_programs_place] FOREIGN KEY ([place_id])
@@ -1900,7 +2015,7 @@ CREATE TABLE [dbo].[place_to_programs](
     )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
     ) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_usertags](
+CREATE TABLE [campusMap].[dbo].[place_to_usertags](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_usertags_place] FOREIGN KEY ([place_id])
@@ -1918,7 +2033,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[geometric_to_media](
+CREATE TABLE [campusMap].[dbo].[geometric_to_media](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [geometric_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_geometric_to_media_geometric] FOREIGN KEY ([geometric_id])
@@ -1933,7 +2048,7 @@ CREATE TABLE [dbo].[geometric_to_media](
     ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[place_to_media](
+CREATE TABLE [campusMap].[dbo].[place_to_media](
     [id] [int] IDENTITY(1,1) NOT NULL,
     [place_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_place_to_media_place] FOREIGN KEY ([place_id])
@@ -1948,7 +2063,7 @@ CREATE TABLE [dbo].[place_to_media](
     ) ON [PRIMARY]
 GO
 	
-CREATE TABLE [dbo].[place_to_place_names](
+CREATE TABLE [campusMap].[dbo].[place_to_place_names](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[place_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_place_to_place_names_place] FOREIGN KEY ([place_id])
@@ -1962,7 +2077,7 @@ CREATE TABLE [dbo].[place_to_place_names](
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[advertisement_to_tag] (
+CREATE TABLE [campusMap].[dbo].[advertisement_to_tag] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[ad_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_advertisement_to_tag_ad] FOREIGN KEY ([ad_id])
@@ -1977,7 +2092,7 @@ CREATE TABLE [dbo].[advertisement_to_tag] (
 	) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[advertisement_to_media] (
+CREATE TABLE [campusMap].[dbo].[advertisement_to_media] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[ad_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_advertisement_to_media_ad] FOREIGN KEY ([ad_id])
@@ -1993,7 +2108,7 @@ CREATE TABLE [dbo].[advertisement_to_media] (
 GO
 
 
-CREATE TABLE [dbo].[view_to_tags] (
+CREATE TABLE [campusMap].[dbo].[view_to_tags] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[view_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_view_to_tags_view] FOREIGN KEY ([view_id])
@@ -2007,7 +2122,7 @@ CREATE TABLE [dbo].[view_to_tags] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[view_to_usertags] (
+CREATE TABLE [campusMap].[dbo].[view_to_usertags] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[view_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_view_to_usertags_place] FOREIGN KEY ([view_id])
@@ -2026,7 +2141,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[authors_to_programs] (
+CREATE TABLE [campusMap].[dbo].[authors_to_programs] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[program_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_programs_program] FOREIGN KEY ([program_id])
@@ -2040,7 +2155,7 @@ CREATE TABLE [dbo].[authors_to_programs] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_campus] (
+CREATE TABLE [campusMap].[dbo].[authors_to_campus] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[campus_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_campus_campus] FOREIGN KEY ([campus_id])
@@ -2054,7 +2169,7 @@ CREATE TABLE [dbo].[authors_to_campus] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_place_type] (
+CREATE TABLE [campusMap].[dbo].[authors_to_place_type] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[place_type_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_place_type_place_type] FOREIGN KEY ([place_type_id])
@@ -2068,7 +2183,7 @@ CREATE TABLE [dbo].[authors_to_place_type] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_colleges] (
+CREATE TABLE [campusMap].[dbo].[authors_to_colleges] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[college_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_colleges_college] FOREIGN KEY ([college_id])
@@ -2082,7 +2197,7 @@ CREATE TABLE [dbo].[authors_to_colleges] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_view] (
+CREATE TABLE [campusMap].[dbo].[authors_to_view] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[author_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_view_authors] FOREIGN KEY ([author_id])
@@ -2096,7 +2211,7 @@ CREATE TABLE [dbo].[authors_to_view] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_geometrics] (
+CREATE TABLE [campusMap].[dbo].[authors_to_geometrics] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[author_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_geometric_authors] FOREIGN KEY ([author_id])
@@ -2110,7 +2225,7 @@ CREATE TABLE [dbo].[authors_to_geometrics] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_place] (
+CREATE TABLE [campusMap].[dbo].[authors_to_place] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[author_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_place_authors] FOREIGN KEY ([author_id])
@@ -2124,7 +2239,7 @@ CREATE TABLE [dbo].[authors_to_place] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[authors_to_categories] (
+CREATE TABLE [campusMap].[dbo].[authors_to_categories] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[author_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_authors_to_categories_authors] FOREIGN KEY ([author_id])
@@ -2147,7 +2262,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[view_to_fields] (
+CREATE TABLE [campusMap].[dbo].[view_to_fields] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[field_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_view_to_fields_field] FOREIGN KEY ([field_id])
@@ -2162,7 +2277,7 @@ CREATE TABLE [dbo].[view_to_fields] (
 	) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[geometrics_to_fields] (
+CREATE TABLE [campusMap].[dbo].[geometrics_to_fields] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[field_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_geometrics_to_fields_field] FOREIGN KEY ([field_id])
@@ -2176,7 +2291,7 @@ CREATE TABLE [dbo].[geometrics_to_fields] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_fields] (
+CREATE TABLE [campusMap].[dbo].[place_to_fields] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[field_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_place_to_fields_field] FOREIGN KEY ([field_id])
@@ -2191,7 +2306,7 @@ CREATE TABLE [dbo].[place_to_fields] (
 	) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[media_to_fields] (
+CREATE TABLE [campusMap].[dbo].[media_to_fields] (
     [id] [int] IDENTITY(1,1) NOT NULL,
 	[field_id] [int] NOT NULL DEFAULT 1
         CONSTRAINT [FK_media_to_fields_field] FOREIGN KEY ([field_id])
@@ -2209,7 +2324,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[geometrics_to_styles] (
+CREATE TABLE [campusMap].[dbo].[geometrics_to_styles] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[style_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_geometrics_to_styles_style] FOREIGN KEY ([style_id])
@@ -2224,7 +2339,7 @@ CREATE TABLE [dbo].[geometrics_to_styles] (
 	) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[geometric_to_tags] (
+CREATE TABLE [campusMap].[dbo].[geometric_to_tags] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[tag_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_geometric_to_tags_style] FOREIGN KEY ([tag_id])
@@ -2245,7 +2360,7 @@ GO
 
 
 
-CREATE TABLE [dbo].[place_to_comments] (
+CREATE TABLE [campusMap].[dbo].[place_to_comments] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[place_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_place_to_comments_place] FOREIGN KEY ([place_id])
@@ -2259,7 +2374,7 @@ CREATE TABLE [dbo].[place_to_comments] (
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 GO
-CREATE TABLE [dbo].[place_to_infotabs] (
+CREATE TABLE [campusMap].[dbo].[place_to_infotabs] (
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[place_id] [int] NOT NULL DEFAULT 1
 		CONSTRAINT [FK_place_to_infotabs_place] FOREIGN KEY ([place_id])
@@ -2274,6 +2389,20 @@ CREATE TABLE [dbo].[place_to_infotabs] (
 	) ON [PRIMARY]
 GO
 
+CREATE TABLE [campusMap].[dbo].[infotabs_to_infotabs_templates] (
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[template_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_infotabs_to_infotabs_templates_template] FOREIGN KEY ([template_id])
+		REFERENCES [infotabs_templates] ([template_id]),
+	[infotab_id] [int] NOT NULL DEFAULT 1
+		CONSTRAINT [FK_infotabs_to_infotabs_templates_infotab] FOREIGN KEY ([infotab_id])
+		REFERENCES [infotabs] ([infotab_id]),
+	CONSTRAINT [PK_infotabs_to_infotabs_templates] PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC 
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+GO
 
 
 

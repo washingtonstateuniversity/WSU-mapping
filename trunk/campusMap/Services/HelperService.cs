@@ -11,6 +11,9 @@
     using campusMap.Models;
     using NVelocity;
     using NVelocity.App;
+    using NVelocity.App.Events;
+    using NVelocity.Util;
+using NVelocity.Tool;
     using NVelocity.Context;
     using NVelocity.Runtime;
     using NHibernate.Expression;
@@ -481,10 +484,14 @@ namespace campusMap.Services
         public string cleanTinyCode(string text){
             bool has = text.IndexOf("tinyImgHolder") >= 0;
             //<img class="tinyImgHolder fLeft" style="opacity: 1;" title="#Inline_Iamge(210 434 180 336 ' fLeft')" src="../media/download.castle?id=210&amp;placeid=434&amp;m=crop&amp;w=180&amp;h=336&amp;pre=TMP" alt="imagingIt|210" width="180" height="336" />
-            string strRegex = @"<img(.*?)class=\""tinyImgHolder(.*?)title=\""(.*?)\""(.*?)\/\>";
-            RegexOptions myRegexOptions = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace;
-            Regex myRegex = new Regex(strRegex, myRegexOptions);
-            return myRegex.Replace(text, "${3}");
+            if (has)
+            {
+                string strRegex = @"<img(.*?)class=\""tinyImgHolder(.*?)title=\""(.*?)\""(.*?)\/\>";
+                RegexOptions myRegexOptions = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace;
+                Regex myRegex = new Regex(strRegex, myRegexOptions);
+                text = myRegex.Replace(text, "${3}");
+            }
+            return text;
         }
 
         public ExtendedProperties setMacros(ExtendedProperties props)
@@ -509,6 +516,23 @@ namespace campusMap.Services
             return props;
         }
 
+        private static void EventCartridge_ReferenceInsertion(object sender, ReferenceInsertionEventArgs e)
+        {
+            string originalString = e.OriginalValue.ToString();
+            if (originalString == null) return;
+            e.NewValue = HtmlEncode(originalString);
+        }
+
+        private static string HtmlEncode(string value)
+        {
+            return value
+                .Replace("&", "&amp;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&#39;"); // &apos; does not work in IE 
+        } 
+
         public String proccessText(Hashtable contextitems, String text, bool usetidy)
         {
             text = cleanTinyCode(text);
@@ -517,9 +541,16 @@ namespace campusMap.Services
             // template = "#set($pound = \"#\")" + System.Environment.NewLine + template;
             VelocityEngine engine = new VelocityEngine();
             ExtendedProperties props = setMacros(new ExtendedProperties());
+
             engine.Init(props);
 
             VelocityContext context = new VelocityContext();
+            // attach a new event cartridge 
+            context.AttachEventCartridge(new EventCartridge());
+            // add our custom handler to the ReferenceInsertion event 
+            context.EventCartridge.ReferenceInsertion += EventCartridge_ReferenceInsertion; 
+
+
 
             foreach (String key in contextitems.Keys)
             {

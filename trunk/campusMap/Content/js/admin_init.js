@@ -214,13 +214,17 @@ $(function() {
 	if($(".lazy img,img.lazy").length){
 		$(".lazy img,img.lazy").lazyload();
 	}
+	
+	
+	
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
-        if($("#place_details").length>0){
-            load_tiny("bodytext");
-            load_tiny("simple");
-        }else{
-            load_tiny();
-        }
+		$.each($('.tinyEditor'),function(i,v){
+			if($(this).hasClass("full")){
+				load_tiny("bodytext",$(this).attr('id'));
+			}else{
+				load_tiny("simple",$(this).attr('id'));
+			}
+		});
     }
 
 

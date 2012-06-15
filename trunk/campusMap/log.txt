@@ -14541,3 +14541,674 @@ The multi-part identifier "t.name" could not be bound.
 2012-06-11 13:23:08,620 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 36828 bytes
 2012-06-11 13:23:09,100 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 95
 2012-06-11 13:23:09,117 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 95, length: 33208 bytes
+2012-06-11 15:27:42,265 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 94
+2012-06-11 15:27:42,295 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 94, length: 1308317 bytes
+2012-06-11 15:27:44,313 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 100
+2012-06-11 15:27:44,367 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 100, length: 3733300 bytes
+2012-06-11 15:27:44,815 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 95
+2012-06-11 15:27:44,860 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 95, length: 3205289 bytes
+2012-06-11 15:27:46,813 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 98
+2012-06-11 15:27:46,841 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 98, length: 1242120 bytes
+2012-06-12 06:29:21,877 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 207
+2012-06-12 06:29:22,367 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 207, length: 15614 bytes
+2012-06-12 06:29:28,783 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 138
+2012-06-12 06:29:28,845 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 138, length: 35510 bytes
+2012-06-12 06:29:29,289 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 141
+2012-06-12 06:29:29,359 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 141, length: 58908 bytes
+2012-06-12 06:29:43,477 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 223
+2012-06-12 06:29:43,586 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 223, length: 32217 bytes
+2012-06-12 06:29:43,985 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 232
+2012-06-12 06:29:44,079 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 232, length: 65794 bytes
+2012-06-12 06:48:49,504 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:48:50,185 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 06:48:55,445 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:48:55,447 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 06:52:24,829 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:52:24,830 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 06:52:32,277 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:52:32,278 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 06:53:01,533 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:53:01,534 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 06:53:06,968 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 06:53:06,969 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 08:24:22,751 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 08:24:22,876 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 08:24:29,297 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-12 08:24:29,299 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-12 09:52:17,268 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'key'.
+2012-06-12 09:52:17,271 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'key'.
+2012-06-12 09:52:49,139 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'key'.
+2012-06-12 09:52:49,140 [16] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near the keyword 'key'.
+2012-06-12 09:54:41,072 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'name', table 'campusMap.dbo.map_views'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-06-12 09:54:41,130 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 09:54:41,132 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 09:54:41,132 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 09:54:41,133 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 09:54:41,133 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:04:22,542 [5] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'name', table 'campusMap.dbo.map_views'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-06-12 10:04:22,602 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:04:22,604 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:04:22,604 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:04:22,605 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:04:22,605 [5] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:25:32,406 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'name', table 'campusMap.dbo.map_views'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-06-12 10:25:32,408 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:25:32,408 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:25:32,409 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:25:32,409 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:25:32,409 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:26:25,266 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Cannot insert the value NULL into column 'name', table 'campusMap.dbo.map_views'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+2012-06-12 10:26:25,268 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:26:25,269 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:26:25,269 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:26:25,269 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:26:25,270 [12] ERROR NHibernate.AssertionFailure [(null)] <(null)> - An AssertionFailure occured - this may indicate a bug in NHibernate
+NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
+2012-06-12 10:55:35,176 [15] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+2012-06-12 10:55:35,187 [15] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+2012-06-12 10:55:35,187 [15] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.map_views.authors#System.Object[]][SQL: SELECT authors0_.view_id as view2___1_, authors0_.authors_id as authors3_1_, authors1_.author_id as author1_26_0_, authors1_.Nid as Nid26_0_, authors1_.name as name26_0_, authors1_.email as email26_0_, authors1_.phone as phone26_0_, authors1_.active as active26_0_, authors1_.logedin as logedin26_0_, authors1_.LastActive as LastActive26_0_, authors1_.access_levels as access9_26_0_ FROM authors_to_view authors0_ left outer join authors authors1_ on authors0_.authors_id=authors1_.author_id WHERE authors0_.view_id=?] ---> System.Data.SqlClient.SqlException: Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-06-12 10:55:35,205 [15] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.map_views.authors#System.Object[]][SQL: SELECT authors0_.view_id as view2___1_, authors0_.authors_id as authors3_1_, authors1_.author_id as author1_26_0_, authors1_.Nid as Nid26_0_, authors1_.name as name26_0_, authors1_.email as email26_0_, authors1_.phone as phone26_0_, authors1_.active as active26_0_, authors1_.logedin as logedin26_0_, authors1_.LastActive as LastActive26_0_, authors1_.access_levels as access9_26_0_ FROM authors_to_view authors0_ left outer join authors authors1_ on authors0_.authors_id=authors1_.author_id WHERE authors0_.view_id=?] ---> System.Data.SqlClient.SqlException: Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-06-12 11:12:45,339 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+2012-06-12 11:12:45,349 [12] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+2012-06-12 11:12:45,350 [12] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.map_views.authors#System.Object[]][SQL: SELECT authors0_.view_id as view1___1_, authors0_.authors_id as authors2_1_, authors1_.author_id as author1_26_0_, authors1_.Nid as Nid26_0_, authors1_.name as name26_0_, authors1_.email as email26_0_, authors1_.phone as phone26_0_, authors1_.active as active26_0_, authors1_.logedin as logedin26_0_, authors1_.LastActive as LastActive26_0_, authors1_.access_levels as access9_26_0_ FROM authors_to_view authors0_ left outer join authors authors1_ on authors0_.authors_id=authors1_.author_id WHERE authors0_.view_id=?] ---> System.Data.SqlClient.SqlException: Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-06-12 11:12:45,352 [12] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.map_views.authors#System.Object[]][SQL: SELECT authors0_.view_id as view1___1_, authors0_.authors_id as authors2_1_, authors1_.author_id as author1_26_0_, authors1_.Nid as Nid26_0_, authors1_.name as name26_0_, authors1_.email as email26_0_, authors1_.phone as phone26_0_, authors1_.active as active26_0_, authors1_.logedin as logedin26_0_, authors1_.LastActive as LastActive26_0_, authors1_.access_levels as access9_26_0_ FROM authors_to_view authors0_ left outer join authors authors1_ on authors0_.authors_id=authors1_.author_id WHERE authors0_.view_id=?] ---> System.Data.SqlClient.SqlException: Invalid column name 'authors_id'.
+Invalid column name 'authors_id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-06-12 13:08:13,281 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-12 13:08:13,515 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-12 13:08:13,790 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-12 13:08:13,804 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-12 13:08:14,305 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-12 13:08:14,319 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-12 13:08:44,785 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-12 13:08:45,013 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-12 13:08:45,287 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-12 13:08:45,289 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-12 13:08:45,802 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-12 13:08:45,804 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-14 07:16:09,065 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:16:55,698 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,932 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,993 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,993 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,993 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,994 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:16:55,994 [8] ERROR NHibernate.Cfg.Configuration [(null)] <(null)> - An association from the table infotabs refers to an unmapped class: infotabs_templates
+NHibernate.MappingException: An association from the table infotabs refers to an unmapped class: infotabs_templates
+2012-06-14 07:17:55,694 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:21:38,839 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:21:41,407 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:23:34,099 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:24:20,256 [8] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 07:24:42,611 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - String was not recognized as a valid Boolean.
+2012-06-14 10:37:28,723 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'template'.
+2012-06-14 10:37:28,921 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'template'.
+2012-06-14 10:37:28,922 [11] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.infotabs#System.Object[]][SQL: SELECT infotabs0_.place_id as place2___1_, infotabs0_.infotab_id as infotab1_1_, infotabs1_.infotab_id as infotab1_11_0_, infotabs1_.content as content11_0_, infotabs1_.title as title11_0_, infotabs1_.sort as sort11_0_, infotabs1_.template as template11_0_ FROM place_to_infotabs infotabs0_ left outer join infotabs infotabs1_ on infotabs0_.infotab_id=infotabs1_.infotab_id WHERE infotabs0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'template'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-06-14 10:37:29,457 [11] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.infotabs#System.Object[]][SQL: SELECT infotabs0_.place_id as place2___1_, infotabs0_.infotab_id as infotab1_1_, infotabs1_.infotab_id as infotab1_11_0_, infotabs1_.content as content11_0_, infotabs1_.title as title11_0_, infotabs1_.sort as sort11_0_, infotabs1_.template as template11_0_ FROM place_to_infotabs infotabs0_ left outer join infotabs infotabs1_ on infotabs0_.infotab_id=infotabs1_.infotab_id WHERE infotabs0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'template'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-06-14 10:38:34,713 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'template'.
+2012-06-14 10:38:34,714 [10] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Invalid column name 'template'.
+2012-06-14 10:38:34,714 [10] ERROR NHibernate.Collection.AbstractPersistentCollection [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.infotabs#System.Object[]][SQL: SELECT infotabs0_.place_id as place2___1_, infotabs0_.infotab_id as infotab1_1_, infotabs1_.infotab_id as infotab1_11_0_, infotabs1_.content as content11_0_, infotabs1_.title as title11_0_, infotabs1_.sort as sort11_0_, infotabs1_.template as template11_0_ FROM place_to_infotabs infotabs0_ left outer join infotabs infotabs1_ on infotabs0_.infotab_id=infotabs1_.infotab_id WHERE infotabs0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'template'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+2012-06-14 10:38:34,714 [10] ERROR NHibernate.LazyInitializationException [(null)] <(null)> - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.ADOException: could not initialize a collection batch: [campusMap.Models.place.infotabs#System.Object[]][SQL: SELECT infotabs0_.place_id as place2___1_, infotabs0_.infotab_id as infotab1_1_, infotabs1_.infotab_id as infotab1_11_0_, infotabs1_.content as content11_0_, infotabs1_.title as title11_0_, infotabs1_.sort as sort11_0_, infotabs1_.template as template11_0_ FROM place_to_infotabs infotabs0_ left outer join infotabs infotabs1_ on infotabs0_.infotab_id=infotabs1_.infotab_id WHERE infotabs0_.place_id in (?, ?, ?, ?, ?)] ---> System.Data.SqlClient.SqlException: Invalid column name 'template'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.LoadCollectionBatch(ISessionImplementor session, Object[] ids, IType type)
+   at NHibernate.Loader.Collection.BatchingCollectionInitializer.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+2012-06-14 10:42:34,141 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:42:34,364 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:43:23,252 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:43:23,254 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:44:10,130 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:44:10,135 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:44:34,508 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:44:34,540 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:44:40,420 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:44:40,446 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:56:04,809 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:56:04,810 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:56:49,301 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:56:49,302 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 10:58:13,097 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 10:58:13,110 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:00:34,638 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:00:34,640 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:00:43,446 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:00:43,448 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:00:49,446 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:00:49,447 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:01:20,394 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:01:20,414 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:01:24,518 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:01:24,520 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:01:25,563 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:01:25,564 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:01:40,396 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:01:40,397 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:06:49,203 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:06:49,206 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:06:56,591 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:06:56,594 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:10:26,779 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:10:26,870 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 11:10:32,737 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 11:10:32,739 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:40:28,516 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:40:28,569 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:40:40,256 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:40:40,276 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:43:01,684 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:43:01,696 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:43:24,090 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:43:24,145 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-14 12:46:17,949 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:46:17,951 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:46:26,230 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:46:26,232 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:48:37,277 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:48:37,278 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:49:49,966 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:49:50,000 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:49:57,406 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:49:57,430 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:50:59,034 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:50:59,035 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:51:07,952 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:51:07,954 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 12:51:26,835 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 12:51:26,836 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-14 13:04:31,551 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:04:31,659 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 13:04:40,906 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:04:40,907 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 13:04:42,060 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:04:42,061 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-14 13:41:21,647 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:41:22,154 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 13:41:30,144 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:41:30,146 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-14 13:51:05,192 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-14 13:51:05,202 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-14 14:09:17,155 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-14 14:09:17,198 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-14 14:09:17,667 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-14 14:09:17,678 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-14 14:09:18,182 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-14 14:09:18,216 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-14 14:09:20,381 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-14 14:09:20,413 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 1490218 bytes
+2012-06-14 14:09:20,616 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-14 14:09:20,640 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 1116997 bytes
+2012-06-14 14:17:13,625 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 170
+2012-06-14 14:17:13,681 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 170, length: 29112 bytes
+2012-06-14 14:17:17,349 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 205
+2012-06-14 14:17:17,362 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 205, length: 30012 bytes
+2012-06-15 07:08:50,780 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:08:50,783 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:08:59,662 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:08:59,663 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:09:00,714 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:09:00,715 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 07:15:18,938 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:15:18,951 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:15:28,105 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:15:28,106 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:16:31,619 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:16:31,632 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:16:41,282 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:16:41,283 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:18:43,898 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:18:43,899 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:18:55,736 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:18:55,737 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:05,382 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:05,383 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:15,359 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:15,426 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:28,934 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:28,936 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:38,032 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:38,034 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:40,829 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:40,830 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:19:49,022 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:19:49,023 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:21:10,755 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:21:10,756 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:21:22,157 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:21:22,159 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:23:53,259 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:23:53,261 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:24:04,227 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:24:04,228 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:24:30,633 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:24:30,635 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:24:40,621 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:24:40,623 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:28:42,742 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:28:42,743 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:28:54,670 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:28:54,671 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:31:22,421 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:31:22,422 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:31:34,753 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:31:34,755 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:35:52,459 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:35:52,460 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:36:04,024 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:36:04,025 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:38:50,258 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:38:50,260 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:39:02,211 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:39:02,212 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:42:05,479 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:42:05,480 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:42:17,483 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:42:17,485 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:51:00,668 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:51:00,670 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:51:11,946 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:51:11,948 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:56:28,924 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:56:28,925 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:57:15,129 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:57:15,130 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 07:57:22,697 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 07:57:22,698 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:02:23,458 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:02:23,461 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:02:29,289 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:02:29,290 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:03:43,289 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:03:43,296 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:07:42,947 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:07:42,954 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:07:49,062 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:07:49,066 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:07:51,094 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:07:51,096 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:10:33,991 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:10:33,992 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:10:39,689 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:10:39,690 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:10:41,196 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:10:41,198 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:11:42,061 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:11:42,063 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:11:47,364 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:11:47,365 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:11:50,687 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:11:50,689 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:12:02,554 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:12:02,556 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:12:07,037 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:12:07,038 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:12:07,732 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:12:07,733 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:13:18,549 [15] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:13:18,550 [15] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:14:19,406 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:14:19,408 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 08:40:32,503 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:40:32,505 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:40:37,483 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:40:37,484 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:42:03,828 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:42:03,830 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:42:09,815 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:42:09,816 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:43:56,263 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:43:56,265 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:44:02,402 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:44:02,403 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:51:58,549 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:51:58,551 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:52:04,979 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:52:04,980 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:52:39,744 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:52:39,745 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:52:46,640 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:52:46,641 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:53:18,153 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:53:18,155 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:53:23,312 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:53:23,314 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:56:37,493 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:56:37,494 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 08:56:43,990 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 08:56:43,992 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:01:47,671 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:01:47,672 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:01:54,084 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:01:54,086 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:02:58,699 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:02:58,700 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:03:05,263 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:03:05,264 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:04:33,317 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:04:33,320 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:04:40,129 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:04:40,130 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:06:19,834 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:06:19,836 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:06:26,182 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:06:26,183 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:08:36,972 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:08:36,978 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:08:43,935 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:08:43,937 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:09:25,956 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:09:25,958 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:09:32,677 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:09:32,679 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:10:42,530 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:10:42,532 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:10:49,153 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:10:49,154 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:11:01,870 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:11:01,871 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 09:24:40,641 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:24:40,643 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:24:47,520 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:24:47,523 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:25:50,406 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:25:50,407 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:25:56,768 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:25:56,770 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:26:57,909 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:26:57,913 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:27:04,379 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:27:04,380 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:28:04,337 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:28:04,342 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 09:35:41,364 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:35:41,366 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:35:48,679 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:35:48,680 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:37:56,889 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:37:56,891 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:38:12,468 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 161
+2012-06-15 09:38:12,492 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 161, length: 23375 bytes
+2012-06-15 09:38:12,974 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 243
+2012-06-15 09:38:13,489 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 137
+2012-06-15 09:38:13,522 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 137, length: 29121 bytes
+2012-06-15 09:38:14,004 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 91
+2012-06-15 09:38:14,019 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 91, length: 23955 bytes
+2012-06-15 09:38:14,517 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
+2012-06-15 09:38:14,531 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes
+2012-06-15 09:38:15,017 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 194
+2012-06-15 09:38:15,032 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 194, length: 30982 bytes
+2012-06-15 09:38:22,949 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:38:22,950 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 09:38:53,122 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:38:53,123 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:38:58,666 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:38:58,667 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:40:19,829 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:40:19,830 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:40:27,433 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:40:27,434 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 09:40:33,200 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 09:40:33,201 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-15 10:10:46,645 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 244
+2012-06-15 10:10:47,149 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 205
+2012-06-15 10:10:47,167 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 205, length: 30012 bytes
+2012-06-15 10:10:47,679 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 170
+2012-06-15 10:10:47,694 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 170, length: 29112 bytes
+2012-06-15 10:18:54,303 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 161
+2012-06-15 10:18:54,305 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 161, length: 23375 bytes
+2012-06-15 10:18:54,807 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 243
+2012-06-15 10:18:55,311 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 137
+2012-06-15 10:18:55,315 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 137, length: 29121 bytes
+2012-06-15 10:18:55,811 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
+2012-06-15 10:18:55,813 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes
+2012-06-15 10:18:56,110 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-15 10:18:56,113 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-15 10:18:56,325 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 91
+2012-06-15 10:18:56,327 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 91, length: 23955 bytes
+2012-06-15 10:18:56,838 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 194
+2012-06-15 10:18:56,839 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 194, length: 30982 bytes
+2012-06-15 10:32:37,596 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 243
+2012-06-15 10:32:39,119 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 194
+2012-06-15 10:32:39,122 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 194, length: 30982 bytes
+2012-06-15 10:32:39,620 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 161
+2012-06-15 10:32:39,622 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 161, length: 23375 bytes
+2012-06-15 10:32:40,133 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 137
+2012-06-15 10:32:40,135 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 137, length: 29121 bytes
+2012-06-15 10:32:40,634 [14] INFO  mediaController [(null)] <(null)> - Starting download for image id 91
+2012-06-15 10:32:40,636 [14] INFO  mediaController [(null)] <(null)> - Finished download for image id 91, length: 23955 bytes
+2012-06-15 10:32:41,148 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 92
+2012-06-15 10:32:41,150 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 92, length: 34741 bytes

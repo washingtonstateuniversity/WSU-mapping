@@ -247,14 +247,15 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
+            authors user = getUser();
             String username = getUserName();
-            PropertyBag["authorname"] = username;
-            view.checked_out_by = username;
+            PropertyBag["authorname"] = user.name;
+            view.checked_out_by = user;
             ActiveRecordMediator<map_views>.Save(view);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["loginUser"] = user;
 
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -289,12 +290,6 @@ namespace campusMap.Controllers
 
             String CreditList = GetCredit();
             PropertyBag["credits"] = CreditList; 
-
-            List<tags> tags = new List<tags>();
-            tags.AddRange(view.tags);
-            for (int i = 0; i < 2; i++)
-                tags.Add(new tags());
-            PropertyBag["viewtags"] = tags;
 
             List<authors> authors = new List<authors>();
             authors.AddRange(view.authors);
@@ -358,39 +353,11 @@ namespace campusMap.Controllers
             CancelLayout();
             RenderText("true");
         }
-        public void GetAddtags(int count)
-        {
-            PropertyBag["count"] = count;
-            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            List<tags> tags = new List<tags>();
-            tags.Add(new tags());
-            tags.Add(new tags());
-            PropertyBag["viewtags"] = tags;
-            RenderView("addtag", true);
-        }
 
-        public void Deletetags(int id, int imageid)
-        {
-            tags tag = ActiveRecordBase<tags>.Find(imageid);
-            map_views view = ActiveRecordBase<map_views>.Find(id);
-            view.tags.Remove(tag);
-            ActiveRecordMediator<map_views>.Save(view);
-            CancelLayout();
-            RenderText("true");
-        }
-
-        public void readmore(int id)
-        {
-            PropertyBag["view"] = id==0? null : ActiveRecordBase<map_views>.Find(id);   
-        }
-        public void view(int id)
-        {
-            PropertyBag["view"] = ActiveRecordBase<map_views>.Find(id);
-        }
         public void clearLock(int id, bool ajax)
         {
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            view.checked_out_by = "";
+            view.checked_out_by = null;
             ActiveRecordMediator<map_views>.Save(view);
             CancelLayout();
             RenderText("true");
@@ -451,7 +418,7 @@ namespace campusMap.Controllers
 
             if (cancel != null)
             {
-                view.checked_out_by = "";
+                view.checked_out_by = null;
                 ActiveRecordMediator<map_views>.Save(view);
                 RedirectToAction("list");
                 return;
@@ -471,7 +438,7 @@ namespace campusMap.Controllers
                 view.Status = stat;
             }*/
 
-            view.tags.Clear(); 
+            //view.tags.Clear(); 
             //view.Images.Clear();
             view.authors.Clear();
             if (apply != null)
@@ -480,7 +447,7 @@ namespace campusMap.Controllers
             }
             else
             {
-                view.checked_out_by = "";
+                view.checked_out_by = null;
             }
 
 
@@ -495,29 +462,7 @@ namespace campusMap.Controllers
                 view.updated = DateTime.Now;
             }
 
-            if (newtag != null)
-            {
-                foreach (String onetags in newtag)
-                {
-                    if (onetags != "")
-                    {
-                        tags t = new tags();
-                        t.name = onetags;
-                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("Name", onetags);
-                        if (temp.Length == 0)
-                        {
-                            ActiveRecordMediator<tags>.Save(t);
-                            view.tags.Add(t);                                                                                  
-                        }
-                    }                        
-                }               
-                     
-            }
-            foreach (tags tag in tags)
-            {
-                if (tag.id > 0)
-                   view.tags.Add(tag);        
-            }
+            
 
             
             foreach (authors author in authors)

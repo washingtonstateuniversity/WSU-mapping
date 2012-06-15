@@ -387,9 +387,9 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.place.editor_place .ui-tabs-panel{margin-right:310px; min-height:535px;}
+.place._editor .ui-tabs-panel{margin-right:310px; min-height:535px;}
 
-.place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
+.place._editor .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
 #map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
 

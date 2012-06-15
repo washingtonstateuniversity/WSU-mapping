@@ -133,11 +133,32 @@ namespace campusMap.Controllers
 
 
 
+        public void getInfoTemplates(string callback)
+        {
+            CancelView();
+            CancelLayout();
+            IList<infotabs_templates> tempList = ActiveRecordBase<infotabs_templates>.FindAll();
+            String jsonStr = "";
+            foreach (infotabs_templates temp in tempList)
+            {
+                jsonStr += @"{";
+                jsonStr += @"""alias"":""" + temp.alias + @""",";
+                jsonStr += @"""id"":""" + temp.id + @""",";
+                jsonStr += @"""content"":""" + temp.content.Replace("\"","\\\"") + @""",";
+                
+                jsonStr += @"""query"":""" + temp.process + @"""";
+                jsonStr += @"},";
+            }
 
+            String json = "[" + jsonStr.TrimEnd(',') + "]";
 
-
-
-
+            if (!string.IsNullOrEmpty(callback))
+            {
+                json = callback + "(" + json + ")";
+            }
+            Response.ContentType = "application/json; charset=UTF-8";
+            RenderText(json);
+        }
 
         private void getPlaces()
         {

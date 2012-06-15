@@ -935,7 +935,6 @@
     <None Include="Content\js\tinymce\tinymce\tests\slickspeed\selectors.list" />
     <None Include="Content\js\tinymce\tinymce\tests\slickspeed\system\index.php" />
     <None Include="Content\js\tinymce\tinymce\tests\slickspeed\system\template.php" />
-    <None Include="Models\ClassDiagram1.cd" />
     <None Include="obj\Debug\ResolveAssemblyReference.cache" />
     <None Include="Views\AccessLevel\list.vm" />
     <None Include="Views\AccessLevel\new.vm" />

@@ -42,34 +42,6 @@ namespace campusMap.Controllers
      * 
      */
 
-
-        public void editor(int id, int page, bool ajax)
-        {
-            if (id == 0){
-                New();
-            }else{
-                _edit(id, page, ajax);
-            }
-            CancelView();
-            CancelLayout();
-            RenderView("editor_place");
-            return;
-        }
-
-
-
-        public void Index()
-        {
-            //ActiveRecordBase<Block>.FindAll();
-            PropertyBag["AccessDate"] = DateTime.Now;           
-        }
-
-        public void breakingNewsreadmore(int id)
-        {
-            place place = ActiveRecordBase<place>.Find(id);
-            PropertyBag["BreakingNews"] = place;
-        }
-
         public void List(int page, int searchId, string target)
         {
             authors user = getUser();
@@ -77,7 +49,7 @@ namespace campusMap.Controllers
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["listcats"] = ActiveRecordBase<categories>.FindAll();
-            
+
 
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
 
@@ -94,47 +66,58 @@ namespace campusMap.Controllers
             int publishedPaging = 1;
             int name_typesPaging = 1;
 
-            switch (target){
-                case "name_types":{
-                    name_typesPaging = page; break;
+            switch (target)
+            {
+                case "name_types":
+                    {
+                        name_typesPaging = page; break;
                     }
-                case "types":{
-                    typesPaging = page; break;
+                case "types":
+                    {
+                        typesPaging = page; break;
                     }
-                case "fields":{
-                    fieldsPaging = page; break;
+                case "fields":
+                    {
+                        fieldsPaging = page; break;
                     }
-                case "draft":{
-                    draftPaging = page; break;
+                case "draft":
+                    {
+                        draftPaging = page; break;
                     }
-                case "review":{
-                    reviewPaging = page; break;
+                case "review":
+                    {
+                        reviewPaging = page; break;
                     }
-                case "published":{
-                    publishedPaging = page; break;
+                case "published":
+                    {
+                        publishedPaging = page; break;
                     }
             }
             //SETUP SEARCHID and parts
-            if (searchId.Equals(0)){
+            if (searchId.Equals(0))
+            {
                 searchId = -3;
-            }else{
+            }
+            else
+            {
                 place_types type = new place_types();
             }
             PropertyBag["searchId"] = searchId;
 
-        //user.categories.Contains(place.categories);
+            //user.categories.Contains(place.categories);
 
             IList<place> items;
             int pagesize = 15;
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-           if (searchId > 0)
+            if (searchId > 0)
             {
-               // find all places of cat
+                // find all places of cat
                 IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", searchId) });
                 IList<place> pitems = new List<place>();
                 foreach (categories c in cats)
                 {
-                    foreach(place p in c.Places){
+                    foreach (place p in c.Places)
+                    {
                         pitems.Add(p);
                     }
                 }
@@ -150,9 +133,11 @@ namespace campusMap.Controllers
             if (searchId.Equals(-3))
             {
                 IList<place> pitems = new List<place>();
-                foreach (categories ucats in user.categories){
+                foreach (categories ucats in user.categories)
+                {
                     IList<categories> cats = ActiveRecordBase<categories>.FindAll(new ICriterion[] { Expression.Eq("id", ucats.id) });
-                    foreach (categories c in cats){
+                    foreach (categories c in cats)
+                    {
                         foreach (place p in c.Places)
                         {
                             pitems.Add(p);
@@ -169,11 +154,13 @@ namespace campusMap.Controllers
                 baseEx.Add(Expression.In("id", obj));
             }
 
-            if (searchId.Equals(-2)){
+            if (searchId.Equals(-2))
+            {
                 IList<place> userplaces = user.Places;
                 object[] obj = new object[userplaces.Count];
                 int i = 0;
-                foreach(place p in userplaces){
+                foreach (place p in userplaces)
+                {
                     obj[i] = p.id;
                     i++;
                 }
@@ -181,21 +168,21 @@ namespace campusMap.Controllers
             }
 
 
-        //REVIEW
+            //REVIEW
             IList<place> reviewItems;
             List<AbstractCriterion> revEx = new List<AbstractCriterion>();
             revEx.AddRange(baseEx);
             revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
             reviewItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), revEx.ToArray());
 
-        //PUBLISHED
+            //PUBLISHED
             IList<place> publishedItems;
             List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
             pubEx.AddRange(baseEx);
             pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
             publishedItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), pubEx.ToArray());
 
-        //DRAFT
+            //DRAFT
             IList<place> draftItems;
             List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
             draftEx.AddRange(baseEx);
@@ -205,65 +192,71 @@ namespace campusMap.Controllers
 
 
 
-        //PUBLISHED
-            foreach (place item in publishedItems){
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+            //PUBLISHED
+            foreach (place item in publishedItems)
+            {
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                {
                     makePlaceStaticMap(item);
                 }
             }
             PropertyBag["published_list"] = PaginationHelper.CreatePagination(publishedItems, pagesize, publishedPaging);
             IList<string> buttons = new List<string>();
-                buttons.Add("edit");
-                buttons.Add("delete");
-                buttons.Add("publish");
-                //buttons.Add("broadcast");
-                //buttons.Add("view"); //NOTE:coming so TODO
-                //buttons.Add("order");
-            PropertyBag["publishedButtonSet"] = buttons;  
+            buttons.Add("edit");
+            buttons.Add("delete");
+            buttons.Add("publish");
+            //buttons.Add("broadcast");
+            //buttons.Add("view"); //NOTE:coming so TODO
+            //buttons.Add("order");
+            PropertyBag["publishedButtonSet"] = buttons;
 
 
-        //REVIEW
-            foreach (place item in reviewItems){
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+            //REVIEW
+            foreach (place item in reviewItems)
+            {
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                {
                     makePlaceStaticMap(item);
                 }
             }
             PropertyBag["review_list"] = PaginationHelper.CreatePagination(reviewItems, pagesize, reviewPaging);
             buttons = new List<string>();
-                buttons.Add("edit");
-                buttons.Add("delete");
-                buttons.Add("publish");
-                //buttons.Add("view");
-            PropertyBag["reviewButtonSet"] = buttons;  
+            buttons.Add("edit");
+            buttons.Add("delete");
+            buttons.Add("publish");
+            //buttons.Add("view");
+            PropertyBag["reviewButtonSet"] = buttons;
 
-        //DRAFT
-            foreach (place item in draftItems){
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null){
+            //DRAFT
+            foreach (place item in draftItems)
+            {
+                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                {
                     makePlaceStaticMap(item);
                 }
             }
             PropertyBag["draft_list"] = PaginationHelper.CreatePagination(draftItems, pagesize, draftPaging);
 
             buttons = new List<string>();
-                buttons.Add("edit");
-                buttons.Add("delete");
-                buttons.Add("publish");
-                //buttons.Add("view");
-            PropertyBag["draftButtonSet"] = buttons;  
+            buttons.Add("edit");
+            buttons.Add("delete");
+            buttons.Add("publish");
+            //buttons.Add("view");
+            PropertyBag["draftButtonSet"] = buttons;
 
-        //place types
+            //place types
             pagesize = 100;
             IList<place_types> place_types_items;
             place_types_items = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["types"] = PaginationHelper.CreatePagination(place_types_items, pagesize, typesPaging);
 
-        //place name types
+            //place name types
             pagesize = 15;
             IList<place_name_types> place_name_types_items;
             place_name_types_items = ActiveRecordBase<place_name_types>.FindAll();
             PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
 
-        //place feilds
+            //place feilds
             pagesize = 15;
             IList<field_types> place_fields_items;
             List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
@@ -274,12 +267,205 @@ namespace campusMap.Controllers
 
             RenderView("../admin/listings/list");
         }
+
+        public void editor(int id, int page, bool ajax)
+        {
+            if (id == 0){
+                New();
+            }else{
+                _edit(id, page, ajax);
+            }
+            CancelView();
+            CancelLayout();
+            RenderView("_editor");
+            return;
+        }
+        public void _edit(int id, int page, bool ajax)
+        {
+            CancelView();
+
+            PropertyBag["ajaxed"] = ajax;
+
+            campusMap.Services.LogService.writelog("Editing place " + id);
+            PropertyBag["credits"] = "";
+            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
+            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
+            PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
+
+            place one_place = ActiveRecordBase<place>.Find(id);
+            authors user = getUser();
+
+
+
+            PropertyBag["authorname"] = user.name;
+            one_place.editing = user;
+            ActiveRecordMediator<place>.Save(one_place);
+
+
+
+            //String locationList = Getlocation();
+            //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
+
+            PropertyBag["loginUser"] = user;
+            PropertyBag["placeimages"] = one_place.Images;
+            //$one_place.campus.zipcode
+            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
+            if (Flash["place"] != null)
+            {
+                place flashplace = Flash["place"] as place;
+                flashplace.Refresh();
+                PropertyBag["place"] = flashplace;
+            }
+            else
+            {
+                PropertyBag["place"] = one_place;
+            }
+            if (one_place.coordinate != null)
+            {
+                PropertyBag["lat"] = one_place.getLat();
+                PropertyBag["long"] = one_place.getLong();
+            }
+
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("model", this.GetType().Name));
+            typeEx.Add(Expression.Eq("set", one_place.model.id));
+
+            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> fields = new List<string>();
+            if (ft != null)
+            {
+                foreach (field_types ft_ in ft)
+                {
+                    fields.Add(get_field(ft_, one_place));
+                }
+            }
+            PropertyBag["fields"] = fields;
+
+
+            //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
+            //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
+            //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll(Order.Asc("friendly"));
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
+
+            PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
+
+            /*if (page == 0)
+                page = 1;
+            int pagesize = 10;
+            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+            baseEx.Add(Expression.Eq("Place", one_place));
+
+            IList<comments> items;
+
+            items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
+            PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
+            */
+
+            String CreditList = GetCredit();
+            PropertyBag["credits"] = CreditList;
+
+            List<tags> tags = new List<tags>();
+            tags.AddRange(one_place.tags);
+            for (int i = 0; i < 2; i++)
+                tags.Add(new tags());
+            PropertyBag["placetags"] = tags;
+
+            List<infotabs> tabs = new List<infotabs>();
+            if (one_place.infotabs.Count > 0) tabs.AddRange(one_place.infotabs);
+            PropertyBag["tabs"] = tabs;
+
+            List<authors> authors = new List<authors>();
+            if (!one_place.Authors.Contains(user)) authors.Add(user);
+            authors.AddRange(one_place.Authors);
+            // for (int i = 0; i < 2; i++)
+            //     authors.Add(new authors());
+
+            List<media_repo> images = new List<media_repo>();
+            images.AddRange(one_place.Images);
+            if (images.Count == 0)
+            {
+                images.Add(new media_repo());
+                PropertyBag["placeimages"] = images;
+            }
+            PropertyBag["short_codes"] = get_feild_short_codes(one_place);
+            PropertyBag["placeauthors"] = authors;
+            //RenderView("new");
+            RenderView("_editor");
+            return;
+        }
+        public void New()
+        {
+            CancelView();
+            PropertyBag["credits"] = "";
+            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
+            PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
+
+            String CreditList = GetCredit();
+            PropertyBag["credits"] = CreditList;
+
+            place place = new place();
+
+
+            List<media_repo> images = new List<media_repo>();
+            images.AddRange(place.Images);
+            if (images.Count == 0)
+            {
+                images.Add(new media_repo());
+            }
+
+
+
+
+            PropertyBag["placeimages"] = images;
+            PropertyBag["loginUser"] = getUser();
+            //String locationList = Getlocation();
+            //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
+
+            String availableImagesList = "";
+            PropertyBag["availableImages"] = availableImagesList; // string should be "location1","location2","location3"
+
+
+            PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
+            PropertyBag["place"] = Flash["place"] != null ? Flash["place"] : place;
+            PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
+            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
+            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
+            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
+            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
+
+            RenderView("_editor");
+            return;
+        }
+        
         public bool canEdit(place place, authors user)
         {
             bool flag = false;
            switch (user.access_levels.title)
             {
-                case "Author":
+                case "Admin":
                     {
                         foreach (place_types item in place.place_types)
                         {
@@ -604,184 +790,7 @@ namespace campusMap.Controllers
             return codes;
         }
 
-        public void _edit(int id, int page, bool ajax)
-        {
-            CancelView();
 
-            PropertyBag["ajaxed"] = ajax;
-
-            campusMap.Services.LogService.writelog("Editing place " + id);
-            PropertyBag["credits"] = "";
-            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
-            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
-            PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
-
-            place one_place = ActiveRecordBase<place>.Find(id);
-            authors user = getUser();
-
-            
-
-            PropertyBag["authorname"] = user.name;
-            one_place.editing = user;
-            ActiveRecordMediator<place>.Save(one_place);
-
-
-
-            //String locationList = Getlocation();
-            //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
-
-            PropertyBag["loginUser"] = user;
-            PropertyBag["placeimages"] = one_place.Images;
-            //$one_place.campus.zipcode
-            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            if(Flash["place"] !=null)
-            {
-                place flashplace = Flash["place"] as place;
-                flashplace.Refresh();
-                PropertyBag["place"] = flashplace;
-            }
-            else
-            {
-                PropertyBag["place"] = one_place;
-            }
-            if (one_place.coordinate != null)
-            {
-                PropertyBag["lat"] = one_place.getLat();
-                PropertyBag["long"] = one_place.getLong();
-            }
-
-            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
-            typeEx.Add(Expression.Eq("model", this.GetType().Name));
-            typeEx.Add(Expression.Eq("set", one_place.model.id));
-
-            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
-            List<string> fields = new List<string>();
-            if (ft != null)
-            {
-                foreach (field_types ft_ in ft)
-                {
-                    fields.Add(get_field(ft_, one_place));
-                }
-            }
-            PropertyBag["fields"] = fields;
-
-
-            //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
-            //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
-            //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
-            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
-            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll(Order.Asc("friendly"));
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
-
-            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
-
-            PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
-
-            /*if (page == 0)
-                page = 1;
-            int pagesize = 10;
-            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Place", one_place));
-
-            IList<comments> items;
-
-            items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
-            PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
-            */
-
-            String CreditList = GetCredit();
-            PropertyBag["credits"] = CreditList; 
-
-            List<tags> tags = new List<tags>();
-            tags.AddRange(one_place.tags);
-            for (int i = 0; i < 2; i++)
-                tags.Add(new tags());
-            PropertyBag["placetags"] = tags;
-
-            List<infotabs> tabs = new List<infotabs>();
-            if (one_place.infotabs.Count>0) tabs.AddRange(one_place.infotabs);
-            PropertyBag["tabs"] = tabs;
-
-            List<authors> authors = new List<authors>();
-            if (!one_place.Authors.Contains(user)) authors.Add(user); 
-            authors.AddRange(one_place.Authors);
-           // for (int i = 0; i < 2; i++)
-           //     authors.Add(new authors());
-
-            List<media_repo> images = new List<media_repo>();
-            images.AddRange(one_place.Images);
-            if (images.Count == 0)
-            {
-               images.Add(new media_repo());
-                PropertyBag["placeimages"] = images;   
-            }
-            PropertyBag["short_codes"] = get_feild_short_codes(one_place);
-            PropertyBag["placeauthors"] = authors; 
-            //RenderView("new");
-            RenderView("editor_place");
-       
-        }
-        public void New()
-        {
-            CancelView();
-            PropertyBag["credits"] = ""; 
-            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
-            PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
-
-            String CreditList = GetCredit();
-            PropertyBag["credits"] = CreditList;
-
-            place place = new place();
-
-
-            List<media_repo> images = new List<media_repo>();
-            images.AddRange(place.Images);
-            if (images.Count == 0)
-            {
-                images.Add(new media_repo());
-            }
-
-
-
-
-            PropertyBag["placeimages"] = images;     
-            PropertyBag["loginUser"] = getUser();
-            //String locationList = Getlocation();
-            //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
-
-            String availableImagesList = "";
-            PropertyBag["availableImages"] = availableImagesList; // string should be "location1","location2","location3"
-
-            
-            PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["place"] = Flash["place"] != null ? Flash["place"] : place;
-            PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
-            PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
-            PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-            PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
-
-            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-            PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
-
-            RenderView("editor_place");
-        }
 
         public void loadPlaceShape(int id,string callback)
         {
@@ -1283,6 +1292,8 @@ namespace campusMap.Controllers
             }
             else
             {
+                place.editing = null;
+                ActiveRecordMediator<place>.Save(place);
                 RedirectToAction("list");
                 return;
             }

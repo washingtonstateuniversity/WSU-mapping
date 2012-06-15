@@ -322,7 +322,7 @@ function loadData(data,callback){
 				  width: "400px"
 				 }
 				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-				,infoBoxClearance: new google.maps.Size(1,1)
+				,infoBoxClearance: new google.maps.Size(1,50)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
@@ -699,21 +699,27 @@ $(document).ready(function(){
 	
 	
 	}	
+	
+	
+	if($('.admin.view._editor').length){
+		load_view_editor();
+	 }		
+	
+	
 	if($('#geometrics_drawing_map').length){
 		load_geometrics_editor();
 	 }	
-	if($('#place_drawing_map').length){
+	if($('.admin.place._editor').length){
 		load_place_editor();
 		tinyResize();
 	 }	
 	if($('#style_map').length){
 		load_style_editor();
-		
-	 }	
+	}	
 	if($('#map_canvas').length){
 		initialize();
 		if($('.home #map_canvas').length){$(window).resize(function(){resizeBg($('#map_canvas'),170)}).trigger("resize");}
-	 }
+	}
 	$('.quickActions').click(function() {
 		$(this).find('.action_nav').slideToggle('fast', function() {
 		// Animation complete.

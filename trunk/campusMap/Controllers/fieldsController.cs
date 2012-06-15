@@ -239,72 +239,7 @@ namespace campusMap.Controllers
             }
             return creditsList.TrimEnd(',');
         }
-        public void Edit_view(int id, int page)
-        {
-            campusMap.Services.LogService.writelog("Editing view " + id);
-            PropertyBag["credits"] = "";
-            PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
-            PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
-            map_views view = ActiveRecordBase<map_views>.Find(id);
-            String username = getUserName();
-            PropertyBag["authorname"] = username;
-            view.checked_out_by = username;
-            ActiveRecordMediator<map_views>.Save(view);
-            //String locationList = Getlocation();
-            //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
-
-            PropertyBag["loginUser"] = getUser();
-
-
-            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            if(Flash["view"] !=null)
-            {
-                map_views flashview = Flash["view"] as map_views;
-                flashview.Refresh();
-                PropertyBag["view"] = flashview;
-            }
-            else
-            {
-                PropertyBag["view"] = view;
-            }
-            //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
-            //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
-            //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
-
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-
-            if (page == 0)
-                page = 1;
-            int pagesize = 10;
-            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("View", view));
-
-            IList<comments> items;
-
-            items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
-            PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);
-
-            String CreditList = GetCredit();
-            PropertyBag["credits"] = CreditList; 
-
-            List<tags> tags = new List<tags>();
-            tags.AddRange(view.tags);
-            for (int i = 0; i < 2; i++)
-                tags.Add(new tags());
-            PropertyBag["viewtags"] = tags;
-
-            List<authors> authors = new List<authors>();
-            authors.AddRange(view.authors);
-            for (int i = 0; i < 2; i++)
-                authors.Add(new authors());
-
-            PropertyBag["viewauthors"] = authors; 
-            RenderView("new");
-       
-        }
         public void New()
         {
 
@@ -358,26 +293,7 @@ namespace campusMap.Controllers
             CancelLayout();
             RenderText("true");
         }
-        public void GetAddtags(int count)
-        {
-            PropertyBag["count"] = count;
-            PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            List<tags> tags = new List<tags>();
-            tags.Add(new tags());
-            tags.Add(new tags());
-            PropertyBag["viewtags"] = tags;
-            RenderView("addtag", true);
-        }
 
-        public void Deletetags(int id, int imageid)
-        {
-            tags tag = ActiveRecordBase<tags>.Find(imageid);
-            map_views view = ActiveRecordBase<map_views>.Find(id);
-            view.tags.Remove(tag);
-            ActiveRecordMediator<map_views>.Save(view);
-            CancelLayout();
-            RenderText("true");
-        }
 
         public void readmore(int id)
         {
@@ -390,7 +306,7 @@ namespace campusMap.Controllers
         public void clearLock(int id, bool ajax)
         {
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            view.checked_out_by = "";
+            view.checked_out_by = null;
             ActiveRecordMediator<map_views>.Save(view);
             CancelLayout();
             RenderText("true");
@@ -424,152 +340,6 @@ namespace campusMap.Controllers
                 }
             }
         }
-        public void cleanUpview_media(int id)
-        {
-            string uploadPath = Context.ApplicationPath + @"\uploads\";
-                   uploadPath += @"view\" + id + @"\";
-            if (!HelperService.DirExists(uploadPath))
-            {
-                return;
-            }
 
-            //ok the view has image as the dir was created already to hold them
-            string[] filePaths = Directory.GetFiles(uploadPath, "*_TMP_*");
-            foreach(string file in filePaths){
-                FileInfo ImgFile = new FileInfo(file);
-                ImgFile.Delete();
-            }
-        }
-        public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] map_views view,
-            [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
-            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
-            string apply, string cancel)     
-        {
-            Flash["view"] = view;
-            Flash["tags"] = view;
-            Flash["authors"] = view;
-
-            if (cancel != null)
-            {
-                view.checked_out_by = "";
-                ActiveRecordMediator<map_views>.Save(view);
-                RedirectToAction("list");
-                return;
-            }
-            if (view.name == null || view.name.Length == 0)
-            {
-                Flash["error"] = "You are missing the basic parts of a view";
-                RedirectToReferrer();
-                return;
-            }
-
-            
-            authors user = getUser();
-            /*if (!canPublish(user))
-            {
-                ViewStatus stat= ActiveRecordBase<ViewStatus>.Find(1);
-                view.Status = stat;
-            }*/
-
-            view.tags.Clear(); 
-            //view.Images.Clear();
-            view.authors.Clear();
-            if (apply != null)
-            {
-
-            }
-            else
-            {
-                view.checked_out_by = "";
-            }
-
-
-            if (view.id == 0)
-            {
-                //ViewStatus stat = ActiveRecordBase<ViewStatus>.Find(1);
-                //view.Status = stat;
-                view.created = DateTime.Now;
-            }
-            else
-            {
-                view.updated = DateTime.Now;
-            }
-
-            if (newtag != null)
-            {
-                foreach (String onetags in newtag)
-                {
-                    if (onetags != "")
-                    {
-                        tags t = new tags();
-                        t.name = onetags;
-                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("Name", onetags);
-                        if (temp.Length == 0)
-                        {
-                            ActiveRecordMediator<tags>.Save(t);
-                            view.tags.Add(t);                                                                                  
-                        }
-                    }                        
-                }               
-                     
-            }
-            foreach (tags tag in tags)
-            {
-                if (tag.id > 0)
-                   view.tags.Add(tag);        
-            }
-
-            
-            foreach (authors author in authors)
-            {
-                if (author.id > 0)
-                    view.authors.Add(author);   
-            }
-
-            /*string requested_url = view.CustomUrl;
-            if (viewService.viewByURL(view.CustomUrl).Length > 1)
-            {
-                view.CustomUrl = requested_url + "1";
-                ActiveRecordMediator<view>.Save(view);
-                Flash["error"] = "The url you choose is in use.  Please choose a new one.  We have saved it as '" + requested_url + "1" + "' currently.";
-                RedirectToReferrer();
-                return;
-            }*/
-
-
-            ActiveRecordMediator<map_views>.Save(view);
-
-            cleanUpview_media(view.id);
-
-            Flash["view"] = null;
-            Flash["tags"] = null;
-            Flash["authors"] = null;
-
-
-            if (apply != null)
-            {
-                if (apply != " Save ")
-                {
-                    Redirect("Edit_view.castle?id=" + view.id);
-                }
-                else
-                {
-                    RedirectToReferrer();
-                }
-            }
-            else
-            {
-                RedirectToAction("list");
-            }
-        }
-
-        public void delete(int id)
-        {
-            map_views view = ActiveRecordBase<map_views>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
-            ActiveRecordMediator<map_views>.Delete(view);
-            CancelLayout();
-            RedirectToAction("list");
-        }
     }
 }

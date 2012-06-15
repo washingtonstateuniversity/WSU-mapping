@@ -69,7 +69,6 @@ namespace campusMap.Controllers
 
             PropertyBag["selected"] = filter;
 
-
             usertags_items = ActiveRecordBase<usertags>.FindAll(Order.Asc("name"));
             PropertyBag["usertags"] = PaginationHelper.CreatePagination(usertags_items, pagesize, uPaging);
         }

@@ -29,13 +29,13 @@
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Threading;
-using Microsoft.SqlServer.Types;
-using System.Data.SqlTypes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
-using log4net;
-using log4net.Config;
+    using Microsoft.SqlServer.Types;
+    using System.Data.SqlTypes;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Utilities;
+    using Newtonsoft.Json.Linq;
+    using log4net;
+    using log4net.Config;
 #endregion
 
 
@@ -93,7 +93,19 @@ using log4net.Config;
             everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
             String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
             String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
-            /* CancelView();
+
+            Dictionary<string, string> queryparams = new Dictionary<string, string>();
+            if (urlwithnoparams != querystring)
+            {
+                foreach (string kvp in querystring.Split(','))
+                {
+                    queryparams.Add(kvp.Split('=')[0], kvp.Split('=')[1]);
+                }
+            }
+
+
+            CancelView();
+            /* 
             if (everUrl == "/default.aspx")
             {
                 //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
@@ -137,6 +149,19 @@ using log4net.Config;
                 RenderView("readmore");
                 return;
             }*/
+            
+            if (urlwithnoparams.ToString().IndexOf("/rt/") > -1)
+            {
+                
+                string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
+                String mode = "";
+                String callback = "";
+                fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
+                return;
+            }
+
+
+
         }
         #endregion
 
@@ -149,7 +174,20 @@ using log4net.Config;
             PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
             RenderView("central");
         }
-
+        public void fetchMap(String alias, String mode, String callback)
+        {
+            CancelView();
+            CancelLayout();
+            IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
+            if (c.Count == 0)
+            {
+                RenderText("false");
+                return;
+            }
+            if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
+            PropertyBag["map"] = c[0];
+            RenderView("map_json");
+        }
 
 
             /*
@@ -278,7 +316,43 @@ using log4net.Config;
                 }
                 return text;
             }
+            /*
+             * Take a string loop over all the fields 
+             * test if the pattern with the field.alias is in
+             * the text.  if in text replace with value.
+             */
+            public string autoFeildProcessing(place place, string text)
+            {
+                if (place.model != null)
+                {
+                    //log.Info("________________________________________________________________________________\nLoading feilds For:" + place.prime_name+"("+place.id+")\n");
+                    List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                    typeEx.Add(Expression.Eq("model", "placeController"));
+                    typeEx.Add(Expression.Eq("set", place.model.id));
 
+                    field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+                    List<string> fields = new List<string>();
+
+
+                    //log.Error(" place:" + place.prime_name);
+                    Hashtable hashtable = new Hashtable();
+                    hashtable["place"] = place;
+
+                    if (ft != null)
+                    {
+                        foreach (field_types ft_ in ft)
+                        {
+                            string value = "";
+                            value = getFieldVal(ft_, place);
+                            hashtable["" + ft_.alias] = value;
+                            //log.Info("hashtable[" + ft_.alias+"]" + value);
+                        }
+                    }
+                    text = helperService.proccessText(hashtable, text, false).Trim();
+                    //log.Info("text:" + text);
+                }
+                return text;
+            }
 
 
 
@@ -481,8 +555,6 @@ using log4net.Config;
             {
                 /* the responsable thing to do here is to remove the html into a template */
                 /* secound make the feed a template too so there should be 3 templates */ 
-
-
                 String cachePath = Context.ApplicationPhysicalPath;
                 if (!cachePath.EndsWith("\\"))
                     cachePath += "\\";
@@ -601,8 +673,9 @@ using log4net.Config;
                                     foreach (infotabs tab in item.infotabs)
                                     {
                                         c++;
-                                        string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-
+                                        //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+                                        string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n",@"
+")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
                                         tabStr += @"
                                             {
                                                 ""block"":""" + infoTitle + content + @""",

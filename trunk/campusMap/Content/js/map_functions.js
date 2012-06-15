@@ -89,6 +89,18 @@ function get_mapzoom(){
     var mapZoom = map.getZoom();
     return mapZoom;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // jeremy's map control
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -591,57 +603,59 @@ function build_infobox(item){
 		 content: box//boxText
 		,disableAutoPan: false
 		,maxWidth: 0
-		,pixelOffset: new google.maps.Size(-200, -36)
+		,height:"340px"
+		,pixelOffset: new google.maps.Size(-200, -103)
 		,zIndex: 99
 		,boxStyle: {
-		 // background: "url('/Content/images/sudo_infobottom.png') no-repeat center bottom",
 		  width: "400px"
 		 }
-		,closeBoxMargin: "10px 2px 2px 2px"
-		,closeBoxURL: siteroot+"Content/images/close.png"
-		,infoBoxClearance: new google.maps.Size(1, 1)
+		,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
+		,infoBoxClearance: new google.maps.Size(1,50)
 		,isHidden: false
 		,pane: "floatPane"
 		,enableEventPropagation: false
-		,onClose:function(){
-					ibOpen=false;
-				}
+		,onClose:function(){ibHover =  false;ibOpen=false;}
 		,onOpen:function(){
-					$('#taby'+i).tabs();
-					$('#taby'+i).hover(function(){
+					ibOpen=true;
+						ibHover =  true;
+						if($(".cWrap").length){
+							$('.cWrap a.gouped').on('click',function(e){
+								e.preventDefault();
+								e.stopImmediatePropagation();
+								$('.cWrap a.gouped').colorbox({
+									photo:true,
+									scrolling:false,
+									opacity:0.7,
+									transition:"none",
+									width:"75%",
+									height:"75%",
+									slideshow:true,
+									slideshowAuto:false,
+									open:true
+								});
+							});
+							$('.cWrap .items').cycle({
+								fx:     'scrollLeft',
+								delay:  -2000,
+								pauseOnPagerHover: 1,
+								pause:1,
+								pager:'.cNav',
+								prev:   '.prev',     next:   '.next', 
+								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
+							});
+							prep();
+						}
+						$('#taby'+i).tabs();
+						var minHeight=0;
+						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
+						}).css('min-height',minHeight); 
+						$('#taby'+i).hover(function(){
 							ib[0].setOptions({enableEventPropagation: true});
 						},function(){
 							ib[0].setOptions({enableEventPropagation: false});
 						});
-					ibOpen=true;
-					$('.headImage').on('click',function(e){
-						e.preventDefault();
-						var trigger=$(this);
-						$.colorbox({
-							rel:'gouped',
-							html:function(){
-								return '<img src="'+trigger.find('img').attr('title')+'" style="height:100%;margin:0 auto;display:block;" />';
-							},
-							photo:true,
-							scrolling:false,
-							opacity:0.7,
-							transition:"none",
-							width:"75%",
-							height:"75%",
-							slideshow:true
-						});
-					});
-					if($(".cWrap").length){
-						$(".cWrap").jCell({
-							btnNext: ".next",
-							btnPrev: ".prev",
-							speed: 1000,
-							visible: 1,
-							navTemplate:'<li><a href="#">{$i}</a></li>',
-							nav:$('.cNav')
-						});
-					}
-					//alert('tring to tab it, dabnab it');
+						ib[0].rePosition();
 				}
 	};
 	ib[0] = new InfoBox(myOptions,function(){});
@@ -879,6 +893,7 @@ function load_place_editor() {
 	$.each('.dyno_tabs',function(i,v){
 		load_tiny("bodytext","tab_"+i);
 		tinyResize();
+		set_tab_editable(i)
 	});
 	var $tab_title_input = $( "#tab_title"),
 		$tab_content_input = $( "#tab_content" );
@@ -888,10 +903,13 @@ function load_place_editor() {
 	var $tabs = $( "#infotabs").tabs({
 		tabTemplate:"<li>"+
 						"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-						"<input type='hidden' name='tabs["+tab_counter+"].id' value='' />"+
-						"<input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' />"+
-						"<input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />"+
+							"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
+							
 						"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+						'<span class="edit ui-icon ui-icon-pencil"></span>'+
 					"</li>",
 		add: function( event, ui ) {
 			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
@@ -901,21 +919,46 @@ function load_place_editor() {
 		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
 	});
 	// actual addTab function: adds new tab using the title input from the form above
-	function addTab() {
 	
+	function set_tab_editable(i){
+		var base= '[href="#dyno_tabs_'+i+'"],[href="#tabs-'+i+'"]';
+		$(base).closest('li').find('span.edit').on('click',function(e){
+			if(!$(this).hasClass('ui-state-disabled')){
+				$(this).addClass('ui-state-disabled');
+				$(base).closest('li').find('a').hide();
+				$(base).closest('li').find('a').after('<input type="text" class="titleEdit" value="'+$(base).closest('li').find('a').text()+'" />');
+				$(base).closest('li').find('.titleEdit').focus();
+				$(base).closest('li').find('.titleEdit').on('blur',function(){
+					$(base).closest('li').find('.edit').removeClass('ui-state-disabled');
+					$(base).text($(this).val());
+					$(base).closest('li').find('#tab_title_'+i).val($(this).val());
+					$(this).remove();
+					$(base).closest('li').find('a').show();
+				});
+			}
+		});
+	}
+	
+	
+	
+	
+	function addTab() {
 		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
 		$tabs.tabs( "option" , "tabTemplate" , "<li>"+
 													"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' />"+
-													"<input type='hidden' name='tabs["+tab_counter+"].title' value='#{label}' />"+
-													"<input type='hidden' class='sort' name='tabs["+tab_counter+"].sort' value='' />"+
+														"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+														"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+														"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+														"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
 													"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+													'<span class="edit ui-icon ui-icon-pencil"></span>'+
 												"</li>" );
-		
 		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
 		load_tiny("bodytext","tab_"+tab_counter);
+		
 		$.each($("#infotabs li.ui-state-default"),function(i,v){
 			$(this).find('.sort').val(i);
+			set_tab_editable(i);
 		});
 		tab_counter++;
 	}
@@ -935,6 +978,7 @@ function load_place_editor() {
 			var id=$(this).find('textarea:first').attr('id');
 			load_tiny("bodytext",id);
 			tinyResize();
+			set_tab_editable(i);
 		});
 	}});
 
@@ -1381,6 +1425,256 @@ function load_style_editor(){
 	});
 }
 
+
+function load_view_editor() {
+	var lat = $('#Lat').val();
+	var lng = $('#Long').val();	
+	var width = $('#width').val();
+	var height = $('#height').val();
+	var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15}
+	//var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+	$.each($('#tabs_Options input.text'),function(i,v){
+		var tmpVal = $(this).val();
+		if(tmpVal!=""){
+			if(isNumber(tmpVal)){
+				if(tmpVal>0){
+					var tmp = {} 
+					tmp[$(this).attr("id")]=tmpVal;
+					$.extend(options,tmp);
+				}
+			}else{
+				var tmp = {} 
+				tmp[$(this).attr("id")]=tmpVal;
+				$.extend(options,tmp);
+			}
+		}
+	});	
+	//alert(dump(options));
+	
+	
+	$('#place_drawing_map').gmap(options).bind('init', function () {
+		//alert(dump(options));
+		//if(lat!='')add_place_point(lat,lng);
+		//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+		//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+		google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
+			var center = $('#place_drawing_map').gmap('get_map_center');
+			//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
+			var lat = $('#Lat').val( center.lat() );
+			var lng = $('#Long').val( center.lng() );	
+		});
+	}).resizable({
+			helper: "ui-resizable-helper",
+			stop: function(event, ui) {
+					var width = $('#width').val(ui.size.width);
+					var height = $('#height').val(ui.size.height);
+					$('#place_drawing_map').gmap('refresh');
+				}
+		});
+
+
+	
+	$.each($('.dyno_tabs'),function(i,v){
+		load_tiny("bodytext",$(this).attr('id'));
+		tinyResize();
+	});
+	var $tab_title_input = $( "#tab_title"),
+		$tab_content_input = $( "#tab_content" );
+	var tab_counter =  $("#infotabs li.ui-state-default").size();
+
+	// tabs init with a custom tab template and an "add" callback filling in the content
+	var $tabs = $( "#infotabs").tabs({
+		tabTemplate:"<li>"+
+						"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+						"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+						"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+						"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
+							
+						"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+						'<span class="edit ui-icon ui-icon-pencil"></span>'+
+					"</li>",
+		add: function( event, ui ) {
+			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
+			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
+			$( ui.panel ).attr('role',tab_counter);
+		},
+		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
+	});
+	// actual addTab function: adds new tab using the title input from the form above
+	function addTab() {
+	
+		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
+		$tabs.tabs( "option" , "tabTemplate" , "<li>"+
+													"<a href='#{href}' hideFocus='true'>#{label}</a>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
+														
+													"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+													'<span class="edit ui-icon ui-icon-pencil"></span>'+
+												"</li>" );
+		
+		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
+		load_tiny("bodytext","tab_"+tab_counter);
+		$.each($("#infotabs li.ui-state-default"),function(i,v){
+			$(this).find('.sort').val(i);
+		});
+		tab_counter++;
+	}
+	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
+		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
+			$(this).find('.sort').val(i);
+			var href = $(this).find('a').attr('href');
+			$(''+href).attr('role',i);
+			var id=$(''+href).find('textarea:first').attr('id');
+			tinyMCE.triggerSave();	
+			if (tinyMCE.getInstanceById(id)){tinymce.execCommand('mceRemoveControl',true,id); }
+		});
+		var tabs = $('#infotabs');
+		var panels = tabs.children('.ui-tabs-panel');
+		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
+  		$.each(panels, function(i, v) {
+			var id=$(this).find('textarea:first').attr('id');
+			load_tiny("bodytext",id);
+			tinyResize();
+		});
+	}});
+
+	// modal dialog init: custom buttons and a "close" callback reseting the form inside
+	var $dialog = $( "#page_dialog" ).dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Add: function() {
+				addTab();
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			//$("#taber").get(0).reset();
+			$tab_title_input.focus();
+		},
+		close: function() {
+			$("#taber")[0].reset();
+		}
+	});
+
+	// addTab form: calls addTab function on submit and closes the dialog
+	var $form = $( "form#taber", $dialog ).submit(function() {
+		tab_counter++;
+		addTab();
+		$dialog.dialog( "close" );
+		return false;
+	});
+
+
+	// addTab button: just opens the dialog
+	$( "#add_tab" )
+		.button()
+		.click(function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			$dialog.dialog( "open" );
+		});
+
+	// close icon: removing the tab on click
+	// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
+		var index = $( "li", $tabs ).index( $( this ).parent() );
+		$tabs.tabs( "remove", index );
+	});
+
+	tinyResize();
+	if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
+	$(window).scroll(function (event) {
+		if ($(this).scrollTop()>= 175) {     
+			if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');}
+			
+		} else { 
+			$('#campusmap').removeClass('fixed_min');       
+			$('#campusmap').removeClass('fixed');   
+			
+		}  
+	});
+	if ($(window).scrollTop()>= 122) {$('.admin #adminNav').addClass('fixed');}
+	$(window).scroll(function (event) {
+		if ($(this).scrollTop()>= 122) {     
+			$('.admin #adminNav').addClass('fixed');
+		} else { 
+			$('.admin #adminNav').removeClass('fixed');
+		}  
+	});
+	
+	
+	$('.Cancel a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Cancel']:first").trigger('click');
+		});
+	$('.Submit a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Submit']:first").trigger('click');
+		});	
+	$('.Apply a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Apply']:first").trigger('click');
+		});
+	$('#shortcode').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$('#shortcodes').toggle(0,function(){ 
+				$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
+			});
+		}).trigger('click');
+
+	$.each($('.switch'),function(i,v){
+		var self = $(this);
+		self.find('a').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				self.find('.active').removeClass('active');
+				var tar=$(this).attr('id');
+				$(this).addClass('active');
+				self.find('.'+tar).addClass('active');
+			});
+	});
+	
+	$('#massTagging').live('click',function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$('#massTaggingarea').slideToggle();
+		});
+	var waiting = false;	
+	$('#urlAlias').live('keyup',function(){
+		var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
+		if(!waiting){
+			waiting = true;
+			$.post('/view/aliasCheck.castle?alias='+val, function(data) {
+				if(data=="true"){
+					$('.aliasState').addClass('ok');
+					$('.aliasState').removeClass('error');
+					$('.aliasState').text('  :  available');
+				}else{
+					$('.aliasState').addClass('error');
+					$('.aliasState').removeClass('ok');
+					$('.aliasState').text('  :  taken');
+				}
+				waiting = false;
+			});
+		}
+		$('.outputurl').text(val);
+		$(this).val(val);
+	});	
+}
+
+
+
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* this is where the fuss start and needs to be 
 cleaned out or refactored back up the chain here */
@@ -1709,7 +2003,7 @@ function initialize() {
 				  }
 			   }
 			 });
-			if($('.place.editor_place').length){
+			if($('.place._editor').length){
 				//if($('#Lat').val()!='' && $('#Long').val()!='')drop1(); 
 				
 				/*$('#setLatLong :not(.ui-state-disabled)').live('click',function(){

@@ -471,25 +471,81 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 }
 
 
-
-
+//
 function tinyoptions(which,id){
 	
-	var id = typeof(id)!=='undefined'||id!=null?id:false;
+	var id = typeof(id)!=='undefined'&& id!=null?id:"place_details";
 	
 	
     switch(which){
        case "bodytext":
+			$.getJSON("/admin/getInfoTemplates.castle", function(result) {
+				// Creates a new plugin class and a custom listbox
+				
+				tinymce.create('tinymce.plugins.ExamplePlugin',{
+					createControl : function(n, cm){
+			
+						switch(n){
+							case 'variablesListBox':
+								//in the JSON I've an element called size which tells me how many objects should I iterate over
+								var total = parseInt(result.size, 10);
+								//save the values from the JSON in a var
+								var variables = new Array();
+								var mlb = cm.createListBox('variablesListBox',{
+								   title : 'tab templates',
+								   onselect : function(v){
+										//actions to be taken when the user clicks on a value
+										//alerts the value clicked
+										//tinyMCE.activeEditor.windowManager.alert('Inserting:' + v);
+										//inserts the corresponding value at the cursor position
+										/*if (typeof tinyMCE != "undefined" && tinyMCE.activeEditor){
+											alert(id);
+											tinyMCE.get(id).focus();
+										}*/
+										tinyMCE.activeEditor.execCommand('mceInsertContent',true,variables[v+'_2']);
+								   }
+								}); 
+								$.each(result,function(i,v){
+									variables[i] = result[i].alias;
+									variables[i+'_1'] = result[i].id;
+									variables[i+'_2'] = result[i].content;
+									variables[i+'_3'] = result[i].query;
+									mlb.add(variables[i],i);
+								});
+								/*var mlb = cm.createDropMenu('variablesListBox',{
+								   title : 'tab templates',
+								   onselect : function(v){
+									   //actions to be taken when the user clicks on a value
+									   //alerts the value clicked
+									   //tinyMCE.activeEditor.windowManager.alert('Inserting:' + v);
+									   //inserts the corresponding value at the cursor position
+									   tinyMCE.activeEditor.execCommand('mceInsertContent',false,v);
+								   }
+								});
+								// Add labels and values to the list box
+								for(var i = 0; i < (total * 4); i+=4){
+									mlb.add(variables[i], variables[i+'1']);
+								}
+								*/								
+								// Return the new listbox instance
+								return mlb;
+						}
+						return null;
+					}
+				});
+				// Register plugin with a short name
+				tinyMCE.PluginManager.add('templatevariables', tinyMCE.plugins.ExamplePlugin);
+			});
             return {
                 mode : "exact", 
                 body_id : "left_col",
-                elements : id?id:"place_details",
+                elements : id,
                 theme : "advanced",
 				width:"685",
-                plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
+                plugins : "-templatevariables,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
                 theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
                 theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace", 
-                theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect",
+                theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect,|,variablesListBox",
                 spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker",
 				theme_advanced_toolbar_location : "top", 
 				theme_advanced_toolbar_align : "left", 

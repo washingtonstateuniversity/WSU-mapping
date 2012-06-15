@@ -189,7 +189,7 @@ table.ui-widget tbody tr.odd td{}
 .admin #content_tar{padding: 0 0 0 10px;}
 .central #content_tar{padding:0px;}
 .home #content_tar{padding:0px;}
-.admin.place.editor_place #content_tar{min-width: 962px;position: relative;}
+.admin.place._editor #content_tar{min-width: 962px;position: relative;}
 /* place listing */
 .placelist{ /*width: 724px;*/}
 .editablelistUL{    list-style: none outside none !important;
@@ -443,13 +443,13 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 
-.place.editor_place #campusmap.fixed{position:fixed;top:45px;right:15px;}
-.place.editor_place #campusmap.fixed_min{position:fixed;top:45px;left:615px;}
-.place.editor_place .ui-tabs-panel{margin-right:460px; min-height:535px;}
+.place._editor #campusmap.fixed{position:fixed;top:45px;right:15px;}
+.place._editor #campusmap.fixed_min{position:fixed;top:45px;left:615px;}
+.place._editor .ui-tabs-panel{margin-right:460px; min-height:535px;}
+.place._editor .sub_tabs .ui-tabs-panel,.place._editor #infotabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
-.place.editor_place .sub_tabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
-
-
+.place._editor #infotabs .ui-tabs-panel .mceEditor.defaultSkin table{ width: auto !important;}
+.place._editor #infotabs .titleEdit{display:inline-block;float:left;margin-top:5px;}
 .switch a.active{ font-weight:bold;}
 .switch .container{display:none;}
 .switch .container.active{display:block;}
@@ -582,3 +582,5 @@ fieldset{padding: 4px 8px 10px;}
 }
 
 
+#infotabs .ui-tabs-nav  .edit{clear: right; float: right; cursor:pointer;}
+#infotabs .ui-tabs-nav  .ui-icon-close{clear:right;float:right;margin:0px;}
