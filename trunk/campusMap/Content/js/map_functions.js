@@ -877,6 +877,53 @@ function tinyResize(id){
 /*
  * EDITOR CONTORL SCRIPTS
  */	
+function set_tab_editable(i){
+	var base= '[href="#dyno_tabs_'+i+'"]';
+	if($(base).length==0)base= '[href="#tabs-'+i+'"]';
+	$(base).closest('li').find('.edit').off('click').on('click',function(e){
+		if(!$(this).hasClass('ui-icon-cancel')){
+			$(this).addClass('ui-icon-cancel');
+			$(base).hide();
+			$(base).after('<input type="text" class="titleEdit" value="'+$(base).text()+'" />');
+			$(base).closest('li').find('.titleEdit').focus();
+			$(base).closest('li').find('.edit').off('click').on('click',function(){
+				$(base).closest('li').find('.titleEdit').blur();
+			});
+			$(base).closest('li').find('.titleEdit').on('blur',function(){
+				$(base).closest('li').find('.edit').removeClass('ui-icon-cancel');
+				$(base).closest('li').find('.edit').addClass('ui-icon-pencil');
+				$(base).text($(this).val());
+				$(base).closest('li').find('#tab_title_'+i).val($(this).val());
+				$(this).remove();
+				$(base).show();
+				set_tab_editable(i);
+			});
+		}
+	});
+}
+function addTab() {
+	var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
+	$tabs.tabs( "option" , "tabTemplate" , "<li>"+
+												"<a href='#{href}' hideFocus='true'>#{label}</a>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+													"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
+												"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+												'<span class="edit ui-icon ui-icon-pencil"></span>'+
+											"</li>" );
+	$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
+	load_tiny("bodytext","tab_"+tab_counter);
+	
+	$.each($("#infotabs li.ui-state-default"),function(i,v){
+		$(this).find('.sort').val(i);
+		set_tab_editable(i);
+	});
+	tab_counter++;
+}
+ 
+ 
+ 
 function load_place_editor() {
 	var lat = $('#Lat').val();
 	var lng = $('#Long').val();	
@@ -891,9 +938,9 @@ function load_place_editor() {
 	});
 
 	$.each('.dyno_tabs',function(i,v){
-		load_tiny("bodytext","tab_"+i);
+		if($(this).hasClass("tinyLoaded")){load_tiny("bodytext","tab_"+i);}
 		tinyResize();
-		set_tab_editable(i)
+		set_tab_editable(i);
 	});
 	var $tab_title_input = $( "#tab_title"),
 		$tab_content_input = $( "#tab_content" );
@@ -913,63 +960,22 @@ function load_place_editor() {
 					"</li>",
 		add: function( event, ui ) {
 			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
-			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
+			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
 			$( ui.panel ).attr('role',tab_counter);
 		},
-		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
+		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();},
+		show: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
 	});
 	// actual addTab function: adds new tab using the title input from the form above
-	
-	function set_tab_editable(i){
-		var base= '[href="#dyno_tabs_'+i+'"],[href="#tabs-'+i+'"]';
-		$(base).closest('li').find('span.edit').on('click',function(e){
-			if(!$(this).hasClass('ui-state-disabled')){
-				$(this).addClass('ui-state-disabled');
-				$(base).closest('li').find('a').hide();
-				$(base).closest('li').find('a').after('<input type="text" class="titleEdit" value="'+$(base).closest('li').find('a').text()+'" />');
-				$(base).closest('li').find('.titleEdit').focus();
-				$(base).closest('li').find('.titleEdit').on('blur',function(){
-					$(base).closest('li').find('.edit').removeClass('ui-state-disabled');
-					$(base).text($(this).val());
-					$(base).closest('li').find('#tab_title_'+i).val($(this).val());
-					$(this).remove();
-					$(base).closest('li').find('a').show();
-				});
-			}
-		});
-	}
-	
-	
-	
-	
-	function addTab() {
-		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
-		$tabs.tabs( "option" , "tabTemplate" , "<li>"+
-													"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-														"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
-														"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
-														"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
-														"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
-													"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
-													'<span class="edit ui-icon ui-icon-pencil"></span>'+
-												"</li>" );
-		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
-		load_tiny("bodytext","tab_"+tab_counter);
-		
-		$.each($("#infotabs li.ui-state-default"),function(i,v){
-			$(this).find('.sort').val(i);
-			set_tab_editable(i);
-		});
-		tab_counter++;
-	}
+
 	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
 		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
 			$(this).find('.sort').val(i);
 			var href = $(this).find('a').attr('href');
 			$(''+href).attr('role',i);
-			var id=$(''+href).find('textarea:first').attr('id');
+			var id=$(''+href).find('textarea.tinyEditor:first').attr('id');
 			tinyMCE.triggerSave();	
-			if (tinyMCE.getInstanceById(id)){tinymce.execCommand('mceRemoveControl',true,id); }
+			if (tinyMCE.getInstanceById(id)){tinyMCE.execCommand('mceRemoveControl',true,id); }
 		});
 		var tabs = $('#infotabs');
 		var panels = tabs.children('.ui-tabs-panel');
@@ -977,6 +983,7 @@ function load_place_editor() {
   		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
 			load_tiny("bodytext",id);
+			tinyMCE.triggerSave();
 			tinyResize();
 			set_tab_editable(i);
 		});
@@ -1477,6 +1484,7 @@ function load_view_editor() {
 	$.each($('.dyno_tabs'),function(i,v){
 		load_tiny("bodytext",$(this).attr('id'));
 		tinyResize();
+		set_tab_editable(i);
 	});
 	var $tab_title_input = $( "#tab_title"),
 		$tab_content_input = $( "#tab_content" );
@@ -1495,33 +1503,13 @@ function load_view_editor() {
 					"</li>",
 		add: function( event, ui ) {
 			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
-			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor' >" + tab_content + "</textarea>" );
+			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
 			$( ui.panel ).attr('role',tab_counter);
 		},
 		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
 	});
 	// actual addTab function: adds new tab using the title input from the form above
-	function addTab() {
-	
-		var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
-		$tabs.tabs( "option" , "tabTemplate" , "<li>"+
-													"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
-														
-													"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
-													'<span class="edit ui-icon ui-icon-pencil"></span>'+
-												"</li>" );
-		
-		$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
-		load_tiny("bodytext","tab_"+tab_counter);
-		$.each($("#infotabs li.ui-state-default"),function(i,v){
-			$(this).find('.sort').val(i);
-		});
-		tab_counter++;
-	}
+
 	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
 		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
 			$(this).find('.sort').val(i);
@@ -1537,7 +1525,9 @@ function load_view_editor() {
   		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
 			load_tiny("bodytext",id);
+			tinyMCE.triggerSave();	
 			tinyResize();
+			set_tab_editable(i);
 		});
 	}});
 

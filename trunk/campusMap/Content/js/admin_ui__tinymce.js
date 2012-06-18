@@ -502,14 +502,17 @@ function tinyoptions(which,id){
 											alert(id);
 											tinyMCE.get(id).focus();
 										}*/
-										tinyMCE.activeEditor.execCommand('mceInsertContent',true,variables[v+'_2']);
+										tinyMCE.triggerSave();
+										tinyMCE.activeEditor.execCommand('mceInsertContent',false,variables[v+'_2']);
+										tinyMCE.triggerSave();
 								   }
 								}); 
 								$.each(result,function(i,v){
-									variables[i] = result[i].alias;
+									var tmplImg = '<img src="../Content/images/tinyMCE/template_'+result[i].alias+'.png" alt="'+result[i].id+'" class="infotabTemplate" width="150" height="55" />';
+									variables[i] = result[i].name;
 									variables[i+'_1'] = result[i].id;
-									variables[i+'_2'] = result[i].content;
-									variables[i+'_3'] = result[i].query;
+									variables[i+'_2'] = tmplImg;
+									variables[i+'_3'] = result[i].process;
 									mlb.add(variables[i],i);
 								});
 								/*var mlb = cm.createDropMenu('variablesListBox',{
@@ -576,8 +579,6 @@ function tinyoptions(which,id){
                         custom_format : {block : 'h1', attributes : {title : "Header"}, styles : {color : 'red'}}
                 },
 				handle_node_change_callback :function(ed, node, undo_index, undo_levels, visual_aid, any_selection){
-					
-						
 							//console.debug('Editor was clicked: ' + e.target.nodeName);
 							if (node.nodeName == null || node.nodeName != 'IMG')
 								return
@@ -604,13 +605,7 @@ function tinyoptions(which,id){
 									var image_id = image[1];
 									imgNode.attr('title','#imagegallery(\''+place_id+'\' '+ imgNode.width() +' '+ imgNode.height() +' \''+ theclass[1] +'\')');
 								}
-								
-								
-								
 							}
-						
-					
-						
 					},
 				setup : function(ed) {
 

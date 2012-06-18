@@ -144,9 +144,8 @@ namespace campusMap.Controllers
                 jsonStr += @"{";
                 jsonStr += @"""alias"":""" + temp.alias + @""",";
                 jsonStr += @"""id"":""" + temp.id + @""",";
-                jsonStr += @"""content"":""" + temp.content.Replace("\"","\\\"") + @""",";
-                
-                jsonStr += @"""query"":""" + temp.process + @"""";
+                jsonStr += @"""name"":""" + temp.name + @""",";
+                jsonStr += @"""process"":""" + temp.process + @"""";
                 jsonStr += @"},";
             }
 

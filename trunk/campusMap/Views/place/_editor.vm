@@ -368,7 +368,7 @@ $formbuttons
 			#set($T = 0)
 			#foreach($tab in $tabs) 
 				<div id="dyno_tabs_$T">
-					<textarea id='tab_$T' class='tinyEditor dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
+					<textarea id='tab_$T' class='tinyEditor full dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
 				</div>
 				#set($T = $T+1)
 			#end

@@ -1392,6 +1392,7 @@ CREATE TABLE [campusMap].[dbo].[infotabs](
 )
 CREATE TABLE [campusMap].[dbo].[infotabs_templates](
 	template_id INT IDENTITY NOT NULL,
+	name NVARCHAR(MAX) null,
 	content NVARCHAR(MAX) null,
 	alias NVARCHAR(MAX) null,
 	process BIT null,

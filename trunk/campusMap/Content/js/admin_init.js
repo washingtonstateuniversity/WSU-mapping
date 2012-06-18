@@ -224,6 +224,7 @@ $(function() {
 			}else{
 				load_tiny("simple",$(this).attr('id'));
 			}
+			$(this).addClass("tinyLoaded");
 		});
     }
 

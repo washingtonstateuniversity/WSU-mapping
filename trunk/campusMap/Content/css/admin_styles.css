@@ -455,7 +455,7 @@ span.UinEdit{    background-color: #E2E2E2;
 .switch .container.active{display:block;}
 
 
-
+.ui-sortable-helper{min-width:50px;max-width:150px;width:auto;}
 
 
 #map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
