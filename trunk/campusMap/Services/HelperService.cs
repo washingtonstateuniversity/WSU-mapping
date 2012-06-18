@@ -559,14 +559,15 @@ namespace campusMap.Services
             // template = "#set($pound = \"#\")" + System.Environment.NewLine + template;
             VelocityEngine engine = new VelocityEngine();
             ExtendedProperties props = setMacros(new ExtendedProperties());
+            props.SetProperty("directive.manager", "Castle.MonoRail.Framework.Views.NVelocity.CustomDirectiveManager; Castle.MonoRail.Framework.Views.NVelocity");
 
             engine.Init(props);
 
             VelocityContext context = new VelocityContext();
             // attach a new event cartridge 
-            context.AttachEventCartridge(new EventCartridge());
+            //context.AttachEventCartridge(new EventCartridge());
             // add our custom handler to the ReferenceInsertion event 
-            context.EventCartridge.ReferenceInsertion += EventCartridge_ReferenceInsertion; 
+           // context.EventCartridge.ReferenceInsertion += EventCartridge_ReferenceInsertion; 
 
 
 

@@ -351,7 +351,7 @@ $formbuttons
 				#foreach($tab in $tabs) 
 					<li class="ui-state-default ui-corner-top">
 						<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
-						<input type="hidden" name="tabs[$T].id" value="" id='tab_id_${T}'/>
+						<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
 						<input type="hidden" name="tabs[$T].title" value="$!tab.title" id='tab_title_${T}'/> 
 						<input type='hidden' name='tabs[$T].template.id' value='$!tab.template.id'  class='sort' id='tab_template_id_${T}'/>
 						<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' id='tab_counter${T}'/>

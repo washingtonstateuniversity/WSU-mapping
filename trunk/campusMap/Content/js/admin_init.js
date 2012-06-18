@@ -219,12 +219,14 @@ $(function() {
 	
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
 		$.each($('.tinyEditor'),function(i,v){
-			if($(this).hasClass("full")){
-				load_tiny("bodytext",$(this).attr('id'));
-			}else{
-				load_tiny("simple",$(this).attr('id'));
+			if(!$(this).is(".tinyLoaded")){
+				if($(this).is(".full")){
+					load_tiny("bodytext",$(this).attr('id'));
+				}else{
+					load_tiny("simple",$(this).attr('id'));
+				}
+				$(this).addClass("tinyLoaded");
 			}
-			$(this).addClass("tinyLoaded");
 		});
     }
 
@@ -418,7 +420,7 @@ $(function() {
 			$('#set_model').combobox();
 			$('#set_model').next('.ui-autocomplete-input').live('change',function(){
 						if($('#set_model :selected').val() !=''){
-							if($('#set_model').next('.ui-autocomplete-input').hasClass('errored')){
+							if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
 								$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
 							}
 						}else{

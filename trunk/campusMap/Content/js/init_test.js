@@ -455,7 +455,7 @@ function loadListings(data,showSum){
 		btn.live('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
-			if(!btn.hasClass('active') && !btn.next('div').is(':visible')){
+			if(!btn.is('active') && !btn.next('div').is(':visible')){// changed hasClass for is for speed
 				//$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
 				$('#selectedPlaceList_area .active').removeClass('active');
 				//btn.next('div').toggle('showOrHide');
@@ -907,7 +907,7 @@ $( "#addGeometrics" ).click(function(){
 
 	$('.ListingChoices').click(function(e) {
 		var obj=$(this);
-		if(!$(this).hasClass('active')){
+		if(!$(this).is('active')){// changed hasClass for is for speed
 			var href = $(this).attr('href');
 			$('.tabactive').animate({
 				width:0,

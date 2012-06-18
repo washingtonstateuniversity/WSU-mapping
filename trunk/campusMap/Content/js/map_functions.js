@@ -460,7 +460,7 @@ function rebuild_example(tabs,mapSelector,type){
 				&& $(this).not('[type=hidden]') 
 				&& typeof( $(this).attr('rel') ) !== 'undefined' 
 				){
-			   options[$(this).attr('rel')]= ($(this).hasClass('color_picker') ? '#' : '') +''+$(this).val();
+			   options[$(this).attr('rel')]= ($(this).is('color_picker') ? '#' : '') +''+$(this).val();// changed hasClass for is for speed
 			}
 		});
 		_op[ mode ] = $.extend({},options); 
@@ -874,14 +874,144 @@ function tinyResize(id){
 			}
 		}).trigger("resize");
 	}
-/*
- * EDITOR CONTORL SCRIPTS
- */	
+	
+function setup_fixedNav(){
+	if ($(window).scrollTop()>= 122) { $('.admin #adminNav').addClass('fixed');  }
+	$(window).scroll(function (event) {
+		if ($(this).scrollTop()>= 122) {     
+			$('.admin #adminNav').addClass('fixed');
+		} else { 
+			$('.admin #adminNav').removeClass('fixed');
+		}  
+	});
+	$('.Cancel a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Cancel']:first").trigger('click');
+		});
+	$('.Submit a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Submit']:first").trigger('click');
+		});	
+	$('.Apply a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Apply']:first").trigger('click');
+		});
+}
+function int_infotabs(){
+	$.each('.dyno_tabs',function(i,v){
+		//replaced "tab_"+i for $(this).attr('id')
+		if(!$(this).is(".tinyLoaded")){ load_tiny("bodytext",$(this).attr('id')); $(this).addClass("tinyLoaded") }
+		tinyResize();
+		set_tab_editable(i);
+	});
+	var $tab_title_input = $( "#tab_title"),
+		$tab_content_input = $( "#tab_content" );
+	var tab_counter =  $("#infotabs li.ui-state-default").size();
+
+	// tabs init with a custom tab template and an "add" callback filling in the content
+	var $tabs = $( "#infotabs").tabs({
+		tabTemplate:"<li>"+
+						"<a href='#{href}' hideFocus='true'>#{label}</a>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
+							"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
+							
+						"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+						'<span class="edit ui-icon ui-icon-pencil"></span>'+
+					"</li>",
+		add: function( event, ui ) {
+			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
+			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
+			$( ui.panel ).attr('role',tab_counter);
+		},
+		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();},
+		show: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
+	});
+
+	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
+		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
+			$(this).find('.sort').val(i);
+			var href = $(this).find('a').attr('href');
+			$(''+href).attr('role',i);
+			var id=$(''+href).find('textarea.tinyEditor:first').attr('id');
+			tinyMCE.triggerSave();	
+			if (tinyMCE.getInstanceById(id)){tinyMCE.execCommand('mceRemoveControl',true,id);$(this).removeClass("tinyLoaded")}
+		});
+		var tabs = $('#infotabs');
+		var panels = tabs.children('.ui-tabs-panel');
+		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
+  		$.each(panels, function(i, v) {
+			var id=$(this).find('textarea:first').attr('id');
+			if(!$(this).is(".tinyLoaded")){ load_tiny("bodytext",id);$(this).addClass("tinyLoaded")}
+			tinyMCE.triggerSave();
+			tinyResize();
+			set_tab_editable(i);
+		});
+	}});
+	// modal dialog init: custom buttons and a "close" callback reseting the form inside
+	var $dialog = $( "#page_dialog" ).dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Add: function() {
+				addTab();
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			//$("#taber").get(0).reset();
+			$tab_title_input.focus();
+		},
+		close: function() {
+			$("#taber")[0].reset();
+		}
+	});
+	// addTab form: calls addTab function on submit and closes the dialog
+	var $form = $( "form#taber", $dialog ).submit(function() {
+		tab_counter++;
+		addTab();
+		$dialog.dialog( "close" );
+		return false;
+	});
+	// addTab button: just opens the dialog
+	$( "#add_tab" )
+		.button()
+		.click(function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			$dialog.dialog( "open" );
+		});
+	// close icon: removing the tab on click
+	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
+		if($( "#deleteconfirm" ).length==0){$('body').append('<div id="deleteconfirm">If you delete this you will have to refresh the page to get it back.<br/><h2>Are you sure?</h2></div>')};
+	 	$( "#deleteconfirm" ).dialog({
+			autoOpen: false,
+			modal: true,
+			buttons: {
+				Delete: function() {
+					var index = $( "li", $tabs ).index( $( this ).parent() );
+					$tabs.tabs( "remove", index );
+					$( this ).dialog( "close" );
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		}).dialog( "open" );
+	});
+}
 function set_tab_editable(i){
 	var base= '[href="#dyno_tabs_'+i+'"]';
 	if($(base).length==0)base= '[href="#tabs-'+i+'"]';
 	$(base).closest('li').find('.edit').off('click').on('click',function(e){
-		if(!$(this).hasClass('ui-icon-cancel')){
+		if(!$(this).is('ui-icon-cancel')){// changed hasClass for is for speed
 			$(this).addClass('ui-icon-cancel');
 			$(base).hide();
 			$(base).after('<input type="text" class="titleEdit" value="'+$(base).text()+'" />');
@@ -921,121 +1051,35 @@ function addTab() {
 	});
 	tab_counter++;
 }
+function setup_massTags(){
+	$('#massTagging').live('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				$('#massTaggingarea').slideToggle();
+			});	
+}
  
- 
- 
+/*
+ * EDITOR CONTORL SCRIPTS
+ */
 function load_place_editor() {
 	var lat = $('#Lat').val();
 	var lng = $('#Long').val();	
-	$('#place_drawing_map').gmap({'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15,'zoomControl': false,'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},'streetViewControl': false }).bind('init', function () {
-		if(lat!='')add_place_point(lat,lng);
-		//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-		$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-	});
+	$('#place_drawing_map').gmap({
+			'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng),
+			'zoom':15,
+			'zoomControl': false,
+			'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},
+			'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},
+			'streetViewControl': false 
+		}).bind('init', function () {
+			if(lat!='')add_place_point(lat,lng);
+			$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+		});
 	
-	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){
-			add_place_point(lat,lng);
-	});
+	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){ add_place_point(lat,lng); });
 
-	$.each('.dyno_tabs',function(i,v){
-		if($(this).hasClass("tinyLoaded")){load_tiny("bodytext","tab_"+i);}
-		tinyResize();
-		set_tab_editable(i);
-	});
-	var $tab_title_input = $( "#tab_title"),
-		$tab_content_input = $( "#tab_content" );
-	var tab_counter =  $("#infotabs li.ui-state-default").size();
-
-	// tabs init with a custom tab template and an "add" callback filling in the content
-	var $tabs = $( "#infotabs").tabs({
-		tabTemplate:"<li>"+
-						"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-							"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
-							"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
-							"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
-							"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
-							
-						"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
-						'<span class="edit ui-icon ui-icon-pencil"></span>'+
-					"</li>",
-		add: function( event, ui ) {
-			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
-			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
-			$( ui.panel ).attr('role',tab_counter);
-		},
-		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();},
-		show: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
-	});
-	// actual addTab function: adds new tab using the title input from the form above
-
-	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
-		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
-			$(this).find('.sort').val(i);
-			var href = $(this).find('a').attr('href');
-			$(''+href).attr('role',i);
-			var id=$(''+href).find('textarea.tinyEditor:first').attr('id');
-			tinyMCE.triggerSave();	
-			if (tinyMCE.getInstanceById(id)){tinyMCE.execCommand('mceRemoveControl',true,id); }
-		});
-		var tabs = $('#infotabs');
-		var panels = tabs.children('.ui-tabs-panel');
-		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
-  		$.each(panels, function(i, v) {
-			var id=$(this).find('textarea:first').attr('id');
-			load_tiny("bodytext",id);
-			tinyMCE.triggerSave();
-			tinyResize();
-			set_tab_editable(i);
-		});
-	}});
-
-	// modal dialog init: custom buttons and a "close" callback reseting the form inside
-	var $dialog = $( "#page_dialog" ).dialog({
-		autoOpen: false,
-		modal: true,
-		buttons: {
-			Add: function() {
-				addTab();
-				$( this ).dialog( "close" );
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		},
-		open: function() {
-			//$("#taber").get(0).reset();
-			$tab_title_input.focus();
-		},
-		close: function() {
-			$("#taber")[0].reset();
-		}
-	});
-
-	// addTab form: calls addTab function on submit and closes the dialog
-	var $form = $( "form#taber", $dialog ).submit(function() {
-		tab_counter++;
-		addTab();
-		$dialog.dialog( "close" );
-		return false;
-	});
-
-
-	// addTab button: just opens the dialog
-	$( "#add_tab" )
-		.button()
-		.click(function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-			$dialog.dialog( "open" );
-		});
-
-	// close icon: removing the tab on click
-	// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
-		var index = $( "li", $tabs ).index( $( this ).parent() );
-		$tabs.tabs( "remove", index );
-	});
-
+	int_infotabs();
 	
 	function revGoeLookup(){
 		$("#place_street,#place_address").live('keyup',function () {
@@ -1049,9 +1093,7 @@ function load_place_editor() {
 			});
 		});
 	}
-	function killRevGoeLookup(){
-		$("#place_street,#place_address").die();
-	}
+	function killRevGoeLookup(){ $("#place_street,#place_address").die(); }
 
 	if($('#place_street').length>0){
 		$('#revGoeLookup').on('change',function(){
@@ -1074,33 +1116,7 @@ function load_place_editor() {
 			
 		}  
 	});
-	
-	
-		if ($(window).scrollTop()>= 122) { $('.admin #adminNav').addClass('fixed');  }
-	$(window).scroll(function (event) {
-		if ($(this).scrollTop()>= 122) {     
-			$('.admin #adminNav').addClass('fixed');
-		} else { 
-			$('.admin #adminNav').removeClass('fixed');
-		}  
-	});
-	
-	
-	$('.Cancel a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Cancel']:first").trigger('click');
-		});
-	$('.Submit a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Submit']:first").trigger('click');
-		});	
-	$('.Apply a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Apply']:first").trigger('click');
-		});
+	setup_fixedNav();
 	$('#shortcode').click(function(e){
 			e.stopPropagation();
 			e.preventDefault();
@@ -1121,12 +1137,7 @@ function load_place_editor() {
 				self.find('.'+tar).addClass('active');
 			});
 	});
-	
-	$('#massTagging').live('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				$('#massTaggingarea').slideToggle();
-			});
+	setup_massTags();
 }
 function load_geometrics_editor() {
      $('#geometrics_drawing_map').gmap({'center': pullman_str , 'zoom':15 }).bind('init', function () {
@@ -1481,105 +1492,10 @@ function load_view_editor() {
 
 
 	
-	$.each($('.dyno_tabs'),function(i,v){
-		load_tiny("bodytext",$(this).attr('id'));
-		tinyResize();
-		set_tab_editable(i);
-	});
-	var $tab_title_input = $( "#tab_title"),
-		$tab_content_input = $( "#tab_content" );
-	var tab_counter =  $("#infotabs li.ui-state-default").size();
-
-	// tabs init with a custom tab template and an "add" callback filling in the content
-	var $tabs = $( "#infotabs").tabs({
-		tabTemplate:"<li>"+
-						"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
-						"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
-						"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
-						"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
-							
-						"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
-						'<span class="edit ui-icon ui-icon-pencil"></span>'+
-					"</li>",
-		add: function( event, ui ) {
-			var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
-			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
-			$( ui.panel ).attr('role',tab_counter);
-		},
-		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
-	});
-	// actual addTab function: adds new tab using the title input from the form above
-
-	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
-		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
-			$(this).find('.sort').val(i);
-			var href = $(this).find('a').attr('href');
-			$(''+href).attr('role',i);
-			var id=$(''+href).find('textarea:first').attr('id');
-			tinyMCE.triggerSave();	
-			if (tinyMCE.getInstanceById(id)){tinymce.execCommand('mceRemoveControl',true,id); }
-		});
-		var tabs = $('#infotabs');
-		var panels = tabs.children('.ui-tabs-panel');
-		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
-  		$.each(panels, function(i, v) {
-			var id=$(this).find('textarea:first').attr('id');
-			load_tiny("bodytext",id);
-			tinyMCE.triggerSave();	
-			tinyResize();
-			set_tab_editable(i);
-		});
-	}});
-
-	// modal dialog init: custom buttons and a "close" callback reseting the form inside
-	var $dialog = $( "#page_dialog" ).dialog({
-		autoOpen: false,
-		modal: true,
-		buttons: {
-			Add: function() {
-				addTab();
-				$( this ).dialog( "close" );
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		},
-		open: function() {
-			//$("#taber").get(0).reset();
-			$tab_title_input.focus();
-		},
-		close: function() {
-			$("#taber")[0].reset();
-		}
-	});
-
-	// addTab form: calls addTab function on submit and closes the dialog
-	var $form = $( "form#taber", $dialog ).submit(function() {
-		tab_counter++;
-		addTab();
-		$dialog.dialog( "close" );
-		return false;
-	});
-
-
-	// addTab button: just opens the dialog
-	$( "#add_tab" )
-		.button()
-		.click(function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-			$dialog.dialog( "open" );
-		});
-
-	// close icon: removing the tab on click
-	// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
-		var index = $( "li", $tabs ).index( $( this ).parent() );
-		$tabs.tabs( "remove", index );
-	});
-
+	int_infotabs();
 	tinyResize();
-	if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
+	
+/*	if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
 	$(window).scroll(function (event) {
 		if ($(this).scrollTop()>= 175) {     
 			if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');}
@@ -1589,32 +1505,9 @@ function load_view_editor() {
 			$('#campusmap').removeClass('fixed');   
 			
 		}  
-	});
-	if ($(window).scrollTop()>= 122) {$('.admin #adminNav').addClass('fixed');}
-	$(window).scroll(function (event) {
-		if ($(this).scrollTop()>= 122) {     
-			$('.admin #adminNav').addClass('fixed');
-		} else { 
-			$('.admin #adminNav').removeClass('fixed');
-		}  
-	});
+	});*/
+	setup_fixedNav();
 	
-	
-	$('.Cancel a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Cancel']:first").trigger('click');
-		});
-	$('.Submit a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Submit']:first").trigger('click');
-		});	
-	$('.Apply a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Apply']:first").trigger('click');
-		});
 	$('#shortcode').click(function(e){
 			e.stopPropagation();
 			e.preventDefault();
@@ -1635,11 +1528,8 @@ function load_view_editor() {
 			});
 	});
 	
-	$('#massTagging').live('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$('#massTaggingarea').slideToggle();
-		});
+	setup_massTags();
+	
 	var waiting = false;	
 	$('#urlAlias').live('keyup',function(){
 		var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
