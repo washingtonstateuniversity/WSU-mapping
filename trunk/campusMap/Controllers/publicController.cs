@@ -604,6 +604,8 @@
                             {
                                 infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + "</h2>";
                             }
+                            String reportError = "<a class='errorReporting' href='?reportError=&place=" + item.id + "' >Report Error</a>";
+
 
                             String imgGallery = "";
                             if (item.Images.Count > 1)
@@ -634,7 +636,7 @@
 
                                 imgGallery += @"
                                         {
-                                            ""block"":""" + infoTitle + gallery + @""",
+                                            ""block"":""" + infoTitle + gallery + reportError + @""",
                                             ""title"":"""+(hasImg?"Views":"")+(hasImg&&hasVid?"/":"")+(hasVid?"Vids":"")+@"""
                                         }";
                             }
@@ -650,7 +652,7 @@
                                 {
                                     autoAccessibility += @"
                                         {
-                                            ""block"":""" + infoTitle + "<ul>" + renderedTxt.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"</ul>"",
+                                            ""block"":""" + infoTitle + "<ul>" + renderedTxt.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"</ul>" + reportError + @""",
                                             ""title"":""Accessibility""
                                         }";
                                 }
@@ -664,7 +666,7 @@
 
                                     infotabs += @"
                                             {
-                                                ""block"":""" + infoTitle + mainimage + details + @""",
+                                                ""block"":""" + infoTitle + mainimage + details + reportError + @""",
                                                 ""title"":""Overview""
                                             }";
                                 if (item.infotabs.Count > 0 )
@@ -678,7 +680,7 @@
 ")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
                                         tabStr += @"
                                             {
-                                                ""block"":""" + infoTitle + content + @""",
+                                                ""block"":""" + infoTitle + content + reportError + @""",
                                                 ""title"":""" + tab.title + @"""
                                             }";
                                         if (c < item.infotabs.Count) tabStr += ",";
@@ -694,7 +696,7 @@
                                 if (String.IsNullOrEmpty(item.details)){
                                     infotabs += @"""" + infoTitle + @"""";
                                 } else{
-                                    infotabs += @"""" + infoTitle + mainimage + details + @"""";
+                                    infotabs += @"""" + infoTitle + mainimage + details + reportError + @"""";
                                 }
                             }
                             

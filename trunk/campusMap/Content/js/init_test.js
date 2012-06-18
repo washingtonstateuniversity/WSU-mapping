@@ -354,6 +354,29 @@ function loadData(data,callback){
 								prev:   '.prev',     next:   '.next', 
 								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 							});
+							$('.errorReporting').click(function(e){
+										e.stopPropagation();
+										e.preventDefault();
+										var trigger=$(this);
+										$.colorbox({
+											html:function(){
+												return '<div id="errorReporting">'+
+															'real form coming soon<br/>'+
+															'<h2>Found an error?</h2>'+
+															'<h3>please provide some infomation to help us correct this issue.</h3>'+
+															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
+															'Discribe the issues:<br/>'+
+															'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
+														'</div>';
+											},
+											scrolling:false,
+											opacity:0.7,
+											transition:"none",
+											width:450,
+											height:350,
+											open:true
+										});
+									});
 							prep();
 						}
 						$('#taby'+i).tabs();
@@ -495,6 +518,7 @@ function getSignlePlace(id){
 	});
 }
 function prep(){
+	$(' [placeholder] ').defaultValue();
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
 $(document).ready(function(){
@@ -679,13 +703,11 @@ $(document).ready(function(){
 					html:function(){
 						return '<div id="embedArea"><h2>Page Link</h2><h3>http://dev.campusmap.wsu.edu/central/</h3><h2>Embed code</h2><textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea></div>';
 					},
-					photo:true,
 					scrolling:false,
 					opacity:0.7,
 					transition:"none",
 					width:450,
 					height:350,
-					slideshow:true
 				});
 
 		});
@@ -695,12 +717,9 @@ $(document).ready(function(){
 			e.preventDefault();
 		
 		});	
-	
-	
-	
 	}	
 	
-	
+/* to move */	
 	if($('.admin.view._editor').length){
 		load_view_editor();
 	 }		
