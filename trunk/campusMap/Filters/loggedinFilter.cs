@@ -25,7 +25,7 @@ namespace campusMap.Filters
         {
             if (Authentication.logged_in())
             {
-                String username = Authentication.authenticate();
+                String username = Authentication.getNID();
                 // save user in database
                 authors[] author_list = ActiveRecordBase<authors>.FindAll();
                 authors temp = null;
