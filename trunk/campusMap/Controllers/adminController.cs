@@ -32,7 +32,7 @@ namespace campusMap.Controllers
 
 
     [Layout("default")]
-    public class adminController : BaseController
+    public class adminController : SecureBaseController
     {
         #region JSON OUTPUT
         public void get_pace_type()
