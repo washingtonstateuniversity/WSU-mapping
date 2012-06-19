@@ -219,8 +219,8 @@ $(function() {
 	
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
 		$.each($('.tinyEditor'),function(i,v){
-			if(!$(this).is(".tinyLoaded")){
-				if($(this).is(".full")){
+			if(!$(this).is($(".tinyLoaded"))){
+				if($(this).is($(".full"))){
 					load_tiny("bodytext",$(this).attr('id'));
 				}else{
 					load_tiny("simple",$(this).attr('id'));

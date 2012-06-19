@@ -861,6 +861,7 @@ function infoUpdate(){
 		$('#place_drawing_map').gmap('clear','services');
 		$('#place_drawing_map').gmap('clear','overlays');	
 		add_place_point(lat,lng,true);
+		watchMediaTab();
 }
 function tinyResize(id){
 		$(window,'#tabs_Text').resize(function(){
@@ -900,19 +901,30 @@ function setup_fixedNav(){
 			$("input[value='Apply']:first").trigger('click');
 		});
 }
+
+
+
+var $tabs = null;
+var tab_counter =  0;
+var $tab_title_input = $( "#tab_title"),
+	$tab_content_input = $( "#tab_content" );
+
 function int_infotabs(){
 	$.each('.dyno_tabs',function(i,v){
 		//replaced "tab_"+i for $(this).attr('id')
-		if(!$(this).is(".tinyLoaded")){ load_tiny("bodytext",$(this).attr('id')); $(this).addClass("tinyLoaded") }
+		/*if(!$(this).is($(".tinyLoaded"))){
+			load_tiny("bodytext",$(this).attr('id'));
+			$(this).addClass("tinyLoaded")
+		}*/
 		tinyResize();
 		set_tab_editable(i);
 	});
-	var $tab_title_input = $( "#tab_title"),
-		$tab_content_input = $( "#tab_content" );
-	var tab_counter =  $("#infotabs li.ui-state-default").size();
+	$tab_title_input = $( "#tab_title");
+	$tab_content_input = $( "#tab_content" );
+	tab_counter =  $("#infotabs li.ui-state-default").size();
 
 	// tabs init with a custom tab template and an "add" callback filling in the content
-	var $tabs = $( "#infotabs").tabs({
+	$tabs = $( "#infotabs").tabs({
 		tabTemplate:"<li>"+
 						"<a href='#{href}' hideFocus='true'>#{label}</a>"+
 							"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
@@ -937,16 +949,19 @@ function int_infotabs(){
 			$(this).find('.sort').val(i);
 			var href = $(this).find('a').attr('href');
 			$(''+href).attr('role',i);
-			var id=$(''+href).find('textarea.tinyEditor:first').attr('id');
-			tinyMCE.triggerSave();	
-			if (tinyMCE.getInstanceById(id)){tinyMCE.execCommand('mceRemoveControl',true,id);$(this).removeClass("tinyLoaded")}
+			var id=$(href).find('textarea.tinyEditor:first').attr('id');
+			tinyMCE.triggerSave();
+			if (typeof(id)!=="undefined" && tinyMCE.getInstanceById(id)){
+				tinyMCE.execCommand('mceRemoveControl',true,id);
+				$("#"+id).removeClass("tinyLoaded");
+			}
 		});
 		var tabs = $('#infotabs');
 		var panels = tabs.children('.ui-tabs-panel');
 		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
   		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
-			if(!$(this).is(".tinyLoaded")){ load_tiny("bodytext",id);$(this).addClass("tinyLoaded")}
+			if(!$(this).is($(".tinyLoaded"))){ load_tiny("bodytext",id);$(this).addClass("tinyLoaded")}
 			tinyMCE.triggerSave();
 			tinyResize();
 			set_tab_editable(i);
@@ -958,7 +973,7 @@ function int_infotabs(){
 		modal: true,
 		buttons: {
 			Add: function() {
-				addTab();
+				tab_counter = addTab(tab_counter);
 				$( this ).dialog( "close" );
 			},
 			Cancel: function() {
@@ -976,7 +991,7 @@ function int_infotabs(){
 	// addTab form: calls addTab function on submit and closes the dialog
 	var $form = $( "form#taber", $dialog ).submit(function() {
 		tab_counter++;
-		addTab();
+		addTab(tab_counter);
 		$dialog.dialog( "close" );
 		return false;
 	});
@@ -1031,26 +1046,52 @@ function set_tab_editable(i){
 		}
 	});
 }
-function addTab() {
-	var tab_title = $tab_title_input.val() || "Tab " + tab_counter;
+function addTab(i,title,content,useWysiwyg,useControlls) {
+	
+	var title = typeof(title)!=="undefined"?title:false;
+	var content = typeof(content)!=="undefined"?content:false; 
+	var useWysiwyg = typeof(useWysiwyg)!=="undefined"?useWysiwyg:true;
+	var useControlls = typeof(useControlls)!=="undefined"?useControlls:true;
+	
+	var tab_title = title || $tab_title_input.val() || "Tab " + i;
+	
+	var controll="";
+	if(useControlls)controll="<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
+							 '<span class="edit ui-icon ui-icon-pencil"></span>';
+	
+	
 	$tabs.tabs( "option" , "tabTemplate" , "<li>"+
 												"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].title' value=\"#{label}\" id='tab_title_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].template.id' value='' id='tab_template_id_"+tab_counter+"'/>"+
-													"<input type='hidden' name='tabs["+tab_counter+"].sort' value='' id='tab_sort_"+tab_counter+"'class='sort' />"+
-												"<span class='ui-icon ui-icon-close'>Remove Tab</span>"+
-												'<span class="edit ui-icon ui-icon-pencil"></span>'+
+													"<input type='hidden' name='tabs["+i+"].id' value='' id='tab_id_"+i+"'/>"+
+													"<input type='hidden' name='tabs["+i+"].title' value=\"#{label}\" id='tab_title_"+i+"'/>"+
+													"<input type='hidden' name='tabs["+i+"].template.id' value='' id='tab_template_id_"+i+"'/>"+
+													"<input type='hidden' name='tabs["+i+"].sort' value='' id='tab_sort_"+i+"'class='sort' />"+
+												controll+
 											"</li>" );
-	$tabs.tabs( "add", "#tabs-" + tab_counter, tab_title.replace('{$i}',tab_counter));
-	load_tiny("bodytext","tab_"+tab_counter);
+	$tabs.tabs( "add", "#tabs-" + i, tab_title.replace('{$i}',i));
+	if(content!=false){
+		$(content).insertBefore( $("#tab_"+i) );
+		$("#tab_"+i).remove();
+	}
+	if(useWysiwyg)load_tiny("bodytext","tab_"+i);
 	
 	$.each($("#infotabs li.ui-state-default"),function(i,v){
 		$(this).find('.sort').val(i);
 		set_tab_editable(i);
 	});
-	tab_counter++;
+	return i++;
 }
+function watchMediaTab(){
+		tab_counter =  $("#infotabs li.ui-state-default").size();
+		if($('.imageBox').length>1 && $('#viewTab').length==0){
+			var content = '<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id="viewTab" width="297" height="201" />'+
+			"<input type=\"hidden\" id='tab_"+tab_counter+"' name=\"tabs["+tab_counter+"].content\" value=\"<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />\" />";
+			addTab(tab_counter,"Views",content,false,false);
+		}
+		if($('.imageBox').length<=1 && $('#viewTab').length>0){
+			$('#viewTab').remove();
+		}
+	}
 function setup_massTags(){
 	$('#massTagging').live('click',function(e){
 				e.stopPropagation();
@@ -1058,7 +1099,7 @@ function setup_massTags(){
 				$('#massTaggingarea').slideToggle();
 			});	
 }
- 
+
 /*
  * EDITOR CONTORL SCRIPTS
  */

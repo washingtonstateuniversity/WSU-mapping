@@ -15565,3 +15565,440 @@ NHibernate.LazyInitializationException: Failed to lazily initialize a collection
 2012-06-18 13:58:03,432 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 167, length: 75958 bytes
 2012-06-18 13:58:03,905 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 165
 2012-06-18 13:58:03,924 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 165, length: 30146 bytes
+2012-06-19 06:25:21,527 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:25:21,652 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:29:17,209 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:29:17,241 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:29:27,168 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:29:27,169 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:31:01,290 [12] INFO  mediaController [(null)] <(null)> - uploadfilename: C:\_SVN_\campusMap\campusMap\uploads\place\119\285.ext
+2012-06-19 06:32:21,821 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:32:23,314 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 53354 bytes
+2012-06-19 06:32:23,339 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:32:24,803 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:35:05,975 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:35:05,976 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:35:07,154 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:35:07,173 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:35:16,361 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:35:16,375 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:35:16,865 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:35:16,866 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:35:40,345 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:40,515 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:40,527 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:40,782 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:41,281 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:41,293 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:41,312 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:41,796 [18] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:42,296 [18] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:43,311 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:43,826 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,441 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,454 [18] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,528 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,542 [18] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,557 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,569 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,580 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,592 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,604 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\189.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:44,948 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\181.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:45,463 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\182.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:45,962 [12] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\188.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:46,477 [18] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\187.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:46,977 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-19 06:35:54,981 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:35:54,982 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:35:55,481 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:35:55,483 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:36:05,581 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:36:05,582 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:36:06,087 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:36:06,088 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:36:29,514 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:36:29,516 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:36:30,014 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:36:30,016 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:37:05,390 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:37:05,422 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:37:05,899 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:37:05,900 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:37:15,813 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:37:15,814 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:37:16,321 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:37:16,323 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:39:55,328 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:39:55,329 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:39:55,839 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:39:55,842 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:40:07,157 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:40:07,173 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:40:07,657 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:40:07,658 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:42:19,289 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:42:19,290 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:42:19,298 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:42:19,300 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:42:30,138 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:42:30,139 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:42:30,637 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:42:30,638 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:44:18,721 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:44:18,723 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:44:19,227 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:44:19,237 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:44:30,750 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:44:30,752 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:44:31,255 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:44:31,257 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:48:12,784 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:48:12,786 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:48:13,285 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:48:13,287 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:48:23,398 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:48:23,400 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:48:23,909 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:48:23,910 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:49:27,265 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:49:27,267 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:49:27,273 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:49:27,281 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:49:37,386 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:49:37,402 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:49:37,872 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:49:37,874 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:52:21,110 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:52:21,112 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:52:21,619 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:52:21,621 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:52:31,442 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:52:31,443 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:52:31,946 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:52:31,992 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:56:49,873 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:56:49,874 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:56:50,376 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:56:50,377 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:57:00,642 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:57:00,644 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:57:01,143 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:57:01,144 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:59:42,628 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:59:42,630 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:59:43,137 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:59:43,139 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 06:59:56,032 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 06:59:56,033 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 06:59:56,536 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 06:59:56,540 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:01:23,771 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:01:23,772 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:01:24,276 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:01:24,281 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:01:33,823 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:01:33,825 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:01:34,337 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:01:34,361 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:04:22,034 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:04:22,036 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:04:22,546 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:04:22,548 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:04:33,517 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:04:33,519 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:04:34,027 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:04:34,049 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:07:08,322 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:07:08,324 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:07:08,823 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:07:08,825 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:07:19,221 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:07:19,223 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:07:19,722 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:07:19,736 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:07:40,315 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:07:40,318 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:09:07,071 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:09:07,073 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:09:07,571 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:09:07,573 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:13:35,633 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:13:35,634 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:13:36,138 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:13:36,139 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:13:41,380 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:13:41,381 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:13:41,895 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:13:41,896 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:16:27,477 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:16:27,478 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:16:27,982 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:16:27,997 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:16:32,946 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:16:32,947 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:16:33,445 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:16:33,446 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:19:14,526 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:19:14,528 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:19:15,033 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:19:15,058 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:21:30,573 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:21:30,574 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:21:30,583 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:21:30,585 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:21:37,534 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:21:37,536 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:21:38,045 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:21:38,046 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:22:48,551 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:22:48,580 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 30534 bytes
+2012-06-19 07:23:43,755 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:23:43,756 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:23:43,767 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:23:43,768 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:23:50,451 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:23:50,454 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:23:50,965 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:23:50,969 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:26:26,339 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:26:26,340 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:26:26,847 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:26:26,848 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:26:31,918 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:26:31,919 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:26:32,432 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:26:32,433 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:27:10,136 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:27:10,138 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:27:10,639 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:27:10,641 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:27:16,953 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:27:16,954 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:27:17,452 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:27:17,454 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:41:51,120 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:41:51,279 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:41:51,614 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:41:51,616 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:43:43,858 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:43:43,859 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:43:44,361 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:43:44,363 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:44:08,565 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:44:08,567 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:44:09,065 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:44:09,066 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:44:32,967 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:44:32,969 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:44:33,473 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:44:33,475 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:44:40,150 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:44:40,160 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:44:40,664 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:44:40,666 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:46:50,518 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:46:50,633 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:46:51,024 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:46:51,026 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:46:59,114 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:46:59,116 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:46:59,619 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:46:59,621 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:48:47,487 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:48:47,488 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:48:47,986 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:48:48,000 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:48:52,727 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:48:52,729 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:48:53,240 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:48:53,241 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:53:16,243 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:53:16,245 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:53:16,745 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:53:16,747 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:53:21,794 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 07:53:21,796 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 07:53:22,307 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 07:53:22,309 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 07:55:58,878 [18] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-19 07:55:58,878 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-19 07:55:58,878 [12] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-19 07:55:59,460 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-19 07:55:59,493 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-19 07:55:59,493 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes

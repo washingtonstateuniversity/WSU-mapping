@@ -675,20 +675,31 @@
                                     foreach (infotabs tab in item.infotabs)
                                     {
                                         c++;
-                                        //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                        string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n",@"
-")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                        tabStr += @"
+                                        if (tab.title=="Views")
+                                        {
+                                            if (!String.IsNullOrEmpty(imgGallery))
                                             {
-                                                ""block"":""" + infoTitle + content + reportError + @""",
-                                                ""title"":""" + tab.title + @"""
-                                            }";
-                                        if (c < item.infotabs.Count) tabStr += ",";
+                                                tabStr += imgGallery;
+                                                if (c < item.infotabs.Count) tabStr += ",";
+                                            }
+                                        }else{
+
+                                        //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+                                            string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n",@"
+")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+                                            tabStr += @"
+                                                {
+                                                    ""block"":""" + infoTitle + content + reportError + @""",
+                                                    ""title"":""" + tab.title + @"""
+                                                }";
+                                            if (c < item.infotabs.Count) tabStr += ",";
+                                        }
+                                        
                                     }
                                 }
 
                                 infotabs += (!string.IsNullOrEmpty(tabStr)?",":"") + tabStr.TrimEnd(',');
-                                infotabs += (!string.IsNullOrEmpty(imgGallery)?",":"") + imgGallery;
+                                
                                 infotabs += (!string.IsNullOrEmpty(autoAccessibility)?",":"") + autoAccessibility;
 
                                 infotabs += @"]";

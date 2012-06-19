@@ -966,6 +966,59 @@ namespace campusMap.Controllers
                 ImgFile.Delete();
             }
         }
+
+
+        public void massInfoTabIt()
+        {
+            place[] places = ActiveRecordBase<place>.FindAll();
+            foreach (place item in places)
+            {
+                item.infotabs.Clear();
+                infotabs t = new infotabs();
+                t.title = "What's Here";
+                t.content = "<img class=\"infotabTemplate\" src=\"../Content/images/tinyMCE/template_whats_inside.png\" alt=\"2\" width=\"150\" height=\"55\" />";
+                t.sort = 1;
+                t.template = ActiveRecordBase<infotabs_templates>.Find(1);
+                ActiveRecordMediator<infotabs>.Save(t);
+                item.infotabs.Add(t);
+
+                t = new infotabs();
+                t.title = "Views";
+                t.content = "<img class=\"infotabTemplate\" src=\"../Content/images/gallery_placeholder.png\"  id='viewTab' width=\"297\" height=\"201\" />";
+                t.sort = 2;
+                t.template = null;
+                ActiveRecordMediator<infotabs>.Save(t);
+                item.infotabs.Add(t);
+                
+                t = new infotabs();
+                t.title = "Access";
+                t.content = "<img class=\"infotabTemplate\" src=\"../Content/images/tinyMCE/template_access.png\" alt=\"1\" width=\"150\" height=\"55\" />";
+                t.sort = 3;
+                t.template = ActiveRecordBase<infotabs_templates>.Find(2);
+                ActiveRecordMediator<infotabs>.Save(t);
+                item.infotabs.Add(t);
+
+                ActiveRecordMediator<place>.Save(item);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void update(
             [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
