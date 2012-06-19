@@ -20,6 +20,7 @@ namespace campusMap.Filters
 {
     public class AuthUserAuthenticationFilter : IFilter
     {
+
         public bool Perform(ExecuteEnum exec, IRailsEngineContext context, Controller controller)
         {
             if (context.Request.IsLocal)
