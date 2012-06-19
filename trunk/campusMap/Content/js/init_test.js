@@ -329,11 +329,10 @@ function loadData(data,callback){
 				,onClose:function(){ibHover =  false;}
 				,onOpen:function(){
 						ibHover =  true;
-						if($(".cWrap").length){
-							$('.cWrap a.gouped').on('click',function(e){
+							$('a.gouped').on('click',function(e){
 								e.preventDefault();
 								e.stopImmediatePropagation();
-								$('.cWrap a.gouped').colorbox({
+								$('a.gouped').colorbox({
 									photo:true,
 									scrolling:false,
 									opacity:0.7,
@@ -345,6 +344,7 @@ function loadData(data,callback){
 									open:true
 								});
 							});
+						if($(".cWrap").length){
 							$('.cWrap .items').cycle({
 								fx:     'scrollLeft',
 								delay:  -2000,

@@ -34,7 +34,7 @@
 			
 			#set($media=0)
 			#if($Controller.getView()!="geometrics") #if($item.Images && $item.Images.Count>1) #set($media=1) #end #end
-			#set($c= $item.infotabs.Count + 1)
+			#set($c= $item.infotabs.Count)
 			#set($c= $c + $media )
 			#if($item.autoAccessibility)#set($c= $c +1)#end
 			

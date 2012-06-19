@@ -31,7 +31,7 @@ namespace campusMap.Controllers
 {
 
 
-    [Layout("home")]
+    [Layout("default")]
     public class adminController : BaseController
     {
         #region JSON OUTPUT
@@ -161,9 +161,6 @@ namespace campusMap.Controllers
 
         public void help()
         {
-            place[] places = placeService.getPublishedPlaces(Order.Desc("Order"));
-            PropertyBag["places"] = places;
-            PropertyBag["Ads"] = placeService.getAdvertisements(places);
             RenderView("../admin/help");
         }
 
