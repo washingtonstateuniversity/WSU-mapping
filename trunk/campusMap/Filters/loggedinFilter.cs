@@ -23,7 +23,7 @@ namespace campusMap.Filters
     {
         public bool Perform(ExecuteEnum exec, IRailsEngineContext context, Controller controller)
         {
-            if (Authentication.logged_in())
+            /*if (Authentication.logged_in())
             {
                 String username = Authentication.getNID();
                 // save user in database
@@ -40,7 +40,7 @@ namespace campusMap.Filters
                     temp.LastActive = DateTime.Now;
                     temp.Save();
                 }
-            }
+            }*/
             return true;
         }
     }
