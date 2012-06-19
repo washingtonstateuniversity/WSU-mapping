@@ -46,7 +46,7 @@ namespace campusMap
 
             if (Authentication.logged_in())
             {
-                String username = Authentication.authenticate();
+                String username = Authentication.getNID();
                 Session["username"] = username;
                 // save user in database
                 authors[] author_list = ActiveRecordBase<authors>.FindAll();
