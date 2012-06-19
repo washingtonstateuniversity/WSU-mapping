@@ -565,7 +565,7 @@
                 String jsonStr = "";
                 int count = 0;
                 foreach (place item in items){
-                    if ((item.status.id == 3 && item.isPublic) || (item.status.id == 3 && !item.isPublic && Authentication.logged_in()))
+                    if ((item.status.id == 3 && item.isPublic))
                     {
                         if (item.coordinate != null)
                         {
