@@ -22,12 +22,12 @@
 #colorbox{}
     #cboxTopLeft{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 0;}
     #cboxTopCenter{height:25px; background:url(../../Content/images/colorbox/border1.png) repeat-x 0 -50px;}
-    #cboxTopRight{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat -25px 0;}
+    #cboxTopRight{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat right 0;}
     #cboxBottomLeft{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 -25px;}
     #cboxBottomCenter{height:25px; background:url(../../Content/images/colorbox/border1.png) repeat-x 0 -75px;}
-    #cboxBottomRight{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat -25px -25px;}
+    #cboxBottomRight{width:50px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat right -25px;}
     #cboxMiddleLeft{width:50px; background:url(../../Content/images/colorbox/border2.png) repeat-y 0 0;}
-    #cboxMiddleRight{width:50px; background:url(../../Content/images/colorbox/border2.png) repeat-y -25px 0;}
+    #cboxMiddleRight{width:50px; background:url(../../Content/images/colorbox/border2.png) repeat-y right 0;}
     #cboxContent{background:#fff; overflow:hidden;}
         .cboxIframe{background:#fff;}
         #cboxError{padding:50px; border:1px solid #ccc;}
