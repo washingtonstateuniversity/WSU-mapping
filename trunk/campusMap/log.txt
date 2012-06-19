@@ -16002,3 +16002,14 @@ File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\183.ext
 2012-06-19 07:55:59,460 [18] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
 2012-06-19 07:55:59,493 [12] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
 2012-06-19 07:55:59,493 [5] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-19 08:20:19,729 [5] INFO  mediaController [(null)] <(null)> - Starting download for image id 274
+2012-06-19 08:20:20,762 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 276
+2012-06-19 08:20:21,262 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 275
+2012-06-19 09:03:38,539 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 09:03:38,632 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-19 09:03:39,039 [16] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 09:03:39,098 [16] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 09:03:54,223 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-19 09:03:54,295 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-19 09:03:54,733 [17] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-19 09:03:54,777 [17] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
