@@ -27,7 +27,7 @@ namespace campusMap.Controllers
             temp.logedin = false;
             temp.Save();/**/
             HttpContext.Session.Abandon();
-            Redirect("/home");
+            Redirect("/admin");
             return;
         }
 	}

@@ -163,7 +163,10 @@ namespace campusMap.Controllers
         {
             RenderView("../admin/help");
         }
-
+        public void admin()
+        {
+            RenderView("../admin/splash");
+        }
 
 
 
