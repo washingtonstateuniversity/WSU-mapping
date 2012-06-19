@@ -414,11 +414,11 @@ border-bottom-right-radius: 0px;
 	#campusmap .cycle .next:hover{background-position:right bottom;}
 
 
-
+#campusmap #cboxContent{ overflow:visible;}
 	#campusmap #cboxContent #cboxPrevious{
-		left:0px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent;z-index: 9; }
+		left:-25px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent;z-index: 9; }
 	#campusmap #cboxContent #cboxNext{
-		right:0px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;z-index: 9;}
+		right:-25px;top:40%; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;z-index: 9;}
 	
 	#campusmap #cboxContent #cboxPrevious:hover{ background-position:left bottom; }
 	#campusmap #cboxContent #cboxNext:hover{background-position:right bottom;}
