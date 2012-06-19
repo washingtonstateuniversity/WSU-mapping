@@ -19,5 +19,3 @@ C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.xml
 C:\_SVN_\campusMap\campusMap\obj\Debug\ResolveAssemblyReference.cache
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.dll
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.pdb
-C:\_SVN_\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml
-C:\_SVN_\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.xml
