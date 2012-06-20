@@ -10,7 +10,7 @@
     using log4net;
     using log4net.Config;
     using System.Text;
-using SquishIt.Framework;
+    using SquishIt.Framework;
 
 #endregion
 namespace campusMap.Controllers
