@@ -10,6 +10,8 @@
     using log4net;
     using log4net.Config;
     using System.Text;
+using SquishIt.Framework;
+
 #endregion
 namespace campusMap.Controllers
 {
@@ -28,6 +30,9 @@ namespace campusMap.Controllers
         protected StylesService StylesService = new StylesService();
         protected googleService googleService = new googleService();
         protected geometricService geometricService = new geometricService();
+        protected ScriptsService ScriptsService = new ScriptsService();
+        
+
 
         public string Tabs(int n)
         {

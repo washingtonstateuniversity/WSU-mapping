@@ -37,6 +37,10 @@
   var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
 </script>
 
+
+$Bundle.Css().Add("~/Content/css/admin_styles.css").Add("~/content/js/colorpicker/css/jpicker-1.1.6.min.css").Render("~/css/combined_#.css")
+
+
 <link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
 <link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
 

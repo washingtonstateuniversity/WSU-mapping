@@ -23,7 +23,7 @@
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
 
-
+    using SquishIt.Framework;
 
 
 #endregion

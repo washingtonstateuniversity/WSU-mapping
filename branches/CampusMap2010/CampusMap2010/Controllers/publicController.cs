@@ -36,6 +36,9 @@
     using Newtonsoft.Json.Linq;
     using log4net;
     using log4net.Config;
+
+    using SquishIt.Framework;
+
 #endregion
 
 
@@ -149,16 +152,27 @@
                 RenderView("readmore");
                 return;
             }*/
-            
             if (urlwithnoparams.ToString().IndexOf("/rt/") > -1)
             {
-                
+
                 string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
                 String mode = "";
                 String callback = "";
                 fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
                 return;
             }
+           /* if (urlwithnoparams.ToString().IndexOf("/assest/js/") > -1)
+            {
+
+                string identifier = Regex.Replace(urlwithnoparams, @"/assest/js/(.*)", "$1");
+                String mode = "";
+                String callback = "";
+                fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
+
+                ScriptsService.Js(identifier);
+
+                return;
+            }*/
 
 
 
