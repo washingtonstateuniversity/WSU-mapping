@@ -1,15 +1,15 @@
 <table class="pagination $Pagination_location">
   <tr>
-    <td>Showing $list_items.FirstItem - $list_items.LastItem of $list_items.TotalItems</td>
+    <td>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</td>
     <td align="right">
-      #if($list_items.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasPrevious) first #end
-      #if($list_items.HasPrevious) | $PaginationHelper.CreatePageLink( $list_items.PreviousIndex, "prev",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasPrevious) | prev #end
-      #if($list_items.HasNext) | $PaginationHelper.CreatePageLink( $list_items.NextIndex, "next",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasNext) | next #end
-      #if($list_items.HasNext) | $PaginationHelper.CreatePageLink( $list_items.LastIndex, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasNext) | last #end
+      #if($list_items.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,target=$status.title}" )  #end
+      #if(!$list_items.HasPreviousPage) first #end
+      #if($list_items.HasPreviousPage) | $PaginationHelper.CreatePageLink( $list_items.PreviousPageIndex, "prev",null, "%{searchId=$!searchId,target=$status.title}" )  #end
+      #if(!$list_items.HasPreviousPage) | prev #end
+      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.NextPageIndex, "next",null, "%{searchId=$!searchId,target=$status.title}" )  #end
+      #if(!$list_items.HasNextPage) | next #end
+      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.LastItemIndex, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
+      #if(!$list_items.HasNextPage) | last #end
     </td>
   </tr>
 </table>
