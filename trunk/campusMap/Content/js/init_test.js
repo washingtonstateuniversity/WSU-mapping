@@ -442,6 +442,8 @@ function loadData(data,callback){
 					});
 					ib[i].open($('#centralMap').gmap('get','map'), this);
 					$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
+					$('#selectedPlaceList_area .active').removeClass('active');
+					$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
 					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
 				})
 			.rightclick(function(event){showContextMenu(event.latLng);})

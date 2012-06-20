@@ -2,20 +2,59 @@
 	<h1  class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Welcome</h1>
 <h3><a href="authors/edit.castle?id=$user.id">$user.name</a></h3>
 <hr/>
-<hr/>
 <span>You currently have:</span>
-<hr/>
+	<table width="100%" class="ui-widget ui-widget-content">
+		  <tbody>
 	#capturefor(tmp)
-		#if($user.Places.Count>0)<span>Places : $user.Places.Count </span><hr/>#end
-		#if($user.views.Count>0)<span>Maps : $user.views.Count </span><hr/>#end
+		#if($user.Places.Count>0)<tr #if($c%2>0) class="even" #else class="odd" #end>
+						<td align="center">Places : $user.Places.Count</td>
+					</tr>#end
+		#if($user.views.Count>0)<tr #if($c%2>0) class="even" #else class="odd" #end>
+						<td align="center">Maps : $user.views.Count</td>
+					</tr>#end
 	#end
-#if($tmp.Trim()!="")
-	$tmp
-#else
-	<span>No Assets</span>
-#end
+	#if($tmp.Trim()!="")
+		$tmp
+	#else
+		<tr #if($c%2>0) class="even" #else class="odd" #end>
+		<td align="center">No Assets</td>
+		</tr>
+	#end			
+			
+		  </tbody>
+		</table>
 
 
+
+
+
+	
+
+<div id="activeUsers" class="ui-widget-content ui-corner-all">
+		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Other Active Users</span>
+		<table width="100%" class="ui-widget ui-widget-content">
+		  <tbody>
+		  #if($activeUser.count()>0)
+				#set ($c=0)
+				#foreach($user in $activeUsers)
+					<tr #if($c%2>0) class="even" #else class="odd" #end>
+						<td align="center">
+							$item.name
+							<span class="ui-icon ui-icon-bullet"></span>
+						</td>
+					</tr>
+					#set ($c=$c+1)
+				#end
+			#else
+					<tr #if($c%2>0) class="even" #else class="odd" #end>
+						<td align="center">
+							There are currently no other users online.
+						</td>
+					</tr>
+			#end
+		  </tbody>
+		</table>
+</div>
 </div>
 <div id="mainsplash">
 	#if($Flash.massage)

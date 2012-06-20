@@ -17947,3 +17947,441 @@ File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext
 2012-06-20 07:19:56,025 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
 2012-06-20 07:20:02,517 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
 2012-06-20 07:20:02,535 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
+2012-06-20 08:10:59,401 [4] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-20 08:10:59,664 [4] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-20 08:10:59,837 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-20 08:10:59,876 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-20 08:11:00,342 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-20 08:11:00,361 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-20 08:12:45,725 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 17
+2012-06-20 08:12:45,727 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 17, length: 28724 bytes
+2012-06-20 08:12:46,224 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 18
+2012-06-20 08:12:46,225 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 18, length: 85526 bytes
+2012-06-20 08:12:46,739 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 19
+2012-06-20 08:12:46,741 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 19, length: 65811 bytes
+2012-06-20 08:12:47,397 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 164
+2012-06-20 08:12:47,431 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 164, length: 30389 bytes
+2012-06-20 08:12:47,910 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 166
+2012-06-20 08:12:47,963 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 166, length: 65757 bytes
+2012-06-20 08:13:03,556 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 246
+2012-06-20 08:13:04,072 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 245
+2012-06-20 08:13:05,697 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 164
+2012-06-20 08:13:05,699 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 164, length: 30389 bytes
+2012-06-20 08:13:06,210 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 166
+2012-06-20 08:13:06,219 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 166, length: 65757 bytes
+2012-06-20 08:13:07,186 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 196
+2012-06-20 08:13:07,204 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 196, length: 24035 bytes
+2012-06-20 08:13:07,691 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 202
+2012-06-20 08:13:07,712 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 202, length: 65727 bytes
+2012-06-20 08:13:09,132 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 75
+2012-06-20 08:13:09,177 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 75, length: 25345 bytes
+2012-06-20 08:13:09,642 [11] INFO  mediaController [(null)] <(null)> - Starting download for image id 76
+2012-06-20 08:13:09,674 [11] INFO  mediaController [(null)] <(null)> - Finished download for image id 76, length: 69849 bytes
+2012-06-20 08:14:23,747 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:14:26,060 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:14:27,022 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:17:05,786 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:17:07,203 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:17:09,274 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:17:09,705 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:18:58,167 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:18:59,414 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:19:01,442 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:19:01,898 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:22:10,522 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:20,849 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:21,759 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:23,813 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:24,750 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:31,021 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:26:36,107 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:00,570 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:02,002 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:03,455 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:08,729 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:22,155 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:26,859 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:27,925 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:27,983 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:32,676 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:29:36,859 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:21,394 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:22,579 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:24,547 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:24,603 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:41,647 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:47,762 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:30:56,281 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:37,514 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:39,174 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:41,346 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:42,320 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:47,648 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:49,246 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:52,397 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:53,427 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:32:59,246 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:06,814 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:13,099 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:20,042 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:26,002 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:55,000 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:33:57,842 [9] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 08:34:01,878 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-20 08:34:01,967 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-20 08:34:02,382 [10] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-20 08:34:02,396 [10] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes
+2012-06-20 08:34:11,985 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 148
+2012-06-20 08:34:11,988 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 148, length: 61234 bytes
+2012-06-20 08:34:12,491 [9] INFO  mediaController [(null)] <(null)> - Starting download for image id 285
+2012-06-20 08:34:12,492 [9] INFO  mediaController [(null)] <(null)> - Finished download for image id 285, length: 71442 bytes

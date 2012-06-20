@@ -64,7 +64,7 @@ namespace campusMap.Controllers
             foreach (map_views view in _views)
             {
                 authors author = view.checked_out_by;
-                if ( !author.active || author.LastActive < DateTime.Today.AddHours(3D) )
+                if (author != null && (!author.active || author.LastActive < DateTime.Today.AddHours(-3)))
                 {
                     view.checked_out_by = null;
                     ActiveRecordMediator<map_views>.Save(view);

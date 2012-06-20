@@ -41,9 +41,22 @@ namespace campusMap.Controllers
      * MAY BE A FIELDS HELPER SERVICES WOULD BE WISE ?
      * 
      */
-
+        public void clearConnections()
+        {
+            place[] _places = ActiveRecordBase<place>.FindAll();
+            foreach (place _place in _places)
+            {
+                authors author = _place.editing;
+                if (author!=null && (!author.active || author.LastActive < DateTime.Today.AddHours(-3)))
+                {
+                    _place.editing = null;
+                    ActiveRecordMediator<place>.Save(_place);
+                }
+            }
+        }
         public void List(int page, int searchId, string target)
         {
+            clearConnections();
             authors user = getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();

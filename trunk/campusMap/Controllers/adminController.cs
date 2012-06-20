@@ -169,6 +169,16 @@ namespace campusMap.Controllers
             IList<place> places = user.getUserPlaces(1,5);
             PropertyBag["places"] = places;
             PropertyBag["user"] = user;
+            IList<authors> activeUser = new List<authors>();
+            authors[] _authors = ActiveRecordBase<authors>.FindAll();
+            foreach (authors _author in _authors)
+            {
+                if (_author != null && (_author.active && _author.LastActive < DateTime.Today.AddHours(-1)))
+                {
+                   activeUser.Add(_author);
+                }
+            }
+            PropertyBag["activeUsers"] = activeUser;
             RenderView("../admin/splash");
         }
 

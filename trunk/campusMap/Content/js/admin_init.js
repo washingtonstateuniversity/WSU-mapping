@@ -197,13 +197,6 @@ function addLiveActionAnimation(){
 }
 $(function() {
 	
-	$('.endcap').dblclick(function(){
-		$('.mItem').each(function(index, element) {
-			$(this).slideToggle('fast');
-		});
-	});
-	
-	
 	$('.insotryupload').live('click',function(){
 		openImgUploader();
 	});
@@ -315,11 +308,12 @@ $(function() {
 			$.each($('.pagination'),function(){
 				var panleId = $(this).closest('.ui-tabs-panel').attr('id');
 				$(this).find('a').live('click',function(e){
+					$('body').append('<h1 style="position:fixed; top:25%; left:45%; z-index:9999;text-align: center;" id="loading"><img src="../Content/images/loading.gif"/></br>Loading</h1>');
 					e.stopPropagation();
 					e.preventDefault();
 					//panleId
 					$.ajaxSetup ({cache: false}); 
-					$('#'+panleId).find('.tab_tar').load( $(this).attr('href')+' #'+panleId,function(){pagLoad()});
+					$('#'+panleId).find('.tab_tar').load( $(this).attr('href')+' #'+panleId,function(){pagLoad(); $('#loading').remove();});
 				});
 			});
 			addLiveActionAnimation();
