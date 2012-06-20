@@ -1,0 +1,126 @@
+/* Daily Evergreen Online - Home */
+
+body {
+	background-color:#b6bcbf;
+	font-family:Lucida Sans Unicode,Lucida Grande,arial,helvetica,sans-serif;
+	color:#262a2d;
+	font-size:12px;
+	line-height:17px;
+	margin:0;
+	padding:0;
+	text-align:center;
+	width:100%;
+}
+
+#wrapper {
+	text-align:center;
+	margin:0 auto;
+	background-color:#b6bcbf;
+}
+
+#stripe1 {
+	background-color:#7f9d6a; /* light green */
+	height:27px;
+}
+
+#breaking_news {
+	color:#ffffff;
+	text-align:center;
+	padding-top:5px;
+	font-size:14px;
+	line-height:19px;
+	width:928px;
+	height:20px;
+	overflow:hidden;
+	position:relative;
+	margin:0 auto;
+}
+
+#stripe1_border {
+	background-color:#b6bcbf; /* gray */
+	height:1px;
+}
+
+#stripe2 {
+	background-color:#526e3f; /* dark green */
+	height:8px;
+}
+
+#social_media {
+	width:26px;
+	float:left;
+	position:relative;
+	top:242px;
+	left:-35px;
+}
+
+#social_media a {
+	padding-bottom:8px;
+	display:block;
+}
+
+#outer_container {
+	background:#b6bcbf url('../images/template/container-bkgrd.jpg') no-repeat center top;
+	text-align:center;
+	min-height:800px;
+	margin:0 auto;
+	position:relative;
+}
+
+#inner_container {
+	text-align:center;
+	margin:0 auto;
+	width:928px;
+	position:relative;
+	/*top:-122px;*/
+}
+
+#masthead {
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+	width:928px;
+	margin:0 auto;
+	float:left;
+}
+
+#content {
+	width:926px;
+	background-color:#ffffff;
+	text-align:center;
+	border:solid 1px #262a2d;
+	min-height:400px;
+	margin:0 auto;
+	clear:both;
+}
+
+#local_footer {
+	padding-top:6px;
+	padding-bottom:0px;
+	color:#262a2d;
+}
+
+#global_footer {
+	padding-top:4px;
+	padding-bottom:10px;
+	color:#5e6a71;
+}
+
+
+/* Type Styles */
+
+.dk_green {
+	color:#526e3f;
+}
+
+.lt_green {
+	color:#7f9d6a;
+}
+
+.gray {
+	color:#b6bcbf;
+}
+
+.dk_gray {
+	color:#262a2d;
+}

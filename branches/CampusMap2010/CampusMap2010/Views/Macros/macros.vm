@@ -1,0 +1,78 @@
+#macro(widget $name)
+    $!proxyservice.renderProxyByName($name) 
+#end
+
+#macro(youtube $videoId $title $w $h $classes)
+	<span style="width:${w}px;" class="inlineImagery ${classes}">
+		<a href='http://www.youtube.com/v/${videoId}?autoplay=1&rel=0' title='$title' class='mediaLinks youtube'>
+		<span class="playicon"></span>
+			<img src="http://img.youtube.com/vi/${videoId}/0.jpg" width="${w}" height="${h}" alt="" class="lazy" />
+			<span class='yTitle'>${title}</span><span class='button'>Watch Now</span>
+		</a>
+	</span>
+#end
+#macro(imagegallery $placeid $w $h $classes)
+	#set ($c=0)
+	<span class="${classes} imgroto">
+		#foreach($image in $imagerepo)
+			<span style="width:${w}px; #if($c>0) display:none; #end" class="inlineImagery">
+				<span class="slide_next"></span>
+				<span class="slide_prev"></span>
+				<img src="/media/download.castle?id=$!{image.id}&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}"  class="lazy"/>
+				<span class="credit" style="top:${h}px;">$!{image.credit}<em class="flare"></em></span><span class="caption">$!{image.caption}</span>
+			</span>
+			#set ($c=$c+1)
+		#end 
+	</span>
+#end
+
+#macro(Inline_Iamge $id $placeid $w $h $classes)
+#if($w==0)#set($w=250)#end
+#if($h==0)#set($h=250)#end
+    <span style="width:${w}px;" class="inlineImagery ${classes}">
+    <img class="inlineImage lazy" src="/media/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}#end&placeid=${placeid}&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />
+	#foreach($image in $imagerepo)
+		#if(${image.id}==$id)
+			<span class="credit" style="top:${h}px;">$!{image.credit}<em class="flare"></em></span><span class="caption">$!{image.caption}</span>
+		#end 
+    #end 
+    </span>
+#end
+
+#*
+#macro(Inline_Iamge $id $w $h $classes)
+	#if($w==0)#set($w=250)#end
+	#if($h==0)#set($h=250)#end
+    <span style="width:${w}px;" class="inlineImagery ${classes}">
+    #if(${mainImage.id}&&${mainImage.id}!=0)
+		<img class="inlineImage lazy" src="/media/download.castle?id=#if($id!=""&&$id!=0)${id}#else${mainImage.id}&placeid=${place.id}#end&m=crop&w=${w}&h=${h}" width="${w}" height="${h}" />#end
+    <span class="credit" style="top:${h}px;">${mainImage.credit}<em class="flare"></em></span><span class="caption">${mainImage.caption}</span>
+    </span>
+#end
+*#
+
+
+#macro(highlightnav $name)
+	$!nav.navTreeIsActive($name)
+#end
+
+#macro(shownav $name)
+	$!nav.renderNav($name, "")
+#end
+#macro(shownavwithclass $name $class)
+	$!nav.renderNav($name, $class)
+#end
+
+#macro(showfullnav $name)
+	$!nav.renderNav($name, true, "")
+#end
+
+#macro(shownavwithhomelink $name)
+	$!nav.renderNavWithHome($name)
+#end
+
+#macro(showpound)
+#set($pound = "#")
+#end
+
+#set($pound = "#")

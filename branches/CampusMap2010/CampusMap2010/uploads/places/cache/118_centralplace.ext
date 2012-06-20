@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.6967571549961",
+                                                "longitude":"-117.240407466888"
+                                                },
+                                    "summary":"The Stock Pavilion building--or expo barn as it is also called-- ...",
+                                    "title":"Livestock Pavilion",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Livestock Pavilion</h2><p>The Stock Pavilion building--or expo barn as it is also called-- was of the first purely agricultural buildings constructed at WSU, and it serves the same purpose today. (Not to be confused with Ensminger Pavilion, which once served a similar purpose, but has been remodeled and made into a meeting hall and event space.)</p><a class='errorReporting' href='?reportError=&place=118' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Livestock Pavilion</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=118' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Livestock Pavilion</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=118' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Livestock Pavilion"
+                                            },
+                                    "shapes":  [{}]
+                                }

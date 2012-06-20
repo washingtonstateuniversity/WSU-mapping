@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7319559766635",
+                                                "longitude":"-117.150864601136"
+                                                },
+                                    "summary":"...",
+                                    "title":"Entomology Grnhse",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Entomology Grnhse</h2><a class='errorReporting' href='?reportError=&place=65' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Entomology Grnhse</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=65' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Entomology Grnhse</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=65' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Entomology Grnhse"
+                                            },
+                                    "shapes":  [{}]
+                                }

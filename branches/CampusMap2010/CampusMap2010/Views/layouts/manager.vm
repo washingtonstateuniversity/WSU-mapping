@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="keywords" content="WSU, Washington State, Washington State University " />
+<title>The Bob &amp; Shelly Project - WSU - $!title</title>
+<!-- favorites ico -->
+<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+
+<!-- replace the key below - replace the key below - replace the key below-->
+<link href="http://designer.wsu.edu/template/css2.aspx?key=0ga498zr011" type="text/css" rel="stylesheet" />
+<!-- replace the key above  -->
+
+<link href="$siteroot/Content/css/style.css" rel="stylesheet" type="text/css" />
+$!head
+
+<!-- We have added the common js files to the project. You can either bring them as static files: -->
+
+<script type="text/javascript" src="$siteroot/Content/js/prototype.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/scriptaculous.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/behaviour.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/formhelper.js"></script>
+
+<!-- Or use the files bundled with MonoRail. We recommend the former, though -->
+
+<!-- 
+$Ajax.InstallScripts()
+$Behaviour.InstallScripts()
+$Scriptaculous.InstallScripts()
+$Form.InstallScripts()
+-->
+
+<script type="text/javascript">
+$!scripts
+</script>
+
+</head>
+<body>
+<div id = "wrapper"><noscript><div id='globalnav'><ul><li>Washington State University</li></ul></div><div id='logo'><a href='http://www.wsu.edu'><img src='http://images.wsu.edu/global/bg-logo.jpg' alt="WSU Logo"/></a></div></noscript>
+<script language="Javascript" src="http://images.wsu.edu/javascripts/wsuidentifierV2.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript"> var strHeader; strHeader = getHeader(); document.write(strHeader);</script>
+<!--End of the WSU Identifier Zone. -->
+ 
+  <div id="siteID">
+    <h2>University Publishing</h2>
+    <h1>Copyright</h1>
+  </div>
+  <div id="toolbar">
+        
+  </div>
+	<div id="content">
+		<div id="nav">
+          <div id="featured">
+				</div>
+			</div>
+    <!--end of nav-->
+	  	
+	  	<div id="main">
+	  		$childContent
+		</div><!--main-->
+		
+		<div id="secondary">
+		</div><!--secondary-->
+		
+		<div id="localfooter">Photo Services :: Washington State University</div>
+		
+	</div><!--content-->
+</div><!--wrapper-->
+<!--Beginning of the WSU Global Footer Zone. Refer to www.wsu.edu/identity/ for more information. -->
+<div id="wsufooter">Copyright &copy;  Board of Regents, <a href="http://www.wsu.edu">Washington State University</a></div>
+
+<!--End of the WSU Global Footer Zone. -->
+
+</body>
+</html>
+
+
+

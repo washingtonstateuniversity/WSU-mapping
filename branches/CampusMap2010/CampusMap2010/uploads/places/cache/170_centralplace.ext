@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7295806868067",
+                                                "longitude":"-117.156851291656"
+                                                },
+                                    "summary":"Dedicated to agricultural research, L.J. Smith Hall is home to th...",
+                                    "title":"Smith Hall",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Smith Hall</h2><p>Dedicated to agricultural research, L.J. Smith Hall is home to the graduate program in biological systems engineering.</p><a class='errorReporting' href='?reportError=&place=170' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Smith Hall</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=170' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Smith Hall</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=170' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Smith Hall"
+                                            },
+                                    "shapes":  [{}]
+                                }

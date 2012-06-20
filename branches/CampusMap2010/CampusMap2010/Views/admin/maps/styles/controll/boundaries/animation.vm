@@ -1,0 +1,13 @@
+<li class="pod opRow ui-state-highlight op_marker" #if($hidden) style="display: none;"#end>
+<span class="option_handle"></span>
+
+	<span class="lable">Animation</span>
+	<span class="controll">
+<br/>
+		<select name="style._zoom[1].events[${event.id}].options[${opt.id}]" rel="${opt.name}">
+			<option value="">None</option>
+			<option value="BOUNCE">Bounce</option>
+			<option value="DROP">Drop</option>
+		</select>
+	</span>
+</li>

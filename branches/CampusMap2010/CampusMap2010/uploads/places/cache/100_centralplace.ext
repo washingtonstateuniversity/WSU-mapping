@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7315221079969",
+                                                "longitude":"-117.155156135559"
+                                                },
+                                    "summary":"Hulbert Hall is a homely-looking brown building that's home to ma...",
+                                    "title":"Hulbert (HULB)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Hulbert (HULB)</h2><a href='http://localhost:4829/media/download.castle?placeid=100&id=164' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=100&id=164&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=100&id=164' alt='' class='img-main' width='148' height='100'/></a><p>Hulbert Hall is a homely-looking brown building that's home to many of the University's agricultural science programs. It's also the central home of the WSU Extension service, which brings the University's expertise to every county in the state of Washington. The administrative offices of the USDA research services, the Department of Human Development, and the College of Agricultural, Human, and Natural Resource Sciences, and several other agriculture-related departments are also located here.</p><a class='errorReporting' href='?reportError=&place=100' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Hulbert (HULB)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>Amenities</strong><span>South side of building		Unisex restroom (first floor)</span></li>\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n<li><strong>Research Centers</strong><span>USDA, ARS Administration; CAHNRS and WSU Extension; Extension CES; Impact Center; International Agricultural Development</span></li>\r\n\r\n\r\n\r\n<li><strong>University Administration &amp; Non-Academic Units</strong><span>CAHNRS Alumni and Friends; CAHNRS Marketing, News, and Educational Communications; WSU Extension</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=100' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>Hulbert (HULB)</h2><div class='cycleArea'><div class='cycle'><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=100&id=166' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=100&id=166&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div></div><div class='navArea'></div></div><a class='errorReporting' href='?reportError=&place=100' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>Hulbert (HULB)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Basement</span></li>\r\n<li><strong>ADA Parking</strong><span>South side of building</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=100' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Hulbert"
+                                            },
+                                    "shapes":  [{}]
+                                }

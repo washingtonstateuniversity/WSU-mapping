@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7268927326509",
+                                                "longitude":"-117.165069580078"
+                                                },
+                                    "summary":"Originally built as a residence hall in the population boom of th...",
+                                    "title":"McAllister (MCAL)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>McAllister (MCAL)</h2><p>Originally built as a residence hall in the population boom of the 1950s, McAllister has been converted for academic use.</p><a class='errorReporting' href='?reportError=&place=123' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>McAllister (MCAL)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<li><strong>Student Services   Advising</strong><span>Intensive American Language Center (IALC)</span></li>\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=123' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>McAllister (MCAL)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Northeast entrance</span></li>\r\n<li><strong>ADA Parking</strong><span>North side of Kruegel Hall</span></li>\r\n<li><strong>ADA Other</strong><span>No elevators; all floors are accessible by ramps</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=123' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"McAllister"
+                                            },
+                                    "shapes":  [{}]
+                                }

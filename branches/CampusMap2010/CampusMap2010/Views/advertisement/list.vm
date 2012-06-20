@@ -1,0 +1,121 @@
+#*<!-- NOTE: DUE TO VS AND IT'S AUTO FORMATING THE LOGIC BELOW IN THE tr GETTS MESSED UP should be <tr #if($c%2>0) class="even" #else class="odd" #end> -->*#
+<h3>Advertisement List</h3>
+
+<table width="50%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+  <tr>
+    <td>Showing $advertisement.FirstItem - $advertisement.LastItem of $advertisement.TotalItems</td>
+    <td align="right">
+      #if($advertisement.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$advertisement.HasPrevious) first #end
+      #if($advertisement.HasPrevious) | $PaginationHelper.CreatePageLink( $advertisement.PreviousIndex, "prev" ) #end
+      #if(!$advertisement.HasPrevious) | prev #end
+      #if($advertisement.HasNext) | $PaginationHelper.CreatePageLink( $advertisement.NextIndex, "next" ) #end
+      #if(!$advertisement.HasNext) | next #end
+      #if($advertisement.HasNext) | $PaginationHelper.CreatePageLink( $advertisement.LastIndex, "last" ) #end
+      #if(!$advertisement.HasNext) | last #end
+    </td>
+  </tr>
+</table>
+<p>
+<a href="new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+    <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Advertisement
+  </a>
+</p>
+<table  width="100%" class="ui-widget ui-widget-content">
+  <thead>
+    <tr class="ui-widget-header ">
+
+    <th>Id</th><th></th>
+    <th>Name</th>
+    
+    <th>Impressions</th>
+    <th>Clicks</th>
+    #*<th>Type</th>
+    <th>Location</th>*#
+    <th>URL</th>
+    
+    <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    #set ($c=0)
+    #foreach($advertisement in $advertisement)
+    <tr #if($c%2>0) class="even" #else class="odd" #end>
+
+      <td  align="center"  style="line-height:50px;">
+      #if($advertisement.expiration<$now)
+      <span class="expired">expired</span>
+      #end
+      $!advertisement.Id 
+      </td>
+      
+      <td align="center">
+        #if($advertisement.HtmlText||($advertisement.Images.count>0&&$advertisement.Images.get_item(0).id))
+
+			<a href='#' class="ad ui-state-default ui-corner-all ui-state-hover" style='display:inline-block'>
+				<span class="ui-icon ui-icon-search"></span>
+				<span class='the_ad ui-widget ui-widget-content ui-corner-all'>
+					#if($advertisement.HtmlText)
+						$!advertisement.HtmlText
+					#else
+						<img id="selectedImage" src="$siteroot/media/download.castle?id=$advertisement.Images.get_item(0).id"/>
+					#end
+				</span>
+			</a>
+			
+        #else
+			Needs ad.
+        #end
+      </td>
+      <td align="left">$!advertisement.name</td>
+      <td align="left">$!advertisement.Views/$!advertisement.maxImpressions</td>
+      <td aligh="left">$!advertisement.Clicked/$!advertisement.maxClicks</td>
+      #*<td align="left">$!advertisement.ClassifiedType.Id</td>
+      <td align="left">$!advertisement.Location.Name</td>*#
+      <td align="left">
+        #if($advertisement.Url)
+			<a href='$!advertisement.Url' target='_blank' class='advertisementUrl'>
+			  $!advertisement.Url<span class="ui-icon ui-icon-arrowthick-1-ne" style='display:inline-block;'></span>
+			</a>
+        #else 
+			#if($advertisement.HtmlText)
+				A custom ad was used.
+			#else
+				There is no url 
+			#end
+        #end
+      </td>
+      <td class='actionArea'>
+        <span style='font-size:0.7em;'>
+          <a href="edit.castle?id=$!{advertisement.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-pencil"></span>
+          </a>
+          <a href="delete.castle?id=$!{advertisement.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-trash"></span>
+          </a>
+        </span>
+
+      </td>
+    </tr>
+    #set ($c=$c+1)
+    #end
+  </tbody>
+</table>
+
+<table width="50%" border="0">
+  <tr>
+    <td>Showing $advertisement.FirstItem - $advertisement.LastItem of $advertisement.TotalItems</td>
+    <td align="right">
+      #if($advertisement.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$advertisement.HasPrevious) first #end
+      #if($advertisement.HasPrevious) | $PaginationHelper.CreatePageLink( $advertisement.PreviousIndex, "prev" ) #end
+      #if(!$advertisement.HasPrevious) | prev #end
+      #if($advertisement.HasNext) | $PaginationHelper.CreatePageLink( $advertisement.NextIndex, "next" ) #end
+      #if(!$advertisement.HasNext) | next #end
+      #if($advertisement.HasNext) | $PaginationHelper.CreatePageLink( $advertisement.LastIndex, "last" ) #end
+      #if(!$advertisement.HasNext) | last #end
+    </td>
+  </tr>
+</table>
+

@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7283782943234",
+                                                "longitude":"-117.166684269905"
+                                                },
+                                    "summary":"The Education Addition, completed in 2007, sits next to Cleveland...",
+                                    "title":"Education Addition (EDAD)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Education Addition (EDAD)</h2><a href='http://localhost:4829/media/download.castle?placeid=58&id=274' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=58&id=274&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=58&id=274' alt='' class='img-main' width='148' height='100'/></a><p>The Education Addition, completed in 2007, sits next to Cleveland Hall and features the latest in innovative teaching technology and classroom facilities. The plaza between Cleveland Addition and Cleveland Hall is a popular place for students to relax, study, and eat.</p><a class='errorReporting' href='?reportError=&place=58' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Education Addition (EDAD)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=58' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>Education Addition (EDAD)</h2><div class='cycleArea'><div class='cycle'><a href='#' class='prev' hidefocus='true'>Prev</a><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=58&id=275' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=58&id=275&m=constrain&h=156' alt='' class='img-main' /></a></li><li><a href='http://localhost:4829/media/download.castle?placeid=58&id=276' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=58&id=276&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div><a href='#' class='next' hidefocus='true'>Next</a></div><div class='navArea'><ul class='cNav'></ul></div></div><a class='errorReporting' href='?reportError=&place=58' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>Education Addition (EDAD)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>First floor</span></li>\r\n<li><strong>ADA Parking</strong><span>NE College Ave and SE Idaho St (south of Cleveland Hall)</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=58' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Education Addition"
+                                            },
+                                    "shapes":  [{}]
+                                }

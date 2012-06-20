@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7320149432288",
+                                                "longitude":"-117.140042682582"
+                                                },
+                                    "summary":"The Beef Barn is...wait for it...a barn that houses beef cattle. ...",
+                                    "title":"Beef Barn (BEEF)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Beef Barn (BEEF)</h2><p>The Beef Barn is...wait for it...a barn that houses beef cattle. Students in animal science raise these cattle to provide tasty food for the campus community.</p><a class='errorReporting' href='?reportError=&place=18' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Beef Barn (BEEF)</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=18' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Beef Barn (BEEF)</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=18' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Beef Barn"
+                                            },
+                                    "shapes":  [{}]
+                                }

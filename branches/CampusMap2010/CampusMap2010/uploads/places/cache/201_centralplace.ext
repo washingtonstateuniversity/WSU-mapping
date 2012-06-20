@@ -1,0 +1,17 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7303593522871",
+                                                "longitude":"-117.170456013338"
+                                                },
+                                    "summary":"Technical support and fabrication shops for engineering and architecture",
+                                    "title":"Thermal-Fluids (THRM)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":"<h2 class='header'>Thermal-Fluids (THRM)</h2><p>The Thermal Fluids Building is home to the technical and fabrication shops that support teaching, design, and advanced research in the College of Engineering and Architecture. The building's name is a bit of an anachronism, as the research that it was built for moved to other lab facilities long ago.</p><a class='errorReporting' href='?reportError=&place=201' >Report error</a>",
+                                            "title":"Thermal-Fluids"
+                                            },
+                                    "shapes":  [{}]
+                                }

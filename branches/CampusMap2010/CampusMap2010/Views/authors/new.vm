@@ -1,0 +1,88 @@
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+<h3>Authorized User</h3>
+<br/>
+<form action="update.castle" method="post" enctype="multipart/form-data" >
+$Form.HiddenField("author.id")
+$Form.HiddenField("image.id") 
+
+
+<p>Name : <br/>
+   #*$Form.TextField("person.name")*#
+  <input type="text" value="$!author.name" name="author.name" id="author_name" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+   
+   <p> Email :<br/>
+   #*$Form.TextField("person.email") *#
+  <input type="text" value="$!author.email" name="author.email" id="author_email" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+  <p>Phone :<br/>
+   #*$Form.TextField("person.phone")*#
+  <input type="text" value="$!author.phone" name="author.phone" id="author_phone" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+  <p>Position :<br/>
+   #*$Form.TextField("person.position")*#
+  <input type="text" value="$!author.position" name="author.position" id="author_position" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+
+
+<p>User Network ID:<br/>
+  #*$Form.TextField("author.Nid")*#
+	<input type="text" value="$!author.Nid" name="author.Nid" id="author_Nid" class="ui-widget ui-widget-content ui-corner-all " /></p>
+
+	#if($controller.canChangeLevel($currentUser))
+	<p> Access Levels :<br/>
+		$Form.Select("author.access_levels.id", $accesslevels, "%{value='Id', text='title', firstoption='-select-',firstoptionvalue=''}") <br/>
+		<div class="right">
+			1.)  A <strong>Contributor</strong> can submit places but can't publish it.<br/>
+			2.)  An <strong>Author</strong> can submit places and publish their own places.<br/>
+			3.)  An <strong>Editor</strong> can submit places, publish their places, and publish anyone elses places also.  Plus a few other admin level items likes classifieds.
+		</div>
+	</p>
+	#end
+
+
+<p>
+  Load Mugshot:<br/>
+  <input class="file" name="newimage" value="image_load" id="author.image.id" type="file" />
+</p>
+<span style="font-size:12px;line-height:12px;">
+	<strong>Note:</strong>
+	<em>Images are auto sized down if they have a width or height of more then 1000px to 1000px;  It will not size up.</em>
+</span>
+#if($author.Images)<br/>
+			#foreach($authorImages in $authorimages)
+
+  <span>
+    Image:<br/>
+    <img id="selectedImage" style="max-width:180px" src="$siteroot/media/download.castle?id=${authorImages.id}&mug=true&m=crop&w=180&h=180" alt=""/>
+  </span>
+  #end
+#end
+<br/>
+<p>Place Types :<br/>
+	<select name="author.place_types[]" id="sections" class="authorSelect" multiple="multiple">
+		#foreach($type in $types)
+			<option class="section" value="$type.id" #if($author.place_types.Contains($type)) selected="selected" #end>$type.Name</option>
+		#end
+	</select>
+</p>
+<p>Categories:<br/>
+	<select name="author.categories[]" id="categories" class="authorSelect" multiple="multiple">
+		#foreach($category in $categories)
+			<option class="section" value="$category.id" #if($author.categories.Contains($category)) selected="selected" #end>$Controller.repeatStr("- ",$category.level) $category.name</option>
+		#end
+	</select>
+</p>
+
+
+
+
+
+
+<p><input type="submit" value="Submit" /></p>
+
+</form>

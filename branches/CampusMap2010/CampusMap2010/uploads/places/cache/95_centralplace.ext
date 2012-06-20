@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7312500190863",
+                                                "longitude":"-117.164028882981"
+                                                },
+                                    "summary":"Holland Library is joined to the newer Terrell Library so that th...",
+                                    "title":"Holland (HOLL)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Holland (HOLL)</h2><a href='http://localhost:4829/media/download.castle?placeid=95&id=168' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=95&id=168&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=95&id=168' alt='' class='img-main' width='148' height='100'/></a><p>Holland Library is joined to the newer Terrell Library so that they function as one. The main library entrance on Terrell Mall serves both buildings (the libraries are also accessible directly from the CUB). Holland-Terrell is the University's main library. It holds more than 2 million books--including many rare and one-of-a-kind items in its Manuscripts, Archives, and Special Collections section--and provides access to nearly unlimited digital knowledge sources. Holland Library is a favorite place for students looking to study in quiet and solitude (and there's plenty of room for group study, too).</p><a class='errorReporting' href='?reportError=&place=95' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Holland (HOLL)</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<li><strong>University Administration &amp; Non-Academic Units</strong><span>Libraries Administration</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=95' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>Holland (HOLL)</h2><div class='cycleArea'><div class='cycle'><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=95&id=169' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=95&id=169&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div></div><div class='navArea'></div></div><a class='errorReporting' href='?reportError=&place=95' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>Holland (HOLL)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Via Terrell Library front entrance (from Terrell Mall)</span></li>\r\n<li><strong>ADA Parking</strong><span>Terrell Library Parking garage (access from Colorado Street)</span></li>\r\n<li><strong>ADA Other</strong><span>Restrooms accessible on ground and first floors only; all restrooms in adjoining Terrell Library are accessible</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=95' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Holland"
+                                            },
+                                    "shapes":  [{}]
+                                }

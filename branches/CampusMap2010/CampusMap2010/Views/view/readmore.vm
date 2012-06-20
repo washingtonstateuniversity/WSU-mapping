@@ -1,0 +1,5 @@
+<a href="list.castle">Back</a>
+ <p>
+    $!view.BodyText
+ </p>
+ 

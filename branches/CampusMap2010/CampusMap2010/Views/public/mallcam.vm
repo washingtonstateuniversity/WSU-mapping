@@ -1,0 +1,158 @@
+<link rel="Stylesheet" type="text/css" href="../content/css/jquery.datepick.css"></link>
+    <link rel="Stylesheet" type="text/css" href="../content/css/datepickstyle.css"></link>
+    <script type="text/javascript" src="../content/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../content/js/jquery.datepick.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+		 $('#new-nav').load('/forecast.weather.gov/MapClick.php?lat=46.7312745&lon=-117.1796158&site=all&smap=1&searchresult=Pullman%2C%20WA%2099163%2C%20USA #container');
+	  
+         });
+</script>
+
+<style  type="text/css">
+#content {
+ padding : 0px;
+}
+body{
+font-size:12px;
+}
+
+</style>
+
+<table style="max-width: 640px; width: 640px; padding: 2px" class="cam_table">
+<tbody><tr>
+<td style="text-align: right; vertical-align: bottom">
+<div id="datebox" style="width: 100%">$nowdate&nbsp$now</div>
+
+<div id="new-nav">
+
+
+</div>
+
+</td>
+</tr>
+<tr>
+<td style="border: 2px solid black; overflow: hidden">
+<center>
+<iframe width="706" height="480" frameborder="0" style="margin:0;padding:0;" src="http://mallcam.wsu.edu/local/view.html"></iframe>
+</center>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top">
+<center><h3 align="left">Current Weather Conditions for Pullman, WA</h3>
+<table style="width: 100%;">
+<tbody><tr>
+<td style="text-align: center; font-size: 1.8em; max-width: 60px; width: 60px">
+<img src="http://weather.gov/weather/images/fcicons/few.jpg" style="margin: 0px; padding: 0px; border: 0px" alt="Weather condition icon"></td>
+<td colspan="2">
+<table style="width: 100%">
+<tbody><tr>
+<th></th>
+<td class="data"></td>
+<th></th>
+<td class="data"></td>
+<th rowspan="2"></th>
+<td class="data" rowspan="2"></td></tr>
+<tr><th></th>
+<td class="data"></td>
+<th></th>
+<td class="data"></td></tr>
+<tr><th></th>
+<td class="data"></td>
+<th></th>
+<td class="data"></td>
+<th></th><td class="data"></td></tr>
+</tbody></table>
+</td>
+</tr>
+<tr><td style="font-weight: bold; font-size:12pt; text-align: center; overflow: visible">
+<br>
+</td></tr>
+<tr>
+<th colspan="3">
+<br>	
+<span style="font-size: x-small"></span>
+</th>
+</tr>
+</tbody></table>
+<hr><table style="width: 100%">
+<tbody><tr>
+	<td style="text-align: center; vertical-align: middle" rowspan="2" class="empty">
+	<img alt="National Weather Service Logo" src="../images/template/nwslogo.jpg"></td>
+    <td style="text-align: center; vertical-align: middle; width: 90%;"></td>
+</tr>
+</tbody></table>
+<table style="width: 100%">
+<tbody><tr>
+    <td>
+    <table style="width: 100%" class="cam_table">
+        <tbody><tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/rasn60.jpg"><br>
+            	               <br>            </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/rasn30.jpg"><br>
+            	               <br>            </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/sn30.jpg"><br>
+            	                <br>           </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/sct.jpg"><br>
+            	               <br>           </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/hi_shwrs30.jpg"><br>
+            	                <br>          </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/sct.jpg"><br>
+            	             <br>           </td>
+		</tr>
+        <tr><td colspan="6"><hr></td>
+        </tr><tr>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/nrasn40.jpg"><br>
+            	                <br>             
+            </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/nsn20.jpg"><br>
+            	                <br>            </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/nsct.jpg"><br>
+            	               <br>         </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/nbkn.jpg"><br>
+            	            <br>           </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/hi_nshwrs40.jpg"><br>
+            	             <br>      </td>
+        	<td style="text-align: center">
+            	<img src="http://www.nws.noaa.gov/weather/images/fcicons/nsct.jpg"><br>
+            	              <br>            </td>
+		</tr>
+        <tr>
+        </tr><tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tbody></table>
+    </td>
+</tr>
+</tbody></table>
+
+</center>
+	</td>
+	</tr>
+</tbody></table>

@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.732603096325",
+                                                "longitude":"-117.154619693756"
+                                                },
+                                    "summary":"Quality is everywhere in this building! USDA researchers and food...",
+                                    "title":"Food Quality",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Food Quality</h2><p>Quality is everywhere in this building! USDA researchers and food scientists in the Food Quality Building study, define, and refine the qualities of food crops ranging from wheat to wine grapes. The WSU Creamery makes ice cream and unique Cougar Cheeses here (including the international award-winning Cougar Gold). And at Ferdinand's Ice Cream Shoppe you can taste the the creamery's delicious results for yourself.</p><a class='errorReporting' href='?reportError=&place=79' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Food Quality</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>Amenities</strong><span>Unisex restroom (first floor)</span></li>\r\n\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n<li><strong>Major Labs/Facilities</strong><span>Western Wheat Quality Laboratory; WSU Creamery</span></li>\r\n\r\n\r\n<li><strong>Special Facilities  Public Venues</strong><span>Ferdinand's Ice Cream Shoppe</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=79' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Food Quality</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Second floor (south side plaza); Ferdinand's Ice Cream Shoppe (first floor, north side)</span></li>\r\n<li><strong>ADA Parking</strong><span>North side, in front of Ferdinand's</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=79' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Food Quality"
+                                            },
+                                    "shapes":  [{}]
+                                }

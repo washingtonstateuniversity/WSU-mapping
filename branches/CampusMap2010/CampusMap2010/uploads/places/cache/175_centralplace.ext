@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7307720217303",
+                                                "longitude":"-117.13653087616"
+                                                },
+                                    "summary":"The E.H. Steffen Center is a 58-acre ecology laboratory. It inclu...",
+                                    "title":"Steffen Ctr (STEF)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Steffen Ctr (STEF)</h2><p>The E.H. Steffen Center is a 58-acre ecology laboratory. It includes forest plantations, wetlands, greenhouses, wildlife ecology facilities, and parts of the unique, highly endangered native Palouse Prairie ecosystem. The Steffen Center's research primarily focuses on wild herbivore and large carnivore nutrition, behavior, and disease prevention. The center also is an outdoor classroom where students get hands-on practice in plant identification, forest and range measurement, habitat evaluation, and more.</p><a class='errorReporting' href='?reportError=&place=175' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Steffen Ctr (STEF)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>Amenities</strong><span>Unisex restrooms (office bldg. and botany greenhouse)</span></li>\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n<li><strong>Research Centers</strong><span>Magpie Forest Ecological Reserve; Wild Ungulate Facility; Bear Research, Education, and Conservation Program</span></li>\r\n\r\n<li><strong>Major Labs/Facilities</strong><span>Endangered Species Lab; Large Carnivore Conservation Lab</span></li>\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=175' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Steffen Ctr (STEF)</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=175' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Steffen Ctr"
+                                            },
+                                    "shapes":  [{}]
+                                }

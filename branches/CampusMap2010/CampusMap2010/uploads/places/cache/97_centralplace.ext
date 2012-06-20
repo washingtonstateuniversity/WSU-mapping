@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.730056856237",
+                                                "longitude":"-117.151983082295"
+                                                },
+                                    "summary":"These greenhouses provide growing space for WSU horticultural res...",
+                                    "title":"Hort Research Greenhouses",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Hort Research Greenhouses</h2><p>These greenhouses provide growing space for WSU horticultural research projects. All sorts of plants, from ornamental flowers to turfgrass to fruits and vegetables, are grown here. Research includes pest/disease prevention, maximizing crop yields, developing new plant varieties for agriculture or ornamental use, and more.</p><a class='errorReporting' href='?reportError=&place=97' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Hort Research Greenhouses</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=97' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Hort Research Greenhouses</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=97' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Hort Research Greenhouses"
+                                            },
+                                    "shapes":  [{}]
+                                }

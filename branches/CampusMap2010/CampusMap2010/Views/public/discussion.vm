@@ -1,0 +1,82 @@
+
+#capturefor(SEO_titling)$!place.Title #if($place.Title) discussions#end#end
+#capturefor(SEO_DISCRIPTION)$!place.subHead#end
+#capturefor(SEO_KEYWORDS)$Controller.Gettags($place.id)#end
+#capturefor(SEO_CANONICAL)$siteroot/discussion/$!place.CustomUrl#end
+
+#if($Flash.message)
+<p style="color: red; font-weight: bold;">
+    $Flash.message
+</p>
+#end
+
+
+#set ($commentCount = $place.Pub_comments.Count)
+#set ($imageCount = $place.Images.Count)
+<div class="headline">$!place.Title</div>
+<div class="subhead"> $!place.subHead</div>
+<div class="byline"> <p>$!place.Teaser</p>By 
+#if($flag)
+#foreach($author in $place.Authors)
+$!author.Name, 
+#end 
+#else 
+#foreach($author in $place.Authors)
+$!author.Name 
+#end 
+#end
+<br/>
+Published: $!place.PublishTime</div><br/>
+<ol id="toc">
+  <li><a href="$siteroot/read/${place.CustomUrl}"><span>Place</span></a></li>
+  <li class="current"><a href="$siteroot/discussion/${place.CustomUrl}"><span>Comments ($commentCount) </span></a></li>
+  #if(${mainImage.Id}&&${mainImage.Id}!=0)<li><a href="$siteroot/place-image/${place.CustomUrl}"><span>Photos ($imageCount) </span></a></li>#end
+</ol>
+<div class="content">
+  #foreach($comment in $Place.comments)
+  #if($comment.published==true)
+    <div class="comments #if($comment.FlagNumber>3)uFlaged #end" id="comment$comment.Id">
+    #if($comment.FlagNumber>3)<h3><span>Click to read <em>+</em></span> User flaged </h3>#end
+    <div #if($comment.FlagNumber>3)class="comment_closed"#end>
+		<form action="$siteroot/public/userFlag.castle" method="post" class="userFlagging" style="float:right; display:line-block;">
+			<input type="hidden" name="comment.Id" value ="$!comment.Id"/>
+			<input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+			<input type="submit" value="" class="userFlagged" title="Flag this post"/>
+		</form>
+      <h5 class="comment" style="float:right; display:line-block;">Posted: <em>$!comment.CreateTime</em>
+      #if($comment.UpdateTime && $comment.CreateTime && ($comment.UpdateTime != $comment.CreateTime))<br/>Updated:<em>$!comment.UpdateTime</em>#end
+      </h5>
+		<h3>#if($comment.commentorName)$!comment.commentorName #else Anonymous #end</h3>
+      <div class="byline">$!comment.Comments</div>
+      </div>
+    </div>
+    <hr/>
+    #end
+  #end
+  <form action="$siteroot/public/submitComment.castle" method="post" id="mainForm" onsubmit="return MySubmitForm();">
+    $Form.HiddenField("comment.Id")
+    <input type="hidden" name="comment.Place.Id" value ="$!{place.Id}"/>
+    <div class=""><h3>Leave the comment here :</h3>
+<p style="display:inline-block;float:left;margin-left: 1px;margin-top: 0;">
+  Name*:<br/>
+  <input type="text" value="" name="comment.commentorName" id="comment_commentorName" style="width:150px;"/>
+</p>
+
+  <p style="display:inline-block;float:left;margin-left:5px;margin-top: 0;">
+    Email:<br/>
+    <input type="text" value="" name="comment.Email" id="comment_Email" style="width:225px;"/>
+  </p>
+  
+  </div>
+    $Form.TextArea("comment.comments")
+    <br/>
+    <script type="text/javascript" src="http://challenge.asirra.com/js/AsirraClientSide.js"></script>
+    <div style="width: 392px;">
+		<h3>You must click all the cats to submit</h3>
+		<h6>Hover over the images in the box, and when you see a cat click it to select the cat.  Click the refresh button at the side if you are unsure if it's a cat or dog.</h6>
+    </div>
+    <input type="submit" value="Submit" />
+    
+  </form>
+  <p><strong>*</strong> Used only with in the the bounds of the privacy policy</p>
+</div>

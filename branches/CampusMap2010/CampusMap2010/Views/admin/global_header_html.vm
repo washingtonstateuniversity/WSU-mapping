@@ -1,0 +1,201 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Wsu Campus Map</title>
+<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+
+
+
+<style type="text/css">
+  body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
+  .at300bs.at15t_compact{background-image:none;}
+  .at300bs{display:inline;}
+</style>
+
+#capturefor(site)
+	#if($Controller.isLocal()==false)
+		http://dev.campusmap.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='/')
+			$siteroot
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl()
+		#else
+			http://dev.campusmap.wsu.edu/
+		#end
+	#end
+#end
+#capturefor(view)$Controller.getView()#end
+#capturefor(mcv_action)$Controller.getAction()#end
+<script type="text/javascript">
+  var siteroot = '$site.Trim()';
+  var view = '$view.Trim()/';
+</script>
+#set($siteroot=$site.Trim().TrimEnd("/"))
+
+<script type="text/javascript">
+  var siteroot = '$site.Trim()/';
+  var view = #if($view!="")'$view.Trim()/'#else""#end;
+  var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
+</script>
+
+<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
+<link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
+<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
+
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
+
+
+<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
+<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
+
+
+<script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.drawingmanager.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.extensions.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
+
+<script type="text/javascript" src="$siteroot/Content/js/jquery.defaultvalue.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript" src="$siteroot/Content/js/map_editor_vars.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_ui__media.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_ui__tinymce.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
+
+<!-- <script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script> -->
+
+
+#if($mcv_action.Trim()=="listings" && $view.Trim()=="media")
+
+<!-- 
+
+THIS IS FOR UPLOADING
+
+-->
+<!-- Bootstrap CSS Toolkit styles -->
+<link rel="stylesheet" href="$siteroot/Content/css/bootstrap_base.css">
+
+<!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+
+<!-- Bootstrap Image Gallery styles -->
+<link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+
+<link rel="stylesheet" href="$siteroot/Content/css/jquery.fileupload-ui.css">
+
+<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="$siteroot/Content/js/file_uploading/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
+
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
+
+
+<script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
+<script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script> 
+
+
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="$siteroot/Content/js/file_uploading/jquery.iframe-transport.js"></script>
+
+<!-- The basic File Upload plugin -->
+<script src="$siteroot/Content/js/file_uploading/jquery.fileupload.js"></script>
+
+<!-- The File Upload file processing plugin -->
+<script src="$siteroot/Content/js/file_uploading/jquery.fileupload-fp.js"></script>
+
+<!-- The File Upload user interface plugin -->
+<script src="$siteroot/Content/js/file_uploading/jquery.fileupload-ui.js"></script>
+
+<!-- The File Upload jQuery UI plugin 
+<script src="$siteroot/Content/js/file_uploading/jquery.fileupload-jui.js"></script> -->
+
+<!-- The localization script -->
+<script src="$siteroot/Content/js/file_uploading/locale.js"></script>
+
+<!-- The main application script -->
+<script src="$siteroot/Content/js/file_uploading/main.js"></script>
+
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+<!--[if gte IE 8]><script src="$siteroot/Content/js/file_uploading/jquery.xdr-transport.js"></script><![endif]-->
+
+
+
+#end
+
+
+
+
+
+
+
+
+
+
+
+
+#if($admin_js)${admin_js}#end
+
+<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
+<!-- WSU theme -->
+<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
+<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
+
+
+
+<style type='text/css'>
+  .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
+  .ui-button { margin-left: -1px; }
+  .ui-button-icon-only .ui-button-text { padding: 0.35em; }
+  .ui-autocomplete-input { margin: 0; padding:0.4em 0 0.4em 0.43em; }
+  .optionsLink{}
+  .options{}
+  .optionsLink:hover .options{}
+</style>
+<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
+<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
+<style>
+#wsu_ui.admin.media.listings .placelist.ui-tabs .ui-tabs-nav li {
+    margin-top: 7px !important;
+}
+
+#wsu_ui.admin.place.list .placelist.ui-tabs .ui-tabs-nav li {
+     margin-top: 4px !important;
+}
+
+
+</style>
+
+<!-- EOF UI SCRIPTS -->
+<!--script for print tool-->
+<script src="http://images.wsu.edu/javascripts/print.js" type="text/javascript"></script>
+

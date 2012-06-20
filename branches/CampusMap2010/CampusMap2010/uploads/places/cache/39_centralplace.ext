@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7304687840689",
+                                                "longitude":"-117.164246434918"
+                                                },
+                                    "summary":"College Hall holds the Department of Anthropology, an anthropolog...",
+                                    "title":"College Hall (COLL)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>College Hall (COLL)</h2><a href='http://localhost:4829/media/download.castle?placeid=39&id=216' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=39&id=216&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=39&id=216' alt='' class='img-main' width='148' height='100'/></a><p>College Hall holds the Department of Anthropology, an anthropology museum, archaeological research space, and several classrooms. One of the University's most classically styled academic buildings, College Hall anchors Terrell Mall to the historic core of campus.</p><a class='errorReporting' href='?reportError=&place=39' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>College Hall (COLL)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n<li><strong>Research Centers</strong><span>Plateau Center for American Indian Study</span></li>\r\n\r\n\r\n\r\n\r\n<li><strong>Special Facilities  Public Venues</strong><span>Anthropology Museum</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=39' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>College Hall (COLL)</h2><div class='cycleArea'><div class='cycle'><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=39&id=217' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=39&id=217&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div></div><div class='navArea'></div></div><a class='errorReporting' href='?reportError=&place=39' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>College Hall (COLL)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Ground floor, south side</span></li>\r\n<li><strong>ADA Parking</strong><span>Library Garage</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=39' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"College Hall"
+                                            },
+                                    "shapes":  [{}]
+                                }

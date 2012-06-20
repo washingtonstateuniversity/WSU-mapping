@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7295512707967",
+                                                "longitude":"-117.16609954834"
+                                                },
+                                    "summary":"Heald Hall is welded to Eastlick Hall, so that they function toge...",
+                                    "title":"Heald Hall (HLD)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Heald Hall (HLD)</h2><a href='http://localhost:4829/media/download.castle?placeid=90&id=174' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=90&id=174&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=90&id=174' alt='' class='img-main' width='148' height='100'/></a><p>Heald Hall is welded to Eastlick Hall, so that they function together and are often simply called Heald/Eastlick. Heald Hall holds classrooms, an auditorium, high-tech plant growth chambers, and the Ownbey Herbarium, which contains a botanical collection that reaches back to the days of Lewis and Clark. The building itself is one of the more unfortunate pieces of modernist architecture on campus, but it's what goes on inside that's important--and this awkward building is home to some of the University's best teaching and research.</p><a class='errorReporting' href='?reportError=&place=90' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Heald Hall (HLD)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n<li><strong>Research Centers</strong><span>Ownbey Herbarium</span></li>\r\n\r\n\r\n\r\n\r\n<li><strong>Special Facilities  Public Venues</strong><span>Heald Auditorium</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=90' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Heald Hall (HLD)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>First and second floors</span></li>\r\n<li><strong>ADA Parking</strong><span>West of building; Eastlick northeast parking lot</span></li>\r\n<li><strong>ADA Other</strong><span>TDD phone, room 100</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=90' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Heald Hall"
+                                            },
+                                    "shapes":  [{}]
+                                }

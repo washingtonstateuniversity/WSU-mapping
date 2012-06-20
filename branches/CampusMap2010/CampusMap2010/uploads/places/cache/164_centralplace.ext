@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7294924387286",
+                                                "longitude":"-117.153214216232"
+                                                },
+                                    "summary":"The Seed House is where seeds are sorted, shipped, and prepared f...",
+                                    "title":"Seed House (SEED)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Seed House (SEED)</h2><p>The Seed House is where seeds are sorted, shipped, and prepared for storage. Many of the seeds processed here come from (or go to) WSU research farms, where new varieties of wheat and other plants are constantly being researched and improved.</p><a class='errorReporting' href='?reportError=&place=164' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Seed House (SEED)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>Amenities</strong><span>Unisex restrooms (ground and first floor)</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=164' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Seed House (SEED)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>Front entrance</span></li>\r\n<li><strong>ADA Parking</strong><span>West side of building</span></li>\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=164' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Seed House"
+                                            },
+                                    "shapes":  [{}]
+                                }

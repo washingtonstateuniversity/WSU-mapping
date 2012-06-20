@@ -1,0 +1,30 @@
+<div style="width:730px; font-family:georgia;">
+<img src="flag.jpg"/><br/>
+Use this form to upload your resume and writing samples. Please note that while writing samples are not <strong>required</strong>
+per se, they are strongly encouraged so we can determine your skill level.<br /><br />
+<strong>Please name your files in the following fashion:<br/></strong>
+<em><br/>LASTNAMEfirstnameResume.xxx
+<br/>LASTNAMEfirstnameSample1.xxx<br /></em>
+<br/>Please note that we can only accept PDF or DOC files. We cannot read DOCX files, please do not send them.<br /><br />
+
+<form action="resumesave.castle" enctype="multipart/form-data" method="post">
+$Form.HiddenField("applicant.Id")
+<table>
+<tr><td>Resume</td>
+<td><input name="resume" 
+value ="resume_load" type="file" size="30" src="$siteroot/public/download.castle?id=$applicant.id" /></td></tr>
+<tr><td>Writing sample 1</td>
+<td><input name="sample1"  type="file"  size="30" src="$siteroot/public/download.castle?id=$applicant.id" /></td></tr>
+<tr><td>Writing sample 2</td>
+<td><input name="sample2"  type="file"  size="30" src="$siteroot/public/download.castle?id=$applicant.id" /></td></tr>
+<tr><td>Writing sample 3</td>
+<td><input name="sample3"  type="file"  size="30" src="$siteroot/public/download.castle?id=$applicant.id" /></td></tr>
+</table>
+<br /><br/>
+<input type="submit" value="Upload">
+
+
+</form>
+After you hit Upload, your files will be uploaded to our servers, where our editors will review them. You should hear from us shortly.
+</div>
+

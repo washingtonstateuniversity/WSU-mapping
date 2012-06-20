@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7308823291884",
+                                                "longitude":"-117.151857018471"
+                                                },
+                                    "summary":"This greenhouse provides growing space and research plots for fac...",
+                                    "title":"IBC Grnhse",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>IBC Grnhse</h2><p>This greenhouse provides growing space and research plots for faculty in the WSU Institute of Biological Chemistry. The specimens grown here are used in research that probes the inner molecular workings of plant life.</p><a class='errorReporting' href='?reportError=&place=101' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>IBC Grnhse</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>Amenities</strong><span>Unisex restroom (first floor)</span></li>\r\n\r\n<li><strong>Research Labs</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=101' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>IBC Grnhse</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=101' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"IBC Grnhse"
+                                            },
+                                    "shapes":  [{}]
+                                }

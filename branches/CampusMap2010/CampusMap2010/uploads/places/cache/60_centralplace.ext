@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7297902754137",
+                                                "longitude":"-117.170246243478"
+                                                },
+                                    "summary":"Though its name still denotes engineering, this building now hous...",
+                                    "title":"Eng Lab Bldg (ELB)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Eng Lab Bldg (ELB)</h2><p>Though its name still denotes engineering, this building now houses design studios for interior design and the apparel merchandising and design program.</p><a class='errorReporting' href='?reportError=&place=60' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Eng Lab Bldg (ELB)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=60' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Eng Lab Bldg (ELB)</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=60' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Eng Lab Bldg"
+                                            },
+                                    "shapes":  [{}]
+                                }

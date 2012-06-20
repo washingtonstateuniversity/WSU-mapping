@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7298821999844",
+                                                "longitude":"-117.161663174629"
+                                                },
+                                    "summary":"Center for Undergrad Education: classrooms, writing lab, advising, faculty offices",
+                                    "title":"Smith Center for Undergraduate Education (CUE)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Smith Center for Undergraduate Education (CUE)</h2><a href='http://localhost:4829/media/download.castle?placeid=50&id=93' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=93&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=50&id=93' alt='' class='img-main' width='148' height='100'/></a><p>The CUE (officially named the Smith Center for Undergraduate Education) is dedicated entirely to undergraduate education. Many of the University's general education courses are taught here. The CUE also houses some important student services--including the Pre-Health &amp; STEM Advising Center, which advises all students, in any major, who are preparing for careers in health care and related areas; and the Writing Center, which offers free walk-in peer tutoring to help all students with any type of writing.</p><a class='errorReporting' href='?reportError=&place=50' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Smith Center for Undergraduate Education (CUE)</h2><p>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n\r\n\r\n<li><strong>Shopping, Dining, Etc.</strong><span>Cyber Cafe</span></li>\r\n\r\n\r\n\r\n<li><strong>Student Services   Advising</strong><span>Pre-Health Advising; Writing Center</span></li>\r\n<li><strong>University Administration &amp; Non-Academic Units</strong><span>CougTech (computing & networking help desk)</span></li>\r\n\r\n\r\n</ul>\r\n</p><a class='errorReporting' href='?reportError=&place=50' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>Smith Center for Undergraduate Education (CUE)</h2><div class='cycleArea'><div class='cycle'><a href='#' class='prev' hidefocus='true'>Prev</a><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=50&id=94' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=94&m=constrain&h=156' alt='' class='img-main' /></a></li><li><a href='http://localhost:4829/media/download.castle?placeid=50&id=95' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_v'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=95&m=constrain&h=156' alt='' class='img-main' /></a></li><li><a href='http://localhost:4829/media/download.castle?placeid=50&id=98' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=98&m=constrain&h=156' alt='' class='img-main' /></a></li><li><a href='http://localhost:4829/media/download.castle?placeid=50&id=99' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=99&m=constrain&h=156' alt='' class='img-main' /></a></li><li><a href='http://localhost:4829/media/download.castle?placeid=50&id=100' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_v'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=50&id=100&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div><a href='#' class='next' hidefocus='true'>Next</a></div><div class='navArea'><ul class='cNav'></ul></div></div><a class='errorReporting' href='?reportError=&place=50' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>Smith Center for Undergraduate Education (CUE)</h2><p>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>All entrances are ADA accessible</span></li>\r\n<li><strong>ADA Parking</strong><span>CUE parking garage (access from Stadium Way)</span></li>\r\n\r\n\r\n</ul>\r\n</p><a class='errorReporting' href='?reportError=&place=50' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"CUE"
+                                            },
+                                    "shapes":  [{}]
+                                }

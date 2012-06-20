@@ -1,0 +1,29 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7319780376889",
+                                                "longitude":"-117.15131521225"
+                                                },
+                                    "summary":"The Plant Growth Center includes greenhouses, controlled environm...",
+                                    "title":"Plant Growth Ctr",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>Plant Growth Ctr</h2><p>The Plant Growth Center includes greenhouses, controlled environmental growth rooms, and growth chambers. It serves the College of Agricultural, Human, and Natural Resource Sciences (CAHNRS) and the University's USDA Agricultural Research Center with space for both teaching and research.</p><a class='errorReporting' href='?reportError=&place=150' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>Plant Growth Ctr</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<li><strong>Research Centers</strong><span>CAHNRS Plant Growth Facilities; USDA/ARS</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=150' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                                {
+                                                    "block":"<h2 class='header'>Plant Growth Ctr</h2>\r\n\r\n<ul>\r\n\r\n\r\n\r\n\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=150' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"Plant Growth Ctr"
+                                            },
+                                    "shapes":  [{}]
+                                }

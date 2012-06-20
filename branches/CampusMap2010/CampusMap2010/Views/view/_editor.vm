@@ -1,0 +1,705 @@
+#capturefor(formbuttons)
+    <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
+    <input type="submit" value="#if($view.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($view.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
+#end
+
+
+
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
+  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+      <a href="#tabs_Basic">Basic</a>
+    </li>
+   <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+      <a href="#tabs_Options">Options</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_SAMPLE">Map Preview</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_Text">Text</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_Detail">Detail</a>
+    </li>
+     #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
+      <a href="#tabs_FIELDS">Fields</a>
+    </li>   #end
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_IMAGES">Images</a>
+    </li>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_OUTPUT">Output</a>
+    </li>
+    #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-top">
+      <a href="#tabs_COMMENTS">Comments</a>
+    </li>#end
+  </ul>
+  
+<form action="update.castle" method="post" id="editor_form">
+
+  <div id="tabs_Basic" class="mainAreaTabs">
+		$formbuttons
+		<p class="validateTips">* fields are required.</p>
+        $Form.HiddenField("view.id")
+		#if( $view.id==0 || $view.tmp)
+			<input type="hidden" name="forced_tmp" value="1" />
+		#end
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Name</strong></label><br/>
+				<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Commentable</strong></label><br/>
+				<input type="checkbox" name="view.commentable" id="commentable" value="$!view.commentable" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Sharable</strong></label><br/>
+				<input type="checkbox" name="view.sharable" id="sharable" value="$!view.sharable" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+		</fieldset>
+		<fieldset style="position:relative;">
+			<legend>Dimensions</legend>
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Width</strong></label><br/>
+				<input type="text" name="view.width" id="width" value="$!view.width" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Height</strong></label><br/>
+				<input type="text" name="view.height" id="height" value="$!view.height" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+			<h6><em><strong>NOTE:</strong>You may resize the map thru the Preview tab by simply draging the corner of the map to the size you wish to see</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<legend>Center</legend>
+			<div class="col2"  style="">	
+				<label for="Lat"><strong>Latitude</strong></label><br/>
+				<input type="text" name="Length" id="Lat" value="$!lat" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+			<div class="col2"  style="">
+				<label for="Long"><strong>Longitude</strong></label><br/>
+				<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" />
+			</div><br/> 
+			<h6><em><strong>NOTE:</strong> by draging the map with drag mode on thru the Preview tab and simple draging the map to the view you wish to see</em></h6>
+		</fieldset>
+		<fieldset><legend>Places</legend>
+			<label for="name">Select Places Objects to load in the map.</label><br/>
+			<select name="view.places[]" id="placeShape" multiple="multiple" size="15">   
+				<option class="geometric" value="" >Select an optional shape.</option> 
+				#foreach($place in $places)
+					<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
+				#end
+			</select>
+		</fieldset>
+     $formbuttons
+    <div class="clear"></div>
+  </div>
+  
+ <div id="tabs_Options" class="mainAreaTabs">
+		$formbuttons <div class="clear"></div>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="backgroundColor"><strong>Background Color</strong></label><br/>
+				<input type="text" name="view.options.backgroundColor" id="backgroundColor" value="$!view.options.backgroundColor" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="disableDefaultUI"><strong>Disable Default UI</strong></label><br/>
+				<input type="checkbox" name="view.options.disableDefaultUI" id="disableDefaultUI" value="true" #if($view.options.disableDefaultUI)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>If true (checked), disables all default UI. May be overridden individually but is enabled by default</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="draggable"><strong>Draggable state</strong></label><br/>
+				<input type="checkbox" name="view.options.draggable" id="draggable" value="false" #if(!$view.options.disableDefaultUI)checked="checked"#end class="text ui-widget-content ui-corner-all" />			
+			</div>
+			<h6><em>If false (checked), prevents the map from being dragged. Dragging is enabled by default.</em></h6>
+		</fieldset>		
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="draggableCursor"><strong>Draggable Cursor</strong></label><br/>
+				<input type="text" name="view.options.draggableCursor" id="draggableCursor" value="$!view.options.draggableCursor" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The name or url of the cursor to display on a draggable object.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="heading"><strong>Heading</strong></label><br/>
+				<input type="text" name="view.options.heading" id="heading" value="$!view.options.heading" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="keyboardShortcuts"><strong>Disable Keyboard Shortcuts</strong></label><br/>
+				<input type="checkbox" name="view.options.keyboardShortcuts" id="keyboardShortcuts" value="false" #if($view.options.keyboardShortcuts)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (checked), prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.</em></h6>
+		</fieldset>	
+		
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="mapMaker"><strong>Use Map Maker Tiles</strong></label><br/>
+				<input type="checkbox" name="view.options.mapMaker" id="mapMaker" value="true" #if($view.options.mapMaker)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If true (checked), Map Maker tiles should be used instead of regular tiles. Disabled by default.</em></h6>
+		</fieldset>	
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="mapTypeId"><strong>Map Type Control Options</strong></label><br/>
+				<select name="view.options.mapTypeId" >
+				<option class="author" value="ROADMAP" #if($!{view.options.mapTypeId} || ${view.options.mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
+				<option class="author" value="SATELLITE" #if(${view.options.mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
+				<option class="author" value="HYBRID" #if(${view.options.mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>
+				<option class="author" value="TERRAIN" #if(${view.options.mapTypeId}=="TERRAIN") selected="selected" #end>TERRAIN</option>
+			</select>
+			</div> 
+			<h6><em>The initial Map type. Required and defaults to ROADMAP.</em></h6>
+		</fieldset>
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="zoom"><strong>Zoom</strong></label><br/>
+				<input type="text" name="view.options.zoom" id="zoom" value="$!view.options.zoom" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial Map zoom level.</em></h6>
+		</fieldset>		
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="maxZoom"><strong>Map maximum Zoom</strong></label><br/>
+				<input type="text" name="view.options.maxZoom" id="maxZoom" value="$!view.options.maxZoom" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="minZoom"><strong>Map minimum Zoom</strong></label><br/>
+				<input type="text" name="view.options.minZoom" id="maxZoom" value="$!view.options.minZoom" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="noClear"><strong>Clear Map Divs</strong></label><br/>
+				<input type="checkbox" name="view.options.noClear" id="noClear" value="true" #if($view.options.noClear)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If true (checked), do not clear the contents of the Map div. Disabled by default.</em></h6>
+		</fieldset>	
+
+
+
+
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="mapTypeControl"><strong>Map Type Control</strong></label><br/>
+				<input type="checkbox" name="view.options.mapTypeControl" id="mapTypeControl" value="true" #if($view.options.mapTypeControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Map type control state. Enabled by default.</em></h6>
+		</fieldset>			
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="mapTypeControlOptions"><strong>Map Type Control Options</strong></label><br/>
+				<input type="text" name="view.options.mapTypeControlOptions" id="mapTypeControlOptions" value="$!view.options.mapTypeControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Map type control.</em></h6>
+		</fieldset>
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="overviewMapControl"><strong>Overview Map Control</strong></label><br/>
+				<input type="checkbox" name="view.options.overviewMapControl" id="overviewMapControl" value="true" #if($view.options.overviewMapControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Overview Map control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="overviewMapControlOptions"><strong>Overview Map Control Options</strong></label><br/>
+				<input type="text" name="view.options.overviewMapControlOptions" id="overviewMapControlOptions" value="$!view.options.overviewMapControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Overview Map control.</em></h6>
+		</fieldset>
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="panControl"><strong>Pan Control</strong></label><br/>
+				<input type="checkbox" name="view.options.panControl" id="panControl" value="true" #if($view.options.panControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Pan control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="panControlOptions"><strong>Pan Control Options</strong></label><br/>
+				<input type="text" name="view.options.panControlOptions" id="panControlOptions" value="$!view.options.panControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Pan control.</em></h6>
+		</fieldset>
+
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="rotateControl"><strong>Rotate Control</strong></label><br/>
+				<input type="checkbox" name="view.options.rotateControl" id="rotateControl" value="true" #if($view.options.rotateControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Rotate control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="rotateControlOptions"><strong>Rotate Control Options</strong></label><br/>
+				<input type="text" name="view.options.rotateControlOptions" id="rotateControlOptions" value="$!view.options.rotateControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Rotate control.</em></h6>
+		</fieldset>
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="scaleControl"><strong>Scale Control</strong></label><br/>
+				<input type="checkbox" name="view.options.scaleControl" id="rotateControl" value="true" #if($view.options.scaleControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Scale control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="scaleControlOptions"><strong>Scale Control Options</strong></label><br/>
+				<input type="text" name="view.options.scaleControlOptions" id="scaleControlOptions" value="$!view.options.scaleControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Scale control.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="streetView"><strong>Street Control</strong></label><br/>
+				<input type="text" name="view.options.streetView" id="streetView" value="$!view.options.streetView" class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Street control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="streetViewControl"><strong>Street Control Options</strong></label><br/>
+				<input type="checkbox" name="view.options.streetViewControl" id="streetViewControl"  value="true" #if($view.options.streetViewControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Street control.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="zoomControl"><strong>Zoom Control</strong></label><br/>
+				<input type="checkbox" name="view.options.zoomControl" id="zoomControl" value="true" #if($view.options.zoomControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Zoom  control state. Enabled by default.</em></h6>
+		</fieldset>
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="zoomControlOptions"><strong>Zoom Control Options</strong></label><br/>
+				<input type="text" name="view.options.zoomControlOptions" id="zoomControlOptions" value="$!view.options.zoomControlOptions" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display options for the Zoom control.</em></h6>
+		</fieldset>
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="scrollwheel"><strong>Scrollwheel Zoom Control</strong></label><br/>
+				<input type="checkbox" name="view.options.zoomControl" id="zoomControl" value="true" #if($view.options.zoomControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>If false (un-checked), this will disabled the Scrollwheel Zoom  control state. Enabled by default.</em></h6>
+		</fieldset>
+
+
+		<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="tilt"><strong>tilt Control</strong></label><br/>
+				<input type="text" name="view.options.tilt" id="tilt" value="$!view.options.tilt" class="text ui-widget-content ui-corner-all" />
+			</div>
+			<h6><em>The angle of incidence of the map as measured in degrees from the viewport plane to the map plane. The only currently supported values are 0, indicating no angle of incidence (no tilt), and 45, indicating a tilt of 45deg;. 45deg; imagery is only available for SATELLITE and HYBRID map types, within some locations, and at some zoom levels.</em></h6>
+		</fieldset>				
+
+
+			<fieldset style="position:relative;">
+			<div class="col2"  style="">	
+				<label for="styles"><strong>Map styles</strong></label><br/>
+				<input type="text" name="view.options.styles" id="styles" value="$!view.options.styles" class="text ui-widget-content ui-corner-all" />
+			</div> 
+			<h6><em>The initial display styles options for the map.</em></h6>
+		</fieldset>
+	
+		
+		
+		
+		
+		
+		
+     $formbuttons
+    <div class="clear"></div>
+  </div>
+  
+  
+<div id="tabs_SAMPLE" class="mainAreaTabs">
+	$formbuttons <div class="clear"></div>
+
+<style>
+	#resizable { width: 150px; height: 150px; padding: 0.5em; }
+	#resizable h3 { text-align: center; margin: 0; }
+	.ui-resizable-helper { border: 2px dotted #00F; }
+	</style>
+		
+		#if($view.height>0)
+			#set($height = $view.height)
+		#else
+			#set($height = 520)
+		#end
+		#if($view.width>0)
+			#set($width = $view.width)
+		#else
+			#set($width = 425)
+		#end
+		
+		<div id="place_drawing_map" style="width:${width}px; height:${height}px;"></div>
+	$formbuttons
+	<div class="clear"></div>
+  <br/>    
+</div>
+  
+  
+  <div id="tabs_Text" class="mainAreaTabs">
+$formbuttons
+
+	<style>
+	#dialog label, #dialog input { display:block; }
+	#dialog label { margin-top: 0.5em; }
+	#dialog input, #dialog textarea { width: 95%; }
+	#tabs { margin-top: 1em; }
+	#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+	#add_tab { cursor: pointer; }
+	</style>
+
+
+
+<div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+$formbuttons
+
+
+			<h3>Summary :</h3>
+			#*$Form.TextArea("view.summary")*#
+			<textarea id="place_summary" name="view.summary"  class="tinyEditor">$!view.summary</textarea>
+						<br/>
+			<hr/>
+			<h3>Short codes <a href="#" title="show" id="shortcode">+</a></h3>
+<div id="shortcodes">
+
+	#foreach($short_code in $short_codes)
+		$short_code<br/>
+	#end
+	
+</div>
+<h6><em>When using the short codes, adding the ! mark between the $ and { ( ie: &#36;!{notes_comments} ) will let the code retrun nothing if there is a value is unset.</em></h6>
+			<br/>
+			<hr/>
+			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!view.infoTitle" placeholder="Title to show at top of each tab" name="view.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="view.hideTitles" >
+				<option class="author" value="true" #if(${view.hideTitles}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${view.hideTitles}) selected="selected" #end>No</option>
+			</select></label>
+			<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the view.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
+			<br/>
+			<hr/>
+			<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label>Enable: <select name="view.autoAccessibility" >
+				<option class="author" value="true" #if(${view.autoAccessibility}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${view.autoAccessibility}) selected="selected" #end>No</option>
+			</select></label>
+			<h6><em>By using the Auto Accessibility feature, a default template is used to display all feilds defined.  You can always use the short codes and disableing this to design your own tab layout.</em></h6>
+			<hr/>
+			<br/>
+			<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<li class="ui-state-default ui-corner-top nonsort"><a href="#dyno_tab1">Overview</a></li>
+				#set($T = 0)
+				#foreach($tab in $tabs) 
+					<li class="ui-state-default ui-corner-top">
+						<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
+						<input type="hidden" name="tabs[$T].id" value="" />
+						<input type="hidden" name="tabs[$T].title" value="$!tab.title" /> 
+						<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' />
+						<span class='ui-icon ui-icon-close'>Remove Tab</span>
+					</li>
+					#set($T = $T+1)
+				#end
+			</ul>
+			<div id="dyno_tab1">
+				<h3>Details:</h3>
+				<textarea id="place_details" name="view.details"  class="tinyEditor full">$!view.details</textarea>
+			</div>
+			#set($T = 0)
+			#foreach($tab in $tabs) 
+				<div id="dyno_tabs_$T">
+					<textarea id='tab_$T' class='tinyEditor dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
+				</div>
+				#set($T = $T+1)
+			#end
+		</div>
+		$formbuttons
+    <div class="clear"></div>
+  </div>
+  
+  
+  <div id="tabs_Detail" class="mainAreaTabs">
+$formbuttons <div class="clear"></div>
+ 	#if($Controller.canPublish($loginUser))
+		<div id="StatusDiv">
+		  <h3 style="display:inline-block;">Place Status:</h3>
+		  $Form.Select("view.status.id", $statuslists, "%{value='id', text='title'}")
+		  <h6><em>Changing this will tell whether or not the public can see this place in a map view.</em></h6>
+		</div>
+		<hr/>
+	#end
+	
+		<div id="publicDiv">
+		  <h3 style="display:inline-block;">Public:</h3>
+			<select name="view.isPublic" >
+				<option class="author" value="true" #if(${view.isPublic}) selected="selected" #end>Yes</option>
+				<option class="author" value="false" #if(!${view.isPublic}) selected="selected" #end>No</option>
+			</select>
+		  <h6><em>Changing this will tell whether or not the public can see this place in a map view <strong>even thou it's published</strong> ie: Internal to WSU only.</em></h6>
+		</div>
+		<hr/>
+	
+	
+    <div id="AuthorDiv">
+      <h3>Authors</h3>
+      <h6><em>Select or create new author (if one isn't already created)</em></h6>
+      #set($count = 0)
+      #set($id = 0)
+      #foreach($placeauthor in $placeauthors)
+      <div id="div$placeauthor.id">
+        <select name="Authors[$!count].id" id="author$placeauthor" class="authorSelect">
+          <option class="" value="">-select-</option>
+          #foreach($author in $authors)
+          <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
+          #set($id = $placeauthor.id)
+          #end
+        </select>
+
+        #if($id!=0)
+        <a title="$id" rel="$view.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
+          <span class="ui-icon ui-icon-trash"></span>
+        </a>
+        #end
+        <div class="lightLine"></div>
+      </div>
+      #set($count = $count + 1)
+      #end
+
+      #*<select name="authors[$!count].id" id="author">
+        <option class="" value="">-select-</option>
+        #foreach($author in $authors)
+        <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
+        #end
+      </select>*#
+
+
+      <div class="lightLine"></div>
+      <input type="hidden" id="NextAuthorID" name="NextAuthorID" value="$my_var"/>
+
+      <div id="NewAuthorHolderDiv"></div>
+    </div>
+
+    <a style="cursor:pointer;" onclick="AddAuthor()">+ add additional authors</a>
+    
+    $formbuttons
+    <div class="clear"></div>
+  <br/>
+    
+  </div>
+
+#if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
+	$formbuttons <div class="clear"></div>
+        <fieldset><legend>Place fields: </legend>
+
+			#foreach($field in $fields)          
+				$field
+			#between
+			<hr/>
+			#end
+        </fieldset> 
+    $formbuttons
+    <div class="clear"></div>
+  <br/>    
+</div>
+  #end
+    <div id="tabs_IMAGES" class="mainAreaTabs">
+$formbuttons     
+        <div id="ImageDiv">
+            <h3>Place Images</h3>
+        
+            <a href="#" class="insotryupload buttons">Upload Images</a>
+            
+			 
+           
+		   <h6><strong>Note:</strong><em>The first image in the list is the main image.  Any layout that calls the Main image will be calling this first image.  To make another image be the main image, simply drag the desired image before the first.</em></h6>
+		   <span id="img_layout_choice" class="grid"></span><br/>
+            <div id="browserBox" class="ui-corner-all grid">
+                #foreach($placeimage in $placeimages)
+                    #if($placeimage.id!=0)
+                    
+                        <span class="imageBox">
+							<input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" class="placeImages"/>
+                            <img src="/media/download.castle?id=${placeimage.id}&placeid=${view.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
+                            <a title="$placeimage.id" rel="$view.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
+                                <span class="ui-icon ui-icon-trash"></span>
+                            </a>
+                            <span class="imgInfo">
+                              <span><label>Caption:</label><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
+                              <span><label>Credit:</label><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
+                              <span><label>Order:</label>
+                              <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
+                              <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
+                              <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>
+                              </span>
+                            </span>
+                        </span>
+                    #end
+                #end
+                <div class="clearings" style="clear:both;"></div>
+            </div>
+            $formbuttons
+    <div class="clear"></div>
+        </div>
+    </div>
+	<div id="tabs_OUTPUT" class="mainAreaTabs">
+		$formbuttons <div class="clear"></div>
+		<fieldset><legend>Output url: </legend>
+			<label for="name">Alias</label><br/>
+				<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" /><strong><span class="aliasState"></span></strong><br/>
+			<label for="name">URL</label><br/>	
+			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
+		</fieldset> 
+			
+				<fieldset><legend>Output Embed code: </legend>
+					<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=js&quot;&gt;&lt;/script&gt;</pre>
+				</fieldset>
+		$formbuttons
+		<div class="clear"></div>
+	  <br/>    
+	</div>
+</form>
+  #if($comments.TotalItems&&$comments.TotalItems!=0)
+  <div id="tabs_COMMENTS" class="mainAreaTabs">
+
+
+    <h3>Comment List</h3>
+
+    <table width="100%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+      <tr>
+        <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
+        <td align="right">
+          #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
+          | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
+          #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
+          | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
+        </td>
+      </tr>
+    </table>
+    <table  width="100%" class="ui-widget ui-widget-content">
+      <thead>
+        <tr class="ui-widget-header ">
+          <th>Place</th>
+          <th>Comments</th>
+          <th>Flagged</th>
+          <th>Published</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        #set ($c=0)
+        #foreach($comment in $comments)
+        <tr class="#if($c%2>0) even #else odd #end #if($comment.adminRead==false) ui-state-highlight #end ">
+          <td>$!comment.view.id</td>
+          <td>$Text.Fold($Controller.StripHtml($!comment.Comments,false),100)</td>
+          <td #if($comment.Flagged==true) class="ui-state-error" #end>$!comment.Flagged</td>
+          <td>$!comment.published</td>
+          <td class='actionArea'>
+
+            <span style='font-size:0.7em;'>
+              <a href="../comment/edit.castle?id=$!{comment.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-icon ui-icon-pencil"></span>
+              </a>
+              <a href="../comment/delete.castle?id=$!{comment.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-icon ui-icon-trash"></span>
+              </a>
+            </span>
+          </td>
+        </tr>
+        #set ($c=$c+1)
+        #end
+      </tbody>
+    </table>
+    <table width="100%" border="0" >
+      <tr>
+        <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
+        <td align="right">
+          #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
+          | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
+          #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
+          | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
+        </td>
+      </tr>
+    </table>
+  </div>
+  #end
+
+
+</div>
+
+
+
+
+	
+	#if( !$ajaxed )
+		<div style="position:absolute;top:-9999em;left:-9999em; z-index: 1;">
+			<div class="ui-widget ui-widget-content ui-corner-left" >
+			  <div id="searchwell"></div>
+			</div>
+			
+			<div id="mapSearch">
+				<h3>Search types</h3>
+				<h4>Geo coded</h4>
+				<input type="text" value="" id="searchbox"  />
+				<h4>places</h4>
+				<input id="searchTextField" type="text" size="50" placeholder="Anything you want!" />
+				<div>
+					<h4>local search</h4>
+					<input type="text" id="queryInput" value="pullman" style="width: 250px;"/>
+					<input type="button" value="Find" onclick="doSearch()"/>
+				</div>
+			</div>
+		</div>
+	#end
+
+	<div id="page_dialog">
+		<form id="taber" name="">
+			<fieldset class="ui-helper-reset">
+				<label for="tab_title">Title</label>
+				<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+				<label for="tab_content">Content</label>
+				<textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
+			</fieldset>
+		</form>
+	</div>
+
+

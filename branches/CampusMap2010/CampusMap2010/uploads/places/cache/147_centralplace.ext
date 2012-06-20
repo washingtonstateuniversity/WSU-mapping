@@ -1,0 +1,33 @@
+
+                                {
+                                    "position":{
+                                                "latitude":"46.7329192996991",
+                                                "longitude":"-117.163181304932"
+                                                },
+                                    "summary":"The PE Building provides space for physical education classes, re...",
+                                    "title":"PE Bldg (PEB)",
+                                    "style":{
+                                            "icon":"http://localhost:4829/Content/images/map_icons/default_icon_{$i}.png"
+                                            },
+                                    "info":{
+                                            "content":[
+                                            {
+                                                "block":"<h2 class='header'>PE Bldg (PEB)</h2><a href='http://localhost:4829/media/download.castle?placeid=147&id=117' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class='imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=147&id=117&m=crop&w=148&h=100' rel='gouped' title='http://localhost:4829/media/download.castle?placeid=147&id=117' alt='' class='img-main' width='148' height='100'/></a><p>The PE Building provides space for physical education classes, recreation, and collegiate athletics. WSU faculty and staff often exercise here during the lunch hour. The PE Building houses racquetball courts, basketball courts, locker rooms, and Gibb Pool, where the University's swim teams practice and compete.</p><a class='errorReporting' href='?reportError=&place=147' >Report error</a>",
+                                                "title":"Overview"
+                                            },
+                                                {
+                                                    "block":"<h2 class='header'>PE Bldg (PEB)</h2>\r\n\r\n<ul>\r\n\r\n\r\n<li><strong>Classrooms</strong><span>yes</span></li>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<li><strong>Special Facilities  Public Venues</strong><span>Gibb Pool--swimming pool and observation gallery</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=147' >Report error</a>",
+                                                    "title":"What's Here"
+                                                },
+                                        {
+                                            "block":"<h2 class='header'>PE Bldg (PEB)</h2><div class='cycleArea'><div class='cycle'><div class='cWrap'><ul class='items'><li><a href='http://localhost:4829/media/download.castle?placeid=147&id=118' alt=''  hidefocus='true' rel='gouped' class='gouped headImage orientation_h'><span class=' imgEnlarge'></span><img src='http://localhost:4829/media/download.castle?placeid=147&id=118&m=constrain&h=156' alt='' class='img-main' /></a></li></ul></div></div><div class='navArea'></div></div><a class='errorReporting' href='?reportError=&place=147' >Report error</a>",
+                                            "title":"Views"
+                                        },
+                                                {
+                                                    "block":"<h2 class='header'>PE Bldg (PEB)</h2>\r\n\r\n<ul>\r\n\r\n<li><strong>ADA Entrance</strong><span>First floor, east side</span></li>\r\n<li><strong>ADA Parking</strong><span>West side of bldg (in front of Smith Gym); East of bidg ( in front of Hollingbery Fieldhouse)</span></li>\r\n<li><strong>ADA Other</strong><span>No elevators. Use wheelchair lift from first floor, Smith Gym elevators for other floors.</span></li>\r\n\r\n</ul>\r\n<a class='errorReporting' href='?reportError=&place=147' >Report error</a>",
+                                                    "title":"Access"
+                                                }],
+                                            "title":"PE Bldg"
+                                            },
+                                    "shapes":  [{}]
+                                }

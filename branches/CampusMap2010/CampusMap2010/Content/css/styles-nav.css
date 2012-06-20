@@ -1,0 +1,485 @@
+/* CSS for Expandable Navigation only */
+
+
+#nav ul
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+
+/* ---- Structure <<<---------- */
+#search-wrap{
+	float:left;
+	position:absolute;
+	right:0;
+	width:230px;
+	margin-top:9px;
+	position:absolute;
+	z-index:24;
+}
+#search-wrap:hover{
+	background:#68737A;
+}
+#search{
+	float:right;
+	padding:6px 20px 8px 25px;	/*padding:6px 20px 8px 40px;*/
+	background:url(../images/template/search-arrow.png) no-repeat 20px 7px !important ;
+}
+#search-box{
+	float:left;
+	width:220px;
+	padding:8px 10px 8px 10px;
+}
+form#searchForm{
+	padding:0;
+	margin:0;
+	float:left;
+	width:215px;
+}
+#search-field{
+	background:#cdcdcd;
+	float:left;
+}
+input#searchtext{
+	/* width:185px; used this width when we had the search icon next to text box */
+	width:200px;
+	padding:0 5px;
+	margin-top:1px;
+	background:none;
+	border:none;
+	float:left;
+}
+input.radio{
+	margin:6px 1px 0 6px;
+	float:left;
+}
+span.radio-text{
+	margin:8px 6px 0 3px;
+	float:left;
+}
+img#searchbuttonimg{
+	float:left;
+	vertical-align:text-top;
+	padding:0 !important;
+}
+/*******make search box appear**********/
+#search-box{
+	display:none;
+}
+#search-wrap:hover #search-box {
+	display:block;
+}
+/****************************************/
+#nav-wrap {
+	/* background-image: url(http://foundation.wsu.edu/images/bg-nav.jpg); removed by jb */
+	height: 30px;
+	width: 100%;
+	margin: 0 auto;
+	/* border-top: 1px solid #cdcdcd; removed by jb */
+	/* border-bottom: 1px solid #cdcdcd; removed by jb */
+}
+#nav {
+	width:100%; /* 970px, changed by jb */
+	margin: 0px auto;
+	/*border-top: 1px solid #cdcdcd;
+	border-bottom: 1px solid #cdcdcd;*/
+}
+#nav ul li {
+	float:left;
+	text-align:center;
+	line-height:12px;
+	list-style-type:none; /* added by jb */
+}
+li.icon{
+	padding-top:1px;
+	display:none;
+}
+li.icon a{
+	padding-bottom:0 !important;
+	margin:0;
+	line-height:8px;
+}
+#nav ul li.link{
+	width:132px;
+	/*border-right:1px solid #525d65; removed by jb */
+	
+	height:25px;
+	padding-top:5px;
+	background:#526e3f; /*#68737a, changed by jb */
+	display:block;
+}
+/* Styles for Link Text, all added by jb */
+#nav ul li.link a{
+	color:#ffffff;
+	text-decoration:none;
+	font-weight:bold;
+	vertical-align:middle;
+	padding-top:7px;
+	font-size:12px;
+	line-height:17px;
+}
+#nav ul li.on{
+	background:#262a2d; /*#981e32, changed by jb */
+}
+#nav ul li.link:hover, #nav ul li.hoveron{
+	background:#7f9d6a; /*#80878c, changed by jb */
+}
+#nav ul li.link.on:hover{
+	background:#262a2d; /*#981e32, changed by jb */
+}
+#content:first-child {
+   /*float:left;*/
+}
+.expand{
+	/*padding:12px 0;*/
+	margin:0px 0px 0;
+	/*margin-bottom:6px;*/
+	background:#ffffff;
+	float:left;
+	width:926px;
+	display:block;
+	/*border-bottom: 1px solid #cdcdcd;*/
+	position:absolute;
+	z-index:121;
+}
+#something{
+	/*background:url(../images/bg-fauxcolumns-navdrop.jpg) repeat-y;*/
+	width:926px;
+	background: #7f9d6a;
+}
+#something ul, #navsecondary ul{ 
+	/*width:100%;*/
+	text-align:center;
+	padding:0;
+	margin: 0 auto;
+}
+#something li, #navsecondary li{ 
+	display: inline; 
+	list-style-type: none;
+	text-align:center;
+	/*float:left;*/
+}
+#sideNav li, .sideNav li
+{
+	list-style-type: none;
+}
+#something li, #navsecondary li{
+	padding:0 16px;
+	color:#fff;
+}
+#something li a{
+	color:#ffffff;
+	text-decoration:none;
+}
+#something li.address, #navsecondary li.address{
+	padding:0 8px;
+	color:#e7e9ea;
+}
+#something li.phone, #navsecondary li.phone{
+	padding-left:24px;
+}
+#something li a{
+	padding-bottom:10px;
+	color:#fff;
+}
+#something li a:hover{
+	color:#e7e9ea;
+}
+#navsecondary, #something{
+	/* height: 26px; */
+	margin: 0 auto;
+	padding-top:5px;
+	text-align:center;
+}
+#something{
+	height:23px;
+}
+#navsecondary{
+	border-bottom: 1px solid #CDCDCD;
+	width:958px;
+	margin-top:-6px;
+	background:#ffffff;
+	/* padding-top:7px; */
+	float:left;
+}
+#navsecondary li a{
+	text-decoration:none;
+	border-bottom:none;
+}
+/* fix nav display wrapping in Safari on Mac */
+#navsecondary li {
+	padding:0 14px;
+}
+#nav ul li ul { display:none }
+li.on .arrow{
+	position:relative;
+	top:6px;
+	width:100%;
+	height:10px;
+	left:0;
+	z-index: 120;
+	background: url(http://foundation.wsu.edu/images/nav-arrow.png) no-repeat center top;
+}
+.nav_spacer{}
+#vertical_status{
+	display:none;
+}
+/*#something ul{
+	float:left;
+	padding:0px 20px;
+	width:150px;
+}
+#something ul ul{
+	padding: 0px 20px;
+}
+#something ul.last-col{
+	width:148px;
+	border:none;
+}*/
+/*************************************************/
+/*content area - including Main and Secondary*/
+
+#sec #sideNav .navcurrentpage {
+	/*font-weight: bold;*/
+	font-weight:normal;
+	color:#68737a; 
+}
+
+.sec-content{
+	padding:20px 30px 30px;
+	border: 1px solid #cdcdcd;
+	border-top:none;
+	border-right:none;
+	border-left:none;
+}
+.sec-nopad{
+	padding:50px 0 30px;
+	border: 1px solid #cdcdcd;
+	border-top:none;
+	border-right:none;
+	border-left:none;
+}
+.sec-nopadtop
+{
+	padding:none;
+	border: 1px solid #cdcdcd;
+	border-top:none;
+	border-right:none;
+	border-left:none;
+}
+/*#sec .sec-content:last-child{
+	border:none;
+}*/
+.no-border{
+	border:none;
+}
+.news{
+	border-bottom:1px solid #cdcdcd;
+	margin-bottom:20px;
+	padding-bottom:20px;
+}
+.sec-content .news:last-child{
+	border-bottom:none;
+	margin-bottom:0;
+	padding-bottom:0;
+}
+
+/******stuff************/
+.navparentpath {
+color:#981E32;
+}
+.navcurrentpage {
+color:#981E32;
+}
+a.navcurrentpage:hover {
+color:#262A2D;
+}
+a.highlight {
+color:#ABABAB;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* this is a CSS answer to fix the hover/focus '~' and hover/focus '+' problem in safari and chrome */
+html {-webkit-animation: safariSelectorFix infinite 1s;}
+@-webkit-keyframes safariSelectorFix {
+0% {zoom:1;} 
+100% {zoom:1;}
+}
+.menu {padding:0 !important; margin:0 !important; list-style:none; width:100%; font-family:arial, sans-serif; min-height:35px;position:relative;z-index: 15;background-color:#526e3f;}
+.menu li.main {float:left; height:35px; padding-right:1px;margin-bottom: 0 !important;}
+.menu li.main a {display:block; float:left; height:35px; line-height:35px; padding:0 35px; color:#fff !important; text-decoration:none; font-size:12px; font-weight:bold;
+/*-moz-border-radius: 10px 10px 0 0;
+border-radius: 10px 10px 0 0;*/
+}
+.menu li.main a:hover{background-color:#7f9d6a;}
+
+
+
+/*.menu li.t1 a {background:#877666;}
+.menu li.t2 a {background:#b99645;}
+.menu li.t3 a {background:#b38a7b;}
+.menu li.t4 a {background:#c09f7c;}
+.menu li.t5 a {background:#90b490;}
+.menu li.t6 a {background:#b1ba8f;}
+.menu li.t7 a {background:#dea58a;}*/
+
+.menu li.t8 a {padding:0 10px}
+
+.menu li.sub {clear:left; float:left; width:auto/*750px*/; height:0; overflow:hidden; border:0; /*position:relative;*/position: absolute;
+    top: 35px;left:0px; padding-right: 20px;
+-moz-transform-origin: left top;
+-ms-transform-origin: left top;
+-o-transform-origin: left top;
+-webkit-transform-origin: left top;
+transform-origin: left top;
+-moz-transform-origin: left top;
+-ms-transform-origin: left top;
+-o-transform-origin: left top;
+-webkit-transform-origin: left top;
+-moz-transition: height 0.5s ease-in-out;
+-ms-transition: height 0.5s ease-in-out;
+-o-transition: height 0.5s ease-in-out;
+-webkit-transition: height 0.5s ease-in-out;
+transition: height 0.5s ease-in-out;
+-moz-border-radius: 0 0 3px 3px;
+border-radius: 0 0 3px 3px;
+}
+.menu li.t8 {position:absolute; right:0; bottom:0px; height:0; overflow:hidden;
+border-radius: 10px 10px 0 0;
+-moz-transition: height 0.5s ease-in-out;
+-ms-transition: height 0.5s ease-in-out;
+-o-transition: height 0.5s ease-in-out;
+-webkit-transition: height 0.5s ease-in-out;
+transition: height 0.5s ease-in-out;
+}
+
+li.p1 {background:#68737A;}
+li.p2 {background:#68737A;}
+li.p3 {background:#68737A;}
+li.p4 {background:#68737A;}
+li.p5 {background:#68737A;}
+li.p6 {background:#68737A;}
+li.p7 {background:#68737A;}
+
+.menu li.sub.p1{left:0px;}
+.menu li.sub.p2{left:95px;}
+.menu li.sub.p3{left:200px;}
+.menu li.sub.p4{left:300px;}
+.menu li.sub.p5{left:383px;}
+.menu li.sub.p6{left:520px;}
+.menu li.sub.p7{left:652px;}
+
+.menu li.sub dl {float:left; margin:10px -9px 0 10px; padding:10px; background:#fff;
+-moz-border-radius:2px;
+border-radius:2px;
+
+}
+.menu li.sub dt {line-height:18px; font-size:14px; font-weight:bold; padding:0 10px; margin:1px 0;
+-moz-border-radius:3px;
+border-radius:3px;
+}
+.menu li.sub dd a {display:block; /*padding-left:30px;*/ line-height:20px; font-size:12px; text-decoration:none; color:#666;
+-moz-border-radius:2px;
+border-radius:2px;text-align:left
+}
+
+
+.menu li.sub span.bottomLine {position:absolute; left:0px; bottom:0px; display:block; width:100%; background:#000;
+-moz-border-radius:2px;
+border-radius:2px;
+}
+.menu li.sub span.bottomLine p {padding:0 0 0 20px; margin:0; line-height:22px; color:#eee; font-weight:bold; font-size:12px;}
+.menu li.sub span.bottomLine p a:hover {text-decoration:none;}
+.menu li:hover {direction:ltr;}
+
+.menu li dd a:hover {color:#fff !important;}
+
+li.p1 dl {width:auto; height:240px;}
+li.p1 dt {color:#641620; border:1px solid #641620;}
+li.p1 dd {padding:0; margin:0; width:auto;}
+li.p1 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p1 span p a {color:#b99645; font-weight:bold;}
+
+li.p2 dl {width:auto; height:240px;}
+li.p2 dt {color:#641620; border:1px solid #641620;}
+li.p2 dd {padding:0; margin:0; width:auto;}
+li.p2 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p2 span p a {color:#b38a7b; font-weight:bold;}
+
+li.p3 dl {width:auto; height:240px;}
+li.p3 dt {color:#641620; border:1px solid #641620;}
+li.p3 dd {padding:0; margin:0; width:auto;}
+li.p3 dd a:hover {background:#7f9d6a; color:#fff; !important;}
+li.p3 span p a {color:#c09f7c; font-weight:bold;}
+
+li.p4 dl {width:auto; height:240px;}
+li.p4 dt {color:#641620; border:1px solid #641620;}
+li.p4 dd {padding:0; margin:0; width:auto;}
+li.p4 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p4 span p a {color:#90b490; font-weight:bold;}
+
+li.p5 dl {width:auto; height:240px;}
+li.p5 dt {color:#641620; border:1px solid #641620;}
+li.p5 dd {padding:0; margin:0; width:auto;}
+li.p5 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p5 span p a {color:#90b490; font-weight:bold;}
+
+li.p6 dl {width:auto; height:240px;}
+li.p6 dt {color:#641620; border:1px solid #641620;}
+li.p6 dd {padding:0; margin:0; width:auto;}
+li.p6 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p6 span p a {color:#90b490; font-weight:bold;}
+
+li.p7 dl {width:auto; height:240px;}
+li.p7 dt {color:#641620; border:1px solid #641620;}
+li.p7 dd {padding:0; margin:0; width:auto;}
+li.p7 dd a:hover {background:#7f9d6a; color:#fff !important;}
+li.p7 span p a {color:#90b490; font-weight:bold;}
+
+.menu li.t1:hover ~ li.p1 ,.menu li.t2:hover ~ li.p2,.menu li.t3:hover ~ li.p3 ,.menu li.t4:hover ~ li.p4,.menu li.t5:hover ~ li.p5 ,.menu li.t6:hover ~ li.p6 ,.menu li.t7:hover ~ li.p7  {
+-moz-transition: height 0.5s ease-in-out 0.25s
+-ms-transition: height 0.5s ease-in-out 0.25s
+-o-transition: height 0.5s ease-in-out 0.25s
+-webkit-transition: height 0.5s ease-in-out 0.25s
+transition: height 0.5s ease-in-out 0.25s
+}
+li.p1:hover,li.p2:hover,li.p3:hover,li.p4:hover,li.p5:hover ,li.p6:hover ,li.p7:hover  {
+-moz-transition: height 0.25s ease-in-out 0.15s
+-ms-transition: height 0.25s ease-in-out 0.15s
+-o-transition: height 0.25s ease-in-out 0.15s
+-webkit-transition: height 0.25s ease-in-out 0.15s
+transition: height 0.25s ease-in-out 0.15s
+}
+
+.menu li.t1:hover ~ li.p1 ,li.p1:hover{height:240px;}
+.menu li.t2:hover ~ li.p2 ,li.p2:hover{height:240px;}
+.menu li.t3:hover ~ li.p3 ,li.p3:hover{height:240px;}
+.menu li.t4:hover ~ li.p4,li.p4:hover {height:240px;}
+.menu li.t5:hover ~ li.p5,li.p5:hover {height:240px;}
+.menu li.t6:hover ~ li.p6,li.p6:hover {height:240px;}
+.menu li.t7:hover ~ li.p7,li.p7:hover {height:240px;}
+
+.clear {clear:left;}
+
+
+
+
+
+
+
+
+
