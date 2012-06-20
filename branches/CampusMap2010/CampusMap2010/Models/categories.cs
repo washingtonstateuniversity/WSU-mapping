@@ -37,6 +37,13 @@ namespace campusMap.Models
             get { return Level; }
             set { Level = value; }
         }
+        private bool _active;
+        [Property]
+        virtual public bool active
+        {
+            get { return _active; }
+            set { _active = value; }
+        }
         private string _friendly_name;
         [Property]
         virtual public string friendly_name
