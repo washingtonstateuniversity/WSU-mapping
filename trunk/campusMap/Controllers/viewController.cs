@@ -58,9 +58,22 @@ namespace campusMap.Controllers
             map_views view = ActiveRecordBase<map_views>.Find(id);
             PropertyBag["BreakingNews"] = view;
         }
-
+        public void clearConnections()
+        {
+            map_views[] _views = ActiveRecordBase<map_views>.FindAll();
+            foreach (map_views view in _views)
+            {
+                authors author = view.checked_out_by;
+                if ( !author.active || author.LastActive < DateTime.Today.AddHours(3D) )
+                {
+                    view.checked_out_by = null;
+                    ActiveRecordMediator<map_views>.Save(view);
+                }
+            }
+        }
         public void List(int page, int searchId, string status)
         {
+            clearConnections();
             authors user = getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
