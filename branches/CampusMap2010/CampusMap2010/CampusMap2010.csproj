@@ -220,6 +220,7 @@
     <Compile Include="Controllers\tagsController.cs" />
     <Compile Include="Controllers\viewController.cs" />
     <Compile Include="Filters\AuthUserAuthenticationFilter.cs" />
+    <Compile Include="Filters\scriptFilter.cs" />
     <Compile Include="Filters\loggedinFilter.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Models\advertisement.cs" />

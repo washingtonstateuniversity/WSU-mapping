@@ -322,7 +322,7 @@ function loadData(data,callback){
 				  width: "400px"
 				 }
 				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-				,infoBoxClearance: new google.maps.Size(1,50)
+				,infoBoxClearance: new google.maps.Size(20,50)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
@@ -354,31 +354,55 @@ function loadData(data,callback){
 								prev:   '.prev',     next:   '.next', 
 								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 							});
-							$('.errorReporting').click(function(e){
-										e.stopPropagation();
-										e.preventDefault();
-										var trigger=$(this);
-										$.colorbox({
-											html:function(){
-												return '<div id="errorReporting">'+
-															'real form coming soon<br/>'+
-															'<h2>Found an error?</h2>'+
-															'<h3>please provide some infomation to help us correct this issue.</h3>'+
-															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-															'Discribe the issues:<br/>'+
-															'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
-														'</div>';
-											},
-											scrolling:false,
-											opacity:0.7,
-											transition:"none",
-											width:450,
-											height:350,
-											open:true
-										});
-									});
-							prep();
 						}
+						$('.errorReporting').click(function(e){
+									e.stopPropagation();
+									e.preventDefault();
+									var trigger=$(this);
+									$.colorbox({
+										html:function(){
+											return '<div id="errorReporting">'+
+														'real form coming soon<br/>'+
+														'<h2>Found an error?</h2>'+
+														'<h3>please provide some infomation to help us correct this issue.</h3>'+
+														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
+														'Discribe the issues:<br/>'+
+														'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
+													'</div>';
+										},
+										scrolling:false,
+										opacity:0.7,
+										transition:"none",
+										width:450,
+										height:350,
+										open:true
+									});
+								});
+						$('#printPdfs').click(function(e){
+									e.stopPropagation();
+									e.preventDefault();
+									var trigger=$(this);
+									$.colorbox({
+										html:function(){
+											return '<div id="printPdfs">'+
+														'real form coming soon<br/>'+
+														'<h2>Found an error?</h2>'+
+														'<h3>please provide some infomation to help us correct this issue.</h3>'+
+														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
+														'Discribe the issues:<br/>'+
+														'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
+													'</div>';
+										},
+										scrolling:false,
+										opacity:0.7,
+										transition:"none",
+										width:450,
+										height:350,
+										open:true
+									});
+								});
+						
+						prep();
 						$('#taby'+i).tabs();
 						var minHeight=0;
 						$.each($('#taby'+i+' .ui-tabs-panel'),function() {

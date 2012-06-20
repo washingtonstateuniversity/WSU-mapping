@@ -37,8 +37,8 @@
 		#if($ulOpen=="true")</li></ul>#end
 		</li>
 	<li class='$baseClass' ><br/></li>
-	<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>
-	<li class='$baseClass' ><a href="?cat=Printable%20PDF%20Maps">Printable PDF Maps</a></li>
+	#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
+	<li class='$baseClass' ><a id="printPdfs" href="#">Printable PDF Maps</a></li>
 </ul>
 
 <form action="#" id="getDirections">

@@ -185,7 +185,7 @@
 
 
 /* PULL THIS OUT DON"T BELONG HERE */
-#nav #main_nav{}
+#nav #main_nav{padding: 0;}
 #nav #main_nav li{}
 #nav #main_nav ul{display:none;margin-left:14px;}
 #nav #main_nav li.active a {color:#981e32; }
@@ -240,13 +240,13 @@
 
 
 
-#getDirections{margin-top:5px}
-#directionsFrom input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
-    margin-top: 5px;
+#getDirections{/*margin-top:5px;*/}
+#directionsFrom input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left 1px transparent; height:22px;border: medium none;
+    /*margin-top: 5px;*/
     padding: 0 15px 0 5px;
     width: 127px;
 }
-#directionsTo input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left top transparent; height:21px;border: medium none;
+#directionsTo input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left 1px transparent; height:22px;border: medium none;
     margin-top: 5px;
     padding: 0 15px 0 5px;
     width: 127px;

@@ -15,12 +15,29 @@
     using System.Security.Principal;
     using MonoRailHelper;
 
+    using System.Collections;
+    using System.Collections.Generic;
+    using Castle.ActiveRecord.Queries;
+    using System.IO;
+    using System.Net;
+    using NHibernate.Criterion;
+    using System.Xml;
+    using System.Xml.XPath;
+    using System.Text.RegularExpressions;
+    using System.Text;
+    using System.Net.Sockets;
+    using System.Web.Mail;
+    using campusMap.Services;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Utilities;
+    using Newtonsoft.Json.Linq;
+
     using SquishIt.Framework;
 #endregion
 
 namespace campusMap.Filters
 {
-    public class loggedinFilter : IFilter
+    public class scriptFilter : IFilter
     {
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
