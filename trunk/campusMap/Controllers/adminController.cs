@@ -173,7 +173,7 @@ namespace campusMap.Controllers
             authors[] _authors = ActiveRecordBase<authors>.FindAll();
             foreach (authors _author in _authors)
             {
-                if (_author != null && (_author.active && _author.LastActive < DateTime.Today.AddHours(-1)))
+                if (_author != null && (_author.logedin && _author.LastActive < DateTime.Today.AddHours(-1)))
                 {
                    activeUser.Add(_author);
                 }
