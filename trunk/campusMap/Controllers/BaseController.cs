@@ -1,15 +1,15 @@
 #region Directives
-using Castle.MonoRail.Framework;
-using campusMap.Services;
-using System.Text.RegularExpressions;
-using System;
-using campusMap.Models;
-using Castle.ActiveRecord;
-using MonoRailHelper;
-using campusMap.Filters;
-using log4net;
-using log4net.Config;
-using System.Text;
+    using Castle.MonoRail.Framework;
+    using campusMap.Services;
+    using System.Text.RegularExpressions;
+    using System;
+    using campusMap.Models;
+    using Castle.ActiveRecord;
+    using MonoRailHelper;
+    using campusMap.Filters;
+    using log4net;
+    using log4net.Config;
+    using System.Text;
 #endregion
 namespace campusMap.Controllers
 {

@@ -1,1 +1,62 @@
-<h1>welcome</h1>
+<div id="sideinfo" class="ui-widget-content ui-corner-all">
+	<h1  class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Welcome</h1>
+<h3>$user.name</h3>
+<hr/>
+<hr/>
+<span>You currently have:</span>
+<hr/>
+	#capturefor(tmp)
+		#if($user.Places.Count>0)<span>Places : $user.Places.Count </span><hr/>#end
+		#if($user.views.Count>0)<span>Maps : $user.views.Count </span><hr/>#end
+	#end
+#if($tmp.Trim()!="")
+	$tmp
+#else
+	<span>No Assets</span>
+#end
+
+
+</div>
+<div id="mainsplash">
+	#if($Flash.massage)
+		<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+			<p style="line-height: 15px;padding-bottom: 0;">
+				<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.massage
+			</p>
+		</div><br/>
+	#end
+	
+	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+		<p style="line-height: 15px;padding-bottom: 0;">
+			<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Notice:</strong>Site is under devlopment, please report any bugs found.
+		</p>
+	</div><br/>
+	
+	<div class="displaybox ui-widget-content ui-corner-all">
+		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Analytics Overview</span>
+		<img src="../Content/images/trash_placeholders/no_data.png" width="400" height="150"/>
+	</div>
+
+	<div class="displaybox ui-widget-content ui-corner-all">
+		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Drafts</span>
+		<table width="100%" class="ui-widget ui-widget-content">
+		  <tbody>
+			#set ($c=0)
+			#foreach($item in $places)
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="center">
+					<a href="/place/_edit.castle?id=$!{item.id}" title="Edit">
+						$item.prime_name
+						<span class="ui-icon ui-icon-pencil"></span>
+					  </a>
+					</td>
+				</tr>
+				#set ($c=$c+1)
+			#end
+		  </tbody>
+		</table>
+		<span><a href="/place/list.castle">Veiw All Places</a></span>
+	</div>
+
+
+</div>

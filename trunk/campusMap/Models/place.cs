@@ -1,28 +1,29 @@
-using System;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using NHibernate.Expression;
-using Castle.ActiveRecord;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using campusMap.Services;
-using Microsoft.SqlServer.Types;
-using System.Xml;
-using System.Text;
-using System.IO;
+    using System;
+    using System.Data;
+    using System.Configuration;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+    using System.Web.UI.WebControls.WebParts;
+    using System.Web.UI.HtmlControls;
+    using NHibernate.Expression;
+    using Castle.ActiveRecord;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data.SqlTypes;
+    using campusMap.Services;
+    using Microsoft.SqlServer.Types;
+    using System.Xml;
+    using System.Text;
+    using System.IO;
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy = true, BatchSize=30)]
     public class place : ActiveRecordBase<place>
     {
         protected HelperService helperService = new HelperService();
+        protected UserService userService = new UserService();
         public place() {  }
 
         private int place_id;

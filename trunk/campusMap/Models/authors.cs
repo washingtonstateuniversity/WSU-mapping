@@ -23,7 +23,7 @@ namespace campusMap.Models
     [ActiveRecord(Lazy=true, BatchSize=30)]
     public class authors : ActiveRecordBase<authors>
     {
-
+        protected UserService userService = new UserService();
         private int author_id;
         [PrimaryKey("author_id")]
         virtual public int id
@@ -188,6 +188,42 @@ namespace campusMap.Models
             set { author_editing = value; }
         }
 
+
+
+        virtual public IList<place> getUserPlaces(int statusId, int limit)
+        {
+            IList<place> temp = new List<place>();
+
+
+            authors user = userService.getUser();
+            IList<place> userplaces = user.Places;
+            if (statusId > 0)
+            {
+                object[] obj = new object[userplaces.Count];
+                int i = 0;
+                foreach (place p in userplaces)
+                {
+                    obj[i] = p.id;
+                    i++;
+                }
+                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+                baseEx.Add(Expression.In("id", obj));
+                List<AbstractCriterion> statusEx = new List<AbstractCriterion>();
+                statusEx.AddRange(baseEx);
+                statusEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(statusId)));
+                if (limit == 0)limit=99999;
+                Order[] ord= new Order[1];
+                ord[0]=Order.Asc("prime_name");
+                temp = ActiveRecordBase<place>.SlicedFindAll(0, limit, ord, statusEx.ToArray());
+            }
+            else
+            {
+                temp = userplaces;
+            }
+
+            return temp;
+
+        }
 
     }
 

@@ -20,6 +20,11 @@
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
     using campusMap.Services;
+    using Castle.MonoRail.Framework;
+    using campusMap.Filters;
+    using log4net;
+    using log4net.Config;
+    using System.Text;
 #endregion
 
 namespace campusMap.Services
@@ -47,7 +52,38 @@ namespace campusMap.Services
             }
             return temp;
         }
-
+        public String getUserName()
+        {
+            String username = "";
+            if (HttpContext.Current.Request.IsLocal)
+            {
+                username = "jeremy.bass";
+            }
+            else
+            {
+                username = HttpContext.Current.Session["username"] == null ? "" : HttpContext.Current.Session["username"].ToString();
+            }
+            return username;
+        }
+        public authors getUser()
+        {
+            try
+            {
+                String login_username = getUserName();
+                authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                authors temp = null;
+                foreach (authors author in author_list)
+                {
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == login_username.ToUpper())
+                    { temp = author; }
+                }
+                return temp;
+            }
+            catch (Exception)
+            {
+            }
+            return null;
+        }
 
     }
 }

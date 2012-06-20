@@ -14,7 +14,7 @@ html,body{height:auto;}
     width: 100%;}
 #wrapper #toolbar{width: 100%;float: none;background-color: #5E6A71;}
 #siteID h2 { margin: 0 0 0 180px;width: auto;}
-#siteID h1 {margin: 0 0 0 180px;width: auto;}
+#siteID h1 {margin:14px 0 0 177px;width: auto;}
 #logo{ display: inline;
     float: none;
     height: 105px;
@@ -69,7 +69,19 @@ ul.menu li.liTop:hover ul {left:0;}
 
 
 
+/*    Admin Splash   */
 
+#sideinfo{width:250px;float:left;}
+#mainsplash{margin-left: 270px;}
+.displaybox{width:400px;display:inline-block;float: left;margin-left:5px;}
+.displaybox .head{font-size: 15px !important;
+    font-weight: bold !important;
+    padding-left: 10px !important;}
+#sideinfo h1{font-size: 15px !important;
+    margin: 0 !important;
+    padding: 2px 5px !important;}
+#sideinfo h3{padding:2px 5px; margin:0px;}
+#sideinfo span{padding:2px 5px; margin:0px;}
 
 
 

@@ -17943,3 +17943,7 @@ File name: 'C:\_SVN_\campusMap\campusMap\uploads\googleStaticMaps\places\185.ext
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.ReadAllBytes(String path)
    at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap\campusMap\Controllers\mediaController.cs:line 918
+2012-06-20 07:19:55,891 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
+2012-06-20 07:19:56,025 [11] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
+2012-06-20 07:20:02,517 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.
+2012-06-20 07:20:02,535 [4] ERROR NHibernate.Util.ADOExceptionReporter [(null)] <(null)> - Incorrect syntax near '5'.

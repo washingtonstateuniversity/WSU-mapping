@@ -165,6 +165,11 @@ namespace campusMap.Controllers
         }
         public void admin()
         {
+
+            authors user = userService.getUser();
+            IList<place> places = user.getUserPlaces(1,5);
+            PropertyBag["places"] = places;
+            PropertyBag["user"] = user;
             RenderView("../admin/splash");
         }
 
