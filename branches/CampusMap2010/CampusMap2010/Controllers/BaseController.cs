@@ -15,8 +15,8 @@
 #endregion
 namespace campusMap.Controllers
 {
-    [Helper(typeof(SmushIt.Mvc.HtmlHelperExtensions))]
     [Filter(ExecuteWhen.BeforeAction, typeof(loggedinFilter))]
+    [Filter(ExecuteWhen.BeforeAction, typeof(scriptFilter))]
     [Layout("default"), Rescue("generalerror")]
     public abstract class BaseController : MonoRailHelper.HelperBaseController
 	{

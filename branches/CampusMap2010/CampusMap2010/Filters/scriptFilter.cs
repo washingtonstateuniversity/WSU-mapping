@@ -33,6 +33,9 @@
     using Newtonsoft.Json.Linq;
 
     using SquishIt.Framework;
+    using SquishIt.Framework.Css;
+    using SquishIt.Framework.JavaScript;
+
 #endregion
 
 namespace campusMap.Filters
@@ -41,7 +44,9 @@ namespace campusMap.Filters
     {
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-            PropertyBag["Bundle"] = Bundle;
+            controllerContext.PropertyBag["cssBundle"] = new CSSBundle();//.Add("~/Content/css/admin_styles.css").Add("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css").RenderCachedAssetTag().Render("~/Content/css/min")
+            controllerContext.PropertyBag["JavaScriptBundle"] = new JavaScriptBundle();
+            return true;
         }
     }
 }

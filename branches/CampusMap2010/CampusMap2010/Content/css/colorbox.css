@@ -40,13 +40,13 @@
         #cboxLoadingOverlay{background:#fff url(../../Content/images/colorbox/loading.gif) no-repeat 5px 5px;}
         #cboxClose{  background: url("../../Content/images/colorbox/cbox_close.png") no-repeat scroll left top transparent;
 					color: #444444;
-					display: block;
-					height: 15px;
-					position: absolute;
-					right: 0;
-					text-indent: -9999em;
-					top: 0;
-					width: 15px;}
+    display: block;
+    height: 15px;
+    position: absolute;
+    right: -23px;
+    text-indent: -9999em;
+    top: 0;
+    width: 17px;}
 #cboxClose:hover{ background-position:left bottom;}
 /*
   The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill

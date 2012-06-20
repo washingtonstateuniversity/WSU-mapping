@@ -38,9 +38,7 @@ namespace campusMap
         {
             //SquishIt
            /* Bundle.Css()
-            .Add("~/Content/Base.css")
-            .Add("~/Content/MainStyle.css")
-            .AsCached("main", "~/assets/css/main");*/
+            .AsCached("min", "~/Content/css/min");*/
         }
 
         public void Application_OnStart()

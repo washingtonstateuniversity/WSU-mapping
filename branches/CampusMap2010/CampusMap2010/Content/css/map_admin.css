@@ -267,9 +267,13 @@
 } 
 
 
-
-
-
+#printPdfs{}
+#printPdfs h2{ text-align:center;}
+#printPdfs div{float:left;text-align:center;padding-right: 20px;}
+#printPdfs div.last{padding:0px;}
+#printPdfs h3{text-align:center;}
+#printPdfs h3 a{color:#981e32;font-size:18px; text-decoration:none;}
+#printPdfs h3 a img{}
 
 
 /* menu */

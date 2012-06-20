@@ -378,30 +378,6 @@ function loadData(data,callback){
 										open:true
 									});
 								});
-						$('#printPdfs').click(function(e){
-									e.stopPropagation();
-									e.preventDefault();
-									var trigger=$(this);
-									$.colorbox({
-										html:function(){
-											return '<div id="printPdfs">'+
-														'real form coming soon<br/>'+
-														'<h2>Found an error?</h2>'+
-														'<h3>please provide some infomation to help us correct this issue.</h3>'+
-														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-														'Discribe the issues:<br/>'+
-														'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
-													'</div>';
-										},
-										scrolling:false,
-										opacity:0.7,
-										transition:"none",
-										width:450,
-										height:350,
-										open:true
-									});
-								});
-						
 						prep();
 						$('#taby'+i).tabs();
 						var minHeight=0;
@@ -635,7 +611,7 @@ $(document).ready(function(){
 			}
 		}
 
-		$('#main_nav li.parent').live('click',function(e){
+		$('#main_nav li.parent:not(".altAction")').live('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
 			$('#main_nav .active').removeClass('active');
@@ -665,7 +641,27 @@ $(document).ready(function(){
 				$(this).closest('.parent').find('.parentalLink').trigger('click');
 			}
 		});
-		
+						$('#printPdfs').click(function(e){
+									e.stopPropagation();
+									e.preventDefault();
+									var trigger=$(this);
+									$.colorbox({
+										html:function(){
+											return '<div id="printPdfs">'+
+														'<h2>Printable Maps</h2>'+
+														'<div><h3><a href="">Parking<br/><img src="'+siteroot+'Content/images/print/parking_icon.jpg"/></a></h3></div>'+
+														'<div><h3><a href="">Arera<br/><img src="'+siteroot+'Content/images/print/area_icon.jpg"/></a></h3></div>'+
+														'<div class="last"><h3><a href="">Washington State<br/><img src="'+siteroot+'Content/images/print/state_icon.jpg"/></a></h3></div>'+
+													'</div>';
+										},
+										scrolling:false,
+										opacity:0.7,
+										transition:"none",
+										width:652,
+										height:350,
+										open:true
+									});
+								});
 		
 		var termTemplate = "<strong>%s</strong>";
 		$( "#placeSearch [type=text]" ).autocomplete({
