@@ -34,12 +34,12 @@
 		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Other Active Users</span>
 		<table width="100%" class="ui-widget ui-widget-content">
 		  <tbody>
-		  #if($activeUser.count()>0)
+		  #if($activeUsers)
 				#set ($c=0)
 				#foreach($user in $activeUsers)
 					<tr #if($c%2>0) class="even" #else class="odd" #end>
 						<td align="center">
-							$item.name
+							$user.name
 							<span class="ui-icon ui-icon-bullet"></span>
 						</td>
 					</tr>
