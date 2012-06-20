@@ -83,6 +83,7 @@ ul.menu li.liTop:hover ul {left:0;}
 #sideinfo h3{padding:2px 5px; margin:0px;}
 #sideinfo span{padding:2px 5px; margin:0px;}
 #activeUsers{max-height:250px;}
+#activeUsers .status{width: 10px !important;float:right;}
 
 
 

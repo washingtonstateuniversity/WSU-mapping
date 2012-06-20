@@ -1,60 +1,65 @@
 <div id="sideinfo" class="ui-widget-content ui-corner-all">
 	<h1  class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Welcome</h1>
-<h3><a href="authors/edit.castle?id=$user.id">$user.name</a></h3>
-<hr/>
-<span>You currently have:</span>
+	<h3><a href="authors/edit.castle?id=$user.id">$user.name</a></h3>
+	<hr/>
+	<span>You currently have:</span>
 	<table width="100%" class="ui-widget ui-widget-content">
-		  <tbody>
-	#capturefor(tmp)
-		#if($user.Places.Count>0)<tr #if($c%2>0) class="even" #else class="odd" #end>
-						<td align="center">Places : $user.Places.Count</td>
-					</tr>#end
-		#if($user.views.Count>0)<tr #if($c%2>0) class="even" #else class="odd" #end>
-						<td align="center">Maps : $user.views.Count</td>
-					</tr>#end
-	#end
-	#if($tmp.Trim()!="")
-		$tmp
-	#else
-		<tr #if($c%2>0) class="even" #else class="odd" #end>
-		<td align="center">No Assets</td>
-		</tr>
-	#end			
-			
-		  </tbody>
-		</table>
-
-
-
-
-
-	
-
-<div id="activeUsers" class="ui-widget-content ui-corner-all">
+	  <tbody>
+		#capturefor(tmp)
+			#if($user.Places.Count>0)
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="center">Places : $user.Places.Count</td>
+				</tr>
+			#end
+			#if($user.views.Count>0)
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="center">Maps : $user.views.Count</td>
+				</tr>
+			#end
+		#end
+		#if($tmp.Trim()!="")
+			$tmp
+		#else
+			<tr #if($c%2>0) class="even" #else class="odd" #end>
+				<td align="center">No Assets</td>
+			</tr>
+		#end			
+	  </tbody>
+	</table>
+	<div id="activeUsers" class="ui-widget-content ui-corner-all">
 		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Other Active Users</span>
 		<table width="100%" class="ui-widget ui-widget-content">
 		  <tbody>
-		  #if($activeUsers)
+			#if($activeUsers)
 				#set ($c=0)
 				#foreach($user in $activeUsers)
 					<tr #if($c%2>0) class="even" #else class="odd" #end>
 						<td align="center">
-							$user.name
-							<span class="ui-icon ui-icon-bullet"></span>
+							<span class="status ui-icon 
+								#if($user.LastActive < $DateTime.Now.AddMinutes(-35) )
+									ui-icon-radio-on
+								#else
+									#if( $user.LastActive < $DateTime.Now.AddMinutes(-15) )
+										ui-icon-radio-off
+									#else
+										ui-icon-bullet
+									#end
+								#end
+							 "></span> $user.name 
 						</td>
 					</tr>
 					#set ($c=$c+1)
 				#end
 			#else
-					<tr #if($c%2>0) class="even" #else class="odd" #end>
-						<td align="center">
-							There are currently no other users online.
-						</td>
-					</tr>
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="center">
+						There are currently no other users online.
+					</td>
+				</tr>
 			#end
 		  </tbody>
 		</table>
-</div>
+	</div>
 </div>
 <div id="mainsplash">
 	#if($Flash.massage)

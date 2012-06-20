@@ -6,3 +6,27 @@ File name: 'c:\documents and settings\nathan_owen\my documents\visual studio 201
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.ReadAllBytes(String path)
    at campusMap.Controllers.mediaController.getmap(String path) in c:\documents and settings\nathan_owen\my documents\visual studio 2010\Projects\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 10:23:23,032 [5] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 10:23:26,906 [6] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 10:23:27,244 [5] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
