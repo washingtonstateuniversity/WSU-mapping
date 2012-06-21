@@ -209,3 +209,35 @@ NVelocity.Exception.MethodInvocationException: Invocation of method 'RenderCache
    at Castle.MonoRail.Framework.Services.DefaultViewEngineManager.Process(String templateName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
    at Castle.MonoRail.Framework.Controller.ProcessView()
    at Castle.MonoRail.Framework.Controller.ProcessRescue(IExecutableAction action, Exception actionException)
+2012-06-20 23:05:00,318 [29] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\216.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\216.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 23:05:04,085 [35] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 23:05:05,086 [11] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\214.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\214.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918
+2012-06-20 23:05:10,158 [72] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\206.ext'.
+File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\206.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 918

@@ -43,6 +43,8 @@ function iniMap(url,callback){
 		});
 	});
 }
+
+/* non-abstract */
 function addCentralControlls(){
 	
 
@@ -125,29 +127,7 @@ function addCentralControlls(){
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-
 
 var cTo="";
 var cFrom="";
@@ -174,7 +154,7 @@ function hereToThere(){
 			$('#loading').remove();
 	});
 }
-function showContextMenu(caurrentLatLng  ) {
+function showContextMenu(caurrentLatLng  ){
 	/* this need to be abstracked out into the jMap plugin */
 	function setMenuXY(caurrentLatLng){
 		function getCanvasXY(caurrentLatLng){
@@ -247,7 +227,7 @@ function hideContextMenu() {
 	$('.contextmenu').remove();
 }
 
-
+/* non-abstract */
 function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
@@ -650,9 +630,9 @@ $(document).ready(function(){
 										html:function(){
 											return '<div id="printPdfs">'+
 														'<h2>Printable Maps</h2>'+
-														'<div><h3><a href="">Parking<br/><img src="'+siteroot+'Content/images/print/parking_icon.jpg"/></a></h3></div>'+
-														'<div><h3><a href="">Arera<br/><img src="'+siteroot+'Content/images/print/area_icon.jpg"/></a></h3></div>'+
-														'<div class="last"><h3><a href="">Washington State<br/><img src="'+siteroot+'Content/images/print/state_icon.jpg"/></a></h3></div>'+
+														'<div><h3><a href="">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+														'<div><h3><a href="">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
+														'<div class="last"><h3><a href="">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
 													'</div>';
 										},
 										scrolling:false,
