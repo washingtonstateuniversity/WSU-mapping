@@ -322,7 +322,7 @@ function loadData(data,callback){
 				  width: "400px"
 				 }
 				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-				,infoBoxClearance: new google.maps.Size(20,50)
+				,infoBoxClearance: new google.maps.Size(50,50)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false

@@ -706,12 +706,15 @@
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
                                                 string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n", @"
 ")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                                tabStr += @"
+                                                if (!String.IsNullOrWhiteSpace(content))
+                                                {
+                                                    tabStr += @"
                                                 {
                                                     ""block"":""" + infoTitle + content + reportError + @""",
                                                     ""title"":""" + tab.title + @"""
                                                 }";
-                                                if (c < item.infotabs.Count) tabStr += ",";
+                                                    if (c < item.infotabs.Count) tabStr += ",";
+                                                }
                                             }
 
                                         }
