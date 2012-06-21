@@ -3034,3 +3034,397 @@ File name: 'C:\_SVN_\campusMap.4\CampusMap2010\uploads\googleStaticMaps\places\2
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.ReadAllBytes(String path)
    at campusMap.Controllers.mediaController.getmap(String path) in C:\_SVN_\campusMap.4\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:14:27,797 [11] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:19:55,477 [12] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:19:57,665 [15] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:20:18,634 [13] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:20:48,276 [5] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:21:15,761 [13] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:22:57,341 [18] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 4 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:24:10,765 [9] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 50 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:25:24,423 [9] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.field_types, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/fields/list.vm Line 4 Column 37 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:25:33,861 [9] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.styles, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/maps/styles/list.vm Line 50 Column 25 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:26:10,362 [4] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.field_types, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /admin/fields/list.vm Line 4 Column 37 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTBlock.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.ASTIfStatement.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:27:36,177 [10] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:27:36,864 [16] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:27:37,364 [21] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:27:38,114 [5] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:27:44,989 [18] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.comments, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template comment\index.vm Line 38 Column 27 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:30:23,103 [9] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.comments, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template comment\index.vm Line 116 Column 27 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:30:45,182 [23] ERROR Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine [(null)] <(null)> - Could not render view
+NVelocity.Exception.MethodInvocationException: Invocation of method 'FirstItem' in Castle.Components.Pagination.GenericPage`1[[campusMap.Models.usertags, CampusMap2010, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], template /tags/usertags/list.vm Line 6 Column 27 threw an exception ---> System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Castle.Components.Pagination.GenericPage`1.GetGenericItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.GenericPage`1.GetItemAtIndex(Int32 itemIndex)
+   at Castle.Components.Pagination.AbstractPage.Castle.Components.Pagination.IPaginatedPage.get_FirstItem()
+   at Castle.Components.Pagination.AbstractPage`1.Castle.Components.Pagination.IPaginatedPage<T>.get_FirstItem()
+   --- End of inner exception stack trace ---
+   at NVelocity.Runtime.Parser.Node.ASTIdentifier.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Execute(Object o, IInternalContextAdapter context)
+   at NVelocity.Runtime.Parser.Node.ASTReference.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Directive.Parse.RenderTemplate(Template template, String arg, TextWriter writer, IInternalContextAdapter context)
+   at NVelocity.Runtime.Directive.Parse.Render(IInternalContextAdapter context, TextWriter writer, INode node)
+   at NVelocity.Runtime.Parser.Node.ASTDirective.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Runtime.Parser.Node.SimpleNode.Render(IInternalContextAdapter context, TextWriter writer)
+   at NVelocity.Template.Merge(IContext context, TextWriter writer)
+   at Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(String viewName, TextWriter output, IEngineContext context, IController controller, IControllerContext controllerContext)
+2012-06-21 16:31:53,293 [5] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:53,308 [4] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:53,324 [25] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:53,340 [26] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:54,433 [4] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\206.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:54,433 [25] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\214.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:54,465 [4] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\216.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919
+2012-06-21 16:31:54,918 [29] ERROR mediaController [(null)] <(null)> - Error uploading file
+System.IO.FileNotFoundException: Could not find file 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'.
+File name: 'C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\uploads\googleStaticMaps\places\203.ext'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.ReadAllBytes(String path)
+   at campusMap.Controllers.mediaController.getmap(String path) in C:\natedev\campusMapbranches\CampusMap2010\CampusMap2010\Controllers\mediaController.cs:line 919

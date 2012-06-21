@@ -1,3 +1,4 @@
+#if($list_items.Count > 0)
 <table class="pagination $Pagination_location">
   <tr>
     <td>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</td>
@@ -10,6 +11,8 @@
       #if(!$list_items.HasNextPage) | next #end
       #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.LastItemIndex, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
       #if(!$list_items.HasNextPage) | last #end
+      
     </td>
   </tr>
 </table>
+#end

@@ -1,4 +1,4 @@
-#if($fields)
+#if($fields.Count > 0)
 	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
 	  <tr>
 		<td>Showing $fields.FirstItem - $fields.LastItem of $fields.TotalItems</td>

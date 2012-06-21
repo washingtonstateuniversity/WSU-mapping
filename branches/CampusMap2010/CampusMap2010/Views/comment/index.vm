@@ -32,7 +32,7 @@
 
 
 <h3>Comment List</h3>
-
+#if($comments.Count > 0)
 <table width="50%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
   <tr>
     <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
@@ -48,6 +48,7 @@
     </td>
   </tr>
 </table>
+#end
 
 #*<p>
 <a href="new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
@@ -109,7 +110,7 @@
 </table>
 
 
-
+#if($comments.Count > 0)
 <table width="50%" border="0" >
   <tr>
     <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
@@ -125,4 +126,4 @@
     </td>
   </tr>
 </table>
-
+#end
