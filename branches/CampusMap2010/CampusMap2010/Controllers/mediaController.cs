@@ -437,35 +437,38 @@ namespace campusMap.Controllers
         }
         private static RotateFlipType OrientationToFlipType(int orientation)
         {
+            RotateFlipType action = RotateFlipType.RotateNoneFlipNone;
             switch (orientation)
             {
                 case 1:
-                    return RotateFlipType.RotateNoneFlipNone;
+                    action = RotateFlipType.RotateNoneFlipNone;
                     break;
                 case 2:
-                    return RotateFlipType.RotateNoneFlipX;
+                    action = RotateFlipType.RotateNoneFlipX;
                     break;
                 case 3:
-                    return RotateFlipType.Rotate180FlipNone;
+                    action = RotateFlipType.Rotate180FlipNone;
                     break;
                 case 4:
-                    return RotateFlipType.Rotate180FlipX;
+                    action = RotateFlipType.Rotate180FlipX;
                     break;
                 case 5:
-                    return RotateFlipType.Rotate90FlipX;
+                    action = RotateFlipType.Rotate90FlipX;
                     break;
                 case 6:
-                    return RotateFlipType.Rotate90FlipNone;
+                    action = RotateFlipType.Rotate90FlipNone;
                     break;
                 case 7:
-                    return RotateFlipType.Rotate270FlipX;
+                    action = RotateFlipType.Rotate270FlipX;
                     break;
                 case 8:
-                    return RotateFlipType.Rotate270FlipNone;
+                    action = RotateFlipType.Rotate270FlipNone;
                     break;
                 default:
-                    return RotateFlipType.RotateNoneFlipNone;
+                    action = RotateFlipType.RotateNoneFlipNone;
+                    break;
             }
+            return action;
         }
         /* END OF move to the service */
 
