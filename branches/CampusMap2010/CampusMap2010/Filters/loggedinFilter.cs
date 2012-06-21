@@ -23,7 +23,7 @@ namespace campusMap.Filters
     {
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-            if (Authentication.logged_in())
+           if (Authentication.logged_in())
             {
                 authors user = UserService.getUser();
                 if (user != null)

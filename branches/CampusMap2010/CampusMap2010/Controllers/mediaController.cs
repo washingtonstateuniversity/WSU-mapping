@@ -945,32 +945,9 @@ namespace campusMap.Controllers
                 HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
                 HttpContext.Response.Cache.SetValidUntilExpires(true);
                 HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-                //HttpContext.Response.Expires = 0;
+                HttpContext.Response.Expires = 0;
                 HttpContext.Response.ContentType = contentType;
-                //HttpContext.Response.AddHeader("Content-Disposition", "inline; filename=\"" + path + "\"");
-
-                int maxage = 0;
-
-                //set for cache controll
-                if (maxage == 0)
-                {
-                    /*if (nocache)
-                    {*/
-
-                    //Context.Response.CacheControlHeader = "max-age=7257600";
-                    //Context.Response.AppendHeader("Cache-Control", "Max-age=7257600");
-
-                    //Context.Response.AppendHeader("Cache-Control", "max-age=7257600");
-                    /*}
-                    else
-                    {
-                        Context.Response.CacheControlHeader = "max-age = 7257600";
-                    }*/
-                }
-                else
-                {
-                    HttpContext.Response.Cache.SetMaxAge(new TimeSpan(84, 0, 0, 0, 0));
-                }
+                
                 // Write the file to the response
                 HttpContext.Response.BinaryWrite(contents);
                 //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
