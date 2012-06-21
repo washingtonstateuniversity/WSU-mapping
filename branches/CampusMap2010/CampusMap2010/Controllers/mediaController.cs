@@ -389,12 +389,6 @@ namespace campusMap.Controllers
             return media;
 
         }
-
-
-
-
-
-
         private string setOrientation(string pathToImageFile)
         {
             
@@ -471,8 +465,6 @@ namespace campusMap.Controllers
             return action;
         }
         /* END OF move to the service */
-
-
 
 
 /* note : below is the start of a php conversion from php THIS IS PROBABLY THE WAY TO GO BUT WE ARE GOING TO CHEAT AND USE THE SIMPLE VERSION ATM */
@@ -955,7 +947,7 @@ namespace campusMap.Controllers
                 HttpContext.Response.BinaryWrite(contents);
                 //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
             }
-            HttpContext.Response.End();
+            HttpContext.Response.Flush();
         }
 
 
@@ -1056,74 +1048,58 @@ namespace campusMap.Controllers
 
             HttpContext.Response.ClearContent();
             HttpContext.Response.ClearHeaders();
-            String contentDisposition = "inline; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
-
-            HttpContext.Response.Clear();
-            String contentType = "applicaton/image";
-            switch (image.ext.ToLower())
+            if (contents != null)
             {
-                case "gif":
-                    contentType = "image/gif";
-                    break;
-                case "png":
-                    contentType = "image/png";
-                    break;
-                case "jpg":
-                case "jpe":
-                case "jpeg":
-                    contentType = "image/jpeg";
-                    break;
-                case "bmp":
-                    contentType = "image/bmp";
-                    break;
-                case "tif":
-                case "tiff":
-                    contentType = "image/tiff";
-                    break;
-                case "eps":
-                    contentType = "application/postscript";
-                    break;
-                default:
-                    contentDisposition = "attachment; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
-                    contentType = "application/" + image.ext.ToLower();
-                    break;
-            }
+                String contentDisposition = "inline; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
 
-            // Setup the response
-            HttpContext.Response.Buffer = true;
-            HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
-            DateTime dt = DateTime.Now.AddYears(1);
-            HttpContext.Response.Cache.SetExpires(dt);
-            HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
-            HttpContext.Response.Cache.SetValidUntilExpires(true);
-            HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-            //HttpContext.Response.Expires = 0;
-            HttpContext.Response.ContentType = contentType;
-            //HttpContext.Response.AddHeader("Content-Disposition", "inline; filename=\"" + image.FileName + arg + "." + image.Ext + "\"");
-
-            //set for cache controll
-            if (maxage == 0){
-                /*if (nocache)
-                {*/
-
-                //Context.Response.CacheControlHeader = "max-age=7257600";
-                //Context.Response.AppendHeader("Cache-Control", "Max-age=7257600");
-                
-                    //Context.Response.AppendHeader("Cache-Control", "max-age=7257600");
-                /*}
-                else
+                HttpContext.Response.Clear();
+                String contentType = "applicaton/image";
+                switch (image.ext.ToLower())
                 {
-                    Context.Response.CacheControlHeader = "max-age = 7257600";
-                }*/
-            }else{
-                HttpContext.Response.Cache.SetMaxAge(new TimeSpan(84,0,0,0,0));
-            }
-            
+                    case "gif":
+                        contentType = "image/gif";
+                        break;
+                    case "png":
+                        contentType = "image/png";
+                        break;
+                    case "jpg":
+                    case "jpe":
+                    case "jpeg":
+                        contentType = "image/jpeg";
+                        break;
+                    case "bmp":
+                        contentType = "image/bmp";
+                        break;
+                    case "tif":
+                    case "tiff":
+                        contentType = "image/tiff";
+                        break;
+                    case "eps":
+                        contentType = "application/postscript";
+                        break;
+                    default:
+                        contentDisposition = "attachment; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
+                        contentType = "application/" + image.ext.ToLower();
+                        break;
+                }
 
-            // Write the file to the response
-            HttpContext.Response.BinaryWrite(contents);
+                // Setup the response
+                HttpContext.Response.Buffer = true;
+                HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
+                DateTime dt = DateTime.Now.AddYears(1);
+                HttpContext.Response.Cache.SetExpires(dt);
+                HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
+                HttpContext.Response.Cache.SetValidUntilExpires(true);
+                HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+                HttpContext.Response.Expires = 0;
+                HttpContext.Response.ContentType = contentType;
+                //HttpContext.Response.AddHeader("Content-Disposition", "inline; filename=\"" + image.FileName + arg + "." + image.Ext + "\"");
+                HttpContext.Response.Cache.SetMaxAge(new TimeSpan(84, 0, 0, 0, 0));
+                // Write the file to the response
+                HttpContext.Response.BinaryWrite(contents);
+            }
             log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
-            HttpContext.Response.End();
+            HttpContext.Response.Flush();
         }
         //private string GetFileName(HttpPostedFile file)
         //{

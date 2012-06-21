@@ -11,7 +11,7 @@
 		<ul class="menu Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
 		<ul class="menu Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
 		<ul class="menu Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
-		#if($Controller.userService.getUser().Nid==$user)<ul class="menu">
+		#if($controller.userService.getUser().Nid==$user)<ul class="menu">
 			<li class="nosub"><a class="open" href="../view/list.castle"><b>Map views</b></a></li>
 		</ul>#end
 		<ul class="menu">
