@@ -14,6 +14,7 @@
     using campusMap.Models;
     using System.Security.Principal;
     using MonoRailHelper;
+    using campusMap.Services;
 #endregion
 
 namespace campusMap.Filters
@@ -24,20 +25,12 @@ namespace campusMap.Filters
         {
             if (Authentication.logged_in())
             {
-                String username = Authentication.getNID();
-                // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
+                authors user = UserService.getUser();
+                if (user != null)
                 {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                    { temp = author; }
-                }
-                if (temp != null)
-                {
-                    temp.logedin = true;
-                    temp.LastActive = DateTime.Now;
-                    temp.Save();
+                    user.logedin = true;
+                    user.LastActive = DateTime.Now;
+                    ActiveRecordMediator<authors>.Save(user);
                 }
             }
             return true;

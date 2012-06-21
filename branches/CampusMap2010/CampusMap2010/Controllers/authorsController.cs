@@ -37,7 +37,7 @@ namespace campusMap.Controllers
         public void Edit(int id)
         {
             authors author = ActiveRecordBase<authors>.Find(id);
-            if (!canControl(getUser()) && author.id != getUser().id)
+            if (!canControl(UserService.getUser()) && author != UserService.getUser())
             {
                 Flash["error"] = "Sorry you are not able to edit this user.";
                 RedirectToAction("list");
@@ -47,7 +47,7 @@ namespace campusMap.Controllers
             media_types imgtype = ActiveRecordBase<media_types>.Find(1);
             PropertyBag["images"] = imgtype.media_typed; //Flash["images"] != null ? Flash["images"] : 
             PropertyBag["authorimages"] = author.media;
-            PropertyBag["currentUser"] = getUser();
+            PropertyBag["currentUser"] = UserService.getUser();
             PropertyBag["author"] = author;
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
@@ -77,7 +77,7 @@ namespace campusMap.Controllers
             PropertyBag["authorimages"] = images;
             media_types imgtype = ActiveRecordBase<media_types>.Find(1);
             PropertyBag["images"] = imgtype.media_typed;
-            PropertyBag["currentUser"] = getUser();
+            PropertyBag["currentUser"] = UserService.getUser();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
 

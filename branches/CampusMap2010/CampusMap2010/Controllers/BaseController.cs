@@ -32,14 +32,13 @@ namespace campusMap.Controllers
         protected googleService googleService = new googleService();
         protected geometricService geometricService = new geometricService();
         protected ScriptsService ScriptsService = new ScriptsService();
-        
 
-
-        public string Tabs(int n)
+        #region STRING METHODS
+            public string Tabs(int n)
         {
             return new String('\t', n);
         }
-        public static string Truncate(string source, int length)
+            public static string Truncate(string source, int length)
         {
             if (source.Length > length)
             {
@@ -47,10 +46,8 @@ namespace campusMap.Controllers
             }
             return source;
         }
-
-
-        //-jb || this will repeate str and {$i} is a the number pattern insertion
-        public string repeatStr(string str,int n)
+            //-jb || this will repeate str and {$i} is a the number pattern insertion
+            public string repeatStr(string str,int n)
         {
             StringBuilder sb = new StringBuilder(str.Length * n);
             for (int i = 0; i < n; i++)
@@ -68,7 +65,7 @@ namespace campusMap.Controllers
             }
             return sb.ToString();
         }
-        public string capitalize(string s)
+            public string capitalize(string s)
         {
             // Check for empty string.
             if (string.IsNullOrEmpty(s))
@@ -79,20 +76,24 @@ namespace campusMap.Controllers
             return char.ToUpper(s[0]) + s.Substring(1);
         }
 
+            public String Escape(String str)
+            {
+                return str.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\'", "&apos;");
+            }
+            const string HTML_TAG_PATTERN = "<.*?>";
+            public string StripHTML(string inputString)
+        {
+            return Regex.Replace
+              (inputString, HTML_TAG_PATTERN, string.Empty);
+        }
+        #endregion
 
-
-
-
-
-
-
-        public string getView()
+        #region MCV INFO METHODS
+            public string getView()
         {
             return SelectedViewName.Split('\\')[0];
         }
-
-
-        public string getRootUrl()
+            public string getRootUrl()
         {
             String root = "";
             if (!Request.IsLocal)
@@ -103,16 +104,13 @@ namespace campusMap.Controllers
             {
                 root = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(System.Web.HttpContext.Current.Request.Url.PathAndQuery, "/"); 
             }
-            
             return root;
         }
-
-
-        public bool isLocal()
+            public bool isLocal()
         {
             return Request.IsLocal;
         }
-        public string getAction()
+            public string getAction()
         {
             if (SelectedViewName.Split('\\')[1].Contains("../"))
             {
@@ -124,62 +122,15 @@ namespace campusMap.Controllers
                 return SelectedViewName.Split('\\')[1];
             }
         }
-        public string getViewAndAction()
+            public string getViewAndAction()
         {
             return SelectedViewName.Replace("\\", "/");
         }
-        public object getVar(string var)
+            public object getVar(string var)
         {
             return PropertyBag[var];
         }
+         #endregion
 
-
-
-        public String Escape(String str)
-        {
-            return str.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\'", "&apos;");
-        }
-
-        const string HTML_TAG_PATTERN = "<.*?>";
-        public string StripHTML(string inputString)
-        {
-            return Regex.Replace
-              (inputString, HTML_TAG_PATTERN, string.Empty);
-        }
-        public String getUserName()
-        {
-            String username = "";
-            if (Request.IsLocal)
-            {
-                username = "jeremy.bass";
-            }
-            else
-            {
-                username = Session["username"] == null ? "" : Session["username"].ToString();
-            }
-            return username;
-        }
-
-        public authors getUser()
-        {
-            try
-            {
-                String login_username = getUserName();
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
-                {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == login_username.ToUpper())
-                    { temp = author; }
-                }
-                return temp;
-            }
-            catch (Exception)
-            {
-            }
-            return null;
-        }
-
-
-	}
+    }
 }

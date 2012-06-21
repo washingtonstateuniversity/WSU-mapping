@@ -195,7 +195,7 @@ namespace campusMap.Models
             IList<place> temp = new List<place>();
 
 
-            authors user = userService.getUser();
+            authors user = UserService.getUser();
             IList<place> userplaces = user.Places;
             if (statusId > 0)
             {

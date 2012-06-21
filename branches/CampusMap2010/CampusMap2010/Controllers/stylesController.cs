@@ -52,12 +52,12 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status)
         {
-            authors user = getUser();
-            PropertyBag["authorname"] = getUserName();
+            authors user = UserService.getUser();
+            PropertyBag["authorname"] = user.Nid;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["loginUser"] = user;
-            PropertyBag["logedin"] = userService.getLogedIn();
+            PropertyBag["logedin"] = UserService.getLogedIn();
             //user.Sections.Contains(view.view_types);
 
                 IList<map_views> items;
@@ -247,8 +247,8 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            authors user = getUser();
-            String username = getUserName();
+            authors user = UserService.getUser();
+            String username = user.name;
             PropertyBag["authorname"] = user.name;
             view.checked_out_by = user;
             ActiveRecordMediator<map_views>.Save(view);
@@ -305,8 +305,8 @@ namespace campusMap.Controllers
 
 
             map_views view = new map_views();
-   
-            PropertyBag["loginUser"] = getUser();
+
+            PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -430,8 +430,8 @@ namespace campusMap.Controllers
                 return;
             }
 
-            
-            authors user = getUser();
+
+            authors user = UserService.getUser();
             /*if (!canPublish(user))
             {
                 ViewStatus stat= ActiveRecordBase<ViewStatus>.Find(1);

@@ -1065,11 +1065,11 @@ namespace campusMap.Controllers
                 log.Error("Error uploading file", ex);
             }
 
-            Response.ClearContent();
+            HttpContext.Response.ClearContent();
             HttpContext.Response.ClearHeaders();
             String contentDisposition = "inline; filename=\"" + image.file_name + arg + "." + image.ext + "\"";
 
-            Response.Clear();
+            HttpContext.Response.Clear();
             String contentType = "applicaton/image";
             switch (image.ext.ToLower())
             {
@@ -1109,7 +1109,7 @@ namespace campusMap.Controllers
             HttpContext.Response.Cache.SetValidUntilExpires(true);
             HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
             //HttpContext.Response.Expires = 0;
-            Response.ContentType = contentType;
+            HttpContext.Response.ContentType = contentType;
             //HttpContext.Response.AddHeader("Content-Disposition", "inline; filename=\"" + image.FileName + arg + "." + image.Ext + "\"");
 
             //set for cache controll
@@ -1127,12 +1127,12 @@ namespace campusMap.Controllers
                     Context.Response.CacheControlHeader = "max-age = 7257600";
                 }*/
             }else{
-                Context.Response.CacheControlHeader = "max-age=" + maxage;
+                HttpContext.Response.Cache.SetMaxAge(new TimeSpan(84,0,0,0,0));
             }
             
 
             // Write the file to the response
-            Response.BinaryWrite(contents);
+            HttpContext.Response.BinaryWrite(contents);
             log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
             HttpContext.Response.End();
         }

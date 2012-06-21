@@ -52,12 +52,12 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status)
         {
-            authors user = getUser();
-            PropertyBag["authorname"] = getUserName();
+            authors user = UserService.getUser();
+            PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["loginUser"] = user;
-            PropertyBag["logedin"] = userService.getLogedIn();
+            PropertyBag["logedin"] = UserService.getLogedIn();
             //user.Sections.Contains(view.view_types);
 
                 IList<map_views> items;
@@ -245,8 +245,8 @@ namespace campusMap.Controllers
 
 
             map_views view = new map_views();
-   
-            PropertyBag["loginUser"] = getUser();
+
+            PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 

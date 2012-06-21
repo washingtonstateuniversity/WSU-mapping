@@ -31,28 +31,31 @@ namespace campusMap.Services
 {
     public class UserService
 	{
-		
-
-        public authors[] getLogedIn()
+        public static authors[] getLogedIn()
         {
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
             baseEx.Add(Expression.Eq("logedin", true));
             authors[] users = ActiveRecordBase<authors>.FindAll(baseEx.ToArray());
             return users;
         }
+        public static bool isLogedIn()
+        {
+            return isLogedIn(null);
+        }
 
-        public bool isLogedIn(string username)
+        public static bool isLogedIn(string Nid)
         {
             authors[] author_list = getLogedIn();
             bool temp = false;
+            if (String.IsNullOrWhiteSpace(Nid)) Nid = getUser().Nid;
             foreach (authors author in author_list)
             {
-                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == Nid.ToUpper())
                 { temp = true; }
             }
             return temp;
         }
-        public String getUserName()
+        public static String getNid()
         {
             String username = "";
             if (HttpContext.Current.Request.IsLocal)
@@ -65,18 +68,13 @@ namespace campusMap.Services
             }
             return username;
         }
-        public authors getUser()
+        public static authors getUser()
         {
             try
             {
-                String login_username = getUserName();
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                authors[] author = ActiveRecordBase<authors>.FindAllByProperty( "Nid", getNid() );
                 authors temp = null;
-                foreach (authors author in author_list)
-                {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == login_username.ToUpper())
-                    { temp = author; }
-                }
+                if (author[0] != null) { temp = author[0]; }
                 return temp;
             }
             catch (Exception)
@@ -84,6 +82,15 @@ namespace campusMap.Services
             }
             return null;
         }
-
+        public static bool isActive(authors user)
+        {
+            int timeThreshold = -2; //TODO Set as site perference
+            bool active = false;
+            if (user != null && (!user.active || user.LastActive < DateTime.Today.AddHours(timeThreshold)))
+            {
+                active = true;
+            }
+            return active;
+        }
     }
 }

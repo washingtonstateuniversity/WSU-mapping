@@ -41,13 +41,12 @@ namespace campusMap.Controllers
      * MAY BE A FIELDS HELPER SERVICES WOULD BE WISE ?
      * 
      */
-        public void clearConnections()
+        private void clearConnections()
         {
             place[] _places = ActiveRecordBase<place>.FindAll();
             foreach (place _place in _places)
             {
-                authors author = _place.editing;
-                if (author!=null && (!author.active || author.LastActive < DateTime.Today.AddHours(-3)))
+                if ( UserService.isActive( _place.editing ) )
                 {
                     _place.editing = null;
                     ActiveRecordMediator<place>.Save(_place);
@@ -57,7 +56,7 @@ namespace campusMap.Controllers
         public void List(int page, int searchId, string target)
         {
             clearConnections();
-            authors user = getUser();
+            authors user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
@@ -69,7 +68,7 @@ namespace campusMap.Controllers
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = userService.getLogedIn();
+            PropertyBag["logedin"] = UserService.getLogedIn();
 
 
             int typesPaging = 1;
@@ -306,7 +305,7 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
-            authors user = getUser();
+            authors user = UserService.getUser();
 
 
 
@@ -443,7 +442,7 @@ namespace campusMap.Controllers
 
 
             PropertyBag["placeimages"] = images;
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -553,9 +552,6 @@ namespace campusMap.Controllers
             PropertyBag["type"] = type;
             RenderView("../admin/place_name_type/new");
         }
-        
-
-
 
         public void edit_field(int id)
         {
@@ -1017,21 +1013,6 @@ namespace campusMap.Controllers
         }*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public void update(
             [ARDataBind("place", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place place,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
@@ -1095,7 +1076,7 @@ namespace campusMap.Controllers
             //place.plus_four_code
             //'99164'
 
-            authors user = getUser();
+            authors user = UserService.getUser();
             place.editing = user;
             if ((place.prime_name == null || place.prime_name.Length == 0) )
             {

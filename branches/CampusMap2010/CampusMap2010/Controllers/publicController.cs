@@ -86,122 +86,119 @@
 
             #endregion
 
-        #region URL rendering
-        public void render()
-        {
-            String everUrl = Context.Request.RawUrl;
-            // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
-            // So strip it all out except http://sitename/pagetorender.html
-            everUrl = Regex.Replace(everUrl, "(.*:80)(.*)", "$2");
-            everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
-            String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
-            String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
-
-            Dictionary<string, string> queryparams = new Dictionary<string, string>();
-            if (urlwithnoparams != querystring)
-            {
-                foreach (string kvp in querystring.Split(','))
+            #region URL rendering
+                public void render()
                 {
-                    queryparams.Add(kvp.Split('=')[0], kvp.Split('=')[1]);
+                    String everUrl = Context.Request.RawUrl;
+                    // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
+                    // So strip it all out except http://sitename/pagetorender.html
+                    everUrl = Regex.Replace(everUrl, "(.*:80)(.*)", "$2");
+                    everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
+                    String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
+                    String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
+
+                    Dictionary<string, string> queryparams = new Dictionary<string, string>();
+                    if (urlwithnoparams != querystring)
+                    {
+                        foreach (string kvp in querystring.Split(','))
+                        {
+                            queryparams.Add(kvp.Split('=')[0], kvp.Split('=')[1]);
+                        }
+                    }
+
+
+                    CancelView();
+                    /* 
+                    if (everUrl == "/default.aspx")
+                    {
+                        //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
+                        Index();
+                        RenderView("index");
+                        return;
+                    }
+                    if (urlwithnoparams.EndsWith("index.castle"))
+                    {
+                        LayoutName = "secondary-tabs";
+                        string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
+                        readmore(placeService.placeByURL_id(url));
+                        RenderView("readmore");
+                        return;
+                    }
+                    if (urlwithnoparams.EndsWith("sitemap.xml"))
+                    {
+                        seoSitemap();
+                        RenderView("seoSitemap");
+                        return;
+                    }
+                    if (urlwithnoparams.EndsWith("/home"))
+                    {
+                        Index();
+                        RenderView("index");
+                        return;
+                    }
+                    if (urlwithnoparams.EndsWith("readmore.castle"))
+                    {
+                        LayoutName = "secondary-tabs";
+                        string id = Regex.Replace(querystring, @"\?id=(.*)", "$1");
+                        readmore(Convert.ToInt32(id));
+                        RenderView("readmore");
+                        return;
+                    }
+                    if (urlwithnoparams.ToString().IndexOf("read/") == 1)
+                    {
+                        LayoutName="secondary-tabs";
+                        string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
+                        readmore(placeService.placeByURL_id(url));
+                        RenderView("readmore");
+                        return;
+                    }*/
+                    if (urlwithnoparams.ToString().IndexOf("/rt/") > -1)
+                    {
+
+                        string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
+                        String mode = "";
+                        String callback = "";
+                        fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
+                        return;
+                    }
+                   /* if (urlwithnoparams.ToString().IndexOf("/assest/js/") > -1)
+                    {
+
+                        string identifier = Regex.Replace(urlwithnoparams, @"/assest/js/(.*)", "$1");
+                        String mode = "";
+                        String callback = "";
+                        fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
+
+                        ScriptsService.Js(identifier);
+
+                        return;
+                    }*/
+
+
+
                 }
+            #endregion
+
+            [Layout("central")]
+            public void central()
+            {
+                PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
+                RenderView("central");
             }
-
-
-            CancelView();
-            /* 
-            if (everUrl == "/default.aspx")
+            public void fetchMap(String alias, String mode, String callback)
             {
-                //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
-                Index();
-                RenderView("index");
-                return;
+                CancelView();
+                CancelLayout();
+                IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
+                if (c.Count == 0)
+                {
+                    RenderText("false");
+                    return;
+                }
+                if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
+                PropertyBag["map"] = c[0];
+                RenderView("map_json");
             }
-            if (urlwithnoparams.EndsWith("index.castle"))
-            {
-                LayoutName = "secondary-tabs";
-                string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
-                readmore(placeService.placeByURL_id(url));
-                RenderView("readmore");
-                return;
-            }
-            if (urlwithnoparams.EndsWith("sitemap.xml"))
-            {
-                seoSitemap();
-                RenderView("seoSitemap");
-                return;
-            }
-            if (urlwithnoparams.EndsWith("/home"))
-            {
-                Index();
-                RenderView("index");
-                return;
-            }
-            if (urlwithnoparams.EndsWith("readmore.castle"))
-            {
-                LayoutName = "secondary-tabs";
-                string id = Regex.Replace(querystring, @"\?id=(.*)", "$1");
-                readmore(Convert.ToInt32(id));
-                RenderView("readmore");
-                return;
-            }
-            if (urlwithnoparams.ToString().IndexOf("read/") == 1)
-            {
-                LayoutName="secondary-tabs";
-                string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
-                readmore(placeService.placeByURL_id(url));
-                RenderView("readmore");
-                return;
-            }*/
-            if (urlwithnoparams.ToString().IndexOf("/rt/") > -1)
-            {
-
-                string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
-                String mode = "";
-                String callback = "";
-                fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
-                return;
-            }
-           /* if (urlwithnoparams.ToString().IndexOf("/assest/js/") > -1)
-            {
-
-                string identifier = Regex.Replace(urlwithnoparams, @"/assest/js/(.*)", "$1");
-                String mode = "";
-                String callback = "";
-                fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
-
-                ScriptsService.Js(identifier);
-
-                return;
-            }*/
-
-
-
-        }
-        #endregion
-
-
-
-
-        [Layout("central")]
-        public void central()
-        {
-            PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
-            RenderView("central");
-        }
-        public void fetchMap(String alias, String mode, String callback)
-        {
-            CancelView();
-            CancelLayout();
-            IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
-            if (c.Count == 0)
-            {
-                RenderText("false");
-                return;
-            }
-            if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
-            PropertyBag["map"] = c[0];
-            RenderView("map_json");
-        }
 
 
             /*
@@ -1201,7 +1198,7 @@
         {
             if (place != null && place.status != null &&place.status.id != 3)
             {
-                authors user = getUser();
+                authors user = UserService.getUser();
                 bool able = false;
                 if(user!=null && user.access_levels !=null)
                     switch (user.access_levels.title)

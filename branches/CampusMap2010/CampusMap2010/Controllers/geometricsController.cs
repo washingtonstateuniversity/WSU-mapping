@@ -59,13 +59,13 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status)
         {
-            authors user = getUser();
+            authors user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = userService.getLogedIn();
+            PropertyBag["logedin"] = UserService.getLogedIn();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
             //user.Sections.Contains(place.place_types);
@@ -415,7 +415,7 @@ namespace campusMap.Controllers
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
 
-            authors user = getUser();
+            authors user = UserService.getUser();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
             
@@ -423,7 +423,7 @@ namespace campusMap.Controllers
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["loginUser"] = user;
             PropertyBag["geometricimages"] = geometric.Images;
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -494,8 +494,8 @@ namespace campusMap.Controllers
             {
                 images.Add(new media_repo());
             }
-            PropertyBag["geometricimages"] = images;     
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["geometricimages"] = images;
+            PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -637,9 +637,9 @@ namespace campusMap.Controllers
                 return;
             }
 */
-            
 
-            authors user = getUser();
+
+            authors user = UserService.getUser();
             geometric.editing = user;
             geometric.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : geometric.status;
 

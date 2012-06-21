@@ -74,7 +74,7 @@ namespace campusMap.Controllers
         public void List(int page, int searchId, string status)
         {
             clearConnections();
-            authors user = getUser();
+            authors user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
@@ -82,7 +82,7 @@ namespace campusMap.Controllers
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = userService.getLogedIn();
+            PropertyBag["logedin"] = UserService.getLogedIn();
 
             int fieldsPaging = 1;
             int draftPaging = 1;
@@ -277,8 +277,9 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            String username = getUserName();
-            authors user = getUser();
+            
+            authors user = UserService.getUser();
+            String username = user.Nid;
             PropertyBag["loginUser"] = user;
 
             PropertyBag["authorname"] = user.name;
@@ -287,7 +288,7 @@ namespace campusMap.Controllers
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
-            PropertyBag["loginUser"] = getUser();
+            PropertyBag["loginUser"] = UserService.getUser();
 
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -351,8 +352,8 @@ namespace campusMap.Controllers
 
 
             map_views view = new map_views();
-   
-            PropertyBag["loginUser"] = getUser();
+
+            PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -529,8 +530,8 @@ namespace campusMap.Controllers
                 byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
                 view.center = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
-            
-            authors user = getUser();
+
+            authors user = UserService.getUser();
             /*if (!canPublish(user))
             {
                 ViewStatus stat= ActiveRecordBase<ViewStatus>.Find(1);
