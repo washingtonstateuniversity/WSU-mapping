@@ -4,7 +4,7 @@
 
 
 
-#set($user="Jeremy Bass")
+#set($user="jeremy.bass")
 <div id="navWrap">
 	<div id="adminNav">
 	
