@@ -641,6 +641,7 @@ $(document).ready(function(){
 				$(this).closest('.parent').find('.parentalLink').trigger('click');
 			}
 		});
+		
 						$('#printPdfs').click(function(e){
 									e.stopPropagation();
 									e.preventDefault();

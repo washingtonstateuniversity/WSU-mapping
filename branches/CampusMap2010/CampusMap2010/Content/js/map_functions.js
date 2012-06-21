@@ -1286,7 +1286,7 @@ function load_geometrics_editor() {
 		});
 
 	});
-	
+	 
 }
 function load_style_editor(){
 	var gmap;

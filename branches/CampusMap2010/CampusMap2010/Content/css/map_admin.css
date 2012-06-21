@@ -273,7 +273,7 @@
 #printPdfs div.last{padding:0px;}
 #printPdfs h3{text-align:center;}
 #printPdfs h3 a{color:#981e32;font-size:18px; text-decoration:none;}
-#printPdfs h3 a img{}
+#printPdfs h3 a img{} 
 
 
 /* menu */

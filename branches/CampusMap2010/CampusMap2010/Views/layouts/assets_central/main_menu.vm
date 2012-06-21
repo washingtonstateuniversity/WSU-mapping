@@ -40,7 +40,7 @@
 		</li>
 	<li class='$baseClass' ><br/></li>
 	#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
-	<li class='$baseClass altAction' ><a id="printPdfs" href="#">Printable PDF Maps</a></li>
+	<li class='$baseClass altAction ' ><a id="printPdfs" href="#">Printable PDF Maps</a></li>
 </ul>
 
 <form action="#" id="getDirections">

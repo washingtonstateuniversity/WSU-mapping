@@ -302,7 +302,7 @@ $(function() {
 								window.location= Location; 
 				$('body #content_area').fadeTo('fast',25);
 		}); 	                    
-	}
+	} 
 	function pagLoad(){
 		if($('.ui-tabs-panel .pagination').length){
 			$.each($('.pagination'),function(){
