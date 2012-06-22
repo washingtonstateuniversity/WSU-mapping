@@ -46,7 +46,7 @@
 	</table>
 	<table width="50%" border="0"  class="pagination">
 	  <tr>
-		<td>Showing $place_name_types.FirstItem - $place_name_types.LastItem of $place_name_types.TotalItems</td>
+		<td>Showing $place_name_types.FirstItemIndex - $place_name_types.LastItemIndex of $place_name_types.TotalItems</td>
 		<td align="right">
 		  #if($place_name_types.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='place_name_types'}" ) #end
 		  #if(!$place_name_types.HasPrevious) first #end
