@@ -1,4 +1,4 @@
-#if($list_items.Count > 0)
+
 <table class="pagination $Pagination_location">
   <tr>
     <td>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</td>
@@ -15,4 +15,4 @@
     </td>
   </tr>
 </table>
-#end
+
