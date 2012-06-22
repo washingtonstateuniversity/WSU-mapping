@@ -753,6 +753,7 @@ function setup_fixedNav(){
 
 
 
+
 var $tabs = null;
 var tab_counter =  0;
 var $tab_title_input = $( "#tab_title"),
