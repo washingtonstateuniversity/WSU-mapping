@@ -1505,7 +1505,7 @@ function applyType(type){
 	map.mapTypes.set('nostations', mapType);
 	map.setMapTypeId('nostations');
 }
- 
+
 /* check for deletion */	
 function getResolution(lat, zoom, tile_side){
   var grid = tile_side || 256;

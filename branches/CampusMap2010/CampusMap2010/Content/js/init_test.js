@@ -351,6 +351,7 @@ function loadData(data,callback){
 														'<textarea placeholder="Description"></textarea></lable><br/>'+
 														'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 													'</div>';
+													
 										},
 										scrolling:false,
 										opacity:0.7,
