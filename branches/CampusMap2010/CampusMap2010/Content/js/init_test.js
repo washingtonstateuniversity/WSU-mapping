@@ -342,20 +342,23 @@ function loadData(data,callback){
 									$.colorbox({
 										html:function(){
 											return '<div id="errorReporting">'+
-														'real form coming soon<br/>'+
 														'<h2>Found an error?</h2>'+
-														'<h3>please provide some infomation to help us correct this issue.</h3>'+
+														'<h3>Please provide some information to help us correct this issue.</h3>'+
 														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-														'Discribe the issues:<br/>'+
-														'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
+														'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"></lable><br/>'+
+														'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+														'<lable>Describe the issues: <br/>'+
+														'<textarea placeholder="Description"></textarea></lable><br/>'+
+														'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 													'</div>';
 										},
 										scrolling:false,
 										opacity:0.7,
 										transition:"none",
 										width:450,
-										height:350,
-										open:true
+										height:450,
+										open:true,
+										onComplete:function(){prep();}
 									});
 								});
 						prep();
