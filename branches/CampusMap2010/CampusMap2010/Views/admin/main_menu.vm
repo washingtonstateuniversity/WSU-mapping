@@ -11,7 +11,7 @@
 		<ul class="menu Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
 		<ul class="menu Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
 		<ul class="menu Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
-		#if($controller.userService.getUser().Nid==$user)<ul class="menu">
+		#if($userService.getUser().Nid==$user)<ul class="menu">
 			<li class="nosub"><a class="open" href="../view/list.castle"><b>Map views</b></a></li>
 		</ul>#end
 		<ul class="menu">
@@ -39,7 +39,7 @@
 			</li>
 			<li class="close"><a href="#"></a></li>
 		</ul>
-		#if($Controller.getUser().name==$user)
+		#if($userService.getUser().Nid==$user)
 		<ul class="menu">
 			<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle"><b>Media</b></a>
 				<ul class="drop">
@@ -67,12 +67,12 @@
 					<li><a href="../authors/new.castle">New User</a></li>
 					<li><a href="../accesslevel/list.castle">Access Levels</a></li>
 					<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
-					#if($Controller.getUser().name==$user)<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
+					#if($userService.getUser().name==$user)<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
 				</ul>
 			</li>
 			<li class="close"><a href="#"></a></li>
 		</ul>	
-		#if($Controller.getUser().name==$user)
+		#if($userService.getUser().Nid==$user)
 			<ul class="menu"><li class="nosub"><a class="open #if($controller.getView()=='comment')ui-state-active#end" href="../comment/list.castle"><b>Site Prefences</b></a></li></ul>
 		#end	
 		<ul class="menu posLeft">

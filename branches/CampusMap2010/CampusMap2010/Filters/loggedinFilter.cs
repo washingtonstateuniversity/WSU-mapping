@@ -21,6 +21,7 @@ namespace campusMap.Filters
 {
     public class loggedinFilter : IFilter
     {
+        protected UserService userService = new UserService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
            if (Authentication.logged_in())
@@ -32,7 +33,9 @@ namespace campusMap.Filters
                     user.LastActive = DateTime.Now;
                     ActiveRecordMediator<authors>.Save(user);
                 }
+                
             }
+           controllerContext.PropertyBag["userService"] = userService;
             return true;
         }
     }

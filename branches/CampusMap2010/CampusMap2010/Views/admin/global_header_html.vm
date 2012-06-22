@@ -39,9 +39,9 @@
 
 
 
-
+#*
 $cssBundle.Add("~/Content/css/admin_styles.css").Add("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css").Render("~/Content/css/min/combined_#.css")
-
+*#
 
 <link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
 <link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
