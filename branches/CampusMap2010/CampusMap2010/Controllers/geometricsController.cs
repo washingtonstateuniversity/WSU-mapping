@@ -242,19 +242,19 @@ namespace campusMap.Controllers
 
             return flag;        
         }
-        public bool canPublish(authors user)
-        {
-            bool flag = false;
-            /*switch (user.Accesslevel.Title)
+           /* public bool canPublish(authors user)
             {
-                case "Author": flag = true; break;
+                bool flag = false;
+                switch (user.Accesslevel.Title)
+                {
+                    case "Author": flag = true; break;
                                
-                case "Editor": flag = true; break;
+                    case "Editor": flag = true; break;
 
-                case "Contributor": flag = false; break;
+                    case "Contributor": flag = false; break;
+                }
+                return flag;        
             }*/
-            return flag;        
-        }
 
 
         public void new_field()
@@ -641,7 +641,7 @@ namespace campusMap.Controllers
 
             authors user = UserService.getUser();
             geometric.editing = user;
-            geometric.status = !canPublish(user) ? ActiveRecordBase<status>.Find(1) : geometric.status;
+            geometric.status = ! UserService.canPublish(user) ? ActiveRecordBase<status>.Find(1) : geometric.status;
 
 
             if (String.IsNullOrEmpty(geometric.name))

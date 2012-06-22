@@ -31,6 +31,7 @@ namespace campusMap.Services
 {
     public class UserService
 	{
+
         public static authors[] getLogedIn()
         {
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
@@ -38,12 +39,13 @@ namespace campusMap.Services
             authors[] users = ActiveRecordBase<authors>.FindAll(baseEx.ToArray());
             return users;
         }
-        public static bool isLogedIn()
+
+        public static Boolean isLogedIn()
         {
             return isLogedIn(null);
         }
 
-        public static bool isLogedIn(string Nid)
+        public static Boolean isLogedIn(string Nid)
         {
             authors[] author_list = getLogedIn();
             bool temp = false;
@@ -55,6 +57,7 @@ namespace campusMap.Services
             }
             return temp;
         }
+
         public static String getNid()
         {
             String username = "";
@@ -68,6 +71,7 @@ namespace campusMap.Services
             }
             return username;
         }
+
         public static authors getUser()
         {
             try
@@ -82,7 +86,8 @@ namespace campusMap.Services
             }
             return null;
         }
-        public static bool isActive(authors user)
+
+        public static Boolean isActive(authors user)
         {
             int timeThreshold = -2; //TODO Set as site perference
             bool active = false;
@@ -92,5 +97,38 @@ namespace campusMap.Services
             }
             return active;
         }
+
+        public static Boolean canPublish(authors user)
+        {
+            bool flag = false;
+            switch (user.access_levels.title)
+            {
+                case "Admin": flag = true; break;
+                case "Editor": flag = true; break;
+            }
+            return flag;
+        }
+
+        public static Boolean clearLock(object obj)
+        {
+            bool result = false;
+            authors author = getUser();
+            if(author.checked_out.Contains(obj)){
+                author.checked_out.Remove(obj);
+                ActiveRecordMediator<authors>.Save(author);
+                result = true;
+            }
+            /*t item = ActiveRecordBase<t>.Find(id);
+            if (item != null)
+            {
+                item.checked_out_by = null;
+                ActiveRecordMediator<t>.Save(item);
+                result = true;
+            }
+             */
+            return result;
+        }
+
+
     }
 }

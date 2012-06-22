@@ -104,7 +104,9 @@ namespace campusMap.Models
                 }
             }
         }
-        
+
+
+
         private IList<media_repo> Media = new List<media_repo>();
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "authors_to_media", ColumnKey = "author_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> media

@@ -508,7 +508,7 @@ namespace campusMap.Controllers
 
             return flag;        
         }
-        public bool canPublish(authors user)
+        /*public bool canPublish(authors user)
         {
             bool flag = false;
             switch (user.access_levels.title)
@@ -517,7 +517,7 @@ namespace campusMap.Controllers
                 case "Editor": flag = true; break;
             }
             return flag;        
-        }
+        }*/
 
         public void new_type()
         {
@@ -1098,7 +1098,7 @@ namespace campusMap.Controllers
                 RedirectToReferrer();
                 return;
             }*/
-            int requestedStatus = canPublish(user) && place.status != null ? place.status.id : 1;
+            int requestedStatus = UserService.canPublish(user) && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             place.infotabs.Clear();

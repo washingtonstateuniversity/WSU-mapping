@@ -203,7 +203,7 @@ namespace campusMap.Controllers
 
             return flag;
         }
-        public bool canPublish(authors user)
+        /*public bool canPublish(authors user)
         {
             bool flag = false;
             switch (user.access_levels.title)
@@ -212,7 +212,7 @@ namespace campusMap.Controllers
                 case "Editor": flag = true; break;
             }
             return flag;
-        }
+        }*/
 
 
 
@@ -257,7 +257,7 @@ namespace campusMap.Controllers
         } 
      
 
-        public String GetCredit()
+        public String GetCredits()
         {
             String sql = "SELECT DISTINCT s.credit FROM media_repo AS s WHERE NOT s.credit = 'NULL'";
             SimpleQuery<String> q = new SimpleQuery<String>(typeof(map_views), sql);
@@ -336,7 +336,7 @@ namespace campusMap.Controllers
             items = ActiveRecordBase<comments>.FindAll(Order.Desc("CreateTime"), baseEx.ToArray());
             PropertyBag["comments"] = PaginationHelper.CreatePagination(items, pagesize, page);*/
 
-            String CreditList = GetCredit();
+            String CreditList = GetCredits();
             PropertyBag["credits"] = CreditList; 
 
             List<authors> authors = new List<authors>();
