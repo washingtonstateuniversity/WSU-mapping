@@ -9,7 +9,7 @@
       #if(!$list_items.HasPreviousPage) | prev #end
       #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.NextPageIndex, "next",null, "%{searchId=$!searchId,target=$status.title}" )  #end
       #if(!$list_items.HasNextPage) | next #end
-      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.LastItemIndex, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
+      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.TotalPages, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
       #if(!$list_items.HasNextPage) | last #end
       
     </td>

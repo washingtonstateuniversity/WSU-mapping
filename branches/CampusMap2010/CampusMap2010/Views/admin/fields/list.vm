@@ -1,19 +1,20 @@
+<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
+  <tr>
+    <td>Showing $fields.FirstItemIndex - $fields.LastItemIndex of $fields.TotalItems</td>
+    <td align="right">
+      #if($fields.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='fields'}" )  #end
+      #if(!$fields.HasPreviousPage) first #end
+      #if($fields.HasPreviousPage) | $PaginationHelper.CreatePageLink( $fields.PreviousPageIndex, "prev",null, "%{target='fields'}" )  #end
+      #if(!$fields.HasPreviousPage) | prev #end
+      #if($fields.HasNextPage) | $PaginationHelper.CreatePageLink( $fields.NextPageIndex, "next",null, "%{target='fields'}" )  #end
+      #if(!$fields.HasNextPage) | next #end
+      #if($fields.HasNextPage) | $PaginationHelper.CreatePageLink( $fields.TotalPages, "last",null, "%{target='fields'}" )  #end
+      #if(!$fields.HasNextPage) | last #end
+    </td>
+  </tr>
+</table>	
 
-	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
-	  <tr>
-		<td>Showing $fields.FirstItemIndex - $fields.LastItemIndex of $fields.TotalItems</td>
-		<td align="right">
-		  #if($fields.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasPrevious) first #end
-		  #if($fields.HasPrevious) | $PaginationHelper.CreatePageLink( $fields.PreviousIndex, "prev", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasPrevious) | prev #end
-		  #if($fields.HasNext) | $PaginationHelper.CreatePageLink( $fields.NextIndex, "next", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasNext) | next #end
-		  #if($fields.HasNext) | $PaginationHelper.CreatePageLink( $fields.LastIndex, "last", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasNext) | last #end
-		</td>
-	  </tr>
-	</table>
+	 
 
 	<table  width="100%" class="ui-widget ui-widget-content">
 	  <thead>
@@ -45,17 +46,19 @@
 	  </tbody>
 	</table>
 	<table width="50%" border="0"  class="pagination" >
-	  <tr>
-		<td>Showing $fields.FirstItem - $fields.LastItem of $fields.TotalItems</td>
-		<td align="right">
-		  #if($fields.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasPrevious) first #end
-		  #if($fields.HasPrevious) | $PaginationHelper.CreatePageLink( $fields.PreviousIndex, "prev", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasPrevious) | prev #end
-		  #if($fields.HasNext) | $PaginationHelper.CreatePageLink( $fields.NextIndex, "next", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasNext) | next #end
-		  #if($fields.HasNext) | $PaginationHelper.CreatePageLink( $fields.LastIndex, "last", null, "%{target='fields'}" ) #end
-		  #if(!$fields.HasNext) | last #end
-		</td>
-	  </tr>
-	</table>
+      <tr>
+        <td>Showing $fields.FirstItemIndex - $fields.LastItemIndex of $fields.TotalItems</td>
+        <td align="right">
+          #if($fields.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='fields'}" )  #end
+          #if(!$fields.HasPreviousPage) first #end
+          #if($fields.HasPreviousPage) | $PaginationHelper.CreatePageLink( $fields.PreviousPageIndex, "prev",null, "%{target='fields'}" )  #end
+          #if(!$fields.HasPreviousPage) | prev #end
+          #if($fields.HasNextPage) | $PaginationHelper.CreatePageLink( $fields.NextPageIndex, "next",null, "%{target='fields'}" )  #end
+          #if(!$fields.HasNextPage) | next #end
+          #if($fields.HasNextPage) | $PaginationHelper.CreatePageLink( $fields.TotalPages, "last",null, "%{target='fields'}" )  #end
+          #if(!$fields.HasNextPage) | last #end
+
+        </td>
+      </tr>
+    </table>
+  

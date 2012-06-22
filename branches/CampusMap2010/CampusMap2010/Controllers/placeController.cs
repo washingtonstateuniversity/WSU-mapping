@@ -71,12 +71,12 @@ namespace campusMap.Controllers
             PropertyBag["logedin"] = UserService.getLogedIn();
 
 
-            int typesPaging = 1;
-            int fieldsPaging = 1;
-            int draftPaging = 1;
-            int reviewPaging = 1;
-            int publishedPaging = 1;
-            int name_typesPaging = 1;
+            int typesPaging = 0;
+            int fieldsPaging = 0;
+            int draftPaging = 0;
+            int reviewPaging = 0;
+            int publishedPaging = 0;
+            int name_typesPaging = 0;
 
             switch (target)
             {
@@ -212,7 +212,8 @@ namespace campusMap.Controllers
                     makePlaceStaticMap(item);
                 }
             }
-            PropertyBag["published_list"] = PaginationHelper.CreatePagination(publishedItems, pagesize, publishedPaging);
+            var publist = PaginationHelper.CreatePagination(publishedItems, pagesize, publishedPaging);
+            PropertyBag["published_list"] = publist;
             IList<string> buttons = new List<string>();
             buttons.Add("edit");
             buttons.Add("delete");
