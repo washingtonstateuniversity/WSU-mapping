@@ -2,7 +2,7 @@
 #if($styles.Count > 0)
 <table width="50%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
   <tr>
-    <td>Showing $styles.FirstItem - $styles.LastItem of $styles.TotalItems</td>
+    <td>Showing $styles.FirstItemIndex - $styles.LastItemIndex of $styles.TotalItems</td>
     <td align="right">
       #if($styles.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
       #if(!$styles.HasPrevious) first #end
@@ -14,7 +14,7 @@
       #if(!$styles.HasNext) | last #end
     </td>
   </tr>
-</table>
+</table>	
 #end
 <table  width="100%" class="ui-widget ui-widget-content">
   <thead>

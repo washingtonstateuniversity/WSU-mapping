@@ -1,7 +1,7 @@
-#if($fields.Count > 0)
+
 	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
 	  <tr>
-		<td>Showing $fields.FirstItem - $fields.LastItem of $fields.TotalItems</td>
+		<td>Showing $fields.FirstItemIndex - $fields.LastItemIndex of $fields.TotalItems</td>
 		<td align="right">
 		  #if($fields.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='fields'}" ) #end
 		  #if(!$fields.HasPrevious) first #end
@@ -14,6 +14,7 @@
 		</td>
 	  </tr>
 	</table>
+
 	<table  width="100%" class="ui-widget ui-widget-content">
 	  <thead>
 		<tr class="ui-widget-header ">
@@ -58,6 +59,3 @@
 		</td>
 	  </tr>
 	</table>
-#else
-	<h1>There are currently no fields</h1>
-#end
