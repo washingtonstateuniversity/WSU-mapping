@@ -25,10 +25,10 @@
     using log4net;
     using log4net.Config;
     using Goheer.EXIF;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.Linq; 
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Drawing.Drawing2D;
+    using System.Linq;
 #endregion
 
 namespace campusMap.Controllers
@@ -904,8 +904,12 @@ namespace campusMap.Controllers
             RedirectToAction("list");
         }
 
+        [SkipFilter()]
         public void getmap(string path)
         {
+            CancelLayout();
+            CancelView();
+
             // Read in the file into a byte array
             byte[] contents = null;
 
@@ -940,21 +944,23 @@ namespace campusMap.Controllers
                 HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
                 HttpContext.Response.Cache.SetValidUntilExpires(true);
                 HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-                HttpContext.Response.Expires = 0;
+                HttpContext.Response.Expires = 780000;
                 HttpContext.Response.ContentType = contentType;
                 
                 // Write the file to the response
                 HttpContext.Response.BinaryWrite(contents);
                 //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
             }
-            HttpContext.Response.Flush();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
 
         // h = height , w = width , p = percent, m = method , protect= stop sizing up of image, pre = prefix to image name 
-        [SkipFilter]
+        [SkipFilter()]
         public void Download(int id, int placeid, int w, int h, int p, string m, bool protect, string pre, string mark, int maxage, bool nocache, bool mug)
         {
+            CancelLayout();
+            CancelView();
             log.Info("Starting download for image id " + id);
             media_repo image = ActiveRecordBase<media_repo>.Find(id);
             string uploadPath = "";
@@ -1099,7 +1105,7 @@ namespace campusMap.Controllers
                 HttpContext.Response.BinaryWrite(contents);
             }
             log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
-            HttpContext.Response.Flush();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
         //private string GetFileName(HttpPostedFile file)
         //{
