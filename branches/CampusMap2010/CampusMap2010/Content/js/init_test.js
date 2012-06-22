@@ -43,6 +43,8 @@ function iniMap(url,callback){
 		});
 	});
 }
+
+/* non-abstract */
 function addCentralControlls(){
 	
 
@@ -125,29 +127,7 @@ function addCentralControlls(){
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
 	});
 	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-
 
 var cTo="";
 var cFrom="";
@@ -174,7 +154,7 @@ function hereToThere(){
 			$('#loading').remove();
 	});
 }
-function showContextMenu(caurrentLatLng  ) {
+function showContextMenu(caurrentLatLng  ){
 	/* this need to be abstracked out into the jMap plugin */
 	function setMenuXY(caurrentLatLng){
 		function getCanvasXY(caurrentLatLng){
@@ -247,7 +227,7 @@ function hideContextMenu() {
 	$('.contextmenu').remove();
 }
 
-
+/* non-abstract */
 function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
@@ -322,7 +302,7 @@ function loadData(data,callback){
 				  width: "400px"
 				 }
 				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-				,infoBoxClearance: new google.maps.Size(20,50)
+				,infoBoxClearance: new google.maps.Size(50,50)
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
@@ -362,20 +342,23 @@ function loadData(data,callback){
 									$.colorbox({
 										html:function(){
 											return '<div id="errorReporting">'+
-														'real form coming soon<br/>'+
 														'<h2>Found an error?</h2>'+
-														'<h3>please provide some infomation to help us correct this issue.</h3>'+
+														'<h3>Please provide some information to help us correct this issue.</h3>'+
 														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-														'Discribe the issues:<br/>'+
-														'<textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea>'+
+														'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"></lable><br/>'+
+														'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+														'<lable>Describe the issues: <br/>'+
+														'<textarea placeholder="Description"></textarea></lable><br/>'+
+														'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 													'</div>';
 										},
 										scrolling:false,
 										opacity:0.7,
 										transition:"none",
 										width:450,
-										height:350,
-										open:true
+										height:450,
+										open:true,
+										onComplete:function(){prep();}
 									});
 								});
 						prep();
@@ -641,6 +624,7 @@ $(document).ready(function(){
 				$(this).closest('.parent').find('.parentalLink').trigger('click');
 			}
 		});
+		
 						$('#printPdfs').click(function(e){
 									e.stopPropagation();
 									e.preventDefault();
@@ -649,9 +633,9 @@ $(document).ready(function(){
 										html:function(){
 											return '<div id="printPdfs">'+
 														'<h2>Printable Maps</h2>'+
-														'<div><h3><a href="">Parking<br/><img src="'+siteroot+'Content/images/print/parking_icon.jpg"/></a></h3></div>'+
-														'<div><h3><a href="">Arera<br/><img src="'+siteroot+'Content/images/print/area_icon.jpg"/></a></h3></div>'+
-														'<div class="last"><h3><a href="">Washington State<br/><img src="'+siteroot+'Content/images/print/state_icon.jpg"/></a></h3></div>'+
+														'<div><h3><a href="http://www.parking.wsu.edu/Map" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+														'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
+														'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
 													'</div>';
 										},
 										scrolling:false,
@@ -662,7 +646,7 @@ $(document).ready(function(){
 										open:true
 									});
 								});
-		
+		 
 		var termTemplate = "<strong>%s</strong>";
 		$( "#placeSearch [type=text]" ).autocomplete({
 			source: function( request, response ) {

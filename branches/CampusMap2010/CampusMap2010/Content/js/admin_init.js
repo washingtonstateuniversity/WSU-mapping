@@ -16,7 +16,7 @@
 	
 	
 (function($){$.fn.blink = function(options){var defaults = { delay:500 };var options = $.extend(defaults, options);return this.each(function(){var obj = $(this);setInterval(function(){if($(obj).css("visibility") == "visible"){$(obj).css('visibility','hidden');}else{$(obj).css('visibility','visible');}}, options.delay);});}}(jQuery));
-  
+   
 
 function typedown(mySelection){  
     window.location = siteroot+view+"list.castle?type="+mySelection;   
@@ -302,7 +302,7 @@ $(function() {
 								window.location= Location; 
 				$('body #content_area').fadeTo('fast',25);
 		}); 	                    
-	}
+	} 
 	function pagLoad(){
 		if($('.ui-tabs-panel .pagination').length){
 			$.each($('.pagination'),function(){

@@ -46,7 +46,7 @@
     right: -23px;
     text-indent: -9999em;
     top: 0;
-    width: 17px;}
+    width: 17px;} 
 #cboxClose:hover{ background-position:left bottom;}
 /*
   The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill
