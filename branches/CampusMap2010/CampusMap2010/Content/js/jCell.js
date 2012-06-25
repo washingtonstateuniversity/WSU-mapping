@@ -48,6 +48,29 @@
  *      }
  * });
  */
+var ip="";
+function myIP() { 
+	if(ip==""){
+		if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest(); 
+		else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
+	 
+		xmlhttp.open("GET","http://api.hostip.info/get_html.php",false); 
+		xmlhttp.send(); 
+	 
+		hostipInfo = xmlhttp.responseText.split("\n"); 
+	 
+		for (i=0; hostipInfo.length >= i; i++) { 
+			ipAddress = hostipInfo[i].split(":"); 
+			if ( ipAddress[0] == "IP" ){
+				ip=	jQuery.trim(ipAddress[1]);
+				return ip; 
+			}
+		} 
+		return false; 
+	}else{
+		return ip;
+	}
+} 
 
 (function($) {
 $.fn.jCell = function(o) {
@@ -78,6 +101,10 @@ $.fn.jCell = function(o) {
         var running = false, animCss=o.vertical?"top":"left", sizeCss=o.vertical?"height":"width";
         var div = $(this), ul = $("ul", div), tLi = $("li", ul), tl = tLi.size(), v = o.visible;
 		var navpos = 0;
+		var extra = tLi.slice(tl-v-1+1).size() + tLi.slice(0,v).size();
+		
+		//alert(extra);
+		
         if(o.circular) {
             ul.prepend(tLi.slice(tl-v-1+1).clone())
               .append(tLi.slice(0,v).clone());
@@ -129,9 +156,8 @@ $.fn.jCell = function(o) {
 				$(this).live('click',function(e){
 					e.preventDefault();
 					e.stopPropagation();
-					$(this).parent().find("."+o.navActive).removeClass(o.navActive);
 					go(o.circular ? o.visible+i : i);
-					$(this).addClass(o.navActive);
+					selectNav(i);
 				});
 			});
 		}
@@ -155,21 +181,23 @@ $.fn.jCell = function(o) {
                         ul.css(animCss, -((itemLength-(v*2))*liSize)+"px");
                         // If "scroll" > 1, then the "to" might not be equal to the condition; it can be lesser depending on the number of elements.
                         curr = to==o.start-v-1 ? itemLength-(v*2)-1 : itemLength-(v*2)-o.scroll;
-						navpos = curr-v;
                     } else if(to>=itemLength-v+1) { // If last, then goto first
                         ul.css(animCss, -( (v) * liSize ) + "px" );
                         // If "scroll" > 1, then the "to" might not be equal to the condition; it can be greater depending on the number of elements.
                         curr = to==itemLength-v+1 ? v+1 : v+o.scroll;
-						navpos = curr-v;
                     } else {
 						curr = to;
-						navpos = curr-v>=(v*2)?0:curr-v;
 					}
-                } else {                    // If non-circular and to points to first or last, we just return.
+					if(to>tl){
+						navpos = (to-1)-tl;
+					}else{
+						navpos = (to-1);
+					}
+                } else {
                     if(to<0 || to>itemLength-v) return;
                     else curr = to;
-					navpos = curr-v;
-                }                           // If neither overrides it, the curr will still be "to" and we can proceed.
+					navpos = (to-1);
+                }
 				
 				if(o.nav){selectNav(navpos);}
 

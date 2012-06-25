@@ -415,7 +415,9 @@
     <Content Include="lib\WatiN.Core.dll" />
     <Content Include="lib\WatiN.Core.xml" />
     <Content Include="lib\zh-TW\Castle.MonoRail.Framework.resources.dll" />
-    <Content Include="logging.config" />
+    <Content Include="logging.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="manager.aspx" />
     <Content Include="Content\jquery-ui-1.8.19.custom.zip" />
     <None Include="lib\Cassini.EULA.rtf" />
@@ -634,7 +636,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4829</DevelopmentServerPort>
+          <DevelopmentServerPort>55421</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

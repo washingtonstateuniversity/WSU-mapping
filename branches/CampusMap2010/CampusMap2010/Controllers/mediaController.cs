@@ -1,5 +1,6 @@
 #region Directives
     using System;
+using System.Threading;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Collections.Generic;
@@ -185,8 +186,10 @@ namespace campusMap.Controllers
 
         public void uploadFiles(IRequest request)
         {
+            CancelLayout();
+            CancelView();
             int i = 0;
-            string json = "[";
+            string json = HttpContext.Current.Request.Form["returnType"]=="id"?"":"[";
            
             String tmp_path = getUploadsPath("image", true);
             foreach (String key in HttpContext.Current.Request.Files.Keys)
@@ -199,9 +202,9 @@ namespace campusMap.Controllers
                 json += createNewFile(file, tmp_File);
                 i = i + 1;
             }
-            json += "]";
+            json += HttpContext.Current.Request.Form["returnType"] == "id" ? "" : "]";
             HttpContext.Current.Response.Write(json);
-            HttpContext.Current.Response.End();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
 
@@ -212,9 +215,6 @@ namespace campusMap.Controllers
         {
             media_repo media = new media_repo();
 
-            
-
-
             String Fname = System.IO.Path.GetFileName(file.FileName);
             String[] fileparts = Fname.Split('.');
             if (String.IsNullOrEmpty(media.file_name))
@@ -223,15 +223,24 @@ namespace campusMap.Controllers
             }
 
             int type = 3;
-            int tmp = int.Parse(HttpContext.Current.Request.Form["mediatype[" + Fname + "]"]);
+
+
+            int tmp = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["mediatype"])
+                        ? HttpContext.Current.Request.Form["mediatype[" + Fname + "]"]
+                        : HttpContext.Current.Request.Form["mediatype"]);
             if(tmp>0){
                 type = tmp;
             }
 
-            String caption = HttpContext.Current.Request.Form["caption[" + Fname + "]"];
+            String caption = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["caption"]) 
+                                ? HttpContext.Current.Request.Form["caption[" + Fname + "]"] 
+                                : HttpContext.Current.Request.Form["caption"];
             if (!String.IsNullOrEmpty(caption))
                 media.caption = caption;
-            String credit = HttpContext.Current.Request.Form["credit[" + Fname + "]"];
+
+            String credit = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["credit"]) 
+                            ? HttpContext.Current.Request.Form["credit[" + Fname + "]"] 
+                            : HttpContext.Current.Request.Form["credit"];
             if (!String.IsNullOrEmpty(credit))
                 media.credit = credit;
 
@@ -247,12 +256,25 @@ namespace campusMap.Controllers
             media.orientation = setOrientation(tmp_File);
             media = pushXMPdb(media,tmp_File);
             ActiveRecordMediator<media_repo>.Save(media);
-            saveMedia(media, file , tmp_File);
 
-            String pool = HttpContext.Current.Request.Form["pool[" + Fname + "]"];
+
+            try
+            {
+                log.Info("preping StartTheThread for " + media.file_name + " with id " + media.id + " at path " + media.path);
+                StartTheThread(media, file, tmp_File);
+            }
+            catch { log.Error("Failed trying to StartTheThread for " + media.file_name + " with id " + media.id + " at path " + media.path); }
+
+
+
+            String pool = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool"]) 
+                            ? HttpContext.Current.Request.Form["pool[" + Fname + "]"] 
+                            : HttpContext.Current.Request.Form["pool"];
 
             int item = 0;
-                tmp = int.Parse(HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]);
+            tmp = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool])
+                ? String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]) ? "" : HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]
+                        : HttpContext.Current.Request.Form["pool_" + pool]);
             if (tmp > 0)
             {
                 item = tmp;
@@ -270,10 +292,21 @@ namespace campusMap.Controllers
                         "\",\"thumbnail_url\":\"" + mediaurl + "\"}";
 
 
-            return json;
+            return HttpContext.Current.Request.Form["returnType"]=="id"? media.id.ToString() : json;
 
             //logService.Log("Uploaded a file named " + file.FileName + " at " + uf.FullPath, "INFO", uf.Site);
         }
+
+        public Thread StartTheThread(media_repo media, HttpPostedFile file, string tmp_File)
+        {
+            log.Info("StartTheThread for " + media.file_name + " with id " + media.id + " at path " + tmp_File);
+            var t = new Thread(() => saveMedia(media, file, tmp_File));
+            t.Start();
+            return t;
+        } 
+
+
+
         public void saveMedia(media_repo media, HttpPostedFile file , string tmp_File)
         {
             if (file.ContentLength != 0)
@@ -311,12 +344,13 @@ namespace campusMap.Controllers
                 String relavtivePath = getUploadsRelavtivePath("image", true);
                 string newFileRelavtivePath = relavtivePath + media.id + ".ext";
                 media.path = newFileRelavtivePath;
+                ActiveRecordMediator<media_repo>.Save(media);
                 //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
                 imageService.process(media.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", media.ext);
             }
             ActiveRecordMediator<media_repo>.Save(media);
             delete(tmp_File,false);
-            //log.Info("Updating " + file.Filename + " at path " + fullpath);
+            log.Info("saveMedia and Updating " + media.file_name + " with id " + media.id + " at path " + media.path);
         }
         public void applyMediaToObject(media_repo media, int id, string type)
         {
@@ -360,11 +394,6 @@ namespace campusMap.Controllers
                     geo.Save();
                     break;
             }
-
-
-
-
-
         }
         /* START OF move to the service */
         /*
@@ -377,8 +406,8 @@ namespace campusMap.Controllers
 
            
             
-            /*
-
+            
+/*
             Bitmap bmp = new Bitmap(pathToImageFile);
             BitmapMetadata Mdata = (BitmapMetadata)bmp.Metadata;
             string date = md.DateTaken; 
@@ -467,6 +496,48 @@ namespace campusMap.Controllers
         /* END OF move to the service */
 
 
+
+        protected string getUploadsURL(string mediaType, bool usetemp)
+        {
+            if (String.IsNullOrEmpty(mediaType)) mediaType = "image";
+            String Url = getRootUrl();
+            if (!Url.EndsWith("\\"))
+                Url += "\\";
+            Url += @"uploads\media\" + mediaType + @"\";
+            if (usetemp) Url += @"tmp\";
+            return Url;
+        }
+        protected string getUploadsPath(string mediaType, bool usetemp)
+        {
+
+            if (String.IsNullOrEmpty(mediaType)) mediaType = "image";
+
+            String path = Context.ApplicationPhysicalPath;
+            if (!path.EndsWith("\\"))
+                path += "\\";
+            path += @"uploads\media\" + mediaType + @"\";
+            if (usetemp) path += @"tmp\";
+
+            if (!HelperService.DirExists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            return path;
+        }
+        protected string getUploadsRelavtivePath(string mediaType, bool usetemp)
+        {
+            String path = getUploadsPath(mediaType, usetemp);
+            String directory = Context.ApplicationPhysicalPath;
+            path = path.Replace(directory, "");
+            if (!path.StartsWith("\\"))
+                path = "\\" + path;
+            if (!HelperService.DirExists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            return path;
+        }
+
 /* note : below is the start of a php conversion from php THIS IS PROBABLY THE WAY TO GO BUT WE ARE GOING TO CHEAT AND USE THE SIMPLE VERSION ATM */
         public void massUpload(
             [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
@@ -500,42 +571,6 @@ namespace campusMap.Controllers
                 }
 
         }
-        
-        protected string getUploadsURL(string mediaType,bool usetemp){
-            if(String.IsNullOrEmpty(mediaType))mediaType="image";
-            String Url = getRootUrl();
-                if (!Url.EndsWith("\\"))
-                    Url += "\\";
-                    Url += @"uploads\media\"+mediaType+@"\";
-                    if(usetemp)Url += @"tmp\";
-            return Url;
-        }
-        protected string getUploadsPath(string mediaType,bool usetemp){
-
-            if(String.IsNullOrEmpty(mediaType))mediaType="image";
-
-            String path = Context.ApplicationPhysicalPath;
-                if (!path.EndsWith("\\"))
-                    path += "\\";
-                    path += @"uploads\media\"+mediaType+@"\";
-                    if(usetemp)path += @"tmp\";
-
-                if (!HelperService.DirExists(path)){
-                    System.IO.Directory.CreateDirectory(path);
-                }
-            return path;
-        }
-        protected string getUploadsRelavtivePath(string mediaType,bool usetemp){
-            String path = getUploadsPath(mediaType,usetemp);
-            String directory = Context.ApplicationPhysicalPath;
-            path = path.Replace(directory, "");
-                if (!path.StartsWith("\\"))
-                    path = "\\" + path;
-                if (!HelperService.DirExists(path)){
-                    System.IO.Directory.CreateDirectory(path);
-                }
-            return path;
-        }
 
         public void get_files() {
             String info = "";
@@ -548,8 +583,6 @@ namespace campusMap.Controllers
             Response.ContentType = "application/json; charset=UTF-8";
             RenderText(info);
         }
-
-
         protected String get_file_objects() {
             String path = getUploadsPath("image",true);
             String info = "";
@@ -560,7 +593,6 @@ namespace campusMap.Controllers
             )));*/
             return info;
         }
-
         protected String get_file_object(String file_name) {
 
             String file = "";
@@ -595,11 +627,6 @@ namespace campusMap.Controllers
                 $file->delete_url .= '&_method=DELETE';
             }
         }*/
-
-
-
-
-
     public void post() {
         if (Request.Params["_method"] != null && Request.Params["_method"] == "DELETE") {
             delete(null,true);
@@ -652,7 +679,6 @@ namespace campusMap.Controllers
         }
         RenderText(json);
     }
-
     public void delete(string file_path, bool retrunJson) {
         if(String.IsNullOrEmpty(file_path)){
             String file_name = !String.IsNullOrEmpty(Request.Params["file"]) ? Path.GetFileName(Request.Params["file"]) : null;
@@ -788,45 +814,46 @@ namespace campusMap.Controllers
                     stream = memoryStream;
 
 
-                //set up the image up from the stream
-                System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+                    //set up the image up from the stream
+                    System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
 
-                if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
-                {
-                    if (ajax)
+                    if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
                     {
-                        CancelView();
-                        CancelLayout();
-                        RenderText("You have uploaded a CMYK image.  Please conver to RGB first.");
+                        if (ajax)
+                        {
+                            CancelView();
+                            CancelLayout();
+                            RenderText("You have uploaded a CMYK image.  Please conver to RGB first.");
+                            return;
+                        }
+                        Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
+                        RedirectToReferrer();
                         return;
                     }
-                    Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
-                    RedirectToReferrer();
-                    return;
-                }
 
 
-                // a var for uploads will start here
-                String uploadPath = Context.ApplicationPhysicalPath;
-                if(!uploadPath.EndsWith("\\"))
-                    uploadPath+="\\";
-                uploadPath += @"uploads\";
+                    // a var for uploads will start here
+                    String uploadPath = Context.ApplicationPhysicalPath;
+                    if(!uploadPath.EndsWith("\\"))
+                        uploadPath+="\\";
+                    uploadPath += @"uploads\";
 
-                if (place_id != 0)
-                {
-                    uploadPath += @"place\" + place_id + @"\";
-                }
-                if (!HelperService.DirExists(uploadPath))
-                {
-                    System.IO.Directory.CreateDirectory(uploadPath);
-                }
-                string newFile = uploadPath + image.id + ".ext";
-                log.Info("uploadfilename: " + newFile);
-                campusMap.Services.LogService.writelog(" in Update " + newFile);
+                    if (place_id != 0)
+                    {
+                        uploadPath += @"place\" + place_id + @"\";
+                    }
+                    if (!HelperService.DirExists(uploadPath))
+                    {
+                        System.IO.Directory.CreateDirectory(uploadPath);
+                    }
+                    string newFile = uploadPath + image.id + ".ext";
+                    log.Info("uploadfilename: " + newFile);
+                    //campusMap.Services.LogService.writelog(" in Update " + newFile);
 
-                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
+                    //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
+                    imageService.process(image.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", image.ext);
             }
+            
             ActiveRecordMediator<media_repo>.Save(image);
             if (place_id != 0)
             {

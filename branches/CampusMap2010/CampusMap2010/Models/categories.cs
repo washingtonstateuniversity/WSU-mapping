@@ -37,6 +37,16 @@ namespace campusMap.Models
             get { return Level; }
             set { Level = value; }
         }
+        private int _position;
+        [Property]
+        virtual public int position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
+
+        
+
         private bool _active;
         [Property]
         virtual public bool active

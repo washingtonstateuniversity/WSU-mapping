@@ -1,5 +1,5 @@
 
-
+var FileName="";
 
 //tiny stuff
 function openImgUploader(){
@@ -60,17 +60,16 @@ function openImgUploader(){
 												
 																											
 												var weWantedTo=true;
-													$('input[type=file]').ajaxfileupload({ 
-															  'action': siteroot+'media/update.castle', 
+													$('input[type=file]').ajaxfileupload({
+															  'action': siteroot+'media/uploadFiles.castle', 
 															  'params': { 
-															  	'image.id':'',
-																'image.FileName':$('input#image_FileName'),
-																'image.Caption':$('input#image_Caption'),
-																'image.Credit':$('input#image_Credit'),
-																'place_id':place_id,
-																'image.type.id':1,
-																'ajax':true
-															  }, 
+																			'returnType':'id',
+																			'pool':'place',
+																			'pool_place':place_id,
+																			'credit':$('input#image_Credit')!='undefined'?$('input#image_Credit'):"",
+																			'caption':$('input#image_Caption')!='undefined'?$('input#image_Caption'):"",
+																			'mediatype':'3'
+																		},
 															  'onComplete': function(response) { 
 																 // first test if it was uploaded ok.
 																  if(isNumber(response)){
@@ -130,6 +129,7 @@ function openImgUploader(){
 															  }, 
 															  'onStart': function() { 
 															  	 FileName=$('input#image_FileName').val();
+																 if(FileName=="")FileName=$('input#image_id').val();
 																 //alert('pause');
 																//if(!weWantedTo) return false; // cancels upload 
 																$('#ISIUarea form').fadeOut('fast',function(){

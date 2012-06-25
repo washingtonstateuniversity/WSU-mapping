@@ -368,7 +368,7 @@ function loadData(data,callback){
 						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
 							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
 						}).css('min-height',minHeight); 
-						$('#taby'+i).hover(function(){
+						$('.ui-tabs-panel').hover(function(){
 							ib[i].setOptions({enableEventPropagation: true});
 							$('#centralMap').gmap('stop_scroll_zoom');
 						},function(){
@@ -634,7 +634,7 @@ $(document).ready(function(){
 										html:function(){
 											return '<div id="printPdfs">'+
 														'<h2>Printable Maps</h2>'+
-														'<div><h3><a href="http://www.parking.wsu.edu/Map" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+														'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
 														'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
 														'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
 													'</div>';

@@ -907,10 +907,14 @@ namespace campusMap.Controllers
             }
             media_repo media = ActiveRecordBase<media_repo>.Find(imageid);
             place place = ActiveRecordBase<place>.Find(id);
-            place_media placemedia = ActiveRecordBase<place_media>.FindFirst(new ICriterion[] { Expression.Eq("place", place), Expression.Eq("media", media) });
-            ActiveRecordMediator<place_media>.Delete(placemedia);
-            //place.Images.Remove(image);
-            //ActiveRecordMediator<place>.Save(place);
+            try
+            {
+                place_media placemedia = ActiveRecordBase<place_media>.FindFirst(new ICriterion[] { Expression.Eq("place", place), Expression.Eq("media", media) });
+                ActiveRecordMediator<place_media>.Delete(placemedia);
+            }
+            catch { }
+            place.Images.Remove(media);
+            ActiveRecordMediator<place>.Save(place);
             CancelLayout();
             RenderText("true");
         }

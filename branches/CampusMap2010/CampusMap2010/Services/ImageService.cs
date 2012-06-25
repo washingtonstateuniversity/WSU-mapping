@@ -107,21 +107,21 @@ namespace campusMap.Services
 
         public static void saveIamge(int id, string NewFile, Image imgPhoto)
         {
-            //log.Info("saving photo to filepath: " + NewFile);
+            log.Info("saving photo to filepath: " + NewFile);
             // create a writer and open the file
-            campusMap.Services.LogService.writelog(" in saveIamge " + NewFile);
+            //campusMap.Services.LogService.writelog(" in saveIamge " + NewFile);
 
 
             imgPhoto.Save(NewFile);
             //compress the file
-            ImageService.smushit(id, NewFile, GetMimeType(imgPhoto));
+            //if(HttpContext.Current!=null)ImageService.smushit(id, NewFile, GetMimeType(imgPhoto));
             imgPhoto.Dispose();
         }
         public static void deleteTmpIamges(string image_path)
         {
-            //log.Info("saving photo to filepath: " + NewFile);
+            log.Info("saving photo to filepath: " + image_path);
             // create a writer and open the file
-            campusMap.Services.LogService.writelog("Deleting Images: " + image_path);
+            //campusMap.Services.LogService.writelog("Deleting Images: " + image_path);
             File.Delete(image_path);
         }
         public void process(int id, Image OriginalFile, string NewFile, imageMethod method, int percent, int height, int width, Dimensions dimensions, bool protect, string mark, string ext)
@@ -150,7 +150,8 @@ namespace campusMap.Services
                 saveIamge(id, NewFile, OriginalFile); // save image
                 return;
             }
-            campusMap.Services.LogService.writelog(" in process pre size" + NewFile);
+            log.Info(" in process pre size" + NewFile);
+            //campusMap.Services.LogService.writelog(" in process pre size" + NewFile);
             switch (method)
             {
                 case imageMethod.Percent: imgPhoto = ScaleByPercent(OriginalFile, percent); break;
@@ -164,8 +165,9 @@ namespace campusMap.Services
             if(!String.IsNullOrEmpty(mark)){
                 imgPhoto=watermakerIt(imgPhoto,id,mark);
             }
+            log.Info(" in process postsize" + NewFile);
             
-            campusMap.Services.LogService.writelog(" in process postsize" + NewFile);
+            //campusMap.Services.LogService.writelog(" in process postsize" + NewFile);
 
             saveIamge(id, NewFile, imgPhoto); // save image
         }
@@ -284,7 +286,8 @@ namespace campusMap.Services
 		}
 		static Image ConstrainProportions(Image imgPhoto, int Size, Dimensions Dimension)
 		{
-            campusMap.Services.LogService.writelog(" in ConstrainProportions ");
+            log.Info(" in ConstrainProportions ");
+            //campusMap.Services.LogService.writelog(" in ConstrainProportions ");
 			int sourceWidth = imgPhoto.Width;
 			int sourceHeight = imgPhoto.Height;
 			int sourceX = 0;
@@ -311,9 +314,11 @@ namespace campusMap.Services
 
 			Graphics grPhoto = Graphics.FromImage(bmPhoto);
 			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            campusMap.Services.LogService.writelog(" in ConstrainProportions mid drawing:" );
+            log.Info(" in ConstrainProportions mid drawing:");
+            //campusMap.Services.LogService.writelog(" in ConstrainProportions mid drawing:" );
 			grPhoto.DrawImage(imgPhoto, new Rectangle(destX,destY,destWidth,destHeight),new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),GraphicsUnit.Pixel);
-            campusMap.Services.LogService.writelog(" in ConstrainProportions before Dispose");
+            log.Info(" in ConstrainProportions before Dispose ");
+            //campusMap.Services.LogService.writelog(" in ConstrainProportions before Dispose");
 			//grPhoto.Dispose();
 			return bmPhoto;
             
@@ -622,7 +627,7 @@ namespace campusMap.Services
         public static bool smushit(int id, string image_name, String mimeType){
             // sent file to yahoo
             string url = "http://www.smushit.com/ysmush.it/ws.php?";// "http://www.smushit.com/ysmush.it/ws.php?";
-
+            log.Info("trying smushit" + image_name);
             //reset the .ext file name
             media_repo image = ActiveRecordBase<media_repo>.Find(id);
 
@@ -646,6 +651,7 @@ namespace campusMap.Services
             }
             if (!String.IsNullOrEmpty(yurl))
             {
+                log.Info("did smushit" + yurl);
                 byte[] imagebytes = DownloadBinary(yurl);
                 ByteArrayToFile(image_name, imagebytes);
                 File.Copy(image_name, orgFile, true);// overwirte the .ext with the new file.

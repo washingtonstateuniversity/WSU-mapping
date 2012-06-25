@@ -112,12 +112,13 @@ namespace campusMap.Services
         public static Boolean clearLock(object obj)
         {
             bool result = false;
+           /*
             authors author = getUser();
             if(author.checked_out.Contains(obj)){
                 author.checked_out.Remove(obj);
                 ActiveRecordMediator<authors>.Save(author);
                 result = true;
-            }
+            }*/
             /*t item = ActiveRecordBase<t>.Find(id);
             if (item != null)
             {
