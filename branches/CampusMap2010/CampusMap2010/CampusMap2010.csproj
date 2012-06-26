@@ -230,6 +230,7 @@
     <Compile Include="Models\comments.cs" />
     <Compile Include="Models\feilds.cs" />
     <Compile Include="Models\geometrics.cs" />
+    <Compile Include="Models\ICheckedOutBy.cs" />
     <Compile Include="Models\Ijson_autocomplete.cs" />
     <Compile Include="Models\infotabs.cs" />
     <Compile Include="Models\json_autocomplete.cs" />

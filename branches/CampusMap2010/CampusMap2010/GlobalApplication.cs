@@ -58,43 +58,48 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
-            if (Authentication.logged_in())
+            /*if (Authentication.logged_in())
             {
-                String username = Authentication.authenticate();
-                Session["username"] = username;
-                // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
+                using (new SessionScope())
                 {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                    { temp = author; }
+                    String username = Authentication.authenticate();
+                    Session["username"] = username;
+                    // save user in database
+                    authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                    authors temp = null;
+                    foreach (authors author in author_list)
+                    {
+                        if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                        { temp = author; }
+                    }
+                    if (temp != null)
+                    {
+                        temp.logedin = true;
+                        temp.Save();
+                    }
                 }
-                if (temp != null)
-                {
-                    temp.logedin = true;
-                    temp.Save();
-                }
-            }
+            }*/
         }
 
         protected void Session_OnEnd(Object sender, EventArgs e)
         {
-            String username = Session["username"] != null ? Session["username"].ToString() : null;
+            /*String username = Session["username"] != null ? Session["username"].ToString() : null;
             if (username != null)
             {
-                // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
+                using (new SessionScope())
                 {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                    { temp = author; }
+                    // save user in database
+                    authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                    authors temp = null;
+                    foreach (authors author in author_list)
+                    {
+                        if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                        { temp = author; }
+                    }
+                    temp.logedin = false;
+                    temp.Save();
                 }
-                temp.logedin = false;
-                temp.Save();
-            }
+            }*/
         }
 
         public void Application_OnEnd()
