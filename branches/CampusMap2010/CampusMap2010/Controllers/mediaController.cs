@@ -1,6 +1,7 @@
 #region Directives
     using System;
-using System.Threading;
+    using System.Threading;
+    using System.Dynamic;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Collections.Generic;
@@ -38,6 +39,20 @@ namespace campusMap.Controllers
     public class mediaController : SecureBaseController
     {
         ILog log = log4net.LogManager.GetLogger("mediaController");
+
+
+        /*
+         *  File structure of the media
+         *  - uploads/media/                        //main media folder
+         *      -mediaType/                         //mediaType folder (note there has to be a method that changes this)
+         *          -media.id/                      //the id of the media
+         *              • filename.*ext*            //note this would be the orginal image untounched even in name 
+         *              • filename.ext              //the main ext (max size to 1000x1000 or site_settings)
+         *              - type/                     //folder of type that the image will be tied to (/place/)
+         *                  • filename_*arg*.ext    //the cache of the image sized as needed
+         */ 
+
+
 
         public void Index()
         {
@@ -124,6 +139,7 @@ namespace campusMap.Controllers
             return creditsList.TrimEnd(',');
         }
 
+        /* probable delete this */
         public void makeImageCopies(int id,string imageByPath)
         {
             System.Drawing.Image processed_image = System.Drawing.Image.FromFile(imageByPath);
@@ -181,7 +197,37 @@ namespace campusMap.Controllers
                 output.Write(buffer, 0, read);
             }
         }
+        /*public static object checkImg(string ext, HttpPostedFile file, string tmp_File)
+        {
+            // Make a copy of the stream to stop the destrustion of the gif animation per
+            // http://stackoverflow.com/questions/8763630/c-sharp-gif-image-to-memorystream-and-back-lose-animation
+            Stream stream = file.InputStream;
+            MemoryStream memoryStream = new MemoryStream();
+            CopyStream(stream, memoryStream);
+            memoryStream.Position = 0;
+            stream = memoryStream;
 
+            //set up the image up from the stream
+            //System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
+
+            System.Drawing.Image processed_image = null;
+            if (media.ext != "gif")
+            {
+                //set up the image up from the stream
+                processed_image = System.Drawing.Image.FromStream(stream);//newimage.InputStream);
+            }
+            else
+            {
+                processed_image = System.Drawing.Image.FromStream(file.InputStream);
+
+                if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
+                {
+
+                    return "You have uploaded a CMYK image.  Please conver to RGB first.";
+                }
+            }
+            return true;
+        }*/
 
 
         public void uploadFiles(IRequest request)
@@ -190,168 +236,174 @@ namespace campusMap.Controllers
             CancelView();
             int i = 0;
             string json = HttpContext.Current.Request.Form["returnType"]=="id"?"":"[";
+            object[] tmpMediaObj = new object[0];
            
-            String tmp_path = getUploadsPath("image", true);
             foreach (String key in HttpContext.Current.Request.Files.Keys)
             {
                 HttpPostedFile file = HttpContext.Current.Request.Files[key];
 
-                string tmp_File = tmp_path + file.FileName;
-                file.SaveAs(tmp_File);
+                String Fname = System.IO.Path.GetFileName(file.FileName);
+                String[] fileparts = Fname.Split('.');
 
-                json += createNewFile(file, tmp_File);
-                i = i + 1;
-            }
-            json += HttpContext.Current.Request.Form["returnType"] == "id" ? "" : "]";
-            HttpContext.Current.Response.Write(json);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
-
-
-
-
-        public string createNewFile(HttpPostedFile file, String tmp_File)
-        {
-            media_repo media = new media_repo();
-
-            String Fname = System.IO.Path.GetFileName(file.FileName);
-            String[] fileparts = Fname.Split('.');
-            if (String.IsNullOrEmpty(media.file_name))
-            {
-                media.file_name = fileparts[0];
-            }
-
-            int type = 3;
-
-
-            int tmp = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["mediatype"])
-                        ? HttpContext.Current.Request.Form["mediatype[" + Fname + "]"]
-                        : HttpContext.Current.Request.Form["mediatype"]);
-            if(tmp>0){
-                type = tmp;
-            }
-
-            String caption = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["caption"]) 
-                                ? HttpContext.Current.Request.Form["caption[" + Fname + "]"] 
-                                : HttpContext.Current.Request.Form["caption"];
-            if (!String.IsNullOrEmpty(caption))
-                media.caption = caption;
-
-            String credit = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["credit"]) 
-                            ? HttpContext.Current.Request.Form["credit[" + Fname + "]"] 
-                            : HttpContext.Current.Request.Form["credit"];
-            if (!String.IsNullOrEmpty(credit))
-                media.credit = credit;
-
-
-            media.type = ActiveRecordBase<media_types>.Find(type);
-            ActiveRecordMediator<media_repo>.Save(media);
-
-            String newFile_path = getUploadsPath("image", true);
-            String url = getUploadsURL("image", true);
-            string newFilePath = newFile_path + media.id + ".ext";
-            string FileName = media.id + ".ext";
-            media.ext = fileparts[1];
-            media.orientation = setOrientation(tmp_File);
-            media = pushXMPdb(media,tmp_File);
-            ActiveRecordMediator<media_repo>.Save(media);
-
-
-            try
-            {
-                log.Info("preping StartTheThread for " + media.file_name + " with id " + media.id + " at path " + media.path);
-                StartTheThread(media, file, tmp_File);
-            }
-            catch { log.Error("Failed trying to StartTheThread for " + media.file_name + " with id " + media.id + " at path " + media.path); }
-
-
-
-            String pool = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool"]) 
-                            ? HttpContext.Current.Request.Form["pool[" + Fname + "]"] 
-                            : HttpContext.Current.Request.Form["pool"];
-
-            int item = 0;
-            tmp = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool])
-                ? String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]) ? "" : HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]
-                        : HttpContext.Current.Request.Form["pool_" + pool]);
-            if (tmp > 0)
-            {
-                item = tmp;
-            }
-
-            if(item>0){
-                applyMediaToObject(media, item, pool);
-            }
-
-           
-            string mediaurl = "/media/download.castle?id=" + media.id + "&m=crop&w=148&h=100";
-            String json = "{\"name\":\"" + file.FileName + 
-                        "\",\"size\":" + file.ContentLength + 
-                        ",\"url\":\"/media/download.castle?id=" + media.id + 
-                        "\",\"thumbnail_url\":\"" + mediaurl + "\"}";
-
-
-            return HttpContext.Current.Request.Form["returnType"]=="id"? media.id.ToString() : json;
-
-            //logService.Log("Uploaded a file named " + file.FileName + " at " + uf.FullPath, "INFO", uf.Site);
-        }
-
-        public Thread StartTheThread(media_repo media, HttpPostedFile file, string tmp_File)
-        {
-            log.Info("StartTheThread for " + media.file_name + " with id " + media.id + " at path " + tmp_File);
-            var t = new Thread(() => saveMedia(media, file, tmp_File));
-            t.Start();
-            return t;
-        } 
-
-
-
-        public void saveMedia(media_repo media, HttpPostedFile file , string tmp_File)
-        {
-            if (file.ContentLength != 0)
-            {
-                // Make a copy of the stream to stop the destrustion of the gif animation per
-                // http://stackoverflow.com/questions/8763630/c-sharp-gif-image-to-memorystream-and-back-lose-animation
                 Stream stream = file.InputStream;
                 MemoryStream memoryStream = new MemoryStream();
                 CopyStream(stream, memoryStream);
                 memoryStream.Position = 0;
                 stream = memoryStream;
 
-                //set up the image up from the stream
-                //System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
 
-                System.Drawing.Image processed_image = null;
-                if (media.ext == "gif")
+                bool ok = ImageService.checkImg(fileparts[1], stream); // should be mediaCheck
+                if (!ok)
                 {
-                    //set up the image up from the stream
-                    processed_image = System.Drawing.Image.FromStream(stream);//newimage.InputStream);
-                }else{
-                    processed_image = System.Drawing.Image.FromStream(file.InputStream);
-
-                    if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
-                    {
-                        Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
-                        RedirectToReferrer();
-                        return;
-                    }
+                    json += "{\"status\":\"You have uploaded a CMYK image.  Please conver to RGB first then try again.  File not uploaded\"}";
                 }
-                String path = getUploadsPath("image", true);
-                string newFile = path + media.id + ".ext";
+                else
+                {
+                    /*
+                     * At this point the image seems sound so we want to set up the image fallbacks,
+                     * We do this by first putting the org image in a folder under media and image,
+                     * Next size the org into a .ext with max 1000x1000px for size, and thumbs if asked
+                     * After the first size add any types (place/geo/etc) the media is tied to
+                     */
+                    /* Set Id */
+                    media_repo media = new media_repo();
+                    media.file_name = Fname;
+                    media.ext = fileparts[1];
+                    media.type = ActiveRecordBase<media_types>.Find(3); // this is to just set a base type just in cause
+                    ActiveRecordMediator<media_repo>.Save(media);
 
 
-                String relavtivePath = getUploadsRelavtivePath("image", true);
-                string newFileRelavtivePath = relavtivePath + media.id + ".ext";
-                media.path = newFileRelavtivePath;
-                ActiveRecordMediator<media_repo>.Save(media);
-                //helperService.ResizeImage(newimage, uploadPath + image.id + ".ext", 1000, 1000, true);           
-                imageService.process(media.id, processed_image, newFile, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", media.ext);
+                    String org_path = getUploadsPath("image\\" + media.id, false);
+                    /* save orginal */
+                    string org_File = org_path + fileparts[0] + "." + fileparts[1].ToLower();
+
+                    if(file.ContentLength<=0)log.Info("StartTheThread for " + media.file_name );
+
+
+                    file.SaveAs(org_File);
+                    /* save firstStage .ext unsized */
+                    string tmp_File = org_path + fileparts[0] + ".ext";
+                    file.SaveAs(tmp_File);
+
+                    media.orientation = setOrientation(org_File);
+                    media = pushXMPdb(media, org_File);
+                    media.path = getUploadsRelavtivePath("image\\" + media.id, false) + fileparts[0] + "." + fileparts[1].ToLower();
+                    
+                    int type = 3; // this would be a preference from stie_settings
+                    int typeTmp = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["mediatype"])
+                                ? HttpContext.Current.Request.Form["mediatype[" + Fname + "]"]
+                                : HttpContext.Current.Request.Form["mediatype"]);
+                    if (typeTmp > 0)
+                    {
+                        type = typeTmp;
+                    }
+                    media.type = ActiveRecordBase<media_types>.Find(type);
+
+                    String caption = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["caption"])
+                                        ? HttpContext.Current.Request.Form["caption[" + Fname + "]"]
+                                        : HttpContext.Current.Request.Form["caption"];
+                    if (!String.IsNullOrEmpty(caption) && caption != "undefined")
+                        media.caption = caption;
+
+                    String credit = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["credit"])
+                                    ? HttpContext.Current.Request.Form["credit[" + Fname + "]"]
+                                    : HttpContext.Current.Request.Form["credit"];
+                    if (!String.IsNullOrEmpty(credit) && credit != "undefined")
+                        media.credit =credit;
+                    ActiveRecordMediator<media_repo>.Save(media);
+
+
+
+                    String pool = String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool"])
+                                    ? HttpContext.Current.Request.Form["pool[" + Fname + "]"]
+                                    : HttpContext.Current.Request.Form["pool"];
+
+                    int tmpPoolId = int.Parse(String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool])
+                        ? String.IsNullOrWhiteSpace(HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]) 
+                                                        ? "" 
+                                                        : HttpContext.Current.Request.Form["pool_" + pool + "[" + Fname + "]"]
+                                : HttpContext.Current.Request.Form["pool_" + pool]);
+                    if (tmpPoolId > 0)
+                    {
+                        applyMediaToObject(media, tmpPoolId, pool);
+                    }
+
+                    /* lets send note to the end user uploaded */
+                    string mediaurl = "/media/download.castle?id=" + media.id + "&m=crop&w=148&h=100";
+                    String tmpjson = "{\"name\":\"" + file.FileName +
+                                "\",\"size\":" + file.ContentLength +
+                                ",\"url\":\"/media/download.castle?id=" + media.id +
+                                "\",\"thumbnail_url\":\"" + mediaurl + "\"}";
+                    json += HttpContext.Current.Request.Form["returnType"] == "id" ? media.id.ToString():tmpjson;
+                    if (tmpMediaObj.Length>0) Array.Resize(ref tmpMediaObj, tmpMediaObj.Length + 1);
+                    tmpMediaObj.CopyTo(getMediaBuild(media,Fname), tmpMediaObj.Length);
+                }
+                i = i + 1;
             }
-            ActiveRecordMediator<media_repo>.Save(media);
-            delete(tmp_File,false);
-            log.Info("saveMedia and Updating " + media.file_name + " with id " + media.id + " at path " + media.path);
+            json += HttpContext.Current.Request.Form["returnType"] == "id" ? "" : "]";
+            HttpContext.Current.Response.Write(json);
+            //startImage processing
+            //startImageProcessing(tmpMediaObj);
+            //end the respons as the image processing will run in  the background
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
+
+        /* maybe turn in to hashtable so that the keys can be used? */
+        public Object[] getMediaBuild( media_repo media,String Fname)
+        {
+            Object[] tmp = new Object[1];
+            tmp[0] = media;
+            return tmp;
+        }
+
+        public void startImageProcessing(Object[] tmpMediaObj){
+            foreach(object[] media in tmpMediaObj){
+                createNewFile(media);
+            }
+        }
+        public Thread StartTheThread(media_repo media, System.Drawing.Image processed_image, string tmp_File)
+        {
+            log.Info("StartTheThread for " + media.file_name + " with id " + media.id + " at path " + tmp_File);
+            var t = new Thread(() => imageService.process(media.id, processed_image, tmp_File, ImageService.imageMethod.Constrain, 0, 0, 1000, ImageService.Dimensions.Width, true, "", media.ext));
+            t.Start();
+            return t;
+        } 
+
+
+        /* from file that exists */
+        public void createNewFile(object[] media)
+        {
+            media_repo mediaObj = (media_repo)media[0];
+            String types_path = getUploadsPath("image\\" + mediaObj.type.name +"\\"+ mediaObj.type.name, false);
+            String url = getUploadsURL("image", true);
+            string newFilePath = types_path + mediaObj.id + ".ext";
+            string FileName = mediaObj.id + ".ext";
+
+            byte[] contents = null;
+
+            contents = File.ReadAllBytes(HttpContext.Server.MapPath(mediaObj.path));
+            MemoryStream memoryStream = new MemoryStream(contents);
+
+            System.Drawing.Image processed_image = null;
+            processed_image = System.Drawing.Image.FromStream(memoryStream);
+
+            try
+            {
+                log.Info("preping StartTheThread for " + 
+                            mediaObj.file_name + " with id " + mediaObj.id +
+                            " at path " + newFilePath);
+                StartTheThread(mediaObj, processed_image, newFilePath);
+            }
+            catch { 
+                log.Error("Failed trying to StartTheThread for " +
+                            mediaObj.file_name + " with id " + mediaObj.id +
+                            " at path " + newFilePath);
+            }
+        }
+
+
+
+
         public void applyMediaToObject(media_repo media, int id, string type)
         {
             switch (type)
@@ -538,7 +590,8 @@ namespace campusMap.Controllers
             return path;
         }
 
-/* note : below is the start of a php conversion from php THIS IS PROBABLY THE WAY TO GO BUT WE ARE GOING TO CHEAT AND USE THE SIMPLE VERSION ATM */
+        /* note : below is the start of a php conversion from php THIS IS PROBABLY THE WAY TO GO BUT WE ARE GOING TO CHEAT AND USE THE SIMPLE VERSION ATM */
+        #region end of the php conversion
         public void massUpload(
             [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
             HttpPostedFile newimage,
@@ -771,22 +824,7 @@ namespace campusMap.Controllers
         */
 
 /* end of the php conversion */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endregion
 
 
 
@@ -817,7 +855,7 @@ namespace campusMap.Controllers
                     //set up the image up from the stream
                     System.Drawing.Image processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
 
-                    if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
+                    if (ImageService.isFileACMYKJpeg(processed_image) || ImageService.isByteACMYK(stream))
                     {
                         if (ajax)
                         {
@@ -906,7 +944,7 @@ namespace campusMap.Controllers
                 {
                     processed_image = System.Drawing.Image.FromStream(newimage.InputStream);
 
-                    if (imageService.isFileACMYKJpeg(processed_image) || imageService.isByteACMYK(stream))
+                    if (ImageService.isFileACMYKJpeg(processed_image) || ImageService.isByteACMYK(stream))
                     {
                         Flash["error"] = "You have uploaded a CMYK image.  Please conver to RGB first.";
                         RedirectToReferrer();
@@ -1043,7 +1081,12 @@ namespace campusMap.Controllers
             // if the process image doesn't Exist yet create it
             if (!File.Exists(newFile))
             {
-                System.Drawing.Image processed_image = System.Drawing.Image.FromFile(HttpContext.Server.MapPath(uploadPath + id + ".ext" ));
+
+                string baseFile = uploadPath + id + ".ext";
+                if (!File.Exists(baseFile))
+                { baseFile = uploadPath + image.file_name; }
+
+                System.Drawing.Image processed_image = System.Drawing.Image.FromFile(HttpContext.Server.MapPath(baseFile));
                 //set some defaults
                 ImageService.imageMethod methodChoice = ImageService.imageMethod.Percent;
                 ImageService.Dimensions dimensional = ImageService.Dimensions.Width;
