@@ -485,7 +485,7 @@ $formbuttons <div class="clear"></div>
 			</div>
 		</div>
 	</fieldset> 
- 	#if($Controller.canPublish($loginUser))
+ 	#if($userService.canPublish($loginUser))
 		<div id="StatusDiv">
 		  <h3 style="display:inline-block;">Place Status:</h3>
 		  $Form.Select("place.status.id", $statuslists, "%{value='id', text='title'}")

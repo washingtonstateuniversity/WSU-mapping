@@ -712,18 +712,7 @@ function infoUpdate(){
 		add_place_point(lat,lng,true);
 		watchMediaTab();
 }
-function tinyResize(id){
-		$(window).resize(function(){
-			if(typeof(id)==='undefinded'){
-				$.each($('textarea.tinyEditor'), function(i, v) {
-					var id=$(this).attr('id');
-					$('#'+id+"_tbl").width($(this).closest('div').width()-40);
-				});
-			}else{
-				$('#'+id+"_tbl").width($('#infotabs').width()-40);	
-			}
-		}).trigger("resize");
-	}
+
 	
 function setup_fixedNav(){
 	if ($(window).scrollTop()>= 122) { $('.admin #adminNav').addClass('fixed');  }
