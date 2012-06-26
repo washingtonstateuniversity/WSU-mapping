@@ -561,7 +561,7 @@ $formbuttons <div class="clear"></div>
 			#between
 			<hr/>
 			#end
-        </fieldset> 
+        </div> 
     $formbuttons
     <div class="clear"></div>
   <br/>    
