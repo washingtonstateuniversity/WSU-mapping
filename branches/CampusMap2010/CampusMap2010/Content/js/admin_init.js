@@ -195,6 +195,15 @@ function addLiveActionAnimation(){
 	);	
 	
 }
+function tinyResize(id){
+		$(window).resize(function(){
+			$.each($('textarea.tinyEditor.tinyLoaded'), function(i, v) {
+				var id=$(this).attr('id');
+				$('#'+id+"_tbl").width($(this).closest('div').width()-40);
+			});
+		}).trigger("resize");
+	}
+
 $(function() {
 	
 	$('.insotryupload').live('click',function(){
@@ -213,12 +222,14 @@ $(function() {
     if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
 		$.each($('.tinyEditor'),function(i,v){
 			if(!$(this).is($(".tinyLoaded"))){
+				if(typeof($(this).attr('id'))=="undefined")$(this).attr('id','temp_'+i)
 				if($(this).is($(".full"))){
 					load_tiny("bodytext",$(this).attr('id'));
 				}else{
 					load_tiny("simple",$(this).attr('id'));
 				}
 				$(this).addClass("tinyLoaded");
+				tinyResize();
 			}
 		});
     }

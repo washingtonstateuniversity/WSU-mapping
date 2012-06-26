@@ -554,7 +554,7 @@ $formbuttons <div class="clear"></div>
   
 #if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
 	$formbuttons <div class="clear"></div>
-        <fieldset><legend>Place fields: </legend>
+        <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="display: block; width: auto;"><h2>Place fields: </h2>
 
 			#foreach($field in $fields)          
 				$field

@@ -713,11 +713,11 @@ function infoUpdate(){
 		watchMediaTab();
 }
 function tinyResize(id){
-		$(window,'#tabs_Text').resize(function(){
+		$(window).resize(function(){
 			if(typeof(id)==='undefinded'){
 				$.each($('textarea.tinyEditor'), function(i, v) {
 					var id=$(this).attr('id');
-					$('#'+id+"_tbl").width($('#infotabs').width()-40);
+					$('#'+id+"_tbl").width($(this).closest('div').width()-40);
 				});
 			}else{
 				$('#'+id+"_tbl").width($('#infotabs').width()-40);	
