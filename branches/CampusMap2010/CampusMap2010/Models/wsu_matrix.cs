@@ -54,12 +54,12 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<place> _places;
-        [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> places
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_programs", ColumnKey = "program_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
         {
-            get { return _places; }
-            set { _places = value; }
+            get { return places; }
+            set { places = value; }
         }
     }
 
@@ -88,13 +88,25 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<place> places;
+        /*private IList<place> places;
         [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }
             set { places = value; }
+        }*/
+
+
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_schools", ColumnKey = "school_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
         }
+
+
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
@@ -122,13 +134,26 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<place> places;
+        /*private IList<place> places;
         [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }
             set { places = value; }
+        }*/
+
+
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_departments", ColumnKey = "department_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
         }
+
+
+
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
@@ -156,13 +181,23 @@ namespace campusMap.Models
             get { return Attr; }
             set { Attr = value; }
         }
-        private IList<place> places;
+       /* private IList<place> places;
         [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }
             set { places = value; }
+        }*/
+
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_colleges", ColumnKey = "college_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
         }
+
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
@@ -233,6 +268,17 @@ namespace campusMap.Models
             get { return places; }
             set { places = value; }
         }
+
+/*
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_campus", ColumnKey = "campus_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
+        }*/
+
+
     }
 
 }

@@ -256,20 +256,6 @@ namespace campusMap.Models
         }
 
 
-        private schools _school;
-        [BelongsTo]
-        virtual public schools school
-        {
-            get { return _school; }
-            set { _school = value; }
-        }
-        private colleges _college;
-        [BelongsTo]
-        virtual public colleges college
-        {
-            get { return _college; }
-            set { _college = value; }
-        }
         private campus _campus;
         [BelongsTo]
         virtual public campus campus
@@ -277,21 +263,71 @@ namespace campusMap.Models
             get { return _campus; }
             set { _campus = value; }
         }
-        private programs _program;
-        [BelongsTo]
-        virtual public programs program
+
+
+        /*
+                 private programs _program;
+                [BelongsTo]
+                virtual public programs program
+                {
+                    get { return _program; }
+                    set { _program = value; }
+                }
+
+                private schools _school;
+                [BelongsTo]
+                virtual public schools school
+                {
+                    get { return _school; }
+                    set { _school = value; }
+                }
+                private colleges _college;
+                [BelongsTo]
+                virtual public colleges college
+                {
+                    get { return _college; }
+                    set { _college = value; }
+                }
+
+
+               private departments _department;
+                [BelongsTo]
+                virtual public departments department
+                {
+                    get { return _department; }
+                    set { _department = value; }
+                }*/
+
+        /**/
+        private IList<schools> _school = new List<schools>();
+        [HasAndBelongsToMany(typeof(schools), Lazy = true, Table = "place_to_schools", ColumnKey = "place_id", ColumnRef = "school_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<schools> school
         {
-            get { return _program; }
-            set { _program = value; }
+            get { return _school; }
+            set { _school = value; }
         }
-        private departments _department;
-        [BelongsTo]
-        virtual public departments department
+        private IList<colleges> _college = new List<colleges>();
+        [HasAndBelongsToMany(typeof(colleges), Lazy = true, Table = "place_to_colleges", ColumnKey = "place_id", ColumnRef = "college_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<colleges> college
+        {
+            get { return _college; }
+            set { _college = value; }
+        }
+       /* private IList<campus> _campus = new List<campus>();
+        [HasAndBelongsToMany(typeof(campus), Lazy = true, Table = "place_to_campus", ColumnKey = "place_id", ColumnRef = "campus_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<campus> campus
+        {
+            get { return _campus; }
+            set { _campus = value; }
+        }*/
+
+        private IList<departments> _department = new List<departments>();
+        [HasAndBelongsToMany(typeof(departments), Lazy = true, Table = "place_to_departments", ColumnKey = "place_id", ColumnRef = "department_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<departments> department
         {
             get { return _department; }
             set { _department = value; }
         }
-
         private IList<categories> _categories = new List<categories>();
         [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "place_to_categories", ColumnKey = "place_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<categories> categories
@@ -299,6 +335,19 @@ namespace campusMap.Models
             get { return _categories; }
             set { _categories = value; }
         }
+
+        private IList<programs> _program = new List<programs>();
+        [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "place_to_programs", ColumnKey = "place_id", ColumnRef = "program_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<programs> program
+        {
+            get { return _program; }
+            set { _program = value; }
+        }
+
+
+
+
+
 
         private IList<fields> Fields;
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "place_to_fields", ColumnKey = "place_id", ColumnRef = "field_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
