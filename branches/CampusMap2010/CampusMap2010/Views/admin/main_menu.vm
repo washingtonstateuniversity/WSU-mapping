@@ -66,8 +66,8 @@
 				<ul class="drop">
 					<li><a href="../authors/new.castle">New User</a></li>
 					<li><a href="../accesslevel/list.castle">Access Levels</a></li>
-					<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Profile</a></li>
-					#if($userService.getUser().name==$user)<li><a href="../authors/edit.castle?id=$controller.getUser().id">Your Settings</a></li>#end
+					<li><a href="../authors/edit.castle?id=$userService.getUser().id">Your Profile</a></li>
+					#if($userService.getUser().name==$user)<li><a href="../authors/edit.castle?id=$userService.getUser().id">Your Settings</a></li>#end
 				</ul>
 			</li>
 			<li class="close"><a href="#"></a></li>
