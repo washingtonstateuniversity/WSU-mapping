@@ -329,7 +329,7 @@ function loadData(data,callback){
 							
 							$('.cWrap .items').cycle('destroy');
 							$('.cWrap .items').cycle({
-								fx:     'scrollLeft',
+								fx:     'scrollHorz',
 								delay:  -2000,
 								pauseOnPagerHover: 1,
 								pause:1,
