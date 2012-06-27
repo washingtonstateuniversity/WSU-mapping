@@ -3,7 +3,7 @@
 	<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
 	  <p>
 		<a href="$siteroot/place/_new_${action}.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-		  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Name Type
+		  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create ${action}
 		</a>&nbsp;
 	  </p>
 	</div>
