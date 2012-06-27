@@ -240,7 +240,8 @@
 
 
 
-#getDirections{/*margin-top:5px;*/}
+#getDirections{margin-top:5px;}
+#directionsTo{margin-top: 5px;}
 #directionsFrom input{color:#5e6a71;background: url("../../Content/images/assests_central/directions_input.png") no-repeat scroll left 1px transparent; height:22px;border: medium none;
     /*margin-top: 5px;*/
     padding: 0 15px 0 5px;

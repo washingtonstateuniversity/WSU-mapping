@@ -325,6 +325,9 @@ function loadData(data,callback){
 								});
 							});
 						if($(".cWrap").length){
+							
+							$('.cWrap .items').cycle('destroy');
+							
 							$('.cWrap .items').cycle({
 								fx:     'scrollLeft',
 								delay:  -2000,
