@@ -166,7 +166,7 @@
 				
 
 <div  style="display:inline-block;">
-				<label for="place.department"><strong>Departments</strong></label><br/>
+				<label for="place.department"><strong>Academic Departments</strong></label><br/>
 				#*<select id="place_department" class="autoselect" name="place.department.id">
 					<option value="">Select one...</option>
 					#foreach($department in $departments)
@@ -183,6 +183,28 @@
 				
 				
 				</div>
+				
+			<div  style="display:inline-block;">
+				<label for="place.admindepartment"><strong>Administrative Departments</strong></label><br/>
+				#*<select id="place_department" class="autoselect" name="place.admindepartment.id">
+					<option value="">Select one...</option>
+					#foreach($admindepartment in $admindepartments)
+						<option class="type" value="$admindepartment.id" #if($place.admindepartment == $admindepartment) selected="selected" #end>$!admindepartment.name</option>
+					#end
+				</select>*#
+				
+					<select id="LocationModelSelect" name="place.admindepartment[]"  class="" multiple="multiple" size="9" style="width:205px;">
+						#foreach($admindepartment in $admindepartments)
+							<option class="model" value="$admindepartment.id" #if($place.admindepartment.Contains($admindepartment)) selected="selected" #end >$!admindepartment.name</option>
+						#end
+					</select>
+				
+				
+				
+				</div>				
+				
+				
+				
 <div  style="display:inline-block;">
 				<label for="place.program"><strong>Programs</strong></label><br/>
 				#*<select id="place_program" class="autoselect" name="place.program.id">

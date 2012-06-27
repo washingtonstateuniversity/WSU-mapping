@@ -17,7 +17,6 @@
     using System.Xml;
     using System.Text;
     using System.IO;
-
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy = true, BatchSize=30)]
@@ -328,6 +327,13 @@ namespace campusMap.Models
         {
             get { return _department; }
             set { _department = value; }
+        }
+        private IList<admindepartments> _admindepartment = new List<admindepartments>();
+        [HasAndBelongsToMany(typeof(admindepartments), Lazy = true, Table = "place_to_admindepartments", ColumnKey = "place_id", ColumnRef = "admindepartment_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<admindepartments> admindepartment
+        {
+            get { return _admindepartment; }
+            set { _admindepartment = value; }
         }
         private IList<categories> _categories = new List<categories>();
         [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "place_to_categories", ColumnKey = "place_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]

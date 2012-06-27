@@ -1,0 +1,43 @@
+#if($items)
+
+	<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
+	  <p>
+		<a href="$siteroot/place/_new_${action}.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+		  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Name Type
+		</a>&nbsp;
+	  </p>
+	</div>
+
+	<table  width="100%" class="ui-widget ui-widget-content">
+	  <thead>
+		<tr class="ui-widget-header ">
+		<th>Name</th>
+		<th style="width:75px;">&nbsp;</th>
+		</tr>
+	  </thead>
+	  <tbody>
+
+		#set ($c=0)
+		#foreach($item in $items)
+		<tr class="#if($c%2>0) even #else odd #end #if($item.adminRead==false) ui-state-highlight #end ">
+		  <td><a href="$siteroot/place/_edit_${action}.castle?id=$!{item.Id}" title="Edit" class="name">
+				$item.name
+			  </a></td>
+		  <td>
+			<span style='font-size:0.7em;'>
+			  <a href="$siteroot/place/_edit_${action}.castle?id=$!{item.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-icon ui-icon-pencil"></span>
+			  </a>
+			  <a href="$siteroot/place/_delete_${action}.castle?id=$!{item.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-icon ui-icon-trash"></span>
+			  </a>
+			</span>
+		  </td>
+		</tr>
+		#set ($c=$c+1)
+		#end
+	  </tbody>
+	</table>
+#else
+	<h1>There are currently no name items</h1>
+#end

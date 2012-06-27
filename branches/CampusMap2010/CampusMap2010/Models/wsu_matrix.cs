@@ -150,12 +150,49 @@ namespace campusMap.Models
             get { return places; }
             set { places = value; }
         }
+    }
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class admindepartments : ActiveRecordBase<admindepartments>
+    {
+        private int admindepartment_id;
+        [PrimaryKey("admindepartment_id")]
+        virtual public int id
+        {
+            get { return admindepartment_id; }
+            set { admindepartment_id = value; }
+        }
+        private string Name;
+        [Property]
+        virtual public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
 
-
-
+        private string Attr;
+        [Property]
+        virtual public string attr
+        {
+            get { return Attr; }
+            set { Attr = value; }
+        }
+        /*private IList<place> places;
+        [HasMany(typeof(place), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
+        }*/
+        private IList<place> places;
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_admindepartments", ColumnKey = "admindepartment_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<place> Places
+        {
+            get { return places; }
+            set { places = value; }
+        }
 
     }
-
+    
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class colleges : ActiveRecordBase<colleges>
     {

@@ -280,6 +280,184 @@ namespace campusMap.Controllers
 
             RenderView("../admin/listings/list");
         }
+        public void wsu_matrix()
+        {
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            RenderView("../admin/wsu_matrix/list");
+        }
+        public void _new_campuses()
+        {
+            campus campuses = new campus();
+            PropertyBag["itmes"] = campuses;
+            PropertyBag["action"] = "campuses";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_campuses(int id)
+        {
+            campus campuses = ActiveRecordBase<campus>.Find(id);
+            PropertyBag["itmes"] = campuses;
+            PropertyBag["action"] = "campuses";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_campuses(int id)
+        {
+            campus campuses = ActiveRecordBase<campus>.Find(id);
+            Flash["massage"] = "A campuse, <strong>" + campuses.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<campus>.Delete(campuses);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_campuses([ARDataBind("campuses", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] campus campuses)
+        {
+            ActiveRecordMediator<campus>.Save(campuses);
+            RedirectToAction("wsu_matrix");
+        }
+
+        public void _new_colleges()
+        {
+            colleges college = new colleges();
+            PropertyBag["itmes"] = college;
+            PropertyBag["action"] = "colleges";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_colleges(int id)
+        {
+            colleges college = ActiveRecordBase<colleges>.Find(id);
+            PropertyBag["itmes"] = college;
+            PropertyBag["action"] = "colleges";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_colleges(int id)
+        {
+            colleges college = ActiveRecordBase<colleges>.Find(id);
+            Flash["massage"] = "A college, <strong>" + college.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<colleges>.Delete(college);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_colleges([ARDataBind("colleges", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] colleges colleges)
+        {
+            ActiveRecordMediator<colleges>.Save(colleges);
+            RedirectToAction("wsu_matrix");
+        }
+
+        public void _new_departments()
+        {
+            departments department = new departments();
+            PropertyBag["itmes"] = department;
+            PropertyBag["action"] = "departments";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_departments(int id)
+        {
+            departments department = ActiveRecordBase<departments>.Find(id);
+            PropertyBag["itmes"] = department;
+            PropertyBag["action"] = "departments";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_departments(int id)
+        {
+            departments department = ActiveRecordBase<departments>.Find(id);
+            Flash["massage"] = "A department, <strong>" + department.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<departments>.Delete(department);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_departments([ARDataBind("departments", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] departments departments)
+        {
+            ActiveRecordMediator<departments>.Save(departments);
+            RedirectToAction("wsu_matrix");
+        }
+
+        public void _new_admindepartments()
+        {
+            admindepartments admindepartment = new admindepartments();
+            PropertyBag["itmes"] = admindepartment;
+            PropertyBag["action"] = "admindepartments";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_admindepartments(int id)
+        {
+            admindepartments admindepartment = ActiveRecordBase<admindepartments>.Find(id);
+            PropertyBag["itmes"] = admindepartment;
+            PropertyBag["action"] = "admindepartments";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_admindepartments(int id)
+        {
+            admindepartments admindepartment = ActiveRecordBase<admindepartments>.Find(id);
+            Flash["massage"] = "A admin department, <strong>" + admindepartment.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<admindepartments>.Delete(admindepartment);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_admindepartments([ARDataBind("admindepartments", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] admindepartments admindepartments)
+        {
+            ActiveRecordMediator<admindepartments>.Save(admindepartments);
+            RedirectToAction("wsu_matrix");
+        }
+
+        public void _new_programs()
+        {
+            programs program = new programs();
+            PropertyBag["itmes"] = program;
+            PropertyBag["action"] = "programs";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_programs(int id)
+        {
+            programs program = ActiveRecordBase<programs>.Find(id);
+            PropertyBag["itmes"] = program;
+            PropertyBag["action"] = "programs";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_programs(int id)
+        {
+            programs program = ActiveRecordBase<programs>.Find(id);
+            Flash["massage"] = "A program, <strong>" + program.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<programs>.Delete(program);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_programs([ARDataBind("programs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] programs programs)
+        {
+            ActiveRecordMediator<programs>.Save(programs);
+            RedirectToAction("wsu_matrix");
+        }
+
+        public void _new_schools()
+        {
+            schools school = new schools();
+            PropertyBag["itmes"] = school;
+            PropertyBag["action"] = "schools";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _edit_schools(int id)
+        {
+            schools school = ActiveRecordBase<schools>.Find(id);
+            PropertyBag["itmes"] = school;
+            PropertyBag["action"] = "schools";
+            RenderView("../admin/wsu_matrix/_editor");
+        }
+        public void _delete_schools(int id)
+        {
+            schools school = ActiveRecordBase<schools>.Find(id);
+            Flash["massage"] = "A school, <strong>" + school.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<schools>.Delete(school);
+            CancelLayout();
+            RedirectToAction("wsu_matrix");
+        }
+        public void _update_schools([ARDataBind("schools", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] schools schools)
+        {
+            ActiveRecordMediator<schools>.Save(schools);
+            RedirectToAction("wsu_matrix");
+        }
 
         public void editor(int id, int page, bool ajax)
         {
@@ -368,6 +546,7 @@ namespace campusMap.Controllers
             PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
             PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
             PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
@@ -518,6 +697,12 @@ namespace campusMap.Controllers
             }
             return flag;        
         }*/
+
+
+
+
+
+
 
         public void new_type()
         {
