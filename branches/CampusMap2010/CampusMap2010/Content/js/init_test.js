@@ -315,6 +315,7 @@ function loadData(data,callback){
 								$('a.gouped').colorbox({
 									photo:true,
 									scrolling:false,
+									scalePhotos:true,
 									opacity:0.7,
 									transition:"none",
 									slideshow:true,
