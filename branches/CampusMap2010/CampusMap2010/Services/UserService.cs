@@ -25,7 +25,6 @@
     using log4net;
     using log4net.Config;
     using System.Text;
-    using CampusMap2010.Models;
 #endregion
 
 namespace campusMap.Services
@@ -110,7 +109,7 @@ namespace campusMap.Services
             return flag;
         }
 
-        public static Boolean clearLock(ICheckedOutBy obj)
+        public static Boolean clearLock(Object obj)
         {
             bool result = false;
            /*

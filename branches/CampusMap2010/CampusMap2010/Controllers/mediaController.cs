@@ -1065,7 +1065,12 @@ namespace campusMap.Controllers
                     }
                 }
             }
-
+            if (String.IsNullOrWhiteSpace(m))
+            {
+                m = "constrain";
+                w = 1000;//this will be site prefenece for max served iamges.
+                h = 1000;
+            }
 
             string arg  = (!String.IsNullOrEmpty(pre)? "_" + pre + "_" : "");
                    arg += (w != 0 ? "w_" + w + "_" : "");

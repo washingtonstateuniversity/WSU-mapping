@@ -317,8 +317,6 @@ function loadData(data,callback){
 									scrolling:false,
 									opacity:0.7,
 									transition:"none",
-									width:"75%",
-									height:"75%",
 									slideshow:true,
 									slideshowAuto:false,
 									open:true

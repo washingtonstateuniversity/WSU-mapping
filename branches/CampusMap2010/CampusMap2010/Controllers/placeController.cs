@@ -1162,7 +1162,7 @@ namespace campusMap.Controllers
         }
 
 
-        public void massInfoTabIt()
+       /* public void massInfoTabIt()
         {
             place[] places = ActiveRecordBase<place>.FindAll();
             foreach (place item in places)
@@ -1178,7 +1178,7 @@ namespace campusMap.Controllers
 
                 t = new infotabs();
                 t.title = "Views";
-                t.content = "<img class=\"infotabTemplate\" src=\"../Content/images/gallery_placeholder.png\"  id='viewTab' width=\"297\" height=\"201\" />";
+                t.content = "<img class=\"infotabTemplate\" src=\"../Content/images/gallery_placeholder.png\"  alt=\"2\" id='viewTab' width=\"297\" height=\"201\" />";
                 t.sort = 2;
                 t.template = null;
                 ActiveRecordMediator<infotabs>.Save(t);
@@ -1195,7 +1195,7 @@ namespace campusMap.Controllers
                 ActiveRecordMediator<place>.Save(item);
             }
 
-        }/**/
+        }*/
 
 
         public void update(
