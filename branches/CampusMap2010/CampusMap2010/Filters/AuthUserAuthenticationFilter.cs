@@ -29,12 +29,11 @@ namespace campusMap.Filters
             User user = (User)context.Session["user"];
             
             // Redirect to dailycampusMap.wsu.edu because dailycampusMap.com can't catch the cookie
-            /*if (context.Request.Uri.ToString().ToLower().Contains("dailycampusMap.com"))
-            {
-                context.Response.Redirect("http://dev.campusmap.wsu.edu/admin");
-                return false;
-            }*/
-
+            //if (context.Request.Uri.ToString().ToLower().Contains("dailycampusMap.com"))
+            //{
+            //     context.Response.Redirect("http://dev.campusmap.wsu.edu/admin");
+            //     return false;
+            //}
             // Sets the principal as the current user
             context.CurrentUser = user;
 

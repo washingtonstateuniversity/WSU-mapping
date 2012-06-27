@@ -825,8 +825,6 @@ namespace campusMap.Controllers
         }
 
 
-
-
         /*public String Getlocation()  // this is to be replaced with get cord logic
         {
             String sql = "SELECT DISTINCT s.Location FROM Place AS s WHERE NOT s.Location = 'NULL'";

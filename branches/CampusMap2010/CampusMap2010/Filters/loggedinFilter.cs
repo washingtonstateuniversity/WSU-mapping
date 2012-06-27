@@ -33,7 +33,6 @@ namespace campusMap.Filters
                     user.LastActive = DateTime.Now;
                     ActiveRecordMediator<authors>.Save(user);
                 }
-                
             }
            controllerContext.PropertyBag["userService"] = userService;
             return true;

@@ -31,16 +31,17 @@ namespace campusMap
             // ... everything else
 
             // SquishIt
-            Application_Bundle();
+           // Application_Bundle();
         }
-
+/*
         protected void Application_Bundle()
         {
             //SquishIt
-           /* Bundle.Css()
-            .AsCached("min", "~/Content/css/min");*/
+            Bundle.Css()
+            .AsCached("min", "~/Content/css/min");
+            
         }
-
+*/
         public void Application_OnStart()
         {
             container = new WindsorContainer(new XmlInterpreter());
@@ -58,48 +59,43 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            /*if (Authentication.logged_in())
+
+            if (Authentication.logged_in())
             {
-                using (new SessionScope())
+                String username = Authentication.authenticate();
+                Session["username"] = username;
+                // save user in database
+                authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                authors temp = null;
+                foreach (authors author in author_list)
                 {
-                    String username = Authentication.authenticate();
-                    Session["username"] = username;
-                    // save user in database
-                    authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                    authors temp = null;
-                    foreach (authors author in author_list)
-                    {
-                        if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                        { temp = author; }
-                    }
-                    if (temp != null)
-                    {
-                        temp.logedin = true;
-                        temp.Save();
-                    }
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                    { temp = author; }
                 }
-            }*/
+                if (temp != null)
+                {
+                    temp.logedin = true;
+                    temp.Save();
+                }
+            }
         }
 
         protected void Session_OnEnd(Object sender, EventArgs e)
         {
-            /*String username = Session["username"] != null ? Session["username"].ToString() : null;
+            String username = Session["username"] != null ? Session["username"].ToString() : null;
             if (username != null)
             {
-                using (new SessionScope())
+                // save user in database
+                authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                authors temp = null;
+                foreach (authors author in author_list)
                 {
-                    // save user in database
-                    authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                    authors temp = null;
-                    foreach (authors author in author_list)
-                    {
-                        if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                        { temp = author; }
-                    }
-                    temp.logedin = false;
-                    temp.Save();
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                    { temp = author; }
                 }
-            }*/
+                temp.logedin = false;
+                temp.Save();
+            }
         }
 
         public void Application_OnEnd()

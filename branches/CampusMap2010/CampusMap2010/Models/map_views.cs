@@ -20,7 +20,7 @@ using System.IO;
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class map_views : ActiveRecordBase<map_views>, CampusMap2010.Models.ICheckedOutBy
+    public class map_views : ActiveRecordBase<map_views>
     {
         protected HelperService helperService = new HelperService();
         public map_views() {  }
