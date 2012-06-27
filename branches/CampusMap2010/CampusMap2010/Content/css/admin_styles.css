@@ -8,13 +8,14 @@ html,body{height:auto;}
 #wrapper{width:100%;min-width:1086px;padding-left:0px;}
 #globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
 #siteID{    background: none repeat scroll 0 0 #262A2D;
-    color: #FFFFFF;
+    
     float: none;
     height: 80px;
     width: 100%;}
 #wrapper #toolbar{width: 100%;float: none;background-color: #5E6A71;}
 #siteID h2 { margin: 0 0 0 180px;width: auto;}
 #siteID h1 {margin:14px 0 0 177px;width: auto;}
+#siteID h1 a{color: #FFFFFF; text-decoration:none;}
 #logo{ display: inline;
     float: none;
     height: 105px;
@@ -521,8 +522,8 @@ input[type=text],#wsu_ui .ui-widget-content input[type=text]{none repeat scroll 
 label{ font-weight:bold; font-size:1.1em;}
 
 
-fieldset{padding: 4px 8px 10px;}
-/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk.png) repeat center center;}
+fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk.png) repeat-x center top;}
+/**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk_hover.png) repeat center center;}
 
 
 

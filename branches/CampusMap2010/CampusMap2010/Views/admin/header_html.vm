@@ -33,7 +33,7 @@
 		
 	<div id="siteID">
 		<h2></h2>
-		<h1>WSU Campus Map Control</h1>
+		<h1><a href="../admin">WSU Campus Map Control</a></h1>
 	</div>
 	<div id="toolbar">
 		<ul><li></li></ul>

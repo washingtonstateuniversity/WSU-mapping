@@ -270,16 +270,18 @@ namespace campusMap.Controllers
             PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
 
             //place feilds
-            pagesize = 15;
+            pagesize = 50;
             IList<field_types> place_fields_items;
             List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
-            fieldsEx.AddRange(baseEx);
+            //fieldsEx.AddRange(baseEx);
             fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
             place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
             PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
 
             RenderView("../admin/listings/list");
         }
+
+        #region WSU MATRIX
         public void wsu_matrix()
         {
             PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
@@ -291,6 +293,7 @@ namespace campusMap.Controllers
 
             RenderView("../admin/wsu_matrix/list");
         }
+        /* campus */
         public void _new_campuses()
         {
             campus campuses = new campus();
@@ -318,7 +321,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<campus>.Save(campuses);
             RedirectToAction("wsu_matrix");
         }
-
+        /* colleges */
         public void _new_colleges()
         {
             colleges college = new colleges();
@@ -346,7 +349,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<colleges>.Save(colleges);
             RedirectToAction("wsu_matrix");
         }
-
+        /* departments */
         public void _new_departments()
         {
             departments department = new departments();
@@ -374,7 +377,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<departments>.Save(departments);
             RedirectToAction("wsu_matrix");
         }
-
+        /* admin departments */
         public void _new_admindepartments()
         {
             admindepartments admindepartment = new admindepartments();
@@ -402,7 +405,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<admindepartments>.Save(admindepartments);
             RedirectToAction("wsu_matrix");
         }
-
+        /* programs */
         public void _new_programs()
         {
             programs program = new programs();
@@ -430,7 +433,7 @@ namespace campusMap.Controllers
             ActiveRecordMediator<programs>.Save(programs);
             RedirectToAction("wsu_matrix");
         }
-
+        /* programs */
         public void _new_schools()
         {
             schools school = new schools();
@@ -458,7 +461,9 @@ namespace campusMap.Controllers
             ActiveRecordMediator<schools>.Save(schools);
             RedirectToAction("wsu_matrix");
         }
+        #endregion
 
+        /* place editing router */
         public void editor(int id, int page, bool ajax)
         {
             if (id == 0){
@@ -651,7 +656,9 @@ namespace campusMap.Controllers
             RenderView("_editor");
             return;
         }
-        
+
+
+        /* move checks out */
         public bool canEdit(place place, authors user)
         {
             bool flag = false;
@@ -664,10 +671,6 @@ namespace campusMap.Controllers
                             if (place.Authors.Contains(user) && user.place_types.Contains(item))
                                 flag = true; break;
                         } 
-                        
-                        
-                        
-                        
                         break;
                     }
 
@@ -677,10 +680,7 @@ namespace campusMap.Controllers
                         {
                             if (user.place_types.Contains(item))
                                 flag = true; break;
-                        } 
-                        
-                        
-                        
+                        }
                         break;
                     }
              }
@@ -793,9 +793,6 @@ namespace campusMap.Controllers
             ActiveRecordMediator<place_name_types>.Save(type);
             RedirectToAction("list");
         }
-
-        
-
 
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,

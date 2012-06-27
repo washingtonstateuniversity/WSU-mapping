@@ -222,7 +222,7 @@
                 }
                 elementSet ele = (elementSet)JsonConvert.DeserializeObject(field_type.attr.ToString(), typeof(elementSet));
 
-                if (sel.selections != null && ele.type == "dropdown")
+                if (ele != null && sel != null && sel.selections != null && ele.type == "dropdown")
                 {
                     foreach (Option _option in ele.options)
                     {
@@ -232,7 +232,7 @@
                         }
                     }
                 }
-                else if (sel.selections[0].val != null)
+                else if (sel!=null && sel.selections[0].val != null)
                 {
                     foreach (Option _option in ele.options)
                     {

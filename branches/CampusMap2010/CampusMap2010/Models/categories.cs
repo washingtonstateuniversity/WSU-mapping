@@ -23,19 +23,19 @@ namespace campusMap.Models
             get { return category_id; }
             set { category_id = value; }
         }
-        private string Name;
+        private string _name;
         [Property]
         virtual public string name
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
-        private int Level;
+        private int _level;
         [Property]
         virtual public int level
         {
-            get { return Level; }
-            set { Level = value; }
+            get { return _level; }
+            set { _level = value; }
         }
         private int _position;
         [Property]
@@ -44,9 +44,20 @@ namespace campusMap.Models
             get { return _position; }
             set { _position = value; }
         }
-
-        
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
+        private bool _asLink;
+        [Property]
+        virtual public bool asLink
+        {
+            get { return _asLink; }
+            set { _asLink = value; }
+        }
         private bool _active;
         [Property]
         virtual public bool active
@@ -61,12 +72,12 @@ namespace campusMap.Models
             get { return _friendly_name; }
             set { _friendly_name = value; }
         }
-        private IList<place> places;
+        private IList<place> _places;
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_categories", ColumnKey = "category_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
-            get { return places; }
-            set { places = value; }
+            get { return _places; }
+            set { _places = value; }
         }
      }
 }
