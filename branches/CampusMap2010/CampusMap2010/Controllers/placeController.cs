@@ -1162,7 +1162,7 @@ namespace campusMap.Controllers
         }
 
 
-        /*public void massInfoTabIt()
+        public void massInfoTabIt()
         {
             place[] places = ActiveRecordBase<place>.FindAll();
             foreach (place item in places)
@@ -1195,7 +1195,7 @@ namespace campusMap.Controllers
                 ActiveRecordMediator<place>.Save(item);
             }
 
-        }*/
+        }/**/
 
 
         public void update(

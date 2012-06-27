@@ -327,16 +327,17 @@ function loadData(data,callback){
 						if($(".cWrap").length){
 							
 							$('.cWrap .items').cycle('destroy');
-							
 							$('.cWrap .items').cycle({
 								fx:     'scrollLeft',
 								delay:  -2000,
 								pauseOnPagerHover: 1,
 								pause:1,
+								timeout: $('.cWrap .items').lenth>5?4000:0, 
 								pager:'.cNav',
 								prev:   '.prev',     next:   '.next', 
 								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 							});
+							
 						}
 						$('.errorReporting').click(function(e){
 									e.stopPropagation();
