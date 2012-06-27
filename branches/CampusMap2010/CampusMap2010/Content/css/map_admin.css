@@ -374,6 +374,7 @@ border-bottom-right-radius: 0px;
     padding: 2px 5px;
     position: absolute;
     right: 25px;
+	text-decoration:none;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}
 #campusmap .ui-tabs .ui-tabs-panel .content .errorReporting:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity:1.0;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:9px; position:relative; cursor:pointer;margin-left: -4px;margin-top: -1px;}	
@@ -431,6 +432,8 @@ border-bottom-right-radius: 0px;
 	
 	#campusmap #cboxContent #cboxPrevious:hover{ background-position:left bottom; }
 	#campusmap #cboxContent #cboxNext:hover{background-position:right bottom;}
+	
+	#campusmap #cboxSlideshow{}
 
 
 	
