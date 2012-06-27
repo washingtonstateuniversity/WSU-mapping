@@ -7,9 +7,9 @@
 
 <form action="_update_${action}.castle" method="post">
   <input type="hidden" value="$!itmes.id" name="${action}.id" />
-  <h3>Place Type</h3>
+  <h3>${action}</h3>
   <p>Name:<br/>
-      <input type="text" value="$!itmes.name" name="${action}.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+      <input type="text" value="$!itmes.name" name="${action}.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all w500" />
   </p>
   <p><input type="submit" value="Submit" /></p>
 </form>
