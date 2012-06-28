@@ -530,21 +530,67 @@ function loadListings(data,showSum){
 */
 function getSignlePlace(id){
 	var url=siteroot+"public/get_place.castle";
-	$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
-		if(!$('#selectedPlaceList_btn').is(':visible')){
-			$('#selectedPlaceList_btn').css({'display':'block'});
-			//$('#selectedPlaceList_btn').trigger('click');
-		}
-		$.each(ib, function(i) {ib[i].close();});
-		$('#centralMap').gmap('clear','markers');
-		$('#centralMap').gmap('clear','overlays');
-		loadData(data,function(marker){
-			ib[0].open($('#centralMap').gmap('get','map'), marker);
+	$( "#placeSearch [type=text]" ).autocomplete("close");
+	var found=false;
+	if(!$.isNumeric(id)){
+		$.get(url+''+(id!=false?'?id='+id:''), function(data) {
+			if(data=="false"){
+				$.colorbox({
+					html:function(){
+						return '<div id="noplace">'+
+									'<h2>No matches</h2>'+
+									'<div><p>Please try a new search as we are not finding anything for your entry.</p></div>'+
+								'</div>';
+					},
+					width:450,
+					scrolling:false,
+					opacity:0.7,
+					transition:"none",
+					open:true
+				});
+			}else{
+				found=true;
+			}
+			
+			if(found==true){
+				$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
+					if(!$('#selectedPlaceList_btn').is(':visible')){
+						$('#selectedPlaceList_btn').css({'display':'block'});
+						//$('#selectedPlaceList_btn').trigger('click');
+					}
+					$.each(ib, function(i) {ib[i].close();});
+					$('#centralMap').gmap('clear','markers');
+					$('#centralMap').gmap('clear','overlays');
+					loadData(data,function(marker){
+						ib[0].open($('#centralMap').gmap('get','map'), marker);
+					});
+					loadListings(data,true);
+					prep();
+				});
+			}
+			
+		});
+	}else{
+		$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
+			if(!$('#selectedPlaceList_btn').is(':visible')){
+				$('#selectedPlaceList_btn').css({'display':'block'});
+				//$('#selectedPlaceList_btn').trigger('click');
+			}
+			$.each(ib, function(i) {ib[i].close();});
+			$('#centralMap').gmap('clear','markers');
+			$('#centralMap').gmap('clear','overlays');
+			loadData(data,function(marker){
+				ib[0].open($('#centralMap').gmap('get','map'), marker);
 			});
-		loadListings(data,true);
-		prep();
-	});
+			loadListings(data,true);
+			prep();
+		});
+	}
+
+	
 }
+
+
 function prep(){
 	$(' [placeholder] ').defaultValue();
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
@@ -668,28 +714,28 @@ $(document).ready(function(){
 			}
 		});
 		
-						$('#printPdfs').click(function(e){
-									e.stopPropagation();
-									e.preventDefault();
-									var trigger=$(this);
-									$.colorbox({
-										html:function(){
-											return '<div id="printPdfs">'+
-														'<h2>Printable Maps</h2>'+
-														'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
-														'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
-														'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
-													'</div>';
-										},
-										scrolling:false,
-										opacity:0.7,
-										transition:"none",
-										width:652,
-										height:350,
-										open:true
-									});
-								});
-		 
+		$('#printPdfs').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			var trigger=$(this);
+			$.colorbox({
+				html:function(){
+					return '<div id="printPdfs">'+
+								'<h2>Printable Maps</h2>'+
+								'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+								'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
+								'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
+							'</div>';
+				},
+				scrolling:false,
+				opacity:0.7,
+				transition:"none",
+				width:652,
+				height:350,
+				open:true
+			});
+		});
+		var cur_search = "";
 		var termTemplate = "<strong>%s</strong>";
 		$( "#placeSearch [type=text]" ).autocomplete({
 			source: function( request, response ) {
@@ -714,16 +760,17 @@ $(document).ready(function(){
 									place_id: item.place_id
 								}
 							}
-						
 						}));
 					}
 				});
 			},
+			search: function(event, ui) {
+				/**/
+			},
 			minLength: 2,
 			select: function( event, ui ) {
 				getSignlePlace(ui.item.place_id);
-				$( "#placeSearch [type=text]" ).blur();
-				$( "#placeSearch [type=text]" ).val("");
+				$( "#placeSearch [type=text]" ).autocomplete("close");
 			},
 			focus: function( event, ui ) {
 				$( "#placeSearch [type=text]" ).val( ui.item.label );
@@ -738,9 +785,14 @@ $(document).ready(function(){
 				.data( "item.autocomplete", item )
 				.append( "<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>" )
 				.appendTo( ul );
-		};
-	
-	
+				
+		}
+		$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
+			if ( event.which == 13 ) {
+				//$( "#placeSearch [type=text]" ).autocomplete("close");
+				getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
+			}
+		});
 		$('#embed').click(function(e){
 			e.stopPropagation();
 			e.preventDefault();

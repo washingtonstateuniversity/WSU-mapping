@@ -520,14 +520,99 @@
                 place[] items = q.Execute();
                 sendPlaceJson(items,callback);
             }
-            public void get_place(int id, string callback)
+            public void get_place(String id, string callback)
             {
                 CancelView();
                 CancelLayout();
-                place item = ActiveRecordBase<place>.Find(id);
-                place[] obj = new place[1];
-                obj[0] = item;
-                sendPlaceJson(obj, callback);
+
+                int sid = 0;
+                if (!int.TryParse(id, out sid))
+                {
+
+
+                    String term = id.Trim();
+
+                    // Use hashtable to store name/value pairs
+                    Hashtable results = new Hashtable();
+
+                    // Trying a different Query method
+                    // Here was the all inclusive query (not used for now except for reference)
+                    String overallsqlstring = @"from place p where 
+                   p.abbrev_name LIKE :searchterm 
+                or p.prime_name like :searchterm
+                or (p in (select p from p.tags as t where t.name like :searchterm)) 
+                or (p in (select p from p.names as n where n.name like :searchterm))
+                ";
+                    // Search place abbrev
+                    String searchabbrev = @"from place p where 
+                   p.abbrev_name LIKE :searchterm 
+                ";
+                    foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
+                    {
+                        results[place.abbrev_name] = place.id;
+                    }
+                    // Search place prime name
+                    String searchprime_name = @"from place p where 
+                   p.prime_name LIKE :searchterm 
+                ";
+                    foreach (place place in searchAndAddResultsToHashtable(searchprime_name, term))
+                    {
+                        results[place.prime_name] = place.id;
+                    }
+                    // Search tags
+                    String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
+                    if (!String.IsNullOrEmpty(term))
+                    {
+                        sql += " AND t.name LIKE  '%" + term + "%'";
+                    }
+                    SimpleQuery<tags> q = new SimpleQuery<tags>(typeof(tags), sql);
+                    tags[] tags = q.Execute();
+                    // Loop through the tags' places
+                    foreach (tags tag in tags)
+                    {
+                        String ids = "";
+                        foreach (place place in tag.places)
+                        {
+                            if (String.IsNullOrEmpty(ids))
+                                ids = place.id.ToString();
+                            else
+                                ids += "," + place.id.ToString();
+                        }
+                        results[tag.name] = ids;
+                    }
+                    // Search place names
+                    String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
+                    if (!String.IsNullOrEmpty(term))
+                    {
+                        nsql += " AND pn.name LIKE  '%" + term + "%'";
+                    }
+                    SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
+                    place_names[] placenames = nq.Execute();
+                    // Loop through the place names
+                    foreach (place_names placename in placenames)
+                    {
+                        results[placename.name] = placename.place_id;
+                    }
+                    /* end of this hacky thing.. now you need to return a place id tied so un hack it */
+                    foreach (String key in results.Keys)
+                    {
+                        if (key.ToLower().Trim() == id.ToLower().Trim())
+                        {
+                            sid = (int)results[key];
+                        }
+                    }
+                }
+                if (sid > 0)
+                {
+                    place item = ActiveRecordBase<place>.Find(sid);
+                    place[] obj = new place[1];
+                    obj[0] = item;
+                    sendPlaceJson(obj, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
             }
             
 
