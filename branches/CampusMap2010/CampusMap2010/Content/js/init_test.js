@@ -329,7 +329,7 @@ function loadData(data,callback){
 									photo:true,
 									scrolling:false,
 									scalePhotos:true,
-									opacity:0.7,									
+									opacity:0.7,
 									maxWidth:"75%",
 									maxHeight:"75%",
 									transition:"none",
@@ -357,6 +357,9 @@ function loadData(data,callback){
 											}
 											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
 										}
+									},
+									onClose:function(){
+										 $('#colorbox #cb_nav').remove();
 									},
 									onCleanup:function(){
 										 $('#colorbox #cb_nav').remove();
