@@ -357,7 +357,7 @@ function loadData(data,callback){
 											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
 										}
 									},
-									onClosed:function(){
+									onCleanup:function(){
 										 $('#cb_nav').remove();
 									}
 								});
