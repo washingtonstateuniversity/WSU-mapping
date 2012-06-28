@@ -335,13 +335,23 @@ function loadData(data,callback){
 									slideshowAuto:false,
 									open:true,
 									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-									onComplete:function(){$('#cb_nav .active').removeClass('active');$('#cb_nav').find('li:eq('+$('#cboxCurrent #cur').text()+')').addClass('active');},
+									onComplete:function(){
+										var t=parseInt($('#ttl').text());
+										if($('#cb_nav').length==0 && t>1){
+											var li="";
+											for(i=0; i<t; i++){
+												li+="<li><a></a></li>";
+											}
+											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+										}
+										
+										$('#cb_nav .active').removeClass('active');$('#cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');},
 									onLoad:function(){
 										var t=parseInt($('#ttl').text());
 										if($('#cb_nav').length==0 && t>1){
 											var li="";
-											for(i=0; i=t; i++){
-												li+="<li></li>";
+											for(i=0; i<t; i++){
+												li+="<li><a></a></li>";
 											}
 											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
 										}
