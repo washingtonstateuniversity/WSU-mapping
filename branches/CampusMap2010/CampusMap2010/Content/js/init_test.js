@@ -34,19 +34,7 @@ function iniMap(url,callback){
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			var map = $('#centralMap').gmap("get","map");
 			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
-			google.maps.event.addListener(map, "click",function(event){ 
-						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
- 			});
-			google.maps.event.addListener(map, "mousemove",function(event){ 
-						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
- 			});
-			google.maps.event.addListener(map, "mousedown",function(event){ 
-						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
- 			});
-			google.maps.event.addListener(map, "mousemove",function(event){ 
+			google.maps.event.addListener(map, "mouseup",function(event){ 
 						hideContextMenu(); 
 						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
  			});
@@ -54,17 +42,10 @@ function iniMap(url,callback){
 						hideContextMenu(); 
 						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
  			});
-			google.maps.event.addListener(map, "dragend",function(event){ 
-						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50); 
- 			});
-
-			
-			
-			google.maps.event.addListener(map, "click",function(event){ 
+			/*google.maps.event.addListener(map, "click",function(event){ 
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
- 			});
+ 			});*/
 			google.maps.event.addListener(map, "drag",function(event){ hideContextMenu();$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click');  });
 			addCentralControlls();
 			loadData(data);
