@@ -324,7 +324,7 @@ function loadData(data,callback){
 							$('a.gouped').on('click',function(e){
 								e.preventDefault();
 								e.stopImmediatePropagation();
-
+								if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').remove();
 								$('a.gouped').colorbox({
 									photo:true,
 									scrolling:false,
@@ -339,7 +339,7 @@ function loadData(data,callback){
 									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 									onComplete:function(){
 										var t=parseInt($('#ttl').text());
-										if($('#cb_nav').length==0 && t>1){
+										if($('#colorbox #cb_nav').length==0 && t>1){
 											var li="";
 											for(i=0; i<t; i++){
 												li+="<li><a></a></li>";
