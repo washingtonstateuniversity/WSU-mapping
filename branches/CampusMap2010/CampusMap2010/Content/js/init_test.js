@@ -317,70 +317,67 @@ function loadData(data,callback){
 				,isHidden: false
 				,pane: "floatPane"
 				,enableEventPropagation: false
-				,onClose:function(){ibHover =  false;}
+				,onClose:function(){
+					ibHover =  false;
+					if($('.cWrap .items li').length>1){$('.cWrap .items').cycle('destroy');}
+					$('#taby'+i).tabs('destroy').tabs();
+				}
 				,onOpen:function(){
 						ibHover =  true;
-						$('#taby'+i).tabs();
-							$('a.gouped').on('click',function(e){
-								e.preventDefault();
-								e.stopImmediatePropagation();
-								if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').remove();
-								$('a.gouped').colorbox({
-									photo:true,
-									scrolling:false,
-									scalePhotos:true,
-									opacity:0.7,
-									maxWidth:"75%",
-									maxHeight:"75%",
-									transition:"none",
-									slideshow:true,
-									slideshowAuto:false,
-									open:true,
-									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-									onComplete:function(){
-										var t=parseInt($('#ttl').text());
-										if($('#colorbox #cb_nav').length==0 && t>1){
-											var li="";
-											for(i=0; i<t; i++){
-												li+="<li><a></a></li>";
-											}
-											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
-										}
-										$('#colorbox #cb_nav .active').removeClass('active');$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
-									},
-									onLoad:function(){
-										var t=parseInt($('#ttl').text());
-										if($('#cb_nav').length==0 && t>1){
-											var li="";
-											for(i=0; i<t; i++){
-												li+="<li><a></a></li>";
-											}
-											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
-										}
-									},
-									onClose:function(){
-										 $('#colorbox #cb_nav').remove();
-									},
-									onCleanup:function(){
-										 $('#colorbox #cb_nav').remove();
-									}
-								});
-							});
-						if($(".cWrap").length){
-							
-							$('.cWrap .items').cycle('destroy');
+						$('#taby'+i).tabs('destroy').tabs();
+						if($('.cWrap .items li').length>1){
+						$('.cWrap .items').cycle('destroy');
 							$('.cWrap .items').cycle({
 								fx:     'scrollHorz',
 								delay:  -2000,
 								pauseOnPagerHover: 1,
 								pause:1,
-								timeout: $('.cWrap .items').lenth>5?4000:0, 
+								timeout:0, 
 								pager:'.cNav',
-								prev:   '.prev',     next:   '.next', 
+								prev:   '.prev',
+								next:   '.next', 
 								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
-							});
-							
+							});/*	*/
 						}
+						$('a.gouped').off().on('click',function(e){
+							e.preventDefault();
+							e.stopPropagation();
+							$('a.gouped').colorbox({
+								photo:true,
+								scrolling:false,
+								scalePhotos:true,
+								opacity:0.7,
+								maxWidth:"75%",
+								maxHeight:"75%",
+								transition:"none",
+								slideshow:true,
+								slideshowAuto:false,
+								open:true,
+								current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
+								onComplete:function(){
+									if($('#ttl').length){
+										var t=parseInt($('#ttl').text());
+										var li="";
+										if(t>1){
+											for(j=0; j<t; j++){
+												li+="<li><a href='#'></a></li>";
+											}
+											if($('#colorbox #cb_nav').length==0){
+												$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+											}else{
+												$('#colorbox #cb_nav').html(li);
+											}
+										}else{
+											if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+										}
+										if($('#colorbox #cb_nav').length){
+											$('#colorbox #cb_nav .active').removeClass('active');
+											$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+										}
+									}
+								}
+							});
+						});
 						$('.errorReporting').click(function(e){
 									e.stopPropagation();
 									e.preventDefault();
@@ -408,8 +405,6 @@ function loadData(data,callback){
 										onComplete:function(){prep();}
 									});
 								});
-						prep();
-						
 						var minHeight=0;
 						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
 							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
@@ -426,6 +421,7 @@ function loadData(data,callback){
 						var mH = $('#centralMap').height();
 						var latOffset = 0;
 						ib[i].rePosition();
+						prep();
 					}
 			};
 			ib[i] = new InfoBox(myOptions,function(){
