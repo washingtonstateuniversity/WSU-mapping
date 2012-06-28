@@ -440,7 +440,15 @@ border-bottom-right-radius: 0px;
 	#campusmap #cboxSlideshow.playing:hover{background-position:right bottom; }
 	#campusmap #cboxCurrent { position:absolute;top:-9999em;}
 
+	/*#campusmap #cb_nav {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}*/
+	#campusmap #cb_nav{display:inline;margin:5px;padding:0;}
+	#campusmap #cb_nav li{display:inline;padding: 0 4px;line-height: 8px;height: 8px;}
+	#campusmap #cb_nav li{display:inline-block;margin:0 2px; width:8px; height:8px;text-indent:-9999em;background: url("../../Content/images/jCellNav_btn.png") no-repeat scroll right center transparent;}
+	#campusmap #cb_nav li.active{ background-position:left center;}
+	#campusmap #cb_nav li:hover{background-position:center center;}
 	
+	
+		
 	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}
 	#campusmap .navArea ul.cNav{display:inline;margin:5px;padding:0;}
 	#campusmap .navArea ul.cNav li{display:inline;padding: 0 4px;line-height: 8px;height: 8px;}

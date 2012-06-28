@@ -334,9 +334,18 @@ function loadData(data,callback){
 									slideshow:true,
 									slideshowAuto:false,
 									open:true,
-									current:"{current}",
-									onComplete:function(){alert('onComplete');},
-									onLoad:function(){alert('onLoad');}
+									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
+									onComplete:function(){$('#cb_nav .active').removeClass('active');$('#cb_nav').find('li:eq('+$('#cboxCurrent #cur').text()+')').addClass('active');},
+									onLoad:function(){
+										var t=parseInt($('#ttl').text());
+										if($('#cb_nav').length==0 && t>1){
+											var li="";
+											for(i=0; i=t; i++){
+												li+="<li></li>";
+											}
+											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+										}
+									}
 								});
 							});
 						if($(".cWrap").length){
