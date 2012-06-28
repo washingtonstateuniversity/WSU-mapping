@@ -433,7 +433,11 @@ border-bottom-right-radius: 0px;
 	#campusmap #cboxContent #cboxPrevious:hover{ background-position:left bottom; }
 	#campusmap #cboxContent #cboxNext:hover{background-position:right bottom;}
 	
-	#campusmap #cboxSlideshow{}
+	
+	#campusmap #cboxSlideshow{background: url("../../Content/images/play_pause.png") no-repeat scroll right top transparent; text-indent:-9999em; width:18px;}
+	#campusmap #cboxSlideshow:hover{background-position:right bottom; }
+	#campusmap #cboxSlideshow.playing{background: url("../../Content/images/play_pause.png") no-repeat scroll left top transparent; text-indent:-9999em; width:18px;}
+	#campusmap #cboxSlideshow.playing:hover{background-position:left bottom; }
 
 
 	
