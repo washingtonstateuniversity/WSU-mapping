@@ -34,9 +34,7 @@ namespace campusMap.Services
 
         public static authors[] getLogedIn()
         {
-            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("logedin", true));
-            authors[] users = ActiveRecordBase<authors>.FindAll(baseEx.ToArray());
+            authors[] users = ActiveRecordBase<authors>.FindAllByProperty("logedin", true);
             return users;
         }
 
