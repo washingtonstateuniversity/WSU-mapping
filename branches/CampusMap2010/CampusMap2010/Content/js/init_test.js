@@ -42,10 +42,25 @@ function iniMap(url,callback){
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
  			});
-			google.maps.event.addListener(map, "mouseup",function(event){ 
+			google.maps.event.addListener(map, "mousedown",function(event){ 
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
  			});
+			google.maps.event.addListener(map, "mousemove",function(event){ 
+						hideContextMenu(); 
+						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
+ 			});
+			google.maps.event.addListener(map, "dragstart",function(event){ 
+						hideContextMenu(); 
+						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
+ 			});
+			google.maps.event.addListener(map, "dragend",function(event){ 
+						hideContextMenu(); 
+						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
+ 			});
+
+			
+			
 			google.maps.event.addListener(map, "click",function(event){ 
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
