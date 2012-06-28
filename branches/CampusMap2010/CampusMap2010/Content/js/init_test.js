@@ -320,6 +320,7 @@ function loadData(data,callback){
 				,onClose:function(){ibHover =  false;}
 				,onOpen:function(){
 						ibHover =  true;
+						$('#taby'+i).tabs();
 							$('a.gouped').on('click',function(e){
 								e.preventDefault();
 								e.stopImmediatePropagation();
@@ -345,7 +346,7 @@ function loadData(data,callback){
 											}
 											$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
 										}
-										$('#cb_nav .active').removeClass('active');$('#cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+										$('#colorbox #cb_nav .active').removeClass('active');$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
 									},
 									onLoad:function(){
 										var t=parseInt($('#ttl').text());
@@ -358,7 +359,7 @@ function loadData(data,callback){
 										}
 									},
 									onCleanup:function(){
-										 $('#cb_nav').remove();
+										 $('#colorbox #cb_nav').remove();
 									}
 								});
 							});
@@ -405,7 +406,7 @@ function loadData(data,callback){
 									});
 								});
 						prep();
-						$('#taby'+i).tabs();
+						
 						var minHeight=0;
 						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
 							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
