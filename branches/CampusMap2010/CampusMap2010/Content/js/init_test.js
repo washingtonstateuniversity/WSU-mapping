@@ -42,6 +42,10 @@ function iniMap(url,callback){
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
  			});
+			google.maps.event.addListener(map, "mouseup",function(event){ 
+						hideContextMenu(); 
+						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
+ 			});
 			google.maps.event.addListener(map, "click",function(event){ 
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
