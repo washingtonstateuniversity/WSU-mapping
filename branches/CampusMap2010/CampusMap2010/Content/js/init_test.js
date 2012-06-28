@@ -333,7 +333,10 @@ function loadData(data,callback){
 									transition:"none",
 									slideshow:true,
 									slideshowAuto:false,
-									open:true
+									open:true,
+									current:"{current}",
+									onComplete:function(){alert('onComplete');},
+									onLoad:function(){alert('onLoad');}
 								});
 							});
 						if($(".cWrap").length){

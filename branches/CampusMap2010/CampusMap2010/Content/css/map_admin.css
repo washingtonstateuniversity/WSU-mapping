@@ -438,7 +438,7 @@ border-bottom-right-radius: 0px;
 	#campusmap #cboxSlideshow:hover{background-position:left bottom; }
 	#campusmap #cboxSlideshow.playing{background-position:right top; }
 	#campusmap #cboxSlideshow.playing:hover{background-position:right bottom; }
-
+	#campusmap #cboxCurrent { position:absolute;top:-9999em;}
 
 	
 	#campusmap .navArea {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}
