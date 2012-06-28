@@ -72,17 +72,10 @@ namespace campusMap.Services
 
         public static authors getUser()
         {
-            try
-            {
-                authors[] author = ActiveRecordBase<authors>.FindAllByProperty( "Nid", getNid() );
-                authors temp = null;
-                if (author[0] != null) { temp = author[0]; }
-                return temp;
-            }
-            catch (Exception)
-            {
-            }
-            return null;
+            List<AbstractCriterion> userEx = new List<AbstractCriterion>();
+            userEx.Add(Expression.Eq("Nid", getNid()));
+            authors author = ActiveRecordBase<authors>.FindFirst(userEx.ToArray());
+            return author;
         }
 
         public static Boolean isActive(authors user)
