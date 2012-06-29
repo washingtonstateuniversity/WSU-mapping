@@ -860,6 +860,7 @@ function int_infotabs(){
 			}
 		}).dialog( "open" );
 	});
+	watchMediaTab();
 }
 function set_tab_editable(i){
 	var base= '[href="#dyno_tabs_'+i+'"]';
