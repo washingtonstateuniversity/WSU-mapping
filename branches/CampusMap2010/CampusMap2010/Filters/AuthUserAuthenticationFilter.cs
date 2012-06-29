@@ -49,7 +49,7 @@ namespace campusMap.Filters
 
                 if (authors.Length == 0)
                 {
-                    context.Response.RedirectToUrl("~/public/notauthorized.castle");
+                    context.Response.RedirectToUrl("~/admin", false);
                     return false;
                 }
                 context.Session["manager"] = true;

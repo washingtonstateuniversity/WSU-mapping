@@ -181,7 +181,7 @@ namespace campusMap.Models
             set { position = value; }
         }*/
 
-/*Table = "authors_editing", ColumnKey = "place_id", ColumnRef = "author_id",*/
+        /*Table = "authors_editing", ColumnKey = "place_id", ColumnRef = "author_id",*/
         private IList<place> author_editing = new List<place>();
         [HasMany(typeof(place), Lazy = true, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         virtual public IList<place> editing
@@ -195,8 +195,6 @@ namespace campusMap.Models
         virtual public IList<place> getUserPlaces(int statusId, int limit)
         {
             IList<place> temp = new List<place>();
-
-
             authors user = UserService.getUser();
             IList<place> userplaces = user.Places;
             if (statusId > 0)

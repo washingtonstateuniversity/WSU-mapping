@@ -405,7 +405,7 @@ namespace campusMap.Models
         }
 
         private IList<infotabs> _infotabs = new List<infotabs>();
-        [HasAndBelongsToMany(typeof(infotabs), Lazy = true, BatchSize = 5, Table = "place_to_infotabs", ColumnKey = "place_id", ColumnRef = "infotab_id", NotFoundBehaviour = NotFoundBehaviour.Ignore, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
+        [HasAndBelongsToMany(typeof(infotabs), Lazy = true, BatchSize = 5, Table = "place_to_infotabs", ColumnKey = "place_id", ColumnRef = "infotab_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<infotabs> infotabs
         {
             get { return _infotabs; }

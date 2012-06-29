@@ -354,21 +354,19 @@ $formbuttons
 				<li class="ui-state-default ui-corner-top nonsort"><a href="#tab_overview">Overview</a></li>
 				#set($T = 0)
 				#foreach($tab in $tabs)
-				
 					#if($tab.title=="Views" && $tab.content=="")
-						#if($placeimages.cont>0)
+						#if($placeimages.count>0)
 							<li class="ui-state-default ui-corner-top">
 								<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
 								<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
 								<input type="hidden" name="tabs[$T].title" value="$!tab.title" id='tab_title_${T}'/> 
 								<input type='hidden' name='tabs[$T].template.id' value='$!tab.template.id'  class='sort' id='tab_template_id_${T}'/>
 								<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' id='tab_counter${T}'/>
-
 							</li>
 						#end
 					#else
 						#if($tab.title=="Views")
-							#if($placeimages.cont>0)
+							#if($placeimages.count>0)
 								<li class="ui-state-default ui-corner-top">
 									<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
 									<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
@@ -391,9 +389,6 @@ $formbuttons
 							</li>
 						#end
 					#end
-				
-				 
-					
 					#set($T = $T+1)
 				#end
 			</ul>
@@ -405,13 +400,13 @@ $formbuttons
 			#foreach($tab in $tabs) 
 				<div id="dyno_tabs_$T">
 					#if($tab.title=="Views" && $tab.content=="")
-						#if($placeimages.cont>0)
+						#if($placeimages.count>0)
 							<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id='viewTab' width="297" height="201" />
 							<input type="hidden" id='tab_$T' name="tabs[$T].content" value="<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />" />
 						#end
 					#else
 						#if($tab.title=="Views")
-							#if($placeimages.cont>0)
+							#if($placeimages.count>0)
 								<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id='viewTab' width="297" height="201" />
 							<input type="hidden" id='tab_$T' name="tabs[$T].content" value="<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />" />
 							#end

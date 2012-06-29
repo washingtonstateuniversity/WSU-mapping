@@ -1285,7 +1285,7 @@ namespace campusMap.Controllers
             int requestedStatus = UserService.canPublish(user) && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
-            place.infotabs.Clear();
+            //place.infotabs.Clear();
             //place.categories.Clear();
             place.Images.Clear();
             place.Authors.Clear();
@@ -1397,7 +1397,7 @@ namespace campusMap.Controllers
                     }
                 }
             }
-            place.tags.Clear();
+            /*place.tags.Clear();
             foreach (tags tag in tags)
             {
                 if (tag.name != null)
@@ -1409,7 +1409,7 @@ namespace campusMap.Controllers
                     }
                     place.tags.Add(tag);
                 }
-            }
+            }*/
             if (massTag != null)
             {
                 foreach (String onetags in massTag)

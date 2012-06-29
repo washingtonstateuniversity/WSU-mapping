@@ -133,7 +133,7 @@ namespace campusMap.Controllers
                 PropertyBag["places"] = places;
                 PropertyBag["user"] = user;
                 IList<authors> activeUser = new List<authors>();
-                authors[] _authors = ActiveRecordBase<authors>.FindAll();
+                authors[] _authors = ActiveRecordBase<authors>.FindAllByProperty("logedin", true);
                 foreach (authors _author in _authors)
                 {
                     if (_author != null && _author.LastActive > DateTime.Today.AddHours(-1))
