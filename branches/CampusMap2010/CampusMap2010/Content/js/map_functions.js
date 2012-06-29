@@ -909,16 +909,19 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 												controll+
 											"</li>" );
 	$tabs.tabs( "add", "#tabs-" + i, tab_title.replace('{$i}',i));
-	if(content!=false){
-		$(content).insertBefore( $("#tab_"+i) );
-		$("#tab_"+i).remove();
-	}
-	if(useWysiwyg)load_tiny("bodytext","tab_"+i);
+
 	
 	$.each($("#infotabs li.ui-state-default"),function(i,v){
 		$(this).find('.sort').val(i);
 		set_tab_editable(i);
 	});
+	
+	if(content!=false){
+		$("#tabs-" + i).html( content );
+	}
+	if(useWysiwyg)load_tiny("bodytext","tab_"+i);
+	
+	
 	return i++;
 }
 function watchMediaTab(){

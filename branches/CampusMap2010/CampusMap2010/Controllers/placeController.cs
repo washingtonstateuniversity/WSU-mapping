@@ -1385,6 +1385,7 @@ namespace campusMap.Controllers
                         if (temp.Length == 0)
                         {
                             ActiveRecordMediator<tags>.Save(tag);
+                            place.tags.Add(tag);
                         }
                         else
                         {
