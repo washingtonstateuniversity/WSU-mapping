@@ -90,46 +90,46 @@ namespace campusMap.Controllers
 
         #region MCV INFO METHODS
             public string getView()
-        {
-            return SelectedViewName.Split('\\')[0];
-        }
+            {
+                return SelectedViewName.Split('\\')[0];
+            }
             public string getRootUrl()
-        {
-            String root = "";
-            if (!Request.IsLocal)
             {
-                root = "http://map.wsu.edu/";
+                String root = "";
+                if (!Request.IsLocal)
+                {
+                    root = "http://map.wsu.edu/";
+                }
+                else
+                {
+                    root = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(System.Web.HttpContext.Current.Request.Url.PathAndQuery, "/"); 
+                }
+                return root;
             }
-            else
-            {
-                root = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(System.Web.HttpContext.Current.Request.Url.PathAndQuery, "/"); 
-            }
-            return root;
-        }
             public bool isLocal()
-        {
-            return Request.IsLocal;
-        }
+            {
+                return Request.IsLocal;
+            }
             public string getAction()
-        {
-            if (SelectedViewName.Split('\\')[1].Contains("../"))
             {
-                string[] act = SelectedViewName.Split('\\')[1].Split('/');
-                return act[act.Length-1];
+                if (SelectedViewName.Split('\\')[1].Contains("../"))
+                {
+                    string[] act = SelectedViewName.Split('\\')[1].Split('/');
+                    return act[act.Length-1];
+                }
+                else
+                {
+                    return SelectedViewName.Split('\\')[1];
+                }
             }
-            else
-            {
-                return SelectedViewName.Split('\\')[1];
-            }
-        }
             public string getViewAndAction()
-        {
-            return SelectedViewName.Replace("\\", "/");
-        }
+            {
+                return SelectedViewName.Replace("\\", "/");
+            }
             public object getVar(string var)
-        {
-            return PropertyBag[var];
-        }
+            {
+                return PropertyBag[var];
+            }
          #endregion
 
     }
