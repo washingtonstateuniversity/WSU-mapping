@@ -284,12 +284,12 @@ namespace campusMap.Controllers
         #region WSU MATRIX
         public void wsu_matrix()
         {
-            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-            PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
-            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll(Order.Asc("name"));
+            PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll(Order.Asc("name"));
+            PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll(Order.Asc("name"));
+            PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll(Order.Asc("name"));
+            PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll(Order.Asc("name"));
+            PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll(Order.Asc("name"));
 
             RenderView("../admin/wsu_matrix/list");
         }
