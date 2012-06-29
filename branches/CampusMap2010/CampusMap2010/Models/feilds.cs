@@ -92,7 +92,6 @@ namespace campusMap.Models
             get { return field_model; }
             set { field_model = value; }
         }
-
         private int field_set;
         [Property("fieldset")]
         virtual public int set
@@ -100,11 +99,27 @@ namespace campusMap.Models
             get { return field_set; }
             set { field_set = value; }
         }
-
-
-
-
-
+        private bool _is_public;
+        [Property]
+        virtual public bool is_public
+        {
+            get { return _is_public; }
+            set { _is_public = value; }
+        }
+        private IList<authors> _authors = new List<authors>();
+        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 5, Table = "authors_to_field_type", ColumnKey = "field_type_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<authors> authors
+        {
+            get { return _authors; }
+            set { _authors = value; }
+        }
+        private IList<access_levels> _access_levels = new List<access_levels>();
+        [HasAndBelongsToMany(typeof(access_levels), Lazy = true, BatchSize = 5, Table = "access_levels_to_field_type", ColumnKey = "field_type_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<access_levels> access_levels
+        {
+            get { return _access_levels; }
+            set { _access_levels = value; }
+        }
         /*
 
         private IList<view> Views;

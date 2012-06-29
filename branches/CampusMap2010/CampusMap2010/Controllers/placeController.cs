@@ -722,7 +722,8 @@ namespace campusMap.Controllers
             PropertyBag["field"] = field;
             place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["p_models"] = p_models;
-
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
 
             RenderView("../admin/fields/new");
         }
@@ -749,7 +750,8 @@ namespace campusMap.Controllers
 
             elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
             string ele_str = FieldsService.getfieldmodel(ele);
-
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
 
             PropertyBag["html_ele"] = ele_str;
             PropertyBag["ele"] = ele;

@@ -20,29 +20,62 @@
 	#end
 </fieldset>
 <fieldset style="float:left;width:46%;">
-<legend>Basic setup:</legend>
-  <p>Name:<br/>
-      <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-  </p>
-  <p>Alias:<br/>
-      <input type="text" value="$!field.alias" name="field.alias" id="type_alias" class="ui-widget ui-widget-content ui-corner-all " />
-  </p>
-<p  style="float:left;width:46%;">Place Model:<br/>
-	<select name="placemodel">	
-		#foreach($model in $p_models)
-			<option value="$model.id" #if($field.set==$model.id)selected='selected'#end>$model.name</option>
-		#end
-	</select>
-</p>
-<p style="float:right;width:46%;">Feild Type:<br/>  
-	<select name="ele.type">
-		<option value="dropdown" #if($ele.type=='dropdown')selected='selected'#end>dropdown</option>
-		<option value="textinput" #if($ele.type=='textinput')selected='selected'#end>text</option>
-		<option value="textarea" #if($ele.type=='textarea')selected='selected'#end>textarea</option>
-		<option value="checkbox" #if($ele.type=='checkbox')selected='selected'#end>checkbox</option>
-		<option value="yes_no" #if($ele.type=='yes_no')selected='selected'#end>yes/no</option>
-	</select>
-</p>
+	<legend>Basic setup:</legend>
+	<div  style="float:left;width:46%;">Name:<br/>
+		  <input type="text" value="$!field.name" name="field.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+	</div> 
+	 <div  style="float:left;width:46%;">Alias:<br/>
+		  <input type="text" value="$!field.alias" name="field.alias" id="type_alias" class="ui-widget ui-widget-content ui-corner-all " />
+	</div>
+	<div class="clear"></div>
+	<hr/>
+	<p>Public:<br/>
+		<select name="field.isPublic" >
+			<option class="author" value="true" #if(${field.isPublic}) selected="selected" #end>Yes</option>
+			<option class="author" value="false" #if(!${field.isPublic}) selected="selected" #end>No</option>
+		</select>
+		<h6><em>Changing this will tell whether or not the public can see this place in a map view <strong>even thou it's published</strong> ie: Internal to WSU only.</em></h6>  
+	</p>
+	<hr/>
+	<fieldset><legend id="customName"><label>User access settings</label> <em>+</em></legend>
+		<div id="customNames">
+			<div  style="float:left;width:46%;">Access levels:<br/>
+				<select name="field.access_levels[]" id="access" multiple="multiple" size="9" style="width:205px;">   
+					#foreach($access in $accesslevels)
+						<option class="access_levels" value="$access.id" #if($field.access_levels.Contains($access)) selected="selected" #end>$!access.title</option>
+					#end
+				</select>
+				<h6 style="margin:5px;"><em>These selections make up all the levels that can see and use the fields. Leaving them blank lets everyone use them.</em></h6>  
+			</div> 
+			 <div  style="float:left;width:46%;">Authors:<br/>
+				<select name="field.authors[]" id="author" multiple="multiple" size="9" style="width:205px;">   
+					#foreach($author in $authors)
+						<option class="access_levels" value="$author.id" #if($field.authors.Contains($author)) selected="selected" #end>$!author.name</option>
+					#end
+				</select><br/>
+				<h6 style="margin:5px;"><em>These selections make up all the authors that can see and use the fields. Leaving them blank lets everyone use them.</em></h6>  
+			</div>  
+		</div>
+	</fieldset>
+	
+	<fieldset><legend><label>Tie Feilds To:</label></legend>
+		<div style="float:right;width:46%;">Feild Type:<br/>  
+			<select name="ele.type">
+				<option value="dropdown" #if($ele.type=='dropdown')selected='selected'#end>dropdown</option>
+				<option value="textinput" #if($ele.type=='textinput')selected='selected'#end>text</option>
+				<option value="textarea" #if($ele.type=='textarea')selected='selected'#end>textarea</option>
+				<option value="checkbox" #if($ele.type=='checkbox')selected='selected'#end>checkbox</option>
+				<option value="yes_no" #if($ele.type=='yes_no')selected='selected'#end>yes/no</option>
+			</select>
+		</div> 
+		<div  style="float:left;width:46%;">Place Model:<br/>
+			<select name="placemodel">	
+				#foreach($model in $p_models)
+					<option value="$model.id" #if($field.set==$model.id)selected='selected'#end>$model.name</option>
+				#end
+			</select>
+		</div>
+	</fieldset>
 </fieldset>
 
 

@@ -121,6 +121,13 @@ namespace campusMap.Models
             get { return places; }
             set { places = value; }
         }
+        private IList<field_types> _field_types = new List<field_types>();
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, BatchSize = 30, Table = "authors_to_field_type", ColumnKey = "author_id", ColumnRef = "field_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return _field_types; }
+            set { _field_types = value; }
+        }
 
         private IList<geometrics> Geometric = new List<geometrics>();
         [HasAndBelongsToMany(typeof(geometrics), Lazy = true, BatchSize = 60, Table = "authors_to_geometrics", ColumnKey = "author_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
@@ -220,9 +227,7 @@ namespace campusMap.Models
             {
                 temp = userplaces;
             }
-
             return temp;
-
         }
 
     }
@@ -245,6 +250,15 @@ namespace campusMap.Models
             get { return Title; }
             set { Title = value; }
         }
+
+        private IList<field_types> _field_types = new List<field_types>();
+        [HasAndBelongsToMany(typeof(field_types), Lazy = true, BatchSize = 30, Table = "access_levels_to_field_type", ColumnKey = "access_level_id", ColumnRef = "field_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<field_types> field_types
+        {
+            get { return _field_types; }
+            set { _field_types = value; }
+        }
+
     }
 
 
