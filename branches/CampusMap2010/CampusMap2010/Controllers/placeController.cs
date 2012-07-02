@@ -797,7 +797,7 @@ namespace campusMap.Controllers
             typeEx.Add(Expression.Eq("type", field_type));
             if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
             fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
-            string ele_str = FieldsService.getfieldmodel_dynamic(field_type.attr.ToString(), field.value.ToString());
+            string ele_str = FieldsService.getfieldmodel_dynamic(field_type.attr.ToString(), field == null ? null : field.value.ToString());
             return ele_str;
         }
 

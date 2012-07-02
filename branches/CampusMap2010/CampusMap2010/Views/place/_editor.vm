@@ -83,7 +83,7 @@
     <li class="ui-state-default ui-corner-top">
       <a href="#tabs_Detail">Detail</a>
     </li>
-     #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
+     #if(${user_fields.count}>0||${fields.count}>0)<li class="ui-state-default ui-corner-top">
       <a href="#tabs_FIELDS">Fields</a>
     </li>   #end
     <li class="ui-state-default ui-corner-top">
@@ -554,7 +554,7 @@ $formbuttons <div class="clear"></div>
     
   </div>
   
-#if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
+#if(${user_fields.count}>0||${fields.count}>0)<div id="tabs_FIELDS" class="mainAreaTabs">
 	$formbuttons <div class="clear"></div>
         <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="display: block; width: auto;"><h2>Place fields: </h2>
 
