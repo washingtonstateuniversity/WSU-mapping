@@ -530,12 +530,14 @@ $formbuttons <div class="clear"></div>
       #set($count = $count + 1)
       #end
 
-      #*<select name="authors[$!count].id" id="author">
-        <option class="" value="">-select-</option>
-        #foreach($author in $authors)
-        <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
-        #end
-      </select>*#
+	#*
+		<select name="authors[$!count].id" id="author">
+			<option class="" value="">-select-</option>
+			#foreach($author in $authors)
+			<option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
+			#end
+		</select>
+	*#
 
 
       <div class="lightLine"></div>
@@ -556,11 +558,18 @@ $formbuttons <div class="clear"></div>
 	$formbuttons <div class="clear"></div>
         <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="display: block; width: auto;"><h2>Place fields: </h2>
 
-			#foreach($field in $fields)          
+			#foreach($field in $user_fields)          
 				$field
 			#between
 			<hr/>
 			#end
+			<div style="position:absolute;top:-9999em;left-9999em;">
+				#foreach($field in $fields)          
+					$field
+				#end
+			</div>
+			
+			
         </div> 
     $formbuttons
     <div class="clear"></div>

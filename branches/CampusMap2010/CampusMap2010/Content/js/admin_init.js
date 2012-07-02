@@ -219,8 +219,8 @@ $(function() {
 	
 	
 	
-    if(typeof(tinyMCE) !== 'undefined' && $('.tinyEditor').length>0){
-		$.each($('.tinyEditor'),function(i,v){
+    if(typeof(tinyMCE) !== 'undefined' && $('textarea.tinyEditor').length>0){
+		$.each($('textarea.tinyEditor'),function(i,v){
 			if(!$(this).is($(".tinyLoaded"))){
 				if(typeof($(this).attr('id'))=="undefined")$(this).attr('id','temp_'+i)
 				if($(this).is($(".full"))){

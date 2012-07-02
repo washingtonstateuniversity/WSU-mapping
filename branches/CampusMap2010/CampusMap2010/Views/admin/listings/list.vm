@@ -14,7 +14,6 @@
 #end
 
 	<div class="listing_switch">
-		
 		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active">
 			<span>${controller.getView()} List</span>
 		</a>
@@ -32,7 +31,7 @@
 			<a href="#_name_types" id="name_types_choice" class="ui-state-default ListingChoices ">
 				<span>Name Types</span>
 			</a>
-		#end	
+		#end
 		#if($fields)	
 			<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices ">
 				<span>Fields</span>

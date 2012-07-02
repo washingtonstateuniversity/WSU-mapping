@@ -37,6 +37,20 @@ namespace campusMap.Controllers
 
     #endregion
 
+
+
+    public abstract class dynoBaseFormData
+    {
+        public dynamic type { get; set; }
+        public dynamic label { get; set; }
+        public attrSet attr { get; set; }
+        public dynamic options { get; set; }
+    }
+    public abstract class attrSet
+    {
+        public dynamic name { get; set; }
+    }
+
     [Layout("default")]
     public class placeController : SecureBaseController
     {
@@ -530,16 +544,31 @@ namespace campusMap.Controllers
             typeEx.Add(Expression.Eq("set", one_place.model.id));
 
             field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> user_fields = new List<string>();
             List<string> fields = new List<string>();
             if (ft != null)
             {
                 foreach (field_types ft_ in ft)
                 {
-                    fields.Add(get_field(ft_, one_place));
+                    if ((ft_.authors.Count > 0) || (ft_.access_levels.Count > 0))
+                    {
+                        if (ft_.authors.Contains(user) || ft_.access_levels.Contains(user.access_levels))
+                        {
+                            user_fields.Add(get_field(ft_, one_place));
+                        }
+                        else
+                        {
+                            fields.Add(get_field(ft_, one_place));
+                        }
+                    }
+                    else
+                    {
+                        user_fields.Add(get_field(ft_, one_place));
+                    }
                 }
             }
+            PropertyBag["user_fields"] = user_fields;
             PropertyBag["fields"] = fields;
-
 
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
@@ -803,19 +832,20 @@ namespace campusMap.Controllers
 
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
-            [DataBind("ele", Validate = true)] dynamic ele,
+            [DataBind("ele", Validate = false)] dynoBaseFormData ele,
             string ele_type,
             int placemodel,
            bool ajaxed_update,
            string apply,
            string cancel
                 )
-        {
+            {
             if (cancel != null){
                 RedirectToAction("list");
                 return;
             }
-
+            
+            //dynamic value;
             var jss = new JavaScriptSerializer();
             ActiveRecordMediator<fields>.Save(field);
             
@@ -823,7 +853,7 @@ namespace campusMap.Controllers
             field.set = ActiveRecordBase<place_models>.Find(placemodel).id;  // NOTE THIS IS THE ONLY REASON WE CAN ABSTRACT YET... FIX?
 
             ele.attr.name = "fields[" + field.id + "]" ;//+ (ele.type == "dropdown"?"[]":"");
-            ele.options.RemoveAt(ele.options.Count - 1); //to remove ele.options[9999] at the end
+            ele.options.RemoveAt(ele.options.Count - 1);//to remove ele.options[9999] at the end
             string tmpNull=null;
             dynamic jsonstr = new {
                                 type = ele.type,

@@ -207,7 +207,6 @@
              */
             public static string getFieldVal(field_types field_type, place _place)
             {
-
                 string value = "";
 
                 List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
@@ -639,7 +638,7 @@
                         {
 
                             string file = item.id + "_centralplace" + ".ext";
-                            if (!File.Exists(cachePath + file))
+                            if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"]))
                             {
 
                                 string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
