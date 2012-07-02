@@ -37,20 +37,6 @@ namespace campusMap.Controllers
 
     #endregion
 
-
-
-    public abstract class dynoBaseFormData
-    {
-        public dynamic type { get; set; }
-        public dynamic label { get; set; }
-        public attrSet attr { get; set; }
-        public dynamic options { get; set; }
-    }
-    public abstract class attrSet
-    {
-        public dynamic name { get; set; }
-    }
-
     [Layout("default")]
     public class placeController : SecureBaseController
     {
@@ -832,12 +818,12 @@ namespace campusMap.Controllers
 
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
-            [DataBind("ele", Validate = false)] dynoBaseFormData ele,
+            [DataBind("ele", Validate = false)] elementSet ele,
             string ele_type,
             int placemodel,
-           bool ajaxed_update,
-           string apply,
-           string cancel
+            bool ajaxed_update,
+            string apply,
+            string cancel
                 )
             {
             if (cancel != null){

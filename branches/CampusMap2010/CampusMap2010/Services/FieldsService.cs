@@ -32,6 +32,112 @@
 #endregion
 
 namespace campusMap.Services{
+
+
+    public class elementSet
+    {
+        private string Type;
+        [JsonProperty]
+        public string type { get { return Type; } set { Type = value; } }
+
+        private string Label;
+        [JsonProperty]
+        public string label { get { return Label; } set { Label = value; } }
+
+        private Attr Attrs;
+        [JsonProperty]
+        public Attr attr { get { return Attrs; } set { Attrs = value; } }
+
+        private IList<Option> Options;
+        [JsonProperty]
+        public IList<Option> options { get { return Options; } set { Options = value; } }
+
+        private Events _events;
+        [JsonProperty]
+        public Events events { get { return _events; } set { _events = value; } }
+    }
+    public class selectionSet
+    {
+        private IList<Selection> Selections;
+        [JsonProperty]
+        public IList<Selection> selections { get { return Selections; } set { Selections = value; } }
+    }
+    public class Selection
+    {
+        private string Val;
+        [JsonProperty]
+        public string val { get { return Val; } set { Val = value; } }
+    }
+    public class Option
+    {
+        private string Label;
+        [JsonProperty]
+        public string label { get { return Label; } set { Label = value; } }
+
+        private string Val;
+        [JsonProperty]
+        public string val { get { return Val; } set { Val = value; } }
+
+        private string Selected;
+        [JsonProperty]
+        public string selected { get { return Selected; } set { Selected = value; } }
+    }
+    public class Attr
+    {
+        private string Ele_class;
+        [JsonProperty]
+        public string ele_class { get { return Ele_class; } set { Ele_class = value; } }
+
+        private string Name;
+        [JsonProperty]
+        public string name { get { return Name; } set { Name = value; } }
+
+        private string Title;
+        [JsonProperty]
+        public string title { get { return Title; } set { Title = value; } }
+
+        private string Dir;
+        [JsonProperty]
+        public string dir { get { return Dir; } set { Dir = value; } }
+
+        private string Accesskey;
+        [JsonProperty]
+        public string accesskey { get { return Accesskey; } set { Accesskey = value; } }
+
+        private string Placeholder;
+        [JsonProperty]
+        public string placeholder { get { return Placeholder; } set { Placeholder = value; } }
+
+        private string Tabindex;
+        [JsonProperty]
+        public string tabindex { get { return Tabindex; } set { Tabindex = value; } }
+
+        private string Id;
+        [JsonProperty]
+        public string id { get { return Id; } set { Id = value; } }
+
+        private string Style;
+        [JsonProperty]
+        public string style { get { return Style; } set { Style = value; } }
+
+        private string Multiple;
+        [JsonProperty]
+        public string multiple { get { return Multiple; } set { Multiple = value; } }
+    }
+    public class Events
+    {
+        private string onClick;
+        [JsonProperty]
+        public string onclick { get { return onClick; } set { onClick = value; } }
+
+        private string onChange;
+        [JsonProperty]
+        public string onchange { get { return onChange; } set { onChange = value; } }
+
+    } 
+
+
+
     public class FieldsService{
         private static ILog log = log4net.LogManager.GetLogger("FieldsService");
 
