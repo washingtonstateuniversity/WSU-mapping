@@ -192,7 +192,9 @@ table.ui-widget tbody tr.odd td{}
 .w500{width:500px !important;}
 .w300{min-width:150px; max-width:300px !important;}
 .w250{width:250px !important;}
+.w200{width:200px !important;}
 .w150{width:150px !important;}
+.w100{width:100px !important;}
 .w50{width:50px !important;}
 
 .listing_switch{height: 37px; margin-top: 9px; position: relative; z-index: 1;top:0px;}

@@ -28,6 +28,11 @@ namespace campusMap.Controllers
         using Newtonsoft.Json.Utilities;
         using Newtonsoft.Json.Linq;
 
+        using System.Collections.ObjectModel;
+        using System.Dynamic;
+        using System.Linq;
+        using System.Web.Script.Serialization;
+
 
 
     #endregion
@@ -35,7 +40,6 @@ namespace campusMap.Controllers
     [Layout("default")]
     public class placeController : SecureBaseController
     {
-
     /*
      * 
      * MAY BE A FIELDS HELPER SERVICES WOULD BE WISE ?
@@ -277,7 +281,6 @@ namespace campusMap.Controllers
             fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
             place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
             PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
-
             RenderView("../admin/listings/list");
         }
 
@@ -748,8 +751,16 @@ namespace campusMap.Controllers
             place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["p_models"] = p_models;
 
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
-            string ele_str = FieldsService.getfieldmodel(ele);
+            string ele_str = FieldsService.getfieldmodel_dynamic(field.attr.ToString());
+            PropertyBag["nat_html_ele"] = ele_str;
+
+
+            //string json = "{\"Items\":[{ \"Name\":\"Apple\", \"Price\":12.3 },{ \"Name\":\"Grape\", \"Price\":3.21 }],\"Date\":\"21/11/2010\"}";
+            var jss = new JavaScriptSerializer();
+            var ele = jss.Deserialize<Dictionary<string, dynamic>>(field.attr.ToString());
+
+            //elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
+            //string ele_str = FieldsService.getfieldmodel(ele);
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
 
@@ -771,13 +782,7 @@ namespace campusMap.Controllers
             typeEx.Add(Expression.Eq("type", field_type));
             if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
             fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
-
-            selectionSet sel = null;
-            if( field!=null  && !String.IsNullOrEmpty(field.value)){
-                sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
-            }
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field_type.attr.ToString(), typeof(elementSet));
-            string ele_str = FieldsService.getfieldmodel(ele, sel);
+            string ele_str = FieldsService.getfieldmodel_dynamic(field_type.attr.ToString(), field.value.ToString());
             return ele_str;
         }
 
@@ -798,7 +803,7 @@ namespace campusMap.Controllers
 
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
-            [DataBind("ele", Validate = true)] elementSet ele,
+            [DataBind("ele", Validate = true)] dynamic ele,
             string ele_type,
             int placemodel,
            bool ajaxed_update,
@@ -810,32 +815,25 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
                 return;
             }
-            char[] startC = { '{' };
-            char[] endC = { '}' };
 
-
-
+            var jss = new JavaScriptSerializer();
             ActiveRecordMediator<fields>.Save(field);
             
             field.model = this.GetType().Name;
             field.set = ActiveRecordBase<place_models>.Find(placemodel).id;  // NOTE THIS IS THE ONLY REASON WE CAN ABSTRACT YET... FIX?
 
             ele.attr.name = "fields[" + field.id + "]" ;//+ (ele.type == "dropdown"?"[]":"");
-
-            string ele_attr = JsonConvert.SerializeObject(ele.attr);       
-            ele_attr = ele_attr.TrimEnd(endC);
-            ele_attr = ele_attr.TrimStart(startC);
-            // ele_attr Should match
-            //{\"class\":null,\"id\":null,\"ETC ;)\":null}
             ele.options.RemoveAt(ele.options.Count - 1); //to remove ele.options[9999] at the end
-            string ele_ops = JsonConvert.SerializeObject(ele.options);
-            ele_ops = ele_ops.TrimEnd(endC);
-            ele_ops = ele_ops.TrimStart(startC);
-            // ele_ops Should match
-            //[{\"label\":\"bar\",\"val\":\"bars\"},{\"label\":\"fooed\",\"val\":\"baring\"}]
-
-            field.attr = "{ \"type\": \"" + ele.type + "\", \"label\": \"" + ((ele.label == "") ? field.name : ele.label) + "\", \"attr\":{" + ele_attr + "}, \"options\":" + ele_ops + " }";
-
+            string tmpNull=null;
+            dynamic jsonstr = new {
+                                type = ele.type,
+                                label = ((ele.label == "") ? field.name : ele.label),
+                                attr = ele.attr,
+                                events = tmpNull,
+                                options = ele.options
+                            };
+            var json = jss.Serialize(jsonstr);
+            field.attr = json;
 
             ActiveRecordMediator<fields>.Save(field);
             if (apply != null || ajaxed_update)

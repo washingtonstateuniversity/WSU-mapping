@@ -28,6 +28,13 @@ namespace campusMap.Controllers
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
 
+    using System.Collections.ObjectModel;
+    using System.Dynamic;
+    using System.Linq;
+    using System.Web.Script.Serialization;
+
+
+
     #endregion
 
     [Layout("default")]
@@ -272,12 +279,16 @@ namespace campusMap.Controllers
             field_types field = ActiveRecordBase<field_types>.Find(id);
             PropertyBag["field"] = field;
 
-            geometrics_types[] g_type = ActiveRecordBase<geometrics_types>.FindAll();
-            PropertyBag["p_models"] = g_type;
+            geometrics_types[] p_models = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["p_models"] = p_models;
 
-            elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
-            string ele_str = FieldsService.getfieldmodel(ele);
+            string ele_str = FieldsService.getfieldmodel_dynamic(field.attr.ToString());
 
+            var jss = new JavaScriptSerializer();
+            var ele = jss.Deserialize<Dictionary<string, dynamic>>(field.attr.ToString());
+
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
 
             PropertyBag["html_ele"] = ele_str;
             PropertyBag["ele"] = ele;
@@ -830,7 +841,7 @@ namespace campusMap.Controllers
 
         public void update_field(
                    [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
-                   [DataBind("ele", Validate = true)] elementSet ele,
+                   [DataBind("ele", Validate = true)] dynamic ele,
                    string ele_type,
                    int placemodel,
                   bool ajaxed_update,

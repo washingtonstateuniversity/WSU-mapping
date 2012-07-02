@@ -214,35 +214,7 @@
                 typeEx.Add(Expression.Eq("type", field_type));
                 if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
                 fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
-
-                selectionSet sel = null;
-                if (field != null && !String.IsNullOrEmpty(field.value))
-                {
-                    sel = (selectionSet)JsonConvert.DeserializeObject(field.value.ToString(), typeof(selectionSet));
-                }
-                elementSet ele = (elementSet)JsonConvert.DeserializeObject(field_type.attr.ToString(), typeof(elementSet));
-
-                if (ele != null && sel != null && sel.selections != null && ele.type == "dropdown")
-                {
-                    foreach (Option _option in ele.options)
-                    {
-                        foreach (Selection _val in sel.selections)
-                        {
-                            if (!String.IsNullOrEmpty(_val.val) && _option.val == _val.val) value = _val.val;
-                        }
-                    }
-                }
-                else if (sel!=null && sel.selections[0].val != null)
-                {
-                    foreach (Option _option in ele.options)
-                    {
-                        _option.selected = "";
-                        if (sel.selections[0].val != "")
-                        {
-                            value = sel.selections[0].val;
-                        }
-                    }
-                }
+                value = FieldsService.getFieldVal(field_type,field);
                 return value;
             }
 
