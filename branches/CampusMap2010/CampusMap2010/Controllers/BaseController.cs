@@ -89,8 +89,8 @@ namespace campusMap.Controllers
             }
             public string stripNonSenseContent(string inputString)
             {
-                String output = Regex.Replace (inputString, @"<p>\s+</p>", string.Empty);
-                        output = Regex.Replace(inputString, @"\s{3,}", string.Empty);
+                String output = Regex.Replace(inputString, @"<p>\s{0,}</p>", string.Empty);
+                        output = Regex.Replace(output, @"\s{3,}", string.Empty);
                         output = output.Replace('\t', ' ');
                         output = output.Replace("\\r\\n", "");
                         output = output.Replace("\r\n", "");
