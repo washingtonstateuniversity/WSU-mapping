@@ -758,7 +758,7 @@
 
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
                                                 string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n", @"
-")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ');
+")).Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ');
                                                 if (!String.IsNullOrWhiteSpace(content))
                                                 {
                                                     tabStr += @"
@@ -802,8 +802,8 @@
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
                                     ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary.Replace("\\r\\n", @"
-").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false) : Truncate(StripHtml(details.Replace("\\r\\n", @"
-").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false), 65) + "...") + @""",
+").Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false) : Truncate(StripHtml(details.Replace("\\r\\n", @"
+").Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
                                             ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
