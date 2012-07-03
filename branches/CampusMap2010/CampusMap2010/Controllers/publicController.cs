@@ -787,7 +787,8 @@
                                     }
                                     else
                                     {
-                                        infotabs += @"""" + infoTitle + mainimage + details + reportError + @"""";
+                                        infotabs += @"""" + infoTitle + mainimage + details.Replace("\\r\\n", @"
+").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ') + reportError + @"""";
                                     }
                                 }
 
@@ -800,7 +801,9 @@
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
-                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary, false) : Truncate(StripHtml(details, false), 65) + "...") + @""",
+                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary.Replace("\\r\\n", @"
+").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false) : Truncate(StripHtml(details.Replace("\\r\\n", @"
+").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
                                             ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
