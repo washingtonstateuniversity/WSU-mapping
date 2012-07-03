@@ -83,10 +83,25 @@ namespace campusMap.Controllers
             }
             const string HTML_TAG_PATTERN = "<.*?>";
             public string StripHTML(string inputString)
-        {
-            return Regex.Replace
-              (inputString, HTML_TAG_PATTERN, string.Empty);
-        }
+            {
+                return Regex.Replace
+                    (inputString, HTML_TAG_PATTERN, string.Empty);
+            }
+            public string stripNonSenseContent(string inputString)
+            {
+                String output = Regex.Replace (inputString, @"<p>\s+</p>", string.Empty);
+                        output = output.Replace("\\r\\n", @"
+");
+                        output = output.Replace("\"", @"\""");
+                        output = output.Replace("\\\"", "\"");
+                        output = output.Replace('\r', ' ');
+                        output = output.Replace('\n', ' ');
+                        output = output.Replace('\t', ' ');
+                return output;
+            }
+
+
+
         #endregion
 
         #region MCV INFO METHODS

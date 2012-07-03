@@ -722,7 +722,7 @@
                                     {
                                         autoAccessibility += @"
                                         {
-                                            ""block"":""" + infoTitle + "<ul>" + renderedTxt.Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') + @"</ul>" + reportError + @""",
+                                            ""block"":""" + infoTitle + "<ul>" + stripNonSenseContent(renderedTxt) + @"</ul>" + reportError + @""",
                                             ""title"":""Accessibility""
                                         }";
                                     }
@@ -757,8 +757,7 @@
                                             {
 
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                                string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n", @"
-")).Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ').Replace("<p></p>","");
+                                                string content = autoFeildProcessing(item, stripNonSenseContent(tab.content) );
                                                 if (!String.IsNullOrWhiteSpace(content))
                                                 {
                                                     tabStr += @"
@@ -787,8 +786,7 @@
                                     }
                                     else
                                     {
-                                        infotabs += @"""" + infoTitle + mainimage + details.Replace("\\r\\n", @"
-").Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ').Replace("<p></p>", "") + reportError + @"""";
+                                        infotabs += @"""" + infoTitle + mainimage + stripNonSenseContent(details) + reportError + @"""";
                                     }
                                 }
 
@@ -801,9 +799,7 @@
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
-                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(item.summary.Replace("\\r\\n", @"
-").Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ').Replace("<p></p>",""), false) : Truncate(StripHtml(details.Replace("\\r\\n", @"
-").Replace("\"", @"\""").Replace("\\\"", "\"").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ').Replace("<p></p>", ""), false), 65) + "...") + @""",
+                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(stripNonSenseContent(item.summary), false) : Truncate(StripHtml(stripNonSenseContent(details), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
                                             ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
