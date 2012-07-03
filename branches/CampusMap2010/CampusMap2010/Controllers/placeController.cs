@@ -81,9 +81,17 @@ namespace campusMap.Controllers
             int reviewPaging = 0;
             int publishedPaging = 0;
             int name_typesPaging = 0;
+            int templatePaging = 0;
+
+
+
 
             switch (target)
             {
+                case "templates":
+                    {
+                        templatePaging = page; break;
+                    }
                 case "name_types":
                     {
                         name_typesPaging = page; break;
@@ -272,6 +280,18 @@ namespace campusMap.Controllers
             IList<place_name_types> place_name_types_items;
             place_name_types_items = ActiveRecordBase<place_name_types>.FindAll();
             PropertyBag["place_name_types"] = PaginationHelper.CreatePagination(place_name_types_items, pagesize, name_typesPaging);
+
+
+            //place infotabs templates
+            pagesize = 15;
+            IList<infotabs_templates> infotabs_templates_items;
+            infotabs_templates_items = ActiveRecordBase<infotabs_templates>.FindAll();
+            PropertyBag["templates"] = PaginationHelper.CreatePagination(infotabs_templates_items, pagesize, templatePaging);
+
+
+
+
+
 
             //place feilds
             pagesize = 50;
@@ -717,22 +737,65 @@ namespace campusMap.Controllers
         }*/
 
 
+        public void new_template()
+        {
+
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("model", "placeController"));
+            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> fields = new List<string>();
+
+            string[] codes = new string[ft.Length];
+            int i = 0;
+            if (ft != null)
+            {
+                foreach (field_types ft_ in ft)
+                {
+                    codes[i] = "${" + ft_.alias + "}";
+                    i++;
+                }
+            }
+
+            PropertyBag["short_codes"] = codes;
 
 
+            infotabs_templates template = new infotabs_templates();
+            PropertyBag["template"] = template;
+            RenderView("../admin/templates/_editor");
+        }
+        public void edit_template(int id)
+        {
+            List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+            typeEx.Add(Expression.Eq("model", "placeController"));
+            field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
+            List<string> fields = new List<string>();
+            string[] codes = new string[ft.Length];
+            int i = 0;
+            if (ft != null)
+            {
+                foreach (field_types ft_ in ft)
+                {
+                    codes[i] = "${" + ft_.alias + "}";
+                    i++;
+                }
+            }
+            PropertyBag["short_codes"] = codes;
 
-
-
+            infotabs_templates template = ActiveRecordBase<infotabs_templates>.Find(id);
+            PropertyBag["template"] = template;
+            RenderView("../admin/templates/_editor");
+        }
         public void new_type()
         {
             place_types type = new place_types();
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
-        public void new_name_type()
+        public void edit_type(int id)
         {
-            place_name_types type = new place_name_types();
+            place_types type = ActiveRecordBase<place_types>.Find(id);
             PropertyBag["type"] = type;
-            RenderView("../admin/place_name_type/new");
+            RenderView("../admin/types/new");
         }
         public void new_field()
         {
@@ -745,19 +808,6 @@ namespace campusMap.Controllers
 
             RenderView("../admin/fields/new");
         }
-        public void edit_type(int id)
-        {
-            place_types type = ActiveRecordBase<place_types>.Find(id);
-            PropertyBag["type"] = type;
-            RenderView("../admin/types/new");
-        }
-        public void edit_name_type(int id)
-        {
-            place_name_types type = ActiveRecordBase<place_name_types>.Find(id);
-            PropertyBag["type"] = type;
-            RenderView("../admin/place_name_type/new");
-        }
-
         public void edit_field(int id)
         {
             field_types field = ActiveRecordBase<field_types>.Find(id);
@@ -784,6 +834,19 @@ namespace campusMap.Controllers
 
             RenderView("../admin/fields/new");
         }
+        public void edit_name_type(int id)
+        {
+            place_name_types type = ActiveRecordBase<place_name_types>.Find(id);
+            PropertyBag["type"] = type;
+            RenderView("../admin/place_name_type/new");
+        }
+        public void new_name_type()
+        {
+            place_name_types type = new place_name_types();
+            PropertyBag["type"] = type;
+            RenderView("../admin/place_name_type/new");
+        }
+
 
         public static string get_field(field_types field_type)
         {
@@ -809,7 +872,11 @@ namespace campusMap.Controllers
             ActiveRecordMediator<place_types>.Save(type);
             RedirectToAction("list");
         }
-
+        public void update_template([ARDataBind("template", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] infotabs_templates template)
+        {
+            ActiveRecordMediator<infotabs_templates>.Save(template);
+            RedirectToAction("list");
+        }
         public void update_name_type([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_name_types type)
         {
             ActiveRecordMediator<place_name_types>.Save(type);

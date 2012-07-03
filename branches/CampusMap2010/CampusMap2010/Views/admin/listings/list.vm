@@ -32,6 +32,14 @@
 				<span>Name Types</span>
 			</a>
 		#end
+		
+		
+		#if($templates)	
+			<a href="#_template" id="template_choice" class="ui-state-default ui-corner-right ListingChoices ">
+				<span>Infotab Templates</span>
+			</a>
+		#end		
+		
 		#if($fields)	
 			<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices ">
 				<span>Fields</span>
@@ -143,4 +151,23 @@
 			</div>
 		</div></div>
 	#end	
+	#if($templates)
+		<div id="_template" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
+				  <p>
+					<a href="$siteroot/${controller.getView()}/new_template.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New template
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} templates ($templates.TotalItems)</h3>
+				#parse("/admin/templates/list.vm")
+			</div>
+		</div></div>
+	#end	
+	
+
+	
+	
 <!-- <div> -->
