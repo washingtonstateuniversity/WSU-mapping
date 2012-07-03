@@ -758,7 +758,7 @@
 
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
                                                 string content = autoFeildProcessing(item, tab.content.Replace("\\r\\n", @"
-")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+")).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ');
                                                 if (!String.IsNullOrWhiteSpace(content))
                                                 {
                                                     tabStr += @"
