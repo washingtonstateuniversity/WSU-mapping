@@ -757,7 +757,7 @@
                                             {
 
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                                string content = autoFeildProcessing(item, stripNonSenseContent(tab.content) );
+                                                string content = stripNonSenseContent(autoFeildProcessing(item, tab.content));
                                                 if (!String.IsNullOrWhiteSpace(content))
                                                 {
                                                     tabStr += @"
@@ -810,6 +810,7 @@
                                             },
                                     ""shapes"":" + loadPlaceShape(item) + @"
                                 }";
+                                placeList=stripNonSenseContent(placeList);
                                 setJsonCache(cachePath, file, placeList);
                             }
                             jsonStr += System.IO.File.ReadAllText(cachePath + file) + ",";
