@@ -90,8 +90,7 @@ namespace campusMap.Controllers
             public string stripNonSenseContent(string inputString)
             {
                 String output = Regex.Replace (inputString, @"<p>\s+</p>", string.Empty);
-                        output = output.Replace("\\r\\n", @"
-");
+                        output = output.Replace("\\r\\n", string.Empty);
                         output = output.Replace("\"", @"\""");
                         output = output.Replace("\\\"", "\"");
                         output = output.Replace('\r', ' ');
