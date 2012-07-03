@@ -648,8 +648,21 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 		}
 		.sortable .childVisable.disabled{display:none !important;}
 		
+		.sortable .placeholder {
+			border: 1px dashed #ccc;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+		}
+		.sortable .highlight{border: 1px dashed red;}
+		.mjs-nestedSortable-error {
+			background: #fbe3e4;
+			border-color: transparent;
+		}
+		.sortable .nav_level_display,.sortable .nav_position_display{ font-style:italic; font-size:9px; color:#666;}
+		.sortable .nav_level_display{margin-right:5px;}
+		.sortable .value{font-weight:bold;}
 		
-		
-		
+	
 		
 		

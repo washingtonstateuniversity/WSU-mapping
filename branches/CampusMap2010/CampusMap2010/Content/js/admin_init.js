@@ -250,8 +250,16 @@ if($('.sortable').length){
 		update: function(event, ui) {
 				var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
 				$.each($('li','ol.sortable'),function(i,v){
+					//$('ol.sortable .highlight').removeClass("highlight");
+					//$(this).addClass("highlight");
+					//alert("depth:"+arraied[i+1]["depth"]);
+					$(this).find('.nav_level').val(arraied[i+1]["depth"]);
 					$(this).find('.nav_position').val(i+1);
-					$(this).find('.nav_level').val(arraied[i]["depth"]+1);
+					
+					$(this).find('.nav_level_display .value').text(arraied[i+1]["depth"]);
+					$(this).find('.nav_position_display .value').text(i+1);
+					
+					
 				});
 			}
 	});

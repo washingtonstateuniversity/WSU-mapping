@@ -45,7 +45,7 @@
 				  </a>
 				</span>
 			
-				$!item.name
+				$!item.name&nbsp;&nbsp;(<span class="nav_level_display">depth:<span class="value">$!item.level</span></span><span class="nav_position_display">order:<span class="value">$!item.position</span></span>)
 				<input type="hidden" value="$!item.id" name="navs[].id"/>
 				<input type="hidden" value="$!item.level" name="navs[].level" class="nav_level"/>
 				<input type="hidden" value="$!item.position" name="navs[].position" class="nav_position"/>
