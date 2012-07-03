@@ -1415,12 +1415,12 @@ namespace campusMap.Controllers
                         {
                             foreach (String val in Request.Form[key].Split(','))
                             {
-                                vals = vals + @"{""val"":" + (!String.IsNullOrEmpty(val) ? ("\"" + val.Trim('"') + "\"") : "null") + "},";
+                                vals = vals + @"{""val"":" + (!String.IsNullOrEmpty(val) ? ("\"" + val.Trim('"').Replace("\"",@"\""") + "\"") : "null") + "},";
                             }
                         }
                         else
                         {
-                            vals = @"{""val"":" + (!String.IsNullOrEmpty(Request.Form[key]) ? ("\"" + Request.Form[key].Trim('"') + "\"") : "null") + "},";
+                            vals = @"{""val"":" + (!String.IsNullOrEmpty(Request.Form[key]) ? ("\"" + Request.Form[key].Trim('"').Replace("\"", @"\""") + "\"") : "null") + "},";
                         }
                         char[] endC = { ',' };
                         vals = vals.TrimEnd(endC);
