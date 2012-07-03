@@ -91,6 +91,9 @@ namespace campusMap.Controllers
             {
                 String output = Regex.Replace (inputString, @"<p>\s+</p>", string.Empty);
                         output = output.Replace("\\r\\n", string.Empty);
+                        output = output.Replace("\r\n", string.Empty);
+                        output = output.Replace(@"
+", string.Empty);
                         output = output.Replace("\"", @"\""");
                         output = output.Replace("\\\"", "\"");
                         output = output.Replace('\r', ' ');
