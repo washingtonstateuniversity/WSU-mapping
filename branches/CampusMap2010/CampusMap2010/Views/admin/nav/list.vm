@@ -1,0 +1,65 @@
+<div style="max-width:80%; margin:0 auto;">
+<form action="update_nav.castle" method="post">
+  <h1> Global Navagation editor</h1>
+  <h4>Simply drag the nodes around to chang it's order and level.  To change the names use the edit icons on the right.</h4>
+  <hr/>
+
+#set($baseClass="parent")
+#set($subULClass="")
+#set($subNarrowClass="subNarrow")
+#set($subClass="")
+
+#set($lastLevel=1)
+#set($ulOpen="false")
+#set($liOpen="false")
+#set($c=0)
+<ol class="sortable">
+	#foreach($item in $nav)
+		#if($item.active)
+			#if($lastLevel == ${item.level} && $liOpen=="true" && $c>0)
+				</li>
+			#end
+			#if($lastLevel > ${item.level} && $ulOpen=="true")
+				#set($deepth=${lastLevel}-${item.level})
+				$Controller.repeatStr("</li></ol>",$deepth)
+				#set($ulOpen="false")
+			#end
+			#if($lastLevel != ${item.level} && $c>0)
+				#if($lastLevel < ${item.level})
+					<ol class='$subULClass'>#set($ulOpen="true")
+				#end
+			#end
+			
+			<li id="list_${c}" class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' ><div>
+				<span style='font-size:0.5em; float:right;'>
+				  <a href="../view/edit_nav.castle?id=$!{item.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-pencil"></span>
+				  </a>
+				  <a href="../view/delete_nav.castle?id=$!{item.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-trash"></span>
+				  </a>
+				</span>
+				<span style='font-size:0.5em; float:left; margin-right:15px;'>
+				  <a href="../view/edit_nav.castle?id=$!{item.id}" title="Edit" class="childVisable disabled buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-plus"></span>
+				  </a>
+				</span>
+			
+				$!item.name
+				<input type="hidden" value="$!item.id" name="navs[].id"/>
+				<input type="hidden" value="$!item.level" name="navs[].level" class="nav_level"/>
+				<input type="hidden" value="$!item.position" name="navs[].position" class="nav_position"/>
+
+			</div>
+	
+			#*$Controller.repeatStr("- ",$cat.level)*#
+			#set($lastLevel=${item.level})
+			#set($liOpen="true")
+			#set($c=$c+1)
+		#end
+	#end
+	#if($ulOpen=="true")</li></ol>#end
+	</li>
+</ol>
+</form>
+</div>

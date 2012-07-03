@@ -50,6 +50,7 @@ $cssBundle.Add("~/Content/css/admin_styles.css").Add("~/Content/js/colorpicker/c
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
+
 <script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
 
@@ -57,6 +58,8 @@ $cssBundle.Add("~/Content/css/admin_styles.css").Add("~/Content/js/colorpicker/c
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
 <script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.mjs.nestedSortable.js"></script>
+
 
 <script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
 

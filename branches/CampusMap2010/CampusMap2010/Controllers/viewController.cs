@@ -382,7 +382,45 @@ namespace campusMap.Controllers
             }
             return locationsList.TrimEnd(',');
         }*/
+        public void list_nav()
+        {
+            PropertyBag["nav"] = ActiveRecordBase<categories>.FindAll(Order.Asc("position"));
+            RenderView("../admin/nav/list");
+        }
 
+        public void new_nav()
+        {
+            categories nav = new categories();
+            PropertyBag["nav"] = nav;
+            RenderView("../admin/nav/_editor");
+        }
+        public void edit_nav(int id)
+        {
+            categories nav = ActiveRecordBase<categories>.Find(id);
+            PropertyBag["nav"] = nav;
+            RenderView("../admin/nav/_editor");
+        }
+        public void update_nav([ARDataBind("nav", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories nav)
+        {
+            ActiveRecordMediator<categories>.Save(nav);
+            RedirectToAction("list");
+        }
+        public void reorder_nav([ARDataBind("navs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories[] navs)
+        {
+            foreach (categories nav in navs)
+            {
+                ActiveRecordMediator<categories>.Save(nav);
+            }
+            RedirectToAction("list");
+        }
+        public void delete_nav(int id)
+        {
+            categories nav = ActiveRecordBase<categories>.Find(id);
+            Flash["massage"] = "A Place type, <strong>" + nav.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<categories>.Delete(nav);
+            CancelLayout();
+            RedirectToAction("list");
+        }
 
 
         public void GetAddAuthor(int count)

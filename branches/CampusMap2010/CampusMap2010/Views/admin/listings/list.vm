@@ -32,10 +32,8 @@
 				<span>Name Types</span>
 			</a>
 		#end
-		
-		
 		#if($templates)	
-			<a href="#_template" id="template_choice" class="ui-state-default ui-corner-right ListingChoices ">
+			<a href="#_template" id="template_choice" class="ui-state-default ListingChoices ">
 				<span>Infotab Templates</span>
 			</a>
 		#end		

@@ -233,8 +233,34 @@ $(function() {
 			}
 		});
     }
-
-
+if($('.sortable').length){
+	$('ol.sortable').nestedSortable({
+		disableNesting: 'no-nest',
+		forcePlaceholderSize: true,
+		handle: 'div',
+		helper:	'clone',
+		items: 'li',
+		maxLevels: 3,
+		opacity: .6,
+		placeholder: 'placeholder',
+		revert: 250,
+		tabSize: 25,
+		tolerance: 'pointer',
+		toleranceElement: '> div',
+		update: function(event, ui) {
+				var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
+				$.each($('li','ol.sortable'),function(i,v){
+					$(this).find('.nav_position').val(i+1);
+					$(this).find('.nav_level').val(arraied[i]["depth"]+1);
+				});
+			}
+	});
+	
+	
+	
+	
+	
+}
 /* General Actions */
 
 

@@ -863,10 +863,6 @@ namespace campusMap.Controllers
             string ele_str = FieldsService.getfieldmodel_dynamic(field_type.attr.ToString(), field == null ? null : field.value.ToString());
             return ele_str;
         }
-
-        
-
-
         public void update_type([ARDataBind("type", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] place_types type)
         {
             ActiveRecordMediator<place_types>.Save(type);
@@ -882,6 +878,14 @@ namespace campusMap.Controllers
             ActiveRecordMediator<place_name_types>.Save(type);
             RedirectToAction("list");
         }
+
+
+
+
+        
+
+
+
 
         public void update_field(
             [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,

@@ -11,16 +11,23 @@
 		<ul class="menu Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
 		<ul class="menu Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
 		<ul class="menu Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
-		#if($userService.getUser().Nid==$user)<ul class="menu">
-			<li class="nosub"><a class="open" href="../view/list.castle"><b>Map views</b></a></li>
-		</ul>#end
+		
+		<ul class="menu">
+			<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
+				<ul class="drop">
+					<li><a href="../view/list_nav.castle">Global Navagation</a></li>
+				</ul>
+			</li>
+			<li class="close"><a href="#"></a></li>
+		</ul>
+		#if($userService.getUser().Nid==$user)
+		
+		#end
 		<ul class="menu">
 			<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../place/list.castle"><b>Places</b></a>
 				<ul class="drop">
 					<li><a href="../place/new.castle">New Place</a></li>
 					<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>
-					
-					
 					#*
 					<li><a href="../place/list.castle#_Types">Types</a></li>
 					<li><a href="../place/list.castle#_Fields">Fields</a></li>
