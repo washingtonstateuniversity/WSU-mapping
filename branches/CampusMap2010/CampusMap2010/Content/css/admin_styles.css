@@ -263,6 +263,27 @@ table.ui-widget tbody tr.odd td{}
 	}
 .tips:hover{background-color: #FFFFFF;color: #0033FF;border: 1px solid #0033FF;padding: 0px 2px 2px 3px;}
 
+
+.itemError{
+background-color: #690608;
+    color: #FFFFFF;
+    cursor: help;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    left: -7px;
+    line-height: 15px;
+    padding: 1px 3px 3px 2px;
+    position: absolute;
+    text-align: center;
+    top: -9px;
+    width: 15px;
+    z-index: 9;
+	-webkit-border-radius: 15px;border-radius: 15px 15px 15px 15px;
+	}
+.itemError:hover{background-color: #FFFFFF;color: #690608;border: 1px solid #690608;padding: 0px 2px 2px 3px;}
+
+
 .detailInfoBut{position:absolute;bottom:5px;left:0px; width:16px;height:36px;display:inline-block;
 text-indent:-9999px;
 

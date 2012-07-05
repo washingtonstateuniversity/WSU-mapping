@@ -638,7 +638,7 @@
                 String jsonStr = "";
                 int count = 0;
                 foreach (place item in items){
-                    if ((item.status.id == 3 && item.isPublic))
+                    if ((item.status.id == 3 && item.isPublic) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["all"]))
                     {
                         if (item.coordinate != null)
                         {
@@ -829,9 +829,10 @@
 
                                 if (!dataGood)
                                 {
+                                    item.outputError = true;
+                                    ActiveRecordMediator<place>.Save(item);
                                     placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
                                 }
-
 
                                 setJsonCache(cachePath, file, placeList);
                             }

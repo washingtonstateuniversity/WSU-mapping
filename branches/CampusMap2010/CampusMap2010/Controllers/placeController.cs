@@ -12,6 +12,7 @@ namespace campusMap.Controllers
         using System.IO;
         using System.Web;
         using System;
+        using System.Net;
         using campusMap.Models;
         using System.Net.Mail;
         using Castle.Components.Common.EmailSender;   
@@ -1311,7 +1312,8 @@ namespace campusMap.Controllers
             Flash["cats"] = place;
             Flash["images"] = place;
             Flash["authors"] = place;
-            
+
+            dynamic value;
             if (cancel != null){
                 if (forced_tmp && place.id!=0)
                 {
@@ -1342,7 +1344,7 @@ namespace campusMap.Controllers
                 place.coordinate = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
 
-            
+            place.outputError = false;
 
 
             //place.plus_four_code
@@ -1580,6 +1582,7 @@ namespace campusMap.Controllers
                 File.Delete(file_path);
             }
 
+
             cleanUpplace_media(place.id);
 
             Flash["place"] = null;
@@ -1588,6 +1591,11 @@ namespace campusMap.Controllers
             Flash["cats"] = null;
             Flash["images"] = null;
             Flash["authors"] = null;
+            using (WebClient wc = new WebClient())
+            {
+                value = wc.DownloadString("http://localhost:63750/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+            }
+            place.Refresh();
 
             if (apply != null || ajaxed_update)
             {

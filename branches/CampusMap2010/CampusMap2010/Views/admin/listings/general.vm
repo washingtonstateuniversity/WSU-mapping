@@ -19,6 +19,10 @@
 			#end
 			#* EOF set up  *#
 			<li class="ui-widget-content ui-corner-all item_$!item.id con">
+			
+			#if($!item.outputError)<b title="There seems to be an error on this item and it will not show on the map it's placed in." class="itemError">!</b>#end
+			
+			
 				#parse("admin/listings/areas/inedit.vm")
 				<div class="item_aTar item_$!item.id" title="$!item.id">
 					#parse("admin/listings/areas/summaryCol.vm")

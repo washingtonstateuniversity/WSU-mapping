@@ -178,7 +178,13 @@ namespace campusMap.Models
             set { Tmp = value; }
         }
 
-
+        private bool _outputError;
+        [Property]
+        virtual public bool outputError
+        {
+            get { return _outputError; }
+            set { _outputError = value; }
+        }
         private bool _isPublic;
         [Property]
         virtual public bool isPublic
