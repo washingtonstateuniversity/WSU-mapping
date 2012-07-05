@@ -519,7 +519,7 @@ function loadPlaceShape(_load,callback){
 	var url=siteroot+"place/loadPlaceShape.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&id='+_load:''), function(data) {
 
-		if(typeof(data.shape)!=='undfined' && !$.isEmptyObject(data.shape)){
+		if(typeof(data.shape)!=='undefined' && !$.isEmptyObject(data.shape)){
 			$.each( data, function(i, shape) {	
 
 			//alert(shape.latlng_str);

@@ -31,14 +31,20 @@
     using System.Threading;
     using Microsoft.SqlServer.Types;
     using System.Data.SqlTypes;
+    /* Newtonsoft slated to remove */
     using Newtonsoft.Json;
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
+
     using log4net;
     using log4net.Config;
 
     using SquishIt.Framework;
 
+    using System.Collections.ObjectModel;
+    using System.Dynamic;
+    using System.Linq;
+    using System.Web.Script.Serialization;
 #endregion
 
 
@@ -640,7 +646,8 @@
                             string file = item.id + "_centralplace" + ".ext";
                             if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"]))
                             {
-
+                                dynamic value;
+                                var jss = new JavaScriptSerializer();
                                 string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
 
                                 String mainimage = "";
@@ -795,6 +802,7 @@
 
                                 placeList = @"
                                 {
+                                    ""id"":""" + item.id + @""",
                                     ""position"":{
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
@@ -811,6 +819,20 @@
                                     ""shapes"":" + loadPlaceShape(item) + @"
                                 }";
                                 placeList=stripNonSenseContent(placeList);
+
+                                // the goal with this is to make sure the maps don't break by simple testing that the data can be read
+                                // if it can not be read then we place a friendly showing that the data is bad to keep the map working
+                                bool dataGood = true;
+
+                                try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
+                                catch { dataGood = false; }
+
+                                if (!dataGood)
+                                {
+                                    placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
+                                }
+
+
                                 setJsonCache(cachePath, file, placeList);
                             }
                             jsonStr += System.IO.File.ReadAllText(cachePath + file) + ",";

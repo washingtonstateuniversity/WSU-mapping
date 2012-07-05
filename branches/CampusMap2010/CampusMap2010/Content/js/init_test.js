@@ -249,14 +249,27 @@ function updateMap(_load,showSum){
 			$('#selectedPlaceList_btn').css({'display':'block'});
 			$('#selectedPlaceList_btn').trigger('click');
 		}
-		loadData(data);
-		loadListings(data,showSum);
+		var cleanedData = [];
+		cleanedData.markers = [];
+		if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
+			$.each( data.markers, function(i, marker) {
+				if(typeof(marker.id)==='undefined'){
+					delete data.markers[i];
+				}else if(typeof(marker.error)!=='undefined'){
+					delete data.markers[i]; 
+				}else{
+					cleanedData.markers.push(data.markers[i]);		
+				}
+			});
+			loadData(cleanedData);
+			loadListings(cleanedData,showSum);
+		}
 		prep();
 	});
 	
 }
 function loadData(data,callback){
-	if(typeof(data.shapes)!=='undfined' && !$.isEmptyObject(data.shapes)){
+	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			 var pointHolder = {};
 			 if(shape.coords!='' && shape.type=='polyline'){ 
@@ -273,215 +286,217 @@ function loadData(data,callback){
 			$('#centralMap').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), ele);
 		});
 	}
-	if(typeof(data.markers)!=='undfined' &&  !$.isEmptyObject( data.markers )){
-		$.each( data.markers, function(i, marker) {	
-			if($.isArray(marker.info.content)){
-				var nav='';
-				$.each( marker.info.content, function(j, html) {	
-					nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
-				});
-				var content='';
-				$.each( marker.info.content, function(j, html) {
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace('/','_')+'">'+html.block+'</div></div>';
-				});				
-			
-			}else{
-				var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-				var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div></div>';
-			}
-	
-			var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
-						'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-						content+
-						'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow"></span></div>'+
-					'</div>';
-	
-			/* so need to remove this and create the class for it */
-			var boxText = document.createElement("div");
-			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-			boxText.innerHTML = marker.info.content;
-	
-			var myOptions = {
-				alignBottom:true,
-				 content: box//boxText
-				,disableAutoPan: false
-				,maxWidth: 0
-				,height:"340px"
-				,pixelOffset: new google.maps.Size(-200, -103)
-				,zIndex: 99
-				,boxStyle: {
-				  width: "400px"
-				 }
-				,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-				,infoBoxClearance: new google.maps.Size(50,50)
-				,isHidden: false
-				,pane: "floatPane"
-				,enableEventPropagation: false
-				,onClose:function(){
-					ibHover =  false;
-					if($('.cWrap .items li').length>1){$('.cWrap .items').cycle('destroy');}
-					$('#taby'+i).tabs('destroy').tabs();
+	if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
+		$.each( data.markers, function(i, marker) {
+			//alert(dump(marker));
+				if($.isArray(marker.info.content)){
+					var nav='';
+					$.each( marker.info.content, function(j, html) {	
+						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+					});
+					var content='';
+					$.each( marker.info.content, function(j, html) {
+						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace('/','_')+'">'+html.block+'</div></div>';
+					});				
+				
+				}else{
+					var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
+					var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div></div>';
 				}
-				,onOpen:function(){
-						ibHover =  true;
+		
+				var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
+							'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+							content+
+							'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow"></span></div>'+
+						'</div>';
+		
+				/* so need to remove this and create the class for it */
+				var boxText = document.createElement("div");
+				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+				boxText.innerHTML = marker.info.content;
+		
+				var myOptions = {
+					alignBottom:true,
+					 content: box//boxText
+					,disableAutoPan: false
+					,maxWidth: 0
+					,height:"340px"
+					,pixelOffset: new google.maps.Size(-200, -103)
+					,zIndex: 99
+					,boxStyle: {
+					  width: "400px"
+					 }
+					,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
+					,infoBoxClearance: new google.maps.Size(50,50)
+					,isHidden: false
+					,pane: "floatPane"
+					,enableEventPropagation: false
+					,onClose:function(){
+						ibHover =  false;
+						if($('.cWrap .items li').length>1){$('.cWrap .items').cycle('destroy');}
 						$('#taby'+i).tabs('destroy').tabs();
-						if($('.cWrap .items li').length>1){
-						$('.cWrap .items').cycle('destroy');
-							$('.cWrap .items').cycle({
-								fx:     'scrollHorz',
-								delay:  -2000,
-								pauseOnPagerHover: 1,
-								pause:1,
-								timeout:0, 
-								pager:'.cNav',
-								prev:   '.prev',
-								next:   '.next', 
-								pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
-							});/*	*/
-						}
-						$('a.gouped').off().on('click',function(e){
-							e.preventDefault();
-							e.stopPropagation();
-							$('a.gouped').colorbox({
-								photo:true,
-								scrolling:false,
-								scalePhotos:true,
-								opacity:0.7,
-								maxWidth:"75%",
-								maxHeight:"75%",
-								transition:"none",
-								slideshow:true,
-								slideshowAuto:false,
-								open:true,
-								current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-								onComplete:function(){
-									if($('#ttl').length){
-										var t=parseInt($('#ttl').text());
-										var li="";
-										if(t>1){
-											for(j=0; j<t; j++){
-												li+="<li><a href='#'></a></li>";
-											}
-											if($('#colorbox #cb_nav').length==0){
-												$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+					}
+					,onOpen:function(){
+							ibHover =  true;
+							$('#taby'+i).tabs('destroy').tabs();
+							if($('.cWrap .items li').length>1){
+							$('.cWrap .items').cycle('destroy');
+								$('.cWrap .items').cycle({
+									fx:     'scrollHorz',
+									delay:  -2000,
+									pauseOnPagerHover: 1,
+									pause:1,
+									timeout:0, 
+									pager:'.cNav',
+									prev:   '.prev',
+									next:   '.next', 
+									pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
+								});/*	*/
+							}
+							$('a.gouped').off().on('click',function(e){
+								e.preventDefault();
+								e.stopPropagation();
+								$('a.gouped').colorbox({
+									photo:true,
+									scrolling:false,
+									scalePhotos:true,
+									opacity:0.7,
+									maxWidth:"75%",
+									maxHeight:"75%",
+									transition:"none",
+									slideshow:true,
+									slideshowAuto:false,
+									open:true,
+									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
+									onComplete:function(){
+										if($('#ttl').length){
+											var t=parseInt($('#ttl').text());
+											var li="";
+											if(t>1){
+												for(j=0; j<t; j++){
+													li+="<li><a href='#'></a></li>";
+												}
+												if($('#colorbox #cb_nav').length==0){
+													$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+												}else{
+													$('#colorbox #cb_nav').html(li);
+												}
 											}else{
-												$('#colorbox #cb_nav').html(li);
+												if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 											}
-										}else{
-											if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
-										}
-										if($('#colorbox #cb_nav').length){
-											$('#colorbox #cb_nav .active').removeClass('active');
-											$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+											if($('#colorbox #cb_nav').length){
+												$('#colorbox #cb_nav .active').removeClass('active');
+												$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+											}
 										}
 									}
-								}
-							});
-						});
-						$('.errorReporting').click(function(e){
-									e.stopPropagation();
-									e.preventDefault();
-									var trigger=$(this);
-									$.colorbox({
-										html:function(){
-											return '<div id="errorReporting">'+
-														'<h2>Found an error?</h2>'+
-														'<h3>Please provide some information to help us correct this issue.</h3>'+
-														'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-														'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"></lable><br/>'+
-														'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
-														'<lable>Describe the issues: <br/>'+
-														'<textarea placeholder="Description"></textarea></lable><br/>'+
-														'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
-													'</div>';
-													
-										},
-										scrolling:false,
-										opacity:0.7,
-										transition:"none",
-										width:450,
-										height:450,
-										open:true,
-										onComplete:function(){prep();}
-									});
 								});
-						var minHeight=0;
-						$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-							minHeight = Math.max(minHeight, $(this).find('.content').height()); 
-						}).css('min-height',minHeight); 
-						$('.ui-tabs-panel').hover(function(){
-							ib[i].setOptions({enableEventPropagation: true});
-							$('#centralMap').gmap('stop_scroll_zoom');
-						},function(){
-							ib[i].setOptions({enableEventPropagation: false});
-							$('#centralMap').gmap('set_scroll_zoom');
-						});
-						var pos = markerLog[i].getPosition();
-						var z = $('#centralMap').gmap('get','map').getZoom(); 
-						var mH = $('#centralMap').height();
-						var latOffset = 0;
-						ib[i].rePosition();
-						prep();
-					}
-			};
-			ib[i] = new InfoBox(myOptions,function(){
-				//$('#taby'+i).tabs();
-				//alert('tring to tab it, dabnab it, from the INI');
-			});
-			//end of the bs that is well.. bs of a implamentation
-			/* so need to remove this and create the class for it */
-			var boxText = document.createElement("div");
-			boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
-			boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
-			var myHoverOptions = {
-				alignBottom:true,
-				 content: boxText//boxText
-				,disableAutoPan: false
-				,pixelOffset: new google.maps.Size(15,-15)
-				,zIndex: 99
-				,boxStyle: {
-					minWidth: "250px"
-				 }
-				,infoBoxClearance: new google.maps.Size(1, 1)
-				,isHidden: false
-				,pane: "floatPane"
-				,boxClass:"hoverbox"
-				,enableEventPropagation: false
-				,disableAutoPan:true
-				,onOpen:function(){}
-				
-			};
-			ibh[i] = new InfoBox(myHoverOptions,function(){});
-			if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
-			$('#centralMap').gmap('addMarker', $.extend({ 
-					'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
-					'z-index':1
-				},marker.style),function(ops,marker){
-					markerLog[i]=marker;
-					$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-					if($.isFunction(callback))callback(marker);
-				})
-			.click(function() {
-					$.each(ib, function(i) {
-						ib[i].close();
+							});
+							$('.errorReporting').click(function(e){
+										e.stopPropagation();
+										e.preventDefault();
+										var trigger=$(this);
+										$.colorbox({
+											html:function(){
+												return '<div id="errorReporting">'+
+															'<h2>Found an error?</h2>'+
+															'<h3>Please provide some information to help us correct this issue.</h3>'+
+															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
+															'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"></lable><br/>'+
+															'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+															'<lable>Describe the issues: <br/>'+
+															'<textarea placeholder="Description"></textarea></lable><br/>'+
+															'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
+														'</div>';
+														
+											},
+											scrolling:false,
+											opacity:0.7,
+											transition:"none",
+											width:450,
+											height:450,
+											open:true,
+											onComplete:function(){prep();}
+										});
+									});
+							var minHeight=0;
+							$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+								minHeight = Math.max(minHeight, $(this).find('.content').height()); 
+							}).css('min-height',minHeight); 
+							$('.ui-tabs-panel').hover(function(){
+								ib[i].setOptions({enableEventPropagation: true});
+								$('#centralMap').gmap('stop_scroll_zoom');
+							},function(){
+								ib[i].setOptions({enableEventPropagation: false});
+								$('#centralMap').gmap('set_scroll_zoom');
+							});
+							var pos = markerLog[i].getPosition();
+							var z = $('#centralMap').gmap('get','map').getZoom(); 
+							var mH = $('#centralMap').height();
+							var latOffset = 0;
+							ib[i].rePosition();
+							prep();
+						}
+				};
+				ib[i] = new InfoBox(myOptions,function(){
+					//$('#taby'+i).tabs();
+					//alert('tring to tab it, dabnab it, from the INI');
+				});
+				//end of the bs that is well.. bs of a implamentation
+				/* so need to remove this and create the class for it */
+				var boxText = document.createElement("div");
+				boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
+				boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
+				var myHoverOptions = {
+					alignBottom:true,
+					 content: boxText//boxText
+					,disableAutoPan: false
+					,pixelOffset: new google.maps.Size(15,-15)
+					,zIndex: 99
+					,boxStyle: {
+						minWidth: "250px"
+					 }
+					,infoBoxClearance: new google.maps.Size(1, 1)
+					,isHidden: false
+					,pane: "floatPane"
+					,boxClass:"hoverbox"
+					,enableEventPropagation: false
+					,disableAutoPan:true
+					,onOpen:function(){}
+					
+				};
+				ibh[i] = new InfoBox(myHoverOptions,function(){});
+				if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
+				$('#centralMap').gmap('addMarker', $.extend({ 
+						'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
+						'z-index':1
+					},marker.style),function(ops,marker){
+						markerLog[i]=marker;
 						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-					});
-					ib[i].open($('#centralMap').gmap('get','map'), this);
-					$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
-					$('#selectedPlaceList_area .active').removeClass('active');
-					$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
-					//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
+						if($.isFunction(callback))callback(marker);
+					})
+				.click(function() {
+						$.each(ib, function(i) {
+							ib[i].close();
+							$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
+						});
+						ib[i].open($('#centralMap').gmap('get','map'), this);
+						$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
+						$('#selectedPlaceList_area .active').removeClass('active');
+						$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
+						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
+					})
+				.rightclick(function(event){showContextMenu(event.latLng);})
+				.mouseover(function(event){
+					$.each(ibh, function(i) {ibh[i].close();});
+					$('.infoBox').hover( 
+						function() { ibHover =  true; }, 
+						function() { ibHover =  false;  } 
+					); 
+					if(ibHover!=true)ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
 				})
-			.rightclick(function(event){showContextMenu(event.latLng);})
-			.mouseover(function(event){
-				$.each(ibh, function(i) {ibh[i].close();});
-				$('.infoBox').hover( 
-					function() { ibHover =  true; }, 
-					function() { ibHover =  false;  } 
-				); 
-				if(ibHover!=true)ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
-			})
-			.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
+				.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
+			
 		});
 	}
 }
@@ -489,16 +504,18 @@ function loadListings(data,showSum){
 	var listing="";
 	if(data.markers.length>17)showSum=false;
 	$.each( data.markers, function(i, marker) {	
-		var sum="";
-		
-		if(typeof(marker.summary)!=='undfined' && !$.isEmptyObject(marker.summary)){
-			sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
+		if(typeof(marker.info)!=='undefined'){
+			var sum="";
+			
+			if(typeof(marker.summary)!=='undefined' && !$.isEmptyObject(marker.summary)){
+				sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
+			}
+	
+			listing+='<li class="">'+
+						'<a href="#" class=""><img src="'+siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
+						sum+
+					'</div>';
 		}
-
-		listing+='<li class="">'+
-					'<a href="#" class=""><img src="'+siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
-					sum+
-				'</div>';
 	});
 	$('#selectedPlaceList_area').html('<ul>'+listing+'</ul>');
 	$.each($('#selectedPlaceList_area a'),function(i,v){
