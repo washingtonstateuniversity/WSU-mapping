@@ -131,6 +131,15 @@ namespace campusMap.Controllers
                 authors user = UserService.getUser();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
+
+
+                IList<place> temp = new List<place>();
+
+                place[] erroredPlaces = ActiveRecordBase<place>.FindAllByProperty("outputError", true);
+                PropertyBag["erroredPlaces"] = erroredPlaces;
+
+
+
                 PropertyBag["user"] = user;
                 IList<authors> activeUser = new List<authors>();
                 authors[] _authors = ActiveRecordBase<authors>.FindAllByProperty("logedin", true);

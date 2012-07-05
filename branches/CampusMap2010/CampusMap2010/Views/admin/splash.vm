@@ -101,6 +101,29 @@
 		</table>
 		<span><a href="/place/list.castle">View All Places</a></span>
 	</div>
+	
+	
+	<div class="displaybox ui-widget-content ui-corner-all">
+		<span class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Places that can't render (with errors)</span>
+		<table width="100%" class="ui-widget ui-widget-content">
+		  <tbody>
+			#set ($c=0)
+			#foreach($item in $erroredPlaces)
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="center">
+					<a href="/place/_edit.castle?id=$!{item.id}" title="Edit">
+						$item.prime_name
+						<span class="ui-icon ui-icon-pencil"></span>
+					  </a>
+					</td>
+				</tr>
+				#set ($c=$c+1)
+			#end
+		  </tbody>
+		</table>
+		<span><a href="/place/list.castle">View All Places</a></span>
+	</div>
+	
 
 
 </div>
