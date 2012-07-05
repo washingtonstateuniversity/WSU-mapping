@@ -1,10 +1,9 @@
 <h1><span style="color:#7F9D6A;">map.wsu.edu</span></h1>
-<h3>Breaking News for $date</h3>
+<h3>Reported error on $date</h3>
 <p>Hello #if($name)$name#end,<br/>
-You submitted a ticket for:<br/>
-
-
-<br/>On$date</p>
+You submitted a ticket for:<br/><br/>
+        $description        
+</p>
 <hr/>
 
 

@@ -242,20 +242,24 @@
 
                 foreach (authors user in users)
                 {
-                    MailAddress to = new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass");//user.email;
-                    System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
-
-                    email_mass.IsBodyHtml = true;
-                    email_mass.From = new MailAddress("noreply@wsu.edu");
-                    email_mass.Subject = "Breaking news from The Daily Evergreen";
-                    if(!String.IsNullOrWhiteSpace(user.email)){
-                        try
+                    if (user.email == "jeremy.bass@wsu.edu")
+                    {
+                        System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
+                        email_mass.IsBodyHtml = true;
+                        email_mass.From = new MailAddress("noreply@wsu.edu");
+                        email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
+                        email_mass.Subject = "Reported Map error";
+                        if (!String.IsNullOrWhiteSpace(user.email))
                         {
-                            DeliverEmail(email_mass);
-                        }
-                        catch (Exception ex)
-                        {
-
+                            try
+                            {
+                                DeliverEmail(email_mass);
+                                RenderText("Sent");
+                            }
+                            catch (Exception ex)
+                            {
+                                RenderText(ex.ToString());
+                            }
                         }
                     }
                 }

@@ -417,7 +417,7 @@ function loadData(data,callback){
 											//height:450,
 											open:true,
 											onComplete:function(){prep();
-												$('#errorReporting [type="Submit"]').live('click',function(e){
+												$('#errorReporting [type="Submit"]').off().on('click',function(e){
 													e.stopPropagation();
 													e.preventDefault();
 													$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
