@@ -45,6 +45,27 @@
     using System.Dynamic;
     using System.Linq;
     using System.Web.Script.Serialization;
+
+        using System.Net.Mail;
+        using Castle.Components.Common.EmailSender;   
+        using Castle.Components.Common.EmailSender.Smtp;
+        using System.Collections.Generic;
+        using System.Collections.Specialized;
+        using Castle.ActiveRecord;
+        using Castle.MonoRail.Framework;
+        using Castle.MonoRail.ActiveRecordSupport;
+        using Castle.MonoRail.Framework.Helpers;
+        using MonoRailHelper;
+
+        using System.IO;
+        using System.Web;
+        using System;
+
+
+        using Castle.ActiveRecord.Queries;
+        using System.Text.RegularExpressions;
+        using System.Collections;
+
 #endregion
 
 
@@ -206,7 +227,39 @@
                 RenderView("map_json");
             }
 
+            public void reportError(String name, String email, int place_id, String description, String issueType)
+            {
+                CancelView();
+                CancelLayout();
 
+                authors[] users = ActiveRecordBase<authors>.FindAllByProperty("access_levels", ActiveRecordBase<access_levels>.Find(1));
+                    
+                List<String> sentemails = new List<String>();
+
+                PropertyBag["date"] = formatDate(DateTime.Now);
+                PropertyBag["description"] = description;
+                PropertyBag["name"] = name;
+
+                foreach (authors user in users)
+                {
+                    MailAddress to = new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass");//user.email;
+                    System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
+
+                    email_mass.IsBodyHtml = true;
+                    email_mass.From = new MailAddress("noreply@wsu.edu");
+                    email_mass.Subject = "Breaking news from The Daily Evergreen";
+                    if(!String.IsNullOrWhiteSpace(user.email)){
+                        try
+                        {
+                            DeliverEmail(email_mass);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                }
+            }
             /*
              * Get the value of a field that is attached to the 
              * place.

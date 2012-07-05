@@ -398,25 +398,36 @@ function loadData(data,callback){
 										var trigger=$(this);
 										$.colorbox({
 											html:function(){
-												return '<div id="errorReporting">'+
+												return '<div id="errorReporting"><form action="../public/reportError.castle" method="post">'+
 															'<h2>Found an error?</h2>'+
 															'<h3>Please provide some information to help us correct this issue.</h3>'+
-															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last"></lable><br/>'+
-															'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"></lable><br/>'+
+															'<input type="hidden" value="'+marker.id+'" name="place_id">'+
+															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last" name="name"></lable><br/>'+
+															'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"  name="email"></lable><br/>'+
 															'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
 															'<lable>Describe the issues: <br/>'+
-															'<textarea placeholder="Description"></textarea></lable><br/>'+
+															'<textarea placeholder="Description" name="description"></textarea></lable><br/>'+
 															'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
-														'</div>';
-														
+														'</from></div>';
 											},
 											scrolling:false,
 											opacity:0.7,
 											transition:"none",
 											width:450,
-											height:450,
+											//height:450,
 											open:true,
-											onComplete:function(){prep();}
+											onComplete:function(){prep();
+												$('#errorReporting [type="Submit"]').live('click',function(e){
+													e.stopPropagation();
+													e.preventDefault();
+													$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
+														$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
+														$.colorbox.resize();
+													});
+													
+													
+												});
+											}
 										});
 									});
 							var minHeight=0;
@@ -430,10 +441,10 @@ function loadData(data,callback){
 								ib[i].setOptions({enableEventPropagation: false});
 								$('#centralMap').gmap('set_scroll_zoom');
 							});
-							var pos = markerLog[i].getPosition();
+							/*var pos = markerLog[i].getPosition();
 							var z = $('#centralMap').gmap('get','map').getZoom(); 
 							var mH = $('#centralMap').height();
-							var latOffset = 0;
+							var latOffset = 0;*/
 							ib[i].rePosition();
 							prep();
 						}
