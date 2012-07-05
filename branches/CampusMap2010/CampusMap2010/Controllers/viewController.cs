@@ -403,7 +403,7 @@ namespace campusMap.Controllers
         public void update_nav([ARDataBind("nav", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories nav)
         {
             ActiveRecordMediator<categories>.Save(nav);
-            RedirectToAction("list");
+            RedirectToAction("list_nav");
         }
         public void reorder_nav([ARDataBind("navs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories[] navs)
         {
@@ -411,7 +411,7 @@ namespace campusMap.Controllers
             {
                 ActiveRecordMediator<categories>.Save(nav);
             }
-            RedirectToAction("list");
+            RedirectToAction("list_nav");
         }
         public void delete_nav(int id)
         {

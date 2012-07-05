@@ -700,6 +700,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			$(this).closest('li').toggleClass('checked');
 			$(this).closest('.parent').find('.parentalLink').addClass('childSelected');
+			$(this).closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
 			$.each(ib, function(i) {ib[i].close();});
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');

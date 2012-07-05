@@ -40,7 +40,7 @@ min-width:1026px;
 ul.menu {padding:0; margin:0; list-style:none; position:relative; z-index:500; margin-right:1px; float:left;}
 
 .admin #adminNav .Cancel,.admin #adminNav .Apply,.admin #adminNav .Submit{display:none;float:right;}
-.admin #adminNav.fixed .Cancel,.admin #adminNav.fixed .Apply,.admin #adminNav.fixed .Submit{display:block;float:right;}
+.admin._editor #adminNav.fixed .Cancel,.admin._editor #adminNav.fixed .Apply,.admin._editor #adminNav.fixed .Submit{display:block;}
 
 
 
@@ -626,7 +626,7 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 			margin: 5px 0 0 0;
 			padding: 0;
 		}
-
+		
 		.sortable li div  {
 			border: 1px solid #d4d4d4;
 			-webkit-border-radius: 3px;
@@ -644,15 +644,17 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 			background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
 			background: linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
-
 		}
+		.sortable li.inactive {-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter: alpha(opacity=75);opacity:.75;background: #e2e2e0;}
+		.sortable li.inactive div{background: #e2e2e0;}
 		.sortable .childVisable.disabled{display:none !important;}
 		
 		.sortable .placeholder {
-			border: 1px dashed #ccc;
+			border: 1px dashed #696969;
 			-webkit-border-radius: 3px;
 			-moz-border-radius: 3px;
 			border-radius: 3px;
+			background: #b9d7be;
 		}
 		.sortable .highlight{border: 1px dashed red;}
 		.mjs-nestedSortable-error {

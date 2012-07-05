@@ -17,6 +17,36 @@
 	
 (function($){$.fn.blink = function(options){var defaults = { delay:500 };var options = $.extend(defaults, options);return this.each(function(){var obj = $(this);setInterval(function(){if($(obj).css("visibility") == "visible"){$(obj).css('visibility','hidden');}else{$(obj).css('visibility','visible');}}, options.delay);});}}(jQuery));
 
+	
+function setup_fixedNav(){
+	if ($(window).scrollTop()>= 122) { $('.admin #adminNav').addClass('fixed');  }
+	$(window).scroll(function (event) {
+		if ($(this).scrollTop()>= 122) {     
+			$('.admin #adminNav').addClass('fixed');
+		} else { 
+			$('.admin #adminNav').removeClass('fixed');
+		}  
+	});
+	$('.Cancel a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Cancel']:first").trigger('click');
+		});
+	$('.Submit a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Submit']:first").trigger('click');
+		});	
+	$('.Apply a').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("input[value='Apply']:first").trigger('click');
+		});
+}
+
+
+
+
 
 function typedown(mySelection){  
     window.location = siteroot+view+"list.castle?type="+mySelection;   
@@ -205,7 +235,7 @@ function tinyResize(id){
 	}
 
 $(function() {
-	
+	setup_fixedNav();
 	$('.insotryupload').live('click',function(){
 		openImgUploader();
 	});
@@ -248,26 +278,16 @@ if($('.sortable').length){
 		tolerance: 'pointer',
 		toleranceElement: '> div',
 		update: function(event, ui) {
+				if(!$('.menu.formAction.Submit').is(':visible'))$('.menu.formAction.Submit').show();
 				var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
 				$.each($('li','ol.sortable'),function(i,v){
-					//$('ol.sortable .highlight').removeClass("highlight");
-					//$(this).addClass("highlight");
-					//alert("depth:"+arraied[i+1]["depth"]);
 					$(this).find('.nav_level').val(arraied[i+1]["depth"]);
 					$(this).find('.nav_position').val(i+1);
-					
 					$(this).find('.nav_level_display .value').text(arraied[i+1]["depth"]);
 					$(this).find('.nav_position_display .value').text(i+1);
-					
-					
 				});
 			}
 	});
-	
-	
-	
-	
-	
 }
 /* General Actions */
 

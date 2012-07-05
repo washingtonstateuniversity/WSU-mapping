@@ -713,32 +713,6 @@ function infoUpdate(){
 		watchMediaTab();
 }
 
-	
-function setup_fixedNav(){
-	if ($(window).scrollTop()>= 122) { $('.admin #adminNav').addClass('fixed');  }
-	$(window).scroll(function (event) {
-		if ($(this).scrollTop()>= 122) {     
-			$('.admin #adminNav').addClass('fixed');
-		} else { 
-			$('.admin #adminNav').removeClass('fixed');
-		}  
-	});
-	$('.Cancel a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Cancel']:first").trigger('click');
-		});
-	$('.Submit a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Submit']:first").trigger('click');
-		});	
-	$('.Apply a').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$("input[value='Apply']:first").trigger('click');
-		});
-}
 
 
 

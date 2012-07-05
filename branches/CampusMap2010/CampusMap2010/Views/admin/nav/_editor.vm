@@ -5,8 +5,8 @@
 </p>
 #end
 
-<form action="../types - Copy/update_type.castle" method="post">
-  $Form.HiddenField("nav.Id")
+<form action="../view/update_nav.castle" method="post">
+  $Form.HiddenField("nav.id")
   <h3>Place Type</h3>
   <p>Name:<br/>
       <input type="text" value="$!nav.name" name="nav.name" id="nav_name" class="ui-widget ui-widget-content ui-corner-all " />

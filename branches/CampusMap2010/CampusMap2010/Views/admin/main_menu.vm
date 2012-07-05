@@ -8,9 +8,9 @@
 <div id="navWrap">
 	<div id="adminNav">
 	
-		<ul class="menu Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
-		<ul class="menu Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
-		<ul class="menu Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
+		<ul class="menu formAction Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
+		<ul class="menu formAction Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
+		<ul class="menu formAction Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
 		
 		<ul class="menu">
 			<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>

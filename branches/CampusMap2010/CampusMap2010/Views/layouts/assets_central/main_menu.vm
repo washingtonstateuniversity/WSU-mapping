@@ -28,7 +28,7 @@
 				#end
 			#end
 			
-			<li class='#if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' ><a href='#if($item.asLink && $item.url)${item.url}#else?cat[]=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end">$!item.name</a>
+			<li class='depth_${item.level} #if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' ><a href='#if($item.asLink && $item.url)${item.url}#else?cat[]=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end">$!item.name</a>
 	
 			#*$Controller.repeatStr("- ",$cat.level)*#
 			#set($lastLevel=${item.level})
