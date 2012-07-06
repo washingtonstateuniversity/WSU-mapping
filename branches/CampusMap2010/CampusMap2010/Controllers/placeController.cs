@@ -1389,6 +1389,7 @@ namespace campusMap.Controllers
                 //PlaceStatus stat = ActiveRecordBase<PlaceStatus>.Find(1);
                 //place.Status = stat;
                 place.creation_date = DateTime.Now;
+
             }else{
                 place.updated_date = DateTime.Now;
             }
@@ -1593,13 +1594,21 @@ namespace campusMap.Controllers
             Flash["cats"] = null;
             Flash["images"] = null;
             Flash["authors"] = null;
-            using (WebClient wc = new WebClient())
-            {
-                value = wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
-            }
-            
 
-            if (value.Contains("{\"error\":"))
+            if (!forced_tmp)
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    value = wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+                }
+            }
+            else
+            {
+                value = "";
+            }
+
+
+            if (!forced_tmp && value.Contains("{\"error\":"))
             {
                 place.outputError = true;
             }

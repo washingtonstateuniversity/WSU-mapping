@@ -8,7 +8,7 @@ namespace campusMap
     using MonoRailHelper;
     using campusMap.Models;
     using System.Net.Mail;
-    using SquishIt.Framework;
+
 
 	public class GlobalApplication : HttpApplication, IContainerAccessor
 	{

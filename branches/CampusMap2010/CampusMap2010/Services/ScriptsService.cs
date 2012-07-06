@@ -25,14 +25,14 @@ using campusMap.Filters;
 using log4net;
 using log4net.Config;
 using System.Text;
-using SquishIt.Framework;
+
 #endregion
 
 namespace campusMap.Services
 {
     public class ScriptsService
     {
-        public String Js(string identifier)
+       /* public String Js(string identifier)
         {
             // Set max-age to a year from now
             HttpContext.Current.Response.Cache.SetMaxAge(TimeSpan.FromDays(365));
@@ -49,6 +49,6 @@ namespace campusMap.Services
             HttpContext.Current.Response.StatusCode = 304;
             return Bundle.Css().RenderCached(identifier);
         }
-
+        */
     }
 }

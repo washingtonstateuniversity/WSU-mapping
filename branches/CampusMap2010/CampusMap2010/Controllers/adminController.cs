@@ -22,7 +22,7 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
-    using SquishIt.Framework;
+
 #endregion
 namespace campusMap.Controllers
 {

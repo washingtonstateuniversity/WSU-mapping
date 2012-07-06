@@ -39,7 +39,7 @@
     using log4net;
     using log4net.Config;
 
-    using SquishIt.Framework;
+
 
     using System.Collections.ObjectModel;
     using System.Dynamic;
@@ -526,10 +526,8 @@
                 return json;
             }
 
-
             public void get_place_by_category(string[] cat, string callback)
             {
-
                 CancelView();
                 CancelLayout();
 
