@@ -826,7 +826,7 @@
                                                 {
                                                     tabStr += @"
                                                 {
-                                                    ""block"":""" + infoTitle + content.Replace("\"", @"\""") + reportError + @""",
+                                                    ""block"":""" + infoTitle + content + reportError + @""",
                                                     ""title"":""" + tab.title + @"""
                                                 }";
                                                     if (c < item.infotabs.Count) tabStr += ",";

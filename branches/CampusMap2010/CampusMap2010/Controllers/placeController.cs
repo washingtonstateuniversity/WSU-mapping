@@ -1595,9 +1595,20 @@ namespace campusMap.Controllers
             Flash["authors"] = null;
             using (WebClient wc = new WebClient())
             {
-                wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+                value = wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
             }
-            place.Refresh();
+            
+
+            if (value.Contains("{\"error\":"))
+            {
+                place.outputError = true;
+            }
+            else
+            {
+                place.outputError = false;
+            }
+            ActiveRecordMediator<place>.Save(place);
+            //place.Refresh();
 
             if (apply != null || ajaxed_update)
             {
@@ -1624,11 +1635,7 @@ namespace campusMap.Controllers
             {
                 place.editing = null;
                 ActiveRecordMediator<place>.Save(place);
-                using (WebClient wc = new WebClient())
-                {
-                    wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
-                }
-                place.Refresh();
+                //place.Refresh();
                 RedirectToAction("list");
                 return;
             }
