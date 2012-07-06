@@ -1344,7 +1344,7 @@ namespace campusMap.Controllers
                 place.coordinate = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
 
-            place.outputError = false;
+            
 
 
             //place.plus_four_code
@@ -1562,6 +1562,8 @@ namespace campusMap.Controllers
                 return;
             }*/
 
+
+            place.outputError = false;
             ActiveRecordMediator<place>.Save(place);
             if (place.coordinate != null)
             {
@@ -1593,7 +1595,7 @@ namespace campusMap.Controllers
             Flash["authors"] = null;
             using (WebClient wc = new WebClient())
             {
-                value = wc.DownloadString("http://localhost:63750/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+                wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
             }
             place.Refresh();
 
@@ -1622,6 +1624,11 @@ namespace campusMap.Controllers
             {
                 place.editing = null;
                 ActiveRecordMediator<place>.Save(place);
+                using (WebClient wc = new WebClient())
+                {
+                    wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+                }
+                place.Refresh();
                 RedirectToAction("list");
                 return;
             }

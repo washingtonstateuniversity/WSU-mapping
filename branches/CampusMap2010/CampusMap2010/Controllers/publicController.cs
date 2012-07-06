@@ -826,7 +826,7 @@
                                                 {
                                                     tabStr += @"
                                                 {
-                                                    ""block"":""" + infoTitle + content + reportError + @""",
+                                                    ""block"":""" + infoTitle + content.Replace("\"", @"\""") + reportError + @""",
                                                     ""title"":""" + tab.title + @"""
                                                 }";
                                                     if (c < item.infotabs.Count) tabStr += ",";
@@ -884,10 +884,17 @@
                                 try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
                                 catch { dataGood = false; }
 
-                                if (!dataGood)
+                                if (dataGood)
+                                {
+                                    item.outputError = false;
+                                    ActiveRecordMediator<place>.Save(item);
+                                    item.Refresh();
+                                }
+                                else
                                 {
                                     item.outputError = true;
                                     ActiveRecordMediator<place>.Save(item);
+                                    item.Refresh();
                                     placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
                                 }
 
