@@ -104,6 +104,65 @@
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
 		<fieldset style="min-width:455px;">
+		
+		
+<fieldset><legend>Naming</legend>
+                <span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name</label><br/>
+                <input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/></span>
+                <span style="float:left;display:inline-block;"><label for="place.abbrev_name">Bldg Abbrev</label><br/>
+                <input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /></span><br/><br/><br/>
+                
+                #capturefor(nameblock)
+					#set($c=0)
+					#foreach($altname in $place_names)
+					<span class="pod name">
+						<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
+						<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+						<span>Type:</span>
+						<select id="LocationModelSelect" name="place_names[$c].label.id"  class="" >
+							#set($pt=$altname.label.id)
+							#foreach($pTypes in $place_name_types)
+								<option class="model" value="$pTypes.id" #if($pt == $pTypes.id) selected="selected" #end> $!pTypes.type</option>
+							#end
+						</select>
+						<br/><span>Name:</span>
+						<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
+						#set($c=$c+1)
+						</span>
+					#end  
+				#end
+                
+                
+                
+                
+                <fieldset style="clear:left;"><legend id="customName"><label>Custom Naming</label> (<span id="nameCount">$c</span> name#if($c==0||$c>1)s#end) <em>+</em></legend>
+					<div id="customNames">
+						<div id="names" class="podContainer">
+							$nameblock
+						</div>
+						
+						<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+							<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
+						</a>
+						<div id="name_clonebed" class="clonebed">         
+							<span class="pod name">    
+								<input type="hidden" name="||place_names[9999].id" value=""/>
+								<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+								<span>Type:</span>
+								<select id="LocationModelSelect" name="||place_names[9999].label.id"  class="" >
+									#foreach($pTypes in $place_name_types)
+										<option class="model" value="$pTypes.id">$!pTypes.type</option>
+									#end
+								</select>
+								<br/><span>Name:</span>
+								<input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
+							</span>
+						</div>
+					</div>
+				</fieldset>
+			</fieldset>
+		
+		
 			<fieldset style="width:44%;float:right;"><legend>Address Options</legend>
 					<div class="col2 w100"  style="display:inline-block;">
 						<label for="street_address">Address</label><br/>
@@ -229,61 +288,7 @@
 				</div>
             </fieldset>	
 	
-            <fieldset><legend>Naming</legend>
-                <span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name</label><br/>
-                <input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/></span>
-                <span style="float:left;display:inline-block;"><label for="place.abbrev_name">Bldg Abbrev</label><br/>
-                <input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /></span><br/><br/><br/>
-                
-                #capturefor(nameblock)
-					#set($c=0)
-					#foreach($altname in $place_names)
-					<span class="pod name">
-						<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
-						<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
-						<span>Type:</span>
-						<select id="LocationModelSelect" name="place_names[$c].label.id"  class="" >
-							#set($pt=$altname.label.id)
-							#foreach($pTypes in $place_name_types)
-								<option class="model" value="$pTypes.id" #if($pt == $pTypes.id) selected="selected" #end> $!pTypes.type</option>
-							#end
-						</select>
-						<br/><span>Name:</span>
-						<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
-						#set($c=$c+1)
-						</span>
-					#end  
-				#end
-                
-                
-                
-                
-                <fieldset style="clear:left;"><legend id="customName"><label>Custom Naming</label> (<span id="nameCount">$c</span> name#if($c==0||$c>1)s#end) <em>+</em></legend>
-					<div id="customNames">
-						<div id="names" class="podContainer">
-							$nameblock
-						</div>
-						
-						<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-							<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
-						</a>
-						<div id="name_clonebed" class="clonebed">         
-							<span class="pod name">    
-								<input type="hidden" name="||place_names[9999].id" value=""/>
-								<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
-								<span>Type:</span>
-								<select id="LocationModelSelect" name="||place_names[9999].label.id"  class="" >
-									#foreach($pTypes in $place_name_types)
-										<option class="model" value="$pTypes.id">$!pTypes.type</option>
-									#end
-								</select>
-								<br/><span>Name:</span>
-								<input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
-							</span>
-						</div>
-					</div>
-				</fieldset>
-			</fieldset>
+            
 			<fieldset><legend>Geometrics</legend>
                 <label for="name">Geometric Object to repersent this place.</label><br/>
 				<select name="place.geometrics[]" id="placeShape">   

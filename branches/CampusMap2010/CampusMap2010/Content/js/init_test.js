@@ -424,8 +424,6 @@ function loadData(data,callback){
 														$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
 														$.colorbox.resize();
 													});
-													
-													
 												});
 											}
 										});
@@ -639,6 +637,7 @@ $(document).ready(function(){
 				}
 			).trigger("resize");
 		}
+		
 		$('#selectedPlaceList_btn').live('click', function(e){
 			e.stopPropagation();
 			e.preventDefault();
@@ -650,6 +649,7 @@ $(document).ready(function(){
 					}, 500, function() {
 						btn.addClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
+						$(window).trigger("resize");
 				});
 				$('.central_layout.public.central #centralMap').animate({'margin-left':'190px','width':$('.central_layout.public.central #centralMap').width()-190}, 500, function() {}).addClass("opended");
 				listOffset=190;
@@ -660,6 +660,7 @@ $(document).ready(function(){
 					}, 500, function() {
 						btn.removeClass("active");
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
+						$(window).trigger("resize");
 				});
 				$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
 				listOffset=0;
