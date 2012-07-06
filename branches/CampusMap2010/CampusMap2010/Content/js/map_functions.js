@@ -1120,7 +1120,7 @@ function load_style_editor(){
 				obj.find('.pod.op_'+sel).fadeIn('fast');
 				if(defined(DEFAULT_overlay)){
 					DEFAULT_overlay.setMap(null);
-					DEFAULT_overlay.delete;
+					//DEFAULT_overlay.delete();
 				}
 			});
 			set_up_style_list($('.tabed').not('[id*=9999]'),$('#style_map'),sel);	
@@ -1247,7 +1247,7 @@ function load_style_editor(){
 								},
 								position:{
 								  x: 'screenCenter',
-								  y: 'bottom',
+								  y: 'bottom'
 								},
 								expandable: false,
 								liveUpdate: true,

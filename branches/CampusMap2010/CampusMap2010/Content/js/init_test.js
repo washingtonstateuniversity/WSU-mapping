@@ -54,16 +54,14 @@ function iniMap(url,callback){
 		});
 	});
 }
-
+var currentControl="ROADMAP";
 /* non-abstract */
 function addCentralControlls(){
 	
-
-
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 
-	controlUI.title = 'Click to set the map to Home';
+	controlUI.title = 'Click Get Aerial photos';
 	controlUI.className = 'mapControl TOP';
 	
 	// Set CSS for the control interior.
@@ -71,73 +69,107 @@ function addCentralControlls(){
 	controlText.className = 'text';
 	controlText.innerHTML = 'Aerial Photo';
 	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
 			$('.mapControl').removeClass('activeControl');
 			$(this).addClass('activeControl');
-		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+		 //$('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+			$.colorbox({
+				html:function(){
+					return '<div id="printPdfs">'+
+								'<h2>Printable Maps</h2>'+
+								'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+								'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
+								'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
+							'</div>';
+				},
+				photo:true,
+				scrolling:false,
+				scalePhotos:true,
+				opacity:0.7,
+				transition:"none",
+				maxWidth:"75%",
+				maxHeight:"75%",
+				open:true,
+				onClosed:function(){
+					$('#'+currentControl).trigger('click');
+				}
+			});
+			
+		 
+		 
+		 
 	});
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
+	
 
 
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
 
-	controlUI.title = 'Click to set the map to Home';
+	controlUI.title = 'Switch map to Roadmap';
 	controlUI.className = 'mapControl TYPE activeControl';
-
+	controlUI.id="ROADMAP";
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
 	controlText.className = 'text';
 	controlText.innerHTML = 'Map';
 	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
 			$('.mapControl').removeClass('activeControl');
 			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+		 currentControl="ROADMAP";
 	});
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
+	
 	
 	
 
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
-	controlUI.title = 'Click to set the map to Home';
+	controlUI.title = 'Switch map to Satellite';
 	controlUI.className = 'mapControl';
-
+	controlUI.id="SATELLITE";
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
 	controlText.className = 'text';
 	controlText.innerHTML = 'Satellite';
 	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
 			$('.mapControl').removeClass('activeControl');
 			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
+		 currentControl="SATELLITE";
 	});
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
+	
 	
 	
 		
 
 	// Set CSS for the control border.
 	var controlUI = document.createElement('div');
-	controlUI.title = 'Click to set the map to Home';
+	controlUI.title = 'Switch map to Hybrid (satellite + roadmap)';
 	controlUI.className = 'mapControl';
-
+	controlUI.id="HYBRID";
 	
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
 	controlText.className = 'text';
+	
 	controlText.innerHTML = 'Hybrid';
 	controlUI.appendChild(controlText);
+	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	google.maps.event.addDomListener(controlUI, 'click', function() {
 			$('.mapControl').removeClass('activeControl');
 			$(this).addClass('activeControl');
 		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
+		 currentControl="HYBRID";
 	});
-	$('#centralMap').gmap("addControl",controlUI, google.maps.ControlPosition.RIGHT_TOP);
+	
+	/**/
 }
 
 var cTo="";
@@ -722,7 +754,7 @@ $(document).ready(function(){
 			$.each(ib, function(i) {ib[i].close();});
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');
-			updateMap(encodeURI($(this).find('a:first').attr('href').replace('?cat[]=','')));
+			updateMap(encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 		});
 		$('#main_nav .parent li a').live('click',function(e){
 			e.stopPropagation();
@@ -736,7 +768,7 @@ $(document).ready(function(){
 			var params='';
 			if($('li.checked a').length){
 				$.each($('li.checked a'),function(){
-					params=params+$(this).attr('href').replace('?cat[]=','')+',';
+					params=params+$(this).attr('href').split('=')[1]+',';
 				});
 				updateMap(encodeURI(params.substring(0, params.length - 1)),true);
 			}else{
@@ -838,7 +870,7 @@ $(document).ready(function(){
 					opacity:0.7,
 					transition:"none",
 					width:450,
-					height:350,
+					height:350
 				});
 
 		});

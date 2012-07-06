@@ -142,7 +142,7 @@
 		 * @see http://code.google.com/intl/sv-SE/apis/maps/documentation/javascript/reference.html#ControlPosition
 		 */
 		addControl: function(panel, position) {
-			this.get('map').controls[position].push(this._unwrap(panel));
+			this.get('map').controls[position].push(panel);// this._unwrap(panel) cause a jquery filtering error.  removeing fixes and doesn't change scoope of the function.
 			return this;
 		},
 		

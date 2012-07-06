@@ -209,7 +209,7 @@
             [Layout("central")]
             public void central()
             {
-                PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll(Order.Asc("position"));
+                PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position","active",true);
                 RenderView("central");
             }
             public void fetchMap(String alias, String mode, String callback)

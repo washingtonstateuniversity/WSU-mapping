@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6 ie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 ie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 ie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+#capturefor(html)<!doctype html>
+<!--[if IE 7]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 8]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie8 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en"> <!--<![endif]-->
 	<head>
 		#* all the JS and CSS that is site wide *#
 		#parse("layouts/assets_central/global_header_html.vm")
 	</head>
 	<body id='campusmap' class="central_layout ${controller.getView()} ${controller.getAction()}">
+	
 		<div id="header_bar">
 			#parse("layouts/assets_central/header_html.vm")
 		</div>
@@ -18,5 +18,9 @@
 		$childContent
 		#parse("layouts/assets_central/footer.vm")
 		#parse("layouts/assets_central/global_footer_JS.vm")
+		
+		
 	</body>
 </html>
+
+#end$Controller.stripNonSenseContent($html)

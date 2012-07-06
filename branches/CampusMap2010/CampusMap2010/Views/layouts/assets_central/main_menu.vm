@@ -7,41 +7,37 @@
 	<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
 </form>
 
-#set($lastLevel=1)
-#set($ulOpen="false")
-#set($liOpen="false")
+#set($lastLevel = 1 )
 #set($c=0)
 <ul id='main_nav'>
 	#foreach($item in $menuItems)
-		#if($item.active)
-			#if($lastLevel == ${item.level} && $liOpen=="true" && $c>0)
-				</li>
-			#end
-			#if($lastLevel > ${item.level} && $ulOpen=="true")
-				#set($deepth=${lastLevel}-${item.level})
-				$Controller.repeatStr("</li></ul>",$deepth)
-				#set($ulOpen="false")
-			#end
-			#if($lastLevel != ${item.level} && $c>0)
-				#if($lastLevel < ${item.level})
-					<ul class='$subULClass'>#set($ulOpen="true")
-				#end
-			#end
-			
-			<li class='depth_${item.level} #if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' ><a href='#if($item.asLink && $item.url)${item.url}#else?cat[]=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end">$!item.name</a>
+		#*
+			$velocityCount
+		*#
 	
-			#*$Controller.repeatStr("- ",$cat.level)*#
-			#set($lastLevel=${item.level})
-			#set($liOpen="true")
-			#set($c=$c+1)
+		#set($Lev=$item.level)
+		#if($Lev > $lastLevel)
+			#set($val=$Lev - $lastLevel)
+			$Controller.repeatStr("<ul>",$val)
+		#elseif( $Lev < $lastLevel )
+			#set($val=$lastLevel - $Lev)
+			$Controller.repeatStr("</li></ul>",$val)
+			</li>
+		#elseif( $Lev > 1 )
+			</li>
 		#end
+
+		<li class='depth_${item.level} #if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' >
+			<a  hidefocus="true" href='/#if($item.asLink && $item.url)${item.url}#else?cat%5B%5D=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end>
+				$!item.name.Replace("&","&amp;")
+			</a>
+			#set($lastLevel=${item.level})
 	#end
-		#if($ulOpen=="true")</li></ul>#end
-		</li>
+		#set($val=$lastLevel-1)
+		$Controller.repeatStr("</li></ul>",$val)
+	</li>
 	<li class='$baseClass' ><br/></li>
 	#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
-	
-	
 	<li class='$baseClass altAction ' ><a href="http://pullman.mapstrat.com/nextvehicle/Map.aspx" target='_blank'>Bus Routes</a></li>
 	<li class='$baseClass altAction ' ><a id="printPdfs" href="#">Printable PDF Maps</a></li>
 </ul>
