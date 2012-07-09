@@ -90,6 +90,7 @@ function addCentralControlls(){
 					$('#'+currentControl).trigger('click');
 				},
 				onComplete:function(){
+					if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 					if($('#ttl').length){
 						var t=parseInt($('#ttl').text());
 						var li="";
@@ -102,8 +103,6 @@ function addCentralControlls(){
 							}else{
 								$('#colorbox #cb_nav').html(li);
 							}
-						}else{
-							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 						}
 						if($('#colorbox #cb_nav').length){
 							$('#colorbox #cb_nav .active').removeClass('active');
@@ -414,6 +413,7 @@ function loadData(data,callback){
 									open:true,
 									current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 									onComplete:function(){
+										if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 										if($('#ttl').length){
 											var t=parseInt($('#ttl').text());
 											var li="";
@@ -426,8 +426,6 @@ function loadData(data,callback){
 												}else{
 													$('#colorbox #cb_nav').html(li);
 												}
-											}else{
-												if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 											}
 											if($('#colorbox #cb_nav').length){
 												$('#colorbox #cb_nav .active').removeClass('active');
@@ -462,6 +460,7 @@ function loadData(data,callback){
 											//height:450,
 											open:true,
 											onComplete:function(){prep();
+																if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 												$('#errorReporting [type="Submit"]').off().on('click',function(e){
 													e.stopPropagation();
 													e.preventDefault();
@@ -805,9 +804,12 @@ $(document).ready(function(){
 				scrolling:false,
 				opacity:0.7,
 				transition:"none",
-				width:652,
+				width:710,
 				height:350,
-				open:true
+				open:true,
+				onComplete:function(){
+					if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+				}
 			});
 		});
 		var cur_search = "";
