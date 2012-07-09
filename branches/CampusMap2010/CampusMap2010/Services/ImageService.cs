@@ -454,9 +454,9 @@ namespace campusMap.Services
 			Graphics grPhoto = Graphics.FromImage(bmPhoto);
 			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-			grPhoto.DrawImage(imgPhoto, 
-				new Rectangle(destX,destY,destWidth,destHeight),
-				new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
+			grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX - 1, destY - 1, destWidth + 1, destHeight+1),
+				new Rectangle(sourceX,sourceY,sourceWidth - 1,sourceHeight - 1),
 				GraphicsUnit.Pixel);
 
 			grPhoto.Dispose();
