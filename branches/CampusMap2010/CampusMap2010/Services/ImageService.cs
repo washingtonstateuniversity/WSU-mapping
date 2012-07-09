@@ -342,12 +342,22 @@ namespace campusMap.Services
 			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
             log.Info(" in ConstrainProportions mid drawing:");
             //campusMap.Services.LogService.writelog(" in ConstrainProportions mid drawing:" );
-			grPhoto.DrawImage(imgPhoto, new Rectangle(destX,destY,destWidth,destHeight),new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),GraphicsUnit.Pixel);
+			grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX - 1, destY - 1, destWidth + 1, destHeight + 1),
+                new Rectangle(sourceX, sourceY, sourceWidth - 1, sourceHeight - 1),
+               // new Rectangle(destX,destY,destWidth,destHeight),
+               // new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
+                GraphicsUnit.Pixel);
             log.Info(" in ConstrainProportions before Dispose ");
             //campusMap.Services.LogService.writelog(" in ConstrainProportions before Dispose");
 			//grPhoto.Dispose();
 			return bmPhoto;
             
+
+
+                            
+
+
 		}
 		static Image FixedSize(Image imgPhoto, int Width, int Height)
 		{
