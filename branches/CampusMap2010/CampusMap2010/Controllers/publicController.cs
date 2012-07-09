@@ -736,7 +736,7 @@
                                 {
                                     infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + "</h2>";
                                 }
-                                String reportError = "<a class='errorReporting' href='?reportError=&place=" + item.id + "' >Report&nbsp;error</a>";
+                                String reportError = "<a class='errorReporting' href='?reportError=&place=" + item.id + "' >Report&nbsp;&nbsp;error</a>";
 
 
                                 String imgGallery = "";
