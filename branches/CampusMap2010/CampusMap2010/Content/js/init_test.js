@@ -74,31 +74,44 @@ function addCentralControlls(){
 			$('.mapControl').removeClass('activeControl');
 			$(this).addClass('activeControl');
 		 //$('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
-			$.colorbox({
-				html:function(){
-					return '<div id="printPdfs">'+
-								'<h2>Printable Maps</h2>'+
-								'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
-								'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
-								'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
-							'</div>';
-				},
+			$('[rel="aerial_gouped"]').colorbox({
 				photo:true,
 				scrolling:false,
 				scalePhotos:true,
 				opacity:0.7,
-				transition:"none",
 				maxWidth:"75%",
 				maxHeight:"75%",
+				transition:"none",
+				slideshow:true,
+				slideshowAuto:false,
 				open:true,
+				current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 				onClosed:function(){
 					$('#'+currentControl).trigger('click');
+				},
+				onComplete:function(){
+					if($('#ttl').length){
+						var t=parseInt($('#ttl').text());
+						var li="";
+						if(t>1){
+							for(j=0; j<t; j++){
+								li+="<li><a href='#'></a></li>";
+							}
+							if($('#colorbox #cb_nav').length==0){
+								$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+							}else{
+								$('#colorbox #cb_nav').html(li);
+							}
+						}else{
+							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+						}
+						if($('#colorbox #cb_nav').length){
+							$('#colorbox #cb_nav .active').removeClass('active');
+							$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+						}
+					}
 				}
 			});
-			
-		 
-		 
-		 
 	});
 	
 

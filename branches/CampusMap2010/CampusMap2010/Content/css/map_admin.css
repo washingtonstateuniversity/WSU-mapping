@@ -435,11 +435,14 @@ border-bottom-right-radius: 0px;
 	#campusmap #cboxContent #cboxPrevious:hover{ background-position:left bottom; }
 	#campusmap #cboxContent #cboxNext:hover{background-position:right bottom;}
 	
-	
+	/*
 	#campusmap #cboxSlideshow{bottom: 10px;right: -37px;background: url("../../Content/images/play_pause.png") no-repeat scroll left top transparent; text-indent:-9999em; width:18px;height:18px;}
 	#campusmap #cboxSlideshow:hover{background-position:left bottom; }
 	#campusmap #cboxSlideshow.playing{background-position:right top; }
 	#campusmap #cboxSlideshow.playing:hover{background-position:right bottom; }
+	*/
+	#campusmap #cboxSlideshow{display:none !important;}
+	
 	#campusmap #cboxCurrent { position:absolute;top:-9999em;}
 
 	/*#campusmap #cb_nav {position:relative;clear: both;text-align:center;display:block;margin-left: -8px;}*/
