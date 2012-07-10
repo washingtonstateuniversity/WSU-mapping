@@ -33,6 +33,21 @@ function iniMap(url,callback){
 		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			var map = $('#centralMap').gmap("get","map");
+			
+			if($('.geolocation').length){
+				$('#centralMap').gmap("geolocate",true,false,function(mess, pos){
+				
+					$('#centralMap').gmap('addMarker', { 
+							'position': pos,
+							"icon":"http://localhost:63750/Content/images/map_icons/geolocation_icon.png"
+						},function(ops,marker){
+						//markerLog[i]=marker;
+						//$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
+						//if($.isFunction(callback))callback(marker);
+					});
+				});
+			}
+			
 			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
 			google.maps.event.addListener(map, "mouseup",function(event){ 
 						hideContextMenu(); 

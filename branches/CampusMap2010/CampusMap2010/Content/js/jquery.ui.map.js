@@ -347,13 +347,45 @@
 			} else {
 				return false;
 			}
-		},		
+		},	
+		set_map_center: function(pos,callback) {
+			this.get('map').setCenter(pos);
+			this._call(callback, this.get('map'));
+			return this;
+		},			
+
+		
+			
 		stop_scroll_zoom: function() {
 			this.get('map').setOptions({'scrollwheel':false});
 		},	
 		set_scroll_zoom: function() {
 			this.get('map').setOptions({'scrollwheel':true});
 		},			
+		
+		
+		
+		
+		geolocate: function(browserSupportFlag,center,callback) {
+			var mess = "";
+			var pos = null;
+			if(browserSupportFlag && navigator.geolocation) { // dbl check that it's there
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					if(center)this.get('map').setCenter(pos);
+				}, function() {
+					mess = 'Error: The Geolocation service failed.';
+				});
+			} else {
+				mess = 'Error: Your browser doesn\'t support geolocation.';
+			}
+			this._call(callback, mess, pos);
+			return this;
+		},			
+		
+		
+		
+		
 		
 		
 				
