@@ -545,6 +545,9 @@ function tinyoptions(which,id){
                 elements : id,
                 theme : "advanced",
 				width:"685",
+				force_br_newlines : true, 
+				force_p_newlines : false,
+				forced_root_block : '',
                 plugins : "-templatevariables,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
                 theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
                 theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace", 
@@ -737,6 +740,9 @@ function tinyoptions(which,id){
                 theme : "advanced",
                 width : "685", 
 				height:  "150",
+				force_br_newlines : true, 
+				force_p_newlines : false,
+				forced_root_block : '',
 				theme_advanced_resizing_min_height :150,
 				setup : function(ed) {
 					ed.onInit.add(function() {
@@ -762,6 +768,9 @@ function tinyoptions(which,id){
                 theme : "advanced",
 				width : "685", 
 				height:  "350",
+				force_br_newlines : true, 
+				force_p_newlines : false,
+				forced_root_block : '',
 				theme_advanced_resizing_min_height :150,
 				setup : function(ed) {
 					ed.onInit.add(function() {
