@@ -1,8 +1,8 @@
 a[href='https://portal.wsu.edu/']{display:none;}
 a[href='http://www.about.wsu.edu/statewide/']{display:none;}
-
+#header_bar{margin: 0;}
 #globalnav li { padding-left:10px;}
-#nav {padding: 0 10px 10px 7px;width: 138px;}
+#nav {padding: 0 10px 10px 7px;width: 138px;margin: 0;}
 #logo{background: url("http://images.wsu.edu/global/bg-logo3.jpg") no-repeat scroll left center #FFFFFF;width: 155px;}
 #centralMap_wrap {margin: 0 0 0 155px;}
 #siteID h1 {margin: 0 0 0 145px;}
