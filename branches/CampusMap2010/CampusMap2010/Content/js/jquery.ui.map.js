@@ -370,8 +370,8 @@
 			var mess = "";
 			var pos = null;
 			if(browserSupportFlag && navigator.geolocation) { // dbl check that it's there
-				navigator.geolocation.getCurrentPosition(function(position) {
-					var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				navigator.geolocation.getCurrentPosition(function(p) {
+					var pos = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
 					if(center)this.get('map').setCenter(pos);
 				}, function() {
 					mess = 'Error: The Geolocation service failed.';
