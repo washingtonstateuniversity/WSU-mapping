@@ -11,6 +11,21 @@ function resizeBg(obj,height,width) {
 	obj.height($(window).height()-height);
 	if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);
 } 
+function geoLocate(){
+	if($('.geolocation').length){
+		$('#centralMap').gmap("geolocate",true,false,function(mess, pos){
+			//$('#centralMap').gmap("make_latlng_str",pos)//alert('hello');
+			$('#centralMap').gmap('addMarker', { 
+					position: pos,
+					icon:"http://localhost:63750/Content/images/map_icons/geolocation_icon.png"
+				},function(ops,marker){
+				//markerLog[i]=marker;
+				//$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
+				//if($.isFunction(callback))callback(marker);
+			});
+		});
+	}
+}
 function iniMap(url,callback){
 	var winH = $(window).height()-160;
 	var winW = $(window).width();
@@ -34,19 +49,7 @@ function iniMap(url,callback){
 		$('#centralMap').gmap(map_op).bind('init', function() { 
 			var map = $('#centralMap').gmap("get","map");
 			
-			if($('.geolocation').length){
-				$('#centralMap').gmap("geolocate",true,false,function(mess, pos){
-				
-					$('#centralMap').gmap('addMarker', { 
-							'position': pos,
-							"icon":"http://localhost:63750/Content/images/map_icons/geolocation_icon.png"
-						},function(ops,marker){
-						//markerLog[i]=marker;
-						//$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-						//if($.isFunction(callback))callback(marker);
-					});
-				});
-			}
+			
 			
 			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
 			google.maps.event.addListener(map, "mouseup",function(event){ 
@@ -64,6 +67,7 @@ function iniMap(url,callback){
 			google.maps.event.addListener(map, "drag",function(event){ hideContextMenu();$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click');  });
 			addCentralControlls();
 			loadData(data);
+			geoLocate();
 			callback();
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 		});
@@ -566,6 +570,7 @@ function loadData(data,callback){
 				.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
 			
 		});
+		geoLocate();
 	}
 }
 function loadListings(data,showSum){

@@ -275,7 +275,7 @@
 					}
 				}
 			return points;
-		},
+		}, 
 		make_latlng_str: function(points,handling) {
 			var pathString='';
 			for(i=0;i<points.length;i++){

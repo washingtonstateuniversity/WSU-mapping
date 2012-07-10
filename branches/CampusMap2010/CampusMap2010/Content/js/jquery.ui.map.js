@@ -369,18 +369,22 @@
 		geolocate: function(browserSupportFlag,center,callback) {
 			var mess = "";
 			var pos = null;
+			var self=this;
 			if(browserSupportFlag && navigator.geolocation) { // dbl check that it's there
 				navigator.geolocation.getCurrentPosition(function(p) {
-					var pos = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
-					if(center)this.get('map').setCenter(pos);
+					pos = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+					if(center)self.get('map').setCenter(pos);
+					self._call(callback, mess, pos);
 				}, function() {
 					mess = 'Error: The Geolocation service failed.';
+					self._call(callback, mess, pos);
 				});
 			} else {
 				mess = 'Error: Your browser doesn\'t support geolocation.';
+				self._call(callback, mess, pos);
 			}
-			this._call(callback, mess, pos);
-			return this;
+			
+			return self;
 		},			
 		
 		
