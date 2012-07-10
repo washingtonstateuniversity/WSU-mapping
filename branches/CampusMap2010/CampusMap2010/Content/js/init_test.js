@@ -460,7 +460,7 @@ function loadData(data,callback){
 											//height:450,
 											open:true,
 											onComplete:function(){prep();
-																if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+												if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 												$('#errorReporting [type="Submit"]').off().on('click',function(e){
 													e.stopPropagation();
 													e.preventDefault();
@@ -616,7 +616,10 @@ function getSignlePlace(id){
 					scrolling:false,
 					opacity:0.7,
 					transition:"none",
-					open:true
+					open:true,
+					onComplete:function(){
+						if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+					}
 				});
 			}else{
 				found=true;

@@ -579,9 +579,11 @@
                     String searchabbrev = @"from place p where 
                    p.abbrev_name LIKE :searchterm 
                 ";
+                    int i = 0;
                     foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
                     {
-                        results[place.abbrev_name] = place.id;
+                        results[i.ToString()+":"+place.abbrev_name] = place.id;
+                        i++;
                     }
                     // Search place prime name
                     String searchprime_name = @"from place p where 
@@ -589,7 +591,8 @@
                 ";
                     foreach (place place in searchAndAddResultsToHashtable(searchprime_name, term))
                     {
-                        results[place.prime_name] = place.id;
+                        results[i.ToString() + ":" + place.prime_name] = place.id;
+                        i++;
                     }
                     // Search tags
                     String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
@@ -609,8 +612,10 @@
                                 ids = place.id.ToString();
                             else
                                 ids += "," + place.id.ToString();
+
+                            i++;
                         }
-                        results[tag.name] = ids;
+                        results[i.ToString() + ":" + tag.name] = ids;
                     }
                     // Search place names
                     String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
@@ -623,14 +628,17 @@
                     // Loop through the place names
                     foreach (place_names placename in placenames)
                     {
-                        results[placename.name] = placename.place_id;
+                        results[i.ToString() + ":" + placename.name] = placename.place_id;
+                        i++;
                     }
                     /* end of this hacky thing.. now you need to return a place id tied so un hack it */
+                    
                     foreach (String key in results.Keys)
                     {
-                        if (key.ToLower().Trim() == id.ToLower().Trim())
+                        if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim())
                         {
-                            sid = (int)results[key];
+                            sid = int.Parse(results[key].ToString());
+                            break;
                         }
                     }
                 }
