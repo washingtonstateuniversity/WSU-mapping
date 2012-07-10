@@ -1,6 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta content='initial-scale=1;' name='viewport' /> 
-<meta content='width=device-width;' name='viewport' /> 
+<meta content='width=device-width, maximum-scale=1.0' name='viewport' /> 
 
 
 #if($Controller.isLocal()==false)
