@@ -331,7 +331,7 @@
 			if ( !latLng ) {
 				return new google.maps.LatLng(0.0, 0.0);
 			}
-			if ( latLng instanceof google.maps.LatLng || !$.isEmptyObject(latLng) ) {
+			if ( latLng instanceof google.maps.LatLng  ) {
 				return latLng;
 			} else {
 				latLng = latLng.replace(/ /g,'').split(',');
