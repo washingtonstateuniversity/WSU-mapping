@@ -239,7 +239,9 @@
                 PropertyBag["date"] = formatDate(DateTime.Now);
                 PropertyBag["description"] = description;
                 PropertyBag["name"] = name;
-
+                PropertyBag["place_id"] = place_id;
+                PropertyBag["issueType"] = issueType;
+                
                 foreach (authors user in users)
                 {
                     if (user.Nid == "jeremy.bass")
@@ -248,7 +250,7 @@
                         email_mass.IsBodyHtml = true;
                         email_mass.From = new MailAddress("noreply@wsu.edu");
                         email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
-                        email_mass.Subject = "Reported Map error";
+                        email_mass.Subject = "Reported Map error: " + issueType;
                         if (!String.IsNullOrWhiteSpace(user.email))
                         {
                             try
