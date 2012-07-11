@@ -368,7 +368,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content ul {list-style: none outside none;padding: 0;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li{padding-bottom:5px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li li{padding-bottom:0px;}
-#campusmap .ui-tabs .ui-tabs-panel .content ul li li h4{padding-top:3px; font-weight:bold;font-size: 12px;line-height: 16px;}
+#campusmap .ui-tabs .ui-tabs-panel .content ul li h4{padding-top:5px; font-weight:bold;font-size: 12px;line-height: 16px; margin:0px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li strong{display: block;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li span{padding-left:35px;display: inline-block;}
 #campusmap .ui-tabs .ui-tabs-panel .content .errorReporting{background-color: #FFFFFF;letter-spacing: 0.25px;
