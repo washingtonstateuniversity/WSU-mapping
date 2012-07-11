@@ -540,6 +540,7 @@
                     sql += " or ";
                 }
                 sql += " 1=0 ";
+                sql += " ORDER BY p.prime_name ASC ";
                 SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
                 id = 1;
                 foreach (string category in cat)
@@ -581,7 +582,7 @@
 
                     // Search place prime name
                     String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%'";
-
+                    
                     SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
                     place[] places = pq.Execute();
 
@@ -685,6 +686,7 @@
                     sql += " or ";
                 }
                 sql += " 1=0 ";
+                
                 SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
                 id = 1;
                 foreach (string category in str)
