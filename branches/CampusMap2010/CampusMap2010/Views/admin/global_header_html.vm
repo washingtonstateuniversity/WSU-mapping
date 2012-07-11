@@ -87,6 +87,11 @@ $adminRejuicer_css.File("~/Content/css/admin_styles.css").File("~/Content/js/col
 <script type="text/javascript" src="$siteroot/Content/js/map_functions.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/admin_ui__media.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/admin_ui__tinymce.js"></script>
+
+<script type="text/javascript" src="$siteroot/Content/js/admin_ui__editors.js"></script>
+
+
+
 <script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
 

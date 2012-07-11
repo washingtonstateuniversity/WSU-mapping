@@ -28,11 +28,11 @@
 -->
 <script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
-<!--
+
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.extensions.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.services.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.overlays.js"></script>
-
+<!--
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
 -->
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>

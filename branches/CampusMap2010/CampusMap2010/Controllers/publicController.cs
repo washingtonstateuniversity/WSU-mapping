@@ -263,6 +263,7 @@
                         }
                     }
                 }
+                RenderText("true");
             }
             /*
              * Get the value of a field that is attached to the 
