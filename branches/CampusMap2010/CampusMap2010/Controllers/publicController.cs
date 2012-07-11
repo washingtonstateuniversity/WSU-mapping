@@ -242,7 +242,7 @@
 
                 foreach (authors user in users)
                 {
-                    if (user.email == "jeremy.bass@wsu.edu")
+                    if (user.Nid == "jeremy.bass")
                     {
                         System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
                         email_mass.IsBodyHtml = true;
