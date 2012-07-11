@@ -565,7 +565,9 @@
                     String term = id.Trim();
 
                     // Use hashtable to store name/value pairs
-                    Hashtable results = new Hashtable();
+                    SortedDictionary<string, int> results = new SortedDictionary<string, int>();
+                    //id is for order
+                    int i = 0;
 
                     // Trying a different Query method
                     // Here was the all inclusive query (not used for now except for reference)
@@ -575,25 +577,50 @@
                 or (p in (select p from p.tags as t where t.name like :searchterm)) 
                 or (p in (select p from p.names as n where n.name like :searchterm))
                 ";
+                    
+
+                    // Search place prime name
+                    String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%'";
+
+                    SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
+                    place[] places = pq.Execute();
+
+                    foreach (place place in places)
+                    {
+                        //results[i.ToString() + ":" + place.prime_name] = place.id;
+                        results.Add(i.ToString() + ":" + place.prime_name, place.id);
+                        i++;
+                    }
+
                     // Search place abbrev
                     String searchabbrev = @"from place p where 
                    p.abbrev_name LIKE :searchterm 
                 ";
-                    int i = 0;
+                    
                     foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
                     {
-                        results[i.ToString()+":"+place.abbrev_name] = place.id;
+                        //results[i.ToString()+":"+place.abbrev_name] = place.id;
+                        results.Add(i.ToString() + ":" + place.abbrev_name, place.id);
                         i++;
                     }
-                    // Search place prime name
-                    String searchprime_name = @"from place p where 
-                   p.prime_name LIKE :searchterm 
-                ";
-                    foreach (place place in searchAndAddResultsToHashtable(searchprime_name, term))
+
+                    // Search place names
+                    String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
+                    if (!String.IsNullOrEmpty(term))
                     {
-                        results[i.ToString() + ":" + place.prime_name] = place.id;
+                        nsql += " AND pn.name LIKE  '%" + term + "%'";
+                    }
+                    SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
+                    place_names[] placenames = nq.Execute();
+                    // Loop through the place names
+                    foreach (place_names placename in placenames)
+                    {
+                        //results[i.ToString() + ":" + placename.name] = placename.place_id;
+                        results.Add(i.ToString() + ":" + placename.name, placename.place_id);
                         i++;
                     }
+
+
                     // Search tags
                     String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
                     if (!String.IsNullOrEmpty(term))
@@ -612,30 +639,18 @@
                                 ids = place.id.ToString();
                             else
                                 ids += "," + place.id.ToString();
-
+                            results.Add(i.ToString() + ":" + tag.name, place.id);
                             i++;
                         }
-                        results[i.ToString() + ":" + tag.name] = ids;
+                        //results[i.ToString() + ":" + tag.name] = ids;
+                        
                     }
-                    // Search place names
-                    String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
-                    if (!String.IsNullOrEmpty(term))
-                    {
-                        nsql += " AND pn.name LIKE  '%" + term + "%'";
-                    }
-                    SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
-                    place_names[] placenames = nq.Execute();
-                    // Loop through the place names
-                    foreach (place_names placename in placenames)
-                    {
-                        results[i.ToString() + ":" + placename.name] = placename.place_id;
-                        i++;
-                    }
+                    
                     /* end of this hacky thing.. now you need to return a place id tied so un hack it */
                     
                     foreach (String key in results.Keys)
                     {
-                        if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim())
+                        if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim() || key.Split(':')[1].ToLower().Trim().Contains(id.ToLower().Trim()))
                         {
                             sid = int.Parse(results[key].ToString());
                             break;
