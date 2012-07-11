@@ -46,7 +46,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr
@@ -80,7 +86,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr
@@ -126,7 +138,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr
@@ -168,7 +186,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr
@@ -210,7 +234,13 @@ namespace campusMap.Models
             get { return Name; }
             set { Name = value; }
         }
-
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
         private string Attr;
         [Property]
         virtual public string attr

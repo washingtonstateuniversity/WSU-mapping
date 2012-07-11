@@ -1518,16 +1518,21 @@ namespace campusMap.Controllers
                     }
                 }
             }
+            bool hasView = false;
             place.infotabs.Clear();
             foreach (infotabs tab in tabs)
             {
                 if (tab.title != null)
                 {
-                    if (tab.id == 0)
+                    if (tab.title != "Views" || tab.title == "Views" && !hasView)
                     {
-                        ActiveRecordMediator<infotabs>.Save(tab);
+                        if (tab.id == 0)
+                        {
+                            ActiveRecordMediator<infotabs>.Save(tab);
+                        }
+                        place.infotabs.Add(tab);
                     }
-                    place.infotabs.Add(tab);
+                    if (tab.title == "Views") hasView = true;
                 }
             }
 

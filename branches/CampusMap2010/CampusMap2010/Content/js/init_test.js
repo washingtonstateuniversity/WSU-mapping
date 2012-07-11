@@ -86,7 +86,7 @@ function addCentralControlls(){
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
 	controlText.className = 'text';
-	controlText.innerHTML = 'Aerial Photo';
+	controlText.innerHTML = 'Aerial Views';
 	controlUI.appendChild(controlText);
 	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 	google.maps.event.addDomListener(controlUI, 'click', function() {

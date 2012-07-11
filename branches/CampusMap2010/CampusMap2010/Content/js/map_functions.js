@@ -905,7 +905,12 @@ function watchMediaTab(){
 			"<input type=\"hidden\" id='tab_"+tab_counter+"' name=\"tabs["+tab_counter+"].content\" value=\"<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />\" />";
 			addTab(tab_counter,"Views",content,false,false);
 		}
+		if($('#viewTab').length>1){
+			$('#'+$('#viewTabb:last').atrr('href')).remove();
+			$('#viewTab:last').remove();
+		}
 		if($('.imageBox').length<=1 && $('#viewTab').length>0){
+			$('#'+$('#viewTab').atrr('href')).remove();
 			$('#viewTab').remove();
 		}
 	}
