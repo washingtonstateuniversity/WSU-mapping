@@ -1,3 +1,4 @@
+<pre>
 #macro(showexception $exc)
 	$exc.GetType().Name
 
@@ -15,7 +16,7 @@
 	#showexception($inner)
 	#end
 #end
-
+</pre>
 <h2>Unexpected error happenend</h2>
 
 <p> This is the rescue page and it is supposed to show you a nice message. 
