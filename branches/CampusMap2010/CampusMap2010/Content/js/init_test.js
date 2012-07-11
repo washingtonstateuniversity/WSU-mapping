@@ -464,11 +464,11 @@ function loadData(data,callback){
 															'<h2>Found an error?</h2>'+
 															'<h3>Please provide some information to help us correct this issue.</h3>'+
 															'<input type="hidden" value="'+marker.id+'" name="place_id">'+
-															'<lable>Name:<br/><input type="text" value="" placeholder="First and Last" name="name"></lable><br/>'+
-															'<lable>Email:<br/><input type="text" value="" placeholder="Your email address"  name="email"></lable><br/>'+
-															'<lable>Type:<br/><select name="issueType"><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+															'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
+															'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"></lable><br/>'+
+															'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
 															'<lable>Describe the issues: <br/>'+
-															'<textarea placeholder="Description" name="description"></textarea></lable><br/>'+
+															'<textarea required placeholder="Description" name="description"></textarea></lable><br/>'+
 															'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 														'</from></div>';
 											},
@@ -483,10 +483,19 @@ function loadData(data,callback){
 												$('#errorReporting [type="Submit"]').off().on('click',function(e){
 													e.stopPropagation();
 													e.preventDefault();
-													$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
-														$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
-														$.colorbox.resize();
+													var valid=true;
+													$.each($('#errorReporting [required]'),function(){
+														if($(this).val()=="")valid=false;
 													});
+													
+													if(valid){
+														$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
+															$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
+															$.colorbox.resize();
+														});
+													}else{
+														if($('#valid').length==0)$('#errorReporting').prepend("<div id='valid'><h3>Please completely fill out the form so we may completely help you.</h3></div>");
+													}
 												});
 											}
 										});
