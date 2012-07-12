@@ -227,6 +227,54 @@
                 RenderView("map_json");
             }
 
+
+            public void emailDir(String name, String email, String directions, String notes,String recipientname, String recipientemail)
+            {
+                CancelView();
+                CancelLayout();
+
+                if (!helperService.IsValidEmail(email))
+                {
+                    RenderText("email:false");
+                    return;
+                }
+                if (!helperService.IsValidEmail(recipientemail))
+                {
+                    RenderText("recipientemail:false");
+                    return;
+                }
+
+
+
+                List<String> sentemails = new List<String>();
+
+                PropertyBag["date"] = formatDate(DateTime.Now);
+                PropertyBag["directions"] = directions;
+                PropertyBag["name"] = name;
+                PropertyBag["recipientname"] = recipientname;
+                PropertyBag["notes"] = notes;
+
+                System.Net.Mail.MailMessage email_mass = RenderMailMessage("directions", null, PropertyBag);
+                email_mass.IsBodyHtml = true;
+                email_mass.From = new MailAddress("noreply@wsu.edu");
+                email_mass.To.Add(new MailAddress(email, name));
+                email_mass.To.Add(new MailAddress(recipientemail, recipientname));
+                email_mass.Subject = "Directions from WSU";
+
+                try
+                {
+                    DeliverEmail(email_mass);
+                    RenderText("Sent");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    RenderText("false");
+                    return;
+                }
+
+               
+            }
             public void reportError(String name, String email, int place_id, String description, String issueType)
             {
                 CancelView();
@@ -239,6 +287,7 @@
                 PropertyBag["date"] = formatDate(DateTime.Now);
                 PropertyBag["description"] = description;
                 PropertyBag["name"] = name;
+                PropertyBag["email"] = email;
                 PropertyBag["place_id"] = place_id;
                 PropertyBag["issueType"] = issueType;
                 
@@ -427,8 +476,104 @@
 
                 String term = name_startsWith.Trim();
 
+                SortedDictionary<string, int> results = search_place_string(term);
+
+                /* end of this hacky thing.. now you need to return a place id tied so un hack it */
+                String labelsList = "";
+                foreach (String key in results.Keys)
+                {
+                    if (!key.StartsWith("RELATED|"))
+                    {
+                        string name = key.Split(':')[1];
+                        labelsList += @"{";
+                        labelsList += @"""label"":""" + name + @""",";
+                        labelsList += @"""value"":""" + name + @""",";
+                        labelsList += @"""place_id"":""" + int.Parse(results[key].ToString()) + @""",";
+                        labelsList += @"""related"":""false""";
+                        labelsList += @"},";
+                    }
+                }
+
+
+                bool hasRelated = false;
+
+                foreach (String key in results.Keys)
+                {
+                    if (key.StartsWith("RELATED|"))
+                    {
+
+                        if (!hasRelated)
+                        {
+                            labelsList += @"{";
+                            labelsList += @"""label"":""------"",";
+                            labelsList += @"""value"":""------"",";
+                            labelsList += @"""place_id"":""------"",";
+                            labelsList += @"""related"":""header""";
+                            labelsList += @"},";
+                        }
+                        hasRelated = true;
+                        string name = key.Split('|')[1].Split(':')[1];
+                        labelsList += @"{";
+                        labelsList += @"""label"":""" + name + @""",";
+                        labelsList += @"""value"":""" + name + @""",";
+                        labelsList += @"""place_id"":""" + int.Parse(results[key].ToString()) + @""",";
+                        labelsList += @"""related"":""true""";
+                        labelsList += @"},";
+                    }
+                }
+
+
+
+
+                String json = "[" + labelsList.TrimEnd(',') + "]";
+
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
+            }
+
+            public void get_place(String id, string callback)
+            {
+                CancelView();
+                CancelLayout();
+
+                int sid = 0;
+                if (!int.TryParse(id, out sid))
+                {
+                    String term = id.Trim();
+
+                    SortedDictionary<string, int> results = search_place_string(term);
+                    foreach (String key in results.Keys)
+                    {
+                        if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim() || key.Split(':')[1].ToLower().Trim().Contains(id.ToLower().Trim()))
+                        {
+                            sid = int.Parse(results[key].ToString());
+                            break;
+                        }
+                    }
+                }
+                if (sid > 0)
+                {
+                    place item = ActiveRecordBase<place>.Find(sid);
+                    place[] obj = new place[1];
+                    obj[0] = item;
+                    sendPlaceJson(obj, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+
+            public SortedDictionary<string, int> search_place_string(string term)
+            {
                 // Use hashtable to store name/value pairs
-                Hashtable results = new Hashtable();
+                SortedDictionary<string, int> results = new SortedDictionary<string, int>();
+                //id is for order
+                int i = 0;
 
                 // Trying a different Query method
                 // Here was the all inclusive query (not used for now except for reference)
@@ -438,22 +583,50 @@
                 or (p in (select p from p.tags as t where t.name like :searchterm)) 
                 or (p in (select p from p.names as n where n.name like :searchterm))
                 ";
+
+
+                // Search place prime name
+                String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%'";
+
+                SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
+                place[] places = pq.Execute();
+
+                foreach (place place in places)
+                {
+                    //results[i.ToString() + ":" + place.prime_name] = place.id;
+                    results.Add(i.ToString() + ":" + place.prime_name, place.id);
+                    i++;
+                }
+
                 // Search place abbrev
                 String searchabbrev = @"from place p where 
                    p.abbrev_name LIKE :searchterm 
                 ";
+
                 foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
                 {
-                    results[place.abbrev_name] = place.id;
+                    //results[i.ToString()+":"+place.abbrev_name] = place.id;
+                    results.Add(i.ToString() + ":" + place.abbrev_name, place.id);
+                    i++;
                 }
-                // Search place prime name
-                String searchprime_name = @"from place p where 
-                   p.prime_name LIKE :searchterm 
-                ";
-                foreach (place place in searchAndAddResultsToHashtable(searchprime_name, term))
+
+                // Search place names
+                String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
+                if (!String.IsNullOrEmpty(term))
                 {
-                    results[place.prime_name] = place.id;
+                    nsql += " AND pn.name LIKE  '%" + term + "%'";
                 }
+                SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
+                place_names[] placenames = nq.Execute();
+                // Loop through the place names
+                foreach (place_names placename in placenames)
+                {
+                    //results[i.ToString() + ":" + placename.name] = placename.place_id;
+                    results.Add(i.ToString() + ":" + placename.name, placename.place_id);
+                    i++;
+                }
+
+
                 // Search tags
                 String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
                 if (!String.IsNullOrEmpty(term))
@@ -472,49 +645,21 @@
                             ids = place.id.ToString();
                         else
                             ids += "," + place.id.ToString();
+                        results.Add("RELATED|"+ i.ToString() + ":" + place.prime_name, place.id);
+                        i++;
                     }
-                    results[tag.name] = ids;
+                    //results[i.ToString() + ":" + tag.name] = ids;
                 }
-                // Search place names
-                String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
-                if (!String.IsNullOrEmpty(term))
-                {
-                    nsql += " AND pn.name LIKE  '%" + term + "%'";
-                }
-                SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
-                place_names[] placenames = nq.Execute();
-                // Loop through the place names
-                foreach (place_names placename in placenames)
-                {
-                    results[placename.name] = placename.place_id;
-                }
-
-                /* end of this hacky thing.. now you need to return a place id tied so un hack it */
-                String labelsList = "";
-                foreach (String key in results.Keys)
-                {
-                    labelsList += @"{";
-                    labelsList += @"""label"":""" + key + @""",";
-                    labelsList += @"""value"":""" + key + @""",";
-                    labelsList += @"""place_id"":""" + results[key] + @"""";
-                    labelsList += @"},";
-                }
-
-                String json = "[" + labelsList.TrimEnd(',') + "]";
-
-                if (!string.IsNullOrEmpty(callback))
-                {
-                    json = callback + "(" + json + ")";
-                }
-                Response.ContentType = "application/json; charset=UTF-8";
-                RenderText(json);
+                return results;
             }
+
+
             public string loadPlaceShape(place place)
             {
                 IList<geometrics> tmpGeo = place.geometrics;
                 String json = "";
                 json += @"  [";
-                int i=0;
+                int i = 0;
                 foreach (geometrics geo in tmpGeo)
                 {
                     json += @"{""shape"":";
@@ -525,7 +670,7 @@
                 }
                 if (tmpGeo.Count == 0) json += "{}";
                 json += @"]";
-                
+
                 return json;
             }
 
@@ -554,127 +699,8 @@
                     id = id + 1;
                 }
                 place[] items = q.Execute();
-                sendPlaceJson(items,callback);
+                sendPlaceJson(items, callback);
             }
-            public void get_place(String id, string callback)
-            {
-                CancelView();
-                CancelLayout();
-
-                int sid = 0;
-                if (!int.TryParse(id, out sid))
-                {
-
-
-                    String term = id.Trim();
-
-                    // Use hashtable to store name/value pairs
-                    SortedDictionary<string, int> results = new SortedDictionary<string, int>();
-                    //id is for order
-                    int i = 0;
-
-                    // Trying a different Query method
-                    // Here was the all inclusive query (not used for now except for reference)
-                    String overallsqlstring = @"from place p where 
-                   p.abbrev_name LIKE :searchterm 
-                or p.prime_name like :searchterm
-                or (p in (select p from p.tags as t where t.name like :searchterm)) 
-                or (p in (select p from p.names as n where n.name like :searchterm))
-                ";
-                    
-
-                    // Search place prime name
-                    String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%'";
-                    
-                    SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
-                    place[] places = pq.Execute();
-
-                    foreach (place place in places)
-                    {
-                        //results[i.ToString() + ":" + place.prime_name] = place.id;
-                        results.Add(i.ToString() + ":" + place.prime_name, place.id);
-                        i++;
-                    }
-
-                    // Search place abbrev
-                    String searchabbrev = @"from place p where 
-                   p.abbrev_name LIKE :searchterm 
-                ";
-                    
-                    foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term))
-                    {
-                        //results[i.ToString()+":"+place.abbrev_name] = place.id;
-                        results.Add(i.ToString() + ":" + place.abbrev_name, place.id);
-                        i++;
-                    }
-
-                    // Search place names
-                    String nsql = "SELECT DISTINCT pn FROM place_names AS pn WHERE NOT pn.name = 'NULL'";
-                    if (!String.IsNullOrEmpty(term))
-                    {
-                        nsql += " AND pn.name LIKE  '%" + term + "%'";
-                    }
-                    SimpleQuery<place_names> nq = new SimpleQuery<place_names>(typeof(place_names), nsql);
-                    place_names[] placenames = nq.Execute();
-                    // Loop through the place names
-                    foreach (place_names placename in placenames)
-                    {
-                        //results[i.ToString() + ":" + placename.name] = placename.place_id;
-                        results.Add(i.ToString() + ":" + placename.name, placename.place_id);
-                        i++;
-                    }
-
-
-                    // Search tags
-                    String sql = "SELECT DISTINCT t FROM tags AS t WHERE NOT t.name = 'NULL'";
-                    if (!String.IsNullOrEmpty(term))
-                    {
-                        sql += " AND t.name LIKE  '%" + term + "%'";
-                    }
-                    SimpleQuery<tags> q = new SimpleQuery<tags>(typeof(tags), sql);
-                    tags[] tags = q.Execute();
-                    // Loop through the tags' places
-                    foreach (tags tag in tags)
-                    {
-                        String ids = "";
-                        foreach (place place in tag.places)
-                        {
-                            if (String.IsNullOrEmpty(ids))
-                                ids = place.id.ToString();
-                            else
-                                ids += "," + place.id.ToString();
-                            results.Add(i.ToString() + ":" + tag.name, place.id);
-                            i++;
-                        }
-                        //results[i.ToString() + ":" + tag.name] = ids;
-                        
-                    }
-                    
-                    /* end of this hacky thing.. now you need to return a place id tied so un hack it */
-                    
-                    foreach (String key in results.Keys)
-                    {
-                        if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim() || key.Split(':')[1].ToLower().Trim().Contains(id.ToLower().Trim()))
-                        {
-                            sid = int.Parse(results[key].ToString());
-                            break;
-                        }
-                    }
-                }
-                if (sid > 0)
-                {
-                    place item = ActiveRecordBase<place>.Find(sid);
-                    place[] obj = new place[1];
-                    obj[0] = item;
-                    sendPlaceJson(obj, callback);
-                }
-                else
-                {
-                    RenderText("false");
-                }
-            }
-            
-
             public void get_place_by_keyword(string[] str, string callback)
             {
                 CancelView();

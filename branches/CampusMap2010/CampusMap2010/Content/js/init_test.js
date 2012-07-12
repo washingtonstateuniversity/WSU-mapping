@@ -308,10 +308,7 @@ function updateMap(_load,showSum){
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
-		if(!$('#selectedPlaceList_btn').is(':visible')){
-			$('#selectedPlaceList_btn').css({'display':'block'});
-			$('#selectedPlaceList_btn').trigger('click');
-		}
+		autoOpenListPanel();
 		var cleanedData = [];
 		cleanedData.markers = [];
 		if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
@@ -331,6 +328,10 @@ function updateMap(_load,showSum){
 	});
 	
 }
+
+
+
+var needsMoved=0;
 function loadData(data,callback){
 	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
@@ -385,7 +386,7 @@ function loadData(data,callback){
 					,maxWidth: 0
 					,height:"340px"
 					,pixelOffset: new google.maps.Size(-200, -103)
-					,zIndex: 99
+					,zIndex: 999
 					,boxStyle: {
 					  width: "400px"
 					 }
@@ -400,6 +401,7 @@ function loadData(data,callback){
 						$('#taby'+i).tabs('destroy').tabs();
 					}
 					,onOpen:function(){
+							needsMoved=0;
 							ibHover =  true;
 							$('#taby'+i).tabs('destroy').tabs();
 							if($('.cWrap .items li').length>1){
@@ -449,57 +451,37 @@ function loadData(data,callback){
 											if($('#colorbox #cb_nav').length){
 												$('#colorbox #cb_nav .active').removeClass('active');
 												$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+													if(needsMoved<0||needsMoved>0){
+														//alert(needsMoved);
+														if(needsMoved<0){
+															$.colorbox.next();
+															needsMoved++;
+														}else{
+															$.colorbox.prev();
+															needsMoved--;
+														}
+													}
+												$('#colorbox #cb_nav li').off().on('click',function(){
+													var cur=(parseInt($('#cboxCurrent #cur').text())-1);
+													var selected=$(this).index('#cb_nav li');
+													var dif=cur-selected;
+													needsMoved=dif;
+													if(dif<0||dif>0){
+														if(dif<0){
+															$.colorbox.next();
+															needsMoved++;
+														}else{
+															$.colorbox.prev();
+															needsMoved--;
+														}
+													}
+												});
 											}
 										}
 									}
 								});
 							});
-							$('.errorReporting').click(function(e){
-										e.stopPropagation();
-										e.preventDefault();
-										var trigger=$(this);
-										$.colorbox({
-											html:function(){
-												return '<div id="errorReporting"><form action="../public/reportError.castle" method="post">'+
-															'<h2>Found an error?</h2>'+
-															'<h3>Please provide some information to help us correct this issue.</h3>'+
-															'<input type="hidden" value="'+marker.id+'" name="place_id">'+
-															'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
-															'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"></lable><br/>'+
-															'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
-															'<lable>Describe the issues: <br/>'+
-															'<textarea required placeholder="Description" name="description"></textarea></lable><br/>'+
-															'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
-														'</from></div>';
-											},
-											scrolling:false,
-											opacity:0.7,
-											transition:"none",
-											width:450,
-											//height:450,
-											open:true,
-											onComplete:function(){prep();
-												if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
-												$('#errorReporting [type="Submit"]').off().on('click',function(e){
-													e.stopPropagation();
-													e.preventDefault();
-													var valid=true;
-													$.each($('#errorReporting [required]'),function(){
-														if($(this).val()=="")valid=false;
-													});
-													
-													if(valid){
-														$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
-															$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
-															$.colorbox.resize();
-														});
-													}else{
-														if($('#valid').length==0)$('#errorReporting').prepend("<div id='valid'><h3>Please completely fill out the form so we may completely help you.</h3></div>");
-													}
-												});
-											}
-										});
-									});
+							addErrorReporting(marker);
 							var minHeight=0;
 							$.each($('#taby'+i+' .ui-tabs-panel'),function() {
 								minHeight = Math.max(minHeight, $(this).find('.content').height()); 
@@ -533,7 +515,7 @@ function loadData(data,callback){
 					 content: boxText//boxText
 					,disableAutoPan: false
 					,pixelOffset: new google.maps.Size(15,-15)
-					,zIndex: 99
+					,zIndex: 999
 					,boxStyle: {
 						minWidth: "250px"
 					 }
@@ -582,7 +564,225 @@ function loadData(data,callback){
 		geoLocate();
 	}
 }
+function addErrorReporting(marker){
+$('.errorReporting').click(function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var trigger=$(this);
+		$.colorbox({
+			html:function(){
+				return '<div id="errorReporting"><form action="../public/reportError.castle" method="post">'+
+							'<h2>Found an error?</h2>'+
+							'<h3>Please provide some information to help us correct this issue.</h3>'+
+							'<input type="hidden" value="'+marker.id+'" name="place_id">'+
+							'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
+							'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"></lable><br/>'+
+							'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+							'<lable>Describe the issues: <br/>'+
+							'<textarea required placeholder="Description" name="description"></textarea></lable><br/>'+
+							'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
+						'</from></div>';
+			},
+			scrolling:false,
+			opacity:0.7,
+			transition:"none",
+			width:450,
+			//height:450,
+			open:true,
+			onComplete:function(){prep();
+				if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+				$('#errorReporting [type="Submit"]').off().on('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					var valid=true;
+					$.each($('#errorReporting [required]'),function(){
+						if($(this).val()=="")valid=false;
+					});
+					
+					if(valid){
+						$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
+							$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
+							$.colorbox.resize();
+						});
+					}else{
+						if($('#valid').length==0)$('#errorReporting').prepend("<div id='valid'><h3>Please completely fill out the form so we may completely help you.</h3></div>");
+					}
+				});
+			}
+		});
+	});	
+	
+}
+
+
+function autoOpenListPanel(){
+	if(!$('#selectedPlaceList_btn').is(':visible')){
+		$('#selectedPlaceList_btn').css({'display':'block'});
+		$('#selectedPlaceList_btn').trigger('click');
+	}
+}
+
+function listTabs(prime){
+	
+	if($('#selectedPlaceList_area #listing').length>0 && $('#selectedPlaceList_area #directions-panel').length>0){
+		if($('#selectedPlaceList_area #option').length==0)$('#selectedPlaceList_area').prepend('<ul id="option">');
+
+		if($('#selectedPlaceList_area #listing').length>0 && $('#selectedPlaceList_area #option #locations').length==0){
+			$('#selectedPlaceList_area #option').append('<li id="locations">Locations</li>');
+		}
+		if($('#selectedPlaceList_area #directions-panel').length>0 && $('#selectedPlaceList_area #option #directions').length==0){
+			$('#selectedPlaceList_area #option').append('<li id="directions">Directions</li>');
+		}
+		
+		if($('#selectedPlaceList_area #option li').length>1){
+			$('#selectedPlaceList_area #option li:first').addClass('DIVIT');	
+		}else{
+			$('#option .DIVIT').removeClass('DIVIT');	
+		}
+		$('#option .active').removeClass('active');
+		
+		
+		$('#locations').off().on('click',function(){
+				$('#option .active').removeClass('active');
+				$('#listing').show();
+				$('#directions-panel').hide();
+				$('#locations').addClass('active');
+		});
+		$('#directions').off().on('click',function(){
+				$('#option .active').removeClass('active');
+				$('#listing').hide();
+				$('#directions-panel').show();
+				$('#directions').addClass('active');
+		});
+		
+		if(typeof(prime)!=="undefined" && prime!=null){
+			if(prime=="locations"){
+				$('#option .active').removeClass('active');
+				$('#listing').show();
+				$('#directions-panel').hide();
+				$('#locations').addClass('active');
+			}
+			if(prime=="directions"){
+				$('#option .active').removeClass('active');
+				$('#listing').hide();
+				$('#directions-panel').show();
+				$('#directions').addClass('active');
+			};
+		}
+		if($('#listing').is(':visible'))$('#locations').addClass('active');
+		if($('#directions').is(':visible'))$('#directions').addClass('active');
+		
+	}else{
+		if($('#selectedPlaceList_area #option').length>0)$('#selectedPlaceList_area #option').remove();
+	}
+
+}
+function addEmailDir(){
+$('#emailDir').off().on('click',function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var trigger=$(this);
+		$.colorbox({
+			html:function(){
+				return '<div id="emailDirs"><form action="../public/emailDir.castle" method="post">'+
+							'<h2>Want to email the directions?</h2>'+
+							'<h4>Please provide you email and the email of the person you wish to send the directions to.</h4>'+
+							'<textarea name="directions" style="position:absolute;top:-9999em;left:-9999em;">'+$('#directions-panel').html()+'</textarea>'+
+							'<lable>Your Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
+							'<lable>Your Email:<br/><input type="email" value="" required placeholder="Your email address" id="email" name="email"></lable><br/>'+
+							'<lable>Recipient Name:<br/><input type="text" value="" required placeholder="First and Last" name="recipientname"></lable><br/>'+
+							'<lable>Recipient Email:<br/><input type="email" value="" required placeholder="Destination email address" id="recipientemail" name="recipientemail"></lable><br/>'+
+							'<lable>Notes to recipient: <br/>'+
+							'<textarea required placeholder="Some notes on the directions" name="notes"></textarea></lable><br/>'+
+							'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
+						'</from></div>';
+			},
+			scrolling:false,
+			opacity:0.7,
+			transition:"none",
+			width:450,
+			//height:450,
+			open:true,
+			onComplete:function(){prep();
+				if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");
+				$.colorbox.resize();	
+				$('#emailDirs [type="Submit"]').off().on('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					$('#valid').remove();
+					var valid=true;
+					$.each($('#emailDirs [required]'),function(){
+						if($(this).val()=="")valid=false;
+					});
+					
+					if(valid){
+						$.post($('#emailDirs form').attr('action'), $('#emailDirs form').serialize(),function(data){
+							if(data=="email:false"){
+								$('#emailDirs').prepend("<div id='valid'><h3>Your email is not a valid email.  Please enter it again</h3></div>");
+								$('#email').focus();
+								$.colorbox.resize();
+							}else if(data=="recipientemail:false"){
+								$('#emailDirs').prepend("<div id='valid'><h3>The recipient's email is not a valid email.  Please enter it again</h3></div>");
+								$('#recipientemail').focus();
+								$.colorbox.resize();
+							}else{
+								$('#emailDirs').html('<h2>You will recive an email shortly as a copy.</h2>'+'');
+								$.colorbox.resize();
+							}
+						});
+					}else{
+						if($('#valid').length==0)$('#emailDirs').prepend("<div id='valid'><h3>Please completely fill out the form.</h3></div>");
+					}
+				});
+			}
+		});
+	});	
+	
+}
+
+
+var hasListing = false;
+var hasDirections = false;
 function loadListings(data,showSum){
+	$('#selectedPlaceList').removeClass('ini');
+	var listing="";
+	if(data.markers.length>17)showSum=false;
+	$.each( data.markers, function(i, marker) {	
+		if(typeof(marker.info)!=='undefined'){
+			var sum="";
+			
+			if(typeof(marker.summary)!=='undefined' && !$.isEmptyObject(marker.summary)){
+				sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
+			}
+	
+			listing+='<li class="">'+
+						'<a href="#" class=""><img src="'+siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
+						sum+
+					'</div>';
+			hasListing = false;
+		}
+	});
+	if($('#selectedPlaceList_area #listing').length==0)$('#selectedPlaceList_area').append('<div id="listing">');
+	listTabs("locations");
+	$('#selectedPlaceList_area #listing').html('<ul>'+listing+'</ul>');
+	$.each($('#selectedPlaceList_area #listing a'),function(i,v){
+		var btn=$(this);
+		btn.live('click',function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			if(!btn.is('active') && !btn.next('div').is(':visible')){// changed hasClass for is for speed
+				//$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
+				$('#selectedPlaceList_area .active').removeClass('active');
+				//btn.next('div').toggle('showOrHide');
+				btn.addClass('active');
+			}
+			$.each(ib, function(i) {ib[i].close();});
+			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
+		});
+	});
+}
+
+function loadDirections(data,showSum){
 	var listing="";
 	if(data.markers.length>17)showSum=false;
 	$.each( data.markers, function(i, marker) {	
@@ -599,8 +799,9 @@ function loadListings(data,showSum){
 					'</div>';
 		}
 	});
-	$('#selectedPlaceList_area').html('<ul>'+listing+'</ul>');
-	$.each($('#selectedPlaceList_area a'),function(i,v){
+	if($('#selectedPlaceList_area #listing').length==0)$('#selectedPlaceList_area').append('<div id="listing">');
+	$('#selectedPlaceList_area #listing').html('<ul>'+listing+'</ul>');
+	$.each($('#selectedPlaceList_area #listing a'),function(i,v){
 		var btn=$(this);
 		btn.live('click',function(e){
 			e.stopPropagation();
@@ -616,6 +817,8 @@ function loadListings(data,showSum){
 		});
 	});
 }
+
+
 /*
 *
 *
@@ -754,8 +957,8 @@ $(document).ready(function(){
 				},2000);
 		});
 		function fireDirections(){
-			$('#centralMap').gmap('clear','markers');
-			$('#centralMap').gmap('clear','overlays');
+			//$('#centralMap').gmap('clear','markers');
+			//$('#centralMap').gmap('clear','overlays');
 			$('#centralMap').gmap('clear','serivces');
 			$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 			var from=$('#directionsFrom input').val();
@@ -776,14 +979,34 @@ $(document).ready(function(){
 					if (status == google.maps.GeocoderStatus.OK) {
 						from = results[0].geometry.location
 						$('#centralMap').gmap('displayDirections',
-								{origin:from,destination:to,travelMode: google.maps.DirectionsTravelMode.DRIVING},
-								{draggable: true},
-								function(){
-									$('#loading').remove();
-								});
+							{origin:from,destination:to,travelMode: google.maps.DirectionsTravelMode.DRIVING},
+							{draggable: true},
+							function(results, status){
+								autoOpenListPanel();
+								if($('#directions-panel').length==0){$('#selectedPlaceList_area').append('<div id="directions-panel">')}
+								listTabs("directions");
+								var directionsDisplay = $('#centralMap').gmap('get','services > DirectionsRenderer')
+								directionsDisplay.setPanel(document.getElementById('directions-panel'));
+								directionsDisplay.setDirections(results);
+								if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
+								addEmailDir();
+							});
 					} else {
-						alert("Google was having a hard time finding your location, Please try again. \r\n reason: " + status);
+						$.colorbox({
+							html:function(){
+								return '<div id="errorReporting"><h2>Error</h2><h3>Google couldn\'t pull up the directions, Please try again</h3><h4>Google was having a hard time finding your location for this reason:'+ status +' </h4></div>';
+							},
+							scrolling:false,
+							opacity:0.7,
+							transition:"none",
+							width:450,
+							open:true,
+							onComplete:function(){prep();
+								$.colorbox.resize();
+							}
+						});
 					}
+					$('#loading').remove();
 				});
 			}
 		}
@@ -862,11 +1085,12 @@ $(document).ready(function(){
 						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 						response( $.map( data, function( item ) {
 							var text = item.label;
-							if ( item.value && ( !request.term || matcher.test(text) ) ){
+							if ( (item.value && ( !request.term || matcher.test(text)) || item.related == "header" || item.related == "true" ) ){
 								return {
 									label: item.label,
 									value: item.value,
-									place_id: item.place_id
+									place_id: item.place_id,
+									related: item.related,
 								}
 							}
 						}));
@@ -890,15 +1114,20 @@ $(document).ready(function(){
        		 }
 		}).data( "autocomplete" )._renderItem = function( ul, item ) {
 			var text =item.label;
+			if(item.related=="header"){
+				text = "<em>Related search items</em>";
+			}else{
+				text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
+			}
 			return $( "<li></li>" )
 				.data( "item.autocomplete", item )
-				.append( "<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>" )
+				.append( text )
 				.appendTo( ul );
 				
 		}
 		$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
 			if ( event.which == 13 ) {
-				//$( "#placeSearch [type=text]" ).autocomplete("close");
+				$( "#placeSearch [type=text]" ).autocomplete("close");
 				getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
 			}
 		});
