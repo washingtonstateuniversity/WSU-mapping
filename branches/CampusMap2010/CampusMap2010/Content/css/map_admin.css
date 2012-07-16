@@ -328,7 +328,7 @@
 #campusmap .tabedBox.infoClose:hover{ background-position:center bottom;}
 #campusmap .ui-tabs {
 	padding: 0;
-	margin:0px;
+
 	border: medium none;
 	width:100%;
 	-webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
@@ -375,7 +375,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids{padding:0px 4px; }
 #campusmap .ui-tabs .ui-tabs-panel .content .header{font-size:14px; color:#981e32; font-weight:bold;margin-top: 0;padding-top: 0;}
 
-#campusmap .ui-tabs .ui-tabs-panel .content ul {list-style: none outside none;padding: 0;}
+#campusmap .ui-tabs .ui-tabs-panel .content ul {list-style: none outside none;padding: 0;	margin:0px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li{padding-bottom:5px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li li{padding-bottom:0px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li h4{padding-top:5px; font-weight:bold;font-size: 12px;line-height: 16px; margin:0px;}
