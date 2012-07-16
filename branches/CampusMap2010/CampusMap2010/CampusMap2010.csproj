@@ -87,6 +87,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\dotless.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EcmaScript.NET, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EcmaScript.NET.dll</HintPath>
+    </Reference>
     <Reference Include="EcmaScript.NET.modified, Version=0.1.1.0, Culture=neutral, PublicKeyToken=7d53ba4f537753a5, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EcmaScript.NET.modified.dll</HintPath>
@@ -120,6 +124,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Rejuicer.dll</HintPath>
     </Reference>
+    <Reference Include="SquishIt.Framework, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SquishIt.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SquishIt.Mvc, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SquishIt.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -133,7 +145,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Yahoo.Yui.Compressor, Version=1.7.0.0, Culture=neutral, PublicKeyToken=f8b4b81ec75097e2, processorArchitecture=MSIL">
+    <Reference Include="Yahoo.Yui.Compressor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>

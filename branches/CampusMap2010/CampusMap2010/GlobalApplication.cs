@@ -8,6 +8,7 @@ namespace campusMap
     using MonoRailHelper;
     using campusMap.Models;
     using System.Net.Mail;
+    using Rejuicer;
 
 
 	public class GlobalApplication : HttpApplication, IContainerAccessor
@@ -45,6 +46,8 @@ namespace campusMap
         public void Application_OnStart()
         {
             container = new WindsorContainer(new XmlInterpreter());
+            //
+            
             // ActiveRecordStarter.CreateSchema();
             try
             {
@@ -55,6 +58,10 @@ namespace campusMap
             {
                 // I'm eating this error because it's just handy, not necessary
             }
+
+
+            OnRequest.ForCss("~/Content/css/min/Combined.css");
+
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -78,6 +85,7 @@ namespace campusMap
                     temp.Save();
                 }
             }
+            
         }
 
         protected void Session_OnEnd(Object sender, EventArgs e)

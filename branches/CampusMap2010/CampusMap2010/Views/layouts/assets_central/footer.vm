@@ -1,8 +1,2 @@
 <div id="localfooter">
- <a href="http://publishing.wsu.edu/copyright/WSU.html">&copy; 2012</a>
- <a href="http://www.wsu.edu">Washington State University</a> | 
- <a href="http://access.wsu.edu/">Accessibility</a> | 
- <a href="http://policies.wsu.edu/">Policies</a> | 
- <a href="http://publishing.wsu.edu/copyright/WSU.html">Copyright</a> | 
- <a href="">Contact Us</a> 
-</div>
+<div id="wsufooter"><a href="http://publishing.wsu.edu/copyright/WSU.html" hidefocus="true" style="outline: medium none;">&copy; 2012</a> <a href="http://www.wsu.edu" hidefocus="true" style="outline: medium none;">Washington State University</a> | <a href="http://access.wsu.edu/" hidefocus="true" style="outline: medium none;">Accessibility</a> | <a href="http://policies.wsu.edu/" hidefocus="true" style="outline: medium none;">Policies</a> | <a href="http://publishing.wsu.edu/copyright/WSU.html" hidefocus="true" style="outline: medium none;">Copyright</a> | <a href="mailto:jeremy.bass@wsu.edu?subject=${campus}%20map%20has%20an%20error&body=">Report Errors</a> </div></div>

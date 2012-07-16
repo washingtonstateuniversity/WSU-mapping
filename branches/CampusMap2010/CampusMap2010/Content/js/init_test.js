@@ -26,13 +26,16 @@ function geoLocate(){
 		});
 	}
 }
+
+
+
 function iniMap(url,callback){
 	var winH = $(window).height()-160;
 	var winW = $(window).width();
 	var zoom = 15;
-	if(winW>=500 && winH>=200){zoom = 13;}
-	if(winW>=700 && winH>=400){zoom = 14;}
-	if(winW>=900 && winH>=600){zoom = 15;}
+	if(winW>=500 && winH>=200){zoom = 15;}
+	if(winW>=700 && winH>=400){zoom = 16;}
+	if(winW>=900 && winH>=600){zoom = 17;}
 	var _load = false;
 	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
 	$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
@@ -40,9 +43,9 @@ function iniMap(url,callback){
 			var map_op = {'center': pullman_str , 'zoom':zoom };
 		}else{
 			var map_op = data.mapOptions;
-			if(winW>=500 && winH>=300){map_op.zoom = map_op.zoom-1;}
-			if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom;}
-			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom+1;}
+			if(winW>=500 && winH>=300){map_op.zoom = map_op.zoom;}
+			if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom+1;}
+			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}
 		}
 		
 		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
@@ -54,21 +57,26 @@ function iniMap(url,callback){
 			//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
 			google.maps.event.addListener(map, "mouseup",function(event){ 
 						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
+						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1);
  			});
 			google.maps.event.addListener(map, "dragstart",function(event){ 
 						hideContextMenu(); 
-						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },50);
+						setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1);
  			});
+			google.maps.event.trigger(map, 'mouseup');
 			/*google.maps.event.addListener(map, "click",function(event){ 
 						hideContextMenu(); 
 						$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
  			});*/
-			google.maps.event.addListener(map, "drag",function(event){ hideContextMenu();$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click');  });
+			google.maps.event.addListener(map, "drag",function(event){
+				 hideContextMenu();
+				 setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1); 
+			 });
 			addCentralControlls();
 			loadData(data);
 			geoLocate();
 			callback();
+			$(window).trigger('resize');
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 		});
 	});
@@ -301,12 +309,17 @@ function hideContextMenu() {
 	$('.contextmenu').remove();
 }
 
+var mapview="central/";
+var currentLocation = siteroot+mapview;
+
 /* non-abstract */
 function updateMap(_load,showSum){
 	if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
+	
+	currentLocation=siteroot+mapview+(_load!=false?'?cat[]='+_load:'');
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		autoOpenListPanel();
 		var cleanedData = [];
@@ -907,7 +920,16 @@ $(document).ready(function(){
 		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		iniMap("",function(){
 			$('#loading').remove();
-			
+			if(typeof(startingUrl)!="undefined"){
+				updateMap(encodeURI(startingUrl.split('=')[1])); 
+				if(startingUrl.split('=')[1].indexOf(',')>0){
+					$.each(startingUrl.split('=')[1].split(','),function(i,v){
+						$('#main_nav a[href$="'+v+'"]').trigger('click');
+						});
+				}else{
+					$('#main_nav a[href$="'+startingUrl.split('=')[1]+'"]').trigger('click');
+				}
+			}
 		});
 		if($('#centralMap').length){
 			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=450?155:201)+listOffset)}).trigger("resize");
@@ -923,10 +945,12 @@ $(document).ready(function(){
 			var btn=$(this);
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 			if(btn.closest('#selectedPlaceList').width()<=1){
+				$('#selectedPlaceList').addClass("active");
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"190px"
 					}, 500, function() {
 						btn.addClass("active");
+						
 						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
 						$(window).trigger("resize");
 				});
@@ -934,10 +958,12 @@ $(document).ready(function(){
 				listOffset=190;
 				$(window).trigger("resize");
 			}else{
+				$('#selectedPlaceList').removeClass("active");
 				btn.closest('#selectedPlaceList').stop().animate({
 					width:"0px"
 					}, 500, function() {
 						btn.removeClass("active");
+						
 						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 						$(window).trigger("resize");
 				});
@@ -1027,6 +1053,7 @@ $(document).ready(function(){
 			e.stopPropagation();
 			e.preventDefault();
 			$(this).closest('li').toggleClass('checked');
+			$(this).closest('.parent').addClass('active');
 			$(this).closest('.parent').find('.parentalLink').addClass('childSelected');
 			$(this).closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
 			$.each(ib, function(i) {ib[i].close();});
@@ -1140,7 +1167,7 @@ $(document).ready(function(){
 				$.colorbox({
 					rel:'gouped',
 					html:function(){
-						return '<div id="embedArea"><h2>Page Link</h2><h3>http://dev.campusmap.wsu.edu/central/</h3><h2>Embed code</h2><textarea><iframe src="http://dev.campusmap.wsu.edu/central/"/></textarea></div>';
+						return '<div id="embedArea"><h2>Page Link</h2><h3>'+currentLocation+'</h3><h2>Embed code</h2><textarea><iframe src="'+currentLocation+'"/></textarea></div>';
 					},
 					scrolling:false,
 					opacity:0.7,

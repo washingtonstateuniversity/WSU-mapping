@@ -4,6 +4,6 @@
 		
 <div id="siteID">
 	<h2></h2>
-	<h1>Campus Map</h1>
+	<h1>#if($campus!="")${campus} #end Campus Map</h1>
 </div>
 <div id="toolbar"><ul><li><a href="#" id="embed">Link/Embed</a></li><li><a href="#" id="share">Share</a></li></ul></div>

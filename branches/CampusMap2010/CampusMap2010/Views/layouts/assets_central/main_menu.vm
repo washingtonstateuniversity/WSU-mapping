@@ -2,6 +2,7 @@
 #set($subULClass="")
 #set($subNarrowClass="subNarrow")
 #set($subClass="")
+#set($baseurl=$controller.getAction())
 
 <form action="#" id="placeSearch">
 	<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
@@ -27,8 +28,8 @@
 			</li>
 		#end
 
-		<li class='depth_${item.level} #if($item.level==1) $baseClass #elseif($item.level>1) $subClass #end  #if($item.asLink && $item.url) altAction #end' >
-			<a  hidefocus="true" href='/#if($item.asLink && $item.url)${item.url}#else?cat%5B%5D=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end>
+		<li class='#if($item.asLink && $item.url)altAction#end depth_${item.level} #if($item.level==1)$baseClass#elseif($item.level>1)$subClass#end #if($selectedCats.Contains(${item.friendly_name}))active#end' >
+			<a  hidefocus="true" href='/$baseurl/#if($item.asLink && $item.url)${item.url}#else?cat%5B%5D=$!{item.friendly_name}#end' class=' #if($item.level==1) parentalLink #end ' #if($item.asLink && $item.url) target='_blank' #end>
 				$!item.name.Replace("&","&amp;")
 			</a>
 			#set($lastLevel=${item.level})

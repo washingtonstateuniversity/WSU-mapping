@@ -3,18 +3,17 @@
     using Castle.MonoRail.Framework;
     using campusMap.Models;
     using MonoRailHelper;
-    using Rejuicer;
+    using campusMap.Services;
 #endregion
 
 namespace campusMap.Filters
 {
     public class scriptFilter : IFilter
     {
+        protected ScriptsService scriptsService = new ScriptsService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-            controllerContext.PropertyBag["adminRejuicer_css"] = OnRequest.ForCss("~/Content/css/min/Combined.css").Compact;
-            controllerContext.PropertyBag["adminRejuicer_js"] = OnRequest.ForJs("~/Content/js/min/Combined.js");
-            //controllerContext.PropertyBag["JavaScriptBundle"] = new JavaScriptBundle();
+            controllerContext.PropertyBag["scriptsService"] = scriptsService;
             return true;
         }
     }

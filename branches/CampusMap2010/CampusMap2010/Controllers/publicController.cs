@@ -75,7 +75,7 @@
     {
 
 
-        [Layout("central")]
+        //[Layout("central")]
         public class publicController : BaseController
         {
             ILog log = log4net.LogManager.GetLogger("publicController");
@@ -206,11 +206,27 @@
                 }
             #endregion
 
-            [Layout("central")]
-            public void central()
+
+            /* this is to be turned into to the main map view switcher */
+            //[Layout("central")]
+            public void central(string[] cat, int activePlace)
             {
+                
+                String urlQueries="";
+                foreach (string category in cat)
+                {
+                    urlQueries += "," + category;
+                }
+
+                PropertyBag["campus"] = "Pullman";
+
+                PropertyBag["selectedCats"] = cat;
+                PropertyBag["activePlace"] = activePlace;
+                PropertyBag["urlQueries"] = urlQueries.TrimStart(',');
                 PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position","active",true);
-                RenderView("central");
+
+                LayoutName = "central"; // would be a var
+                RenderView("central"); // would be a var
             }
             public void fetchMap(String alias, String mode, String callback)
             {

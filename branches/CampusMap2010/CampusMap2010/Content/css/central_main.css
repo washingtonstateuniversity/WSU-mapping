@@ -36,7 +36,11 @@ min-width:1026px;
 }
 
 #localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;padding-left: 250px;}
-#localfooter a{font-size: 10px;color: #868F95; text-decoration:none;}
+#localfooter #wsufooter{background: none repeat scroll 0 0 transparent;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    width: auto;}
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 
 
@@ -498,7 +502,7 @@ fieldset{padding: 4px 8px 10px;}
     /*width: 100%;*/}
 
 #selectedPlaceList{
- border-left: 1px solid #B8B8B8;
+ 
 	float: left;
 	padding-right: 28px;
 	position: absolute;
@@ -508,9 +512,14 @@ fieldset{padding: 4px 8px 10px;}
 	min-height:350px;
 	height:auto;
 	z-index: 9;
-	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
+	border-radius: 0px 0px 0px 20px;
+	-webkit-border-radius: 0px 0px 0px 20px;
 	  background: url("../../Content/images/assests_central/selectlist_shadow.png") repeat-y scroll left center transparent;
 	}
+	
+#selectedPlaceList.active{border-left: 1px solid #B8B8B8;}	
+	
+	
 #selectedPlaceList.ini{padding:0px;}
 	
 #selectedPlaceList_btn{position:absolute;top:5px;right:0px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}

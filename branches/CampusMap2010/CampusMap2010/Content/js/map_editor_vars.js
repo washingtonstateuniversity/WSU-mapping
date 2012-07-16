@@ -31,8 +31,8 @@ var waypts = [],
 	points=[],
 	lableStyles=[],
 	keysOrder=[],
-	pullman = new google.maps.LatLng(46.73191920826778,-117.15296745300293);
-var pullman_str = '46.73191920826778,-117.15296745300293';
+	pullman = new google.maps.LatLng(46.730904390653876,-117.16101408004698);
+var pullman_str = '46.730904390653876,-117.16101408004698';
 
 function gob(e){if(typeof(e)=='object')return(e);if(document.getElementById)return(document.getElementById(e));return(eval(e))}
 

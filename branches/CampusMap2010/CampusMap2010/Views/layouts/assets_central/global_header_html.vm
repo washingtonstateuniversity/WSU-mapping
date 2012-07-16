@@ -1,5 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta content='initial-scale=1,width=device-width' name='viewport' /> 
+<meta name="msvalidate.01" content="73B464C828058D51A426DC1B61D99824" />
+<meta name="google-site-verification" content="hMQT0jjLAQ7ZvVY91SCAMHNNBjEWVgpJMqIbzt0XAd0" />
+
+
 
 
 #if($Controller.isLocal()==false)
@@ -7,7 +11,7 @@
 #end
 
 
-<title>The WSU Campus Map</title>
+<title>The WSU #if($campus!="")${campus}#end Campus Map</title>
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
 #capturefor(site)
@@ -29,6 +33,11 @@ $Controller.getView()
 <script type="text/javascript">
   var siteroot = '$site.Trim()';
   var view = '$view.Trim()/';
+  #if($urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
+  #if($activePlace!="")var activePlace = $activePlace; #end
+  #if($campus!="")var campus = '$campus'; #end
+ 
+  
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
@@ -38,16 +47,20 @@ $Controller.getView()
   .at300bs{display:inline;}
 </style>
 <link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
-<link rel="stylesheet" type="text/css" href="$siteroot/Content/css/central_main.css" />
-<!-- WSU theme -->
-<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
-
+#*
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
 <link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
+*#
 
-
-
+#*
+<link rel="stylesheet" type="text/css" href="$siteroot/Content/css/central_main.css" />
+<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
+<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
+<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
+*#
+$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css?")
+#*
 <style type="text/css" >
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
   .ui-button { margin-left: -1px; }
@@ -58,9 +71,9 @@ $Controller.getView()
   .optionsLink:hover .options{}
 </style>
 
-<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
+*#
+
 <link rel='stylesheet' media='screen and (max-width:450px)' href='$siteroot/Content/css/small_width.css' />
-<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
 
 
 

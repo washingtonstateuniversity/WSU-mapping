@@ -38,40 +38,47 @@
 </script>
 
 
+<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
+<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
+<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
+
+$scriptsService.Css("~/Content/css/admin_styles.css,~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css?")
+
 
 #* 
-$adminRejuicer_css.File("~/Content/css/admin_styles.css").File("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css")
-*#
-
-
-<link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
 <link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
+<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
 
+<!-- WSU theme -->
+<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
+<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
+<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
+<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
+*#
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-
-<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
-<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.js"></script>
-<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
-<script type="text/javascript" src="$siteroot/Content/js/jquery.mjs.nestedSortable.js"></script>
-
-
-<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
-
-
-<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
-<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
 <script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
 
+<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+
+$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/utilities_general.js,~/Content/js/jquery.mjs.nestedSortable.js,~/content/js/colorpicker/jpicker-1.1.6.min.js,~/Content/js/external/jquery.cookie.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.drawingmanager.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/admin_ui__media.js,~/Content/js/admin_ui__tinymce.js,~/Content/js/admin_ui__editors.js,~/Content/js/init_test.js,~/Content/js/admin_init.js?")
+
+#*
+<script type="text/javascript" src="$siteroot/Content/js/modernizr-2.0.6/modernizr.min.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/utilities_general.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/jquery.dialog.extra.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/jquery.mjs.nestedSortable.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/colorpicker/jpicker-1.1.6.min.js"></script>
+<script type="text/javascript" src="$siteroot/Content/js/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 
 <script type="text/javascript" src="$siteroot/Content/js/infobox.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/jquery.ui.map.js"></script>
@@ -90,10 +97,10 @@ $adminRejuicer_css.File("~/Content/css/admin_styles.css").File("~/Content/js/col
 
 <script type="text/javascript" src="$siteroot/Content/js/admin_ui__editors.js"></script>
 
-
-
 <script type="text/javascript" src="$siteroot/Content/js/init_test.js"></script>
 <script type="text/javascript" src="$siteroot/Content/js/admin_init.js"></script>
+*#
+
 
 <!-- <script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script> -->
 
@@ -179,12 +186,6 @@ THIS IS FOR UPLOADING
 
 #if($admin_js)${admin_js}#end
 
-<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
-<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
-<!-- WSU theme -->
-<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
-<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
-
 
 
 <style type='text/css'>
@@ -196,8 +197,7 @@ THIS IS FOR UPLOADING
   .options{}
   .optionsLink:hover .options{}
 </style>
-<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
-<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
+
 <style>
 #wsu_ui.admin.media.listings .placelist.ui-tabs .ui-tabs-nav li {
     margin-top: 7px !important;
