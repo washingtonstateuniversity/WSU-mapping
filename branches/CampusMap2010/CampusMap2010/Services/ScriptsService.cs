@@ -56,7 +56,7 @@ namespace campusMap.Services
         public static String Css(string files)
         {
             String name = CalculateMD5Hash(files);
-            String path = @"~/cache/script/css/";
+            String path = @"/cache/script/css/";
             String FilePath = path + name + ".css";
 
             if (!HelperService.DirExists(path))
@@ -74,7 +74,7 @@ namespace campusMap.Services
         {
 
             String name = CalculateMD5Hash(files);
-            String path = @"~/cache/script/js/";
+            String path = @"/cache/script/js/";
             String FilePath = path + name + ".js" ;
 
             if (!HelperService.DirExists(path))
