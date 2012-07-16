@@ -328,6 +328,7 @@
 #campusmap .tabedBox.infoClose:hover{ background-position:center bottom;}
 #campusmap .ui-tabs {
 	padding: 0;
+	margin:0px;
 	border: medium none;
 	width:100%;
 	-webkit-box-shadow:  0 5px 14px 5px rgba(0, 0, 0, 0.4);
@@ -341,6 +342,7 @@
 	-khtml-border-bottom-right-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
+
 #campusmap .ui-widget-header{height:17px;}
 
 #campusmap .ui-tabs .ui-tabs-nav{padding: 0.2em 0 0;
