@@ -71,7 +71,7 @@ namespace campusMap
                 HttpRequest httpRequest = HttpContext.Current.Request;
                 if (httpRequest.Browser.IsMobileDevice)
                 {
-                    Response.Redirect("http://goo.gl/maps/4P71");
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71"); 
                 }
                 /*if (Request.Headers["User-Agent"] != null)
                 {
