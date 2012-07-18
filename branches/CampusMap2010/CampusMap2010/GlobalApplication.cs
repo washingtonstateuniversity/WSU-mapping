@@ -66,12 +66,19 @@ namespace campusMap
                 // I'm eating this error because it's just handy, not necessary
             }
 
+
+            //OnRequest.ForCss("~/Content/css/min/Combined.css");
+
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
             try
             {
                 HttpRequest httpRequest = HttpContext.Current.Request;
                 if (httpRequest.Browser.IsMobileDevice)
                 {
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71"); 
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                 }
                 /*if (Request.Headers["User-Agent"] != null)
                 {
@@ -84,18 +91,11 @@ namespace campusMap
                     if (Request.UserAgent.ToUpper().Contains("MIDP") || Request.UserAgent.ToUpper().Contains("CLDC"))
                         Response.Redirect("http://goo.gl/maps/4P71");
                 }*/
-            
+
             }
             catch
             {
             }
-            //OnRequest.ForCss("~/Content/css/min/Combined.css");
-
-        }
-
-        protected void Session_Start(object sender, EventArgs e)
-        {
-
             if (Authentication.logged_in())
             {
                 String username = Authentication.authenticate();
