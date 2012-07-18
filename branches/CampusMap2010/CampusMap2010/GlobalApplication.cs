@@ -66,8 +66,7 @@ namespace campusMap
                 // I'm eating this error because it's just handy, not necessary
             }
 
-            try
-            {
+            
                 if (Context.Request.Headers["User-Agent"] != null)
                 {
                     if (Context.Request.Browser["IsMobileDevice"] != null && Context.Request.Browser["IsMobileDevice"] == "true")
@@ -79,6 +78,8 @@ namespace campusMap
                     if (Context.Request.UserAgent.ToUpper().Contains("MIDP") || Context.Request.UserAgent.ToUpper().Contains("CLDC"))
                         Context.Response.Redirect("http://goo.gl/maps/4P71");
                 }
+            try
+            {
             }
             catch
             {
