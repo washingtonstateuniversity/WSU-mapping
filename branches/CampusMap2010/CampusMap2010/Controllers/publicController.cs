@@ -217,7 +217,7 @@
             //[Layout("central")]
             public void central(string[] cat, int activePlace)
             {
-                //log.Info(HttpContext.Current.Request.Browser.IsMobileDevice);
+                log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
                 if (HttpContext.Current.Request.Headers["User-Agent"] != null)
                 {
                     if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
