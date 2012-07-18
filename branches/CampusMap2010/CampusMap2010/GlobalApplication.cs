@@ -67,16 +67,16 @@ namespace campusMap
             }
 
             
-                if (Context.Request.Headers["User-Agent"] != null)
+                if (Request.Headers["User-Agent"] != null)
                 {
-                    if (Context.Request.Browser["IsMobileDevice"] != null && Context.Request.Browser["IsMobileDevice"] == "true")
-                        Context.Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Context.Request.Browser["BlackBerry"] != null && Context.Request.Browser["BlackBerry"] == "true")
-                        Context.Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Context.Request.UserAgent.ToLower().Contains("iphone"))
-                        Context.Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Context.Request.UserAgent.ToUpper().Contains("MIDP") || Context.Request.UserAgent.ToUpper().Contains("CLDC"))
-                        Context.Response.Redirect("http://goo.gl/maps/4P71");
+                    if (Request.Browser["IsMobileDevice"] != null && Request.Browser["IsMobileDevice"] == "true")
+                        Response.Redirect("http://goo.gl/maps/4P71");
+                    if (Request.Browser["BlackBerry"] != null && Request.Browser["BlackBerry"] == "true")
+                        Response.Redirect("http://goo.gl/maps/4P71");
+                    if (Request.UserAgent.ToLower().Contains("iphone"))
+                        Response.Redirect("http://goo.gl/maps/4P71");
+                    if (Request.UserAgent.ToUpper().Contains("MIDP") || Request.UserAgent.ToUpper().Contains("CLDC"))
+                        Response.Redirect("http://goo.gl/maps/4P71");
                 }
             try
             {
