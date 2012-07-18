@@ -384,7 +384,7 @@ function loadData(data,callback){
 				var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
 							'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
 							content+
-							'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow"></span></div>'+
+							'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
 						'</div>';
 		
 				/* so need to remove this and create the class for it */
@@ -431,6 +431,7 @@ function loadData(data,callback){
 									pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 								});/*	*/
 							}
+							$('.infoBox a').attr('target','_blank');
 							$('a.gouped').off().on('click',function(e){
 								e.preventDefault();
 								e.stopPropagation();
@@ -506,11 +507,8 @@ function loadData(data,callback){
 								ib[i].setOptions({enableEventPropagation: false});
 								$('#centralMap').gmap('set_scroll_zoom');
 							});
-							/*var pos = markerLog[i].getPosition();
-							var z = $('#centralMap').gmap('get','map').getZoom(); 
-							var mH = $('#centralMap').height();
-							var latOffset = 0;*/
 							ib[i].rePosition();
+							ibHover =  false;
 							prep();
 						}
 				};
@@ -560,6 +558,7 @@ function loadData(data,callback){
 						$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
 						$('#selectedPlaceList_area .active').removeClass('active');
 						$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
+						ibHover =  false;
 						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
 					})
 				.rightclick(function(event){showContextMenu(event.latLng);})
@@ -1074,6 +1073,7 @@ $(document).ready(function(){
 			e.stopPropagation();
 			e.preventDefault();
 			var trigger=$(this);
+			$.colorbox.remove();
 			$.colorbox({
 				html:function(){
 					return '<div id="printPdfs">'+
@@ -1164,6 +1164,7 @@ $(document).ready(function(){
 
 				e.preventDefault();
 				var trigger=$(this);
+				$.colorbox.remove()
 				$.colorbox({
 					rel:'gouped',
 					html:function(){

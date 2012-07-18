@@ -854,7 +854,7 @@
                                     {
                                         autoAccessibility += @"
                                         {
-                                            ""block"":""" + infoTitle + "<ul>" + stripNonSenseContent(renderedTxt) + @"</ul>" + reportError + @""",
+                                            ""block"":""" + infoTitle + "<ul>" + jsonEscape(renderedTxt) + @"</ul>" + reportError + @""",
                                             ""title"":""Accessibility""
                                         }";
                                     }
@@ -889,7 +889,7 @@
                                             {
 
                                                 //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
-                                                string content = stripNonSenseContent(autoFeildProcessing(item, tab.content));
+                                                string content = jsonEscape(autoFeildProcessing(item, tab.content));
                                                 if (!String.IsNullOrWhiteSpace(content))
                                                 {
                                                     tabStr += @"
@@ -918,7 +918,7 @@
                                     }
                                     else
                                     {
-                                        infotabs += @"""" + infoTitle + mainimage + stripNonSenseContent(details) + reportError + @"""";
+                                        infotabs += @"""" + infoTitle + mainimage + jsonEscape(details) + reportError + @"""";
                                     }
                                 }
 
@@ -932,7 +932,7 @@
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
-                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(stripNonSenseContent(item.summary), false) : Truncate(StripHtml(stripNonSenseContent(details), false), 65) + "...") + @""",
+                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
                                             ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
@@ -943,7 +943,7 @@
                                             },
                                     ""shapes"":" + loadPlaceShape(item) + @"
                                 }";
-                                placeList=stripNonSenseContent(placeList);
+                                placeList = jsonEscape(placeList);
 
                                 // the goal with this is to make sure the maps don't break by simple testing that the data can be read
                                 // if it can not be read then we place a friendly showing that the data is bad to keep the map working

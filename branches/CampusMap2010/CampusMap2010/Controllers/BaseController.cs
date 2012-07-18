@@ -35,50 +35,55 @@ namespace campusMap.Controllers
 
         #region STRING METHODS
             public string Tabs(int n)
-        {
-            return new String('\t', n);
-        }
-            public static string Truncate(string source, int length)
-        {
-            if (source.Length > length)
             {
-                source = source.Substring(0, length);
+                return new String('\t', n);
             }
-            return source;
-        }
+            public static string Truncate(string source, int length)
+            {
+                if (source.Length > length)
+                {
+                    source = source.Substring(0, length);
+                }
+                return source;
+            }
             //-jb || this will repeate str and {$i} is a the number pattern insertion
             public string repeatStr(string str,int n)
-        {
-            StringBuilder sb = new StringBuilder(str.Length * n);
-            for (int i = 0; i < n; i++)
             {
-                string tmp = "";
-                if (str.Contains("{$i}"))
+                StringBuilder sb = new StringBuilder(str.Length * n);
+                for (int i = 0; i < n; i++)
                 {
-                    tmp = str.Replace("{$i}", "" + i);
+                    string tmp = "";
+                    if (str.Contains("{$i}"))
+                    {
+                        tmp = str.Replace("{$i}", "" + i);
+                    }
+                    else
+                    {
+                        tmp = str;
+                    }
+                    sb.Append(tmp);
                 }
-                else
-                {
-                    tmp = str;
-                }
-                sb.Append(tmp);
+                return sb.ToString();
             }
-            return sb.ToString();
-        }
             public string capitalize(string s)
-        {
-            // Check for empty string.
-            if (string.IsNullOrEmpty(s))
             {
-                return string.Empty;
+                // Check for empty string.
+                if (string.IsNullOrEmpty(s))
+                {
+                    return string.Empty;
+                }
+                // Return char and concat substring.
+                return char.ToUpper(s[0]) + s.Substring(1);
             }
-            // Return char and concat substring.
-            return char.ToUpper(s[0]) + s.Substring(1);
-        }
+
+            public String htmlSafeEscape(String str)
+            {
+                return str.Replace("&", "&amp;").Replace("\"", "&quot;").Replace("\'", "&apos;");
+            }
 
             public String Escape(String str)
             {
-                return str.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\'", "&apos;");
+                return htmlSafeEscape(str).Replace("<", "&lt;").Replace(">", "&gt;");
             }
             const string HTML_TAG_PATTERN = "<.*?>";
             public string StripHTML(string inputString)
@@ -86,25 +91,39 @@ namespace campusMap.Controllers
                 return Regex.Replace
                     (inputString, HTML_TAG_PATTERN, string.Empty);
             }
+
             public string stripNonSenseContent(string inputString)
             {
+                return stripNonSenseContent(inputString,false);
+            }
+            public string stripNonSenseContent(string inputString,bool stripComments)
+            {
                 String output = Regex.Replace(inputString, @"<p>\s{0,}</p>", string.Empty);
-                        output = Regex.Replace(output, @"\s{3,}", string.Empty);
+                        output = Regex.Replace(output, @"\t{1,}", " ");
                         output = output.Replace('\t', ' ');
-                        output = output.Replace("\\r\\n", "");
-                        output = output.Replace("\r\n", "");
-                        output = output.Replace(@"
-", "");
-                        output = output.Replace("\"", @"\""");
-                        output = output.Replace("\\\"", "\"");
+                        output = Regex.Replace(output, @"\r\n{1,}", " ");
+                        output = Regex.Replace(output, @"""\s{0,}(.*?)\s{0,}""", @"""$1""");
+                        output = Regex.Replace(output, @"'\s{0,}(.*?)\s{0,}'", @"'$1'");
+                        output = Regex.Replace(output, @">\s{1,}<", @"><");//set for code with idea never presented in copy too
+                        if (stripComments) output = Regex.Replace(output, @"<!--(?!<!)[^\[>].*?-->", @"");
+                //Just in case it's in type string
+                        output = output.Replace("\\r\\n", " ");
+                        output = output.Replace("\r\n", " ");
                         output = output.Replace('\r', ' ');
                         output = output.Replace('\n', ' ');
-                        
+                //the retrun is for real.  clears both dos and machine carrage returns but not string
+                        output = output.Replace(@"
+", "");
+                        output = Regex.Replace(output, @"\s{2,}", " ");
                 return output;
             }
-
-
-
+            public string jsonEscape(string inputString)
+            {
+                String output = stripNonSenseContent(inputString);
+                output = output.Replace("\"", @"\""");
+                output = output.Replace("\\\"", "\"");
+                return output;
+            }
         #endregion
 
         #region MCV INFO METHODS

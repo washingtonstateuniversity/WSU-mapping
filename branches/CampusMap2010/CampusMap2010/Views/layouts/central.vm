@@ -29,4 +29,4 @@
 	</body>
 </html>
 
-#end$Controller.stripNonSenseContent($html)
+#end$Controller.stripNonSenseContent($html,true)

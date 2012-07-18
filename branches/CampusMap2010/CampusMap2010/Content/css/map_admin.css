@@ -365,7 +365,11 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected{ padding-bottom: 1px;}
 #campusmap .ui-tabs .ui-tabs-nav li.ui-tabs-selected a{color:#262a2d;}
 #campusmap .ui-tabs .ui-tabs-panel-cap{background-color: #262A2D;bottom: -7px;height: 7px;left: 0;position: absolute;width: 100%;z-index: 9;}
-#campusmap .ui-tabs .ui-tabs-panel-cap .arrow{background: url("../../Content/images/iw_arrow.png") no-repeat scroll center center transparent;bottom:-78px;display: block; height: 86px;left:162.5px; position: absolute;width:74px;} 	
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow{background: url("../../Content/images/iw_arrow.png") no-repeat scroll center center transparent;bottom:-78px;display: block; height:17.2px;left:162.5px; position: absolute;width:74px;} 	
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow.L5{background-position: left 0;bottom: -9px;left: 162.5px;width: 74px;} 
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow.L4{background-position: -8px -17.2px;bottom: -25.4px;left: 170.5px;width: 59px;} 
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow.L3{background-position: -13px -35px;bottom: -42.6px;left: 175.5px;width: 50px;} 
+#campusmap .ui-tabs .ui-tabs-panel-cap .arrow.L2{background-position: -15px -51px;bottom: -59.8px;left: 177.5px;width: 46px;} 
 
 /* info boxes content */	
 
