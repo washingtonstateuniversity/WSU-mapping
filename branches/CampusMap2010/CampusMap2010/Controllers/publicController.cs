@@ -116,6 +116,12 @@
             #region URL rendering
                 public void render()
                 {
+                    HttpRequest httpRequest = HttpContext.Current.Request;
+                    if (httpRequest.Browser.IsMobileDevice)
+                    {
+                        HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                    }
+
                     String everUrl = Context.Request.RawUrl;
                     // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
                     // So strip it all out except http://sitename/pagetorender.html

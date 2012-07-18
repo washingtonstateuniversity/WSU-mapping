@@ -73,11 +73,6 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            HttpRequest httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Browser.IsMobileDevice)
-            {
-                HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-            }
             if (Authentication.logged_in())
             {
                 String username = Authentication.authenticate();
