@@ -217,8 +217,8 @@
             //[Layout("central")]
             public void central(string[] cat, int activePlace)
             {
-                HttpRequest httpRequest = HttpContext.Current.Request;
-                if (httpRequest.Browser.IsMobileDevice)
+   
+                if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true")
                 {
                     HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                 }
