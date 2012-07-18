@@ -66,16 +66,16 @@ namespace campusMap
                 // I'm eating this error because it's just handy, not necessary
             }
 
-            if (HttpContext.Current.Request.Headers["User-Agent"] != null)
+            if (Context.Request.Headers["User-Agent"] != null)
             {
-                if (HttpContext.Current.Request.Browser["IsMobileDevice"] != null && HttpContext.Current.Request.Browser["IsMobileDevice"] == "true")
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                if (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                if (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                if (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                if (Context.Request.Browser["IsMobileDevice"] != null && Context.Request.Browser["IsMobileDevice"] == "true")
+                    Context.Response.Redirect("http://goo.gl/maps/4P71");
+                if (Context.Request.Browser["BlackBerry"] != null && Context.Request.Browser["BlackBerry"] == "true")
+                    Context.Response.Redirect("http://goo.gl/maps/4P71");
+                if (Context.Request.UserAgent.ToLower().Contains("iphone"))
+                    Context.Response.Redirect("http://goo.gl/maps/4P71");
+                if (Context.Request.UserAgent.ToUpper().Contains("MIDP") || Context.Request.UserAgent.ToUpper().Contains("CLDC"))
+                    Context.Response.Redirect("http://goo.gl/maps/4P71");
             }
             //OnRequest.ForCss("~/Content/css/min/Combined.css");
 
