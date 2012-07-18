@@ -224,6 +224,8 @@
                         || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
                         || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
                         || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
+                        || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
+                        || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
                         )
                     {
                         HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
