@@ -45,6 +45,13 @@ namespace campusMap
 */
         public void Application_OnStart()
         {
+
+
+
+
+
+
+
             container = new WindsorContainer(new XmlInterpreter());
             //
             
@@ -59,8 +66,18 @@ namespace campusMap
                 // I'm eating this error because it's just handy, not necessary
             }
 
-
-            OnRequest.ForCss("~/Content/css/min/Combined.css");
+            if (HttpContext.Current.Request.Headers["User-Agent"] != null)
+            {
+                if (HttpContext.Current.Request.Browser["IsMobileDevice"] != null && HttpContext.Current.Request.Browser["IsMobileDevice"] == "true")
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                if (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                if (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                if (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
+                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+            }
+            //OnRequest.ForCss("~/Content/css/min/Combined.css");
 
         }
 
