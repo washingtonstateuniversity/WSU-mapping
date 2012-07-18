@@ -73,28 +73,10 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            try
+            HttpRequest httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Browser.IsMobileDevice)
             {
-                HttpRequest httpRequest = HttpContext.Current.Request;
-                if (httpRequest.Browser.IsMobileDevice)
-                {
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                }
-                /*if (Request.Headers["User-Agent"] != null)
-                {
-                    if (Request.Browser["IsMobileDevice"] != null && Request.Browser["IsMobileDevice"] == "true")
-                        Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Request.Browser["BlackBerry"] != null && Request.Browser["BlackBerry"] == "true")
-                        Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Request.UserAgent.ToLower().Contains("iphone"))
-                        Response.Redirect("http://goo.gl/maps/4P71");
-                    if (Request.UserAgent.ToUpper().Contains("MIDP") || Request.UserAgent.ToUpper().Contains("CLDC"))
-                        Response.Redirect("http://goo.gl/maps/4P71");
-                }*/
-
-            }
-            catch
-            {
+                HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
             }
             if (Authentication.logged_in())
             {
