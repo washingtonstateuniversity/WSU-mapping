@@ -226,6 +226,7 @@
                         || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
                         || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
                         || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
+                        || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("blackBerry")
                         )
                     {
                         HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
