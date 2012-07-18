@@ -68,7 +68,12 @@ namespace campusMap
 
             try
             {
-                if (Request.Headers["User-Agent"] != null)
+                HttpRequest httpRequest = HttpContext.Current.Request;
+                if (httpRequest.Browser.IsMobileDevice)
+                {
+                    Response.Redirect("http://goo.gl/maps/4P71");
+                }
+                /*if (Request.Headers["User-Agent"] != null)
                 {
                     if (Request.Browser["IsMobileDevice"] != null && Request.Browser["IsMobileDevice"] == "true")
                         Response.Redirect("http://goo.gl/maps/4P71");
@@ -78,7 +83,7 @@ namespace campusMap
                         Response.Redirect("http://goo.gl/maps/4P71");
                     if (Request.UserAgent.ToUpper().Contains("MIDP") || Request.UserAgent.ToUpper().Contains("CLDC"))
                         Response.Redirect("http://goo.gl/maps/4P71");
-                }
+                }*/
             
             }
             catch
