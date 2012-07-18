@@ -36,7 +36,7 @@ namespace campusMap.Filters
             //}
             // Sets the principal as the current user
             context.CurrentUser = user;
-
+            
             // Checks if it is OK
             if (context.CurrentUser == null ||
                 !context.CurrentUser.Identity.IsAuthenticated ||
