@@ -217,22 +217,18 @@
             //[Layout("central")]
             public void central(string[] cat, int activePlace)
             {
-   
-
-
-                if (Request.Headers["User-Agent"] != null)
+                //log.Info(HttpContext.Current.Request.Browser.IsMobileDevice);
+                if (HttpContext.Current.Request.Headers["User-Agent"] != null)
                 {
-                        if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
-                            || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
-                            || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
-                            || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
-                            )
-                        {
-                            HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                        }
-
+                    if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
+                        || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
+                        || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
+                        || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
+                        )
+                    {
+                        HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                    }
                 }
-
 
                 String urlQueries="";
                 foreach (string category in cat)
