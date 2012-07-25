@@ -931,7 +931,7 @@ $(document).ready(function(){
 			}
 		});
 		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=450?155:201)+listOffset)}).trigger("resize");
+			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=600?($(window).width()<=404?0:155):201)+listOffset)}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 				}

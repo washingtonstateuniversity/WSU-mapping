@@ -3,6 +3,19 @@
     using campusMap.Services;
     using System.Text.RegularExpressions;
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
+using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.IO;
+using System.ServiceModel.Web;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Json;
+    using System.Dynamic;
+    using System.Security.Permissions;
+    using System.Web.Script.Serialization;
     using campusMap.Models;
     using Castle.ActiveRecord;
     using MonoRailHelper;
@@ -170,5 +183,123 @@ namespace campusMap.Controllers
             }
          #endregion
 
+        #region methodbase
+
+        #endregion
+
+
+        #region Method extentions
+
+        public static Dictionary<string, string> getUrlParmas_obj()
+        {
+            String everUrl = System.Web.HttpContext.Current.Request.RawUrl;
+            // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
+            // So strip it all out except http://sitename/pagetorender.html
+            everUrl = Regex.Replace(everUrl, "(.*:80)(.*)", "$2");
+            everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
+            String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
+            String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
+
+            Dictionary<string, string> queryparams = new Dictionary<string, string>();
+            if (urlwithnoparams != querystring)
+            {
+                foreach (string kvp in querystring.Split(','))
+                {
+                    queryparams.Add(kvp.Split('=')[0], kvp.Split('=')[1]);
+                }
+            }
+            return queryparams;
+        }
+
+        public static Dictionary<string, string> getPostParmas_obj()
+        {
+            Dictionary<string, string> queryparams = new Dictionary<string, string>();
+            foreach (String key in System.Web.HttpContext.Current.Request.Form.AllKeys)
+            {
+                queryparams.Add(key, System.Web.HttpContext.Current.Request.Form[key]);
+            }
+            return queryparams;
+        }
+        public static Dictionary<string, string> getPostParmasAsObj_obj(string name)
+        {
+            Dictionary<string, string> queryparams = new Dictionary<string, string>();
+            foreach (String key in System.Web.HttpContext.Current.Request.Form.AllKeys)
+            {
+                if (key.StartsWith(name))
+                {
+                    queryparams.Add(key.Split('.')[1], System.Web.HttpContext.Current.Request.Form[key]);
+                }
+            }
+            return queryparams;
+        }
+
+        public static String Serialize(dynamic data)
+        {
+            var serializer = new DataContractJsonSerializer(data.GetType());
+            var ms = new MemoryStream();
+            serializer.WriteObject(ms, data);
+
+            return Encoding.UTF8.GetString(ms.ToArray());
+        } 
+
+
+        #endregion
+
+
+
     }
+
+    public class DynamicEntity : DynamicObject
+    {
+        private IDictionary<string, object> _values;
+
+        public DynamicEntity(IDictionary<string, object> values)
+        {
+            _values = values;
+        }
+
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (_values.ContainsKey(binder.Name))
+            {
+                result = _values[binder.Name];
+                return true;
+            }
+            result = null;
+            return false;
+        }
+    }
+    [Serializable]
+    public class MyJsonDictionary<K, V> : ISerializable
+    {
+        Dictionary<K, V> dict = new Dictionary<K, V>();
+
+        public MyJsonDictionary() { }
+
+        protected MyJsonDictionary(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            foreach (K key in dict.Keys)
+            {
+                info.AddValue(key.ToString(), dict[key]);
+            }
+        }
+
+        public void Add(K key, V value)
+        {
+            dict.Add(key, value);
+        }
+
+        public V this[K index]
+        {
+            set { dict[index] = value; }
+            get { return dict[index]; }
+        }
+    } 
+
 }

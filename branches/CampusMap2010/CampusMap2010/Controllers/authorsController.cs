@@ -99,11 +99,11 @@ namespace campusMap.Controllers
 
 
         }
-
+        
         public bool canControl(authors user)
         {
             bool flag = false;
-            switch (user.access_levels.title)
+            switch (user.access_levels.name)
             {
                 case "Admin": flag = true; break;
 
@@ -115,7 +115,7 @@ namespace campusMap.Controllers
         public bool canChangeLevel(authors user)
         {
             bool flag = false;
-            switch (user.access_levels.title)
+            switch (user.access_levels.name)
             {
                 case "Admin": flag = true; break;
 
@@ -134,6 +134,25 @@ namespace campusMap.Controllers
             {
                 RedirectToAction("list");
                 return;
+            }
+
+
+            if (cancel != null)
+            {
+                RedirectToAction("list");
+                return;
+            }
+            if (author.access_levels.id == 0)
+            {
+                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+                baseEx.Add(Expression.Eq("default", true));
+                author.access_levels.id = ActiveRecordBase<access_levels>.FindFirst(baseEx.ToArray()).id;
+               
+                //List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+ /*
+                author.access_levels.id = ActiveRecordBase<access_levels>.FindFirst(new List<AbstractCriterion>(){ Expression.Eq("default", false) }).id;
+ */
+                
             }
 
             /*author.place_types.Clear();

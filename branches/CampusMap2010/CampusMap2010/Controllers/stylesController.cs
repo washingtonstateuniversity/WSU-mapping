@@ -511,7 +511,7 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<map_views>.Delete(view);
             CancelLayout();
             RedirectToAction("list");

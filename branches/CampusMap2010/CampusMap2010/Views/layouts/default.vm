@@ -22,8 +22,26 @@ ul.menu li.liTop:hover + li.close {z-index:10;}
 		#parse("admin/main_menu.vm")
 		
 		<div id="content">
+		
+		
+		
 			<div id="main">
-				<div id="content_area"><div id="content_tar">$childContent</div></div> 
+				<div id="content_area"><div id="content_tar">
+#if($Flash.message)
+	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+	  <p style="line-height: 15px;padding-bottom: 0;">
+		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
+	  </p>
+	</div>
+#end
+#if($Flash.error)
+	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+	  <p style="line-height: 15px;padding-bottom: 0;">
+		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
+	  </p>
+	</div>
+#end			
+				$childContent</div></div> 
 			</div>
 		</div>
 		#parse("admin/footer.vm")

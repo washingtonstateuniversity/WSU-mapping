@@ -12,6 +12,7 @@
     using System.Web;
     using MonoRailHelper;
     using System.Xml;
+    using System.Linq;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.Drawing.Drawing2D;
@@ -89,10 +90,27 @@ namespace campusMap.Services
             return active;
         }
 
+        public bool setSessionPrivleage(authors user, string privilege)
+        {
+            bool flag = user.access_levels.privileges.Any(item => item.alias == privilege);
+            HttpContext.Current.Session[privilege] = flag;
+            return flag;
+        }
+        public bool checkPrivleage(string privilege){
+            return checkPrivleage(getUser(),privilege);
+        }
+        public bool checkPrivleage(authors user, string privilege)
+        {
+            bool flag = HttpContext.Current.Session[privilege] == null ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
+            return flag;
+        }
+
+
+        /* remove */
         public static Boolean canPublish(authors user)
         {
             bool flag = false;
-            switch (user.access_levels.title)
+            switch (user.access_levels.name)
             {
                 case "Admin": flag = true; break;
                 case "Editor": flag = true; break;

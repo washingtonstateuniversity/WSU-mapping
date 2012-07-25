@@ -335,7 +335,7 @@ namespace campusMap.Controllers
         public void _delete_campuses(int id)
         {
             campus campuses = ActiveRecordBase<campus>.Find(id);
-            Flash["massage"] = "A campuse, <strong>" + campuses.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A campuse, <strong>" + campuses.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<campus>.Delete(campuses);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -363,7 +363,7 @@ namespace campusMap.Controllers
         public void _delete_colleges(int id)
         {
             colleges college = ActiveRecordBase<colleges>.Find(id);
-            Flash["massage"] = "A college, <strong>" + college.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A college, <strong>" + college.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<colleges>.Delete(college);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -391,7 +391,7 @@ namespace campusMap.Controllers
         public void _delete_departments(int id)
         {
             departments department = ActiveRecordBase<departments>.Find(id);
-            Flash["massage"] = "A department, <strong>" + department.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A department, <strong>" + department.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<departments>.Delete(department);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -419,7 +419,7 @@ namespace campusMap.Controllers
         public void _delete_admindepartments(int id)
         {
             admindepartments admindepartment = ActiveRecordBase<admindepartments>.Find(id);
-            Flash["massage"] = "A admin department, <strong>" + admindepartment.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A admin department, <strong>" + admindepartment.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<admindepartments>.Delete(admindepartment);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -447,7 +447,7 @@ namespace campusMap.Controllers
         public void _delete_programs(int id)
         {
             programs program = ActiveRecordBase<programs>.Find(id);
-            Flash["massage"] = "A program, <strong>" + program.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A program, <strong>" + program.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<programs>.Delete(program);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -475,7 +475,7 @@ namespace campusMap.Controllers
         public void _delete_schools(int id)
         {
             schools school = ActiveRecordBase<schools>.Find(id);
-            Flash["massage"] = "A school, <strong>" + school.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A school, <strong>" + school.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<schools>.Delete(school);
             CancelLayout();
             RedirectToAction("wsu_matrix");
@@ -701,7 +701,7 @@ namespace campusMap.Controllers
         public bool canEdit(place place, authors user)
         {
             bool flag = false;
-           switch (user.access_levels.title)
+           switch (user.access_levels.name)
             {
                 case "Admin":
                     {
@@ -1681,7 +1681,7 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
             place place = ActiveRecordBase<place>.Find(id);
-            Flash["massage"] = "A Place, <strong>" + place.prime_name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A Place, <strong>" + place.prime_name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place>.Delete(place);
             CancelLayout();
             RedirectToAction("list");
@@ -1689,7 +1689,7 @@ namespace campusMap.Controllers
         public void delete_type(int id)
         {
             place_types place_type = ActiveRecordBase<place_types>.Find(id);
-            Flash["massage"] = "A Place type, <strong>" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A Place type, <strong>" + place_type.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place_types>.Delete(place_type);
             CancelLayout();
             RedirectToAction("list");
@@ -1698,7 +1698,7 @@ namespace campusMap.Controllers
         public void delete_name_type(int id)
         {
             place_name_types place_type = ActiveRecordBase<place_name_types>.Find(id);
-            Flash["massage"] = "A Name Type for places, <strong>" + place_type.type + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A Name Type for places, <strong>" + place_type.type + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place_name_types>.Delete(place_type);
             CancelLayout();
             RedirectToAction("list");
@@ -1706,7 +1706,7 @@ namespace campusMap.Controllers
         public void delete_field(int id)
         {
             field_types place_fields = ActiveRecordBase<field_types>.Find(id);
-            Flash["massage"] = "A field for places, <strong>" + place_fields.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A field for places, <strong>" + place_fields.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<field_types>.Delete(place_fields);
             CancelLayout();
             RedirectToAction("list");

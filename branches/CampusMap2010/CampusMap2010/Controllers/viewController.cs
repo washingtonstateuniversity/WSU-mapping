@@ -178,7 +178,7 @@ namespace campusMap.Controllers
         public bool canEdit(map_views views, authors user)
         {
             bool flag = false;
-            switch (user.access_levels.title)
+            switch (user.access_levels.name)
             {
                 case "Admin":
                     {
@@ -416,7 +416,7 @@ namespace campusMap.Controllers
         public void delete_nav(int id)
         {
             categories nav = ActiveRecordBase<categories>.Find(id);
-            Flash["massage"] = "A Place type, <strong>" + nav.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "A Place type, <strong>" + nav.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<categories>.Delete(nav);
             CancelLayout();
             RedirectToAction("list");
@@ -641,7 +641,7 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            Flash["massage"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<map_views>.Delete(view);
             CancelLayout();
             RedirectToAction("list");

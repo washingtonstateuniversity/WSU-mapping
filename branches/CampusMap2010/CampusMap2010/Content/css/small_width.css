@@ -5,5 +5,5 @@ a[href='http://www.about.wsu.edu/statewide/']{display:none;}
 #nav {padding: 0 10px 10px 7px;width: 138px;margin: 0;}
 #logo{background: url("http://images.wsu.edu/global/bg-logo3.jpg") no-repeat scroll left center #FFFFFF;width: 155px;}
 #centralMap_wrap {margin: 0 0 0 155px;}
-#siteID h1 {margin: 0 0 0 145px;}
+#siteID h1 {font-size: 1.35em;margin: 19px 0 0 145px;}
 #localfooter{padding-left: 0px;}

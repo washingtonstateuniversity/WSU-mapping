@@ -1,0 +1,8 @@
+html, body {background-color: #fff;height: 100%;}
+#globalnav ul{display:none;}
+#header_bar{margin: 0;}
+#nav {padding: 0 10px 10px 7px;width: 138px;margin: 0;  position:absolute;top:25px;left:0px;}
+#logo{background: url("../images/mobile_logo.png") no-repeat scroll left center #FFFFFF;width:32px;height:25px; position:absolute;top:0px;left:0px;}
+#centralMap_wrap {margin: 0 0 0 0px;}
+#siteID h1 {margin: 0 0 0 145px;}
+#localfooter{padding-left: 0px;}

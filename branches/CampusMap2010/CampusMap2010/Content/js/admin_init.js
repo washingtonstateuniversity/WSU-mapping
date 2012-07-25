@@ -247,7 +247,26 @@ $(function() {
 		$(".lazy img,img.lazy").lazyload();
 	}
 	
-	
+	if($("input.all").length){
+		$("input.all").live('click',function(e) {
+			var ele = $(this);
+			if(!ele.attr('checked')){
+				ele.closest('div').find('select option').removeAttr('selected');
+			}else{
+				ele.closest('div').find('select option').attr('selected',true);
+			}
+		});
+		
+		$("input.all").closest('div').find('select').on('mouseup',function(){
+			if($(this).find('option').size() == $(this).find(':selected').size()){
+				$(this).closest('div').find('input.all').attr("checked",true);
+			}else{
+				$(this).closest('div').find('input.all').removeAttr("checked");
+			}
+		});
+		
+		
+	}
 	
     if(typeof(tinyMCE) !== 'undefined' && $('textarea.tinyEditor').length>0){
 		$.each($('textarea.tinyEditor'),function(i,v){

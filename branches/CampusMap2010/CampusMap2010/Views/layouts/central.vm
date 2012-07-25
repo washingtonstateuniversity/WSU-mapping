@@ -9,15 +9,12 @@
 	<body id='campusmap' class="central_layout ${controller.getView()} ${controller.getAction()}">
 	
 		<div id="header_bar">
-		
 			#parse("layouts/assets_central/header_html.vm")
-			
 		</div>
 		<div id="nav">
-		
 			#parse("layouts/assets_central/main_menu.vm")
-			
 		</div>
+		
 		$childContent
 		
 		#parse("layouts/assets_central/footer.vm")

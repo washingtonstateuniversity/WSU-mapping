@@ -9,6 +9,7 @@
     using campusMap.Models;
     using MonoRailHelper;
     using System.IO;
+using System.Linq;
     using System.Net;
     using System.Web;
     using NHibernate.Criterion;
@@ -19,9 +20,10 @@
     using System.Net.Sockets;
     using System.Web.Mail;
     using campusMap.Services;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Utilities;
-    using Newtonsoft.Json.Linq;
+    using System.Dynamic;
+    using System.Linq;
+    using System.Web.Script.Serialization;
+    using System.Runtime.Serialization; 
 
 #endregion
 namespace campusMap.Controllers
@@ -30,7 +32,7 @@ namespace campusMap.Controllers
     public class adminController : SecureBaseController
     {
         #region JSON OUTPUT
-            public void get_pace_type()
+           /* public void get_pace_type()
             {
                 CancelView();
                 CancelLayout();
@@ -48,7 +50,7 @@ namespace campusMap.Controllers
                 string json = JsonConvert.SerializeObject(type_list);
                 RenderText(json);
             }
-            /*public void get_place_tags(string type)
+            public void get_place_tags(string type)
             {
                 CancelView();
                 CancelLayout();
@@ -153,6 +155,123 @@ namespace campusMap.Controllers
                 PropertyBag["activeUsers"] = activeUser;
                 RenderView("../admin/splash");
             }
+            public void _list_siteSettings()
+            {
+                var values = new Dictionary<string, object>();
+                values.Add("Title", "Hello World!");
+                values.Add("Text", "My first post");
+                values.Add("Tags", new[] { "hello", "world" });
+
+                var post = new DynamicEntity(values);
+
+                dynamic dynPost = post;
+                //var text = dynPost.Text;
+
+
+                PropertyBag["text"] = dynPost.Text;
+
+
+
+
+
+
+
+                RenderView("../admin/settings/settings");
+            }
+
+        /*
+            public static string get_userSettingStr(authors user)
+            {
+                List<AbstractCriterion> typeEx = new List<AbstractCriterion>();
+                typeEx.Add(Expression.Eq("type", field_type));
+                if (!object.ReferenceEquals(_place, null)) typeEx.Add(Expression.Eq("owner", _place.id));
+                fields field = ActiveRecordBase<fields>.FindFirst(typeEx.ToArray());
+                string ele_str = FieldsService.getfieldmodel_dynamic(field_type.attr.ToString(), field == null ? null : field.value.ToString());
+                return ele_str;
+            }
+        */
+            public static dynamic get_user_setting(string settingName)
+            {
+                dynamic value = false;
+                value = get_user_setting(UserService.getUser(), settingName);
+                return value;
+            }
+
+            public static dynamic get_user_setting(authors user, string settingName)
+            {
+                dynamic value = false;
+                var values = new Dictionary<string, object>();
+                if (!String.IsNullOrWhiteSpace(user.settings.attr) && user.settings.attr != "{}")
+                {
+                    var jss = new JavaScriptSerializer();
+                    var settings = jss.Deserialize<Dictionary<string, dynamic>>(user.settings.attr);
+                    settings.ToList<KeyValuePair<string, dynamic>>();
+                    foreach (KeyValuePair<string, dynamic> setting in settings)
+                    {
+                        if (settingName == setting.Key)
+                        {
+                            value = setting.Value;
+                        }
+                    }
+                }
+                return value;
+            }
+            public void _edit_settings(int id)
+            {
+                authors user = ActiveRecordBase<authors>.Find(id);
+                /* give access by group or ownership */
+                if (user.id == UserService.getUser().id || UserService.getUser().access_levels.id == 2)
+                {
+                    var values = new Dictionary<string, object>();
+                    if (!String.IsNullOrWhiteSpace(user.settings.attr) && user.settings.attr!="{}")
+                    {
+                        var jss = new JavaScriptSerializer();
+                        var settings = jss.Deserialize<Dictionary<string, dynamic>>(user.settings.attr);
+                        settings.ToList<KeyValuePair<string, dynamic>>();
+                        foreach (KeyValuePair<string, dynamic> setting in settings)
+                        {
+                            values.Add(setting.Key, setting.Value);
+                        }
+                    }
+                    PropertyBag["settings"] = values;
+                    PropertyBag["user"] = user;
+                    RenderView("../admin/settings/_edit");
+                }
+                else
+                {
+                    Flash["message"] = "You don't have access to this user's settings";
+                    RedirectToAction("_list_siteSettings");
+                }
+            }
+            public void _save_siteSettings(
+                [ARDataBind("user", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] authors user
+                )
+            {
+
+                Dictionary<string, string> urlparams = getPostParmasAsObj_obj("settings");
+                var jss = new JavaScriptSerializer();
+                //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+
+                //var values = new Dictionary<string, object>();
+                MyJsonDictionary<String, Object> values = new MyJsonDictionary<String, Object>(); 
+
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    values.Add(_urlparams.Key, _urlparams.Value);
+                }
+                /*
+                    values.Add("Title", "Hello World!");
+                    values.Add("Text", "My first post");
+                    values.Add("Tags", new[] { "hello", "world" });
+                */
+                //var usettings = new DynamicEntity(values);
+
+                user.settings.attr = Serialize(values);//jss.Serialize(usettings);
+                ActiveRecordMediator<authors>.Save(user);
+                Flash["message"] = "Your setting were saved";
+                RedirectToAction("_list_siteSettings");
+            }
+
             public void help()
             {
                 RenderView("../admin/help");

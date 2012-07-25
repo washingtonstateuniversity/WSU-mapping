@@ -225,7 +225,7 @@
                         || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
                         || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
                         || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
-                        || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
+                        //|| HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
                         || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("blackBerry")
                         )
                     {
@@ -1433,7 +1433,7 @@
                 authors user = UserService.getUser();
                 bool able = false;
                 if(user!=null && user.access_levels !=null)
-                    switch (user.access_levels.title)
+                    switch (user.access_levels.name)
                     {
                         case "Author": able = true; break;
                         case "Editor": able = true; break;

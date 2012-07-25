@@ -73,9 +73,10 @@ $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/cen
 
 *#
 
-<link rel='stylesheet' media='screen and (max-width:450px)' href='$siteroot/Content/css/small_width.css' />
 
-
+<link rel='stylesheet' media='all and (max-width:320px)' href='$siteroot/Content/css/mobile.css' />
+<link rel='stylesheet' media='all and (min-width:321px) and (max-width:404px)' href='$siteroot/Content/css/narrow.css' />
+<link rel='stylesheet' media='all and (min-width:405px) and (max-width:600px)' href='$siteroot/Content/css/small_width.css' />
 
 
 #if($admin_js)${admin_js}#end

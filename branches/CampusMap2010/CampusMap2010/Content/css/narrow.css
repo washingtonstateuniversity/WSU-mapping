@@ -1,0 +1,49 @@
+#globalnav{height:20px;}
+#globalnav ul{display:none;}
+#embedlink{display:none;}
+#header_bar{margin: 0;height: 80px;}
+#nav {    margin: 0;
+    padding: 0;
+    position: static;}
+#logo{background: url("../images/mobile_logo.png") no-repeat scroll left center #FFFFFF;width:32px;height:25px; position:absolute;top:0px;left:0px;}
+#centralMap_wrap {margin: 0 0 0 155px;}
+#siteID {height: 22px;}
+#siteID h2{display:none;}
+#siteID h1 {    font-size: 1.05em;
+    line-height: 1em;
+    margin: 0 0 0 -17px;
+    padding-top: 3px;}
+#localfooter{padding-left: 0px;}
+
+
+
+#placeSearch {
+    position: absolute;
+    right:2px;
+    top:1px;
+}
+
+#toolbar ul{
+margin:-21px 9px 0 0;
+}
+#getDirections {
+    margin-top: 0;
+    position: absolute;
+ right: 3px;
+    top: 52px;
+    width: 145px;
+    z-index: 99;
+}
+
+#nav #main_nav {
+    padding: 0;position: absolute;
+}
+#centralMap_wrap {
+    margin: 0;
+}
+#selectedPlaceList_btn{right: -28px;}
+
+#localfooter #wsufooter{height: 31px;}
+
+
+ 
