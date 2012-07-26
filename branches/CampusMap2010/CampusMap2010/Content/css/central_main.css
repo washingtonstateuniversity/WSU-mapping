@@ -49,7 +49,11 @@ min-width:1026px;
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {padding:23px 10px 10px 24px;position: relative; z-index: 9;margin-left: 16px;}
+#nav {padding:23px 10px 10px 24px;position: relative; z-index: 99;margin-left: 16px;}
+#nav ul ul, #nav ul ul ul {
+    margin: 0;
+    padding: 3px 0 3px 3px;
+}
 #main_nav{}
 #main_nav li{width: 153px;}
 #main_nav li a{display: block !important; color:#5e6a71;}
@@ -507,7 +511,7 @@ fieldset{padding: 4px 8px 10px;}
 #selectedPlaceList{
  
 	float: left;
-	padding-right: 28px;
+	/*padding-right: 28px;*/
 	position: absolute;
 	left:0px;
 	width:0px;/* if opened 125px; */
@@ -525,7 +529,7 @@ fieldset{padding: 4px 8px 10px;}
 	
 #selectedPlaceList.ini{padding:0px;}
 	
-#selectedPlaceList_btn{position:absolute;top:5px;right:0px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
+#selectedPlaceList_btn{position:absolute;top:5px;right:-28px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
 #selectedPlaceList_btn:hover{ background-position:left bottom;}
 #selectedPlaceList_btn.active{ background-position:right top;}
 #selectedPlaceList_btn.active:hover{ background-position:right bottom;}

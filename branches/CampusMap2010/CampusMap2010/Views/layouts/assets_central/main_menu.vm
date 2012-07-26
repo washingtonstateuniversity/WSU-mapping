@@ -12,7 +12,8 @@
 #set($c=0)
 <ul id='mob'>
 	<li id="mob_li">
-		<a id='mob_link'>Nav<em></em></a>
+		<a id='mob_link'>Nav</a>
+		<em></em>
 		<ul id='main_nav'>
 			#foreach($item in $menuItems)
 				#*
