@@ -217,7 +217,7 @@
             //[Layout("central")]
             public void central(string[] cat, int activePlace)
             {
-                log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
+               /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
                 if (HttpContext.Current.Request.Headers["User-Agent"] != null)
                 {
                     if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
@@ -232,7 +232,7 @@
                         HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                     }
                 }
-
+                */
                 String urlQueries="";
                 foreach (string category in cat)
                 {
