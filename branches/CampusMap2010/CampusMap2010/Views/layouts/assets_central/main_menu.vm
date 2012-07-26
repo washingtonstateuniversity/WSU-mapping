@@ -46,8 +46,15 @@
 	</li>
 </ul>
 <form action="#" id="getDirections">
-	<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
-	<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
+	<ul id="dir">
+		<li>
+			<a>Directions</a>
+			<span id="dirArea">
+				<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
+				<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
+			</span>
+		</li>
+	</ul>
 </form>
 
 

@@ -913,6 +913,18 @@ function prep(){
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
 $(document).ready(function(){
+	$(window).resize(function(){
+		if($(window).width()<=320){
+			$('html').removeClass('narrow');
+			$('html').addClass('mobile');
+		}else if($(window).width()<=600){
+			$('html').addClass('narrow');
+			$('html').removeClass('mobile');
+		}else{
+			$('html').removeClass('narrow');
+			$('html').removeClass('mobile');
+		}
+	}).trigger("resize");
 	var listOffset=0;
 	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
@@ -933,7 +945,7 @@ $(document).ready(function(){
 			
 		});
 		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),160,($(window).width()<=600?($(window).width()<=404?0:155):201)+listOffset)}).trigger("resize");
+			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 				}
