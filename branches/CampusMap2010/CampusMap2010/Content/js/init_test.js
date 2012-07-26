@@ -17,7 +17,7 @@ function geoLocate(){
 			//$('#centralMap').gmap("make_latlng_str",pos)//alert('hello');
 			$('#centralMap').gmap('addMarker', { 
 					position: pos,
-					icon:"http://localhost:63750/Content/images/map_icons/geolocation_icon.png"
+					icon:siteroot+"Content/images/map_icons/geolocation_icon.png"
 				},function(ops,marker){
 				//markerLog[i]=marker;
 				//$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);

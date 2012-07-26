@@ -1,6 +1,9 @@
 @media all and (max-width:404px) and (min-width:0px)  {
 	#globalnav {height:20px;}
 	#globalnav ul {display:none;}
+	#embedlink{display:none;}
+	
+	
 	#header_bar {height:80px;margin:0;}
 	#nav {position:static;margin:0;padding:0;}
 	#logo {background:url("../images/mobile_logo.png") no-repeat scroll left center #FFF;width:32px;height:25px;position:absolute;top:0;left:0;}
