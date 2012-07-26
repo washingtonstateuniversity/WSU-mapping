@@ -946,7 +946,7 @@ $(document).ready(function(){
       }); 
   }; 
 })(jQuery); 
-if($(window).width()<=404)$('#centralMap').nodoubletapzoom()
+if($(window).width()<=404)$(window).nodoubletapzoom()
 			
 			
 		});
