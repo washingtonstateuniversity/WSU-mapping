@@ -12,7 +12,7 @@
 #set($c=0)
 <ul id='mob'>
 	<li id="mob_li">
-		<a id='mob_link'>Nav</a>
+		<a id='mob_link'>Nav<em></em></a>
 		<ul id='main_nav'>
 			#foreach($item in $menuItems)
 				#*
@@ -48,7 +48,7 @@
 <form action="#" id="getDirections">
 	<ul id="dir">
 		<li>
-			<a>Directions</a>
+			<a>Directions<em></em></a>
 			<span id="dirArea">
 				<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
 				<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
