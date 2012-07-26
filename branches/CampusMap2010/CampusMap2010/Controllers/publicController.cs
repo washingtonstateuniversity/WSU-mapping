@@ -222,9 +222,9 @@
                 {
                     if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
                         || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
-                        || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
+                        //|| (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
                         || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
-                        || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
+                        //|| HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
                         //|| HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
                         || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("blackBerry")
                         )
