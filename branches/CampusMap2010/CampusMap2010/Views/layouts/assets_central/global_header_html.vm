@@ -1,5 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta content='initial-scale=1,width=device-width' name='viewport' /> 
+<!--<meta content='initial-scale=1,width=device-width' name='viewport' /> -->
+
+<meta content='True' name='HandheldFriendly' />
+ <meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0' name='viewport' />
+ <meta name="viewport" content="width=device-width" />
+
+
 <meta name="msvalidate.01" content="73B464C828058D51A426DC1B61D99824" />
 <meta name="google-site-verification" content="hMQT0jjLAQ7ZvVY91SCAMHNNBjEWVgpJMqIbzt0XAd0" />
 
