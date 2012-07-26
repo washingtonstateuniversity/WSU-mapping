@@ -65,7 +65,10 @@ min-width:1026px;
 #nav ul li.ui-state-active ul{
 	 margin: 0 0 0 -14px;
 }
-
+#mob{margin:0px;padding:0px;}
+#mob_link{position:absolute;top:-9999em;left:-9999em;}
+#mob_li{padding:0px !important;}
+#nav #main_nav li a em{font-style: normal;}
 
 
 /*

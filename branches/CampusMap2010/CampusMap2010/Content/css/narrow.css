@@ -36,12 +36,67 @@ margin:-21px 9px 0 0;
 }
 
 #nav #main_nav {
-    padding: 0;position: absolute;
+    background-color: #CBCCCC;
+    left: -9999px;
+    padding: 0;
+    position: absolute;
+    top: 31px;
+    z-index: 999;
+	width: 100%;
+}
+
+#nav ul#mob{    left: 5px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 49px;width: 100%;z-index: 999;}
+#nav a#mob_link{
+    background: url("../../Content/images/vertical_div.png") repeat-y scroll 70px top transparent;
+    color: #981E32;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    height: 32px;
+    left: -5px;
+    line-height: 29px;
+    padding-left: 16px;
+    padding-right: 5px;
+    position: absolute;
+    top: -2px;
+    width: 55px;
+	}
+#mob_li:hover #main_nav {
+	
+    left: -4px;
+    top: 30px;
+}
+#nav #main_nav li {
+    margin: 0;
+    padding: 0;
+	width: 100%;
+	background: url(../../Content/images/hor_div.png) repeat-x 40px top;
+}
+#nav #main_nav li a{
+    border-top: 1px solid #E2E2E2;
+    display: inline-block !important;
+    font-size: 15px;
+    height: 35px;
+    line-height: 15px;
+    width: 100%;
+} 
+#nav #main_nav li a em{
+    display: inline-block;
+    font-style: normal;
+    height: 36px;
+    line-height: 35px;
+    padding-left: 5px;
+
 }
 #centralMap_wrap {
     margin: 0;
 }
-#selectedPlaceList_btn{right: -28px;}
+#selectedPlaceList_btn{right:0px;}
 
 #localfooter #wsufooter{height: 31px;}
 

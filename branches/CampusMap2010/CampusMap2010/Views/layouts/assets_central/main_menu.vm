@@ -10,37 +10,41 @@
 
 #set($lastLevel = 1 )
 #set($c=0)
-<ul id='main_nav'>
-	#foreach($item in $menuItems)
-		#*
-			$velocityCount
-		*#
-	
-		#set($Lev=$item.level)
-		#if($Lev > $lastLevel)
-			#set($val=$Lev - $lastLevel)
-			$Controller.repeatStr("<ul>",$val)
-		#elseif( $Lev < $lastLevel )
-			#set($val=$lastLevel - $Lev)
-			$Controller.repeatStr("</li></ul>",$val)
+<ul id='mob'>
+	<li id="mob_li">
+		<a id='mob_link'>Nav</a>
+		<ul id='main_nav'>
+			#foreach($item in $menuItems)
+				#*
+					$velocityCount
+				*#
+			
+				#set($Lev=$item.level)
+				#if($Lev > $lastLevel)
+					#set($val=$Lev - $lastLevel)
+					$Controller.repeatStr("<ul>",$val)
+				#elseif( $Lev < $lastLevel )
+					#set($val=$lastLevel - $Lev)
+					$Controller.repeatStr("</li></ul>",$val)
+					</li>
+				#elseif( $Lev > 1 )
+					</li>
+				#end
+		
+				<li class='#if($item.asLink && $item.url)altAction#end depth_${item.level} #if($item.level==1)$baseClass#elseif($item.level>1)$subClass#end #if($selectedCats.Contains(${item.friendly_name}))active#end' >
+					<a  hidefocus="true" href='/$baseurl/#if($item.asLink && $item.url)${item.url}#else?cat%5B%5D=$!{item.friendly_name}#end' #if($item.level==1) class='parentalLink' #end  #if($item.asLink && $item.url) target='_blank' #end><em>$!item.name.Replace("&","&amp;")</em></a>
+					#set($lastLevel=${item.level})
+			#end
+				#set($val=$lastLevel-1)
+				$Controller.repeatStr("</li></ul>",$val)
 			</li>
-		#elseif( $Lev > 1 )
-			</li>
-		#end
-
-		<li class='#if($item.asLink && $item.url)altAction#end depth_${item.level} #if($item.level==1)$baseClass#elseif($item.level>1)$subClass#end #if($selectedCats.Contains(${item.friendly_name}))active#end' >
-			<a  hidefocus="true" href='/$baseurl/#if($item.asLink && $item.url)${item.url}#else?cat%5B%5D=$!{item.friendly_name}#end' #if($item.level==1) class='parentalLink' #end  #if($item.asLink && $item.url) target='_blank' #end>$!item.name.Replace("&","&amp;")</a>
-			#set($lastLevel=${item.level})
-	#end
-		#set($val=$lastLevel-1)
-		$Controller.repeatStr("</li></ul>",$val)
+			<li class='$baseClass' ><br/></li>
+			#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
+			<li class='$baseClass altAction ' ><a href="http://pullman.mapstrat.com/nextvehicle/Map.aspx" target='_blank'><em>Bus Routes</em></a></li>
+			<li class='$baseClass altAction ' ><a id="printPdfs" href="#"><em>Printable PDF Maps</em></a></li>
+		</ul>
 	</li>
-	<li class='$baseClass' ><br/></li>
-	#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
-	<li class='$baseClass altAction ' ><a href="http://pullman.mapstrat.com/nextvehicle/Map.aspx" target='_blank'>Bus Routes</a></li>
-	<li class='$baseClass altAction ' ><a id="printPdfs" href="#">Printable PDF Maps</a></li>
 </ul>
-
 <form action="#" id="getDirections">
 	<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
 	<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
