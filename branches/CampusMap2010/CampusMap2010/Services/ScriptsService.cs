@@ -52,8 +52,11 @@ namespace campusMap.Services
             }
             return sb.ToString();
         }
-
-        public static String Css(string files)
+        public static String Css(String files)
+        {
+            return Css(files, false);
+        }
+        public static String Css(String files, Boolean debug)
         {
             String name = CalculateMD5Hash(files);
             String path = @"/cache/script/css/";
@@ -68,9 +71,21 @@ namespace campusMap.Services
             {
                 css.Add(fl);
             }
-            return css.ForceRelease().Render(FilePath);
+            if (debug)
+            {
+                return css.ForceRelease().ForceDebug().Render(FilePath);
+            }
+            else
+            {
+                return css.ForceRelease().Render(FilePath);
+            }
         }
-        public static String Js(string files)
+
+        public static String Js(String files)
+        {
+            return Js(files, false);
+        }
+        public static String Js(String files,Boolean debug)
         {
 
             String name = CalculateMD5Hash(files);
@@ -90,7 +105,14 @@ namespace campusMap.Services
             {
                 js.Add(fl);
             }
-            return js.ForceRelease().Render(FilePath);
+            if (debug==true)
+            {
+                return js.ForceRelease().ForceDebug().Render(FilePath);
+            }
+            else
+            {
+                return js.ForceRelease().Render(FilePath);
+            }
         }
 
 
