@@ -941,8 +941,73 @@ $(document).ready(function(){
 					$('#main_nav a[href$="'+startingUrl.split('=')[1]+'"]').trigger('click');
 				}
 			}
-
 			
+			/* Search autocomplete */
+			var cur_search = "";
+			var termTemplate = "<strong>%s</strong>";
+			$( "#placeSearch input[type=text]" ).autocomplete({
+				source: function( request, response ) {
+					var term = request.term;
+					$.ajax({
+						url: siteroot+"public/keywordAutoComplete.castle",
+						dataType: "jsonp",
+						data: {
+							featureClass: "P",
+							style: "full",
+							maxRows: 12,
+							name_startsWith: request.term
+						},
+						success: function( data, status, xhr  ) {
+							var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+							response( $.map( data, function( item ) {
+								var text = item.label;
+								if ( (item.value && ( !request.term || matcher.test(text)) || item.related == "header" || item.related == "true" ) ){
+									return {
+										label: item.label,
+										value: item.value,
+										place_id: item.place_id,
+										related: item.related,
+									}
+								}
+							}));
+						}
+					});
+				},
+				search: function(event, ui) {
+					/**/
+				},
+				minLength: 2,
+				select: function( event, ui ) {
+					getSignlePlace(ui.item.place_id);
+					$( "#placeSearch input[type=text]" ).autocomplete("close");
+				},
+				focus: function( event, ui ) {
+					$( "#placeSearch [type=text]" ).val( ui.item.label );
+					return false;
+				},
+				open: function(e,ui) {
+					$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
+				 }
+			}).data( "autocomplete" )._renderItem = function( ul, item ) {
+				var text =item.label;
+				if(item.related=="header"){
+					text = "<em>Related search items</em>";
+				}else{
+					text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
+				}
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( text )
+					.appendTo( ul );
+					
+			}
+			$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
+				if ( event.which == 13 ) {
+					$( "#placeSearch input[type=text]" ).autocomplete("close");
+					getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
+				}
+			});
+			/* EOF Search autocomplete */
 		});
 		if($('#centralMap').length){
 			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))}).trigger("resize");
@@ -1108,70 +1173,7 @@ $(document).ready(function(){
 				}
 			});
 		});
-		var cur_search = "";
-		var termTemplate = "<strong>%s</strong>";
-		$( "#placeSearch [type=text]" ).autocomplete({
-			source: function( request, response ) {
-				var term = request.term;
-				$.ajax({
-					url: siteroot+"public/keywordAutoComplete.castle",
-					dataType: "jsonp",
-					data: {
-						featureClass: "P",
-						style: "full",
-						maxRows: 12,
-						name_startsWith: request.term
-					},
-					success: function( data, status, xhr  ) {
-						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-						response( $.map( data, function( item ) {
-							var text = item.label;
-							if ( (item.value && ( !request.term || matcher.test(text)) || item.related == "header" || item.related == "true" ) ){
-								return {
-									label: item.label,
-									value: item.value,
-									place_id: item.place_id,
-									related: item.related,
-								}
-							}
-						}));
-					}
-				});
-			},
-			search: function(event, ui) {
-				/**/
-			},
-			minLength: 2,
-			select: function( event, ui ) {
-				getSignlePlace(ui.item.place_id);
-				$( "#placeSearch [type=text]" ).autocomplete("close");
-			},
-			focus: function( event, ui ) {
-				$( "#placeSearch [type=text]" ).val( ui.item.label );
-				return false;
-			},
-			open: function(e,ui) {
-				$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
-       		 }
-		}).data( "autocomplete" )._renderItem = function( ul, item ) {
-			var text =item.label;
-			if(item.related=="header"){
-				text = "<em>Related search items</em>";
-			}else{
-				text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
-			}
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( text )
-				.appendTo( ul );
-				
-		}
-		$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
-			if ( event.which == 13 ) {
-				$( "#placeSearch [type=text]" ).autocomplete("close");
-				getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
-			}
-		});
+
 		$('#embed').click(function(e){
 			e.stopPropagation();
 			e.preventDefault();
