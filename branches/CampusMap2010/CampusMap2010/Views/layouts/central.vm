@@ -1,6 +1,6 @@
 #capturefor(html)<!doctype html>
-<!--[if IE 7]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie7 ie" lang="en"> <![endif]-->
-<!--[if IE 8]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en"> <!--<![endif]-->
 	<head>
 		#* all the JS and CSS that is site wide *#
