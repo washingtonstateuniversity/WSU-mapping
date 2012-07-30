@@ -1006,202 +1006,200 @@ $(document).ready(function(){
 				}
 			});
 			/* EOF Search autocomplete */
-		});
-		if($('#centralMap').length){
-			$(window).resize(function(){resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))}).trigger("resize");
-			$(window).resize(function(){
-				resizeBg($('.cAssest'),160)
+			
+			/* Other after gmap ini */
+				$('#selectedPlaceList_btn').live('click', function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					var btn=$(this);
+					$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
+					if(btn.closest('#selectedPlaceList').width()<=1){
+						$('#selectedPlaceList').addClass("active");
+						btn.closest('#selectedPlaceList').stop().animate({
+							width:"190px"
+							}, 500, function() {
+								btn.addClass("active");
+								
+								$('#selectedPlaceList_area').css({'overflow-y':'auto'});
+								$(window).trigger("resize");
+						});
+						$('.central_layout.public.central #centralMap').animate({'margin-left':'190px','width':$('.central_layout.public.central #centralMap').width()-190}, 500, function() {}).addClass("opended");
+						listOffset=190;
+						$(window).trigger("resize");
+					}else{
+						$('#selectedPlaceList').removeClass("active");
+						btn.closest('#selectedPlaceList').stop().animate({
+							width:"0px"
+							}, 500, function() {
+								btn.removeClass("active");
+								
+								$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
+								$(window).trigger("resize");
+						});
+						$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
+						listOffset=0;
+					}
+				});
+				var kStroke;
+				$('#directionsTo').slideToggle();
+				$('#directionsFrom input,#directionsTo input').live('keyup',function(){
+					if($('#directionsFrom input').val() !=''){
+						if($('#directionsTo').css('display')=='none')$('#directionsTo').slideToggle();
+					}
+					clearTimeout(kStroke);
+					kStroke=setTimeout(function(){
+						fireDirections();
+						},2000);
+				});
+				function fireDirections(){
+					//$('#centralMap').gmap('clear','markers');
+					//$('#centralMap').gmap('clear','overlays');
+					$('#centralMap').gmap('clear','serivces');
+					$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
+					var from=$('#directionsFrom input').val();
+					var to=$('#directionsTo input').val();
+					if(from!=''){
+						if(to=="WSU"){
+							to= pullman_str;
+						}else{
+							$('#centralMap').gmap('search',{address:to+' USA'},function(results, status){
+								if (status == google.maps.GeocoderStatus.OK) {
+									to = results[0].geometry.location
+								} else {
+									to = pullman_str;
+								}
+							});
+						}
+						$('#centralMap').gmap('search',{address:from+' USA'},function(results, status){
+							if (status == google.maps.GeocoderStatus.OK) {
+								from = results[0].geometry.location
+								$('#centralMap').gmap('displayDirections',
+									{origin:from,destination:to,travelMode: google.maps.DirectionsTravelMode.DRIVING},
+									{draggable: true},
+									function(results, status){
+										autoOpenListPanel();
+										if($('#directions-panel').length==0){$('#selectedPlaceList_area').append('<div id="directions-panel">')}
+										listTabs("directions");
+										var directionsDisplay = $('#centralMap').gmap('get','services > DirectionsRenderer')
+										directionsDisplay.setPanel(document.getElementById('directions-panel'));
+										directionsDisplay.setDirections(results);
+										if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
+										addEmailDir();
+									});
+							} else {
+								$.colorbox({
+									html:function(){
+										return '<div id="errorReporting"><h2>Error</h2><h3>Google couldn\'t pull up the directions, Please try again</h3><h4>Google was having a hard time finding your location for this reason:'+ status +' </h4></div>';
+									},
+									scrolling:false,
+									opacity:0.7,
+									transition:"none",
+									width:450,
+									open:true,
+									onComplete:function(){prep();
+										$.colorbox.resize();
+									}
+								});
+							}
+							$('#loading').remove();
+						});
+					}
 				}
-			).trigger("resize");
-		}
 		
-		$('#selectedPlaceList_btn').live('click', function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			var btn=$(this);
-			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
-			if(btn.closest('#selectedPlaceList').width()<=1){
-				$('#selectedPlaceList').addClass("active");
-				btn.closest('#selectedPlaceList').stop().animate({
-					width:"190px"
-					}, 500, function() {
-						btn.addClass("active");
-						
-						$('#selectedPlaceList_area').css({'overflow-y':'auto'});
-						$(window).trigger("resize");
+				$('#main_nav li.parent:not(".altAction")').live('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					$('#main_nav .active').removeClass('active');
+					$('.checked').removeClass('checked');
+					$('.childSelected').removeClass('childSelected');
+					$(this).addClass('active');
+					$.each(ib, function(i) {ib[i].close();});
+					$('#centralMap').gmap('clear','markers');
+					$('#centralMap').gmap('clear','overlays');
+					updateMap(encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 				});
-				$('.central_layout.public.central #centralMap').animate({'margin-left':'190px','width':$('.central_layout.public.central #centralMap').width()-190}, 500, function() {}).addClass("opended");
-				listOffset=190;
-				$(window).trigger("resize");
-			}else{
-				$('#selectedPlaceList').removeClass("active");
-				btn.closest('#selectedPlaceList').stop().animate({
-					width:"0px"
-					}, 500, function() {
-						btn.removeClass("active");
-						
-						$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
-						$(window).trigger("resize");
+				$('#main_nav .parent li a').live('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					$(this).closest('li').toggleClass('checked');
+					$(this).closest('.parent').addClass('active');
+					$(this).closest('.parent').find('.parentalLink').addClass('childSelected');
+					$(this).closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
+					$.each(ib, function(i) {ib[i].close();});
+					$('#centralMap').gmap('clear','markers');
+					$('#centralMap').gmap('clear','overlays');
+					var params='';
+					if($('li.checked a').length){
+						$.each($('li.checked a'),function(){
+							params=params+$(this).attr('href').split('=')[1]+',';
+						});
+						updateMap(encodeURI(params.substring(0, params.length - 1)),true);
+					}else{
+						$(this).closest('.parent').find('.parentalLink').trigger('click');
+					}
 				});
-				$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
-				listOffset=0;
-			}
-		});
-		var kStroke;
-		$('#directionsTo').slideToggle();
-		$('#directionsFrom input,#directionsTo input').live('keyup',function(){
-			if($('#directionsFrom input').val() !=''){
-				if($('#directionsTo').css('display')=='none')$('#directionsTo').slideToggle();
-			}
-			clearTimeout(kStroke);
-			kStroke=setTimeout(function(){
-				fireDirections();
-				},2000);
-		});
-		function fireDirections(){
-			//$('#centralMap').gmap('clear','markers');
-			//$('#centralMap').gmap('clear','overlays');
-			$('#centralMap').gmap('clear','serivces');
-			$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
-			var from=$('#directionsFrom input').val();
-			var to=$('#directionsTo input').val();
-			if(from!=''){
-				if(to=="WSU"){
-					to= pullman_str;
-				}else{
-					$('#centralMap').gmap('search',{address:to+' USA'},function(results, status){
-						if (status == google.maps.GeocoderStatus.OK) {
-							to = results[0].geometry.location
-						} else {
-							to = pullman_str;
+				
+				$('#printPdfs').click(function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					var trigger=$(this);
+					$.colorbox.remove();
+					$.colorbox({
+						html:function(){
+							return '<div id="printPdfs">'+
+										'<h2>Printable Maps</h2>'+
+										'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
+										'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
+										'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
+									'</div>';
+						},
+						scrolling:false,
+						opacity:0.7,
+						transition:"none",
+						width:710,
+						height:350,
+						open:true,
+						onComplete:function(){
+							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 						}
 					});
-				}
-				$('#centralMap').gmap('search',{address:from+' USA'},function(results, status){
-					if (status == google.maps.GeocoderStatus.OK) {
-						from = results[0].geometry.location
-						$('#centralMap').gmap('displayDirections',
-							{origin:from,destination:to,travelMode: google.maps.DirectionsTravelMode.DRIVING},
-							{draggable: true},
-							function(results, status){
-								autoOpenListPanel();
-								if($('#directions-panel').length==0){$('#selectedPlaceList_area').append('<div id="directions-panel">')}
-								listTabs("directions");
-								var directionsDisplay = $('#centralMap').gmap('get','services > DirectionsRenderer')
-								directionsDisplay.setPanel(document.getElementById('directions-panel'));
-								directionsDisplay.setDirections(results);
-								if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
-								addEmailDir();
-							});
-					} else {
+				});
+		
+				$('#embed').click(function(e){
+					e.stopPropagation();
+					e.preventDefault();
+		
+						e.preventDefault();
+						var trigger=$(this);
+						$.colorbox.remove()
 						$.colorbox({
+							rel:'gouped',
 							html:function(){
-								return '<div id="errorReporting"><h2>Error</h2><h3>Google couldn\'t pull up the directions, Please try again</h3><h4>Google was having a hard time finding your location for this reason:'+ status +' </h4></div>';
+								return '<div id="embedArea"><h2>Page Link</h2><h3>'+currentLocation+'</h3><h2>Embed code</h2><textarea><iframe src="'+currentLocation+'"/></textarea></div>';
 							},
 							scrolling:false,
 							opacity:0.7,
 							transition:"none",
 							width:450,
-							open:true,
-							onComplete:function(){prep();
-								$.colorbox.resize();
-							}
+							height:350
 						});
-					}
-					$('#loading').remove();
+		
 				});
-			}
+			
+				$('#share').click(function(e){
+					e.stopPropagation();
+					e.preventDefault();
+				});	
+			/* EFO Other after gmap ini */
+		});
+		if($('#centralMap').length){
+			$(window).resize(function(){
+				resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))
+			}).trigger("resize");
+			$(window).resize(function(){
+				resizeBg($('.cAssest'),160)
+			}).trigger("resize");
 		}
-
-		$('#main_nav li.parent:not(".altAction")').live('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$('#main_nav .active').removeClass('active');
-			$('.checked').removeClass('checked');
-			$('.childSelected').removeClass('childSelected');
-			$(this).addClass('active');
-			$.each(ib, function(i) {ib[i].close();});
-			$('#centralMap').gmap('clear','markers');
-			$('#centralMap').gmap('clear','overlays');
-			updateMap(encodeURI($(this).find('a:first').attr('href').split('=')[1]));
-		});
-		$('#main_nav .parent li a').live('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$(this).closest('li').toggleClass('checked');
-			$(this).closest('.parent').addClass('active');
-			$(this).closest('.parent').find('.parentalLink').addClass('childSelected');
-			$(this).closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
-			$.each(ib, function(i) {ib[i].close();});
-			$('#centralMap').gmap('clear','markers');
-			$('#centralMap').gmap('clear','overlays');
-			var params='';
-			if($('li.checked a').length){
-				$.each($('li.checked a'),function(){
-					params=params+$(this).attr('href').split('=')[1]+',';
-				});
-				updateMap(encodeURI(params.substring(0, params.length - 1)),true);
-			}else{
-				$(this).closest('.parent').find('.parentalLink').trigger('click');
-			}
-		});
-		
-		$('#printPdfs').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			var trigger=$(this);
-			$.colorbox.remove();
-			$.colorbox({
-				html:function(){
-					return '<div id="printPdfs">'+
-								'<h2>Printable Maps</h2>'+
-								'<div><h3><a href="http://www.parking.wsu.edu/utils/File.aspx?fileid=2965" target="_blank">Parking<br/><span id="parking" style="background-image:url('+siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
-								'<div><h3><a href="http://campusmap.wsu.edu/pdfs/areamap0406.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+siteroot+'Content/images/print/area_icon.jpg);"></span></a></h3></div>'+
-								'<div class="last"><h3><a href="http://campusmap.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
-							'</div>';
-				},
-				scrolling:false,
-				opacity:0.7,
-				transition:"none",
-				width:710,
-				height:350,
-				open:true,
-				onComplete:function(){
-					if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
-				}
-			});
-		});
-
-		$('#embed').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-
-				e.preventDefault();
-				var trigger=$(this);
-				$.colorbox.remove()
-				$.colorbox({
-					rel:'gouped',
-					html:function(){
-						return '<div id="embedArea"><h2>Page Link</h2><h3>'+currentLocation+'</h3><h2>Embed code</h2><textarea><iframe src="'+currentLocation+'"/></textarea></div>';
-					},
-					scrolling:false,
-					opacity:0.7,
-					transition:"none",
-					width:450,
-					height:350
-				});
-
-		});
-	
-		$('#share').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-		
-		});	
 	}	
-
-			
-
-
-			
+		
 });
