@@ -38,7 +38,6 @@ function loadPlaceShape(_load,callback){
 			});
 		}
 	});
-	
 }
 
 function add_place_point(lat,lng,clear){
@@ -888,15 +887,16 @@ function load_view_editor() {
 		var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 		if(!waiting){
 			waiting = true;
-			$.post('/view/aliasCheck.castle?alias='+val, function(data) {
+			//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
+			$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+view.replace("/",""), function(data) {
 				if(data=="true"){
-					$('.aliasState').addClass('ok');
-					$('.aliasState').removeClass('error');
-					$('.aliasState').text('  :  available');
-				}else{
 					$('.aliasState').addClass('error');
 					$('.aliasState').removeClass('ok');
 					$('.aliasState').text('  :  taken');
+				}else{
+					$('.aliasState').addClass('ok');
+					$('.aliasState').removeClass('error');
+					$('.aliasState').text('  :  available');
 				}
 				waiting = false;
 			});

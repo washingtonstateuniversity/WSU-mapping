@@ -90,16 +90,17 @@ namespace campusMap.Services
             return active;
         }
 
-        public bool setSessionPrivleage(authors user, string privilege)
+        public static bool setSessionPrivleage(authors user, string privilege)
         {
             bool flag = user.access_levels.privileges.Any(item => item.alias == privilege);
             HttpContext.Current.Session[privilege] = flag;
             return flag;
         }
-        public bool checkPrivleage(string privilege){
+        public static bool checkPrivleage(string privilege)
+        {
             return checkPrivleage(getUser(),privilege);
         }
-        public bool checkPrivleage(authors user, string privilege)
+        public static bool checkPrivleage(authors user, string privilege)
         {
             bool flag = HttpContext.Current.Session[privilege] == null ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
             return flag;

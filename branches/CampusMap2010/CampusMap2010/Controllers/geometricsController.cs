@@ -652,7 +652,7 @@ namespace campusMap.Controllers
 
             authors user = UserService.getUser();
             geometric.editing = user;
-            geometric.status = ! UserService.canPublish(user) ? ActiveRecordBase<status>.Find(1) : geometric.status;
+            geometric.status = !UserService.checkPrivleage("can_publish") ? ActiveRecordBase<status>.Find(1) : geometric.status;
 
 
             if (String.IsNullOrEmpty(geometric.name))

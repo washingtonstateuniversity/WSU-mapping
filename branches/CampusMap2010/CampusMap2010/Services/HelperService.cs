@@ -175,6 +175,53 @@ namespace campusMap.Services
 
         }
         */
+
+
+        
+
+        public static object[] alias_exsits(String alias,String typeName)
+        {
+            object[] temp = new object[]{ };
+            try
+            {
+                /*
+                 * the switch should be replaced.  There has to be a way to 
+                 * make the class for ActiveRecordBase<> be called by 
+                 * (string)name 
+                 */
+                string type = typeName.Replace("Controller", "");
+                switch (type)
+                {
+                    case "place":
+                        {
+                            temp = ActiveRecordBase<place>.FindAllByProperty("alias", alias); break;
+                        }
+                    case "styles":
+                        {
+                            temp = ActiveRecordBase<styles>.FindAllByProperty("alias", alias); break;
+                        }
+                    case "view":
+                        {
+                            temp = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias); break;
+                        }
+                    case "geometrics":
+                        {
+                            temp = ActiveRecordBase<geometrics>.FindAllByProperty("alias", alias); break;
+                        }
+                }               
+            }
+            catch { }
+
+            return temp;
+        }
+
+
+
+
+
+
+
+
         public static string GetPageAsString(Uri address)
         {
             string result = "";

@@ -52,10 +52,12 @@ namespace campusMap.Services
              * #end
              * 
              */
-            byte[] imagebytes = ImageService.DownloadBinary(url);
-            ImageService.ByteArrayToFile(newFile, imagebytes);
-
-            return newFile;
+            try{
+                byte[] imagebytes = ImageService.DownloadBinary(url);
+                ImageService.ByteArrayToFile(newFile, imagebytes);
+                return newFile;
+            }
+            catch { return ""; }
         }
     }
 }

@@ -215,12 +215,16 @@ namespace campusMap.Controllers
             draftItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), draftEx.ToArray());
 
 
+                String cachePath = Context.ApplicationPhysicalPath;
+                if (!cachePath.EndsWith("\\"))
+                    cachePath += "\\";
+
 
 
             //PUBLISHED
             foreach (place item in publishedItems)
             {
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
                 {
                     makePlaceStaticMap(item);
                 }
@@ -240,7 +244,7 @@ namespace campusMap.Controllers
             //REVIEW
             foreach (place item in reviewItems)
             {
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
                 {
                     makePlaceStaticMap(item);
                 }
@@ -256,7 +260,7 @@ namespace campusMap.Controllers
             //DRAFT
             foreach (place item in draftItems)
             {
-                if (string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
                 {
                     makePlaceStaticMap(item);
                 }
@@ -1371,7 +1375,7 @@ namespace campusMap.Controllers
                 RedirectToReferrer();
                 return;
             }*/
-            int requestedStatus = UserService.canPublish(user) && place.status != null ? place.status.id : 1;
+            int requestedStatus = UserService.checkPrivleage("can_publish") && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             //place.infotabs.Clear();

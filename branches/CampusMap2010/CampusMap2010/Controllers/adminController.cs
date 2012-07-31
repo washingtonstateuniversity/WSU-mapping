@@ -304,6 +304,18 @@ namespace campusMap.Controllers
                 Response.ContentType = "application/json; charset=UTF-8";
                 RenderText(json);
             }
+        public void checkAlias(String alias,String typeName ){
+
+            CancelView();
+            CancelLayout();
+            object[] temp = HelperService.alias_exsits(alias, typeName);
+            if(temp.Length>0){
+                RenderText("true");
+            }else{
+                RenderText("false");
+            }
+        }
+
         #endregion
 
     }

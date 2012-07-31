@@ -570,11 +570,12 @@ namespace campusMap.Controllers
             }
 
             authors user = UserService.getUser();
-            /*if (!canPublish(user))
-            {
-                ViewStatus stat= ActiveRecordBase<ViewStatus>.Find(1);
-                view.Status = stat;
-            }*/
+            
+
+
+
+
+
 
             //view.tags.Clear(); 
             //view.Images.Clear();
@@ -585,31 +586,40 @@ namespace campusMap.Controllers
                 view.checked_out_by = null;
             }
 
-
             if (view.id == 0)
             {
-                //ViewStatus stat = ActiveRecordBase<ViewStatus>.Find(1);
-                //view.Status = stat;
+                if (!UserService.checkPrivleage("can_publish") || view.status == null)
+                {
+                    status stat = ActiveRecordBase<status>.Find(1);
+                    view.status = stat;
+                }
                 view.created = DateTime.Now;
-            }
-            else
-            {
+            }else{
                 view.updated = DateTime.Now;
             }
-            
+
             foreach (authors author in authors){
                 if (author.id > 0)
                     view.authors.Add(author);   
             }
-            /*string requested_url = view.CustomUrl;
-            if (viewService.viewByURL(view.CustomUrl).Length > 1)
+
+            if (HelperService.alias_exsits(view.alias, this.GetType().Name).Length > 1)
             {
-                view.CustomUrl = requested_url + "1";
-                ActiveRecordMediator<view>.Save(view);
-                Flash["error"] = "The url you choose is in use.  Please choose a new one.  We have saved it as '" + requested_url + "1" + "' currently.";
-                RedirectToReferrer();
+                view.alias = view.alias + "1";
+                ActiveRecordMediator<map_views>.Save(view);
+                Flash["error"] = "The url you choose is in use.  Please choose a new one.  We have saved it as '" + view.alias + "1" + "' currently.";
+                if (apply != " Save ")
+                {
+                    RedirectToUrl("~/view/_edit.castle?id=" + view.id);
+                }
+                else
+                {
+                    RedirectToReferrer();
+                }
                 return;
-            }*/
+            }
+
+
             ActiveRecordMediator<map_views>.Save(view);
 
             cleanUpview_media(view.id);
