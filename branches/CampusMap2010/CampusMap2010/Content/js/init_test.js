@@ -370,7 +370,7 @@ function loadData(data,callback){
 	}
 	if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
 		var l = data.markers.length;
-		alert(l);
+		//alert(l);
 		$.each( data.markers, function(i, marker) {
 			//alert(dump(marker));
 			var mid= marker.id;
@@ -588,8 +588,8 @@ function loadData(data,callback){
 				
 				
 				if(i==(l-1) && $.isFunction(callback)){
-					alert(l);
-					alert(i);
+					//alert(l);
+					//alert(i);
 					callback();
 				}
 		});
