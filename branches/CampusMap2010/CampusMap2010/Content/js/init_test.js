@@ -2,6 +2,7 @@ var ib = [];
 var ibh = [];
 var markerLog = [];
 var markerbyid = [];
+var mid = [];
 var shapes = [];
 
 var ibHover = false;
@@ -312,18 +313,18 @@ function hideContextMenu() {
 
 var mapview="central/";
 var currentLocation = siteroot+mapview;
-var currentPlace = 0;
+var cur_nav = "";
+var cur_mid = 0;
 /* non-abstract */
 function updateMap(_load,showSum,callback){
 	if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
 	if(typeof(callback)==='undefined') var callback = false;
-	
-	
+	cur_mid = 0;
+	cur_nav = _load;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
-	
-	
+
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		autoOpenListPanel();
 		var cleanedData = [];
@@ -340,14 +341,19 @@ function updateMap(_load,showSum,callback){
 			});
 			loadData(cleanedData,callback);
 			loadListings(cleanedData,showSum);
-			currentLocation=siteroot+mapview+(_load!=false?'?cat[]='+_load:'')+(currentPlace>0?'&pid='+currentPlace:'');
 		}
 		prep();
 	});
 	
 }
-
-
+function updateUrl(nav,pid){
+	cur_nav = nav;
+	cur_mid = pid;
+}
+function getUrl(){
+	//alert(siteroot+mapview+(cur_nav!=false?'?cat[]='+cur_nav:'')+(cur_mid>0?'&pid='+cur_mid:''));
+	return siteroot+mapview+(cur_nav!=false?'?cat[]='+cur_nav:'')+(cur_mid>0?'&pid='+cur_mid:'');
+}
 
 var needsMoved=0;
 function loadData(data,callback){
@@ -373,7 +379,9 @@ function loadData(data,callback){
 		//alert(l);
 		$.each( data.markers, function(i, marker) {
 			//alert(dump(marker));
-			var mid= marker.id;
+			var _mid= marker.id;
+			
+			mid[i]=marker.id;
 				if($.isArray(marker.info.content)){
 					var nav='';
 					$.each( marker.info.content, function(j, html) {	
@@ -557,7 +565,8 @@ function loadData(data,callback){
 						'z-index':1
 					},marker.style),function(ops,marker){
 						markerLog[i]=marker;
-						markerbyid[mid] = markerLog[i];
+						markerbyid[_mid] = markerLog[i];
+						
 						 // these too are needing to be worked together
 						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
 						//if($.isFunction(callback))callback(marker);
@@ -567,11 +576,16 @@ function loadData(data,callback){
 							ib[i].close();
 							$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
 						});
-						ib[i].open($('#centralMap').gmap('get','map'), this);
+						ib[i].open($('#centralMap').gmap('get','map'), this,function(){
+								cur_mid = mid[i];
+								//updateUrl(cur_nav,mid[i]);
+							});
 						$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
 						$('#selectedPlaceList_area .active').removeClass('active');
 						$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
-						currentPlace=mid;
+						//cur_mid = _mid;
+						//updateUrl(cur_nav,_mid);
+						cur_mid = mid[i];
 						ibHover =  false;
 						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
 					})
@@ -813,6 +827,7 @@ function loadListings(data,showSum){
 			}
 			$.each(ib, function(i) {ib[i].close();});
 			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
+			cur_mid = mid[i];
 		});
 	});
 }
@@ -849,6 +864,7 @@ function loadDirections(data,showSum){
 			}
 			$.each(ib, function(i) {ib[i].close();});
 			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
+			cur_mid = mid[i];
 		});
 	});
 }
@@ -903,6 +919,7 @@ function getSignlePlace(id){
 					$('#centralMap').gmap('clear','overlays');
 					loadData(data,function(marker){
 						ib[0].open($('#centralMap').gmap('get','map'), marker);
+						cur_mid = mid[0];
 					});
 					loadListings(data,true);
 					prep();
@@ -921,6 +938,7 @@ function getSignlePlace(id){
 			$('#centralMap').gmap('clear','overlays');
 			loadData(data,function(marker){
 				ib[0].open($('#centralMap').gmap('get','map'), marker);
+				cur_mid = mid[0];
 			});
 			loadListings(data,true);
 			prep();
@@ -928,6 +946,21 @@ function getSignlePlace(id){
 	}
 }
 
+
+function menuDressChild(jObj)
+{
+	if(jObj.is($('.parent'))){
+		$('#main_nav .active').removeClass('active');
+		$('.checked').removeClass('checked');
+		$('.childSelected').removeClass('childSelected');
+		jObj.addClass('active');	
+	}else{
+		jObj.closest('li').toggleClass('checked');
+		jObj.closest('.parent').addClass('active');
+		jObj.closest('.parent').find('.parentalLink').addClass('childSelected');
+		jObj.closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
+	}
+}
 
 function prep(){
 	$(' [placeholder] ').defaultValue();
@@ -959,13 +992,15 @@ $(document).ready(function(){
 							//google.maps.event.trigger(marker, 'click');
 							$(marker).triggerEvent('click');
 						}
-					}); 
+					});
+				var link = startingUrl.split('=')[1].split('&')[0].toString(); 
+				//alert(link);
 				if(startingUrl.split('=')[1].indexOf(',')>0){
 					$.each(startingUrl.split('=')[1].split(','),function(i,v){
-						$('#main_nav a[href$="'+v+'"]').trigger('click');
-						});
+						menuDressChild($('#main_nav a[href$="'+v+'"]'));
+					});
 				}else{
-					$('#main_nav a[href$="'+startingUrl.split('=')[1].split('&')[0]+'"]').trigger('click');
+					menuDressChild($('#main_nav a[href$="'+link+'"]'));
 				}
 						
 			}
@@ -1074,10 +1109,10 @@ $(document).ready(function(){
 				$('#main_nav li.parent:not(".altAction")').live('click',function(e){
 					e.stopPropagation();
 					e.preventDefault();
-					$('#main_nav .active').removeClass('active');
-					$('.checked').removeClass('checked');
-					$('.childSelected').removeClass('childSelected');
-					$(this).addClass('active');
+					
+					menuDressChild($(this));
+					
+					
 					$.each(ib, function(i) {ib[i].close();});
 					$('#centralMap').gmap('clear','markers');
 					$('#centralMap').gmap('clear','overlays');
@@ -1086,10 +1121,7 @@ $(document).ready(function(){
 				$('#main_nav .parent li a').live('click',function(e){
 					e.stopPropagation();
 					e.preventDefault();
-					$(this).closest('li').toggleClass('checked');
-					$(this).closest('.parent').addClass('active');
-					$(this).closest('.parent').find('.parentalLink').addClass('childSelected');
-					$(this).closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
+					menuDressChild($(this));
 					$.each(ib, function(i) {ib[i].close();});
 					$('#centralMap').gmap('clear','markers');
 					$('#centralMap').gmap('clear','overlays');
@@ -1140,7 +1172,7 @@ $(document).ready(function(){
 						$.colorbox({
 							rel:'gouped',
 							html:function(){
-								return '<div id="embedArea"><h2>Page Link</h2><h3>'+currentLocation+'</h3><h2>Embed code</h2><textarea><iframe src="'+currentLocation+'"/></textarea></div>';
+								return '<div id="embedArea"><h2>Page Link</h2><h3>'+getUrl()+'</h3><h2>Embed code</h2><textarea><iframe src="'+getUrl()+'"/></textarea></div>';
 							},
 							scrolling:false,
 							opacity:0.7,
