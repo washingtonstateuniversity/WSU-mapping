@@ -27,6 +27,14 @@ namespace campusMap.Controllers
     using Newtonsoft.Json;
     using Newtonsoft.Json.Utilities;
     using Newtonsoft.Json.Linq;
+
+
+    using System.Collections.ObjectModel;
+    using System.Dynamic;
+    using System.Linq;
+    using System.Web.Script.Serialization;
+
+
     #endregion
 
     [Layout("default")]
@@ -187,7 +195,7 @@ namespace campusMap.Controllers
                             //if (views.authors.Contains(user))
                                 flag = true; break;
                        // }
-                        break;
+                      
                     }
 
                 case "Editor":
@@ -197,7 +205,7 @@ namespace campusMap.Controllers
                             //if (user.place_types.Contains(item))
                                 flag = true; break;
                         //}
-                        break;
+                     
                     }
             }
 
@@ -518,14 +526,14 @@ namespace campusMap.Controllers
             }
             return;
         }
-        public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] map_views view,
+        public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] map_views view,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
             [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
             int[] cats,
             String[] massTag,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
-            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
+            
            String[][] fields,
            bool ajaxed_update,
            bool forced_tmp,
@@ -535,10 +543,12 @@ namespace campusMap.Controllers
            string cancel
             )     
         {
+            if (view.options.id == 0) ActiveRecordMediator<map_views_options>.Save(view.options);
+            
             Flash["view"] = view;
             Flash["tags"] = view;
             Flash["authors"] = view;
-
+            ActiveRecordMediator<map_views>.Update(view);
             if (cancel != null)
             {
                 view.checked_out_by = null;
@@ -569,7 +579,7 @@ namespace campusMap.Controllers
                 view.center = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
 
-            authors user = UserService.getUser();
+            
             
 
 
@@ -579,6 +589,9 @@ namespace campusMap.Controllers
 
             //view.tags.Clear(); 
             //view.Images.Clear();
+
+
+            authors user = UserService.getUser();
             view.authors.Clear();
             if (apply != null){
 
@@ -598,11 +611,11 @@ namespace campusMap.Controllers
                 view.updated = DateTime.Now;
             }
 
-            foreach (authors author in authors){
+           /* foreach (authors author in authors){
                 if (author.id > 0)
                     view.authors.Add(author);   
-            }
-
+            }*/
+            view.authors.Add(user); 
             if (HelperService.alias_exsits(view.alias, this.GetType().Name).Length > 1)
             {
                 view.alias = view.alias + "1";
@@ -617,7 +630,11 @@ namespace campusMap.Controllers
                     RedirectToReferrer();
                 }
                 return;
-            }
+            }/**/
+            map_views_options tmp = view.options;
+            var jss = new JavaScriptSerializer();
+            var json = jss.Serialize(tmp);
+            view.options_obj = json;
 
 
             ActiveRecordMediator<map_views>.Save(view);

@@ -156,7 +156,6 @@ namespace campusMap.Models
                 {
                     // bla is a valid sql datetime
                     Creation_Date = value;
-
                 }
             }
         }
@@ -171,7 +170,6 @@ namespace campusMap.Models
                 {
                     // bla is a valid sql datetime
                     Updated_Date = value;
-
                 }
             }
         }
@@ -257,7 +255,6 @@ namespace campusMap.Models
             set { _places = value; }
         }
 
-
         private map_views_options _options;
         [BelongsTo]
         virtual public map_views_options options
@@ -266,6 +263,14 @@ namespace campusMap.Models
             set { _options = value; }
         }
 
+
+        private String _options_obj;
+        [Property("optionObj")]
+        virtual public String options_obj
+        {
+            get { return _options_obj; }
+            set { _options_obj = value; }
+        }
 
         virtual public bool isPublished()
         {
@@ -524,6 +529,9 @@ namespace campusMap.Models
             get { return _zoomControlOptions; }
             set { _zoomControlOptions = value; }
         }
+
+
+
     }
 }
 

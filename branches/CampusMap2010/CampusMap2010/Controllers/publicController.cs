@@ -135,7 +135,9 @@
                     {
                         foreach (string kvp in querystring.Split(','))
                         {
-                            queryparams.Add(kvp.Split('=')[0], kvp.Split('=')[1]);
+                            var tmp = kvp;
+                            if (kvp.StartsWith("?")) tmp = kvp.TrimStart('?');
+                            queryparams.Add(tmp.Split('=')[0], tmp.Split('=')[1]);
                         }
                     }
 
@@ -199,7 +201,7 @@
 
             /* this is to be turned into to the main map view switcher */
             //[Layout("central")]
-            public void central(string[] cat, int activePlace)
+            public void central(string[] cat, int activePlace, int pid)
             {
                /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
                 if (HttpContext.Current.Request.Headers["User-Agent"] != null)
@@ -227,26 +229,63 @@
 
                 PropertyBag["selectedCats"] = cat;
                 PropertyBag["activePlace"] = activePlace;
+                
+
                 PropertyBag["urlQueries"] = urlQueries.TrimStart(',');
+                if (pid > 0){
+                    PropertyBag["urlQueries"] += "&pid="+pid.ToString();
+                }
                 PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position","active",true);
 
                 LayoutName = "central"; // would be a var
                 RenderView("central"); // would be a var
             }
+
+
+
+
+
+
+
+
+            [Layout("map_veiws")]
             public void fetchMap(String alias, String mode, String callback)
             {
                 CancelView();
-                CancelLayout();
+                
                 IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
                 if (c.Count == 0)
                 {
                     RenderText("false");
                     return;
                 }
-                if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
+                if (mode == "json")
+                {
+                    CancelLayout();
+                    if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
+                    PropertyBag["map"] = c[0];
+                    RenderView("map_json");
+                    return;
+                }
+                if (mode == "standalone")
+                {
+                    CancelLayout();
+                    PropertyBag["map"] = c[0];
+                    RenderView("map_view/map_standalone");
+                    return;
+                }
+                LayoutName = "map_veiws";
                 PropertyBag["map"] = c[0];
-                RenderView("map_json");
+                RenderView("map_view/map_basic");
             }
+
+
+
+
+
+
+
+
 
 
             public void emailDir(String name, String email, String directions, String notes,String recipientname, String recipientemail)

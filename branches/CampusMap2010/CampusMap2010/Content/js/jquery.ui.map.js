@@ -406,7 +406,7 @@
 	jQuery.fn.extend( {
 		
 		triggerEvent: function(eventType) {
-			google.maps.event.trigger(this[0], eventType);
+				google.maps.event.trigger(this[0], eventType);
 			return this;
 		},
 		

@@ -70,15 +70,18 @@ namespace campusMap.Services
             }
             return username;
         }
-
-        public static authors getUser()
+        public static authors setUser()
         {
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("Nid", getNid()));
             authors author = ActiveRecordBase<authors>.FindFirst(userEx.ToArray());
             return author;
         }
-
+        public static authors getUser()
+        {
+            authors author = HttpContext.Current.Session["user"] == null ? setUser() : (authors)HttpContext.Current.Session["user"]; 
+            return author;
+        }
         public static Boolean isActive(authors user)
         {
             int timeThreshold = -2; //TODO Set as site perference

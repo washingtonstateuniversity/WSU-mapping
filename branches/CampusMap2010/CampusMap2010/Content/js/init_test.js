@@ -1,6 +1,7 @@
 var ib = [];
 var ibh = [];
 var markerLog = [];
+var markerbyid = [];
 var shapes = [];
 
 var ibHover = false;
@@ -311,15 +312,18 @@ function hideContextMenu() {
 
 var mapview="central/";
 var currentLocation = siteroot+mapview;
-
+var currentPlace = 0;
 /* non-abstract */
-function updateMap(_load,showSum){
+function updateMap(_load,showSum,callback){
 	if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
+	if(typeof(callback)==='undefined') var callback = false;
+	
+	
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"public/get_place_by_category.castle";
 	
-	currentLocation=siteroot+mapview+(_load!=false?'?cat[]='+_load:'');
+	
 	$.getJSON(url+'?callback=?'+(_load!=false?'&cat[]='+_load:''), function(data) {
 		autoOpenListPanel();
 		var cleanedData = [];
@@ -334,8 +338,9 @@ function updateMap(_load,showSum){
 					cleanedData.markers.push(data.markers[i]);		
 				}
 			});
-			loadData(cleanedData);
+			loadData(cleanedData,callback);
 			loadListings(cleanedData,showSum);
+			currentLocation=siteroot+mapview+(_load!=false?'?cat[]='+_load:'')+(currentPlace>0?'&pid='+currentPlace:'');
 		}
 		prep();
 	});
@@ -364,8 +369,11 @@ function loadData(data,callback){
 		});
 	}
 	if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
+		var l = data.markers.length;
+		alert(l);
 		$.each( data.markers, function(i, marker) {
 			//alert(dump(marker));
+			var mid= marker.id;
 				if($.isArray(marker.info.content)){
 					var nav='';
 					$.each( marker.info.content, function(j, html) {	
@@ -391,6 +399,9 @@ function loadData(data,callback){
 				var boxText = document.createElement("div");
 				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
 				boxText.innerHTML = marker.info.content;
+		
+		
+				
 		
 				var myOptions = {
 					alignBottom:true,
@@ -546,8 +557,10 @@ function loadData(data,callback){
 						'z-index':1
 					},marker.style),function(ops,marker){
 						markerLog[i]=marker;
+						markerbyid[mid] = markerLog[i];
+						 // these too are needing to be worked together
 						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-						if($.isFunction(callback))callback(marker);
+						//if($.isFunction(callback))callback(marker);
 					})
 				.click(function() {
 						$.each(ib, function(i) {
@@ -558,6 +571,7 @@ function loadData(data,callback){
 						$('#centralMap').gmap('setOptions', {'zIndex':9}, this);
 						$('#selectedPlaceList_area .active').removeClass('active');
 						$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
+						currentPlace=mid;
 						ibHover =  false;
 						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this); // todo
 					})
@@ -571,10 +585,19 @@ function loadData(data,callback){
 					if(ibHover!=true)ibh[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
 				})
 				.mouseout(function(event){$.each(ibh, function(i) {ibh[i].close();});});
-			
+				
+				
+				if(i==(l-1) && $.isFunction(callback)){
+					alert(l);
+					alert(i);
+					callback();
+				}
 		});
 		geoLocate();
+		
 	}
+	//if($.isFunction(callback))callback();return;
+	
 }
 function addErrorReporting(marker){
 $('.errorReporting').click(function(e){
@@ -930,14 +953,21 @@ $(document).ready(function(){
 		iniMap("",function(){
 			$('#loading').remove();
 			if(typeof(startingUrl)!="undefined"){
-				updateMap(encodeURI(startingUrl.split('=')[1])); 
+				updateMap(encodeURI(startingUrl.split('=')[1].split('&')[0]),false,function(){
+						if(parseInt(startingUrl.split('=')[2])>0){
+							var marker = markerbyid[parseInt(startingUrl.split('=')[2])];
+							//google.maps.event.trigger(marker, 'click');
+							$(marker).triggerEvent('click');
+						}
+					}); 
 				if(startingUrl.split('=')[1].indexOf(',')>0){
 					$.each(startingUrl.split('=')[1].split(','),function(i,v){
 						$('#main_nav a[href$="'+v+'"]').trigger('click');
 						});
 				}else{
-					$('#main_nav a[href$="'+startingUrl.split('=')[1]+'"]').trigger('click');
+					$('#main_nav a[href$="'+startingUrl.split('=')[1].split('&')[0]+'"]').trigger('click');
 				}
+						
 			}
 			
 
@@ -1125,74 +1155,74 @@ $(document).ready(function(){
 					e.stopPropagation();
 					e.preventDefault();
 				});	
-				
-				/* Search autocomplete */
-				var cur_search = "";
-				var termTemplate = "<strong>%s</strong>";
-				$( "#placeSearch input[type=text]" ).autocomplete({
-					source: function( request, response ) {
-						var term = request.term;
-						$.ajax({
-							url: siteroot+"public/keywordAutoComplete.castle",
-							dataType: "jsonp",
-							data: {
-								featureClass: "P",
-								style: "full",
-								maxRows: 12,
-								name_startsWith: request.term
-							},
-							success: function( data, status, xhr  ) {
-								var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-								response( $.map( data, function( item ) {
-									var text = item.label;
-									if ( (item.value && ( !request.term || matcher.test(text)) || item.related == "header" || item.related == "true" ) ){
-										return {
-											label: item.label,
-											value: item.value,
-											place_id: item.place_id,
-											related: item.related,
+				if($( "#placeSearch input[type=text]" ).length){
+					/* Search autocomplete */
+					var cur_search = "";
+					var termTemplate = "<strong>%s</strong>";
+					$( "#placeSearch input[type=text]" ).autocomplete({
+						source: function( request, response ) {
+							var term = request.term;
+							$.ajax({
+								url: siteroot+"public/keywordAutoComplete.castle",
+								dataType: "jsonp",
+								data: {
+									featureClass: "P",
+									style: "full",
+									maxRows: 12,
+									name_startsWith: request.term
+								},
+								success: function( data, status, xhr  ) {
+									var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+									response( $.map( data, function( item ) {
+										var text = item.label;
+										if ( (item.value && ( !request.term || matcher.test(text)) || item.related == "header" || item.related == "true" ) ){
+											return {
+												label: item.label,
+												value: item.value,
+												place_id: item.place_id,
+												related: item.related,
+											}
 										}
-									}
-								}));
-							}
-						});
-					},
-					search: function(event, ui) {
-						/**/
-					},
-					minLength: 2,
-					select: function( event, ui ) {
-						getSignlePlace(ui.item.place_id);
-						$( "#placeSearch input[type=text]" ).autocomplete("close");
-					},
-					focus: function( event, ui ) {
-						$( "#placeSearch [type=text]" ).val( ui.item.label );
-						return false;
-					},
-					open: function(e,ui) {
-						$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
-					 }
-				}).data( "autocomplete" )._renderItem = function( ul, item ) {
-					var text =item.label;
-					if(item.related=="header"){
-						text = "<em>Related search items</em>";
-					}else{
-						text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
+									}));
+								}
+							});
+						},
+						search: function(event, ui) {
+							/**/
+						},
+						minLength: 2,
+						select: function( event, ui ) {
+							getSignlePlace(ui.item.place_id);
+							$( "#placeSearch input[type=text]" ).autocomplete("close");
+						},
+						focus: function( event, ui ) {
+							$( "#placeSearch [type=text]" ).val( ui.item.label );
+							return false;
+						},
+						open: function(e,ui) {
+							$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
+						 }
+					}).data( "autocomplete" )._renderItem = function( ul, item ) {
+						var text =item.label;
+						if(item.related=="header"){
+							text = "<em>Related search items</em>";
+						}else{
+							text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
+						}
+						return $( "<li></li>" )
+							.data( "item.autocomplete", item )
+							.append( text )
+							.appendTo( ul );
+							
 					}
-					return $( "<li></li>" )
-						.data( "item.autocomplete", item )
-						.append( text )
-						.appendTo( ul );
-						
+					$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
+						if ( event.which == 13 ) {
+							$( "#placeSearch input[type=text]" ).autocomplete("close");
+							getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
+						}
+					});
+					/* EOF Search autocomplete */
 				}
-				$( "#placeSearch .ui-autocomplete-input" ).on('keypress',function(event) {
-					if ( event.which == 13 ) {
-						$( "#placeSearch input[type=text]" ).autocomplete("close");
-						getSignlePlace($( "#placeSearch .ui-autocomplete-input" ).val());
-					}
-				});
-				/* EOF Search autocomplete */
-				
 			/* EFO Other after gmap ini */
 		});
 		if($('#centralMap').length){
