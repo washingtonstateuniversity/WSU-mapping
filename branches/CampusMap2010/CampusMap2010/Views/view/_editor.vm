@@ -4,7 +4,13 @@
     <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
 #end
 
+<div id="runningOptions">$options_json</div>
 
+<script type="text/javascript">
+
+var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
+
+</script>
 
 #if($Flash.error)
 <p style="color: red; font-weight: bold;">
@@ -107,241 +113,323 @@
   </div>
   
  <div id="tabs_Options" class="mainAreaTabs">
- <input type="hidden" name="view.options.id" value="$!view.options.id" />
 		$formbuttons <div class="clear"></div>
-
-		
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="backgroundColor"><strong>Background Color</strong></label><br/>
-				<input type="text" name="view.options.backgroundColor" id="backgroundColor" value="$!view.options.backgroundColor" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized.</em></h6>
-		</fieldset>
+		#* NOTE: how this works is that with the TryGetValue we can introduce new items
+				to the virtual model, as the VM is a json format set stroed in the DB
+				and pushed out to a list<Dic<str,dno>> so the test is via the TryGetValue
+		*#
+		#if($options.TryGetValue("backgroundColor",$value))
+			<fieldset style="position:relative;">
+				<div class="col2"  style="">	
+					<label for="backgroundColor"><strong>Background Color</strong></label><br/>
+					<input type="text" name="options.backgroundColor" id="backgroundColor" value="$!options.backgroundColor" class="text ui-widget-content ui-corner-all" />
+				</div> 
+				<h6><em>Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized.</em></h6>
+			</fieldset>
+		#end
+		#if($options.TryGetValue("disableDefaultUI",$value))
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="disableDefaultUI"><strong>Disable Default UI</strong></label><br/>
-				<input type="checkbox" name="view.options.disableDefaultUI" id="disableDefaultUI" value="true" #if($view.options.disableDefaultUI)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.disableDefaultUI" id="disableDefaultUI">
+					<option value="true" #if($options.disableDefaultUI=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($options.disableDefaultUI=="false")selected="selected"#end >No</option>
+				</select>			
 			</div> 
 			<h6><em>If true (checked), disables all default UI. May be overridden individually but is enabled by default</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("draggable",$value))
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="draggable"><strong>Draggable state</strong></label><br/>
-				<input type="checkbox" name="view.options.draggable" id="draggable" value="false" #if(!$view.options.disableDefaultUI)checked="checked"#end class="text ui-widget-content ui-corner-all" />			
+				<select name="options.draggable" id="draggable">
+					<option value="true" #if($!options.draggable=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.draggable=="false")selected="selected"#end >No</option>
+				</select>		
 			</div>
 			<h6><em>If false (checked), prevents the map from being dragged. Dragging is enabled by default.</em></h6>
-		</fieldset>		
+		</fieldset>
+		#end
+		#if($options.TryGetValue("draggableCursor",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="draggableCursor"><strong>Draggable Cursor</strong></label><br/>
-				<input type="text" name="view.options.draggableCursor" id="draggableCursor" value="$!view.options.draggableCursor" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.draggableCursor" id="draggableCursor" value="$!options.draggableCursor" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The name or url of the cursor to display on a draggable object.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("heading",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="heading"><strong>Heading</strong></label><br/>
-				<input type="text" name="view.options.heading" id="heading" value="$!view.options.heading" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.heading" id="heading" value="$!options.heading" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("keyboardShortcuts",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="keyboardShortcuts"><strong>Disable Keyboard Shortcuts</strong></label><br/>
-				<input type="checkbox" name="view.options.keyboardShortcuts" id="keyboardShortcuts" value="false" #if($view.options.keyboardShortcuts)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.keyboardShortcuts" id="keyboardShortcuts">
+					<option value="true" #if($!options.keyboardShortcuts=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.keyboardShortcuts=="false")selected="selected"#end >No</option>
+				</select>	
 			</div>
 			<h6><em>If false (checked), prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.</em></h6>
-		</fieldset>	
-		
+		</fieldset>
+		#end
+		#if($options.TryGetValue("mapMaker",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
-				<label for="mapMaker"><strong>Use Map Maker Tiles</strong></label><br/>
-				<input type="checkbox" name="view.options.mapMaker" id="mapMaker" value="true" #if($view.options.mapMaker)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<label for="mapMaker"><strong>Use Map Maker Tiles</strong></label><br/>			
+				<select name="options.mapMaker" id="mapMaker">
+					<option value="true" #if($!options.mapMaker=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.mapMaker=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If true (checked), Map Maker tiles should be used instead of regular tiles. Disabled by default.</em></h6>
-		</fieldset>	
+		</fieldset>
+		#end
+		#if($options.TryGetValue("mapTypeId",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="mapTypeId"><strong>Map Type Control Options</strong></label><br/>
-				<select name="view.options.mapTypeId" >
-				<option class="author" value="ROADMAP" #if($!{view.options.mapTypeId} || ${view.options.mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
-				<option class="author" value="SATELLITE" #if(${view.options.mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
-				<option class="author" value="HYBRID" #if(${view.options.mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>
-				<option class="author" value="TERRAIN" #if(${view.options.mapTypeId}=="TERRAIN") selected="selected" #end>TERRAIN</option>
+				<select name="options.mapTypeId" >
+				<option class="author" value="ROADMAP" #if($!{options.mapTypeId} || ${options.mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
+				<option class="author" value="SATELLITE" #if(${options.mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
+				<option class="author" value="HYBRID" #if(${options.mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>
+				<option class="author" value="TERRAIN" #if(${options.mapTypeId}=="TERRAIN") selected="selected" #end>TERRAIN</option>
 			</select>
 			</div> 
 			<h6><em>The initial Map type. Required and defaults to ROADMAP.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("zoom",$value))	
 
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="zoom"><strong>Zoom</strong></label><br/>
-				<input type="text" name="view.options.zoom" id="zoom" value="$!view.options.zoom" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.zoom" id="zoom" value="$!options.zoom" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial Map zoom level.</em></h6>
-		</fieldset>		
+		</fieldset>	
+		#end
+		#if($options.TryGetValue("maxZoom",$value))		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="maxZoom"><strong>Map maximum Zoom</strong></label><br/>
-				<input type="text" name="view.options.maxZoom" id="maxZoom" value="$!view.options.maxZoom" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.maxZoom" id="maxZoom" value="$!options.maxZoom" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("minZoom",$value))		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="minZoom"><strong>Map minimum Zoom</strong></label><br/>
-				<input type="text" name="view.options.minZoom" id="maxZoom" value="$!view.options.minZoom" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.minZoom" id="maxZoom" value="$!options.minZoom" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("noClear",$value))		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="noClear"><strong>Clear Map Divs</strong></label><br/>
-				<input type="checkbox" name="view.options.noClear" id="noClear" value="true" #if($view.options.noClear)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.noClear" id="noClear">
+					<option value="true" #if($!options.noClear=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.noClear=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If true (checked), do not clear the contents of the Map div. Disabled by default.</em></h6>
 		</fieldset>	
-
-
-
-
-
-
+		#end
+		#if($options.TryGetValue("mapTypeControl",$value))		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="mapTypeControl"><strong>Map Type Control</strong></label><br/>
-				<input type="checkbox" name="view.options.mapTypeControl" id="mapTypeControl" value="true" #if($view.options.mapTypeControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.mapTypeControl" id="mapTypeControl">
+					<option value="true" #if($!options.mapTypeControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.mapTypeControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Map type control state. Enabled by default.</em></h6>
-		</fieldset>			
+		</fieldset>		
+		#end
+		#if($options.TryGetValue("mapTypeControlOptions",$value))		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="mapTypeControlOptions"><strong>Map Type Control Options</strong></label><br/>
-				<input type="text" name="view.options.mapTypeControlOptions" id="mapTypeControlOptions" value="$!view.options.mapTypeControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.mapTypeControlOptions" id="mapTypeControlOptions" value="$!options.mapTypeControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Map type control.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("overviewMapControl",$value))	
 
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="overviewMapControl"><strong>Overview Map Control</strong></label><br/>
-				<input type="checkbox" name="view.options.overviewMapControl" id="overviewMapControl" value="true" #if($view.options.overviewMapControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.overviewMapControl" id="overviewMapControl">
+					<option value="true" #if($!options.overviewMapControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.overviewMapControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Overview Map control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("overviewMapControlOptions",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="overviewMapControlOptions"><strong>Overview Map Control Options</strong></label><br/>
-				<input type="text" name="view.options.overviewMapControlOptions" id="overviewMapControlOptions" value="$!view.options.overviewMapControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.overviewMapControlOptions" id="overviewMapControlOptions" value="$!options.overviewMapControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Overview Map control.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("panControl",$value))	
 
 
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="panControl"><strong>Pan Control</strong></label><br/>
-				<input type="checkbox" name="view.options.panControl" id="panControl" value="true" #if($view.options.panControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.panControl" id="panControl">
+					<option value="true" #if($!options.panControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.panControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Pan control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("panControlOptions",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="panControlOptions"><strong>Pan Control Options</strong></label><br/>
-				<input type="text" name="view.options.panControlOptions" id="panControlOptions" value="$!view.options.panControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.panControlOptions" id="panControlOptions" value="$!options.panControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Pan control.</em></h6>
 		</fieldset>
 
+		#end
+		#if($options.TryGetValue("rotateControl",$value))	
 
 
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="rotateControl"><strong>Rotate Control</strong></label><br/>
-				<input type="checkbox" name="view.options.rotateControl" id="rotateControl" value="true" #if($view.options.rotateControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.rotateControl" id="rotateControl">
+					<option value="true" #if($!options.rotateControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.rotateControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Rotate control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("rotateControlOptions",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="rotateControlOptions"><strong>Rotate Control Options</strong></label><br/>
-				<input type="text" name="view.options.rotateControlOptions" id="rotateControlOptions" value="$!view.options.rotateControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.rotateControlOptions" id="rotateControlOptions" value="$!options.rotateControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Rotate control.</em></h6>
 		</fieldset>
-
-
+		#end
+		#if($options.TryGetValue("scaleControl",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="scaleControl"><strong>Scale Control</strong></label><br/>
-				<input type="checkbox" name="view.options.scaleControl" id="rotateControl" value="true" #if($view.options.scaleControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.scaleControl" id="scaleControl">
+					<option value="true" #if($!options.scaleControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.scaleControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Scale control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("scaleControlOptions",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="scaleControlOptions"><strong>Scale Control Options</strong></label><br/>
-				<input type="text" name="view.options.scaleControlOptions" id="scaleControlOptions" value="$!view.options.scaleControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.scaleControlOptions" id="scaleControlOptions" value="$!options.scaleControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Scale control.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("streetView",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="streetView"><strong>Street Control</strong></label><br/>
-				<input type="text" name="view.options.streetView" id="streetView" value="$!view.options.streetView" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.streetView" id="streetView" value="$!options.streetView" class="text ui-widget-content ui-corner-all" />
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Street control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("streetViewControl",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="streetViewControl"><strong>Street Control Options</strong></label><br/>
-				<input type="checkbox" name="view.options.streetViewControl" id="streetViewControl"  value="true" #if($view.options.streetViewControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.streetViewControl" id="streetViewControl">
+					<option value="true" #if($!options.streetViewControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.streetViewControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div> 
 			<h6><em>The initial display options for the Street control.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("zoomControl",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="zoomControl"><strong>Zoom Control</strong></label><br/>
-				<input type="checkbox" name="view.options.zoomControl" id="zoomControl" value="true" #if($view.options.zoomControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.zoomControl" id="zoomControl">
+					<option value="true" #if($!options.zoomControl=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.zoomControl=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Zoom  control state. Enabled by default.</em></h6>
 		</fieldset>
+		#end
+		#if($options.TryGetValue("zoomControlOptions",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="zoomControlOptions"><strong>Zoom Control Options</strong></label><br/>
-				<input type="text" name="view.options.zoomControlOptions" id="zoomControlOptions" value="$!view.options.zoomControlOptions" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.zoomControlOptions" id="zoomControlOptions" value="$!options.zoomControlOptions" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display options for the Zoom control.</em></h6>
 		</fieldset>
-
-
+		#end
+		#if($options.TryGetValue("scrollwheel",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="scrollwheel"><strong>Scrollwheel Zoom Control</strong></label><br/>
-				<input type="checkbox" name="view.options.zoomControl" id="zoomControl" value="true" #if($view.options.zoomControl)checked="checked"#end class="text ui-widget-content ui-corner-all" />
+				<select name="options.scrollwheel" id="scrollwheel">
+					<option value="true" #if($!options.scrollwheel=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if($!options.scrollwheel=="false")selected="selected"#end >No</option>
+				</select>
 			</div>
 			<h6><em>If false (un-checked), this will disabled the Scrollwheel Zoom  control state. Enabled by default.</em></h6>
 		</fieldset>
-
-
+		#end
+		#if($options.TryGetValue("tilt",$value))	
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="tilt"><strong>tilt Control</strong></label><br/>
-				<input type="text" name="view.options.tilt" id="tilt" value="$!view.options.tilt" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.tilt" id="tilt" value="$!options.tilt" class="text ui-widget-content ui-corner-all" />
 			</div>
 			<h6><em>The angle of incidence of the map as measured in degrees from the viewport plane to the map plane. The only currently supported values are 0, indicating no angle of incidence (no tilt), and 45, indicating a tilt of 45deg;. 45deg; imagery is only available for SATELLITE and HYBRID map types, within some locations, and at some zoom levels.</em></h6>
-		</fieldset>				
-
-
+		</fieldset>
+		#end
+		#if($options.TryGetValue("styles",$value))	
 			<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="styles"><strong>Map styles</strong></label><br/>
-				<input type="text" name="view.options.styles" id="styles" value="$!view.options.styles" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="options.styles" id="styles" value="$!options.styles" class="text ui-widget-content ui-corner-all" />
 			</div> 
 			<h6><em>The initial display styles options for the map.</em></h6>
 		</fieldset>
-	
+	#end
 		
 		
 		
@@ -372,7 +460,10 @@
 		#else
 			#set($width = 425)
 		#end
-		
+		<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
+		</lable> | 
+		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
+		</lable>
 		<div id="place_drawing_map" style="width:${width}px; height:${height}px;"></div>
 	$formbuttons
 	<div class="clear"></div>

@@ -316,8 +316,20 @@ namespace campusMap.Controllers
                 PropertyBag["long"] = view.getLong();
             } PropertyBag["view"] = view;
 
-
-
+            var values = new Dictionary<string, object>();
+            if (!String.IsNullOrWhiteSpace(view.options_obj) && view.options_obj != "{}")
+            {
+                var jss = new JavaScriptSerializer();
+                var options = jss.Deserialize<Dictionary<string, dynamic>>(view.options_obj);
+                options.ToList<KeyValuePair<string, dynamic>>();
+                foreach (KeyValuePair<string, dynamic> option in options)
+                {
+                    values.Add(option.Key, option.Value);
+                }
+            }
+            PropertyBag["options"] = values;
+            PropertyBag["options_json"] = Regex.Replace(Regex.Replace(view.options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+            PropertyBag["baseJson"] = Regex.Replace(view.options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
 
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
@@ -327,10 +339,6 @@ namespace campusMap.Controllers
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
-
-
-
-
 
 
             if (page == 0)
@@ -526,27 +534,30 @@ namespace campusMap.Controllers
             }
             return;
         }
-        public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] map_views view,
+        public void Update(
+            [ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] map_views view,
             [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
             int[] cats,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
-            
-           String[][] fields,
-           bool ajaxed_update,
-           bool forced_tmp,
-           string LongLength,
-           string Length,
-           string apply,
-           string cancel
+            String[][] fields,
+            bool ajaxed_update,
+            bool forced_tmp,
+            string LongLength,
+            string Length,
+            string apply,
+            string cancel
             )     
         {
-            if (view.options.id == 0) ActiveRecordMediator<map_views_options>.Save(view.options);
+            //if (view.options.id == 0)  ActiveRecordMediator<map_views_options>.Save(view.options);
             
             Flash["view"] = view;
             Flash["tags"] = view;
             Flash["authors"] = view;
-            ActiveRecordMediator<map_views>.Update(view);
+            //ActiveRecordMediator<map_views>.Update(view);
+
+
+
             if (cancel != null)
             {
                 view.checked_out_by = null;
@@ -628,11 +639,34 @@ namespace campusMap.Controllers
                     RedirectToReferrer();
                 }
                 return;
-            }/**/
-            map_views_options tmp = view.options;
+            }/*
+            //map_views_options tmp = view.options;
             var jss = new JavaScriptSerializer();
             var json = jss.Serialize(tmp);
             view.options_obj = json;
+*/
+
+            Dictionary<string, string> urlparams = getPostParmasAsObj_obj("options");
+            var jss = new JavaScriptSerializer();
+            //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+
+            //var values = new Dictionary<string, object>();
+            MyJsonDictionary<String, Object> values = new MyJsonDictionary<String, Object>();
+
+            foreach (KeyValuePair<string, string> _urlparams in urlparams)
+            {
+                values.Add(_urlparams.Key, _urlparams.Value);
+            }
+            /*
+                values.Add("Title", "Hello World!");
+                values.Add("Text", "My first post");
+                values.Add("Tags", new[] { "hello", "world" });
+            */
+            //var usettings = new DynamicEntity(values);
+
+            view.options_obj = Serialize(values);//jss.Serialize(usettings);
+
+
 
 
             ActiveRecordMediator<map_views>.Save(view);

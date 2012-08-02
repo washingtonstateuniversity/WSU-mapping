@@ -272,6 +272,10 @@
                 {
                     CancelLayout();
                     PropertyBag["map"] = c[0];
+
+                    PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+                    PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+
                     RenderView("map_view/map_standalone");
                     return;
                 }

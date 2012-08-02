@@ -261,8 +261,26 @@ table.ui-widget tbody tr.odd td{}
     line-height: 9px;
     padding: 1px 3px 3px 4px;
 	-webkit-border-radius: 10px;
+	position:relative;
 	}
 .tips:hover{background-color: #FFFFFF;color: #0033FF;border: 1px solid #0033FF;padding: 0px 2px 2px 3px;}
+.tips em{position:absolute;top:-9999em;left:-9999em;width:150px; display:block;z-index: 99;
+
+ background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+    color: #0033FF;
+    cursor: help;
+    display: inline-block;
+    font-size: 9px;
+    font-weight: bold;
+    line-height:11px;
+    padding: 1px 3px 3px 4px;
+	-webkit-border-radius: 10px;
+border: 1px solid #0033FF;
+}
+.tips:hover em{position:absolute;top:0px;left:24px;}
+
+
 
 
 .itemError{
@@ -688,5 +706,5 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 		.sortable .value{font-weight:bold;}
 		
 	
-		
+		#runningOptions{ position:absolute; top:-9999em; left:-9999em;}
 		

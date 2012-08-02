@@ -225,7 +225,7 @@ namespace campusMap.Controllers
             Dictionary<string, string> queryparams = new Dictionary<string, string>();
             foreach (String key in System.Web.HttpContext.Current.Request.Form.AllKeys)
             {
-                if (key.StartsWith(name+"."))
+                if (key.StartsWith(name))
                 {
                     queryparams.Add(key.Split('.')[1], System.Web.HttpContext.Current.Request.Form[key]);
                 }

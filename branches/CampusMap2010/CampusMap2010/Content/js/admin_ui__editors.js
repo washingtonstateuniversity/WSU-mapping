@@ -803,6 +803,7 @@ function load_view_editor() {
 	var height = $('#height').val();
 	var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15}
 	//var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+	if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
 	$.each($('#tabs_Options input.text'),function(i,v){
 		var tmpVal = $(this).val();
 		if(tmpVal!=""){
@@ -810,18 +811,40 @@ function load_view_editor() {
 				if(tmpVal>0){
 					var tmp = {} 
 					tmp[$(this).attr("id")]=tmpVal;
-					$.extend(options,tmp);
+					options=$.extend(options,tmp);
 				}
 			}else{
 				var tmp = {} 
 				tmp[$(this).attr("id")]=tmpVal;
-				$.extend(options,tmp);
+				options=$.extend(options,tmp);
 			}
 		}
 	});	
+	}else{
+		var jsonStr = $('#runningOptions').html();
+		var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+		jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+		$.extend(options,base,$.parseJSON(jsonStr));
+		//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
+	}
 	//alert(dump(options));
 	
-	
+	$('#dragCenter').on('change',function(){
+			if($(this).is(":checked")){
+				$('#place_drawing_map').gmap('setOptions',{"draggable":true})
+			}else{
+				$('#place_drawing_map').gmap('setOptions',{"draggable":$('#draggable').is(":checked")})
+			}
+		});
+		
+	$('#setZoom').on('change',function(){
+			if($(this).is(":checked")){
+				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":true})
+			}else{
+				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")})
+			}
+		});		
+
 	$('#place_drawing_map').gmap(options).bind('init', function () {
 		//alert(dump(options));
 		//if(lat!='')add_place_point(lat,lng);

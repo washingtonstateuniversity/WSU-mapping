@@ -15,45 +15,67 @@
 $Controller.getView()
 #end
 
-
 #capturefor(html)
 
+<!doctype html>
+<!--[if IE 7]><html class="no-js ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en"> <!--<![endif]-->
+	<head>
+		<style type="text/css">
+  body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
+  .at300bs.at15t_compact{background-image:none;}
+  .at300bs{display:inline;}
+  #runningOptions{ position:absolute; top:-9999em; left:-9999em;}
+</style>
+<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
+$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css?")
+#parse("layouts/assets_central/google-analytics.vm")
+	</head>
+	<body id='campusmap' class="central_layout ${controller.getView()} ${controller.getAction()}">
+
+
+<div id="runningOptions">$options_json</div>
 #if($nav>0)
 	<div id="nav">
 		#parse("layouts/assets_central/main_menu.vm")
 	</div>
 #end
-<div id="centralMap_wrap" style="#if(!$nav) margin-left:0px; #end #if($map.width>0) width:$map.width; #else  width:100%; #end #if($map.height>0) height:$map.height; #else  height:100%; #end ">
+<div id="centralMap_wrap" style="#if(!$nav) margin-left:0px; #end #if($view.width>0) width:${view.width}px; #else  width:100%; #end #if($view.height>0) height:${view.height}px; #else  height:100%; #end">
 	<div id='selectedPlaceList' class='cAssest ini'>
 		<a href="#" id='selectedPlaceList_btn' style="display:none;">Info</a> 
 		<div id='selectedPlaceList_area' class='cAssest'></div>
 	</div>
-	<div id="centralMap" style="  #if($map.width>0) width:$map.width; #else  width:100%; #end #if($map.height>0) height:$map.height; #else  height:100%; #end "></div>
+	<div id="centralMap" style=" #if($view.width>0) width:${view.width}px; #else  width:100%; #end #if($view.height>0) height:${view.height}px; #else  height:100%; #end "></div>
 </div>
+
+
+
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>
+<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
   var siteroot = '$site.Trim()';
   var view = '$view.Trim()/';
   #if($urlQueries && $urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
   #if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
   #if($campus && $campus!="")var campus = '$campus'; #end
+  var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
-<style type="text/css">
-  body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
-  .at300bs.at15t_compact{background-image:none;}
-  .at300bs{display:inline;}
-</style>
-<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
-<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
-$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css?")
-#parse("layouts/assets_central/google-analytics.vm")
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>
-<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/init_test.js",false)
 
+$scriptsService.Js("~/Content/js/utilities_general.js,~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/init_test.js",true)
+
+
+
+
+	</body>
+</html>
 
 
 #end$Controller.stripNonSenseContent($html,true)
