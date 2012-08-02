@@ -527,10 +527,8 @@ namespace campusMap.Controllers
             return;
         }
         public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] map_views view,
-            [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags,
             [ARDataBind("tabs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]infotabs[] tabs,
             int[] cats,
-            String[] massTag,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             

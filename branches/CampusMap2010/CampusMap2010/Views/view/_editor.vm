@@ -109,6 +109,8 @@
  <div id="tabs_Options" class="mainAreaTabs">
  <input type="hidden" name="view.options.id" value="$!view.options.id" />
 		$formbuttons <div class="clear"></div>
+
+		
 		<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="backgroundColor"><strong>Background Color</strong></label><br/>
