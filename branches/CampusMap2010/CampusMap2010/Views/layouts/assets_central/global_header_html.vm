@@ -65,7 +65,7 @@ $Controller.getView()
 <link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
 <link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
 *#
-$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css?")
+$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css")
 #*
 <style type="text/css" >
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}
