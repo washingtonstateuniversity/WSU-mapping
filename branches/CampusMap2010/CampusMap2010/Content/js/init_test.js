@@ -589,7 +589,7 @@ function loadData(data,callback){
 						
 						 // these too are needing to be worked together
 						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-						//if($.isFunction(callback))callback(marker);
+						if($.isFunction(callback))callback(marker);
 					})
 				.click(function() {
 						$.each(ib, function(i) {
