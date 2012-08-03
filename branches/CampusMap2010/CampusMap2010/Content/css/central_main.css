@@ -53,7 +53,7 @@ min-width:1026px;
     left: 0;
     margin-left: 16px;
     padding: 23px 10px 10px 24px;
-    position: relative;
+    position: static;
     top: 0;
     z-index: 999;
 	}
