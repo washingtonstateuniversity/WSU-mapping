@@ -49,7 +49,7 @@ min-width:1026px;
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {padding:23px 10px 10px 24px;position: relative; z-index: 99;margin-left: 16px;}
+#nav {padding:23px 10px 10px 24px;position: relative; z-index: 999;margin-left: 16px;}
 #nav ul ul, #nav ul ul ul {
     margin: 0;
     padding: 3px 0 3px 3px;
@@ -497,7 +497,9 @@ fieldset{padding: 4px 8px 10px;}
 .LEVEL_TABS li .ui-icon-close { float: right; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #centralMap{width:100%;min-height:350px;height:auto;max-height:100%;border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;}
 #centralMap.opended{border-radius: 0px 0px 0px 0px;-webkit-border-radius: 0px 0px 0px 0px;}
-#centralMap_wrap{    display: block;
+#centralMap_wrap{
+	background-color:transparent;
+	    display: block;
     height: auto;
     margin-left: 201px;
     max-height: 100%;
