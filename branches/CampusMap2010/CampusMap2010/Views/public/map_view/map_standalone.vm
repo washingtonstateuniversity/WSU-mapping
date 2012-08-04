@@ -33,7 +33,7 @@ $Controller.getView()
 $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css?")
 #parse("layouts/assets_central/google-analytics.vm")
 	</head>
-	<body id='campusmap' class="central_layout ${controller.getView()} ${controller.getAction()}">
+	<body id='campusmap' class="veiw_base_layout ${controller.getView()} ${controller.getAction()}">
 
 
 <div id="runningOptions">$options_json</div>

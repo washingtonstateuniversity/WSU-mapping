@@ -101,8 +101,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		</fieldset>
 		<fieldset><legend>Places</legend>
 			<label for="name">Select Places Objects to load in the map.</label><br/>
-			<select name="view.places[]" id="placeShape" multiple="multiple" size="15">   
-				<option class="geometric" value="" >Select an optional shape.</option> 
+			<select name="view.places[]" id="placeShape" class="" multiple="multiple" size="9" style="width:205px;">
 				#foreach($place in $places)
 					<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
 				#end

@@ -248,13 +248,13 @@ namespace campusMap.Models
         }
 
         private IList<place> _places;
-        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_view", ColumnKey = "view_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_view", ColumnKey = "view_id", ColumnRef = "place_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> places
         {
             get { return _places; }
             set { _places = value; }
         }
-
+        /* replaced by the virtural model
         private map_views_options _options;
         [BelongsTo]
         virtual public map_views_options options
@@ -262,8 +262,8 @@ namespace campusMap.Models
             get { return _options; }
             set { _options = value; }
         }
-
-
+        */
+        /* the virtural model in json */
         private String _options_obj;
         [Property("optionObj")]
         virtual public String options_obj

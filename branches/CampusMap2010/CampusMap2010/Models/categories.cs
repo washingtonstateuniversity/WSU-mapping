@@ -79,5 +79,6 @@ namespace campusMap.Models
             get { return _places; }
             set { _places = value; }
         }
+
      }
 }

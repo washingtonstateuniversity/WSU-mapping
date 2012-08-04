@@ -825,7 +825,7 @@ function load_view_editor() {
 		var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
 		jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
 		$.extend(options,base,$.parseJSON(jsonStr));
-		alert(dump(options));
+		//alert(dump(options));
 		//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 	}
 	//alert(dump(options));

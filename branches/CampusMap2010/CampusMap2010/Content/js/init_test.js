@@ -29,7 +29,33 @@ function geoLocate(){
 	}
 }
 
+function ini_map_view(map_ele_obj,callback){
+		var map_op = {'center': pullman_str , 'zoom':15 };
+		//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
+		if($('#runningOptions').length){
+			if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
+		
+			}else{
+				//map_op= {}
+				$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
+				var jsonStr = $('#runningOptions').html();
+				var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+				jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+				$.extend(map_op,base,$.parseJSON(jsonStr));
+				//map_op = $.parseJSON(jsonStr);
+				//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
+				//alert(dump(map_op));
+			}
+		}
+		
+		
+		
+		map_ele_obj.gmap(map_op).bind('init', function() { 
+			var map = map_ele_obj.gmap("get","map");
+			callback();
+		});
 
+}
 
 function iniMap(url,callback){
 	var winH = $(window).height()-160;
@@ -376,7 +402,7 @@ function getUrl(){
 }
 
 var needsMoved=0;
-function loadData(data,callback){
+function loadData(data,callback,markerCallback){
 	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			 var pointHolder = {};
@@ -589,7 +615,7 @@ function loadData(data,callback){
 						
 						 // these too are needing to be worked together
 						$('#centralMap').gmap('setOptions', {'zIndex':1}, markerLog[i]);
-						if($.isFunction(callback))callback(marker);
+						if($.isFunction(markerCallback))markerCallback(marker);
 					})
 				.click(function() {
 						$.each(ib, function(i) {
@@ -937,7 +963,7 @@ function getSignlePlace(id){
 					$.each(ib, function(i) {ib[i].close();});
 					$('#centralMap').gmap('clear','markers');
 					$('#centralMap').gmap('clear','overlays');
-					loadData(data,function(marker){
+					loadData(data,null,function(marker){
 						ib[0].open($('#centralMap').gmap('get','map'), marker);
 						cur_mid = mid[0];
 					});
@@ -956,7 +982,7 @@ function getSignlePlace(id){
 			$.each(ib, function(i) {ib[i].close();});
 			$('#centralMap').gmap('clear','markers');
 			$('#centralMap').gmap('clear','overlays');
-			loadData(data,function(marker){
+			loadData(data,null,function(marker){
 				ib[0].open($('#centralMap').gmap('get','map'), marker);
 				cur_mid = mid[0];
 			});
@@ -986,24 +1012,8 @@ function prep(){
 	$(' [placeholder] ').defaultValue();
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
-$(document).ready(function(){
-	$(window).resize(function(){
-		if($(window).width()<=320){
-			$('html').removeClass('narrow');
-			$('html').addClass('mobile');
-		}else if($(window).width()<=600){
-			$('html').addClass('narrow');
-			$('html').removeClass('mobile');
-		}else{
-			$('html').removeClass('narrow');
-			$('html').removeClass('mobile');
-		}
-	}).trigger("resize");
-	var listOffset=0;
-	$(' [placeholder] ').defaultValue();
-	if($('#centralMap').length){
-		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
-		iniMap("",function(){
+
+function setup(){
 			$('#loading').remove();
 			if(typeof(startingUrl)!="undefined"){
 				updateMap(encodeURI(startingUrl.split('=')[1].split('&')[0]),false,function(){
@@ -1212,6 +1222,7 @@ $(document).ready(function(){
 					var cur_search = "";
 					var termTemplate = "<strong>%s</strong>";
 					$( "#placeSearch input[type=text]" ).autocomplete({
+
 						source: function( request, response ) {
 							var term = request.term;
 							$.ajax({
@@ -1276,7 +1287,36 @@ $(document).ready(function(){
 					/* EOF Search autocomplete */
 				}
 			/* EFO Other after gmap ini */
-		});
+		}
+
+
+$(document).ready(function(){
+	$(window).resize(function(){
+		if($(window).width()<=320){
+			$('html').removeClass('narrow');
+			$('html').addClass('mobile');
+		}else if($(window).width()<=600){
+			$('html').addClass('narrow');
+			$('html').removeClass('mobile');
+		}else{
+			$('html').removeClass('narrow');
+			$('html').removeClass('mobile');
+		}
+	}).trigger("resize");
+	var listOffset=0;
+	$(' [placeholder] ').defaultValue();
+	if($('#centralMap').length){
+		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
+		
+		
+		
+		
+		
+		if($('.veiw_base_layout').length){
+			ini_map_view($('#centralMap'),setup);
+		}else{
+			iniMap("",setup);
+		}
 		if($('#centralMap').length){
 			$(window).resize(function(){
 				resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))
@@ -1285,6 +1325,11 @@ $(document).ready(function(){
 				resizeBg($('.cAssest'),160)
 			}).trigger("resize");
 		}
+		
+		
+		
+		
+		
 	}	
 		
 });

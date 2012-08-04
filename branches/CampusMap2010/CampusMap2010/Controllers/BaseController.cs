@@ -6,13 +6,13 @@
     using System.Collections;
     using System.Collections.Generic;
 
-using System.Collections.ObjectModel;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.IO;
-using System.ServiceModel.Web;
+    using System.ServiceModel.Web;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Json;
+    using System.Runtime.Serialization.Json;
     using System.Dynamic;
     using System.Security.Permissions;
     using System.Web.Script.Serialization;
@@ -23,6 +23,8 @@ using System.Runtime.Serialization.Json;
     using log4net;
     using log4net.Config;
     using System.Text;
+
+    using System.Reflection;
 
 #endregion
 namespace campusMap.Controllers
@@ -189,7 +191,10 @@ namespace campusMap.Controllers
 
 
         #region Method extentions
-
+            public static String getRootPath()
+            {
+                return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath).Replace("bin", "");
+            }
         public static Dictionary<string, string> getUrlParmas_obj()
         {
             String everUrl = System.Web.HttpContext.Current.Request.RawUrl;

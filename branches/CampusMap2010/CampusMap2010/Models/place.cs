@@ -358,7 +358,13 @@ namespace campusMap.Models
             get { return _program; }
             set { _program = value; }
         }
-
+        private IList<map_views> _views;
+        [HasAndBelongsToMany(typeof(map_views), Lazy = true, Table = "place_to_view", ColumnKey = "place_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<map_views> views
+        {
+            get { return _views; }
+            set { _views = value; }
+        }
 
 
 
