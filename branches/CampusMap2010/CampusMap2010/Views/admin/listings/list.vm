@@ -32,46 +32,39 @@
 	<div class="clear"></div>
 	
 	<div id="_Listing" class="tabedArea tabactive" >
+		<a href="$siteroot/${controller.getView()}/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;float:right;">
+		  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
+		</a>
 		<h3>${controller.getView()} List :</h3>
 		<div style="position:relative;" >
-			<div id="${controller.getView()}TypeDiv" style="position: absolute; top: 5px; z-index: 1; line-height: 15px; right: 8px;color:#fff;">
 			
-				<a href="$siteroot/${controller.getView()}/new.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;">
-				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
-				</a>
-				<span style="display:inline-block;">
-					Categories:<br/>
-					<select id="list${controller.getView()}Type" class="fliterList">
-						<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
-						<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
-						<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
-						#foreach($cat in $listcats)
-							<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
+			#parse("/admin/listings/filters.vm")
+			#set($list_items=$controller.getVar("filteredResults_list"))
+			#if($list_items)
+				#set($buttons=$controller.getVar("filteredResults_ButtonSet"))
+				#parse("admin/listings/general.vm")
+			#else
+				<div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+						#set($c=0)
+						#foreach($status in $statuses)
+							<li class="ui-state-default ui-corner-top #if($c<=0) ui-tabs-selected ui-state-active #end">
+								<a href="#${status.title}">${status.title} ($controller.getVar("${status.title}_list").TotalItems)</a>
+							</li>
+							#set($c=$c+1)
 						#end
-					</select>
-				</span>
-			</div>
-			
-			<div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
-				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-					#set($c=0)
-					#foreach($status in $statuses)
-						<li class="ui-state-default ui-corner-top #if($c<=0) ui-tabs-selected ui-state-active #end">
-							<a href="#${status.title}">${status.title} ($controller.getVar("${status.title}_list").TotalItems)</a>
-						</li>
-						#set($c=$c+1)
+					</ul>
+					#foreach($STATUS in $statuses)
+					  <div id="${STATUS.title}">
+							#set($buttons=$controller.getVar("${STATUS.title}ButtonSet"))
+							#set($list_items=$controller.getVar("${STATUS.title}_list"))
+							#parse("admin/listings/general.vm")
+							<div class="clear"></div>
+					  </div>
 					#end
-				</ul>
-				#foreach($STATUS in $statuses)
-				  <div id="${STATUS.title}">
-						#set($buttons=$controller.getVar("${STATUS.title}ButtonSet"))
-						#set($list_items=$controller.getVar("${STATUS.title}_list"))
-						#parse("admin/listings/general.vm")
-						<div class="clear"></div>
-				  </div>
-				#end
-			</div>
-		</div>
+				</div>
+			#end
+		</div>	
 	</div>
 
 	#if($types && $userService.checkPrivleage("modify_place_types"))

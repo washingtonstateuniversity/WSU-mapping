@@ -471,9 +471,7 @@
                             //log.Info("hashtable[" + ft_.alias+"]" + value);
                         }
                     }
-                    String renderPath = Context.ApplicationPhysicalPath;
-                    if (!renderPath.EndsWith("\\"))
-                        renderPath += "\\";
+                    String renderPath = getRootPath();
 
                     text = System.IO.File.ReadAllText(renderPath + "Views/public/central/accessibilties.vm");
                     text = helperService.proccessText(hashtable, text, true).Trim();
@@ -530,7 +528,7 @@
                 System.IO.File.WriteAllText(uploadPath + file, blob);
             }
 
-            public place[] searchAndAddResultsToHashtable(String hql, String searchterm)
+            public static place[] searchAndAddResultsToHashtable(String hql, String searchterm)
             {
                 SimpleQuery<place> query = new SimpleQuery<place>(typeof(place), hql);
                 query.SetParameter("searchterm", "%" + searchterm + "%");
@@ -603,6 +601,27 @@
                 RenderText(json);
             }
 
+            public static List<place> filterPage(String term)
+            {
+                List<place> listtems = new List<place>();
+                int sid = 0;
+                if (!int.TryParse(term, out sid))
+                {
+                    term = term.Trim();
+                    SortedDictionary<string, int> results = search_place_string(term);
+                    foreach(int res in results.Values){
+                        listtems.Add(ActiveRecordBase<place>.Find(res));
+                    }
+                    
+                }
+                if (sid > 0)
+                {
+                        
+                        listtems.Add(ActiveRecordBase<place>.Find(sid));
+                }
+                return listtems;
+            }
+
             public void get_place(String id, string callback)
             {
                 CancelView();
@@ -636,7 +655,7 @@
                 }
             }
 
-            public SortedDictionary<string, int> search_place_string(string term)
+            public static SortedDictionary<string, int> search_place_string(string term)
             {
                 // Use hashtable to store name/value pairs
                 SortedDictionary<string, int> results = new SortedDictionary<string, int>();

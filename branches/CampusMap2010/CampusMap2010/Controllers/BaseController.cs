@@ -191,10 +191,10 @@ namespace campusMap.Controllers
 
 
         #region Method extentions
-            public static String getRootPath()
-            {
-                return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath).Replace("bin", "");
-            }
+        public static String getRootPath()
+        {
+            return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath).Replace("bin", "");
+        }
         public static Dictionary<string, string> getUrlParmas_obj()
         {
             String everUrl = System.Web.HttpContext.Current.Request.RawUrl;

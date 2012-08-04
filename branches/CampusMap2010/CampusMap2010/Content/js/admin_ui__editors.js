@@ -395,11 +395,11 @@ function watchMediaTab(){
 			addTab(tab_counter,"Views",content,false,false);
 		}
 		if($('#viewTab').length>1){
-			$('#'+$('#viewTabb:last').atrr('href')).remove();
+			$('#'+$('#viewTab:last').attr('href')).remove();
 			$('#viewTab:last').remove();
 		}
 		if($('.imageBox').length<=1 && $('#viewTab').length>0){
-			$('#'+$('#viewTab').atrr('href')).remove();
+			$('#'+$('#viewTab').attr('href')).remove();
 			$('#viewTab').remove();
 		}
 	}
@@ -825,7 +825,7 @@ function load_view_editor() {
 		var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
 		jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
 		$.extend(options,base,$.parseJSON(jsonStr));
-		//alert(dump(options));
+		alert(dump(options));
 		//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 	}
 	//alert(dump(options));

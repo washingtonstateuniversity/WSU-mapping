@@ -58,7 +58,7 @@ namespace campusMap.Controllers
                 }
             }
         }
-        public void List(int page, int searchId, string target)
+        public void List(int page, int searchId, string target, string filter)
         {
             clearConnections();
             authors user = UserService.getUser();
@@ -83,41 +83,50 @@ namespace campusMap.Controllers
             int publishedPaging = 0;
             int name_typesPaging = 0;
             int templatePaging = 0;
+            int filterPaging = 0;
 
-
-
-
+            var pageing = new Dictionary<string, int>();
+            
             switch (target)
             {
                 case "templates":
                     {
-                        templatePaging = page; break;
+                        pageing.Add("templatePaging", page); break;
                     }
                 case "name_types":
                     {
-                        name_typesPaging = page; break;
+                        pageing.Add("name_typesPaging", page); break;
                     }
                 case "types":
                     {
-                        typesPaging = page; break;
+                        pageing.Add("typesPaging", page); break;
                     }
                 case "fields":
                     {
-                        fieldsPaging = page; break;
+                        pageing.Add("fieldsPaging", page); break;
                     }
                 case "draft":
                     {
-                        draftPaging = page; break;
+                        pageing.Add("draftPaging", page); break;
                     }
                 case "review":
                     {
-                        reviewPaging = page; break;
+                        pageing.Add("reviewPaging", page); break;
                     }
                 case "published":
                     {
-                        publishedPaging = page; break;
+                        pageing.Add("publishedPaging", page); break;
+                    }
+                case "filteredResults":
+                    {
+                        pageing.Add("filterPaging", page); break;
                     }
             }
+
+
+            
+
+
             //SETUP SEARCHID and parts
             if (searchId.Equals(0))
             {
@@ -192,87 +201,60 @@ namespace campusMap.Controllers
                 baseEx.Add(Expression.In("id", obj));
             }
 
+            String cachePath = getRootPath();
 
-            //REVIEW
-            IList<place> reviewItems;
-            List<AbstractCriterion> revEx = new List<AbstractCriterion>();
-            revEx.AddRange(baseEx);
-            revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
-            reviewItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), revEx.ToArray());
-
-            //PUBLISHED
-            IList<place> publishedItems;
-            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-            pubEx.AddRange(baseEx);
-            pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
-            publishedItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), pubEx.ToArray());
-
-            //DRAFT
-            IList<place> draftItems;
-            List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
-            draftEx.AddRange(baseEx);
-            draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
-            draftItems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), draftEx.ToArray());
-
-
-                String cachePath = Context.ApplicationPhysicalPath;
-                if (!cachePath.EndsWith("\\"))
-                    cachePath += "\\";
-
-
-
-            //PUBLISHED
-            foreach (place item in publishedItems)
-            {
-                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
-                {
-                    makePlaceStaticMap(item);
-                }
-            }
-            var publist = PaginationHelper.CreatePagination(publishedItems, pagesize, publishedPaging);
-            PropertyBag["published_list"] = publist;
             IList<string> buttons = new List<string>();
-            buttons.Add("edit");
-            buttons.Add("delete");
-            buttons.Add("publish");
-            //buttons.Add("broadcast");
-            //buttons.Add("view"); //NOTE:coming so TODO
-            //buttons.Add("order");
-            PropertyBag["publishedButtonSet"] = buttons;
-
-
-            //REVIEW
-            foreach (place item in reviewItems)
+            int pag = 0;
+            if (!String.IsNullOrWhiteSpace(filter))
             {
-                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
-                {
-                    makePlaceStaticMap(item);
-                }
-            }
-            PropertyBag["review_list"] = PaginationHelper.CreatePagination(reviewItems, pagesize, reviewPaging);
-            buttons = new List<string>();
-            buttons.Add("edit");
-            buttons.Add("delete");
-            buttons.Add("publish");
-            //buttons.Add("view");
-            PropertyBag["reviewButtonSet"] = buttons;
 
-            //DRAFT
-            foreach (place item in draftItems)
+                List<place> listtems = publicController.filterPage(filter.Replace("+"," "));
+                foreach (place item in listtems)
+                {
+                    if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null)
+                        || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
+                    {
+                        makePlaceStaticMap(item);
+                    }
+                }
+                PropertyBag["filteredResults_list"] = PaginationHelper.CreatePagination((IList)listtems, 15, (pageing.TryGetValue("fliterPaging", out pag) ? pag : 0));
+                buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                //buttons.Add("view");
+                PropertyBag["filteredResults_ButtonSet"] = buttons;
+            }
+
+            
+            
+            status[] states = ActiveRecordBase<status>.FindAll();
+            foreach (status stat in states)
             {
-                if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
-                {
-                    makePlaceStaticMap(item);
-                }
-            }
-            PropertyBag["draft_list"] = PaginationHelper.CreatePagination(draftItems, pagesize, draftPaging);
+                string name = stat.title;
+                
+                IList<place> listtems;
+                List<AbstractCriterion> revEx = new List<AbstractCriterion>();
+                revEx.AddRange(baseEx);
+                revEx.Add(Expression.Eq("status", stat));
+                listtems = ActiveRecordBase<place>.FindAll(Order.Asc("prime_name"), revEx.ToArray());
 
-            buttons = new List<string>();
-            buttons.Add("edit");
-            buttons.Add("delete");
-            buttons.Add("publish");
-            //buttons.Add("view");
-            PropertyBag["draftButtonSet"] = buttons;
+                foreach (place item in listtems)
+                {
+                    if ((string.IsNullOrEmpty(item.staticMap) && item.coordinate != null) 
+                        || (!string.IsNullOrEmpty(item.staticMap) && !File.Exists(cachePath + item.staticMap) && item.coordinate != null))
+                    {
+                        makePlaceStaticMap(item);
+                    }
+                }
+                PropertyBag[name + "_list"] = PaginationHelper.CreatePagination(listtems, pagesize, (pageing.TryGetValue(name + "Paging", out pag)?pag:0));
+                buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                //buttons.Add("view");
+                PropertyBag[name + "ButtonSet"] = buttons;
+            }
 
             //place types
             pagesize = 100;
@@ -292,11 +274,6 @@ namespace campusMap.Controllers
             IList<infotabs_templates> infotabs_templates_items;
             infotabs_templates_items = ActiveRecordBase<infotabs_templates>.FindAll();
             PropertyBag["templates"] = PaginationHelper.CreatePagination(infotabs_templates_items, pagesize, templatePaging);
-
-
-
-
-
 
             //place feilds
             pagesize = 50;
@@ -1581,11 +1558,7 @@ namespace campusMap.Controllers
             }
 
 
-            String cachePath = Context.ApplicationPhysicalPath;
-            if (!cachePath.EndsWith("\\"))
-                cachePath += "\\";
-                cachePath += @"uploads\";
-                cachePath += @"places\cache\";
+            String cachePath = getRootPath() +"cache/places/";
 
             string file = place.id + "_centralplace" + ".ext";
             String file_path = cachePath + file;
@@ -1608,7 +1581,7 @@ namespace campusMap.Controllers
             {
                 using (WebClient wc = new WebClient())
                 {
-                    value = wc.DownloadString("http://map.wsu.edu/public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
+                    value = wc.DownloadString( getRootUrl()+"public/get_place.castle?all=yes&dyno=yes&id=" + place.id);
                 }
             }
             else
@@ -1661,9 +1634,7 @@ namespace campusMap.Controllers
         public void makePlaceStaticMap(place place)
         {
             string url = "http://maps.google.com/staticmap?center=" + place.getLat() + "," + place.getLong() + "&size=250x145&maptype=mobile&markers=" + place.getLat() + "," + place.getLong() + ",red&sensor=false";
-            String uploadPath = Context.ApplicationPhysicalPath;
-            if (!uploadPath.EndsWith("\\"))
-                uploadPath += "\\";
+            String uploadPath = getRootPath();
 
             String imagePath = @"";
             imagePath += @"uploads\";

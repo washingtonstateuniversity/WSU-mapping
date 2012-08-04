@@ -159,7 +159,7 @@ namespace campusMap.Controllers
         {
             media_repo image = ActiveRecordBase<media_repo>.Find(image_id);
             // a var for uploads will start here
-            String uploadPath = Context.ApplicationPhysicalPath + @"\uploads\";
+            String uploadPath = getRootPath() + @"uploads\";
             if (place_id != 0)
             {
                 uploadPath += @"place\" + place_id + @"\";
@@ -426,9 +426,7 @@ namespace campusMap.Controllers
                     */
 
                     // So this should be abstracted to the bottom where the place is a var and same with the id
-                    String cachePath = Context.ApplicationPhysicalPath;
-                    if (!cachePath.EndsWith("\\"))
-                        cachePath += "\\";
+                    String cachePath = getRootPath();
                     cachePath += @"uploads\";
                     cachePath += @"places\cache\";
 
@@ -564,9 +562,7 @@ namespace campusMap.Controllers
 
             if (String.IsNullOrEmpty(mediaType)) mediaType = "image";
 
-            String path = Context.ApplicationPhysicalPath;
-            if (!path.EndsWith("\\"))
-                path += "\\";
+            String path = getRootPath();
             path += @"uploads\media\" + mediaType + @"\";
             if (usetemp) path += @"tmp\";
 
@@ -579,7 +575,7 @@ namespace campusMap.Controllers
         protected string getUploadsRelavtivePath(string mediaType, bool usetemp)
         {
             String path = getUploadsPath(mediaType, usetemp);
-            String directory = Context.ApplicationPhysicalPath;
+            String directory = getRootPath();
             path = path.Replace(directory, "");
             if (!path.StartsWith("\\"))
                 path = "\\" + path;
@@ -871,7 +867,7 @@ namespace campusMap.Controllers
 
 
                     // a var for uploads will start here
-                    String uploadPath = Context.ApplicationPhysicalPath;
+                    String uploadPath = getRootPath();
                     if(!uploadPath.EndsWith("\\"))
                         uploadPath+="\\";
                     uploadPath += @"uploads\";
@@ -955,7 +951,7 @@ namespace campusMap.Controllers
 
 
                 // a var for uploads will start here
-                String uploadPath = Context.ApplicationPhysicalPath + @"\uploads\";
+                String uploadPath = getRootPath() +@"\uploads\";
 
                 if (!HelperService.DirExists(uploadPath))
                 {
@@ -978,10 +974,7 @@ namespace campusMap.Controllers
             // Read in the file into a byte array
             byte[] contents = null;
 
-            String cachePath = Context.ApplicationPhysicalPath;
-            if (!cachePath.EndsWith("\\"))
-                cachePath += "\\";
-                cachePath += path.TrimStart('\\');
+            String cachePath = getRootPath();
 
             try
             {
