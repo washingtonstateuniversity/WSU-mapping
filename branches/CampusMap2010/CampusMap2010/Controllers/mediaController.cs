@@ -978,7 +978,7 @@ namespace campusMap.Controllers
 
             try
             {
-                contents = File.ReadAllBytes(cachePath);
+                contents = File.ReadAllBytes(cachePath + path);
             }
             catch (Exception ex)
             {
