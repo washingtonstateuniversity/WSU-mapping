@@ -14,17 +14,17 @@
 		/*
 		 * This is just a short cut to addShape
 		 */
-		addPolygon: function(shapeOptions) {
-			return this.addShape('Polygon', shapeOptions);
+		addPolygon: function(shapeOptions, callback) {
+			return  this.addShape('Polygon', shapeOptions,callback);
 		},
-		addPolyline: function(shapeOptions) {
-			return this.addShape('Polyline', shapeOptions);
+		addPolyline: function(shapeOptions, callback,callback) {
+			return  this.addShape('Polyline', shapeOptions,callback);
 		},
-		addRectangle: function(shapeOptions) {
-			return this.addShape('Rectangle', shapeOptions);
+		addRectangle: function(shapeOptions, callback) {
+			return  this.addShape('Rectangle', shapeOptions,callback);
 		},
-		addCircle: function(shapeOptions) {
-			return this.addShape('Circle', shapeOptions);
+		addCircle: function(shapeOptions, callback) {
+			return  this.addShape('Circle', shapeOptions,callback);
 		},
 		/**
 		 * Adds a shape to the map
@@ -33,9 +33,10 @@
 		 * @return object
 		 */
 		addShape: function(shapeType, shapeOptions, callback) {
+			//alert(dump(shapeOptions));
 			var self = this;
 			var flip = typeof(shapeOptions.coordsFlip)!=='undefined' ? shapeOptions.coordsFlip : false;
-			if(typeof(shapeOptions.paths)!='string' && !$.isArray(shapeOptions.paths) ){
+			if(typeof(shapeOptions.paths)!="undefined" && typeof(shapeOptions.paths)!='string' && !$.isArray(shapeOptions.paths) ){
 				var reverse_array = false;
 				var paths_array = [];
 				$.each(shapeOptions.paths, function(i,v){
@@ -46,7 +47,10 @@
 			}
 			if(typeof(shapeOptions.paths)=='string'){shapeOptions.paths = self.process_coords(shapeOptions.paths,flip,false);}
 			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = self.process_coords(shapeOptions.path,flip,false);}
+			if(typeof(shapeOptions.encoded)=='string'){shapeOptions.paths = google.maps.geometry.encoding.decodePath(shapeOptions.encoded);}
 			
+			
+			//alert(dump(shapeOptions));
 			var shape = new google.maps[shapeType](jQuery.extend({'map': self.get('map')}, shapeOptions));
 			this.get('overlays > ' + shapeType, []).push(shape);
 			this._call(callback, shape);

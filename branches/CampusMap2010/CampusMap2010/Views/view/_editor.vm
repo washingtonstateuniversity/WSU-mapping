@@ -5,6 +5,10 @@
 #end
 
 <div id="runningOptions">$options_json</div>
+<div id="shape" style="position:absolute;top:-9999em;left:-9999em;">$shapes</div>
+
+
+
 
 <script type="text/javascript">
 
@@ -28,9 +32,9 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
     <li class="ui-state-default ui-corner-top">
       <a href="#tabs_SAMPLE">Map Preview</a>
     </li>
-    <li class="ui-state-default ui-corner-top">
+   #* <li class="ui-state-default ui-corner-top">
       <a href="#tabs_Text">Text</a>
-    </li>
+    </li> *#
     <li class="ui-state-default ui-corner-top">
       <a href="#tabs_Detail">Detail</a>
     </li>
@@ -99,13 +103,27 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 			</div><br/> 
 			<h6><em><strong>NOTE:</strong> by draging the map with drag mode on thru the Preview tab and simple draging the map to the view you wish to see</em></h6>
 		</fieldset>
-		<fieldset><legend>Places</legend>
-			<label for="name">Select Places Objects to load in the map.</label><br/>
-			<select name="view.places[]" id="placeShape" class="" multiple="multiple" size="9" style="width:205px;">
-				#foreach($place in $places)
-					<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
-				#end
-			</select>
+		<fieldset><legend>On The Map</legend>
+			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Places</legend>
+				<label for="places">Select Places Objects<br/>to load in the map.</label><br/>
+				<select name="view.places[]" id="places" class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($place in $places)
+						<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
+					#end
+				</select>
+			</fieldset>
+			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Geometrics</legend>
+                <label for="name">Geometric Object<br/>to repersent this place.</label><br/>
+				<select name="view.geometrics[]" id="placeShape" class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($geo in $geometrics)
+						<option class="geometric" value="$geo.id" #if($view.geometrics.Contains($geo)) selected="selected" #end>$!geo.name</option>
+					#end
+				</select>
+            </fieldset>  
+			
+			
+			
+			
 		</fieldset>
      $formbuttons
     <div class="clear"></div>
@@ -463,13 +481,15 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		</lable> | 
 		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
 		</lable>
+		<div id="campusmap">
 		<div id="place_drawing_map" style="width:${width}px; height:${height}px;"></div>
+		</div>
 	$formbuttons
 	<div class="clear"></div>
   <br/>    
 </div>
   
-  
+  #*
   <div id="tabs_Text" class="mainAreaTabs">
 $formbuttons
 
@@ -489,7 +509,7 @@ $formbuttons
 
 
 			<h3>Summary :</h3>
-			#*$Form.TextArea("view.summary")*#
+			
 			<textarea id="place_summary" name="view.summary"  class="tinyEditor">$!view.summary</textarea>
 						<br/>
 			<hr/>
@@ -548,7 +568,7 @@ $formbuttons
 		$formbuttons
     <div class="clear"></div>
   </div>
-  
+  *#
   
   <div id="tabs_Detail" class="mainAreaTabs">
 $formbuttons <div class="clear"></div>
@@ -681,10 +701,28 @@ $formbuttons
 			<label for="name">URL</label><br/>	
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
 		</fieldset> 
+
+
+		<fieldset><legend>Themed Output: </legend>
+			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
+		</fieldset>
 			
-				<fieldset><legend>Output Embed code: </legend>
-					<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=js&quot;&gt;&lt;/script&gt;</pre>
-				</fieldset>
+		<fieldset><legend>Feed Output: </legend>
+			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json</pre>
+			<h4>Callback for jsonp</h4>
+			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json&callback=test</pre>
+		</fieldset>
+		
+		<fieldset><legend>Standalone Output: </legend>
+			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
+		</fieldset>		
+		
+		<fieldset><legend>Embed code example: </legend>
+			<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot;&gt;&lt;/script&gt;</pre>
+		</fieldset>
+		
+				
+				
 		$formbuttons
 		<div class="clear"></div>
 	  <br/>    

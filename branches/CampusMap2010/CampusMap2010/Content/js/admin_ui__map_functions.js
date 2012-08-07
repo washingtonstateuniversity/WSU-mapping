@@ -157,35 +157,38 @@ function get_wsu_logo_shape(){
  *
 */
 function apply_element(mapOjb,type,style){
-	mapOjb.gmap('add'+type, filter_map_element(type,style.rest.options)).click(function(){
-					if(style.click){
-						if(style.click.options)mapOjb.gmap('setOptions',filter_map_element(type,style.click.options),this);
-						if(style.click.callback)style.click.callback();
-					}
-				 }).mouseover(function(){
-					 if(style.mouseover){
-						 if(style.mouseover.options)mapOjb.gmap('setOptions',filter_map_element(type,style.mouseover.options),this);
-						 if(style.mouseover.callback)style.mouseover.callback();
-					 }
-				}).mouseout(function(){
-					if(style.rest){
-						if(style.rest.options)mapOjb.gmap('setOptions',filter_map_element(type,style.rest.options),this);
-						if(style.rest.callback)style.rest.callback();
-					}
-				}).dblclick(function(){
-					if(style.dblclick){
-						if(style.dblclick.options)mapOjb.gmap('setOptions',filter_map_element(type,style.dblclick.options),this);
-						if(style.dblclick.callback)style.dblclick.callback();
-					}
-				})
-				.triggerEvent('mouseover')
-				.triggerEvent('mouseout');/*,
-				rightclick: function(){
-					if(style.dblclick){
-						if(style.rightclick.options)mapOjb.gmap('get','map').setCenter(filter_map_element(type,style.rightclick.options),this);
-						if(style.rightclick.callback)style.hover.callback();
-					}
-				}*/
+	mapOjb.gmap('addShape', type, filter_map_element(type,style.rest.options), function(shape){
+		$(shape).click(function(){
+			if(style.click){
+				if(style.click.options)mapOjb.gmap('setOptions',filter_map_element(type,style.click.options),this);
+				if(style.click.callback)style.click.callback();
+			}
+		 }).mouseover(function(){
+			 if(style.mouseover){
+				 if(style.mouseover.options)mapOjb.gmap('setOptions',filter_map_element(type,style.mouseover.options),this);
+				 if(style.mouseover.callback)style.mouseover.callback();
+			 }
+		}).mouseout(function(){
+			if(style.rest){
+				if(style.rest.options)mapOjb.gmap('setOptions',filter_map_element(type,style.rest.options),this);
+				if(style.rest.callback)style.rest.callback();
+			}
+		}).dblclick(function(){
+			if(style.dblclick){
+				if(style.dblclick.options)mapOjb.gmap('setOptions',filter_map_element(type,style.dblclick.options),this);
+				if(style.dblclick.callback)style.dblclick.callback();
+			}
+		})
+		.trigger('mouseover')
+		.trigger('mouseout');
+	});
+	/*,
+	rightclick: function(){
+		if(style.dblclick){
+			if(style.rightclick.options)mapOjb.gmap('get','map').setCenter(filter_map_element(type,style.rightclick.options),this);
+			if(style.rightclick.callback)style.hover.callback();
+		}
+	}*/
 }
 
 
@@ -194,7 +197,7 @@ function rebuild_example(tabs,mapSelector,type){
 	var _op={};
 	$.each(tabs, function(){
 		var tab = $(this);
-		var mode = tab.attr('id').split('__')[1].split('_')[1];
+		var mode = tab.attr('id');//.split('__')[1].split('_')[1];
 		var objs_to_rebuild = tab.find('.sortStyleOps :input');
 		
 		_op[ mode ] = {};

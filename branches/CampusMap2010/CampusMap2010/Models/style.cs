@@ -43,6 +43,17 @@ namespace campusMap.Models
             get { return _of; }
             set { _of = value; }
         }
+        private string _style_obj;
+        [Property]
+        virtual public string style_obj
+        {
+            get { return _style_obj; }
+            set { _style_obj = value; }
+        }
+
+        
+        /*
+ */
         private IList<style_options> _options;
         [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "style_to_style_options", ColumnKey = "style_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<style_options> _option
@@ -64,6 +75,7 @@ namespace campusMap.Models
             get { return _levels; }
             set { _levels = value; }
         }
+        
     }
 
     [ActiveRecord(Lazy = true)]

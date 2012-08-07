@@ -149,7 +149,7 @@ namespace campusMap.Controllers
             public string getRootUrl()
             {
                 String root = "";
-                if (!Request.IsLocal)
+                if (!System.Web.HttpContext.Current.Request.IsLocal)
                 {
                     root = "http://map.wsu.edu/";
                 }

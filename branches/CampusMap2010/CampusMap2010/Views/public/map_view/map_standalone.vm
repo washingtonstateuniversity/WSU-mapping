@@ -42,12 +42,12 @@ $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/cen
 		#parse("layouts/assets_central/main_menu.vm")
 	</div>
 #end
-<div id="centralMap_wrap" style="#if(!$nav) margin-left:0px; #end #if($view.width>0) width:${view.width}px; #else  width:100%; #end #if($view.height>0) height:${view.height}px; #else  height:100%; #end">
+<div id="centralMap_wrap" style="#if(!$nav) margin-left:0px; #end #if($map.width>0) width:${map.width}px; #else  width:100%; #end #if($map.height>0) height:${map.height}px; #else  height:100%; #end">
 	<div id='selectedPlaceList' class='cAssest ini'>
 		<a href="#" id='selectedPlaceList_btn' style="display:none;">Info</a> 
 		<div id='selectedPlaceList_area' class='cAssest'></div>
 	</div>
-	<div id="centralMap" style=" #if($view.width>0) width:${view.width}px; #else  width:100%; #end #if($view.height>0) height:${view.height}px; #else  height:100%; #end "></div>
+	<div id="centralMap" style=" #if($map.width>0) width:${map.width}px; #else  width:100%; #end #if($map.height>0) height:${map.height}px; #else  height:100%; #end "></div>
 </div>
 
 
@@ -65,14 +65,22 @@ $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/cen
   #if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
   #if($campus && $campus!="")var campus = '$campus'; #end
   var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
+  #if(${map.places})
+  #set($c=0)
+  var ids = "#foreach($place in $map.places)$!place.id,#end 0";
+  #end
+  #if(${map.geometrics})
+  #set($c=0)
+  var sids = "#foreach($geo in $map.geometrics)$!geo.id,#end 0";
+  #end
+  
+  
+  
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
 
 $scriptsService.Js("~/Content/js/utilities_general.js,~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/init_test.js",true)
-
-
-
 
 	</body>
 </html>

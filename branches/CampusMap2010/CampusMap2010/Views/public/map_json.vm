@@ -1,45 +1,13 @@
 #if($callback)$callback(#end
 {
-	"center":"$map.getLat(),$map.getLong()",
-	#capturefor(str)
-		#if($map.options.backgroundColor)"backgroundColor":"$map.options.backgroundColor",#end
-		#if($map.options.disableDefaultUI)"disableDefaultUI":"$map.options.disableDefaultUI",#end
-		#if($map.options.disableDoubleClickZoom)"disableDoubleClickZoom":"$map.options.disableDoubleClickZoom",#end
-		#if($map.options.draggable && $map.options.draggable=="false")"draggable":false,#end
-		#if($map.options.draggableCursor)"draggableCursor":"$map.options.draggableCursor",#end
-		#if($map.options.draggingCursor)"draggingCursor":"$map.options.draggingCursor",#end
-		#if($map.options.heading>0)"heading":"$map.options.heading",#end
-		#if($map.options.keyboardShortcuts)"keyboardShortcuts":true,#end
-		#if($map.options.mapMaker)"mapMaker":"$map.options.mapMaker",#end
-		
-		
-		
-		#if($map.options.mapTypeControl)"mapTypeControl":false,#end
-		
-		
-		
-		#if($map.options.mapTypeControlOptions)"mapTypeControlOptions":"$map.options.mapTypeControlOptions",#end
-		#if($map.options.mapTypeId)"mapTypeId":"$map.options.mapTypeId",#end
-		#if($map.options.maxZoom>0)"maxZoom":"$map.options.maxZoom",#end
-		#if($map.options.minZoom>0)"minZoom":"$map.options.minZoom",#end
-		#if($map.options.noClear)"noClear":"$map.options.noClear",#end
-		#if($map.options.overviewMapControl && $map.options.overviewMapControl=="false")"overviewMapControl":false,#end
-		#if($map.options.overviewMapControlOptions)"overviewMapControlOptions":"$map.options.overviewMapControlOptions",#end
-		#if($map.options.panControl && $map.options.panControl=="false")"panControl":false,#end
-		#if($map.options.panControlOptions)"panControlOptions":"$map.options.panControlOptions",#end
-		#if($map.options.rotateControl && $map.options.rotateControl=="false")"rotateControl":false,#end
-		#if($map.options.rotateControlOptions)"rotateControlOptions":"$map.options.rotateControlOptions",#end
-		#if($map.options.scaleControl && $map.options.scaleControl=="false")"scaleControl":false,#end
-		#if($map.options.scaleControlOptions)"scaleControlOptions":"$map.options.scaleControlOptions",#end
-		#if($map.options.scrollwheel && $map.options.scrollwheel=="false")"scrollwheel":false,#end
-		#if($map.options.streetView && $map.options.streetView=="false")"streetView":false,#end
-		#if($map.options.streetViewControl)"streetViewControl":"$map.options.streetViewControl",#end
-		#if($map.options.styles)"styles":"$map.options.styles",#end
-		#if($map.options.tilt>0)"tilt":"$map.options.tilt",#end
-		#if($map.options.zoomControl && $map.options.zoomControl=="false")"zoomControl":false,#end
-		#if($map.options.zoomControlOptions)"zoomControlOptions":"$map.options.zoomControlOptions",#end
-	#end
-	$str
-	"zoom":#if($map.options.zoom)${map.options.zoom}#else 15 #end
+"map_ops":$options_json,
+"map_base":{#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end},
+  #if(${map.places})
+"places":{"#foreach($place in $map.places)$!place.id,#end 0"},
+  #end
+  #if(${map.geometrics})
+"geometrics":{"#foreach($geo in $map.geometrics)$!geo.id,#end 0"}
+  #end
+
 }
 #if($callback))#end

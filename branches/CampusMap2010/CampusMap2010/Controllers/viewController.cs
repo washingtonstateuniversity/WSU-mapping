@@ -331,6 +331,12 @@ namespace campusMap.Controllers
             PropertyBag["options_json"] = Regex.Replace(Regex.Replace(view.options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
             PropertyBag["baseJson"] = Regex.Replace(view.options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
 
+
+            PropertyBag["shapes"] = new publicController().createPlaceJson(view.places.ToArray());
+
+
+
+
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
@@ -339,7 +345,7 @@ namespace campusMap.Controllers
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
-
+            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
 
             if (page == 0)
                 page = 1;

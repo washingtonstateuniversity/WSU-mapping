@@ -34,8 +34,8 @@
 			<ul class="menu">
 				<li class="liTop"><a class="open #if($controller.getView()=='geometrics')active#end" href="../geometrics/list.castle"><b>Geometrics</b></a>
 					<ul class="drop">
-						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						#*
+						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						<li><a href="../geometrics/list.castle#_Types">Types</a></li>
 						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
 						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>

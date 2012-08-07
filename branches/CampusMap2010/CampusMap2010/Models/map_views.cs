@@ -254,6 +254,13 @@ namespace campusMap.Models
             get { return _places; }
             set { _places = value; }
         }
+        private IList<geometrics> _geometrics;
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "view_to_geometrics", ColumnKey = "view_id", ColumnRef = "geometric_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics> geometrics
+        {
+            get { return _geometrics; }
+            set { _geometrics = value; }
+        }
         /* replaced by the virtural model
         private map_views_options _options;
         [BelongsTo]

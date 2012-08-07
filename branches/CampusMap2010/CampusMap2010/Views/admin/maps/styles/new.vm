@@ -17,221 +17,70 @@
 
 <form action="update_style.castle" method="post">
 	$Form.Hiddenfield("style.id")
-<div class="style_controlls">
-	<fieldset>
-		<legend>Basic setup:</legend>
-		<p style="float:right;width:46%;">Field Type:<br/>  
-			<select name="style.type" id="style_of">
-				<option value="" #if($style.type=='')selected='selected'#end>Select a geometry type</option>
-				#foreach($type in $style_types)
-					<option value="$type.id" #if($style.type==$type)selected='selected'#end>$type.name</option>
-				#end
-			</select>
-		</p>
-		
-		<p>Name:<br/>
-			<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-		</p>
-	</fieldset>
-
-	#if( !$ajaxed )
-	<div id="smaple_area">
-				<fieldset><legend>Sample</legend>
-					<div id="style_map" style="width: 500px;height: 520px;"></div>
-				</fieldset>
-	</div>
-	#end
-
-
-
-
-
-<div class="LEVEL_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
-	<button id="add_zoom">Add level</button>
-
-	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-		#foreach($zoom in $style.zoom)
-			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-				<span class='ui-icon ui-icon-close'>Remove Tab</span><a href="#z_${zoom.id}">Zoom level:<span class="name__start">${zoom.start}</span>#if(${zoom.end}!='')<span class="name__endarea"> to <span class="name__end">${zoom.end}</span></span>#end </a>
-			</li>
+	<div class="style_controlls">
+		<fieldset>
+			<legend>Basic setup:</legend>
+			<p style="float:right;width:46%;">Field Type:<br/>  
+				<select name="style.type" id="style_of">
+					<option value="" #if($style.type=='')selected='selected'#end>Select a geometry type</option>
+					#foreach($type in $style_types)
+						<option value="$type.id" #if($style.type==$type || $selectedType==$type.id)selected='selected'#end>$type.name</option>
+					#end
+				</select>
+			</p>
+			
+			<p>Name:<br/>
+				<input type="text" value="$!style.name" name="style.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
+			</p>
+		</fieldset>
+	
+		#if( !$ajaxed )
+		<div id="smaple_area">
+					<fieldset><legend>Sample</legend>
+						<div id="style_map" style="width: 500px;height: 520px;"></div>
+					</fieldset>
+		</div>
 		#end
-	</ul>
-	#set($c=0)
-	#foreach($zoom in $style.zoom)
-		<div class="tabed" id="z_${zoom.id}">
-			#if($c<=0)
-				<div class="ZoomChoice">
-					Set zoom levels: <span class="name__start">${zoom.start}</span>#if(${zoom.end}!='') to <span class="name__end">${zoom.end}</span>#end 
-					<br/><br/>
-					<div class="slider-range"></div><br/>
-					<input type="hidden" name="zoom[0].id" class="__id" value="#if($zoom.id)${zoom.id}#else0#end"/>
-					<input type="hidden" name="zoom[0].start" class="__start" value="${zoom.start}"/>
-					<input type="hidden" name="zoom[0].end" class="__end" value="$!{zoom.end}"/>
+	
+		<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				#foreach($event in $style_events)
+					<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+						<a href="#${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
+					</li>
+				#end
+			</ul>
+			#foreach($event in $style_events)
+				<div class="tabed" id="${event.name}">
+					<fieldset>
+						<legend>#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end setup:</legend>
+						<fieldset id="optionsSelection_hover" >
+							<legend>Style options</legend>
+							<div>
+								#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
+								<ul id="sortable2_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
+									#foreach($opt in $event.getUnUsed($style,$style.zoom))
+										#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
+									#end
+									#foreach($opt in $event.getRemaining($style,$style.zoom))
+										#set($hidden=true)
+										#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
+									#end
+								</ul>
+								<ul id="sortable_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
+									#foreach($opt in $event.getUsed($style,$style.zoom))
+										#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
+									#end
+								</ul>
+								<div style="clear:both;"></div>
+							</div>
+						</fieldset>
+					</fieldset>
 				</div>
 			#end
-			<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
-				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-					#foreach($event in $style.zoom.events)
-						<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-							<a href="#z__${zoom.id}_${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
-						</li>
-					#end
-				</ul>
-				#foreach($event in $style.zoom.events)
-					<div class="tabed" id="z__${zoom.id}_${event.name}">
-						<fieldset>
-							<legend>#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end setup:</legend>
-							<fieldset id="optionsSelection_hover" >
-								<legend>Style options</legend>
-								<div>
-									#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
-									<ul id="sortable2___${zoom.id}_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
-										#foreach($opt in $event.getUnUsed($style,$style.zoom))
-											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-										#end
-										#foreach($opt in $event.getRemaining($style,$style.zoom))
-											#set($hidden=true)
-											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-										#end
-									</ul>
-									<ul id="sortable1_z__${zoom.id}_${event.name}" class="sortStyleOps orgin hover connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
-										#foreach($opt in $event.getUsed($style,$style.zoom))
-											#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-										#end
-									</ul>
-									<div style="clear:both;"></div>
-								</div>
-							</fieldset>
-						</fieldset>
-
-					</div>
-				#end
-				<div style="clear:both;"></div>
-				$formbuttons
-				<div style="clear:both;"></div>
-			</div>
+			<div style="clear:both;"></div>
+			$formbuttons
+			<div style="clear:both;"></div>
 		</div>
-		#set($c=$c+1)
-	#end
-</div>
-		
-
-
-</div>
+	</div>
 </form>
-
-<div class="clone_pool">
-	<div class="ZoomChoice">
-		Set zoom levels: <span class="name__start">0</span>#if(${zoom.end}!='') to <span class="name__end">14</span>#end 
-		<br/><br/>
-		<div class="slider-range"></div><br/>
-		<select class='zoom_select'>
-			#foreach($level in $zoom_levels)
-				<option value="$level.start,$level.end">$level.id</option>
-			#end
-			</select>
-		<input type="hidden" name="zoom[9999].id" class="__id" value="0"/>
-		<input type="hidden" name="zoom[9999].start" class="__start" value="0"/>
-		<input type="hidden" name="zoom[9999].end" class="__end" value="14"/>
-	</div>
-	<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
-		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-			#foreach($event in $style_events)
-				<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-					<a href="#z__9999_${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
-				</li>
-			#end
-		</ul>
-		#foreach($event in $style_events)
-			<div class="tabed" id="z__9999_${event.name}">
-				<fieldset>
-					<legend>#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end setup:</legend>
-					<fieldset id="optionsSelection_${event.name}" >
-						<legend>Style options</legend>
-						<div>
-							#if($style.type=='')#set($hidden=true)#else#set($hidden=false)#end
-							<ul id="sortable2_z__9999_${event.name}" class="sortStyleOps pool hover connectedSortable"  style="float:right;width:250px;display:inline-block;" >
-								#foreach($opt in $event.getUnUsed($style,$zoom))
-									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-								#end
-								#foreach($opt in $event.getRemaining($style,$zoom))
-									#set($hidden=true)
-									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-								#end
-							</ul>
-							<ul id="sortable1_z__9999_${event.name}" class="sortStyleOps orgin ${event.name} connectedSortable" style="width:225px;display:inline-block; border-right:1px solid #e2e2e2;float:left;">
-								#foreach($opt in $event.getUsed($style,$zoom))
-									#parse("admin/maps/styles/controll/boundaries/${opt.name}.vm")
-								#end
-							</ul>
-							<div style="clear:both;"></div>
-						</div>
-					</fieldset>
-				</fieldset>
-			</div>
-		#end
-		<div style="clear:both;"></div>
-		$formbuttons
-		<div style="clear:both;"></div>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

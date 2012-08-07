@@ -362,8 +362,85 @@ if($('.sortable').length){
 	}
 
 
-
-
+/* note this is for the gem area only */
+if($('a[href$="/geometrics/new.castle"]').length){
+	$('a[href$="/geometrics/new.castle"]').on('click',function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		
+		if($( "#choosegType" ).length==0){
+			$( "body" ).append('<div id="choosegType" title="Choose the place model">'+
+			'<p><strong>Choose a type</strong>'+
+			'that the style will be for.</p>'+
+			'</div>');
+		}
+		$("#choosegType").dialog({
+			autoOpen: true,
+			height: 275,
+			width:350,
+			modal: true,
+			hide: 'blind',
+			resizable: false,
+			draggable: false,
+			buttons: {
+				/*"Marker": function() {
+					window.location = "/geometrics/new.castle?type=1"
+				},*/
+				"Polyline": function() {
+					window.location = "/geometrics/new.castle?type=2"
+				},
+				"Polygon": function() {
+					window.location = "/geometrics/new.castle?type=3"
+				}/*,
+				"Rectangle": function() {
+					window.location = "/geometrics/new.castle?type=4"
+				},
+				"Circle": function() {
+					window.location = "/geometrics/new.castle?type=5"
+				}*/
+			}
+		});
+	});
+}
+if($('a[href$="/geometrics/new_style.castle"]').length){
+	$('a[href$="/geometrics/new_style.castle"]').on('click',function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		
+		if($( "#chooseSType" ).length==0){
+			$( "body" ).append('<div id="chooseSType" title="Choose the place model">'+
+			'<p><strong>Choose a type</strong>'+
+			'that the style will be for.</p>'+
+			'</div>');
+		}
+		$("#chooseSType").dialog({
+			autoOpen: true,
+			height: 275,
+			width:350,
+			modal: true,
+			hide: 'blind',
+			resizable: false,
+			draggable: false,
+			buttons: {
+				/*"Marker": function() {
+					window.location = "/geometrics/new_style.castle?type=1"
+				},*/
+				"Polyline": function() {
+					window.location = "/geometrics/new_style.castle?type=2"
+				},
+				"Polygon": function() {
+					window.location = "/geometrics/new_style.castle?type=3"
+				}/*,
+				"Rectangle": function() {
+					window.location = "/geometrics/new_style.castle?type=4"
+				},
+				"Circle": function() {
+					window.location = "/geometrics/new_style.castle?type=5"
+				}*/
+			}
+		});
+	});
+}
 
 
 

@@ -192,7 +192,7 @@
                         string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
                         String mode = "";
                         String callback = "";
-                        fetchMap(alias, queryparams.TryGetValue("mode", out mode) ? mode : "", queryparams.TryGetValue("callback", out callback) ? callback : "");
+                        fetchMap(alias, HttpContext.Current.Request.Params["mode"], HttpContext.Current.Request.Params["callback"]);
                         return;
                     }
                 }
@@ -265,6 +265,11 @@
                     CancelLayout();
                     if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
                     PropertyBag["map"] = c[0];
+                    PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+                    PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+
+                    PropertyBag["callback"] = callback;
+
                     RenderView("map_json");
                     return;
                 }
@@ -772,6 +777,42 @@
             }
 
 
+
+
+            public void getShapesJson_byIds(int[] ids, string callback)
+            {
+
+
+                List<geometrics> items = new List<geometrics> { };
+                foreach (int id in ids)
+                {
+                    items.Add(ActiveRecordBase<geometrics>.Find(id));
+                }
+
+
+                IList<geometrics> tmpGeo = items;
+                String json = "";
+                json += @"  {""shapes"":[";
+                int i = 0;
+                foreach (geometrics geo in tmpGeo)
+                {
+                    json += geometricService.getShapeLatLng_json_str(geo.id, true);
+                    if (i < tmpGeo.Count - 1) json += ",";
+                    i++;
+                }
+                if (tmpGeo.Count == 0) json += "{}";
+                json += @"]}";
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(jsonEscape(json));
+
+            }
+
+
+
             public string loadPlaceShape(place place)
             {
                 IList<geometrics> tmpGeo = place.geometrics;
@@ -780,9 +821,8 @@
                 int i = 0;
                 foreach (geometrics geo in tmpGeo)
                 {
-                    json += @"{""shape"":";
-                    json += geometricService.getShapeLatLng_json_str(geo.id, false);
-                    json += "}";
+    
+                    json += geometricService.getShapeLatLng_json_str(geo.id, true);
                     if (i < tmpGeo.Count - 1) json += ",";
                     i++;
                 }
@@ -847,6 +887,19 @@
                 sendPlaceJson(items, callback);
             }
 
+
+            
+
+
+            public void getPlaceJson_byIds(int[] ids, string callback)
+            {
+                List<place> items= new List<place> {};
+                foreach (int id in ids)
+                {
+                    items.Add(ActiveRecordBase<place>.Find(id));
+                }
+                sendPlaceJson(items.ToArray(), callback);
+            }
             public void sendPlaceJson(place[] items, string callback)
             {
                 String json = createPlaceJson(items);
@@ -857,7 +910,11 @@
                 Response.ContentType = "application/json; charset=UTF-8";
                 RenderText(json);
             }
-
+            public static String returnPlaceJson(place[] items)
+            {
+                String json = new publicController().createPlaceJson(items);
+                return json;
+            }
             public String createPlaceJson(place[] items)
             {
                 /* the responsable thing to do here is to remove the html into a template */

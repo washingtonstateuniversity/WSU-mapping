@@ -45,10 +45,10 @@ namespace campusMap.Controllers
 
 
 
-        public void editor(int id, int page, bool ajax)
+        public void editor(int id, int page, bool ajax, int type)
         {
             if (id == 0){
-                New();
+                New(type);
             }else{
                 _edit(id, page, ajax);
             }
@@ -309,13 +309,15 @@ namespace campusMap.Controllers
             RenderView("../admin/types/new");
         }
 
-        public void new_style()
+        public void new_style(int type)
         {
             styles STYLE = new styles();
             zoom_levels level = ActiveRecordBase<zoom_levels>.Find(1);
             List<zoom_levels> levels = new List<zoom_levels>();
             levels.Add(level);
             STYLE._zoom = levels; // priming the levels with the all zoom level
+
+            PropertyBag["selectedType"] = type;
 
             PropertyBag["style"] = STYLE;
             PropertyBag["style_types"]  = ActiveRecordBase<geometrics_types>.FindAll();
@@ -456,7 +458,7 @@ namespace campusMap.Controllers
             PropertyBag["geometrictype"] = ActiveRecordBase<geometrics_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-
+            
             //if (page == 0)
             //    page = 1;
             //int pagesize = 10;
@@ -491,7 +493,7 @@ namespace campusMap.Controllers
             RenderView("editor");
        
         }
-        public void New()
+        public void New(int type)
         {
             CancelView();
             PropertyBag["credits"] = ""; 
@@ -512,7 +514,8 @@ namespace campusMap.Controllers
 
             String availableImagesList = "";
             PropertyBag["availableImages"] = availableImagesList; // string should be "location1","location2","location3"
-            
+
+            PropertyBag["selectedType"] = type;
 
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["geometric"] = Flash["geometric"] != null ? Flash["geometric"] : geometric;
@@ -652,8 +655,9 @@ namespace campusMap.Controllers
 
             authors user = UserService.getUser();
             geometric.editing = user;
-            geometric.status = !UserService.checkPrivleage("can_publish") ? ActiveRecordBase<status>.Find(1) : geometric.status;
 
+            int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
             if (String.IsNullOrEmpty(geometric.name))
             {
@@ -915,9 +919,32 @@ namespace campusMap.Controllers
                 char[] startC = { '{' };
                 char[] endC = { '}' };
 
+                var jss = new JavaScriptSerializer();
+
+            /*
+                Dictionary<string, string> urlparams = getPostParmasAsObj_obj("options");
+                
+                //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+
+                //var values = new Dictionary<string, object>();
+                MyJsonDictionary<String, Object> values = new MyJsonDictionary<String, Object>();
+
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    values.Add(_urlparams.Key, _urlparams.Value);
+                }
+            */
+                /*
+                    values.Add("Title", "Hello World!");
+                    values.Add("Text", "My first post");
+                    values.Add("Tags", new[] { "hello", "world" });
+                */
+                //var usettings = new DynamicEntity(values);
+
+                style.style_obj = jss.Serialize(style._zoom);// Serialize(style._zoom);//jss.Serialize(usettings);
 
 
-            /* first add zoom levels */
+            /* first add zoom levels 
                 foreach (zoom_levels zoom in style._zoom)
                 {
                     List<AbstractCriterion> revEx = new List<AbstractCriterion>();
@@ -929,7 +956,7 @@ namespace campusMap.Controllers
                         ActiveRecordMediator<zoom_levels>.Save(zoom);
                         style._zoom.Add(zoom);
                     }
-                }
+                }*/
 
                 /* 
                  * everthing from here should be inherently saved with the 
