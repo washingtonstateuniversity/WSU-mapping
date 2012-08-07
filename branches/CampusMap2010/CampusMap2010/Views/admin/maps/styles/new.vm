@@ -19,14 +19,17 @@
 	$Form.Hiddenfield("style.id")
 	<div class="style_controlls">
 		<fieldset>
-			<legend>Basic setup:</legend>
-			<p style="float:right;width:46%;">Field Type:<br/>  
+			<legend>Basic setup for #foreach($type in $style_types)#if($style.type==$type || $selectedType==$type)  $type.name #end#end</legend>
+			<p style="float:right;width:46%; position:absolute;top-9999em;left:-999em;">Field Type:<br/>  
 				<select name="style.type" id="style_of">
 					<option value="" #if($style.type=='')selected='selected'#end>Select a geometry type</option>
 					#foreach($type in $style_types)
-						<option value="$type.id" #if($style.type==$type || $selectedType==$type.id)selected='selected'#end>$type.name</option>
+						<option value="$type.id" #if($style.type==$type || $selectedType==$type)selected='selected'#end>$type.name</option>
 					#end
 				</select>
+				
+				<input type="hidden"  name="style.type" value="#if($selectedType)$selectedType#else${style.type}#end"/>
+				
 			</p>
 			
 			<p>Name:<br/>

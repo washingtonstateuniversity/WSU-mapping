@@ -18,10 +18,12 @@
 	#end
 	
 	<fieldset><legend>General Information</legend>
-		<p style="float:left;">Name:<br/>
+		<p style="float:left; margin-right:15px;">Name:<br/>
 			<input type="text" value="$!geometric.name" name="geometric.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
 		</p>
-		<p style="float:left;">Geometry Type:<br/>
+		<p style="float:left; margin-right:15px;">Geometry Type :<br/>
+		#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end
+		<span style="position:absolute;top:-999em;left-999em;">
 		<input type="hidden" id="startingValue" value="$geometric.default_type.name" />
 			<select name="geom_type" id="style_of">
 				<option value="" #if($geometric.default_type.id==0  || $selectedType==0)selected='selected'#end>Select a geometry type</option>
@@ -31,6 +33,8 @@
 				<option value="rectangle" #if($geometric.default_type.id=='4' || $selectedType==4)selected='selected'#end>Rectangle</option>
 				<option value="circle" #if($geometric.default_type.id=='5' || $selectedType==5)selected='selected'#end>Circle</option>
 			</select>
+			<input type="hidden" id="pickedValue" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
+			</span>
 		</p>
 		<p style="float:left;">Geometry Style:<br/>  
 			<select name="$geometric.style" id="style_of">

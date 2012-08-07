@@ -514,7 +514,11 @@ function load_geometrics_editor() {
 			
 		$('#geometrics_drawing_map').gmap('init_drawing', 
 			{ 
-				drawingControl: controlOn,
+				drawingControl:controlOn,
+				drawingControlOptions : controlOn?{
+					position: google.maps.ControlPosition.TOP_CENTER,
+					drawingModes: $('#pickedValue').val()!=""?[$('#pickedValue').val()]:[google.maps.drawing.OverlayType.POLYLINE, google.maps.drawing.OverlayType.POLYGON]
+				  }:false,
 				polylineOptions:{editable: true} 
 			}, $.extend( {
 					limit:1,
@@ -540,7 +544,7 @@ function load_geometrics_editor() {
 						},
 					drawingmode_changed:function(type){
 							if(type!=null){
-								$('#style_of').val(type);
+								$('#style_of :selected').val(type);
 							}
 						}
 				},
@@ -749,6 +753,11 @@ function load_view_editor() {
 	var height = $('#height').val();
 	var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15}
 	//var options = {'center': (typeof(lat)==='undefined' || lat=='')? pullman_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+	
+	$('.codeurllink').on('click',function(){window.open($(this).prev('.codeurl').text())})
+	
+	
+	
 	if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
 	$.each($('#tabs_Options input.text'),function(i,v){
 		var tmpVal = $(this).val();
@@ -923,7 +932,7 @@ function reloadShapes(){
 				  if(shape.latlng_str!='' && shape.type=='polygon'){ 
 					var pointHolder = {'paths' : shape.latlng_str };
 				 }
-				 if((typeof(shape.latlng_str)=="undefined"||shape.latlng_str=='') && !$.isEmptyObject(pointHolder) && typeof(shape.encoded)!="undefined"){ 
+				 if((typeof(shape.latlng_str)=="undefined"||shape.latlng_str=='') && $.isEmptyObject(pointHolder) && typeof(shape.encoded)!="undefined"){ 
 					var pointHolder = {'paths' : shape.encoded };
 				 }
 				 if(!$.isEmptyObject(pointHolder)){

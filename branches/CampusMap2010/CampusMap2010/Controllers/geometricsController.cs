@@ -999,12 +999,19 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            Flash["message"] = "Article, <strong>Note:" + geometric.id + "</strong>, has been <strong>deleted</strong>.";
+            Flash["message"] = "Article, <strong>Note:" + geometric.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<geometrics>.Delete(geometric);
             CancelLayout();
             RedirectToAction("list");
         }
-
+        public void delete_style(int id)
+        {
+            styles styles = ActiveRecordBase<styles>.Find(id);
+            Flash["message"] = "Article, <strong>Note:" + styles.name + "</strong>, has been <strong>deleted</strong>.";
+            ActiveRecordMediator<styles>.Delete(styles);
+            CancelLayout();
+            RedirectToAction("list");
+        }
 
     }
 }

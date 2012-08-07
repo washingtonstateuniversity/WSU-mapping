@@ -41,9 +41,9 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
      #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
       <a href="#tabs_FIELDS">Fields</a>
     </li>   #end
-    <li class="ui-state-default ui-corner-top">
+    #*<li class="ui-state-default ui-corner-top">
       <a href="#tabs_IMAGES">Images</a>
-    </li>
+    </li>*#
     <li class="ui-state-default ui-corner-top">
       <a href="#tabs_OUTPUT">Output</a>
     </li>
@@ -67,7 +67,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 				<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all" />
 			</div><br/> 
 		</fieldset>
-		<fieldset style="position:relative;">
+		#*<fieldset style="position:relative;">
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Commentable</strong></label><br/>
 				<input type="checkbox" name="view.commentable" id="commentable" value="$!view.commentable" class="text ui-widget-content ui-corner-all" />
@@ -78,7 +78,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 				<label for="Lat"><strong>Sharable</strong></label><br/>
 				<input type="checkbox" name="view.sharable" id="sharable" value="$!view.sharable" class="text ui-widget-content ui-corner-all" />
 			</div><br/> 
-		</fieldset>
+		</fieldset>*#
 		<fieldset style="position:relative;">
 			<legend>Dimensions</legend>
 			<div class="col2"  style="">	
@@ -111,6 +111,9 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 						<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
 					#end
 				</select>
+				<br/><strong>Note:</strong>If a place has a shape
+				<br/>you may wish to not pick
+				<br/>a Geometric Shape.
 			</fieldset>
 			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Geometrics</legend>
                 <label for="name">Geometric Object<br/>to repersent this place.</label><br/>
@@ -572,7 +575,10 @@ $formbuttons
   
   <div id="tabs_Detail" class="mainAreaTabs">
 $formbuttons <div class="clear"></div>
- 	#if($Controller.canPublish($loginUser))
+
+
+
+ 	#if($userService.checkPrivleage("can_publish"))
 		<div id="StatusDiv">
 		  <h3 style="display:inline-block;">Place Status:</h3>
 		  $Form.Select("view.status.id", $statuslists, "%{value='id', text='title'}")
@@ -654,7 +660,7 @@ $formbuttons <div class="clear"></div>
   <br/>    
 </div>
   #end
-    <div id="tabs_IMAGES" class="mainAreaTabs">
+   #* <div id="tabs_IMAGES" class="mainAreaTabs">
 $formbuttons     
         <div id="ImageDiv">
             <h3>Place Images</h3>
@@ -692,7 +698,7 @@ $formbuttons
             $formbuttons
     <div class="clear"></div>
         </div>
-    </div>
+    </div>*#
 	<div id="tabs_OUTPUT" class="mainAreaTabs">
 		$formbuttons <div class="clear"></div>
 		<fieldset><legend>Output url: </legend>
@@ -708,17 +714,22 @@ $formbuttons
 		</fieldset>
 			
 		<fieldset><legend>Feed Output: </legend>
-			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json</pre>
-			<h4>Callback for jsonp</h4>
+			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json</pre>
+			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
+			<h4 style="clear:left;">Callback for jsonp</h4>
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json&callback=test</pre>
 		</fieldset>
 		
 		<fieldset><legend>Standalone Output: </legend>
-			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
+			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
+			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
 		</fieldset>		
 		
 		<fieldset><legend>Embed code example: </legend>
 			<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot;&gt;&lt;/script&gt;</pre>
+			
+		
+			
 		</fieldset>
 		
 				

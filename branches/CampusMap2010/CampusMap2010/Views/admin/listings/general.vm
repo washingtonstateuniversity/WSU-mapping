@@ -9,7 +9,7 @@
 				<li class="ui-widget-content ui-corner-all item_$!item.id con">
 					#parse("admin/listings/item.vm")
 				</li>
-		  #end
+		  	#end
 		</ul>
 		#set($Pagination_location='bottom')
 		#parse("listing_parts/areas/pagination.vm")
