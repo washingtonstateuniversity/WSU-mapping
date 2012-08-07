@@ -935,8 +935,9 @@ function reloadShapes(){
 				 if((typeof(shape.latlng_str)=="undefined"||shape.latlng_str=='') && $.isEmptyObject(pointHolder) && typeof(shape.encoded)!="undefined"){ 
 					var pointHolder = {'paths' : shape.encoded };
 				 }
+				 var style = shape.type=='polygon'? {'fillOpacity':.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':.99,'strokeColor':'#262A2D','strokeWeight':2};
 				 if(!$.isEmptyObject(pointHolder)){
-					var ele = $.extend( { 'fillOpacity':.99,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+					var ele = $.extend( style , pointHolder );
 				 }else{
 					var ele = {};
 				 }
@@ -965,8 +966,9 @@ function loadJsonData(jObj,data,callback,markerCallback){
 				 if((typeof(shape.latlng_str)=="undefined"||shape.latlng_str=='') && !$.isEmptyObject(pointHolder) && typeof(shape.encoded)!="undefined"){ 
 					var pointHolder = {'paths' : shape.encoded };
 				 }
+				 var style = shape.type=='polygon'? {'fillOpacity':.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':.99,'strokeColor':'#262A2D','strokeWeight':2};
 				 if(!$.isEmptyObject(pointHolder)){
-					var ele = $.extend( { 'fillOpacity':.99,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+					var ele = $.extend( style , pointHolder );
 				 }else{
 					var ele = {};
 				 }
@@ -993,8 +995,9 @@ function loadJsonData(jObj,data,callback,markerCallback){
 				 if((typeof(shape.latlng_str)=="undefined"||shape.latlng_str=='') && !$.isEmptyObject(pointHolder) && typeof(shape.encoded)!="undefined"){ 
 					var pointHolder = {'paths' : shape.encoded };
 				 }
+				 var style = shape.type=='polygon'? {'fillOpacity':.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':.99,'strokeColor':'#262A2D','strokeWeight':2};
 				 if(!$.isEmptyObject(pointHolder)){
-					var ele = $.extend( { 'fillOpacity':.99,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+					var ele = $.extend( style , pointHolder );
 				 }else{
 					var ele = {};
 				 }

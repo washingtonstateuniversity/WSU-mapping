@@ -81,6 +81,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		</fieldset>*#
 		<fieldset style="position:relative;">
 			<legend>Dimensions</legend>
+			<h6><em>Both will default to 100% if blank or 0</em></h6>
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Width</strong></label><br/>
 				<input type="text" name="view.width" id="width" value="$!view.width" class="text ui-widget-content ui-corner-all" />
@@ -471,21 +472,22 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 	</style>
 		
 		#if($view.height>0)
-			#set($height = $view.height)
+			#set($height = "${view.height}px")
 		#else
-			#set($height = 520)
+			#set($height = "520px")
 		#end
+		
 		#if($view.width>0)
-			#set($width = $view.width)
+			#set($width = "${view.width}px")
 		#else
-			#set($width = 425)
+			#set($width = "100%")
 		#end
 		<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
 		</lable> | 
 		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
 		</lable>
 		<div id="campusmap">
-		<div id="place_drawing_map" style="width:${width}px; height:${height}px;"></div>
+		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
 		</div>
 	$formbuttons
 	<div class="clear"></div>
