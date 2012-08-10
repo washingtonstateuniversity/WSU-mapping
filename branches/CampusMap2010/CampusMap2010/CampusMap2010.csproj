@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxMin.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.ActiveRecord, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Castle.Components.Binder, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -435,6 +438,7 @@
     <None Include="lib\NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="packages.config" />
     <None Include="Views\AccessLevel\list.vm" />
     <None Include="Views\AccessLevel\new.vm" />
     <None Include="Views\AccessLevel\_edit_privilege.vm" />

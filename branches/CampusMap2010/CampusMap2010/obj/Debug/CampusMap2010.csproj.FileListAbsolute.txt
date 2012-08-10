@@ -290,3 +290,5 @@ C:\_SVN_\campusMap.4\CampusMap2010\bin\Rejuicer.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\AjaxMin.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\SquishIt.Framework.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\SquishIt.Mvc.pdb
+C:\_SVN_\campusMap.4\CampusMap2010\bin\AutoMapper.dll
+C:\_SVN_\campusMap.4\CampusMap2010\bin\AutoMapper.xml

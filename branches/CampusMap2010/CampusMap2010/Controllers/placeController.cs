@@ -34,7 +34,7 @@ namespace campusMap.Controllers
         using System.Linq;
         using System.Web.Script.Serialization;
 
-
+        using AutoMapper;
 
     #endregion
 
@@ -78,12 +78,9 @@ namespace campusMap.Controllers
 
             int typesPaging = 0;
             int fieldsPaging = 0;
-            int draftPaging = 0;
-            int reviewPaging = 0;
-            int publishedPaging = 0;
             int name_typesPaging = 0;
             int templatePaging = 0;
-            int filterPaging = 0;
+            
 
             var pageing = new Dictionary<string, int>();
             
@@ -223,6 +220,9 @@ namespace campusMap.Controllers
                 buttons.Add("delete");
                 buttons.Add("publish");
                 //buttons.Add("view");
+
+                buttons.Add("copy");
+
                 PropertyBag["filteredResults_ButtonSet"] = buttons;
             }
 
@@ -252,6 +252,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("view");
                 PropertyBag[name + "ButtonSet"] = buttons;
             }
@@ -1265,6 +1266,29 @@ namespace campusMap.Controllers
             }
 
         }*/
+
+
+        public void _copy(int id, String name)
+        {
+            CancelLayout();
+            CancelView();
+            place org = ActiveRecordBase<place>.Find(id);
+
+            Mapper.Reset();
+            
+            Mapper.CreateMap<place, place>().ForMember(dest => dest.id, o => o.Ignore());
+            Mapper.CreateMap<fields, fields>().ForMember(dest => dest.id, o => o.Ignore());
+
+
+            place copy = new place();
+            Mapper.Map(org, copy);
+
+            copy.SaveAndFlush();
+
+            Flash["message"] = "New copy saved to the system.  You may now edit "+name;
+            RedirectToUrl("~/place/_edit.castle?id=" + copy.id);
+        }
+
 
 
         public void update(

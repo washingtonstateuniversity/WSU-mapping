@@ -720,8 +720,9 @@ $formbuttons
 			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
 			<h4 style="clear:left;">Callback for jsonp</h4>
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json&callback=test</pre>
+			 <h6><em><strong>Note:</strong> the url query value "test" for the name "callback" is an example and could be anything.  It's highly suggested to make this a random value to avoid any client side cache uses. <strong>ex: callback=jQuery172012056579411266988_1344368945782 via jquery jsonp using callback=?</strong> </em></h6>
 		</fieldset>
-		
+
 		<fieldset><legend>Standalone Output: </legend>
 			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
 			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>

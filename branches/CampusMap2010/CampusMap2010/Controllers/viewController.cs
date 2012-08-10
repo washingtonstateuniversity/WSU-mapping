@@ -33,7 +33,7 @@ namespace campusMap.Controllers
     using System.Dynamic;
     using System.Linq;
     using System.Web.Script.Serialization;
-
+    using AutoMapper;
 
     #endregion
 
@@ -138,6 +138,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("broadcast");
                 //buttons.Add("view"); //NOTE:coming so TODO
                 //buttons.Add("order");
@@ -159,6 +160,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("view");
                 PropertyBag["reviewButtonSet"] = buttons;
 
@@ -177,6 +179,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("view");
                 PropertyBag["draftButtonSet"] = buttons;
 
@@ -277,6 +280,25 @@ namespace campusMap.Controllers
             }
             return creditsList.TrimEnd(',');
         }
+
+        public void _copy(int id, String name)
+        {
+            CancelLayout();
+            CancelView();
+            map_views org = ActiveRecordBase<map_views>.Find(id);
+
+            Mapper.Reset();
+            Mapper.CreateMap<map_views, map_views>().ForMember(dest => dest.id, o => o.Ignore());
+            map_views copy = new map_views();
+            Mapper.Map(org, copy);
+
+            copy.SaveAndFlush();
+
+            Flash["message"] = "New copy saved to the system.  You may now edit " + name;
+            RedirectToUrl("~/view/_edit.castle?id=" + copy.id);
+        }
+
+
         public void _edit(int id, int page)
         {
             campusMap.Services.LogService.writelog("Editing view " + id);

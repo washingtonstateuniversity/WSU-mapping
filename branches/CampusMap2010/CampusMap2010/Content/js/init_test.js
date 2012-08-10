@@ -126,6 +126,35 @@ function iniMap(url,callback){
 			callback();
 			$(window).trigger('resize');
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
+			
+			var addthis_config = {
+					  services_compact: 'email, facebook, twitter, myspace, google, more',
+					  services_exclude: 'print',
+					  ui_click: true
+			};
+			var addthis_share ={
+				templates: {twitter: 'check out {{url}} '}
+			};
+			$("#shareIt").on('click' , function() {
+				
+
+				var addthis_config = {
+						  services_compact: 'email, facebook, twitter, myspace, google, more',
+						  services_exclude: 'print',
+						  ui_click: true
+				};
+				var addthis_share ={
+					url:getUrl(),
+					templates: {twitter: 'check out {{url}} '}
+				};
+				$('#addthisScript').attr('src', "http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&" + Math.random() );
+				
+				$.getScript( "http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&" + Math.random());
+				addthis.init(); 
+				//$(".addthis_button_compact").attr( "addthis:url", getUrl() );
+				window.addthis.ost = 0;
+				window.addthis.ready();
+			});
 		});
 	});
 }
@@ -397,7 +426,6 @@ function updateUrl(nav,pid){
 	cur_mid = pid;
 }
 function getUrl(){
-	//alert(siteroot+mapview+(cur_nav!=false?'?cat[]='+cur_nav:'')+(cur_mid>0?'&pid='+cur_mid:''));
 	return siteroot+mapview+(cur_nav!=false?'?cat[]='+cur_nav:'')+(cur_mid>0?'&pid='+cur_mid:'');
 }
 

@@ -7,6 +7,12 @@
 		<ul class="menu formAction Cancel"><li class="nosub"><a class="open " href="#"><b>Cancel</b></a></li></ul>
 		<ul class="menu formAction Apply"><li class="nosub"><a class="open " href="#"><b>Apply</b></a></li></ul>
 		<ul class="menu formAction Submit"><li class="nosub"><a class="open " href="#"><b>Submit</b></a></li></ul>
+		
+		
+		<ul class="menu posRight">
+			<li class="nosub"><a class="open" href="../admin"><b>Home</b></a></li>
+		</ul>
+		
 		#if($userService.checkPrivleage("modify_views"))
 			<ul class="menu">
 				<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
@@ -18,62 +24,67 @@
 			</ul>
 		#end
 		<ul class="menu">
-			<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../place/list.castle"><b>Places</b></a>
+			<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="#"><b>Assests</b></a>
 				<ul class="drop">
-					<li><a href="../place/new.castle">New Place</a></li>
-					#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
-					#*
-					<li><a href="../place/list.castle#_Types">Types</a></li>
-					<li><a href="../place/list.castle#_Fields">Fields</a></li>
-					*#
-				</ul>
-			</li>
-			<li class="close"><a href="#"></a></li>
-		</ul>
-		#if($userService.checkPrivleage("modify_geometrics"))
-			<ul class="menu">
-				<li class="liTop"><a class="open #if($controller.getView()=='geometrics')active#end" href="../geometrics/list.castle"><b>Geometrics</b></a>
-					<ul class="drop">
-						
+					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../place/list.castle">Places</a>
+						<ul class="drop">
+							<li><a href="../place/new.castle">New Place</a></li>
+							#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
+						</ul>
+					</li>
+					
+					#if($userService.checkPrivleage("modify_geometrics"))
+					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../geometrics/list.castle">Geometrics</a>
+						<ul class="drop">
 						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						<li><a href="../geometrics/new_style.castle">New Style</a></li>
 						#*<li><a href="../geometrics/list.castle#_Types">Types</a></li>
 						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
 						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
 						*#
-					</ul>
-				</li>
-				<li class="close"><a href="#"></a></li>
-			</ul>
-		#end
-		#if($userService.checkPrivleage("modify_media"))
-			<ul class="menu">
-				<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle"><b>Media</b></a>
-					<ul class="drop">
-						<li><a href="geometrics/new.castle">New Media</a></li>
-						<li><a href="#url">User Media</a></li>
-						<li><a href="../advertisement/list.castle">Advertising</a></li>
-					</ul>
-				</li>
-				<li class="close"><a href="#"></a></li>
-			</ul>
-		#end
-		#if($userService.checkPrivleage("modify_comments"))
-			<ul class="menu"><li class="nosub"><a class="open #if($controller.getView()=='comment')active#end" href="../comment/index.castle"><b>Comments</b></a></li></ul>
-		#end
-		#if($userService.checkPrivleage("modify_tags"))
-			<ul class="menu">
-				<li class="liTop"><a class="open #if($controller.getView()=='tags')active#end" href="../tags/index.castle"><b>Tags</b></a>
-					<ul class="drop">
-						<li><a href="../tags/new.castle">New Tag</a></li>
-						<li><a href="../tags/index.castle#usertag">User Tags</a></li>
-					</ul>
-				</li>
-				<li class="close"><a href="#"></a></li>
-			</ul>
-		#end	
+						</ul>
+					</li>
+					#end
+					
+				</ul>
+			</li>
+			<li class="close"><a href="#"></a></li>
+		</ul>
 		
 		
+		<ul class="menu">
+			<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="#"><b>Content</b></a>
+				<ul class="drop">
+				
+				#if($userService.checkPrivleage("modify_media"))
+					<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle">Media</a>
+						<ul class="drop">
+							<li><a href="geometrics/new.castle">New Media</a></li>
+							<li><a href="#url">User Media</a></li>
+							<li><a href="../advertisement/list.castle">Advertising</a></li>
+						</ul>
+					</li>
+				#end
+					
+				#if($userService.checkPrivleage("modify_comments"))
+					<li class="liTop nosub"><a class="open #if($controller.getView()=='comment')active#end" href="../comment/index.castle">Comments</a></li>
+				#end
+				
+				
+				#if($userService.checkPrivleage("modify_tags"))
+					<li class="liTop"><a class="open #if($controller.getView()=='tags')active#end" href="../tags/index.castle">Tags</a>
+						<ul class="drop">
+							<li><a href="../tags/new.castle">New Tag</a></li>
+							<li><a href="../tags/index.castle#usertag">User Tags</a></li>
+						</ul>
+					</li>
+				#end	
+				</ul>
+			</li>
+			<li class="close"><a href="#"></a></li>
+		</ul>
+
+
 		<ul class="menu">
 			<li class="liTop"><a class="open #if($controller.getView()=='authors')active#end" #if($userService.checkPrivleage("modify_users"))href="../authors/list.castle"#end><b>Authorized Users</b></a>
 				<ul class="drop">
@@ -89,7 +100,8 @@
 		#if($userService.checkPrivleage("modify_site_settings"))
 			<ul class="menu"><li class="nosub"><a class="open #if($controller.getView()=='comment')ui-state-active#end" href="../admin/_list_siteSettings.castle"><b>Site Prefences</b></a></li></ul>
 		#end	
-		<ul class="menu posLeft">
+		<ul class="menu"><li class="sep"><b>::</b></li></ul>
+		<ul class="menu">
 			<li class="nosub"><a class="open" href="../admin/help.castle" target="_blank"><b>Help</b></a></li>
 		</ul>
 		<ul class="menu"><li class="nosub"><a class="open" href="../place/logout.castle"><b>Logout</b></a></li></ul>

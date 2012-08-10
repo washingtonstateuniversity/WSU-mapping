@@ -191,7 +191,7 @@ function infoUpdate(){
 	var lat = $('#Lat').val();
 	var lng = $('#Long').val();	
 		reopen = ibOpen;
-		ib[0].close();
+		if(typeof(ib[0])!=="undefined")ib[0].close();
 		tinyMCE.triggerSave();
 		$('#place_drawing_map').gmap('clear','markers');
 		$('#place_drawing_map').gmap('clear','services');
@@ -1058,7 +1058,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 					,enableEventPropagation: false
 					,onClose:function(){
 						ibHover =  false;
-						if($('.cWrap .items li').length>1){$('.cWrap .items').cycle('destroy');}
+						if($('.cWrap .items li').length>1 && typeof(cycle)!=="undefined"){$('.cWrap .items').cycle('destroy');}
 						$('#taby'+i).tabs('destroy').tabs();
 					}
 					,onOpen:function(){

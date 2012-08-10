@@ -33,7 +33,7 @@ namespace campusMap.Controllers
     using System.Linq;
     using System.Web.Script.Serialization;
 
-
+    using AutoMapper;
 
     #endregion
 
@@ -128,6 +128,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 //buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("broadcast");
                 //buttons.Add("view");
                 //buttons.Add("order");
@@ -153,6 +154,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("view");
                 PropertyBag["reviewButtonSet"] = buttons;  
 
@@ -174,6 +176,7 @@ namespace campusMap.Controllers
                 buttons.Add("edit");
                 buttons.Add("delete");
                 buttons.Add("publish");
+                buttons.Add("copy");
                 //buttons.Add("view");
                 PropertyBag["draftButtonSet"] = buttons;  
 
@@ -842,7 +845,22 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
             }
         }
+        public void _copy(int id, String name)
+        {
+            CancelLayout();
+            CancelView();
+            geometrics org = ActiveRecordBase<geometrics>.Find(id);
 
+            Mapper.Reset();
+            Mapper.CreateMap<geometrics, geometrics>().ForMember(dest => dest.id, o => o.Ignore());
+            geometrics copy = new geometrics();
+            Mapper.Map(org, copy);
+
+            copy.SaveAndFlush();
+
+            Flash["message"] = "New copy saved to the system.  You may now edit " + name;
+            RedirectToUrl("~/geometrics/_edit.castle?id=" + copy.id);
+        }
         public void update_field(
                    [ARDataBind("field", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] field_types field,
                    [DataBind("ele", Validate = true)] dynamic ele,
