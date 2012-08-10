@@ -4,7 +4,7 @@ var markerLog = [];
 var markerbyid = [];
 var mid = [];
 var shapes = [];
-
+var listOffset = 0;
 var ibHover = false;
 
 
@@ -1079,11 +1079,11 @@ function setup(){
 								btn.addClass("active");
 								
 								$('#selectedPlaceList_area').css({'overflow-y':'auto'});
-								$(window).trigger("resize");
+								//$(window).trigger("resize");
 						});
 						$('.central_layout.public.central #centralMap').animate({'margin-left':'190px','width':$('.central_layout.public.central #centralMap').width()-190}, 500, function() {}).addClass("opended");
 						listOffset=190;
-						$(window).trigger("resize");
+						//$(window).trigger("resize");
 					}else{
 						$('#selectedPlaceList').removeClass("active");
 						btn.closest('#selectedPlaceList').stop().animate({
@@ -1095,6 +1095,7 @@ function setup(){
 								$(window).trigger("resize");
 						});
 						$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
+						//$(window).trigger("resize");
 						listOffset=0;
 					}
 				});
@@ -1707,15 +1708,15 @@ $(document).ready(function(){
 		}
 		if($('#centralMap').length){
 			$(window).resize(function(){
-				resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)+listOffset))
+				
+
+				
+				resizeBg($('.central_layout.public.central #centralMap'),($(window).height()<=404?35:160),($(window).width()<=404?0:($(window).width()<=600?155:201)) + $('#selectedPlaceList').width())
 			}).trigger("resize");
 			$(window).resize(function(){
 				resizeBg($('.cAssest'),160)
 			}).trigger("resize");
 		}
-		
-		
-
 	}	
 		
 });
