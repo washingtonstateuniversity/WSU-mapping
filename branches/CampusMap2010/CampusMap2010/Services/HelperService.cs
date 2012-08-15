@@ -29,6 +29,8 @@
     using System.Collections;
     using log4net;
     using log4net.Config;
+using System.Reflection;
+
 #endregion
 
 namespace campusMap.Services
@@ -177,7 +179,10 @@ namespace campusMap.Services
         */
 
 
-        
+        public static String getRootPath()
+        {
+            return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath).Replace("bin", "");
+        }
 
         public static object[] alias_exsits(String alias,String typeName)
         {

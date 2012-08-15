@@ -149,6 +149,45 @@ $(function() {
 			});
 		}
 	});
+	
+	$('.img_layout_choice').on('click',function(){
+		var self = $(this);
+		var imageArea= self.siblings('.browserBox');
+		
+		if(!self.is($('.list'))){
+			$.each(imageArea.find('.imageBox'),function(){
+				$(this).stop().animate({
+					width:"100%",
+					height: "175px",
+					"min-height": "175px"
+				}, 500, function() {
+				// Animation complete.
+				
+					removeToggle();
+				});
+			});
+			self.addClass('list');
+			imageArea.removeClass('grid');
+			imageArea.addClass('list');
+		}else{
+			$.each(imageArea.find('.imageBox'),function(){
+				$(this).stop().animate({
+					width:"175px",
+					height: "175px"
+				}, 500, function() {
+				// Animation complete.
+				
+					addToggle();
+				});
+			});
+			self.removeClass('list');
+			imageArea.removeClass('list');
+			imageArea.addClass('grid');
+		}
+	});
+	
+	
+	
 	$('#img_layout_choice').toggle(
 	  function(){
 	

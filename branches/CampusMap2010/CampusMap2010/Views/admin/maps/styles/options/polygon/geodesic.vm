@@ -1,0 +1,9 @@
+<input type="checkbox" value="true" name="${event.name}.${opt}" #if($val!="")checked="checked"#end rel="${opt}"/>
+
+#foreach($opts in $events)
+	#foreach($opted in $opts)
+		$opted
+	#end
+#end
+
+#if($events.rest.TryGetValue("geodesic",$value)) ${opt} #set($val=$!{value}) #end

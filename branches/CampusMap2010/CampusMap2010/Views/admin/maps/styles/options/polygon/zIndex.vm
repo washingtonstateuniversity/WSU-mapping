@@ -1,0 +1,1 @@
+<input type="text" value="$!{val}" name="${event.name}.${opt}"  rel="${opt}"/>

@@ -334,7 +334,7 @@ span.UinEdit{    background-color: #E2E2E2;
 #wsu_ui .users_comments  .placelist.ui-tabs .ui-tabs-nav { width: 446px;}
 
 
-/* media boxes */
+/* media boxes
 #browserBox.grid{border:1px solid #CCCCCC;padding: 15px;width: 540px; margin:15px auto 0px; background-color:#fff;}
 #browserBox.grid .imageBox{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width:175px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
 #browserBox.grid .previewImg{background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
@@ -376,7 +376,7 @@ span.UinEdit{    background-color: #E2E2E2;
 #browserBox.list .ui-state-highlight{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;height:175px;}
 .placeOrderId{ position:absolute; top:-9999em; left:-9999em;}
 
-
+ */
 
 
 .ui-dialog.ui-widget.ui-widget-content{

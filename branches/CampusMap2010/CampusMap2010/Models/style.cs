@@ -61,12 +61,15 @@ namespace campusMap.Models
             get { return _options; }
             set { _options = value; }
         }
-        private IList<events_set> _event_sets;
-        [HasAndBelongsToMany(typeof(events_set), Lazy = true, Table = "style_to_events_set", ColumnKey = "style_id", ColumnRef = "events_set_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<events_set> _sets
+
+
+
+        private IList<geometric_events> _events;
+        [HasAndBelongsToMany(typeof(geometric_events), Lazy = true, Table = "style_to_events_set", ColumnKey = "style_id", ColumnRef = "events_set_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometric_events> g_event
         {
-            get { return _event_sets; }
-            set { _event_sets = value; }
+            get { return _events; }
+            set { _events = value; }
         }
         private IList<zoom_levels> _levels;
         [HasAndBelongsToMany(typeof(zoom_levels), Lazy = true, Table = "style_to_zoom", ColumnKey = "style_id", ColumnRef = "zoom_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]

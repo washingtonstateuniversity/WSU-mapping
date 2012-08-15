@@ -15,6 +15,7 @@ using System.Data.SqlTypes;
 using campusMap.Services;
 using Microsoft.SqlServer.Types;
 using System.IO;
+using System.Linq;
 
 namespace campusMap.Models
 {
@@ -415,6 +416,8 @@ namespace campusMap.Models
     [ActiveRecord(Lazy = true)]
     public class geometric_events : ActiveRecordBase<geometric_events>
     {
+        protected HelperService helperService = new HelperService();
+
         private int _id;
         [PrimaryKey("geometric_event_id")]
         virtual public int id
@@ -450,20 +453,25 @@ namespace campusMap.Models
             get { return _options; }
             set { _options = value; }
         }
-        private IList<zoom_levels> _zoom;
-        [HasAndBelongsToMany(typeof(zoom_levels), Lazy = true, Table = "geometric_events_to_zoom", ColumnKey = "zoom_id", ColumnRef = "geometric_event_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
-        virtual public IList<zoom_levels> zoom
-        {
-            get { return _zoom; }
-            set { _zoom = value; }
-        }
         /* EOF not sure on these ties  */
 
 
+        /* this is to let us just add or remove a file to add
+         * an option to the styles.  Goal here is that if we
+         * have a file it'll get pulled in and put to the json
+         * this is an extension of the "virtual" model idea
+         */
+        virtual public String[] getOptions(string gType)
+        {
+            String filePath = HelperService.getRootPath() + "Views/admin/maps/styles/options/" + gType + "/";
+            String[] used = Directory.GetFiles(filePath, "*.vm").Select(fileName => Path.GetFileNameWithoutExtension(fileName)).ToArray(); 
+            return used;
+        }
 
 
 
-        virtual public IList<style_options> getUsed(styles style, zoom_levels zoom)
+
+        virtual public IList<style_options> getUsed(styles style, geometric_events events)
         {
             IList<style_options> used = new List<style_options>();
             if (style.id > 0)
@@ -489,7 +497,8 @@ namespace campusMap.Models
             return used;
         }
 
-        virtual public IList<style_option_types> getUnUsed(styles style,zoom_levels zoom){
+        virtual public IList<style_option_types> getUnUsed(styles style, geometric_events events)
+        {
             IList<style_option_types> unUsed = new List<style_option_types>();
             //IList<style_options> used = getUsed();
             if (style.id > 0)
@@ -522,15 +531,15 @@ namespace campusMap.Models
             return unUsed;
         }
 
-        virtual public IList<style_option_types> getRemaining(styles style, zoom_levels zoom)
+        virtual public IList<style_option_types> getRemaining(styles style, geometric_events events)
         {
             IList<style_option_types> remaining = new List<style_option_types>();
 
             style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
             if (style.id > 0)
             {
-                IList<style_options> used = getUsed(style,zoom);
-                IList<style_option_types> unUsed = getUnUsed(style,zoom);
+                IList<style_options> used = getUsed(style, events);
+                IList<style_option_types> unUsed = getUnUsed(style, events);
                 foreach (style_option_types ops in all_op)
                 {
                     bool op_added = false;

@@ -4,6 +4,6 @@
 	<span class="lable">Flat</span>
 	<span class="controll">
 <br/>
-		<input type="checkbox"  value="$!{opt.value}" name="style._zoom[1].events[${event.id}].options[${opt.id}]"   rel="${opt.name}"/>
+		<input type="checkbox"  value="$!{opt.value}" name="style.g_event[${event.id}].options[${opt.id}]"   rel="${opt.name}"/>
 	</span>
 </li>

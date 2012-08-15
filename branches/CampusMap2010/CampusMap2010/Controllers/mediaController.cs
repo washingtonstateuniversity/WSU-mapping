@@ -81,7 +81,7 @@ namespace campusMap.Controllers
 
 
 
-        public void _list(int page, int type, int pagesize)
+        public void _list(int page, string target, int pagesize)
         {
             if (page == 0)
                 page = 1;
@@ -90,7 +90,7 @@ namespace campusMap.Controllers
             if (pagesize == 0)
                 pagesize = 15;
 
-            if (type != 0)
+            /*if (type != 0)
             {
                 media_types imgtype = ActiveRecordBase<media_types>.Find(type);
                 items = imgtype.media_typed;
@@ -98,13 +98,29 @@ namespace campusMap.Controllers
             else
             {
                 items = ActiveRecordBase<media_repo>.FindAll();
+            }*/
+            items = ActiveRecordBase<media_repo>.FindAll();
+            var pageing = new Dictionary<string, int>();
+            var pag = 0;
+            switch (target)
+            {
+                case "places":
+                    {
+                        pageing.Add("placesPaging", page); break;
+                    }
             }
 
+
             PropertyBag["pagesize"] = pagesize;
-            PropertyBag["selected"] = type;
             PropertyBag["mediatypes"] = ActiveRecordBase<media_types>.FindAll();
-            PropertyBag["media"] = PaginationHelper.CreatePagination(items, pagesize, page);
-            PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
+            PropertyBag["media"] = items;
+
+
+
+            var pItems = ActiveRecordBase<place>.FindAll().Where(obj => obj.Images.Count>0).OrderBy(obj => obj.prime_name);
+            PropertyBag["places"] = PaginationHelper.CreatePagination((IList)pItems.ToList(), 15, (pageing.TryGetValue("placesPaging", out pag) ? pag : 0));
+
+
             PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
             RenderView("listings");
         }

@@ -1,0 +1,2 @@
+<input type="text" value="$!{val}" name="${event.name}.${opt}"  rel="${opt}"/><span class="${opt}  opacity"></span>
+<input type="hidden"  value="0" name="${opt}.defaults" class="defaults"  rel="${opt}"/>

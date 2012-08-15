@@ -1,18 +1,38 @@
+#if(!$target)
+#set($target = $status.title)
+#end
 
-<table class="pagination $Pagination_location">
-  <tr>
-    <td>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</td>
-    <td align="right">
-      #if($list_items.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasPreviousPage) first #end
-      #if($list_items.HasPreviousPage) | $PaginationHelper.CreatePageLink( $list_items.PreviousPageIndex, "prev",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasPreviousPage) | prev #end
-      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.NextPageIndex, "next",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasNextPage) | next #end
-      #if($list_items.HasNextPage) | $PaginationHelper.CreatePageLink( $list_items.TotalPages, "last",null, "%{searchId=$!searchId,target=$status.title}" )  #end
-      #if(!$list_items.HasNextPage) | last #end
-      
-    </td>
-  </tr>
-</table>
+<div class="pagination $Pagination_location ui-widget-content ui-corner-all">
+    <h6>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</h6>
+    <ul class=" ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-bottom">
+		<li>
+			#if($list_items.HasPreviousPage)
+				$PaginationHelper.CreatePageLink( 1, "first",null, "%{searchId=$!searchId,target=$target}" )
+			#else
+				<a href="#">first</a>
+			#end
+		</li>
+		<li>
+			#if($list_items.HasPreviousPage)
+				$PaginationHelper.CreatePageLink( $list_items.PreviousPageIndex, "prev",null, "%{searchId=$!searchId,target=$target}" )
+			#else
+				<a href="#">prev</a>
+			#end
+		</li>
+		<li>
+			#if($list_items.HasNextPage)
+				$PaginationHelper.CreatePageLink( $list_items.NextPageIndex, "next",null, "%{searchId=$!searchId,target=$target}" )
+			#else
+				<a href="#">next</a>
+			#end
+		</li>
+		<li>
+			#if($list_items.HasNextPage)
+				$PaginationHelper.CreatePageLink( $list_items.TotalPages, "last",null, "%{searchId=$!searchId,target=$target}" )
+			#else
+				<a href="#">last </a>
+			#end
+      	</li>
+    </ul>
+</div>
 

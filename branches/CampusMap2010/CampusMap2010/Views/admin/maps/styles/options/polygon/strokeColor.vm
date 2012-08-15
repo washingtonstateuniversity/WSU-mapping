@@ -1,0 +1,2 @@
+<input type="text" value="$!{val}" name="${event.name}.${opt}" class="color_picker" rel="${opt}"/>
+<input type="hidden"  value="" name="${opt}.defaults" class="defaults"  rel="${opt}"/>

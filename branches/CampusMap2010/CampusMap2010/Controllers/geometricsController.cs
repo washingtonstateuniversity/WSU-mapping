@@ -320,7 +320,7 @@ namespace campusMap.Controllers
             levels.Add(level);
             STYLE._zoom = levels; // priming the levels with the all zoom level
 
-            PropertyBag["selectedType"] = type;
+            PropertyBag["selectedType"] = ActiveRecordBase<geometrics_types>.Find(type); ;
 
             PropertyBag["style"] = STYLE;
             PropertyBag["style_types"]  = ActiveRecordBase<geometrics_types>.FindAll();
@@ -332,9 +332,26 @@ namespace campusMap.Controllers
         {
             styles STYLE = ActiveRecordBase<styles>.Find(id);
             PropertyBag["style"] = STYLE;
+
+
+            var values = new Dictionary<string, object>();
+            if (!String.IsNullOrWhiteSpace(STYLE.style_obj) && STYLE.style_obj != "{}")
+            {
+                var jss = new JavaScriptSerializer();
+                var options = jss.Deserialize<Dictionary<string, dynamic>>(STYLE.style_obj);
+                options.ToList<KeyValuePair<string, dynamic>>();
+                foreach (KeyValuePair<string, dynamic> option in options)
+                {
+                    values.Add(option.Key, option.Value);
+                }
+            }
+            PropertyBag["events"] = values["events"];
+
+
             PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             geometric_events[] events = ActiveRecordBase<geometric_events>.FindAll();
             PropertyBag["style_events"] = events;
+            PropertyBag["selectedType"] = STYLE.type;
             PropertyBag["zoom_levels"] = ActiveRecordBase<zoom_levels>.FindAll();
             RenderView("../admin/maps/styles/new");
         }
@@ -936,7 +953,7 @@ namespace campusMap.Controllers
                 }
                 char[] startC = { '{' };
                 char[] endC = { '}' };
-
+                
                 var jss = new JavaScriptSerializer();
 
             /*
@@ -959,7 +976,53 @@ namespace campusMap.Controllers
                 */
                 //var usettings = new DynamicEntity(values);
 
-                style.style_obj = jss.Serialize(style._zoom);// Serialize(style._zoom);//jss.Serialize(usettings);
+
+                Dictionary<string, string> urlparams = getPostParmasAsObj_obj("rest");
+                MyJsonDictionary<String, Object> rest = new MyJsonDictionary<String, Object>();
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) rest.Add(_urlparams.Key, _urlparams.Value);
+                }
+
+                urlparams = getPostParmasAsObj_obj("mouseover");
+                MyJsonDictionary<String, Object> mouseover = new MyJsonDictionary<String, Object>();
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) mouseover.Add(_urlparams.Key, _urlparams.Value);
+                }
+                
+                urlparams = getPostParmasAsObj_obj("click");
+                MyJsonDictionary<String, Object> click = new MyJsonDictionary<String, Object>();
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) click.Add(_urlparams.Key, _urlparams.Value);
+                }
+
+                urlparams = getPostParmasAsObj_obj("dblclick");
+                MyJsonDictionary<String, Object> dblclick = new MyJsonDictionary<String, Object>();
+                foreach (KeyValuePair<string, string> _urlparams in urlparams)
+                {
+                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) dblclick.Add(_urlparams.Key, _urlparams.Value);
+                }
+
+
+                dynamic jsonstr = new
+                {
+                    events = new
+                    {
+                        rest = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(rest)),
+                        mouseover = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(mouseover)),
+                        click = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(click)),
+                        dblclick = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(dblclick))
+                    }
+                };
+               /* var json = jss.Serialize(jsonstr);
+                field.attr = json;
+
+                geometric_events[] events = ActiveRecordBase<geometric_events>.FindAll();
+            */
+
+                style.style_obj = jss.Serialize(jsonstr);// Serialize(style._zoom);//jss.Serialize(usettings);
 
 
             /* first add zoom levels 

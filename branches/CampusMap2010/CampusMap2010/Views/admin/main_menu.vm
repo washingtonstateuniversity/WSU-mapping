@@ -60,8 +60,8 @@
 					<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle">Media</a>
 						<ul class="drop">
 							<li><a href="geometrics/new.castle">New Media</a></li>
-							<li><a href="#url">User Media</a></li>
-							<li><a href="../advertisement/list.castle">Advertising</a></li>
+							#if($userService.checkPrivleage("modify_feu_media"))<li><a href="#">Front End User Media</a></li>#end
+							#if($userService.checkPrivleage("modify_ads_n_notices"))<li><a href="advertisement/list.castle">Notices and Adverts</a></li>#end
 						</ul>
 					</li>
 				#end

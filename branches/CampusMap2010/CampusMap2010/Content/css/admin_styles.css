@@ -5,7 +5,7 @@ html,body{height:auto;}
 .clear{clear:both;}
 
 
-#wrapper{width:100%;min-width:1086px;padding-left:0px;}
+#wrapper{width:100%;min-width:956px;padding-left:0px;}
 #globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
 #siteID{    background: none repeat scroll 0 0 #262A2D;
     
@@ -30,7 +30,7 @@ html,body{height:auto;}
 	position:relative;
 z-index:1;
 width: 100%;
-min-width:1026px;
+min-width:956px;
 }
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
 .admin #navWrap{height:35px;}
@@ -168,6 +168,13 @@ ul.menu ul.drop li.liTop:hover ul.drop {left:170px;top:0px;}
 
 
 #wsu_ui .ui-autocomplete.ui-menu{max-height:250px;overflow-y: scroll;}
+
+
+/* for accordions */
+.accordion h3 input{ display:inline-block;}
+
+
+
 
 
 
@@ -454,29 +461,41 @@ span.UinEdit{    background-color: #E2E2E2;
 
 
 /* media boxes */
-#browserBox.grid{border:1px solid #CCCCCC;padding: 15px;min-width:370px; margin:15px auto 0px; background-color:#fff;}
-#browserBox.grid .imageBox{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width:175px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
-#browserBox.grid .previewImg{background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
-#browserBox.grid .DeleteImage{position:absolute; top:5px; right:5px;diplay:none;}
-#browserBox.grid .imgInfo{background: url(../../Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;padding:2px 5px;position:absolute; bottom:0px; left:0px;}
-#browserBox.grid .imgInfo span{font-size:12px;}
-#browserBox.grid .imgInfo label{font-size:10px;font-weight:bold;}
-#browserBox.grid .imgInfo input{width:160px;}
 
-#img_layout_choice{width:32px; height:32px; cursor:pointer; display:inline-block; float:right;
+.grouped{    border: inherit;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+    padding: 4px 8px 10px;
+    width: auto;  background: url(../../Content/images/fieldset_bk.png) repeat-x scroll center top transparent !important;}
+.grouped legend{    font-size: 15px;
+    line-height: 15px;
+    margin-bottom: 5px;
+    padding: 5px;font-weight: bold;}
+
+#browserBox.grid,.browserBox.grid{border:1px solid #CCCCCC;padding: 15px;min-width:370px; margin:15px auto 0px; background-color:#fff;}
+#browserBox.grid .imageBox,.browserBox.grid .imageBox{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width:175px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
+#browserBox.grid .previewImg,.browserBox.grid .previewImg{background: url(../../Content/images/loading-icon.gif) no-repeat center center;}
+#browserBox.grid .DeleteImage,.browserBox.grid.DeleteImage{position:absolute; top:5px; right:5px;diplay:none;}
+#browserBox.grid .imgInfo,.browserBox.grid .imgInfo{background: url(../../Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;padding:2px 5px;position:absolute; bottom:0px; left:0px;}
+#browserBox.grid .imgInfo span,.browserBox.grid .imgInfo span{font-size:12px;}
+#browserBox.grid .imgInfo label,.browserBox.grid .imgInfo label{font-size:10px;font-weight:bold;}
+#browserBox.grid .imgInfo input,.browserBox.grid .imgInfo input{width:160px;}
+
+#img_layout_choice,.img_layout_choice{width:32px; height:32px; cursor:pointer; display:inline-block; float:right;
 					background: url(../../Content/images/grid_list_choices.png) no-repeat scroll left bottom transparent;}
-#img_layout_choice.list{background: url(../../Content/images/grid_list_choices.png) no-repeat scroll left top transparent;}
+#img_layout_choice.list,.img_layout_choice.list{background: url(../../Content/images/grid_list_choices.png) no-repeat scroll left top transparent;}
 
 
 
 
 
 
-#browserBox.list{border:1px solid #CCCCCC;padding: 15px;width: 540px; margin:15px auto 0px; background-color:#fff;}
-#browserBox.list .imageBox{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;max-width:540px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
-#browserBox.list .previewImg{}
-#browserBox.list .DeleteImage{position:absolute; top:5px; right:5px;display:block !important;}
-#browserBox.list .imgInfo{
+#browserBox.list,.browserBox.list{border:1px solid #CCCCCC;padding: 15px;width: 100%; margin:15px auto 0px; background-color:#fff;}
+#browserBox.list .imageBox,.browserBox.list .imageBox{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;max-width:540px;height:175px;background: url(../../Content/images/loading-icon.gif) no-repeat 40px center;}
+#browserBox.list .previewImg,.browserBox.list .previewImg{}
+#browserBox.list .DeleteImage,.browserBox.list .DeleteImage{position:absolute; top:5px; right:5px;display:block !important;}
+#browserBox.list .imgInfo,.browserBox.list .imgInfo{
 	background: url(../../Content/images/227_227_227_66.png) repeat scroll 50% 50% transparent;
     display: block !important;
     float: right;
@@ -485,14 +504,14 @@ span.UinEdit{    background-color: #E2E2E2;
     padding: 2px 5px;
     width: 350px;
 	}
-#browserBox.list .imgInfo span{font-size:12px;}
-#browserBox.list .imgInfo label{    display: inline-block;
+#browserBox.list .imgInfo span,.browserBox.list .imgInfo span{font-size:12px;}
+#browserBox.list .imgInfo label,.browserBox.list .imgInfo label{    display: inline-block;
     font-size: 10px;
     font-weight: bold;
     margin-top: 12px;}
-#browserBox.list .imgInfo input{width:100%;}
-#browserBox.grid .ui-state-highlight{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:2px; margin-bottom:5px;width:175px;height:173px;}
-#browserBox.list .ui-state-highlight{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;height:175px;}
+#browserBox.list .imgInfo input,.browserBox.list .imgInfo input{width:100%;}
+#browserBox.grid .ui-state-highlight,.browserBox.grid .ui-state-highlight{position:relative; overflow:hidden;display: inline-block;float:left; margin-right:2px; margin-bottom:5px;width:175px;height:173px;}
+#browserBox.list .ui-state-highlight,.browserBox.list .ui-state-highlight{position:relative;display: inline-block;float:left; margin-right:5px; margin-bottom:5px;width: 100%;height:175px;}
 .placeOrderId{ position:absolute; top:-9999em; left:-9999em;}
 
 
@@ -518,12 +537,12 @@ span.UinEdit{    background-color: #E2E2E2;
 
 .tabedArea{position: absolute;width:0px;overflow:hidden;display: inline-block; float: left;}
 .tabactive{width:100%;position: relative;}
-
+.tabedArea .listTitle{display: inline-block;float: left;font-size: 24px;font-weight: bold;margin: 5px 15px 0 5px;text-transform: capitalize;}
 
 
 
 .place._editor #campusmap.fixed{position:fixed;top:45px;right:15px;}
-.place._editor #campusmap.fixed_min{position:fixed;top:45px;left:615px;}
+.place._editor #campusmap.fixed_min{position:fixed;top:45px;left:521px;}
 .place._editor .ui-tabs-panel{margin-right:460px; min-height:535px;}
 .place._editor .sub_tabs .ui-tabs-panel,.place._editor #infotabs .ui-tabs-panel {margin-right:0px;min-height: 30px;}
 
@@ -592,8 +611,22 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 
 
 
-
-.pagination.top{float:right;margin-right:5px;margin-top:7px;width:100%}
+/* pagination */
+#wsu_ui .pagination{position: relative;z-index: 9;}
+#wsu_ui .pagination.top{float: right;margin: -3px 0 0;width: auto;}
+#wsu_ui .pagination.top.inhead{float: right;margin-right: 5px;margin-top: 7px;position: relative;width: auto;z-index: 9;}
+	
+	
+	    
+    
+	
+#wsu_ui .pagination  h6{ text-align: center;padding: 0;}
+#wsu_ui .pagination  ul{height: 2em !important; display: inline-block;}
+#wsu_ui .pagination .ui-tabs-nav li,#wsu_ui.admin.place.list .placelist.ui-tabs .pagination .ui-tabs-nav li,#wsu_ui.admin.media.listings .placelist.ui-tabs .pagination .ui-tabs-nav li{margin: -2px 0 0 !important;}	
+#wsu_ui .pagination .ui-tabs-nav li a{padding: 2px 5px !important; border: medium none;line-height: 16px;}
+#wsu_ui .pagination .ui-tabs-nav li a[href='#']{color: #999999;cursor: default;}
+	
+	
 .sortStyleOps{ min-height:75px; margin:0px !important;padding:0px !important;}
 
 .sortStyleOps.orgin{
