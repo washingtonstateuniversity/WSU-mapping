@@ -574,13 +574,12 @@ function addShapeToMap(jObj,i,shape){
 		jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style);
 	}else{
 		// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
-		var jObj = jObj;
 		jObj.gmap('addShape', (shape.type[0].toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
 		$(shape_obj).click(function(){
 			if(typeof(shape.style.events.click)!="undefined" && shape.style.events.click != ""){
 				jObj.gmap('setOptions',shape.style.events.click,this);
 				if(typeof(shape.style.events.click.onEnd)!="undefined" && shape.style.events.click.onEnd != ""){
-					eval(shape.style.events.click.onEnd.replace('\u0027',"'"));
+					eval(shape.style.events.click.onEnd.replace("\u0027","'"));
 				}
 			}
 		 }).mouseover(function(){
@@ -588,14 +587,14 @@ function addShapeToMap(jObj,i,shape){
 				 jObj.gmap('setOptions',shape.style.events.mouseover,this);
 				// if(style.mouseover.callback)style.mouseover.callback();
 				if(typeof(shape.style.events.mouseover.onEnd)!="undefined" && shape.style.events.mouseover.onEnd != ""){
-					eval(shape.style.events.mouseover.onEnd.replace('\u0027',"'"));
+					eval(shape.style.events.mouseover.onEnd.replace("\u0027","'"));
 				}		
 			 }
 		}).mouseout(function(){
 			if(typeof(shape.style.events.rest)!="undefined" && shape.style.events.rest != ""){
 				jObj.gmap('setOptions',shape.style.events.rest,this);
 				if(typeof(shape.style.events.rest.onEnd)!="undefined" && shape.style.events.rest.onEnd != ""){
-					eval(shape.style.events.rest.onEnd.replace('\u0027',"'"));
+					eval(shape.style.events.rest.onEnd.replace("\u0027","'"));
 				}
 			}
 		}).dblclick(function(){
