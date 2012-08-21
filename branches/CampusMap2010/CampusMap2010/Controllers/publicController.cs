@@ -642,7 +642,6 @@
                 if (!int.TryParse(id, out sid))
                 {
                     String term = id.Trim();
-
                     SortedDictionary<string, int> results = search_place_string(term);
                     foreach (String key in results.Keys)
                     {
