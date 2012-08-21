@@ -587,7 +587,8 @@ function addShapeToMap(jObj,i,shape){
 				 jObj.gmap('setOptions',shape.style.events.mouseover,this);
 				// if(style.mouseover.callback)style.mouseover.callback();
 				if(typeof(shape.style.events.mouseover.onEnd)!="undefined" && shape.style.events.mouseover.onEnd != ""){
-					eval(shape.style.events.mouseover.onEnd.replace("\u0027","'"));
+					var myCode = shape.style.events.mouseover.onEnd.replace("\u0027","'");
+					var myFucn = new Function(myCode); myFucn();
 				}		
 			 }
 		}).mouseout(function(){
