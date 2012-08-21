@@ -39,7 +39,7 @@ $Controller.getView()
 <script type="text/javascript">
   var siteroot = '$site.Trim()';
   var view = '$view.Trim()/';
-  #if($urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
+  #if($urlQueries!="")var startingUrl = '$urlQueries'; #end
   #if($activePlace!="")var activePlace = $activePlace; #end
   #if($campus!="")var campus = '$campus'; #end
  

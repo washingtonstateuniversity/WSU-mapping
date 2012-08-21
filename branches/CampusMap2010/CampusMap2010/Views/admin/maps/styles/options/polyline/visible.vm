@@ -1,10 +1,4 @@
-
-
-
-	
-	
-
-		#*
+#*
 		Come back to to fix.  In google the visible pukes cause google loves me yes it does.
-		<input type="checkbox" value="true" name="style.g_event[${event.id}].options[${opt.id}]" rel="${opt.name}"/> *#
+		<input type="checkbox" value="true" name="g_event[${event.id}].options[${opt.id}]" rel="${opt}"/> *#
 	

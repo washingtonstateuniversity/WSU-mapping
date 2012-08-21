@@ -369,6 +369,12 @@ namespace campusMap.Controllers
             PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
             PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
 
+            foreach (geometrics_types types in ActiveRecordBase<geometrics_types>.FindAll())
+            {
+                PropertyBag["styles_" + types.name] = ActiveRecordBase<styles>.FindAll().Where(obj => obj.type.id == types.id);
+            }
+            //PropertyBag["styles_marker"] = ActiveRecordBase<styles>.FindAll().Where(obj => obj.type == ActiveRecordBase<geometrics_types>.Find(1));
+
             if (page == 0)
                 page = 1;
             int pagesize = 10;

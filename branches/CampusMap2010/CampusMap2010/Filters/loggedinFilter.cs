@@ -22,6 +22,7 @@ namespace campusMap.Filters
     public class loggedinFilter : IFilter
     {
         protected UserService userService = new UserService();
+        protected HelperService helperService = new HelperService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
            if (Authentication.logged_in())
@@ -35,6 +36,7 @@ namespace campusMap.Filters
                 }
             }
            controllerContext.PropertyBag["userService"] = userService;
+           controllerContext.PropertyBag["helperService"] = helperService;
             return true;
         }
     }

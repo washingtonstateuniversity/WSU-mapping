@@ -115,12 +115,30 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 				<br/><strong>Note:</strong>If a place has a shape
 				<br/>you may wish to not pick
 				<br/>a Geometric Shape.
+				<br/>
+				<br/><strong>force shape style:</strong>
+				<select name="view.forced_marker_style" id="forced_marker_style">
+					<option class="geometric" value="" #if($!view.forced_marker_style) selected="selected" #end>Passthru (none)</option>
+					#foreach($style in $styles_polygon)
+						<option class="geometric" value="$style.id" #if($view.forced_marker_style.Contains($style)) selected="selected" #end>$!style.name</option>
+					#end
+				</select>
+				
 			</fieldset>
 			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Geometrics</legend>
                 <label for="name">Geometric Object<br/>to repersent this place.</label><br/>
 				<select name="view.geometrics[]" id="placeShape" class="" multiple="multiple" size="9" style="width:205px;">
 					#foreach($geo in $geometrics)
 						<option class="geometric" value="$geo.id" #if($view.geometrics.Contains($geo)) selected="selected" #end>$!geo.name</option>
+					#end
+				</select>
+				<br/>
+				
+				<br/><strong>force shape style:</strong>
+				<select name="view.forced_shapes_style" id="forced_shapes_style">
+					<option class="geometric" value="" #if($!view.forced_shapes_style) selected="selected" #end>Passthru (none)</option>
+					#foreach($style in $styles_polygon)
+						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.Contains($style)) selected="selected" #end>$!style.name</option>
 					#end
 				</select>
             </fieldset>  

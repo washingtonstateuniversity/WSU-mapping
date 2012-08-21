@@ -230,11 +230,11 @@
 
                 PropertyBag["selectedCats"] = cat;
                 PropertyBag["activePlace"] = activePlace;
-                
 
-                PropertyBag["urlQueries"] = urlQueries.TrimStart(',');
+
+                PropertyBag["urlQueries"] = String.IsNullOrWhiteSpace(urlQueries) ? "" : "cat[]="+urlQueries.TrimStart(',') ;
                 if (pid > 0){
-                    PropertyBag["urlQueries"] += "&pid="+pid.ToString();
+                    PropertyBag["urlQueries"] += (String.IsNullOrWhiteSpace(urlQueries) ? "" : "&")+"pid="+pid.ToString();
                 }
                 PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position","active",true);
 
@@ -290,13 +290,19 @@
             }
 
 
-
-
-
-
-
-
-
+            public void get_Style(int id, String callback)
+            {
+                CancelView();
+                CancelLayout();
+                styles style = ActiveRecordBase<styles>.Find(id);
+                String json = style.style_obj;
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
+            }
 
             public void emailDir(String name, String email, String directions, String notes,String recipientname, String recipientemail)
             {
@@ -659,7 +665,7 @@
                     RenderText("false");
                 }
             }
-
+            
             public static SortedDictionary<string, int> search_place_string(string term)
             {
                 // Use hashtable to store name/value pairs
@@ -832,7 +838,7 @@
                 return json;
             }
 
-            public void get_place_by_category(string[] cat, string callback)
+            public void get_place_by_category(string[] cat,string pid, string callback)
             {
                 CancelView();
                 CancelLayout();

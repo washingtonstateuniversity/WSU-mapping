@@ -56,13 +56,6 @@
 			this._call(callback, shape);
 			return $(shape);
 		},
-		
-		
-		
-		
-		
-		
-		
 		process_coords: function(coordinates,flip,reverse_array) {
 			var Coords=[];
 			if( typeof(google.maps.geometry)!=='undefined' && coordinates.match(/[\||\@|\_|\`]+/i) ){ // only encoded has @ | _ `

@@ -31,6 +31,8 @@
     using log4net.Config;
 using System.Reflection;
 
+
+
 #endregion
 
 namespace campusMap.Services
@@ -177,6 +179,17 @@ namespace campusMap.Services
 
         }
         */
+
+        public static String convertHexToARGB(String hex,String Alpha)
+        {
+
+            System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml(hex);
+            String argb = col.ToArgb().ToString();
+
+
+            return argb;
+        }
+
 
 
         public static String getRootPath()

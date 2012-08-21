@@ -227,7 +227,7 @@ namespace campusMap.Models
 
 
         private IList<styles> _style;
-        [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_styles", ColumnKey = "style_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_styles", ColumnKey = "geometric_id", ColumnRef = "style_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<styles> style
         {
             get { return _style; }

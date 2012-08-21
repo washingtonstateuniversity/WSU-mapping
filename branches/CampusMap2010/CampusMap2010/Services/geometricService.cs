@@ -73,11 +73,10 @@ namespace campusMap.Services
             shape += @"
                 {";
             String shapeOptions = "";
-
                 shapeOptions += @"       ""name"":""" + geometric.name + @""",";
-                shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
+                //shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
                 shapeOptions += @"       ""encoded"":""" + geometric.encoded + @""",";
-                shapeOptions += (geometric.style.Count>0?@"      ""style"":""" + geometric.style[0] + @""",":"");
+                shapeOptions += (geometric.style.Count > 0 ? @"      ""style"":" + geometric.style[0].style_obj + @"," : "");
                 shapeOptions += @"      ""type"":""" + geometric.default_type.name + @"""";
 
             shape += shapeOptions;

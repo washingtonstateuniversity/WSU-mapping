@@ -1,8 +1,1 @@
-
-
-
-	
-	
-
-		<input type="checkbox"  value="$!{opt.value}" name="style.g_event[${event.id}].options[${opt.id}]"   rel="${opt.name}"/>
-	
+<input type="checkbox" value="true" name="${event.name}.${opt}" #if($val!="")checked="checked"#end rel="${opt}"/>

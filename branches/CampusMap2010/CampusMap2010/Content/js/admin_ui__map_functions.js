@@ -197,28 +197,24 @@ function rebuild_example(tabs,mapSelector,type){
 	var _op={};
 	$.each(tabs, function(){
 		var tab = $(this);
-		var mode = tab.attr('id');//.split('__')[1].split('_')[1];
-		var objs_to_rebuild = tab.find('.sortStyleOps :input');
+		var mode = tab.closest('.tabed').attr('id');//.split('__')[1].split('_')[1];
+		var ele = tab.find(':input').not('h3 :input,input:hidden');
 		
-		_op[ mode ] = {};
+		
 		var options={}
-		$.each(objs_to_rebuild, function(){
 			if(
-				$(this).closest('.pod').css('display') != 'none' 
-				&& ( $(this).is(':checked') 
-					|| $(this).is(':selected') 
-					|| ($(this).val()!='' 
-						&& ($(this).not('[type=checkbox]')
-							&&$(this).not('[type=select]'))
+				( ele.is(':checked') 
+					|| (ele.val()!='' 
+						&& ele.not(':checkbox')
 						)
 					) 
-				&& $(this).not('[type=hidden]') 
-				&& typeof( $(this).attr('rel') ) !== 'undefined' 
+				&& ele.not('[type=hidden]') 
+				&& typeof( ele.attr('rel') ) !== 'undefined' 
 				){
-			   options[$(this).attr('rel')]= ($(this).is('color_picker') ? '#' : '') +''+$(this).val();// changed hasClass for is for speed
+			   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
 			}
-		});
-		_op[ mode ] = $.extend({},options); 
+		
+		_op[ mode ] = $.extend({},_op[ mode ],options); 
 	});
 	mapSelector.gmap('clear_map');	
 	set_default_shape(mapSelector,type,_op);

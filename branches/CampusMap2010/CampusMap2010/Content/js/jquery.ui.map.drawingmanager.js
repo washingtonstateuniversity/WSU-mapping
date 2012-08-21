@@ -23,14 +23,16 @@
 			
 			if( typeof(handling.loaded_shape)!=='undefined' && !$.isEmptyObject(handling.loaded_shape) ){
 				var shape = self.addShape(handling.loaded_type, handling.loaded_shape);
-			
+				shape[0].type = handling.loaded_type;
+				self.set_drawingSelection(shape[0]);
 				google.maps.event.addListener(shape[0], 'click', function(e) {
-											var newShape = shape[0];
-											newShape.type = handling.loaded_type;
-											self.set_drawingSelection(newShape);
+											self.set_drawingSelection(shape[0]);
 											handling.onDrag();
 										});
-				google.maps.event.trigger(shape[0], 'click');
+				
+										
+										
+				//google.maps.event.trigger(shape[0], 'click');
 			}
 
 			if(typeof(handling.onDrag)=='function'){
@@ -144,13 +146,15 @@
 			}
 		},
 		set_drawingSelection:function(shape) {
-			this.unset_drawingSelection();
-			this.set('selected',shape);
-			this.set('type',shape.type);
-			if(shape.type  == google.maps.drawing.OverlayType.MARKER ) {
-				shape.setDraggable(true);
-			}else{
-				shape.setEditable(true);
+			if(typeof(shape)!=="undefined"){
+				this.unset_drawingSelection();
+				this.set('selected',shape);
+				this.set('type',shape.type);
+				if(typeof(shape.type)!=="undefined" && shape.type  == google.maps.drawing.OverlayType.MARKER ) {
+					shape.setDraggable(true);
+				}else{
+					shape.setEditable(true);
+				}
 			}
 		},
 		get_drawingSelection: function(){
@@ -163,35 +167,39 @@
 		},		
 		get_updated_data:function() {
 			var overlay = this.get('selected');
-			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
-				var paths = overlay.getBounds();
-				var points = paths.toString();
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
-				var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
-				if($.isArray(overlay.getPaths())){
-					/*
-					* i think this needs to move somewhere.. in regrades to the 
-					* way i think google handle drawing complex shapes.  
-					* they don't let you and we need to fake it
-					*/
-					//alert('is a array so you are making holes');
-					var paths = overlay.getPaths();
-					if(paths.length){
-						for(i=0; i<=paths.length-1; i++){
-							var path = this.convert_gmap_LatLng(paths[i])
-							i % 2 > 0 ? path.reverse() : '';
-							points.push();
-						}
-					}
-				}else{
-					var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
-				}
-			}else if(overlay.type == google.maps.drawing.OverlayType.RECTANGLE || overlay.type == 'Rectangle'){
-					var paths = overlay.getBounds();					
+			if(typeof(overlay)!="undefined" && overlay != null){
+				if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
+					var paths = overlay.getBounds();
 					var points = paths.toString();
+				}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
+					var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
+				}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
+					if($.isArray(overlay.getPaths())){
+						/*
+						* i think this needs to move somewhere.. in regrades to the 
+						* way i think google handle drawing complex shapes.  
+						* they don't let you and we need to fake it
+						*/
+						//alert('is a array so you are making holes');
+						var paths = overlay.getPaths();
+						if(paths.length){
+							for(i=0; i<=paths.length-1; i++){
+								var path = this.convert_gmap_LatLng(paths[i])
+								i % 2 > 0 ? path.reverse() : '';
+								points.push();
+							}
+						}
+					}else{
+						var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
+					}
+				}else if(overlay.type == google.maps.drawing.OverlayType.RECTANGLE || overlay.type == 'Rectangle'){
+						var paths = overlay.getBounds();					
+						var points = paths.toString();
+				}
+				return points;
+			}else{
+				return false;
 			}
-			return points;
 		},	
 		
 		
@@ -228,9 +236,16 @@
 					var points = overlay.getPath();
 				}
 			}
-			points = google.maps.geometry.encoding.encodePath(points);
-			return points;
+			var result = google.maps.geometry.encoding.encodePath(points);
+			return result;
 		},	
+		
+		encode:function(path) {
+			var result = google.maps.geometry.encoding.encodePath(path);
+			return result;
+		},	
+		
+		
 		// Polygon containsLatLng - method to determine if a latLng is within a polygon
 		polygon_containsLatLng:function(polygon,latLng) {
 		  // Exclude points outside of bounds as there is no way they are in the poly

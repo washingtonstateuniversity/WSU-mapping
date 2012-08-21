@@ -456,6 +456,9 @@ namespace campusMap.Controllers
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
+
+            PropertyBag["styles"] = ActiveRecordBase<styles>.FindAll();
+
             PropertyBag["loginUser"] = user;
             PropertyBag["geometricimages"] = geometric.Images;
 
@@ -671,7 +674,9 @@ namespace campusMap.Controllers
                 return;
             }
 */
-
+            //IList<styles> styled = geometric.style;
+            //geometric.style.Clear();
+            
 
             authors user = UserService.getUser();
             geometric.editing = user;
@@ -728,7 +733,7 @@ namespace campusMap.Controllers
                 }               
                      
             }
-            */
+            
             foreach (geometrics_media si in media)
             {
                 if (si.Media != null && si.Media.id > 0)
@@ -737,7 +742,7 @@ namespace campusMap.Controllers
                     find.geometric_order = si.geometric_order;
                     ActiveRecordMediator<geometrics_media>.Save(find);
                 }
-            }
+            }*/
 /*
             foreach (tags tag in tags)
             {
@@ -834,7 +839,7 @@ namespace campusMap.Controllers
                 */
                 geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
-
+            
 
             ActiveRecordMediator<geometrics>.Save(geometric);
 

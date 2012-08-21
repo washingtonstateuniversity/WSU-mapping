@@ -57,7 +57,7 @@
 		search: function(geocoderRequest, callback) {
 			this.get('services > Geocoder', new google.maps.Geocoder()).geocode(geocoderRequest, callback);
 		}
-	
+		
 	});
 	
 } (jQuery) );

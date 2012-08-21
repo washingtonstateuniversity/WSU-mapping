@@ -1,8 +1,3 @@
-
-
-
-	
-	
-
-		<input type="text" value="$!{opt.value}" name="style.g_event[${event.id}].options[${opt.id}]" class="color_picker"  rel="${opt.name}"/>
-	
+<input type="text" title="${event.name}.${opt}" value="$!val.Replace("null","").Replace("#","")" class="color_picker" rel="${opt}"/>
+<input type="hidden"  value="" name="${opt}.defaults" class="defaults" rel="${opt}"/>
+<input type="hidden" value="$!val.Replace("null","")" name="${event.name}.${opt}" class="colorsaver"/>

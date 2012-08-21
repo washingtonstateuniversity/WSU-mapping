@@ -261,6 +261,23 @@ namespace campusMap.Models
             get { return _geometrics; }
             set { _geometrics = value; }
         }
+
+
+        private styles _forced_shapes_style;
+        [BelongsTo]
+        virtual public styles forced_shapes_style
+        {
+            get { return _forced_shapes_style; }
+            set { _forced_shapes_style = value; }
+        }
+        private styles _forced_marker_style;
+        [BelongsTo]
+        virtual public styles forced_marker_style
+        {
+            get { return _forced_marker_style; }
+            set { _forced_marker_style = value; }
+        }
+
         /* replaced by the virtural model
         private map_views_options _options;
         [BelongsTo]

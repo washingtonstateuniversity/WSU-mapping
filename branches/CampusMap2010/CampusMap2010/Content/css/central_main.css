@@ -12,6 +12,10 @@ html,body{height:100%; background-color:#edefee;}
     height: 80px;
     width: 100%;}
 #wrapper #toolbar{width: 100%;float: none;background-color: #5E6A71;}
+#toolbar .addthis_button_compact span{height: 0;
+    width: 0;}
+
+
 #siteID h2 { margin: 0 0 0 180px;width: auto;}
 #siteID h1 {margin:15px 0 0 185px;width: auto;}
 #logo{ display: inline;
@@ -581,6 +585,13 @@ fieldset{padding: 4px 8px 10px;}
 #option li:hover{color:#000!important;}
 #option li.DIVIT{ border-right: 1px #666 solid;}
 #option li.active{color:#981e32;}
+
+
+
+#campusmap .ui-tabs .ui-tabs-panel .content.Views{overflow:hidden;}
+
+
+
 
 
 #output{height:20px;width:100%;background-color:#ccc;  -webkit-box-shadow:  0px -5px 10px -5px rgba(0, 0, 0, 0.55);

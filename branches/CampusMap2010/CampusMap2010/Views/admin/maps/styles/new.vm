@@ -28,11 +28,12 @@
 		</fieldset>
 	
 		#if( !$ajaxed )
-		<div id="smaple_area">
-					<fieldset><legend>Sample</legend>
-						<div id="style_map" style="width: 500px;height: 520px;"></div>
-					</fieldset>
-		</div>
+			<div id="smaple_area">
+				<fieldset>
+					<legend>Sample</legend>
+					<div id="style_map" style="width: 500px;height: 520px;"></div>
+				</fieldset>
+			</div>
 		#end
 	
 		<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
@@ -50,15 +51,19 @@
 						<fieldset id="optionsSelection_hover" >
 							<legend>Style options</legend>
 								#foreach($opt in $event.getOptions(${gtype}))
+								
+									#set($val="")
+									#if($events.TryGetValue(${event.name},$evt))
+										#if($events.get_item($event.name).TryGetValue(${opt},$value))
+											#set($val=$events.get_item($event.name).get_item($opt))
+										#end
+									#end
+								
+								
 									<div class="accordion">
-										<h3><a href="#"><input type="checkbox" name="style.${event.name}.${opt}.used" #if($opt.value)checked="checked"#end/>${opt}</a></h3>
+										<h3><a href="#"><input type="checkbox" name="style.${event.name}.${opt}.used" #if($val.Trim()!="")checked="checked"#end/>${opt}</a></h3>
 										<div> 
-											#set($val="")
-											#if($events.TryGetValue(${event.name},$evt))
-												#if($evt.TryGetValue(${opt},$value)) ${opt}
-													#set($val=$!{value})
-												#end
-											#end
+											
 											#parse("admin/maps/styles/options/${gtype}/${opt}.vm")
 										</div>
 									</div>
@@ -68,11 +73,28 @@
 							<legend>Javascript Callbacks</legend>
 							<div class="accordion">
 								<h3><a href="#">Start of event</a></h3>
-								<div> <textarea name="style.${event.name}.onStart">#*$!{options.getVal($!opt)}*#</textarea> </div>
+								
+								#set($val="")
+								#if($events.TryGetValue(${event.name},$evt))
+									#if($events.get_item($event.name).TryGetValue("onStart",$value))
+										#set($val=$events.get_item($event.name).get_item("onStart"))
+									#end
+								#end
+								
+								
+								<div> <textarea name="${event.name}.onStart">$!val</textarea> </div>
 							</div>
 							<div class="accordion">
 								<h3><a href="#">End of event</a></h3>
-								<div> <textarea name="style.${event.name}.onEnd">$!{opt.value}</textarea> </div>
+								
+								#set($val="")
+								#if($events.TryGetValue(${event.name},$evt))
+									#if($events.get_item($event.name).TryGetValue("onEnd",$value))
+										#set($val=$events.get_item($event.name).get_item("onEnd"))
+									#end
+								#end
+								
+								<div> <textarea name="${event.name}.onEnd">$!val</textarea> </div>
 							</div>
 						</fieldset>
 					</fieldset>

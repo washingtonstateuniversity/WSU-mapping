@@ -31,7 +31,7 @@ $Controller.getView()
 <link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css?")
-#parse("layouts/assets_central/google-analytics.vm")
+
 	</head>
 	<body id='campusmap' class="veiw_base_layout ${controller.getView()} ${controller.getAction()}">
 
@@ -57,7 +57,7 @@ $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/cen
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-
+#parse("layouts/assets_central/google-analytics.vm")
 <script type="text/javascript">
   var siteroot = '$site.Trim()';
   var view = '$view.Trim()/';
