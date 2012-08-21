@@ -579,7 +579,7 @@ function addShapeToMap(jObj,i,shape){
 			if(typeof(shape.style.events.click)!="undefined" && shape.style.events.click != ""){
 				jObj.gmap('setOptions',shape.style.events.click,this);
 				if(typeof(shape.style.events.click.onEnd)!="undefined" && shape.style.events.click.onEnd != ""){
-					eval(shape.style.events.click.onEnd.replace("\u0027","'"));
+					//eval(shape.style.events.click.onEnd.replace("\u0027","'"));
 				}
 			}
 		 }).mouseover(function(){
@@ -587,15 +587,15 @@ function addShapeToMap(jObj,i,shape){
 				 jObj.gmap('setOptions',shape.style.events.mouseover,this);
 				// if(style.mouseover.callback)style.mouseover.callback();
 				if(typeof(shape.style.events.mouseover.onEnd)!="undefined" && shape.style.events.mouseover.onEnd != ""){
-					var myCode = "var jObj=["+jObj+"]; var i="+i+"; "+shape.style.events.mouseover.onEnd.replace("\u0027","'");
-					var myFucn = new Function(myCode);myFucn();
+					//var myCode = "var jObj=["+jObj+"]; var i="+i+"; "+shape.style.events.mouseover.onEnd.replace("\u0027","'");
+					//var myFucn = new Function(myCode);myFucn();
 				}		
 			 }
 		}).mouseout(function(){
 			if(typeof(shape.style.events.rest)!="undefined" && shape.style.events.rest != ""){
 				jObj.gmap('setOptions',shape.style.events.rest,this);
 				if(typeof(shape.style.events.rest.onEnd)!="undefined" && shape.style.events.rest.onEnd != ""){
-					eval(shape.style.events.rest.onEnd.replace("\u0027","'"));
+					//eval(shape.style.events.rest.onEnd.replace("\u0027","'"));
 				}
 			}
 		}).dblclick(function(){
