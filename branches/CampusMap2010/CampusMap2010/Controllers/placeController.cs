@@ -127,7 +127,7 @@ namespace campusMap.Controllers
             //SETUP SEARCHID and parts
             if (searchId.Equals(0))
             {
-                searchId = -3;
+                searchId = -2;
             }
             else
             {

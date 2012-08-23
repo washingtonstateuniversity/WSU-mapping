@@ -10,8 +10,10 @@
 	<span style="display:inline-block;">
 		Categories:<br/>
 		<select id="list${controller.getView()}Type" class="fliterList">
-			<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
 			<option value="-2" #if($searchId == -2) selected="selected" #end>Your ${controller.getView()}</option>
+		
+			<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
+			
 			<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
 			#foreach($cat in $listcats)
 				<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>

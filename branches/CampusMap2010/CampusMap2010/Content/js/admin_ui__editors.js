@@ -534,8 +534,8 @@ function load_geometrics_editor() {
 		 }else{
 			var shape = {};
 		 }
-			
-		$('#geometrics_drawing_map').gmap('init_drawing', 
+		var jObj = $('#geometrics_drawing_map');
+		jObj.gmap('init_drawing', 
 			{ 
 				drawingControl:controlOn,
 				drawingControlOptions : controlOn?{
@@ -559,7 +559,7 @@ function load_geometrics_editor() {
 								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
 								//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
 								
-								$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),true,false)));
+								$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
 								///process_coords: function(coordinates,flip,reverse_array)
 							}
 						},
@@ -569,7 +569,7 @@ function load_geometrics_editor() {
 								$('#latLong').val(points);
 								//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',points,false,false))));
 								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-								$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),true,false)));
+								$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
 								//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
 							}
 						},
@@ -589,8 +589,8 @@ function load_geometrics_editor() {
 					}
 				},
 				/*note we are extending the settings with the shape */
-				$('#style_of').val()==''?{}:{
-					loaded_type: ($('#style_of').val()[0].toUpperCase() + $('#style_of').val().slice(1)),
+				$('#pickedValue').val()==''?{}:{
+					loaded_type: ($('#pickedValue').val()[0].toUpperCase() + $('#pickedValue').val().slice(1)),
 					loaded_shape:shape
 				}
 			)
@@ -599,29 +599,29 @@ function load_geometrics_editor() {
 		$('#drawingcontrolls.showing').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#geometrics_drawing_map').gmap('hide_drawingControl');
+			jObj.gmap('hide_drawingControl');
 			$(this).removeClass('showing').addClass('hidden').text('Show controlls');
 		});
 		$('#drawingcontrolls.hidden').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#geometrics_drawing_map').gmap('show_drawingControl');
+			jObj.gmap('show_drawingControl');
 			$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
 		});
 		$('#restart').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#geometrics_drawing_map').gmap('refresh_drawing',false);
+			jObj.gmap('refresh_drawing',false);
 		});
 		$('#update').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#latLong').val($('#geometrics_drawing_map').gmap('get_updated_data'));
+			if(jObj.gmap('get_updated_data'))$('#latLong').val(jObj.gmap('get_updated_data'));
 			
 			//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),false,false))));
 			
 			//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
-			$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),true,true)));
+			if(jObj.gmap('get_updated_data'))$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,true)));
 		});
 		$("form#shapeEditor").autoUpdate({
 			 before:function(){ 
@@ -631,21 +631,30 @@ function load_geometrics_editor() {
 		$('#unselect').live('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			$('#latLong').val($('#geometrics_drawing_map').gmap('unset_drawingSelection'));
+			$('#latLong').val(jObj.gmap('unset_drawingSelection'));
 		});
 		var selected_type = '';
 		$('#style').on('change',function(){
 			if($('#style').val()>0){
-				var url=siteroot+"public/get_style.castle";
-				$.getJSON(url+'?callback=?&id='+$('#style').val(), function(data) {
-					var type = $('#style_of').val()[0].toUpperCase() + $('#style_of').val().slice(1);
-					$('#geometrics_drawing_map').gmap('setOptions',data.events.rest,$('#geometrics_drawing_map').gmap('get','overlays > '+type)[0]);
-				});
+				if($('#latLong').val()!="")get_style(jObj,$('#style').val(),$('#pickedValue').val());
 			}
-		}).trigger('change');
+		});
+		if($('#latLong').val()!="") $('#style').trigger('change');
 	});
 	 
 }
+function get_style(jObj,style_id,type){
+	//if((typeof(type)==="undefined" || type==="undefined") || (typeof(style_id)==="undefined" || style_id==="undefined") )alert('error'); return false;
+	
+	var url=siteroot+"public/get_style.castle";
+	$.getJSON(url+'?callback=?&id='+style_id, function(data) {
+		var typed = type[0].toUpperCase() + type.slice(1);
+		var overlays = jObj.gmap('get','overlays > '+typed);
+		if(overlays!=null && overlays.length>0)jObj.gmap('setOptions',data.events.rest,overlays[0]);
+	});	
+}
+
+
 function load_style_editor(){
 	var gmap;
 	var pullman_str = "46.73304697156661,-117.15406340441444";

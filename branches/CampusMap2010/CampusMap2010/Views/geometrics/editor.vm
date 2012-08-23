@@ -23,7 +23,7 @@
 		</p>
 		<p style="float:left; margin-right:15px;">Geometry Type :<br/>
 		#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end
-		<span style="position:absolute;top:-999em;left-999em;">
+		#*<span style="position:absolute;top:-999em;left-999em;">
 		<input type="hidden" id="startingValue" value="$geometric.default_type.name" />
 			<select name="geom_type" id="style_of">
 				<option value="" #if($geometric.default_type.id==0  || $selectedType==0)selected='selected'#end>Select a geometry type</option>
@@ -34,7 +34,9 @@
 				<option value="circle" #if($geometric.default_type.id=='5' || $selectedType==5)selected='selected'#end>Circle</option>
 			</select>
 			<input type="hidden" id="pickedValue" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
-			</span>
+		</span>*#
+			<input type="hidden" id="startingValue" value="$!{geometric.default_type.name}" />
+			<input type="hidden" id="pickedValue" name="geom_type" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
 		</p>
 		<p style="float:left;">Geometry Style:<br/>  
 			<select name="geometric.style[]" id="style">
@@ -66,10 +68,10 @@
 		</div>
 		<div id="Manual">
 			<fieldset><legend>Latitudes and Longitudes</legend>
-				<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>
+				<textarea name="boundary" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
 			</fieldset>
 			<p>Encoded:<br/>
-				<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" >$!geometric.encoded</textarea>
+				<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" cols="80"  rows="5">$!geometric.encoded</textarea>
 			</p>
 			$formbuttons
 		</div>

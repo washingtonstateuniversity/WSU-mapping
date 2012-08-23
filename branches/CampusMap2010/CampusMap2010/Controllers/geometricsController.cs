@@ -540,6 +540,7 @@ namespace campusMap.Controllers
 
             PropertyBag["selectedType"] = type;
 
+            PropertyBag["styles"] = ActiveRecordBase<styles>.FindAll();
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["geometric"] = Flash["geometric"] != null ? Flash["geometric"] : geometric;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
