@@ -71,7 +71,8 @@
 					handling.drawingmode_changed( self.get_drawingMode() );
 				}
 			});
-
+			if(typeof(handling.onComplete)=='function')
+				handling.onComplete(drawingManager , ((typeof(shape)!=="undefined")?shape:null) );
 			//google.maps.event.addListener(self.get('map'), 'click', function(){handling.onDrag();self.unset_drawingSelection();});
 			
 			return $(drawingManager);
@@ -165,8 +166,8 @@
 			  	this.get('selected').setMap(null);
 			}
 		},		
-		get_updated_data:function() {
-			var overlay = this.get('selected');
+		get_updated_data:function(shape) {
+			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
 			if(typeof(overlay)!="undefined" && overlay != null){
 				if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
 					var paths = overlay.getBounds();
@@ -210,8 +211,9 @@
 		
 		*/
 		
-		get_updated_data_encoded:function() {
-			var overlay = this.get('selected');
+		get_updated_data_encoded:function(shape) {
+			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
+			//var overlay = this.get('selected');
 			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
 				var points = overlay.getRadius();
 			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {

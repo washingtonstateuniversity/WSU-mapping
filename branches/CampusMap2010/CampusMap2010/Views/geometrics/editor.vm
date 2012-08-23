@@ -69,7 +69,7 @@
 				<textarea name="boundary" style="width:100%;height:250px;" id="latLong">$!spatial</textarea>
 			</fieldset>
 			<p>Encoded:<br/>
-				<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" >$!geometric.encoded</testarea>
+				<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" >$!geometric.encoded</textarea>
 			</p>
 			$formbuttons
 		</div>

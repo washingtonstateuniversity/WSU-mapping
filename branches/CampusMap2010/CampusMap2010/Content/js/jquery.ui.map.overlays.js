@@ -49,8 +49,6 @@
 			if(typeof(shapeOptions.path)=='string'){shapeOptions.path = self.process_coords(shapeOptions.path,flip,false);}
 			if(typeof(shapeOptions.encoded)=='string'){shapeOptions.paths = google.maps.geometry.encoding.decodePath(shapeOptions.encoded);}
 			
-			
-			//alert(dump(shapeOptions));
 			var shape = new google.maps[shapeType](jQuery.extend({'map': self.get('map')}, shapeOptions));
 			this.get('overlays > ' + shapeType, []).push(shape);
 			this._call(callback, shape);
@@ -192,6 +190,31 @@
 			return $(shape);
 		},	
 		stop_shapeMove: function(polygon){},
+		/*
+		options
+			zoom
+		
+		*/
+		zoom_to_bounds: function(options,shape,callback){
+			poly = this._unwrap(shape); 
+			alert('zooming');
+			var map = this.get('map');
+			var bounds= new google.maps.LatLngBounds();
+			var MVCArray_latLng = poly.getPath().getArray();
+			for (i = 0; i < MVCArray_latLng.length; i++) {
+				bounds.extend(MVCArray_latLng[i]);
+			}
+			//var currentCenter = bounds.getCenter();	
+			map.fitBounds(bounds); 
+			if(typeof(options)!=="undefined" && typeof(options.zoom)!=="undefined"){
+				var listener = google.maps.event.addListener(map, "idle", function() {  
+				  if (map.getZoom() > options.zoom) map.setZoom(options.zoom);  
+				  google.maps.event.removeListener(listener);  
+				});
+			}
+			this._call(callback, shape);
+			return $(shape);
+		},
 
 		attach_shape_to_marker:function(shape,marker){
 			return this.move_shape(shape,marker.getPosition());

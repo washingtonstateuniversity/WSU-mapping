@@ -1,7 +1,7 @@
 
 
 function loadPlaceShape(_load,callback){
-	if(typeof(_load)==='undefined') var _load = false;
+	/*if(typeof(_load)==='undefined') var _load = false;
 	if(typeof(showSum)==='undefined') var showSum = false;
 	//var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';	
 	var url=siteroot+"place/loadPlaceShape.castle";
@@ -25,7 +25,7 @@ function loadPlaceShape(_load,callback){
 				 }
 				 //alert(shape.type);
 				 if(!$.isEmptyObject(pointHolder)){
-					var ele = $.extend( { 'fillOpacity':.25,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
+					var ele = $.extend( {'fillOpacity':.25,'fillColor':'#981e32', 'strokeWeight':0 } , pointHolder );
 				 }else{
 					var ele = {};
 				 }
@@ -37,7 +37,29 @@ function loadPlaceShape(_load,callback){
 				});
 			});
 		}
-	});
+	});*/
+	var url=siteroot+"public/getShapesJson_byIds.castle";
+	
+	if(typeof(_load)!="undefined"){
+		$.getJSON(url+'?callback=?&ids[]='+_load, function(data) {
+			$('#place_drawing_map').gmap('clear','overlays');
+			$.each( data.shapes, function(i, shape) {
+				if(
+					typeof(shape.style.events.rest.fillOpacity)!=="undefined" && shape.style.events.rest.fillOpacity == 0
+					&& (typeof(shape.style.events.rest.strokeOpacity)!=="undefined" && shape.style.events.rest.strokeOpacity == 0
+						|| typeof(shape.style.events.rest.strokeWeight)!=="undefined" && shape.style.events.rest.strokeWeight == 0)
+						){
+							shape.style.events.rest.strokeWeight = .2;
+							shape.style.events.rest.strokeOpacity = .6;
+						}
+				
+				addShapeToMap($('#place_drawing_map'),i, shape);
+			});
+		});
+	}		
+
+	
+	
 }
 
 function add_place_point(lat,lng,clear){
@@ -58,6 +80,7 @@ function add_place_point(lat,lng,clear){
 			}
 			if($("#placeShape :selected").length && $("#placeShape :selected").val()!=""){
 				shapes=[];
+				
 				loadPlaceShape($("#placeShape :selected").val(),function(shape){
 					$('#place_drawing_map').gmap("attach_shape_to_marker",shapes[0],marker);
 				});
@@ -554,7 +577,16 @@ function load_geometrics_editor() {
 							if(type!=null){
 								$('#style_of').val(type);
 							}
+						},
+					onComplete:function(dm,shape){
+						if(shape!=null){
+							//$('#latLong').val($('#geometrics_drawing_map').gmap('get_updated_data',$('#geometrics_drawing_map').gmap('overlays')));
+							//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded',shape));
+							$('#drawing_map').gmap('zoom_to_bounds',{},shape,function(){alert('zoomed?')});
+						}else{
+						
 						}
+					}
 				},
 				/*note we are extending the settings with the shape */
 				$('#style_of').val()==''?{}:{

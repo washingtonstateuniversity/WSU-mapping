@@ -17,6 +17,7 @@
 			<ul class="menu">
 				<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
 					<ul class="drop">
+						<li><a href="../view/list.castle">Map view list</a></li>
 						<li><a href="../view/list_nav.castle">Global Navagation</a></li>
 					</ul>
 				</li>
@@ -28,6 +29,7 @@
 				<ul class="drop">
 					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../place/list.castle">Places</a>
 						<ul class="drop">
+							<li><a href="../place/list.castle">New Place list</a></li>
 							<li><a href="../place/new.castle">New Place</a></li>
 							#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
 						</ul>
@@ -36,11 +38,13 @@
 					#if($userService.checkPrivleage("modify_geometrics"))
 					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../geometrics/list.castle">Geometrics</a>
 						<ul class="drop">
+						<li><a href="../geometrics/list.castle">Geometrics List</a></li>
 						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						<li><a href="../geometrics/new_style.castle">New Style</a></li>
-						#*<li><a href="../geometrics/list.castle#_Types">Types</a></li>
-						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
-						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
+						#*
+							<li><a href="../geometrics/list.castle#_Types">Types</a></li>
+							<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
+							<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
 						*#
 						</ul>
 					</li>
