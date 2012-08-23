@@ -504,6 +504,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		</lable> | 
 		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
 		</lable>
+		<img src="${siteroot}/Content/images/size_guide.png" width="968" height="36" />
 		<div id="campusmap">
 		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
 		</div>
