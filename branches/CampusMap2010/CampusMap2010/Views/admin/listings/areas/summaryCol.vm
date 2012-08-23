@@ -8,9 +8,9 @@
 	
 	#if($name)<li class='name #if($name.Length>35)
 	fsize_1
-	#elseif($name.Length>30)
+	#elseif($name.Length>28)
 	fsize_2
-	#elseif($name.Length>25)
+	#elseif($name.Length>24)
 	fsize_3
 	#elseif($name.Length>20)
 	fsize_4

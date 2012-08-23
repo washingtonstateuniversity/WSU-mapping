@@ -105,7 +105,7 @@ namespace campusMap.Services
         }
         public static bool checkPrivleage(authors user, string privilege)
         {
-            bool flag = HttpContext.Current.Session[privilege] == null ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
+            bool flag = (HttpContext.Current.Session[privilege] == null || String.IsNullOrWhiteSpace(HttpContext.Current.Session[privilege].ToString())) ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
             return flag;
         }
 

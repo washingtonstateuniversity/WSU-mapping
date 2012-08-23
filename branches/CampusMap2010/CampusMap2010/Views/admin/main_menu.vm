@@ -18,7 +18,7 @@
 				<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
 					<ul class="drop">
 						<li><a href="../view/list.castle">Map view list</a></li>
-						<li><a href="../view/list_nav.castle">Global Navagation</a></li>
+						#if($userService.checkPrivleage("modify_global_nav"))<li><a href="../view/list_nav.castle">Global Navagation</a></li>#end
 					</ul>
 				</li>
 				<li class="close"><a href="#"></a></li>

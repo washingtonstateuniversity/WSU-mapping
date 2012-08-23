@@ -2,7 +2,7 @@
 		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active">
 			<span>${controller.getView()} List</span>
 		</a>
-		#if($types && $userService.checkPrivleage("modify_place_types"))
+		#if($types && (($userService.checkPrivleage("modify_place_types") && ${controller.getView()}=="place") || ($userService.checkPrivleage("modify_geo_types") && ${controller.getView()}=="geometrics")) )
 			<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices ">
 				<span>Types</span>
 			</a>
@@ -62,7 +62,7 @@
 		</div>	
 	</div>
 
-	#if($types && $userService.checkPrivleage("modify_place_types"))
+	#if($types && (($userService.checkPrivleage("modify_place_types") && ${controller.getView()}=="place") || ($userService.checkPrivleage("modify_geo_types") && ${controller.getView()}=="geometrics")))
 		<div id="_Types" class="tabedArea ui-tabs-panel"><div class="tab_tar">
 		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
