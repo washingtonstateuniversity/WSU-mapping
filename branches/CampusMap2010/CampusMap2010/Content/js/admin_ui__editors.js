@@ -856,6 +856,11 @@ function load_view_editor() {
 		stop: function(event, ui) {
 				var width = $('#width').val(ui.size.width);
 				var height = $('#height').val(ui.size.height);
+				
+				$('.widthOutput').text(ui.size.width);
+				$('.heightOutput').text(ui.size.height);
+				
+				
 				$('#place_drawing_map').gmap('refresh');
 			}
 	});
@@ -901,6 +906,14 @@ function load_view_editor() {
 				self.find('.'+tar).addClass('active');
 			});
 	});
+	$('#width').live('keyup',function(){
+		$('.widthOutput').text($(this).val());
+	});
+	$('#height').live('keyup',function(){
+		$('.heightOutput').text($(this).val());
+	});
+				
+	
 	
 	setup_massTags();
 	
@@ -928,7 +941,7 @@ function load_view_editor() {
 	});	
 }
 
-
+	
 function reloadPlaces(){
 		var url=siteroot+"public/getPlaceJson_byIds.castle";
 		var ids;

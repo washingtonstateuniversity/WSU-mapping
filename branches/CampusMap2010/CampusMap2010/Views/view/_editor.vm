@@ -746,16 +746,10 @@ $formbuttons
 			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
 			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
 		</fieldset>		
-		
 		<fieldset><legend>Embed code example: </legend>
-			<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot;&gt;&lt;/script&gt;</pre>
-			
-		
-			
+			<pre>&lt;iframe src=&quot;http://map.wsu.edu/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot; width="<span class="widthOutput">$!{view.width}</span>" height="<span class="heightOutput">$!{view.height}</span>"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" &gt;&lt;/iframe&gt;</pre>
 		</fieldset>
-		
-				
-				
+
 		$formbuttons
 		<div class="clear"></div>
 	  <br/>    
