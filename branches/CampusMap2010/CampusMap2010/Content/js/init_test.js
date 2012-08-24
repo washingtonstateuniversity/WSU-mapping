@@ -53,7 +53,7 @@ function ini_map_view(map_ele_obj,callback){
 				var jsonStr = $('#runningOptions').html();
 				var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
 				jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
-				$.extend(map_op,base,$.parseJSON(jsonStr));
+				$.extend(map_op,pos,base,$.parseJSON(jsonStr));
 				//map_op = $.parseJSON(jsonStr);
 				//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 				//alert(dump(map_op));

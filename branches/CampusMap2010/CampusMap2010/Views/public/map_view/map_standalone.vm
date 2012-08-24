@@ -64,6 +64,7 @@ $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/cen
   #if($urlQueries && $urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
   #if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
   #if($campus && $campus!="")var campus = '$campus'; #end
+  var pos = {"center":"$map.getLat(),$map.getLong()"};
   var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
   #if(${map.places})
   #set($c=0)
