@@ -1,0 +1,20 @@
+#capturefor(html)<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Sorry, page not found.</title>
+		
+		<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+		$scriptsService.Css("~/Content/css/colorbox.css,~/Content/css/error.css")
+
+	</head>
+	
+	<body>
+		$childContent
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/error_page_ini.js",false)
+	</body>
+</html>
+#end$Controller.stripNonSenseContent($html,true)

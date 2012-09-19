@@ -58,7 +58,7 @@ namespace campusMap.Controllers
                 }
             }
         }
-        public void List(int page, int searchId, string target, string filter)
+        public void List(int page, int searchId, string target, string filter, Boolean ajax)
         {
             clearConnections();
             authors user = UserService.getUser();
@@ -257,6 +257,9 @@ namespace campusMap.Controllers
                 PropertyBag[name + "ButtonSet"] = buttons;
             }
 
+            PropertyBag["ajax"] = ajax;
+
+
             //place types
             pagesize = 100;
             IList<place_types> place_types_items;
@@ -312,7 +315,7 @@ namespace campusMap.Controllers
             campus campuses = ActiveRecordBase<campus>.Find(id);
             PropertyBag["itmes"] = campuses;
             PropertyBag["action"] = "campuses";
-            RenderView("../admin/wsu_matrix/_editor");
+            RenderView("../admin/wsu_matrix/campus_editor");
         }
         public void _delete_campuses(int id)
         {

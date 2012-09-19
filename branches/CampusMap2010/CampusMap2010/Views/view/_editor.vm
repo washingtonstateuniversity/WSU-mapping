@@ -1,25 +1,23 @@
+#* 
+NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE AS A SHELL FOR FEATURE PARTS
+*#
+
+
 #capturefor(formbuttons)
     <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
     <input type="submit" value="#if($view.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($view.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
     <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
 #end
 
-<div id="runningOptions">$options_json</div>
-<div id="shape" style="position:absolute;top:-9999em;left:-9999em;">$shapes</div>
-
-
-
-
+<div id="runningOptions">$!options_json</div>
+<div id="shape" style="position:absolute;top:-9999em;left:-9999em;">$!shapes</div>
 <script type="text/javascript">
-
-var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
-
+	var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 </script>
-
 #if($Flash.error)
-<p style="color: red; font-weight: bold;">
-    $Flash.error
-</p>
+	<p style="color: red; font-weight: bold;">
+		$Flash.error
+	</p>
 #end
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -61,24 +59,45 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		#if( $view.id==0 || $view.tmp)
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="Lat"><strong>Name</strong></label><br/>
-				<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all" />
-			</div><br/> 
+		<fieldset style="position:relative;"><legend>Map Basics</legend>
+				
+				<label for="Lat"><strong>Name: </strong></label>
+				<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all w500" /><br/>
+				<hr/>
+				<label for="name">Alias</label>
+				
+				<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" required="required"/>
+				#set($mess="You must provide this url.  All output will be called with this string. Note you will not want to use characters such as &quot; _ | ' ? &map; % ^ &quot;  being that  those are going to destroy the optimal efficiency of the map displaying.")
+				#parse("admin/noted.vm")<br/>
+				<strong>The url is <span class="aliasState">needed to access your map view.</span></strong>
+			
+				<hr/>
+			<label for="campus"><strong>Campus:</strong></label>&nbsp;
+				<select name="view.campus" id="commentable">
+					#foreach($campus in $campuses)
+						<option class="type" value="$campus.id" #if($view.campus == $campus) selected="selected" #end>$!campus.name</option>
+					#end
+				</select>
+				#set($mess="Every map is tied to down to a campus.  Thou you could make a map that incorporates other campus places, there has to be a home point for the map view.")
+				#parse("admin/noted.vm")
+				<hr/>
+			<label for="commentable"><strong>Commentable:</strong></label>&nbsp;
+				<select name="view.commentable" id="commentable">
+					<option value="true" #if($view.commentable && $view.commentable=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if(!$view.commentable || $view.commentable=="false")selected="selected"#end >No</option>
+				</select>
+				#set($mess="Any item that gets any comments will ONLY show up under this view.  In no other view will the comment ever show up regardless if the item it's self is shared between any other map view.")
+				#parse("admin/noted.vm")
+				<hr/>
+			<label for="sharable"><strong>Sharable:</strong></label>&nbsp;
+				<select name="view.sharable" id="sharable">
+					<option value="true" #if($view.sharable && $view.sharable=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if(!$view.sharable || $view.sharable=="false")selected="selected"#end >No</option>
+				</select>
+				#set($mess="Give the clients/end users access to the urls and code that would let them embed and or share socially this map view.")
+				#parse("admin/noted.vm")
 		</fieldset>
-		#*<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="Lat"><strong>Commentable</strong></label><br/>
-				<input type="checkbox" name="view.commentable" id="commentable" value="$!view.commentable" class="text ui-widget-content ui-corner-all" />
-			</div><br/> 
-		</fieldset>
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="Lat"><strong>Sharable</strong></label><br/>
-				<input type="checkbox" name="view.sharable" id="sharable" value="$!view.sharable" class="text ui-widget-content ui-corner-all" />
-			</div><br/> 
-		</fieldset>*#
+
 		<fieldset style="position:relative;">
 			<legend>Dimensions</legend>
 			<h6><em>Both will default to 100% if blank or 0</em></h6>
@@ -89,8 +108,9 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Height</strong></label><br/>
 				<input type="text" name="view.height" id="height" value="$!view.height" class="text ui-widget-content ui-corner-all" />
-			</div><br/> 
-			<h6><em><strong>NOTE:</strong>You may resize the map thru the Preview tab by simply draging the corner of the map to the size you wish to see</em></h6>
+				#set($mess="You may resize the map thru the Preview tab by simply draging the corner of the map to the size you wish to see")
+				#parse("admin/noted.vm")
+			</div>
 		</fieldset>
 		<fieldset style="position:relative;">
 			<legend>Center</legend>
@@ -101,45 +121,140 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 			<div class="col2"  style="">
 				<label for="Long"><strong>Longitude</strong></label><br/>
 				<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" />
-			</div><br/> 
-			<h6><em><strong>NOTE:</strong> by draging the map with drag mode on thru the Preview tab and simple draging the map to the view you wish to see</em></h6>
+				#set($mess="by draging the map with drag mode on thru the Preview tab and simple draging the map to the view you wish to see")
+				#parse("admin/noted.vm")
+			</div>
 		</fieldset>
-		<fieldset><legend>On The Map</legend>
-			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Places</legend>
-				<label for="places">Select Places Objects<br/>to load in the map.</label><br/>
-				<select name="view.places[]" id="places" class="" multiple="multiple" size="9" style="width:205px;">
-					#foreach($place in $places)
-						<option class="place" value="$place.id" #if($view.places.Contains($place)) selected="selected" #end>$!place.prime_name</option>
+		<fieldset id="onMap"><legend>On The Map</legend>
+			<fieldset style="display:inline-block; float:left;margin-right:13px;width:205px;" role="place">
+				<legend><h3 style="padding: 0px; margin: 0px;">Used <span>Place</span>s</h3></legend>
+				<div class="listPicker ui-widget-content ui-corner-top">	
+					<ol id="places" class="sortable">
+						#set($c=0)
+						#foreach($place in $view.places)
+							<li  id="list_${c}">
+								<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
+									$!place.prime_name<input type="hidden" name="placelist[]" class="place" value="$place.id" /><em></em>
+								</div>	
+							</li>
+							#set($c=$c+1)
+						#end
+						#if($c==0)
+							<li class="ini"><div><h5>Add place from below</h5></div></li>
+						#end
+					</ol>		
+				</div>	
+					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to chang the order.</h6>
+				<hr style="margin: 2px 0px;"/>
+				<label for="places">Add Places to the Map,</label><br/>
+				<strong>Under:</strong>
+				<select id="placeFilter" class="onfliterList">
+					<option value="-2" #if(!$searchId || $searchId == -2) selected="selected" #end>Your Places</option>
+					<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
+					<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
+					<option value="categories" #if($searchId == 1) selected="selected" #end>Categories</option>
+                    <option value="colleges" #if($searchId == 1) selected="selected" #end>Colleges</option>
+                    <option value="admindepartments" #if($searchId == 1) selected="selected" #end>Admin Departments</option>
+                    <option value="departments" #if($searchId == 1) selected="selected" #end>Departments</option>
+                    <option value="schools" #if($searchId == 1) selected="selected" #end>Schools</option>
+                    <option value="programs" #if($searchId == 1) selected="selected" #end>Programs</option>
+				</select><br/>
+                <span class="subFilter">
+				<strong>for:</strong>
+                <select id="placeSubFilter" class="onsubfliterList w200">
+                	<option value="">All</option>
+					#foreach($cat in $listcats)
+						<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
 					#end
-				</select>
-				<br/><strong>Note:</strong>If a place has a shape
+				</select><br/>
+                </span>
+                <br/>
+				<select id="place_select" class="" style="width:171px;">
+					<option class="place" value="">Select to add</option>
+					#foreach($place in $places)
+						<option class="place" value="$place.id" #if($view.places.Contains($place))disabled="disabled"#end>$!place.prime_name</option>
+					#end
+				</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+				
+				
+				<br/>#*<span class="NOTED"><strong >Note:</strong><span style="display:none;">If a place has a shape
 				<br/>you may wish to not pick
-				<br/>a Geometric Shape.
+				<br/>a Geometric Shape.</span><strong ><em> (+)</em></strong></span>*#
+				
+				#set($mess="If a place has a shape <br/>you may wish to not pick <br/>a Geometric Shape.")
+				#parse("admin/noted.vm")
+				
+				
 				<br/>
-				<br/><strong>force shape style:</strong>
+				<br/><strong>force marker style:</strong>
 				<select name="view.forced_marker_style" id="forced_marker_style">
 					<option class="geometric" value="" #if($!view.forced_marker_style) selected="selected" #end>Passthru (none)</option>
-					#foreach($style in $styles_polygon)
+                    #set($i=0)
+					#foreach($style in $styles_marker)
+                   		#if($i==0)<optgroup label="Marker styles">#end
 						<option class="geometric" value="$style.id" #if($view.forced_marker_style.Contains($style)) selected="selected" #end>$!style.name</option>
+                        #set($i=$i+1)
 					#end
 				</select>
-				
 			</fieldset>
-			<fieldset style="display:inline-block; float:left;margin-right:13px;"><legend>Geometrics</legend>
-                <label for="name">Geometric Object<br/>to repersent this place.</label><br/>
-				<select name="view.geometrics[]" id="placeShape" class="" multiple="multiple" size="9" style="width:205px;">
-					#foreach($geo in $geometrics)
-						<option class="geometric" value="$geo.id" #if($view.geometrics.Contains($geo)) selected="selected" #end>$!geo.name</option>
+			<fieldset style="display:inline-block; float:left;margin-right:13px;width:205px;" role="geo">
+			
+				<legend><h3 style="padding: 0px; margin: 0px;">Used <span>Shape</span>s</h3></legend>
+				<div class="listPicker ui-widget-content ui-corner-top">		
+					<ol id="geos" class="sortable">
+						#set($c=0)
+						#foreach($geo in $view.geometrics)
+							<li  id="list_${c}">
+								<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
+									$!geo.name<input type="hidden" name="geolist[]" class="place" value="$geo.id" /><em></em>
+								</div>	
+							</li>
+							#set($c=$c+1)
+						#end
+						#if($c==0)
+							<li class="ini"><div><h5>Add shape from below</h5></div></li>
+						#end
+					</ol>		
+				</div>	
+					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to chang the order.</h6>
+				<hr style="margin: 2px 0px;"/>
+
+                <label for="name">Add Shapes to the Map,</label><br/>
+				<strong>Under:</strong>
+				<select id="list${controller.getView()}Type" class="fliterList">
+					<option value="-2" #if($searchId == -2) selected="selected" #end>Your Shapes</option>
+					<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
+					<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
+					#foreach($cat in $listcats)
+						<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
 					#end
-				</select>
-				<br/>
+				</select><br/><br/>
+				<select id="geo_select" class="" style="width:171px;">
+					<option class="place" value="">Select to add</option>
+					#foreach($geo in $geometrics)
+						<option class="geometric" value="$geo.id" #if($view.geometrics.Contains($geo))disabled="disabled"#end>$!geo.name</option>
+					#end
+				</select><a href="#" title="Add Place" id="addGeoSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
 				
-				<br/><strong>force shape style:</strong>
+				
+				<br/><br/><strong>force shape style:</strong>
 				<select name="view.forced_shapes_style" id="forced_shapes_style">
 					<option class="geometric" value="" #if($!view.forced_shapes_style) selected="selected" #end>Passthru (none)</option>
+                    #set($i=0)
 					#foreach($style in $styles_polygon)
+                   		#if($i==0)<optgroup label="Polygon styles">#end
 						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.Contains($style)) selected="selected" #end>$!style.name</option>
+                        #set($i=$i+1)
 					#end
+                    #if($i>0)</optgroup>#end
+                    
+                    #set($j=0)
+                    #foreach($style in $styles_polyline)
+                    	#if($j==0)<optgroup label="Polyline styles">#end
+						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.Contains($style)) selected="selected" #end>$!style.name</option>
+                        #set($j=$j+1)
+					#end
+                    #if($j>0)</optgroup>#end
 				</select>
             </fieldset>  
 			
@@ -153,319 +268,333 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
   
  <div id="tabs_Options" class="mainAreaTabs">
 		$formbuttons <div class="clear"></div>
+		
+		
+		<fieldset>
+			<label for="show_global_nav"><strong>Show tab nav:</strong></label>&nbsp;
+				<select name="view.show_global_nav" id="show_global_nav">
+					<option value="true" #if($view.show_global_nav && $view.show_global_nav=="true")selected="selected"#end >Yes</option>
+					<option value="false" #if(!$view.show_global_nav || $view.show_global_nav=="false")selected="selected"#end >No</option>
+				</select>
+				#set($mess="If true (yes), this will show a list of the point on the map to the left of the map.  It will start as a tab and on user click it will open.  Default is no.")
+				#parse("admin/noted.vm")
+		</fieldset>
+		
+		
+		
+		
+		
+		
+		#* this is the google model fleshed out as a virtual model *#
+		
 		#* NOTE: how this works is that with the TryGetValue we can introduce new items
 				to the virtual model, as the VM is a json format set stroed in the DB
 				and pushed out to a list<Dic<str,dno>> so the test is via the TryGetValue
 		*#
+		
+		#if($options.TryGetValue("mapTypeId",$value))	#set($mapTypeId=$!options.mapTypeId)#end	
+		<fieldset>
+			<label for="mapTypeId"><strong>Map Type Control Options:</strong></label>&nbsp;
+				<select name="options.mapTypeId" >
+					<option class="author" value="ROADMAP" #if($!{mapTypeId} || ${mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
+					<option class="author" value="SATELLITE" #if(${mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
+					<option class="author" value="HYBRID" #if(${mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>
+					<option class="author" value="TERRAIN" #if(${mapTypeId}=="TERRAIN") selected="selected" #end>TERRAIN</option>
+				</select>
+				#set($mess="The initial Map type. Required and defaults to ROADMAP.")
+				#parse("admin/noted.vm") 
+		</fieldset>
+
+		#if($options.TryGetValue("zoom",$value))#set($zoom=$!options.zoom)#end	
+		<fieldset>
+			<label for="zoom"><strong>Zoom:</strong></label>&nbsp;
+				<input type="text" name="options.zoom" id="zoom" value="$!zoom" class="text ui-widget-content ui-corner-all" />
+				#set($mess="The initial Map zoom level.")
+				#parse("admin/noted.vm")
+		</fieldset>	
+
+		#if($options.TryGetValue("maxZoom",$value))#set($mapTypeId=$!options.maxZoom)#end		
+		<fieldset>
+			<label for="maxZoom"><strong>Map maximum Zoom:</strong></label>&nbsp;
+				<input type="text" name="options.maxZoom" id="maxZoom" value="$!maxZoom" class="text ui-widget-content ui-corner-all" />
+				#set($mess="The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead.")
+				#parse("admin/noted.vm") 
+			 
+		</fieldset>
+
+		#if($options.TryGetValue("minZoom",$value))	#set($minZoom=$!options.minZoom)#end		
+		<fieldset>
+			<label for="minZoom"><strong>Map minimum Zoom:</strong></label>&nbsp;
+				<input type="text" name="options.minZoom" id="maxZoom" value="$!minZoom" class="text ui-widget-content ui-corner-all" />
+				#set($mess="The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead.")
+				#parse("admin/noted.vm") 
+			 
+		</fieldset>
+		
 		#if($options.TryGetValue("backgroundColor",$value))#set($backgroundColor=$!options.backgroundColor)#end
-			<fieldset style="position:relative;">
-				<div class="col2"  style="">	
-					<label for="backgroundColor"><strong>Background Color</strong></label><br/>
+			<fieldset>
+				<label for="backgroundColor"><strong>Background Color:</strong></label>&nbsp;
 					<input type="text" name="options.backgroundColor" id="backgroundColor" value="$!backgroundColor" class="text ui-widget-content ui-corner-all" />
-				</div> 
-				<h6><em>Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized.</em></h6>
+					#set($mess="Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized.")
+					#parse("admin/noted.vm") 
+				 
 			</fieldset>
 
 		#if($options.TryGetValue("disableDefaultUI",$value))#set($disableDefaultUI=$!options.disableDefaultUI)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="disableDefaultUI"><strong>Disable Default UI</strong></label><br/>
+		<fieldset>
+			<label for="disableDefaultUI"><strong>Disable Default UI:</strong></label>&nbsp;
 				<select name="options.disableDefaultUI" id="disableDefaultUI">
 					<option value="true" #if($!disableDefaultUI=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!disableDefaultUI=="false")selected="selected"#end >No</option>
-				</select>			
-			</div> 
-			<h6><em>If true (checked), disables all default UI. May be overridden individually but is enabled by default</em></h6>
+				</select>
+					#set($mess="If true (checked), disables all default UI. May be overridden individually but is enabled by default")
+					#parse("admin/noted.vm") 			
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("draggable",$value))#set($draggable=$!options.draggable)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="draggable"><strong>Draggable state</strong></label><br/>
+		<fieldset>
+			<label for="draggable"><strong>Draggable state:</strong></label>&nbsp;
 				<select name="options.draggable" id="draggable">
 					<option value="true" #if($!draggable=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!draggable=="false")selected="selected"#end >No</option>
-				</select>		
-			</div>
-			<h6><em>If false (checked), prevents the map from being dragged. Dragging is enabled by default.</em></h6>
+				</select>
+				#set($mess="If false (checked), prevents the map from being dragged. Dragging is enabled by default.")
+				#parse("admin/noted.vm")	
+			
 		</fieldset>
 
 		#if($options.TryGetValue("draggableCursor",$value))	#set($draggableCursor=$!options.draggableCursor)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="draggableCursor"><strong>Draggable Cursor</strong></label><br/>
+		<fieldset>
+			<label for="draggableCursor"><strong>Draggable Cursor:</strong></label>&nbsp;
 				<input type="text" name="options.draggableCursor" id="draggableCursor" value="$!draggableCursor" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The name or url of the cursor to display on a draggable object.</em></h6>
+				#set($mess="The name or url of the cursor to display on a draggable object.")
+				#parse("admin/noted.vm")	
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("heading",$value))	#set($heading=$!options.heading)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="heading"><strong>Heading</strong></label><br/>
+		<fieldset>
+			<label for="heading"><strong>Heading:</strong></label>&nbsp;
 				<input type="text" name="options.heading" id="heading" value="$!heading" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available.</em></h6>
+				#set($mess="The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available.")
+				#parse("admin/noted.vm")	
+			
 		</fieldset>
 
 		#if($options.TryGetValue("keyboardShortcuts",$value))	#set($keyboardShortcuts=$!options.keyboardShortcuts)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="keyboardShortcuts"><strong>Disable Keyboard Shortcuts</strong></label><br/>
+		<fieldset>
+			<label for="keyboardShortcuts"><strong>Disable Keyboard Shortcuts:</strong></label>&nbsp;
 				<select name="options.keyboardShortcuts" id="keyboardShortcuts">
 					<option value="true" #if($!keyboardShortcuts=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!keyboardShortcuts=="false")selected="selected"#end >No</option>
 				</select>	
-			</div>
-			<h6><em>If false (checked), prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.</em></h6>
+			#set($mess="If false (checked), prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.")
+				#parse("admin/noted.vm")	
+			
 		</fieldset>
 
 		#if($options.TryGetValue("mapMaker",$value))	#set($mapMaker=$!options.mapMaker)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="mapMaker"><strong>Use Map Maker Tiles</strong></label><br/>			
+		<fieldset>
+			<label for="mapMaker"><strong>Use Map Maker Tiles:</strong></label>&nbsp;			
 				<select name="options.mapMaker" id="mapMaker">
 					<option value="true" #if($!mapMaker=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!mapMaker=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If true (checked), Map Maker tiles should be used instead of regular tiles. Disabled by default.</em></h6>
+				#set($mess="If true (checked), Map Maker tiles should be used instead of regular tiles. Disabled by default.")
+				#parse("admin/noted.vm")	
+			
 		</fieldset>
 
-		#if($options.TryGetValue("mapTypeId",$value))	#set($mapTypeId=$!options.mapTypeId)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="mapTypeId"><strong>Map Type Control Options</strong></label><br/>
-				<select name="options.mapTypeId" >
-				<option class="author" value="ROADMAP" #if($!{mapTypeId} || ${mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
-				<option class="author" value="SATELLITE" #if(${mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
-				<option class="author" value="HYBRID" #if(${mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>
-				<option class="author" value="TERRAIN" #if(${mapTypeId}=="TERRAIN") selected="selected" #end>TERRAIN</option>
-			</select>
-			</div> 
-			<h6><em>The initial Map type. Required and defaults to ROADMAP.</em></h6>
-		</fieldset>
-
-		#if($options.TryGetValue("zoom",$value))#set($zoom=$!options.zoom)#end	
-
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="zoom"><strong>Zoom</strong></label><br/>
-				<input type="text" name="options.zoom" id="zoom" value="$!zoom" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial Map zoom level.</em></h6>
-		</fieldset>	
-
-		#if($options.TryGetValue("maxZoom",$value))#set($mapTypeId=$!options.maxZoom)#end		
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="maxZoom"><strong>Map maximum Zoom</strong></label><br/>
-				<input type="text" name="options.maxZoom" id="maxZoom" value="$!maxZoom" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead.</em></h6>
-		</fieldset>
-
-		#if($options.TryGetValue("minZoom",$value))	#set($minZoom=$!options.minZoom)#end		
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="minZoom"><strong>Map minimum Zoom</strong></label><br/>
-				<input type="text" name="options.minZoom" id="maxZoom" value="$!minZoom" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead.</em></h6>
-		</fieldset>
+		
 
 		#if($options.TryGetValue("noClear",$value))#set($noClear=$!options.noClear)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="noClear"><strong>Clear Map Divs</strong></label><br/>
+		<fieldset>
+			<label for="noClear"><strong>Clear Map Divs:</strong></label>&nbsp;
 				<select name="options.noClear" id="noClear">
 					<option value="true" #if($!noClear=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!noClear=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If true (checked), do not clear the contents of the Map div. Disabled by default.</em></h6>
+				#set($mess="If true (checked), do not clear the contents of the Map div. Disabled by default.")
+				#parse("admin/noted.vm")	
 		</fieldset>	
 		
 		#if($options.TryGetValue("mapTypeControl",$value))#set($mapTypeControl=$!options.mapTypeControl)#end			
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="mapTypeControl"><strong>Map Type Control</strong></label><br/>
+		<fieldset>
+			<label for="mapTypeControl"><strong>Map Type Control:</strong></label>&nbsp;
 				<select name="options.mapTypeControl" id="mapTypeControl">
 					<option value="true" #if($!mapTypeControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!mapTypeControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Map type control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Map type control state. Enabled by default.")
+				#parse("admin/noted.vm")	
+			
 		</fieldset>		
 
 		#if($options.TryGetValue("mapTypeControlOptions",$value))#set($mapTypeControlOptions=$!options.mapTypeControlOptions)#end			
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="mapTypeControlOptions"><strong>Map Type Control Options</strong></label><br/>
+		<fieldset>
+			<label for="mapTypeControlOptions"><strong>Map Type Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.mapTypeControlOptions" id="mapTypeControlOptions" value="$!mapTypeControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Map type control.</em></h6>
+				#set($mess="The initial display options for the Map type control.")
+				#parse("admin/noted.vm")
 		</fieldset>
 
 		
 		
 		#if($options.TryGetValue("overviewMapControl",$value))#set($overviewMapControl=$!options.overviewMapControl)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="overviewMapControl"><strong>Overview Map Control</strong></label><br/>
+		<fieldset>
+			<label for="overviewMapControl"><strong>Overview Map Control:</strong></label>&nbsp;
 				<select name="options.overviewMapControl" id="overviewMapControl">
 					<option value="true" #if($!overviewMapControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!overviewMapControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Overview Map control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Overview Map control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 		
 		
 		#if($options.TryGetValue("overviewMapControlOptions",$value))#set($overviewMapControlOptions=$!options.overviewMapControlOptions)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="overviewMapControlOptions"><strong>Overview Map Control Options</strong></label><br/>
+		<fieldset>
+			<label for="overviewMapControlOptions"><strong>Overview Map Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.overviewMapControlOptions" id="overviewMapControlOptions" value="$!overviewMapControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Overview Map control.</em></h6>
+				#set($mess="The initial display options for the Overview Map control.")
+				#parse("admin/noted.vm")
+			 
 		</fieldset>
 		
 		
 
 		#if($options.TryGetValue("panControl",$value))#set($panControl=$!options.panControl)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="panControl"><strong>Pan Control</strong></label><br/>
+		<fieldset>
+			<label for="panControl"><strong>Pan Control:</strong></label>&nbsp;
 				<select name="options.panControl" id="panControl">
 					<option value="true" #if($!panControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!panControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Pan control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Pan control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 		
 		#if($options.TryGetValue("panControlOptions",$value))	#set($panControlOptions=$!options.panControlOptions)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="panControlOptions"><strong>Pan Control Options</strong></label><br/>
+		<fieldset>
+			<label for="panControlOptions"><strong>Pan Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.panControlOptions" id="panControlOptions" value="$!panControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Pan control.</em></h6>
+				#set($mess="The initial display options for the Pan control.")
+				#parse("admin/noted.vm")
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("rotateControl",$value))	#set($rotateControl=$!options.rotateControl)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="rotateControl"><strong>Rotate Control</strong></label><br/>
+		<fieldset>
+			<label for="rotateControl"><strong>Rotate Control:</strong></label>&nbsp;
 				<select name="options.rotateControl" id="rotateControl">
 					<option value="true" #if($!rotateControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!rotateControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Rotate control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Rotate control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 
 		#if($options.TryGetValue("rotateControlOptions",$value))#set($rotateControlOptions=$!options.rotateControlOptions)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="rotateControlOptions"><strong>Rotate Control Options</strong></label><br/>
+		<fieldset>
+			<label for="rotateControlOptions"><strong>Rotate Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.rotateControlOptions" id="rotateControlOptions" value="$!rotateControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Rotate control.</em></h6>
+				#set($mess="The initial display options for the Rotate control.")
+				#parse("admin/noted.vm")
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("scaleControl",$value))	#set($scaleControl=$!options.scaleControl)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="scaleControl"><strong>Scale Control</strong></label><br/>
+		<fieldset>
+			<label for="scaleControl"><strong>Scale Control:</strong></label>&nbsp;
 				<select name="options.scaleControl" id="scaleControl">
 					<option value="true" #if($!scaleControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!scaleControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Scale control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Scale control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 
 		#if($options.TryGetValue("scaleControlOptions",$value))	#set($scaleControlOptions=$!options.scaleControlOptions)#end	
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="scaleControlOptions"><strong>Scale Control Options</strong></label><br/>
+		<fieldset>
+			<label for="scaleControlOptions"><strong>Scale Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.scaleControlOptions" id="scaleControlOptions" value="$!scaleControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Scale control.</em></h6>
+				#set($mess="The initial display options for the Scale control.")
+				#parse("admin/noted.vm")
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("streetView",$value))	#set($streetView=$!options.streetView)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="streetView"><strong>Street Control</strong></label><br/>
+		<fieldset>
+			<label for="streetView"><strong>Street Control:</strong></label>&nbsp;
 				<input type="text" name="options.streetView" id="streetView" value="$!streetView" class="text ui-widget-content ui-corner-all" />
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Street control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Street control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 
 		#if($options.TryGetValue("streetViewControl",$value))	#set($streetViewControl=$!options.streetViewControl)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="streetViewControl"><strong>Street Control Options</strong></label><br/>
+		<fieldset>
+			<label for="streetViewControl"><strong>Street Control Options:</strong></label>&nbsp;
 				<select name="options.streetViewControl" id="streetViewControl">
 					<option value="true" #if($!streetViewControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!streetViewControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div> 
-			<h6><em>The initial display options for the Street control.</em></h6>
+				#set($mess="The initial display options for the Street control.")
+				#parse("admin/noted.vm")
 		</fieldset>
 
 		#if($options.TryGetValue("zoomControl",$value))	#set($zoomControl=$!options.zoomControl)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="zoomControl"><strong>Zoom Control</strong></label><br/>
+		<fieldset>
+			<label for="zoomControl"><strong>Zoom Control:</strong></label>&nbsp;
 				<select name="options.zoomControl" id="zoomControl">
 					<option value="true" #if($!zoomControl=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!zoomControl=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Zoom  control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Zoom  control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 
 		#if($options.TryGetValue("zoomControlOptions",$value))	#set($zoomControlOptions=$!options.zoomControlOptions)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="zoomControlOptions"><strong>Zoom Control Options</strong></label><br/>
+		<fieldset>
+			<label for="zoomControlOptions"><strong>Zoom Control Options:</strong></label>&nbsp;
 				<input type="text" name="options.zoomControlOptions" id="zoomControlOptions" value="$!zoomControlOptions" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display options for the Zoom control.</em></h6>
+				#set($mess="The initial display options for the Zoom control.")
+				#parse("admin/noted.vm")
+			 
 		</fieldset>
 
 		#if($options.TryGetValue("scrollwheel",$value))	#set($scrollwheel=$!options.scrollwheel)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="scrollwheel"><strong>Scrollwheel Zoom Control</strong></label><br/>
+		<fieldset>
+			<label for="scrollwheel"><strong>Scrollwheel Zoom Control:</strong></label>&nbsp;
 				<select name="options.scrollwheel" id="scrollwheel">
 					<option value="true" #if($!scrollwheel=="true")selected="selected"#end >Yes</option>
 					<option value="false" #if($!scrollwheel=="false")selected="selected"#end >No</option>
 				</select>
-			</div>
-			<h6><em>If false (un-checked), this will disabled the Scrollwheel Zoom  control state. Enabled by default.</em></h6>
+				#set($mess="If false (un-checked), this will disabled the Scrollwheel Zoom  control state. Enabled by default.")
+				#parse("admin/noted.vm")
+			
 		</fieldset>
 
 		#if($options.TryGetValue("tilt",$value))	#set($tilt=$!options.tilt)#end
-		<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="tilt"><strong>tilt Control</strong></label><br/>
+		<fieldset>
+			<label for="tilt"><strong>tilt Control:</strong></label>&nbsp;
 				<input type="text" name="options.tilt" id="tilt" value="$!tilt" class="text ui-widget-content ui-corner-all" />
-			</div>
-			<h6><em>The angle of incidence of the map as measured in degrees from the viewport plane to the map plane. The only currently supported values are 0, indicating no angle of incidence (no tilt), and 45, indicating a tilt of 45deg;. 45deg; imagery is only available for SATELLITE and HYBRID map types, within some locations, and at some zoom levels.</em></h6>
+				#set($mess="The angle of incidence of the map as measured in degrees from the viewport plane to the map plane. The only currently supported values are 0, indicating no angle of incidence (no tilt), and 45, indicating a tilt of 45deg;. 45deg; imagery is only available for SATELLITE and HYBRID map types, within some locations, and at some zoom levels.")
+				#parse("admin/noted.vm")
 		</fieldset>
 
 		#if($options.TryGetValue("styles",$value))	#set($styles=$!options.styles)#end
-			<fieldset style="position:relative;">
-			<div class="col2"  style="">	
-				<label for="styles"><strong>Map styles</strong></label><br/>
+			<fieldset>
+			<label for="styles"><strong>Map styles:</strong></label>&nbsp;
 				<input type="text" name="options.styles" id="styles" value="$!styles" class="text ui-widget-content ui-corner-all" />
-			</div> 
-			<h6><em>The initial display styles options for the map.</em></h6>
+				#set($mess="The initial display styles options for the map.")
+				#parse("admin/noted.vm")
 		</fieldset>
 
 		
@@ -503,7 +632,7 @@ var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		</lable> | 
 		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
 		</lable><br/>
-		<img src="${siteroot}/Content/images/size_guide.png" width="968" height="36" />
+		<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>
 		<div id="campusmap">
 		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
 		</div>
@@ -719,11 +848,23 @@ $formbuttons
     <div class="clear"></div>
         </div>
     </div>*#
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div id="tabs_OUTPUT" class="mainAreaTabs">
 		$formbuttons <div class="clear"></div>
 		<fieldset><legend>Output url: </legend>
-			<label for="name">Alias</label><br/>
-				<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" /><strong><span class="aliasState"></span></strong><br/>
 			<label for="name">URL</label><br/>	
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
 		</fieldset> 

@@ -35,20 +35,20 @@
 						</ul>
 					</li>
 					
-					#if($userService.checkPrivleage("modify_geometrics"))
+				#if($userService.checkPrivleage("modify_geometrics"))
 					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../geometrics/list.castle">Geometrics</a>
 						<ul class="drop">
 						<li><a href="../geometrics/list.castle">List</a></li>
 						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						<li><a href="../geometrics/new_style.castle">New Style</a></li>
 						#*
-							<li><a href="../geometrics/list.castle#_Types">Types</a></li>
-							<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
-							<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
+						<li><a href="../geometrics/list.castle#_Types">Types</a></li>
+						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
+						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
 						*#
 						</ul>
 					</li>
-					#end
+				#end
 					
 				</ul>
 			</li>
@@ -59,25 +59,23 @@
 		<ul class="menu">
 			<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="#"><b>Content</b></a>
 				<ul class="drop">
-				
 				#if($userService.checkPrivleage("modify_media"))
 					<li class="liTop"><a class="open #if($controller.getView()=='media')active#end" href="../media/_list.castle">Media</a>
 						<ul class="drop">
+							<li><a href="../media/_list.castle">List</a></li>
 							<li><a href="geometrics/new.castle">New Media</a></li>
 							#if($userService.checkPrivleage("modify_feu_media"))<li><a href="#">Front End User Media</a></li>#end
 							#if($userService.checkPrivleage("modify_ads_n_notices"))<li><a href="advertisement/list.castle">Notices and Adverts</a></li>#end
 						</ul>
 					</li>
 				#end
-					
 				#if($userService.checkPrivleage("modify_comments"))
 					<li class="liTop nosub"><a class="open #if($controller.getView()=='comment')active#end" href="../comment/index.castle">Comments</a></li>
 				#end
-				
-				
 				#if($userService.checkPrivleage("modify_tags"))
 					<li class="liTop"><a class="open #if($controller.getView()=='tags')active#end" href="../tags/index.castle">Tags</a>
 						<ul class="drop">
+							<li><a href="../tags/index.castle">List</a></li>
 							<li><a href="../tags/new.castle">New Tag</a></li>
 							<li><a href="../tags/index.castle#usertag">User Tags</a></li>
 						</ul>

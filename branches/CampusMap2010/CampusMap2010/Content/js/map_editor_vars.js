@@ -1,3 +1,6 @@
+/* NOTE THERE IS A LOT OF EXTRA THAT NEEDS DELETING */
+
+
 var tinyMCEImageList = [];
 var ib = [];
 var timeouts;
@@ -32,7 +35,7 @@ var waypts = [],
 	lableStyles=[],
 	keysOrder=[],
 	pullman = new google.maps.LatLng(46.730904390653876,-117.16101408004698);
-var pullman_str = '46.730904390653876,-117.16101408004698';
+//var pullman_str = '46.730904390653876,-117.16101408004698';
 
 function gob(e){if(typeof(e)=='object')return(e);if(document.getElementById)return(document.getElementById(e));return(eval(e))}
 

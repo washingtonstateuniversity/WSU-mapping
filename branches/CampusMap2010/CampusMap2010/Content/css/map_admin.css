@@ -388,16 +388,17 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content ul li h4{padding-top:5px; font-weight:bold;font-size: 12px;line-height: 16px; margin:0px;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li strong{display: block;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li span{padding-left:35px;display: inline-block;}
-#campusmap .ui-tabs .ui-tabs-panel .content .errorReporting{background-color: #FFFFFF;letter-spacing: 0.25px;
-    bottom: 0;
+#campusmap .ui-tabs .ui-tabs-panel .errorReporting{background-color: #FFFFFF;letter-spacing: 0.25px;
     color: #999999;
     display: block;
     font-size: 8px;
     padding: 2px 5px;
     position: absolute;
     right: 25px;
+	bottom: 0;
 	text-decoration:none;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;
+	}
 #campusmap .ui-tabs .ui-tabs-panel .content .errorReporting:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity:1.0;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage{float:left;  padding:10px;margin-right:9px; position:relative; cursor:pointer;margin-left: -4px;margin-top: -1px;}	
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter: alpha(opacity=80);opacity: .8;}	

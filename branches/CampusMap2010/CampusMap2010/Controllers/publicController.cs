@@ -114,6 +114,24 @@
             #endregion
 
             #region URL rendering
+
+                public void general(string aspxerrorpath)
+                {
+                    CancelLayout();
+                    CancelView();
+                    LayoutName = "error";
+                    RenderView("errors/general404");
+                }
+                public void error(string aspxerrorpath)
+                {
+                    CancelView();
+                    CancelLayout();
+                    Exception LastErrorOccured;
+                    LastErrorOccured = Context.LastException;
+                    PropertyBag["error"] = LastErrorOccured;
+                    LayoutName = "error";
+                    RenderView("errors/error");
+                }
                 public void render()
                 {
                     HttpRequest httpRequest = HttpContext.Current.Request;
@@ -141,52 +159,62 @@
                         }
                     }
 
-
                     CancelView();
-                    /* 
+
                     if (everUrl == "/default.aspx")
                     {
+                        //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
+                        central(HttpContext.Current.Request.Params["cat"].Split(','), int.Parse(HttpContext.Current.Request.Params["activePlace"]), int.Parse(HttpContext.Current.Request.Params["pid"]), Convert.ToBoolean(HttpContext.Current.Request.Params["eb"]));
+                        LayoutName = "central"; // would be a var
+                        RenderView("central"); // would be a var
+                        return;
+                    }
+                    if (urlwithnoparams.EndsWith("/central"))
+                    {
+                        central(HttpContext.Current.Request.Params["cat"].Split(','), int.Parse(HttpContext.Current.Request.Params["activePlace"]), int.Parse(HttpContext.Current.Request.Params["pid"]), Convert.ToBoolean(HttpContext.Current.Request.Params["eb"]));
+                        LayoutName = "central"; // would be a var
+                        RenderView("central"); // would be a var
+                        return;
+                    }
+                    /* 
+                    if (everUrl == "/default.aspx"){
                         //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
                         Index();
                         RenderView("index");
                         return;
                     }
-                    if (urlwithnoparams.EndsWith("index.castle"))
-                    {
+                    if (urlwithnoparams.EndsWith("index.castle")){
                         LayoutName = "secondary-tabs";
                         string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
                         readmore(placeService.placeByURL_id(url));
                         RenderView("readmore");
                         return;
                     }
-                    if (urlwithnoparams.EndsWith("sitemap.xml"))
-                    {
+                    if (urlwithnoparams.EndsWith("sitemap.xml")){
                         seoSitemap();
                         RenderView("seoSitemap");
                         return;
                     }
-                    if (urlwithnoparams.EndsWith("/home"))
-                    {
+                    if (urlwithnoparams.EndsWith("/home")){
                         Index();
                         RenderView("index");
                         return;
                     }
-                    if (urlwithnoparams.EndsWith("readmore.castle"))
-                    {
+                    if (urlwithnoparams.EndsWith("readmore.castle")){
                         LayoutName = "secondary-tabs";
                         string id = Regex.Replace(querystring, @"\?id=(.*)", "$1");
                         readmore(Convert.ToInt32(id));
                         RenderView("readmore");
                         return;
                     }
-                    if (urlwithnoparams.ToString().IndexOf("read/") == 1)
-                    {
+                    if (urlwithnoparams.ToString().IndexOf("read/") == 1){
                         LayoutName="secondary-tabs";
                         string url = Regex.Replace(urlwithnoparams, @"/read/(.*)", "$1");
                         readmore(placeService.placeByURL_id(url));
                         RenderView("readmore");
                         return;
-                    }*/
+                    }
+                    */
                     if (urlwithnoparams.ToString().IndexOf("/rt/") > -1)
                     {
                         string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
@@ -195,15 +223,75 @@
                         fetchMap(alias, HttpContext.Current.Request.Params["mode"], HttpContext.Current.Request.Params["callback"]);
                         return;
                     }
+                    if (urlwithnoparams.ToString().IndexOf("/t/") > -1)
+                    {
+                        string smallUrl = Regex.Replace(urlwithnoparams, @"/t/(.*)", "$1");
+                        String mode = "";
+                        String callback = "";
+
+                        small_url[] u = ActiveRecordBase<small_url>.FindAllByProperty("sm_url", smallUrl);
+                        if (u.Count() == 0)
+                        {
+                            RenderText("false");
+                            return;
+                        }
+                        string[] queries = u[0].or_url.Split('?')[1].Split('&');
+                        string[] cats = u[0].or_url.Contains("cat") ? null : new string[0];
+                        int activePlace = u[0].or_url.Contains("activePlace") ? -1 : 0;
+                        int pid = u[0].or_url.Contains("pid") ? -1 : 0;
+                        Boolean eb = u[0].or_url.Contains("eb") ? false : false;
+
+                        foreach (string query in queries)
+                        {
+                            if (cats == null && query.Contains("cat")) cats = query.ToString().Replace("cat[]=", "").Split(',');
+                            if (activePlace == -1 && query.Contains("activePlace")) activePlace = int.Parse(query.ToString().Replace("activePlace=", ""));
+                            if (pid == -1 && query.Contains("pid")) pid = int.Parse(query.ToString().Replace("pid=", ""));
+                            if (query.Contains("eb")) eb = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
+                        }
+                        central(cats, activePlace, pid, eb, true, smallUrl);
+                        return;
+                    }
                 }
             #endregion
 
+            public void get_sm_url(String _url)
+            {
+                CancelLayout();
+                CancelView();
+                RenderText(make_sm_url(_url));
+            }
+
+            public String make_sm_url(String _url)
+            {
+                String sm_url = "";
+                small_url[] u = ActiveRecordBase<small_url>.FindAllByProperty("or_url", _url);
+                if (u.Count() == 0)
+                {
+                    small_url url = new small_url();
+                    url.or_url = _url;
+                    url.sm_url = String.Format("{0:X}", _url.GetHashCode());
+                    url.Save();
+                    Array.Resize(ref u, 1);
+                    sm_url = url.sm_url;
+                }
+                else
+                {
+                    sm_url = u[0].sm_url;
+                }
+                return sm_url;
+            }
 
             /* this is to be turned into to the main map view switcher */
             //[Layout("central")]
-            public void central(string[] cat, int activePlace, int pid)
+            //[DefaultAction]
+
+            public void central(string[] cat, int activePlace, int pid, Boolean eb)
             {
-               /* */log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
+                central(cat, activePlace, pid, eb, false,null);
+            }
+            public void central(string[] cat, int activePlace, int pid, Boolean eb,Boolean hasUrl,string sm_url)
+            {
+                /* */log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
                 if (HttpContext.Current.Request.Headers["User-Agent"] != null)
                 {
                     if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
@@ -219,17 +307,26 @@
                         HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                     }
                 }
-                
+
+                if (!hasUrl)
+                {
+
+                    String _url = Request.Url;
+                    sm_url = make_sm_url(_url);
+                }
+
                 String urlQueries="";
                 foreach (string category in cat)
                 {
                     urlQueries += "," + category;
                 }
-
-                PropertyBag["campus"] = "Pullman";
+                PropertyBag["url"] = sm_url;
+                PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
 
                 PropertyBag["selectedCats"] = cat;
                 PropertyBag["activePlace"] = activePlace;
+
+                PropertyBag["embeded"] = eb;
 
 
                 PropertyBag["urlQueries"] = String.IsNullOrWhiteSpace(urlQueries) ? "" : "cat[]="+urlQueries.TrimStart(',') ;
@@ -241,8 +338,6 @@
                 LayoutName = "central"; // would be a var
                 RenderView("central"); // would be a var
             }
-
-
 
 
 
@@ -290,6 +385,108 @@
             }
 
 
+            #region API get items from the db
+
+            public void get_categories_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<categories>.FindAll().Select(i => new { i.id , i.name });
+                if (tmp.Count()>0) {
+                 render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void get_colleges_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<colleges>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count()>0) {
+                 render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void get_admindepartments_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<admindepartments>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count()>0) {
+                 render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void get_departments_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<departments>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count() > 0){
+                    render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void get_schools_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<schools>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count() > 0){
+                    render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void get_programs_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<programs>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count() > 0){
+                    render_list_json(tmp, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            // by = deparment
+            public void get_place_list_attr(string by,int id,String callback)
+            {
+                CancelView();
+                CancelLayout();
+
+                // Search place names
+                String nsql = "SELECT p FROM place AS p WHERE " + id + " in Elements(p." + by + ")";
+                SimpleQuery<place> nq = new SimpleQuery<place>(typeof(place), nsql);
+                var tmp = nq.Execute();
+                var tmp2 = tmp.ToArray().Select(i => new { i.id, i.prime_name });
+
+                if (tmp2.Count() > 0){
+                    render_list_json(tmp2, callback);
+                }else{
+                    RenderText("false");
+                }
+            }
+            public void render_list_json(dynamic tmp, String callback)
+            {
+                var jss = new JavaScriptSerializer();
+                var json = jss.Serialize(tmp);
+                //String json = Serialize(tmp);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = callback + "(" + json + ")";
+                }
+                Response.ContentType = "application/json; charset=UTF-8";
+                RenderText(json);
+            }
+
+
+
+
             public void get_Style(int id, String callback)
             {
                 CancelView();
@@ -303,6 +500,9 @@
                 Response.ContentType = "application/json; charset=UTF-8";
                 RenderText(json);
             }
+            #endregion
+
+
 
             public void emailDir(String name, String email, String directions, String notes,String recipientname, String recipientemail)
             {
@@ -787,7 +987,11 @@
             public void getShapesJson_byIds(int[] ids, string callback)
             {
 
-
+                if (ids.LongCount() == 0 || (ids.LongCount() == 1 && ids[0] == 0))
+                {
+                    RenderText("false");
+                    return;
+                }
                 List<geometrics> items = new List<geometrics> { };
                 foreach (int id in ids)
                 {
@@ -973,7 +1177,7 @@
                                 {
                                     infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + "</h2>";
                                 }
-                                String reportError = "<a class='errorReporting' href='?reportError=&place=" + item.id + "' >Report&nbsp;&nbsp;error</a>";
+                                
 
 
                                 String imgGallery = "";
@@ -1005,7 +1209,7 @@
 
                                     imgGallery += @"
                                         {
-                                            ""block"":""" + infoTitle + gallery + reportError + @""",
+                                            ""block"":""" + infoTitle + gallery  + @""",
                                             ""title"":""" + (hasImg ? "Views" : "") + (hasImg && hasVid ? "/" : "") + (hasVid ? "Vids" : "") + @"""
                                         }";
                                 }
@@ -1021,7 +1225,7 @@
                                     {
                                         autoAccessibility += @"
                                         {
-                                            ""block"":""" + infoTitle + "<ul>" + jsonEscape(renderedTxt) + @"</ul>" + reportError + @""",
+                                            ""block"":""" + infoTitle + "<ul>" + jsonEscape(renderedTxt) + @"</ul>"  + @""",
                                             ""title"":""Accessibility""
                                         }";
                                     }
@@ -1035,7 +1239,7 @@
 
                                     infotabs += @"
                                             {
-                                                ""block"":""" + infoTitle + mainimage + details + reportError + @""",
+                                                ""block"":""" + infoTitle + mainimage + details  + @""",
                                                 ""title"":""Overview""
                                             }";
                                     if (item.infotabs.Count > 0)
@@ -1061,7 +1265,7 @@
                                                 {
                                                     tabStr += @"
                                                 {
-                                                    ""block"":""" + infoTitle + content.Replace("\"", @"\""") + reportError + @""",
+                                                    ""block"":""" + infoTitle + content.Replace("\"", @"\""")  + @""",
                                                     ""title"":""" + tab.title + @"""
                                                 }";
                                                     if (c < item.infotabs.Count) tabStr += ",";
@@ -1085,7 +1289,7 @@
                                     }
                                     else
                                     {
-                                        infotabs += @"""" + infoTitle + mainimage + jsonEscape(details) + reportError + @"""";
+                                        infotabs += @"""" + infoTitle + mainimage + jsonEscape(details)  + @"""";
                                     }
                                 }
 

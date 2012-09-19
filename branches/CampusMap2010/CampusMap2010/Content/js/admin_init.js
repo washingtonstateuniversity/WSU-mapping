@@ -282,32 +282,32 @@ $(function() {
 			}
 		});
     }
-if($('.sortable').length){
-	$('ol.sortable').nestedSortable({
-		disableNesting: 'no-nest',
-		forcePlaceholderSize: true,
-		handle: 'div',
-		helper:	'clone',
-		items: 'li',
-		maxLevels: 3,
-		opacity: .6,
-		placeholder: 'placeholder',
-		revert: 250,
-		tabSize: 25,
-		tolerance: 'pointer',
-		toleranceElement: '> div',
-		update: function(event, ui) {
-				if(!$('.menu.formAction.Submit').is(':visible'))$('.menu.formAction.Submit').show();
-				var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
-				$.each($('li','ol.sortable'),function(i,v){
-					$(this).find('.nav_level').val(arraied[i+1]["depth"]);
-					$(this).find('.nav_position').val(i+1);
-					$(this).find('.nav_level_display .value').text(arraied[i+1]["depth"]);
-					$(this).find('.nav_position_display .value').text(i+1);
-				});
-			}
-	});
-}
+	if($('.sortable.nav').length){
+		$('ol.sortable').nestedSortable({
+			disableNesting: 'no-nest',
+			forcePlaceholderSize: true,
+			handle: 'div',
+			helper:	'clone',
+			items: 'li',
+			maxLevels: 3,
+			opacity: .6,
+			placeholder: 'placeholder',
+			revert: 250,
+			tabSize: 25,
+			tolerance: 'pointer',
+			toleranceElement: '> div',
+			update: function(event, ui) {
+					if(!$('.menu.formAction.Submit').is(':visible'))$('.menu.formAction.Submit').show();
+					var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
+					$.each($('li','ol.sortable'),function(i,v){
+						$(this).find('.nav_level').val(arraied[i+1]["depth"]);
+						$(this).find('.nav_position').val(i+1);
+						$(this).find('.nav_level_display .value').text(arraied[i+1]["depth"]);
+						$(this).find('.nav_position_display .value').text(i+1);
+					});
+				}
+		});
+	}
 /* General Actions */
 
 
@@ -322,7 +322,18 @@ if($('.sortable').length){
         $( ".buttons" ).button({text:false});
     }
     if($( ".admin input[type='submit']" ).length > 0){$("input[type='submit']" ).button();}
-
+	if($('.NOTED').length){
+		$('.NOTED strong').on('click',function(e){
+			var self = $(this);
+			var parent = $(this).closest('span');
+			parent.find('span').slideToggle('fast',function(){
+				self.is('.open')?
+					self.removeClass('open')
+					:self.addClass('open');
+				parent.find('em').text((self.is('.open')?' (-)':' (+)'));
+			});
+		});
+	}
 
     
     if($( "a[title='Delete']" ).length>0){
@@ -474,7 +485,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 					e.preventDefault();
 					//panleId
 					$.ajaxSetup ({cache: false}); 
-					$('#'+panleId).find('.tab_tar').load( $(this).attr('href')+' #'+panleId,function(){pagLoad(); $('#loading').remove();});
+					$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){pagLoad(); $('#loading').remove();});
 				});
 			});
 			addLiveActionAnimation();

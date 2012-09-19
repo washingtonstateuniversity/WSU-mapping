@@ -64,7 +64,7 @@ namespace campusMap.Controllers
             PropertyBag["AccessDate"] = DateTime.Now;           
         }
 
-        public void List(int page, int searchId, string status)
+        public void List(int page, int searchId, string status, Boolean ajax)
         {
             authors user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
@@ -74,7 +74,7 @@ namespace campusMap.Controllers
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = UserService.getLogedIn();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
-
+            PropertyBag["ajax"] = ajax;
             //user.Sections.Contains(place.place_types);
 
             IList<geometrics> items;

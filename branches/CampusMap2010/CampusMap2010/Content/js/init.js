@@ -39,8 +39,6 @@ function HumanCheckComplete(isHuman){
 $(function() {
 
 
-
-
 if($('.right_side #twtr-search-widget').length>0){
   new TWTR.Widget({
 	  search: 'from:DailyEvergreen',

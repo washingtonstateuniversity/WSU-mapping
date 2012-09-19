@@ -79,7 +79,7 @@ namespace campusMap.Controllers
                 }
             }
         }
-        public void List(int page, int searchId, string status)
+        public void List(int page, int searchId, string status, Boolean ajax)
         {
             clearConnections();
             authors user = UserService.getUser();
@@ -91,6 +91,7 @@ namespace campusMap.Controllers
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = UserService.getLogedIn();
+            PropertyBag["ajax"] = ajax;
 
             int fieldsPaging = 1;
             int draftPaging = 1;
@@ -368,10 +369,11 @@ namespace campusMap.Controllers
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
             PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
-
+            PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll(Order.Asc("name"));
+            PropertyBag["listcats"] = ActiveRecordBase<categories>.FindAll();
             foreach (geometrics_types types in ActiveRecordBase<geometrics_types>.FindAll())
             {
-                PropertyBag["styles_" + types.name] = ActiveRecordBase<styles>.FindAll().Where(obj => obj.type.id == types.id);
+                PropertyBag["styles_" + types.name] = ActiveRecordBase<styles>.FindAllByProperty("type",types);
             }
             //PropertyBag["styles_marker"] = ActiveRecordBase<styles>.FindAll().Where(obj => obj.type == ActiveRecordBase<geometrics_types>.Find(1));
 
@@ -575,6 +577,8 @@ namespace campusMap.Controllers
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             String[][] fields,
+            int[] geolist,
+            int[] placelist,
             bool ajaxed_update,
             bool forced_tmp,
             string LongLength,
@@ -691,17 +695,21 @@ namespace campusMap.Controllers
             {
                 values.Add(_urlparams.Key, _urlparams.Value);
             }
-            /*
-                values.Add("Title", "Hello World!");
-                values.Add("Text", "My first post");
-                values.Add("Tags", new[] { "hello", "world" });
-            */
-            //var usettings = new DynamicEntity(values);
-
             view.options_obj = Serialize(values);//jss.Serialize(usettings);
 
+            view.geometrics.Clear();
+            foreach (int newItem in geolist)
+            {
+                view.geometrics.Add(ActiveRecordBase<geometrics>.Find(newItem));
+            }
+            view.places.Clear();
+            foreach (int newItem in placelist)
+            {
+                view.places.Add(ActiveRecordBase<place>.Find(newItem));
+            }
 
 
+            
 
             ActiveRecordMediator<map_views>.Save(view);
 

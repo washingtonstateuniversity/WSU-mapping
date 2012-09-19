@@ -50,11 +50,11 @@
 						#end
 					</ul>
 					#foreach($STATUS in $statuses)
-					  <div id="${STATUS.title}" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+					  <div id="${STATUS.title}" class="ui-tabs-panel ui-widget-content ui-corner-bottom #if(!$ajax)ui-tabs-hide#end">
 							#set($buttons=$controller.getVar("${STATUS.title}ButtonSet"))
 							#set($list_items=$controller.getVar("${STATUS.title}_list"))
 							#parse("admin/listings/general.vm")
-							<div class="clear"></div>
+							
 					  </div>
 					#end
 				</div>

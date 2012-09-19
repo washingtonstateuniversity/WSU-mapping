@@ -277,55 +277,62 @@ namespace campusMap.Models
             get { return campus_id; }
             set { campus_id = value; }
         }
-        private string City;
+        private string _city;
         [Property]
         virtual public string city
         {
-            get { return City; }
-            set { City = value; }
+            get { return _city; }
+            set { _city = value; }
         }
-        private string Name;
+        private string _name;
         [Property]
         virtual public string name
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
-        private string State;
+        private string _url;
+        [Property]
+        virtual public string url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
+        private string _state;
         [Property]
         virtual public string state
         {
-            get { return State; }
-            set { State = value; }
+            get { return _state; }
+            set { _state = value; }
         }
-        private string State_Abbrev;
+        private string _state_abbrev;
         [Property]
         virtual public string state_abbrev
         {
-            get { return State_Abbrev; }
-            set { State_Abbrev = value; }
+            get { return _state_abbrev; }
+            set { _state_abbrev = value; }
         }
-        private int Zipcode;
+        private int _zipcode;
         [Property]
         virtual public int zipcode
         {
-            get { return Zipcode; }
-            set { Zipcode = value; }
+            get { return _zipcode; }
+            set { _zipcode = value; }
         }
 
-        private decimal Latitude;
+        private decimal _latitude;
         [Property]
         virtual public decimal latitude
         {
-            get { return Latitude; }
-            set { Latitude = value; }
+            get { return _latitude; }
+            set { _latitude = value; }
         }
-        private decimal Longitude;
+        private decimal _longitude;
         [Property]
         virtual public decimal longitude
         {
-            get { return Longitude; }
-            set { Longitude = value; }
+            get { return _longitude; }
+            set { _longitude = value; }
         }
 
         private IList<place> places;

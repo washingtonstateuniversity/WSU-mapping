@@ -309,14 +309,14 @@ namespace campusMap.Models
         /**/
         private IList<schools> _school = new List<schools>();
         [HasAndBelongsToMany(typeof(schools), Lazy = true, Table = "place_to_schools", ColumnKey = "place_id", ColumnRef = "school_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<schools> school
+        virtual public IList<schools> schools
         {
             get { return _school; }
             set { _school = value; }
         }
         private IList<colleges> _college = new List<colleges>();
         [HasAndBelongsToMany(typeof(colleges), Lazy = true, Table = "place_to_colleges", ColumnKey = "place_id", ColumnRef = "college_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<colleges> college
+        virtual public IList<colleges> colleges
         {
             get { return _college; }
             set { _college = value; }
@@ -331,14 +331,14 @@ namespace campusMap.Models
 
         private IList<departments> _department = new List<departments>();
         [HasAndBelongsToMany(typeof(departments), Lazy = true, Table = "place_to_departments", ColumnKey = "place_id", ColumnRef = "department_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<departments> department
+        virtual public IList<departments> departments
         {
             get { return _department; }
             set { _department = value; }
         }
         private IList<admindepartments> _admindepartment = new List<admindepartments>();
         [HasAndBelongsToMany(typeof(admindepartments), Lazy = true, Table = "place_to_admindepartments", ColumnKey = "place_id", ColumnRef = "admindepartment_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<admindepartments> admindepartment
+        virtual public IList<admindepartments> admindepartments
         {
             get { return _admindepartment; }
             set { _admindepartment = value; }
@@ -353,7 +353,7 @@ namespace campusMap.Models
 
         private IList<programs> _program = new List<programs>();
         [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "place_to_programs", ColumnKey = "place_id", ColumnRef = "program_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<programs> program
+        virtual public IList<programs> programs
         {
             get { return _program; }
             set { _program = value; }

@@ -17,7 +17,7 @@
 #end
 
 
-<title>The WSU #if($campus!="")${campus}#end Campus Map</title>
+<title>The WSU #if($campus.name!="")${campus.name}#end Campus Map</title>
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
 #capturefor(site)
@@ -37,13 +37,13 @@
 $Controller.getView()
 #end
 <script type="text/javascript">
-  var siteroot = '$site.Trim()';
-  var view = '$view.Trim()/';
-  #if($urlQueries!="")var startingUrl = '$urlQueries'; #end
-  #if($activePlace!="")var activePlace = $activePlace; #end
-  #if($campus!="")var campus = '$campus'; #end
- 
-  
+	var siteroot = '$site.Trim()';
+	var view = '$view.Trim()/';
+	#if($urlQueries!="")var startingUrl = '$urlQueries'; #end
+	#if($activePlace!="")var activePlace = $activePlace; #end
+	var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
+	#if($campus.url!="")var url = '$campus.url'; #end
+	var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
@@ -65,7 +65,7 @@ $Controller.getView()
 <link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
 <link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
 *#
-$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css,~/Content/css/reactive.css")
+$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/css/reactive.css")
 #*
 <style type="text/css" >
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}

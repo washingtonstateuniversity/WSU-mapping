@@ -52,7 +52,7 @@
 			<a>Directions<em></em></a>
 			<span id="dirArea">
 				<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
-				<span id="directionsTo"><input type="text" value="WSU" placeholder="To..." /></span>
+				<span id="directionsTo"><input type="text" value="WSU $!campus.name" placeholder="To..." /></span>
 			</span>
 		</li>
 	</ul>

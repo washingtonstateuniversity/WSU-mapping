@@ -2,6 +2,16 @@
 /* Lets override the defaults for the tamplates */
 html,body{height:auto;}
 
+
+legend{
+	    color: #323232;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: -3px;
+	}
+
+
 .clear{clear:both;}
 
 
@@ -556,6 +566,13 @@ span.UinEdit{    background-color: #E2E2E2;
 .ui-sortable-helper{min-width:50px;max-width:150px;width:auto;}
 
 
+
+.admin.view._editor #campusmap{background:transparent url(../../../Content/images/size_guide_grid.png) repeat left top;border-top:1px solid #989898;border-left: 1px solid #989898;padding: 0 105px 105px 0;}
+.admin.view._editor #size_guide{background:transparent url(../../../Content/images/size_guide.png) no-repeat left bottom;height:52px;}
+.admin.view._editor #size_guide_ticks{background:transparent url(../../../Content/images/size_guide_ticks.png) repeat-x left bottom;border-left: 1px solid transparent;}
+#place_drawing_map{-webkit-box-shadow:  2px 2px 5px 2px rgba(25, 25, 25, .35);box-shadow:  2px 2px 5px 2px rgba(25, 25, 25, .35);border-bottom:1px solid #5f5f5f;border-right: 1px solid #5f5f5f;}
+
+
 #map_canvas{background-color: #E5E3DF;height: 520px;overflow: hidden;position: relative;width:300px;}
 
 .geometrics.editor .style_controlls{margin-right:525px; min-height:535px;}
@@ -564,22 +581,24 @@ span.UinEdit{    background-color: #E2E2E2;
 .geometrics.editor #map_canvas{width:500px;}
 .geometrics.editor #drawing_map{width:500px;min-height:535px;}
 
-
-
 .geometrics.new .style_controlls{margin-right:525px; min-height:535px;}
 /*.geometrics.new .LEVEL_TABS {margin-right:510px; min-height:535px;}*/
 .geometrics.new #smaple_area{background-color: #FFFFFF; position: absolute;right: 15px;top:0px; z-index: 9;}
 .geometrics.new #map_canvas{width:500px;}
 .geometrics.new #drawing_map{width:500px;min-height:535px;}
 
-
 .geometrics.editor .place_new{min-height:535px;}
-
 
 #shortcode{font-size:.75em; text-decoration:none;}
 #shortcodes{height: 150px; overflow-y: scroll; border: 1px solid rgb(204, 204, 204); margin: 5px 10px;}
 
 
+.aliasState.error{color:#F00;}
+.aliasState.ok{color:#0C0;}
+
+.listPicker{height: 150px;margin: 0 auto;max-width:99%;overflow-y: auto;padding: 5px;border-color: #848484;}
+.jspPane{ padding:0px !important;}
+#onMap .jspContainer{/*width: 205px!important;*/ height: 150px;}
 
 .pod{  display: inline-block;
     min-height: 29px;}
@@ -602,17 +621,42 @@ span.UinEdit{    background-color: #E2E2E2;
 #customName,.editable{ cursor:pointer;}
 
 input[type=text],#wsu_ui .ui-widget-content input[type=text]{none repeat scroll 0 0 #EFEFEF !important}
-label{ font-weight:bold; font-size:1.1em;}
+label{ font-weight:bold; font-size:0.9em; color:#4C4C4C;}
 
 
 fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk.png) repeat-x center top;}
 /**/fieldset:hover{padding: 4px 8px 10px;background: transparent url(../../Content/images/fieldset_bk_hover.png) repeat center center;}
 
 
+.ini div{ cursor:default !important;}
 
+#wsu_ui .dynoList.ui-button-text-only .ui-button-text{ margin-top: -3px; padding: 1px 5px;}
+#wsu_ui .tiny.ui-button .ui-button-text{ margin-top: -3px; padding: 1px 5px;}
+#onMap .tiny.buttons.deleteplace{height: 19px;
+outline: medium none;
+width: 19px;}
+
+#wsu_ui .tiny.buttons.deleteplace.ui-button .ui-button-text{
+    margin-left: 1px;
+    margin-top: 0;
+    padding: 0;
+}
+
+
+
+
+.NOTED{color: #4C4C4C;font-size: 11px;}
+.NOTED strong{ cursor:pointer;}
+.NOTED strong:hover{color:#981E32;}
+.NOTED:hover span{color:#333;}
+
+#tabs_Options .NOTED{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter: alpha(opacity=75);opacity:.75;}
+#tabs_Options .NOTED:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity:1.0;}
 
 /* pagination */
-#wsu_ui .pagination{position: relative;z-index: 9;}
+#wsu_ui .pagination{position: relative;z-index: 9;-webkit-box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);
+        
+        box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);}
 #wsu_ui .pagination.top{float: right;margin: -3px 0 0;width: auto;}
 #wsu_ui .pagination.top.inhead{float: right;margin-right: 5px;margin-top: 7px;position: relative;width: auto;z-index: 9;}
 	
@@ -716,7 +760,7 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 		ol.sortable {
 			margin: 4em 0;
 		}
-
+		
 		.sortable li {
 			margin: 5px 0 0 0;
 			padding: 0;
@@ -739,6 +783,7 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 			background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
 			background: linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+			position: relative;
 		}
 		.sortable li.inactive {-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter: alpha(opacity=75);opacity:.75;background: #e2e2e0;}
 		.sortable li.inactive div{background: #e2e2e0;}
@@ -760,6 +805,14 @@ fieldset{padding: 4px 8px 10px;background: transparent url(../../Content/images/
 		.sortable .nav_level_display{margin-right:5px;}
 		.sortable .value{font-weight:bold;}
 		
-	
+		#onMap ol.sortable{ margin: 0 0 0 7px !important;}
+		#onMap ol.sortable li div{padding:0px 1px 1px 11px !important;}
+		#onMap ol.sortable li div em{pdisplay: block;
+			height: 19px;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 10px;background:transparent url(../../../Content/images/sorthandle.png) no-repeat left top scroll;}
 		#runningOptions{ position:absolute; top:-9999em; left:-9999em;}
+		
 		

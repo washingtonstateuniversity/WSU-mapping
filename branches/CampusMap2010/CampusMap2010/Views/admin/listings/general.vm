@@ -22,4 +22,5 @@
 		#set($Pagination_location='bottom')
 		#parse("listing_parts/areas/pagination.vm")
 	#end
+	<div class="clear"></div>
 </div>

@@ -60,49 +60,59 @@ namespace campusMap.Models
             get { return Cache_Path; }
             set { Cache_Path = value; }
         }
-        private bool Commentable;
+
+
+        private bool _show_global_nav;
+        [Property]
+        virtual public bool show_global_nav
+        {
+            get { return _show_global_nav; }
+            set { _show_global_nav = value; }
+        }
+
+        private bool _commentable;
         [Property]
         virtual public bool commentable
         {
-            get { return Commentable; }
-            set { Commentable = value; }
+            get { return _commentable; }
+            set { _commentable = value; }
         }
-        private bool Sharable;
+        private bool _sharable;
         [Property]
         virtual public bool sharable
         {
-            get { return Sharable; }
-            set { Sharable = value; }
+            get { return _sharable; }
+            set { _sharable = value; }
         }
-        private int Width;
+        private int _width;
         [Property]
         virtual public int width
         {
-            get { return Width; }
-            set { Width = value; }
+            get { return _width; }
+            set { _width = value; }
         }
-        private int Height;
+        private int _height;
         [Property]
         virtual public int height
         {
-            get { return Height; }
-            set { Height = value; }
+            get { return _height; }
+            set { _height = value; }
         }
 
-        private IList<authors> Authors = new List<authors>();
+        private IList<authors> _authors = new List<authors>();
         [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> authors
         {
-            get { return Authors; }
-            set { Authors = value; }
+            get { return _authors; }
+            set { _authors = value; }
         }
 
-        private Byte[] Center;
+        private Byte[] _center;
         [Property(SqlType = "geography")]
         virtual public Byte[] center
         {
-            get { return Center; }
-            set { Center = value; }
+            get { return _center; }
+            set { _center = value; }
         }
         public static SqlGeography AsGeography(byte[] bytes)
         {
@@ -173,11 +183,11 @@ namespace campusMap.Models
                 }
             }
         }
-        private bool Tmp;
+        private bool _tmp;
         virtual public bool tmp
         {
-            get { return Tmp; }
-            set { Tmp = value; }
+            get { return _tmp; }
+            set { _tmp = value; }
         }
         private bool _isPublic;
         [Property]
@@ -186,19 +196,19 @@ namespace campusMap.Models
             get { return _isPublic; }
             set { _isPublic = value; }
         }
-        private status Status;
+        private status _status;
         [BelongsTo("view_status")]
         virtual public status status
         {
-            get { return Status; }
-            set { Status = value; }
+            get { return _status; }
+            set { _status = value; }
         }
-        private media_repo Media;
+        private media_repo _media;
         [BelongsTo]
         virtual public media_repo media
         {
-            get { return Media; }
-            set { Media = value; }
+            get { return _media; }
+            set { _media = value; }
         }
         private string _staticMap;
         [Property]
@@ -277,7 +287,13 @@ namespace campusMap.Models
             get { return _forced_marker_style; }
             set { _forced_marker_style = value; }
         }
-
+        private campus _campus;
+        [BelongsTo]
+        virtual public campus campus
+        {
+            get { return _campus; }
+            set { _campus = value; }
+        }
         /* replaced by the virtural model
         private map_views_options _options;
         [BelongsTo]
@@ -298,7 +314,7 @@ namespace campusMap.Models
 
         virtual public bool isPublished()
         {
-            if (this.Status == ActiveRecordBase<status>.Find(3) && this.published != null && this.published.Value.CompareTo(DateTime.Now) <= 0)
+            if (this.status == ActiveRecordBase<status>.Find(3) && this.published != null && this.published.Value.CompareTo(DateTime.Now) <= 0)
             {
                 return true;
             }
@@ -313,249 +329,6 @@ namespace campusMap.Models
           
             return flag; 
         }
-    }
-
-
-
-
-
-    /* 
-     * this is tmp for now since we can have an easy json to deal with the
-     * complext and dynamic nature of the google model in our own model.
-     */
-    [ActiveRecord(Lazy = true, BatchSize = 30)]
-    public class map_views_options : ActiveRecordBase<map_views_options>
-    {
-        protected HelperService helperService = new HelperService();
-        public map_views_options() { }
-
-        private int option_id;
-        [PrimaryKey("option_id")]
-        virtual public int id
-        {
-            get { return option_id; }
-            set { option_id = value; }
-        }
-        private string _backgroundColor;
-        [Property]
-        virtual public string backgroundColor
-        {
-            get { return _backgroundColor; }
-            set { _backgroundColor = value; }
-        }
-        private bool _disableDefaultUI;
-        [Property]
-        virtual public bool disableDefaultUI
-        {
-            get { return _disableDefaultUI; }
-            set { _disableDefaultUI = value; }
-        }
-        private bool _disableDoubleClickZoom;
-        [Property]
-        virtual public bool disableDoubleClickZoom
-        {
-            get { return _disableDoubleClickZoom; }
-            set { _disableDoubleClickZoom = value; }
-        }
-        private bool _draggable;
-        [Property]
-        virtual public bool draggable
-        {
-            get { return _draggable; }
-            set { _draggable = value; }
-        }
-        private string _draggableCursor;
-        [Property]
-        virtual public string draggableCursor
-        {
-            get { return _draggableCursor; }
-            set { _draggableCursor = value; }
-        }
-        private string _draggingCursor;
-        [Property]
-        virtual public string draggingCursor
-        {
-            get { return _draggingCursor; }
-            set { _draggingCursor = value; }
-        }
-        private int _heading;
-        [Property]
-        virtual public int heading
-        {
-            get { return _heading; }
-            set { _heading = value; }
-        }
-        private bool _keyboardShortcuts;
-        [Property]
-        virtual public bool keyboardShortcuts
-        {
-            get { return _keyboardShortcuts; }
-            set { _keyboardShortcuts = value; }
-        }
-        private bool _mapMaker;
-        [Property]
-        virtual public bool mapMaker
-        {
-            get { return _mapMaker; }
-            set { _mapMaker = value; }
-        }
-        private bool _mapTypeControl;
-        [Property]
-        virtual public bool mapTypeControl
-        {
-            get { return _mapTypeControl; }
-            set { _mapTypeControl = value; }
-        }
-        private string _mapTypeControlOptions;
-        [Property]
-        virtual public string mapTypeControlOptions
-        {
-            get { return _mapTypeControlOptions; }
-            set { _mapTypeControlOptions = value; }
-        }
-        private string _mapTypeId;
-        [Property]
-        virtual public string mapTypeId
-        {
-            get { return _mapTypeId; }
-            set { _mapTypeId = value; }
-        }
-        private int _maxZoom;
-        [Property]
-        virtual public int maxZoom
-        {
-            get { return _maxZoom; }
-            set { _maxZoom = value; }
-        }
-        private int _minZoom;
-        [Property]
-        virtual public int minZoom
-        {
-            get { return _minZoom; }
-            set { _minZoom = value; }
-        }
-        private bool _noClear;
-        [Property]
-        virtual public bool noClear
-        {
-            get { return _noClear; }
-            set { _noClear = value; }
-        }
-        private bool _overviewMapControl;
-        [Property]
-        virtual public bool overviewMapControl
-        {
-            get { return _overviewMapControl; }
-            set { _overviewMapControl = value; }
-        }
-        private string _overviewMapControlOptions;
-        [Property]
-        virtual public string overviewMapControlOptions
-        {
-            get { return _overviewMapControlOptions; }
-            set { _overviewMapControlOptions = value; }
-        }
-        private bool _panControl;
-        [Property]
-        virtual public bool panControl
-        {
-            get { return _panControl; }
-            set { _panControl = value; }
-        }
-        private string _panControlOptions;
-        [Property]
-        virtual public string panControlOptions
-        {
-            get { return _panControlOptions; }
-            set { _panControlOptions = value; }
-        }
-        private bool _rotateControl;
-        [Property]
-        virtual public bool rotateControl
-        {
-            get { return _rotateControl; }
-            set { _rotateControl = value; }
-        }
-        private string _rotateControlOptions;
-        [Property]
-        virtual public string rotateControlOptions
-        {
-            get { return _rotateControlOptions; }
-            set { _rotateControlOptions = value; }
-        }
-        private bool _scaleControl;
-        [Property]
-        virtual public bool scaleControl
-        {
-            get { return _scaleControl; }
-            set { _scaleControl = value; }
-        }
-        private string _scaleControlOptions;
-        [Property]
-        virtual public string scaleControlOptions
-        {
-            get { return _scaleControlOptions; }
-            set { _scaleControlOptions = value; }
-        }
-        private bool _scrollwheel;
-        [Property]
-        virtual public bool scrollwheel
-        {
-            get { return _scrollwheel; }
-            set { _scrollwheel = value; }
-        }
-        private string _streetView;
-        [Property]
-        virtual public string streetView
-        {
-            get { return _streetView; }
-            set { _streetView = value; }
-        }
-        private bool _streetViewControl;
-        [Property]
-        virtual public bool streetViewControl
-        {
-            get { return _streetViewControl; }
-            set { _streetViewControl = value; }
-        }
-        private string _styles;
-        [Property]
-        virtual public string styles
-        {
-            get { return _styles; }
-            set { _styles = value; }
-        }
-        private int _tilt;
-        [Property]
-        virtual public int tilt
-        {
-            get { return _tilt; }
-            set { _tilt = value; }
-        }
-        private int _zoom;
-        [Property]
-        virtual public int zoom
-        {
-            get { return _zoom; }
-            set { _zoom = value; }
-        }
-        private bool _zoomControl;
-        [Property]
-        virtual public bool zoomControl
-        {
-            get { return _zoomControl; }
-            set { _zoomControl = value; }
-        }
-        private string _zoomControlOptions;
-        [Property]
-        virtual public string zoomControlOptions
-        {
-            get { return _zoomControlOptions; }
-            set { _zoomControlOptions = value; }
-        }
-
-
-
     }
 }
 

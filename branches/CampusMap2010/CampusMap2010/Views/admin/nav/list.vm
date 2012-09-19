@@ -20,7 +20,7 @@
 		#set($ulOpen="false")
 		#set($liOpen="false")
 		#set($c=0)
-		<ol class="sortable">
+		<ol class="sortable nav">
 			#foreach($item in $nav)
 				
 					#if($lastLevel == ${item.level} && $liOpen=="true" && $c>0)

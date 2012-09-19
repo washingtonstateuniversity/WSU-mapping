@@ -520,11 +520,12 @@ fieldset{padding: 4px 8px 10px;}
     box-shadow:  0px 5px 10px -5px rgba(0, 0, 0, 0.25);
 	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
     /*width: 100%;*/}
+.embeded #centralMap_wrap,.embeded #centralMap{margin-left:0px;height: 100%;}
 
 #selectedPlaceList{
- 
+
 	float: left;
-	/*padding-right: 28px;*/
+	padding-right: 15px;/**/
 	position: absolute;
 	left:0px;
 	width:0px;/* if opened 125px; */
@@ -542,7 +543,7 @@ fieldset{padding: 4px 8px 10px;}
 	
 #selectedPlaceList.ini{padding:0px;}
 	
-#selectedPlaceList_btn{position:absolute;top:5px;right:-28px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
+#selectedPlaceList_btn{position:absolute;top:5px;right:-13px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
 #selectedPlaceList_btn:hover{ background-position:left bottom;}
 #selectedPlaceList_btn.active{ background-position:right top;}
 #selectedPlaceList_btn.active:hover{ background-position:right bottom;}
@@ -556,7 +557,15 @@ fieldset{padding: 4px 8px 10px;}
 	border-radius: 0px 0px 0px 20px;-webkit-border-radius: 0px 0px 0px 20px;
 
 }
-#selectedPlaceList_area ul{list-style: none outside none; margin: 45px 0 0; padding: 0px;  background: url("../../Content/images/assests_central/selectlist_shadow.png") repeat-y scroll left center transparent;}
+#centralMap_wrap{background: url(../../Content/images/maplist-bk.png) repeat-x left top transparent;}
+#selectedPlaceList_area.active{width: 190px;}
+#listing{width: 190px;}
+#listing{margin-top: 36px !important; overflow-y:auto; height:100%;}
+#selectedPlaceList_area ul{    
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 100%;}
 #selectedPlaceList_area ul li{ position:relative; padding-left:28px; min-height:28px;}
 #selectedPlaceList_area ul li a{color: #003C69;
     display: block;
@@ -569,23 +578,51 @@ fieldset{padding: 4px 8px 10px;}
 #selectedPlaceList_area ul li a img{ position:absolute; top:2px; left:2px;}
 #selectedPlaceList_area ul li div{font-size: 0.7em;font-weight: normal;line-height: 1.2em;padding-left: 5px;}
 /* NOTE THIS IS GOOGLE GENERATED CLASSES */
-#directions-panel{margin: 45px 0 0;}
+#directions-panel{margin:26px 0 0;width:190px !important;}
 #selectedPlaceList .adp-details,#selectedPlaceList  .adp-legal{font-size:10px !important;}
 #selectedPlaceList .adp-directions {border-collapse: collapse;cursor: pointer;font-size: 11px;line-height: 14px;}
-#selectedPlaceList .adp-step,#selectedPlaceList .adp-text {font-size: 15px;line-height: 16px;width: 100%;}
+#selectedPlaceList .adp-step,#selectedPlaceList .adp-text {font-size: 12px;font-weight: bold;line-height: 12px;width: 100%;}
 #selectedPlaceList .adp-summary {color:#981e32; font-size: 13px;font-weight: bold; line-height: 14px;padding: 0 3px 3px;}
 #selectedPlaceList .adp-directions table{ width: 190px;}
 #adp-placemark{margin-top:0px !important;}
-#option{display: block;
-    left: 5px;
-    margin: 0 auto 0 10px !important;
-    position: absolute;
-    top: 5px;}
-#option li{font-size:13px; display:inline-block;margin: 0;padding: 0 5px !important; cursor:pointer;}
-#option li:hover{color:#000!important;}
-#option li.DIVIT{ border-right: 1px #666 solid;}
-#option li.active{color:#981e32;}
+.warnbox-content {
+    background: none repeat scroll 0 0 #FFF1A8;
+    font-size: 10px;
+    line-height: 12px;
+    padding: 5px 6px;
+}
 
+
+
+#option{    display: block;
+    height: 31px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -1px;}
+#option li{  line-height: 27px; background-color: #dfdfdf;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0;
+    padding:3px 0 0 0 !important;
+    text-align: center;
+    width: 49%;border-bottom: 1px solid #b8b8b8;min-height: 27px  !important;}
+#option li:hover{color:#000!important;}
+
+#option li.active{color:#981e32;border-left: 1px #b8b8b8 solid;border-bottom:none;-webkit-border-radius: 10px 0px 0px 0px;
+        border-radius: 10px 0px 0px 0px;
+		color:#5e6a71;
+		-webkit-box-shadow:  -3px 0px 20px -5px rgba(25, 25, 25, .25);
+        box-shadow:  -3px 0px 20px -5px rgba(25, 25, 25, .25);
+		min-height: 29px  !important;
+		  background-color: #EEEEEE;
+		}
+#option li.DIVIT.active{border-left:none;border-right: 1px #b8b8b8 solid;-webkit-border-radius: 0px 10px 0px 0px;
+        border-radius: 0px 10px 0px 0px;
+		-webkit-box-shadow:  3px 0px 20px -5px rgba(25, 25, 25, .25);
+        box-shadow:  3px 0px 20px -5px rgba(25, 25, 25, .25);
+		}
 
 
 #campusmap .ui-tabs .ui-tabs-panel .content.Views{overflow:hidden;}
@@ -594,22 +631,20 @@ fieldset{padding: 4px 8px 10px;}
 
 
 
-#output{height:20px;width:100%;background-color:#ccc;  -webkit-box-shadow:  0px -5px 10px -5px rgba(0, 0, 0, 0.55);
-    box-shadow:  0px -5px 10px -5px rgba(0, 0, 0, 0.55);}
-#output a{background-color: #262A2D;
-    color: #FFFFFF;
-    display: block;
-    float: left;
-    font-size: 12px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    width: 50%;}
+#output{height: 18px;  margin-left: 10px;margin-bottom: 15px;}
+#output a{    color: #5E6A71;
+    display: inline-block;
+    font-size: 11px;
+    height: 12px;
+    line-height: 12px;
+    margin-right: 9px;
+    text-align: left;
+    text-decoration: none;}
 #output a:hover{color:#981e32;background-color:#e2e2e2;}
 
 
 
-
+/* embeding */
 #embedArea{}
 #embedArea h2{margin: 0;font-size: 16px;}
 #embedArea h3{    color: #981E32;
@@ -617,7 +652,22 @@ font-weight:normal;
     font-size: 13px;
     margin: 0;}
 #embedArea textarea{ width:100%; height:101px; }
+.my_clip_button {
+    border: 1px solid #000000;
+    cursor: pointer;
+    font-size: 10px;
+    line-height: 15px;
+    margin: 10px 0;
+    padding: 5px;
+    text-align: center;
+    width: 145px;display:inline-block;background:url(../../../Content/wsu_ui/images/ui-bg_glass_40_c6b8ba_1x400.png) repeat-x scroll 50% 50% #3B4044; }
+.my_clip_button.hover { background-color:#eee; }
+.my_clip_button.active { background-color:#aaa; }
 
+#embedArea label{font-size: 10px; line-height: 15px;}
+
+
+/* error */
 #errorReporting{}
 #errorReporting h2{margin: 0;font-size: 16px;}
 #errorReporting h3{    color: #981E32;
