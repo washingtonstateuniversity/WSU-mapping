@@ -3,8 +3,7 @@
 <!doctype html>
 <!--[if IE 7]><html class="no-js ie7 ie" lang="en"> <![endif]-->
 <!--[if IE 8]><html class="no-js ie8 ie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en"> <!--<![endif]-->
-	<head>
+<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en"> <!--<![endif]--><head>
 		<style type="text/css">
 			body {
 				background: none repeat-x scroll 0 0 #EEEFF1;
@@ -19,7 +18,8 @@
 			.at300bs{display:inline;}*/
 			#runningOptions{ position:absolute; top:-9999em; left:-9999em;}
 		</style>
-		#*<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
+		#*
+	<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
 		<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />*#
 		$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css, ~/Content/css/central_main.css, ~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css, ~/Content/css/colorbox.css, ~/Content/css/reactive.css?")
 	</head>
@@ -68,7 +68,9 @@
 		  var view = '$view.Trim()/';
 		  #if($urlQueries && $urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
 		  #if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
-		  #if($campus && $campus!="")var campus = '$campus'; #end
+		  var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
+		  #if($campus.url!="")var url = '$campus.url'; #end
+		  var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
 		  var pos = {"center":"$map.getLat(),$map.getLong()"};
 		  var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 		  #if(${map.places})
