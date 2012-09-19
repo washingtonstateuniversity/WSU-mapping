@@ -155,7 +155,7 @@ namespace campusMap.Controllers
                 String root = "";
                 if (!System.Web.HttpContext.Current.Request.IsLocal)
                 {
-                    root = "http://map.wsu.edu/";
+                    root = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(System.Web.HttpContext.Current.Request.Url.PathAndQuery, "/"); //"http://map.wsu.edu/";
                 }
                 else
                 {
