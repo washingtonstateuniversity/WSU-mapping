@@ -1,19 +1,9 @@
 #if($types)
-	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
-	  <tr>
-		<td>Showing $types.FirstItemIndex - $types.LastItemIndex of $types.TotalItems</td>
-		<td align="right">
-		  #if($types.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='types'}" )  #end
-		  #if(!$types.HasPreviousPage) first #end
-		  #if($types.HasPreviousPage) | $PaginationHelper.CreatePageLink( $types.PreviousPageIndex, "prev",null, "%{target='types'}" )  #end
-		  #if(!$types.HasPreviousPage) | prev #end
-		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.NextPageIndex, "next",null, "%{target='types'}" )  #end
-		  #if(!$types.HasNextPage) | next #end
-		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.TotalPages, "last",null, "%{target='types'}" )  #end
-		  #if(!$types.HasNextPage) | last #end
-		</td>
-	  </tr>
-	</table>	
+
+    #set($list_items=$types)
+	#set($Pagination_location='top inhead')
+	#set($target = 'types')
+	#parse("admin/listings/areas/pagination.vm")	
 
 	<table  width="100%" class="ui-widget ui-widget-content">
 	  <thead>
@@ -45,21 +35,10 @@
 		#end
 	  </tbody>
 	</table>
-	<table width="50%" border="0"  class="pagination">
-	  <tr>
-		<td>Showing $types.FirstItemIndex - $types.LastItemIndex of $types.TotalItems</td>
-		<td align="right">
-		  #if($types.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='types'}" )  #end
-		  #if(!$types.HasPreviousPage) first #end
-		  #if($types.HasPreviousPage) | $PaginationHelper.CreatePageLink( $types.PreviousPageIndex, "prev",null, "%{target='types'}" )  #end
-		  #if(!$types.HasPreviousPage) | prev #end
-		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.NextPageIndex, "next",null, "%{target='types'}" )  #end
-		  #if(!$types.HasNextPage) | next #end
-		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.TotalPages, "last",null, "%{target='types'}" )  #end
-		  #if(!$types.HasNextPage) | last #end
-		</td>
-	  </tr>
-	</table>	
+    #set($list_items=$types)
+	#set($Pagination_location='')
+	#set($target = 'types')
+	#parse("admin/listings/areas/pagination.vm")		
 
 #else
 	<h1>There are currently no types</h1>

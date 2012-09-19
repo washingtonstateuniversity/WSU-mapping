@@ -965,7 +965,7 @@ function load_view_editor() {
 										'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
 											'<span class="ui-icon ui-icon-trash"></span>'+
 										'</a>'+
-									'</span>'+name+'<input type="hidden" value="'+selection+'" class="place" name="'+(role=="place"?'place':'geo')+'list[]">'+
+									'</span>'+name+'<input type="hidden" value="'+selection+'" class="place" name="'+(role=="place"?'place':'geo')+'list[]"/><em></em>'+
 								'</div>'+
 							'</li>';
 				container.find('ol.sortable').append(addEle);

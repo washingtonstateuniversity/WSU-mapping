@@ -654,11 +654,9 @@ width: 19px;}
 #tabs_Options .NOTED:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity:1.0;}
 
 /* pagination */
-#wsu_ui .pagination{position: relative;z-index: 9;-webkit-box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);
-        
-        box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);}
-#wsu_ui .pagination.top{float: right;margin: -3px 0 0;width: auto;}
-#wsu_ui .pagination.top.inhead{float: right;margin-right: 5px;margin-top: 7px;position: relative;width: auto;z-index: 9;}
+#wsu_ui .pagination{float: left;margin: 7px  0 0;    position: relative;z-index: 9;width: auto;-webkit-box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);box-shadow:  2px 1px 3px 0.0px rgba(25, 10, 0, 0.73);}
+#wsu_ui .pagination.top{float: right;margin: -3px 0 0;}
+#wsu_ui .pagination.top.inhead{float: right;margin-right: 5px;margin-top: 7px;}
 	
 	
 	    

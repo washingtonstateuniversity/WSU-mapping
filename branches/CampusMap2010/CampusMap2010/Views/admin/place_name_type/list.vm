@@ -1,19 +1,8 @@
 #if($place_name_types)
-	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
-	  <tr>
-		<td>Showing $place_name_types.FirstItemIndex - $place_name_types.LastItemIndex of $place_name_types.TotalItems</td>
-		<td align="right">
-		  #if($place_name_types.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasPrevious) first #end
-		  #if($place_name_types.HasPrevious) | $PaginationHelper.CreatePageLink( $place_name_types.PreviousIndex, "prev", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasPrevious) | prev #end
-		  #if($place_name_types.HasNext) | $PaginationHelper.CreatePageLink( $place_name_types.NextIndex, "next", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasNext) | next #end
-		  #if($place_name_types.HasNext) | $PaginationHelper.CreatePageLink( $place_name_types.LastIndex, "last", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasNext) | last #end
-		</td>
-	  </tr>
-	</table>
+    #set($list_items=$place_name_types)
+	#set($Pagination_location='top inhead')
+	#set($target = 'place_name_types')
+	#parse("admin/listings/areas/pagination.vm")
 	<table  width="100%" class="ui-widget ui-widget-content">
 	  <thead>
 		<tr class="ui-widget-header ">
@@ -44,21 +33,10 @@
 		#end
 	  </tbody>
 	</table>
-	<table width="50%" border="0"  class="pagination">
-	  <tr>
-		<td>Showing $place_name_types.FirstItemIndex - $place_name_types.LastItemIndex of $place_name_types.TotalItems</td>
-		<td align="right">
-		  #if($place_name_types.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasPrevious) first #end
-		  #if($place_name_types.HasPrevious) | $PaginationHelper.CreatePageLink( $place_name_types.PreviousIndex, "prev", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasPrevious) | prev #end
-		  #if($place_name_types.HasNext) | $PaginationHelper.CreatePageLink( $place_name_types.NextIndex, "next", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasNext) | next #end
-		  #if($place_name_types.HasNext) | $PaginationHelper.CreatePageLink( $place_name_types.LastIndex, "last", null, "%{target='place_name_types'}" ) #end
-		  #if(!$place_name_types.HasNext) | last #end
-		</td>
-	  </tr>
-	</table>
+    #set($list_items=$place_name_types)
+	#set($Pagination_location='')
+	#set($target = 'place_name_types')
+	#parse("admin/listings/areas/pagination.vm")
 #else
 	<h1>There are currently no name types</h1>
 #end
