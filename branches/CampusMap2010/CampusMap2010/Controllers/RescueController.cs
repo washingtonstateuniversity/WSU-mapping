@@ -47,14 +47,21 @@ namespace campusMap.Controllers
            // if (exception.GetType() == typeof(WebException) && exception.Message == "Unable to connect to the remote server") SetRescueView("webexception_cannot_connect");
            // if (exception.GetType() == typeof(WebException) && exception.Message == "The operation has timed out") SetRescueView("webexception_portal_timeout");
             PropertyBag["exception"] = exception;
-            
-            SetRescueView("error");
+
+
+
+            if (HttpContext.Response.StatusCode == 404)
+            {
+                SetRescueView("general404");
+            }else{
+                SetRescueView("error");
+            }
         }
 
 
         private void SetRescueView(string viewname)
         {
-            RenderView("../public/errors/error");
+            RenderView("../public/errors/" + viewname);
         }
 
     }
