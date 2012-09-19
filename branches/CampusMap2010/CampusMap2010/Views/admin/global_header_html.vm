@@ -12,7 +12,7 @@
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		http://map.wsu.edu/
+		$Controller.getRootUrl()
 	#else
 		#if($siteroot && $siteroot !='/')
 			$siteroot
