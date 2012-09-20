@@ -108,7 +108,7 @@ function iniMap(url,callback){
 			poi_setup($('#centralMap'));
 			addCentralControlls();
 			if(typeof(data)!=='undefined') loadData($('#centralMap'),data);
-			geoLocate();
+			if($('.mobile').length==0)geoLocate();
 			callback();
 			$(window).trigger('resize');
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
