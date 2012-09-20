@@ -732,7 +732,7 @@ function make_InfoWindow(jObj,i,marker){
 	
 	}else{
 		var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div></div>';
+		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 	}
 	var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
 				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
@@ -805,8 +805,8 @@ function make_InfoWindow(jObj,i,marker){
 						pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 					});/*	*/
 				}
-				$('.infoBox a').attr('target','_blank');
-				$('.infoBox a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
+				$('.infoBox .ui-tabs-panel a').attr('target','_blank');
+				$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
 					if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
 				});
 				
