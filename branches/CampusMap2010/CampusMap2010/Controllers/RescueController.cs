@@ -39,7 +39,7 @@ namespace campusMap.Controllers
     #endregion
 
     [Layout("error")]
-    public class RescueController : SecureBaseController, IRescueController
+    public class RescueController : BaseController, IRescueController
     {
         public void Rescue(Exception exception, IController controller, IControllerContext controllerContext)
         {
