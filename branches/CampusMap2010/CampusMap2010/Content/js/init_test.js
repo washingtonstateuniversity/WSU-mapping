@@ -727,7 +727,7 @@ function make_InfoWindow(jObj,i,marker){
 		});
 		var content='';
 		$.each( marker.info.content, function(j, html) {
-			content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+			content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace("'",'_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 		});				
 	
 	}else{
@@ -892,10 +892,7 @@ function make_InfoWindow(jObj,i,marker){
 					});
 				});
 				addErrorReporting(marker);
-				var minHeight=0;
-				$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-					minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
-				}).css('min-height',minHeight); 
+
 				$('.ui-tabs-panel').hover(function(){
 					ib[i].setOptions({enableEventPropagation: true});
 					jObj.gmap('stop_scroll_zoom');
@@ -908,12 +905,17 @@ function make_InfoWindow(jObj,i,marker){
 				
 				
 
-				
+				var minHeight=0;
+				$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+					minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
+					
+				}).css('min-height',minHeight); 
 				var settings = {
 					verticalDragMinHeight: 50
 					//showArrows: true
 				};
 				var pane = $('#campusmap .ui-tabs .ui-tabs-panel .content:not(".Views")');
+				if(minHeight>235){
 				pane.bind(
 					'jsp-scroll-y',
 					function(event, scrollPositionY, isAtTop, isAtBottom)
@@ -931,7 +933,9 @@ function make_InfoWindow(jObj,i,marker){
 					}
 	
 				).jScrollPane(settings);
-				
+				api = pane.data('jsp');
+				}
+								
 				
 				prep();
 			}
