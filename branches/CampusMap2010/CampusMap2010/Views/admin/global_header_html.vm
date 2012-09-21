@@ -27,7 +27,7 @@
 #capturefor(mcv_action)$Controller.getAction()#end
 
 <script type="text/javascript">
-	var siteroot = '$site.Trim()';
+	var siteroot = #if($site.Trim()=="")'/'#else '$site.Trim()' #end;
 	var view = #if($view!="")'$view.Trim()/'#else""#end;
 	var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
 	var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
