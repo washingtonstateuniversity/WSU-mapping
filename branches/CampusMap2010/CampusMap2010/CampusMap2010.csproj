@@ -259,6 +259,7 @@
     <Compile Include="Models\wsu_matrix.cs" />
     <Compile Include="Models\zoom_levels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\adminService.cs" />
     <Compile Include="Services\FieldsService.cs" />
     <Compile Include="Services\geometricService.cs" />
     <Compile Include="Services\googleService.cs" />

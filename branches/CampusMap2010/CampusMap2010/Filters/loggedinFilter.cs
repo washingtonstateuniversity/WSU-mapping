@@ -35,9 +35,10 @@ namespace campusMap.Filters
                     ActiveRecordMediator<authors>.Save(user);
                 }
             }
+           controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
            controllerContext.PropertyBag["userService"] = userService;
            controllerContext.PropertyBag["helperService"] = helperService;
-            return true;
+           return true;
         }
     }
 }

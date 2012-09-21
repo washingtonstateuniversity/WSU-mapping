@@ -39,7 +39,7 @@ width: 100%;
 min-width:1026px;
 }
 
-#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;padding-left: 250px;}
+#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;/*padding-left: 250px;*/}
 #localfooter #wsufooter{background: none repeat scroll 0 0 transparent;
     padding-left: 0;
     padding-right: 0;

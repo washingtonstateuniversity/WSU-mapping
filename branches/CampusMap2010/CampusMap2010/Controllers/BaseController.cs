@@ -50,7 +50,7 @@ namespace campusMap.Controllers
         protected googleService googleService = new googleService();
         protected geometricService geometricService = new geometricService();
         protected ScriptsService ScriptsService = new ScriptsService();
-        
+        protected adminService adminService = new adminService();
 
         #region STRING METHODS
             public string Tabs(int n)

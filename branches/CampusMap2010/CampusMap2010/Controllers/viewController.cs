@@ -357,9 +357,7 @@ namespace campusMap.Controllers
 
             PropertyBag["shapes"] = new publicController().createPlaceJson(view.places.ToArray());
 
-
-
-
+            
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();

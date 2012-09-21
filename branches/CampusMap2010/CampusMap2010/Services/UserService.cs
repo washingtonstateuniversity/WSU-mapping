@@ -82,6 +82,23 @@ namespace campusMap.Services
             authors author = HttpContext.Current.Session["user"] == null ? setUser() : (authors)HttpContext.Current.Session["user"]; 
             return author;
         }
+
+
+        public static campus getUserCoreCampus()
+        {
+            return getUserCoreCampus(getUser());
+        }
+
+        public static campus getUserCoreCampus(authors author)
+        {
+            campus campus = author.campus.Count() > 0 ? author.campus[0] : ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0]; 
+            return campus;
+        }
+
+ 
+
+
+
         public static Boolean isActive(authors user)
         {
             int timeThreshold = -2; //TODO Set as site perference

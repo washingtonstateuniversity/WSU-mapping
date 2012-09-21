@@ -61,6 +61,10 @@ namespace campusMap.Controllers
             PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+/*          
+            adminService.setPDefaults();
+*/
+
             PropertyBag["field_types"] = ActiveRecordBase<field_types>.FindAll();
 
             RenderView("new");

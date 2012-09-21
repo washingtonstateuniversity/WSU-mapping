@@ -25,18 +25,16 @@
 #end
 #capturefor(view)$Controller.getView()#end
 #capturefor(mcv_action)$Controller.getAction()#end
+
 <script type="text/javascript">
-  var siteroot = '$site.Trim()';
-  var view = '$view.Trim()/';
+	var siteroot = '$site.Trim()';
+	var view = #if($view!="")'$view.Trim()/'#else""#end;
+	var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
+	var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
+	#if($campus.url!="")var url = '$campus.url'; #end
+	var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
-
-<script type="text/javascript">
-  var siteroot = '$site.Trim()/';
-  var view = #if($view!="")'$view.Trim()/'#else""#end;
-  var mcv_action = #if($mcv_action!="")'$mcv_action.Trim()'#else""#end;
-</script>
-
 
 <link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
