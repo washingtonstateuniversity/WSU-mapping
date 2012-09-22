@@ -34,9 +34,10 @@ namespace campusMap.Filters
                     user.LastActive = DateTime.Now;
                     ActiveRecordMediator<authors>.Save(user);
                 }
+                controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
+                controllerContext.PropertyBag["userService"] = userService;
             }
-           controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
-           controllerContext.PropertyBag["userService"] = userService;
+
            controllerContext.PropertyBag["helperService"] = helperService;
            return true;
         }
