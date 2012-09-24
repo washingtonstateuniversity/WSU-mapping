@@ -1215,7 +1215,7 @@ function loadListings(data,showSum){
 }
 function setup_listingsBar(jObj){
 	/* Other after gmap ini */
-	$('#selectedPlaceList_btn').live('click', function(e){
+	$('#selectedPlaceList_btn').off().on('click', function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var btn=$(this);
@@ -1235,7 +1235,7 @@ function setup_listingsBar(jObj){
 				'margin-left':'190px','width':
 				$('.central_layout.public.central #centralMap').width()-190
 			},
-			500,
+			250,
 			function() {
 				}).addClass("opended");
 			//listOffset=190;
