@@ -458,7 +458,7 @@ namespace campusMap.Controllers
         }
         public void reorder_nav([ARDataBind("navs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories[] navs)
         {
-            LogService.writelog("Editing reordering nav category " + id);
+            LogService.writelog("Editing reordering nav category ");
             foreach (categories nav in navs)
             {
                 ActiveRecordMediator<categories>.Save(nav);

@@ -768,6 +768,24 @@ function make_InfoWindow(jObj,i,marker){
 			$('#taby'+i).tabs('destroy').tabs();
 		}
 		,onOpen:function(){
+			if(jObj.gmap("hasPanorama")){
+				var pano = jObj.gmap("getPanorama");
+				pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+				google.maps.event.addListener(pano, 'position_changed', function() {
+					if(jObj.gmap("hasPanorama")){
+						var pov = pano.getPov();
+						var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+						pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
+						pano.setPov(pov);
+					}
+					
+				});
+				
+				
+				
+			}else{
+				
+			}
 				needsMoved=0;
 				ibHover =  true;
 				$('#taby'+i).tabs('destroy').tabs({
@@ -1244,7 +1262,7 @@ function setup_listingsBar(jObj){
 			$('#selectedPlaceList').removeClass("active");
 			btn.closest('#selectedPlaceList').stop().animate({
 				width:"0px"
-				}, 500, function() {
+				}, 250, function() {
 					btn.removeClass("active");
 					$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 					//$(window).trigger("resize");
