@@ -778,11 +778,7 @@ function make_InfoWindow(jObj,i,marker){
 						pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
 						pano.setPov(pov);
 					}
-					
 				});
-				
-				
-				
 			}else{
 				
 			}
@@ -994,7 +990,8 @@ function make_Marker(jObj,i,id,marker,markerCallback){
 	if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
 	jObj.gmap('addMarker', $.extend({ 
 			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
-			'z-index':1
+			'z-index':1,
+			'title':marker.title
 		},marker.style),function(ops,marker){
 			markerLog[i]=marker;
 			markerbyid[id] = markerLog[i];
