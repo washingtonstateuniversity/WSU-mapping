@@ -3,7 +3,7 @@ html,body{height:100%; background-color:#edefee;}
 
 .clear{clear:both;}
 
-
+#campusmap{ overflow:hidden;}
 #body{width:100%;height:100%;}
 #globalnav{width: auto;float: none; background: none repeat scroll 0 0 #981E32;}
 #siteID{    background: none repeat scroll 0 0 #262A2D;
@@ -14,6 +14,10 @@ html,body{height:100%; background-color:#edefee;}
 #wrapper #toolbar{width: 100%;float: none;background-color: #5E6A71;}
 #toolbar .addthis_button_compact span{height: 0;
     width: 0;}
+
+
+
+
 
 
 #siteID h2 { margin: 0 0 0 180px;width: auto;}
@@ -32,20 +36,26 @@ html,body{height:100%; background-color:#edefee;}
 #header_bar{background-color: #5E6A71; height:130px; margin-left: 16px; position: relative;}
 
 .admin #content{
-position:relative;
-padding-top: 130px;
-z-index:1;
-width: 100%;
-min-width:1026px;
+	position:relative;
+	padding-top: 130px;
+	z-index:1;
+	width: 100%;
+	min-width:1026px;
 }
 
-#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;/*padding-left: 250px;*/}
-#localfooter #wsufooter{background: none repeat scroll 0 0 transparent;
+#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;position: absolute;bottom:3px;/*padding-left: 250px;*/}
+#localfooter #wsufooter{
+	background: none repeat scroll 0 0 transparent;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    width: auto;}
+    width: auto;
+	height: auto;
+}
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
+
+
+
 
 
 
@@ -525,7 +535,7 @@ fieldset{padding: 4px 8px 10px;}
 #selectedPlaceList{
 
 	float: left;
-	padding-right: 15px;/**/
+	padding-right: 20px;/**/
 	position: absolute;
 	left:0px;
 	width:0px;/* if opened 125px; */
@@ -543,7 +553,7 @@ fieldset{padding: 4px 8px 10px;}
 	
 #selectedPlaceList.ini{padding:0px;}
 	
-#selectedPlaceList_btn{position:absolute;top:5px;right:-13px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
+#selectedPlaceList_btn{position:absolute;top:5px;right:-8px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
 #selectedPlaceList_btn:hover{ background-position:left bottom;}
 #selectedPlaceList_btn.active{ background-position:right top;}
 #selectedPlaceList_btn.active:hover{ background-position:right bottom;}

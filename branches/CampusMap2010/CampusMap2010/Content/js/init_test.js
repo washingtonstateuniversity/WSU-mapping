@@ -18,7 +18,7 @@ var cur_nav = "";
 var cur_mid = 0;
 var hasListing = false;
 var hasDirections = false;
-
+var mapInst = null;
 /* non-abstract */
 function resizeBg(obj,height,width) {
 	obj.height($(window).height()-height);
@@ -26,9 +26,9 @@ function resizeBg(obj,height,width) {
 } 
 function geoLocate(){
 	if($('.geolocation').length){
-		$('#centralMap').gmap("geolocate",true,false,function(mess, pos){
+		mapInst.gmap("geolocate",true,false,function(mess, pos){
 			//$('#centralMap').gmap("make_latlng_str",pos)//alert('hello');
-			$('#centralMap').gmap('addMarker', { 
+			mapInst.gmap('addMarker', { 
 					position: pos,
 					icon:siteroot+"Content/images/map_icons/geolocation_icon.png"
 				},function(ops,marker){
@@ -41,6 +41,7 @@ function geoLocate(){
 }
 
 function ini_map_view(map_ele_obj,callback){
+	
 		var map_op = {'center': campus_latlng_str , 'zoom':15 };
 		//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 		if($('#runningOptions').length){
@@ -233,132 +234,132 @@ function ini_addthis(username){
 
 /* non-abstract */
 function addCentralControlls(){
+	if($('.mapControl').length==0){
+		// Set CSS for the control border.
+		var controlUI = document.createElement('div');
 	
-	// Set CSS for the control border.
-	var controlUI = document.createElement('div');
-
-	controlUI.title = 'Click Get Aerial photos';
-	controlUI.className = 'mapControl TOP';
+		controlUI.title = 'Click Get Aerial photos';
+		controlUI.className = 'mapControl TOP';
+		
+		
+		if(!$('.embeded').length && campus=="Pullman"){
+			// Set CSS for the control interior.
+			var controlText = document.createElement('div');
+			controlText.className = 'text';
+			controlText.innerHTML = 'Aerial Views';
+			controlUI.appendChild(controlText);
+			$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+			google.maps.event.addDomListener(controlUI, 'click', function() {
+					$('.mapControl').removeClass('activeControl');
+					$(this).addClass('activeControl');
+				 //$('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+					$('[rel="aerial_gouped"]').colorbox({
+						photo:true,
+						scrolling:false,
+						scalePhotos:true,
+						opacity:0.7,
+						maxWidth:"75%",
+						maxHeight:"75%",
+						transition:"none",
+						slideshow:true,
+						slideshowAuto:false,
+						open:true,
+						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
+						onClosed:function(){
+							$('#'+currentControl).trigger('click');
+						},
+						onComplete:function(){
+							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
+							if($('#ttl').length){
+								var t=parseInt($('#ttl').text());
+								var li="";
+								if(t>1){
+									for(j=0; j<t; j++){
+										li+="<li><a href='#'></a></li>";
+									}
+									if($('#colorbox #cb_nav').length==0){
+										$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+									}else{
+										$('#colorbox #cb_nav').html(li);
+									}
+								}
+								if($('#colorbox #cb_nav').length){
+									$('#colorbox #cb_nav .active').removeClass('active');
+									$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
+								}
+							}
+						}
+					});
+			});
+		}
 	
 	
-	if(!$('.embeded').length && campus=="Pullman"){
+		// Set CSS for the control border.
+		var controlUI = document.createElement('div');
+	
+		controlUI.title = 'Switch map to Roadmap';
+		controlUI.className = 'mapControl TYPE activeControl';
+		controlUI.id="ROADMAP";
+		
 		// Set CSS for the control interior.
 		var controlText = document.createElement('div');
 		controlText.className = 'text';
-		controlText.innerHTML = 'Aerial Views';
+		controlText.innerHTML = 'Map';
 		controlUI.appendChild(controlText);
 		$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 		google.maps.event.addDomListener(controlUI, 'click', function() {
 				$('.mapControl').removeClass('activeControl');
 				$(this).addClass('activeControl');
-			 //$('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
-				$('[rel="aerial_gouped"]').colorbox({
-					photo:true,
-					scrolling:false,
-					scalePhotos:true,
-					opacity:0.7,
-					maxWidth:"75%",
-					maxHeight:"75%",
-					transition:"none",
-					slideshow:true,
-					slideshowAuto:false,
-					open:true,
-					current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-					onClosed:function(){
-						$('#'+currentControl).trigger('click');
-					},
-					onComplete:function(){
-						if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
-						if($('#ttl').length){
-							var t=parseInt($('#ttl').text());
-							var li="";
-							if(t>1){
-								for(j=0; j<t; j++){
-									li+="<li><a href='#'></a></li>";
-								}
-								if($('#colorbox #cb_nav').length==0){
-									$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
-								}else{
-									$('#colorbox #cb_nav').html(li);
-								}
-							}
-							if($('#colorbox #cb_nav').length){
-								$('#colorbox #cb_nav .active').removeClass('active');
-								$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text())-1) +')').addClass('active');
-							}
-						}
-					}
-				});
+			 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+			 currentControl="ROADMAP";
+		});
+		
+		
+		
+	
+		// Set CSS for the control border.
+		var controlUI = document.createElement('div');
+		controlUI.title = 'Switch map to Satellite';
+		controlUI.className = 'mapControl';
+		controlUI.id="SATELLITE";
+		
+		// Set CSS for the control interior.
+		var controlText = document.createElement('div');
+		controlText.className = 'text';
+		controlText.innerHTML = 'Satellite';
+		controlUI.appendChild(controlText);
+		$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+		google.maps.event.addDomListener(controlUI, 'click', function() {
+				$('.mapControl').removeClass('activeControl');
+				$(this).addClass('activeControl');
+			 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
+			 currentControl="SATELLITE";
+		});
+		
+		
+		
+			
+	
+		// Set CSS for the control border.
+		var controlUI = document.createElement('div');
+		controlUI.title = 'Switch map to Hybrid (satellite + roadmap)';
+		controlUI.className = 'mapControl';
+		controlUI.id="HYBRID";
+		
+		// Set CSS for the control interior.
+		var controlText = document.createElement('div');
+		controlText.className = 'text';
+		
+		controlText.innerHTML = 'Hybrid';
+		controlUI.appendChild(controlText);
+		$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+		google.maps.event.addDomListener(controlUI, 'click', function() {
+				$('.mapControl').removeClass('activeControl');
+				$(this).addClass('activeControl');
+			 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
+			 currentControl="HYBRID";
 		});
 	}
-
-
-	// Set CSS for the control border.
-	var controlUI = document.createElement('div');
-
-	controlUI.title = 'Switch map to Roadmap';
-	controlUI.className = 'mapControl TYPE activeControl';
-	controlUI.id="ROADMAP";
-	
-	// Set CSS for the control interior.
-	var controlText = document.createElement('div');
-	controlText.className = 'text';
-	controlText.innerHTML = 'Map';
-	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
-	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.mapControl').removeClass('activeControl');
-			$(this).addClass('activeControl');
-		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
-		 currentControl="ROADMAP";
-	});
-	
-	
-	
-
-	// Set CSS for the control border.
-	var controlUI = document.createElement('div');
-	controlUI.title = 'Switch map to Satellite';
-	controlUI.className = 'mapControl';
-	controlUI.id="SATELLITE";
-	
-	// Set CSS for the control interior.
-	var controlText = document.createElement('div');
-	controlText.className = 'text';
-	controlText.innerHTML = 'Satellite';
-	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
-	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.mapControl').removeClass('activeControl');
-			$(this).addClass('activeControl');
-		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
-		 currentControl="SATELLITE";
-	});
-	
-	
-	
-		
-
-	// Set CSS for the control border.
-	var controlUI = document.createElement('div');
-	controlUI.title = 'Switch map to Hybrid (satellite + roadmap)';
-	controlUI.className = 'mapControl';
-	controlUI.id="HYBRID";
-	
-	// Set CSS for the control interior.
-	var controlText = document.createElement('div');
-	controlText.className = 'text';
-	
-	controlText.innerHTML = 'Hybrid';
-	controlUI.appendChild(controlText);
-	$('#centralMap').gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
-	google.maps.event.addDomListener(controlUI, 'click', function() {
-			$('.mapControl').removeClass('activeControl');
-			$(this).addClass('activeControl');
-		 $('#centralMap').gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
-		 currentControl="HYBRID";
-	});
-	
 	/**/
 }
 function poi_setup(jObj){
@@ -1160,6 +1161,9 @@ function listTabs(prime){
 	}
 
 }
+
+
+
 function loadListings(data,showSum){
 	$('#selectedPlaceList').removeClass('ini');
 	var listing="";
@@ -1353,10 +1357,14 @@ function prep(){
 	$(' [placeholder] ').defaultValue();
 	$("a").each(function() {$(this).attr("hideFocus", "true").css("outline", "none");});
 }
+
+
+
+
 function setup_directions(jObj){
 	var kStroke;
-	$('#directionsTo').slideToggle();
-	$('#directionsFrom input,#directionsTo input').live('keyup',function(){
+	if($('#directionsTo').is(':visible'))$('#directionsTo').slideToggle();
+	$('#directionsFrom input,#directionsTo input').off().on('keyup',function(){
 		if($('#directionsFrom input').val() !=''){
 			if($('#directionsTo').css('display')=='none')$('#directionsTo').slideToggle();
 		}
@@ -1432,33 +1440,68 @@ function setup_directions(jObj){
 	
 }
 
-function destroy_Listscrollbar(){
-	if(apiL!=null){apiL.destroy();}
+
+function reset_Listscrollbar(){
+	if(apiL!=null){
+		destroy_Listscrollbar(function(){
+			setup_Listscrollbar($('#listing'));
+			//apiL.reinitialise();
+		});
+	}
+	
 }
-function destroy_Dirscrollbar(){
-	if(apiD!=null){apiD.destroy();}
+function reset_Dirscrollbar(){
+	if(apiD!=null){
+		destroy_Dirscrollbar(function(){
+			setup_Dirscrollbar($('#directions-panel'));
+			//apiD.reinitialise();
+		});
+	}
+	
+}
+
+function destroy_Listscrollbar(callback){
+	if(apiL!=null && !$.isEmptyObject(apiL.jObj)){apiL.destroy();apiL=null;}
+	if($.isFunction(callback))callback();
+}
+function destroy_Dirscrollbar(callback){
+	if(apiD!=null && !$.isEmptyObject(apiD.jObj)){apiD.destroy();apiD=null;}
+	if($.isFunction(callback))callback();
 }
 function setup_Listscrollbar(jObj){
-	jObj.removeAttr('height');
-	jObj.height($('#selectedPlaceList_area').height()-(jObj.css("margin-top").split('px')[0]) );
-	
-	var settings = {
-		//showArrows: true
-	};
-	var pane = jObj;
-	pane.jScrollPane(settings);
-	apiL = pane.data('jsp');
+	if(typeof(jObj)!="undefined"){
+		apiL!=null;
+		jObj.removeAttr('height');
+		
+		jObj.find('.cAssest').removeAttr('style');
+		
+		jObj.height($('#selectedPlaceList_area').height()-(typeof(jObj.css("margin-top"))!=="undefined"?jObj.css("margin-top").split('px')[0]:0) );
+		
+		var settings = {
+			//showArrows: true
+		};
+		var pane = jObj;
+		pane.jScrollPane(settings);
+		apiL = pane.data('jsp');
+		$.extend(apiL,{jObj:jObj});
+		$.extend(apiL,{settings:settings});
+	}
 }
 function setup_Dirscrollbar(jObj){
-	jObj.removeAttr('height');
-	jObj.height($('#selectedPlaceList_area').height()-(jObj.css("margin-top").split('px')[0]) );
-	
-	var settings = {
-		//showArrows: true
-	};
-	var pane = jObj;
-	pane.jScrollPane(settings);
-	apiD = pane.data('jsp');
+	if(typeof(jObj)!="undefined"){
+		jObj.removeAttr('height');
+		jObj.find('.cAssest').removeAttr('style');
+		jObj.height($('#selectedPlaceList_area').height()-(typeof(jObj.css("margin-top"))!=="undefined"?jObj.css("margin-top").split('px')[0]:0) );
+		
+		var settings = {
+			//showArrows: true
+		};
+		var pane = jObj;
+		pane.jScrollPane(settings);
+		apiD = pane.data('jsp');
+		$.extend(apiD,{jObj:jObj});
+		$.extend(apiD,{settings:settings});
+	}
 }
 
 
@@ -1477,20 +1520,20 @@ function menuDressChild(jObj){
 	}
 }
 function setup_nav(jObj){
-	$('#main_nav li.parent:not(".altAction")').live('click',function(e){
+	$('#main_nav li.parent:not(".altAction")').off().on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		menuDressChild($(this));
-		$.each(ib, function(i) {ib[i].close();});
+		if(ib.length>0)$.each(ib, function(i) {ib[i].close();});
 		jObj.gmap('clear','markers');
 		jObj.gmap('clear','overlays');
 		updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 	});
-	$('#main_nav .parent li a').live('click',function(e){
+	$('#main_nav .parent li a').off().on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		menuDressChild($(this));
-		$.each(ib, function(i) {ib[i].close();});
+		if(ib.length>0)$.each(ib, function(i) {ib[i].close();});
 		jObj.gmap('clear','markers');
 		jObj.gmap('clear','overlays');
 		var params='';
@@ -1897,6 +1940,34 @@ function setup(jObj){
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function(){
 	$(window).resize(function(){
 		if($(window).width()<=320){
@@ -1913,23 +1984,61 @@ $(document).ready(function(){
 	var listOffset=0;
 	$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
-		$('#centralMap').append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
+		mapInst=$('#centralMap');
+		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		if($('.veiw_base_layout').length){
-			ini_map_view($('#centralMap'),setup);
+			ini_map_view(mapInst,setup);
 		}else{
 			iniMap("",setup);
 		}
-		if($('#centralMap').length){
+		if(mapInst.length){
 			$(window).resize(function(){
+				
+				// can't us mapInst here cause it's still in the admin area.  Split that.
 				resizeBg($('.central_layout.public.central #centralMap'),($('.embeded').length?0:($(window).height()<=404?0:130)),($('.embeded').length?0:($(window).width()<=404?0:($(window).width()<=600?155:201))) + $('#selectedPlaceList').width())
-				//201
 			}).trigger("resize");
 			$(window).resize(function(){
+				// can't us mapInst here cause it's still in the admin area.  Split that.
+				resizeBg($('#nav'),$('.central_layout.public.central #centralMap').height() );
 				resizeBg($('.cAssest'),($('.embeded').length?0:130));
+				
+				reset_Dirscrollbar();
+				reset_Listscrollbar();
 				
 				//if($('#listing').length)setup_scrollbar($('#listing'));
 				
 			}).trigger("resize");
 		}
 	}
+	
+	$('#resetmap').on('click',function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		if(!$('#selectedPlaceList').is($('.ini'))){
+			destroy_Dirscrollbar(function(){
+				destroy_Listscrollbar(function(){
+					$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
+					$('#selectedPlaceList').addClass('ini');
+					$('#selectedPlaceList_area').html("");
+				});
+			});
+		}
+
+		$('#main_nav').find('.active').removeClass('active');
+		$('#selectedPlaceList_btn').css('display',"none");
+		if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
+		//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
+		//$('.mapControl').remove();
+		mapInst.gmap("destroy",function(ele){
+			mapInst.html('');
+			$('.mapControl').remove(); 
+			if($('.veiw_base_layout').length){
+				ini_map_view(mapInst,setup);
+			}else{
+				iniMap("",setup);
+			}
+			$(window).trigger("resize");
+			//alert("done");
+		});
+	});
 });

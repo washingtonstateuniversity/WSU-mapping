@@ -308,9 +308,10 @@
 		/**
 		 * Destroys the plugin.
 		 */
-		destroy: function() {
+		destroy: function(callback) {
 			this.clear('markers').clear('services').clear('overlays')._c(this.instance);
 			jQuery.removeData(this.el, this.name);
+			this._call(callback, this);
 		},
 		
 		/**

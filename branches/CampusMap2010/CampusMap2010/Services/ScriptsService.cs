@@ -24,12 +24,12 @@ using Castle.MonoRail.Framework;
 using campusMap.Filters;
 using log4net;
 using log4net.Config;
-using System.Text;
+
 
 using SquishIt.Framework;
 using SquishIt.Framework.Css;
 using SquishIt.Framework.JavaScript;
-using System.Security.Cryptography;
+
 
 #endregion
 
@@ -37,28 +37,14 @@ namespace campusMap.Services
 {
     public class ScriptsService
     {
-        public static string CalculateMD5Hash(string input)
-        {
-            // step 1, calculate MD5 hash from input
-            MD5 md5 = MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
+        
         public static String Css(String files)
         {
             return Css(files, false);
         }
         public static String Css(String files, Boolean debug)
         {
-            String name = CalculateMD5Hash(files);
+            String name = HelperService.CalculateMD5Hash(files);
             String path = @"/cache/script/css/";
             String FilePath = path + name + ".css";
 
@@ -88,7 +74,7 @@ namespace campusMap.Services
         public static String Js(String files,Boolean debug)
         {
 
-            String name = CalculateMD5Hash(files);
+            String name = HelperService.CalculateMD5Hash(files);
             String path = @"/cache/script/js/";
             String FilePath = path + name + ".js" ;
 

@@ -490,8 +490,7 @@ namespace campusMap.Controllers
             CancelView();
 
             PropertyBag["ajaxed"] = ajax;
-
-            campusMap.Services.LogService.writelog("Editing place " + id);
+            LogService.writelog("Editing place " + id);
             PropertyBag["credits"] = "";
             PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
@@ -1628,6 +1627,7 @@ namespace campusMap.Controllers
                 place.outputError = false;
             }
             ActiveRecordMediator<place>.Save(place);
+            
             //place.Refresh();
 
             if (apply != null || ajaxed_update)

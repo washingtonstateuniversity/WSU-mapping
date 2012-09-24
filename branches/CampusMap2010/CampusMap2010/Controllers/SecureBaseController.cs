@@ -11,9 +11,9 @@ namespace campusMap.Controllers
     [Filter(ExecuteWhen.BeforeAction, typeof(AuthUserAuthenticationFilter))]
 	public abstract class SecureBaseController : BaseController
 	{
+        protected UserService userService = new UserService();
         public void logout()
         {
-            
             String username = Authentication.authenticate();
             Authentication.logout();
             // save user in database

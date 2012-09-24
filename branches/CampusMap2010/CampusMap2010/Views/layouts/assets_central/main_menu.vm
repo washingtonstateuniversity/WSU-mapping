@@ -48,13 +48,8 @@
 </ul>
 <form action="#" id="getDirections">
 	<ul id="dir">
-		<li>
-			<a>Directions<em></em></a>
-			<span id="dirArea">
-				<span id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></span>
-				<span id="directionsTo"><input type="text" value="WSU $!campus.name" placeholder="To..." /></span>
-			</span>
-		</li>
+		<li id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></li>
+		<li id="directionsTo"><input type="text" value="WSU $!campus.name" placeholder="To..." /></li>
 	</ul>
 </form>
 <div id="localfooter" style="padding:0px;">

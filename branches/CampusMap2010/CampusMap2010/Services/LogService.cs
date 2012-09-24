@@ -32,7 +32,7 @@ namespace campusMap.Services
         {
             logs loger = new logs();
 
-            loger.logentry = txt;
+            loger.logentry = txt + " :by: " + UserService.getNid() + " :from: " + UserService.getUserIp();
             loger.dtOfLog = DateTime.Now;
             loger.Save();
         }

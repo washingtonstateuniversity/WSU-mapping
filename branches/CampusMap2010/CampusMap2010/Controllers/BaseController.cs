@@ -43,10 +43,9 @@ namespace campusMap.Controllers
         protected PlaceService placeService = new PlaceService();
         protected HelperService helperService = new HelperService();
         protected ImageService imageService = new ImageService();
-        protected UserService userService = new UserService();
         protected LogService logService = new LogService();
         protected FieldsService fieldsService = new FieldsService();
-        protected StylesService StylesService = new StylesService();
+        //protected StylesService StylesService = new StylesService();
         protected googleService googleService = new googleService();
         protected geometricService geometricService = new geometricService();
         protected ScriptsService ScriptsService = new ScriptsService();
@@ -253,8 +252,6 @@ namespace campusMap.Controllers
 
 
         #endregion
-
-
 
     }
 

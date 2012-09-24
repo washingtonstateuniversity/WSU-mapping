@@ -241,7 +241,7 @@ namespace campusMap.Controllers
         }
         public void Edit_view(int id, int page)
         {
-            campusMap.Services.LogService.writelog("Editing view " + id);
+            LogService.writelog("Editing map view " + id);
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();

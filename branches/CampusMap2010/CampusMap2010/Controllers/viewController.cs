@@ -302,7 +302,7 @@ namespace campusMap.Controllers
 
         public void _edit(int id, int page)
         {
-            campusMap.Services.LogService.writelog("Editing view " + id);
+            LogService.writelog("Editing map view " + id);
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
@@ -446,6 +446,7 @@ namespace campusMap.Controllers
         }
         public void edit_nav(int id)
         {
+            LogService.writelog("Editing nav categories " + id);
             categories nav = ActiveRecordBase<categories>.Find(id);
             PropertyBag["nav"] = nav;
             RenderView("../admin/nav/_editor");
@@ -457,6 +458,7 @@ namespace campusMap.Controllers
         }
         public void reorder_nav([ARDataBind("navs", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] categories[] navs)
         {
+            LogService.writelog("Editing reordering nav category " + id);
             foreach (categories nav in navs)
             {
                 ActiveRecordMediator<categories>.Save(nav);
@@ -465,6 +467,7 @@ namespace campusMap.Controllers
         }
         public void delete_nav(int id)
         {
+            LogService.writelog("Deleting nav categoy " + id);
             categories nav = ActiveRecordBase<categories>.Find(id);
             Flash["message"] = "A Place type, <strong>" + nav.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<categories>.Delete(nav);
@@ -646,6 +649,7 @@ namespace campusMap.Controllers
 
             if (view.id == 0)
             {
+
                 if (!UserService.checkPrivleage("can_publish") || view.status == null)
                 {
                     status stat = ActiveRecordBase<status>.Find(1);
@@ -710,7 +714,7 @@ namespace campusMap.Controllers
             
 
             ActiveRecordMediator<map_views>.Save(view);
-
+            
             cleanUpview_media(view.id);
 
             Flash["view"] = null;
@@ -739,6 +743,7 @@ namespace campusMap.Controllers
 
         public void delete(int id)
         {
+            LogService.writelog("Deleting view " + id);
             map_views view = ActiveRecordBase<map_views>.Find(id);
             Flash["message"] = "Article, <strong>Note:" + view.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<map_views>.Delete(view);
