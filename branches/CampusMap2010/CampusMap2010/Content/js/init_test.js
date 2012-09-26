@@ -123,19 +123,15 @@ function iniMap(url,callback){
 function ini_GAtracking(gacode){
 			var data = [
 				{
-					"element":"a:not(a[href='#'])",
+					"element":"a[href^='http']:not([href*='wsu.edu'])",
 					"options":{
+						"mode":"event,_link",
 						"category":"outbound"
 						}
 				},{
-					"element":"a[href*='wsu.edu']:not(a[href='#'])",
+					"element":"a[href*='wsu.edu']:not([href^='/'],[href*='**SELF_DOMAIN**'])",
 					"options":{
-						"category":"internal",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a:not([href^='http:'],a[href='#'])",
-					"options":{
+						"skip_internal":"true",
 						"category":"internal",
 						"overwrites":"true"
 						}
@@ -153,8 +149,6 @@ function ini_GAtracking(gacode){
 						"overwrites":"true"
 						}
 				},
-				
-				
 				{
 					"element":"a.track.outbound",
 					"options":{

@@ -965,7 +965,7 @@ function load_view_editor() {
 										'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
 											'<span class="ui-icon ui-icon-trash"></span>'+
 										'</a>'+
-									'</span>'+name+'<input type="hidden" value="'+selection+'" class="place" name="'+(role=="place"?'place':'geo')+'list[]"/><em></em>'+
+									'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
 								'</div>'+
 							'</li>';
 				container.find('ol.sortable').append(addEle);
@@ -1054,26 +1054,66 @@ function load_view_editor() {
 	if($('.onfliterList').length>0){
 		$(".onfliterList").on('change',function () {
 			var self=$(this);
-			$.getJSON(siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
-				self.closest('div').find('.onsubfliterList').html(function(){
-					var str="<option value=''>All</option>";
-					$.each(data,function(i,v){
-						str += "<option value='"+v.id+"'>"+v.name+"</option>";
-					});
-					return str;
-				}).attr('role',self.val());
-			});
+			var role = self.closest('fieldset').attr('role');
+			if(self.val()==""){
+				self.closest('fieldset').find('.subFilter').hide();
+				self.closest('fieldset').find('.mainFilter').hide();
+			}else{
+				$.getJSON(siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
+					if(data=="false"){
+						alert("false");
+						$.colorbox({
+							html:function(){
+								return '<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3></div>';
+							},
+							scrolling:false,
+							opacity:0.7,
+							transition:"none",
+							open:true,
+							onComplete:function(){
+								prep();
+								$.colorbox.resize();
+							}
+						});
+						return false;
+					}
+					self.closest('fieldset').find('.onsubfliterList').html(function(){
+						var str="<option value=''>All</option>";
+						$.each(data,function(i,v){
+							str += "<option value='"+v.id+"'>"+v.name+"</option>";
+						});
+						return str;
+					}).attr('role',self.val());
+					if(self.val().indexOf("all_")>-1 || self.val().indexOf("authors_")>-1){
+						self.closest('fieldset').find('.subFilter').hide();	
+						self.closest('fieldset').find('.finFill').html(function(){
+							var str="<option value=''>Select a "+role+"</option>";
+							$.each(data,function(i,v){
+								var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
+								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
+							});
+							self.closest('fieldset').find('.mainFilter').show();
+							return str;
+						});
+					}else{
+						self.closest('fieldset').find('.subFilter').show();	
+					}
+				});
+			}
 		});
 	}
 	if($('.onfliterList').length>0){
 		$(".onsubfliterList").on('change',function () {
 			var self=$(this);
-			$.getJSON(siteroot+"public/get_place_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
-				self.closest('div').find('#place_select').html(function(){
-					var str="<option value=''>All</option>";
+			var role = self.closest('fieldset').attr('role');
+			$.getJSON(siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
+				self.closest('fieldset').find('.finFill').html(function(){
+					var str="<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
 					$.each(data,function(i,v){
-						str += "<option value='"+v.id+"'>"+v.prime_name+"</option>";
+								var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
+								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
 					});
+					self.closest('fieldset').find('.mainFilter').show();
 					return str;
 				});
 			});

@@ -108,7 +108,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Height</strong></label><br/>
 				<input type="text" name="view.height" id="height" value="$!view.height" class="text ui-widget-content ui-corner-all" />
-				#set($mess="You may resize the map thru the Preview tab by simply draging the corner of the map to the size you wish to see")
+				#set($mess="You may resize the map thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> by simply draging the corner of the map to the size you wish to see")
 				#parse("admin/noted.vm")
 			</div>
 		</fieldset>
@@ -116,12 +116,12 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<legend>Center</legend>
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Latitude</strong></label><br/>
-				<input type="text" name="Length" id="Lat" value="$!lat" class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="Length" id="Lat" value="$!lat" class="text ui-widget-content ui-corner-all" required="required" />
 			</div><br/> 
 			<div class="col2"  style="">
 				<label for="Long"><strong>Longitude</strong></label><br/>
-				<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" />
-				#set($mess="by draging the map with drag mode on thru the Preview tab and simple draging the map to the view you wish to see")
+				<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" required="required" />
+				#set($mess="by draging the map with drag mode on thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> and simple draging the map to the view you wish to see")
 				#parse("admin/noted.vm")
 			</div>
 		</fieldset>
@@ -134,7 +134,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 						#foreach($place in $view.places)
 							<li  id="list_${c}">
 								<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
-									$!place.prime_name<input type="hidden" name="placelist[]" class="place" value="$place.id" /><em></em>
+									$!place.prime_name<input type="hidden" name="placelist[]" class="list_place" value="$place.id" /><em></em>
 								</div>	
 							</li>
 							#set($c=$c+1)
@@ -149,50 +149,49 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 				<label for="places">Add Places to the Map,</label><br/>
 				<strong>Under:</strong>
 				<select id="placeFilter" class="onfliterList">
-					<option value="-2" #if(!$searchId || $searchId == -2) selected="selected" #end>Your Places</option>
-					<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
-					<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
-					<option value="categories" #if($searchId == 1) selected="selected" #end>Categories</option>
-                    <option value="colleges" #if($searchId == 1) selected="selected" #end>Colleges</option>
-                    <option value="admindepartments" #if($searchId == 1) selected="selected" #end>Admin Departments</option>
-                    <option value="departments" #if($searchId == 1) selected="selected" #end>Departments</option>
-                    <option value="schools" #if($searchId == 1) selected="selected" #end>Schools</option>
-                    <option value="programs" #if($searchId == 1) selected="selected" #end>Programs</option>
+                	<option value="">Filter Selection</option>
+					<option value="authors_places">Your Places</option>
+					<!--<option value="owned_sections">Your Sections</option>-->
+					<option value="all_places">All</option>
+					<option value="categories">Categories</option>
+                    <option value="colleges">Colleges</option>
+                    <option value="admindepartments">Admin Departments</option>
+                    <option value="departments">Departments</option>
+                    <option value="schools">Schools</option>
+                    <option value="programs">Programs</option>
 				</select><br/>
-                <span class="subFilter">
-				<strong>for:</strong>
-                <select id="placeSubFilter" class="onsubfliterList w200">
-                	<option value="">All</option>
-					#foreach($cat in $listcats)
-						<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
-					#end
-				</select><br/>
+                <span class="subFilter" style="display:none;">
+                    <strong>for:</strong>
+                    <select id="placeSubFilter" class="onsubfliterList w200">
+                        <option value="">All</option>
+                        #foreach($cat in $listcats)
+                            <option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
+                        #end
+                    </select><br/>
                 </span>
-                <br/>
-				<select id="place_select" class="" style="width:171px;">
-					<option class="place" value="">Select to add</option>
-					#foreach($place in $places)
-						<option class="place" value="$place.id" #if($view.places.Contains($place))disabled="disabled"#end>$!place.prime_name</option>
-					#end
-				</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+               
+                <span class="mainFilter" style="display:none;">
+                    <select id="place_select" class="finFill" style="width:171px;">
+                        <option class="place" value="">Select to add</option>
+                        #foreach($place in $places)
+                            <option class="place" value="$place.id" #if($view.places.Contains($place))disabled="disabled"#end>$!place.prime_name</option>
+                        #end
+                    </select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a><br/>
+				</span>
 				
-				
-				<br/>#*<span class="NOTED"><strong >Note:</strong><span style="display:none;">If a place has a shape
-				<br/>you may wish to not pick
-				<br/>a Geometric Shape.</span><strong ><em> (+)</em></strong></span>*#
-				
+				<br/>
 				#set($mess="If a place has a shape <br/>you may wish to not pick <br/>a Geometric Shape.")
 				#parse("admin/noted.vm")
 				
 				
-				<br/>
+				
 				<br/><strong>force marker style:</strong>
 				<select name="view.forced_marker_style" id="forced_marker_style">
 					<option class="geometric" value="" #if($!view.forced_marker_style) selected="selected" #end>Passthru (none)</option>
                     #set($i=0)
 					#foreach($style in $styles_marker)
                    		#if($i==0)<optgroup label="Marker styles">#end
-						<option class="geometric" value="$style.id" #if($view.forced_marker_style.Contains($style)) selected="selected" #end>$!style.name</option>
+						<option class="geometric" value="$style.id" #if($view.forced_marker_style.id == $style.id) selected="selected" #end>$!style.name</option>
                         #set($i=$i+1)
 					#end
 				</select>
@@ -206,7 +205,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 						#foreach($geo in $view.geometrics)
 							<li  id="list_${c}">
 								<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
-									$!geo.name<input type="hidden" name="geolist[]" class="place" value="$geo.id" /><em></em>
+									$!geo.name<input type="hidden" name="geolist[]" class="list_geo" value="$geo.id" /><em></em>
 								</div>	
 							</li>
 							#set($c=$c+1)
@@ -221,29 +220,29 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 
                 <label for="name">Add Shapes to the Map,</label><br/>
 				<strong>Under:</strong>
-				<select id="list${controller.getView()}Type" class="fliterList">
-					<option value="-2" #if($searchId == -2) selected="selected" #end>Your Shapes</option>
-					<option value="-3" #if($searchId == -3) selected="selected" #end>Your Sections</option>
-					<option value="-1" #if($searchId == -1) selected="selected" #end>All</option>
-					#foreach($cat in $listcats)
-						<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
-					#end
-				</select><br/><br/>
-				<select id="geo_select" class="" style="width:171px;">
-					<option class="place" value="">Select to add</option>
-					#foreach($geo in $geometrics)
-						<option class="geometric" value="$geo.id" #if($view.geometrics.Contains($geo))disabled="disabled"#end>$!geo.name</option>
-					#end
-				</select><a href="#" title="Add Place" id="addGeoSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+				<select id="geoFilter" class="onfliterList">
+                	<option value="">Filter Selection</option>
+					<option value="authors_geometrics">Your Shapes</option>
+					<!--<option value="owned_sections">Your Sections</option>-->
+					<option value="all_geometrics">All</option>
+				</select><br/>
+                <span class="mainFilter" style="display:none;"><br/>
+                    <select id="geo_select" class="finFill" style="width:171px;">
+                        <option class="place" value="">Select to add</option>
+                        #foreach($geo in $geometrics)
+                            <option class="geo" value="$geo.id" #if($view.geometrics.Contains($geo))disabled="disabled"#end>$!geo.name</option>
+                        #end
+                    </select><a href="#" title="Add Shapes" id="addGeoSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+                    <br/>
+				</span>
 				
-				
-				<br/><br/><strong>force shape style:</strong>
+				<br/><strong>force shape style:</strong>
 				<select name="view.forced_shapes_style" id="forced_shapes_style">
 					<option class="geometric" value="" #if($!view.forced_shapes_style) selected="selected" #end>Passthru (none)</option>
                     #set($i=0)
 					#foreach($style in $styles_polygon)
                    		#if($i==0)<optgroup label="Polygon styles">#end
-						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.Contains($style)) selected="selected" #end>$!style.name</option>
+						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.id == $style.id) selected="selected" #end>$!style.name</option>
                         #set($i=$i+1)
 					#end
                     #if($i>0)</optgroup>#end
@@ -251,7 +250,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
                     #set($j=0)
                     #foreach($style in $styles_polyline)
                     	#if($j==0)<optgroup label="Polyline styles">#end
-						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.Contains($style)) selected="selected" #end>$!style.name</option>
+						<option class="geometric" value="$style.id" #if($view.forced_shapes_style.id == $style.id) selected="selected" #end>$!style.name</option>
                         #set($j=$j+1)
 					#end
                     #if($j>0)</optgroup>#end
@@ -753,19 +752,19 @@ $formbuttons <div class="clear"></div>
       #set($count = 0)
       #set($id = 0)
       #foreach($placeauthor in $placeauthors)
-      <div id="div$placeauthor.id">
-        <select name="Authors[$!count].id" id="author$placeauthor" class="authorSelect">
-          <option class="" value="">-select-</option>
-          #foreach($author in $authors)
-          <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
-          #set($id = $placeauthor.id)
-          #end
-        </select>
-
-        #if($id!=0)
-        <a title="$id" rel="$view.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
-          <span class="ui-icon ui-icon-trash"></span>
-        </a>
+          <div id="div$placeauthor.id">
+            <select name="Authors[$!count].id" id="author$placeauthor" class="authorSelect">
+              <option class="" value="">-select-</option>
+              #foreach($author in $authors)
+              <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
+              #set($id = $placeauthor.id)
+              #end
+            </select>
+    
+            #if($id!=0)
+            <a title="$id" rel="$view.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
+              <span class="ui-icon ui-icon-trash"></span>
+            </a>
         #end
         <div class="lightLine"></div>
       </div>

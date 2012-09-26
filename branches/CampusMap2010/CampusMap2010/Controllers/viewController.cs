@@ -294,15 +294,17 @@ namespace campusMap.Controllers
             Mapper.Map(org, copy);
 
             copy.SaveAndFlush();
-
+            LogService.writelog("Copied map view " + id);
             Flash["message"] = "New copy saved to the system.  You may now edit " + name;
             RedirectToUrl("~/view/_edit.castle?id=" + copy.id);
         }
-
-
         public void _edit(int id, int page)
         {
-            LogService.writelog("Editing map view " + id);
+            _edit(id, page, false);
+        }
+        public void _edit(int id, int page, Boolean applied)
+        {
+            if (!applied) LogService.writelog("Editing map view " + id);
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
@@ -599,6 +601,7 @@ namespace campusMap.Controllers
 
             if (cancel != null)
             {
+                LogService.writelog("Canceled changes mapview " + view.id);
                 view.checked_out_by = null;
                 ActiveRecordMediator<map_views>.Save(view);
                 RedirectToAction("list");
@@ -699,15 +702,21 @@ namespace campusMap.Controllers
             }
             view.options_obj = Serialize(values);//jss.Serialize(usettings);
 
-            view.geometrics.Clear();
-            foreach (int newItem in geolist)
+            if (view.geometrics != null)
             {
-                view.geometrics.Add(ActiveRecordBase<geometrics>.Find(newItem));
+                view.geometrics.Clear();
+                foreach (int newItem in geolist)
+                {
+                    view.geometrics.Add(ActiveRecordBase<geometrics>.Find(newItem));
+                }
             }
-            view.places.Clear();
-            foreach (int newItem in placelist)
+            if (view.places != null)
             {
-                view.places.Add(ActiveRecordBase<place>.Find(newItem));
+                view.places.Clear();
+                foreach (int newItem in placelist)
+                {
+                    view.places.Add(ActiveRecordBase<place>.Find(newItem));
+                }
             }
 
 
@@ -724,19 +733,21 @@ namespace campusMap.Controllers
 
             if (apply != null)
             {
+                LogService.writelog("Applied changes mapview " + view.id);
                 if (apply != " Save ")
                 {
-                    RedirectToUrl("~/view/_edit.castle?id=" + view.id);
+                    RedirectToUrl("~/view/_edit.castle?applied=true&id=" + view.id);
                 }
                 else
                 {
-                    RedirectToReferrer();
+                    RedirectToUrl("~/view/_edit.castle?applied=true"); //RedirectToReferrer();
                 }
             }
             else
             {
                 view.checked_out_by = null;
                 ActiveRecordMediator<map_views>.Save(view);
+                LogService.writelog("Saved mapview " + view.id);
                 RedirectToAction("list");
             }
         }

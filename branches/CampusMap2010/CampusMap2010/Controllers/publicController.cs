@@ -78,7 +78,7 @@
         //[Layout("central")]
         public class publicController : BaseController
         {
-            ILog log = log4net.LogManager.GetLogger("publicController");
+            //ILog log = log4net.LogManager.GetLogger("publicController");
             
 
             #region JSON OUTPUT
@@ -291,7 +291,7 @@
             }
             public void central(string[] cat, int activePlace, int pid, Boolean eb,Boolean hasUrl,string sm_url)
             {
-                /* */log.Info(HttpContext.Current.Request.Headers["User-Agent"]);
+                /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);*/
                 if (HttpContext.Current.Request.Headers["User-Agent"] != null)
                 {
                     if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
@@ -453,6 +453,74 @@
                     RenderText("false");
                 }
             }
+
+
+            public void get_authors_places_list(String callback)
+            {
+                get_authors_places_list(UserService.getUser(), callback);
+            }
+
+            public void get_authors_places_list(authors user, String callback)
+            {
+                CancelView();
+                CancelLayout();
+                String nsql = "SELECT p FROM place AS p WHERE " + user.id + " in Elements(p.Authors)";
+                SimpleQuery<place> nq = new SimpleQuery<place>(typeof(place), nsql);
+                var tmp = nq.Execute();
+                var tmp2 = tmp.ToArray().Select(i => new { i.id, i.prime_name });
+
+                if (tmp2.Count() > 0)
+                {
+                    render_list_json(tmp2, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+            /* come back to
+            public void get_owned_sections_list(String callback)
+            {
+                get_owned_sections_list(UserService.getUser(), callback);
+            }
+
+            public void get_owned_sections_list(authors user, String callback)
+            {
+                CancelView();
+                CancelLayout();
+                String nsql = "SELECT p FROM place AS p WHERE " + user + " in Elements(p.Authors)";
+                SimpleQuery<place> nq = new SimpleQuery<place>(typeof(place), nsql);
+                var tmp = nq.Execute();
+                var tmp2 = tmp.ToArray().Select(i => new { i.id, i.prime_name });
+
+                if (tmp2.Count() > 0)
+                {
+                    render_list_json(tmp2, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+            */
+
+            public void get_all_places_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<place>.FindAll().Select(i => new { i.id, i.prime_name });
+                if (tmp.Count() > 0)
+                {
+                    render_list_json(tmp, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+
+
+
             // by = deparment
             public void get_place_list_attr(string by,int id,String callback)
             {
@@ -471,6 +539,52 @@
                     RenderText("false");
                 }
             }
+
+
+            public void get_authors_geometrics_list(String callback)
+            {
+                get_authors_geometrics_list(UserService.getUser(), callback);
+            }
+
+            public void get_authors_geometrics_list(authors user, String callback)
+            {
+                CancelView();
+                CancelLayout();
+                String nsql = "SELECT g FROM geometrics AS g WHERE " + user.id + " in Elements(g.Authors)";
+                SimpleQuery<geometrics> nq = new SimpleQuery<geometrics>(typeof(geometrics), nsql);
+                var tmp = nq.Execute();
+                var tmp2 = tmp.ToArray().Select(i => new { i.id, i.name });
+
+                if (tmp2.Count() > 0)
+                {
+                    render_list_json(tmp2, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+            public void get_all_geometrics_list(String callback)
+            {
+                CancelView();
+                CancelLayout();
+                var tmp = ActiveRecordBase<geometrics>.FindAll().Select(i => new { i.id, i.name });
+                if (tmp.Count() > 0)
+                {
+                    render_list_json(tmp, callback);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }
+
+
+
+
+
+
+
             public void render_list_json(dynamic tmp, String callback)
             {
                 var jss = new JavaScriptSerializer();

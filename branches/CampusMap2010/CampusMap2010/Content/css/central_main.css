@@ -553,7 +553,7 @@ fieldset{padding: 4px 8px 10px;}
 	
 #selectedPlaceList.ini{padding:0px;}
 	
-#selectedPlaceList_btn{position:absolute;top:5px;right:-8px; width:28px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
+#selectedPlaceList_btn{position:absolute;top:5px;right:-4px; width:24px;height:57px;display:inline-block;text-indent:-9999px;background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;}
 #selectedPlaceList_btn:hover{ background-position:left bottom;}
 #selectedPlaceList_btn.active{ background-position:right top;}
 #selectedPlaceList_btn.active:hover{ background-position:right bottom;}

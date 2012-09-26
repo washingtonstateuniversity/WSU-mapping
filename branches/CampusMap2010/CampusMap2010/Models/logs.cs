@@ -19,38 +19,48 @@ namespace campusMap.Models
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class logs : ActiveRecordBase<logs>
     {
-        private int id;
-        [PrimaryKey]
-        virtual public int Id
+        private int _id;
+        [PrimaryKey("Id")]
+        virtual public int id
         {
-            get { return id; }
-            set { id = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-        private string LOG;
-        [Property]
-        virtual public string logentry
+        private string _log;
+        [Property("logentry")]
+        virtual public string entry
         {
-            get { return LOG; }
-            set { LOG = value; }
+            get { return _log; }
+            set { _log = value; }
         }
-
-        private DateTime? LOGDATE;
+        private string _nid;
         [Property]
-        virtual public DateTime? dtOfLog
+        virtual public string nid
         {
-            get { return LOGDATE; }
+            get { return _nid; }
+            set { _nid = value; }
+        }
+        private string _ip;
+        [Property]
+        virtual public string ip
+        {
+            get { return _ip; }
+            set { _ip = value; }
+        }
+        private DateTime? _logdate;
+        [Property("dtOfLog")]
+        virtual public DateTime? date
+        {
+            get { return _logdate; }
             set
             {
                 if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
                 {
                     // bla is a valid sql datetime
-                    LOGDATE = value;
+                    _logdate = value;
 
                 }
             }
         }
-
-
-
     }
 }

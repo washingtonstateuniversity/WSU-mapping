@@ -32,6 +32,45 @@ namespace campusMap.Services
 {
     public class UserService
 	{
+        public static Boolean loginUser()
+        {
+            String username = Authentication.authenticate();
+            HttpContext.Current.Session["username"] = username; //Maybe this should be md5'd?
+            // save user in database
+            authors[] author_list = ActiveRecordBase<authors>.FindAll();
+            authors temp = null;
+            foreach (authors author in author_list)
+            {
+                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                { temp = author; }
+            }
+            if (temp != null)
+            {
+                temp.logedin = true;
+                temp.Save();
+            }
+            return temp.logedin;
+        }
+        public static Boolean logoutUser()
+        {
+            String username = HttpContext.Current.Session["username"] != null ? HttpContext.Current.Session["username"].ToString() : null;
+            if (username != null)
+            {
+                // save user in database
+                authors[] author_list = ActiveRecordBase<authors>.FindAll();
+                authors temp = null;
+                foreach (authors author in author_list)
+                {
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                    { temp = author; }
+                }
+                temp.logedin = false;
+                temp.Save();
+                return temp.logedin?false:true;
+            }
+            return true;
+        }
+
 
         public static authors[] getLogedIn()
         {

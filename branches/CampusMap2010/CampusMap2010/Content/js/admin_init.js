@@ -13,7 +13,7 @@
 	var image_Credit='';
 	var image_Caption='';
 	var FileName='';
-	
+	var $tabs;
 	
 (function($){$.fn.blink = function(options){var defaults = { delay:500 };var options = $.extend(defaults, options);return this.each(function(){var obj = $(this);setInterval(function(){if($(obj).css("visibility") == "visible"){$(obj).css('visibility','hidden');}else{$(obj).css('visibility','visible');}}, options.delay);});}}(jQuery));
 
@@ -518,7 +518,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
         if($('#content_tar #tabs').length>0){
             taboptions={cookie:{expires: 1,path:'/'+view+mcv_action}};
         } 
-        $( "#tabs" ).tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:{}, {
+        $tabs = $( "#tabs" ).tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:{}, {
 				show: function(event, ui) {
 					if($('#place_id').length){
 						tinyMCE.triggerSave();

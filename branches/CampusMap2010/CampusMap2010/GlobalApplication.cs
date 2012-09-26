@@ -73,42 +73,17 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            if (Authentication.logged_in())
+            if (Authentication.logged_in() && Services.UserService.loginUser())
             {
-                String username = Authentication.authenticate();
-                Session["username"] = username;
-                // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
-                {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                    { temp = author; }
-                }
-                if (temp != null)
-                {
-                    temp.logedin = true;
-                    temp.Save();
-                }
+                Services.LogService.writelog("User loged in");
             }
-            
         }
 
         protected void Session_OnEnd(Object sender, EventArgs e)
         {
-            String username = Session["username"] != null ? Session["username"].ToString() : null;
-            if (username != null)
+            if (Services.UserService.logoutUser())
             {
-                // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
-                {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
-                    { temp = author; }
-                }
-                temp.logedin = false;
-                temp.Save();
+                Services.LogService.writelog("User was loged out");
             }
         }
 

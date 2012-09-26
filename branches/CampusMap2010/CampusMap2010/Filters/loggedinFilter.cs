@@ -25,7 +25,7 @@ namespace campusMap.Filters
         protected HelperService helperService = new HelperService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-           if (Authentication.logged_in())
+            if (UserService.isLogedIn() || Authentication.logged_in()) /* not 100% we can't just strip off the Authentication.*/
             {
                 authors user = UserService.getUser();
                 if (user != null)
@@ -37,7 +37,6 @@ namespace campusMap.Filters
                 controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
                 controllerContext.PropertyBag["userService"] = userService;
             }
-
            controllerContext.PropertyBag["helperService"] = helperService;
            return true;
         }

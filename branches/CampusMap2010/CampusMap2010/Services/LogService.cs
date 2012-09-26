@@ -31,9 +31,10 @@ namespace campusMap.Services
         public static void writelog(string txt)
         {
             logs loger = new logs();
-
-            loger.logentry = txt + " :by: " + UserService.getNid() + " :from: " + UserService.getUserIp();
-            loger.dtOfLog = DateTime.Now;
+            loger.entry = txt;
+            loger.nid = UserService.getNid()!=""?UserService.getNid():"";
+            loger.ip = UserService.getUserIp();
+            loger.date = DateTime.Now;
             loger.Save();
         }
     }
