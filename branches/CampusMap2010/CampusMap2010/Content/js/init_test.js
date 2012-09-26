@@ -148,43 +148,6 @@ function ini_GAtracking(gacode){
 						"category":"email",
 						"overwrites":"true"
 						}
-				},
-				{
-					"element":"a.track.outbound",
-					"options":{
-						"category":"outbound",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a.track.internal",
-					"options":{
-						"skip_internal":"true",
-						"category":"internal",
-						"noninteraction":"true",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a.track.internal",
-					"options":{
-						"skip_internal":"true",
-						"category":"internal",
-						"noninteraction":"true",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a.track.email",
-					"options":{
-						"category":"email",
-						"overwrites":"true",
-						"alias":"email_tracking"
-						}
-				},{
-					"element":"#errorSubmit",
-					"options":{
-						"category":"email",
-						"overwrites":"true",
-						"alias":"_error_email_track_"
-						}
 				}
 			];
 			$.jtrack.defaults.debug.run = false;
@@ -1514,13 +1477,25 @@ function setup_Dirscrollbar(jObj){
 }
 
 
-
+function reset_listings(){
+	if(!$('#selectedPlaceList').is($('.ini'))){
+		destroy_Dirscrollbar(function(){
+			destroy_Listscrollbar(function(){
+				$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
+				$('#selectedPlaceList').addClass('ini');
+				$('#selectedPlaceList_area').html("");
+			});
+		});
+	}
+	$('#selectedPlaceList_btn').css('display',"none");
+}
 function menuDressChild(jObj){
 	if(jObj.is($('.parent'))){
+		var self_active = jObj.is($('.active'));
 		$('#main_nav .active').removeClass('active');
 		$('.checked').removeClass('checked');
 		$('.childSelected').removeClass('childSelected');
-		jObj.addClass('active');	
+		if(!self_active)jObj.addClass('active');	
 	}else{
 		jObj.closest('li').toggleClass('checked');
 		jObj.closest('.parent').addClass('active');
@@ -1536,7 +1511,11 @@ function setup_nav(jObj){
 		if(ib.length>0)$.each(ib, function(i) {ib[i].close();});
 		jObj.gmap('clear','markers');
 		jObj.gmap('clear','overlays');
-		updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
+		if($(this).is($('.active'))){
+			updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
+		}else{
+			reset_listings();
+		}
 	});
 	$('#main_nav .parent li a').off().on('click',function(e){
 		e.stopPropagation();
@@ -2019,22 +1998,14 @@ $(document).ready(function(){
 			}).trigger("resize");
 		}
 	}
-	
+
 	$('#resetmap').on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		if(!$('#selectedPlaceList').is($('.ini'))){
-			destroy_Dirscrollbar(function(){
-				destroy_Listscrollbar(function(){
-					$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
-					$('#selectedPlaceList').addClass('ini');
-					$('#selectedPlaceList_area').html("");
-				});
-			});
-		}
-
+		
+		reset_listings();
 		$('#main_nav').find('.active').removeClass('active');
-		$('#selectedPlaceList_btn').css('display',"none");
+		
 		if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
 		//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
 		//$('.mapControl').remove();
