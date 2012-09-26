@@ -87,11 +87,14 @@ namespace campusMap.Services
         {
             authors[] author_list = getLogedIn();
             bool temp = false;
-            if (String.IsNullOrWhiteSpace(Nid)) Nid = getUser().Nid;
-            foreach (authors author in author_list)
+            if (String.IsNullOrWhiteSpace(Nid)) Nid = getNid();
+            if (!String.IsNullOrWhiteSpace(Nid))
             {
-                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == Nid.ToUpper())
-                { temp = true; }
+                foreach (authors author in author_list)
+                {
+                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == Nid.ToUpper())
+                    { temp = true; }
+                }
             }
             return temp;
         }
