@@ -70,6 +70,7 @@ html,body{height:100%; background-color:#edefee;}
 	float:left;
 	background: url("../../../../Content/images/bg-nav.png") no-repeat scroll -99px 0 transparent;
 	}
+#navwrap .jspContainer{background: url("../../../../Content/images/active-nav-scroll.png") no-repeat scroll 0px 0 transparent;}
 #nav{
 	background:none;
     margin-left: 16px;
