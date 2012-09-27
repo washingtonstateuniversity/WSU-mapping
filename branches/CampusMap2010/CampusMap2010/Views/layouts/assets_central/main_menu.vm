@@ -23,10 +23,10 @@
 				#set($Lev=$item.level)
 				#if($Lev > $lastLevel)
 					#set($val=$Lev - $lastLevel)
-					$Controller.repeatStr("<ul>",$val)
+					$Controller.repeatStr("<div class='parentarea'><ul>",$val)
 				#elseif( $Lev < $lastLevel )
 					#set($val=$lastLevel - $Lev)
-					$Controller.repeatStr("</li></ul>",$val)
+					$Controller.repeatStr("</li></ul></div>",$val)
 					</li>
 				#elseif( $Lev > 1 )
 					</li>
@@ -37,7 +37,7 @@
 					#set($lastLevel=${item.level})
 			#end
 				#set($val=$lastLevel-1)
-				$Controller.repeatStr("</li></ul>",$val)
+				$Controller.repeatStr("</li></ul></div>",$val)
 			</li>
 			<li class='$baseClass' ><br/></li>
 			#*<li class='$baseClass' ><a href="?cat=Virtual%20Tours">Virtual Tours</a></li>*#
@@ -52,7 +52,5 @@
 		<li id="directionsTo"><input type="text" value="WSU $!campus.name" placeholder="To..." /></li>
 	</ul>
 </form>
-<div id="localfooter" style="padding:0px;">
-<div id="wsufooter"><a href="http://publishing.wsu.edu/copyright/WSU.html" hidefocus="true" style="outline: medium none;">&copy; 2012 &nbsp;</a> <a href="http://www.wsu.edu" hidefocus="true" style="outline: medium none;">Washington State University</a></div></div>
 
    

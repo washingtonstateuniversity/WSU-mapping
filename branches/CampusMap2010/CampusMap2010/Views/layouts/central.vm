@@ -11,15 +11,21 @@
 			<div id="header_bar">
 				#parse("layouts/assets_central/header_html.vm")
 			</div>
-			<div id="nav">
-				#parse("layouts/assets_central/main_menu.vm")
+			<div id="navwrap">
+            	<div id="nav" style="height:100%">
+					#parse("layouts/assets_central/main_menu.vm")
+                    #parse("layouts/assets_central/footer.vm")
+                </div>
+                
+                
+
 			</div>
 		#end
 		
 		$childContent
 		
 		#if(!$embeded)
-			#parse("layouts/assets_central/footer.vm")
+			
 			
 			#parse("layouts/assets_central/aerial.vm")
 		#end

@@ -209,9 +209,10 @@
 
 
 
-#toolbar ul {float:right; padding:0px; margin:0 15px 0 0;height:20px;}
-#toolbar ul li{ display: block;float: left;line-height: 15px;}
-#toolbar a {color: #fff;font-size:11px;text-decoration: none;line-height:20px;}
+#toolbar ul {float:right; padding:0px; margin:-1px 15px 0 0;height:20px;}
+#toolbar ul li{ display: block;float: left;line-height: 15px;padding: 0px 0px 0px 21px;}
+
+#toolbar a {color: #cfd4d7;font-size:11px;text-decoration: none;line-height:20px;}
 /*#toolbar a:hover {color: #5e6a71 !important;}*/
 #placeSearch{height:23px; position:relative;width:147px;background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent;}
 #placeSearch:focus{ background-position:left bottom;}
@@ -389,7 +390,7 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content ul li strong{display: block;}
 #campusmap .ui-tabs .ui-tabs-panel .content ul li span{padding-left:35px;display: inline-block;}
 #campusmap .ui-tabs .ui-tabs-panel .errorReporting{background-color: #FFFFFF;letter-spacing: 0.25px;
-    color: #999999;
+    color: #5e6a71;
     display: block;
     font-size: 8px;
     padding: 2px 5px;

@@ -43,7 +43,7 @@ html,body{height:100%; background-color:#edefee;}
 	min-width:1026px;
 }
 
-#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;position: absolute;bottom:3px;/*padding-left: 250px;*/}
+#localfooter{font-size: 10px;color:	#262A2D; height:25px;text-align: center;padding-top:5px;/*position: absolute;bottom:3px;padding-left: 250px;*/}
 #localfooter #wsufooter{
 	background: none repeat scroll 0 0 transparent;
     padding-left: 0;
@@ -63,13 +63,18 @@ html,body{height:100%; background-color:#edefee;}
     width: 100%;position: relative;}
 
 /* Nav */
-#nav {
-    left: 0;
-    margin-left: 16px;
-    padding: 23px 10px 10px 24px;
-    position: static;
+#navwrap{
+	left: 0;    position: static;
     top: 0;
-    z-index: 999;
+    z-index: 999;width: 201px;
+	float:left;
+	background: url("../../../../Content/images/bg-nav.png") no-repeat scroll -99px 0 transparent;
+	}
+#nav{
+	background:none;
+    margin-left: 16px;
+    padding: 23px 0px 10px 18px;
+
 	}
 #nav ul ul, #nav ul ul ul {
     margin: 0;
@@ -77,6 +82,9 @@ html,body{height:100%; background-color:#edefee;}
 }
 #main_nav{}
 #main_nav li{width: 153px;}
+
+#main_nav li li{width: 115px;}
+
 #main_nav li a{display: block !important; color:#5e6a71;}
 #main_nav li:hover{font-weight: normal;}
 #main_nav li a:hover{color: #981e32 !important;}
@@ -589,7 +597,7 @@ fieldset{padding: 4px 8px 10px;}
 #selectedPlaceList_area ul li div{font-size: 0.7em;font-weight: normal;line-height: 1.2em;padding-left: 5px;}
 /* NOTE THIS IS GOOGLE GENERATED CLASSES */
 #directions-panel{margin:26px 0 0;width:190px !important;}
-#selectedPlaceList .adp-details,#selectedPlaceList  .adp-legal{font-size:10px !important;}
+#selectedPlaceList .adp-details,#selectedPlaceList  .adp-legal{font-size:10px !important;padding-left: 5px;}
 #selectedPlaceList .adp-directions {border-collapse: collapse;cursor: pointer;font-size: 11px;line-height: 14px;}
 #selectedPlaceList .adp-step,#selectedPlaceList .adp-text {font-size: 12px;font-weight: bold;line-height: 12px;width: 100%;}
 #selectedPlaceList .adp-summary {color:#981e32; font-size: 13px;font-weight: bold; line-height: 14px;padding: 0 3px 3px;}

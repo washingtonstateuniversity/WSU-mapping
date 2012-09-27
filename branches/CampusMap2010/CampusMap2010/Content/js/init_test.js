@@ -223,7 +223,10 @@ function addCentralControlls(){
 						open:true,
 						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 						onClosed:function(){
-							$('#'+currentControl).trigger('click');
+							$('.activeControl').removeClass('activeControl');
+							$('#'+currentControl).addClass('activeControl');
+							//$('#'+currentControl).trigger('click');
+							//$('#centralMap').gmap("setOptions",{'mapTypeId':currentControl.toLowerCase()});
 						},
 						onComplete:function(){
 							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
@@ -800,10 +803,14 @@ function make_InfoWindow(jObj,i,marker){
 						open:true,
 						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 						onOpen:function(){
+							
 							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
 						},
 						onClosed:function(){
 							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
+							$('#colorbox #cb_nav').html("");
+							$('#ttl').text(0);
+							$('#ttl').text(1);
 						},
 						onComplete:function(){
 							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
@@ -1099,16 +1106,19 @@ function listTabs(prime){
 		
 		
 		$('#locations').off().on('click',function(){
-				$('#option .active').removeClass('active');
-				$('#listing').show();
-				$('#directions-panel').hide();
-				$('#locations').addClass('active');
+			$('#option .active').removeClass('active');
+			$('#listing').show();
+			$('#directions-panel').hide();
+			$('#locations').addClass('active');
 		});
 		$('#directions').off().on('click',function(){
-				$('#option .active').removeClass('active');
-				$('#listing').hide();
-				$('#directions-panel').show();
-				$('#directions').addClass('active');
+			$('#option .active').removeClass('active');
+			$('#listing').hide();
+			$('#directions-panel').show();
+			$('#directions').addClass('active');
+			$('#printDir').off().on('click',function(){
+				$('#directions_area').jprint();
+			});
 		});
 		
 		if(typeof(prime)!=="undefined" && prime!=null){
@@ -1184,6 +1194,11 @@ function loadListings(data,showSum){
 			cur_mid = mid[i];
 		});
 	});
+	google.maps.event.addListener($('#centralMap').gmap('get','map'), 'zoom_changed',function(){
+			$('#selectedPlaceList_area .active').trigger('click');
+		});
+	
+	
 }
 function setup_listingsBar(jObj){
 	/* Other after gmap ini */
@@ -1512,9 +1527,11 @@ function setup_nav(jObj){
 		jObj.gmap('clear','markers');
 		jObj.gmap('clear','overlays');
 		if($(this).is($('.active'))){
+			setup_Navscrollbar();
 			updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 		}else{
 			reset_listings();
+			reset_Navscrollbar();
 		}
 	});
 	$('#main_nav .parent li a').off().on('click',function(e){
@@ -1529,13 +1546,38 @@ function setup_nav(jObj){
 			$.each($('li.checked a'),function(){
 				params=params+$(this).attr('href').split('=')[1]+',';
 			});
+			reset_Navscrollbar();
 			updateMap(jObj,encodeURI(params.substring(0, params.length - 1)),true);
 		}else{
+			destroy_Navscrollbar(function(){});
 			$(this).closest('.parent').find('.parentalLink').trigger('click');
 		}
 	});
+	
 }
-
+var api_nav=null;
+function setup_Navscrollbar(){
+	
+	var settings = {
+		maintainPosition:false
+		//showArrows: true
+	};
+	var pane = $("#navwrap");
+	pane.jScrollPane(settings);
+	api_nav = pane.data('jsp');
+}
+function reset_Navscrollbar(){
+	if(api_nav!=null){
+		
+		destroy_Navscrollbar(function(){
+			setup_Navscrollbar();
+		});
+	}
+}
+function destroy_Navscrollbar(callback){
+	if(api_nav!=null && !$.isEmptyObject(api_nav.jObj)){api_nav.scrollToY(0);api_nav.destroy();api_nav=null;}
+	if($.isFunction(callback))callback();
+}
 
 
 
@@ -1647,7 +1689,7 @@ function makeRequestCustom(){
 								'<lable>Notes on your needs: <br/>'+
 								'<textarea required placeholder="Some notes" name="notes"></textarea></lable><br/>'+
 								'<br/><input type="Submit" id="requestSubmit" value="Submit"/><br/>'+
-								'<a href="#" id="embedback">&laquo; Back to Custom Embeding</a>'+
+								'<a href="#" id="embedback">&laquo; Back to custom embedding</a>'+
 							'</from></div>';
 				},
 				scrolling:false,
@@ -1987,12 +2029,12 @@ $(document).ready(function(){
 			}).trigger("resize");
 			$(window).resize(function(){
 				// can't us mapInst here cause it's still in the admin area.  Split that.
-				resizeBg($('#nav'),$('.central_layout.public.central #centralMap').height() );
+				$('#navwrap').height($('#centralMap_wrap').height());
 				resizeBg($('.cAssest'),($('.embeded').length?0:130));
 				
 				reset_Dirscrollbar();
 				reset_Listscrollbar();
-				
+				reset_Navscrollbar();
 				//if($('#listing').length)setup_scrollbar($('#listing'));
 				
 			}).trigger("resize");
