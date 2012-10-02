@@ -363,13 +363,14 @@ function display_directions(jObj,results){
 		if($('#directions-panel').length==0){$('#selectedPlaceList_area').append('<div id="directions-panel">')}
 		if($('#directions_area').length==0){$('#directions-panel').append('<div id="directions_area">')}
 		destroy_Dirscrollbar();
-		listTabs("directions");
+		
 		var directionsDisplay = jObj.gmap('get','services > DirectionsRenderer')
 		directionsDisplay.setPanel(document.getElementById('directions_area'));
 		directionsDisplay.setDirections(results);
 									
 		if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
 		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {destroy_Dirscrollbar();setup_Dirscrollbar($('#directions-panel'));}); 
+		listTabs("directions");
 		setup_Dirscrollbar($('#directions-panel'));
 		addEmailDir();
 	});
@@ -421,7 +422,6 @@ function hereToThere(jObj){
 						hasDirection=true;
 						$('#loading').remove();
 						display_directions(jObj,results);
-						
 				});
 			});
 		}
@@ -717,7 +717,7 @@ function make_InfoWindow(jObj,i,marker){
 		  width: "400px"
 		 }
 		,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-		,infoBoxClearance: new google.maps.Size(50,50)
+		,infoBoxClearance: new google.maps.Size(75,50)
 		,isHidden: false
 		,pane: "floatPane"
 		,enableEventPropagation: false
@@ -1036,7 +1036,7 @@ function getSignlePlace(jObj,id){
 			if(found==true){
 				$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
 					if(!$('#selectedPlaceList_btn').is(':visible')){
-						$('#selectedPlaceList_btn').css({'display':'block'});
+						//$('#selectedPlaceList_btn').css({'display':'block'});
 						//$('#selectedPlaceList_btn').trigger('click');
 					}
 					$.each(ib, function(i) {ib[i].close();});
@@ -1046,7 +1046,7 @@ function getSignlePlace(jObj,id){
 						ib[0].open(jObj.gmap('get','map'), marker);
 						cur_mid = mid[0];
 					});
-					loadListings(data,true);
+					//loadListings(data,true);
 					prep();
 				});
 			}
@@ -1055,7 +1055,7 @@ function getSignlePlace(jObj,id){
 	}else{
 		$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
 			if(!$('#selectedPlaceList_btn').is(':visible')){
-				$('#selectedPlaceList_btn').css({'display':'block'});
+				//$('#selectedPlaceList_btn').css({'display':'block'});
 				//$('#selectedPlaceList_btn').trigger('click');
 			}
 			$.each(ib, function(i) {ib[i].close();});
@@ -1065,7 +1065,7 @@ function getSignlePlace(jObj,id){
 				ib[0].open(jObj.gmap('get','map'), marker);
 				cur_mid = mid[0];
 			});
-			loadListings(data,true);
+			//loadListings(data,true);
 			prep();
 		});
 	}
@@ -1102,8 +1102,7 @@ function listTabs(prime){
 		}else{
 			$('#option .DIVIT').removeClass('DIVIT');	
 		}
-		$('#option .active').removeClass('active');
-		
+		if($('#option .active').length)$('#option .active').removeClass('active');
 		
 		$('#locations').off().on('click',function(){
 			$('#option .active').removeClass('active');
@@ -1116,28 +1115,16 @@ function listTabs(prime){
 			$('#listing').hide();
 			$('#directions-panel').show();
 			$('#directions').addClass('active');
-			$('#printDir').off().on('click',function(){
-				$('#directions_area').jprint();
-			});
+
 		});
-		
 		if(typeof(prime)!=="undefined" && prime!=null){
 			if(prime=="locations"){
-				$('#option .active').removeClass('active');
-				$('#listing').show();
-				$('#directions-panel').hide();
-				$('#locations').addClass('active');
+				$('#locations').trigger('click');
 			}
 			if(prime=="directions"){
-				$('#option .active').removeClass('active');
-				$('#listing').hide();
-				$('#directions-panel').show();
-				$('#directions').addClass('active');
+				$('#directions').trigger('click');
 			};
 		}
-		if($('#listing').is(':visible'))$('#locations').addClass('active');
-		if($('#directions').is(':visible'))$('#directions').addClass('active');
-		
 	}else{
 		if($('#selectedPlaceList_area #option').length>0)$('#selectedPlaceList_area #option').remove();
 	}
@@ -1313,7 +1300,7 @@ function setup_mapsearch(jObj){
 			.append( text )
 			.appendTo( ul );
 	}
-	$( "#placeSearch input[type='text']" ).on('keydown',function(e) {
+	$( "#placeSearch input[type='text']" ).on('keyup',function(e) {
 		if ( e.which == 13 ){
 			var id   = $( "#placeSearch .ui-autocomplete-input" ).val();
 			var url=siteroot+"public/get_place.castle";
@@ -1322,6 +1309,14 @@ function setup_mapsearch(jObj){
 			getSignlePlace(jObj,$( "#placeSearch .ui-autocomplete-input" ).val());
 		}
 	});	
+	$("#placeSearch input[type='submit']").off().on('click',function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var btn=$(this);
+		var id   = $( "#placeSearch .ui-autocomplete-input" ).val();
+		getSignlePlace(jObj,id);
+		if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
+	});
 }
 
 /*
@@ -1350,15 +1345,18 @@ function prep(){
 
 function setup_directions(jObj){
 	var kStroke;
-	if($('#directionsTo').is(':visible'))$('#directionsTo').slideToggle();
+	if($('#directionsTo').is(':visible'))$('#directionsTo').show();
 	$('#directionsFrom input,#directionsTo input').off().on('keyup',function(){
 		if($('#directionsFrom input').val() !=''){
-			if($('#directionsTo').css('display')=='none')$('#directionsTo').slideToggle();
+			if($('#directionsTo').css('display')=='none'){
+				$('#directionsTo').show();
+				reset_Navscrollbar();
+			}
 		}
 		clearTimeout(kStroke);
 		kStroke=setTimeout(function(){
-			fireDirections();
-			},2000);
+					fireDirections();
+				},2000);
 	});
 	function fireDirections(){
 		//$('#centralMap').gmap('clear','markers');
@@ -1368,7 +1366,7 @@ function setup_directions(jObj){
 		var from=$('#directionsFrom input').val();
 		var to=$('#directionsTo input').val();
 		if(from!=''){
-			if(to=="WSU "+campus){
+			if(to=="" || to=="WSU "+campus){
 				to= campus_latlng_str;
 			}else{
 				jObj.gmap('search',{address:to+' USA'},function(results, status){
@@ -1386,24 +1384,12 @@ function setup_directions(jObj){
 						{origin:from,destination:to,travelMode: google.maps.DirectionsTravelMode.DRIVING},
 						{draggable: true},
 						function(results, status){
-							
-							
 							display_directions(jObj,results);
-							
-							
-							/*
-							autoOpenListPanel();
-							if($('#directions-panel').length==0){$('#selectedPlaceList_area').append('<div id="directions-panel">')}
-							if($('#directions').length==0){$('#directions-panel').append('<div id="directions">')}
-							listTabs("directions");
-							var directionsDisplay = jObj.gmap('get','services > DirectionsRenderer')
-							directionsDisplay.setPanel(document.getElementById('directions'));
-							directionsDisplay.setDirections(results);
-							google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {destroy_Dirscrollbar();setup_Dirscrollbar($('#directions-panel'));}); 	
-							if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
-							
-							addEmailDir();
-							*/
+							if($('#directions_area').length){
+								$('#printDir').off().on('click',function(){
+									$('#directions_area').jprint();
+								});
+							}
 						});
 				} else {
 					$.colorbox({
@@ -1423,8 +1409,7 @@ function setup_directions(jObj){
 				$('#loading').remove();
 			});
 		}
-	}	
-	
+	}
 }
 
 
@@ -1565,6 +1550,11 @@ function setup_Navscrollbar(){
 	var pane = $("#navwrap");
 	pane.jScrollPane(settings);
 	api_nav = pane.data('jsp');
+	if($('#nav').height()>$('#navwrap_outer').height()){
+		$('#navwrap_outer').addClass('active');
+	}else{
+		$('#navwrap_outer').removeClass('active');	
+	}
 }
 function reset_Navscrollbar(){
 	if(api_nav!=null){
@@ -1754,12 +1744,13 @@ $('.errorReporting').click(function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var trigger=$(this);
+		var id= typeof(marker)!="undefined"?marker.id:0;
 		$.colorbox({
 			html:function(){
 				return '<div id="errorReporting"><form action="../public/reportError.castle" method="post">'+
 							'<h2>Found an error?</h2>'+
 							'<h3>Please provide some information to help us correct this issue.</h3>'+
-							'<input type="hidden" value="'+marker.id+'" name="place_id"/>'+
+							'<input type="hidden" value="'+id+'" name="place_id"/>'+
 							'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"/></lable><br/>'+
 							'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+
 							'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
@@ -1925,7 +1916,7 @@ function setup(jObj){
 	setup_directions($('#centralMap'));
 	setup_nav($('#centralMap'));
 	setup_embeder();
-	
+	addErrorReporting();
 	
 	setup_pdfprints();
 
@@ -2029,7 +2020,7 @@ $(document).ready(function(){
 			}).trigger("resize");
 			$(window).resize(function(){
 				// can't us mapInst here cause it's still in the admin area.  Split that.
-				$('#navwrap').height($('#centralMap_wrap').height());
+				$('#navwrap').height($('#centralMap_wrap').height()-70);
 				resizeBg($('.cAssest'),($('.embeded').length?0:130));
 				
 				reset_Dirscrollbar();
@@ -2039,6 +2030,8 @@ $(document).ready(function(){
 				
 			}).trigger("resize");
 		}
+		$('#directionsTo').hide();
+		$('#campusmap input[type="text"]').val('');
 	}
 
 	$('#resetmap').on('click',function(e){
@@ -2047,7 +2040,8 @@ $(document).ready(function(){
 		
 		reset_listings();
 		$('#main_nav').find('.active').removeClass('active');
-		
+		$('#campusmap input[type="text"]').val('');
+		if($('#directionsTo').is(':visible'))$('#directionsTo').hide();
 		if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
 		//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
 		//$('.mapControl').remove();

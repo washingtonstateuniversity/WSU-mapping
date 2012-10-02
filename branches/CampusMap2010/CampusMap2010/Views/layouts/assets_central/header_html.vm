@@ -28,5 +28,9 @@
     <li>
       <div id="addthis_toolbox"></div>
       <a class="addthis_button_compact"  id="shareIt">Share</a></li>
+       <li>
+      
+      <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;error</a>
+      </li>
   </ul>
 </div>

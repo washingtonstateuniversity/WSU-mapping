@@ -4,13 +4,11 @@
 #set($subClass="")
 #set($baseurl=$controller.getAction())
 
-<form action="#" id="placeSearch">
-	<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
-</form>
+
 
 #set($lastLevel = 1 )
 #set($c=0)
-<ul id='mob'>
+<ul id='mob' >
 	<li id="mob_li">
 		<a id='mob_link'>Nav</a>
 		<em></em>
@@ -49,7 +47,7 @@
 <form action="#" id="getDirections">
 	<ul id="dir">
 		<li id="directionsFrom"><input type="text" value="" placeholder="Directions from..." /></li>
-		<li id="directionsTo"><input type="text" value="WSU $!campus.name" placeholder="To..." /></li>
+		<li id="directionsTo"><span style="color: #5E6A71;">To<br/></span><input type="text" value="WSU $!campus.name" placeholder="WSU $!campus.name" /></li>
 	</ul>
 </form>
 
