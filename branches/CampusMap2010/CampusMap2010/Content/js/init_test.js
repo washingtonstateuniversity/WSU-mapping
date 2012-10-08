@@ -62,7 +62,7 @@ function ini_map_view(map_ele_obj,callback){
 		map_ele_obj.gmap(map_op).bind('init', function() { 
 			var map = map_ele_obj.gmap("get","map");
 			ini_GAtracking('UA-22127038-5');
-			geoLocate();
+			if($('.mobile').length)geoLocate();
 			callback();
 		});
 
@@ -109,7 +109,7 @@ function iniMap(url,callback){
 			poi_setup($('#centralMap'));
 			addCentralControlls();
 			if(typeof(data)!=='undefined') loadData($('#centralMap'),data);
-			if($('.mobile').length==0)geoLocate();
+			if($('.mobile').length)geoLocate();
 			callback();
 			$(window).trigger('resize');
 			$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
