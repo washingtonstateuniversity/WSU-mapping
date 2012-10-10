@@ -77,7 +77,8 @@ function iniMap(url,callback){
 	if(winW>=900 && winH>=600){zoom = 17;}
 	var _load = false;
 	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
-	$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
+	//$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
+		var data = {};
 		if( $.isEmptyObject( data.mapOptions )){
 			var map_op = {'center': campus_latlng_str , 'zoom':zoom };
 		}else{
@@ -116,7 +117,7 @@ function iniMap(url,callback){
 			/* addthis setup */
 			ini_addthis("mcwsu");
 		});
-	});
+	//});
 }
 
 
