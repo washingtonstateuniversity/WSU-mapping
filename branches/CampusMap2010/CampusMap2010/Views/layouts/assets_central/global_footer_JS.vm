@@ -42,7 +42,7 @@
 			};
 </script>
 
-$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/map_editor_vars.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js,~/Content/js/map_functions.js,~/Content/js/zeroclipboard/ZeroClipboard.js,~/Content/js/init_test.js",true)
+$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/map_editor_vars.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js,~/Content/js/map_functions.js,~/Content/js/zeroclipboard/ZeroClipboard.js,~/Content/js/init_test.js",false)
 
 
 #*

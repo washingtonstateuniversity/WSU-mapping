@@ -72,9 +72,9 @@ function iniMap(url,callback){
 	var winH = $(window).height()-130;
 	var winW = $(window).width();
 	var zoom = 15;
-	if(winW>=500 && winH>=200){zoom = 15;}
-	if(winW>=700 && winH>=400){zoom = 16;}
-	if(winW>=900 && winH>=600){zoom = 17;}
+	if(winW>=500 && winH>=200){zoom = 14;}
+	if(winW>=700 && winH>=400){zoom = 15;}
+	if(winW>=900 && winH>=600){zoom = 16;}
 	var _load = false;
 	var url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
 	//$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
@@ -365,15 +365,18 @@ function display_directions(jObj,results){
 		if($('#directions_area').length==0){$('#directions-panel').append('<div id="directions_area">')}
 		destroy_Dirscrollbar();
 		
-		var directionsDisplay = jObj.gmap('get','services > DirectionsRenderer')
+		var directionsDisplay = jObj.gmap('get','services > DirectionsRenderer');
 		directionsDisplay.setPanel(document.getElementById('directions_area'));
 		directionsDisplay.setDirections(results);
 									
 		if($('#directions-panel #output').length==0)$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
 		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {destroy_Dirscrollbar();setup_Dirscrollbar($('#directions-panel'));}); 
+		directionsDisplay.setDirections(results);
 		listTabs("directions");
-		setup_Dirscrollbar($('#directions-panel'));
+		
 		addEmailDir();
+		
+		
 	});
 }
 
@@ -1201,6 +1204,7 @@ function setup_listingsBar(jObj){
 				width:"190px"
 				}, 250, function() {
 					btn.addClass("active");
+					if($('#directions-panel').length)setup_Dirscrollbar($('#directions-panel'));
 					//$('#selectedPlaceList_area').css({'overflow-y':'auto'});
 					//setup_scrollbar($('#listing'));	
 					
@@ -1390,6 +1394,7 @@ function setup_directions(jObj){
 								$('#printDir').off().on('click',function(){
 									$('#directions_area').jprint();
 								});
+								
 							}
 						});
 				} else {
@@ -1474,10 +1479,29 @@ function setup_Dirscrollbar(jObj){
 		apiD = pane.data('jsp');
 		$.extend(apiD,{jObj:jObj});
 		$.extend(apiD,{settings:settings});
+		
 	}
 }
 
 
+
+function reset_listingarea(){
+	destroy_Listscrollbar(function(){
+		$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
+		$('#selectedPlaceList').addClass('ini');
+		$('#selectedPlaceList_area').html("");
+	});
+}
+
+
+function reset_listingarea(){
+	destroy_Listscrollbar(function(){
+		//$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
+		//$('#selectedPlaceList').addClass('ini');
+		$('#listing').remove();
+		$('#option').remove();
+	});
+}
 function reset_listings(){
 	if(!$('#selectedPlaceList').is($('.ini'))){
 		destroy_Dirscrollbar(function(){
@@ -1516,7 +1540,12 @@ function setup_nav(jObj){
 			setup_Navscrollbar();
 			updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 		}else{
-			reset_listings();
+			if($('#directions-panel').length){
+				$('#directions').trigger('click');
+				reset_listingarea();
+			}else{
+				reset_listings();
+			}
 			reset_Navscrollbar();
 		}
 	});
