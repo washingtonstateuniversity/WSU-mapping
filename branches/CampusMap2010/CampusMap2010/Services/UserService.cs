@@ -48,8 +48,9 @@ namespace campusMap.Services
             {
                 temp.logedin = true;
                 temp.Save();
+                return temp.logedin;
             }
-            return temp.logedin;
+            return false;            
         }
         public static Boolean logoutUser()
         {
