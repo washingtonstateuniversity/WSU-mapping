@@ -2033,7 +2033,7 @@ $(document).ready(function(){
 		}
 	}).trigger("resize");
 	var listOffset=0;
-	$(' [placeholder] ').defaultValue();
+	//$(' [placeholder] ').defaultValue();
 	if($('#centralMap').length){
 		mapInst=$('#centralMap');
 		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
