@@ -10,8 +10,9 @@
 #cboxTitle{margin:0;}
 #cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
 #cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-.cboxPhoto{float:left; margin:auto; border:0; display:block;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none;}
 .cboxIframe{width:100%; height:100%; display:block; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box;}
 
 /* 
     User Style:
@@ -20,7 +21,8 @@
 */
 #cboxOverlay{background:#000;}
 #colorbox{}
-    #cboxTopLeft{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 0;}
+    /*
+	#cboxTopLeft{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 0;}
     #cboxTopCenter{height:25px; background:url(../../Content/images/colorbox/border1.png) repeat-x 0 -50px;}
     #cboxTopRight{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat right 0;}
     #cboxBottomLeft{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 -25px;}
@@ -28,10 +30,39 @@
     #cboxBottomRight{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat right -25px;}
     #cboxMiddleLeft{width:75px; background:url(../../Content/images/colorbox/border2.png) repeat-y 0 0;}
     #cboxMiddleRight{width:75px; background:url(../../Content/images/colorbox/border2.png) repeat-y right 0;}
+	
+	*/
+	
+	
+	
+	#cboxTopLeft{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 0;}
+    #cboxTopCenter{height:25px; background:url(../../Content/images/colorbox/border1.png) repeat-x 0 -50px;}
+    #cboxTopRight{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat -25px 0;}
+    #cboxBottomLeft{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat 0 -25px;}
+    #cboxBottomCenter{height:25px; background:url(../../Content/images/colorbox/border1.png) repeat-x 0 -75px;}
+    #cboxBottomRight{width:75px; height:25px; background:url(../../Content/images/colorbox/border1.png) no-repeat -25px -25px;}
+    #cboxMiddleLeft{width:75px; background:url(../../Content/images/colorbox/border2.png) repeat-y 0 0;}
+    #cboxMiddleRight{width:75px; background:url(../../Content/images/colorbox/border2.png) repeat-y -25px 0;}
+
+
+	.norm #cboxWrapper{ margin-left: 61px;}
+    .norm #cboxTopLeft{width:25px;}
+    .norm #cboxTopCenter{height:25px;}
+    .norm #cboxTopRight{width:25px; background-position:-61px  0; }
+    .norm #cboxBottomLeft{width:25px;}
+    .norm #cboxBottomCenter{height:25px;}
+    .norm #cboxBottomRight{width:25px;background-position:-61px -25px;}
+    .norm #cboxMiddleLeft{width:25px;}
+    .norm #cboxMiddleRight{width:25px;background-position:-61px  0;}
+	
+	
+	
     #cboxContent{background:#fff; overflow:hidden;}
         .cboxIframe{background:#fff;}
         #cboxError{padding:50px; border:1px solid #ccc;}
         #cboxLoadedContent{margin-bottom:44px;margin-top: 12px;}
+		.norm #cboxLoadedContent { margin-bottom: 0px;}
+		
         #cboxTitle{position:absolute; bottom:0px; left:0; text-align:center; width:100%; color:#999;}
         #cboxCurrent{position:absolute; bottom:0px; left:100px; color:#999;}
         #cboxSlideshow{position:absolute; bottom:0px; right:42px; color:#444;}
@@ -47,6 +78,10 @@
     text-indent: -9999em;
     top: 0;
     width: 17px;} 
+	
+	.norm #cboxClose{right: -16px;}
+	
+	
 #cboxClose:hover{ background-position:left bottom;}
 /*
   The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill

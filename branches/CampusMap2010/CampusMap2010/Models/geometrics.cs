@@ -28,52 +28,20 @@ namespace campusMap.Models
 
         public geometrics() { }
 
-
-        private int geometric_id;
         [PrimaryKey("geometric_id")]
-        virtual public int id
-        {
-            get { return geometric_id; }
-            set { geometric_id = value; }
-        }
-        /* private string Coordinate;
-        [Property]
-        virtual public string coordinate
-        {
-            get { return Coordinate; }
-            set { Coordinate = value; }
-        }*/
+        virtual public int id { get; set; }
 
-        private byte[] Boundary;
         [Property(SqlType = "geography", ColumnType = "BinaryBlob")]
-        //[Property]
-        virtual public byte[] boundary
-        {
-            get { return Boundary; }
-            set { Boundary = value; }
-        }
+        virtual public byte[] boundary { get; set; }
 
-        private string _name;
         [Property]
-        virtual public string name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private string _encoded;
+        virtual public string name { get; set; }
+
         [Property]
-        virtual public string encoded
-        {
-            get { return _encoded; }
-            set { _encoded = value; }
-        }
-        private string _staticMap;
+        virtual public string encoded { get; set; }
+
         [Property]
-        virtual public string staticMap
-        {
-            get { return _staticMap; }
-            set { _staticMap = value; }
-        }
+        virtual public string staticMap { get; set; }
         
 
 
@@ -108,15 +76,9 @@ namespace campusMap.Models
             }
         }
 
-
-
-        private geometrics_types Default_Type;
         [BelongsTo("default_type")]
-        virtual public geometrics_types default_type
-        {
-            get { return Default_Type; }
-            set { Default_Type = value; }
-        }
+        virtual public geometrics_types default_type { get; set; }
+
         private DateTime? Publish_Time;
         [Property]
         virtual public DateTime? publish_time
@@ -165,99 +127,38 @@ namespace campusMap.Models
             }
         }
 
-        private status _status;
         [BelongsTo("status")]
-        virtual public status status
-        {
-            get { return _status; }
-            set { _status = value; }
-        }
-
-
-        private media_repo Media;
-        [BelongsTo]
-        virtual public media_repo media
-        {
-            get { return Media; }
-            set { Media = value; }
-        }
-
-
-
-
-
-        private IList<tags> Tags = new List<tags>();
-        [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "geometric_to_tags", ColumnKey = "geometric_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<tags> tags
-        {
-            get { return Tags; }
-            set { Tags = value; }
-        }
-
+        virtual public status status { get; set; }
         
-        private IList<geometrics_types> Geometric_Types = new List<geometrics_types>();
+        [BelongsTo]
+        virtual public media_repo media { get; set; }
+
+        [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "geometric_to_tags", ColumnKey = "geometric_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<tags> tags { get; set; }
+
         [HasAndBelongsToMany(typeof(geometrics_types), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<geometrics_types> geometric_types
-        {
-            get { return Geometric_Types; }
-            set { Geometric_Types = value; }
-        }
-        private IList<place> places;
+        virtual public IList<geometrics_types> geometric_types { get; set; }
+
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places
-        {
-            get { return places; }
-            set { places = value; }
-        }
-        private IList<map_views> _views;
+        virtual public IList<place> Places { get; set; }
+
         [HasAndBelongsToMany(typeof(map_views), Lazy = true, Table = "view_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<map_views> views
-        {
-            get { return _views; }
-            set { _views = value; }
-        }
-        private IList<fields> Fields;
+        virtual public IList<map_views> views { get; set; }
+
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "geometrics_to_fields", ColumnKey = "field_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<fields> field
-        {
-            get { return Fields; }
-            set { Fields = value; }
-        }
+        virtual public IList<fields> field { get; set; }
 
-
-
-        private IList<styles> _style;
         [HasAndBelongsToMany(typeof(styles), Lazy = true, Table = "geometrics_to_styles", ColumnKey = "geometric_id", ColumnRef = "style_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<styles> style
-        {
-            get { return _style; }
-            set { _style = value; }
-        }
+        virtual public IList<styles> style { get; set; }
 
-
-
-        private IList<media_repo> images = new List<media_repo>();
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "geometric_to_media", ColumnKey = "geometric_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<media_repo> Images
-        {
-            get { return images; }
-            set { images = value; }
-        }
+        virtual public IList<media_repo> Images { get; set; }
 
-        private IList<authors> _authors = new List<authors>();
         [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> Authors
-        {
-            get { return _authors; }
-            set { _authors = value; }
-        }
-        private authors _editing;
+        virtual public IList<authors> Authors { get; set; }
+
         [BelongsTo("author_editing")]
-        virtual public authors editing
-        {
-            get { return _editing; }
-            set { _editing = value; }
-        }
+        virtual public authors editing { get; set; }
 
         virtual public bool isPublished()
         {
@@ -285,131 +186,65 @@ namespace campusMap.Models
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class geometrics_types : ActiveRecordBase<geometrics_types>
     {
-        private int geometrics_type_id;
         [PrimaryKey("geometrics_type_id")]
-        virtual public int id
-        {
-            get { return geometrics_type_id; }
-            set { geometrics_type_id = value; }
-        }
+        virtual public int id { get; set; }
 
-        private string Name;
         [Property]
-        virtual public string name
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
+        virtual public string name { get; set; }
 
-        private string Attr;
         [Property]
-        virtual public string attr
-        {
-            get { return Attr; }
-            set { Attr = value; }
-        }
-        private IList<geometrics> geometrics;
+        virtual public string attr { get; set; }
+
         [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "geometrics_to_types", ColumnKey = "geometric_id", ColumnRef = "geometrics_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<geometrics> Geometrics
-        {
-            get { return geometrics; }
-            set { geometrics = value; }
-        }
+        virtual public IList<geometrics> Geometrics { get; set; }
 
-        private IList<style_option_types> _ops;
         [HasAndBelongsToMany(typeof(style_option_types), Lazy = true, Table = "style_option_types_to_geometrics_types", ColumnKey = "geometrics_type_id", ColumnRef = "style_option_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<style_option_types> ops
-        {
-            get { return _ops; }
-            set { _ops = value; }
-        }
+        virtual public IList<style_option_types> ops { get; set; }
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class geometrics_media : ActiveRecordBase<geometrics_media>
     {
-        private int id;
-        [PrimaryKey]
-        virtual public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
 
-        private geometrics Geometric;
+        [PrimaryKey]
+        virtual public int Id { get; set; }
+
         [BelongsTo("geometric_id")]
-        virtual public geometrics geometric
-        {
-            get { return Geometric; }
-            set { Geometric = value; }
-        }
-        private media_repo media;
+        virtual public geometrics geometric { get; set; }
+
         [BelongsTo("media_id")]
-        virtual public media_repo Media
-        {
-            get { return media; }
-            set { media = value; }
-        }
-        private int order;
+        virtual public media_repo Media { get; set; }
+
         [Property]
-        virtual public int geometric_order
-        {
-            get { return order; }
-            set { order = value; }
-        }
+        virtual public int geometric_order { get; set; }
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class geometrics_status
     {
-        private int id;
+
         [PrimaryKey]
-        virtual public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        private String title;
+        virtual public int Id { get; set; }
+
         [Property]
-        virtual public String Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
+        virtual public String Title { get; set; }
     }
 
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class events_set : ActiveRecordBase<events_set>
     {
-        private int events_set_id;
         [PrimaryKey("events_set_id")]
-        virtual public int id
-        {
-            get { return events_set_id; }
-            set { events_set_id = value; }
-        }
-        private styles _style;
+        virtual public int id  { get; set; }
+
         [BelongsTo("style_id")]
-        virtual public styles style
-        {
-            get { return _style; }
-            set { _style = value; }
-        }
-        private zoom_levels _zoom;
+        virtual public styles style { get; set; }
+
         [BelongsTo("zoom_id")]
-        virtual public zoom_levels zoom
-        {
-            get { return _zoom; }
-            set { _zoom = value; }
-        }
-        private IList<geometric_events> _events;
+        virtual public zoom_levels zoom { get; set; }
+
         [HasAndBelongsToMany(typeof(geometric_events), Lazy = true, Table = "geometric_events_to_events_set", ColumnKey = "geometric_event_id", ColumnRef = "events_set_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
-        virtual public IList<geometric_events> events
-        {
-            get { return _events; }
-            set { _events = value; }
-        }
+        virtual public IList<geometric_events> events { get; set; }
     }
 
 
@@ -418,29 +253,14 @@ namespace campusMap.Models
     {
         protected HelperService helperService = new HelperService();
 
-        private int _id;
         [PrimaryKey("geometric_event_id")]
-        virtual public int id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        virtual public int id { get; set; }
 
-        private string _name;
         [Property]
-        virtual public string name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        virtual public string name { get; set; }
 
-        private string _f_name;
         [Property]
-        virtual public string friendly_name
-        {
-            get { return _f_name; }
-            set { _f_name = value; }
-        }
+        virtual public string friendly_name { get; set; }
 
 
 
@@ -483,7 +303,7 @@ namespace campusMap.Models
                     {
                         foreach (style_options op in style._option)
                         {
-                            if (this._id == op.user_event.id)
+                            if (this.id == op.user_event.id)
                             {
                                 if (op.value != "")
                                 {
@@ -512,7 +332,7 @@ namespace campusMap.Models
                         {
                             foreach (style_options op in style._option)
                             {
-                                if (this._id == op.user_event.id)
+                                if (this.id == op.user_event.id)
                                 {
                                     if (op.value == "")
                                     {

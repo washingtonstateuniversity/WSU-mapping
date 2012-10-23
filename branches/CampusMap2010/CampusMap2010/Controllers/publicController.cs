@@ -706,7 +706,47 @@
                 }
                 RenderText("true");
             }
-            
+            public void emailRequest(String name, String email, String Deparments, String description, String issueType)
+            {
+                CancelView();
+                CancelLayout();
+
+                authors[] users = ActiveRecordBase<authors>.FindAllByProperty("access_levels", ActiveRecordBase<access_levels>.Find(1));
+                    
+                List<String> sentemails = new List<String>();
+
+                PropertyBag["date"] = formatDate(DateTime.Now);
+                PropertyBag["description"] = description;
+                PropertyBag["name"] = name;
+                PropertyBag["email"] = email;
+                PropertyBag["Deparments"] = Deparments;
+                PropertyBag["issueType"] = issueType;
+                
+                foreach (authors user in users)
+                {
+                    if (user.Nid == "jeremy.bass")
+                    {
+                        System.Net.Mail.MailMessage email_mass = RenderMailMessage("access_request", null, PropertyBag);
+                        email_mass.IsBodyHtml = true;
+                        email_mass.From = new MailAddress("noreply@wsu.edu");
+                        email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
+                        email_mass.Subject = "Access to Map request: " + issueType;
+                        if (!String.IsNullOrWhiteSpace(user.email))
+                        {
+                            try
+                            {
+                                DeliverEmail(email_mass);
+                                RenderText("Sent");
+                            }
+                            catch (Exception ex)
+                            {
+                                RenderText(ex.ToString());
+                            }
+                        }
+                    }
+                }
+                RenderText("true");
+            }
             
             
             /*

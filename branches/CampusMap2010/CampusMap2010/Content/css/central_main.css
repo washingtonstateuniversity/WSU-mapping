@@ -725,27 +725,61 @@ fieldset{padding: 4px 8px 10px;}
 
 
 /* embeding */
-#embedArea{}
+#embedArea{padding:0 0 0 15px;}
 #embedArea h2{margin: 0;font-size: 16px;}
 #embedArea h3{    color: #981E32;
 font-weight:normal;
     font-size: 13px;
     margin: 0;}
-#embedArea textarea{ width:100%; height:101px; }
+	#linkurl{color:#a61232;}
+#embedArea textarea{
+		border: medium none;
+		color: #C07C8B;
+		float: left;
+		font-size: 11px;
+		height: 140px;
+		margin-left: 7px;
+		resize: none;
+		width: 195px;
+		background-color: transparent;
+		overflow: hidden;
+	}
+
+#embedArea #custom{float: left;background:url(../../../Content/images/embed_code_braket.png) no-repeat scroll right top transparent;padding-right:13px;width: 180px;min-height: 155px;}
+#cSize{    border-top: 1px solid #C2C2C2;
+    font-size: 12px;
+    margin-top: 7px;
+    padding-top: 7px;}
+
+
+
+#request{font-size: 13px;}
+
 .my_clip_button {
-    border: 1px solid #000000;
+    border: 1px solid #5e5e5e;
     cursor: pointer;
-    font-size: 10px;
-    line-height: 15px;
+    font-size: 11px;
+    line-height: 13px;
+	height: 13px;
     margin: 10px 0;
-    padding: 5px;
+    padding: 2px;
     text-align: center;
-    width: 145px;display:inline-block;background:url(../../../Content/wsu_ui/images/ui-bg_glass_40_c6b8ba_1x400.png) repeat-x scroll 50% 50% #3B4044; }
+    width:55px;
+	display:inline-block;
+	background:url(../../../Content/wsu_ui/images/ui-bg_highlight-hard_100_eeeeee_1x100.png) repeat-x scroll 50% 50% #3B4044;
+	border-radius:15px;
+	color:#252525;
+}
 .my_clip_button.hover { background-color:#eee; }
 .my_clip_button.active { background-color:#aaa; }
 
-#embedArea label{font-size: 10px; line-height: 15px;}
+#embedArea label{    display: block;
+    font-size: 11px;
+    height: 18px;
+    line-height: 18px;}
 
+
+#emailRequest{padding:0 0 0 15px;}
 
 /* error */
 #errorReporting{}

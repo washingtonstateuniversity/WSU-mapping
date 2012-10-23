@@ -25,12 +25,24 @@
   <ul>
   	<li style="float:left"><a href="#" id="resetmap">Reset Map</a></li>
     <li><a href="#" id="embed">Link<span id="embedlink">/Embed</span></a></li>
-    <li>
-      <div id="addthis_toolbox"></div>
-      <a class="addthis_button_compact"  id="shareIt">Share</a></li>
-       <li>
-      
-      <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;error</a>
-      </li>
+	<li class="sharearea">
+        <a href="#" class="clickshare">Share</a>
+        <div id="sharing-menu">
+            <!--<div id="share-header">
+                <p>Washington State University</p>
+            </div>-->
+            <div id="social-list">
+                <ul>
+                    <li><a class="addthis_button_facebook">Facebook</a></li>
+                    <li><a class="addthis_button_twitter">Twitter</a></li>
+                    <li><a class="addthis_button_email">Email</a></li>              
+                </ul>
+                <div class="mid"><a class="addthis_button_expanded">More Destinations...</a></div>
+            </div>
+        </div>
+     </li>
+     <li>
+         <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;error</a>
+     </li>
   </ul>
 </div>

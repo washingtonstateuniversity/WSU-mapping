@@ -24,77 +24,33 @@ namespace campusMap.Models
     public class authors : ActiveRecordBase<authors>
     {
         protected UserService userService = new UserService();
-        private int author_id;
+
         [PrimaryKey("author_id")]
-        virtual public int id
-        {
-            get { return author_id; }
-            set { author_id = value; }
-        }
+        virtual public int id { get; set; }
 
-        private String nid;
         [Property]
-        virtual public String Nid
-        {
-            get { return nid; }
-            set { nid = value; }
-        }
+        virtual public String Nid { get; set; }
 
-        private access_levels access_level;
         [BelongsTo]
-        virtual public access_levels access_levels
-        {
-            get { return access_level; }
-            set { access_level = value; }
-        }
+        virtual public access_levels access_levels { get; set; }
 
-        private user_settings _user_settings;
         [BelongsTo]
-        virtual public user_settings settings
-        {
-            get { return _user_settings; }
-            set { _user_settings = value; }
-        }
+        virtual public user_settings settings { get; set; }
 
-        private string Name;
         [Property]
-        virtual public string name
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
+        virtual public string name { get; set; }
 
-        private string Email;
         [Property]
-        virtual public string email
-        {
-            get { return Email; }
-            set { Email = value; }
-        }
+        virtual public string email { get; set; }
 
-        private string Phone;
         [Property]
-        virtual public string phone
-        {
-            get { return Phone; }
-            set { Phone = value; }
-        }
+        virtual public string phone { get; set; }
 
-        private bool Active;
         [Property]
-        virtual public bool active
-        {
-            get { return Active; }
-            set { Active = value; }
-        }
+        virtual public bool active { get; set; }
 
-        private bool Logedin;
         [Property]
-        virtual public bool logedin
-        {
-            get { return Logedin; }
-            set { Logedin = value; }
-        }
+        virtual public bool logedin { get; set; }
 
         private DateTime? lastActive;
         [Property]
@@ -114,97 +70,39 @@ namespace campusMap.Models
         }
         
 
-
-        private IList<media_repo> Media = new List<media_repo>();
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "authors_to_media", ColumnKey = "author_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<media_repo> media
-        {
-            get { return Media; }
-            set { Media = value; }
-        }
-        private IList<place> places = new List<place>();
+        virtual public IList<media_repo> media { get; set; }
+
         [HasAndBelongsToMany(typeof(place), Lazy = true, BatchSize = 60, Table = "authors_to_place", ColumnKey = "author_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places
-        {
-            get { return places; }
-            set { places = value; }
-        }
-        private IList<field_types> _field_types = new List<field_types>();
+        virtual public IList<place> Places { get; set; }
+
         [HasAndBelongsToMany(typeof(field_types), Lazy = true, BatchSize = 30, Table = "authors_to_field_type", ColumnKey = "author_id", ColumnRef = "field_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<field_types> field_types
-        {
-            get { return _field_types; }
-            set { _field_types = value; }
-        }
+        virtual public IList<field_types> field_types { get; set; }
 
-        private IList<geometrics> Geometric = new List<geometrics>();
         [HasAndBelongsToMany(typeof(geometrics), Lazy = true, BatchSize = 60, Table = "authors_to_geometrics", ColumnKey = "author_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<geometrics> geometric
-        {
-            get { return Geometric; }
-            set { Geometric = value; }
-        }
+        virtual public IList<geometrics> geometric { get; set; }
 
-
-        private IList<map_views> _views = new List<map_views>();
         [HasAndBelongsToMany(typeof(map_views), Lazy = true, BatchSize = 60, Table = "authors_to_view", ColumnKey = "author_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<map_views> views
-        {
-            get { return _views; }
-            set { _views = value; }
-        }
-        private IList<place_types> _place_types = new List<place_types>();
+        virtual public IList<map_views> views { get; set; }
+
         [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "authors_to_place_type", ColumnKey = "author_id", ColumnRef = "place_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place_types> place_types
-        {
-            get { return _place_types; }
-            set { _place_types = value; }
-        }
-        private IList<colleges> _colleges = new List<colleges>();
+        virtual public IList<place_types> place_types { get; set; }
+
         [HasAndBelongsToMany(typeof(colleges), Lazy = true, Table = "authors_to_colleges", ColumnKey = "college_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<colleges> colleges
-        {
-            get { return _colleges; }
-            set { _colleges = value; }
-        }
-        private IList<campus> _campus = new List<campus>();
+        virtual public IList<colleges> colleges { get; set; }
+
         [HasAndBelongsToMany(typeof(campus), Lazy = true, Table = "authors_to_campus", ColumnKey = "author_id", ColumnRef = "campus_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<campus> campus
-        {
-            get { return _campus; }
-            set { _campus = value; }
-        }
-        private IList<programs> _programs = new List<programs>();
+        virtual public IList<campus> campus { get; set; }
+
         [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "authors_to_programs", ColumnKey = "author_id", ColumnRef = "program_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<programs> programs
-        {
-            get { return _programs; }
-            set { _programs = value; }
-        }
-        private IList<categories> _categories = new List<categories>();
+        virtual public IList<programs> programs { get; set; }
+
         [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "authors_to_categories", ColumnKey = "author_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<categories> categories
-        {
-            get { return _categories; }
-            set { _categories = value; }
-        }
-       /* private Positions position;
-        [BelongsTo]
-        virtual public Positions Position
-        {
-            get { return position; }
-            set { position = value; }
-        }*/
+        virtual public IList<categories> categories { get; set; }
 
-        /*Table = "authors_editing", ColumnKey = "place_id", ColumnRef = "author_id",*/
-        private IList<place> author_editing = new List<place>();
+
         [HasMany(typeof(place), Lazy = true, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
-        virtual public IList<place> editing
-        {
-            get { return author_editing; }
-            set { author_editing = value; }
-        }
-
+        virtual public IList<place> editing { get; set; }
 
 
         virtual public IList<place> getUserPlaces(int statusId, int limit)
@@ -240,163 +138,74 @@ namespace campusMap.Models
 
     }
 
-
+    /* AKA GROUPS */
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class access_levels
     {
-        private int access_level_id;
         [PrimaryKey("access_level_id")]
-        virtual public int id
-        {
-            get { return access_level_id; }
-            set { access_level_id = value; }
-        }
-        private String _name;
+        virtual public int id { get; set; }
+
         [Property("title")]
-        virtual public String name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private String _alias;
-        [Property]
-        virtual public String alias
-        {
-            get { return _alias; }
-            set { _alias = value; }
-        }
-        private Boolean _default;
-        [Property]
-        virtual public Boolean default_group
-        {
-            get { return _default; }
-            set { _default = value; }
-        }
+        virtual public String name { get; set; }
 
-        private IList<authors> _users;
+        [Property]
+        virtual public String alias { get; set; }
+
+        [Property]
+        virtual public Boolean default_group { get; set; }
+
         [HasMany(typeof(authors), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> users
-        {
-            get { return _users; }
-            set { _users = value; }
-        }
-        private IList<field_types> _field_types = new List<field_types>();
+        virtual public IList<authors> users { get; set; }
+
         [HasAndBelongsToMany(typeof(field_types), Lazy = true, BatchSize = 30, Table = "access_levels_to_field_type", ColumnKey = "access_level_id", ColumnRef = "field_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<field_types> field_types
-        {
-            get { return _field_types; }
-            set { _field_types = value; }
-        }
-        private IList<privileges> _privileges = new List<privileges>();
+        virtual public IList<field_types> field_types { get; set; }
+
         [HasAndBelongsToMany(typeof(privileges), Lazy = true, BatchSize = 30, Table = "access_levels_to_privilege", ColumnKey = "access_level_id", ColumnRef = "privilege_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<privileges> privileges
-        {
-            get { return _privileges; }
-            set { _privileges = value; }
-        }
+        virtual public IList<privileges> privileges { get; set; }
 
-        /* attach some base properties to the group level */
-        private IList<colleges> _colleges = new List<colleges>();
         [HasAndBelongsToMany(typeof(colleges), Lazy = true, Table = "groups_to_colleges", ColumnKey = "access_level_id", ColumnRef = "college_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<colleges> colleges
-        {
-            get { return _colleges; }
-            set { _colleges = value; }
-        }
-        private IList<campus> _campus = new List<campus>();
+        virtual public IList<colleges> colleges { get; set; }
+
         [HasAndBelongsToMany(typeof(campus), Lazy = true, Table = "groups_to_campus", ColumnKey = "access_level_id", ColumnRef = "campus_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<campus> campus
-        {
-            get { return _campus; }
-            set { _campus = value; }
-        }
-        private IList<programs> _programs = new List<programs>();
+        virtual public IList<campus> campus { get; set; }
+
         [HasAndBelongsToMany(typeof(programs), Lazy = true, Table = "groups_to_programs", ColumnKey = "access_level_id", ColumnRef = "program_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<programs> programs
-        {
-            get { return _programs; }
-            set { _programs = value; }
-        }
-        private IList<schools> _schools = new List<schools>();
+        virtual public IList<programs> programs { get; set; }
+
         [HasAndBelongsToMany(typeof(schools), Lazy = true, Table = "groups_to_schools", ColumnKey = "access_level_id", ColumnRef = "school_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<schools> schools
-        {
-            get { return _schools; }
-            set { _schools = value; }
-        }
-        private IList<categories> _categories = new List<categories>();
+        virtual public IList<schools> schools { get; set; }
+
         [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "groups_to_categories", ColumnKey = "access_level_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<categories> categories
-        {
-            get { return _categories; }
-            set { _categories = value; }
-        }
-
-
+        virtual public IList<categories> categories { get; set; }
 
     }
-
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class privileges
     {
-        private int privilege_id;
         [PrimaryKey("privilege_id")]
-        virtual public int id
-        {
-            get { return privilege_id; }
-            set { privilege_id = value; }
-        }
-        private String _name;
+        virtual public int id { get; set; }
+
         [Property("title")]
-        virtual public String name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private String _alias;
+        virtual public String name { get; set; }
+
         [Property]
-        virtual public String alias
-        {
-            get { return _alias; }
-            set { _alias = value; }
-        }
-        private Boolean _editable;
+        virtual public String alias { get; set; }
+
         [Property]
-        virtual public Boolean editable
-        {
-            get { return _editable; }
-            set { _editable = value; }
-        }
-        private IList<access_levels> _access_levels = new List<access_levels>();
+        virtual public Boolean editable { get; set; }
+
         [HasAndBelongsToMany(typeof(access_levels), Lazy = true, BatchSize = 30, Table = "access_levels_to_privilege", ColumnKey = "privilege_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<access_levels> access_levels
-        {
-            get { return _access_levels; }
-            set { _access_levels = value; }
-        }
-
+        virtual public IList<access_levels> access_levels { get; set; }
     }
-
-
-
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class user_settings
     {
-        private int user_settings_id;
         [PrimaryKey("user_settings_id")]
-        virtual public int id
-        {
-            get { return user_settings_id; }
-            set { user_settings_id = value; }
-        }
-        private String _attr;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public String attr
-        {
-            get { return _attr; }
-            set { _attr = value; }
-        }
+        virtual public String attr { get; set; }
     }
 }

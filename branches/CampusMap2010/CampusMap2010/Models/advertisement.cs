@@ -16,114 +16,45 @@ namespace campusMap.Models
     [ActiveRecord(Lazy=true)]
     public class advertisement : ActiveRecordBase<advertisement>
     {
-        private int ad_id;
         [PrimaryKey("ad_id")]
-        virtual public int id
-        {
-            get { return ad_id; }
-            set { ad_id = value; }
-        }
-        private int clicked;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public int Clicked
-        {
-            get { return clicked; }
-            set { clicked = value; }
-        }
-        private String url;
+        virtual public int Clicked { get; set; }
+
         [Property]
-        virtual public String Url
-        {
-            get { return url; }
-            set { url = value; }
-        }
-       /* private bool breakingNews;
-        [Property]
-        virtual public bool BreakingNews
-        {
-            get { return breakingNews; }
-            set { breakingNews = value; }
-        }*/
-        private IList<media_repo> images = new List<media_repo>();
+        virtual public String Url { get; set; }
+
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, Table = "advertisement_to_media", ColumnKey = "ad_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<media_repo> Images
-        {
-            get { return images; }
-            set { images = value; }
-        }
-        private IList<tags> tags = new List<tags>();
+        virtual public IList<media_repo> Images { get; set; }
+
         [HasAndBelongsToMany(typeof(tags), Lazy = true, Table = "advertisement_to_tag", ColumnKey = "ad_id", ColumnRef = "tag_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<tags> Tags
-        {
-            get { return tags; }
-            set { tags = value; }
-        }
+        virtual public IList<tags> Tags { get; set; }
 
-        private IList<fields> Fields;
         [HasAndBelongsToMany(typeof(fields), Lazy = true, Table = "view_to_fields", ColumnKey = "field_id", ColumnRef = "view_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<fields> field
-        {
-            get { return Fields; }
-            set { Fields = value; }
-        }    
+        virtual public IList<fields> field { get; set; }
 
+        [Property(Default = "0")]
+        virtual public int Views { get; set; }
 
-
-
-
-        private int views = 0;
         [Property]
-        virtual public int Views
-        {
-            get { return views; }
-            set { views = value;}
-        }
+        virtual public String HtmlText { get; set; }
 
-        private String htmltext;
         [Property]
-        virtual public String HtmlText
-        {
-            get { return htmltext; }
-            set { htmltext = value;}
-        }
-        private String name;
-        [Property]
-        virtual public String Name
-        {
-            get { return name; }
-            set { name = value;}
-        }
-        private place_types Place_Types;
+        virtual public String Name { get; set; }
+
         [BelongsTo]
-        virtual public place_types place_types
-        {
-            get { return Place_Types; }
-            set { Place_Types = value; }
-        }
+        virtual public place_types place_types { get; set; }
 
+        [Property(Default = "0")]
+        virtual public String limitAds { get; set; }
 
+        [Property(Default = "0")]
+        virtual public int maxClicks { get; set; }
 
-        private String limitads;
-        [Property]
-        virtual public String limitAds
-        {
-            get { return limitads; }
-            set { limitads = value; }
-        }
-        private int maxclicks = 0;
-        [Property]
-        virtual public int maxClicks
-        {
-            get { return maxclicks; }
-            set { maxclicks = value;}
-        }
-        private int maximpressions = 0;
-        [Property]
-        virtual public int maxImpressions
-        {
-            get { return maximpressions; }
-            set { maximpressions = value;}
-        }
+        [Property(Default = "0")]
+        virtual public int maxImpressions { get; set; }
+
         private DateTime? Expiration;
         [Property]
         virtual public DateTime? expiration
@@ -159,7 +90,7 @@ namespace campusMap.Models
 
         virtual public bool isExpired()
         {
-            if ((!expiration.HasValue || expiration.HasValue && expiration.Value.CompareTo(DateTime.Now) >= 0) && (maxClicks == 0 || Clicked < maxClicks) && (maxImpressions == 0 || Views < maximpressions))
+            if ((!expiration.HasValue || expiration.HasValue && expiration.Value.CompareTo(DateTime.Now) >= 0) && (maxClicks == 0 || Clicked < maxClicks) && (maxImpressions == 0 || Views < maxImpressions))
                 return false;
             return true;
         }

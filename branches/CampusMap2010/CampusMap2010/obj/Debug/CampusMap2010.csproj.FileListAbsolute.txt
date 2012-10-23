@@ -283,7 +283,6 @@ C:\_SVN_\campusMap.4\CampusMap2010\bin\ru\Castle.Components.Validator.resources.
 C:\_SVN_\campusMap.4\CampusMap2010\bin\sv\Castle.Components.Validator.resources.dll
 C:\_SVN_\campusMap.4\CampusMap2010\bin\pt-BR\Castle.MonoRail.Framework.resources.dll
 C:\_SVN_\campusMap.4\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.dll
-C:\_SVN_\campusMap.4\CampusMap2010\obj\Debug\ResolveAssemblyReference.cache
 C:\_SVN_\campusMap.4\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\_SVN_\campusMap.4\CampusMap2010\obj\Debug\CampusMap2010.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\Rejuicer.pdb
@@ -292,3 +291,4 @@ C:\_SVN_\campusMap.4\CampusMap2010\bin\SquishIt.Framework.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\SquishIt.Mvc.pdb
 C:\_SVN_\campusMap.4\CampusMap2010\bin\AutoMapper.dll
 C:\_SVN_\campusMap.4\CampusMap2010\bin\AutoMapper.xml
+C:\_SVN_\campusMap.4\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache

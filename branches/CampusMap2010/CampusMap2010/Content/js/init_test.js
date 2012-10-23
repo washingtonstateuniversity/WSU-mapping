@@ -807,7 +807,6 @@ function make_InfoWindow(jObj,i,marker){
 						open:true,
 						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 						onOpen:function(){
-							
 							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
 						},
 						onClosed:function(){
@@ -817,6 +816,7 @@ function make_InfoWindow(jObj,i,marker){
 							$('#ttl').text(1);
 						},
 						onComplete:function(){
+							
 							if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");	
 							if($('#ttl').length){
 								var t=parseInt($('#ttl').text());
@@ -871,6 +871,7 @@ function make_InfoWindow(jObj,i,marker){
 									});
 								}
 							}
+							
 						}
 					});
 				});
@@ -1514,6 +1515,10 @@ function reset_listings(){
 	}
 	$('#selectedPlaceList_btn').css('display',"none");
 }
+
+/************
+nav
+******/
 function menuDressChild(jObj){
 	if(jObj.is($('.parent'))){
 		var self_active = jObj.is($('.active'));
@@ -1609,13 +1614,17 @@ function makeEmbeder(){
 			rel:'gouped',
 			html:function(){
 				
-				return '<div id="embedArea"><h2>Page Link</h2><h3 id="ebLink"><em id="linkurl">#</em> <a id="ebLink_con" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" title="Copy this item" href="#" style="background:url(../../../Content/wsu_ui/images/ui-bg_glass_40_c6b8ba_1x400.png) repeat-x scroll 50% 50% #3B4044;" ><span  id="ebLink_but" class="ui-icon ui-icon-clipboard"></span></a></h3><hr/><h2> Embed code <a id="customEmbed" href="#" class=" ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;background:url(../../../Content/wsu_ui/images/ui-bg_glass_40_c6b8ba_1x400.png) repeat-x scroll 50% 50% #3B4044;"><span class="ui-icon ui-icon-gear"></span></a></h2><textarea id="embedCode"  style="border: medium none; resize: none;" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe></textarea><div id="d_clip_container" style="position:relative"><div id="d_clip_button" class="my_clip_button"><b><span class="ui-icon ui-icon-clipboard" style="float:right;"></span>Copy To Clipboard...</b></div></div><div id="custom" style="display: none;"><h2>Customize</h2><label><input type="radio" value="s" name="size"/>Small <em>(214 x 161)</em></label><br/><label><input type="radio" value="m" name="size"/>Medium <em>(354 x 266)</em></label><br/><label><input type="radio" checked="checked" name="size" value="l"/>Large <em>(495 x 372)</em></label><br/><label><input type="radio" name="size" value="xl"/>Largest <em>(731 x 549)</em></label><br/><label><input type="radio" value="c" name="size"/>Custom</label><br/><div id="cSize" style="display: none; font-size:12px;">Width:<input id="w" value="" style="width:50px;" /> Height<input id="h" value=""  style="width:50px;" /></div></div><a href="#" id="request">Request access to WSU map manager to create your own map.&raquo;</a></div>';	
+				return '<div id="embedArea">  <h2>Page Link</h2>  <h3 id="ebLink"><em id="linkurl">#</em></h3>  <div id="ebLink_con" style="position:relative; float:right;">  <div id="ebLink_but" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <h2> Embed code </h2>  <div id="custom">  <label>  <input type="radio" value="s" name="size"/>  Small <em>(214 x 161)</em></label>  <label>  <input type="radio" value="m" name="size"/>  Medium <em>(354 x 266)</em></label>  <label>  <input type="radio" checked="checked" name="size" value="l"/>  Large <em>(495 x 372)</em></label>  <label>  <input type="radio" name="size" value="xl"/>  Largest <em>(731 x 549)</em></label>  <label>  <input type="radio" value="c" name="size"/>  Custom</label>  <div id="cSize" style="display: none; font-size:12px;">Width:  <input id="w" value="" style="width:50px;" />px<br/>  Height  <input id="h" value=""  style="width:50px;" />px  </div>  </div>  <textarea id="embedCode" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe>  </textarea>  <div id="d_clip_container" style="position:relative; float:right;">  <div id="d_clip_button" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <a href="#" id="request">WSU units: Request access to create your own map. &raquo;</a></div>';	
 			},
 			scrolling:false,
 			opacity:0.7,
 			transition:"none",
-			width:450,
+			innerWidth:450,
 			open:true,
+			onClosed:function(){
+				$('#colorbox').removeClass('norm');
+			},
+			onOpen:function(){$('#colorbox').addClass('norm');},
 			onComplete:function(){
 
 				clip = new ZeroClipboard.Client();
@@ -1642,53 +1651,48 @@ function makeEmbeder(){
 					clip.setText($('#embedCode').text());
 				});
 		
-				$('#customEmbed').off().on('click',function(){
-					$('#custom').slideToggle('fast', function() {
-					   $.colorbox.resize();
-						$('input[name="size"]').off().on('change',function(){
-							var val = $(this).val();
-							function changeEmText(w,h){
-								getSmUrl("eb=true",function(url){
-										var code = '<iframe width="'+w+'" height="'+h+'" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'+url+'" ></iframe>';
-										$('#embedCode').text(code);
-										clip.setText(code);
-								});
-							}
-							function dynoSize(){
-								if(!$('#cSize').is(':visible')){
-									$('#cSize').slideToggle('fast', function() {
-									   $.colorbox.resize();
-									});
-								}
-								$('#cSize input').off().on('keyup',function(){
-									changeEmText($('#w').val(),$('#h').val());
-								});
-							}
-							switch(val){
-								case "s":
-									if($('#cSize').is(':visible'))$('#cSize').slideToggle();
-									changeEmText(214,161);
-									break;
-								case "m":
-									if($('#cSize').is(':visible'))$('#cSize').slideToggle();
-									changeEmText(354,266);
-									break;
-								case "l":
-									if($('#cSize').is(':visible'))$('#cSize').slideToggle();
-									changeEmText(495,372);
-									break;
-								case "xl":
-									if($('#cSize').is(':visible'))$('#cSize').slideToggle();
-									changeEmText(731,549);
-									break;
-								case "c":
-									dynoSize();
-									break;
-							}
+				$.colorbox.resize();
+				$('input[name="size"]').off().on('change',function(){
+					var val = $(this).val();
+					function changeEmText(w,h){
+						getSmUrl("eb=true",function(url){
+								var code = '<iframe width="'+w+'" height="'+h+'" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'+url+'" ></iframe>';
+								$('#embedCode').text(code);
+								clip.setText(code);
 						});
-					});
+					}
+					function dynoSize(){
+						if(!$('#cSize').is(':visible')){
+							$('#cSize').slideToggle('fast', function() {
+							   $.colorbox.resize();
+							});
+						}
+						$('#cSize input').off().on('keyup',function(){
+							changeEmText($('#w').val(),$('#h').val());
+						});
+					}
+					switch(val){
+						case "s":
+							if($('#cSize').is(':visible'))$('#cSize').slideToggle();
+							changeEmText(214,161);
+							break;
+						case "m":
+							if($('#cSize').is(':visible'))$('#cSize').slideToggle();
+							changeEmText(354,266);
+							break;
+						case "l":
+							if($('#cSize').is(':visible'))$('#cSize').slideToggle();
+							changeEmText(495,372);
+							break;
+						case "xl":
+							if($('#cSize').is(':visible'))$('#cSize').slideToggle();
+							changeEmText(731,549);
+							break;
+						case "c":
+							dynoSize();
+							break;
+					}
 				});
-
 				
 				
 				makeRequestCustom();
@@ -1715,12 +1719,27 @@ function makeRequestCustom(){
 				scrolling:false,
 				opacity:0.7,
 				transition:"none",
-				width:450,
+				innerWidth:450,
 				//height:450,
 				open:true,
+				onClosed:function(){
+					$('#colorbox').removeClass('norm');
+				},
+				onOpen:function(){$('#colorbox').addClass('norm');},
 				onComplete:function(){prep();
 					if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");
 					$.colorbox.resize();
+					
+					$.getJSON("/public/get_admindepartments_list.castle",function(data){
+						$.each(data,function(i,val){
+							$('[name="Deparments"]').append("<option value='"+val.name+"("+val.id+")'>"+val.name+"</option>")
+							
+							});
+						
+					});
+					
+					
+					
 					
 					$('#embedback').off().on('click',function(e){
 						makeEmbeder();
