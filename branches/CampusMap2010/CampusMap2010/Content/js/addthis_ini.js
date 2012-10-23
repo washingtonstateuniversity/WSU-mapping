@@ -34,8 +34,5 @@ var addthis_config = {
 	 ui_header_color: "#000",
 	 ui_header_background: "#FFF", 
 	 data_track_clickback: true,
-	 data_ga_property: 'UA-22127038-5',<!-- IMPORTANT change for each site -->
-	 data_ga_social: true,
-	 data_track_addressbar: true,
-	 data_track_addressbar_paths: ["/*", "schedule/*", "abstracts/*", "commitees/*"]<!-- IMPORTANT change for each site -->
+	 data_ga_property: 'UA-22127038-5'<!-- IMPORTANT change for each site -->
 };
