@@ -65,11 +65,15 @@ namespace campusMap.Services
                     if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
                     { temp = author; }
                 }
-                temp.logedin = false;
-                temp.Save();
-                return temp.logedin?false:true;
+                if (temp != null)
+                {
+                    temp.logedin = false;
+                    temp.Save();
+                    return temp.logedin;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
 
 
