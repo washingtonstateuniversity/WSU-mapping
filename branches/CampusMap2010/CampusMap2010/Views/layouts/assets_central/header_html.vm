@@ -42,7 +42,7 @@
         </div>
      </li>
      <li>
-         <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;error</a>
+         <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;Error</a>
      </li>
   </ul>
 </div>

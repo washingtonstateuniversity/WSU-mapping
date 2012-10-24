@@ -7,7 +7,7 @@ function isTouch() {
   }
   return false;
 }
-
+/*
 function MySubmitForm(){
      if (passThroughFormSubmit) {
           return true;
@@ -35,9 +35,10 @@ function HumanCheckComplete(isHuman){
           formElt.submit();
      }
 }
+*/
 
+/*
 $(function() {
-
 
 if($('.right_side #twtr-search-widget').length>0){
   new TWTR.Widget({
@@ -70,8 +71,6 @@ if($('.right_side #twtr-search-widget').length>0){
 	  }
   }).render().start();
 }
-
-
 
 
 
@@ -248,3 +247,4 @@ if($('.right_side #twtr-search-widget').length>0){
 	});
     
 });
+*/

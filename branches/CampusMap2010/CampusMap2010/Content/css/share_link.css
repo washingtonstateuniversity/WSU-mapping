@@ -11,6 +11,8 @@
 #toolbar #social-list ul li a:hover{color:#FFF;background-color:#5e6a71;}
 #toolbar #social-list ul li span{margin:4px;margin-left:10px;display:block;float:left;}
 #toolbar .mid{text-align:center;}
+#toolbar .mid a { }
+#toolbar .mid a span{display:none;}
 #toolbar .mid a:hover{color: #981E32 !important;}
 /*classes from addthis*/
 #toolbar .at16nc{background-size:11px;height:11px;}

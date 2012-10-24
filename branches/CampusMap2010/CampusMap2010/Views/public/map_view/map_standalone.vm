@@ -33,8 +33,8 @@
 			</div>
 		#end
 		<div id="centralMap_wrap" style="#if(!$nav) margin-left:0px; #end #if($map.width>0) width:${map.width}px; #else  width:100%; #end #if($map.height>0) height:${map.height}px; #else  height:100%; #end">
-			<div id='selectedPlaceList' class='cAssest ini'>
-				<a href="#" id='selectedPlaceList_btn' style="display:none;">Info</a> 
+			<div id='selectedPlaceList' class='cAssest #if(${map.show_global_nav})  #else ini #end'>
+				<a href="#" id='selectedPlaceList_btn' #if(${map.show_global_nav})  #else style="display:none;" #end>Info</a> 
 				<div id='selectedPlaceList_area' class='cAssest'></div>
 			</div>
 			<div id="centralMap" style=" #if($map.width>0) width:${map.width}px; #else  width:100%; #end #if($map.height>0) height:${map.height}px; #else  height:100%; #end "></div>
@@ -81,10 +81,19 @@
 		  #set($c=0)
 		  var sids = "#foreach($geo in $map.geometrics)$!geo.id,#end 0";
 		  #end
+		  var show_global_nav = #if(${map.show_global_nav})true; #else false; #end
 		</script>
 		#set($siteroot=$site.Trim().TrimEnd("/"))
 
-		$scriptsService.Js("~/Content/js/utilities_general.js, ~/Content/js/map_editor_vars.js, ~/Content/js/modernizr-2.0.6/modernizr.min.js, ~/Content/js/jquery.defaultvalue.js, ~/Content/js/infobox.js, ~/Content/js/jquery.ui.map.js, ~/Content/js/jquery.ui.map.extensions.js, ~/Content/js/jquery.ui.map.services.js, ~/Content/js/jquery.ui.map.overlays.js, ~/Content/js/jquery.colorbox-min.js, ~/Content/js/jquery.cycle.all.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js, ~/Content/js/map_functions.js, ~/Content/js/init_test.js")
+#* PLUGINS *#
+$scriptsService.Js("~/Content/js/utilities_general.js, ~/Content/js/modernizr-2.0.6/modernizr.min.js, ~/Content/js/jquery.defaultvalue.js, ~/Content/js/infobox.js, ~/Content/js/jquery.ui.map.js, ~/Content/js/jquery.ui.map.extensions.js, ~/Content/js/jquery.ui.map.services.js, ~/Content/js/jquery.ui.map.overlays.js, ~/Content/js/jquery.colorbox-min.js, ~/Content/js/jquery.cycle.all.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js")
+
+#* Controls *#
+$scriptsService.Js("~/Content/js/map_editor_vars.js, ~/Content/js/map_functions.js, ~/Content/js/init_test.js,~/Content/js/map_ini.js")
+
+
+
+
 
 	</body>
 </html>

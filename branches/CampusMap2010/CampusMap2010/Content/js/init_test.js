@@ -62,6 +62,9 @@ function ini_map_view(map_ele_obj,callback){
 		map_ele_obj.gmap(map_op).bind('init', function() { 
 			var map = map_ele_obj.gmap("get","map");
 			ini_GAtracking('UA-22127038-5');
+			poi_setup($('#centralMap'));
+			
+			
 			if($('.mobile').length)geoLocate();
 			callback();
 		});
@@ -718,10 +721,10 @@ function make_InfoWindow(jObj,i,marker){
 		,pixelOffset: new google.maps.Size(-200, -103)
 		,zIndex: 999
 		,boxStyle: {
-		  width: "400px"
+		  width: ($('#centralMap').width()<425?$('#centralMap').width()-25:400)+"px"
 		 }
 		,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-		,infoBoxClearance: new google.maps.Size(75,50)
+		,infoBoxClearance: ($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?new google.maps.Size(25,15):new google.maps.Size(75,50))
 		,isHidden: false
 		,pane: "floatPane"
 		,enableEventPropagation: false
@@ -753,6 +756,7 @@ function make_InfoWindow(jObj,i,marker){
 							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
 						}
 					});
+					$("#campusmap .ui-tabs .ui-tabs-panel .content").width(($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?$('#campusmap .ui-tabs .ui-tabs-panel').width()-35:365)+"px")
 				if($('.cWrap .items li').length>1 && typeof($.fn.cycle)!=="undefined"){
 					var currSlide=0; 
 					$('.cWrap .items').cycle('destroy');
@@ -1567,6 +1571,7 @@ function setup_nav(jObj){
 				params=params+$(this).attr('href').split('=')[1]+',';
 			});
 			reset_Navscrollbar();
+			$('*:focused').blur();
 			updateMap(jObj,encodeURI(params.substring(0, params.length - 1)),true);
 		}else{
 			destroy_Navscrollbar(function(){});
@@ -1579,7 +1584,8 @@ var api_nav=null;
 function setup_Navscrollbar(){
 	
 	var settings = {
-		maintainPosition:false
+		maintainPosition:true,
+		stickToBottom:true
 		//showArrows: true
 	};
 	var pane = $("#navwrap");
@@ -1775,21 +1781,17 @@ function makeRequestCustom(){
 		});
 	}
 function setup_embeder(){
-	$('#embed').click(function(e){
+	$('#embed').off().on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var trigger=$(this);
 		$.colorbox.remove();
 		makeEmbeder();
-
-		
-		
-
 	});
 }
 
 function addErrorReporting(marker){
-$('.errorReporting').click(function(e){
+$('.errorReporting').off().on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var trigger=$(this);
@@ -1903,7 +1905,7 @@ $('#emailDir').off().on('click',function(e){
 
 /* these are very central map items */
 function setup_pdfprints(){
-	$('#printPdfs').click(function(e){
+	$('#printPdfs').off().on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var trigger=$(this);
@@ -1985,6 +1987,7 @@ function setup(jObj){
 						//ib[0].open($('#centralMap').gmap('get','map'), marker);
 						//cur_mid = mid[0];
 					});
+					if(show_global_nav)loadListings(data,false);
 					prep();
 				});
 			}	
@@ -2007,103 +2010,9 @@ function setup(jObj){
 		reloadPlaces();
 	}
 	/* EFO Other after gmap ini */
+	
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function(){
-	$(window).resize(function(){
-		if($(window).width()<=320){
-			$('html').removeClass('narrow');
-			$('html').addClass('mobile');
-		}else if($(window).width()<=600){
-			$('html').addClass('narrow');
-			$('html').removeClass('mobile');
-		}else{
-			$('html').removeClass('narrow');
-			$('html').removeClass('mobile');
-		}
-	}).trigger("resize");
-	var listOffset=0;
-	//$(' [placeholder] ').defaultValue();
-	if($('#centralMap').length){
-		mapInst=$('#centralMap');
-		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
-		if($('.veiw_base_layout').length){
-			ini_map_view(mapInst,setup);
-		}else{
-			iniMap("",setup);
-		}
-		if(mapInst.length){
-			$(window).resize(function(){
-				
-				// can't us mapInst here cause it's still in the admin area.  Split that.
-				resizeBg($('.central_layout.public.central #centralMap'),($('.embeded').length?0:($(window).height()<=404?0:130)),($('.embeded').length?0:($(window).width()<=404?0:($(window).width()<=600?155:201))) + $('#selectedPlaceList').width())
-			}).trigger("resize");
-			$(window).resize(function(){
-				// can't us mapInst here cause it's still in the admin area.  Split that.
-				$('#navwrap').height($('#centralMap_wrap').height()-70);
-				resizeBg($('.cAssest'),($('.embeded').length?0:130));
-				
-				reset_Dirscrollbar();
-				reset_Listscrollbar();
-				reset_Navscrollbar();
-				//if($('#listing').length)setup_scrollbar($('#listing'));
-				
-			}).trigger("resize");
-		}
-		$('#directionsTo').hide();
-		$('#campusmap input[type="text"]').val('');
-	}
-
-	$('#resetmap').on('click',function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		
-		reset_listings();
-		$('#main_nav').find('.active').removeClass('active');
-		$('#campusmap input[type="text"]').val('');
-		if($('#directionsTo').is(':visible'))$('#directionsTo').hide();
-		if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
-		//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
-		//$('.mapControl').remove();
-		mapInst.gmap("destroy",function(ele){
-			mapInst.html('');
-			$('.mapControl').remove(); 
-			if($('.veiw_base_layout').length){
-				ini_map_view(mapInst,setup);
-			}else{
-				iniMap("",setup);
-			}
-			$(window).trigger("resize");
-			//alert("done");
-		});
-	});
-});
