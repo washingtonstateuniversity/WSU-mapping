@@ -12,7 +12,7 @@
 			<div id="header_bar">
 				#parse("layouts/assets_central/header_html.vm")
 			</div>
-			<div style="float: left;left: 0; position: static;top: 0;width: 201px;z-index: 999;background: url(../../../../../Content/images/bg-nav.png) no-repeat scroll -99px 0 transparent;">
+			<div id="mainNavArea">
                 <form action="#" id="placeSearch" style="margin: 19px 0 10px 33px;">
                     <input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
                 </form>
