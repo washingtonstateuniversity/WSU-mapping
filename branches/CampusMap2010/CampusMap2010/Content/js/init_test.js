@@ -1396,40 +1396,40 @@ function setup_directions(jObj){
 						function(results, status){
 							display_directions(jObj,results);
 							if($('#directions_area').length){
-								$('#printDir').off().on('click',function(){
+								$('#printDir').off().on('click',function(e){
+									e.preventDefault();
+									e.stopPropagation();
 									var map = jObj.gmap('get','map');
 									var baseUrl = "http://maps.googleapis.com/maps/api/staticmap?";
 									 
-								   var params = [];
-								   params.push("sensor=false");
-								   params.push("size=700x504");
-								   params.push("center=" + map.getCenter().lat().toFixed(6) + "," + map.getCenter().lng().toFixed(6));
-								   //params.push("zoom=" + map.getZoom());
-								   
-								   
+									var params = [];
+									params.push("sensor=false");
+									params.push("size=700x504");
+									params.push("center=" + map.getCenter().lat().toFixed(6) + "," + map.getCenter().lng().toFixed(6));
+									//params.push("zoom=" + map.getZoom());
+
 									var markersArray = [];
-								   markersArray.push("markers=color:green%7Clabel:A%7C"+results.routes[0].legs[0].start_location.toString().replace(')','').replace('(',''));
-								   markersArray.push("markers=color:green%7Clabel:B%7C"+results.routes[0].legs[0].end_location.toString().replace(')','').replace('(',''));
-								   params.push(markersArray.join("&"));
+									markersArray.push("markers=color:green%7Clabel:A%7C"+results.routes[0].legs[0].start_location.toString().replace(')','').replace('(',''));
+									markersArray.push("markers=color:green%7Clabel:B%7C"+results.routes[0].legs[0].end_location.toString().replace(')','').replace('(',''));
+									params.push(markersArray.join("&"));
 									var path = google.maps.geometry.encoding.decodePath(results.routes[0].overview_polyline.points);   
-									
-									
+
 									params.push("path=weight:3%7Ccolor:blue%7Cenc:" + google.maps.geometry.encoding.encodePath(path) );
-									
-									//params.push("key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxSPW5CJgpdgO_s4yyMovOaVh_KvvhSfpvagV18eOyDWu7VytS6Bi1CWxw");
-									
 									baseUrl += params.join("&");
 
 									   
 									if($("#hide").length==0)$('body').append('<div id="hide" ><div id="pArea"></div></div>');
 									
 									$("#pArea").html($('#directions_area').html()+'<img src="'+baseUrl+'" alt="map" width="700" height="504"/>');
-									if($.browser.msie){
+									/*if($.browser.msie){
 										$("#pArea").prepend("<style>@media print {#header_bar,#centralMap_wrap,#mainNavArea {display:none;}}</style>");
 										window.print();
 									}else{
 										$("#pArea").jprint();
-									}
+									}*/
+									
+									$("#pArea").jprint();
+									
 								});
 								
 							}
@@ -1603,10 +1603,11 @@ function setup_nav(jObj){
 				params=params+$(this).attr('href').split('=')[1]+',';
 			});
 			reset_Navscrollbar();
-			$('*:focused').blur();
+			
 			updateMap(jObj,encodeURI(params.substring(0, params.length - 1)),true);
 		}else{
 			destroy_Navscrollbar(function(){});
+			$('*:focus').blur();
 			$(this).closest('.parent').find('.parentalLink').trigger('click');
 		}
 	});
