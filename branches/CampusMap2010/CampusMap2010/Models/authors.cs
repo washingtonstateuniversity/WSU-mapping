@@ -145,14 +145,23 @@ namespace campusMap.Models
         [PrimaryKey("access_level_id")]
         virtual public int id { get; set; }
 
-        [Property("title")]
+        [Property]
+        virtual public int parent_id { get; set; }
+
+        [Property]
         virtual public String name { get; set; }
 
         [Property]
         virtual public String alias { get; set; }
 
-        [Property]
+        [Property(Default = "0")]
         virtual public Boolean default_group { get; set; }
+
+        [Property(Default = "0")]
+        virtual public Boolean isAdmin { get; set; }
+
+        [Property(Default = "0")]
+        virtual public Boolean allow_signup { get; set; }
 
         [HasMany(typeof(authors), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<authors> users { get; set; }
@@ -194,6 +203,9 @@ namespace campusMap.Models
 
         [Property]
         virtual public Boolean editable { get; set; }
+
+        [Property]
+        virtual public String discription { get; set; }
 
         [HasAndBelongsToMany(typeof(access_levels), Lazy = true, BatchSize = 30, Table = "access_levels_to_privilege", ColumnKey = "privilege_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<access_levels> access_levels { get; set; }

@@ -40,6 +40,7 @@ namespace campusMap.Controllers
 
             PropertyBag["privileges"] = ActiveRecordBase<privileges>.FindAll();
             PropertyBag["accesslevel"] = ActiveRecordBase<access_levels>.Find(id);
+            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             RenderView("new");
         }
         public void _new_accesslevel()

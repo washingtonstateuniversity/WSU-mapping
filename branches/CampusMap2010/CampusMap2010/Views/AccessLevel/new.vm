@@ -11,7 +11,24 @@
 	<h4>Alias:</h4>
 	$Form.TextField("accesslevel.alias") 
 	<h6>(<em><strong>NOTE:</strong>This is the Alias name that is used by the system.</em>)</h6>
+    <hr style="max-width:66%;display: inline-block;width:100%;"/>
+    <h4>Admin account:</h4>
+    <input type="checkbox" class="checkable" name="accesslevel.isAdmin" value="True" #if($accesslevel.isAdmin)checked="checked"#end />
+
+    <h4>Allow users to add them self to the group:</h4>
+    <input type="checkbox" class="checkable" name="accesslevel.allow_signup" value="True" #if($accesslevel.allow_signup)checked="checked"#end />    
+
 	
+    <h4>Allow users to add them self to the group:</h4>
+    <select id="accesslevel.parent_id" name="accesslevel.parent_id"  class="" style="width:205px;">
+    	<option class="model" value="0" #if($accesslevel.parent_id == 0) selected="selected" #end >None (Top level)</option>
+        #foreach($group in $accesslevels)
+            <option class="model" value="$group.id" #if($accesslevel.parent_id == $group.id) selected="selected" #end >$group.name</option>
+        #end
+    </select>
+    
+    
+    
 	
 	<div id="tabs" class="placelist  ui-tabs ui-widget ui-widget-content ui-corner-all">
 	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -101,7 +118,7 @@
 					#set ($c=0)
 					#foreach($privilege in $privileges)
 					<tr #if($c%2>0) class="even" #else class="odd" #end>
-					<td align="center"><input type="checkbox" class="checkable" name="accesslevel.privileges[]" value="$privilege.id" #if($accesslevel.privileges.contains($privilege))checked="checked"#end></td>
+					<td align="center"><input type="checkbox" class="checkable" name="accesslevel.privileges[]" value="$privilege.id" #if($accesslevel.privileges.contains($privilege))checked="checked"#end /></td>
 					<td align="left">$!privilege.name</td>
 					</tr>
 					#set ($c=$c+1)
