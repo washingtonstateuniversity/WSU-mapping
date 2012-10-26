@@ -1010,7 +1010,7 @@ function loadData(jObj,data,callback,markerCallback){
 			
 			if(i==(data.markers.length-1) && $.isFunction(callback)){callback();}
 		});
-		geoLocate();
+		if($('.mobile').length)geoLocate();
 	}
 	//if($.isFunction(callback))callback();return;
 }
