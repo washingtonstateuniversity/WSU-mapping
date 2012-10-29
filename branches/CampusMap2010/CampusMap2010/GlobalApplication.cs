@@ -17,6 +17,7 @@ namespace campusMap
 
 		public GlobalApplication()
 		{
+
 		}
 
 		#region IContainerAccessor
