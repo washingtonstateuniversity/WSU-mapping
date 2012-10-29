@@ -86,8 +86,8 @@ namespace campusMap.Filters
                 {
                     currentUser.logedin = true;
                     currentUser.LastActive = DateTime.Now;
-                    currentUser.SaveAndFlush();
-                    //ActiveRecordMediator<users>.Save(currentUser);
+                    ActiveRecordMediator<users>.Update(currentUser);
+                    ActiveRecordMediator<users>.Save(currentUser);
                 }
             }
 
