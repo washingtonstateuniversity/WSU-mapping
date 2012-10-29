@@ -96,7 +96,7 @@ function add_place_point(lat,lng,clear){
 		var placePos = this.getPosition();
 		var lat = placePos.lat();
 		var lng = placePos.lng();
-		if(shapes.length>0){
+		if(typeof(shapes)!=="undefined" && shapes.length>0){
 			$('#place_drawing_map').gmap("move_shape",shapes[0],placePos);
 		}
 		$('#Lat').val(lat);
