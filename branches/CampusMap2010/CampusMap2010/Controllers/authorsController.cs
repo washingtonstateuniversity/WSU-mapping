@@ -30,14 +30,14 @@ namespace campusMap.Controllers
 
         public void List()
         {
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();    
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();    
         }
 
         public void Edit(int id)
         {
-            authors author = ActiveRecordBase<authors>.Find(id);
-            if (!canControl(UserService.getUser()) && author != UserService.getUser())
+            users user = ActiveRecordBase<users>.Find(id);
+            if (!canControl(UserService.getUser()) && user != UserService.getUser())
             {
                 Flash["error"] = "Sorry you are not able to edit this user.";
                 RedirectToAction("list");
@@ -46,13 +46,13 @@ namespace campusMap.Controllers
 
             media_types imgtype = ActiveRecordBase<media_types>.Find(1);
             PropertyBag["images"] = imgtype.media_typed; //Flash["images"] != null ? Flash["images"] : 
-            PropertyBag["authorimages"] = author.media;
+            PropertyBag["authorimages"] = user.media;
             PropertyBag["currentUser"] = UserService.getUser();
-            PropertyBag["author"] = author;
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["user"] = user;
+            PropertyBag["groups"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
@@ -61,9 +61,6 @@ namespace campusMap.Controllers
             PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
             PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-/*          
-            adminService.setPDefaults();
-*/
 
             PropertyBag["field_types"] = ActiveRecordBase<field_types>.FindAll();
 
@@ -73,9 +70,9 @@ namespace campusMap.Controllers
 
         public void New()
         {
-            authors author = new authors();
+            users user = new users();
             List<media_repo> images = new List<media_repo>();
-            images.AddRange(author.media);
+            //images.AddRange(user.media);
             if (images.Count == 0)
             {
                 images.Add(new media_repo());
@@ -84,14 +81,11 @@ namespace campusMap.Controllers
             media_types imgtype = ActiveRecordBase<media_types>.Find(1);
             PropertyBag["images"] = imgtype.media_typed;
             PropertyBag["currentUser"] = UserService.getUser();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-
-
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            PropertyBag["groups"] = ActiveRecordBase<user_groups>.FindAll();
 
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
@@ -104,10 +98,10 @@ namespace campusMap.Controllers
 
         }
         
-        public bool canControl(authors user)
+        public bool canControl(users user)
         {
             bool flag = false;
-            switch (user.access_levels.name)
+            switch (user.groups.name)
             {
                 case "Admin": flag = true; break;
 
@@ -116,10 +110,10 @@ namespace campusMap.Controllers
             }
             return flag;
         }
-        public bool canChangeLevel(authors user)
+        public bool canChangeLevel(users user)
         {
             bool flag = false;
-            switch (user.access_levels.name)
+            switch (user.groups.name)
             {
                 case "Admin": flag = true; break;
 
@@ -128,7 +122,7 @@ namespace campusMap.Controllers
             }
             return flag;
         }
-        public void Update([ARDataBind("author", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] authors author,
+        public void Update([ARDataBind("user", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] users user,
                            [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
                            HttpPostedFile newimage,
                            int[] Sections, string apply, string cancel) 
@@ -146,20 +140,14 @@ namespace campusMap.Controllers
                 RedirectToAction("list");
                 return;
             }
-            if (author.access_levels.id == 0)
+            if (user.groups.id<=0)
             {
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
                 baseEx.Add(Expression.Eq("default", true));
-                author.access_levels.id = ActiveRecordBase<access_levels>.FindFirst(baseEx.ToArray()).id;
-               
-                //List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
- /*
-                author.access_levels.id = ActiveRecordBase<access_levels>.FindFirst(new List<AbstractCriterion>(){ Expression.Eq("default", false) }).id;
- */
-                
+                user.groups = ActiveRecordBase<user_groups>.FindFirst(baseEx.ToArray());
             }
-
-            /*author.place_types.Clear();
+            /*
+            author.place_types.Clear();
             foreach (int section in Sections)
             {
                 place_types tmp=ActiveRecordBase<place_types>.Find(section);
@@ -167,17 +155,18 @@ namespace campusMap.Controllers
                 {
                     author.place_types.Add(tmp);
                 }
-            }*/
-            author.media.Clear();
+            }
 
+            user.media.Clear();
+            */
             try
             {
-                ActiveRecordMediator<authors>.Save(author);
+                ActiveRecordMediator<users>.Save(user);
             }
             catch (Exception ex)
             {
                 Flash["error"] = ex.Message;
-                Flash["author"] = author;
+                Flash["author"] = user;
             }
             /*
                 ActiveRecordMediator<media_repo>.Save(image);
@@ -215,8 +204,8 @@ namespace campusMap.Controllers
         public void delete(int id)
         {
 
-           authors auth = ActiveRecordBase<authors>.Find(id);
-           ActiveRecordMediator<authors>.Delete(auth);
+           users auth = ActiveRecordBase<users>.Find(id);
+           ActiveRecordMediator<users>.Delete(auth);
            RedirectToReferrer(); 
         }
 

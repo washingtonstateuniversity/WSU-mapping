@@ -17,7 +17,9 @@
 			<ul class="menu">
 				<li class="liTop"><a class="open #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
 					<ul class="drop">
-						<li><a href="../view/list.castle">Map view list</a></li>
+                        <li><a href="../view/list.castle">Map view list</a></li>
+                        <li><a href="../view/new.castle">New Map view</a></li>
+                        <li><hr/></li>
 						#if($userService.checkPrivleage("modify_global_nav"))<li><a href="../view/list_nav.castle">Global Navagation</a></li>#end
 					</ul>
 				</li>
@@ -31,10 +33,9 @@
 						<ul class="drop">
 							<li><a href="../place/list.castle">List</a></li>
 							<li><a href="../place/new.castle">New Place</a></li>
-							#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
+							
 						</ul>
 					</li>
-					
 				#if($userService.checkPrivleage("modify_geometrics"))
 					<li class="liTop"><a class="open #if($controller.getView()=='place')active#end" href="../geometrics/list.castle">Geometrics</a>
 						<ul class="drop">
@@ -49,7 +50,6 @@
 						</ul>
 					</li>
 				#end
-					
 				</ul>
 			</li>
 			<li class="close"><a href="#"></a></li>
@@ -100,9 +100,19 @@
 			<li class="close"><a href="#"></a></li>
 		</ul>
 		
-		#if($userService.checkPrivleage("modify_site_settings"))
-			<ul class="menu"><li class="nosub"><a class="open #if($controller.getView()=='comment')ui-state-active#end" href="../admin/_list_siteSettings.castle"><b>Site Prefences</b></a></li></ul>
-		#end	
+		#if($userService.checkPrivleage("modify_site_settings") || $userService.checkPrivleage("modify_wsu_matrix"))
+            <ul class="menu">
+                <li class="liTop"><a class="open"  href="#"><b>Site Controlls</b></a>
+                    <ul class="drop">
+                        #if($userService.checkPrivleage("modify_site_settings"))<li><a href="../admin/_list_siteSettings.castle"><b>Site Prefences</b></a></li> #end	
+                        <li><hr/></li>
+                        #if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
+                    </ul>
+                </li>
+                <li class="close"><a href="#"></a></li>
+            </ul>					
+        #end	     
+		
 		<ul class="menu"><li class="sep"><b>::</b></li></ul>
 		<ul class="menu">
 			<li class="nosub"><a class="open" href="../admin/help.castle" target="_blank"><b>Help</b></a></li>

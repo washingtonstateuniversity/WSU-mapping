@@ -460,7 +460,7 @@
                 get_authors_places_list(UserService.getUser(), callback);
             }
 
-            public void get_authors_places_list(authors user, String callback)
+            public void get_authors_places_list(users user, String callback)
             {
                 CancelView();
                 CancelLayout();
@@ -546,7 +546,7 @@
                 get_authors_geometrics_list(UserService.getUser(), callback);
             }
 
-            public void get_authors_geometrics_list(authors user, String callback)
+            public void get_authors_geometrics_list(users user, String callback)
             {
                 CancelView();
                 CancelLayout();
@@ -670,7 +670,7 @@
                 CancelView();
                 CancelLayout();
 
-                authors[] users = ActiveRecordBase<authors>.FindAllByProperty("access_levels", ActiveRecordBase<access_levels>.Find(1));
+                users[] users = ActiveRecordBase<users>.FindAllByProperty("access_levels", ActiveRecordBase<user_groups>.Find(1));
                     
                 List<String> sentemails = new List<String>();
 
@@ -681,9 +681,9 @@
                 PropertyBag["place_id"] = place_id;
                 PropertyBag["issueType"] = issueType;
                 
-                foreach (authors user in users)
+                foreach (users user in users)
                 {
-                    if (user.Nid == "jeremy.bass")
+                    if (user.nid == "jeremy.bass")
                     {
                         System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
                         email_mass.IsBodyHtml = true;
@@ -711,7 +711,7 @@
                 CancelView();
                 CancelLayout();
 
-                authors[] users = ActiveRecordBase<authors>.FindAllByProperty("access_levels", ActiveRecordBase<access_levels>.Find(1));
+                users[] users = ActiveRecordBase<users>.FindAllByProperty("access_levels", ActiveRecordBase<user_groups>.Find(1));
                     
                 List<String> sentemails = new List<String>();
 
@@ -722,9 +722,9 @@
                 PropertyBag["Deparments"] = Deparments;
                 PropertyBag["issueType"] = issueType;
                 
-                foreach (authors user in users)
+                foreach (users user in users)
                 {
-                    if (user.Nid == "jeremy.bass")
+                    if (user.nid == "jeremy.bass")
                     {
                         System.Net.Mail.MailMessage email_mass = RenderMailMessage("access_request", null, PropertyBag);
                         email_mass.IsBodyHtml = true;

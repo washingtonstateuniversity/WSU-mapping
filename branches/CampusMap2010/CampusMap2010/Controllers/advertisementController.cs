@@ -32,7 +32,7 @@ namespace campusMap.Controllers
             PropertyBag["advertisement"] = PaginationHelper.CreatePagination(items, pagesize, page);
             //PropertyBag["advertisement"] = ActiveRecordBase<Advertisement>.FindAll();
 
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["now"] = DateTime.Now;
             PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -48,7 +48,7 @@ namespace campusMap.Controllers
             media_types imgtype = ActiveRecordBase<media_types>.Find(2);
             PropertyBag["images"] = imgtype.media_typed;
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             //PropertyBag["classifiedtype"] = ActiveRecordBase<ClassifiedType>.FindAll();
             //PropertyBag["location"] = ActiveRecordBase<LocationType>.FindAll();    
             List<tags> tags = new List<tags>();
@@ -69,7 +69,7 @@ namespace campusMap.Controllers
             PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll(baseEx.ToArray());
             PropertyBag["advertisement"] = ActiveRecordBase<advertisement>.FindAll();
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             //PropertyBag["location"] = ActiveRecordBase<LocationType>.FindAll();    
         }
         public void GetAddImage(int count)

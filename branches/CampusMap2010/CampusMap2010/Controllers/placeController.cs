@@ -61,14 +61,14 @@ namespace campusMap.Controllers
         public void List(int page, int searchId, string target, string filter, Boolean ajax)
         {
             clearConnections();
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["listcats"] = ActiveRecordBase<categories>.FindAll();
 
 
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
 
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
@@ -497,7 +497,7 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
 
 
 
@@ -543,7 +543,7 @@ namespace campusMap.Controllers
                 {
                     if ((ft_.authors.Count > 0) || (ft_.access_levels.Count > 0))
                     {
-                        if (ft_.authors.Contains(user) || ft_.access_levels.Contains(user.access_levels))
+                        if (ft_.authors.Contains(user) || ft_.access_levels.Contains(user.groups))
                         {
                             user_fields.Add(get_field(ft_, one_place));
                         }
@@ -564,10 +564,10 @@ namespace campusMap.Controllers
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll(Order.Asc("friendly"));
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
@@ -607,7 +607,7 @@ namespace campusMap.Controllers
             if (one_place.infotabs.Count > 0) tabs.AddRange(one_place.infotabs);
             PropertyBag["tabs"] = tabs;
 
-            List<authors> authors = new List<authors>();
+            List<users> authors = new List<users>();
             if (!one_place.Authors.Contains(user)) authors.Add(user);
             authors.AddRange(one_place.Authors);
             // for (int i = 0; i < 2; i++)
@@ -661,10 +661,10 @@ namespace campusMap.Controllers
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["place"] = Flash["place"] != null ? Flash["place"] : place;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<users>.FindAll();
             PropertyBag["models"] = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["types"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
@@ -682,10 +682,10 @@ namespace campusMap.Controllers
 
 
         /* move checks out */
-        public bool canEdit(place place, authors user)
+        public bool canEdit(place place, users user)
         {
             bool flag = false;
-           switch (user.access_levels.name)
+           switch (user.groups.name)
             {
                 case "Admin":
                     {
@@ -788,8 +788,8 @@ namespace campusMap.Controllers
             PropertyBag["field"] = field;
             place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
             PropertyBag["p_models"] = p_models;
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
 
             RenderView("../admin/fields/new");
         }
@@ -811,8 +811,8 @@ namespace campusMap.Controllers
 
             //elementSet ele = (elementSet)JsonConvert.DeserializeObject(field.attr.ToString(), typeof(elementSet));
             //string ele_str = FieldsService.getfieldmodel(ele);
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
 
             PropertyBag["html_ele"] = ele_str;
             PropertyBag["ele"] = ele;
@@ -1097,16 +1097,16 @@ namespace campusMap.Controllers
         public void GetAddAuthor(int count)
         {
             PropertyBag["count"] = count;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            List<authors> authors = new List<authors>();
-            authors.Add(new authors());
-            authors.Add(new authors());
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            List<users> authors = new List<users>();
+            authors.Add(new users());
+            authors.Add(new users());
             PropertyBag["placeauthors"] = authors;
             RenderView("addauthor", true);
         }
         public void DeleteAuthor(int id, int placeId)
         {
-            authors author = ActiveRecordBase<authors>.Find(id);
+            users author = ActiveRecordBase<users>.Find(id);
             place place = ActiveRecordBase<place>.Find(placeId);
             place.Authors.Remove(author);
             ActiveRecordMediator<place>.Save(place);
@@ -1303,7 +1303,7 @@ namespace campusMap.Controllers
             String[] massTag,
             String[] newtab,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
-            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
+            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
             [ARDataBind("place_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]place_media[] place_media,
             [ARDataBind("place_names", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]place_names[] place_names,
             String[][] fields,
@@ -1359,7 +1359,7 @@ namespace campusMap.Controllers
             //place.plus_four_code
             //'99164'
 
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             place.editing = user;
             if ((place.prime_name == null || place.prime_name.Length == 0) )
             {
@@ -1561,7 +1561,7 @@ namespace campusMap.Controllers
                 }
             }
             if (!place.Authors.Contains(user) && authors==null) place.Authors.Add(user); 
-            foreach (authors author in authors)
+            foreach (users author in authors)
             {
                 if (author.id > 0 && !place.Authors.Contains(author))
                     place.Authors.Add(author);   

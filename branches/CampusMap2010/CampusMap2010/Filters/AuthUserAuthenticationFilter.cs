@@ -45,7 +45,7 @@ namespace campusMap.Filters
                 // Not authenticated, redirect to login
                 String username = Authentication.authenticate();
 
-                authors[] authors = ActiveRecordBase<authors>.FindAllByProperty("Nid", username);
+                users[] authors = ActiveRecordBase<users>.FindAllByProperty("Nid", username);
 
                 if (authors.Length == 0)
                 {

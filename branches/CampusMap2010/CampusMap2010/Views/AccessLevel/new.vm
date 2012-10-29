@@ -19,11 +19,11 @@
     <input type="checkbox" class="checkable" name="accesslevel.allow_signup" value="True" #if($accesslevel.allow_signup)checked="checked"#end />    
 
 	
-    <h4>Allow users to add them self to the group:</h4>
-    <select id="accesslevel.parent_id" name="accesslevel.parent_id"  class="" style="width:205px;">
-    	<option class="model" value="0" #if($accesslevel.parent_id == 0) selected="selected" #end >None (Top level)</option>
+    <h4>Add as a sub group to:</h4>
+    <select id="accesslevel.parent" name="accesslevel.parent"  class="" style="width:205px;">
+    	<option class="model" value="" #if(!$accesslevel.parent.id < 1) selected="selected" #end >None (Top level)</option>
         #foreach($group in $accesslevels)
-            <option class="model" value="$group.id" #if($accesslevel.parent_id == $group.id) selected="selected" #end >$group.name</option>
+            <option value="$group.id" #if($accesslevel.parent.id == $group.id)) selected="selected" #end >$group.name</option>
         #end
     </select>
     

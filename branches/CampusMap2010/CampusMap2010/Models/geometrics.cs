@@ -154,11 +154,11 @@ namespace campusMap.Models
         [HasAndBelongsToMany(typeof(media_repo), Lazy = true, BatchSize = 30, Table = "geometric_to_media", ColumnKey = "geometric_id", ColumnRef = "media_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<media_repo> Images { get; set; }
 
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> Authors { get; set; }
+        [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<users> Authors { get; set; }
 
         [BelongsTo("author_editing")]
-        virtual public authors editing { get; set; }
+        virtual public users editing { get; set; }
 
         virtual public bool isPublished()
         {

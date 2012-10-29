@@ -52,7 +52,7 @@ namespace campusMap.Controllers
             String PositionList = GetPosition();
             PropertyBag["positions"] = PositionList; // string should be "location1","location2","location3"
             PropertyBag["personTypes"] = ActiveRecordBase<person_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
 
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
             baseEx.Add(Expression.Eq("Email", person.Email));
@@ -77,7 +77,7 @@ namespace campusMap.Controllers
             PropertyBag["positions"] = PositionList; // string should be "location1","location2","location3"
             PropertyBag["person"] = ActiveRecordBase<person>.FindAll();
             PropertyBag["personTypes"] = ActiveRecordBase<person_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();  
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();  
         }
 
         public String GetPosition()

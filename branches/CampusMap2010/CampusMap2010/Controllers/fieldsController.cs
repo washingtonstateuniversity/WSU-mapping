@@ -52,10 +52,10 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status)
         {
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["loginUser"] = user;
             PropertyBag["logedin"] = UserService.getLogedIn();
             //user.Sections.Contains(view.view_types);
@@ -136,7 +136,7 @@ namespace campusMap.Controllers
                 }
             RenderView("list");
         }
-        public bool canEdit(map_views view, authors user)
+        public bool canEdit(map_views view, users user)
         {
             bool flag = false;
            /* switch (user.Accesslevel.Title)
@@ -169,7 +169,7 @@ namespace campusMap.Controllers
 
             return flag;        
         }
-        public bool canPublish(authors user)
+        public bool canPublish(users user)
         {
             bool flag = false;
             /*switch (user.Accesslevel.Title)
@@ -254,8 +254,8 @@ namespace campusMap.Controllers
 
             PropertyBag["view"] = Flash["view"] != null ? Flash["view"] : view;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<users>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
         }
 
@@ -277,16 +277,16 @@ namespace campusMap.Controllers
         public void GetAddAuthor(int count)
         {
             PropertyBag["count"] = count;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            List<authors> authors = new List<authors>();
-            authors.Add(new authors());
-            authors.Add(new authors());
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            List<users> authors = new List<users>();
+            authors.Add(new users());
+            authors.Add(new users());
             PropertyBag["viewauthors"] = authors;
             RenderView("addauthor", true);
         }
         public void DeleteAuthor(int id, int viewId)
         {
-            authors author = ActiveRecordBase<authors>.Find(id);
+            users author = ActiveRecordBase<users>.Find(id);
             map_views view = ActiveRecordBase<map_views>.Find(viewId);
             view.authors.Remove(author);
             ActiveRecordMediator<map_views>.Save(view);

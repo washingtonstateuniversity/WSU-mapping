@@ -37,11 +37,11 @@ namespace campusMap.Services
             String username = Authentication.authenticate();
             HttpContext.Current.Session["username"] = username; //Maybe this should be md5'd?
             // save user in database
-            authors[] author_list = ActiveRecordBase<authors>.FindAll();
-            authors temp = null;
-            foreach (authors author in author_list)
+            users[] author_list = ActiveRecordBase<users>.FindAll();
+            users temp = null;
+            foreach (users author in author_list)
             {
-                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper())
                 { temp = author; }
             }
             if (temp != null)
@@ -58,11 +58,11 @@ namespace campusMap.Services
             if (username != null)
             {
                 // save user in database
-                authors[] author_list = ActiveRecordBase<authors>.FindAll();
-                authors temp = null;
-                foreach (authors author in author_list)
+                users[] author_list = ActiveRecordBase<users>.FindAll();
+                users temp = null;
+                foreach (users author in author_list)
                 {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                    if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper())
                     { temp = author; }
                 }
                 if (temp != null)
@@ -77,9 +77,9 @@ namespace campusMap.Services
         }
 
 
-        public static authors[] getLogedIn()
+        public static users[] getLogedIn()
         {
-            authors[] users = ActiveRecordBase<authors>.FindAllByProperty("logedin", true);
+            users[] users = ActiveRecordBase<users>.FindAllByProperty("logedin", true);
             return users;
         }
 
@@ -90,14 +90,14 @@ namespace campusMap.Services
 
         public static Boolean isLogedIn(string Nid)
         {
-            authors[] author_list = getLogedIn();
+            users[] author_list = getLogedIn();
             bool temp = false;
             if (String.IsNullOrWhiteSpace(Nid)) Nid = getNid();
             if (!String.IsNullOrWhiteSpace(Nid))
             {
-                foreach (authors author in author_list)
+                foreach (users author in author_list)
                 {
-                    if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == Nid.ToUpper())
+                    if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == Nid.ToUpper())
                     { temp = true; }
                 }
             }
@@ -117,16 +117,16 @@ namespace campusMap.Services
             }
             return username;
         }
-        public static authors setUser()
+        public static users setUser()
         {
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
-            userEx.Add(Expression.Eq("Nid", getNid()));
-            authors author = ActiveRecordBase<authors>.FindFirst(userEx.ToArray());
+            userEx.Add(Expression.Eq("nid", getNid()));
+            users author = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             return author;
         }
-        public static authors getUser()
+        public static users getUser()
         {
-            authors author = HttpContext.Current.Session["user"] == null ? setUser() : (authors)HttpContext.Current.Session["user"]; 
+            users author = HttpContext.Current.Session["user"] == null ? setUser() : (users)HttpContext.Current.Session["user"]; 
             return author;
         }
         public static string getUserIp()
@@ -155,7 +155,7 @@ namespace campusMap.Services
             return getUserCoreCampus(getUser());
         }
 
-        public static campus getUserCoreCampus(authors author)
+        public static campus getUserCoreCampus(users author)
         {
             campus campus = author.campus.Count() > 0 ? author.campus[0] : ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0]; 
             return campus;
@@ -165,7 +165,7 @@ namespace campusMap.Services
 
 
 
-        public static Boolean isActive(authors user)
+        public static Boolean isActive(users user)
         {
             int timeThreshold = -2; //TODO Set as site perference
             bool active = false;
@@ -176,9 +176,9 @@ namespace campusMap.Services
             return active;
         }
 
-        public static bool setSessionPrivleage(authors user, string privilege)
+        public static bool setSessionPrivleage(users user, string privilege)
         {
-            bool flag = user.access_levels.privileges.Any(item => item.alias == privilege);
+            bool flag = user.groups.privileges.Any(item => item.alias == privilege);
             HttpContext.Current.Session[privilege] = flag;
             return flag;
         }
@@ -186,7 +186,7 @@ namespace campusMap.Services
         {
             return checkPrivleage(getUser(),privilege);
         }
-        public static bool checkPrivleage(authors user, string privilege)
+        public static bool checkPrivleage(users user, string privilege)
         {
             bool flag = (HttpContext.Current.Session[privilege] == null || String.IsNullOrWhiteSpace(HttpContext.Current.Session[privilege].ToString())) ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
             return flag;
@@ -194,10 +194,10 @@ namespace campusMap.Services
 
 
         /* remove */
-        public static Boolean canPublish(authors user)
+        public static Boolean canPublish(users user)
         {
             bool flag = false;
-            switch (user.access_levels.name)
+            switch (user.groups.name)
             {
                 case "Admin": flag = true; break;
                 case "Editor": flag = true; break;

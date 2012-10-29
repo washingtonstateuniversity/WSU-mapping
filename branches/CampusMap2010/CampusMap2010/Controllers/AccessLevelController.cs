@@ -10,6 +10,7 @@ namespace campusMap.Controllers
     using System.Web;
     using System;
     using campusMap.Models;
+    using System.Linq;
      
 
     [Layout("default")]
@@ -24,7 +25,7 @@ namespace campusMap.Controllers
         public void List()
         {
             PropertyBag["privileges"] = ActiveRecordBase<privileges>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["groups"] = ActiveRecordBase<user_groups>.FindAll().Where(x => x.parent == null);
         }
 
         public void _edit_accesslevel(int id)
@@ -39,8 +40,8 @@ namespace campusMap.Controllers
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
             PropertyBag["privileges"] = ActiveRecordBase<privileges>.FindAll();
-            PropertyBag["accesslevel"] = ActiveRecordBase<access_levels>.Find(id);
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevel"] = ActiveRecordBase<user_groups>.Find(id);
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             RenderView("new");
         }
         public void _new_accesslevel()
@@ -55,14 +56,14 @@ namespace campusMap.Controllers
             PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
 
             PropertyBag["privileges"] = ActiveRecordBase<privileges>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             RenderView("new");
         }
-        public void _update_accesslevel([ARDataBind("accesslevel", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] access_levels accesslevel)
+        public void _update_accesslevel([ARDataBind("accesslevel", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] user_groups accesslevel)
         {
             try
             {
-                ActiveRecordMediator<access_levels>.Save(accesslevel);
+                ActiveRecordMediator<user_groups>.Save(accesslevel);
             }       
             catch (Exception ex)
             {
@@ -82,13 +83,13 @@ namespace campusMap.Controllers
         }
         public void _delete_accesslevel(int id)
         {
-            access_levels level = ActiveRecordBase<access_levels>.Find(id);
+            user_groups level = ActiveRecordBase<user_groups>.Find(id);
             Flash["error"] = "At the moment no one has rights to delete a group but the system.";
             if (id == 999999)
             {
                 try
                 {
-                    ActiveRecordMediator<access_levels>.Delete(level);
+                    ActiveRecordMediator<user_groups>.Delete(level);
                 }
                 catch (Exception ex)
                 {

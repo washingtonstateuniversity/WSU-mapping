@@ -66,11 +66,11 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status, Boolean ajax)
         {
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["user"] = user;
             PropertyBag["logedin"] = UserService.getLogedIn();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
@@ -219,7 +219,7 @@ namespace campusMap.Controllers
             
                 RenderView("../admin/listings/list");
         }
-        public bool canEdit(geometrics geometric, authors user)
+        public bool canEdit(geometrics geometric, users user)
         {
             bool flag = false;
            /* switch (user.Accesslevel.Title)
@@ -290,8 +290,8 @@ namespace campusMap.Controllers
             var jss = new JavaScriptSerializer();
             var ele = jss.Deserialize<Dictionary<string, dynamic>>(field.attr.ToString());
 
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
 
             PropertyBag["html_ele"] = ele_str;
             PropertyBag["ele"] = ele;
@@ -448,7 +448,7 @@ namespace campusMap.Controllers
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
 
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
             
@@ -477,9 +477,9 @@ namespace campusMap.Controllers
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
             PropertyBag["geometrictype"] = ActiveRecordBase<geometrics_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             
             //if (page == 0)
@@ -497,10 +497,10 @@ namespace campusMap.Controllers
                 tags.Add(new tags());
             PropertyBag["geometrictags"] = tags;*/
 
-            List<authors> authors = new List<authors>();
+            List<users> authors = new List<users>();
             authors.AddRange(geometric.Authors);
             for (int i = 0; i < 2; i++)
-                authors.Add(new authors());
+                authors.Add(new users());
 
             /*List<media_repo> images = new List<media_repo>();
             images.AddRange(geometric.Images);
@@ -544,9 +544,9 @@ namespace campusMap.Controllers
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();
             PropertyBag["geometric"] = Flash["geometric"] != null ? Flash["geometric"] : geometric;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
+            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<users>.FindAll();
             PropertyBag["geometrictype"] = ActiveRecordBase<geometrics_types>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             RenderView("editor");
         }
@@ -639,7 +639,7 @@ namespace campusMap.Controllers
         public void Update([ARDataBind("geometric", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics geometric,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
-            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
+            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
             string boundary,
             string geom_type,
         [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel)     
@@ -679,7 +679,7 @@ namespace campusMap.Controllers
             //geometric.style.Clear();
             
 
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             geometric.editing = user;
 
             int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
@@ -758,7 +758,7 @@ namespace campusMap.Controllers
                 }
             }
             */
-            foreach (authors author in authors)
+            foreach (users author in authors)
             {
                 if (author.id > 0)
                     geometric.Authors.Add(author);   

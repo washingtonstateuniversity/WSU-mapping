@@ -129,7 +129,7 @@ namespace campusMap.Controllers
         #region VIEWS
             public void admin()
             {
-                authors user = UserService.getUser();
+                users user = UserService.getUser();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
 
@@ -142,9 +142,9 @@ namespace campusMap.Controllers
 
 
                 PropertyBag["user"] = user;
-                IList<authors> activeUser = new List<authors>();
-                authors[] _authors = ActiveRecordBase<authors>.FindAllByProperty("logedin", true);
-                foreach (authors _author in _authors)
+                IList<users> activeUser = new List<users>();
+                users[] _authors = ActiveRecordBase<users>.FindAllByProperty("logedin", true);
+                foreach (users _author in _authors)
                 {
                     if (_author != null && _author.LastActive > DateTime.Today.AddHours(-1))
                     {
@@ -196,7 +196,7 @@ namespace campusMap.Controllers
                 return value;
             }
 
-            public static dynamic get_user_setting(authors user, string settingName)
+            public static dynamic get_user_setting(users user, string settingName)
             {
                 dynamic value = false;
                 var values = new Dictionary<string, object>();
@@ -217,9 +217,9 @@ namespace campusMap.Controllers
             }
             public void _edit_settings(int id)
             {
-                authors user = ActiveRecordBase<authors>.Find(id);
+                users user = ActiveRecordBase<users>.Find(id);
                 /* give access by group or ownership */
-                if (user.id == UserService.getUser().id || UserService.getUser().access_levels.id == 2)
+                if (user.id == UserService.getUser().id || UserService.getUser().groups.id == 2)
                 {
                     var values = new Dictionary<string, object>();
                     if (!String.IsNullOrWhiteSpace(user.settings.attr) && user.settings.attr!="{}")
@@ -243,7 +243,7 @@ namespace campusMap.Controllers
                 }
             }
             public void _save_siteSettings(
-                [ARDataBind("user", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] authors user
+                [ARDataBind("user", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] users user
                 )
             {
 
@@ -266,7 +266,7 @@ namespace campusMap.Controllers
                 //var usettings = new DynamicEntity(values);
 
                 user.settings.attr = Serialize(values);//jss.Serialize(usettings);
-                ActiveRecordMediator<authors>.Save(user);
+                ActiveRecordMediator<users>.Save(user);
                 Flash["message"] = "Your setting were saved";
                 RedirectToAction("_list_siteSettings");
             }

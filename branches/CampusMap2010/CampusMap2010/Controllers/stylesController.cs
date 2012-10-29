@@ -52,10 +52,10 @@ namespace campusMap.Controllers
 
         public void List(int page, int searchId, string status)
         {
-            authors user = UserService.getUser();
-            PropertyBag["authorname"] = user.Nid;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            users user = UserService.getUser();
+            PropertyBag["authorname"] = user.nid;
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["loginUser"] = user;
             PropertyBag["logedin"] = UserService.getLogedIn();
             //user.Sections.Contains(view.view_types);
@@ -136,7 +136,7 @@ namespace campusMap.Controllers
                 }
             RenderView("list");
         }
-        public bool canEdit(map_views view, authors user)
+        public bool canEdit(map_views view, users user)
         {
             bool flag = false;
            /* switch (user.Accesslevel.Title)
@@ -169,7 +169,7 @@ namespace campusMap.Controllers
 
             return flag;        
         }
-        public bool canPublish(authors user)
+        public bool canPublish(users user)
         {
             bool flag = false;
             /*switch (user.Accesslevel.Title)
@@ -247,7 +247,7 @@ namespace campusMap.Controllers
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             String username = user.name;
             PropertyBag["authorname"] = user.name;
             view.checked_out_by = user;
@@ -272,9 +272,9 @@ namespace campusMap.Controllers
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();//Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<author>.FindAll();
 
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
 
             if (page == 0)
@@ -291,10 +291,10 @@ namespace campusMap.Controllers
             String CreditList = GetCredit();
             PropertyBag["credits"] = CreditList; 
 
-            List<authors> authors = new List<authors>();
+            List<users> authors = new List<users>();
             authors.AddRange(view.authors);
             for (int i = 0; i < 2; i++)
-                authors.Add(new authors());
+                authors.Add(new users());
 
             PropertyBag["viewauthors"] = authors; 
             RenderView("new");
@@ -314,8 +314,8 @@ namespace campusMap.Controllers
 
             PropertyBag["view"] = Flash["view"] != null ? Flash["view"] : view;
             PropertyBag["tags"] = Flash["tags"] != null ? Flash["tags"] : ActiveRecordBase<tags>.FindAll();
-            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<authors>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<access_levels>.FindAll();
+            PropertyBag["authors"] = Flash["authors"] != null ? Flash["authors"] : ActiveRecordBase<users>.FindAll();
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
         }
 
@@ -337,16 +337,16 @@ namespace campusMap.Controllers
         public void GetAddAuthor(int count)
         {
             PropertyBag["count"] = count;
-            PropertyBag["authors"] = ActiveRecordBase<authors>.FindAll();
-            List<authors> authors = new List<authors>();
-            authors.Add(new authors());
-            authors.Add(new authors());
+            PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
+            List<users> authors = new List<users>();
+            authors.Add(new users());
+            authors.Add(new users());
             PropertyBag["viewauthors"] = authors;
             RenderView("addauthor", true);
         }
         public void DeleteAuthor(int id, int viewId)
         {
-            authors author = ActiveRecordBase<authors>.Find(id);
+            users author = ActiveRecordBase<users>.Find(id);
             map_views view = ActiveRecordBase<map_views>.Find(viewId);
             view.authors.Remove(author);
             ActiveRecordMediator<map_views>.Save(view);
@@ -409,7 +409,7 @@ namespace campusMap.Controllers
         }
         public void Update([ARDataBind("view", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] map_views view,
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
-            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]authors[] authors,
+            [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
             string apply, string cancel)     
         {
             Flash["view"] = view;
@@ -431,7 +431,7 @@ namespace campusMap.Controllers
             }
 
 
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             /*if (!canPublish(user))
             {
                 ViewStatus stat= ActiveRecordBase<ViewStatus>.Find(1);
@@ -465,7 +465,7 @@ namespace campusMap.Controllers
             
 
             
-            foreach (authors author in authors)
+            foreach (users author in authors)
             {
                 if (author.id > 0)
                     view.authors.Add(author);   

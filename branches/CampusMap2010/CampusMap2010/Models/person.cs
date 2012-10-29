@@ -74,9 +74,9 @@ namespace campusMap.Models
             set { newsletter = value; }
         }
 
-        private access_levels accesslevelStatus;
+        private user_groups accesslevelStatus;
         [BelongsTo]
-        virtual public access_levels AccessLevelStatus
+        virtual public user_groups AccessLevelStatus
         {
             get { return accesslevelStatus; }
             set { accesslevelStatus = value; }

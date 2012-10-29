@@ -426,16 +426,16 @@ namespace campusMap.Models
             set { _infotabs = value; }
         }
 
-        private IList<authors> _authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> Authors
+        private IList<users> _authors = new List<users>();
+        [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<users> Authors
         {
             get { return _authors; }
             set { _authors = value; }
         }
-        private authors _editing;
+        private users _editing;
         [BelongsTo("author_editing")]
-        virtual public authors editing
+        virtual public users editing
         {
             get { return _editing; }
             set { _editing = value; }

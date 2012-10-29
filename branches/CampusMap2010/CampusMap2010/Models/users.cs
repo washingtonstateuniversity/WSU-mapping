@@ -15,13 +15,10 @@ using System.Collections;
 using System.Data.SqlTypes;
 using campusMap.Services;
 
-
-
-
 namespace campusMap.Models
 {
     [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class authors : ActiveRecordBase<authors>
+    public class users : ActiveRecordBase<users>
     {
         protected UserService userService = new UserService();
 
@@ -29,10 +26,10 @@ namespace campusMap.Models
         virtual public int id { get; set; }
 
         [Property]
-        virtual public String Nid { get; set; }
+        virtual public String nid { get; set; }
 
         [BelongsTo]
-        virtual public access_levels access_levels { get; set; }
+        virtual public user_groups groups { get; set; }
 
         [BelongsTo]
         virtual public user_settings settings { get; set; }
@@ -108,7 +105,7 @@ namespace campusMap.Models
         virtual public IList<place> getUserPlaces(int statusId, int limit)
         {
             IList<place> temp = new List<place>();
-            authors user = UserService.getUser();
+            users user = UserService.getUser();
             IList<place> userplaces = user.Places;
             if (statusId > 0)
             {
@@ -140,13 +137,13 @@ namespace campusMap.Models
 
     /* AKA GROUPS */
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class access_levels
+    public class user_groups
     {
         [PrimaryKey("access_level_id")]
         virtual public int id { get; set; }
 
-        [Property]
-        virtual public int parent_id { get; set; }
+        [BelongsTo]
+        virtual public user_groups parent { get; set; }
 
         [Property]
         virtual public String name { get; set; }
@@ -163,8 +160,12 @@ namespace campusMap.Models
         [Property(Default = "0")]
         virtual public Boolean allow_signup { get; set; }
 
-        [HasMany(typeof(authors), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> users { get; set; }
+        [HasMany(typeof(users), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<users> users { get; set; }
+
+        [HasMany(typeof(user_groups), Lazy = true, Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<user_groups> children { get; set; }
+
 
         [HasAndBelongsToMany(typeof(field_types), Lazy = true, BatchSize = 30, Table = "access_levels_to_field_type", ColumnKey = "access_level_id", ColumnRef = "field_type_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<field_types> field_types { get; set; }
@@ -187,6 +188,10 @@ namespace campusMap.Models
         [HasAndBelongsToMany(typeof(categories), Lazy = true, Table = "groups_to_categories", ColumnKey = "access_level_id", ColumnRef = "category_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<categories> categories { get; set; }
 
+
+
+
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
@@ -207,8 +212,8 @@ namespace campusMap.Models
         [Property]
         virtual public String discription { get; set; }
 
-        [HasAndBelongsToMany(typeof(access_levels), Lazy = true, BatchSize = 30, Table = "access_levels_to_privilege", ColumnKey = "privilege_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<access_levels> access_levels { get; set; }
+        [HasAndBelongsToMany(typeof(user_groups), Lazy = true, BatchSize = 30, Table = "access_levels_to_privilege", ColumnKey = "privilege_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<user_groups> access_levels { get; set; }
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]

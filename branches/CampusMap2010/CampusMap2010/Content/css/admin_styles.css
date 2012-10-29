@@ -43,6 +43,8 @@ width: 100%;
 min-width:956px;
 }
 .central #content{min-width:1026px;position:relative;z-index:1;display: inline-block;float: left;}
+
+/*
 .admin #navWrap{height:35px;}
 .admin #adminNav{width: 100%;background: none repeat scroll 0 0 #981E32;height:35px; position: relative;z-index:10;}
 .admin #adminNav.fixed{position: fixed; top:0px; left:0px;min-width: 1087px;}
@@ -100,7 +102,7 @@ ul.menu li.liTop:hover ul.drop ul {left:-9999px;}
 ul.menu ul.drop li.liTop:hover {position:relative; height:35px;}
 ul.menu ul.drop li.liTop:hover ul.drop {left:170px;top:0px;}
 
-
+*/
 
 /*    Admin Splash   */
 

@@ -17,11 +17,11 @@ namespace campusMap.Controllers
             String username = Authentication.authenticate();
             Authentication.logout();
             // save user in database
-            authors[] author_list = ActiveRecordBase<authors>.FindAll();
-            authors temp = null;
-            foreach (authors author in author_list)
+            users[] author_list = ActiveRecordBase<users>.FindAll();
+            users temp = null;
+            foreach (users author in author_list)
             {
-                if (!string.IsNullOrEmpty(author.Nid) && author.Nid.ToUpper() == username.ToUpper())
+                if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper())
                 { temp = author; }
             }
             temp.logedin = false;

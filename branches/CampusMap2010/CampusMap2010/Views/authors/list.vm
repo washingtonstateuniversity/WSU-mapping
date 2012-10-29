@@ -18,7 +18,7 @@
     <tr class="ui-widget-header ">
     <th>Id</th>
     <th>Network ID</th>
-    <th>Access Level</th>
+    <th>Group</th>
 	<th>Email</th>
     <th>&nbsp;</th>
     </tr>
@@ -28,9 +28,9 @@
     #foreach($author in $authors)
     <tr #if($c%2>0) class="even" #else class="odd" #end>
       <td>$!author.id</td>
-      <td>$!author.Nid</td>
+      <td>$!author.nid</td>
       <td>
-        $!author.access_levels.title
+        $!author.groups.name
       </td>
       <td>
         #if($author.email) <a href="mailto:$!author.email">$!author.email</a> #else -- #end

@@ -27,12 +27,12 @@ namespace campusMap.Filters
         {
             if (UserService.isLogedIn())// || Authentication.logged_in()) /* not 100% we can't just strip off the Authentication.*/
             {
-                authors user = UserService.getUser();
+                users user = UserService.getUser();
                 if (user != null)
                 {
                     user.logedin = true;
                     user.LastActive = DateTime.Now;
-                    ActiveRecordMediator<authors>.Save(user);
+                    ActiveRecordMediator<users>.Save(user);
                     controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
                     
                 }

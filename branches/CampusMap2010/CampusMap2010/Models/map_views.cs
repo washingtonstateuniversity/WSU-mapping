@@ -99,9 +99,9 @@ namespace campusMap.Models
             set { _height = value; }
         }
 
-        private IList<authors> _authors = new List<authors>();
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> authors
+        private IList<users> _authors = new List<users>();
+        [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<users> authors
         {
             get { return _authors; }
             set { _authors = value; }
@@ -225,17 +225,17 @@ namespace campusMap.Models
             set { Comments = value; }
         }
 
-        private authors author_editing;
+        private users author_editing;
         [BelongsTo("authors_editing")]
-        virtual public authors editing
+        virtual public users editing
         {
             get { return author_editing; }
             set { author_editing = value; }
         }
 
-        private authors checked_out;
+        private users checked_out;
         [BelongsTo]
-        virtual public authors checked_out_by
+        virtual public users checked_out_by
         {
             get { return checked_out; }
             set { checked_out = value; }

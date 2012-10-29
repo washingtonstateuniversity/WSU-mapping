@@ -10,7 +10,7 @@ $Form.HiddenField("accesslevel.id")
     <th>Title</th>
     <th>&nbsp;</th>
 
-#foreach($accesslevel in $accesslevels)
+#foreach($accesslevel in $groups)
 <tr>
 <td>$!accesslevel.id</td>
 <td>$!accesslevel.Title</td>
@@ -52,21 +52,40 @@ $Form.HiddenField("accesslevel.id")
 			  </thead>
 			  <tbody>
 				#set ($c=0)
-				#foreach($accesslevel in $accesslevels)
-				<tr #if($c%2>0) class="even" #else class="odd" #end>
-					<td align="left">$!accesslevel.name</td>
-				  <td class='actionArea'>
-			
-					<span style='font-size:0.7em;'>
-					  <a href="_edit_accesslevel.castle?id=$!{accesslevel.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-						<span class="ui-icon ui-icon-pencil"></span>
-					  </a>
-					  <a href="_delete_accesslevel.castle?id=$!{accesslevel.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-						<span class="ui-icon ui-icon-trash"></span>
-					  </a>
-					</span>
-				  </td>
-				</tr>
+				#foreach($group in $groups)
+
+                    <tr #if($c%2>0) class="even" #else class="odd" #end>
+                        <td align="left">$!group.name</td>
+                        <td class='actionArea'>
+                            <span style='font-size:0.7em;'>
+                                <a href="_edit_accesslevel.castle?id=$!{group.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                    <span class="ui-icon ui-icon-pencil"></span>
+                                </a>
+                                <a href="_delete_accesslevel.castle?id=$!{group.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                    <span class="ui-icon ui-icon-trash"></span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    #if($group.children)
+                        #set ($c_s=0)
+                        #foreach($child in $group.children)
+                            <tr #if($c_s%2>0) class="even" #else class="odd" #end>
+                                <td align="left">--- $!child.name</td>
+                                <td class='actionArea'>
+                                <span style='font-size:0.7em;'>
+                                    <a href="_edit_accesslevel.castle?id=$!{child.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                        <span class="ui-icon ui-icon-pencil"></span>
+                                    </a>
+                                    <a href="_delete_accesslevel.castle?id=$!{child.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                        <span class="ui-icon ui-icon-trash"></span>
+                                    </a>
+                                </span>
+                                </td>
+                            </tr>
+                        #set ($c_s=$c_s+1)
+                        #end  
+                    #end  
 				#set ($c=$c+1)
 				#end
 			  </tbody>

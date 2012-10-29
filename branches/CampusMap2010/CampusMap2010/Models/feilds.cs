@@ -61,11 +61,11 @@ namespace campusMap.Models
         [Property]
         virtual public bool is_public { get; set; }
 
-        [HasAndBelongsToMany(typeof(authors), Lazy = true, BatchSize = 5, Table = "authors_to_field_type", ColumnKey = "field_type_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<authors> authors { get; set; }
+        [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 5, Table = "authors_to_field_type", ColumnKey = "field_type_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<users> authors { get; set; }
 
-        [HasAndBelongsToMany(typeof(access_levels), Lazy = true, BatchSize = 5, Table = "access_levels_to_field_type", ColumnKey = "field_type_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<access_levels> access_levels { get; set; }
+        [HasAndBelongsToMany(typeof(user_groups), Lazy = true, BatchSize = 5, Table = "access_levels_to_field_type", ColumnKey = "field_type_id", ColumnRef = "access_level_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<user_groups> access_levels { get; set; }
 
     }
 
