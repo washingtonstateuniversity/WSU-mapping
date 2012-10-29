@@ -81,9 +81,13 @@ namespace campusMap
 
         protected void Session_OnEnd(Object sender, EventArgs e)
         {
-            if (Services.UserService.logoutUser())
+
+            if (HttpContext.Current.Session["username"] != null)
             {
-                Services.LogService.writelog("User was loged out");
+                if (Services.UserService.logoutUser())
+                {
+                    Services.LogService.writelog("User was loged out");
+                }
             }
         }
 

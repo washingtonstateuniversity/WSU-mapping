@@ -31,7 +31,7 @@ using System.Linq.Expressions;
 #endregion
 namespace campusMap.Controllers
 {
-    [Filter(ExecuteWhen.BeforeAction, typeof(loggedinFilter))]
+    //[Filter(ExecuteWhen.BeforeAction, typeof(loggedinFilter))]
     [Filter(ExecuteWhen.BeforeAction, typeof(scriptFilter))]
     [Layout("default")]
     [Rescue(typeof(RescueController))]//Rescue("generalerror")

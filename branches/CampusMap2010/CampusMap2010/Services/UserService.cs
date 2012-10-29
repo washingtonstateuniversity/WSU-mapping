@@ -121,13 +121,14 @@ namespace campusMap.Services
         {
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
-            users author = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
-            return author;
+            users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
+            HttpContext.Current.Session["user"] = user;
+            return user;
         }
         public static users getUser()
         {
-            users author = HttpContext.Current.Session["user"] == null ? setUser() : (users)HttpContext.Current.Session["user"]; 
-            return author;
+            users user = HttpContext.Current.Session["user"] == null ? setUser() : (users)HttpContext.Current.Session["user"];
+            return user;
         }
         public static string getUserIp()
         {

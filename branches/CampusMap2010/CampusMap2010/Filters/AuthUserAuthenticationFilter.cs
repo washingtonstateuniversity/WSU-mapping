@@ -13,15 +13,32 @@ using Castle.ActiveRecord;
 using campusMap.Models;
 using System.Security.Principal;
 using MonoRailHelper;
+using campusMap.Services;
 
 
 namespace campusMap.Filters
 {
     public class AuthUserAuthenticationFilter : IFilter
     {
-
+        protected UserService userService = new UserService();
+        protected HelperService helperService = new HelperService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
+
+
+
+            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
+            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            controllerContext.PropertyBag["userService"] = userService;
+            controllerContext.PropertyBag["helperService"] = helperService;
+
             if (context.Request.IsLocal)
                 return true;
             // Read previous authenticated principal from session 
@@ -58,6 +75,28 @@ namespace campusMap.Filters
                 context.CurrentUser = user;
                 System.Threading.Thread.CurrentPrincipal = user;
             }
+
+            if (UserService.isLogedIn())// || Authentication.logged_in()) /* not 100% we can't just strip off the Authentication.*/
+            {
+                users currentUser = UserService.getUser();
+                if (currentUser != null)
+                {
+                    currentUser.logedin = true;
+                    currentUser.LastActive = DateTime.Now;
+                    ActiveRecordMediator<users>.Save(user);
+                }
+            }
+
+            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            controllerContext.PropertyBag["userService"] = userService;
+            controllerContext.PropertyBag["helperService"] = helperService;
 
             // Everything is ok
             return true;
