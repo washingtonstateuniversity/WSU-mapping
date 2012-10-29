@@ -6,12 +6,12 @@
 	<table width="100%" class="ui-widget ui-widget-content">
 	  <tbody>
 		#capturefor(tmp)
-			#if($user.Places.Count>0)
+			#if($user.Places && $user.Places.Count()>0)
 				<tr #if($c%2>0) class="even" #else class="odd" #end>
 					<td align="center">Places : $user.Places.Count</td>
 				</tr>
 			#end
-			#if($user.views.Count>0)
+			#if($user.views && $user.views.Count()>0)
 				<tr #if($c%2>0) class="even" #else class="odd" #end>
 					<td align="center">Maps : $user.views.Count</td>
 				</tr>
