@@ -84,10 +84,11 @@ namespace campusMap.Filters
                 users currentUser = UserService.getUser();
                 if (currentUser != null)
                 {
-                    currentUser.logedin = true;
-                    currentUser.LastActive = DateTime.Now;
-                    ActiveRecordMediator<users>.Update(currentUser);
-                    ActiveRecordMediator<users>.Save(currentUser);
+                    users you = ActiveRecordBase<users>.Find(currentUser.id);
+                    you.logedin = true;
+                    you.LastActive = DateTime.Now;
+                    ActiveRecordMediator<users>.Update(you);
+                    ActiveRecordMediator<users>.Save(you);
                 }
             }
 
