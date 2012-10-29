@@ -122,12 +122,12 @@ namespace campusMap.Services
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
-            HttpContext.Current.Session["user"] = user;
+            HttpContext.Current.Session["you"] = user;
             return user;
         }
         public static users getUser()
         {
-            users user = HttpContext.Current.Session["user"] == null ? setUser() : (users)HttpContext.Current.Session["user"];
+            users user = HttpContext.Current.Session["you"] == null ? setUser() : (users)HttpContext.Current.Session["you"];
             return user;
         }
         public static string getUserIp()

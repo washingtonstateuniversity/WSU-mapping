@@ -16,6 +16,7 @@ using MonoRailHelper;
 using campusMap.Services;
 
 
+
 namespace campusMap.Filters
 {
     public class AuthUserAuthenticationFilter : IFilter
@@ -40,7 +41,9 @@ namespace campusMap.Filters
             controllerContext.PropertyBag["helperService"] = helperService;
 
             if (context.Request.IsLocal)
+            {
                 return true;
+            }
             // Read previous authenticated principal from session 
             // (could be from cookie although with more work)
             User user = (User)context.Session["user"];
