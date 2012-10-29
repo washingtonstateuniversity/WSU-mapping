@@ -26,8 +26,6 @@ namespace campusMap.Filters
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
 
-
-
             controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
             controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
@@ -47,13 +45,6 @@ namespace campusMap.Filters
             // Read previous authenticated principal from session 
             // (could be from cookie although with more work)
             User user = (User)context.Session["user"];
-            
-            // Redirect to dailycampusMap.wsu.edu because dailycampusMap.com can't catch the cookie
-            //if (context.Request.Uri.ToString().ToLower().Contains("dailycampusMap.com"))
-            //{
-            //     context.Response.Redirect("http://dev.campusmap.wsu.edu/admin");
-            //     return false;
-            //}
             // Sets the principal as the current user
             context.CurrentUser = user;
             
@@ -79,7 +70,7 @@ namespace campusMap.Filters
                 System.Threading.Thread.CurrentPrincipal = user;
             }
 
-            if (UserService.isLogedIn())// || Authentication.logged_in()) /* not 100% we can't just strip off the Authentication.*/
+            if (UserService.isLogedIn())
             {
                 users currentUser = UserService.getUser();
                 if (currentUser != null)
@@ -91,18 +82,6 @@ namespace campusMap.Filters
                     ActiveRecordMediator<users>.Save(you);
                 }
             }
-
-            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
-
-            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-            controllerContext.PropertyBag["userService"] = userService;
-            controllerContext.PropertyBag["helperService"] = helperService;
-
             // Everything is ok
             return true;
         }
