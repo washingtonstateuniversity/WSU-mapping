@@ -81,21 +81,21 @@ namespace campusMap.Filters
                     ActiveRecordMediator<users>.Update(you);
                     ActiveRecordMediator<users>.Save(you);
                 }
-                controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
-                controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-                controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-                controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-                controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
-                controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-                controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-                controllerContext.PropertyBag["userService"] = userService;
-                controllerContext.PropertyBag["helperService"] = helperService;
-                controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
             }
 
+            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
+            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
+            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            controllerContext.PropertyBag["userService"] = userService;
+            controllerContext.PropertyBag["helperService"] = helperService;
+            controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
 
             // Everything is ok
