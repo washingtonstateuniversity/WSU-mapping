@@ -103,7 +103,7 @@ namespace campusMap.Controllers
                 int pagesize = 15;
                 int paging = 1;
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-
+            /*
                 if (searchId.Equals(-2))
                 {
                     IList<map_views> userviews = user.views;
@@ -115,6 +115,29 @@ namespace campusMap.Controllers
                     }
                     baseEx.Add(Expression.In("view_id", obj));
                 }
+             * */
+              /*   IList<map_views> userviews = user.views;
+                object[] obj = new object[userviews.Count];
+                int i = 0;
+                foreach (map_views view in userviews)
+                {
+                    obj[i] = view.id;
+                    i++;
+                }
+                baseEx.Add(Expression.In("id", obj));
+
+           
+                IList<place> userplaces = user.Places;
+                object[] obj = new object[userplaces.Count];
+                int i = 0;
+                foreach (place p in userplaces)
+                {
+                    obj[i] = p.id;
+                    i++;
+                }
+                baseEx.Add(Expression.In("id", obj));
+            */
+
 
             //PUBLISHED
                 if (status == "published"){
@@ -140,6 +163,8 @@ namespace campusMap.Controllers
                 buttons.Add("delete");
                 buttons.Add("publish");
                 buttons.Add("copy");
+                buttons.Add("share");
+
                 //buttons.Add("broadcast");
                 //buttons.Add("view"); //NOTE:coming so TODO
                 //buttons.Add("order");
@@ -162,6 +187,7 @@ namespace campusMap.Controllers
                 buttons.Add("delete");
                 buttons.Add("publish");
                 buttons.Add("copy");
+                buttons.Add("share");
                 //buttons.Add("view");
                 PropertyBag["reviewButtonSet"] = buttons;
 
@@ -181,9 +207,10 @@ namespace campusMap.Controllers
                 buttons.Add("delete");
                 buttons.Add("publish");
                 buttons.Add("copy");
+                buttons.Add("share");
                 //buttons.Add("view");
                 PropertyBag["draftButtonSet"] = buttons;
-
+                PropertyBag["hideFilter"] = true;
 
              RenderView("../admin/listings/list");
         }

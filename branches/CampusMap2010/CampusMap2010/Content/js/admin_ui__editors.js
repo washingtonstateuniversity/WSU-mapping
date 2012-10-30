@@ -657,6 +657,7 @@ function get_style(jObj,style_id,type){
 
 function load_style_editor(){
 	var gmap;
+	campus_latlng_str = '46.73276783809271,-117.15300628829834';
 
      $('#style_map').gmap({'center': campus_latlng_str , 'zoom':15,'disableDoubleClickZoom':true,'draggable':false,'zoomControl': false,'mapTypeControl': false,'panControl':false,'streetViewControl': false  }).bind('init', function () {
 		$('#style_map').gmap('stop_scroll_zoom');

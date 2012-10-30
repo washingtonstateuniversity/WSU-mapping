@@ -1,6 +1,6 @@
 <div class="tab_tar">
 	#set($Pagination_location='top')
-	#set($target = $status.title)
+	#set($target = $status.name)
 	#parse("admin/listings/areas/pagination.vm")
 	
 	<div class="listTitle">${controller.getView()} List :</div>

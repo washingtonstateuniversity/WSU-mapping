@@ -231,7 +231,7 @@ namespace campusMap.Controllers
             status[] states = ActiveRecordBase<status>.FindAll();
             foreach (status stat in states)
             {
-                string name = stat.title;
+                string name = stat.name;
                 
                 IList<place> listtems;
                 List<AbstractCriterion> revEx = new List<AbstractCriterion>();

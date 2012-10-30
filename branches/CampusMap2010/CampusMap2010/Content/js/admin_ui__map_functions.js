@@ -25,6 +25,7 @@ function set_default_shape(mapSelector,type,op){
 						}
 					}
 				DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
+
 				return DEFAULT_overlay;
 			break;
 		case "rectangle" :
@@ -73,6 +74,10 @@ function set_default_shape(mapSelector,type,op){
 						]
 					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
 					apply_element(map,capedType,_option);*/
+					
+
+					
+					
 				return polyline;
 			break;				
 		case "marker" :
@@ -181,6 +186,14 @@ function apply_element(mapOjb,type,style){
 		})
 		.trigger('mouseover')
 		.trigger('mouseout');
+		
+		var placePos = mapOjb.gmap("get_map_center");
+		
+		if(typeof(shape)!=="undefined"){
+			//mapOjb.gmap("move_shape",shape,placePos);
+		}
+		
+		
 	});
 	/*,
 	rightclick: function(){

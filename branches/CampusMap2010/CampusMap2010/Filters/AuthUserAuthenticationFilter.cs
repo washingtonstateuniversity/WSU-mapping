@@ -36,7 +36,7 @@ namespace campusMap.Filters
 
             controllerContext.PropertyBag["userService"] = userService;
             controllerContext.PropertyBag["helperService"] = helperService;
-
+            controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
             if (context.Request.IsLocal)
             {
                 return true;
@@ -81,6 +81,10 @@ namespace campusMap.Filters
                     ActiveRecordMediator<users>.Save(you);
                 }
             }
+
+
+
+
             // Everything is ok
             return true;
         }

@@ -525,11 +525,11 @@ namespace campusMap.Controllers
 
             geometrics geometric = new geometrics();
             List<media_repo> images = new List<media_repo>();
-            images.AddRange(geometric.Images);
+            /*images.AddRange(geometric.Images);
             if (images.Count == 0)
             {
                 images.Add(new media_repo());
-            }
+            }*/
             PropertyBag["geometricimages"] = images;
             PropertyBag["loginUser"] = UserService.getUser();
             //String locationList = Getlocation();

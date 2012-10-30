@@ -245,7 +245,6 @@
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Models\advertisement.cs" />
     <Compile Include="Models\users.cs" />
-    <Compile Include="Models\categories.cs" />
     <Compile Include="Models\comments.cs" />
     <Compile Include="Models\small_url.cs" />
     <Compile Include="Models\feilds.cs" />

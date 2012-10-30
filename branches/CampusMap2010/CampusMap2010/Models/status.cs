@@ -18,19 +18,10 @@ namespace campusMap.Models
         
     {
         public status() { }
-        private int Id;
         [PrimaryKey("status_id")]
-        virtual public int id
-        {
-            get { return Id; }
-            set { Id = value; }
-        }
-        private String Title;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public String title
-        {
-            get { return Title; }
-            set { Title = value; }
-        }
+        virtual public String name { get; set; }
     }
 }
