@@ -28,37 +28,11 @@ namespace campusMap
 		}
 
 		#endregion
-        protected void Application_Start()
-        {
-            // ... everything else
-
-            // SquishIt
-           // Application_Bundle();
-        }
-/*
-        protected void Application_Bundle()
-        {
-            //SquishIt
-            Bundle.Css()
-            .AsCached("min", "~/Content/css/min");
-            
-        }
-*/
         public void Application_OnStart()
         {
-
-
-
-
-
-
-
             container = new WindsorContainer(new XmlInterpreter());
-            //
-            
             // ActiveRecordStarter.CreateSchema();
-            try
-            {
+            try {
                 if (Context.Request.IsLocal)
                     ActiveRecordStarter.GenerateCreationScripts(Context.Server.MapPath("/config/export.sql"));
             }
@@ -66,10 +40,6 @@ namespace campusMap
             {
                 // I'm eating this error because it's just handy, not necessary
             }
-
-
-            //OnRequest.ForCss("~/Content/css/min/Combined.css");
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -91,9 +61,7 @@ namespace campusMap
                     }
                 }
             }
-            catch{
-
-            }
+            catch{ }
         }
 
         public void Application_OnEnd()
