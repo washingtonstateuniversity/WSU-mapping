@@ -25,7 +25,6 @@ namespace campusMap.Filters
         protected HelperService helperService = new HelperService();
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-
             controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
             controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
