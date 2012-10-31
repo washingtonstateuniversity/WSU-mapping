@@ -628,10 +628,10 @@ function addShapeToMap(jObj,i,shape){
 	}
 	
 	if((typeof(shape.style)=="undefined"||shape.style=='') && typeof(shape.type)!="undefined"){
-		jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style);
+		jObj.gmap('addShape',(shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style);
 	}else{
 		// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
-		jObj.gmap('addShape', (shape.type[0].toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
+		jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
 		$(shape_obj).click(function(){
 			if(typeof(shape.style.events.click)!="undefined" && shape.style.events.click != ""){
 				jObj.gmap('setOptions',shape.style.events.click,this);
