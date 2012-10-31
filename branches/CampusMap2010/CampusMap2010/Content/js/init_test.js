@@ -627,7 +627,7 @@ function addShapeToMap(jObj,i,shape){
 		var style = {};
 	}
 	
-	if(typeof(shape.style)=="undefined"||shape.style==''){
+	if((typeof(shape.style)=="undefined"||shape.style=='') && typeof(shape.type)!="undefined"){
 		jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style);
 	}else{
 		// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
