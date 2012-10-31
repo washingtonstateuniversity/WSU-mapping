@@ -590,7 +590,7 @@ function load_geometrics_editor() {
 				},
 				/*note we are extending the settings with the shape */
 				$('#pickedValue').val()==''?{}:{
-					loaded_type: ($('#pickedValue').val()[0].toUpperCase() + $('#pickedValue').val().slice(1)),
+					loaded_type: ($('#pickedValue').val().charAt(0).toUpperCase() + $('#pickedValue').val().slice(1)),
 					loaded_shape:shape
 				}
 			)
@@ -648,7 +648,7 @@ function get_style(jObj,style_id,type){
 	
 	var url=siteroot+"public/get_style.castle";
 	$.getJSON(url+'?callback=?&id='+style_id, function(data) {
-		var typed = type[0].toUpperCase() + type.slice(1);
+		var typed = type.charAt(0).toUpperCase() + type.slice(1);
 		var overlays = jObj.gmap('get','overlays > '+typed);
 		if(overlays!=null && overlays.length>0)jObj.gmap('setOptions',data.events.rest,overlays[0]);
 	});	

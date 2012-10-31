@@ -5,7 +5,7 @@
  * TODO besides listed above is circle and rec and marker
  */
 function set_default_shape(mapSelector,type,op){
-	var capedType=type[0].toUpperCase() + type.slice(1)
+	var capedType=type.charAt(0).toUpperCase() + type.slice(1)
 	if(typeof(op)==='undefined')op={};
 	switch(type){
 		case "polygon" :
