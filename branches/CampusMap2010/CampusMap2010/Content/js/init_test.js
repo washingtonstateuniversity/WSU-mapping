@@ -327,25 +327,14 @@ function addCentralControlls(){
 	/**/
 }
 function poi_setup(jObj){
-	var map = jObj.gmap("get","map");
-	//google.maps.event.addListener(map, "rightclick",function(event){showContextMenu(event.latLng);});
-	google.maps.event.addListener(map, "mouseup",function(event){ 
-		hideContextMenu(); 
-		setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1);
-	});
-	google.maps.event.addListener(map, "dragstart",function(event){ 
-		hideContextMenu(); 
-		setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1);
-	});
-	google.maps.event.trigger(map, 'mouseup');
-	/*google.maps.event.addListener(map, "click",function(event){ 
-	hideContextMenu(); 
-	$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); 
-	});*/
-	google.maps.event.addListener(map, "drag",function(event){
-		hideContextMenu();
-		setInterval(function(){$('[src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"]').trigger('click'); },1); 
-	});
+	//var map = jObj.gmap("get","map");
+    var proto = google.maps.InfoWindow.prototype,
+        open = proto.open;
+    proto.open = function(map, anchor, please) {
+        if (please) {
+            return open.apply(this, arguments);
+        }
+    }
 }
 
 
