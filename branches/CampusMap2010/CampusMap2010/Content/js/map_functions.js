@@ -56,11 +56,11 @@ function empty_input_recursive(obj){
 			?obj.find(':input').val(''):null;
 }
 */
-/* set up parts of the map NOTE: should be worked into the jquery plugin jMaps
+/* set up parts of the map NOTE: should be worked into the jquery plugin jMaps*/
 function setGeoCoder(){
 	if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
 	return geocoder;
-}*/
+}
 
 /*
 function setDirectionsRenderer(){

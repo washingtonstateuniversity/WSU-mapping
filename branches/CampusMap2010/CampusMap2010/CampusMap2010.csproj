@@ -218,7 +218,9 @@
     <Content Include="Default.aspx" />
     <Content Include="global.asax" />
     <Content Include="Readme.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccessLevelController.cs" />

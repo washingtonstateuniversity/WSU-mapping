@@ -130,6 +130,10 @@ namespace campusMap.Services
             users user = HttpContext.Current.Session["you"] == null ? setUser() : (users)HttpContext.Current.Session["you"];
             return user;
         }
+        public static users getUserFull() {
+            users user = ActiveRecordBase<users>.Find(getUser().id);
+            return user;
+        }
         public static string getUserIp()
         {
             return GetIPAddress();
@@ -185,7 +189,7 @@ namespace campusMap.Services
         }
         public static bool checkPrivleage(string privilege)
         {
-            return checkPrivleage(getUser(),privilege);
+            return checkPrivleage(getUserFull(), privilege);
         }
         public static bool checkPrivleage(users user, string privilege)
         {

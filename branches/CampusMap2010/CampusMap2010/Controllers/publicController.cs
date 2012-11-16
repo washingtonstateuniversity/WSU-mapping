@@ -374,7 +374,7 @@
                     PropertyBag["map"] = c[0];
 
                     PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
-                    PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
 
                     RenderView("map_view/map_standalone");
                     return;
@@ -689,6 +689,17 @@
                         email_mass.IsBodyHtml = true;
                         email_mass.From = new MailAddress("noreply@wsu.edu");
                         email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
+
+                        if (issueType == "local" || issueType == "local")
+                        {
+                            place place = ActiveRecordBase<place>.Find(place_id);
+                            foreach (users auth in place.Authors)
+                            {
+                                email_mass.To.Add(new MailAddress(auth.email, auth.name));
+                            }
+                        }
+
+
                         email_mass.Subject = "Reported Map error: " + issueType;
                         if (!String.IsNullOrWhiteSpace(user.email))
                         {

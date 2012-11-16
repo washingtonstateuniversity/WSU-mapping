@@ -493,7 +493,9 @@ $formbuttons <div class="clear"></div>
  	#if($userService.checkPrivleage("can_publish"))
 		<div id="StatusDiv">
 		  <h3 style="display:inline-block;">Place Status:</h3>
-		  $Form.Select("place.status.id", $statuslists, "%{value='id', text='title'}")
+		  $Form.Select("place.status.id", $statuslists, "%{value='id', text='name'}")
+          
+          
 		  <h6><em>Changing this will tell whether or not the public can see this place in a map view.</em></h6>
 		</div>
 		<hr/>

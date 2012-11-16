@@ -129,7 +129,7 @@ namespace campusMap.Controllers
         #region VIEWS
             public void admin()
             {
-                users user = UserService.getUser();
+                users user = UserService.getUserFull();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
 
@@ -192,7 +192,7 @@ namespace campusMap.Controllers
             public static dynamic get_user_setting(string settingName)
             {
                 dynamic value = false;
-                value = get_user_setting(UserService.getUser(), settingName);
+                value = get_user_setting(UserService.getUserFull(), settingName);
                 return value;
             }
 
@@ -219,7 +219,7 @@ namespace campusMap.Controllers
             {
                 users user = ActiveRecordBase<users>.Find(id);
                 /* give access by group or ownership */
-                if (user.id == UserService.getUser().id || UserService.getUser().groups.id == 2)
+                if (user.id == UserService.getUserFull().id || UserService.getUserFull().groups.id == 2)
                 {
                     var values = new Dictionary<string, object>();
                     if (!String.IsNullOrWhiteSpace(user.settings.attr) && user.settings.attr!="{}")
