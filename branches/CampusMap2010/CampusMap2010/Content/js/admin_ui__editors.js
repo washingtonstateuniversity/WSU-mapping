@@ -225,7 +225,7 @@ function infoUpdate(){
 
 
 
-
+var $dynotabs = null;
 
 var $tabs = null;
 var tab_counter =  0;
@@ -244,10 +244,10 @@ function int_infotabs(){
 	});
 	$tab_title_input = $( "#tab_title");
 	$tab_content_input = $( "#tab_content" );
-	tab_counter =  $("#infotabs li.ui-state-default").size();
+	tab_counter =  $("#dynoTab li.ui-state-default").size();
 
 	// tabs init with a custom tab template and an "add" callback filling in the content
-	$tabs = $( "#infotabs").tabs({
+	$dynotabs = $( "#dynoTab").tabs({
 		tabTemplate:"<li>"+
 						"<a href='#{href}' hideFocus='true'>#{label}</a>"+
 							"<input type='hidden' name='tabs["+tab_counter+"].id' value='' id='tab_id_"+tab_counter+"'/>"+
@@ -267,8 +267,8 @@ function int_infotabs(){
 		show: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
 	});
 
-	$( "#infotabs").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
-		$.each($("#infotabs .ui-tabs-nav li"),function(i,v){
+	$( "#dynoTab").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
+		$.each($("#dynoTab .ui-tabs-nav li"),function(i,v){
 			$(this).find('.sort').val(i);
 			var href = $(this).find('a').attr('href');
 			$(''+href).attr('role',i);
@@ -279,9 +279,9 @@ function int_infotabs(){
 				$("#"+id).removeClass("tinyLoaded");
 			}
 		});
-		var tabs = $('#infotabs');
+		var tabs = $('#dynoTab');
 		var panels = tabs.children('.ui-tabs-panel');
-		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#infotabs');
+		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#dynoTab');
   		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
 			if(!$(this).find('textarea:first').is($(".tinyLoaded"))){ load_tiny("bodytext",id);$(this).find('textarea:first').addClass("tinyLoaded")}
@@ -327,7 +327,7 @@ function int_infotabs(){
 			$dialog.dialog( "open" );
 		});
 	// close icon: removing the tab on click
-	$( "#infotabs span.ui-icon-close" ).live( "click", function() {
+	$( "#dynoTab span.ui-icon-close" ).live( "click", function() {
 		if($( "#deleteconfirm" ).length==0){$('body').append('<div id="deleteconfirm">If you delete this you will have to refresh the page to get it back.<br/><h2>Are you sure?</h2></div>')};
 	 	$( "#deleteconfirm" ).dialog({
 			autoOpen: false,
@@ -335,7 +335,7 @@ function int_infotabs(){
 			buttons: {
 				Delete: function() {
 					var index = $( "li", $tabs ).index( $( this ).parent() );
-					$tabs.tabs( "remove", index );
+					$dynotabs.tabs( "remove", index );
 					$( this ).dialog( "close" );
 				},
 				Cancel: function() {
@@ -384,7 +384,7 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 							 '<span class="edit ui-icon ui-icon-pencil"></span>';
 	
 	
-	$tabs.tabs( "option" , "tabTemplate" , "<li>"+
+	$dynotabs.tabs( "option" , "tabTemplate" , "<li>"+
 												"<a href='#{href}' hideFocus='true'>#{label}</a>"+
 													"<input type='hidden' name='tabs["+i+"].id' value='' id='tab_id_"+i+"'/>"+
 													"<input type='hidden' name='tabs["+i+"].title' value=\"#{label}\" id='tab_title_"+i+"'/>"+
@@ -392,10 +392,10 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 													"<input type='hidden' name='tabs["+i+"].sort' value='' id='tab_sort_"+i+"'class='sort' />"+
 												controll+
 											"</li>" );
-	$tabs.tabs( "add", "#tabs-" + i, tab_title.replace('{$i}',i));
+	$dynotabs.tabs( "add", "#tabs-" + i, tab_title.replace('{$i}',i));
 
 	
-	$.each($("#infotabs li.ui-state-default"),function(i,v){
+	$.each($("#dynoTab li.ui-state-default"),function(i,v){
 		$(this).find('.sort').val(i);
 		set_tab_editable(i);
 	});
@@ -411,7 +411,7 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 
 
 function watchMediaTab(){
-		tab_counter =  $("#infotabs li.ui-state-default").size();
+		tab_counter =  $("#dynoTab li.ui-state-default").size();
 		if($('.imageBox').length>1 && $('#viewTab').length==0){
 			var content = '<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id="viewTab" width="297" height="201" />'+
 			"<input type=\"hidden\" id='tab_"+tab_counter+"' name=\"tabs["+tab_counter+"].content\" value=\"<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />\" />";

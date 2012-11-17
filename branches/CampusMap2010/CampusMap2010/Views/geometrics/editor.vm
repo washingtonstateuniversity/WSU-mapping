@@ -63,7 +63,6 @@
 				<button id="restart" >Restart</button>
 				<button id="update" >Update</button>
 				<button id="unselect" >un select selected</button>
-				<img src="/Cougarhead2000_201.png" style="position: absolute; left: 661px; top: 113px; width: 370px;">
 				<div id="geometrics_drawing_map" style="width:100%;height:450px;opacity: 0.8;"></div>
 			$formbuttons
 		</div>

@@ -104,15 +104,18 @@
 			return this;
 		},	
 		destroy_drawing: function(){
+			this.stop_drawing();
 			if ( this.get('drawingManager') != null ) {
 				this.get('drawingManager').setMap(null);
-				this.set('drawingManager') = null;
 			}
+			this.clear('markers');
+			this.clear('services');
+			this.clear('overlays');
 			return this;
 		},
 		refresh_drawing: function(clear){
-			if(typeof(clear)!=='undefined' && clear)this.clear_drawings;
-			this.destroy_drawing;
+			if(typeof(clear)!=='undefined' && clear)this.clear_drawings();
+			this.destroy_drawing();
 			this.init_drawing( this.get('drawingOptions') , this.get('handling') ); 
 			return this;
 		},	
