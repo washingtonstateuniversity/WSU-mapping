@@ -144,7 +144,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 						#end
 					</ol>		
 				</div>	
-					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to chang the order.</h6>
+					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to change the order.</h6>
 				<hr style="margin: 2px 0px;"/>
 				<label for="places">Add Places to the Map,</label><br/>
 				<strong>Under:</strong>
@@ -215,7 +215,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 						#end
 					</ol>		
 				</div>	
-					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to chang the order.</h6>
+					<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to change the order.</h6>
 				<hr style="margin: 2px 0px;"/>
 
                 <label for="name">Add Shapes to the Map,</label><br/>
@@ -729,7 +729,7 @@ $formbuttons <div class="clear"></div>
  	#if($userService.checkPrivleage("can_publish"))
 		<div id="StatusDiv">
 		  <h3 style="display:inline-block;">Place Status:</h3>
-		  $Form.Select("view.status.id", $statuslists, "%{value='id', text='title'}")
+		  $Form.Select("view.status.id", $statuslists, "%{value='id', text='name'}")
 		  <h6><em>Changing this will tell whether or not the public can see this place in a map view.</em></h6>
 		</div>
 		<hr/>
@@ -860,9 +860,10 @@ $formbuttons
 	
 	
 	
-	
+
 	<div id="tabs_OUTPUT" class="mainAreaTabs">
-		$formbuttons <div class="clear"></div>
+		$formbuttons
+        <h3>NOTE: you must apply your changes to have them reflect here</h3>
 		<fieldset><legend>Output url: </legend>
 			<label for="name">URL</label><br/>	
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>

@@ -155,6 +155,11 @@ namespace campusMap.Services
 
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
+
+        public static campus getUserCoreCampus(bool defaultCampus) {
+            return defaultCampus ? ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0] : getUserCoreCampus();
+        }
+
         public static campus getUserCoreCampus()
         {
             return getUserCoreCampus(getUser());
