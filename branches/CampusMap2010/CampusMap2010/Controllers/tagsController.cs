@@ -105,7 +105,7 @@ namespace campusMap.Controllers
         }
         public void merge(int[] ids, string newname)
         {
-            if (!String.IsNullOrEmpty(Request.Params["deleteTags"])) massDeleteTags(ids); return;
+            if (!String.IsNullOrEmpty(Request.Params["deleteTags"])){ massDeleteTags(ids); return;}
             List<place> places = new List<place>();
             string name = "";
             foreach(int id in ids){

@@ -21,7 +21,7 @@ namespace campusMap.Models
 {
 
     [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class geometrics : ActiveRecordBase<geometrics>
+    public class geometrics : publish_base
     {
         protected HelperService helperService = new HelperService();
 
@@ -79,56 +79,7 @@ namespace campusMap.Models
         [BelongsTo("default_type")]
         virtual public geometrics_types default_type { get; set; }
 
-        private DateTime? Publish_Time;
-        [Property]
-        virtual public DateTime? publish_time
-        {
-            get { return Publish_Time; }
-            set
-            {
-                //DateTime bla = DateTime.MinValue;
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
-                {
-                    // bla is a valid sql datetime
-                    Publish_Time = value;
 
-                }
-            }
-        }
-        private DateTime? Creation_Date;
-        [Property]
-        virtual public DateTime? creation_date
-        {
-            get { return Creation_Date; }
-            set
-            {
-                //DateTime bla = DateTime.MinValue;
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
-                {
-                    // bla is a valid sql datetime
-                    Creation_Date = value;
-
-                }
-            }
-        }
-        private DateTime? Updated_Date;
-        [Property]
-        virtual public DateTime? updated_date
-        {
-            get { return Updated_Date; }
-            set
-            {
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
-                {
-                    // bla is a valid sql datetime
-                    Updated_Date = value;
-
-                }
-            }
-        }
-
-        [BelongsTo("status")]
-        virtual public status status { get; set; }
         
         [BelongsTo]
         virtual public media_repo media { get; set; }
@@ -157,26 +108,9 @@ namespace campusMap.Models
         [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_geometrics", ColumnKey = "geometric_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<users> Authors { get; set; }
 
-        [BelongsTo("author_editing")]
-        virtual public users editing { get; set; }
 
-        virtual public bool isPublished()
-        {
-            if (this.status == ActiveRecordBase<status>.Find(3) && this.publish_time != null && this.publish_time.Value.CompareTo(DateTime.Now) <= 0)
-            {
-                return true;
-            }
-            return false;
-        }
 
-        virtual public bool isCheckedOutNull()
-        {
-            bool flag = false;
-            if (editing == null)
-                flag = true;
 
-            return flag;
-        }
 
 
 

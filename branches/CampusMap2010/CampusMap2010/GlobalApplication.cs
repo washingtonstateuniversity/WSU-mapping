@@ -46,7 +46,7 @@ namespace campusMap
         {
             if (Authentication.logged_in() && Services.UserService.loginUser())
             {
-                Services.LogService.writelog("User loged in");
+                Services.HelperService.writelog("User loged in");
             }
         }
 
@@ -57,7 +57,7 @@ namespace campusMap
                 {
                     if (Services.UserService.logoutUser())
                     {
-                        Services.LogService.writelog("User was loged out");
+                        Services.HelperService.writelog("User was loged out");
                     }
                 }
             }

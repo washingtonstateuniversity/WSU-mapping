@@ -427,7 +427,8 @@ namespace campusMap.Controllers
                 case "place":
                     place place = ActiveRecordBase<place>.Find(id);
                     place.Images.Add(media);
-                    place.Save();
+                    ActiveRecordMediator<place>.Save(place);
+
 
                     /* add order here 
                     foreach (place_media si in place_media)
@@ -457,7 +458,7 @@ namespace campusMap.Controllers
                 case "geo":
                     geometrics geo = ActiveRecordBase<geometrics>.Find(id);
                     geo.Images.Add(media);
-                    geo.Save();
+                    ActiveRecordMediator<geometrics>.Save(geo);
                     break;
             }
         }

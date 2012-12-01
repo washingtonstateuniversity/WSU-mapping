@@ -129,6 +129,9 @@
     <Reference Include="Nullables, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="Nullables.NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="NVelocity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
     <Reference Include="Rejuicer, Version=1.2.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Rejuicer.dll</HintPath>
@@ -246,6 +249,7 @@
     <Compile Include="Filters\scriptFilter.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Models\advertisement.cs" />
+    <Compile Include="Models\base.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Models\comments.cs" />
     <Compile Include="Models\small_url.cs" />
@@ -271,7 +275,7 @@
     <Compile Include="Services\googleService.cs" />
     <Compile Include="Services\HelperService.cs" />
     <Compile Include="Services\ImageService.cs" />
-    <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\~LogService.cs" />
     <Compile Include="Services\PlaceService.cs" />
     <Compile Include="Services\ScriptsService.cs" />
     <Compile Include="Services\StylesService.cs" />

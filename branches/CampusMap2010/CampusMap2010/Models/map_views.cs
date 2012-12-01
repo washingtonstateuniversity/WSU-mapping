@@ -19,73 +19,41 @@ using System.Text;
 using System.IO;
 namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 30)]
-    public class map_views : ActiveRecordBase<map_views> {
+    public class map_views : publish_base {
         protected HelperService helperService = new HelperService();
         public map_views() { }
 
-        private int view_id;
+
         [PrimaryKey("view_id")]
-        virtual public int id {
-            get { return view_id; }
-            set { view_id = value; }
-        }
-        private string Name;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public string name {
-            get { return Name; }
-            set { Name = value; }
-        }
-        private string _alias;
+        virtual public string name { get; set; }
+
         [Property]
-        virtual public string alias {
-            get { return _alias; }
-            set { _alias = value; }
-        }
-        private string _key;
+        virtual public string alias { get; set; }
+
         [Property("idkey")]
-        virtual public string key {
-            get { return _key; }
-            set { _key = value; }
-        }
-        private string Cache_Path;
+        virtual public string key { get; set; }
+
         [Property("cache_path")]
-        virtual public string cache {
-            get { return Cache_Path; }
-            set { Cache_Path = value; }
-        }
+        virtual public string cache { get; set; }
 
+        [Property]
+        virtual public bool show_global_nav { get; set; }
 
-        private bool _show_global_nav;
         [Property]
-        virtual public bool show_global_nav {
-            get { return _show_global_nav; }
-            set { _show_global_nav = value; }
-        }
+        virtual public bool commentable { get; set; }
 
-        private bool _commentable;
         [Property]
-        virtual public bool commentable {
-            get { return _commentable; }
-            set { _commentable = value; }
-        }
-        private bool _sharable;
+        virtual public bool sharable { get; set; }
+
         [Property]
-        virtual public bool sharable {
-            get { return _sharable; }
-            set { _sharable = value; }
-        }
-        private int _width;
+        virtual public int width { get; set; }
+
         [Property]
-        virtual public int width {
-            get { return _width; }
-            set { _width = value; }
-        }
-        private int _height;
-        [Property]
-        virtual public int height {
-            get { return _height; }
-            set { _height = value; }
-        }
+        virtual public int height { get; set; }
+
 
         private IList<users> _authors = new List<users>();
         [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
@@ -131,7 +99,7 @@ namespace campusMap.Models {
 
 
         }
-        private DateTime? Publish_Time;
+         /*private DateTime? Publish_Time;
         [Property]
         virtual public DateTime? published {
             get { return Publish_Time; }
@@ -178,31 +146,26 @@ namespace campusMap.Models {
             get { return _isPublic; }
             set { _isPublic = value; }
         }
-        private status _status;
+       private status _status;
         [BelongsTo("view_status")]
         virtual public status status {
             get { return _status; }
             set { _status = value; }
-        }
-        private media_repo _media;
+        }*/
+
         [BelongsTo]
-        virtual public media_repo media {
-            get { return _media; }
-            set { _media = value; }
-        }
-        private string _staticMap;
+        virtual public media_repo media { get; set; }
+
         [Property]
-        virtual public string staticMap {
-            get { return _staticMap; }
-            set { _staticMap = value; }
-        }
+        virtual public string staticMap { get; set; }
+
         private IList<comments> Comments = new List<comments>();
         [HasMany(typeof(comments), Lazy = true, Table = "view_to_comments", ColumnKey = "view_id", Cascade = ManyRelationCascadeEnum.AllDeleteOrphan, Inverse = true)]
         virtual public IList<comments> comments {
             get { return Comments; }
             set { Comments = value; }
         }
-
+        /*
         private users author_editing;
         [BelongsTo("authors_editing")]
         virtual public users editing {
@@ -212,10 +175,8 @@ namespace campusMap.Models {
 
         private users checked_out;
         [BelongsTo]
-        virtual public users checked_out_by {
-            get { return checked_out; }
-            set { checked_out = value; }
-        }
+        virtual public users checked_out_by { get; set; }
+        */
         private IList<comments> Pub_comments = new List<comments>();
         [HasMany(typeof(comments), Lazy = true, Table = "view_to_comments", ColumnKey = "view_id", Where = "published=1", Cascade = ManyRelationCascadeEnum.None)]
         virtual public IList<comments> comments_pub {
@@ -245,24 +206,14 @@ namespace campusMap.Models {
         }
 
 
-        private styles _forced_shapes_style;
         [BelongsTo]
-        virtual public styles forced_shapes_style {
-            get { return _forced_shapes_style; }
-            set { _forced_shapes_style = value; }
-        }
-        private styles _forced_marker_style;
+        virtual public styles forced_shapes_style { get; set; }
+
         [BelongsTo]
-        virtual public styles forced_marker_style {
-            get { return _forced_marker_style; }
-            set { _forced_marker_style = value; }
-        }
-        private campus _campus;
+        virtual public styles forced_marker_style { get; set; }
+
         [BelongsTo]
-        virtual public campus campus {
-            get { return _campus; }
-            set { _campus = value; }
-        }
+        virtual public campus campus { get; set; }
         /* replaced by the virtural model
         private map_views_options _options;
         [BelongsTo]
@@ -279,7 +230,7 @@ namespace campusMap.Models {
             get { return _options_obj; }
             set { _options_obj = value; }
         }
-
+        /*
         virtual public bool isPublished() {
             if (this.status == ActiveRecordBase<status>.Find(3) && this.published != null && this.published.Value.CompareTo(DateTime.Now) <= 0) {
                 return true;
@@ -293,7 +244,7 @@ namespace campusMap.Models {
                 flag = true;
 
             return flag;
-        }
+        }*/
     }
 }
 

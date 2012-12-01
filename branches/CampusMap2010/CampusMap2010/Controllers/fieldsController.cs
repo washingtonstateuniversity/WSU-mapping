@@ -306,7 +306,7 @@ namespace campusMap.Controllers
         public void clearLock(int id, bool ajax)
         {
             map_views view = ActiveRecordBase<map_views>.Find(id);
-            view.checked_out_by = null;
+            view.editing = null;
             ActiveRecordMediator<map_views>.Save(view);
             CancelLayout();
             RenderText("true");

@@ -1,26 +1,25 @@
-namespace campusMap.Controllers
-{
+namespace campusMap.Controllers {
     #region Directives
-        using System.Collections.Generic;
-        using System.Collections.Specialized;
-        using Castle.ActiveRecord;
-        using Castle.MonoRail.Framework;
-        using Castle.MonoRail.ActiveRecordSupport;
-        using Castle.MonoRail.Framework.Helpers;
-        using MonoRailHelper;
-        using NHibernate.Criterion;
-        using System.IO;
-        using System.Web;
-        using System;
-        using campusMap.Models;
-        using System.Net.Mail;
-        using Castle.Components.Common.EmailSender;   
-        using Castle.Components.Common.EmailSender.Smtp;
-        using Castle.ActiveRecord.Queries;
-        using System.Text.RegularExpressions;
-        using System.Collections;
-        using campusMap.Services;
-        using Microsoft.SqlServer.Types;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using Castle.ActiveRecord;
+    using Castle.MonoRail.Framework;
+    using Castle.MonoRail.ActiveRecordSupport;
+    using Castle.MonoRail.Framework.Helpers;
+    using MonoRailHelper;
+    using NHibernate.Criterion;
+    using System.IO;
+    using System.Web;
+    using System;
+    using campusMap.Models;
+    using System.Net.Mail;
+    using Castle.Components.Common.EmailSender;
+    using Castle.Components.Common.EmailSender.Smtp;
+    using Castle.ActiveRecord.Queries;
+    using System.Text.RegularExpressions;
+    using System.Collections;
+    using campusMap.Services;
+    using Microsoft.SqlServer.Types;
     using System.Data.SqlTypes;
     using System.Xml;
     using System.Text;
@@ -38,18 +37,16 @@ namespace campusMap.Controllers
     #endregion
 
     [Layout("default")]
-    public class geometricsController : SecureBaseController
-    {
+    public class geometricsController : SecureBaseController {
 
-        enum GEOM_TYPE {POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRYCOLLECTION  };
-
+        enum GEOM_TYPE { POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRYCOLLECTION };
 
 
-        public void editor(int id, int page, bool ajax, int type)
-        {
-            if (id == 0){
+
+        public void editor(int id, int page, bool ajax, int type) {
+            if (id == 0) {
                 New(type);
-            }else{
+            } else {
                 _edit(id, page, ajax);
             }
             CancelView();
@@ -58,14 +55,12 @@ namespace campusMap.Controllers
             return;
         }
 
-        public void Index()
-        {
+        public void Index() {
             //ActiveRecordBase<Block>.FindAll();
-            PropertyBag["AccessDate"] = DateTime.Now;           
+            PropertyBag["AccessDate"] = DateTime.Now;
         }
 
-        public void List(int page, int searchId, string status, Boolean ajax)
-        {
+        public void List(int page, int searchId, string status, Boolean ajax) {
             users user = UserService.getUser();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
@@ -78,197 +73,190 @@ namespace campusMap.Controllers
             //user.Sections.Contains(place.place_types);
 
             IList<geometrics> items;
-                int pagesize = 15;
-                int paging = 1;
-                List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-               /* if (searchId > 0)
-                {
-                    baseEx.Add(Expression.Eq("place_types", ActiveRecordBase<place_types>.Find(searchId)));
-                }
-                else if (!searchId.Equals(-1))
-                {
-                    place_types[] array1 = new place_types[user.Sections.Count];
-                    user.Sections.CopyTo(array1, 0);
-                    baseEx.Add(Expression.In("place_types", array1));
-                }*/
+            int pagesize = 15;
+            int paging = 1;
+            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+            /* if (searchId > 0)
+             {
+                 baseEx.Add(Expression.Eq("place_types", ActiveRecordBase<place_types>.Find(searchId)));
+             }
+             else if (!searchId.Equals(-1))
+             {
+                 place_types[] array1 = new place_types[user.Sections.Count];
+                 user.Sections.CopyTo(array1, 0);
+                 baseEx.Add(Expression.In("place_types", array1));
+             }*/
 
-                if (searchId.Equals(-2))
-                {
-                    IList<geometrics> usergeometrics = user.geometric;
-                    object[] obj = new object[usergeometrics.Count];
-                    int i = 0;
-                    foreach (geometrics geometric in usergeometrics)
-                    {
-                        obj[i] = geometric.id;
-                        i++;
-                    }
-                    baseEx.Add(Expression.In("geometric_id", obj));
+            if (searchId.Equals(-2)) {
+                IList<geometrics> usergeometrics = user.geometric;
+                object[] obj = new object[usergeometrics.Count];
+                int i = 0;
+                foreach (geometrics geometric in usergeometrics) {
+                    obj[i] = geometric.id;
+                    i++;
                 }
+                baseEx.Add(Expression.In("geometric_id", obj));
+            }
 
             //PUBLISHED
-                if (status == "published"){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
-                List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-                pubEx.AddRange(baseEx);
-                pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
+            if (status == "published") {
+                paging = page;
+            } else {
+                paging = 1;
+            }
+            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
+            pubEx.AddRange(baseEx);
+            pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
 
-                if (searchId > 0)
-                {
-                    items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), pubEx.ToArray());
-                }
-                else
-                {
-                    items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
-                }
-                PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
-                IList<string> buttons = new List<string>();
-                buttons.Add("edit");
-                //buttons.Add("delete");
-                buttons.Add("publish");
-                buttons.Add("copy");
-                //buttons.Add("broadcast");
-                //buttons.Add("view");
-                //buttons.Add("order");
-                PropertyBag["publishedButtonSet"] = buttons;  
+            if (searchId > 0) {
+                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), pubEx.ToArray());
+            } else {
+                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
+            }
+            PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            IList<string> buttons = new List<string>();
+            buttons.Add("edit");
+            //buttons.Add("delete");
+            buttons.Add("publish");
+            buttons.Add("copy");
+            //buttons.Add("broadcast");
+            //buttons.Add("view");
+            //buttons.Add("order");
+            PropertyBag["publishedButtonSet"] = buttons;
 
 
 
 
             //REVIEW
-                if (status == "review"){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
-                List<AbstractCriterion> revEx = new List<AbstractCriterion>();
-                revEx.AddRange(baseEx);
-                revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
+            if (status == "review") {
+                paging = page;
+            } else {
+                paging = 1;
+            }
+            List<AbstractCriterion> revEx = new List<AbstractCriterion>();
+            revEx.AddRange(baseEx);
+            revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
-                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-                PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
+            PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
-                buttons = new List<string>();
-                buttons.Add("edit");
-                buttons.Add("delete");
-                buttons.Add("publish");
-                buttons.Add("copy");
-                //buttons.Add("view");
-                PropertyBag["reviewButtonSet"] = buttons;  
+            buttons = new List<string>();
+            buttons.Add("edit");
+            buttons.Add("delete");
+            buttons.Add("publish");
+            buttons.Add("copy");
+            //buttons.Add("view");
+            PropertyBag["reviewButtonSet"] = buttons;
 
- 
+
 
             //DRAFT
-                if (status == "draft"){
-                    paging = page;
-                }else{
-                    paging = 1;
-                }
-                List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
-                draftEx.AddRange(baseEx);
-                draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
-                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
-                PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            if (status == "draft") {
+                paging = page;
+            } else {
+                paging = 1;
+            }
+            List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
+            draftEx.AddRange(baseEx);
+            draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
+            items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
+            PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
 
-                buttons = new List<string>();
-                buttons.Add("edit");
-                buttons.Add("delete");
-                buttons.Add("publish");
-                buttons.Add("copy");
-                //buttons.Add("view");
-                PropertyBag["draftButtonSet"] = buttons;  
+            buttons = new List<string>();
+            buttons.Add("edit");
+            buttons.Add("delete");
+            buttons.Add("publish");
+            buttons.Add("copy");
+            //buttons.Add("view");
+            PropertyBag["draftButtonSet"] = buttons;
 
             //SETUP SEARCHID and parts
-                if (searchId.Equals(0)){
-                    PropertyBag["searchId"] = 0;
+            if (searchId.Equals(0)) {
+                PropertyBag["searchId"] = 0;
+            } else {
+                geometrics_types type = new geometrics_types();
+                PropertyBag["searchId"] = searchId;
+                geometrics firstgeometric = new geometrics();
+                geometrics lastgeometric = new geometrics();
+                /*if (type.Places.Count.Equals(0)){
+                    firstplace = null;
+                    lastplace = null;
                 }else{
-                    geometrics_types type = new geometrics_types();
-                    PropertyBag["searchId"] = searchId;
-                    geometrics firstgeometric = new geometrics();
-                    geometrics lastgeometric = new geometrics();
-                    /*if (type.Places.Count.Equals(0)){
-                        firstplace = null;
-                        lastplace = null;
-                    }else{
-                        firstplace = type.Places[0];
-                        lastplace = type.Places[type.Places.Count - 1];
-                    }*/
-                    PropertyBag["firstgeometric"] = firstgeometric;
-                    PropertyBag["lastgeometric"] = lastgeometric; 
-                }
+                    firstplace = type.Places[0];
+                    lastplace = type.Places[type.Places.Count - 1];
+                }*/
+                PropertyBag["firstgeometric"] = firstgeometric;
+                PropertyBag["lastgeometric"] = lastgeometric;
+            }
 
-                pagesize = 50;
-                IList<geometrics_types> geometrics_types_items;
-                geometrics_types_items = ActiveRecordBase<geometrics_types>.FindAll();
-                PropertyBag["types"] = PaginationHelper.CreatePagination(geometrics_types_items, pagesize, paging);
+            pagesize = 50;
+            IList<geometrics_types> geometrics_types_items;
+            geometrics_types_items = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["types"] = PaginationHelper.CreatePagination(geometrics_types_items, pagesize, paging);
 
-                pagesize = 15;
-                IList<field_types> geometrics_fields_items;
-                List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
-                fieldsEx.AddRange(baseEx);
-                fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
-                geometrics_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
-                PropertyBag["fields"] = PaginationHelper.CreatePagination(geometrics_fields_items, pagesize, paging);
+            pagesize = 15;
+            IList<field_types> geometrics_fields_items;
+            List<AbstractCriterion> fieldsEx = new List<AbstractCriterion>();
+            fieldsEx.AddRange(baseEx);
+            fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
+            geometrics_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
+            PropertyBag["fields"] = PaginationHelper.CreatePagination(geometrics_fields_items, pagesize, paging);
 
-                pagesize = 15;
-                IList<styles> geometrics_styles_items;
-                geometrics_styles_items = ActiveRecordBase<styles>.FindAll();
-                PropertyBag["styles"] = PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
-            
-                RenderView("../admin/listings/list");
+            pagesize = 15;
+            IList<styles> geometrics_styles_items;
+            geometrics_styles_items = ActiveRecordBase<styles>.FindAll();
+            PropertyBag["styles"] = PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
+
+            RenderView("../admin/listings/list");
         }
-        public bool canEdit(geometrics geometric, users user)
-        {
+        public bool canEdit(geometrics geometric, users user) {
             bool flag = false;
-           /* switch (user.Accesslevel.Title)
-            {
-                case "Author":
-                    {
-                        foreach (place_types item in place.place_types)
-                        {
-                            if (place.Authors.Contains(user) && user.Sections.Contains(item))
-                                flag = true; break;
-                        }
-                    }
-                case "Contributer":
-                    {
-                        foreach (place_types item in place.place_types)
-                        {
-                            if (place.Authors.Contains(user) && user.Sections.Contains(item))
-                                flag = true; break;
-                        }
-                    }
-                case "Editor":
-                    {
-                        foreach (place_types item in place.place_types)
-                        {
-                            if (user.Sections.Contains(item))
-                                flag = true; break;
-                        }
-                    }
-             }*/
+            /* switch (user.Accesslevel.Title)
+             {
+                 case "Author":
+                     {
+                         foreach (place_types item in place.place_types)
+                         {
+                             if (place.Authors.Contains(user) && user.Sections.Contains(item))
+                                 flag = true; break;
+                         }
+                     }
+                 case "Contributer":
+                     {
+                         foreach (place_types item in place.place_types)
+                         {
+                             if (place.Authors.Contains(user) && user.Sections.Contains(item))
+                                 flag = true; break;
+                         }
+                     }
+                 case "Editor":
+                     {
+                         foreach (place_types item in place.place_types)
+                         {
+                             if (user.Sections.Contains(item))
+                                 flag = true; break;
+                         }
+                     }
+              }*/
 
-            return flag;        
+            return flag;
         }
-           /* public bool canPublish(authors user)
-            {
-                bool flag = false;
-                switch (user.Accesslevel.Title)
-                {
-                    case "Author": flag = true; break;
+        /* public bool canPublish(authors user)
+         {
+             bool flag = false;
+             switch (user.Accesslevel.Title)
+             {
+                 case "Author": flag = true; break;
                                
-                    case "Editor": flag = true; break;
+                 case "Editor": flag = true; break;
 
-                    case "Contributor": flag = false; break;
-                }
-                return flag;        
-            }*/
+                 case "Contributor": flag = false; break;
+             }
+             return flag;        
+         }*/
 
 
-        public void new_field()
-        {
+        public void new_field() {
             field_types field = new field_types();
             PropertyBag["field"] = field;
             place_models[] p_models = ActiveRecordBase<place_models>.FindAll();
@@ -277,8 +265,7 @@ namespace campusMap.Controllers
 
             RenderView("../admin/fields/new");
         }
-        public void edit_field(int id)
-        {
+        public void edit_field(int id) {
             field_types field = ActiveRecordBase<field_types>.Find(id);
             PropertyBag["field"] = field;
 
@@ -299,21 +286,18 @@ namespace campusMap.Controllers
             RenderView("../admin/fields/new");
         }
 
-        public void new_type()
-        {
+        public void new_type() {
             place_types type = new place_types();
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
-        public void edit_type(int id)
-        {
+        public void edit_type(int id) {
             geometrics_types type = ActiveRecordBase<geometrics_types>.Find(id);
             PropertyBag["type"] = type;
             RenderView("../admin/types/new");
         }
 
-        public void new_style(int type)
-        {
+        public void new_style(int type) {
             styles STYLE = new styles();
             zoom_levels level = ActiveRecordBase<zoom_levels>.Find(1);
             List<zoom_levels> levels = new List<zoom_levels>();
@@ -323,25 +307,22 @@ namespace campusMap.Controllers
             PropertyBag["selectedType"] = ActiveRecordBase<geometrics_types>.Find(type); ;
 
             PropertyBag["style"] = STYLE;
-            PropertyBag["style_types"]  = ActiveRecordBase<geometrics_types>.FindAll();
+            PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             PropertyBag["style_events"] = ActiveRecordBase<geometric_events>.FindAll();
-            PropertyBag["zoom_levels"]  = ActiveRecordBase<zoom_levels>.FindAll();
+            PropertyBag["zoom_levels"] = ActiveRecordBase<zoom_levels>.FindAll();
             RenderView("../admin/maps/styles/new");
         }
-        public void edit_style(int id)
-        {
+        public void edit_style(int id) {
             styles STYLE = ActiveRecordBase<styles>.Find(id);
             PropertyBag["style"] = STYLE;
 
 
             var values = new Dictionary<string, object>();
-            if (!String.IsNullOrWhiteSpace(STYLE.style_obj) && STYLE.style_obj != "{}")
-            {
+            if (!String.IsNullOrWhiteSpace(STYLE.style_obj) && STYLE.style_obj != "{}") {
                 var jss = new JavaScriptSerializer();
                 var options = jss.Deserialize<Dictionary<string, dynamic>>(STYLE.style_obj);
                 options.ToList<KeyValuePair<string, dynamic>>();
-                foreach (KeyValuePair<string, dynamic> option in options)
-                {
+                foreach (KeyValuePair<string, dynamic> option in options) {
                     values.Add(option.Key, option.Value);
                 }
             }
@@ -356,8 +337,7 @@ namespace campusMap.Controllers
             RenderView("../admin/maps/styles/new");
         }
 
-        public void setStatus(int id, int status, bool ajax)
-        {
+        public void setStatus(int id, int status, bool ajax) {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             PropertyBag["geometric"] = geometric;
             status published = ActiveRecordBase<status>.Find(status);
@@ -374,49 +354,43 @@ namespace campusMap.Controllers
             //}
         }
 
-        public geometrics[] getDrafts()
-        {
+        public geometrics[] getDrafts() {
             geometrics draft = ActiveRecordBase<geometrics>.Find(1);
-           ICriterion expression = Expression.Eq("Status", draft);
-           geometrics[] geometricArray = ActiveRecordBase<geometrics>.FindAll(expression);
-           return geometricArray;        
+            ICriterion expression = Expression.Eq("Status", draft);
+            geometrics[] geometricArray = ActiveRecordBase<geometrics>.FindAll(expression);
+            return geometricArray;
         }
-        public geometrics[] getReview()
-        {
+        public geometrics[] getReview() {
             geometrics review = ActiveRecordBase<geometrics>.Find(2);
             ICriterion expression = Expression.Eq("Status", review);
             geometrics[] geometricArray = ActiveRecordBase<geometrics>.FindAll(expression);
             return geometricArray;
         }
-        public geometrics[] getPublished()
-        {
+        public geometrics[] getPublished() {
             geometrics published = ActiveRecordBase<geometrics>.Find(3);
             ICriterion expression = Expression.Eq("Status", published);
             geometrics[] geometricArray = ActiveRecordBase<geometrics>.FindAll(expression);
-            return geometricArray;        
+            return geometricArray;
         }
- 
 
 
 
-        public void _edit(int id, int page, bool ajax)
-        {
+
+        public void _edit(int id, int page, bool ajax) {
             CancelView();
             PropertyBag["ajaxed"] = ajax;
-            LogService.writelog("Editing geometric " + id);
-            
+            HelperService.writelog("Editing geometric", id);
+
             PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             string gem = "";
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            if (geometric.boundary != null)
-            {
+            if (geometric.boundary != null) {
                 SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
                 string sp_type = spatial.STGeometryType().ToString().ToUpper();
-                switch (sp_type)
-                {
+                switch (sp_type) {
                     case "POINT":
                         gem = geometricService.outputRawPoint(spatial);
                         break;
@@ -443,7 +417,7 @@ namespace campusMap.Controllers
             //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = "";//items;
 
-           PropertyBag["spatial"] = gem;
+            PropertyBag["spatial"] = gem;
 
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
@@ -451,7 +425,7 @@ namespace campusMap.Controllers
             users user = UserService.getUser();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
-            
+
             ActiveRecordMediator<geometrics>.Save(geometric);
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
@@ -463,17 +437,14 @@ namespace campusMap.Controllers
             PropertyBag["geometricimages"] = geometric.Images;
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
-            if (Flash["geometric"] != null)
-            {
+            if (Flash["geometric"] != null) {
                 geometrics flashgeometric = Flash["geometric"] as geometrics;
-                flashgeometric.Refresh();
+                ActiveRecordMediator<geometrics>.Refresh(flashgeometric);
                 PropertyBag["geometric"] = flashgeometric;
-            }
-            else
-            {
+            } else {
                 PropertyBag["geometric"] = geometric;
             }
-            
+
             //ImageType imgtype = ActiveRecordBase<ImageType>.Find(1);
             //PropertyBag["images"] = imgtype.Images; //Flash["images"] != null ? Flash["images"] : 
             //PropertyBag["images"] = ActiveRecordBase<media_repo>.FindAll();
@@ -481,14 +452,14 @@ namespace campusMap.Controllers
             PropertyBag["geometrictype"] = ActiveRecordBase<geometrics_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
-            
+
             //if (page == 0)
             //    page = 1;
             //int pagesize = 10;
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
             baseEx.Add(Expression.Eq("Place", geometric));
 
-            
+
 
 
             /*List<tags> tags = new List<tags>();
@@ -509,17 +480,16 @@ namespace campusMap.Controllers
                images.Add(new media_repo());
                PropertyBag["geometricimages"] = images;   
             }*/
-              
+
 
             PropertyBag["placeauthors"] = authors;
 
             RenderView("editor");
-       
+
         }
-        public void New(int type)
-        {
+        public void New(int type) {
             CancelView();
-            PropertyBag["credits"] = ""; 
+            PropertyBag["credits"] = "";
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
@@ -565,8 +535,7 @@ namespace campusMap.Controllers
         }*/
 
 
-        public void GetAddImage(int count)
-        {
+        public void GetAddImage(int count) {
             PropertyBag["count"] = count;
 
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
@@ -578,10 +547,8 @@ namespace campusMap.Controllers
             PropertyBag["geometricimages"] = images;
             RenderView("addimage", true);
         }
-        public void DeleteImage(int id, int imageid)
-        {
-            if (id.Equals(0) || imageid.Equals(0))
-            {
+        public void DeleteImage(int id, int imageid) {
+            if (id.Equals(0) || imageid.Equals(0)) {
                 CancelLayout();
                 RenderText("false");
                 return;
@@ -597,8 +564,7 @@ namespace campusMap.Controllers
         }
 
 
-        public void clearLock(int id, bool ajax)
-        {
+        public void clearLock(int id, bool ajax) {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             geometric.editing = null;
             ActiveRecordMediator<geometrics>.Save(geometric);
@@ -606,8 +572,7 @@ namespace campusMap.Controllers
             RenderText("true");
         }
 
-        public string normaliz_latsLongs(string latLong, string type)
-        {
+        public string normaliz_latsLongs(string latLong, string type) {
 
             latLong = latLong.Trim();
 
@@ -619,16 +584,15 @@ namespace campusMap.Controllers
             latLong = latLong.Replace("|", " ");
             latLong = latLong.Replace("\r\n", "");
 
-            if (!longFirst)
-            {
+            if (!longFirst) {
                 string pattern = @"(\d+\.\d+)\s?(-?\d+\.\d+),?";
                 string replacement = "$2 $1,";
                 Regex rgx = new Regex(pattern);
                 latLong = rgx.Replace(latLong, replacement);
             }
-            if (type == "polygon"){ /* this is to avoid an error where the ring needs to be closed in MS SQL */
-                string[] tmp = latLong.Split(','); 
-                if(tmp[0] != tmp[tmp.Length-1]){
+            if (type == "polygon") { /* this is to avoid an error where the ring needs to be closed in MS SQL */
+                string[] tmp = latLong.Split(',');
+                if (tmp[0] != tmp[tmp.Length - 1]) {
                     latLong = latLong.TrimEnd(',') + "," + tmp[0];
                 }
             }
@@ -642,15 +606,13 @@ namespace campusMap.Controllers
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
             string boundary,
             string geom_type,
-        [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel)     
-        {
+        [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
             Flash["geometric"] = geometric;
             Flash["tags"] = geometric;
             Flash["images"] = geometric;
             Flash["authors"] = geometric;
 
-            if (cancel != null)
-            {
+            if (cancel != null) {
                 geometric.editing = null;
                 ActiveRecordMediator<geometrics>.Save(geometric);
                 RedirectToAction("list");
@@ -677,7 +639,7 @@ namespace campusMap.Controllers
 */
             //IList<styles> styled = geometric.style;
             //geometric.style.Clear();
-            
+
 
             users user = UserService.getUser();
             geometric.editing = user;
@@ -685,34 +647,27 @@ namespace campusMap.Controllers
             int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
             geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
-            if (String.IsNullOrEmpty(geometric.name))
-            {
+            if (String.IsNullOrEmpty(geometric.name)) {
                 geometric.name = "Untitled";
             }
 
 
 
-           // geometric.tags.Clear(); 
+            // geometric.tags.Clear(); 
             //place.Images.Clear();
             geometric.Authors.Clear();
-            if (apply != null)
-            {
+            if (apply != null) {
 
-            }
-            else
-            {
+            } else {
                 geometric.editing = null;
             }
 
 
-            if (geometric.id == 0)
-            {
+            if (geometric.id == 0) {
                 //PlaceStatus stat = ActiveRecordBase<PlaceStatus>.Find(1);
                 //place.Status = stat;
                 geometric.creation_date = DateTime.Now;
-            }
-            else
-            {
+            } else {
                 geometric.updated_date = DateTime.Now;
             }
             /*
@@ -744,24 +699,23 @@ namespace campusMap.Controllers
                     ActiveRecordMediator<geometrics_media>.Save(find);
                 }
             }*/
-/*
-            foreach (tags tag in tags)
-            {
-                if (tag.id > 0)
-                    geometric.tags.Add(tag);        
-            }
-            foreach (media_repo _media in images)
-            {
-                if (_media.id > 0 && !geometric.Images.Contains(_media))
-                {
-                    geometric.Images.Add(_media);
-                }
-            }
-            */
-            foreach (users author in authors)
-            {
+            /*
+                        foreach (tags tag in tags)
+                        {
+                            if (tag.id > 0)
+                                geometric.tags.Add(tag);        
+                        }
+                        foreach (media_repo _media in images)
+                        {
+                            if (_media.id > 0 && !geometric.Images.Contains(_media))
+                            {
+                                geometric.Images.Add(_media);
+                            }
+                        }
+                        */
+            foreach (users author in authors) {
                 if (author.id > 0)
-                    geometric.Authors.Add(author);   
+                    geometric.Authors.Add(author);
             }
 
             /*string requested_url = place.CustomUrl;
@@ -775,39 +729,37 @@ namespace campusMap.Controllers
             }*/
 
 
-            
+
             string gemSql = "";
             string gemtype = "";
-            switch (geom_type)
-            {
+            switch (geom_type) {
                 case "marker": //case "POINT":
-                    if (boundary != null)
-                    {
+                    if (boundary != null) {
                         gemSql = "POINT (" + normaliz_latsLongs(boundary, geom_type) + ")";
                     }
                     gemtype = "Marker";
                     break;
                 case "polyline": //case "LINESTRING":
-                    if (boundary != null)
-                    {gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    if (boundary != null) {
+                        gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
                     }
                     gemtype = "Line";
                     break;
                 case "polygon": //case "POLYGON":
-                    if (boundary != null)
-                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     }
                     gemtype = "Shape";
                     break;
                 case "rectangle":
-                    if (boundary != null)
-                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     }
                     gemtype = "Shape";
                     break;
                 case "circle":
-                    if (boundary != null)
-                    {gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary != null) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
                     }
                     gemtype = "Shape";
                     break;
@@ -818,14 +770,13 @@ namespace campusMap.Controllers
                 case "GEOMETRYCOLLECTION":
                     break;
             }
-            
+
             geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) });
             //geometric.geometric_types = geom_type;
-            if (boundary != null)
-            {
+            if (boundary != null) {
                 string wkt = gemSql;
 
-               // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
+                // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
                 SqlChars udtText = new SqlChars(wkt);
                 SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
 
@@ -840,7 +791,7 @@ namespace campusMap.Controllers
                 */
                 geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
             }
-            
+
 
             ActiveRecordMediator<geometrics>.Save(geometric);
 
@@ -852,24 +803,17 @@ namespace campusMap.Controllers
             Flash["authors"] = null;
 
 
-            if (apply != null)
-            {
-                if (apply != " Save ")
-                {
+            if (apply != null) {
+                if (apply != " Save ") {
                     RedirectToUrl("_edit.castle?id=" + geometric.id);
-                }
-                else
-                {
+                } else {
                     RedirectToReferrer();
                 }
-            }
-            else
-            {
+            } else {
                 RedirectToAction("list");
             }
         }
-        public void _copy(int id, String name)
-        {
+        public void _copy(int id, String name) {
             CancelLayout();
             CancelView();
             geometrics org = ActiveRecordBase<geometrics>.Find(id);
@@ -878,8 +822,8 @@ namespace campusMap.Controllers
             Mapper.CreateMap<geometrics, geometrics>().ForMember(dest => dest.id, o => o.Ignore());
             geometrics copy = new geometrics();
             Mapper.Map(org, copy);
+            ActiveRecordMediator<geometrics>.SaveAndFlush(copy);
 
-            copy.SaveAndFlush();
 
             Flash["message"] = "New copy saved to the system.  You may now edit " + name;
             RedirectToUrl("~/geometrics/_edit.castle?id=" + copy.id);
@@ -892,10 +836,8 @@ namespace campusMap.Controllers
                   bool ajaxed_update,
                   string apply,
                   string cancel
-                       )
-        {
-            if (cancel != null)
-            {
+                       ) {
+            if (cancel != null) {
                 RedirectToAction("list");
                 return;
             }
@@ -927,20 +869,14 @@ namespace campusMap.Controllers
 
 
             ActiveRecordMediator<fields>.Save(field);
-            if (apply != null || ajaxed_update)
-            {
-                if (field.id > 0)
-                {
+            if (apply != null || ajaxed_update) {
+                if (field.id > 0) {
                     RedirectToUrl("edit_field.castle?id=" + field.id);
                     return;
-                }
-                else
-                {
+                } else {
                     RedirectToReferrer();
                 }
-            }
-            else
-            {
+            } else {
                 RedirectToAction("list");
             }
         }
@@ -950,17 +886,15 @@ namespace campusMap.Controllers
                 bool ajaxed_update,
                 string apply,
                 string cancel
-                )
-            {
-                if (cancel != null)
-                {
-                    RedirectToAction("list");
-                    return;
-                }
-                char[] startC = { '{' };
-                char[] endC = { '}' };
-                
-                var jss = new JavaScriptSerializer();
+                ) {
+            if (cancel != null) {
+                RedirectToAction("list");
+                return;
+            }
+            char[] startC = { '{' };
+            char[] endC = { '}' };
+
+            var jss = new JavaScriptSerializer();
 
             /*
                 Dictionary<string, string> urlparams = getPostParmasAsObj_obj("options");
@@ -975,60 +909,54 @@ namespace campusMap.Controllers
                     values.Add(_urlparams.Key, _urlparams.Value);
                 }
             */
-                /*
-                    values.Add("Title", "Hello World!");
-                    values.Add("Text", "My first post");
-                    values.Add("Tags", new[] { "hello", "world" });
-                */
-                //var usettings = new DynamicEntity(values);
-
-
-                Dictionary<string, string> urlparams = getPostParmasAsObj_obj("rest");
-                MyJsonDictionary<String, Object> rest = new MyJsonDictionary<String, Object>();
-                foreach (KeyValuePair<string, string> _urlparams in urlparams)
-                {
-                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) rest.Add(_urlparams.Key, _urlparams.Value);
-                }
-
-                urlparams = getPostParmasAsObj_obj("mouseover");
-                MyJsonDictionary<String, Object> mouseover = new MyJsonDictionary<String, Object>();
-                foreach (KeyValuePair<string, string> _urlparams in urlparams)
-                {
-                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) mouseover.Add(_urlparams.Key, _urlparams.Value);
-                }
-                
-                urlparams = getPostParmasAsObj_obj("click");
-                MyJsonDictionary<String, Object> click = new MyJsonDictionary<String, Object>();
-                foreach (KeyValuePair<string, string> _urlparams in urlparams)
-                {
-                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) click.Add(_urlparams.Key, _urlparams.Value);
-                }
-
-                urlparams = getPostParmasAsObj_obj("dblclick");
-                MyJsonDictionary<String, Object> dblclick = new MyJsonDictionary<String, Object>();
-                foreach (KeyValuePair<string, string> _urlparams in urlparams)
-                {
-                    if (!String.IsNullOrWhiteSpace(_urlparams.Value)) dblclick.Add(_urlparams.Key, _urlparams.Value);
-                }
-
-
-                dynamic jsonstr = new
-                {
-                    events = new
-                    {
-                        rest = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(rest)),
-                        mouseover = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(mouseover)),
-                        click = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(click)),
-                        dblclick = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(dblclick))
-                    }
-                };
-               /* var json = jss.Serialize(jsonstr);
-                field.attr = json;
-
-                geometric_events[] events = ActiveRecordBase<geometric_events>.FindAll();
+            /*
+                values.Add("Title", "Hello World!");
+                values.Add("Text", "My first post");
+                values.Add("Tags", new[] { "hello", "world" });
             */
+            //var usettings = new DynamicEntity(values);
 
-                style.style_obj = jss.Serialize(jsonstr);// Serialize(style._zoom);//jss.Serialize(usettings);
+
+            Dictionary<string, string> urlparams = getPostParmasAsObj_obj("rest");
+            MyJsonDictionary<String, Object> rest = new MyJsonDictionary<String, Object>();
+            foreach (KeyValuePair<string, string> _urlparams in urlparams) {
+                if (!String.IsNullOrWhiteSpace(_urlparams.Value)) rest.Add(_urlparams.Key, _urlparams.Value);
+            }
+
+            urlparams = getPostParmasAsObj_obj("mouseover");
+            MyJsonDictionary<String, Object> mouseover = new MyJsonDictionary<String, Object>();
+            foreach (KeyValuePair<string, string> _urlparams in urlparams) {
+                if (!String.IsNullOrWhiteSpace(_urlparams.Value)) mouseover.Add(_urlparams.Key, _urlparams.Value);
+            }
+
+            urlparams = getPostParmasAsObj_obj("click");
+            MyJsonDictionary<String, Object> click = new MyJsonDictionary<String, Object>();
+            foreach (KeyValuePair<string, string> _urlparams in urlparams) {
+                if (!String.IsNullOrWhiteSpace(_urlparams.Value)) click.Add(_urlparams.Key, _urlparams.Value);
+            }
+
+            urlparams = getPostParmasAsObj_obj("dblclick");
+            MyJsonDictionary<String, Object> dblclick = new MyJsonDictionary<String, Object>();
+            foreach (KeyValuePair<string, string> _urlparams in urlparams) {
+                if (!String.IsNullOrWhiteSpace(_urlparams.Value)) dblclick.Add(_urlparams.Key, _urlparams.Value);
+            }
+
+
+            dynamic jsonstr = new {
+                events = new {
+                    rest = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(rest)),
+                    mouseover = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(mouseover)),
+                    click = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(click)),
+                    dblclick = jss.Deserialize<Dictionary<string, dynamic>>(Serialize(dblclick))
+                }
+            };
+            /* var json = jss.Serialize(jsonstr);
+             field.attr = json;
+
+             geometric_events[] events = ActiveRecordBase<geometric_events>.FindAll();
+         */
+
+            style.style_obj = jss.Serialize(jsonstr);// Serialize(style._zoom);//jss.Serialize(usettings);
 
 
             /* first add zoom levels 
@@ -1045,54 +973,51 @@ namespace campusMap.Controllers
                     }
                 }*/
 
-                /* 
-                 * everthing from here should be inherently saved with the 
-                 * ActiveRecordMediator<styles>.Save(style);
-                 * 
-                 * 
-                 * FORM INPUT NAME for an option on
-                 * 'fillColor' under the 'rest' event under Zoom 0,14
-                 * EXMAPLE: 
-                 *   so:
-                 * style._zoom[1]        id:1  -  '0,14'
-                 * style._event[6]       id:2  -  'hover'
-                 * style._value[6]       id:6  -  'fillColor'
-                 * <input type="hidden" value="$!{opt.value}" name="style._zoom[${zoom.id}].events[${event.id}]._value[${opt.id}]" />
-                 * 
-                 * */
-                /* finish up by finalizing the style */
-                ActiveRecordMediator<styles>.Save(style);
+            /* 
+             * everthing from here should be inherently saved with the 
+             * ActiveRecordMediator<styles>.Save(style);
+             * 
+             * 
+             * FORM INPUT NAME for an option on
+             * 'fillColor' under the 'rest' event under Zoom 0,14
+             * EXMAPLE: 
+             *   so:
+             * style._zoom[1]        id:1  -  '0,14'
+             * style._event[6]       id:2  -  'hover'
+             * style._value[6]       id:6  -  'fillColor'
+             * <input type="hidden" value="$!{opt.value}" name="style._zoom[${zoom.id}].events[${event.id}]._value[${opt.id}]" />
+             * 
+             * */
+            /* finish up by finalizing the style */
+            ActiveRecordMediator<styles>.Save(style);
 
-                if (apply != null || ajaxed_update){
-                    if (style.id > 0){
-                        RedirectToUrl("edit_style.castle?id=" + style.id);
-                        return;
-                    }else{
-                        RedirectToReferrer();
-                    }
-                }else{
-                    RedirectToAction("list");
+            if (apply != null || ajaxed_update) {
+                if (style.id > 0) {
+                    RedirectToUrl("edit_style.castle?id=" + style.id);
+                    return;
+                } else {
+                    RedirectToReferrer();
                 }
+            } else {
+                RedirectToAction("list");
             }
+        }
 
-        public void test()
-        {
+        public void test() {
             geometrics geo = ActiveRecordBase<geometrics>.Find(10);
             SqlGeography spatial = geometrics.AsGeography(geo.boundary);
 
             CancelView();
         }
 
-        public void delete(int id)
-        {
+        public void delete(int id) {
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             Flash["message"] = "Article, <strong>Note:" + geometric.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<geometrics>.Delete(geometric);
             CancelLayout();
             RedirectToAction("list");
         }
-        public void delete_style(int id)
-        {
+        public void delete_style(int id) {
             styles styles = ActiveRecordBase<styles>.Find(id);
             Flash["message"] = "Article, <strong>Note:" + styles.name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<styles>.Delete(styles);

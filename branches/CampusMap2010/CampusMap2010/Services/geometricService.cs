@@ -43,7 +43,7 @@ namespace campusMap.Services
     {
         public string getShapeLatLng_json_str(int id, bool showOnlyEncoded)
         {
-            if (showOnlyEncoded == null) showOnlyEncoded = true;
+            if (showOnlyEncoded == null){ showOnlyEncoded = true;}
             string gem = "";
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             if (geometric.boundary != null)

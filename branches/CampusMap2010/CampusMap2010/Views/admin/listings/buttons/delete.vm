@@ -1,4 +1,4 @@
-#if($Controller.canEdit($item,$user.id) || $item.editing == $user || $item.isCheckedOutNull())
+
 	<li>
 		<a href="$siteroot/${controller.getView()}/delete.castle?id=$!{item.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
 		  <span class="ui-button-icon-primary ui-icon ui-icon-trash"> </span>
@@ -6,4 +6,6 @@
 		  <span class="actionpropt">&#187;</span>
 		</a>
 	</li>
+#if($Controller.canEdit($item,$user.id) || $item.editing == $user || $item.isCheckedOutNull())
+    
 #end
