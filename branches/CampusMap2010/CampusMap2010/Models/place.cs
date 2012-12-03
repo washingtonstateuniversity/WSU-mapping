@@ -242,7 +242,7 @@ namespace campusMap.Models {
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class place_types : json_autocomplete<place_types>, campusMap.Models.Ijson_autocomplete {
-        private int place_type_id;
+
         [PrimaryKey("place_type_id")]
         virtual public int id { get; set; }
 
@@ -262,7 +262,7 @@ namespace campusMap.Models {
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class google_types : json_autocomplete<google_types>, campusMap.Models.Ijson_autocomplete {
-        private int google_type_id;
+
         [PrimaryKey("google_type_id")]
         virtual public int id { get; set; }
 
@@ -304,7 +304,7 @@ namespace campusMap.Models {
 
     [ActiveRecord(Lazy = true)]
     public class place_name_types {
-        private int type_id;
+
         [PrimaryKey("type_id")]
         virtual public int id { get; set; }
 
@@ -315,7 +315,7 @@ namespace campusMap.Models {
 
     [ActiveRecord(Lazy = true)]
     public class place_models : json_autocomplete<place_models>, campusMap.Models.Ijson_autocomplete {
-        private int place_model_id;
+
         [PrimaryKey("place_model_id")]
         virtual public int id { get; set; }
 
@@ -349,7 +349,7 @@ namespace campusMap.Models {
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class place_comments : ActiveRecordBase<place_comments> {
-        private int comment_id;
+
         [PrimaryKey("comment_id")]
         virtual public int id { get; set; }
 

@@ -713,7 +713,7 @@ function make_InfoWindow(jObj,i,marker){
 		  width: ($('#centralMap').width()<425?$('#centralMap').width()-25:400)+"px"
 		 }
 		,closeBoxHTML:"<span class='tabedBox infoClose'></span>"
-		,infoBoxClearance: ($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?new google.maps.Size(25,15):new google.maps.Size(75,50))
+		,infoBoxClearance: new google.maps.Size(75,60)
 		,isHidden: false
 		,pane: "floatPane"
 		,enableEventPropagation: false

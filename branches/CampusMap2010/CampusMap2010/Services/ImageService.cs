@@ -1,72 +1,62 @@
 #region Directives
-    using System;
-    using System.Data;
-    using System.Configuration;
-    using campusMap.Models;
-    using NHibernate.Criterion;
-    using System.Collections.Generic;
-    using Castle.ActiveRecord;
-    using System.Net;
-    using System.Text.RegularExpressions;
-    using System.IO;
-    using System.Web;
-    using MonoRailHelper;
-    using System.Xml;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Collections.Specialized;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Utilities;
-    using Newtonsoft.Json.Linq;
-    using campusMap.Services;
-    using log4net;
-    using log4net.Config;
+using System;
+using System.Data;
+using System.Configuration;
+using campusMap.Models;
+using NHibernate.Criterion;
+using System.Collections.Generic;
+using Castle.ActiveRecord;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Web;
+using MonoRailHelper;
+using System.Xml;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Utilities;
+using Newtonsoft.Json.Linq;
+using campusMap.Services;
+using log4net;
+using log4net.Config;
 #endregion
 
-namespace campusMap.Services
-{
-    public class ImageService
-	{
+namespace campusMap.Services {
+    public class ImageService {
         private static ILog log = log4net.LogManager.GetLogger("ImageService");
 
-		public enum Dimensions 
-		{
-			Width,
-			Height
-		}
-        public enum AnchorPosition
-		{
-			Top,
-			Center,
-			Bottom,
-			Left,
-			Right
-		}
-        public enum imageMethod
-        {
+        public enum Dimensions {
+            Width,
+            Height
+        }
+        public enum AnchorPosition {
+            Top,
+            Center,
+            Bottom,
+            Left,
+            Right
+        }
+        public enum imageMethod {
             Percent,
             Constrain,
             Fixed,
             Crop
         }
-        public static bool isUploadAJpeg(HttpPostedFile someFile)
-        {
-            if (someFile.ContentType == "image/jpg" || someFile.ContentType == "image/jpeg" || someFile.ContentType == "image/pjpeg")
-            {
+        public static bool isUploadAJpeg(HttpPostedFile someFile) {
+            if (someFile.ContentType == "image/jpg" || someFile.ContentType == "image/jpeg" || someFile.ContentType == "image/pjpeg") {
                 return true;
             }
             return false;
         }
 
 
-        public static bool isByteACMYK(Stream image)
-        {
-            using (StreamReader sr = new StreamReader(image))
-            {
+        public static bool isByteACMYK(Stream image) {
+            using (StreamReader sr = new StreamReader(image)) {
                 string contents = sr.ReadToEnd();
-                if (contents.ToLower().Contains("cmyk"))
-                {
+                if (contents.ToLower().Contains("cmyk")) {
                     return true;
                 }
             }
@@ -74,38 +64,30 @@ namespace campusMap.Services
         }
 
 
-        public static bool isFileACMYKJpeg(System.Drawing.Image image)
-        {
+        public static bool isFileACMYKJpeg(System.Drawing.Image image) {
             System.Drawing.Imaging.ImageFlags flagValues = (System.Drawing.Imaging.ImageFlags)Enum.Parse(typeof(System.Drawing.Imaging.ImageFlags), image.Flags.ToString());
-            if (flagValues.ToString().ToLower().IndexOf("ycck") == -1)
-            {
+            if (flagValues.ToString().ToLower().IndexOf("ycck") == -1) {
                 // based on http://www.maxostudio.com/Tut_CS_CMYK.cfm
 
                 bool ret = false;
-                try
-                {
+                try {
                     int cmyk = (image.Flags & (int)ImageFlags.ColorSpaceCmyk);
                     int ycck = (image.Flags & (int)ImageFlags.ColorSpaceYcck);
 
                     ret = ((cmyk > 0) || (ycck > 0));
-                }
-                catch (Exception ex)
-                {
+                } catch {
 
                 }
                 return ret;
             }
             return true;
         }
-        public static Boolean checkImg(string ext, Stream stream)
-        {
+        public static Boolean checkImg(string ext, Stream stream) {
             // Make a copy of the stream to stop the destrustion of the gif animation per
             // http://stackoverflow.com/questions/8763630/c-sharp-gif-image-to-memorystream-and-back-lose-animation
-            if (ext != "gif")
-            {
+            if (ext != "gif") {
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                if (isFileACMYKJpeg(img) || isByteACMYK(stream))
-                {
+                if (isFileACMYKJpeg(img) || isByteACMYK(stream)) {
                     //stream.Dispose();
                     return false;
                 }
@@ -116,13 +98,11 @@ namespace campusMap.Services
 
 
 
-/*  http handling  */
-        public static void CopyStream(Stream input, Stream output)
-        {
+        /*  http handling  */
+        public static void CopyStream(Stream input, Stream output) {
             byte[] buffer = new byte[32768];
             int read;
-            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-            {
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0) {
                 output.Write(buffer, 0, read);
             }
         }
@@ -131,8 +111,7 @@ namespace campusMap.Services
 
 
 
-        public static void saveIamge(int id, string NewFile, Image imgPhoto)
-        {
+        public static void saveIamge(int id, string NewFile, Image imgPhoto) {
             log.Info("saving photo to filepath: " + NewFile);
             // create a writer and open the file
             //campusMap.Services.LogService.writelog(" in saveIamge " + NewFile);
@@ -143,15 +122,13 @@ namespace campusMap.Services
             //if(HttpContext.Current!=null)ImageService.smushit(id, NewFile, GetMimeType(imgPhoto));
             imgPhoto.Dispose();
         }
-        public static void deleteTmpIamges(string image_path)
-        {
+        public static void deleteTmpIamges(string image_path) {
             log.Info("saving photo to filepath: " + image_path);
             // create a writer and open the file
             //campusMap.Services.LogService.writelog("Deleting Images: " + image_path);
             File.Delete(image_path);
         }
-        public void process(int id, Image OriginalFile, string NewFile, imageMethod method, int percent, int height, int width, Dimensions dimensions, bool protect, string mark, string ext)
-		{
+        public void process(int id, Image OriginalFile, string NewFile, imageMethod method, int percent, int height, int width, Dimensions dimensions, bool protect, string mark, string ext) {
             /* example usage
             imgPhoto = ScaleByPercent(imgPhotoVert, 50);
             imgPhoto = ConstrainProportions(imgPhotoVert, 200, Dimensions.Width);
@@ -160,26 +137,23 @@ namespace campusMap.Services
             imgPhoto = Crop(imgPhotoHoriz, 200, 200, AnchorPosition.Center);
             */
 
-            if (ext != "gif")
-            {
+            if (ext != "gif") {
                 // Prevent using images internal thumbnail
                 OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
                 OriginalFile.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
             }
-			Image imgPhoto = null;
+            Image imgPhoto = null;
             ImageFormat type = get_image_type(OriginalFile);
 
 
             //check to see if the image need protection from sizing up
-            if (protect && !protectSize(OriginalFile, width, height, true))
-            {
+            if (protect && !protectSize(OriginalFile, width, height, true)) {
                 saveIamge(id, NewFile, OriginalFile); // save image
                 return;
             }
             log.Info(" in process pre size" + NewFile);
             //campusMap.Services.LogService.writelog(" in process pre size" + NewFile);
-            switch (method)
-            {
+            switch (method) {
                 case imageMethod.Percent: imgPhoto = ScaleByPercent(OriginalFile, percent); break;
 
                 case imageMethod.Constrain: imgPhoto = ConstrainProportions(OriginalFile, width != 0 ? width : height, dimensions); break;
@@ -188,32 +162,28 @@ namespace campusMap.Services
 
                 case imageMethod.Crop: imgPhoto = Crop(OriginalFile, width, height, AnchorPosition.Center); break;
             }
-            if(!String.IsNullOrEmpty(mark)){
-                imgPhoto=watermakerIt(imgPhoto,id,mark);
+            if (!String.IsNullOrEmpty(mark)) {
+                imgPhoto = watermakerIt(imgPhoto, id, mark);
             }
             log.Info(" in process postsize" + NewFile);
-            
+
             //campusMap.Services.LogService.writelog(" in process postsize" + NewFile);
 
             saveIamge(id, NewFile, imgPhoto); // save image
         }
 
         #region GET MIME TYPEs as needed
-        public static string GetMimeType(Image i)
-        {
+        public static string GetMimeType(Image i) {
             Guid imgguid = i.RawFormat.Guid;
-            foreach (ImageCodecInfo codec in ImageCodecInfo.GetImageDecoders())
-            {
+            foreach (ImageCodecInfo codec in ImageCodecInfo.GetImageDecoders()) {
                 if (codec.FormatID == imgguid)
                     return codec.MimeType;
             }
             return "image/unknown";
         }
-        public static string mimeFinder(string ext)
-        {
+        public static string mimeFinder(string ext) {
             String contentType = "applicaton/image";
-            switch (ext.ToLower())
-            {
+            switch (ext.ToLower()) {
                 case "gif":
                     contentType = "image/gif";
                     break;
@@ -238,27 +208,17 @@ namespace campusMap.Services
             }
             return contentType;
         }
-        static ImageFormat get_image_type(Image imgPhoto)
-        {
+        static ImageFormat get_image_type(Image imgPhoto) {
             ImageFormat imageFormat = imgPhoto.RawFormat;
-            if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
-            {
+            if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg)) {
                 return ImageFormat.Jpeg;
-            }
-            else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Png))
-            {
+            } else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Png)) {
                 return ImageFormat.Png;
-            }
-            else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Gif))
-            {
+            } else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Gif)) {
                 return ImageFormat.Gif;
-            }
-            else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Tiff))
-            {
+            } else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Tiff)) {
                 return ImageFormat.Tiff;
-            }
-            else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Bmp))
-            {
+            } else if (imgPhoto.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Bmp)) {
                 return ImageFormat.Bmp;
             }
             return null;
@@ -266,216 +226,198 @@ namespace campusMap.Services
         #endregion
 
         #region Image sizing routins
-        static Boolean protectSize(Image OriginalFile, int MaxWidth, int MaxHeight, bool onBoth)
-        {
-            if ((OriginalFile.Height <= MaxWidth && OriginalFile.Width <= MaxWidth) && onBoth)
-            {
+        static Boolean protectSize(Image OriginalFile, int MaxWidth, int MaxHeight, bool onBoth) {
+            if ((OriginalFile.Height <= MaxWidth && OriginalFile.Width <= MaxWidth) && onBoth) {
                 return false;
             }
-            if (OriginalFile.Height <= MaxWidth)
-            {
+            if (OriginalFile.Height <= MaxWidth) {
                 return false;
             }
-            if (OriginalFile.Width <= MaxWidth)
-            {
+            if (OriginalFile.Width <= MaxWidth) {
                 return false;
             }
             return true;
         }
-        static Image ScaleByPercent(Image imgPhoto, int Percent)
-		{
-			float nPercent = ((float)Percent/100);
+        static Image ScaleByPercent(Image imgPhoto, int Percent) {
+            float nPercent = ((float)Percent / 100);
 
-			int sourceWidth = imgPhoto.Width;
-			int sourceHeight = imgPhoto.Height;
-			int sourceX = 0;
-			int sourceY = 0;
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int sourceX = 0;
+            int sourceY = 0;
 
-			int destX = 0;
-			int destY = 0; 
-			int destWidth  = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
+            int destX = 0;
+            int destY = 0;
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
 
-			Bitmap bmPhoto = new Bitmap(destWidth, destHeight, PixelFormat.Format24bppRgb);
-			bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+            Bitmap bmPhoto = new Bitmap(destWidth, destHeight, PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
 
-			Graphics grPhoto = Graphics.FromImage(bmPhoto);
-			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-			grPhoto.DrawImage(imgPhoto, 
-				new Rectangle(destX,destY,destWidth,destHeight),
-				new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
-				GraphicsUnit.Pixel);
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
+                GraphicsUnit.Pixel);
 
-			grPhoto.Dispose();
-			return bmPhoto;
-		}
-		static Image ConstrainProportions(Image imgPhoto, int Size, Dimensions Dimension)
-		{
+            grPhoto.Dispose();
+            return bmPhoto;
+        }
+        static Image ConstrainProportions(Image imgPhoto, int Size, Dimensions Dimension) {
             log.Info(" in ConstrainProportions ");
             //campusMap.Services.LogService.writelog(" in ConstrainProportions ");
-			int sourceWidth = imgPhoto.Width;
-			int sourceHeight = imgPhoto.Height;
-			int sourceX = 0;
-			int sourceY = 0;
-			int destX = 0;
-			int destY = 0; 
-			float nPercent = 0;
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int sourceX = 0;
+            int sourceY = 0;
+            int destX = 0;
+            int destY = 0;
+            float nPercent = 0;
 
-			switch(Dimension)
-			{
-				case Dimensions.Width:
-					nPercent = ((float)Size/(float)sourceWidth);
-					break;
-				default:
-					nPercent = ((float)Size/(float)sourceHeight);
-					break;
-			}
-				
-			int destWidth  = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
+            switch (Dimension) {
+                case Dimensions.Width:
+                    nPercent = ((float)Size / (float)sourceWidth);
+                    break;
+                default:
+                    nPercent = ((float)Size / (float)sourceHeight);
+                    break;
+            }
 
-			Bitmap bmPhoto = new Bitmap(destWidth, destHeight, PixelFormat.Format24bppRgb);
-			bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
 
-			Graphics grPhoto = Graphics.FromImage(bmPhoto);
-			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            Bitmap bmPhoto = new Bitmap(destWidth, destHeight, PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
             log.Info(" in ConstrainProportions mid drawing:");
             //campusMap.Services.LogService.writelog(" in ConstrainProportions mid drawing:" );
-			grPhoto.DrawImage(imgPhoto,
+            grPhoto.DrawImage(imgPhoto,
                 new Rectangle(destX - 1, destY - 1, destWidth + 1, destHeight + 1),
                 new Rectangle(sourceX, sourceY, sourceWidth - 1, sourceHeight - 1),
-               // new Rectangle(destX,destY,destWidth,destHeight),
-               // new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
+                // new Rectangle(destX,destY,destWidth,destHeight),
+                // new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
                 GraphicsUnit.Pixel);
             log.Info(" in ConstrainProportions before Dispose ");
             //campusMap.Services.LogService.writelog(" in ConstrainProportions before Dispose");
-			//grPhoto.Dispose();
-			return bmPhoto;
-            
+            //grPhoto.Dispose();
+            return bmPhoto;
 
 
-                            
 
 
-		}
-		static Image FixedSize(Image imgPhoto, int Width, int Height)
-		{
-			int sourceWidth = imgPhoto.Width;
-			int sourceHeight = imgPhoto.Height;
-			int sourceX = 0;
-			int sourceY = 0;
-			int destX = 0;
-			int destY = 0; 
 
-			float nPercent = 0;
-			float nPercentW = 0;
-			float nPercentH = 0;
 
-			nPercentW = ((float)Width/(float)sourceWidth);
-			nPercentH = ((float)Height/(float)sourceHeight);
+        }
+        static Image FixedSize(Image imgPhoto, int Width, int Height) {
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int sourceX = 0;
+            int sourceY = 0;
+            int destX = 0;
+            int destY = 0;
 
-			//if we have to pad the height pad both the top and the bottom
-			//with the difference between the scaled height and the desired height
-			if(nPercentH < nPercentW)
-			{
-				nPercent = nPercentH;
-				destX = (int)((Width - (sourceWidth * nPercent))/2);
-			}
-			else
-			{
-				nPercent = nPercentW;
-				destY = (int)((Height - (sourceHeight * nPercent))/2);
-			}
-		
-			int destWidth  = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
 
-			Bitmap bmPhoto = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
-			bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+            nPercentW = ((float)Width / (float)sourceWidth);
+            nPercentH = ((float)Height / (float)sourceHeight);
 
-			Graphics grPhoto = Graphics.FromImage(bmPhoto);
-			grPhoto.Clear(Color.Red);
-			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //if we have to pad the height pad both the top and the bottom
+            //with the difference between the scaled height and the desired height
+            if (nPercentH < nPercentW) {
+                nPercent = nPercentH;
+                destX = (int)((Width - (sourceWidth * nPercent)) / 2);
+            } else {
+                nPercent = nPercentW;
+                destY = (int)((Height - (sourceHeight * nPercent)) / 2);
+            }
 
-			grPhoto.DrawImage(imgPhoto, 
-				new Rectangle(destX,destY,destWidth,destHeight),
-				new Rectangle(sourceX,sourceY,sourceWidth,sourceHeight),
-				GraphicsUnit.Pixel);
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
 
-			grPhoto.Dispose();
-			return bmPhoto;
-		}
-		static Image Crop(Image imgPhoto, int Width, int Height, AnchorPosition Anchor)
-		{
-			int sourceWidth = imgPhoto.Width;
-			int sourceHeight = imgPhoto.Height;
-			int sourceX = 0;
-			int sourceY = 0;
-			int destX = 0;
-			int destY = 0;
+            Bitmap bmPhoto = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
 
-			float nPercent = 0;
-			float nPercentW = 0;
-			float nPercentH = 0;
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.Clear(Color.Red);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-			nPercentW = ((float)Width/(float)sourceWidth);
-			nPercentH = ((float)Height/(float)sourceHeight);
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
+                GraphicsUnit.Pixel);
 
-			if(nPercentH < nPercentW)
-			{
-				nPercent = nPercentW;
-				switch(Anchor)
-				{
-					case AnchorPosition.Top:
-						destY = 0;
-						break;
-					case AnchorPosition.Bottom:
-						destY = (int)(Height - (sourceHeight * nPercent));
-						break;
-					default:
-						destY = (int)((Height - (sourceHeight * nPercent))/2);
-						break;
-				}				
-			}
-			else
-			{
-				nPercent = nPercentH;
-				switch(Anchor)
-				{
-					case AnchorPosition.Left:
-						destX = 0;
-						break;
-					case AnchorPosition.Right:
-						destX = (int)(Width - (sourceWidth * nPercent));
-						break;
-					default:
-						destX = (int)((Width - (sourceWidth * nPercent))/2);
-						break;
-				}			
-			}
+            grPhoto.Dispose();
+            return bmPhoto;
+        }
+        static Image Crop(Image imgPhoto, int Width, int Height, AnchorPosition Anchor) {
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int sourceX = 0;
+            int sourceY = 0;
+            int destX = 0;
+            int destY = 0;
 
-			int destWidth  = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
 
-			Bitmap bmPhoto = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
-			bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+            nPercentW = ((float)Width / (float)sourceWidth);
+            nPercentH = ((float)Height / (float)sourceHeight);
 
-			Graphics grPhoto = Graphics.FromImage(bmPhoto);
-			grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            if (nPercentH < nPercentW) {
+                nPercent = nPercentW;
+                switch (Anchor) {
+                    case AnchorPosition.Top:
+                        destY = 0;
+                        break;
+                    case AnchorPosition.Bottom:
+                        destY = (int)(Height - (sourceHeight * nPercent));
+                        break;
+                    default:
+                        destY = (int)((Height - (sourceHeight * nPercent)) / 2);
+                        break;
+                }
+            } else {
+                nPercent = nPercentH;
+                switch (Anchor) {
+                    case AnchorPosition.Left:
+                        destX = 0;
+                        break;
+                    case AnchorPosition.Right:
+                        destX = (int)(Width - (sourceWidth * nPercent));
+                        break;
+                    default:
+                        destX = (int)((Width - (sourceWidth * nPercent)) / 2);
+                        break;
+                }
+            }
 
-			grPhoto.DrawImage(imgPhoto,
-                new Rectangle(destX - 1, destY - 1, destWidth + 1, destHeight+1),
-				new Rectangle(sourceX,sourceY,sourceWidth - 1,sourceHeight - 1),
-				GraphicsUnit.Pixel);
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
 
-			grPhoto.Dispose();
-			return bmPhoto;
+            Bitmap bmPhoto = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
+
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX - 1, destY - 1, destWidth + 1, destHeight + 1),
+                new Rectangle(sourceX, sourceY, sourceWidth - 1, sourceHeight - 1),
+                GraphicsUnit.Pixel);
+
+            grPhoto.Dispose();
+            return bmPhoto;
         }
 
 
-        static Image watermakerIt(Image imgPhoto, int img_id, string mark)
-        {
+        static Image watermakerIt(Image imgPhoto, int img_id, string mark) {
 
             //create a image object containing the photograph to watermark
             int phWidth = imgPhoto.Width;
@@ -532,8 +474,7 @@ namespace campusMap.Services
 
             //Loop through the defined sizes checking the length of the Copyright string
             //If its length in pixles is less then the image width choose this Font size.
-            for (int i = 0; i < 7; i++)
-            {
+            for (int i = 0; i < 7; i++) {
                 //set a Font object to Arial (i)pt, Bold
                 crFont = new Font("arial", sizes[i], FontStyle.Bold);
                 //Measure the Copyright string in this Font
@@ -660,33 +601,29 @@ namespace campusMap.Services
 
         #endregion
 
-        public static bool smushit(int id, string image_name, String mimeType){
+        public static bool smushit(int id, string image_name, String mimeType) {
             // sent file to yahoo
             string url = "http://www.smushit.com/ysmush.it/ws.php?";// "http://www.smushit.com/ysmush.it/ws.php?";
             log.Info("trying smushit" + image_name);
             //reset the .ext file name
             media_repo image = ActiveRecordBase<media_repo>.Find(id);
 
-            string orgFile=image_name;
-            image_name = Regex.Replace(image_name, ".ext", "."+image.ext, RegexOptions.IgnoreCase);
+            string orgFile = image_name;
+            image_name = Regex.Replace(image_name, ".ext", "." + image.ext, RegexOptions.IgnoreCase);
 
-            File.Copy(orgFile,image_name, true);
+            File.Copy(orgFile, image_name, true);
 
             NameValueCollection nvc = new NameValueCollection();
             //nvc.Add("id", "TTR");
             //nvc.Add("btn-submit-photo", "Upload");
             string yurl = "";
-            try
-            {
+            try {
                 String responseData = HttpUploadFile(url, image_name, "files", mimeFinder(image.ext), nvc);
                 JObject obj = JObject.Parse(responseData);
                 yurl = (string)obj["dest"]; // what is the path?
+            } catch {
             }
-            catch
-            {
-            }
-            if (!String.IsNullOrEmpty(yurl))
-            {
+            if (!String.IsNullOrEmpty(yurl)) {
                 log.Info("did smushit" + yurl);
                 byte[] imagebytes = DownloadBinary(yurl);
                 ByteArrayToFile(image_name, imagebytes);
@@ -694,9 +631,7 @@ namespace campusMap.Services
                 //File.Delete(image_name);
                 deleteTmpIamges(image_name);
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
@@ -708,10 +643,8 @@ namespace campusMap.Services
         /// <param name="_FileName">File name to save byte array</param>
         /// <param name="_ByteArray">Byte array to save to external file</param>
         /// <returns>Return true if byte array save successfully, if not return false</returns>
-        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
-        {
-            try
-            {
+        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray) {
+            try {
                 // Open file for reading
                 System.IO.FileStream _FileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
 
@@ -722,9 +655,7 @@ namespace campusMap.Services
                 _FileStream.Close();
 
                 return true;
-            }
-            catch (Exception _Exception)
-            {
+            } catch (Exception _Exception) {
                 // Error
                 Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
             }
@@ -733,8 +664,7 @@ namespace campusMap.Services
             return false;
         }
 
-        public static String HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc)
-        {
+        public static String HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc) {
             //log.Debug(string.Format("Uploading {0} to {1}", file, url));
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
@@ -748,8 +678,7 @@ namespace campusMap.Services
             Stream rs = wr.GetRequestStream();
 
             string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
-            foreach (string key in nvc.Keys)
-            {
+            foreach (string key in nvc.Keys) {
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 string formitem = string.Format(formdataTemplate, key, nvc[key]);
                 byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
@@ -765,8 +694,7 @@ namespace campusMap.Services
             FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
             byte[] buffer = new byte[4096];
             int bytesRead = 0;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            {
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0) {
                 rs.Write(buffer, 0, bytesRead);
             }
             fileStream.Close();
@@ -776,8 +704,7 @@ namespace campusMap.Services
             rs.Close();
 
             WebResponse wresp = null;
-            try
-            {
+            try {
                 wresp = wr.GetResponse();
                 Stream stream2 = wresp.GetResponseStream();
                 StreamReader reader2 = new StreamReader(stream2);
@@ -786,30 +713,23 @@ namespace campusMap.Services
 
                 //log.Debug(string.Format("File uploaded, server response is: {0}", reader2.ReadToEnd()));
 
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 log.Error("Error uploading file", ex);
-                if (wresp != null)
-                {
+                if (wresp != null) {
                     wresp.Close();
                     wresp = null;
                 }
                 return "false";
 
-            }
-            finally
-            {
+            } finally {
                 wr = null;
             }
             //return "false";
         }
 
-        public static byte[] DownloadBinary(string url)
-        {
+        public static byte[] DownloadBinary(string url) {
             byte[] image;
-            using (WebClient wc = new WebClient())
-            {
+            using (WebClient wc = new WebClient()) {
                 wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)");
                 image = wc.DownloadData(url);
             }
@@ -818,43 +738,39 @@ namespace campusMap.Services
             return image;
         }
 
-        public static Image DownloadImage(string _URL)
-            {
-                Image _tmpImage = null;
+        public static Image DownloadImage(string _URL) {
+            Image _tmpImage = null;
 
-                try
-                {
-                    // Open a connection
-                    System.Net.HttpWebRequest _HttpWebRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(_URL);
+            try {
+                // Open a connection
+                System.Net.HttpWebRequest _HttpWebRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(_URL);
 
-                    _HttpWebRequest.AllowWriteStreamBuffering = true;
+                _HttpWebRequest.AllowWriteStreamBuffering = true;
 
-                    // You can also specify additional header values like the user agent or the referer: (Optional)
-                    _HttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)";
-                    _HttpWebRequest.Referer = "http://www.google.com/";
+                // You can also specify additional header values like the user agent or the referer: (Optional)
+                _HttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)";
+                _HttpWebRequest.Referer = "http://www.google.com/";
 
-                    // set timeout for 20 seconds (Optional)
-                    _HttpWebRequest.Timeout = 20000;
+                // set timeout for 20 seconds (Optional)
+                _HttpWebRequest.Timeout = 20000;
 
-                    // Request response:
-                    System.Net.WebResponse _WebResponse = _HttpWebRequest.GetResponse();
+                // Request response:
+                System.Net.WebResponse _WebResponse = _HttpWebRequest.GetResponse();
 
-                    // Open data stream:
-                    System.IO.Stream _WebStream = _WebResponse.GetResponseStream();
+                // Open data stream:
+                System.IO.Stream _WebStream = _WebResponse.GetResponseStream();
 
-                    // convert webstream to image
-                    _tmpImage = Image.FromStream(_WebStream);
+                // convert webstream to image
+                _tmpImage = Image.FromStream(_WebStream);
 
-                    // Cleanup
-                    _WebResponse.Close();
-                    _WebResponse.Close();
-                }
-                catch (Exception _Exception)
-                {
-                    // Error
-                    Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
-                    return null;
-                }
+                // Cleanup
+                _WebResponse.Close();
+                _WebResponse.Close();
+            } catch (Exception _Exception) {
+                // Error
+                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+                return null;
+            }
 
             return _tmpImage;
         }

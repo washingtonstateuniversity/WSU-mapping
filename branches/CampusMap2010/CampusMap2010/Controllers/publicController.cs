@@ -1138,7 +1138,7 @@ namespace campusMap.Controllers {
 
                         string file = item.id + "_centralplace" + ".ext";
                         if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
-                            dynamic value;
+                            //dynamic value;
                             var jss = new JavaScriptSerializer();
                             string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
 

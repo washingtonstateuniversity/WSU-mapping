@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class infotabs : ActiveRecordBase<infotabs> {
-        private int infotab_id;
+
         [PrimaryKey("infotab_id")]
         virtual public int id { get; set; }
 
@@ -37,7 +37,7 @@ namespace campusMap.Models {
     }
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class infotabs_templates : publish_base {
-        private int template_id;
+
         [PrimaryKey("template_id")]
         virtual public int id { get; set; }
 
