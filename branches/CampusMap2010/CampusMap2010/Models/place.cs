@@ -216,7 +216,7 @@ namespace campusMap.Models {
 
         private IList<users> _authors = new List<users>();
         [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_place", ColumnKey = "place_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<users> Authors {
+        virtual public IList<users> authors {
             get { return _authors; }
             set { _authors = value; }
         }
@@ -244,148 +244,89 @@ namespace campusMap.Models {
     public class place_types : json_autocomplete<place_types>, campusMap.Models.Ijson_autocomplete {
         private int place_type_id;
         [PrimaryKey("place_type_id")]
-        virtual public int id {
-            get { return place_type_id; }
-            set { place_type_id = value; }
-        }
-        private string _name;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public string name {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private string _friendly;
+        virtual public string name { get; set; }
+
         [Property("friendly_name")]
-        virtual public string friendly {
-            get { return _friendly; }
-            set { _friendly = value; }
-        }
-        private IList<place> _places;
+        virtual public string friendly { get; set; }
+
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_place_types", ColumnKey = "place_type_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> places {
-            get { return _places; }
-            set { _places = value; }
-        }
-        private IList<google_types> _type;
+        virtual public IList<place> places { get; set; }
+
         [HasAndBelongsToMany(typeof(google_types), Lazy = true, Table = "google_types_to_place_types", ColumnKey = "google_type_id", ColumnRef = "place_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<google_types> google_type {
-            get { return _type; }
-            set { _type = value; }
-        }
+        virtual public IList<google_types> google_type { get; set; }
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class google_types : json_autocomplete<google_types>, campusMap.Models.Ijson_autocomplete {
         private int google_type_id;
         [PrimaryKey("google_type_id")]
-        virtual public int id {
-            get { return google_type_id; }
-            set { google_type_id = value; }
-        }
+        virtual public int id { get; set; }
 
-        private string Name;
         [Property]
-        virtual public string name {
-            get { return Name; }
-            set { Name = value; }
-        }
-        private IList<place_types> _type;
+        virtual public string name { get; set; }
+
         [HasAndBelongsToMany(typeof(place_types), Lazy = true, Table = "google_types_to_place_types", ColumnKey = "google_type_id", ColumnRef = "place_type_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place_types> place_type {
-            get { return _type; }
-            set { _type = value; }
-        }
+        virtual public IList<place_types> place_type { get; set; }
 
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 3)]
     public class place_status {
-        private int id;
+
         [PrimaryKey]
-        virtual public int Id {
-            get { return id; }
-            set { id = value; }
-        }
-        private String title;
+        virtual public int Id { get; set; }
+
         [Property]
-        virtual public String Title {
-            get { return title; }
-            set { title = value; }
-        }
+        virtual public String Title { get; set; }
+
     }
 
     [ActiveRecord(Lazy = true)]
     public class place_names {
-        private int name_id;
+
         [PrimaryKey("name_id")]
-        virtual public int id {
-            get { return name_id; }
-            set { name_id = value; }
-        }
-        private int Place_Id;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public int place_id {
-            get { return Place_Id; }
-            set { Place_Id = value; }
-        }
-        private String Name;
+        virtual public int place_id { get; set; }
+
         [Property]
-        virtual public String name {
-            get { return Name; }
-            set { Name = value; }
-        }
-        private place_name_types _label;
+        virtual public String name { get; set; }
+
         [BelongsTo]
-        virtual public place_name_types label {
-            get { return _label; }
-            set { _label = value; }
-        }
+        virtual public place_name_types label { get; set; }
+
     }
 
     [ActiveRecord(Lazy = true)]
     public class place_name_types {
         private int type_id;
         [PrimaryKey("type_id")]
-        virtual public int id {
-            get { return type_id; }
-            set { type_id = value; }
-        }
-        private string _type;
+        virtual public int id { get; set; }
+
         [Property]
-        virtual public string type {
-            get { return _type; }
-            set { _type = value; }
-        }
+        virtual public string type { get; set; }
+
     }
 
     [ActiveRecord(Lazy = true)]
     public class place_models : json_autocomplete<place_models>, campusMap.Models.Ijson_autocomplete {
         private int place_model_id;
         [PrimaryKey("place_model_id")]
-        virtual public int id {
-            get { return place_model_id; }
-            set { place_model_id = value; }
-        }
+        virtual public int id { get; set; }
 
-        private string Name;
         [Property]
-        virtual public string name {
-            get { return Name; }
-            set { Name = value; }
-        }
+        virtual public string name { get; set; }
 
-        private string Attr;
         [Property]
-        virtual public string attr {
-            get { return Attr; }
-            set { Attr = value; }
-        }
-        private IList<place> places;
+        virtual public string attr { get; set; }
+
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_place_models", ColumnKey = "place_model_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
-        virtual public IList<place> Places {
-            get { return places; }
-            set { places = value; }
-        }
+        virtual public IList<place> Places { get; set; }
 
     }
 
@@ -393,113 +334,61 @@ namespace campusMap.Models {
     public class place_media : ActiveRecordBase<place_media> {
         private int id;
         [PrimaryKey]
-        virtual public int Id {
-            get { return id; }
-            set { id = value; }
-        }
+        virtual public int Id { get; set; }
 
-        private place place;
         [BelongsTo("place_id")]
-        virtual public place Place {
-            get { return place; }
-            set { place = value; }
-        }
-        private media_repo media;
+        virtual public place Place { get; set; }
+
         [BelongsTo("media_id")]
-        virtual public media_repo Media {
-            get { return media; }
-            set { media = value; }
-        }
-        private int order;
+        virtual public media_repo Media { get; set; }
+
         [Property]
-        virtual public int place_order {
-            get { return order; }
-            set { order = value; }
-        }
+        virtual public int place_order { get; set; }
+
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class place_comments : ActiveRecordBase<place_comments> {
         private int comment_id;
         [PrimaryKey("comment_id")]
-        virtual public int id {
-            get { return comment_id; }
-            set { comment_id = value; }
-        }
-        private string comments;
-        [Property]
-        virtual public string Comments {
-            get { return comments; }
-            set { comments = value; }
-        }
-        private bool publish;
-        [Property]
-        virtual public bool published {
-            get { return publish; }
-            set { publish = value; }
-        }
+        virtual public int id { get; set; }
 
-        private bool flagged;
         [Property]
-        virtual public bool Flagged {
-            get { return flagged; }
-            set { flagged = value; }
-        }
-        private int flagnumber;
-        [Property]
-        virtual public int FlagNumber {
-            get { return flagnumber; }
-            set { flagnumber = value; }
-        }
-        private bool adminread;
-        [Property]
-        virtual public bool adminRead {
-            get { return adminread; }
-            set { adminread = value; }
-        }
-        private DateTime createTime;
-        [Property]
-        virtual public DateTime CreateTime {
-            get { return createTime; }
-            set { createTime = value; }
-        }
-        private DateTime updateTime;
-        [Property]
-        virtual public DateTime UpdateTime {
-            get { return updateTime; }
-            set { updateTime = value; }
-        }
-        private bool deleted;
-        [Property]
-        virtual public bool Deleted {
-            get { return deleted; }
-            set { deleted = value; }
-        }
-        private string nid;
-        [Property]
-        virtual public string Nid {
-            get { return nid; }
-            set { nid = value; }
-        }
+        virtual public string Comments { get; set; }
 
-        private string commentorname;
         [Property]
-        virtual public string commentorName {
-            get { return commentorname; }
-            set { commentorname = value; }
-        }
-        private string email;
+        virtual public bool published { get; set; }
+
         [Property]
-        virtual public string Email {
-            get { return email; }
-            set { email = value; }
-        }
-        private place Place;
+        virtual public bool Flagged { get; set; }
+
+        [Property]
+        virtual public int FlagNumber { get; set; }
+
+        [Property]
+        virtual public bool adminRead { get; set; }
+
+        [Property]
+        virtual public DateTime CreateTime { get; set; }
+
+        [Property]
+        virtual public DateTime UpdateTime { get; set; }
+
+        [Property]
+        virtual public bool Deleted { get; set; }
+
+        [Property]
+        virtual public string Nid { get; set; }
+
+        [Property]
+        virtual public string commentorName { get; set; }
+
+        [Property]
+        virtual public string Email { get; set; }
+
         [BelongsTo]
-        virtual public place place {
-            get { return Place; }
-            set { Place = value; }
-        }
+        virtual public place place { get; set; }
+
     }
 }
 

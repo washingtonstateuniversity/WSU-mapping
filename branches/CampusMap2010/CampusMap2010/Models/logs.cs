@@ -1,12 +1,7 @@
 using System;
 using System.Data;
 using System.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
+
 using NHibernate.Criterion;
 using Castle.ActiveRecord;
 using System.Collections;
@@ -14,11 +9,9 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using campusMap.Services;
 
-namespace campusMap.Models
-{
+namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 10)]
-    public class logs : ActiveRecordBase<logs>
-    {
+    public class logs : ActiveRecordBase<logs> {
         [PrimaryKey("log_id")]
         virtual public int id { get; set; }
 
@@ -46,13 +39,10 @@ namespace campusMap.Models
 
         private DateTime? _logdate;
         [Property("dtOfLog")]
-        virtual public DateTime? date
-        {
+        virtual public DateTime? date {
             get { return _logdate; }
-            set
-            {
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
-                {
+            set {
+                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue)) {
                     // bla is a valid sql datetime
                     _logdate = value;
 

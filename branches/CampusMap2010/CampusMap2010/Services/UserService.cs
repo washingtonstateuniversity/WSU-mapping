@@ -143,7 +143,12 @@ namespace campusMap.Services {
         }
 
 
-
+        public Boolean hasGroup(String group) {
+            return hasGroup (group, UserService.getUser());
+        }
+        public Boolean hasGroup(String group, users user){
+            return group == user.groups.name;
+        }
 
 
         public static Boolean isActive(users user) {

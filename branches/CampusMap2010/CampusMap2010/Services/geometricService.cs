@@ -1,57 +1,52 @@
 #region Directives
-    using System;
-    using System.Data;
-    using System.Configuration;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.IO;
-    using System.Net;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Xml;
-    using System.Web;
-    using System.Web.Security;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using System.Web.UI.WebControls.WebParts;
-    using System.Web.UI.HtmlControls;
-    using System.Data.SqlTypes;
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data.SqlTypes;
 
-    using Microsoft.SqlServer.Types;
+using Microsoft.SqlServer.Types;
 
-    using NHibernate.Criterion;
-    using Castle.ActiveRecord;
-    using Castle.ActiveRecord.Queries;
-    using MonoRailHelper;
+using NHibernate.Criterion;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Queries;
+using MonoRailHelper;
 
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Utilities;
-    using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Utilities;
+using Newtonsoft.Json.Linq;
 
-    using log4net;
-    using log4net.Config;
+using log4net;
+using log4net.Config;
 
-    using campusMap.Models;
-    using campusMap.Services;
+using campusMap.Models;
+using campusMap.Services;
 #endregion
-namespace campusMap.Services
-{
-    public class geometricService
-    {
-        public string getShapeLatLng_json_str(int id, bool showOnlyEncoded)
-        {
-            if (showOnlyEncoded == null){ showOnlyEncoded = true;}
+namespace campusMap.Services {
+    public class geometricService {
+        public string getShapeLatLng_json_str(int id, bool showOnlyEncoded) {
+            if (showOnlyEncoded == null) { showOnlyEncoded = true; }
             string gem = "";
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            if (geometric.boundary != null)
-            {
+            if (geometric.boundary != null) {
                 SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
                 string sp_type = spatial.STGeometryType().ToString().ToUpper();
-                switch (sp_type)
-                {
+                switch (sp_type) {
                     case "POINT":
                         gem = outputRawPoint(spatial);
                         break;
@@ -73,11 +68,11 @@ namespace campusMap.Services
             shape += @"
                 {";
             String shapeOptions = "";
-                shapeOptions += @"       ""name"":""" + geometric.name + @""",";
-                //shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
-                shapeOptions += @"       ""encoded"":""" + geometric.encoded + @""",";
-                shapeOptions += (geometric.style.Count > 0 ? @"      ""style"":" + geometric.style[0].style_obj + @"," : "");
-                shapeOptions += @"      ""type"":""" + geometric.default_type.name + @"""";
+            shapeOptions += @"       ""name"":""" + geometric.name + @""",";
+            //shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
+            shapeOptions += @"       ""encoded"":""" + geometric.encoded + @""",";
+            shapeOptions += (geometric.style.Count > 0 ? @"      ""style"":" + geometric.style[0].style_obj + @"," : "");
+            shapeOptions += @"      ""type"":""" + geometric.default_type.name + @"""";
 
             shape += shapeOptions;
             shape += @"
@@ -195,21 +190,18 @@ namespace campusMap.Services
 
                }*/
 
-        public XmlElement createPoint(XmlDocument kmlDoc, SqlGeography shape, String Z)
-        {
+        public XmlElement createPoint(XmlDocument kmlDoc, SqlGeography shape, String Z) {
             XmlElement pointNode = kmlDoc.CreateElement("Point");
             XmlElement coordsNode = kmlDoc.CreateElement("coordinates");
             coordsNode.InnerText = string.Format("{0},{1},{2}", shape.Lat.ToString(), shape.Long.ToString(), Z);
             pointNode.AppendChild(coordsNode);
             return pointNode;
         }
-        public XmlElement createLineString(XmlDocument kmlDoc, SqlGeography shape, String Z)
-        {
+        public XmlElement createLineString(XmlDocument kmlDoc, SqlGeography shape, String Z) {
             XmlElement lineStringNode = kmlDoc.CreateElement("LineString");
             XmlElement coordsNode = kmlDoc.CreateElement("coordinates");
             StringBuilder coordsString = new StringBuilder("");
-            for (int i = 1; i <= shape.STNumPoints(); i++)
-            {
+            for (int i = 1; i <= shape.STNumPoints(); i++) {
                 coordsString.Append(string.Format("{0},{1},{2}", shape.STPointN(i).Long.ToString(), shape.STPointN(i).Lat.ToString(), Z));
                 coordsString.Append(Environment.NewLine);
             }
@@ -217,8 +209,7 @@ namespace campusMap.Services
             lineStringNode.AppendChild(coordsNode);
             return lineStringNode;
         }
-        public XmlElement createPolygon(XmlDocument kmlDoc, SqlGeography shape, String Z)
-        {
+        public XmlElement createPolygon(XmlDocument kmlDoc, SqlGeography shape, String Z) {
             XmlElement polygonNode = kmlDoc.CreateElement("Polygon");
 
             XmlElement extrudeNode = kmlDoc.CreateElement("extrude");
@@ -239,8 +230,7 @@ namespace campusMap.Services
 
             XmlElement coordsNode = kmlDoc.CreateElement("coordinates");
             StringBuilder coordsString = new StringBuilder("");
-            for (int k = 1; k <= shape.RingN(1).STNumPoints(); k++)
-            {
+            for (int k = 1; k <= shape.RingN(1).STNumPoints(); k++) {
                 coordsString.Append(string.Format("{0},{1},{2}", shape.RingN(1).STPointN(k).Long.ToString(), shape.RingN(1).STPointN(k).Lat.ToString(), Z));
                 coordsString.Append(Environment.NewLine);
             }
@@ -248,34 +238,27 @@ namespace campusMap.Services
             linearRingNode.AppendChild(coordsNode);
             return polygonNode;
         }
-        public bool IsReusable
-        {
-            get
-            {
+        public bool IsReusable {
+            get {
                 return false;
             }
         }
-        public string outputRawPolygon(SqlGeography shape)
-        {
+        public string outputRawPolygon(SqlGeography shape) {
             StringBuilder coordsString = new StringBuilder("");
-            for (int k = 1; k <= shape.RingN(1).STNumPoints(); k++)
-            {
+            for (int k = 1; k <= shape.RingN(1).STNumPoints(); k++) {
                 coordsString.Append(string.Format("{0},{1},{2}", shape.RingN(1).STPointN(k).Long.ToString(), shape.RingN(1).STPointN(k).Lat.ToString(), 0));
                 coordsString.Append(Environment.NewLine);
             }
             return coordsString.ToString();
         }
-        public string outputRawPoint(SqlGeography shape)
-        {
+        public string outputRawPoint(SqlGeography shape) {
             StringBuilder coordsString = new StringBuilder("");
             coordsString.Append(string.Format("{0},{1},{2}", shape.Lat.ToString(), shape.Long.ToString(), 0));
             return coordsString.ToString();
         }
-        public string outputRawLineString(SqlGeography shape)
-        {
+        public string outputRawLineString(SqlGeography shape) {
             StringBuilder coordsString = new StringBuilder("");
-            for (int i = 1; i <= shape.STNumPoints(); i++)
-            {
+            for (int i = 1; i <= shape.STNumPoints(); i++) {
                 coordsString.Append(string.Format("{0},{1},{2}", shape.STPointN(i).Long.ToString(), shape.STPointN(i).Lat.ToString(), 0));
                 coordsString.Append(Environment.NewLine);
             }

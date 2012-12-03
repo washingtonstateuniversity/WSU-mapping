@@ -610,7 +610,7 @@ namespace campusMap.Controllers {
 
                     if (issueType == "local" || issueType == "local") {
                         place place = ActiveRecordBase<place>.Find(place_id);
-                        foreach (users auth in place.Authors) {
+                        foreach (users auth in place.authors) {
                             email_mass.To.Add(new MailAddress(auth.email, auth.name));
                         }
                     }

@@ -130,4 +130,45 @@ $Form.HiddenField("image.id")
 
 <p><input type="submit" value="Submit" /></p>
 
+
+    <div id="tabs" class="placelist  ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <!--<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#contact_profiles">Contact Profiles</a></li>-->
+            <li class="ui-state-default ui-corner-top" ><a href="#history">History</a></li>
+        </ul>
+        <div id="history">
+            <table width="100%" class="ui-widget ui-widget-content">
+                  <thead>
+                    <tr class="ui-widget-header ">
+                        <th width="10%">ID</th>
+                        <th width="15%">date</th>
+                        <th width="75%">event</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    #set ($c=0)
+                    #foreach($log in $history)
+                        <tr #if($c%2>0) class="even" #else class="odd" #end>
+                          <td align="center">$!log.id</td>
+                          <td align="left">$!log.date</td>
+                          <td align="left">$!log.entry</td>
+                        </tr>
+                        #set ($c=$c+1)
+                    #end
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                  <td colspan="4" align="right">
+                  	#set($Pagination_location='top')
+                    #set($target = "history")
+                    #set($list_items = $history)
+                    #parse("admin/listings/areas/pagination.vm")
+                    </td>
+                  </tr>
+                  </tfoot>
+            </table>
+        </div>
+    </div>
+
+
 </form>

@@ -535,8 +535,8 @@ namespace campusMap.Controllers {
             PropertyBag["tabs"] = tabs;
 
             List<users> authors = new List<users>();
-            if (!one_place.Authors.Contains(user)) authors.Add(user);
-            authors.AddRange(one_place.Authors);
+            if (!one_place.authors.Contains(user)) authors.Add(user);
+            authors.AddRange(one_place.authors);
             // for (int i = 0; i < 2; i++)
             //     authors.Add(new authors());
 
@@ -611,7 +611,7 @@ namespace campusMap.Controllers {
             switch (user.groups.name) {
                 case "Admin": {
                         foreach (place_types item in place.place_types) {
-                            if (place.Authors.Contains(user) && user.place_types.Contains(item))
+                            if (place.authors.Contains(user) && user.place_types.Contains(item))
                                 flag = true; break;
                         }
                         break;
@@ -982,7 +982,7 @@ namespace campusMap.Controllers {
         public void DeleteAuthor(int id, int placeId) {
             users author = ActiveRecordBase<users>.Find(id);
             place place = ActiveRecordBase<place>.Find(placeId);
-            place.Authors.Remove(author);
+            place.authors.Remove(author);
             ActiveRecordMediator<place>.Save(place);
             CancelLayout();
             RenderText("true");
@@ -1228,7 +1228,7 @@ namespace campusMap.Controllers {
             //place.infotabs.Clear();
             //place.categories.Clear();
             place.Images.Clear();
-            place.Authors.Clear();
+            place.authors.Clear();
             if (apply != null) {
 
             } else {
@@ -1372,10 +1372,10 @@ namespace campusMap.Controllers {
                     place.Images.Add(media);
                 }
             }
-            if (!place.Authors.Contains(user) && authors == null) place.Authors.Add(user);
+            if (!place.authors.Contains(user) && authors == null) place.authors.Add(user);
             foreach (users author in authors) {
-                if (author.id > 0 && !place.Authors.Contains(author))
-                    place.Authors.Add(author);
+                if (author.id > 0 && !place.authors.Contains(author))
+                    place.authors.Add(author);
             }
 
             /*string requested_url = place.CustomUrl;

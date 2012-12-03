@@ -15,11 +15,9 @@ using System.Collections;
 using System.Data.SqlTypes;
 using campusMap.Services;
 
-namespace campusMap.Models
-{
-    [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class users : ActiveRecordBase<users>
-    {
+namespace campusMap.Models {
+    [ActiveRecord(Lazy = true, BatchSize = 30)]
+    public class users : ActiveRecordBase<users> {
         protected UserService userService = new UserService();
 
         [PrimaryKey("author_id")]
@@ -51,14 +49,11 @@ namespace campusMap.Models
 
         private DateTime? lastActive;
         [Property]
-        virtual public DateTime? LastActive
-        {
+        virtual public DateTime? LastActive {
             get { return lastActive; }
-            set
-            {
+            set {
                 //DateTime bla = DateTime.MinValue;
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue))
-                {
+                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue)) {
                     // bla is a valid sql datetime
                     lastActive = value;
 
@@ -102,17 +97,14 @@ namespace campusMap.Models
         virtual public IList<place> editing { get; set; }
 
 
-        virtual public IList<place> getUserPlaces(int statusId, int limit)
-        {
+        virtual public IList<place> getUserPlaces(int statusId, int limit) {
             IList<place> temp = new List<place>();
             users user = UserService.getUser();
             IList<place> userplaces = user.Places;
-            if (statusId > 0)
-            {
+            if (statusId > 0) {
                 object[] obj = new object[userplaces.Count];
                 int i = 0;
-                foreach (place p in userplaces)
-                {
+                foreach (place p in userplaces) {
                     obj[i] = p.id;
                     i++;
                 }
@@ -121,13 +113,11 @@ namespace campusMap.Models
                 List<AbstractCriterion> statusEx = new List<AbstractCriterion>();
                 statusEx.AddRange(baseEx);
                 statusEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(statusId)));
-                if (limit == 0)limit=99999;
-                Order[] ord= new Order[1];
-                ord[0]=Order.Asc("prime_name");
+                if (limit == 0) limit = 99999;
+                Order[] ord = new Order[1];
+                ord[0] = Order.Asc("prime_name");
                 temp = ActiveRecordBase<place>.SlicedFindAll(0, limit, ord, statusEx.ToArray());
-            }
-            else
-            {
+            } else {
                 temp = userplaces;
             }
             return temp;
@@ -137,8 +127,7 @@ namespace campusMap.Models
 
     /* AKA GROUPS */
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class user_groups
-    {
+    public class user_groups {
         [PrimaryKey("access_level_id")]
         virtual public int id { get; set; }
 
@@ -195,8 +184,7 @@ namespace campusMap.Models
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class privileges
-    {
+    public class privileges {
         [PrimaryKey("privilege_id")]
         virtual public int id { get; set; }
 
@@ -217,8 +205,7 @@ namespace campusMap.Models
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class user_settings
-    {
+    public class user_settings {
         [PrimaryKey("user_settings_id")]
         virtual public int id { get; set; }
 

@@ -1,5 +1,4 @@
-namespace campusMap.Controllers
-{
+namespace campusMap.Controllers {
     using System.Collections.Generic;
     using Castle.ActiveRecord;
     using Castle.MonoRail.Framework;
@@ -11,34 +10,31 @@ namespace campusMap.Controllers
     using System;
     using campusMap.Models;
     using campusMap.Services;
-    
-    
-    [Layout("default")]
-    public class authorsController : SecureBaseController
-    {
+    using Castle.MonoRail.Framework.Helpers;
+    using System.Collections;
+    using System.Linq;
 
-        public void Index()
-        {
+
+    [Layout("default")]
+    public class authorsController : SecureBaseController {
+
+        public void Index() {
             //ActiveRecordBase<Block>.FindAll();
             PropertyBag["AccessDate"] = DateTime.Now;
         }
 
-        public void BlowItAway()
-        {
+        public void BlowItAway() {
             throw new Exception("Exception thrown from a MonoRail action");
         }
 
-        public void List()
-        {
+        public void List() {
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
-            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();    
+            PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
         }
 
-        public void Edit(int id)
-        {
+        public void Edit(int id, int page) {
             users user = ActiveRecordBase<users>.Find(id);
-            if (!canControl(UserService.getUser()) && user != UserService.getUser())
-            {
+            if (!canControl(UserService.getUser()) && user != UserService.getUser()) {
                 Flash["error"] = "Sorry you are not able to edit this user.";
                 RedirectToAction("list");
                 return;
@@ -64,17 +60,17 @@ namespace campusMap.Controllers
 
             PropertyBag["field_types"] = ActiveRecordBase<field_types>.FindAll();
 
+            PropertyBag["history"] = PaginationHelper.CreatePagination((IList)ActiveRecordBase<logs>.FindAll().Where(x => x.nid == user.nid).ToList(), 15, page);
+
             RenderView("new");
         }
 
 
-        public void New()
-        {
+        public void New() {
             users user = new users();
             List<media_repo> images = new List<media_repo>();
             //images.AddRange(user.media);
-            if (images.Count == 0)
-            {
+            if (images.Count == 0) {
                 images.Add(new media_repo());
             }
             PropertyBag["authorimages"] = images;
@@ -97,12 +93,10 @@ namespace campusMap.Controllers
 
 
         }
-        
-        public bool canControl(users user)
-        {
+
+        public bool canControl(users user) {
             bool flag = false;
-            switch (user.groups.name)
-            {
+            switch (user.groups.name) {
                 case "Admin": flag = true; break;
 
                 case "Editor": flag = true; break;
@@ -110,11 +104,9 @@ namespace campusMap.Controllers
             }
             return flag;
         }
-        public bool canChangeLevel(users user)
-        {
+        public bool canChangeLevel(users user) {
             bool flag = false;
-            switch (user.groups.name)
-            {
+            switch (user.groups.name) {
                 case "Admin": flag = true; break;
 
                 case "Editor": flag = true; break;
@@ -125,23 +117,19 @@ namespace campusMap.Controllers
         public void Update([ARDataBind("user", Validate = true, AutoLoad = AutoLoadBehavior.NewInstanceIfInvalidKey)] users user,
                            [ARDataBind("image", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] media_repo image,
                            HttpPostedFile newimage,
-                           int[] Sections, string apply, string cancel) 
-        {
+                           int[] Sections, string apply, string cancel) {
 
-            if (cancel != null)
-            {
+            if (cancel != null) {
                 RedirectToAction("list");
                 return;
             }
 
 
-            if (cancel != null)
-            {
+            if (cancel != null) {
                 RedirectToAction("list");
                 return;
             }
-            if (user.groups.id<=0)
-            {
+            if (user.groups.id <= 0) {
                 List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
                 baseEx.Add(Expression.Eq("default", true));
                 user.groups = ActiveRecordBase<user_groups>.FindFirst(baseEx.ToArray());
@@ -159,12 +147,9 @@ namespace campusMap.Controllers
 
             user.media.Clear();
             */
-            try
-            {
+            try {
                 ActiveRecordMediator<users>.Save(user);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Flash["error"] = ex.Message;
                 Flash["author"] = user;
             }
@@ -201,14 +186,12 @@ namespace campusMap.Controllers
             RedirectToAction("list");
         }
 
-        public void delete(int id)
-        {
+        public void delete(int id) {
 
-           users auth = ActiveRecordBase<users>.Find(id);
-           ActiveRecordMediator<users>.Delete(auth);
-           RedirectToReferrer(); 
+            users auth = ActiveRecordBase<users>.Find(id);
+            ActiveRecordMediator<users>.Delete(auth);
+            RedirectToReferrer();
         }
 
     }
 }
-                                                      

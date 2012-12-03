@@ -17,12 +17,10 @@ using Microsoft.SqlServer.Types;
 using System.IO;
 using System.Linq;
 
-namespace campusMap.Models
-{
+namespace campusMap.Models {
 
-    [ActiveRecord(Lazy=true, BatchSize=30)]
-    public class geometrics : publish_base
-    {
+    [ActiveRecord(Lazy = true, BatchSize = 30)]
+    public class geometrics : publish_base {
         protected HelperService helperService = new HelperService();
 
 
@@ -42,17 +40,11 @@ namespace campusMap.Models
 
         [Property]
         virtual public string staticMap { get; set; }
-        
 
-
-
-        public static SqlGeography AsGeography( byte[] bytes)
-        {
+        public static SqlGeography AsGeography(byte[] bytes) {
             SqlGeography geo = new SqlGeography();
-            using (MemoryStream stream = new System.IO.MemoryStream(bytes))
-            {
-                using (BinaryReader rdr = new System.IO.BinaryReader(stream))
-                {
+            using (MemoryStream stream = new System.IO.MemoryStream(bytes)) {
+                using (BinaryReader rdr = new System.IO.BinaryReader(stream)) {
                     geo.Read(rdr);
                 }
             }
@@ -61,15 +53,12 @@ namespace campusMap.Models
         }
 
 
-        public static byte[] AsByteArray(SqlGeography geography)
-        {
+        public static byte[] AsByteArray(SqlGeography geography) {
             if (geography == null)
                 return null;
 
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                using (BinaryWriter writer = new System.IO.BinaryWriter(stream))
-                {
+            using (MemoryStream stream = new System.IO.MemoryStream()) {
+                using (BinaryWriter writer = new System.IO.BinaryWriter(stream)) {
                     geography.Write(writer);
                     return stream.ToArray();
                 }
@@ -80,7 +69,7 @@ namespace campusMap.Models
         virtual public geometrics_types default_type { get; set; }
 
 
-        
+
         [BelongsTo]
         virtual public media_repo media { get; set; }
 
@@ -118,8 +107,7 @@ namespace campusMap.Models
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class geometrics_types : ActiveRecordBase<geometrics_types>
-    {
+    public class geometrics_types : ActiveRecordBase<geometrics_types> {
         [PrimaryKey("geometrics_type_id")]
         virtual public int id { get; set; }
 
@@ -137,8 +125,7 @@ namespace campusMap.Models
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
-    public class geometrics_media : ActiveRecordBase<geometrics_media>
-    {
+    public class geometrics_media : ActiveRecordBase<geometrics_media> {
 
         [PrimaryKey]
         virtual public int Id { get; set; }
@@ -154,8 +141,7 @@ namespace campusMap.Models
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class geometrics_status
-    {
+    public class geometrics_status {
 
         [PrimaryKey]
         virtual public int Id { get; set; }
@@ -166,10 +152,9 @@ namespace campusMap.Models
 
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
-    public class events_set : ActiveRecordBase<events_set>
-    {
+    public class events_set : ActiveRecordBase<events_set> {
         [PrimaryKey("events_set_id")]
-        virtual public int id  { get; set; }
+        virtual public int id { get; set; }
 
         [BelongsTo("style_id")]
         virtual public styles style { get; set; }
@@ -183,8 +168,7 @@ namespace campusMap.Models
 
 
     [ActiveRecord(Lazy = true)]
-    public class geometric_events : ActiveRecordBase<geometric_events>
-    {
+    public class geometric_events : ActiveRecordBase<geometric_events> {
         protected HelperService helperService = new HelperService();
 
         [PrimaryKey("geometric_event_id")]
@@ -196,14 +180,10 @@ namespace campusMap.Models
         [Property]
         virtual public string friendly_name { get; set; }
 
-
-
-
         /* not sure on these ties  */
         private IList<style_options> _options;
         [HasAndBelongsToMany(typeof(style_options), Lazy = true, Table = "geometric_events_to_style_options", ColumnKey = "geometric_event_id", ColumnRef = "style_option_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]//[Property]
-        virtual public IList<style_options> options
-        {
+        virtual public IList<style_options> options {
             get { return _options; }
             set { _options = value; }
         }
@@ -215,32 +195,24 @@ namespace campusMap.Models
          * have a file it'll get pulled in and put to the json
          * this is an extension of the "virtual" model idea
          */
-        virtual public String[] getOptions(string gType)
-        {
+        virtual public String[] getOptions(string gType) {
             String filePath = HelperService.getRootPath() + "Views/admin/maps/styles/options/" + gType + "/";
-            String[] used = Directory.GetFiles(filePath, "*.vm").Select(fileName => Path.GetFileNameWithoutExtension(fileName)).ToArray(); 
+            String[] used = Directory.GetFiles(filePath, "*.vm").Select(fileName => Path.GetFileNameWithoutExtension(fileName)).ToArray();
             return used;
         }
 
 
 
 
-        virtual public IList<style_options> getUsed(styles style, geometric_events events)
-        {
+        virtual public IList<style_options> getUsed(styles style, geometric_events events) {
             IList<style_options> used = new List<style_options>();
-            if (style.id > 0)
-            {
+            if (style.id > 0) {
                 style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-                foreach (style_option_types ops in all_op)
-                {
-                    if (style._option != null && ops.style_type.Contains(style.type) && style._option.Count > 0)
-                    {
-                        foreach (style_options op in style._option)
-                        {
-                            if (this.id == op.user_event.id)
-                            {
-                                if (op.value != "")
-                                {
+                foreach (style_option_types ops in all_op) {
+                    if (style._option != null && ops.style_type.Contains(style.type) && style._option.Count > 0) {
+                        foreach (style_options op in style._option) {
+                            if (this.id == op.user_event.id) {
+                                if (op.value != "") {
                                     used.Add(op);
                                 }
                             }
@@ -251,32 +223,22 @@ namespace campusMap.Models
             return used;
         }
 
-        virtual public IList<style_option_types> getUnUsed(styles style, geometric_events events)
-        {
+        virtual public IList<style_option_types> getUnUsed(styles style, geometric_events events) {
             IList<style_option_types> unUsed = new List<style_option_types>();
             //IList<style_options> used = getUsed();
-            if (style.id > 0)
-            {
+            if (style.id > 0) {
                 style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-                foreach (style_option_types ops in all_op)
-                {
-                    if (ops.style_type.Contains(style.type))
-                    {
-                        if (style._option != null && style._option.Count > 0)
-                        {
-                            foreach (style_options op in style._option)
-                            {
-                                if (this.id == op.user_event.id)
-                                {
-                                    if (op.value == "")
-                                    {
+                foreach (style_option_types ops in all_op) {
+                    if (ops.style_type.Contains(style.type)) {
+                        if (style._option != null && style._option.Count > 0) {
+                            foreach (style_options op in style._option) {
+                                if (this.id == op.user_event.id) {
+                                    if (op.value == "") {
                                         unUsed.Add(ops);
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             unUsed.Add(ops);
                         }
                     }
@@ -285,43 +247,31 @@ namespace campusMap.Models
             return unUsed;
         }
 
-        virtual public IList<style_option_types> getRemaining(styles style, geometric_events events)
-        {
+        virtual public IList<style_option_types> getRemaining(styles style, geometric_events events) {
             IList<style_option_types> remaining = new List<style_option_types>();
 
             style_option_types[] all_op = ActiveRecordBase<style_option_types>.FindAll();
-            if (style.id > 0)
-            {
+            if (style.id > 0) {
                 IList<style_options> used = getUsed(style, events);
                 IList<style_option_types> unUsed = getUnUsed(style, events);
-                foreach (style_option_types ops in all_op)
-                {
+                foreach (style_option_types ops in all_op) {
                     bool op_added = false;
-                    if (used != null)
-                    {
-                        foreach (style_options op in used)
-                        {
-                            if (op.type != ops)
-                            {
+                    if (used != null) {
+                        foreach (style_options op in used) {
+                            if (op.type != ops) {
                                 remaining.Add(ops);
                                 op_added = true;
                             }
                         }
-                        if (!op_added && (unUsed == null || !unUsed.Contains(ops)))
-                        {
+                        if (!op_added && (unUsed == null || !unUsed.Contains(ops))) {
                             remaining.Add(ops);
                         }
-                    }
-                    else if (unUsed == null || !unUsed.Contains(ops))
-                    {
+                    } else if (unUsed == null || !unUsed.Contains(ops)) {
                         remaining.Add(ops);
                     }
                 }
-            }
-            else
-            {
-                 foreach (style_option_types ops in all_op)
-                {
+            } else {
+                foreach (style_option_types ops in all_op) {
                     remaining.Add(ops);
                 }
             }

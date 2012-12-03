@@ -65,6 +65,9 @@ namespace campusMap.Models {
         virtual public Boolean isPublic { get; set; }
 
         [BelongsTo]
+        virtual public users onwer { get; set; }
+
+        [BelongsTo]
         virtual public users editing { get; set; }
 
         [BelongsTo]
