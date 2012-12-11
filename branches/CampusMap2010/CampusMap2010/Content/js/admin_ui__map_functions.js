@@ -345,9 +345,8 @@ function build_infobox(item){
 		mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
 	}
 	var infoTitle = "";
-	if($('#hideTitles:checked').length==0){
-		infoTitle = '<h2 class="header">'+ ($("#infoTitle").val()!==''?$("#infoTitle").val():$("#name").val())+'</h2>';
-	}
+	infoTitle = '<h2 class="header">'+ $("#name").val() +'</h2>';
+	
 	if($.isArray(item.info.content)){
 			var nav='';
 			$.each( item.info.content, function(j, html) {	
@@ -362,12 +361,12 @@ function build_infobox(item){
 		var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+item.info.content+'</div></div>';
 	}
 
+
 		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
-					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-					content+
-					'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow"></span></div>'+
-				'</div>';
-			
+				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+				content+
+				'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
+			'</div>';		
 	var myOptions = {
 		alignBottom:true,
 		 content: box//boxText

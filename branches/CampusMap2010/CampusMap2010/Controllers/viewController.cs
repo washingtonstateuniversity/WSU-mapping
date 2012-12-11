@@ -350,6 +350,7 @@ namespace campusMap.Controllers {
             authors.AddRange(view.authors);
 
             PropertyBag["viewauthors"] = authors;
+
             RenderView("_editor");
 
         }

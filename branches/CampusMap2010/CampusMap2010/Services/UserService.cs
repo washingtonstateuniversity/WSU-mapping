@@ -194,7 +194,7 @@ namespace campusMap.Services {
             foreach (dynamic item in items) {
                 if (item.GetType().GetProperty("editing") != null) {
                     if (UserService.isActive(item.editing)) {
-                        HelperService.writelog("Releasing editor from item ", item.editing.nid, item.id);
+                        HelperService.writelog("Releasing editor from item ", item.editing, item.id);
                         item.editing = null;
                         ActiveRecordMediator<dynamic>.Save(item);
                         result = true;

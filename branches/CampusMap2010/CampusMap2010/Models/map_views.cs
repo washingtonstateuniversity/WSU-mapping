@@ -21,8 +21,7 @@ namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 30)]
     public class map_views : publish_base {
         protected HelperService helperService = new HelperService();
-        public map_views() { }
-
+        //public map_views() { }
 
         [PrimaryKey("view_id")]
         virtual public int id { get; set; }
@@ -99,59 +98,6 @@ namespace campusMap.Models {
 
 
         }
-         /*private DateTime? Publish_Time;
-        [Property]
-        virtual public DateTime? published {
-            get { return Publish_Time; }
-            set {
-                //DateTime bla = DateTime.MinValue;
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue)) {
-                    // bla is a valid sql datetime
-                    Publish_Time = value;
-
-                }
-            }
-        }
-        private DateTime? Creation_Date;
-        [Property]
-        virtual public DateTime? created {
-            get { return Creation_Date; }
-            set {
-                //DateTime bla = DateTime.MinValue;
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue)) {
-                    // bla is a valid sql datetime
-                    Creation_Date = value;
-                }
-            }
-        }
-        private DateTime? Updated_Date;
-        [Property]
-        virtual public DateTime? updated {
-            get { return Updated_Date; }
-            set {
-                if ((value >= (DateTime)SqlDateTime.MinValue) && (value <= (DateTime)SqlDateTime.MaxValue)) {
-                    // bla is a valid sql datetime
-                    Updated_Date = value;
-                }
-            }
-        }
-        private bool _tmp;
-        virtual public bool tmp {
-            get { return _tmp; }
-            set { _tmp = value; }
-        }
-        private bool _isPublic;
-        [Property]
-        virtual public bool isPublic {
-            get { return _isPublic; }
-            set { _isPublic = value; }
-        }
-       private status _status;
-        [BelongsTo("view_status")]
-        virtual public status status {
-            get { return _status; }
-            set { _status = value; }
-        }*/
 
         [BelongsTo]
         virtual public media_repo media { get; set; }
@@ -165,18 +111,7 @@ namespace campusMap.Models {
             get { return Comments; }
             set { Comments = value; }
         }
-        /*
-        private users author_editing;
-        [BelongsTo("authors_editing")]
-        virtual public users editing {
-            get { return author_editing; }
-            set { author_editing = value; }
-        }
 
-        private users checked_out;
-        [BelongsTo]
-        virtual public users checked_out_by { get; set; }
-        */
         private IList<comments> Pub_comments = new List<comments>();
         [HasMany(typeof(comments), Lazy = true, Table = "view_to_comments", ColumnKey = "view_id", Where = "published=1", Cascade = ManyRelationCascadeEnum.None)]
         virtual public IList<comments> comments_pub {
@@ -214,15 +149,7 @@ namespace campusMap.Models {
 
         [BelongsTo]
         virtual public campus campus { get; set; }
-        /* replaced by the virtural model
-        private map_views_options _options;
-        [BelongsTo]
-        virtual public map_views_options options
-        {
-            get { return _options; }
-            set { _options = value; }
-        }
-        */
+
         /* the virtural model in json */
         private String _options_obj;
         [Property("optionObj")]
@@ -230,21 +157,6 @@ namespace campusMap.Models {
             get { return _options_obj; }
             set { _options_obj = value; }
         }
-        /*
-        virtual public bool isPublished() {
-            if (this.status == ActiveRecordBase<status>.Find(3) && this.published != null && this.published.Value.CompareTo(DateTime.Now) <= 0) {
-                return true;
-            }
-            return false;
-        }
-
-        virtual public bool isCheckedOutNull() {
-            bool flag = false;
-            if (checked_out_by == null)
-                flag = true;
-
-            return flag;
-        }*/
     }
 }
 

@@ -707,7 +707,25 @@ namespace campusMap.Services {
             return parsedtext;
         }
 
-
+        public static Boolean flushAllCached() {
+            return flushAllCached(0);
+        }
+        public static Boolean flushAllCached(int hours) {
+            return flushCache(campusMap.Controllers.BaseController.getRootPath() + "cache/", hours);
+        }
+        public static Boolean flushMenuCache(int hours) {
+            return flushCache(campusMap.Controllers.BaseController.getRootPath() + "cache/html/menu/0_menu.ext", hours);
+        }
+        public static Boolean flushCache(String cachePath, int hours) {
+            if (File.Exists(cachePath)) {
+                FileInfo fi = new FileInfo(cachePath);
+                if (fi.LastWriteTime <= DateTime.Now.AddHours(hours)) {
+                    fi.Delete();
+                    return false;
+                }
+            }
+            return true;
+        }
 
 
 
@@ -779,22 +797,27 @@ namespace campusMap.Services {
 
             dynamic copy = new t();
             copy.name = name;
-            
             ActiveRecordMediator<dynamic>.Save(copy);
-            int ided = copy.id;
-            
-                //Mapper.Map(org, copy);
-                IValueInjecter injecter = new ValueInjecter();
-                injecter.Inject(copy, org);
-                copy.id = ided;
-                copy.authors.Add(UserService.getUserFull());
-                ActiveRecordMediator<dynamic>.Update(copy);
-                ActiveRecordMediator<dynamic>.Save(copy);
-            try{}
-            catch{
-                ActiveRecordMediator<dynamic>.Delete(copy);
-            }
+            copy = (t)copy;
+            int copy_id = copy.id;
+            IValueInjecter injecter = new ValueInjecter();
+            injecter.Inject<CloneInjection>(copy, org);
 
+
+            //copy = copy.InjectFrom<CloneInjection>(org);
+            copy.name = name;
+            copy.id = copy_id;
+            copy.owner.id = UserService.getUserFull().id;
+            copy.status.id = 1;
+            copy = (dynamic)copy;
+            //ActiveRecordMediator<dynamic>.Save(copy);
+            /*
+             * ActiveRecordMediator<dynamic>.Update(copy);
+             * try{}
+            catch{
+                //ActiveRecordMediator<dynamic>.Delete(copy);
+            }
+            */
             return copy;
         }
 
@@ -834,7 +857,7 @@ namespace campusMap.Services {
                 if (c.SourceProp.Type.GetGenericTypeDefinition().GetInterfaces().Contains(typeof(IEnumerable))) {
                     var t = c.SourceProp.Type.GetGenericArguments()[0];
                     if (t.IsValueType || t == typeof(string)) return c.SourceProp.Value;
-
+                    /*
                     var tlist = typeof(List<>).MakeGenericType(t);
                     //var list = Activator.CreateInstance(tlist);
                     dynamic list = Activator.CreateInstance(tlist);
@@ -845,6 +868,9 @@ namespace campusMap.Services {
                         //addMethod.Invoke(list, new[] { e }); // in 4.0 you can use dynamic and just do list.Add(e);
                         list.Add(e);
                     }
+                     * */
+                    var tlist = typeof(List<>).MakeGenericType(t);
+                    dynamic list = Activator.CreateInstance(tlist);
                     return list;
                 }
 
