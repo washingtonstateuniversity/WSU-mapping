@@ -3,7 +3,7 @@
 <!--[if IE 8]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie8 ie" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" ><!--<![endif]--><head>
 	<script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta charset="utf-8">
     #* all the JS and CSS that is site wide *#
     #parse("admin/global_header_html.vm")
