@@ -116,11 +116,11 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<legend>Center</legend>
 			<div class="col2"  style="">
 				<label for="Lat"><strong>Latitude</strong></label><br/>
-				<input type="text" name="Length" id="Lat" #if($lat) value="$!lat" #else #if($campus.latitude!="") value="$campus.latitude" #else value="46.73304697156661" #end #end class="text ui-widget-content ui-corner-all" required="required" />
+				<input type="text" name="Length" id="Lat" #if($lat && $lat!="") value="$!lat" #else #if($campus.latitude!="") value="$campus.latitude" #else value="46.73304697156661" #end #end class="text ui-widget-content ui-corner-all" required="required" />
 			</div><br/> 
 			<div class="col2"  style="">
 				<label for="Long"><strong>Longitude</strong></label><br/>
-				<input type="text" name="LongLength" id="Long" #if($long) value="$!long" #else #if($campus.longitude!="") value="$campus.longitude" #else value="-117.15406340441444" #end #end class="text ui-widget-content ui-corner-all" required="required" />
+				<input type="text" name="LongLength" id="Long" #if($long && $long!="") value="$!long" #else #if($campus.longitude!="") value="$campus.longitude" #else value="-117.15406340441444" #end #end class="text ui-widget-content ui-corner-all" required="required" />
 				#set($mess="by draging the map with drag mode on thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> and simple draging the map to the view you wish to see")
 				#parse("admin/noted.vm")
 			</div>
