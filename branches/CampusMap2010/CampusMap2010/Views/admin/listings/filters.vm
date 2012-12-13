@@ -5,7 +5,7 @@
         #if(${controller.getView()}=="place")
         
             <form action="/place/List.castle" id="placeSearch" style="float:left;margin-right:7px;margin-top:12px">
-                <lable for="by_name_id"><span></sapn><input id="by_name_id" type="text" value="" placeholder="Place name or id" name="filter"/><input type="submit" class="submit" value="placeSearching" style=" background: none repeat scroll 0 0 transparent;border: medium none;display: inline-block;font-size: 0;height: 24px;line-height: 24px;margin: 0;padding: 0;position: absolute;right: 0;top: 0;"/></lable>
+                <lable for="by_name_id"><span></span><input id="by_name_id" type="text" value="" placeholder="Place name or id" name="filter"/><input type="submit" class="submit" value="placeSearching" style=" background: none repeat scroll 0 0 transparent;border: medium none;display: inline-block;font-size: 0;height: 24px;line-height: 24px;margin: 0;padding: 0;position: absolute;right: 0;top: 0;"/></lable>
             </form>
         #end
         

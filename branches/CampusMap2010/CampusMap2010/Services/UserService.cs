@@ -134,7 +134,7 @@ namespace campusMap.Services {
         }
 
         public static campus getUserCoreCampus() {
-            return getUserCoreCampus(getUser());
+            return getUserCoreCampus(getUserFull());
         }
 
         public static campus getUserCoreCampus(users author) {
@@ -144,7 +144,7 @@ namespace campusMap.Services {
 
 
         public Boolean hasGroup(String group) {
-            return hasGroup (group, UserService.getUser());
+            return hasGroup(group, UserService.getUserFull());
         }
         public Boolean hasGroup(String group, users user){
             return group == user.groups.name;

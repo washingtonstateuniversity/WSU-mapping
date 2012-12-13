@@ -436,7 +436,7 @@ namespace campusMap.Controllers {
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
 
 
 
@@ -574,7 +574,7 @@ namespace campusMap.Controllers {
 
 
             PropertyBag["placeimages"] = images;
-            PropertyBag["loginUser"] = UserService.getUser();
+            PropertyBag["loginUser"] = UserService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -1205,7 +1205,7 @@ namespace campusMap.Controllers {
             //place.plus_four_code
             //'99164'
 
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             place.editing = user;
             if ((place.prime_name == null || place.prime_name.Length == 0)) {
                 if (!forced_tmp) {

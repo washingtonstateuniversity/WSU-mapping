@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <!--[if IE 7]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie7 ie" lang="en"><![endif]-->
 <!--[if IE 8]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie8 ie" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" ><!--<![endif]--><head>
-	<script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-    #* all the JS and CSS that is site wide *#
-    #parse("admin/global_header_html.vm")
-
-    <style media="only screen and (max-device-width:768px)" type="text/css">
-		/* for iPhone, iPod Touch and iPad */
-		ul.menu li.liTop:hover + li.close {z-index:10;}
-    </style>
+<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" ><!--<![endif]-->
+    <head>
+        <script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        #* all the JS and CSS that is site wide *#
+        #parse("admin/global_header_html.vm")
     
-	
-</head>
-<body id='wsu_ui' class="admin ${controller.getView()} ${controller.getAction()}">
-	<div id = "wrapper">
-		<div id="header_bar">
-			#parse("admin/header_html.vm")
-		</div>
-		
-		#parse("admin/main_menu.vm")
-		
-		<div id="content">
-		
-		
-		
-			<div id="main">
-				<div id="content_area"><div id="content_tar">
-#if($Flash.message)
-	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
-	  <p style="line-height: 15px;padding-bottom: 0;">
-		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
-	  </p>
-	</div>
-#end
-#if($Flash.error)
-	<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-	  <p style="line-height: 15px;padding-bottom: 0;">
-		<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
-	  </p>
-	</div>
-#end			
-				$childContent</div></div> 
-			</div>
-		</div>
-		#parse("admin/footer.vm")
-	</div>
-	<div id="staging" class="push_hide"></div>
-	#parse("admin/global_footer_JS.vm")
-</body>
+        <style media="only screen and (max-device-width:768px)" type="text/css">
+            /* for iPhone, iPod Touch and iPad */
+            ul.menu li.liTop:hover + li.close {z-index:10;}
+        </style>
+    </head>
+    <body id='wsu_ui' class="admin ${controller.getView()} ${controller.getAction()}">
+        <div id = "wrapper">
+            <div id="header_bar">
+                #parse("admin/header_html.vm")
+            </div>
+            
+            #parse("admin/main_menu.vm")
+            
+            <div id="content">
+                <div id="main">
+                    <div id="content_area"><div id="content_tar">
+                        #if($Flash.message)
+                            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+                              <p style="line-height: 15px;padding-bottom: 0;">
+                                <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
+                              </p>
+                            </div>
+                        #end
+                        #if($Flash.error)
+                            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+                              <p style="line-height: 15px;padding-bottom: 0;">
+                                <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
+                              </p>
+                            </div>
+                        #end			
+                        $childContent
+                    </div></div> 
+                </div>
+            </div>
+            #parse("admin/footer.vm")
+        </div>
+        <div id="staging" class="push_hide"></div>
+        #parse("admin/global_footer_JS.vm")
+    </body>
 </html>

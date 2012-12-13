@@ -75,7 +75,7 @@ namespace campusMap.Models {
 
         virtual public bool isCheckedOut() {
             bool flag = false;
-            if (this.editing != null && this.editing != UserService.getUser())
+            if (this.editing != null && this.editing != UserService.getUserFull())
                 flag = true;
             return flag;
         }

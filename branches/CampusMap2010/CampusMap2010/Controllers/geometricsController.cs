@@ -61,7 +61,7 @@ namespace campusMap.Controllers {
         }
 
         public void List(int page, int searchId, string status, Boolean ajax) {
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
@@ -422,7 +422,7 @@ namespace campusMap.Controllers {
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
 
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
 
@@ -501,7 +501,7 @@ namespace campusMap.Controllers {
                 images.Add(new media_repo());
             }*/
             PropertyBag["geometricimages"] = images;
-            PropertyBag["loginUser"] = UserService.getUser();
+            PropertyBag["loginUser"] = UserService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -641,7 +641,7 @@ namespace campusMap.Controllers {
             //geometric.style.Clear();
 
 
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             geometric.editing = user;
 
             int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;

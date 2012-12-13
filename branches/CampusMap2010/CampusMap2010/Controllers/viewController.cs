@@ -272,7 +272,7 @@ namespace campusMap.Controllers {
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
 
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             String username = user.nid;
             PropertyBag["loginUser"] = user;
 
@@ -282,7 +282,7 @@ namespace campusMap.Controllers {
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
-            PropertyBag["loginUser"] = UserService.getUser();
+            PropertyBag["loginUser"] = user;
 
 
             PropertyBag["tags"] = ActiveRecordBase<tags>.FindAll();
@@ -359,7 +359,7 @@ namespace campusMap.Controllers {
 
             map_views view = new map_views();
 
-            PropertyBag["loginUser"] = UserService.getUser();
+            PropertyBag["loginUser"] = UserService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -564,7 +564,7 @@ namespace campusMap.Controllers {
             //view.Images.Clear();
 
 
-            users user = UserService.getUser();
+            users user = UserService.getUserFull();
             view.authors.Clear();
             if (apply != null) {
 

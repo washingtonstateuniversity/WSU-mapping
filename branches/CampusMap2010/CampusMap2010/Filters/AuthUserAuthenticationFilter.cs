@@ -72,7 +72,7 @@ namespace campusMap.Filters
 
             if (UserService.isLogedIn())
             {
-                users currentUser = UserService.getUser();
+                users currentUser = UserService.getUserFull();
                 if (currentUser != null)
                 {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
