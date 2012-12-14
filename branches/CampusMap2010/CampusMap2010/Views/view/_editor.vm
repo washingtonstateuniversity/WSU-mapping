@@ -103,11 +103,11 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<h6><em>Both will default to 100% if blank or 0</em></h6>
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Width</strong></label><br/>
-				<input type="text" name="view.width" id="width" #if($view.width && $view.width!="")value="$!view.width" #else value="500" #end class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="view.width" id="width" #if($view.width)value="$!view.width" #else value="500" #end class="text ui-widget-content ui-corner-all" />
 			</div><br/> 
 			<div class="col2"  style="">	
 				<label for="Lat"><strong>Height</strong></label><br/>
-				<input type="text" name="view.height" id="height" #if($view.height && $view.height!="")value="$!view.height" #else value="500" #end class="text ui-widget-content ui-corner-all" />
+				<input type="text" name="view.height" id="height" #if($view.height)value="$!view.height" #else value="500" #end class="text ui-widget-content ui-corner-all" />
 				#set($mess="You may resize the map thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> by simply draging the corner of the map to the size you wish to see")
 				#parse("admin/noted.vm")
 			</div>
