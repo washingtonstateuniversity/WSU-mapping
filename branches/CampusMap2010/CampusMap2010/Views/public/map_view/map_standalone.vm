@@ -21,7 +21,7 @@
 		#*
 	<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
 		<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />*#
-		$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css, ~/Content/css/central_main.css, ~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css, ~/Content/css/colorbox.css, ~/Content/css/reactive.css?")
+		$scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css, ~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css, ~/Content/css/colorbox.css,~/Content/css/reactive.css")
 	</head>
 	<body id='campusmap' class="veiw_base_layout ${controller.getView()} ${controller.getAction()}">
 
