@@ -7,6 +7,11 @@ a{color:#5e6a71;text-decoration:none;}
 a:hover{color:#7f9d6a;text-decoration:underline;}
 hr{color:#ffffff;background-color:#ffffff;border:1px dotted #526e3f;border-style:none none dotted;padding-top:3px;margin:20px 0 25px 0;}
 
+:focus{border:none;outline:none;}
+
+
+
+
 /* Layout Helpers */
 .w100{width:100px;}
 .w150{width:150px;}
