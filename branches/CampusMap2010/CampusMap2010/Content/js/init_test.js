@@ -976,6 +976,7 @@ function make_Marker(jObj,i,id,marker,markerCallback){
 	});
 }
 
+
 var needsMoved=0;
 function loadData(jObj,data,callback,markerCallback){
 	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
@@ -1175,9 +1176,9 @@ function loadListings(data,showSum){
 				//btn.next('div').toggle('showOrHide');
 				btn.addClass('active');
 			}
-			$.each(ib, function(i,v) {v.close();});
-			var pid = btn.attr("role");
-			ib[pid].open($('#centralMap').gmap('get','map'), markerLog[i]);
+			$.each(ib, function(i,v) {ib[i].close();});
+			//var pid = btn.attr("role");
+			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
 			if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
 			cur_mid = mid[i];
 		});
