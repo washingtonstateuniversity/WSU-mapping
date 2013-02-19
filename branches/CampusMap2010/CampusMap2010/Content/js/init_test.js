@@ -919,6 +919,7 @@ function make_InfoWindow(jObj,i,marker){
 		//$('#taby'+i).tabs();
 		//alert('tring to tab it, dabnab it, from the INI');
 	});
+	
 }
 function make_ToolTip(jObj,i,marker){
 	//end of the bs that is well.. bs of a implamentation
