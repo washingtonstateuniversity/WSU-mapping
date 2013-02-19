@@ -493,19 +493,21 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	}
 
 	function setInfoSlide(){
-		$('.detailInfoBut').live('click', function(){
-			if($(this).closest('.detailCol').width()<=1){
-				$(this).closest('.detailCol').stop().animate({
-					width:"125px"
-					}, 500, function() {
-				});
-			}else{
-				$(this).closest('.detailCol').stop().animate({
-					width:"0px"
-					}, 500, function() {
-				});
-			}
-		});
+		if($('.detailInfoBut')){
+			$('.detailInfoBut').live('click', function(){
+				if($(this).closest('.detailCol').width()<=1){
+					$(this).closest('.detailCol').stop().animate({
+						width:"125px"
+						}, 500, function() {
+					});
+				}else{
+					$(this).closest('.detailCol').stop().animate({
+						width:"0px"
+						}, 500, function() {
+					});
+				}
+			});
+		}
 	}
 
 	
@@ -607,7 +609,9 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
         if(moveToTab>0){
             $( "#tabs" ).tabs( "select" , moveToTab );
         } 
-    }
+    }else{
+		setInfoSlide();	
+	}
 
 	$(".editzone").live("blur",function() { 
 		var txt = $(this); 
