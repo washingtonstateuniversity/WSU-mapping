@@ -912,8 +912,6 @@ function make_InfoWindow(jObj,i,marker){
 				).jScrollPane(settings);
 				api = pane.data('jsp');
 				}
-								
-				
 				prep();
 			}
 	};
