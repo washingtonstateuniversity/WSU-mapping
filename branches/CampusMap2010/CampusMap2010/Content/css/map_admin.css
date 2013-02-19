@@ -388,8 +388,8 @@ border-bottom-right-radius: 0px;
 	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage.orientation_{
 		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;    margin-left: 0;
     padding: 13px 13px;}
-	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycle ul li span{padding: 12px 10px; }
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_v{
+	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycleArea ul li span{padding: 12px 10px; }
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage.orientation_v{
 		    background: url("../../Content/images/gallery_bk_ver.png") no-repeat scroll center top transparent;
 			margin-left: 67px;
 			padding: 12px 9px;
