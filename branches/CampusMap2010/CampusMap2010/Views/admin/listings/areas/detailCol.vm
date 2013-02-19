@@ -28,7 +28,8 @@
 					#end
 				</li>
 			#end
-			#if($item.Publishtime)<li class='date'> <span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','') </li>#end
+            #if($item.Publishtime)<li class='date'> <span>Date: </span>$!item.Publishtime.ToString().Reitem('12:00:00 AM','') </li>#end
+			#if($item.publish_time)<li class='date'> <span>Date: </span>$!item.publish_time.ToString().Reitem('12:00:00 AM','') </li>#end
 			
 			#*#if($item.Location)<li> <span>Location: </span>$!item.Location </li>#end*#
 			
