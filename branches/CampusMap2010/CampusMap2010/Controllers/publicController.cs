@@ -864,8 +864,12 @@ namespace campusMap.Controllers {
             if (!int.TryParse(term, out sid)) {
                 term = term.Trim();
                 SortedDictionary<string, int> results = search_place_string(term);
+                List<int> ids = new List<int>();
                 foreach (int res in results.Values) {
-                    listtems.Add(ActiveRecordBase<place>.Find(res));
+                    if (!ids.Contains(res)){
+                        listtems.Add(ActiveRecordBase<place>.Find(res));
+                        ids.Add(res);
+                    }
                 }
 
             }
