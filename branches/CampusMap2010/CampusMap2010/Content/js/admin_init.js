@@ -494,7 +494,9 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 
 	function setInfoSlide(){
 		if($('.detailInfoBut')){
-			$('.detailInfoBut').live('click', function(){
+			$('.detailInfoBut').live('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
 				if($(this).closest('.detailCol').width()<=1){
 					$(this).closest('.detailCol').stop().animate({
 						width:"125px"
