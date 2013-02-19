@@ -678,6 +678,8 @@ var apiL = null;
 var apiD = null;
 function make_InfoWindow(jObj,i,marker){
 	if($.isArray(marker.info.content)){
+			
+		 
 		var nav='';
 		$.each( marker.info.content, function(j, html) {	
 			nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
@@ -912,6 +914,8 @@ function make_InfoWindow(jObj,i,marker){
 				).jScrollPane(settings);
 				api = pane.data('jsp');
 				}
+								
+				
 				prep();
 			}
 	};
@@ -919,7 +923,6 @@ function make_InfoWindow(jObj,i,marker){
 		//$('#taby'+i).tabs();
 		//alert('tring to tab it, dabnab it, from the INI');
 	});
-	
 }
 function make_ToolTip(jObj,i,marker){
 	//end of the bs that is well.. bs of a implamentation
@@ -991,7 +994,7 @@ function loadData(jObj,data,callback,markerCallback){
 			//alert(dump(marker));
 			//var _mid= marker.id;
 			mid[i]=marker.id;
-			
+			var pid = marker.id;
 			make_InfoWindow(jObj,i,marker);
 			make_ToolTip(jObj,i,marker);
 			make_Marker(jObj,i,marker.id,marker,markerCallback);
@@ -1141,9 +1144,9 @@ function loadListings(data,showSum){
 			if(typeof(marker.summary)!=='undefined' && !$.isEmptyObject(marker.summary)){
 				sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
 			}
-	
+			var p_id = marker.id;
 			listing+='<li class="">'+
-						'<a href="#" class=""><img src="'+siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
+						'<a href="#" class="" role="'+p_id+'"><img src="'+siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
 						sum+
 					'</div>';
 			hasListing = false;
@@ -1163,7 +1166,7 @@ function loadListings(data,showSum){
 	
 	$.each($('#selectedPlaceList_area #listing a'),function(i,v){
 		var btn=$(this);
-		btn.live('click',function(e){
+		btn.off().on('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
 			if(!btn.is('active') && !btn.next('div').is(':visible')){// changed hasClass for is for speed
@@ -1172,8 +1175,9 @@ function loadListings(data,showSum){
 				//btn.next('div').toggle('showOrHide');
 				btn.addClass('active');
 			}
-			$.each(ib, function(i) {ib[i].close();});
-			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
+			$.each(ib, function(i,v) {v.close();});
+			var pid = btn.attr("role");
+			ib[pid].open($('#centralMap').gmap('get','map'), markerLog[i]);
 			if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
 			cur_mid = mid[i];
 		});
@@ -1864,6 +1868,8 @@ $('.errorReporting').off().on("click",function(e){
 							$.colorbox.resize();
 						});
 					}else{
+
+
 						if($('#valid').length==0)$('#errorReporting').prepend("<div id='valid'><h3>Please completely fill out the form so we may completely help you.</h3></div>");
 					}
 				});

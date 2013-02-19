@@ -1105,10 +1105,6 @@ namespace campusMap.Controllers {
             sendPlaceJson(items, callback);
         }
 
-
-
-
-
         public void getPlaceJson_byIds(int[] ids, string callback) {
             List<place> items = new List<place> { };
             foreach (int id in ids) {
