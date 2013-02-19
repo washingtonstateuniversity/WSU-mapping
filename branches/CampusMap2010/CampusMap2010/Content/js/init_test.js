@@ -1003,12 +1003,15 @@ function loadData(jObj,data,callback,markerCallback){
 	}
 	//if($.isFunction(callback))callback();return;
 }
+
+
+var last_searched=0;
 function getSignlePlace(jObj,id){
 	var url=siteroot+"public/get_place.castle";
 	$( "#placeSearch input[type=text]" ).autocomplete("close");
 	var found=false;
 	
-	if(!$.isNumeric(id)){
+	if(!$.isNumeric(id) && last_searched != id){
 		$.get(url+''+(id!=false?'?id='+id:''), function(data) {
 			if(data=="false"){
 				$.colorbox({
@@ -1032,7 +1035,7 @@ function getSignlePlace(jObj,id){
 			}
 			
 			if(found==true){
-				$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
+				//$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
 					if(!$('#selectedPlaceList_btn').is(':visible')){
 						//$('#selectedPlaceList_btn').css({'display':'block'});
 						//$('#selectedPlaceList_btn').trigger('click');
@@ -1046,11 +1049,12 @@ function getSignlePlace(jObj,id){
 					});
 					//loadListings(data,true);
 					prep();
-				});
+					last_searched = id;
+				//});
 			}
 			
 		});
-	}else{
+	}else if(last_searched != id){
 		$.getJSON(url+'?callback=?'+(id!=false?'&id='+id:''), function(data) {
 			if(!$('#selectedPlaceList_btn').is(':visible')){
 				//$('#selectedPlaceList_btn').css({'display':'block'});
@@ -1065,6 +1069,7 @@ function getSignlePlace(jObj,id){
 			});
 			//loadListings(data,true);
 			prep();
+			last_searched = id;
 		});
 	}
 }
@@ -1293,12 +1298,13 @@ function setup_mapsearch(jObj){
 			.appendTo( ul );
 	}
 	$( "#placeSearch input[type='text']" ).on('keyup',function(e) {
-		if ( e.which == 13 ){
+		if ( e.which == 13){
 			var id   = $( "#placeSearch .ui-autocomplete-input" ).val();
 			var url=siteroot+"public/get_place.castle";
 			if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 			$( "#placeSearch input[type=text]" ).autocomplete("close");
 			getSignlePlace(jObj,$( "#placeSearch .ui-autocomplete-input" ).val());
+			
 		}
 	});	
 	$("#placeSearch input[type='submit']").off().on('click',function(e){
