@@ -376,16 +376,16 @@ border-bottom-right-radius: 0px;
 	#campusmap .cycleArea .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
 	#campusmap .cycleArea .cWrap ul li{width: 344px !important;height:190px;}
 
-	#campusmap #cboxContent .cycle{position:relative;width:75%;height:100%;margin: 0 auto;}	
-	#campusmap #cboxContent .cycle .cWrap {margin: 0 auto;height:100%;width: auto !important;}
-	#campusmap #cboxContent .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:100%;}
-	#campusmap #cboxContent .cycle .cWrap ul li{width: auto !important;height:100%;padding-left: 24px;}
-	#campusmap #cboxContent .cycle .cWrap ul li img{height:100%;}
+	#campusmap #cboxContent .cycleArea{position:relative;width:75%;height:100%;margin: 0 auto;}	
+	#campusmap #cboxContent .cycleArea .cWrap {margin: 0 auto;height:100%;width: auto !important;}
+	#campusmap #cboxContent .cycleArea .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:100%;}
+	#campusmap #cboxContent .cycleArea .cWrap ul li{width: auto !important;height:100%;padding-left: 24px;}
+	#campusmap #cboxContent .cycleArea .cWrap ul li img{height:100%;}
 	#cboxLoadedContent{ overflow:visible  !important;}
 	
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage{float: left;position: relative;}	
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h,
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_{
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage{float: left;position: relative;}	
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage.orientation_h,
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage.orientation_{
 		background: url("../../Content/images/gallery_bk_hor.png") no-repeat scroll center top transparent;    margin-left: 0;
     padding: 13px 13px;}
 	#campusmap .ui-tabs .ui-tabs-panel .content.Views_Vids .cycle ul li span{padding: 12px 10px; }
@@ -394,17 +394,17 @@ border-bottom-right-radius: 0px;
 			margin-left: 67px;
 			padding: 12px 9px;
 	}
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage .imgEnlarge{background: url("../../Content/images/imgEnlarge_large.png") no-repeat scroll center top transparent;right: 5px;height:18px;width:18px;}
-	#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage:hover .imgEnlarge{ background-position:center bottom;}
-	#campusmap .cycle .prev{
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage .imgEnlarge{background: url("../../Content/images/imgEnlarge_large.png") no-repeat scroll center top transparent;right: 5px;height:18px;width:18px;}
+	#campusmap .ui-tabs .ui-tabs-panel .content .cycleArea ul li .headImage:hover .imgEnlarge{ background-position:center bottom;}
+	#campusmap .cycleArea .prev{
 		left:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll left top transparent;z-index: 9; }
-	#campusmap .cycle .next{
+	#campusmap .cycleArea .next{
 		right:0px;top:55px; text-indent:-9999em; display:block;width:24px; height:71px; position:absolute;background: url("../../Content/images/tab_next_prev.png") no-repeat scroll right top transparent;z-index: 9;}
 		
-		#campusmap #cboxContent .cycle .prev , #campusmap #cboxContent .cycle .next {top:50%;}
+		#campusmap #cboxContent .cyccycleAreale .prev , #campusmap #cboxContent .cycleArea .next {top:50%;}
 		
-	#campusmap .cycle .prev:hover{ background-position:left bottom; }
-	#campusmap .cycle .next:hover{background-position:right bottom;}
+	#campusmap .cycleArea .prev:hover{ background-position:left bottom; }
+	#campusmap .cycleArea .next:hover{background-position:right bottom;}
 
 
 #campusmap #cboxContent{ overflow:visible;}
