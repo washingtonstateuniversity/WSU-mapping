@@ -371,10 +371,10 @@ border-bottom-right-radius: 0px;
 	background: url("../../Content/images/imgEnlarge.png") no-repeat scroll center top transparent;top:6px;display:block;height:14px;right:4px;position: absolute;width:14px;padding: 0;}
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover .imgEnlarge{ background-position:center bottom;}
   /* info boxes gallery */		
-	#campusmap .cycle{position:relative;width:344px;height:190px;margin-left:10px;}	
-	#campusmap .cycle .cWrap {margin: 0 auto;height:190px;width: 263px !important;}
-	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
-	#campusmap .cycle .cWrap ul li{width: 344px !important;height:190px;}
+	#campusmap .cycleArea{position:relative;width:344px;height:190px;margin-left:10px;}	
+	#campusmap .cycleArea .cWrap {margin: 0 auto;height:190px;width: 263px !important;}
+	#campusmap .cycleArea .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
+	#campusmap .cycleArea .cWrap ul li{width: 344px !important;height:190px;}
 
 	#campusmap #cboxContent .cycle{position:relative;width:75%;height:100%;margin: 0 auto;}	
 	#campusmap #cboxContent .cycle .cWrap {margin: 0 auto;height:100%;width: auto !important;}
