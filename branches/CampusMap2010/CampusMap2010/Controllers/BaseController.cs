@@ -120,8 +120,8 @@ namespace campusMap.Controllers
                         output = Regex.Replace(output, @"\t{1,}", " ");
                         output = output.Replace('\t', ' ');
                         output = Regex.Replace(output, @"\r\n{1,}", " ");
-                        output = Regex.Replace(output, @"""\s{0,}(.*?)\s{0,}""", @"""$1""");
-                        output = Regex.Replace(output, @"'\s{0,}(.*?)\s{0,}'", @"'$1'");
+                        output = Regex.Replace(output, @"=""\s{0,}(.*?)\s{0,}""", @"=""$1""");
+                        output = Regex.Replace(output, @"='\s{0,}(.*?)\s{0,}'", @"='$1'");
                         output = Regex.Replace(output, @">\s{1,}<", @"><");//set for code with idea never presented in copy too
                         if (stripComments) output = Regex.Replace(output, @"<!--(?!<!)[^\[>].*?-->", @"");
                 //Just in case it's in type string
