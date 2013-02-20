@@ -1012,6 +1012,7 @@ var last_searched=0;
 function getSignlePlace(jObj,id){
 	var url=siteroot+"public/get_place.castle";
 	$( "#placeSearch input[type=text]" ).autocomplete("close");
+	$( "#placeSearch input[type=text]" ).blur();
 	var found=false;
 	
 	if(!$.isNumeric(id) && last_searched != id){
