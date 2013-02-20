@@ -372,8 +372,8 @@ border-bottom-right-radius: 0px;
 #campusmap .ui-tabs .ui-tabs-panel .content .headImage:hover .imgEnlarge{ background-position:center bottom;}
   /* info boxes gallery */		
   .infoBox{max-height:270px; -webkit-transform: translateZ(0px); }
-	#campusmap .cycle{position:relative;width:344px;height:190px;margin-left:10px;zoom:1;}	
-	#campusmap .cycle .cWrap {margin: 0 auto;height:190px;width: 263px !important;}
+	#campusmap .cycle{position:relative;width:344px;height:190px;margin-left:10px;-webkit-transform: translateZ(0px); }	
+	#campusmap .cycle .cWrap {margin: 0 auto;height:190px;width: 263px !important;-webkit-transform: translateZ(0px); }
 	#campusmap .cycle .cWrap ul{display: block;list-style: none outside none;margin: 0 auto;height:190px;}
 	#campusmap .cycle .cWrap ul li{width: 344px !important;height:190px;}
 
