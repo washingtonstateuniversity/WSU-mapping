@@ -590,7 +590,7 @@ namespace campusMap.Controllers {
             CancelView();
             CancelLayout();
 
-            users[] users = ActiveRecordBase<users>.FindAllByProperty("access_levels", ActiveRecordBase<user_groups>.Find(1));
+            //users[] users = ActiveRecordBase<users>.FindAllByProperty("access_levels", ActiveRecordBase<user_groups>.Find(1));
 
             List<String> sentemails = new List<String>();
 
@@ -601,8 +601,8 @@ namespace campusMap.Controllers {
             PropertyBag["place_id"] = place_id;
             PropertyBag["issueType"] = issueType;
 
-            foreach (users user in users) {
-                if (user.nid == "jeremy.bass") {
+            
+                
                     System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
                     email_mass.IsBodyHtml = true;
                     email_mass.From = new MailAddress("noreply@wsu.edu");
@@ -617,16 +617,16 @@ namespace campusMap.Controllers {
 
 
                     email_mass.Subject = "Reported Map error: " + issueType;
-                    if (!String.IsNullOrWhiteSpace(user.email)) {
+                    
                         try {
                             DeliverEmail(email_mass);
                             RenderText("Sent");
                         } catch (Exception ex) {
                             RenderText(ex.ToString());
                         }
-                    }
-                }
-            }
+                    //if (!String.IsNullOrWhiteSpace(user.email)) {}
+                //if (user.nid == "jeremy.bass") {}
+            //foreach (users user in users) {}
             RenderText("true");
         }
         public void emailRequest(String name, String email, String Deparments, String description, String issueType) {
