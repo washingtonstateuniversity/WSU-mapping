@@ -1988,7 +1988,7 @@ function setup(jObj){
 	$('#loading').remove();
 	if(typeof(startingUrl)!="undefined"){
 		updateMap($('#centralMap'),encodeURI(startingUrl.indexOf("&")?startingUrl.split('=')[1].split('&')[0]:startingUrl.split('=')[1]),false,function(){
-				if(parseInt(startingUrl.split('=')[2])>0){
+				if(parseInt(startingUrl.split('=')[1])>0){
 					var marker = markerbyid[parseInt(startingUrl.split('=')[1])];
 					
 					//google.maps.event.trigger(marker, 'click');
