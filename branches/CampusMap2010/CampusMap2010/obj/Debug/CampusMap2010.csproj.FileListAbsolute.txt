@@ -294,3 +294,4 @@ C:\_SVN_\campusMap.4\CampusMap2010\bin\AutoMapper.xml
 C:\_SVN_\campusMap.4\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
 C:\_SVN_\campusMap.4\CampusMap2010\bin\Omu.ValueInjecter.dll
 C:\_SVN_\campusMap.4\CampusMap2010\bin\Omu.ValueInjecter.xml
+C:\_SVN_\campusMap.4\CampusMap2010\bin\Microsoft.SqlServer.SqlClrProvider.dll
