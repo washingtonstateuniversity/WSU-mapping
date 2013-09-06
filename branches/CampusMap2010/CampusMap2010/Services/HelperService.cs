@@ -807,7 +807,12 @@ namespace campusMap.Services {
             //copy = copy.InjectFrom<CloneInjection>(org);
             copy.name = name;
             copy.id = copy_id;
-            copy.owner.id = UserService.getUserFull().id;
+            try {
+                copy.owner.id = UserService.getUserFull().id;
+            } catch (Exception ex) {
+                // caught it, it is not there.. 
+            } 
+            
             copy.status.id = 1;
             copy = (dynamic)copy;
             //ActiveRecordMediator<dynamic>.Save(copy);
