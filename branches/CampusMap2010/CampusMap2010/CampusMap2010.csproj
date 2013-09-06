@@ -122,6 +122,7 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MonoRailHelper">
       <HintPath>\\dev-mcweb.it.wsu.edu\Mcstage\Tools\MonoRail20Helper\MonoRailHelper\bin\Debug\MonoRailHelper.dll</HintPath>
