@@ -655,7 +655,7 @@ namespace campusMap.Controllers {
 
             // geometric.tags.Clear(); 
             //place.Images.Clear();
-            geometric.Authors.Clear();
+            if (geometric.Authors.Count()>0) geometric.Authors.Clear();
             if (apply != null) {
 
             } else {
