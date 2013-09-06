@@ -18,6 +18,8 @@
 
 
 <title>The WSU #if($campus.name!="")${campus.name}#end Campus Map</title>
+<meta name="description" content="Washington State University provides this maping system to help you find the best of the area." />
+<meta name="keywords" content="Learning, Research, Community, WSU, Wazzu, Washington State University, Cougs, Cougars, President Elson S. Floyd, Pullman, Spokane, Tri-Cities, Vancouver, Extension, WSU West, Undergraduate, Graduate School, Eastern Washington, Clean Technologies, School for Global Animal Health, Food Supply, Future and Current Students, Facutly, Staff, Alumni, Friends, Parents, Athletics, Give to WSU" />
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
 #capturefor(site)
