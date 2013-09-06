@@ -606,7 +606,7 @@ namespace campusMap.Controllers {
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
             string boundary,
             string geom_type,
-        [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
+            [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
             Flash["geometric"] = geometric;
             Flash["tags"] = geometric;
             Flash["images"] = geometric;
@@ -655,7 +655,7 @@ namespace campusMap.Controllers {
 
             // geometric.tags.Clear(); 
             //place.Images.Clear();
-            if (geometric.Authors.Count()>0) geometric.Authors.Clear();
+            
             if (apply != null) {
 
             } else {
@@ -670,65 +670,12 @@ namespace campusMap.Controllers {
             } else {
                 geometric.updated_date = DateTime.Now;
             }
-            /*
-            if (newtag != null)
-            {
-                foreach (String onetags in newtag)
-                {
-                    if (onetags != "")
-                    {
-                        tags t = new tags();
-                        t.name = onetags;
-                        tags[] temp = ActiveRecordBase<tags>.FindAllByProperty("Name", onetags);
-                        if (temp.Length == 0)
-                        {
-                            ActiveRecordMediator<tags>.Save(t);
-                            geometric.tags.Add(t);                                                                                  
-                        }
-                    }                        
-                }               
-                     
-            }
-            
-            foreach (geometrics_media si in media)
-            {
-                if (si.Media != null && si.Media.id > 0)
-                {
-                    geometrics_media find = ActiveRecordBase<geometrics_media>.FindFirst(new ICriterion[] { Expression.Eq("media", si.Media), Expression.Eq("geometric_id", geometric) });
-                    find.geometric_order = si.geometric_order;
-                    ActiveRecordMediator<geometrics_media>.Save(find);
-                }
-            }*/
-            /*
-                        foreach (tags tag in tags)
-                        {
-                            if (tag.id > 0)
-                                geometric.tags.Add(tag);        
-                        }
-                        foreach (media_repo _media in images)
-                        {
-                            if (_media.id > 0 && !geometric.Images.Contains(_media))
-                            {
-                                geometric.Images.Add(_media);
-                            }
-                        }
-                        */
+
+            if (geometric.Authors != null && geometric.Authors.Count() > 0) geometric.Authors.Clear();
             foreach (users author in authors) {
                 if (author.id > 0)
                     geometric.Authors.Add(author);
             }
-
-            /*string requested_url = place.CustomUrl;
-            if (placeService.placeByURL(place.CustomUrl).Length > 1)
-            {
-                place.CustomUrl = requested_url + "1";
-                ActiveRecordMediator<place>.Save(place);
-                Flash["error"] = "The url you choose is in use.  Please choose a new one.  We have saved it as '" + requested_url + "1" + "' currently.";
-                RedirectToReferrer();
-                return;
-            }*/
-
-
 
             string gemSql = "";
             string gemtype = "";
