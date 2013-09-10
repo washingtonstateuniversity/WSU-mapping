@@ -300,6 +300,15 @@
             </fieldset>    
 			
              
+			<fieldset><legend>Map Point</legend>
+                <label for="name">Choose a map point</label><br/>
+				<select name="place.pointImg" id="placeShape">   
+					<option class="geometric" value="" >Auto indexed numbering</option> 
+					#foreach($img in $pointImgs)
+						<option class="mappoint" value="$img" #if($place.pointImg == $img) selected="selected" #end>$img</option>
+					#end
+				</select>
+            </fieldset>               
 
 
 

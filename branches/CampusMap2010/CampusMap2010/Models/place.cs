@@ -106,6 +106,9 @@ namespace campusMap.Models {
         [Property]
         virtual public string staticMap { get; set; }
 
+        [Property]
+        virtual public string pointImg { get; set; }
+
         [BelongsTo]
         virtual public campus campus { get; set; }
 

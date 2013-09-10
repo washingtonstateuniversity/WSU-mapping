@@ -1281,7 +1281,7 @@ namespace campusMap.Controllers {
                                     ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""style"":{
-                                            ""icon"":""" + getRootUrl() + @"Content/images/map_icons/default_icon_{$i}.png""
+                                            ""icon"":""" + getRootUrl() + @"Content/images/map_icons/" + (!String.IsNullOrWhiteSpace(item.pointImg) ? item.pointImg : "default_icon_{$i}.png") + @"""
                                             },
                                     ""info"":{
                                             ""content"":" + infotabs + @",

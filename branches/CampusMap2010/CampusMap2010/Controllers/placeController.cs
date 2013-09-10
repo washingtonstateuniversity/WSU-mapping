@@ -469,6 +469,22 @@ namespace campusMap.Controllers {
             typeEx.Add(Expression.Eq("model", this.GetType().Name));
             typeEx.Add(Expression.Eq("set", one_place.model.id));
 
+            String pointImg_path = getRootPath() + "/Content/images/map_icons";
+            string[] files = Directory.GetFiles(pointImg_path, "*.*", SearchOption.AllDirectories);
+            string[] wantedExtensions = { ".png",".gif", ".jpg", ".svg" }; // you can extend it   
+            List<String> col = new List<String>();
+            foreach (string file in files) {
+                string ext = Path.GetExtension(file);
+                if (wantedExtensions.Contains<string>(ext)) {
+                    col.Add(file.Split(new string[] { "map_icons\\" }, StringSplitOptions.None)[1]);
+                }
+            }   
+
+
+            PropertyBag["pointImgs"] = col;
+
+
+
             field_types[] ft = ActiveRecordBase<field_types>.FindAll(typeEx.ToArray());
             List<string> user_fields = new List<string>();
             List<string> fields = new List<string>();
