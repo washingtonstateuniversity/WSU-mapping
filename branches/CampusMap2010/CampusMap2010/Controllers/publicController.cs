@@ -255,7 +255,13 @@ namespace campusMap.Controllers {
         public void central(string[] cat, int activePlace, int pid, Boolean eb) {
             central(cat, activePlace, pid, eb, false, null);
         }
-        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url) {
+        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url){
+            central(cat, activePlace, pid, eb, false, null, true, true, true, true); 
+        }
+
+
+
+        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions) {
             /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);*/
             if (HttpContext.Current.Request.Headers["User-Agent"] != null) {
                 if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
@@ -282,6 +288,13 @@ namespace campusMap.Controllers {
             }
             PropertyBag["url"] = sm_url;
             PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
+            PropertyBag["layout"]=layout;
+            PropertyBag["header"]=header;
+            PropertyBag["search"]=search;
+            PropertyBag["directions"]=directions;
+
+
+
 
             PropertyBag["selectedCats"] = cat;
             PropertyBag["activePlace"] = activePlace;

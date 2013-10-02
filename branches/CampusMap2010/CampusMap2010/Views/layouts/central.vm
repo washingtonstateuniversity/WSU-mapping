@@ -6,6 +6,20 @@
     	<meta charset="utf-8">
 		#* all the JS and CSS that is site wide *#
 		#parse("layouts/assets_central/global_header_html.vm")
+		
+		
+		#if($layout==false || $header==false || $search==false || $directions==false)
+		
+		<style>
+			#if($layout==false || $header==false) #header_bar{display:none;} #end
+			#if($layout==false || $search==false) #placeSearch{display:none;} #end
+			#if($layout==false || $directions==false) #getDirections{display:none;} #end
+		</style>
+		
+		#end
+		
+		
+		
 	</head>
 	<body id='campusmap' class="#if($embeded)embeded #end central_layout ${controller.getView()} ${controller.getAction()}">
 		#if(!$embeded)
