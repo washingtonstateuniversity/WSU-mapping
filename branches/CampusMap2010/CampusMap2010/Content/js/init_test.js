@@ -72,7 +72,9 @@ function ini_map_view(map_ele_obj,callback){
 }
 
 function iniMap(url,callback){
-	var winH = $(window).height()-130;
+	var padder = 130;
+	if($('.layoutfree').lenght)padder = 0;
+	var winH = $(window).height()-padder;
 	var winW = $(window).width();
 	var zoom = 15;
 	if(winW>=500 && winH>=200){zoom = 14;}

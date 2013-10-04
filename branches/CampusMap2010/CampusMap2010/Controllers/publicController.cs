@@ -253,7 +253,7 @@ namespace campusMap.Controllers {
         //[DefaultAction]
 
         public void central(string[] cat, int activePlace, int pid, Boolean eb) {
-            central(cat, activePlace, pid, eb, false, null);
+            central(cat, activePlace, pid, eb, false, null, true, true, true, true);
         }
         public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url){
             central(cat, activePlace, pid, eb, false, null, true, true, true, true); 

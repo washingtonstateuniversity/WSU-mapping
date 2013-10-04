@@ -21,8 +21,8 @@
 		
 		
 	</head>
-	<body id='campusmap' class="#if($embeded)embeded #end central_layout ${controller.getView()} ${controller.getAction()}">
-		#if(!$embeded)
+	<body id='campusmap' class="#if($embeded)embeded #end #if(!$layout)layoutfree #end central_layout ${controller.getView()} ${controller.getAction()}">
+		#if(!$embeded && $layout!="false")
 			<div id="header_bar">
 				#parse("layouts/assets_central/header_html.vm")
 			</div>
