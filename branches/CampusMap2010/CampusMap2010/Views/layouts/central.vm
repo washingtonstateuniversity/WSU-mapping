@@ -17,7 +17,7 @@
 				#logo{ top:0; }
 				#header_bar{ height: 93px; }
 				#logo{ }
-				.parent.altAction{display:none;}
+				#printPdfs{display:none;}
 			#end
 			#if($layout==false || $search==false) #placeSearch{display:none;} #end
 			#if($layout==false || $directions==false) #getDirections{display:none;} #end
