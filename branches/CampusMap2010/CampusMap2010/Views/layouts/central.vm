@@ -16,7 +16,7 @@
 				#toolbar, #globalnav{display:none;} 
 				#logo{ top:0; }
 				#header_bar{ height: 93px; }
-				#logo{ }
+				#nav{background: none repeat scroll center bottom rgba(0, 0, 0, 0); }
 				#main_nav li a#printPdfs { display: none !important; }
 			#end
 			#if($layout==false || $search==false) #placeSearch{display:none;} #end

@@ -329,7 +329,6 @@ function addCentralControlls(){
 	/**/
 }
 function poi_setup(jObj){
-	//var map = jObj.gmap("get","map");
     var proto = google.maps.InfoWindow.prototype,
         open = proto.open;
     proto.open = function(map, anchor, please) {
@@ -577,6 +576,13 @@ function open_info(jObj,i,marker){
 		$('#selectedPlaceList_area .active').removeClass('active');
 		$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
 		cur_mid = mid[i];
+		if($('.layoutfree').length){
+			$('.ui-tabs-panel .content a').on("click",function(e){
+				e.stopPropagation();
+				e.preventDefault();	
+				return false;
+			});
+		}
 	}
 	ibHover =  false;		
 }
@@ -785,7 +791,13 @@ function make_InfoWindow(jObj,i,marker){
 				$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
 					if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
 				});
-				
+				if($('.layoutfree').length){
+					$('.infoBox .ui-tabs-panel .content a').on("click",function(e){
+						e.stopPropagation();
+						e.preventDefault();	
+						return false;
+					});
+				}
 				
 				
 				$('a.gouped').off().on('click',function(e){
@@ -2016,7 +2028,21 @@ function setup(jObj){
 	addErrorReporting();
 	
 	setup_pdfprints();
+	if($('.layoutfree').length){
+		$('a').not('#nav a').on("click",function(e){
+			e.stopPropagation();
+			e.preventDefault();	
+		});
+		$('.ui-tabs-panel .content a').on("click",function(e){
+			e.stopPropagation();
+			e.preventDefault();	
+		});
 
+		
+		
+		
+		
+	}
 	if($( "#placeSearch input[type=text]" ).length){
 		setup_mapsearch($('#centralMap'));
 		/* EOF Search autocomplete */
