@@ -138,7 +138,7 @@ namespace campusMap.Controllers {
             }
 
             CancelView();
-
+            
             if (everUrl == "/default.aspx") {
                 //Redirect(HttpContext.Request.ApplicationPath + "/Admin/editByUrl.castle?editurl=" + Context.Server.UrlEncode(everUrl));
                 central(HttpContext.Current.Request.Params["cat"].Split(','), int.Parse(HttpContext.Current.Request.Params["activePlace"]), int.Parse(HttpContext.Current.Request.Params["pid"]), Convert.ToBoolean(HttpContext.Current.Request.Params["eb"]));
@@ -213,14 +213,17 @@ namespace campusMap.Controllers {
                 int activePlace = u[0].or_url.Contains("activePlace") ? -1 : 0;
                 int pid = u[0].or_url.Contains("pid") ? -1 : 0;
                 Boolean eb = u[0].or_url.Contains("eb") ? false : false;
-
+                Boolean layout = true;
                 foreach (string query in queries) {
                     if (cats == null && query.Contains("cat")) cats = query.ToString().Replace("cat[]=", "").Split(',');
                     if (activePlace == -1 && query.Contains("activePlace")) activePlace = int.Parse(query.ToString().Replace("activePlace=", ""));
                     if (pid == -1 && query.Contains("pid")) pid = int.Parse(query.ToString().Replace("pid=", ""));
                     if (query.Contains("eb")) eb = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
+                    
                 }
-                central(cats, activePlace, pid, eb, true, smallUrl);
+                if (querystring.IndexOf("layout") >-1)
+                    layout = Convert.ToBoolean(HttpContext.Current.Request.Params["layout"]);
+                central(cats, activePlace, pid, eb, true, smallUrl, layout);
                 return;
             }
         }
@@ -258,7 +261,12 @@ namespace campusMap.Controllers {
         public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url){
             central(cat, activePlace, pid, eb, false, null, true, true, true, true); 
         }
-
+        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url, Boolean layout) {
+            central(cat, activePlace, pid, eb, false, null, layout, true, true, true);
+        }
+        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean layout) {
+            central(cat, activePlace, pid, eb, false, null, layout, true, true, true);
+        }
 
 
         public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions) {
