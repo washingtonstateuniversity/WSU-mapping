@@ -53,10 +53,11 @@ function ini_map_view(map_ele_obj,callback){
 				var jsonStr = $('#runningOptions').html();
 				var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
 				jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+
 				$.extend(map_op,pos,base,$.parseJSON(jsonStr));
 			}
 		}
-		
+
 		
 		
 		map_ele_obj.gmap(map_op).bind('init', function() { 
@@ -94,7 +95,20 @@ function iniMap(url,callback){
 		}
 		
 		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
-		
+		if($('.layoutfree').length){
+			styles={
+				zoom:17,
+				styles:[{
+				featureType:"poi",
+				elementType:"labels",
+				stylers:[{
+					visibility:"off"
+				}]
+			}]};
+		}
+				
+				
+		map_op=$.extend(map_op,styles);
 		if($('#runningOptions').length){
 			if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
 		
