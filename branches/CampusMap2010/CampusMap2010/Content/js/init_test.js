@@ -93,7 +93,7 @@ function iniMap(url,callback){
 			if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom+1;}
 			if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}
 		}
-		
+		styles={};
 		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 		if($('.layoutfree').length){
 			styles={
