@@ -111,6 +111,7 @@
 		_create: function() {
 			var self = this;
 			this.instance = { 'map': new google.maps.Map(self.el, self.options), 'markers': [], 'overlays': [], 'services': [] };
+			this.supressPoiPopup();//this should be exposed as an option
 			google.maps.event.addListenerOnce(self.instance.map, 'bounds_changed', function() { $(self.el).trigger('init', self.instance.map); });
 			self._call(self.options.callback, self.instance.map);
 		},
@@ -252,7 +253,18 @@
 			}
 			return instance[key];
 		},
-		
+		supressPoiPopup: function(){
+			var set = google.maps.InfoWindow.prototype.set;
+			google.maps.InfoWindow.prototype.set = function (key, val) {
+				if (key === 'map') {
+					if (!this.get('noSupress')) {
+						//console.log('This InfoWindow is supressed. To enable it, set "noSupress" option to true');
+						return;
+					}
+				}
+				set.apply(this, arguments);
+			}
+		},
 		/**
 		 * Triggers an InfoWindow to open
 		 * @param infoWindowOptions:google.maps.InfoWindowOptions
@@ -263,6 +275,7 @@
 		openInfoWindow: function(infoWindowOptions, marker, callback) {
 			var iw = this.get('iw', infoWindowOptions.infoWindow || new google.maps.InfoWindow);
 			iw.setOptions(infoWindowOptions);
+			iw.set('noSupress', true);
 			iw.open(this.get('map'), this._unwrap(marker)); 
 			this._call(callback, iw);
 			return this;

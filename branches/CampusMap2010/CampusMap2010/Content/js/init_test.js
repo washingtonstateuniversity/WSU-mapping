@@ -97,16 +97,17 @@ function iniMap(url,callback){
 		map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 		if($('.layoutfree').length){
 			styles={
-				zoom:17,
+				zoom:17
+			};
+		}
+				/*,
 				styles:[{
 				featureType:"poi",
 				elementType:"labels",
 				stylers:[{
 					visibility:"off"
 				}]
-			}]};
-		}
-				
+				}]*/
 				
 		map_op=$.extend(map_op,styles);
 		if($('#runningOptions').length){

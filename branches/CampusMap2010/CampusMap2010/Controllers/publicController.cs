@@ -219,7 +219,6 @@ namespace campusMap.Controllers {
                     if (activePlace == -1 && query.Contains("activePlace")) activePlace = int.Parse(query.ToString().Replace("activePlace=", ""));
                     if (pid == -1 && query.Contains("pid")) pid = int.Parse(query.ToString().Replace("pid=", ""));
                     if (query.Contains("eb")) eb = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
-                    
                 }
                 if (querystring.IndexOf("layout") >-1)
                     layout = Convert.ToBoolean(HttpContext.Current.Request.Params["layout"]);
