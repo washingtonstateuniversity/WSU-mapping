@@ -7,7 +7,7 @@
 
 
 <meta name="google-site-verification" content="xhwREwkwhYoAUqVEoe6o8jpnm9YYtDrJlUnhRWYNqDQ" />
-
+<meta name="msvalidate.01" content="73B464C828058D51A426DC1B61D99824" />
 
 
 #if($Controller.isLocal()==false)
