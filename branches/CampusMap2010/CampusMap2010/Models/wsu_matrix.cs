@@ -11,6 +11,7 @@ using Castle.ActiveRecord;
 using NHibernate.Criterion;
 using System.Collections.Generic;
 using Castle.Components.Validator;
+using Newtonsoft.Json;
 
 namespace campusMap.Models
 {
@@ -43,7 +44,17 @@ namespace campusMap.Models
         virtual public string friendly_name { get; set; }
 
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_categories", ColumnKey = "category_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [JsonIgnore]
         virtual public IList<place> Places { get; set; }
+
+        private categories parent;
+        [BelongsTo]
+        [JsonIgnore]
+        virtual public categories Parent
+        {
+            get { return parent; }
+            set { parent = value; }
+        }
     }
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]

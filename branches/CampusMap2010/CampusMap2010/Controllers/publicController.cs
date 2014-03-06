@@ -366,12 +366,21 @@ namespace campusMap.Controllers {
         public void get_categories_list(String callback) {
             CancelView();
             CancelLayout();
-            var tmp = ActiveRecordBase<categories>.FindAll().Select(i => new { i.id, i.name });
+            var tmp = ActiveRecordBase<categories>.FindAll().Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 :  i.Parent.id) });
             if (tmp.Count() > 0) {
                 render_list_json(tmp, callback);
             } else {
                 RenderText("false");
             }
+        }
+        public void getCategories(int parentid)
+        {
+            categories parent = null;
+            parent = ActiveRecordBase<categories>.TryFind(parentid);
+            categories[] cats = ActiveRecordBase<categories>.FindAllByProperty("Parent", parent);
+
+            RenderText(JsonConvert.SerializeObject(cats));
+            CancelView();
         }
         public void get_colleges_list(String callback) {
             CancelView();
