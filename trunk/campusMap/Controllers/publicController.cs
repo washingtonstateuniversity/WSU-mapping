@@ -174,6 +174,15 @@
             PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAll();
             RenderView("central");
         }
+        public void getCategories(int parentid)
+        {
+            categories parent = null;
+            parent = ActiveRecordBase<categories>.TryFind(parentid);
+            categories[] cats = ActiveRecordBase<categories>.FindAllByProperty("Parent", parent);
+
+            RenderText(JsonConvert.SerializeObject(cats));
+            CancelView();
+        }
         public void fetchMap(String alias, String mode, String callback)
         {
             CancelView();

@@ -19,3 +19,12 @@ C:\_SVN_\campusMap\campusMap\bin\Castle.DynamicProxy2.xml
 C:\_SVN_\campusMap\campusMap\obj\Debug\ResolveAssemblyReference.cache
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.dll
 C:\_SVN_\campusMap\campusMap\obj\Debug\campusMap.pdb
+C:\updesktop\natedev\campusMap\campusMap\obj\Debug\ResolveAssemblyReference.cache
+C:\updesktop\natedev\campusMap\campusMap\obj\Debug\campusMap.dll
+C:\updesktop\natedev\campusMap\campusMap\bin\campusMap.dll
+C:\updesktop\natedev\campusMap\campusMap\bin\campusMap.pdb
+C:\updesktop\natedev\campusMap\campusMap\bin\Castle.DynamicProxy2.dll
+C:\updesktop\natedev\campusMap\campusMap\bin\Castle.DynamicProxy2.xml
+C:\updesktop\natedev\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml
+C:\updesktop\natedev\campusMap\campusMap\bin\Castle.Components.Common.TemplateEngine.xml
+C:\updesktop\natedev\campusMap\campusMap\obj\Debug\campusMap.pdb

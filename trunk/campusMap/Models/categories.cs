@@ -10,6 +10,7 @@ using System.Web.UI.HtmlControls;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace campusMap.Models
 {   
@@ -44,12 +45,23 @@ namespace campusMap.Models
             get { return _friendly_name; }
             set { _friendly_name = value; }
         }
+
         private IList<place> places;
+        [JsonIgnore]
         [HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_categories", ColumnKey = "category_id", ColumnRef = "place_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<place> Places
         {
             get { return places; }
             set { places = value; }
+        }
+
+        private categories parent;
+        [BelongsTo]
+        [JsonIgnore]
+        virtual public categories Parent
+        {
+            get { return parent; }
+            set { parent = value; }
         }
      }
 }
