@@ -366,7 +366,7 @@ namespace campusMap.Controllers {
         public void get_categories_list(String callback) {
             CancelView();
             CancelLayout();
-            var tmp = ActiveRecordBase<categories>.FindAll().Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 :  i.Parent.id) });
+            var tmp = ActiveRecordBase<categories>.FindAllByProperty("active", true).Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 :  i.Parent.id) });
             if (tmp.Count() > 0) {
                 render_list_json(tmp, callback);
             } else {
