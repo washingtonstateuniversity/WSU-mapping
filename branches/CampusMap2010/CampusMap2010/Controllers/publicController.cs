@@ -1089,7 +1089,20 @@ namespace campusMap.Controllers {
         {
             CancelView();
             CancelLayout();
-            place[] list = ActiveRecordBase<place>.FindAllByProperty("prime_name", name);
+            string cleanedname = Regex.Replace(name, @"\(.*?\)", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            if (!String.IsNullOrEmpty(cleanedname))
+                cleanedname = cleanedname.Trim();
+            IList<place_names> c = ActiveRecordBase<place_names>.FindAllByProperty("name", cleanedname);
+            String sql = "from place p where p.prime_name = :p0 or p.abbrev_name = :p0 ";
+            if(c.Count > 0)
+                sql += " or :p1 in elements(p.names)";
+
+            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+            q.SetParameter("p0", cleanedname);
+            if(c.Count > 0)
+                q.SetParameter("p1", c[0]);
+
+            place[] list = q.Execute();
 
             sendPlaceJson(list, callback);
         }
