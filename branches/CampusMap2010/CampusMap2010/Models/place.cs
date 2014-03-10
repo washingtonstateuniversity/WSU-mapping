@@ -26,6 +26,10 @@ namespace campusMap.Models {
         protected UserService userService = new UserService();
         public place() { }
 
+        virtual public String getBestName(){
+            return !string.IsNullOrEmpty(infoTitle) ? infoTitle.Trim() : prime_name.Trim();
+        }
+
         [PrimaryKey("place_id")]
         virtual public int id { get; set; }
 

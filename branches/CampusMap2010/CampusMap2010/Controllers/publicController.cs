@@ -1085,6 +1085,15 @@ namespace campusMap.Controllers {
             return json;
         }
 
+        public void get_place_by_name(string name, string callback)
+        {
+            CancelView();
+            CancelLayout();
+            place[] list = ActiveRecordBase<place>.FindAllByProperty("friendly_name", name);
+
+            sendPlaceJson(list, callback);
+        }
+
         public void get_place_by_category(string[] cat, string pid, string callback) {
             CancelView();
             CancelLayout();
@@ -1092,9 +1101,14 @@ namespace campusMap.Controllers {
             String sql = "from place p where ";
             int id = 1;
             foreach (string category in cat) {
-                sql += " :p" + id + " in elements(p.categories) ";
-                id = id + 1;
-                sql += " or ";
+                string cats = HttpUtility.UrlDecode(category);
+                IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                if (c.Count > 0)
+                {
+                    sql += " :p" + id + " in elements(p.categories) ";
+                    id = id + 1;
+                    sql += " or ";
+                }
             }
             sql += " 1=0 ";
             sql += " ORDER BY p.prime_name ASC ";
@@ -1103,14 +1117,32 @@ namespace campusMap.Controllers {
             foreach (string category in cat) {
                 string cats = HttpUtility.UrlDecode(category);
                 IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
-                q.SetParameter("p" + id, c[0]);
-                id = id + 1;
+                if (c.Count > 0)
+                {
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
             }
             place[] items = q.Execute();
             sendPlaceJson(items, callback);
         }
-        public void get_place_by_keyword(string[] str, string callback) {
+        public void get_place_by_categoryname(string catname, string callback)
+        {
             CancelView();
+            CancelLayout();
+            place[] items = new List<place>().ToArray();
+            IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("name", catname);
+            if (c.Count > 0)
+            {
+                String sql = "from place p where :p in elements(p.categories) ORDER BY p.prime_name ASC ";
+                SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+                q.SetParameter("p", c[0]);
+                items = q.Execute();
+            }
+            sendPlaceJson(items, callback);
+        }
+        public void get_place_by_keyword(string[] str, string callback) {
+            /*CancelView();
             CancelLayout();
 
             String sql = "from place p where ";
@@ -1129,6 +1161,36 @@ namespace campusMap.Controllers {
                 IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
                 q.SetParameter("p" + id, c[0]);
                 id = id + 1;
+            }*/
+            CancelView();
+            CancelLayout();
+
+            String sql = "from place p where ";
+            int id = 1;
+            foreach (string name in str)
+            {
+                string cats = HttpUtility.UrlDecode(name);
+                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
+                if (c.Count > 0)
+                {
+                    sql += " :p" + id + " in elements(p.tags) ";
+                    id = id + 1;
+                    sql += " or ";
+                }
+            }
+            sql += " 1=0 ";
+            sql += " ORDER BY p.prime_name ASC ";
+            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+            id = 1;
+            foreach (string name in str)
+            {
+                string cats = HttpUtility.UrlDecode(name);
+                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
+                if (c.Count > 0)
+                {
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
             }
             place[] items = q.Execute();
             sendPlaceJson(items, callback);
