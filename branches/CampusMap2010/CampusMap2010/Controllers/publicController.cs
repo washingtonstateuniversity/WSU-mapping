@@ -1093,7 +1093,7 @@ namespace campusMap.Controllers {
             if (!String.IsNullOrEmpty(cleanedname))
                 cleanedname = cleanedname.Trim();
             IList<place_names> c = ActiveRecordBase<place_names>.FindAllByProperty("name", cleanedname);
-            String sql = "from place p where p.prime_name = :p0 or p.abbrev_name = :p0 ";
+            String sql = "from place p where p.prime_name = :p0 or p.infoTitle = :p0 or p.abbrev_name = :p0 ";
             if(c.Count > 0)
                 sql += " or :p1 in elements(p.names)";
 
