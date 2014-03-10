@@ -1089,7 +1089,7 @@ namespace campusMap.Controllers {
         {
             CancelView();
             CancelLayout();
-            place[] list = ActiveRecordBase<place>.FindAllByProperty("friendly_name", name);
+            place[] list = ActiveRecordBase<place>.FindAllByProperty("prime_name", name);
 
             sendPlaceJson(list, callback);
         }
