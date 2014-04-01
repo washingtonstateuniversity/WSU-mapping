@@ -395,6 +395,5 @@ C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\ru\Castle
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\sv\Castle.Components.Validator.resources.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\pt-BR\Castle.MonoRail.Framework.resources.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.dll
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.pdb
