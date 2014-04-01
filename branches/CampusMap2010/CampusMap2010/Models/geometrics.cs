@@ -22,7 +22,7 @@ namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 30)]
     public class geometrics : publish_base {
         protected HelperService helperService = new HelperService();
-
+        protected geometricService geometricService = new geometricService();
 
         public geometrics() { }
 
@@ -31,6 +31,38 @@ namespace campusMap.Models {
 
         [Property(SqlType = "geography", ColumnType = "BinaryBlob")]
         virtual public byte[] boundary { get; set; }
+
+        virtual public String latlongs {
+            get
+            {
+                var gem = "";
+                if (boundary != null)
+                {
+                    SqlGeography spatial = geometrics.AsGeography(boundary);
+                    string sp_type = spatial.STGeometryType().ToString().ToUpper();
+                    switch (sp_type)
+                    {
+                        case "POINT":
+                            gem = geometricService.outputRawPoint(spatial);
+                            break;
+                        case "LINESTRING":
+                            gem = geometricService.outputRawLineString(spatial);
+                            break;
+                        case "POLYGON":
+                            gem = geometricService.outputRawPolygon(spatial);
+                            break;
+                        case "MULTIPOINT":
+                            break;
+                        case "MULTILINESTRING":
+                            break;
+                        case "MULTIPOLYGON":
+                            break;
+                    }
+                }
+                return gem;
+            }
+            set{}
+        }
 
         [Property]
         virtual public string name { get; set; }

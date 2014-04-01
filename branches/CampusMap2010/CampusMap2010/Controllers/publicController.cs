@@ -1154,7 +1154,7 @@ namespace campusMap.Controllers {
             }
             sendPlaceJson(items, callback);
         }
-        public void get_place_by_keyword(string[] str, string callback) {
+        public void get_place_by_keyword(string str, string callback) {
             /*CancelView();
             CancelLayout();
 
@@ -1180,9 +1180,8 @@ namespace campusMap.Controllers {
 
             String sql = "from place p where ";
             int id = 1;
-            foreach (string name in str)
             {
-                string cats = HttpUtility.UrlDecode(name);
+                string cats = HttpUtility.UrlDecode(str);
                 IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
                 if (c.Count > 0)
                 {
@@ -1195,9 +1194,8 @@ namespace campusMap.Controllers {
             sql += " ORDER BY p.prime_name ASC ";
             SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
             id = 1;
-            foreach (string name in str)
             {
-                string cats = HttpUtility.UrlDecode(name);
+                string cats = HttpUtility.UrlDecode(str);
                 IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
                 if (c.Count > 0)
                 {
@@ -1399,7 +1397,8 @@ namespace campusMap.Controllers {
                             // if it can not be read then we place a friendly showing that the data is bad to keep the map working
                             bool dataGood = true;
 
-                            try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); } catch { dataGood = false; }
+                            try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
+                            catch (Exception e) { throw(e);  dataGood = false; }
 
                             if (dataGood) {
                                 item.outputError = false;
