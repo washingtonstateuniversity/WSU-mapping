@@ -340,7 +340,6 @@ C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\CentralCC
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Recaptcha.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Antlr3.Runtime.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Lucene.Net.dll
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\AjaxMin.pdb
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\AutoMapper.xml
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Castle.ActiveRecord.pdb
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Castle.ActiveRecord.xml
@@ -374,9 +373,6 @@ C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Nullables
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Nullables.NHibernate.xml
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\NVelocity.xml
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Omu.ValueInjecter.xml
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Rejuicer.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\SquishIt.Framework.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\SquishIt.Mvc.pdb
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\NHibernate.ByteCode.Castle.xml
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Castle.DynamicProxy2.xml
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.pdb
