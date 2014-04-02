@@ -1397,7 +1397,8 @@ namespace campusMap.Controllers {
                             // if it can not be read then we place a friendly showing that the data is bad to keep the map working
                             bool dataGood = true;
 
-                            jss.Deserialize<Dictionary<string, dynamic>>(placeList); 
+                            try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
+                            catch (Exception e) { throw(e);  dataGood = false; }
 
                             if (dataGood) {
                                 item.outputError = false;
@@ -1407,7 +1408,7 @@ namespace campusMap.Controllers {
                                 item.outputError = true;
                                 ActiveRecordMediator<place>.Save(item);
                                 ActiveRecordMediator<place>.Refresh(item);
-                                placeList = @"{""error"":""Error in the outputt.  This place needs to be edited.""}";
+                                placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
                             }
 
                             setJsonCache(cachePath, file, placeList);
