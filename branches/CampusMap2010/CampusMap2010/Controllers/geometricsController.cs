@@ -725,7 +725,25 @@ namespace campusMap.Controllers {
 
                 // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
                 SqlChars udtText = new SqlChars(wkt);
-                SqlGeography sqlGeometry1 = SqlGeography.STGeomFromText(udtText, 4326);
+
+
+                // a helper SqlGeometry, which isn't picky about ring orientation
+                var geometryHelper =
+                    SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+
+                // STUnion will automagically correct any bad ring orientation
+                var validGeom =
+                    geometryHelper.STUnion(geometryHelper.STStartPoint());
+
+                // use the validGeom with correct ring orientation to 
+                // create a SqlGeography.
+                var sqlGeometry1 =
+                    SqlGeography.STGeomFromText(validGeom.STAsText(), 4326);
+
+
+
+                //SqlGeometry sqlGeometry1 = SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+                //SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
 
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter bw = new BinaryWriter(ms);

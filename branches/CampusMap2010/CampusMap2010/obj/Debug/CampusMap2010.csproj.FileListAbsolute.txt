@@ -397,8 +397,3 @@ C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\pt-BR\Cas
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\AjaxMin.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\Rejuicer.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\SquishIt.Framework.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\bin\SquishIt.Mvc.pdb
-C:\updesktop\natedev\campusMapbranches\CampusMap2010\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
