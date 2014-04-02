@@ -1397,8 +1397,7 @@ namespace campusMap.Controllers {
                             // if it can not be read then we place a friendly showing that the data is bad to keep the map working
                             bool dataGood = true;
 
-                            try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
-                            catch (Exception e) { throw(e);  }
+                            jss.Deserialize<Dictionary<string, dynamic>>(placeList); 
 
                             if (dataGood) {
                                 item.outputError = false;
