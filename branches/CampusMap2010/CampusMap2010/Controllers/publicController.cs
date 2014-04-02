@@ -1407,7 +1407,7 @@ namespace campusMap.Controllers {
                                 item.outputError = true;
                                 ActiveRecordMediator<place>.Save(item);
                                 ActiveRecordMediator<place>.Refresh(item);
-                                placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
+                                placeList = @"{""error"":""Error in the outputt.  This place needs to be edited.""}";
                             }
 
                             setJsonCache(cachePath, file, placeList);
