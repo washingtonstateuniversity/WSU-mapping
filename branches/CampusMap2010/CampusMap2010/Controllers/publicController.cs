@@ -1398,7 +1398,7 @@ namespace campusMap.Controllers {
                             bool dataGood = true;
 
                             try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
-                            catch (Exception e) { throw(e);  dataGood = false; }
+                            catch (Exception e) { throw(e);  }
 
                             if (dataGood) {
                                 item.outputError = false;
