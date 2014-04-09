@@ -205,7 +205,7 @@ namespace campusMap.Controllers {
             pagesize = 15;
             IList<styles> geometrics_styles_items;
             geometrics_styles_items = ActiveRecordBase<styles>.FindAll();
-            PropertyBag["styles"] = PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
+            PropertyBag["styles"] = geometrics_styles_items; // PaginationHelper.CreatePagination(geometrics_styles_items, pagesize, paging);
 
             RenderView("../admin/listings/list");
         }

@@ -87,7 +87,7 @@
 					</a>&nbsp;
 				  </p>
 				</div>
-				<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.TotalItems)</h3>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.Count)</h3>
 				#parse("/admin/maps/styles/list.vm")	
 			</div>
 		</div></div>	
