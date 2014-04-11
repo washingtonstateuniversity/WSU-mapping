@@ -934,7 +934,7 @@ namespace campusMap.Controllers {
             }
         }
 
-        public static SortedDictionary<string, int> search_place_string(string term) {
+        public static SortedDictionary<string, int> search_place_string(string term, bool skiptags) {
             // Use hashtable to store name/value pairs
             SortedDictionary<string, int> results = new SortedDictionary<string, int>();
             //id is for order
@@ -947,11 +947,12 @@ namespace campusMap.Controllers {
                 or p.prime_name like :searchterm
                 or (p in (select p from p.tags as t where t.name like :searchterm)) 
                 or (p in (select p from p.names as n where n.name like :searchterm))
+where p.status = 3
                 ";
 
 
             // Search place prime name
-            String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%'";
+            String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%' and p.status =3";
 
             SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
             place[] places = pq.Execute();
