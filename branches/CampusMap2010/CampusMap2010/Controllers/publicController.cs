@@ -934,7 +934,7 @@ namespace campusMap.Controllers {
             }
         }
 
-        public static SortedDictionary<string, int> search_place_string(string term, bool skiptags) {
+        public static SortedDictionary<string, int> search_place_string(string term) {
             // Use hashtable to store name/value pairs
             SortedDictionary<string, int> results = new SortedDictionary<string, int>();
             //id is for order
