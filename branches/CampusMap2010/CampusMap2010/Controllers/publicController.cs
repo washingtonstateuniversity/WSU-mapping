@@ -1399,7 +1399,7 @@ where p.status = 3
                             bool dataGood = true;
 
                             try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
-                            catch (Exception e) { throw(e);  dataGood = false; }
+                            catch (Exception e) {  dataGood = false; }
 
                             if (dataGood) {
                                 item.outputError = false;
