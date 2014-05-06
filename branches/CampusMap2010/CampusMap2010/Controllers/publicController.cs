@@ -948,11 +948,12 @@ namespace campusMap.Controllers {
                 or (p in (select p from p.tags as t where t.name like :searchterm)) 
                 or (p in (select p from p.names as n where n.name like :searchterm))
 where p.status = 3
+                order by p.prime_name ASC
                 ";
 
 
             // Search place prime name
-            String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%' and p.status =3";
+            String searchprime_name = @"SELECT p FROM place AS p WHERE p.prime_name LIKE '%" + term + "%' and p.status =3  order by p.prime_name ASC";
 
             SimpleQuery<place> pq = new SimpleQuery<place>(typeof(place), searchprime_name);
             place[] places = pq.Execute();
@@ -971,6 +972,7 @@ where p.status = 3
             // Search place abbrev
             String searchabbrev = @"from place p where 
                    p.abbrev_name LIKE :searchterm 
+ order by p.prime_name ASC
                 ";
 
             foreach (place place in searchAndAddResultsToHashtable(searchabbrev, term)) {
