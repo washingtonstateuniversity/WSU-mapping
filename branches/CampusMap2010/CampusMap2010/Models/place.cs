@@ -116,6 +116,9 @@ namespace campusMap.Models {
         [BelongsTo]
         virtual public campus campus { get; set; }
 
+        [Property]
+        virtual public String percentfull { get; set; }
+
         private IList<schools> _school = new List<schools>();
         [HasAndBelongsToMany(typeof(schools), Lazy = true, Table = "place_to_schools", ColumnKey = "place_id", ColumnRef = "school_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<schools> schools {
@@ -228,6 +231,14 @@ namespace campusMap.Models {
             set { _authors = value; }
         }
 
+        private IList<place_data> _placedata;
+        [HasMany]
+        private IList<place_data> Placedata
+        {
+            get { return _placedata; }
+            set { _placedata = value; }
+        }
+
         private IList<geometrics> _geometrics;
         [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "place_to_geometrics", ColumnKey = "place_id", ColumnRef = "geometric_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<geometrics> geometrics {
@@ -246,6 +257,39 @@ namespace campusMap.Models {
 
         }
     }
+
+    [ActiveRecord(Lazy = true, BatchSize = 10)]
+    public class place_data
+    {
+        int id;
+        [PrimaryKey]
+        virtual public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        place place;
+        [BelongsTo]
+        virtual public place Place
+        {
+            get { return place; }
+            set { place = value; }
+        }
+        String data, key;
+        [Property("[Key]")]
+        virtual public String Key
+        {
+            get { return key; }
+            set { key = value; }
+        }
+        [Property()]
+        virtual public String Data
+        {
+            get { return data; }
+            set { data = value; }
+        }
+    }
+
 
     [ActiveRecord(Lazy = true, BatchSize = 10)]
     public class place_types : json_autocomplete<place_types>, campusMap.Models.Ijson_autocomplete {

@@ -64,7 +64,7 @@ namespace campusMap.Controllers {
     //[Layout("central")]
     public class publicController : BaseController {
         //ILog log = log4net.LogManager.GetLogger("publicController");
-
+        PlaceService placeservice = new PlaceService();
 
         #region JSON OUTPUT
 
@@ -1142,6 +1142,15 @@ where p.status = 3
             place[] items = q.Execute();
             sendPlaceJson(items, callback);
         }
+
+        public void gamedaytourmode()
+        {
+            Hashtable result = new Hashtable();
+            campus thecampus = ActiveRecordBase<campus>.Find(1);
+            result["mode"] = thecampus.gameDayTourOn;
+            RenderText( JsonConvert.SerializeObject(result) );
+        }
+
         public void get_place_by_categoryname(string catname, string callback)
         {
             CancelView();
@@ -1158,56 +1167,7 @@ where p.status = 3
             sendPlaceJson(items, callback);
         }
         public void get_place_by_keyword(string str, string callback) {
-            /*CancelView();
-            CancelLayout();
-
-            String sql = "from place p where ";
-            int id = 1;
-            foreach (string name in str) {
-                sql += " :p" + id + " in elements(p.tags) ";
-                id = id + 1;
-                sql += " or ";
-            }
-            sql += " 1=0 ";
-
-            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
-            id = 1;
-            foreach (string category in str) {
-                string cats = HttpUtility.UrlDecode(category);
-                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
-                q.SetParameter("p" + id, c[0]);
-                id = id + 1;
-            }*/
-            CancelView();
-            CancelLayout();
-
-            String sql = "from place p where ";
-            int id = 1;
-            {
-                string cats = HttpUtility.UrlDecode(str);
-                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
-                if (c.Count > 0)
-                {
-                    sql += " :p" + id + " in elements(p.tags) ";
-                    id = id + 1;
-                    sql += " or ";
-                }
-            }
-            sql += " 1=0 ";
-            sql += " ORDER BY p.prime_name ASC ";
-            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
-            id = 1;
-            {
-                string cats = HttpUtility.UrlDecode(str);
-                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
-                if (c.Count > 0)
-                {
-                    q.SetParameter("p" + id, c[0]);
-                    id = id + 1;
-                }
-            }
-            place[] items = q.Execute();
-            sendPlaceJson(items, callback);
+            sendPlaceJson(placeservice.getPlacesByKeyword(str), callback);
         }
 
         public void getPlaceJson_byIds(int[] ids, string callback) {
@@ -1379,6 +1339,7 @@ where p.status = 3
                             placeList = @"
                                 {
                                     ""id"":""" + item.id + @""",
+                                    ""gamedayparkingpercentfull"":"""+item.percentfull+@""",
                                     ""position"":{
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""

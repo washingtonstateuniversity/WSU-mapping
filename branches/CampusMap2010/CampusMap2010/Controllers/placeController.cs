@@ -44,6 +44,8 @@ namespace campusMap.Controllers {
          * MAY BE A FIELDS HELPER SERVICES WOULD BE WISE ?
          * 
          */
+        PlaceService placeservice = new PlaceService();
+
         private void clearConnections() {
             place[] _places = ActiveRecordBase<place>.FindAll();
             foreach (place _place in _places) {
@@ -53,6 +55,28 @@ namespace campusMap.Controllers {
                 }
             }
         }
+
+        public void gamedaymanager(bool toggleon, bool toggleoff)
+        {
+            campus campus = ActiveRecordBase<campus>.Find(1);
+            if(toggleon)
+                campus.gameDayTourOn = true;
+            if (toggleoff)
+                campus.gameDayTourOn = false;
+            PropertyBag["percents"] = new string[] { "0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"};
+            PropertyBag["places"] = placeservice.getPlacesByKeyword("Game Day Parking - General");
+            PropertyBag["campus"] = ActiveRecordBase<campus>.Find(1);
+        }
+
+        public void updatePercent(String percent, int placeid)
+        {
+            place place = ActiveRecordBase<place>.Find(placeid);
+            place.percentfull = percent;
+            ActiveRecordMediator<place>.Save(place);
+            CancelView();
+            CancelLayout();
+        }
+        
         public void List(int page, int searchId, string target, string filter, Boolean ajax) {
             //clearConnections();
             UserService.clearConnections<place>();

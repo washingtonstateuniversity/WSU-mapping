@@ -199,7 +199,36 @@ namespace campusMap.Services
         }
 
 
-
+        public place[] getPlacesByKeyword(string str)
+        {
+            String sql = "from place p where ";
+            int id = 1;
+            {
+                string cats = HttpUtility.UrlDecode(str);
+                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
+                if (c.Count > 0)
+                {
+                    sql += " :p" + id + " in elements(p.tags) ";
+                    id = id + 1;
+                    sql += " or ";
+                }
+            }
+            sql += " 1=0 ";
+            sql += " ORDER BY p.prime_name ASC ";
+            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+            id = 1;
+            {
+                string cats = HttpUtility.UrlDecode(str);
+                IList<tags> c = ActiveRecordBase<tags>.FindAllByProperty("name", cats);
+                if (c.Count > 0)
+                {
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
+            }
+            place[] items = q.Execute();
+            return items;
+        }
 
 
 

@@ -162,6 +162,9 @@ namespace campusMap.Models
         virtual public int id { get; set; }
 
         [Property]
+        virtual public bool gameDayTourOn { get; set; }
+
+        [Property]
         virtual public string city { get; set; }
 
         [Property]
