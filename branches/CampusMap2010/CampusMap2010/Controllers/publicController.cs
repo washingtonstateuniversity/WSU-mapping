@@ -912,7 +912,7 @@ namespace campusMap.Controllers {
         public void get_place(String id, string callback) {
             CancelView();
             CancelLayout();
-
+            Response.ContentType = "application/json; charset=UTF-8";
             int sid = 0;
             if (!int.TryParse(id, out sid)) {
                 String term = id.Trim();
