@@ -115,6 +115,9 @@
 		
 		<ul class="menu"><li class="sep"><b>::</b></li></ul>
 		<ul class="menu">
+			<li class="nosub"><a class="open" href="../place/gamedaymanager.castle"><b>Game Day Parking</b></a></li>
+		</ul>
+		<ul class="menu">
 			<li class="nosub"><a class="open" href="../admin/help.castle" target="_blank"><b>Help</b></a></li>
 		</ul>
 		<ul class="menu"><li class="nosub"><a class="open" href="../place/logout.castle"><b>Logout</b></a></li></ul>
