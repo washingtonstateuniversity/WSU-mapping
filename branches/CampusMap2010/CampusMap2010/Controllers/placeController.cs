@@ -73,6 +73,14 @@ namespace campusMap.Controllers {
             place place = ActiveRecordBase<place>.Find(placeid);
             place.percentfull = percent;
             ActiveRecordMediator<place>.Save(place);
+            String cachePath = getRootPath() + "cache/places/";
+
+            string file = place.id + "_centralplace" + ".ext";
+            String file_path = cachePath + file;
+            if (File.Exists(file_path))
+            {
+                File.Delete(file_path);
+            }
             CancelView();
             CancelLayout();
         }
