@@ -1362,7 +1362,9 @@ where p.status = 3
                             bool dataGood = true;
 
                             try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); }
-                            catch (Exception e) {  dataGood = false; }
+                            catch (Exception e) {  
+                                dataGood = false; 
+                            }
 
                             if (dataGood) {
                                 item.outputError = false;
@@ -1374,8 +1376,8 @@ where p.status = 3
                                 ActiveRecordMediator<place>.Refresh(item);
                                 placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
                             }
-
-                            setJsonCache(cachePath, file, placeList);
+                            if(dataGood)
+                                setJsonCache(cachePath, file, placeList);
                         }
                         jsonStr += System.IO.File.ReadAllText(cachePath + file) + ",";
                         count++;

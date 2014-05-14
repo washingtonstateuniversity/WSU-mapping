@@ -141,6 +141,7 @@ namespace campusMap.Controllers
                 output = output.Replace("\"", @"\""");
                 output = output.Replace("\\\"", "\"");
                 output = output.Replace(@"\", @"\\");
+                output = output.Replace(@"\\", @"\");
                 return output;
             }
         #endregion
