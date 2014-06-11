@@ -1,0 +1,82 @@
+<a href="pdf.castle"></a>
+<h3>Print Version</h3>
+<link rel="Stylesheet" type="text/css" href="/content/css/jquery.datepick.css"></link>
+<link rel="Stylesheet" type="text/css" href="/content/css/datepickstyle.css"></link>
+<script type="text/javascript" src="/content/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/content/js/jquery.datepick.js"></script>
+
+<style type="text/css">
+#calendar{
+	float: right;
+	width: 35%;	
+}
+#printversion{
+	float:left;
+	width: 65%;
+}
+#headings{
+    float:left;
+	width: 65%;
+	padding: 0 0;
+	margin: 0 20px 0 0;
+	text-align:left;
+}
+</style>
+<script type="text/javascript">
+function selectDate(mySelection)
+{  
+  theDate = mySelection.toString();
+  dateObj = new Date(theDate);
+  
+  yyyy = dateObj.getFullYear();
+  mm = dateObj.getMonth()+ 1;
+  dd = dateObj.getDate();
+
+  window.location ="pdf.castle?Date="+mm+"/"+dd+"/"+yyyy;
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function()
+   {  
+    $('#calendar').datepick({defaultDate:'$Date', onSelect: function(dateText,inst)
+    {
+       dateAsObject = $(this).datepick('getDate');
+       selectDate(dateAsObject);             
+    }
+}); 
+});
+</script>
+
+<div id="printversion">
+From here you can see all of the pages from The Daily Evergreen for every printed edition, from your own home! <br/><br/>
+Print versions are displayed per week, so if you want to see the paper from another week, use the calendar to the right to guide you to whatever you want to see!
+</div>
+<div id="calendar" width="300px" type="text" value=""></div> 
+<div id="headings">
+<h4>Online places from this print page:</h4>
+
+#foreach($place in $placesfortoday)
+<li>
+ <a href="/public/readmore.castle?id=$!{place.Id}">$!place.Title</a>     
+</li>
+#end
+</div>
+<div>
+#foreach( $pdf in $pdfsfortoday)
+    <li>
+    	    $!pdf.Description <br/>
+			$!pdf.Date
+			<img id="selectedPdf" width='600px' src="/Pdf/download.castle?id=$pdf.Id" >
+			<h5><a href="/pdf/download.castle?id=$!{pdf.Id}">Download Pdf Here</a></h5>			
+	</li>
+#end
+</div>
+
+ 
+           
+
+
+  
+        
+

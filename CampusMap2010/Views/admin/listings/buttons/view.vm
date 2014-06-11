@@ -1,0 +1,7 @@
+<li>
+	<a href="$siteroot/read/${item.CustomUrl}" target="_blank" title="View" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+	  <span class="ui-button-icon-primary ui-icon ui-icon-search"> </span>
+	  <span class="actionText">View</span>
+	  <span class="actionpropt">&#187;</span>
+	</a>
+</li>

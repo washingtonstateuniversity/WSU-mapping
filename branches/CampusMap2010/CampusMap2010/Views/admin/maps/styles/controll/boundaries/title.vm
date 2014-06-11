@@ -1,9 +1,0 @@
-<li class="pod opRow ui-state-highlight op_marker" #if($hidden) style="display: none;"#end>
-<span class="option_handle"></span>
-
-	<span class="lable">Title</span>
-	<span class="controll">
-		<br/>
-		<input type="text" value="$!{opt.value}" name="style.g_event[${event.id}].options[${opt.id}]"  rel="${opt.name}"/>
-	</span>
-</li>

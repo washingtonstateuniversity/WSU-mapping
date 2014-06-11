@@ -1,0 +1,174 @@
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+<h3>Authorized User</h3>
+<br/>
+<form action="update.castle" method="post" enctype="multipart/form-data" >
+$Form.HiddenField("user.id")
+$Form.HiddenField("image.id") 
+
+
+<p>Name : <br/>
+	<input type="text" value="$!user.name" name="user.name" id="user_name" class="ui-widget ui-widget-content ui-corner-all " />
+</p>
+
+<p> Email :<br/>
+<input type="text" value="$!user.email" name="user.email" id="user_email" class="ui-widget ui-widget-content ui-corner-all " />
+</p>
+<p>Phone :<br/>
+<input type="text" value="$!user.phone" name="user.phone" id="user_phone" class="ui-widget ui-widget-content ui-corner-all " />
+</p>
+
+<p>User Network ID:<br/>
+<input type="text" value="$!user.nid" name="user.nid" id="user_nid" class="ui-widget ui-widget-content ui-corner-all " /></p>
+
+#if($controller.canChangeLevel($currentUser))
+    <p> Access Levels :<br/>
+        <select name="user.groups.id" >
+            <option value="0" #if(!${user.groups.name})selected="selected"#end>-select-</option>
+            #foreach($group in $groups)
+                <option value="$group.id" #if(${user.groups.id} == $group.id)selected="selected"#end>${group.name}</option>
+            #end
+        </select>
+    </p>
+#end
+
+
+<p>
+  Load Mugshot:<br/>
+  <input class="file" name="newimage" value="image_load" id="user.image.id" type="file" />
+</p>
+<span style="font-size:12px;line-height:12px;">
+	<strong>Note:</strong>
+	<em>Images are auto sized down if they have a width or height of more then 1000px to 1000px;  It will not size up.</em>
+</span>
+#if($user.Images)<br/>
+			#foreach($userImages in $userimages)
+
+  <span>
+    Image:<br/>
+    <img id="selectedImage" style="max-width:180px" src="$siteroot/media/download.castle?id=${userImages.id}&mug=true&m=crop&w=180&h=180" alt=""/>
+  </span>
+  #end
+#end
+
+
+
+			<fieldset style="max-width:66%;">
+				<fieldset><legend>WSU Properties</legend>
+					<div class="col2"  style="display:inline-block; float:left;margin-right:13px;"><em style="float:right;">All <input type="checkbox" class="all" #if($user.campus.count==$campuses.count)checked="checked"#end value="all"/></em>
+						<label for="user.campus" style="font-size:13px;"><strong>Campus</strong></label><br/>
+						<select id="user.campus" name="user.campus[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($campus in $campuses)
+								<option class="model" value="$campus.id" #if($user.campus.Contains($campus)) selected="selected" #end >$!campus.name</option>
+							#end
+						</select>
+					</div>
+					<div class="col2"  style="display:inline-block; float:left;margin-right:13px;"><em style="float:right;">All <input type="checkbox" class="all" #if($user.colleges.count==$colleges.count)checked="checked"#end value="all"/></em>
+						<label for="user.colleges" style="font-size:13px;"><strong>College</strong></label><br/>
+						<select id="user.colleges" name="user.colleges[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($college in $colleges)
+								<option class="model" value="$college.id" #if($user.colleges.Contains($college)) selected="selected" #end >$!college.name</option>
+							#end
+						</select>
+					</div>
+					<div class="col2" style="display:inline-block; float:left;margin-right:13px;"><em style="float:right;">All <input type="checkbox" class="all" #if($user.schools.count==$schools.count)checked="checked"#end value="all"/></em>
+						<label for="user.schools" style="font-size:13px;"><strong>School</strong></label><br/>
+						<select id="user.schools" name="user.schools[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($school in $schools)
+								<option class="model" value="$school.id" #if($user.schools.Contains($school)) selected="selected" #end >$!school.name</option>
+							#end
+						</select>
+					</div>
+								
+					<div  style="display:inline-block; float:left;margin-right:13px;"><em style="float:right;">All <input type="checkbox" class="all" #if($user.programs.count==$programs.count)checked="checked"#end value="all"/></em>
+						<label for="user.programs" style="font-size:13px;"><strong>Programs</strong></label><br/>
+						<select id="user.programs" name="user.programs[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($program in $programs)
+								<option class="model" value="$program.id" #if($user.programs.Contains($program)) selected="selected" #end >$!program.name</option>
+							#end
+						</select>
+					</div>
+					
+					
+					
+					
+					#*<div  style="display:inline-block; float:left;margin-right:13px;">
+						<label for="user.department" style="font-size:13px;"><strong>Academic Departments</strong></label><br/>
+						<select id="user.department" name="user.department[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($department in $departments)
+								<option class="model" value="$department.id" #if($user.department.Contains($department)) selected="selected" #end >$!department.name</option>
+							#end
+						</select>
+					</div>
+					<div  style="display:inline-block; float:left;margin-right:9px;">
+						<label for="user.admindepartment" style="font-size:13px;"><strong>Administrative Departments</strong></label><br/>
+						<select id="user.admindepartment" name="user.admindepartment[]"  class="" multiple="multiple" size="9" style="width:205px;">
+							#foreach($admindepartment in $admindepartments)
+								<option class="model" value="$admindepartment.id" #if($user.admindepartment.Contains($admindepartment)) selected="selected" #end >$!admindepartment.name</option>
+							#end
+						</select>
+					</div>*#	
+				</fieldset>	
+				
+			<fieldset><legend>WSU Categories</legend>
+				<div  style="display:inline-block; float:left;margin-right:9px;"><em style="float:right;">All <input type="checkbox" class="all" #if($user.categories.count==$categories.count)checked="checked"#end value="all"/></em>
+					<label for="LocationModelSelect" style="font-size:13px;"><strong>Categories:</strong></label><br/>
+					<select id="LocationModelSelect" name="user.categories[]"  class="" multiple="multiple" size="9" style="width:205px;">
+						#foreach($cat in $categories)
+							<option class="model" value="$cat.id" #if($user.categories.Contains($cat)) selected="selected" #end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
+						#end
+					</select>
+				</div>  
+			</fieldset>	
+		</fieldset>	
+
+
+
+
+<p><input type="submit" value="Submit" /></p>
+
+
+    <div id="tabs" class="placelist  ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <!--<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#contact_profiles">Contact Profiles</a></li>-->
+            <li class="ui-state-default ui-corner-top" ><a href="#history">History</a></li>
+        </ul>
+        <div id="history">
+            <table width="100%" class="ui-widget ui-widget-content">
+                  <thead>
+                    <tr class="ui-widget-header ">
+                        <th width="10%">ID</th>
+                        <th width="15%">date</th>
+                        <th width="75%">event</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    #set ($c=0)
+                    #foreach($log in $history)
+                        <tr #if($c%2>0) class="even" #else class="odd" #end>
+                          <td align="center">$!log.id</td>
+                          <td align="left">$!log.date</td>
+                          <td align="left">$!log.entry</td>
+                        </tr>
+                        #set ($c=$c+1)
+                    #end
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                  <td colspan="4" align="right">
+                  	#set($Pagination_location='top')
+                    #set($target = "history")
+                    #set($list_items = $history)
+                    #parse("admin/listings/areas/pagination.vm")
+                    </td>
+                  </tr>
+                  </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+</form>

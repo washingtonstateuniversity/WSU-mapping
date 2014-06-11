@@ -1,0 +1,39 @@
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="update.castle" method="post">
+$Form.HiddenField("tag.id")
+
+<h3>New tags</h3>
+<p>tags Name:
+$Form.TextField("tag.name")
+<p>
+</br>    
+</p>
+    <input type="submit" value="Submit" />
+    </p>
+</form>
+
+<hr/>
+
+<table  width="100%" class="ui-widget ui-widget-content">
+  <thead>
+	<tr class="ui-widget-header ">
+		<th>Id</th>
+		<th>Name</th>
+	</tr>
+  </thead>
+  <tbody>
+	#set ($c=0)
+	#foreach($place in $tag.places)
+	<tr #if($c%2>0) class="even" #else class="odd" #end>
+		<td align="center">$place.id</td>
+		<td align="center">$place.prime_name</td>
+	</tr>
+	#set ($c=$c+1)
+	#end
+  </tbody>
+</table>

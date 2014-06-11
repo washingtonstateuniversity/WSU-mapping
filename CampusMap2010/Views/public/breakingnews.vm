@@ -1,0 +1,53 @@
+#if($Flash.message)
+<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+  <p style="line-height: 15px;padding-bottom: 0;">
+    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
+  </p>
+</div>
+#end
+
+<h3>Breaking News Signup</h3>
+<p>
+  You are about to signup for the latest news Daily Evergreen has to offer.
+</p>
+
+
+
+<div class="roundcont">
+   <div class="roundtop">
+	 <img src="$siteroot/images/template/tl.gif" alt="" 
+	 width="15" height="15" class="corner" 
+	 style="display: none" />
+   </div>
+  
+<form action="subscribe_breakingNews.castle" method="post">
+<input type ="hidden" name="person.PersonType.Id" value="2"/>
+$Form.HiddenField("person.Id")
+<div id="breakingNew">
+
+<h4>Please Enter your Name :</h4>
+<input type="text" value="" name="person.Name" id="person_Name" class="w300 ui-widget ui-widget-content ui-corner-all " />
+
+<h4>Your Email Address:</h4>
+<input type="text" value="" name="person.Email" id="person_Email" class="w300 ui-widget ui-widget-content ui-corner-all " />
+<br/><br/>
+<script type="text/javascript" src="http://challenge.asirra.com/js/AsirraClientSide.js"></script>
+<br/>
+<input type="submit" value="Submit"/> 
+</div>
+</form> 
+   <div class="roundbottom">
+	 <img src="$siteroot/images/template/bl.gif" alt="" 
+	 width="15" height="15" class="corner" 
+	 style="display: none" />
+   </div>
+</div>	
+  
+
+
+
+
+
+
+
+

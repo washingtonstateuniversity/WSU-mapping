@@ -1,0 +1,10 @@
+
+
+	
+	
+		<lable>url</lable><input type="text" value="" name="style.g_event[${event.id}].options[${opt.id}].url"  rel="${opt.name}.url" class="required"/>
+		<lable>anchor</lable><input type="text" value="" name="style.g_event[${event.id}].options[${opt.id}].anchor"  rel="${opt.name}.anchor"/>
+		<lable>origin</lable><input type="text" value="" name="style.g_event[${event.id}].options[${opt.id}].origin"  rel="${opt.name}.origin"/>
+		<lable>scaledSize</lable><input type="text" value="" name="style.g_event[${event.id}].options[${opt.id}].scaledSize"  rel="${opt.name}.scaledSize"/>
+		<lable>size</lable><input type="text" value="" name="style.g_event[${event.id}].options[${opt.id}].size"  rel="${opt.name}.size"/>
+	

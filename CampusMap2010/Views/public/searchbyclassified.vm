@@ -1,0 +1,10 @@
+<a href="searchbyclassified.castle">
+$Form.HiddenField("classified.Id")
+#foreach($classified in $byClassified) 
+  
+   <div class="Title">
+     $classified.Id <a title="$!classified.Text" href="../public/readmore.castle?id=$!{classified.Id}">$!classified.Text</a>
+  <br/>
+</div>
+ 
+#end 

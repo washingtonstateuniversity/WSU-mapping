@@ -1,0 +1,33 @@
+<script>
+	function updatePercent(percent, placeid)
+	{
+		jQuery.post("updatePercent.castle", { percent: percent, placeid: placeid })
+			.then(function(data){ 
+				$("#"+placeid+"status").html("Updated succesfully");
+				setTimeout(function(){ $("#"+placeid+"status").html(""); }, 2000); 
+			});
+	}
+</script>
+<br/>
+<h1>Game Day Manager</h1>
+<p>To add lots to this list, add a new tag to the place named `Game Day Parking - General`</p>
+#if($campus.gameDayTourOn)
+	<a href="?toggleoff=true">Turn Off Game Day Parking mode</a>
+	<table>
+	<tr><th>Name</th><th>% Full</th></tr>
+	#foreach($place in $places)
+		<tr><td>${place.prime_name}</td>
+		<td>
+			<select onchange="updatePercent(this.value,'$place.id')">
+			#foreach($percent in $percents)
+				<option #if($percent == $place.percentfull) selected="selected" #end>$percent</option>
+			#end
+			</select>
+		</td>
+		<td id="${place.id}status" style="color:red;"></td>
+		</tr>
+	#end
+	</table>
+#else
+	<a href="?toggleon=true">Turn on Game Day Parking mode</a>
+#end

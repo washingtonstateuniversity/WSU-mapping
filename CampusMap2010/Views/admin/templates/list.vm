@@ -1,0 +1,46 @@
+#if($templates)
+
+    #set($list_items=$templates)
+	#set($Pagination_location='top inhead')
+	#set($target = 'templates')
+	#parse("admin/listings/areas/pagination.vm")
+
+
+	<table  width="100%" class="ui-widget ui-widget-content">
+	  <thead>
+		<tr class="ui-widget-header ">
+		<th>Name</th>
+		<th style="width:75px;">&nbsp;</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	
+		#set ($c=0)
+		#foreach($template in $templates)
+			<tr class="#if($c%2>0) even #else odd #end ">
+			  <td><a href="edit_template.castle?id=$!{template.Id}" title="Edit" class="name">
+					$template.name
+				  </a></td>
+			  <td>
+				<span style='font-size:0.7em;'>
+				  <a href="edit_template.castle?id=$!{template.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-pencil"></span>
+				  </a>
+				  <a href="delete_template.castle?id=$!{template.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<span class="ui-icon ui-icon-trash"></span>
+				  </a>
+				</span>
+			  </td>
+			</tr>
+			#set ($c=$c+1)
+		#end
+	  </tbody>
+	</table>
+    #set($list_items=$templates)
+	#set($Pagination_location='')
+	#set($target = 'templates')
+	#parse("admin/listings/areas/pagination.vm")
+
+#else
+	<h1>There are currently no templates</h1>
+#end

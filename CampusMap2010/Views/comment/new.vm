@@ -1,0 +1,75 @@
+
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="update.castle" method="post">
+
+
+  #if($comment.Id && $comment.adminRead=='False')
+    $controller.adminViewed($comment.Id)
+  #end
+
+#if($comment.Story.Id)
+	<div id="commentsStory">
+		<h2>$comment.Story.Title</h2>
+		<div id="subHead">$comment.Story.subHead</div>
+	</div>
+	<hr/>
+#end
+
+
+
+  $Form.HiddenField("comment.Id")
+  <h3>Comment</h3>
+<p>Comments:</p>
+<div>$comment.comments </div>
+  <p>
+    Flagged :<br/>
+    $Form.CheckboxField("comment.Flagged")
+  </p>
+  <p>
+    Deleted:<br/>
+    $Form.CheckboxField("comment.Deleted")
+  </p>
+  <p>
+    Published:<br/>
+    $Form.CheckboxField("comment.published")
+  </p>
+<p>
+  Commentor Name:<br/>
+  <input type="text" value="$!comment.commentorName" name="comment.commentorName" id="comment_commentorName" class="ui-widget ui-widget-content ui-corner-all " />
+</p>
+
+  <p>
+    Email:<br/>
+    <input type="text" value="$!comment.Email" name="comment.Email" id="comment_Email" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+  #*<p>
+    NID:<br/>
+     $Form.TextField("comment.nid")
+    <input type="text" value="$!comment.nid" name="comment.nid" id="comment_nid" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>*#
+  <p>
+    Create Time:<br/>
+    #*$Form.TextField("comment.createtime")*#
+    <input type="text" value="$!comment.createtime" name="comment.createtime" id="comment_createtime" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+  <p>
+    Update Time:<br/>
+    #*$Form.TextField("comment.updatetime")*#
+    <input type="text" value="$!comment.updatetime" name="comment.updatetime" id="comment_updatetime" class="ui-widget ui-widget-content ui-corner-all " />
+  </p>
+
+  <p>Story ID:<br/>
+    #if($!comment.Story.Id)
+      $!comment.Story.Id
+    #else
+      #*$Form.TextField("comment.nid")*#
+      <input type="text" value="$!comment.nid" name="comment.nid" id="comment_nid" class="ui-widget ui-widget-content ui-corner-all " />
+    #end
+  </p>
+  <p><input type="submit" value="Submit" /></p>
+</form>

@@ -1,0 +1,14 @@
+
+
+
+
+	
+	
+
+		<lable>Type</lable><select name="style.g_event[${event.id}].options[${opt.id}]"  rel="${opt.name}">
+								<option value="circle">Circle</option>
+								<option value="poly">Poly</option>
+								<option value="rect">Rect</option>
+							</select>
+		<lable>coords</lable><input type="text" value="$!{style.options[${event}].coords.val}" name="style.g_event[${event.id}].options[${opt.id}].coords"  rel="${opt.name}.coords"/>
+	

@@ -1,0 +1,11 @@
+<h3><span style="color:#7F9D6A;">Requested on $date</span></h3>
+<p><strong>$name asked,</strong><br/>
+   $description        
+</p>
+<hr/>
+From Deparment: $Deparments
+<hr/>
+Sender's email: $email
+<hr/>
+
+

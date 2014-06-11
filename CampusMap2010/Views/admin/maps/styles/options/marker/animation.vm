@@ -1,0 +1,12 @@
+
+
+
+	
+	
+
+		<select name="style.g_event[${event.id}].options[${opt.id}]" rel="${opt.name}">
+			<option value="">None</option>
+			<option value="BOUNCE">Bounce</option>
+			<option value="DROP">Drop</option>
+		</select>
+	

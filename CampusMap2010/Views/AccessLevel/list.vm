@@ -1,0 +1,136 @@
+#*
+<h3>Access Level </h3>
+<p>
+<a href="new.castle">New Access Level</a>
+</p>
+
+<table width="100%" border="1" cellpadding="2" cellspacing="0">
+$Form.HiddenField("accesslevel.id")
+    <th>Id</th>
+    <th>Title</th>
+    <th>&nbsp;</th>
+
+#foreach($accesslevel in $groups)
+<tr>
+<td>$!accesslevel.id</td>
+<td>$!accesslevel.Title</td>
+
+<td>
+  <span style='font-size:0.7em;'>
+    <a href="edit.castle?id=$!{accesslevel.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+      <span class="ui-icon ui-icon-pencil"></span>
+    </a>
+    <a href="delete.castle?id=$!{accesslevel.id}" title="Delete"  class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+      <span class="ui-icon ui-icon-trash"></span>
+    </a>
+  </span>
+</td>
+</tr>
+#end
+</table>
+
+*#
+
+
+
+<div id="tabs" class="placelist  ui-tabs ui-widget ui-widget-content ui-corner-all">
+	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#groups">Groups</a></li>
+		<li class="ui-state-default ui-corner-top" ><a href="#privileges">Privileges</a></li>
+	</ul>
+
+	<div id="groups">
+			<p>
+				<a href="_new_accesslevel.castle">Create a New Group</a>
+			</p>
+			<table width="100%" class="ui-widget ui-widget-content">
+			  <thead>
+				<tr class="ui-widget-header ">
+					<th>Name</th>
+					<th>&nbsp;</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				#set ($c=0)
+				#foreach($group in $groups)
+
+                    <tr #if($c%2>0) class="even" #else class="odd" #end>
+                        <td align="left">$!group.name</td>
+                        <td class='actionArea'>
+                            <span style='font-size:0.7em;'>
+                                <a href="_edit_accesslevel.castle?id=$!{group.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                    <span class="ui-icon ui-icon-pencil"></span>
+                                </a>
+                                <a href="_delete_accesslevel.castle?id=$!{group.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                    <span class="ui-icon ui-icon-trash"></span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    #if($group.children)
+                        #set ($c_s=0)
+                        #foreach($child in $group.children)
+                            <tr #if($c_s%2>0) class="even" #else class="odd" #end>
+                                <td align="left">--- $!child.name</td>
+                                <td class='actionArea'>
+                                <span style='font-size:0.7em;'>
+                                    <a href="_edit_accesslevel.castle?id=$!{child.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                        <span class="ui-icon ui-icon-pencil"></span>
+                                    </a>
+                                    <a href="_delete_accesslevel.castle?id=$!{child.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                        <span class="ui-icon ui-icon-trash"></span>
+                                    </a>
+                                </span>
+                                </td>
+                            </tr>
+                        #set ($c_s=$c_s+1)
+                        #end  
+                    #end  
+				#set ($c=$c+1)
+				#end
+			  </tbody>
+			</table>
+	</div>
+	<div id="privileges">
+			<p>
+				<a href="_new_privilege.castle">Create a New Privilege</a>
+			</p>
+			<table width="100%" class="ui-widget ui-widget-content">
+			  <thead>
+				<tr class="ui-widget-header ">
+					<th>Name</th>
+					<th>Alias</th>
+					<th>&nbsp;</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				#set ($c=0)
+				#foreach($privilege in $privileges)
+				<tr #if($c%2>0) class="even" #else class="odd" #end>
+					<td align="left">$!privilege.name</td>
+					<td align="left">$!privilege.alias</td>
+					<td class='actionArea'>
+						#if($privilege.editable)
+							<span style='font-size:0.7em;'>
+								<a href="_edit_privilege.castle?id=$!{privilege.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+									<span class="ui-icon ui-icon-pencil"></span>
+								</a>
+								<a href="_delete_privilege.castle?id=$!{privilege.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+									<span class="ui-icon ui-icon-trash"></span>
+								</a>
+							</span>
+						#end
+					</td>
+				</tr>
+				#set ($c=$c+1)
+				#end
+			  </tbody>
+			</table>
+	</div>
+</div>
+	
+
+
+
+
+

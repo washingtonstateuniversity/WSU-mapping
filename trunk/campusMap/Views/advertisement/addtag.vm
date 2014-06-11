@@ -1,8 +1,0 @@
-<select name="tags[$!count].id" id="tag[$!count].id">
-								<option class="" value="">-select-</option>
-								#foreach($tag in $tags)
-									<option class="tag" value="$tag.id" #if($advertisementtag == $tag) selected="selected" #end>$!tag.Name</option>
-								#end	
-							</select>
-							<input type="text" class="tag" name="newtag" value="" id="tag">
-							<div class="lightLine"></div>

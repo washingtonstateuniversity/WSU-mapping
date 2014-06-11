@@ -1,0 +1,13 @@
+#if($callback)$callback(#end
+{
+"map_ops":$options_json,
+"map_base":{#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end},
+  #if(${map.places})
+"places":{"#foreach($place in $map.places)$!place.id,#end 0"},
+  #end
+  #if(${map.geometrics})
+"geometrics":{"#foreach($geo in $map.geometrics)$!geo.id,#end 0"}
+  #end
+
+}
+#if($callback))#end

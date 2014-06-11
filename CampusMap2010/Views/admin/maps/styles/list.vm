@@ -1,0 +1,65 @@
+#*<!-- NOTE: DUE TO VS AND IT'S AUTO FORMATING THE LOGIC BELOW IN THE tr GETTS MESSED UP should be <tr #if($c%2>0) class="even" #else class="odd" #end> -->*#
+#if($styles.Count > 0)
+#*<table width="50%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+  <tr>
+    <td>Showing $styles.FirstItemIndex - $styles.LastItemIndex of $styles.TotalItems</td>
+    <td align="right">
+      #if($styles.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$styles.HasPrevious) first #end
+      #if($styles.HasPrevious) | $PaginationHelper.CreatePageLink( $styles.PreviousIndex, "prev" ) #end
+      #if(!$styles.HasPrevious) | prev #end
+      #if($styles.HasNext) | $PaginationHelper.CreatePageLink( $styles.NextIndex, "next" ) #end
+      #if(!$styles.HasNext) | next #end
+      #if($styles.HasNext) | $PaginationHelper.CreatePageLink( $styles.LastIndex, "last" ) #end
+      #if(!$styles.HasNext) | last #end
+    </td>
+  </tr>
+</table>	*#
+#end
+<table  width="100%" class="ui-widget ui-widget-content">
+  <thead>
+    <tr class="ui-widget-header ">
+    <th>Name</th>
+    <th style="width:75px;">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    #set ($c=0)
+    #foreach($style in $styles)
+    <tr class="#if($c%2>0) even #else odd #end #if($style.adminRead==false) ui-state-highlight #end ">
+      <td><a href="edit_style.castle?id=$!{style.id}" title="Edit" class="name">
+            ${style.name}
+          </a></td>
+      <td>
+        <span style='font-size:0.7em;'>
+          <a href="edit_style.castle?id=$!{style.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-pencil"></span>
+          </a>
+          <a href="delete_style.castle?id=$!{style.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+            <span class="ui-icon ui-icon-trash"></span>
+          </a>
+        </span>
+      </td>
+    </tr>
+    #set ($c=$c+1)
+    #end
+  </tbody>
+</table>
+#if($styles.Count > 0)
+#*
+<table width="50%" border="0" >
+  <tr>
+    <td>Showing $styles.FirstItemIndex - $styles.LastItemIndex of $styles.TotalItems</td>
+    <td align="right">
+      #if($styles.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" ) #end
+      #if(!$styles.HasPrevious) first #end
+      #if($styles.HasPrevious) | $PaginationHelper.CreatePageLink( $styles.PreviousIndex, "prev" ) #end
+      #if(!$styles.HasPrevious) | prev #end
+      #if($styles.HasNext) | $PaginationHelper.CreatePageLink( $styles.NextIndex, "next" ) #end
+      #if(!$styles.HasNext) | next #end
+      #if($styles.HasNext) | $PaginationHelper.CreatePageLink( $styles.LastIndex, "last" ) #end
+      #if(!$styles.HasNext) | last #end
+    </td>
+  </tr>
+</table>*#
+#end

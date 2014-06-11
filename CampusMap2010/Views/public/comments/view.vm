@@ -1,0 +1,20 @@
+  #foreach($comment in $Place.comments)
+  #if($comment.published==true)<a name="com_${comment.id}" id="com_${comment.id}"></a>
+    <div class="comments #if($comment.FlagNumber>3)uFlaged #end" id="comment$comment.id">
+    #if($comment.FlagNumber>3)<h3><span>Click to read <em>+</em></span> User flagged </h3>#end
+    <div #if($comment.FlagNumber>3)class="comment_closed"#end>
+		<form action="$siteroot/public/userFlag.castle" method="post" class="userFlagging" style="float:right; display:line-block;">
+			<input type="hidden" name="comment.id" value ="$!comment.id"/>
+			<input type="hidden" name="comment.Place.id" value ="$!{place.id}"/>
+			<input type="submit" value="" class="userFlagged" title="Flag this post"/>
+		</form>
+      <h5 class="comment" style="float:right; display:line-block;">Posted: <em>$!comment.CreateTime</em>
+      #if($comment.UpdateTime && $comment.CreateTime && ($comment.UpdateTime != $comment.CreateTime))<br/>Updated:<em>$!comment.UpdateTime</em>#end
+      </h5>
+		<h3>#if($comment.commentorName)$!comment.commentorName #else Anonymous #end</h3>
+      <div class="byline">$!comment.Comments</div>
+      </div>
+    </div>
+    <hr/>
+    #end
+  #end

@@ -1,0 +1,73 @@
+<h1>Classified</h1>
+
+<div id="classified_main">
+  <div id="left" border="5">
+    #foreach ($type in $classifiedtypes)
+
+    #if($type.Number == 100 || $type.Number == 200 || $type.Number == 300)
+      #if($type.Number == 200 || $type.Number == 300)</div>#end
+      <h3 class="main"><span><em>-</em></span><span class="num">$type.Number</span> - $type.Name </h3>
+      <div>
+    #end
+
+    #if($type.hasClassifieds()&&$type.Number >=0 && $type.Number <= 399)
+       <h3><span><em>-</em></span>$type.Number - $type.Name </h3>
+		   <div class="inner">
+				#foreach($typedetailed in $type.Classifieds)
+					#if($type.Number >=0 && $type.Number <= 399)
+              #if($typedetailed.activeClassified())
+                $typedetailed.Text <br/>
+              #end
+            #end
+				#end
+		   </div>
+       #end
+    #end
+    </div>
+  </div>
+  <div id="middle" border="5">
+    #foreach ($type in $classifiedtypes)
+    #if($type.Number == 400 || $type.Number == 500)
+      #if($type.Number == 500)</div>#end
+      <h3 class="main"><span><em>-</em></span><span class="num">$type.Number</span> - $type.Name </h3>
+      <div>
+    #end
+	   #if($type.hasClassifieds()&&$type.Number >=400 && $type.Number <= 599)
+     <h3><span><em>-</em></span>$type.Number - $type.Name </h3>
+		<div class="inner">
+		  #foreach($typedetailed in $type.Classifieds)
+			  #if($type.Number >=400 && $type.Number <= 599)
+          #if($typedetailed.activeClassified())
+            $typedetailed.Text <br/>
+          #end
+        #end
+      #end
+      </div>
+	   #end
+    #end
+    </div>
+  </div>
+  <div id="right" border="5">
+    #foreach ($type in $classifiedtypes) 
+    #if($type.Number == 600 || $type.Number == 700)
+      #if($type.Number == 700)</div>#end
+      <h3 class="main"><span><em>-</em></span><span class="num">$type.Number</span> - $type.Name </h3>
+      <div>
+    #end
+	   #if($type.hasClassifieds()&&$type.Number >=600)
+		<h3><span><em>-</em></span>$type.Number - $type.Name </h3>
+		<div class="inner">
+			#foreach($typedetailed in $type.Classifieds)
+				#if($type.Number >=600)
+            #if($typedetailed.activeClassified())
+              $typedetailed.Text <br/>
+            #end
+        #end
+      #end
+    </div>
+		#end
+    #end
+   </div>
+  </div>
+</div>
+<div style="clear:left;"></div>

@@ -1,9 +1,0 @@
-<li class="pod opRow ui-state-highlight op_polyline op_polygon op_rectangle op_circle weight_area" #if($hidden) style="display: none;"#end>
-<span class="option_handle"></span>
-
-	<span class="lable">Stroke Weight</span>
-	<span class="controll">
-<br/>
-		<input type="text" value="$!{opt.value}" name="style._zoom[1].events[${event.id}].options[${opt.id}]" rel="${opt.name}"/> <span class="weight"></span>
-	</span>
-</li>

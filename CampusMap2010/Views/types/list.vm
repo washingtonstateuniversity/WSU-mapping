@@ -1,0 +1,66 @@
+#if($types)
+	<table width="50%" border="0" class="pagination" style="float:right;margin-right:5px;margin-top:7px;">
+	  <tr>
+		<td>Showing $types.FirstItemIndex - $types.LastItemIndex of $types.TotalItems</td>
+		<td align="right">
+		  #if($types.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='types'}" )  #end
+		  #if(!$types.HasPreviousPage) first #end
+		  #if($types.HasPreviousPage) | $PaginationHelper.CreatePageLink( $types.PreviousPageIndex, "prev",null, "%{target='types'}" )  #end
+		  #if(!$types.HasPreviousPage) | prev #end
+		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.NextPageIndex, "next",null, "%{target='types'}" )  #end
+		  #if(!$types.HasNextPage) | next #end
+		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.TotalPages, "last",null, "%{target='types'}" )  #end
+		  #if(!$types.HasNextPage) | last #end
+		</td>
+	  </tr>
+	</table>	
+
+	<table  width="100%" class="ui-widget ui-widget-content">
+	  <thead>
+		<tr class="ui-widget-header ">
+		<th>Name</th>
+		<th style="width:75px;">&nbsp;</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	
+		#set ($c=0)
+		#foreach($type in $types)
+		<tr class="#if($c%2>0) even #else odd #end #if($type.adminRead==false) ui-state-highlight #end ">
+		  <td><a href="edit_type.castle?id=$!{type.Id}" title="Edit" class="name">
+				#if($type.friendly)$type.friendly#else$type.name#end
+			  </a></td>
+		  <td>
+			<span style='font-size:0.7em;'>
+			  <a href="edit_type.castle?id=$!{type.Id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-icon ui-icon-pencil"></span>
+			  </a>
+			  <a href="delete_type.castle?id=$!{type.Id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-icon ui-icon-trash"></span>
+			  </a>
+			</span>
+		  </td>
+		</tr>
+		#set ($c=$c+1)
+		#end
+	  </tbody>
+	</table>
+	<table width="50%" border="0"  class="pagination">
+	  <tr>
+		<td>Showing $types.FirstItemIndex - $types.LastItemIndex of $types.TotalItems</td>
+		<td align="right">
+		  #if($types.HasPreviousPage) $PaginationHelper.CreatePageLink( 1, "first",null, "%{target='types'}" )  #end
+		  #if(!$types.HasPreviousPage) first #end
+		  #if($types.HasPreviousPage) | $PaginationHelper.CreatePageLink( $types.PreviousPageIndex, "prev",null, "%{target='types'}" )  #end
+		  #if(!$types.HasPreviousPage) | prev #end
+		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.NextPageIndex, "next",null, "%{target='types'}" )  #end
+		  #if(!$types.HasNextPage) | next #end
+		  #if($types.HasNextPage) | $PaginationHelper.CreatePageLink( $types.TotalPages, "last",null, "%{target='types'}" )  #end
+		  #if(!$types.HasNextPage) | last #end
+		</td>
+	  </tr>
+	</table>	
+
+#else
+	<h1>There are currently no types</h1>
+#end

@@ -1,0 +1,17 @@
+<div class="relations">
+  <h4>More Places in $placeType.Name</h4>
+  #set($c=0)
+  <ul>
+  #foreach ($place in $relatedBytype)
+    #if($c <= 5)
+      <li>
+        <a title="$!place.Title" href="$siteroot/read/${place.CustomUrl}">$!place.Title</a>
+      </li>
+      #set($c=$c+1)
+    #end
+  #end
+      <li class="last more">
+        <a title="$!placeType.Name" href="$siteroot/Public/list.castle?id=$!{placeType.id}"> Get more &#187;</a>
+      </li>
+  </ul>
+</div>

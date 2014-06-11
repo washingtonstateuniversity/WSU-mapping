@@ -1,0 +1,69 @@
+#capturefor(html)<!DOCTYPE html>
+<!--[if IE 7]><html class="no-js ie7 ie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en" dir="ltr"><!--<![endif]-->
+    <head><script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
+    	<meta charset="utf-8">
+		#* all the JS and CSS that is site wide *#
+		#parse("layouts/assets_central/global_header_html.vm")
+		
+		
+		#if($layout==false || $header==false || $search==false || $directions==false)
+		
+		<style>
+			#if($layout==false || $header==false)
+				body{background:none repeat scroll 0 0 #FFFFFF;}
+				#toolbar, #globalnav{display:none;} 
+				#logo{ top:0; }
+				#header_bar{ height: 93px; }
+				#nav{background: none repeat scroll center bottom rgba(0, 0, 0, 0); }
+				#main_nav li a#printPdfs { display: none !important; }
+				#campusmap .ui-widget-content a {
+    color: #333333;
+    text-decoration: none;
+}
+			#end
+			#if($layout==false || $search==false) #placeSearch{display:none;} #end
+			#if($layout==false || $directions==false) #getDirections{display:none;} #end
+		</style>
+		
+		#end
+		
+		
+		
+	</head>
+	<body id='campusmap' class="#if($embeded)embeded #end #if(!$layout)layoutfree #end central_layout ${controller.getView()} ${controller.getAction()}">
+		#if(!$embeded && $layout!="false")
+			<div id="header_bar">
+				#parse("layouts/assets_central/header_html.vm")
+			</div>
+			<div id="mainNavArea">
+                <form action="#" id="placeSearch" style="margin: 19px 0 10px 33px;">
+                    <input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+                </form>
+                
+                <div id="navwrap_outer">
+                    <div id="navwrap">
+                        <div id="nav">
+                            #parse("layouts/assets_central/main_menu.vm")
+                            #*#parse("layouts/assets_central/footer.vm")*#
+                        </div>
+                    </div>
+                </div>
+
+			</div>
+		#end
+		
+		$childContent
+		
+		#if(!$embeded)
+			
+			
+			#parse("layouts/assets_central/aerial.vm")
+		#end
+		#parse("layouts/assets_central/global_footer_JS.vm")
+
+	</body>
+</html>
+
+#end$Controller.stripNonSenseContent($html,true)

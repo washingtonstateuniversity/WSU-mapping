@@ -1,0 +1,30 @@
+<h2>The Daily Evergreen News Feeds</h2>
+<ul>
+<li><img src="../images/template/rss-icon.png" width="12" height="12">  
+<a href="news.castle">All Recent Places</a></li>
+
+<li><img src="../images/template/rss-icon.png" width="12" height="12">
+<a href ="sports.castle">Recent Sports Places</a></li>
+
+<li><img src="../images/template/rss-icon.png" width="12" height="12"> 
+<a href="life.castle">Recent Life Places</a></li>
+
+
+<li><img src="../images/template/rss-icon.png" width="12" height="12"> 
+<a href="opinion.castle">Recent Opinion Places</a></li>
+
+</ul>
+
+<h2>Daily Evergreen Podcast Feed</h2>
+<ul>
+<li><a href="http://dailyevergreen.com/podcast/">www.dailyevergreen.com/podcast/</a></li>
+</ul>
+<h2>Podcast Software</h2>
+
+<ul>
+<li>
+To listen to the the podcast above you must have a podcast client. You can find them here:
+<a href="http://www.podcastingnews.com/topics/podcast_software.html">www.podcastingnews.com/topics/podcast_software.html</a></li>
+</ul>
+
+

@@ -1,8 +1,0 @@
-
-
-
-	
-	
-
-		<input type="text"  value="$!{opt.value}" name="style.g_event[${event.id}].options[${opt.id}]"  rel="${opt.name}"/> <span class="opacity">
-	

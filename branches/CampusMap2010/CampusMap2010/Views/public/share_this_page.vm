@@ -1,7 +1,0 @@
-<div id="share">
-  <a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4dc486644d64164b" title="Share">
-    <img src="$siteroot/images/template/addthis-icon.png" width="26" height="26" alt="Share" border="0" class="list_bottom_share" />
-    <div id="share_text" style="padding-top:4px;">Share | Print | Email</div>
-  </a>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dc486644d64164b"></script>
-</div>

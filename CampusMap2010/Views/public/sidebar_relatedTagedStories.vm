@@ -1,0 +1,16 @@
+#if($relatedPlacesByPlacetags.Count>0)
+<div class="relations">
+  <h4>Other related Places</h4>
+  #set($c=0)
+  <ul>
+  #foreach ($place in $relatedPlacesByPlacetags)
+    #if($c <= 5)
+      <li #if($c == 5)class="last"#end>
+        <a title="$!place.Title" href="$siteroot/read/${place.CustomUrl}">$!place.Title</a>
+      </li>
+      #set($c=$c+1)
+    #end
+  #end
+  </ul>
+</div>
+#end

@@ -1,0 +1,19 @@
+<div id="social_media">
+  <a href="$siteroot/public/contactus.castle" title="Contact Us">
+    <img src="$siteroot/images/template/email-icon.png" width="26" height="17" alt="Contact Us" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" />
+  </a>
+  <a href="http://www.facebook.com/pages/The-Daily-Evergreen/270217084313" title="Facebook">
+    <img src="$siteroot/images/template/facebook-icon.png" width="26" height="26" alt="Facebook" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" />
+  </a>
+  <a href="http://twitter.com/DailyEvergreen" title="Twitter">
+    <img src="$siteroot/images/template/twitter-icon.png" width="26" height="24" alt="Twitter" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" />
+  </a>
+  <a href="$siteroot/public/rss.castle" title="RSS Feed">
+    <img src="$siteroot/images/template/rss-icon.png" width="26" height="27" alt="RSS Feed" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" />
+  </a>
+  <a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4dc486644d64164b" title="Share">
+    <img src="$siteroot/images/template/addthis-icon.png" width="26" height="26" alt="Share" border="0" style="color:#7f9d6a; display:block; text-decoration:none; border:none;" />
+  </a>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dc486644d64164b"></script>
+</div>
+<!--#social_media-->

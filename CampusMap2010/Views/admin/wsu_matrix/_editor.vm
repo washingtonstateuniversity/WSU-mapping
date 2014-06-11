@@ -1,0 +1,18 @@
+
+#if($Flash.error)
+<p style="color: red; font-weight: bold;">
+    $Flash.error
+</p>
+#end
+
+<form action="_update_${action}.castle" method="post">
+  <input type="hidden" value="$!itmes.id" name="${action}.id" />
+  <h3>${action}</h3>
+  <p>Name:<br/>
+      <input type="text" value="$!itmes.name" name="${action}.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all w500" />
+  </p>
+  <p>Url:<br/>
+      <input type="text" value="$!itmes.url" name="${action}.url" id="type_url" class="ui-widget ui-widget-content ui-corner-all w500" />
+  </p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
