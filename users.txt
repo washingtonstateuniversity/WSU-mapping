@@ -1,4 +1,0 @@
-jeremy.bass = Jeremy Bass <jeremybass@cableone.net>
-nathan_owen = Nathan Owen <nathan_owen@wsu.edu>
-apache = Apache <noreply@something.com>
-jchanson = Jeff Hanson <jchanson@wsu.edu>
