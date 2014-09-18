@@ -1,7 +1,6 @@
 
 
 [Oo]bj
-[Bb]in
 *.user
 *.suo
 *.[Cc]ache
@@ -16,5 +15,3 @@ Ankh.NoLoad
 
 
 /**/properties.config
-cache
-uploads
