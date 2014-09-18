@@ -40,6 +40,16 @@ namespace campusMap.Filters
                 controllerContext.PropertyBag["userService"] = userService;
                 controllerContext.PropertyBag["helperService"] = helperService;
                 controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
+
+                users currentUser = UserService.getUserFull();
+                if (currentUser != null) {
+                    users you = ActiveRecordBase<users>.Find(currentUser.id);
+                    you.logedin = true;
+                    you.LastActive = DateTime.Now;
+                    ActiveRecordMediator<users>.Update(you);
+                    ActiveRecordMediator<users>.Save(you);
+                }
+
                 return true;
             }
             // Read previous authenticated principal from session 
