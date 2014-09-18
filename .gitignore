@@ -15,3 +15,7 @@ Ankh.NoLoad
 
 
 /**/properties.config
+
+log.txt
+/cache/**/*.css
+/cache/**/*.js
