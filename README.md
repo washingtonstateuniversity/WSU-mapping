@@ -12,7 +12,7 @@ This repo doesn't include the `config/properties.config` file which is what is u
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
 	<properties>
-    <connectionString>Server=database.wsu.edu;Initial Catalog=campusMap;Persist Security Info=True;User ID=your_db_username;Password=your_password</connectionString>
+    <connectionString>Server=database.wsu.edu;Initial Catalog=campusMap;Integrated Security=SSPI;Persist Security Info=True;User ID=your_db_username;Password=your_password</connectionString>
   </properties>
 </configuration>
 ```
