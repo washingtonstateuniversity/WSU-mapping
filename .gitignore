@@ -19,3 +19,4 @@ Ankh.NoLoad
 log.txt
 /cache/**/*.css
 /cache/**/*.js
+/CampusMap2010/uploads/media/image/**/
