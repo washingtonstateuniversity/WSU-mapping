@@ -14,7 +14,7 @@ using campusMap.Models;
 using System.Security.Principal;
 using MonoRailHelper;
 using campusMap.Services;
-
+using System.IO;
 
 
 namespace campusMap.Filters
@@ -23,6 +23,7 @@ namespace campusMap.Filters
     {
         protected UserService userService = new UserService();
         protected HelperService helperService = new HelperService();
+
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
 
