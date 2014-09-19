@@ -379,11 +379,11 @@ background: url(../../Content/images/infoTab.png) no-repeat left center transpar
 
 
 
-.editablelistUL li div.actionCol ul li a.buttons .ui-icon{height: 16px;width: 16px;display:block;float: left;
+.editablelistUL li div.actionCol ul li a.buttons i{height: 16px;width: 16px;display:block;float: left;
 
     left: 5px;
     position: absolute;
-    top: 4px;
+    top: 7px;
 
 }
 .editablelistUL li div.actionCol ul li a.buttons span.actionText{width:0px;float: right  !important;overflow: hidden;}

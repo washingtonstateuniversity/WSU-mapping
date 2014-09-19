@@ -1,7 +1,7 @@
 
 	<li>
-	<a href="$siteroot/${controller.getView()}/_edit.castle?id=$!{item.id}" title="#if($item.CheckedOutBy)Is being edited by $item.CheckedOutBy.name #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
-	  <span class="ui-button-icon-primary ui-icon ui-icon-pencil"> </span>
+	<a href="$helper.getAdminUrl("${controller.getView()}/_edit")?id=$!{item.id}" title="#if($item.CheckedOutBy)Is being edited by $item.CheckedOutBy.name #else Edit #end" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
+	  <i class="fa fa-pencil-square-o"></i>
 	  <span class="actionText">Edit</span>
 	  <span class="actionpropt">&#187;</span>
 	</a>

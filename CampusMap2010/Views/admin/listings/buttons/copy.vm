@@ -1,7 +1,7 @@
 
 	<li class="copy">
-		<a href="$siteroot/${controller.getView()}/_copy.castle?id=$!{item.id}" title="Copy this item" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
-		  <span class="ui-button-icon-primary ui-icon ui-icon-copy"> </span>
+		<a href="$helper.getAdminUrl("${controller.getView()}/_copy")?id=$!{item.id}" title="Copy this item" class="buttons editIt ui-button ui-widget ui-state-default ui-corner-all ">
+		  <i class="fa fa-files-o"></i>
 		  <span class="actionText">Copy</span>
 		  <span class="actionpropt">&#187;</span>
 		</a>

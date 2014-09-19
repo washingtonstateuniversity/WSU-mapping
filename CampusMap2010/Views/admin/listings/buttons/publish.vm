@@ -1,7 +1,7 @@
 #if($userService.checkPrivleage("can_publish"))
   <li>
-	<a href="$siteroot/${controller.getView()}/setStatus.castle?id=$!{item.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
-	  <span class="ui-button-icon-primary ui-icon ui-icon-star"></span>
+	<a href="$helper.getAdminUrl("${controller.getView()}/setStatus")?id=$!{item.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
+	  <i class="fa fa-star"></i>
 	  <span class="actionText">Status</span>
 	  <span class="actionpropt">&#187;</span>
 	</a>

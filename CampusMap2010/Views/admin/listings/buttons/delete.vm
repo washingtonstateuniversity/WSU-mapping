@@ -1,7 +1,7 @@
 
 	<li>
-		<a href="$siteroot/${controller.getView()}/delete.castle?id=$!{item.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
-		  <span class="ui-button-icon-primary ui-icon ui-icon-trash"> </span>
+		<a href="$helper.getAdminUrl("${controller.getView()}/delete")?id=$!{item.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
+		  <i class="fa fa-trash"></i>
 		  <span class="actionText">Delete</span>
 		  <span class="actionpropt">&#187;</span>
 		</a>
