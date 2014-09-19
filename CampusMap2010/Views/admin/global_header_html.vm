@@ -1,11 +1,31 @@
 
-<title>Wsu Campus Map</title>
-<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+	<meta charset="utf-8">
+	<title>Admin | Wsu Campus Map</title>
 
+	<!-- FAVICON -->
+	<link rel="shortcut icon" href="http://repo.wsu.edu/spine/1/favicon.ico" />
+
+	<!-- STYLESHEETS -->
+	<link href="//repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
+	<!-- Your custom stylesheets here -->
+	<!-- RESPOND -->
+	<meta name="viewport" content="width=device-width, user-scalable=yes">
+
+	<!-- SCRIPTS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
+	<!-- COMPATIBILITY -->
+	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<noscript><style>#spine .spine-sitenav ul ul li { display: block !important; }</style></noscript>
+
+	<!-- DOCS -->
+	<link type="text/plain" rel="author" href="http://repo.wsu.edu/spine/1/authors.txt">
+	<link type="text/html" rel="help" href="https://github.com/washingtonstateuniversity/WSU-mapping">
 
 
 <style type="text/css">
-  body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
+  /*body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}*/
   .at300bs.at15t_compact{background-image:none;}
   .at300bs{display:inline;}
 </style>
@@ -36,7 +56,9 @@
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
+#*
 <link href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010" type="text/css" rel="stylesheet" />
+*#
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
 <link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
@@ -44,16 +66,7 @@
 $scriptsService.Css("~/Content/css/admin_menu.css,~/Content/css/admin_styles.css,~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css")
 
 
-#* 
-<link href="$siteroot/Content/css/admin_styles.css" rel="stylesheet" type="text/css" />
-<link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
 
-<!-- WSU theme -->
-<link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
-<link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
-<link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
-<link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
-*#
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -166,18 +179,10 @@ THIS IS FOR UPLOADING
 </style>
 
 <style>
-#wsu_ui.admin.media.listings .placelist.ui-tabs .ui-tabs-nav li {
-    margin-top: 7px !important;
-}
-
-#wsu_ui.admin.place.list .placelist.ui-tabs .ui-tabs-nav li {
-     margin-top: 4px !important;
-}
-
-
+	#wsu_ui.admin.media.listings .placelist.ui-tabs .ui-tabs-nav li {
+		margin-top: 7px !important;
+	}
+	#wsu_ui.admin.place.list .placelist.ui-tabs .ui-tabs-nav li {
+		 margin-top: 4px !important;
+	}
 </style>
-
-<!-- EOF UI SCRIPTS -->
-<!--script for print tool-->
-<script src="http://images.wsu.edu/javascripts/print.js" type="text/javascript"></script>
-

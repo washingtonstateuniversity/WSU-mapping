@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<!--[if IE 7]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie7 ie" lang="en"><![endif]-->
-<!--[if IE 8]><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js ie8 ie" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" ><!--<![endif]-->
-    <head>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+
+<head>
         <script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
         <meta content="text/html; charset=UTF-8" http-equiv="content-type">
         #* all the JS and CSS that is site wide *#
@@ -14,36 +16,68 @@
         </style>
     </head>
     <body id='wsu_ui' class="admin ${controller.getView()} ${controller.getAction()}">
-        <div id = "wrapper">
-            <div id="header_bar">
-                #parse("admin/header_html.vm")
-            </div>
-            
-            #parse("admin/main_menu.vm")
-            
-            <div id="content">
-                <div id="main">
-                    <div id="content_area"><div id="content_tar">
-                        #if($Flash.message)
-                            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
-                              <p style="line-height: 15px;padding-bottom: 0;">
-                                <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
-                              </p>
-                            </div>
-                        #end
-                        #if($Flash.error)
-                            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-                              <p style="line-height: 15px;padding-bottom: 0;">
-                                <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
-                              </p>
-                            </div>
-                        #end			
-                        $childContent
-                    </div></div> 
-                </div>
-            </div>
-            #parse("admin/footer.vm")
-        </div>
+		<!-- WRAPPING -->
+		<div id="jacket">
+			<div id="binder" class=" hybrid max-1980">
+				<!-- GRID BEHAVIOR: Default behavior can be changed by changing "hybrid" to "fixed" or "fluid". -->
+				<!-- CONTENT -->
+				<main>
+					<section class=""> 
+						<div class="">       
+							#parse("admin/header_html.vm")   
+						</div>
+					</section>   
+					<section class="row single gutter pad-bottom tall"> 
+						<div class="column one">     
+							<div id="content">
+								<div id="main">
+									<div id="content_area"><div id="content_tar">
+										#if($Flash.message)
+											<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+											  <p style="line-height: 15px;padding-bottom: 0;">
+												<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Note:</strong>$Flash.message
+											  </p>
+											</div>
+										#end
+										#if($Flash.error)
+											<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+											  <p style="line-height: 15px;padding-bottom: 0;">
+												<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>$Flash.error
+											  </p>
+											</div>
+										#end			
+										$childContent
+									</div></div> 
+								</div>
+							</div>
+							#parse("admin/footer.vm")
+						</div>
+					</section>
+				</main>
+				#parse("admin/main_menu.vm")	  
+			</div><!--/cover-->
+		</div><!--/jacket-->
+		<!-- /WRAPPING -->
+		
+		<!-- CONTACT INFO: Adjust the sample contact info below to reflect appropriate contact information. -->
+		<div id="contact-details" itemscope itemtype="http://schema.org/Organization"> 
+			<span itemprop="department"  content="University Communications | Web"></span> 
+			<span itemprop="name" content="Washington State University"></span> 
+			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<span itemprop="location" content="ITB 2016"></span>
+				<span itemprop="streetAddress" content="PO Box 645910"></span>
+				<span itemprop="addressLocality" content="Pullman"></span>
+				<span itemprop="addressRegion" content="WA"></span>
+				<span itemprop="postalCode" content="99164"></span>
+			</div>
+			<span itemprop="telephone" content="(509) 335-2700"></span>
+			<span itemprop="email" content="web.support@wsu.edu"></span>
+			<span itemprop="contactPoint" content="https://github.com/washingtonstateuniversity/WSU-mapping"></span>
+			<span itemprop="url" content="http://ucomm.wsu.edu"></span>
+		</div>
+
+	  
+	  
         <div id="staging" class="push_hide"></div>
         #parse("admin/global_footer_JS.vm")
     </body>
