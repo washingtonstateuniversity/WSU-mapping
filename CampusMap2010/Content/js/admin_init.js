@@ -464,6 +464,70 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			
 			});
 	}
+	
+
+	function tabsToAccordions(){
+		$(".tabs").each(function(){
+			var e=$('<div class="accordion">');
+			var t=new Array;
+			$.each($(this).find(">ul>li"),function(){
+				t.push("<h3>"+$(this).html()+"</h3>")
+			});
+			var n=new Array;
+			$.each($(this).find(">div"),function(){
+				n.push("<div>"+$(this).html()+"</div>");});
+				for(var r=0;r<t.length;r++){
+					e.append(t[r]).append(n[r])
+				}
+				$(this).before(e);
+				$(this).remove()
+			});
+			$(".accordion").accordion({
+				heightStyle: "content",
+				collapsible: true
+			});
+	}
+	 //document.location.hash
+	// changes accordions to tabs (jquery ui)
+	function accordionsToTabs(){
+		$(".accordion").each(function(){
+			var e=$('<div class="tabs">');
+			var t=0;
+			var n=$("<ul>");
+			$.each($(this).find(">h3"),function(i){
+				n.append('<li><a href="#tabs-'+i+'">'+$(this).text()+"</a></li>");
+			});
+			var t=0;
+			var r=$("");
+			$(this).find(">div").each(function(){
+				t++;
+				r=r.add('<div id="tabs-'+t+'">'+$(this).html()+"</div>")
+			});
+			e.append(n).append(r);
+			$(this).before(e);
+			$(this).remove();
+		});
+		$(".tabs").tabs();
+	}
+
+	
+	function updateUI(){
+		if($(window).width() <= 480){
+			tabsToAccordions();
+		} else {
+			accordionsToTabs();
+		}
+	}
+	
+    // event handler for window resize
+    $(window).resize(function(e){
+        updateUI();
+    });
+    updateUI();
+
+	
+	
+	
 	function post_tmp(form_obj,diaObj,callback){
 		$.ajaxSetup ({cache: false,async:false}); 
 		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;

@@ -39,7 +39,7 @@
 				#set($buttons=$controller.getVar("filteredResults_ButtonSet"))
 				#parse("admin/listings/general.vm")
 			#else
-				<div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div id="" class="tabs ${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
 					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 						#set($c=0)
 						#foreach($status in $statuses)
