@@ -40,6 +40,7 @@ namespace campusMap.Filters
 
                 controllerContext.PropertyBag["userService"] = userService;
                 controllerContext.PropertyBag["helperService"] = helperService;
+                controllerContext.PropertyBag["helper"] = helperService;
                 controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
                 users currentUser = UserService.getUserFull();
@@ -106,6 +107,7 @@ namespace campusMap.Filters
 
             controllerContext.PropertyBag["userService"] = userService;
             controllerContext.PropertyBag["helperService"] = helperService;
+            controllerContext.PropertyBag["helper"] = helperService;
             controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
 

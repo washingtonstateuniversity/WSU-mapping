@@ -28,48 +28,39 @@
 </section><!--/#wsu-actions-->
 
 <section id="spine-navigation" class="spine-navigation">
-
 	<nav class="spine-sitenav">
-
-
-		
-		
 		<ul class="">
 			<li><a class="" href="../admin"><b>Dashborad</b></a></li>
 
 			#if($userService.checkPrivleage("modify_views"))
-				<li><a class=" #if($controller.getView()=='view')active#end" href="../view/list.castle" data-overview="Map view List"><b>Map views</b></a>
+				<li><a class=" #if($controller.getView()=='view')active#end" href="$helper.getAdminUrl("view/list")" data-overview="Map view List"><b>Map views</b></a>
 					<ul>
-						<li><a href="../view/list.castle">Map view list</a></li>
-						<li><a href="../view/new.castle">New Map view</a></li>
+						<li><a href="$helper.getAdminUrl("view/list")">Map view list</a></li>
+						<li><a href="$helper.getAdminUrl("view/new")">New Map view</a></li>
 						<li><hr/></li>
-						#if($userService.checkPrivleage("modify_global_nav"))<li><a href="../view/list_nav.castle">Global Navagation</a></li>#end
+						#if($userService.checkPrivleage("modify_global_nav"))<li><a href="$helper.getAdminUrl("view/list_nav")">Global Navagation</a></li>#end
 					</ul>
 				</li>
 			#end
-
 			<li><a class=" #if($controller.getView()=='place' || $controller.getView()=='geometrics')active#end" href="#"><b>Assests</b></a>
 				<ul>
-					<li><a class=" #if($controller.getView()=='place')active#end" href="../place/list.castle"  data-overview="Place List">Places</a>
+					<li><a class=" #if($controller.getView()=='place')active#end" href="$helper.getAdminUrl("place/list")"  data-overview="Place List">Places</a>
 						<ul>
-							<li><a href="../place/new.castle">Create a new Place</a></li>
-							<li><a href="../place/list.castle#_Types">Place Types</a></li>
-							<li><a href="../place/list.castle#_name_types">Name types</a></li>
-							<li><a href="../place/list.castle#_template">Info Window Templates</a></li>
-							<li><a href="../place/list.castle#_Fields">Content Fields</a></li>
+							<li><a href="$helper.getAdminUrl("place/new")">Create a new Place</a></li>
+							<li><a href="$helper.getAdminUrl("place/list")#_Types">Place Types</a></li>
+							<li><a href="$helper.getAdminUrl("place/list")#_name_types">Name types</a></li>
+							<li><a href="$helper.getAdminUrl("place/list")#_template">Info Window Templates</a></li>
+							<li><a href="$helper.getAdminUrl("place/list")#_Fields">Content Fields</a></li>
 						</ul>
 					</li>
 				#if($userService.checkPrivleage("modify_geometrics"))
-					<li><a class=" #if($controller.getView()=='geometrics')active#end" href="../geometrics/list.castle"  data-overview="Geometry List">Geometrics</a>
+					<li><a class=" #if($controller.getView()=='geometrics')active#end" href="$helper.getAdminUrl("geometrics/list")"  data-overview="Geometry List">Geometrics</a>
 						<ul>
-						<li><a href="../geometrics/list.castle">List</a></li>
-						<li><a href="../geometrics/new.castle">New Shape</a></li>
-						<li><a href="../geometrics/new_style.castle">New Style</a></li>
-						
-						<li><a href="../geometrics/list.castle#_Types">Types</a></li>
-						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
-						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
-						
+							<li><a href="$helper.getAdminUrl("geometrics/new")">New Shape</a></li>
+							<li><a href="$helper.getAdminUrl("geometrics/new_style")">New Style</a></li>
+							<li><a href="$helper.getAdminUrl("geometrics/list")#_Types">Types</a></li>
+							<li><a href="$helper.getAdminUrl("geometrics/list")#_Styles">Styles</a></li>
+							<li><a href="$helper.getAdminUrl("geometrics/list")#_Fields">Fields</a></li>
 						</ul>
 					</li>
 				#end
@@ -79,51 +70,48 @@
 			<li><a class=" #if($controller.getView()=='media' || $controller.getView()=='comment' || $controller.getView()=='tags')active#end" href="#"><b>Content</b></a>
 				<ul>
 				#if($userService.checkPrivleage("modify_media"))
-					<li><a class=" #if($controller.getView()=='media')active#end" href="../media/_list.castle">Media</a>
+					<li><a class=" #if($controller.getView()=='media')active#end" href="$helper.getAdminUrl("media/_list")" data-overview="Media List">Media</a>
 						<ul>
-							<li><a href="../media/_list.castle">List</a></li>
-							<li><a href="geometrics/new.castle">New Media</a></li>
+							<li><a href="$helper.getAdminUrl("media/new")">Add Media</a></li>
 							#if($userService.checkPrivleage("modify_feu_media"))<li><a href="#">Front End User Media</a></li>#end
-							#if($userService.checkPrivleage("modify_ads_n_notices"))<li><a href="advertisement/list.castle">Notices and Adverts</a></li>#end
+							#if($userService.checkPrivleage("modify_ads_n_notices"))<li><a href="$helper.getAdminUrl("advertisement/list")">Notices and Adverts</a></li>#end
 						</ul>
 					</li>
 				#end
 				#if($userService.checkPrivleage("modify_comments"))
-					<li class="liTop nosub"><a class=" #if($controller.getView()=='comment')active#end" href="../comment/index.castle">Comments</a></li>
+					<li class="liTop nosub"><a class=" #if($controller.getView()=='comment')active#end" href="$helper.getAdminUrl("comment/index")">Comments</a></li>
 				#end
 				#if($userService.checkPrivleage("modify_tags"))
-					<li><a class=" #if($controller.getView()=='tags')active#end" href="../tags/index.castle">Tags</a>
+					<li><a class=" #if($controller.getView()=='tags')active#end" href="$helper.getAdminUrl("tag/index")" data-overview="Tag List">Tags</a>
 						<ul>
-							<li><a href="../tags/index.castle">List</a></li>
-							<li><a href="../tags/new.castle">New Tag</a></li>
-							<li><a href="../tags/index.castle#usertag">User Tags</a></li>
+							<li><a href="$helper.getAdminUrl("tag/new")">New Tag</a></li>
+							<li><a href="$helper.getAdminUrl("tag/index")#usertag">User Tags</a></li>
 						</ul>
 					</li>
 				#end	
 				</ul>
 			</li>
-
-			<li><a class=" #if($controller.getView()=='authors')active#end" #if($userService.checkPrivleage("modify_users"))href="../authors/list.castle"#end><b>Authorized Users</b></a>
+			<li><a class=" #if($controller.getView()=='authors')active#end" #if($userService.checkPrivleage("modify_users"))href="#"#end><b>Editor Access</b></a>
 				<ul>
-                	#if($userService.checkPrivleage("modify_users"))<li><a href="../authors/list.castle">List</a></li>#end
-					#if($userService.checkPrivleage("modify_users"))<li><a href="../authors/new.castle">New User</a></li>#end
-					#if($userService.checkPrivleage("modify_groups"))<li><a href="../accesslevel/list.castle">Groups</a></li>#end
-					<li><a href="../authors/edit.castle?id=$userService.getUser().id">Your Profile</a></li>
-					#if($userService.getUser().name==$user)<li><a href="../authors/edit.castle?id=$userService.getUser().id">Your Settings</a></li>#end
+                	#if($userService.checkPrivleage("modify_users"))<li><a href="$helper.getAdminUrl("authors/list")">List</a></li>#end
+					#if($userService.checkPrivleage("modify_users"))<li><a href="$helper.getAdminUrl("authors/new")">New User</a></li>#end
+					#if($userService.checkPrivleage("modify_groups"))<li><a href="$helper.getAdminUrl("accesslevel/list")">Groups</a></li>#end
+					<li><a href="$helper.getAdminUrl("authors/edit")?id=$userService.getUser().id">Your Profile</a></li>
+					#if($userService.getUser().name==$user)<li><a href="$helper.getAdminUrl("authors/edit")?id=$userService.getUser().id">Your Settings</a></li>#end
 				</ul>
 			</li>
 
 		#if($userService.checkPrivleage("modify_site_settings") || $userService.checkPrivleage("modify_wsu_matrix"))
 			<li><a class=""  href="#"><b>Site Controlls</b></a>
 				<ul>
-					#if($userService.checkPrivleage("modify_site_settings"))<li><a href="../admin/_list_siteSettings.castle"><b>Site Prefences</b></a></li> #end	
+					#if($userService.checkPrivleage("modify_site_settings"))<li><a href="$helper.getAdminUrl("admin/_list_siteSettings")"><b>Site Prefences</b></a></li> #end	
 					<li><hr/></li>
-					#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="../place/wsu_matrix.castle">WSU Matrix</a></li>#end
+					#if($userService.checkPrivleage("modify_wsu_matrix"))<li><a href="$helper.getAdminUrl("place/wsu_matrix")">WSU Matrix</a></li>#end
 				</ul>
 			</li>
         #end
 		
-			<li><a class="" href="../place/gamedaymanager.castle"><b>Game Day Parking</b></a></li>
+			<li><a class="" href="$helper.getAdminUrl("place/gamedaymanager")"><b>Game Day Parking</b></a></li>
 		</ul>
 		
 		<ul class="menu"><li class="sep"><b>::</b></li></ul>

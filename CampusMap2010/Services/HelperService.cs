@@ -246,6 +246,19 @@ namespace campusMap.Services {
             return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath).Replace("bin", "");
         }
 
+
+        public static String getAdminUrl(String path) {
+            return getAdminUrl(path,true);
+        }
+        public static String getAdminUrl(String path,Boolean useExt){
+            String pageExt = ".castle";
+            string baseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+            String url = baseUrl + path + (useExt ? pageExt : "");
+            return url;
+        }
+
+
+
         public static object[] alias_exsits(String alias, String typeName) {
             object[] temp = new object[] { };
             try {
