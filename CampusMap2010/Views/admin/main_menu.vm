@@ -38,7 +38,7 @@
 			<li><a class="" href="../admin"><b>Dashborad</b></a></li>
 
 			#if($userService.checkPrivleage("modify_views"))
-				<li><a class=" #if($controller.getView()=='view')active#end" href="../view/list.castle"><b>Map views</b></a>
+				<li><a class=" #if($controller.getView()=='view')active#end" href="../view/list.castle" data-overview="Map view List"><b>Map views</b></a>
 					<ul>
 						<li><a href="../view/list.castle">Map view list</a></li>
 						<li><a href="../view/new.castle">New Map view</a></li>
@@ -48,33 +48,35 @@
 				</li>
 			#end
 
-			<li><a class=" #if($controller.getView()=='place')active#end" href="#"><b>Assests</b></a>
+			<li><a class=" #if($controller.getView()=='place' || $controller.getView()=='geometrics')active#end" href="#"><b>Assests</b></a>
 				<ul>
-					<li><a class=" #if($controller.getView()=='place')active#end" href="../place/list.castle">Places</a>
+					<li><a class=" #if($controller.getView()=='place')active#end" href="../place/list.castle"  data-overview="Place List">Places</a>
 						<ul>
-							<li><a href="../place/list.castle">List</a></li>
-							<li><a href="../place/new.castle">New Place</a></li>
-							
+							<li><a href="../place/new.castle">Create a new Place</a></li>
+							<li><a href="../place/list.castle#_Types">Place Types</a></li>
+							<li><a href="../place/list.castle#_name_types">Name types</a></li>
+							<li><a href="../place/list.castle#_template">Info Window Templates</a></li>
+							<li><a href="../place/list.castle#_Fields">Content Fields</a></li>
 						</ul>
 					</li>
 				#if($userService.checkPrivleage("modify_geometrics"))
-					<li><a class=" #if($controller.getView()=='place')active#end" href="../geometrics/list.castle">Geometrics</a>
+					<li><a class=" #if($controller.getView()=='geometrics')active#end" href="../geometrics/list.castle"  data-overview="Geometry List">Geometrics</a>
 						<ul>
 						<li><a href="../geometrics/list.castle">List</a></li>
 						<li><a href="../geometrics/new.castle">New Shape</a></li>
 						<li><a href="../geometrics/new_style.castle">New Style</a></li>
-						#*
+						
 						<li><a href="../geometrics/list.castle#_Types">Types</a></li>
 						<li><a href="../geometrics/list.castle#_Styles">Styles</a></li>
 						<li><a href="../geometrics/list.castle#_Fields">Fields</a></li>
-						*#
+						
 						</ul>
 					</li>
 				#end
 				</ul>
 			</li>
 
-			<li><a class=" #if($controller.getView()=='place')active#end" href="#"><b>Content</b></a>
+			<li><a class=" #if($controller.getView()=='media' || $controller.getView()=='comment' || $controller.getView()=='tags')active#end" href="#"><b>Content</b></a>
 				<ul>
 				#if($userService.checkPrivleage("modify_media"))
 					<li><a class=" #if($controller.getView()=='media')active#end" href="../media/_list.castle">Media</a>
