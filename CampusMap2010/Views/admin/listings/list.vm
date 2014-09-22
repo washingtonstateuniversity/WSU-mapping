@@ -67,7 +67,7 @@
 		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
 			  <p>
-				<a href="$siteroot/${controller.getView()}/new_type.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<a href="$helper.getAdminUrl("${controller.getView()}/new_type")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Type
 				</a>&nbsp;
 			  </p>
@@ -82,7 +82,7 @@
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index:1;top:0px;">
 				  <p>
-					<a href="$siteroot/${controller.getView()}/new_style.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_style")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create style
 					</a>&nbsp;
 				  </p>
@@ -97,7 +97,7 @@
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
 				  <p>
-					<a href="$siteroot/${controller.getView()}/new_name_type.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_name_type")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Name Type
 					</a>&nbsp;
 				  </p>
@@ -113,7 +113,7 @@
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
 				  <p>
-					<a href="$siteroot/${controller.getView()}/new_template.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_template")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New template
 					</a>&nbsp;
 				  </p>
@@ -128,7 +128,7 @@
 			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
 				  <p>
-					<a href="$siteroot/${controller.getView()}/new_field.castle" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_field")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Field
 					</a>&nbsp;
 				  </p>

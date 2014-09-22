@@ -21,7 +21,8 @@
 	#if($item.coordinate || $item.encoded)
 		#if($item.coordinate)
 			<li class='previewMap'>
-				<img src="$siteroot/media/getmap.castle?path=$siteroot${item.staticMap}#*http://maps.google.com/staticmap?center=${item.getLat()},${item.getLong()}&amp;size=250x145&amp;maptype=mobile&amp;markers=${item.getLat()},${item.getLong()},red&amp;sensor=false*#" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end @${item.getLat()},${item.getLong()}"/>
+				#* old url for static map http://maps.google.com/staticmap?center=${item.getLat()},${item.getLong()}&amp;size=250x145&amp;maptype=mobile&amp;markers=${item.getLat()},${item.getLong()},red&amp;sensor=false*#
+				<img src="$helper.getAdminUrl("media/getmap")?path=$siteroot${item.staticMap}" alt="map #if($item.prime_name)of $!item.prime_name#elseif($item.name)of $!item.name#end @${item.getLat()},${item.getLong()}"/>
 			</li>
 		#else
 		#set($fill="")

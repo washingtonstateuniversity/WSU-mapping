@@ -1,6 +1,6 @@
           #if($Controller.canPublish($user))
           <li>
-            <a href="$siteroot/${controller.getView()}/send_breaking_single.castle?id=$!{item.id}" title="Send a breaking News for this ONLY" class="buttons sendBR ui-button ui-widget ui-state-default ui-corner-all">
+            <a href="$helper.getAdminUrl("${controller.getView()}/send_breaking_single")?id=$!{item.id}" title="Send a breaking News for this ONLY" class="buttons sendBR ui-button ui-widget ui-state-default ui-corner-all">
               <span class="ui-button-icon-primary ui-icon ui-icon-signal-diag"> </span>
               <span class="actionText">Broadcast</span>
               <span class="actionpropt">&#187;</span>

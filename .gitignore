@@ -17,6 +17,7 @@ Ankh.NoLoad
 /**/properties.config
 
 log.txt
+/CampusMap2010/cache/**/*.ext
 /cache/**/*.css
 /cache/**/*.js
 /CampusMap2010/uploads/media/image/**/

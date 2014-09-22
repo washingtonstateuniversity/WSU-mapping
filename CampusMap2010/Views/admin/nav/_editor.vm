@@ -5,7 +5,7 @@
 </p>
 #end
 
-<form action="../view/update_nav.castle" method="post">
+<form action="$helper.getAdminUrl("view/update_nav")" method="post">
   $Form.HiddenField("nav.id")
   <h3>Place Type</h3>
   <p>Name:<br/>

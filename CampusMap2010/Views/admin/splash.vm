@@ -1,6 +1,6 @@
 <div id="sideinfo" class="ui-widget-content ui-corner-all">
 	<h1  class="head ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">Welcome</h1>
-	<h3><a href="authors/edit.castle?id=$user.id">$user.name</a></h3>
+	<h3><a href="$helper.getAdminUrl("authors/edit")?id=$user.id">$user.name</a></h3>
 	<hr/>
 	<span>You currently have:</span>
 	<table width="100%" class="ui-widget ui-widget-content">
@@ -240,7 +240,7 @@ var myFeedUri = "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A619995
 			#foreach($item in $places)
 				<tr #if($c%2>0) class="even" #else class="odd" #end>
 					<td align="center">
-					<a href="/place/_edit.castle?id=$!{item.id}" title="Edit">
+					<a href="$helper.getAdminUrl("place/_edit")?id=$!{item.id}" title="Edit">
 						$item.prime_name
 						<span class="ui-icon ui-icon-pencil"></span>
 					  </a>
@@ -250,7 +250,7 @@ var myFeedUri = "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A619995
 			#end
 		  </tbody>
 		</table>
-		<span><a href="/place/list.castle">View All Places</a></span>
+		<span><a href="$helper.getAdminUrl("place/list")">View All Places</a></span>
 	</div>
 	
 	
@@ -262,7 +262,7 @@ var myFeedUri = "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A619995
 			#foreach($item in $erroredPlaces)
 				<tr #if($c%2>0) class="even" #else class="odd" #end>
 					<td align="center">
-					<a href="/place/_edit.castle?id=$!{item.id}" title="Edit">
+					<a href="$helper.getAdminUrl("place/_edit")?id=$!{item.id}" title="Edit">
 						$item.prime_name
 						<span class="ui-icon ui-icon-pencil"></span>
 					  </a>
@@ -272,7 +272,7 @@ var myFeedUri = "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A619995
 			#end
 		  </tbody>
 		</table>
-		<span><a href="/place/list.castle">View All Places</a></span>
+		<span><a href="$helper.getAdminUrl("place/list")">View All Places</a></span>
 	</div>
 	
 
