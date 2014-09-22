@@ -71,9 +71,13 @@
 					handling.drawingmode_changed( self.get_drawingMode() );
 				}
 			});
-			if(typeof(handling.onComplete)=='function')
+			if(typeof(handling.onComplete)=='function'){
 				handling.onComplete(drawingManager , ((typeof(shape)!=="undefined")?shape:null) );
 			//google.maps.event.addListener(self.get('map'), 'click', function(){handling.onDrag();self.unset_drawingSelection();});
+			}
+			if( typeof(shape)!=="undefined" ){
+				self.add_delete_point(shape);
+			}
 			
 			return $(drawingManager);
 		},
@@ -204,8 +208,57 @@
 			}else{
 				return false;
 			}
-		},	
+		},
+		getDeleteButton:function(imageUrl) {
+			return  $("img[src$='" + imageUrl + "']");
+		},
+		add_delete_point:function(shape){
+			var self = this;
+			var poly = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
+			addDeleteButton(poly, 'http://i.imgur.com/RUrKV.png');
+			function addDeleteButton(poly, imageUrl) {
+				var path = poly.getPath();
+				path["btnDeleteClickHandler"] = {};
+				path["btnDeleteImageUrl"] = imageUrl;
+				
+				google.maps.event.addListener(poly.getPath(),'set_at',pointUpdated);
+				google.maps.event.addListener(poly.getPath(),'insert_at',pointUpdated);
+			}
+			
+			function pointUpdated(index) {
+				var path = this;
+				var btnDelete = self.getDeleteButton(path.btnDeleteImageUrl);
+				
+				if(btnDelete.length === 0){
+					var undoimg = $("img[src$='http://maps.gstatic.com/mapfiles/undo_poly.png']");
+					
+					undoimg.parent().css('height', '21px !important');
+					undoimg.parent().parent().append('<div style="overflow-x: hidden; overflow-y: hidden; position: absolute; width: 30px; height: 27px;top:21px;"><img src="' + path.btnDeleteImageUrl + '" class="deletePoly" style="height:auto; width:auto; position: absolute; left:0;"/></div>');
+					
+					// now get that button back again!
+					btnDelete = self.getDeleteButton(path.btnDeleteImageUrl);
+					btnDelete.hover(function() { $(this).css('left', '-30px'); return false;}, 
+					function() { $(this).css('left', '0px'); return false;});
+					btnDelete.mousedown(function() { $(this).css('left', '-60px'); return false;});
+				}
+				
+				// if we've already attached a handler, remove it
+				if(path.btnDeleteClickHandler){
+					btnDelete.unbind('click', path.btnDeleteClickHandler);
+				}
+				// now add a handler for removing the passed in index
+				path.btnDeleteClickHandler = function() {
+					path.removeAt(index); 
+					return false;
+				};
+				btnDelete.click(path.btnDeleteClickHandler);
+			}
+			
+
 		
+		
+		
+		},		
 		
 		
 		/*    
