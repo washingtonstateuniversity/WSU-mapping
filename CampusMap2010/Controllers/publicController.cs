@@ -373,8 +373,9 @@ namespace campusMap.Controllers {
                 RenderText("false");
             }
         }
-        public void getCategories(int parentid)
-        {
+
+        /*
+        public void getCategories(int parentid) {
             categories parent = null;
             parent = ActiveRecordBase<categories>.TryFind(parentid);
             categories[] cats = ActiveRecordBase<categories>.FindAllByProperty("Parent", parent);
@@ -382,6 +383,7 @@ namespace campusMap.Controllers {
             RenderText(JsonConvert.SerializeObject(cats));
             CancelView();
         }
+         */
         public void get_colleges_list(String callback) {
             CancelView();
             CancelLayout();
