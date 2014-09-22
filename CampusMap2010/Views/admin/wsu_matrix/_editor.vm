@@ -5,7 +5,7 @@
 </p>
 #end
 
-<form action="_update_${action}.castle" method="post">
+<form action="$helper.getAdminUrl("place/_update_${action}")" method="post">
   <input type="hidden" value="$!itmes.id" name="${action}.id" />
   <h3>${action}</h3>
   <p>Name:<br/>

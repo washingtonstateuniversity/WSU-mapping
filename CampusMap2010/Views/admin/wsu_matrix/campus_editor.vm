@@ -5,7 +5,7 @@
 </p>
 #end
 
-<form action="_update_${action}.castle" method="post">
+<form action="$helper.getAdminUrl("place/_update_${action}")" method="post">
   <input type="hidden" value="$!itmes.id" name="${action}.id" />
   <h3>${action}</h3>
   <p>Display Name:<br/>
@@ -51,7 +51,7 @@
 					#set($c=$c+1)
 				#end
 				#if($c==0)
-					<li class="ini"><div><h5>Currently there are no places under this campus</h5</div></li>
+					<li class="ini"><div><h5>Currently there are no places under this campus</h5></div></li>
 				#end
 			</ol>		
 		</div>	
