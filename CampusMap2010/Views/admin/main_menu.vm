@@ -82,10 +82,10 @@
 					<li class="liTop nosub"><a class=" #if($controller.getView()=='comment')active#end" href="$helper.getAdminUrl("comment/index")">Comments</a></li>
 				#end
 				#if($userService.checkPrivleage("modify_tags"))
-					<li><a class=" #if($controller.getView()=='tags')active#end" href="$helper.getAdminUrl("tag/index")" data-overview="Tag List">Tags</a>
+					<li><a class=" #if($controller.getView()=='tags')active#end" href="$helper.getAdminUrl("tags/index")" data-overview="Tag List">Tags</a>
 						<ul>
-							<li><a href="$helper.getAdminUrl("tag/new")">New Tag</a></li>
-							<li><a href="$helper.getAdminUrl("tag/index")#usertag">User Tags</a></li>
+							<li><a href="$helper.getAdminUrl("tags/new")">New Tag</a></li>
+							<li><a href="$helper.getAdminUrl("tags/index")#usertag">User Tags</a></li>
 						</ul>
 					</li>
 				#end	
