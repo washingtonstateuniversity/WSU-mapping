@@ -373,7 +373,6 @@ namespace campusMap.Controllers {
                 RenderText("false");
             }
         }
-
         /*
         public void getCategories(int parentid) {
             categories parent = null;

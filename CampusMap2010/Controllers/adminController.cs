@@ -9,7 +9,7 @@
     using campusMap.Models;
     using MonoRailHelper;
     using System.IO;
-using System.Linq;
+    using System.Linq;
     using System.Net;
     using System.Web;
     using NHibernate.Criterion;
@@ -25,11 +25,9 @@ using System.Linq;
     using System.Runtime.Serialization; 
 
 #endregion
-namespace campusMap.Controllers
-{
+namespace campusMap.Controllers{
     [Layout("default")]
-    public class adminController : SecureBaseController
-    {
+    public class adminController : SecureBaseController {
         #region JSON OUTPUT
            /* public void get_pace_type()
             {
@@ -70,8 +68,7 @@ namespace campusMap.Controllers
         #endregion
 
         #region URL rendering
-            public void render()
-        {
+        public void render() {
             String everUrl = Context.Request.RawUrl;
             // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
             // So strip it all out except http://sitename/pagetorender.html
@@ -124,6 +121,24 @@ namespace campusMap.Controllers
                 return;
             }*/
         }
+
+            public void general(string aspxerrorpath) {
+                CancelLayout();
+                CancelView();
+                LayoutName = "error";
+                RenderView("errors/general404");
+            }
+            public void error(string aspxerrorpath) {
+                CancelView();
+                CancelLayout();
+                Exception LastErrorOccured;
+                LastErrorOccured = Context.LastException;
+                PropertyBag["error"] = LastErrorOccured;
+                LayoutName = "error";
+                RenderView("errors/error");
+            }
+
+
         #endregion
 
         #region VIEWS

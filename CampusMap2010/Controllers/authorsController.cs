@@ -146,13 +146,16 @@ namespace campusMap.Controllers {
             }
 
             user.media.Clear();
-            */
+            
             try {
-                ActiveRecordMediator<users>.Save(user);
+               
             } catch (Exception ex) {
                 Flash["error"] = ex.Message;
                 Flash["author"] = user;
-            }
+            }*/
+
+            ActiveRecordMediator<users>.Save(user);
+
             /*
                 ActiveRecordMediator<media_repo>.Save(image);
                 if (newimage.ContentLength != 0)
