@@ -583,7 +583,7 @@ namespace campusMap.Services {
             }
         }
 
-        private static bool fileExists(string sFileName) {
+        public static bool fileExists(string sFileName) {
             try {
                 return (System.IO.File.Exists(sFileName));    //Check for file
             } catch (Exception) {

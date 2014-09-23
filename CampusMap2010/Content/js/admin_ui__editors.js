@@ -552,6 +552,7 @@ function load_geometrics_editor() {
 					delimiter:',',
 					overlaycomplete:function(data){
 							if(data!=null){
+								alert(data);
 								$('#latLong').val(data);
 								//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',data,false,false))));
 								//$('#geometric_encoded').val(google.maps.geometry.encoding.decodePath(data));
@@ -566,6 +567,7 @@ function load_geometrics_editor() {
 					onDrag:function(data){
 							var points=$('#drawing_map').gmap('get_updated_data');
 							if(points.length){
+								alert(points);
 								$('#latLong').val(points);
 								//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',points,false,false))));
 								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));

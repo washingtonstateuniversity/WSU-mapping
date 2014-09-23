@@ -60,7 +60,78 @@ namespace campusMap.Controllers {
             PropertyBag["AccessDate"] = DateTime.Now;
         }
 
-        public void List(int page, int searchId, string status, Boolean ajax) {
+
+
+        public void clearPlaceStaticMap(geometrics item) {
+            String uploadPath = getRootPath();
+
+            String imagePath = @"";
+            imagePath += @"uploads\";
+            imagePath += @"googleStaticMaps\geometrics\";
+
+            uploadPath += imagePath;
+
+            string newFile = uploadPath + item.id.ToString() + ".ext";
+            if (File.Exists(newFile)) {
+                File.Delete(newFile);
+            }
+        }
+
+
+        public void makePlaceStaticMap(geometrics item) {
+
+                String url = "";
+                String fill = "";
+                if( item.default_type.name == "polygon" || item.default_type.name == "rectangle"){
+                    
+					if(item.style.Count()>0){
+						fill = item.style[0].getoptionValue("rest","fillColor").Replace("#","");
+					}
+					if(fill==""){
+                        fill="981F32";
+                    }
+
+                    String sfill = "";
+					if(item.style.Count()>0){
+						sfill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
+                    }
+                    String stroke = "";
+					if(sfill==""){
+						stroke = "weight:0";
+					}else{
+                        stroke = "weight:3%7Ccolor:0x" + sfill + "";
+					}
+					url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path="+stroke+"%7Cfillcolor:0x"+fill+"%7Cenc:"+item.encoded+"&sensor=false";
+                }else if(item.default_type.name == "polyline"){
+					if(item.style.Count()>0){
+						fill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
+					}
+					if(fill==""){
+                        fill = "981F32";
+                    }
+					url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path=weight:3%7Ccolor:0x"+fill+"%7Cenc:"+item.encoded+"&sensor=false" ;
+                }
+
+            String uploadPath = getRootPath();
+
+            String imagePath = @"";
+            imagePath += @"uploads\";
+            imagePath += @"googleStaticMaps\geometrics\";
+
+            uploadPath += imagePath;
+
+            if (!HelperService.DirExists(uploadPath)) {
+                System.IO.Directory.CreateDirectory(uploadPath);
+            }
+            string newFile = uploadPath + item.id.ToString() + ".ext";
+            string finImagePath = @"\" + imagePath + item.id.ToString() + ".ext";
+            if (!HelperService.fileExists(newFile)){
+                googleService.createStaticPlaceMap(url, newFile);
+            }
+            item.staticMap = finImagePath;
+            ActiveRecordMediator<geometrics>.Save(item);
+        }
+        public void List(int page, int searchId, string target, string filter, Boolean ajax) {
             users user = UserService.getUserFull();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
@@ -72,7 +143,6 @@ namespace campusMap.Controllers {
             PropertyBag["ajax"] = ajax;
             //user.Sections.Contains(place.place_types);
 
-            IList<geometrics> items;
             int pagesize = 15;
             int paging = 1;
             List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
@@ -99,76 +169,63 @@ namespace campusMap.Controllers {
             }
 
             //PUBLISHED
-            if (status == "published") {
-                paging = page;
-            } else {
-                paging = 1;
-            }
-            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-            pubEx.AddRange(baseEx);
-            pubEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(3)));
 
-            if (searchId > 0) {
-                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), pubEx.ToArray());
-            } else {
-                items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
+            var pageing = new Dictionary<string, int>();
+
+            switch (target) {
+                case "templates": {
+                        pageing.Add("templatePaging", page); break;
+                    }
+                case "name_types": {
+                        pageing.Add("name_typesPaging", page); break;
+                    }
+                case "types": {
+                        pageing.Add("typesPaging", page); break;
+                    }
+                case "fields": {
+                        pageing.Add("fieldsPaging", page); break;
+                    }
+                case "draft": {
+                        pageing.Add("draftPaging", page); break;
+                    }
+                case "review": {
+                        pageing.Add("reviewPaging", page); break;
+                    }
+                case "published": {
+                        pageing.Add("publishedPaging", page); break;
+                    }
+                case "filteredResults": {
+                        pageing.Add("filterPaging", page); break;
+                    }
             }
-            PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+
+            String cachePath = getRootPath();
             IList<string> buttons = new List<string>();
-            buttons.Add("edit");
-            //buttons.Add("delete");
-            buttons.Add("publish");
-            buttons.Add("copy");
-            //buttons.Add("broadcast");
-            //buttons.Add("view");
-            //buttons.Add("order");
-            PropertyBag["publishedButtonSet"] = buttons;
+            int pag = 0;
 
+            status[] states = ActiveRecordBase<status>.FindAll();
+            foreach (status stat in states) {
+                string name = stat.name;
 
-
-
-            //REVIEW
-            if (status == "review") {
-                paging = page;
-            } else {
-                paging = 1;
+                IList<geometrics> listtems;
+                List<AbstractCriterion> revEx = new List<AbstractCriterion>();
+                revEx.AddRange(baseEx);
+                revEx.Add(Expression.Eq("status", stat));
+                listtems = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
+                foreach (geometrics item in listtems) {
+                    makePlaceStaticMap(item);
+                }
+                PropertyBag[name + "_list"] = PaginationHelper.CreatePagination(listtems, pagesize, (pageing.TryGetValue(name + "Paging", out pag) ? pag : 0));
+                buttons = new List<string>();
+                buttons.Add("edit");
+                buttons.Add("delete");
+                buttons.Add("publish");
+                buttons.Add("copy");
+                //buttons.Add("view");
+                PropertyBag[name + "ButtonSet"] = buttons;
             }
-            List<AbstractCriterion> revEx = new List<AbstractCriterion>();
-            revEx.AddRange(baseEx);
-            revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
-            items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-            PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
-
-            buttons = new List<string>();
-            buttons.Add("edit");
-            buttons.Add("delete");
-            buttons.Add("publish");
-            buttons.Add("copy");
-            //buttons.Add("view");
-            PropertyBag["reviewButtonSet"] = buttons;
-
-
-
-            //DRAFT
-            if (status == "draft") {
-                paging = page;
-            } else {
-                paging = 1;
-            }
-            List<AbstractCriterion> draftEx = new List<AbstractCriterion>();
-            draftEx.AddRange(baseEx);
-            draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
-            items = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
-            PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
-
-            buttons = new List<string>();
-            buttons.Add("edit");
-            buttons.Add("delete");
-            buttons.Add("publish");
-            buttons.Add("copy");
-            //buttons.Add("view");
-            PropertyBag["draftButtonSet"] = buttons;
+            PropertyBag["ajax"] = ajax;
 
             //SETUP SEARCHID and parts
             if (searchId.Equals(0)) {
@@ -759,6 +816,10 @@ namespace campusMap.Controllers {
 
 
             ActiveRecordMediator<geometrics>.Save(geometric);
+            clearPlaceStaticMap(geometric);
+            makePlaceStaticMap(geometric);
+            
+
 
             //cleanUpgeometric_media(geometric.id);
 

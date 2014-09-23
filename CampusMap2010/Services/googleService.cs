@@ -53,7 +53,7 @@ namespace campusMap.Services
              * 
              */
             try{
-                byte[] imagebytes = ImageService.DownloadBinary(url);
+                byte[] imagebytes = ImageService.DownloadBinary(url + "&key=AIzaSyD4Jd5h7HmpPmAgFNxs0qceixgXTS6w8w0");
                 ImageService.ByteArrayToFile(newFile, imagebytes);
                 return newFile;
             }
