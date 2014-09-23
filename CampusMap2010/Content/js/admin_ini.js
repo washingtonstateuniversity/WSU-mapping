@@ -102,7 +102,8 @@ $(document).ready(function(){
 		$( "#addGeom" ).dialog("open").dialog('widget');
 	});
 
-	$('.ListingChoices').click(function(e) {
+
+	$('.ListingChoices').on('click',function(e) {
 		var obj=$(this);
 		if(!$(this).is('active')){// changed hasClass for is for speed
 			var href = $(this).attr('href');
@@ -118,10 +119,21 @@ $(document).ready(function(){
 				}, 250, function() {
 					$(href).addClass('tabactive');
 					obj.addClass('active ui-state-hover');
-				// Animation complete.
+					$.cookie('tabedArea', href, {expires: 1, path: '/'+view+mcv_action+'.castle' });
+					history.replaceState(null, null,  href);
 				});
 			});
 		}
 		return false;
 	});
+	var returnArea = $.cookie('tabedArea');
+	var hash = window.location.hash;
+	if(returnArea!=="undefined" || $("[href='#"+hash+"']").length){
+		href=returnArea;
+		if($("[href='#"+hash+"']").length){
+			href=hash;
+			//$.cookie('tabedArea', href, {expires: 1, path: '/'+view+mcv_action+'.castle' });
+		}
+		$("[href='"+href+"']").trigger('click');
+	}
 });
