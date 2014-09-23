@@ -33,7 +33,7 @@ function openImgUploader(){
 												return HTML;
 											});
 											
-											$('#imagePicker').live('change',function(){
+											$('#imagePicker').on('change',function(){
 												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
@@ -94,7 +94,7 @@ function openImgUploader(){
 																		$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
-																	   $('#again').live('click',function(e){
+																	   $('#again').on('click',function(e){
 																			e.preventDefault();
 																			e.stopPropagation();
 																		   $('#ISIUarea input[type=text]').each(function(){$(this).val('');});
@@ -104,7 +104,7 @@ function openImgUploader(){
 																			   $('#nextUpload').remove();
 																			});
 																		});
-																		$('#place').live('click',function(e){
+																		$('#place').on('click',function(e){
 																			e.preventDefault();
 																			e.stopPropagation();
 																			$('#ISIUarea input[type=text]').each(function(){$(this).val('');});
@@ -196,7 +196,7 @@ function openImgResource(ed,uploadOnly){
 												return HTML;
 											});
 											
-											$('#imagePicker').live('change',function(){
+											$('#imagePicker').on('change',function(){
 												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
@@ -242,7 +242,7 @@ function openImgResource(ed,uploadOnly){
 																		$('#imgPre img').attr('src','media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
 																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
 													
-																	   $('#again').live('click',function(e){
+																	   $('#again').on('click',function(e){
 																			e.preventDefault();
 																			e.stopPropagation();
 																		   $('#ISIUarea input[type=text]').each(function(){$(this).val('');});
@@ -252,7 +252,7 @@ function openImgResource(ed,uploadOnly){
 																			   $('#nextUpload').remove();
 																			});
 																		});
-																		$('#place').live('click',function(e){
+																		$('#place').on('click',function(e){
 																			e.preventDefault();
 																			e.stopPropagation();
 																			$('#ISIUarea input[type=text]').each(function(){$(this).val('');});

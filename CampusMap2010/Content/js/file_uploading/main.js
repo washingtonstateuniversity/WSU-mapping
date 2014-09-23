@@ -16,7 +16,7 @@ $(function () {
     'use strict';
 	
 	
-	$('.pool').live('change',function(){
+	$('.pool').on('change',function(){
 		$(this).siblings('.pools').hide();
 		$(this).siblings('.pool_'+$(this).val()).show();
 		$(this).siblings('.pool_'+$(this).val()).val($(this).val());

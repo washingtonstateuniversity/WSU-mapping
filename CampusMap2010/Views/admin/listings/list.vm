@@ -43,14 +43,14 @@
 					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 						#set($c=0)
 						#foreach($status in $statuses)
-							<li class="ui-state-default ui-corner-top #if($c<=0) ui-tabs-selected ui-state-active #end">
+							<li class="ui-state-default ui-corner-top">
 								<a href="#${status.name}">${status.name} ($controller.getVar("${status.name}_list").TotalItems)</a>
 							</li>
 							#set($c=$c+1)
 						#end
 					</ul>
 					#foreach($STATUS in $statuses)
-					  <div id="${STATUS.name}" class="ui-tabs-panel ui-widget-content ui-corner-bottom #if(!$ajax)ui-tabs-hide#end">
+					  <div id="${STATUS.name}" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
 							#set($buttons=$controller.getVar("${STATUS.name}ButtonSet"))
 							#set($list_items=$controller.getVar("${STATUS.name}_list"))
 							#parse("admin/listings/general.vm")

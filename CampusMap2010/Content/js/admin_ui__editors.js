@@ -327,7 +327,7 @@ function int_infotabs(){
 			$dialog.dialog( "open" );
 		});
 	// close icon: removing the tab on click
-	$( "#dynoTab span.ui-icon-close" ).live( "click", function() {
+	$( "#dynoTab span.ui-icon-close" ).on( "click", function() {
 		if($( "#deleteconfirm" ).length==0){$('body').append('<div id="deleteconfirm">If you delete this you will have to refresh the page to get it back.<br/><h2>Are you sure?</h2></div>')};
 	 	$( "#deleteconfirm" ).dialog({
 			autoOpen: false,
@@ -427,7 +427,7 @@ function watchMediaTab(){
 		}
 	}
 function setup_massTags(){
-	$('#massTagging').live('click',function(e){
+	$('#massTagging').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
 				$('#massTaggingarea').slideToggle();
@@ -452,12 +452,12 @@ function load_place_editor() {
 			$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 		});
 	
-	$('#setLatLong :not(.ui-state-disabled)').live('click',function(){ add_place_point(lat,lng); });
+	$('#setLatLong :not(.ui-state-disabled)').on('click',function(){ add_place_point(lat,lng); });
 
 	int_infotabs();
 	
 	function revGoeLookup(){
-		$("#place_street,#place_address").live('keyup',function () {
+		$("#place_street,#place_address").on('keyup',function () {
 			clearCount('codeAddress');
 			setCount('codeAddress',500,function(){
 				var zip = $('#zcode').length?$('#zcode').text():'';
@@ -503,7 +503,7 @@ function load_place_editor() {
 	
 	$.each($('.switch'),function(i,v){
 		var self = $(this);
-		self.find('a').live('click',function(e){
+		self.find('a').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
 				self.find('.active').removeClass('active');
@@ -596,24 +596,24 @@ function load_geometrics_editor() {
 			)
 		);
 
-		$('#drawingcontrolls.showing').live('click',function(e){
+		$('#drawingcontrolls.showing').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			jObj.gmap('hide_drawingControl');
 			$(this).removeClass('showing').addClass('hidden').text('Show controlls');
 		});
-		$('#drawingcontrolls.hidden').live('click',function(e){
+		$('#drawingcontrolls.hidden').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			jObj.gmap('show_drawingControl');
 			$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
 		});
-		$('#restart').live('click',function(e){
+		$('#restart').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			jObj.gmap('refresh_drawing',false);
 		});
-		$('#update').live('click',function(e){
+		$('#update').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			if(jObj.gmap('get_updated_data'))$('#latLong').val(jObj.gmap('get_updated_data'));
@@ -628,7 +628,7 @@ function load_geometrics_editor() {
 				$('#update').trigger('click');
 			 }
 		});
-		$('#unselect').live('click',function(e){
+		$('#unselect').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			$('#latLong').val(jObj.gmap('unset_drawingSelection'));
@@ -1001,7 +1001,7 @@ function load_view_editor() {
 
 	$.each($('.switch'),function(i,v){
 		var self = $(this);
-		self.find('a').live('click',function(e){
+		self.find('a').on('click',function(e){
 			e.stopPropagation();
 			e.preventDefault();
 			self.find('.active').removeClass('active');
@@ -1010,10 +1010,10 @@ function load_view_editor() {
 			self.find('.'+tar).addClass('active');
 		});
 	});
-	$('#width').live('keyup',function(){
+	$('#width').on('keyup',function(){
 		$('.widthOutput').text($(this).val());
 	});
-	$('#height').live('keyup',function(){
+	$('#height').on('keyup',function(){
 		$('.heightOutput').text($(this).val());
 	});
 	/*
@@ -1029,7 +1029,7 @@ function load_view_editor() {
 	setup_massTags();
 	
 	var waiting = false;	
-	$('#urlAlias').live('keyup',function(){
+	$('#urlAlias').on('keyup',function(){
 		var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 		if(!waiting){
 			waiting = true;

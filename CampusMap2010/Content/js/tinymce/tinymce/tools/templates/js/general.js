@@ -85,7 +85,7 @@
 			}
 		}, 100);
 
-		$("a").live("click", function(e) {
+		$("a").on("click", function(e) {
 			var url = e.target.href;
 
 			if (e.button == 0) {

@@ -323,10 +323,10 @@ function getDeleteButton(imageUrl) {
 */
 $(function() {
 	setup_fixedNav();
-	$('.insotryupload').live('click',function(){
+	$('.insotryupload').on('click',function(){
 		openImgUploader();
 	});
-		$('.imgInfo').slideToggle();
+	$('.imgInfo').slideToggle();
 	$('.DeleteImage').fadeToggle();	
 	addToggle();
 	addLiveActionAnimation();
@@ -335,7 +335,7 @@ $(function() {
 	}
 	
 	if($("input.all").length){
-		$("input.all").live('click',function(e) {
+		$("input.all").on('click',function(e) {
 			var ele = $(this);
 			if(!ele.attr('checked')){
 				ele.closest('div').find('select option').removeAttr('selected');
@@ -430,7 +430,7 @@ $(function() {
 	        $( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
 	    }
 	    $( "a[title='Delete']" )
-		    .live('click',function(e) {
+		    .on('click',function(e) {
 		    e.preventDefault();
 		    e.stopPropagation();
 		    deleteing=$(this).attr('href');
@@ -541,17 +541,60 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 }
 
 
+	function post_tmp(form_obj,diaObj,callback){
+		$.ajaxSetup ({cache: false,async:false}); 
+		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+		//alert(place_id);
+		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res, status, request) {
+				  var Location = '/place/_edit.castle?id='+res; 
 
-    if($( "#sub_tabs" ).length>0){
-        $( "#sub_tabs" ).tabs();
-	}
-    if($( ".sub_tabs" ).length>0){
-        $( ".sub_tabs" ).each(function(){
-			$(this).tabs();
-			
+								window.location= Location; 
+				$('body #content_area').fadeTo('fast',25);
+		}); 	                    
+	} 
+	function pagLoad(){
+		if($('.ui-tabs-panel .pagination').length){
+			$.each($('.pagination'),function(){
+				var panleId = $(this).closest('.ui-tabs-panel').attr('id');
+				$(this).find('a').on('click',function(e){
+					$('body').append('<h1 style="position:fixed; top:25%; left:45%; z-index:9999;text-align: center;" id="loading"><img src="../Content/images/loading.gif"/></br>Loading</h1>');
+					e.stopPropagation();
+					e.preventDefault();
+					//panleId
+					$.ajaxSetup ({cache: false}); 
+					$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){ pagLoad(); $('#loading').remove(); });
+				});
 			});
+			addLiveActionAnimation();
+		}
 	}
+
+	function setInfoSlide(){
+		if($('.detailInfoBut')){
+			$('.detailInfoBut').on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				if($(this).closest('.detailCol').width()<=1){
+					$(this).closest('.detailCol').stop().animate({
+						width:"125px"
+						}, 500, function() {
+					});
+				}else{
+					$(this).closest('.detailCol').stop().animate({
+						width:"0px"
+						}, 500, function() {
+					});
+				}
+			});
+		}
+	}
+
 	
+
+	if($('.autoselect').length){
+		$( ".autoselect" ).each(function(){$(this).combobox();});
+	}
+
 
 	function tabsToAccordions(){
 		$(".tabs").each(function(){
@@ -594,10 +637,8 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			$(this).before(e);
 			$(this).remove();
 		});
-		$(".tabs").tabs();
+		initalize_tabs();
 	}
-
-	
 	function updateUI(){
 		if($(window).width() <= 480){
 			tabsToAccordions();
@@ -605,173 +646,122 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			accordionsToTabs();
 		}
 	}
-	
-    // event handler for window resize
-    $(window).resize(function(e){
-        updateUI();
-    });
-    updateUI();
 
-	
-	
-	
-	function post_tmp(form_obj,diaObj,callback){
-		$.ajaxSetup ({cache: false,async:false}); 
-		var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-		//alert(place_id);
-		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res, status, request) {
-				  var Location = '/place/_edit.castle?id='+res; 
-
-								window.location= Location; 
-				$('body #content_area').fadeTo('fast',25);
-		}); 	                    
-	} 
-	function pagLoad(){
-		if($('.ui-tabs-panel .pagination').length){
-			$.each($('.pagination'),function(){
-				var panleId = $(this).closest('.ui-tabs-panel').attr('id');
-				$(this).find('a').live('click',function(e){
-					$('body').append('<h1 style="position:fixed; top:25%; left:45%; z-index:9999;text-align: center;" id="loading"><img src="../Content/images/loading.gif"/></br>Loading</h1>');
-					e.stopPropagation();
-					e.preventDefault();
-					//panleId
-					$.ajaxSetup ({cache: false}); 
-					$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){pagLoad(); $('#loading').remove();});
-				});
-			});
-			addLiveActionAnimation();
-		}
-	}
-
-	function setInfoSlide(){
-		if($('.detailInfoBut')){
-			$('.detailInfoBut').live('click', function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				if($(this).closest('.detailCol').width()<=1){
-					$(this).closest('.detailCol').stop().animate({
-						width:"125px"
-						}, 500, function() {
-					});
-				}else{
-					$(this).closest('.detailCol').stop().animate({
-						width:"0px"
-						}, 500, function() {
-					});
-				}
-			});
-		}
+	function applyTabToAccordion(){	
+		// event handler for window resize
+		$(window).resize(function(e){
+			updateUI();
+		});
+		updateUI();
 	}
 
 	
-
-	if($('.autoselect').length){
-		$( ".autoselect" ).each(function(){$(this).combobox();});
+    if($( "#sub_tabs" ).length>0){
+        $( "#sub_tabs" ).tabs();
 	}
-    if($( "#tabs" ).length>0){
-        var  taboptions;	
-        if($('#content_tar #tabs').length>0){
-            taboptions={cookie:{expires: 1,path:'/'+view+mcv_action}};
-        } 
-        $tabs = $( "#tabs" ).tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:{}, {
-				show: function(event, ui) {
-					if($('#place_id').length){
-						tinyMCE.triggerSave();
-						tinyResize();
-					}
+    if($( ".sub_tabs" ).length>0){
+        $( ".sub_tabs" ).each(function(){
+			$(this).tabs();
+		});
+	}
+	
+	function initalize_tabs(){
+		var  taboptions={};
+		var activeTab = $.cookie('tabs');
+		$tabs = $(".tabs").tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id==0?{ disabled: [3] }:{}, {
+				active: activeTab!=='undefined'?activeTab:0,
+				create: function(event, ui) {
+					if($('#place_id').length){ tinyMCE.triggerSave(); tinyResize(); }
 					pagLoad();
 					setInfoSlide();
+				},
+				activate: function( event, ui ) {
+					$.cookie('tabs', ui.newTab.index(), {expires: 1, path: '/'+view+mcv_action+'.castle' });
 				}
 			 } ));
-		
-		if($('#content_tar #tabs').length>0 || (typeof(place_id) !== 'undefined'&&place_id==0)){
-			if($( "#LocationTypeSelect" ).length){
-				//$( "#LocationTypeSelect" ).combobox();
-				//$( "#LocationModelSelect" ).combobox();
-			}
-
-			
-		}
-		
-		if( (typeof(place_id) !== 'undefined'&&place_id==0) ){
-			if($( "#chooseModel" ).length==0){
-				$( "body" ).append('<div id="chooseModel" title="Choose the place model">'+
-				'<p><strong>Choose a model </strong>'+
-				'that the place will be.  This will set forth all the options it can have.'+
-				'<br/><select name="set_model" id="set_model">'+
-				$('#LocationModelSelect').clone().html()+
-				'</select></div>');
-			}
-			$("#chooseModel").dialog({
-				autoOpen: true,
-				height: 275,
-				width:350,
-				modal: true,
-				hide: 'blind',
-				resizable: false,
-				draggable: false,
-				buttons: {
-					"Ok": function() {
-						if($('#set_model :selected').val() !=''){
-							$( this ).dialog( "close" );
-							if($( "#loading_tmp" ).length==0){
-									$( "body" ).append('<div id="loading_tmp" title="Loading">'+
-									'<img src="/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
-									'</div>');
-								}
-								$( "#loading_tmp" ).dialog({
-									autoOpen: true,
-									height: 155,
-									width:125,
-									modal: true,
-									hide: 'blind',
-									resizable: false,
-									draggable: false
-								});
-								
-								post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
-						}else{
-							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
-						}
-
-					}
-					
-				}
-			});
-			$('#set_model').combobox();
-			$('#set_model').next('.ui-autocomplete-input').live('change',function(){
-						if($('#set_model :selected').val() !=''){
-							if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
-								$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
-							}
-						}else{
-							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
-						}
-						$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
-						$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
-			});
-		}
-        //var stat=$.QueryString["status"];
+		//var stat=$.QueryString["status"];
 		var stat=param( "status" );
-        var moveToTab=0;
-        if(stat=="review"){
-            moveToTab=1;
-        }else if(stat=="draft"){
-            moveToTab=2;
-        } 
-        if(moveToTab>0){
-            $( "#tabs" ).tabs( "select" , moveToTab );
-        } 
-    }else{
+		var moveToTab=0;
+		if(stat=="review"){
+			moveToTab=1;
+		}else if(stat=="draft"){
+			moveToTab=2;
+		} 
+		if(moveToTab>0){
+			$( "#tabs" ).tabs( "select" , moveToTab );
+		} 
+
+	}
+	if($(".tabs").length>0){
+		applyTabToAccordion();
+	}else{
 		setInfoSlide();	
 	}
+	if($("#tabs").length>0){$("#tabs").tabs()}
+	if( (typeof(place_id) !== 'undefined'&&place_id==0) ){
+		if($( "#chooseModel" ).length==0){
+			$( "body" ).append('<div id="chooseModel" title="Choose the place model">'+
+			'<p><strong>Choose a model </strong>'+
+			'that the place will be.  This will set forth all the options it can have.'+
+			'<br/><select name="set_model" id="set_model">'+
+			$('#LocationModelSelect').clone().html()+
+			'</select></div>');
+		}
+		$("#chooseModel").dialog({
+			autoOpen: true,
+			height: 275,
+			width:350,
+			modal: true,
+			hide: 'blind',
+			resizable: false,
+			draggable: false,
+			buttons: {
+				"Ok": function() {
+					if($('#set_model :selected').val() !=''){
+						$( this ).dialog( "close" );
+						if($( "#loading_tmp" ).length==0){
+								$( "body" ).append('<div id="loading_tmp" title="Loading">'+
+								'<img src="/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
+								'</div>');
+							}
+							$( "#loading_tmp" ).dialog({
+								autoOpen: true,
+								height: 155,
+								width:125,
+								modal: true,
+								hide: 'blind',
+								resizable: false,
+								draggable: false
+							});
+							post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
+					}else{
+						$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+					}
 
-	$(".editzone").live("blur",function() { 
+				}
+				
+			}
+		});
+		$('#set_model').combobox();
+		$('#set_model').next('.ui-autocomplete-input').on('change',function(){
+					if($('#set_model :selected').val() !=''){
+						if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
+							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
+						}
+					}else{
+						$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+					}
+					$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
+					$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
+		});
+	}  
+
+	$(".editzone").on("blur",function() { 
 		var txt = $(this); 
 		txt.prev('.editable').text(txt.val()); 
 		txt.parent(".pod").removeClass("editing"); 
 	}); 
-	$(".pod .editable").live('click',function(e) { 
+	$(".pod .editable").on('click',function(e) { 
 		e.preventDefault();
 		e.stopPropagation();
 		$(this).next().val($(this).text()).focus(); 
@@ -802,14 +792,14 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		$('#customNames').slideToggle();
 	});
 
-	$('#PlaceTagCreate').live('click',function(e){
+	$('#PlaceTagCreate').on('click',function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		i=$('#taged .pod').size();
 		if(i==0)$('#taged').html('');
 		$('#taged').append($('#tag_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ).replace(/\|\|/g, '' ) );
 	});
-	$('#PlaceNameCreate').live('click',function(e){
+	$('#PlaceNameCreate').on('click',function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		i=$('#names .pod').size();
@@ -827,7 +817,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			$('#ops').html('');
 		}
 	});
-	$("#ele_attr_multiple").live("change",function(){
+	$("#ele_attr_multiple").on("change",function(){
 		if($("#ele_attr_multiple:checked").length){
 			$('.pod [type=radio]:checked').attr("checked",false);
 			$('.pod [type=checkbox]:checked').attr("checked",false);
@@ -840,22 +830,22 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			$('.pod [type=checkbox]').hide();
 		}
 	});
-	$('.pod [type=radio]').live("change",function(){
+	$('.pod [type=radio]').on("change",function(){
 		$('.pod :checked').attr("checked",false);
 		$(this).attr("checked",true);
 	});
-	$('.pod .opVal').live("change",function(){
+	$('.pod .opVal').on("change",function(){
 		$(this).siblings('[type=radio]').val($(this).val());
 		$(this).siblings('[type=checkbox]').val($(this).val());
 	});
 
-	$('#addOption').live('click',function(e){
+	$('#addOption').on('click',function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		i=$('#ops .pod').size();
 		$('#ops').append($('#option_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ) );
 	});
-	$('.deleteOption').live('click',function(e){
+	$('.deleteOption').on('click',function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		var tar = $(this).closest('.pod');
@@ -913,7 +903,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
     /* for place listings */
 	
         if($('.fliterList').length>0){
-            $(".fliterList").live('change',function () {
+            $(".fliterList").on('change',function () {
                 window.location = siteroot+view+"list.castle?searchId="+$(this).find(':selected').val(); 
             });
         }
@@ -947,7 +937,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			}
 		});
 		$( ".pubState" )
-			.live('click',function(e) {
+			.on('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			place_id=$(this).closest('.place_aTar').attr('title');
@@ -976,7 +966,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			}
 		});
 		$( ".sendBR" )
-			.live('click',function(e) {
+			.on('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			place_id=$(this).closest('.place_aTar').attr('title');
@@ -1011,7 +1001,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	    });
     }
     if($('.imagedropDown').length>0){
-        $(".imagedropDown").live('change',function () {
+        $(".imagedropDown").on('change',function () {
             if($(this).closest('div').find(".selectedImage").length==0){$(this).closest('div').append('<img src="" class="selectedImage" width="100" />') }
             $(this).closest('div').find(".selectedImage").attr('src', siteroot+'media/download.castle?id=' + $(this).val());
         });
@@ -1020,7 +1010,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 
 
     if($('.addImage').length>0){
-        $(".addImage").live('click',function () {
+        $(".addImage").on('click',function () {
             $.get(siteroot+view+'GetAddImage.castle?count='+image_count, function(data){
                 $('#ExistingImagesDiv').append(data);
                 ++image_count;
@@ -1028,7 +1018,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
         });
     }
     if($('.deleteAuthor').length>0){
-        $('.deleteAuthor').live('click',function(){
+        $('.deleteAuthor').on('click',function(){
             var author_id = $(this).attr('title');
             var PlaceId = $(this).attr('rel');
             alertLoadingSaving();
@@ -1039,7 +1029,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	    });
 	}
     if($('.DeleteTag').length>0){
-        $('.DeleteTag').live('click',function(){
+        $('.DeleteTag').on('click',function(){
             var PlaceId = $(this).attr('title');
             var tag_id = $(this).attr('rel');
             alertLoadingSaving();
@@ -1077,7 +1067,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		});
 
 		$( ".steal" )
-			.live('click',function(e) {
+			.on('click',function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			place_id=$(this).attr('rel');
@@ -1086,7 +1076,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		
 		//This is so that you can use the nav when leaving the editing area.  IE: the same as clicking cancel
         if(url_parts['path']=='/place/Edit_place.castle'){
-		    $( "#main_nav a,a.PDF.creation " ).live('click',function(e) {
+		    $( "#main_nav a,a.PDF.creation " ).on('click',function(e) {
 			    //e.preventDefault();
 			    //e.stopPropagation();
 			    //var obj=$(this);
@@ -1153,7 +1143,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
         });
 		*/
         var clear=false;
-        /*$('input[type=submit]:not(".cancel_btn")').live('click', function(e) {
+        /*$('input[type=submit]:not(".cancel_btn")').on('click', function(e) {
             if(clear!=true){
                 e.preventDefault();
                 e.stopPropagation();
@@ -1201,7 +1191,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
     for adverts
     ---------------- */
     if($('#add_ad_image').length>0){
-        $("#add_ad_image").live('click',function () {
+        $("#add_ad_image").on('click',function () {
             $.get(siteroot+view+'GetAddImage.castle?count='+image_count, function(data){
                 $('#NewImageHolderDiv').html($('#NewImageHolderDiv').html()+ data);
                 ++image_count;

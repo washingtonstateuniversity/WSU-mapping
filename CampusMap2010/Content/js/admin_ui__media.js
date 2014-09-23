@@ -102,7 +102,7 @@ function boxCreation(image_id){
 
 $(function() {
     if($('.DeleteImage').length>0){
-        $('.imageBox .DeleteImage').live('click',function(){
+        $('.imageBox .DeleteImage').on('click',function(){
             var id = $(this).attr('rel');
             var image_id = $(this).attr('title');
             var obj = $(this);
@@ -121,7 +121,7 @@ $(function() {
 		---------------- */
 	/* for image editing */
     if($('#imageTypeDD').length>0){
-        $("#imageTypeDD").live('change',function () {
+        $("#imageTypeDD").on('change',function () {
             if($(this).find(':selected').val()=='1'){
                 $('#imageTypes').show();
             }else{
