@@ -112,9 +112,9 @@
         #end
 		
 			<li><a class="" href="$helper.getAdminUrl("place/gamedaymanager")"><b>Game Day Parking</b></a></li>
-			
-		<li><a class="" href="$helper.getAdminUrl("admin/help")" target="_blank"><b>Help</b></a>
-		<li><a class="" href="$helper.getAdminUrl("place/logout")"><b>Logout</b></a></li>
+				
+			<li><a class="" href="$helper.getAdminUrl("admin/help")" target="_blank"><b>Help</b></a>
+			<li><a class="" href="$helper.getAdminUrl("place/logout")"><b>Logout</b></a></li>
 			
 			
 		</ul>
@@ -122,8 +122,7 @@
 		<ul class="menu formAction Cancel"><li class="nosub"><a class=" " href="#"><b>Cancel</b></a></li></ul>
 		<ul class="menu formAction Apply"><li class="nosub"><a class=" " href="#"><b>Apply</b></a></li></ul>
 		<ul class="menu formAction Submit"><li class="nosub"><a class=" " href="#"><b>Submit</b></a></li></ul>
---<br>
->
+-->
 	</nav>
 
 
