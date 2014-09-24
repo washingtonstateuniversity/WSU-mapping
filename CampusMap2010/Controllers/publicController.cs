@@ -116,9 +116,6 @@ namespace campusMap.Controllers {
         }
         public void render() {
             HttpRequest httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Browser.IsMobileDevice) {
-                HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-            }
 
             String everUrl = Context.Request.RawUrl;
             // URL comes in like http://sitename/edit/dispatch/handle404.castle?404;http://sitename/pagetorender.html
@@ -127,6 +124,13 @@ namespace campusMap.Controllers {
             everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
             String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
             String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
+
+
+
+            if (httpRequest.Browser.IsMobileDevice && !((urlwithnoparams.ToString().IndexOf("/rt/") > -1) && (urlwithnoparams.ToString().IndexOf("/t/") > -1))) {
+                HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+            }
+
 
             Dictionary<string, string> queryparams = new Dictionary<string, string>();
             if (urlwithnoparams != querystring) {
