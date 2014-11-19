@@ -37,11 +37,19 @@ var waypts = [],
 	pullman = new google.maps.LatLng(46.730904390653876,-117.16101408004698);
 //var pullman_str = '46.730904390653876,-117.16101408004698';
 
-function gob(e){if(typeof(e)=='object')return(e);if(document.getElementById)return(document.getElementById(e));return(eval(e))}
+function gob(e){
+	if(typeof(e)==='object'){
+		return(e);
+	}
+	if(document.getElementById){
+		return(document.getElementById(e));
+	}
+	return(eval(e));
+}
 
-	//to show and hide controls base
-	var controlsOut = {scaleControl: false,mapTypeControl:false,zoomControl:false,panControl:false,streetViewControl:false};
-	var controlsIn  = {scaleControl: true,mapTypeControl:true,zoomControl:true,panControl:true,streetViewControl:true};
+//to show and hide controls base
+var controlsOut = {scaleControl: false,mapTypeControl:false,zoomControl:false,panControl:false,streetViewControl:false};
+var controlsIn  = {scaleControl: true,mapTypeControl:true,zoomControl:true,panControl:true,streetViewControl:true};
 
 
 
@@ -133,16 +141,16 @@ var destinations = [];
 var oldpoint = null;
 //var infowindow = new google.maps.InfoWindow({size: new google.maps.Size(150,50)});
 var tinyIcon = new google.maps.MarkerImage(
-    DOMAIN+'/Content/Content/images/marker_20_red.png',
-    new google.maps.Size(12,20),
-    new google.maps.Point(0,0),
-    new google.maps.Point(6,16)
+	DOMAIN+'/Content/Content/images/marker_20_red.png',
+	new google.maps.Size(12,20),
+	new google.maps.Point(0,0),
+	new google.maps.Point(6,16)
 );
 var tinyShadow = new google.maps.MarkerImage(
-    DOMAIN+'/Content/images/marker_20_shadow.png',
-    new google.maps.Size(22,20),
-    new google.maps.Point(6,20),
-    new google.maps.Point(5,1)
+	DOMAIN+'/Content/images/marker_20_shadow.png',
+	new google.maps.Size(22,20),
+	new google.maps.Point(6,20),
+	new google.maps.Point(5,1)
 );
 var imageNormal = new google.maps.MarkerImage(
 	DOMAIN+'/Content/images/square.png',

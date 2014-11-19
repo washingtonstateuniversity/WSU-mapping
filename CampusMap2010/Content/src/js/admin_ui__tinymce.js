@@ -15,6 +15,14 @@ $.wsu_maps.admin.ui.tinymce = {
 		if(typeof(id)==='undefined'){id=null;}
 		tinyMCE.init(tinyoptions(which,id));
 	},
+	tinyResize:function (){//id){
+		$(window).resize(function(){
+			$.each($('textarea.tinyEditor.tinyLoaded'), function(){//i, v) {
+				var id=$(this).attr('id');
+				$('#'+id+"_tbl").width($(this).closest('div').width()-40);
+			});
+		}).trigger("resize");
+	},
 	openImgUploader:function (){
 		if(typeof(uploadonly)==='undefined'){
 			uploadonly=false;
@@ -414,7 +422,7 @@ function editor_oninit(ed) {
 			//ed.execCommand('mceSpellCheck', true);
 		}, 1);
 	}
-	tinyResize(ed.id);
+	$.wsu_maps.admin.ui.tinymce.tinyResize(ed.id);
 }
 
 // replace your editor_remove_insertImage function with this:
@@ -767,7 +775,7 @@ function tinyoptions(which,id){
 						var h = 200; //new height of edit area
 						dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
 						//ed.theme.resizeTo(685, h + dh);
-						tinyResize(ed.id);
+						$.wsu_maps.admin.ui.tinymce.tinyResize(ed.id);
 					});
 				},
                 plugins : "paste, spellchecker, autoresize",
@@ -795,7 +803,7 @@ function tinyoptions(which,id){
 						var h = 200; //new height of edit area
 						dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
 						//ed.theme.resizeTo(685, h + dh);
-						tinyResize(ed.id);
+						$.wsu_maps.admin.ui.tinymce.tinyResize(ed.id);
 					});
 				},
                 plugins : "paste, spellchecker, autoresize,advlink",

@@ -1,43 +1,47 @@
-
+var siteroot=siteroot||"";
+var view=view||"";
+var mcv_action=mcv_action||"";
 	
 $(document).ready(function(){
+	var ed=ed||false;
 	if($('.admin.view._editor').length){
-		load_view_editor();
+		$.wsu_maps.admin.view.load_editor();
 		ed = true;
 	 }		
 	if($('#geometrics_drawing_map').length){
-		load_geometrics_editor();
+		$.wsu_maps.admin.geometrics.load_editor();
 		ed = true;
 	 }	
 	if($('.admin.place._editor').length){
-		load_place_editor();
-		tinyResize();
+		$.wsu_maps.admin.place.load_editor();
+		$.wsu_maps.admin.ui.tinymce.tinyResize();
 		ed = true;
 	 }	
 	if($('#style_map').length){
-		load_style_editor();
+		$.wsu_maps.admin.style.load_editor();
 		ed = true;
 	}	
 	if($('#map_canvas').length){
-		initialize();
-		if($('.home #map_canvas').length){$(window).resize(function(){resizeBg($('#map_canvas'),170)}).trigger("resize");}
+		$.wsu_maps.initialize();
+		if($('.home #map_canvas').length){
+			$(window).resize(function(){
+				$.wsu_maps.resizeBg($('#map_canvas'),170);
+			}).trigger("resize");
+		}
 		ed = true;
 	}
 	
 
 	
 	
-	
-	
-	$( "#tags" )
-	// don't navigate away from the field on tab when selecting an item
-	.bind( "keydown", function( event ) {
+	var DOMAIN=DOMAIN||"";
+	var cache = {},lastXhr;
+	$( "#tags" ).bind( "keydown", function( event ) {
 		if ( event.keyCode === $.ui.keyCode.TAB &&
 				$( this ).data( "autocomplete" ).menu.active ) {
 			event.preventDefault();
 		}
-	})
-	.autocomplete({
+	}).autocomplete({
 		minLength: 0,
 		source: function( request, response ) {
 			// delegate back to autocomplete, but extract the last term
@@ -103,7 +107,7 @@ $(document).ready(function(){
 	});
 
 
-	$('.ListingChoices').on('click',function(e) {
+	$('.ListingChoices').on('click',function(){//e) {
 		var obj=$(this);
 		if(!$(this).is('active')){// changed hasClass for is for speed
 			var href = $(this).attr('href');
@@ -120,7 +124,7 @@ $(document).ready(function(){
 					$(href).addClass('tabactive');
 					obj.addClass('active ui-state-hover');
 					$.cookie('tabedArea', href, {expires: 1, path: '/'+view+mcv_action+'.castle' });
-					history.replaceState(null, null,  href);
+					window.history.replaceState(null, null,  href);
 				});
 			});
 		}
@@ -129,7 +133,7 @@ $(document).ready(function(){
 	var returnArea = $.cookie('tabedArea');
 	var hash = window.location.hash;
 	if(returnArea!=="undefined" || $("[href='#"+hash+"']").length){
-		href=returnArea;
+		var href=returnArea;
 		if($("[href='#"+hash+"']").length){
 			href=hash;
 			//$.cookie('tabedArea', href, {expires: 1, path: '/'+view+mcv_action+'.castle' });

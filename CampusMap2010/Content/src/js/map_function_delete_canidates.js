@@ -148,7 +148,7 @@ function codeAddress(address) {
 	
 
 /* marked for removal */
-function initialize() {
+$.wsu_maps.initialize=function() {
 	if($('#map_canvas').length){
 		boxText.innerHTML = setBoxHtml();
 		

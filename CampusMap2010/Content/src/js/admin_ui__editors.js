@@ -239,7 +239,7 @@ function int_infotabs(){
 			$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",$(this).attr('id'));
 			$(this).addClass("tinyLoaded")
 		}*/
-		tinyResize();
+		$.wsu_maps.admin.ui.tinymce.tinyResize();
 		set_tab_editable(i);
 	});
 	$tab_title_input = $( "#tab_title");
@@ -263,8 +263,14 @@ function int_infotabs(){
 			$( ui.panel ).append( "<textarea id='tab_"+tab_counter+"'  name='tabs["+tab_counter+"].content' class='tinyEditor full' >" + tab_content + "</textarea>" );
 			$( ui.panel ).attr('role',tab_counter);
 		},
-		select: function(event, ui) {tinyMCE.triggerSave();tinyResize();},
-		show: function(event, ui) {tinyMCE.triggerSave();tinyResize();}
+		select: function(event, ui) {
+			tinyMCE.triggerSave();
+			$.wsu_maps.admin.ui.tinymce.tinyResize();
+		},
+		show: function(event, ui) {
+			tinyMCE.triggerSave();
+			$.wsu_maps.admin.ui.tinymce.tinyResize();
+		}
 	});
 
 	$( "#dynoTab").find( ".ui-tabs-nav" ).sortable({items: "li:not(.nonsort)",stop: function(event, ui) {
@@ -289,7 +295,7 @@ function int_infotabs(){
 				$(this).find('textarea:first').addClass("tinyLoaded");
 			}
 			tinyMCE.triggerSave();
-			tinyResize();
+			$.wsu_maps.admin.ui.tinymce.tinyResize();
 			set_tab_editable(i);
 		});
 	}});
@@ -442,213 +448,217 @@ function setup_massTags(){
 /*
  * EDITOR CONTORL SCRIPTS
  */
-function load_place_editor() {
-	var lat = $('#Lat').val();
-	var lng = $('#Long').val();	
-	$('#place_drawing_map').gmap({
-			'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng),
-			'zoom':15,
-			'zoomControl': false,
-			'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},
-			'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},
-			'streetViewControl': false 
-		}).bind('init', function () {
-			if(lat!='')add_place_point(lat,lng);
-			$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-		});
-	
-	$('#setLatLong :not(.ui-state-disabled)').on('click',function(){ add_place_point(lat,lng); });
-
-	int_infotabs();
-	
-	function revGoeLookup(){
-		$("#place_street,#place_address").on('keyup',function () {
-			$.wsu_maps.util.clearCount('codeAddress');
-			$.wsu_maps.util.setCount('codeAddress',500,function(){
-				var zip = $('#zcode').length?$('#zcode').text():'';
-				var campus = $('#campus').length?$('#place_campus').val():'';
-				var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
-				if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
-				$('#setLatLong').addClass('ui-state-disabled');
+$.wsu_maps.admin.place = {
+	load_editor:function () {
+		var lat = $('#Lat').val();
+		var lng = $('#Long').val();	
+		$('#place_drawing_map').gmap({
+				'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng),
+				'zoom':15,
+				'zoomControl': false,
+				'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},
+				'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},
+				'streetViewControl': false 
+			}).bind('init', function () {
+				if(lat!='')add_place_point(lat,lng);
+				$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 			});
-		});
-	}
-	function killRevGoeLookup(){ $("#place_street,#place_address").die(); }
-
-	if($('#place_street').length>0){
-		$('#revGoeLookup').on('change',function(){
-			if($(this).is(":checked")){
-				revGoeLookup();
-			}else{
-				killRevGoeLookup();
-			}
-		});
-	}
-	tinyResize();
-	if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
-	$(window).scroll(function (event) {
-		if ($(this).scrollTop()>= 175) {     
-			if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');}
-			
-		} else { 
-			$('#campusmap').removeClass('fixed_min');       
-			$('#campusmap').removeClass('fixed');   
-			
-		}  
-	});
-	setup_fixedNav();
-	$('#shortcode').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			$('#shortcodes').toggle(0,function(){ 
-				$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
+		
+		$('#setLatLong :not(.ui-state-disabled)').on('click',function(){ add_place_point(lat,lng); });
+	
+		int_infotabs();
+		
+		function revGoeLookup(){
+			$("#place_street,#place_address").on('keyup',function () {
+				$.wsu_maps.util.clearCount('codeAddress');
+				$.wsu_maps.util.setCount('codeAddress',500,function(){
+					var zip = $('#zcode').length?$('#zcode').text():'';
+					var campus = $('#campus').length?$('#place_campus').val():'';
+					var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
+					if( $('#place_street').val() !='' &&$('#place_address').val() !='' ) get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
+					$('#setLatLong').addClass('ui-state-disabled');
+				});
 			});
-		}).trigger('click');
+		}
+		function killRevGoeLookup(){ $("#place_street,#place_address").die(); }
 	
-	
-	$.each($('.switch'),function(i,v){
-		var self = $(this);
-		self.find('a').on('click',function(e){
+		if($('#place_street').length>0){
+			$('#revGoeLookup').on('change',function(){
+				if($(this).is(":checked")){
+					revGoeLookup();
+				}else{
+					killRevGoeLookup();
+				}
+			});
+		}
+		$.wsu_maps.admin.ui.tinymce.tinyResize();
+		if ($(window).scrollTop()>= 175) {if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');} }
+		$(window).scroll(function (event) {
+			if ($(this).scrollTop()>= 175) {     
+				if($(window).width()<=1065){$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');}
+				
+			} else { 
+				$('#campusmap').removeClass('fixed_min');       
+				$('#campusmap').removeClass('fixed');   
+				
+			}  
+		});
+		setup_fixedNav();
+		$('#shortcode').click(function(e){
 				e.stopPropagation();
 				e.preventDefault();
-				self.find('.active').removeClass('active');
-				var tar=$(this).attr('id');
-				$(this).addClass('active');
-				self.find('.'+tar).addClass('active');
-			});
-	});
-	setup_massTags();
-}
-function load_geometrics_editor() {
-     $('#geometrics_drawing_map').gmap({'center': campus_latlng_str , 'zoom':15 }).bind('init', function () {
-		 var controlOn=true;
-		 var drawingMode = false;
-		 
-		 var type= $('#startingValue').val();
-		 var coords=$('#latLong').val();
-		 if(coords=='')coords=$('#geometric_encoded').val();
-		 var pointHolder = {};
-		 if(coords!='' && type=='polyline'){ 
-		 	var pointHolder = {'path' : coords };
-		 }
-		  if(coords!='' && type=='polygon'){ 
-		 	var pointHolder = {'paths' : coords };
-		 }
-		 if(!$.isEmptyObject(pointHolder)){
-			var shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
-		 }else{
-			var shape = {};
-		 }
-		var jObj = $('#geometrics_drawing_map');
-		jObj.gmap('init_drawing', 
-			{ 
-				drawingControl:controlOn,
-				drawingControlOptions : controlOn?{
-					position: google.maps.ControlPosition.TOP_CENTER,
-					drawingModes: $('#pickedValue').val()!=""?[$('#pickedValue').val()]:[google.maps.drawing.OverlayType.POLYLINE, google.maps.drawing.OverlayType.POLYGON]
-				  }:false,
-				polylineOptions:{editable: true} 
-			}, $.extend( {
-					limit:1,
-					limit_reached:function(gmap){},
-					encodePaths:false, // always a string
-					data_return:'str', // "str" , "obj" (gmap obj) and others to come
-					data_pattern:'{lng} {lat}{delimiter}\n',   //
-					delimiter:',',
-					overlaycomplete:function(data){
-							if(data!=null){
-								alert(data);
-								$('#latLong').val(data);
-								//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',data,false,false))));
-								//$('#geometric_encoded').val(google.maps.geometry.encoding.decodePath(data));
-								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-								//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
-								
-								$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
-								///process_coords: function(coordinates,flip,reverse_array)
-							}
-						},
-					onDrag:function(data){
-							var points=$('#drawing_map').gmap('get_updated_data');
-							if(points.length){
-								alert(points);
-								$('#latLong').val(points);
-								//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',points,false,false))));
-								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-								$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
-								//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
-							}
-						},
-					drawingmode_changed:function(type){
-							if(type!=null){
-								$('#style_of').val(type);
-							}
-						},
-					onComplete:function(dm,shape){
-						if(shape!=null){
-							//$('#latLong').val($('#geometrics_drawing_map').gmap('get_updated_data',$('#geometrics_drawing_map').gmap('overlays')));
-							//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded',shape));
-							$('#drawing_map').gmap('zoom_to_bounds',{},shape,function(){alert('zoomed?')});
-						}else{
-						
-						}
-					}
-				},
-				/*note we are extending the settings with the shape */
-				$('#pickedValue').val()==''?{}:{
-					loaded_type: ($('#pickedValue').val().charAt(0).toUpperCase() + $('#pickedValue').val().slice(1)),
-					loaded_shape:shape
-				}
-			)
-		);
-
-		$('#drawingcontrolls.showing').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			jObj.gmap('hide_drawingControl');
-			$(this).removeClass('showing').addClass('hidden').text('Show controlls');
+				$('#shortcodes').toggle(0,function(){ 
+					$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
+				});
+			}).trigger('click');
+		
+		
+		$.each($('.switch'),function(i,v){
+			var self = $(this);
+			self.find('a').on('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					self.find('.active').removeClass('active');
+					var tar=$(this).attr('id');
+					$(this).addClass('active');
+					self.find('.'+tar).addClass('active');
+				});
 		});
-		$('#drawingcontrolls.hidden').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			jObj.gmap('show_drawingControl');
-			$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
-		});
-		$('#restart').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			jObj.gmap('refresh_drawing',false);
-		});
-		$('#update').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			if(jObj.gmap('get_updated_data'))$('#latLong').val(jObj.gmap('get_updated_data'));
-			
-			//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),false,false))));
-			
-			//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
-			if(jObj.gmap('get_updated_data'))$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,true)));
-		});
-		$("form#shapeEditor").autoUpdate({
-			 before:function(){ 
-				$('#update').trigger('click');
+		setup_massTags();
+	}
+};
+$.wsu_maps.admin.geometrics = {
+	load_editor:function () {
+		 $('#geometrics_drawing_map').gmap({'center': campus_latlng_str , 'zoom':15 }).bind('init', function () {
+			 var controlOn=true;
+			 var drawingMode = false;
+			 
+			 var type= $('#startingValue').val();
+			 var coords=$('#latLong').val();
+			 if(coords=='')coords=$('#geometric_encoded').val();
+			 var pointHolder = {};
+			 if(coords!='' && type=='polyline'){ 
+				var pointHolder = {'path' : coords };
 			 }
+			  if(coords!='' && type=='polygon'){ 
+				var pointHolder = {'paths' : coords };
+			 }
+			 if(!$.isEmptyObject(pointHolder)){
+				var shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+			 }else{
+				var shape = {};
+			 }
+			var jObj = $('#geometrics_drawing_map');
+			jObj.gmap('init_drawing', 
+				{ 
+					drawingControl:controlOn,
+					drawingControlOptions : controlOn?{
+						position: google.maps.ControlPosition.TOP_CENTER,
+						drawingModes: $('#pickedValue').val()!=""?[$('#pickedValue').val()]:[google.maps.drawing.OverlayType.POLYLINE, google.maps.drawing.OverlayType.POLYGON]
+					  }:false,
+					polylineOptions:{editable: true} 
+				}, $.extend( {
+						limit:1,
+						limit_reached:function(gmap){},
+						encodePaths:false, // always a string
+						data_return:'str', // "str" , "obj" (gmap obj) and others to come
+						data_pattern:'{lng} {lat}{delimiter}\n',   //
+						delimiter:',',
+						overlaycomplete:function(data){
+								if(data!=null){
+									alert(data);
+									$('#latLong').val(data);
+									//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',data,false,false))));
+									//$('#geometric_encoded').val(google.maps.geometry.encoding.decodePath(data));
+									//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+									//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+									//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
+									
+									$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
+									///process_coords: function(coordinates,flip,reverse_array)
+								}
+							},
+						onDrag:function(data){
+								var points=$('#drawing_map').gmap('get_updated_data');
+								if(points.length){
+									alert(points);
+									$('#latLong').val(points);
+									//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',points,false,false))));
+									//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+									$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
+									//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
+								}
+							},
+						drawingmode_changed:function(type){
+								if(type!=null){
+									$('#style_of').val(type);
+								}
+							},
+						onComplete:function(dm,shape){
+							if(shape!=null){
+								//$('#latLong').val($('#geometrics_drawing_map').gmap('get_updated_data',$('#geometrics_drawing_map').gmap('overlays')));
+								//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded',shape));
+								$('#drawing_map').gmap('zoom_to_bounds',{},shape,function(){alert('zoomed?')});
+							}else{
+							
+							}
+						}
+					},
+					/*note we are extending the settings with the shape */
+					$('#pickedValue').val()==''?{}:{
+						loaded_type: ($('#pickedValue').val().charAt(0).toUpperCase() + $('#pickedValue').val().slice(1)),
+						loaded_shape:shape
+					}
+				)
+			);
+	
+			$('#drawingcontrolls.showing').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				jObj.gmap('hide_drawingControl');
+				$(this).removeClass('showing').addClass('hidden').text('Show controlls');
+			});
+			$('#drawingcontrolls.hidden').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				jObj.gmap('show_drawingControl');
+				$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
+			});
+			$('#restart').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				jObj.gmap('refresh_drawing',false);
+			});
+			$('#update').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				if(jObj.gmap('get_updated_data'))$('#latLong').val(jObj.gmap('get_updated_data'));
+				
+				//alert(dump($('#geometrics_drawing_map').gmap('encode',$('#geometrics_drawing_map').gmap('process_coords',$('#latLong').val(),false,false))));
+				
+				//$('#geometric_encoded').val($('#geometrics_drawing_map').gmap('get_updated_data_encoded'));
+				if(jObj.gmap('get_updated_data'))$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,true)));
+			});
+			$("form#shapeEditor").autoUpdate({
+				 before:function(){ 
+					$('#update').trigger('click');
+				 }
+			});
+			$('#unselect').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				$('#latLong').val(jObj.gmap('unset_drawingSelection'));
+			});
+			var selected_type = '';
+			$('#style').on('change',function(){
+				if($('#style').val()>0){
+					if($('#latLong').val()!="")get_style(jObj,$('#style').val(),$('#pickedValue').val());
+				}
+			});
+			if($('#latLong').val()!="") $('#style').trigger('change');
 		});
-		$('#unselect').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			$('#latLong').val(jObj.gmap('unset_drawingSelection'));
-		});
-		var selected_type = '';
-		$('#style').on('change',function(){
-			if($('#style').val()>0){
-				if($('#latLong').val()!="")get_style(jObj,$('#style').val(),$('#pickedValue').val());
-			}
-		});
-		if($('#latLong').val()!="") $('#style').trigger('change');
-	});
-	 
+		 
+	}
 }
 function get_style(jObj,style_id,type){
 	//if((typeof(type)==="undefined" || type==="undefined") || (typeof(style_id)==="undefined" || style_id==="undefined") )alert('error'); return false;
@@ -661,477 +671,477 @@ function get_style(jObj,style_id,type){
 	});	
 }
 
-
-function load_style_editor(){
-	var gmap;
-	campus_latlng_str = '46.73276783809271,-117.15300628829834';
-
-     $('#style_map').gmap({'center': campus_latlng_str , 'zoom':15,'disableDoubleClickZoom':true,'draggable':false,'zoomControl': false,'mapTypeControl': false,'panControl':false,'streetViewControl': false  }).bind('init', function () {
-		$('#style_map').gmap('stop_scroll_zoom');
-		
-		set_default_shape($('#style_map'),$('#style_of').val());
-
-		if($('.sortStyleOps.orgin').length){
-			if($('#style_of').val()!=''){
-				//set_default_shape($('#style_map'),$('#style_of :selected').text());
-				set_default_shape($('#style_map'),$('#style_of').val());
-				$('#style_of').trigger('change');
-			}
-		}
-
-		if($( ".TABS" ).length>0){
-			$( ".TABS:not(.clone_pool .TABS)" ).each(function(i){
-				$(this).tabs();
-			});
-		}
-
-		$("[name='update_style.castle']").autoUpdate({before:function(){},changed:function(){rebuild_example($( ".accordion" ),$('#style_map'),$('#style_of').val());}});
-
-		$.each($( ".accordion" ),function(i){
-			var self = $(this);
-			var state = false;
-			var input = self.find('input').not('h3 input,input:hidden,');
-			if(	self.find('input').not('h3 input').val()!="" 
-				&& input.not(':checkbox').val()!=self.find('input.default').val()
-				|| ( input.is($(':checkbox')) && input.prop('checked')==true )
-				){
-					state = 0;
-					self.find('h3 input').prop('checked',true);
-			}
-			self.accordion({
-				collapsible: true,
-				autoHeight: false,
-				active: state ,
-				create: function(event, ui) {},
-				change: function(event, ui) {
-						if(ui.newHeader.is($('.ui-state-active'))){
-							ui.newHeader.closest('h3').find('input').prop('checked',true);
-						}else{
-							ui.oldHeader.closest('h3').find('input').prop('checked',false);
-						}
-					}
-			});
-			$.each(self.find('.color_picker'),function(){
-				var box = $(this);
-				var id = (input.attr('title').split('.')[1])+'_color_picker_'+i;
-				//alert(id);
-				if($('#'+id).length<=0){
-					box.attr("id",id);
-					$('#'+id).jPicker({
-						  window:{
-							title: null,
-							effects: {
-							  type: 'show',
-							  speed:{
-								show: 'fast',
-								hide: 'fast'
-							  }
-							},
-							position:{
-							  x: 'screenCenter',
-							  y: 'bottom'
-							},
-							expandable: false,
-							liveUpdate: true,
-							alphaSupport: false,
-							alphaPrecision: 0,
-							updateInputColor: true
-						  },
-						images:{ clientPath:'/Content/js/colorpicker/images/'}
-					},function(color, ob){
-						rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
-						var hex = '#'+color.val('hex');
-						box.siblings('.colorsaver').val(hex!="#null"?hex:""); 
-					},function(color, ob){
-						rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
-						var hex = '#'+color.val('hex');
-						box.siblings('.colorsaver').val(hex!="#null"?hex:""); 
-					},function(color, ob){
-						rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
-						var hex = '#'+color.val('hex');
-						box.siblings('.colorsaver').val(hex!="#null"?hex:"");  
-					});
+$.wsu_maps.admin.style = {
+	load_editor:function (){
+		var gmap;
+		campus_latlng_str = '46.73276783809271,-117.15300628829834';
+	
+		 $('#style_map').gmap({'center': campus_latlng_str , 'zoom':15,'disableDoubleClickZoom':true,'draggable':false,'zoomControl': false,'mapTypeControl': false,'panControl':false,'streetViewControl': false  }).bind('init', function () {
+			$('#style_map').gmap('stop_scroll_zoom');
+			
+			set_default_shape($('#style_map'),$('#style_of').val());
+	
+			if($('.sortStyleOps.orgin').length){
+				if($('#style_of').val()!=''){
+					//set_default_shape($('#style_map'),$('#style_of :selected').text());
+					set_default_shape($('#style_map'),$('#style_of').val());
+					$('#style_of').trigger('change');
 				}
-			});
-			$( ".strokeOpacity,.fillOpacity" ).each(function(i){
-				var subobj = $(this);
-				subobj.slider({
-					range: 	"min",
-					value:	subobj.prev('input').val()!=""?subobj.prev('input').val():"",
-					min: 	0.0,
-					max:	1.0,
-					step: 	.01,
-					slide: function( event, ui ) {
-						subobj.prev('input').val( ui.value ).trigger('change');
-						rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+			}
+	
+			if($( ".TABS" ).length>0){
+				$( ".TABS:not(.clone_pool .TABS)" ).each(function(i){
+					$(this).tabs();
+				});
+			}
+	
+			$("[name='update_style.castle']").autoUpdate({before:function(){},changed:function(){rebuild_example($( ".accordion" ),$('#style_map'),$('#style_of').val());}});
+	
+			$.each($( ".accordion" ),function(i){
+				var self = $(this);
+				var state = false;
+				var input = self.find('input').not('h3 input,input:hidden,');
+				if(	self.find('input').not('h3 input').val()!="" 
+					&& input.not(':checkbox').val()!=self.find('input.default').val()
+					|| ( input.is($(':checkbox')) && input.prop('checked')==true )
+					){
+						state = 0;
+						self.find('h3 input').prop('checked',true);
+				}
+				self.accordion({
+					collapsible: true,
+					autoHeight: false,
+					active: state ,
+					create: function(event, ui) {},
+					change: function(event, ui) {
+							if(ui.newHeader.is($('.ui-state-active'))){
+								ui.newHeader.closest('h3').find('input').prop('checked',true);
+							}else{
+								ui.oldHeader.closest('h3').find('input').prop('checked',false);
+							}
+						}
+				});
+				$.each(self.find('.color_picker'),function(){
+					var box = $(this);
+					var id = (input.attr('title').split('.')[1])+'_color_picker_'+i;
+					//alert(id);
+					if($('#'+id).length<=0){
+						box.attr("id",id);
+						$('#'+id).jPicker({
+							  window:{
+								title: null,
+								effects: {
+								  type: 'show',
+								  speed:{
+									show: 'fast',
+									hide: 'fast'
+								  }
+								},
+								position:{
+								  x: 'screenCenter',
+								  y: 'bottom'
+								},
+								expandable: false,
+								liveUpdate: true,
+								alphaSupport: false,
+								alphaPrecision: 0,
+								updateInputColor: true
+							  },
+							images:{ clientPath:'/Content/js/colorpicker/images/'}
+						},function(color, ob){
+							rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+							var hex = '#'+color.val('hex');
+							box.siblings('.colorsaver').val(hex!="#null"?hex:""); 
+						},function(color, ob){
+							rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+							var hex = '#'+color.val('hex');
+							box.siblings('.colorsaver').val(hex!="#null"?hex:""); 
+						},function(color, ob){
+							rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+							var hex = '#'+color.val('hex');
+							box.siblings('.colorsaver').val(hex!="#null"?hex:"");  
+						});
 					}
 				});
-				subobj.prev('input').val(subobj.slider( "value" ));
-			});
-			$( ".strokeWeight" ).each(function(i){
-				var subobj = $(this);
-				subobj.slider({
-					range: 	"min",
-					value:	subobj.prev('input').val()!=""?subobj.prev('input').val():"",
-					min: 	0,
-					max:	20,
-					step: 	.1,
-					slide: function( event, ui ) {
-						subobj.prev('input').val( ui.value ).trigger('change');
-						rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
-					}
+				$( ".strokeOpacity,.fillOpacity" ).each(function(i){
+					var subobj = $(this);
+					subobj.slider({
+						range: 	"min",
+						value:	subobj.prev('input').val()!=""?subobj.prev('input').val():"",
+						min: 	0.0,
+						max:	1.0,
+						step: 	.01,
+						slide: function( event, ui ) {
+							subobj.prev('input').val( ui.value ).trigger('change');
+							rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+						}
+					});
+					subobj.prev('input').val(subobj.slider( "value" ));
 				});
-				subobj.prev('input').val(subobj.slider( "value" ));
+				$( ".strokeWeight" ).each(function(i){
+					var subobj = $(this);
+					subobj.slider({
+						range: 	"min",
+						value:	subobj.prev('input').val()!=""?subobj.prev('input').val():"",
+						min: 	0,
+						max:	20,
+						step: 	.1,
+						slide: function( event, ui ) {
+							subobj.prev('input').val( ui.value ).trigger('change');
+							rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
+						}
+					});
+					subobj.prev('input').val(subobj.slider( "value" ));
+				});
 			});
+			rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
 		});
-		rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
-	});
-}
-
-
-function load_view_editor() {
-	var api = null;
-	var lat = $('#Lat').val();
-	var lng = $('#Long').val();	
-	var width = $('#width').val();
-	var height = $('#height').val();
-	var options = {'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15}
-	//var options = {'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
-	
-	$('.codeurllink').on('click',function(){window.open($(this).prev('.codeurl').text())})
-	
-	
-	
-	if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
-	$.each($('#tabs_Options input.text'),function(i,v){
-		var tmpVal = $(this).val();
-		if(tmpVal!=""){
-			if($.wsu_maps.util.isNumber(tmpVal)){
-				if(tmpVal>0){
+	}
+);
+$.wsu_maps.admin.view = {
+	load_editor:function () {
+		var api = null;
+		var lat = $('#Lat').val();
+		var lng = $('#Long').val();	
+		var width = $('#width').val();
+		var height = $('#height').val();
+		var options = {'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15}
+		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+		
+		$('.codeurllink').on('click',function(){window.open($(this).prev('.codeurl').text())})
+		
+		
+		
+		if($('#runningOptions').html()=="{}"||$('#runningOptions').html()==""){
+		$.each($('#tabs_Options input.text'),function(i,v){
+			var tmpVal = $(this).val();
+			if(tmpVal!=""){
+				if($.wsu_maps.util.isNumber(tmpVal)){
+					if(tmpVal>0){
+						var tmp = {} 
+						tmp[$(this).attr("id")]=tmpVal;
+						options=$.extend(options,tmp);
+					}
+				}else{
 					var tmp = {} 
 					tmp[$(this).attr("id")]=tmpVal;
 					options=$.extend(options,tmp);
 				}
-			}else{
-				var tmp = {} 
-				tmp[$(this).attr("id")]=tmpVal;
-				options=$.extend(options,tmp);
 			}
+		});	
+		}else{
+			var jsonStr = $('#runningOptions').html();
+			var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+			jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+			if(jsonStr!="")$.extend(options,base,$.parseJSON(jsonStr));
+			//alert(dump(options));
+			//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 		}
-	});	
-	}else{
-		var jsonStr = $('#runningOptions').html();
-		var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
-		jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
-		if(jsonStr!="")$.extend(options,base,$.parseJSON(jsonStr));
 		//alert(dump(options));
-		//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
-	}
-	//alert(dump(options));
+		
+		$('#dragCenter').on('change',function(){
+				if($(this).is(":checked")){
+					$('#place_drawing_map').gmap('setOptions',{"draggable":true})
+				}else{
+					$('#place_drawing_map').gmap('setOptions',{"draggable":$('#draggable').is(":checked")})
+				}
+			});
+			
+		$('#setZoom').on('change',function(){
+				if($(this).is(":checked")){
+					$('#place_drawing_map').gmap('setOptions',{"scrollwheel":true})
+				}else{
+					$('#place_drawing_map').gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")})
+				}
+			});		
 	
-	$('#dragCenter').on('change',function(){
-			if($(this).is(":checked")){
-				$('#place_drawing_map').gmap('setOptions',{"draggable":true})
-			}else{
-				$('#place_drawing_map').gmap('setOptions',{"draggable":$('#draggable').is(":checked")})
-			}
+		$('#place_drawing_map').gmap(options).bind('init', function () {
+			//alert(dump(options));
+			//if(lat!='')add_place_point(lat,lng);
+			//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+			//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+			google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
+				var center = $('#place_drawing_map').gmap('get_map_center');
+				//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
+				var lat = $('#Lat').val( center.lat() );
+				var lng = $('#Long').val( center.lng() );	
+			});
+			google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'zoom_changed',function(){
+				var zoomLevel = $('#place_drawing_map').gmap('get','map').getZoom();
+				var zoom = $('#zoom').val( zoomLevel );
+			});
+			reloadShapes();
+			reloadPlaces();
+			
+		}).resizable({
+			helper: "ui-resizable-helper",
+			stop: function(event, ui) {
+					var width = $('#width').val(ui.size.width);
+					var height = $('#height').val(ui.size.height);
+					
+					$('.widthOutput').text(ui.size.width);
+					$('.heightOutput').text(ui.size.height);
+					$('#place_drawing_map').gmap('refresh');
+				}
 		});
-		
-	$('#setZoom').on('change',function(){
-			if($(this).is(":checked")){
-				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":true})
-			}else{
-				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")})
+		if($('.sortable').length){
+			function createDeleteRow(){
+				$('.tiny.buttons.deleteplace').off().on('click',function(e){
+					e.stopPropagation();
+					e.preventDefault();
+					var container = $(this).closest('ol.sortable');
+					var role=container.closest('fieldset').attr('role');
+					var val=$(this).closest('li').find('input').val();
+					$('select#'+role+'_select [value="'+val+'"]').removeAttr('disabled');
+					$(this).closest('li').remove();
+					container.nestedSortable("refresh");
+					
+					
+					$('jspContainer').css('height','auto');
+					api.reinitialise();
+					reloadShapes();
+					reloadPlaces();
+					if(container.find('.ini').length==0 && container.find('li').size()==0){
+						container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+					}
+				});
 			}
-		});		
-
-	$('#place_drawing_map').gmap(options).bind('init', function () {
-		//alert(dump(options));
-		//if(lat!='')add_place_point(lat,lng);
-		//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-		//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-		google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
-			var center = $('#place_drawing_map').gmap('get_map_center');
-			//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
-			var lat = $('#Lat').val( center.lat() );
-			var lng = $('#Long').val( center.lng() );	
-		});
-		google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'zoom_changed',function(){
-			var zoomLevel = $('#place_drawing_map').gmap('get','map').getZoom();
-			var zoom = $('#zoom').val( zoomLevel );
-		});
-		reloadShapes();
-		reloadPlaces();
-		
-	}).resizable({
-		helper: "ui-resizable-helper",
-		stop: function(event, ui) {
-				var width = $('#width').val(ui.size.width);
-				var height = $('#height').val(ui.size.height);
-				
-				$('.widthOutput').text(ui.size.width);
-				$('.heightOutput').text(ui.size.height);
-				$('#place_drawing_map').gmap('refresh');
-			}
-	});
-	if($('.sortable').length){
-		function createDeleteRow(){
-			$('.tiny.buttons.deleteplace').off().on('click',function(e){
+			$('ol.sortable').nestedSortable({
+				disableNesting: 'no-nest',
+				forcePlaceholderSize: true,
+				handle: 'div:not(a)',
+				helper:	'clone',
+				items: "li:not(.ini)",
+				maxLevels:1,
+				opacity: .6,
+				placeholder: 'placeholder',
+				revert: 250,
+				tabSize: 25,
+				distance: 15, 
+				tolerance: 'pointer',
+				toleranceElement: '> div',
+				update: function(event, ui) {
+					var container = ui.item.closest('ol.sortable');
+					var role=container.closest('fieldset').attr('role');
+					
+					container.find( ".buttons" ).button({text:false});
+					reloadShapes();
+					reloadPlaces();
+					if(container.find('.ini').length &&container.find('li').size()>1){
+						container.find('.ini').remove();
+					}else if(container.find('.ini').length==0 && container.find('li').size()==1){
+						container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+					}
+	
+	
+	
+					createDeleteRow();
+				}
+			});
+			var settings = {
+				verticalDragMinHeight: 50
+				//showArrows: true
+			};
+	
+			var pane = $('.listPicker');
+			pane.bind(
+					'jsp-scroll-y',
+					function(event, scrollPositionY, isAtTop, isAtBottom)
+					{
+							var isAtBottom= isAtBottom;	
+							var isAtTop= isAtTop;			
+						pane.mousewheel(function(event,delta){ 
+							var media = $(this).find('.mediaPanel'); 
+							if (delta > 0) { 
+								if(isAtTop) return false;
+							} else { 
+								if(isAtBottom) return false;
+							}         
+						});  		
+					}
+	
+				).jScrollPane(settings);
+			api = pane.data('jsp');
+	
+			createDeleteRow();
+	
+			$('.addSelecttion').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
-				var container = $(this).closest('ol.sortable');
-				var role=container.closest('fieldset').attr('role');
-				var val=$(this).closest('li').find('input').val();
-				$('select#'+role+'_select [value="'+val+'"]').removeAttr('disabled');
-				$(this).closest('li').remove();
-				container.nestedSortable("refresh");
 				
+				var container = $(this).closest('fieldset');
+				var role=container.attr('role');
+				var selection = $('select#'+role+'_select').val();
 				
-				$('jspContainer').css('height','auto');
-				api.reinitialise();
-				reloadShapes();
-				reloadPlaces();
-				if(container.find('.ini').length==0 && container.find('li').size()==0){
-					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
-				}
-			});
-		}
-		$('ol.sortable').nestedSortable({
-			disableNesting: 'no-nest',
-			forcePlaceholderSize: true,
-			handle: 'div:not(a)',
-			helper:	'clone',
-			items: "li:not(.ini)",
-			maxLevels:1,
-			opacity: .6,
-			placeholder: 'placeholder',
-			revert: 250,
-			tabSize: 25,
-			distance: 15, 
-			tolerance: 'pointer',
-			toleranceElement: '> div',
-			update: function(event, ui) {
-				var container = ui.item.closest('ol.sortable');
-				var role=container.closest('fieldset').attr('role');
-				
-				container.find( ".buttons" ).button({text:false});
-				reloadShapes();
-				reloadPlaces();
-				if(container.find('.ini').length &&container.find('li').size()>1){
-					container.find('.ini').remove();
-				}else if(container.find('.ini').length==0 && container.find('li').size()==1){
-					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
-				}
-
-
-
-				createDeleteRow();
-			}
-		});
-		var settings = {
-			verticalDragMinHeight: 50
-			//showArrows: true
-		};
-
-		var pane = $('.listPicker');
-		pane.bind(
-				'jsp-scroll-y',
-				function(event, scrollPositionY, isAtTop, isAtBottom)
-				{
-						var isAtBottom= isAtBottom;	
-						var isAtTop= isAtTop;			
-					pane.mousewheel(function(event,delta){ 
-						var media = $(this).find('.mediaPanel'); 
-						if (delta > 0) { 
-							if(isAtTop) return false;
-						} else { 
-							if(isAtBottom) return false;
-						}         
-					});  		
-				}
-
-			).jScrollPane(settings);
-		api = pane.data('jsp');
-
-		createDeleteRow();
-
-		$('.addSelecttion').on('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			
-			var container = $(this).closest('fieldset');
-			var role=container.attr('role');
-			var selection = $('select#'+role+'_select').val();
-			
-			if(selection!=""){
-				var name = $('select#'+role+'_select :selected').text();
-				$('select#'+role+'_select :selected').attr('disabled','disabled');
-				$('select#'+role+'_select').val('');
-				var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
-								'<div style="padding: 1px;">'+
-									'<span style="font-size:0.5em; float:right;">'+
-										'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
-											'<span class="ui-icon ui-icon-trash"></span>'+
-										'</a>'+
-									'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
-								'</div>'+
-							'</li>';
-				container.find('ol.sortable').append(addEle);
-				if(container.find('.ini').length>0){
-					container.find('.ini').remove();
-				}
-				container.find('ol.sortable').nestedSortable("refresh");
-				$('jspContainer').css('height','auto');
-				api.reinitialise();
-								reloadShapes();
-				reloadPlaces();
-				createDeleteRow();
-			}
-		});
-	}
-	
-	//$('select#placeShape').on('change',function(){
-	//	reloadShapes()
-	//});	
-	int_infotabs();
-	tinyResize();
-
-	setup_fixedNav();
-	
-	$('#shortcode').click(function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		$('#shortcodes').toggle(0,function(){ 
-			$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
-		});
-	}).trigger('click');
-
-	$.each($('.switch'),function(i,v){
-		var self = $(this);
-		self.find('a').on('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			self.find('.active').removeClass('active');
-			var tar=$(this).attr('id');
-			$(this).addClass('active');
-			self.find('.'+tar).addClass('active');
-		});
-	});
-	$('#width').on('keyup',function(){
-		$('.widthOutput').text($(this).val());
-	});
-	$('#height').on('keyup',function(){
-		$('.heightOutput').text($(this).val());
-	});
-	/*
-	$('[href$="guidelines/dimensions.aspx"]').on('click',function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		$("<div>").load($(this).attr('href')+' #main',function(data){
-			$.colorbox({html:data});
-		});
-	});
-	*/
-	
-	setup_massTags();
-	
-	var waiting = false;	
-	$('#urlAlias').on('keyup',function(){
-		var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
-		if(!waiting){
-			waiting = true;
-			//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
-			$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+view.replace("/",""), function(data) {
-				if(data=="true"){
-					$('.aliasState').addClass('error');
-					$('.aliasState').removeClass('ok');
-					$('.aliasState').text('  :  taken');
-				}else{
-					$('.aliasState').addClass('ok');
-					$('.aliasState').removeClass('error');
-					$('.aliasState').text('  :  available');
-				}
-				waiting = false;
-			});
-		}
-		$('.outputurl').text(val);
-		$(this).val(val);
-	});	
-	
-	
-	if($('.onfliterList').length>0){
-		$(".onfliterList").on('change',function () {
-			var self=$(this);
-			var role = self.closest('fieldset').attr('role');
-			if(self.val()==""){
-				self.closest('fieldset').find('.subFilter').hide();
-				self.closest('fieldset').find('.mainFilter').hide();
-			}else{
-				$.getJSON(siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
-					if(data=="false"){
-						alert("false");
-						$.colorbox({
-							html:function(){
-								return '<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3></div>';
-							},
-							scrolling:false,
-							opacity:0.7,
-							transition:"none",
-							open:true,
-							onComplete:function(){
-								prep();
-								$.colorbox.resize();
-							}
-						});
-						return false;
+				if(selection!=""){
+					var name = $('select#'+role+'_select :selected').text();
+					$('select#'+role+'_select :selected').attr('disabled','disabled');
+					$('select#'+role+'_select').val('');
+					var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
+									'<div style="padding: 1px;">'+
+										'<span style="font-size:0.5em; float:right;">'+
+											'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
+												'<span class="ui-icon ui-icon-trash"></span>'+
+											'</a>'+
+										'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
+									'</div>'+
+								'</li>';
+					container.find('ol.sortable').append(addEle);
+					if(container.find('.ini').length>0){
+						container.find('.ini').remove();
 					}
-					self.closest('fieldset').find('.onsubfliterList').html(function(){
-						var str="<option value=''>All</option>";
-						$.each(data,function(i,v){
-							str += "<option value='"+v.id+"'>"+v.name+"</option>";
-						});
-						return str;
-					}).attr('role',self.val());
-					if(self.val().indexOf("all_")>-1 || self.val().indexOf("authors_")>-1){
-						self.closest('fieldset').find('.subFilter').hide();	
-						self.closest('fieldset').find('.finFill').html(function(){
-							var str="<option value=''>Select a "+role+"</option>";
-							$.each(data,function(i,v){
-								var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
-								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
-							});
-							self.closest('fieldset').find('.mainFilter').show();
-							return str;
-						});
+					container.find('ol.sortable').nestedSortable("refresh");
+					$('jspContainer').css('height','auto');
+					api.reinitialise();
+									reloadShapes();
+					reloadPlaces();
+					createDeleteRow();
+				}
+			});
+		}
+		
+		//$('select#placeShape').on('change',function(){
+		//	reloadShapes()
+		//});	
+		int_infotabs();
+		$.wsu_maps.admin.ui.tinymce.tinyResize();
+	
+		setup_fixedNav();
+		
+		$('#shortcode').click(function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$('#shortcodes').toggle(0,function(){ 
+				$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
+			});
+		}).trigger('click');
+	
+		$.each($('.switch'),function(i,v){
+			var self = $(this);
+			self.find('a').on('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				self.find('.active').removeClass('active');
+				var tar=$(this).attr('id');
+				$(this).addClass('active');
+				self.find('.'+tar).addClass('active');
+			});
+		});
+		$('#width').on('keyup',function(){
+			$('.widthOutput').text($(this).val());
+		});
+		$('#height').on('keyup',function(){
+			$('.heightOutput').text($(this).val());
+		});
+		/*
+		$('[href$="guidelines/dimensions.aspx"]').on('click',function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			$("<div>").load($(this).attr('href')+' #main',function(data){
+				$.colorbox({html:data});
+			});
+		});
+		*/
+		
+		setup_massTags();
+		
+		var waiting = false;	
+		$('#urlAlias').on('keyup',function(){
+			var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
+			if(!waiting){
+				waiting = true;
+				//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
+				$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+view.replace("/",""), function(data) {
+					if(data=="true"){
+						$('.aliasState').addClass('error');
+						$('.aliasState').removeClass('ok');
+						$('.aliasState').text('  :  taken');
 					}else{
-						self.closest('fieldset').find('.subFilter').show();	
+						$('.aliasState').addClass('ok');
+						$('.aliasState').removeClass('error');
+						$('.aliasState').text('  :  available');
 					}
+					waiting = false;
 				});
 			}
-		});
-	}
-	if($('.onfliterList').length>0){
-		$(".onsubfliterList").on('change',function () {
-			var self=$(this);
-			var role = self.closest('fieldset').attr('role');
-			$.getJSON(siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
-				self.closest('fieldset').find('.finFill').html(function(){
-					var str="<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
-					$.each(data,function(i,v){
-								var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
-								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
+			$('.outputurl').text(val);
+			$(this).val(val);
+		});	
+		
+		
+		if($('.onfliterList').length>0){
+			$(".onfliterList").on('change',function () {
+				var self=$(this);
+				var role = self.closest('fieldset').attr('role');
+				if(self.val()==""){
+					self.closest('fieldset').find('.subFilter').hide();
+					self.closest('fieldset').find('.mainFilter').hide();
+				}else{
+					$.getJSON(siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
+						if(data=="false"){
+							alert("false");
+							$.colorbox({
+								html:function(){
+									return '<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3></div>';
+								},
+								scrolling:false,
+								opacity:0.7,
+								transition:"none",
+								open:true,
+								onComplete:function(){
+									prep();
+									$.colorbox.resize();
+								}
+							});
+							return false;
+						}
+						self.closest('fieldset').find('.onsubfliterList').html(function(){
+							var str="<option value=''>All</option>";
+							$.each(data,function(i,v){
+								str += "<option value='"+v.id+"'>"+v.name+"</option>";
+							});
+							return str;
+						}).attr('role',self.val());
+						if(self.val().indexOf("all_")>-1 || self.val().indexOf("authors_")>-1){
+							self.closest('fieldset').find('.subFilter').hide();	
+							self.closest('fieldset').find('.finFill').html(function(){
+								var str="<option value=''>Select a "+role+"</option>";
+								$.each(data,function(i,v){
+									var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
+									str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
+								});
+								self.closest('fieldset').find('.mainFilter').show();
+								return str;
+							});
+						}else{
+							self.closest('fieldset').find('.subFilter').show();	
+						}
 					});
-					self.closest('fieldset').find('.mainFilter').show();
-					return str;
+				}
+			});
+		}
+		if($('.onfliterList').length>0){
+			$(".onsubfliterList").on('change',function () {
+				var self=$(this);
+				var role = self.closest('fieldset').attr('role');
+				$.getJSON(siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
+					self.closest('fieldset').find('.finFill').html(function(){
+						var str="<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
+						$.each(data,function(i,v){
+									var name = typeof(v.prime_name)=="undefined"?v.name:v.prime_name;
+									str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
+						});
+						self.closest('fieldset').find('.mainFilter').show();
+						return str;
+					});
 				});
 			});
-		});
+		}
+		
+		
+		
 	}
-	
-	
-	
-}
-
+};
 	
 function reloadPlaces(){
 	var url=siteroot+"public/getPlaceJson_byIds.castle";

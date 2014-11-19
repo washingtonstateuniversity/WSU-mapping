@@ -20,10 +20,7 @@ var hasListing = false;
 var hasDirections = false;
 var mapInst = null;
 /* non-abstract */
-function resizeBg(obj,height,width) {
-	obj.height($(window).height()-height);
-	if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);
-} 
+
 function geoLocate(){
 	if($('.geolocation').length){
 		mapInst.gmap("geolocate",true,false,function(mess, pos){

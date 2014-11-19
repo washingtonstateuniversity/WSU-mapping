@@ -255,14 +255,7 @@ function addLiveActionAnimation(){
 	);	
 	
 }
-function tinyResize(){//id){
-	$(window).resize(function(){
-		$.each($('textarea.tinyEditor.tinyLoaded'), function(){//i, v) {
-			var id=$(this).attr('id');
-			$('#'+id+"_tbl").width($(this).closest('div').width()-40);
-		});
-	}).trigger("resize");
-}
+
 $.wsu_maps.admin.ui = {};
 $(function() {
 	setup_fixedNav();
@@ -310,7 +303,7 @@ $(function() {
 					$.wsu_maps.admin.ui.tinymceload_tiny("simple",$(this).attr('id'));
 				}
 				$(this).addClass("tinyLoaded");
-				tinyResize();
+				$.wsu_maps.admin.ui.tinymce.tinyResize();
 			}
 		});
 	}
@@ -624,7 +617,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 				create: function(){//event, ui) {
 					if($('#place_id').length){
 						tinyMCE.triggerSave();
-						tinyResize();
+						$.wsu_maps.admin.ui.tinymce.tinyResize();
 					}
 					pagLoad();
 					setInfoSlide();
