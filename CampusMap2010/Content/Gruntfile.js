@@ -167,7 +167,8 @@ module.exports = function(grunt) {
 					ZeroClipboard:true,
 					MutationObserver:true,
 					google:true,
-					tinyMCE:true
+					tinyMCE:true,
+					addthis:true,
 				}
 			}
 		},

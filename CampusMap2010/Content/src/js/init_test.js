@@ -23,6 +23,14 @@ var mapInst = null;
 var siteroot=siteroot||"";
 var view=view||"";
 var mcv_action=mcv_action||"";
+var campus=campus||"";
+var campus_latlng_str=campus_latlng_str||"";
+var pos=pos||{};
+var base=base||{};
+var pageTracker=pageTracker||null;
+var styles=styles||{};
+var InfoBox=InfoBox||null;
+var startingUrl=startingUrl||null;
 
 function geoLocate(){
 	if($('.geolocation').length){
@@ -41,35 +49,30 @@ function geoLocate(){
 }
 
 function ini_map_view(map_ele_obj,callback){
+	var map_op = {'center': campus_latlng_str , 'zoom':15 };
+	//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
+	if($('#runningOptions').length){
+		if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
 	
-		var map_op = {'center': campus_latlng_str , 'zoom':15 };
-		//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
-		if($('#runningOptions').length){
-			if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
-		
-			}else{
-				//map_op= {}
-				$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
-				var jsonStr = $('#runningOptions').html();
-				var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
-				jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+		}else{
+			//map_op= {}
+			$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
+			var jsonStr = $('#runningOptions').html();
+			var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+			jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
 
-				$.extend(map_op,pos,base,$.parseJSON(jsonStr));
-			}
+			$.extend(map_op,pos,base,$.parseJSON(jsonStr));
 		}
-
-		
-		
-		map_ele_obj.gmap(map_op).bind('init', function() { 
-			var map = map_ele_obj.gmap("get","map");
-			ini_GAtracking('UA-22127038-5');
-			poi_setup($('#centralMap'));
-			
-			
-			if($('.mobile').length)geoLocate();
-			callback();
-		});
-
+	}
+	map_ele_obj.gmap(map_op).bind('init', function() { 
+		var map = map_ele_obj.gmap("get","map");
+		ini_GAtracking('UA-22127038-5');
+		poi_setup($('#centralMap'));
+		if($('.mobile').length){
+			geoLocate();
+		}
+		callback();
+	});
 }
 
 function iniMap(url,callback){
@@ -142,39 +145,39 @@ function iniMap(url,callback){
 
 
 function ini_GAtracking(gacode){
-			var data = [
-				{
-					"element":"a[href^='http']:not([href*='wsu.edu'])",
-					"options":{
-						"mode":"event,_link",
-						"category":"outbound"
-						}
-				},{
-					"element":"a[href*='wsu.edu']:not([href^='/'],[href*='**SELF_DOMAIN**'])",
-					"options":{
-						"skip_internal":"true",
-						"category":"internal",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a[href*='.rss']",
-					"options":{
-						"category":"Feed",
-						"action":"RSS",
-						"overwrites":"true"
-						}
-				},{
-					"element":"a[href*='mailto:']",
-					"options":{
-						"category":"email",
-						"overwrites":"true"
-						}
+	var data = [
+		{
+			"element":"a[href^='http']:not([href*='wsu.edu'])",
+			"options":{
+				"mode":"event,_link",
+				"category":"outbound"
 				}
-			];
-			$.jtrack.defaults.debug.run = false;
-			$.jtrack.defaults.debug.v_console = false;
-			$.jtrack.defaults.debug.console = true;
-			$.jtrack({load_analytics:{account:gacode}, trackevents:data }); 	
+		},{
+			"element":"a[href*='wsu.edu']:not([href^='/'],[href*='**SELF_DOMAIN**'])",
+			"options":{
+				"skip_internal":"true",
+				"category":"internal",
+				"overwrites":"true"
+				}
+		},{
+			"element":"a[href*='.rss']",
+			"options":{
+				"category":"Feed",
+				"action":"RSS",
+				"overwrites":"true"
+				}
+		},{
+			"element":"a[href*='mailto:']",
+			"options":{
+				"category":"email",
+				"overwrites":"true"
+				}
+		}
+	];
+	$.jtrack.defaults.debug.run = false;
+	$.jtrack.defaults.debug.v_console = false;
+	$.jtrack.defaults.debug.console = true;
+	$.jtrack({load_analytics:{account:gacode}, trackevents:data }); 	
 }
 function ini_addthis(username){
 	if(typeof(username)==="unfined"){username="mcwsu";}
@@ -207,7 +210,6 @@ function ini_addthis(username){
 		});
 	});
 }
-
 
 
 /* non-abstract */
@@ -260,7 +262,7 @@ function addCentralControlls(){
 									for(var j=0; j<t; j++){
 										li+="<li><a href='#'></a></li>";
 									}
-									if($('#colorbox #cb_nav').length==0){
+									if($('#colorbox #cb_nav').length===0){
 										$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
 									}else{
 										$('#colorbox #cb_nav').html(li);
@@ -399,7 +401,9 @@ function display_directions(jObj,results){
 
 
 function hereToThere(jObj){
-	if(cTo===""||cFrom ==="")return false
+	if(cTo===""||cFrom ===""){
+		return false;
+	}
 	clearHereToThere();
 	
 	$.colorbox.remove();
@@ -419,18 +423,19 @@ function hereToThere(jObj){
 				$.colorbox.close();
 				e.stopPropagation();
 				e.preventDefault();
+				var mode;
 				switch($('#trasMode').val()){
 					case "Walk":
-						var mode = google.maps.DirectionsTravelMode.WALKING;
+						mode = google.maps.DirectionsTravelMode.WALKING;
 						break;
 					case "Bike":
-						var mode = google.maps.DirectionsTravelMode.BICYCLING;
+						mode = google.maps.DirectionsTravelMode.BICYCLING;
 						break;
 					case "Car":
-						var mode = google.maps.DirectionsTravelMode.DRIVING;
+						mode = google.maps.DirectionsTravelMode.DRIVING;
 						break;
 					case "Transit":
-						var mode = google.maps.DirectionsTravelMode.TRANSIT;
+						mode = google.maps.DirectionsTravelMode.TRANSIT;
 						break;
 				}
 				jObj.gmap('displayDirections',
@@ -474,10 +479,12 @@ function showContextMenu(caurrentLatLng  ){
 		var x = clickedPosition.x ;
 		var y = clickedPosition.y ;
 		
-		if((mapWidth - x ) < menuWidth)
+		if((mapWidth - x ) < menuWidth){
 			x = x - menuWidth;
-		if((mapHeight - y ) < menuHeight)
+		}
+		if((mapHeight - y ) < menuHeight){
 			y = y - menuHeight;
+		}
 		
 		$('.contextmenu').css('left',x  );
 		$('.contextmenu').css('top',y );
@@ -493,11 +500,17 @@ function showContextMenu(caurrentLatLng  ){
 	$(map.getDiv()).append(contextmenuDir);
 	setMenuXY(caurrentLatLng);
 	contextmenuDir.style.visibility = "visible";
-	if(cTo==="" && cFrom ===""){clearHereToThere();}
+	if(cTo==="" && cFrom ===""){
+		clearHereToThere();
+	}
 	
 
-	if(cTo!==""){$('.contextmenu #to').addClass('active');}
-	if(cFrom!==""){$('.contextmenu #from').addClass('active');}
+	if(cTo!==""){
+		$('.contextmenu #to').addClass('active');
+	}
+	if(cFrom!==""){
+		$('.contextmenu #from').addClass('active');
+	}
 	$('.contextmenu #to').on('click',function(){
 		cTo=caurrentLatLng.lat()+","+caurrentLatLng.lng();
 		//alert(cTo);
@@ -528,21 +541,21 @@ function hideContextMenu() {
 
 function updateMap(jObj,_load,showSum,callback){
 	if(typeof(_load)==='undefined'){
-		var _load = false;
+		_load = false;
 	}
 	if(typeof(showSum)==='undefined'){
-		var showSum = false;
+		showSum = false;
 	}
 	if(typeof(callback)==='undefined'){
-		var callback = false;
+		callback = false;
 	}
 	cur_mid = 0;
 	cur_nav = _load;
-
+	var url="";
 	if($.isNumeric(_load)){
-		var url=siteroot+"public/get_place.castle";
+		url=siteroot+"public/get_place.castle";
 	}else{
-		var url=siteroot+"public/get_place_by_category.castle";	
+		url=siteroot+"public/get_place_by_category.castle";	
 	}
 	$.getJSON(url+'?callback=?'+(_load!==false && !$.isNumeric(_load)?'&cat[]='+_load:($.isNumeric(_load)?'&id='+_load:'')), function(data) {
 		if(!$.isNumeric(_load)){
@@ -900,7 +913,7 @@ function make_InfoWindow(jObj,i,marker){
 							var t=parseInt($('#ttl').text(), 10);
 							var li="";
 							if(t>1){
-								for(j=0; j<t; j++){
+								for(var j=0; j<t; j++){
 									li+="<li><a href='#'></a></li>";
 								}
 								if($('#colorbox #cb_nav').length===0){
@@ -1435,7 +1448,7 @@ function setup_mapsearch(jObj){
 			.data( "item.autocomplete", item )
 			.append( text )
 			.appendTo( ul );
-	}
+	};
 	$( "#placeSearch input[type='text']" ).on('keyup',function(e) {
 		if ( e.which === 13){
 			var id   = (typeof(focuseitem.id)!=="undefined"&&focuseitem.id!=="")?focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
@@ -1831,7 +1844,7 @@ function makeEmbeder(){
 			onOpen:function(){$('#colorbox').addClass('norm');},
 			onComplete:function(){
 
-				clip = new ZeroClipboard.Client();
+				var clip = new ZeroClipboard.Client();
 				clip.setHandCursor( true );
 				clip.setText($('#embedCode').text());
 				clip.addEventListener('complete', function (client, text) {
@@ -1839,7 +1852,7 @@ function makeEmbeder(){
 				});
 				clip.glue( 'd_clip_button', 'd_clip_container' );
 		
-				clipL = new ZeroClipboard.Client();
+				var clipL = new ZeroClipboard.Client();
 				clipL.setHandCursor( true );
 				clipL.setText($('#ebLink').text());
 				clipL.addEventListener('complete', function (client, text) {
