@@ -13,37 +13,37 @@
 		
 		
 		
-	getStreetViewPanorama: function(panel, streetViewPanoramaOptions) {
-			var StreetViewPanorama = this.get('services > StreetViewPanorama', new google.maps.StreetViewPanorama());
-			return StreetViewPanorama;
-		},	  
-	getGeocoder:function(){
-		var Geocoder = this.get('services > Geocoder', new google.maps.Geocoder());
-		return Geocoder;
-	},
-	
-	getDirectionsService: function(){
-		var DirectionsService = this.get('services > DirectionsService', new google.maps.DirectionsService());
-		return DirectionsService;
-	},
-	getDirectionsRenderer: function(){
-		var DirectionsRenderer = this.get('services > DirectionsRenderer', new google.maps.DirectionsRenderer());
-		return DirectionsRenderer;
-	},	
-	getElevationService:function(){
-		var ElevationService = this.get('services > ElevationService', new google.maps.ElevationService());
-		return ElevationService;
-	},
-	
-	getMaxZoomService:function(){
-		var MaxZoomService = this.get('services > MaxZoomService', new google.maps.MaxZoomService());
-		return MaxZoomService;
-	},
-	
-	getDistanceMatrixService:function(){
-		var DistanceMatrixService = this.get('services > DistanceMatrixService', new google.maps.DistanceMatrixService());
-		return DistanceMatrixService;
-	},
+		getStreetViewPanorama: function(){//panel, streetViewPanoramaOptions) {
+				var StreetViewPanorama = this.get('services > StreetViewPanorama', new google.maps.StreetViewPanorama());
+				return StreetViewPanorama;
+			},	  
+		getGeocoder:function(){
+			var Geocoder = this.get('services > Geocoder', new google.maps.Geocoder());
+			return Geocoder;
+		},
+		
+		getDirectionsService: function(){
+			var DirectionsService = this.get('services > DirectionsService', new google.maps.DirectionsService());
+			return DirectionsService;
+		},
+		getDirectionsRenderer: function(){
+			var DirectionsRenderer = this.get('services > DirectionsRenderer', new google.maps.DirectionsRenderer());
+			return DirectionsRenderer;
+		},	
+		getElevationService:function(){
+			var ElevationService = this.get('services > ElevationService', new google.maps.ElevationService());
+			return ElevationService;
+		},
+		
+		getMaxZoomService:function(){
+			var MaxZoomService = this.get('services > MaxZoomService', new google.maps.MaxZoomService());
+			return MaxZoomService;
+		},
+		
+		getDistanceMatrixService:function(){
+			var DistanceMatrixService = this.get('services > DistanceMatrixService', new google.maps.DistanceMatrixService());
+			return DistanceMatrixService;
+		},
 
 		/**
 		 * Computes directions between two or more places.
@@ -102,84 +102,84 @@
 		},
 		
 
-    getelevation : function(todo){
-      /*var fnc, path, samples, i,
-          locations = [],
-          callback = ival(todo, 'callback'),
-          latLng = ival(todo, 'latlng'),
-          that = this;
-          
-      if (typeof(callback) === 'function'){
-        fnc = function(results, status){
-          var out = status === google.maps.ElevationStatus.OK ? results : false;
-          callback.apply($this, [out, status]);
-          that._end();
-        };
-        if (latLng){
-          locations.push(toLatLng(latLng));
-        } else {
-          locations = ival(todo, 'locations') || [];
-          if (locations){
-            locations = array(locations);
-            for(i=0; i<locations.length; i++){
-              locations[i] = toLatLng(locations[i]);
-            }
-          }
-        }
-        if (locations.length){
-          this.getElevationService().getElevationForLocations({locations:locations}, fnc);
-        } else {
-          path = ival(todo, 'path');
-          samples = ival(todo, 'samples');
-          if (path && samples){
-            for(i=0; i<path.length; i++){
-              locations.push(toLatLng(path[i]));
-            }
-            if (locations.length){
-              this.getElevationService().getElevationAlongPath({path:locations, samples:samples}, fnc);
-            }
-          }
-        }
-      } else {
-        this._end();
-      }*/
-    },
-	
-	    /**
-     * return the distance between an origin and a destination
-     *      
-     **/
-    getdistance : function(todo){
-      /*var i, 
-          callback = ival(todo, 'callback'),
-          that = this;
-      if ( (typeof(callback) === 'function') && todo.options && todo.options.origins && todo.options.destinations ) {
-        // origins and destinations are array containing one or more address strings and/or google.maps.LatLng objects
-        todo.options.origins = array(todo.options.origins);
-        for(i=0; i<todo.options.origins.length; i++){
-          todo.options.origins[i] = toLatLng(todo.options.origins[i], true);
-        }
-        todo.options.destinations = array(todo.options.destinations);
-        for(i=0; i<todo.options.destinations.length; i++){
-          todo.options.destinations[i] = toLatLng(todo.options.destinations[i], true);
-        }
-        this.getDistanceMatrixService().getDistanceMatrix(
-          todo.options,
-          function(results, status) {
-            var out = status == google.maps.DistanceMatrixStatus.OK ? results : false;
-            callback.apply($this, [out, status]);
-            that._end();
-          }
-        );
-      } else {
-        this._end();
-      }*/
-    }
+		getelevation : function(){//todo){
+		  /*var fnc, path, samples, i,
+			  locations = [],
+			  callback = ival(todo, 'callback'),
+			  latLng = ival(todo, 'latlng'),
+			  that = this;
+			  
+		  if (typeof(callback) === 'function'){
+			fnc = function(results, status){
+			  var out = status === google.maps.ElevationStatus.OK ? results : false;
+			  callback.apply($this, [out, status]);
+			  that._end();
+			};
+			if (latLng){
+			  locations.push(toLatLng(latLng));
+			} else {
+			  locations = ival(todo, 'locations') || [];
+			  if (locations){
+				locations = array(locations);
+				for(i=0; i<locations.length; i++){
+				  locations[i] = toLatLng(locations[i]);
+				}
+			  }
+			}
+			if (locations.length){
+			  this.getElevationService().getElevationForLocations({locations:locations}, fnc);
+			} else {
+			  path = ival(todo, 'path');
+			  samples = ival(todo, 'samples');
+			  if (path && samples){
+				for(i=0; i<path.length; i++){
+				  locations.push(toLatLng(path[i]));
+				}
+				if (locations.length){
+				  this.getElevationService().getElevationAlongPath({path:locations, samples:samples}, fnc);
+				}
+			  }
+			}
+		  } else {
+			this._end();
+		  }*/
+		},
 		
-		
-		
-		
-		
+			/**
+		 * return the distance between an origin and a destination
+		 *      
+		 **/
+		getdistance : function(){//todo){
+		  /*var i, 
+			  callback = ival(todo, 'callback'),
+			  that = this;
+		  if ( (typeof(callback) === 'function') && todo.options && todo.options.origins && todo.options.destinations ) {
+			// origins and destinations are array containing one or more address strings and/or google.maps.LatLng objects
+			todo.options.origins = array(todo.options.origins);
+			for(i=0; i<todo.options.origins.length; i++){
+			  todo.options.origins[i] = toLatLng(todo.options.origins[i], true);
+			}
+			todo.options.destinations = array(todo.options.destinations);
+			for(i=0; i<todo.options.destinations.length; i++){
+			  todo.options.destinations[i] = toLatLng(todo.options.destinations[i], true);
+			}
+			this.getDistanceMatrixService().getDistanceMatrix(
+			  todo.options,
+			  function(results, status) {
+				var out = status == google.maps.DistanceMatrixStatus.OK ? results : false;
+				callback.apply($this, [out, status]);
+				that._end();
+			  }
+			);
+		  } else {
+			this._end();
+		  }*/
+		}
+			
+			
+			
+			
+			
 		
 		
 		
