@@ -17,8 +17,8 @@
 		 * @param geoPositionOptions:object, see https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIDOMGeoPositionOptions
 		 */
 		getCurrentPosition: function(callback, geoPositionOptions) {
-			if ( navigator.geolocation ) {
-				navigator.geolocation.getCurrentPosition ( 
+			if ( window.navigator.geolocation ) {
+				window.navigator.geolocation.getCurrentPosition ( 
 					function(result) {
 						callback(result, 'OK');
 					}, 
@@ -39,8 +39,8 @@
 		 * @param geoPositionOptions:object, see https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIDOMGeoPositionOptions
 		 */
 		watchPosition: function(callback, geoPositionOptions) {
-			if ( navigator.geolocation ) {
-				this.set('watch', navigator.geolocation.watchPosition ( 
+			if ( window.navigator.geolocation ) {
+				this.set('watch', window.navigator.geolocation.watchPosition ( 
 					function(result) {
 						callback(result, "OK");
 					}, 
@@ -58,8 +58,8 @@
 		 * Clears any watches
 		 */
 		clearWatch: function() {
-			if ( navigator.geolocation ) {
-				navigator.geolocation.clearWatch(this.get('watch'));
+			if ( window.navigator.geolocation ) {
+				window.navigator.geolocation.clearWatch(this.get('watch'));
 			}
 		},
 		
@@ -75,7 +75,11 @@
 					self.search({'address':request.term}, function(results, status) {
 						if ( status === 'OK' ) {
 							response( $.map( results, function(item) {
-								return { label: item.formatted_address, value: item.formatted_address, position: item.geometry.location }
+								return { 
+									label: item.formatted_address,
+									value: item.formatted_address,
+									position: item.geometry.location
+								};
 							}));
 						} else if ( status === 'OVER_QUERY_LIMIT' ) {
 							alert('Google said it\'s too much!');
@@ -117,7 +121,8 @@
 		 */
 		pagination: function(prop) {
 			var $el = $("<div id='pagination' class='pagination shadow gradient rounded clearfix'><div class='lt btn back-btn'></div><div class='lt display'></div><div class='rt btn fwd-btn'></div></div>");
-			var self = this, i = 0, prop = prop || 'title';
+			var self = this, i = 0;
+			prop = prop || 'title';
 			self.set('p_nav', function(a, b) {
 				if (a) {
 					i = i + b;
