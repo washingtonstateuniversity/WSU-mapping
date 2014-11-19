@@ -200,8 +200,6 @@ $.wsu_maps.util = {
 
 
 
-
-
 	timers_arr:$.wsu_maps.util.timers_arr|| [],
 	clearCount:function (timer){
 		var t = $.wsu_maps.util.timers_arr;

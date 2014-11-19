@@ -157,7 +157,7 @@
 		addMarker: function(markerOptions, callback) {
 			markerOptions.map = this.get('map');
 			markerOptions.position = this._latLng(markerOptions.position);
-			var marker = new (markerOptions.marker || google.maps.Marker)(markerOptions);
+			var marker = new (markerOptions.marker)(markerOptions) || new (google.maps.Marker)(markerOptions);//new (markerOptions.marker || google.maps.Marker)(markerOptions);
 			var markers = this.get('markers');
 			if ( marker.id ) {
 				markers[marker.id] = marker;
@@ -255,7 +255,7 @@
 		},
 		supressPoiPopup: function(){
 			var set = google.maps.InfoWindow.prototype.set;
-			google.maps.InfoWindow.prototype.set = function (key, val) {
+			google.maps.InfoWindow.prototype.set = function (key) {
 				if (key === 'map') {
 					if (!this.get('noSupress')) {
 						//console.log('This InfoWindow is supressed. To enable it, set "noSupress" option to true');
@@ -263,7 +263,7 @@
 					}
 				}
 				set.apply(this, arguments);
-			}
+			};
 		},
 		/**
 		 * Triggers an InfoWindow to open
@@ -273,7 +273,7 @@
 		 * @see http://code.google.com/intl/sv-SE/apis/maps/documentation/javascript/reference.html#InfoWindowOptions
 		 */
 		openInfoWindow: function(infoWindowOptions, marker, callback) {
-			var iw = this.get('iw', infoWindowOptions.infoWindow || new google.maps.InfoWindow);
+			var iw = this.get('iw', infoWindowOptions.infoWindow || new google.maps.InfoWindow() );
 			iw.setOptions(infoWindowOptions);
 			iw.set('noSupress', true);
 			iw.open(this.get('map'), this._unwrap(marker)); 
@@ -285,7 +285,7 @@
 		 * Triggers an InfoWindow to close
 		 */
 		closeInfoWindow: function() {
-			if ( this.get('iw') != null ) {
+			if ( this.get('iw') !== null ) {
 				this.get('iw').close();
 			}
 			return this;
@@ -384,10 +384,12 @@
 			var mess = "";
 			var pos = null;
 			var self=this;
-			if(browserSupportFlag && navigator.geolocation) { // dbl check that it's there
-				navigator.geolocation.getCurrentPosition(function(p) {
+			if(browserSupportFlag && window.navigator.geolocation) { // dbl check that it's there
+				window.navigator.geolocation.getCurrentPosition(function(p) {
 					pos = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
-					if(center)self.get('map').setCenter(pos);
+					if(center){
+						self.get('map').setCenter(pos);
+					}
 					self._call(callback, mess, pos);
 				}, function() {
 					mess = 'Error: The Geolocation service failed.';
@@ -412,7 +414,7 @@
 		 * @param obj:string/node/jQuery
 		 */
 		_unwrap: function(obj) {
-			return (!obj) ? null : ( (obj instanceof jQuery) ? obj[0] : ((obj instanceof Object) ? obj : $('#'+obj)[0]) )
+			return (!obj) ? null : ( (obj instanceof jQuery) ? obj[0] : ((obj instanceof Object) ? obj : $('#'+obj)[0]) );
 		}
 		
 	});
@@ -455,7 +457,7 @@
 	jQuery.each(('click rightclick dblclick mouseover mouseout drag dragend').split(' '), function(i, name) {
 		jQuery.fn[name] = function(a, b) {
 			return this.addEventListener(name, a, b);
-		}
+		};
 	});
 	
 } (jQuery) );

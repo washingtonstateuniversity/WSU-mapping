@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 					'src/js/utilities_general.js',
 					//'src/js/jquery.mjs.nestedSortable.js',
 					//'src/js/colorpicker/jpicker-1.1.6.min.js',
-					'src/js/infobox.js',
+					//'src/js/infobox.js',
 					'src/js/jquery.ui.map.js',
 					'src/js/jquery.ui.map.drawingmanager.js',
 					'src/js/jquery.ui.map.extensions.js',
@@ -165,7 +165,8 @@ module.exports = function(grunt) {
 					alert:true,
 					setTimeout:true,
 					ZeroClipboard:true,
-					MutationObserver:true
+					MutationObserver:true,
+					google:true
 				}
 			}
 		},
