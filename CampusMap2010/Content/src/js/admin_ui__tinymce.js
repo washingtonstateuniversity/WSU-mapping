@@ -72,7 +72,7 @@ function openImgUploader(){
 																		},
 															  'onComplete': function(response) { 
 																 // first test if it was uploaded ok.
-																  if(isNumber(response)){
+																  if($.wsu_maps.util.isNumber(response)){
 																	  
 																	  $('#uploadMess').fadeOut('fast',function(){
 																		  $('#uploadMess').remove();
@@ -220,7 +220,7 @@ function openImgResource(ed,uploadOnly){
 															  }, 
 															  'onComplete': function(response) { 
 																 // first test if it was uploaded ok.
-																  if(isNumber(response)){
+																  if($.wsu_maps.util.isNumber(response)){
 																	  
 																	  $('#uploadMess').fadeOut('fast',function(){
 																		  $('#uploadMess').remove();

@@ -458,8 +458,8 @@ function load_place_editor() {
 	
 	function revGoeLookup(){
 		$("#place_street,#place_address").on('keyup',function () {
-			clearCount('codeAddress');
-			setCount('codeAddress',500,function(){
+			$.wsu_maps.util.clearCount('codeAddress');
+			$.wsu_maps.util.setCount('codeAddress',500,function(){
 				var zip = $('#zcode').length?$('#zcode').text():'';
 				var campus = $('#campus').length?$('#place_campus').val():'';
 				var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
@@ -801,7 +801,7 @@ function load_view_editor() {
 	$.each($('#tabs_Options input.text'),function(i,v){
 		var tmpVal = $(this).val();
 		if(tmpVal!=""){
-			if(isNumber(tmpVal)){
+			if($.wsu_maps.util.isNumber(tmpVal)){
 				if(tmpVal>0){
 					var tmp = {} 
 					tmp[$(this).attr("id")]=tmpVal;

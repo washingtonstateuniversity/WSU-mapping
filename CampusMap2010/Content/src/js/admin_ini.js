@@ -42,7 +42,7 @@ $(document).ready(function(){
 		source: function( request, response ) {
 			// delegate back to autocomplete, but extract the last term
 			/*response( $.ui.autocomplete.filter(
-				availableTags, extractLast( request.term ) ) );*/
+				availableTags, $.wsu_maps.util.extractLast( request.term ) ) );*/
 				var term = request.term;
 				if ( term in cache ) {
 					response( cache[ term ] );
@@ -53,7 +53,7 @@ $(document).ready(function(){
 					cache[ term ] = data;
 					if ( xhr === lastXhr ) {
 						response( $.ui.autocomplete.filter(
-						data, extractLast( request.term ) ) );
+						data, $.wsu_maps.util.extractLast( request.term ) ) );
 					}
 				});
 		},
@@ -62,7 +62,7 @@ $(document).ready(function(){
 			return false;
 		},
 		select: function( event, ui ) {
-			var terms = split( this.value );
+			var terms = $.wsu_maps.util.split( this.value );
 			// remove the current input
 			terms.pop();
 			// add the selected item

@@ -27,6 +27,7 @@ module.exports = function(grunt) {
 			},
 			front_scripts: {
 				src: [
+					'src/js/wsu_maps.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					'src/js/infobox-1.1.12.js',
@@ -50,6 +51,7 @@ module.exports = function(grunt) {
 			},
 			admin_scripts: {
 				src: [
+					'src/js/wsu_maps.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
@@ -109,6 +111,7 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			files: [
+					'src/js/wsu_maps.js',
 					//'src/js/modernizr-2.0.6/modernizr.min.js',
 					//'src/js/jquery.defaultvalue.js',
 					//'src/js/modernizr-2.0.6/modernizr.min.js',
@@ -161,7 +164,8 @@ module.exports = function(grunt) {
 					define:true,
 					alert:true,
 					setTimeout:true,
-					ZeroClipboard:true
+					ZeroClipboard:true,
+					MutationObserver:true
 				}
 			}
 		},

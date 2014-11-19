@@ -14,6 +14,8 @@
 	var image_Caption='';
 	var FileName='';
 	var $tabs;
+
+var url_parts = $.wsu_maps.util.parseUri(window.location);
 	
 (function($){$.fn.blink = function(options){var defaults = { delay:500 };var options = $.extend(defaults, options);return this.each(function(){var obj = $(this);setInterval(function(){if($(obj).css("visibility") == "visible"){$(obj).css('visibility','hidden');}else{$(obj).css('visibility','visible');}}, options.delay);});}}(jQuery));
 
@@ -1091,30 +1093,30 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
                 var val=val.split(';').join('');
                 var val=val.split(':').join('');
                 $('#place_CustomUrl').val(val);
-                clearCount('titleCheck');
-                setCount('titleCheck',200,function(){
+                $.wsu_maps.util.clearCount('titleCheck');
+                $.wsu_maps.util.setCount('titleCheck',200,function(){
                     Checktitle($('#place_CustomUrl').val(),false,function(data){
                             if(data=='true'){
                                 if($('#hasTitle').length==0){$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
                             }else{
                                 if($('#hasTitle').length>0){$('#hasTitle').remove();}
                             }
-                            clearCount('titleCheck');
+                            $.wsu_maps.util.clearCount('titleCheck');
                         });
                 });
             });
         }
         if(url_parts['path']=='/place/new.castle'||url_parts['path']=='/place/Edit_place.castle'){
             $('#place_CustomUrl').keyup(function() {
-                clearCount('titleCheck');
-                setCount('titleCheck',200,function(){
+                $.wsu_maps.util.clearCount('titleCheck');
+                $.wsu_maps.util.setCount('titleCheck',200,function(){
                     Checktitle($('#place_CustomUrl').val(),false,function(data){
                             if(data=='true'){
                                 if($('#hasTitle').length==0){$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');}
                             }else{
                                 if($('#hasTitle').length>0){$('#hasTitle').remove();}
                             }
-                            clearCount('titleCheck');
+                            $.wsu_maps.util.clearCount('titleCheck');
                         });
                 });
             });

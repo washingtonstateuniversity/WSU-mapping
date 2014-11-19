@@ -1,13 +1,13 @@
 var useragent = navigator.userAgent;
 var passThroughFormSubmit = false;
-
+/*
 function isTouch() {
   if (useragent.indexOf('iPad') != -1 || useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
     return true;
   }
   return false;
 }
-/*
+
 function MySubmitForm(){
      if (passThroughFormSubmit) {
           return true;
