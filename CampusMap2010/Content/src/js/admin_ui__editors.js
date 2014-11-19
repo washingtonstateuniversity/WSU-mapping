@@ -236,7 +236,7 @@ function int_infotabs(){
 	$.each('.dyno_tabs',function(i,v){
 		//replaced "tab_"+i for $(this).attr('id')
 		/*if(!$(this).is($(".tinyLoaded"))){
-			load_tiny("bodytext",$(this).attr('id'));
+			$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",$(this).attr('id'));
 			$(this).addClass("tinyLoaded")
 		}*/
 		tinyResize();
@@ -284,7 +284,10 @@ function int_infotabs(){
 		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#dynoTab');
   		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
-			if(!$(this).find('textarea:first').is($(".tinyLoaded"))){ load_tiny("bodytext",id);$(this).find('textarea:first').addClass("tinyLoaded")}
+			if( !$(this).find('textarea:first').is($(".tinyLoaded")) ){ 
+				$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",id);
+				$(this).find('textarea:first').addClass("tinyLoaded");
+			}
 			tinyMCE.triggerSave();
 			tinyResize();
 			set_tab_editable(i);
@@ -403,7 +406,9 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 	if(content!=false){
 		$("#tabs-" + i).html( content );
 	}
-	if(useWysiwyg)load_tiny("bodytext","tab_"+i);
+	if(useWysiwyg){
+		$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext","tab_"+i);
+	}
 	
 	
 	return i++;

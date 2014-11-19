@@ -190,14 +190,7 @@ var gSmallShadow = new google.maps.MarkerImage(
 var boxText = document.createElement("div");
 
 
-var availableTags = [
-			"Food",
-			"Fun",
-			"Facts",
-			"Foo",
-			"Far",
-			"From"
-		];
+
 		//var geocoder; 
 		var temp_var;
 		

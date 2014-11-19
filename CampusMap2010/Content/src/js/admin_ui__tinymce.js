@@ -1,169 +1,186 @@
 
 var FileName="";
 
-//tiny stuff
-function openImgUploader(){
-	if(typeof(uploadonly)==='undefined'){uploadonly=false;}
-	if($('#dialog-pickimage').length==0){$('body').append('<div id="dialog-pickimage">')}
-								$('#dialog-pickimage').dialog("resize", "auto"); 
-								$( "#dialog-pickimage" ).dialog({
-									resizable: false,
-									height:'auto', 
-									width:'375px',
-									modal: true,
-									position:['center','center'] ,
-									title:'Place Imagery',
-									close:function(){
-										$( "#dialog-pickimage" ).dialog( "destroy" );
-										$( "#dialog-pickimage" ).remove();
-										},
-									create: function(event, ui) {
-											/**/$('#dialog-pickimage').html(function(){
-												var optional='<option value="">Choose Image</option>';
-															var i=0;			
-														for (var image in tinyMCEImageList) {
-															var node=tinyMCEImageList[image];
-																var name=node.name;
-																var image_id=node.id;
-																optional+='<option value="'+image_id+'">'+name+'</option>';
-														}
-												var HTML  ='<div id="imgPre"></div>';//<h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Place images</h3><select id="imagePicker">'+optional+'</select>';
-													HTML += '<h3 id="inlinePlaceImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
-															
-												return HTML;
-											});
-											
-											$('#imagePicker').on('change',function(){
-												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
-												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
-													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
-													var imgid=$('#imagePicker :selected').val();
-													$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
-													$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
-												});
 
-											$('#ISIUarea').load(siteroot+'media/inlineupload.castle',function(){
-												if(typeof(availablecredits) !== 'undefined'){
-													if($( "#image_Credit" ).length>0){
-														$( "#image_Credit" ).autocomplete({
-															source: availablecredits
-														});
-													}
-												}	
-												
-												$('input#image_Credit').keypress(function(){
-													image_Credit = $('input#image_Credit').val();
-												});
-												$('input#image_Caption').keypress(function(){
-													image_Caption = $('input#image_Caption').val();
-												});												
-												
-																											
-												var weWantedTo=true;
-													$('input[type=file]').ajaxfileupload({
-															  'action': siteroot+'media/uploadFiles.castle', 
-															  'params': { 
-																			'returnType':'id',
-																			'pool':'place',
-																			'pool_place':place_id,
-																			'credit':$('input#image_Credit')!='undefined'?$('input#image_Credit'):"",
-																			'caption':$('input#image_Caption')!='undefined'?$('input#image_Caption'):"",
-																			'mediatype':'3'
-																		},
-															  'onComplete': function(response) { 
-																 // first test if it was uploaded ok.
-																  if($.wsu_maps.util.isNumber(response)){
-																	  
-																	  $('#uploadMess').fadeOut('fast',function(){
-																		  $('#uploadMess').remove();
-																		  if($('#nextUpload').length==0){
-																			  $('#ISIUarea').append('<div id="nextUpload"><h2>Next...</h2><!--<h3><a href="#" id="place">Insert the new image</a></h3>--><h3><a href="#" id="again">Add more</a></h3></div>');
-																			  }
-																		  });
-																	  
-																		// would get response here from response
-																		image_id=response;
-																		image_FileName = $('input#image_FileName').val();
-																		image_Credit = $('input#image_Credit').val();
-																		image_Caption = $('input#image_Caption').val();
+if(typeof(place_id)!=='undefined'){
+	var placeImgBtn = place_id>0?"|,mainImage,|,imagegallery,":"";
+}
 
-																	  //add to 
-																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
-																	  $('#imagePicker :selected').attr('selected',false);//reset selection
-																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
-																		$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
-																		$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
-													
-																	   $('#again').on('click',function(e){
-																			e.preventDefault();
-																			e.stopPropagation();
-																		   $('#ISIUarea input[type=text]').each(function(){$(this).val('');});
-																		   $('#ISIUarea input[type=file]').each(function(){$(this).val('');});
-																		   $('#nextUpload').fadeOut('fast',function(){
-																			   $('#ISIUarea form').fadeIn('fast');
-																			   $('#nextUpload').remove();
-																			});
-																		});
-																		$('#place').on('click',function(e){
-																			e.preventDefault();
-																			e.stopPropagation();
-																			$('#ISIUarea input[type=text]').each(function(){$(this).val('');});
-																		   $('#ISIUarea input[type=file]').each(function(){$(this).val('');});
-																			ed.selection.execCommand('mceInsertContent',false,get_TinyMCE_InlinImage(image_id));
-																			
-																			$( "#dialog-pickimage" ).dialog( "close" );
-																			
-																		});
-																		
-																		boxCreation(image_id);
-																		addToImgRoster(image_id,image_FileName);
-																		
-																		//console.log('custom handler for file:'); 
-																		//alert(JSON.stringify(response)); 
-																  }else{
-																	 $('#uploadMess').fadeOut('fast',function(){
-																		 $('#uploadMess').remove();
-																		 if($('#nextUpload').length==0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
-																	 });
-																  }
-															  }, 
-															  'onStart': function() { 
-															  	 FileName=$('input#image_FileName').val();
-																 if(FileName=="")FileName=$('input#image_id').val();
-																 //alert('pause');
-																//if(!weWantedTo) return false; // cancels upload 
-																$('#ISIUarea form').fadeOut('fast',function(){
-																	if($('#uploadMess').length==0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
-																	});
-															  }, 
-															  'onCancel': function() { 
-																//console.log('no file selected'); 
-															  } 
-															});
-												});
 
-											$('#inlinePlaceImageUpload').bind('click',function(e){
-												e.preventDefault();
-												e.stopPropagation();
-												var imgid=$('#imagePicker :selected').val();
-												 $('#ISIUarea').slideToggle('fast',function(){
-													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
-													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
-												 });
-												if( $('#ISIUarea').css('display')=='none'){
-													$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
-													$('#imagePicker :selected').attr('selected',false);
-												}
-											});
-										},
-									buttons: {
-										"Done": function() {
-											$( this ).dialog( "close" );
-										}
-									}
+
+$.wsu_maps.admin.ui.tinymce = {
+	ini:function(){},
+	load_tiny:function (which,id){
+		if(typeof(which)==='undefined'){which="default";}
+		if(typeof(id)==='undefined'){id=null;}
+		tinyMCE.init(tinyoptions(which,id));
+	},
+	openImgUploader:function (){
+		if(typeof(uploadonly)==='undefined'){
+			uploadonly=false;
+		}
+		if($('#dialog-pickimage').length==0){
+			$('body').append('<div id="dialog-pickimage">');
+		}
+		$('#dialog-pickimage').dialog("resize", "auto"); 
+		$( "#dialog-pickimage" ).dialog({
+			resizable: false,
+			height:'auto', 
+			width:'375px',
+			modal: true,
+			position:['center','center'] ,
+			title:'Place Imagery',
+			close:function(){
+				$( "#dialog-pickimage" ).dialog( "destroy" );
+				$( "#dialog-pickimage" ).remove();
+				},
+			create: function(event, ui) {
+					/**/$('#dialog-pickimage').html(function(){
+						var optional='<option value="">Choose Image</option>';
+									var i=0;			
+								for (var image in tinyMCEImageList) {
+									var node=tinyMCEImageList[image];
+										var name=node.name;
+										var image_id=node.id;
+										optional+='<option value="'+image_id+'">'+name+'</option>';
+								}
+						var HTML  ='<div id="imgPre"></div>';//<h3 ><span class="ui-icon ui-icon-image" style="    float: left;margin: 0 4px;"></span>Place images</h3><select id="imagePicker">'+optional+'</select>';
+							HTML += '<h3 id="inlinePlaceImageUpload" style=" cursor:pointer;"><span style="margin: 0pt 4px; float: right;" class="ui-icon ui-icon-carat-1-s"></span><em class="ui-icon ui-icon-folder-open" style="float:left;margin: 0pt 4px; "></em>Upload image</h3><div id="ISIUarea" class="ui-corner-all" style="display:none;border:1px solid #ccc; padding:5px;"></div>';
+									
+						return HTML;
+					});
+					
+					$('#imagePicker').on('change',function(){
+						if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+						if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
+							$('#imgPre img').css({'opacity':'.65'}).attr('src','');
+							var imgid=$('#imagePicker :selected').val();
+							$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+imgid+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+							$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
+						});
+
+					$('#ISIUarea').load(siteroot+'media/inlineupload.castle',function(){
+						if(typeof(availablecredits) !== 'undefined'){
+							if($( "#image_Credit" ).length>0){
+								$( "#image_Credit" ).autocomplete({
+									source: availablecredits
 								});
-	
-	}
+							}
+						}	
+						
+						$('input#image_Credit').keypress(function(){
+							image_Credit = $('input#image_Credit').val();
+						});
+						$('input#image_Caption').keypress(function(){
+							image_Caption = $('input#image_Caption').val();
+						});												
+						
+																					
+						var weWantedTo=true;
+							$('input[type=file]').ajaxfileupload({
+									  'action': siteroot+'media/uploadFiles.castle', 
+									  'params': { 
+													'returnType':'id',
+													'pool':'place',
+													'pool_place':place_id,
+													'credit':$('input#image_Credit')!='undefined'?$('input#image_Credit'):"",
+													'caption':$('input#image_Caption')!='undefined'?$('input#image_Caption'):"",
+													'mediatype':'3'
+												},
+									  'onComplete': function(response) { 
+										 // first test if it was uploaded ok.
+										  if($.wsu_maps.util.isNumber(response)){
+											  
+											  $('#uploadMess').fadeOut('fast',function(){
+												  $('#uploadMess').remove();
+												  if($('#nextUpload').length==0){
+													  $('#ISIUarea').append('<div id="nextUpload"><h2>Next...</h2><!--<h3><a href="#" id="place">Insert the new image</a></h3>--><h3><a href="#" id="again">Add more</a></h3></div>');
+													  }
+												  });
+											  
+												// would get response here from response
+												image_id=response;
+												image_FileName = $('input#image_FileName').val();
+												image_Credit = $('input#image_Credit').val();
+												image_Caption = $('input#image_Caption').val();
+
+											  //add to 
+											  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+											  $('#imagePicker :selected').attr('selected',false);//reset selection
+											  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
+												$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
+												$('#imgPre img').load(function(){$('#imgPre img').css({'opacity':'1.0'});});
+							
+											   $('#again').on('click',function(e){
+													e.preventDefault();
+													e.stopPropagation();
+												   $('#ISIUarea input[type=text]').each(function(){$(this).val('');});
+												   $('#ISIUarea input[type=file]').each(function(){$(this).val('');});
+												   $('#nextUpload').fadeOut('fast',function(){
+													   $('#ISIUarea form').fadeIn('fast');
+													   $('#nextUpload').remove();
+													});
+												});
+												$('#place').on('click',function(e){
+													e.preventDefault();
+													e.stopPropagation();
+													$('#ISIUarea input[type=text]').each(function(){$(this).val('');});
+												   $('#ISIUarea input[type=file]').each(function(){$(this).val('');});
+													ed.selection.execCommand('mceInsertContent',false,get_TinyMCE_InlinImage(image_id));
+													
+													$( "#dialog-pickimage" ).dialog( "close" );
+													
+												});
+												
+												$.wsu_maps.admin.ui.media.boxCreation(image_id);
+												$.wsu_maps.admin.ui.media.addToImgRoster(image_id,image_FileName);
+												
+												//console.log('custom handler for file:'); 
+												//alert(JSON.stringify(response)); 
+										  }else{
+											 $('#uploadMess').fadeOut('fast',function(){
+												 $('#uploadMess').remove();
+												 if($('#nextUpload').length==0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
+											 });
+										  }
+									  }, 
+									  'onStart': function() { 
+										 FileName=$('input#image_FileName').val();
+										 if(FileName=="")FileName=$('input#image_id').val();
+										 //alert('pause');
+										//if(!weWantedTo) return false; // cancels upload 
+										$('#ISIUarea form').fadeOut('fast',function(){
+											if($('#uploadMess').length==0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
+											});
+									  }, 
+									  'onCancel': function() { 
+										//console.log('no file selected'); 
+									  } 
+									});
+						});
+
+					$('#inlinePlaceImageUpload').bind('click',function(e){
+						e.preventDefault();
+						e.stopPropagation();
+						var imgid=$('#imagePicker :selected').val();
+						 $('#ISIUarea').slideToggle('fast',function(){
+							 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
+							 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
+						 });
+						if( $('#ISIUarea').css('display')=='none'){
+							$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
+							$('#imagePicker :selected').attr('selected',false);
+						}
+					});
+				},
+			buttons: {
+				"Done": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	},
+}
 
 function openImgResource(ed,uploadOnly){
 	if(typeof(uploadonly)==='undefined'){uploadonly=false;}
@@ -265,8 +282,8 @@ function openImgResource(ed,uploadOnly){
 																			
 																		});
 																		
-																		boxCreation(image_id);
-																		addToImgRoster(image_id,image_FileName);
+																		$.wsu_maps.admin.ui.media.boxCreation(image_id);
+																		$.wsu_maps.admin.ui.media.addToImgRoster(image_id,image_FileName);
 																		//console.log('custom handler for file:'); 
 																		//alert(JSON.stringify(response)); 
 																  }else{
@@ -792,8 +809,4 @@ function tinyoptions(which,id){
 }
 
 
-function load_tiny(which,id){
-        if(typeof(which)==='undefined'){which="default";}
-		if(typeof(id)==='undefined'){id=null;}
-        tinyMCE.init(tinyoptions(which,id));
-}
+
