@@ -762,7 +762,7 @@ width: 19px;}
 		
 
 .column .gm-style img{
-	max-width: none;
+	max-width: none !important;
 }
 
 
