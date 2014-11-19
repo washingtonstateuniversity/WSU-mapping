@@ -13,7 +13,7 @@
 	$.extend($.ui.gmap.prototype, {
 		init_drawing: function(drawingOptions , handling) {
 			var self = this;	
-
+			var shape;
 			
 			self.set('drawingOptions', drawingOptions);
 			self.set('handling', handling);
@@ -22,23 +22,20 @@
 			self.set('drawingManager', drawingManager);
 			
 			if( typeof(handling.loaded_shape)!=='undefined' && !$.isEmptyObject(handling.loaded_shape) ){
-				var shape = self.addShape(handling.loaded_type, handling.loaded_shape);
+				shape = self.addShape(handling.loaded_type, handling.loaded_shape);
 				shape[0].type = handling.loaded_type;
 				self.set_drawingSelection(shape[0]);
-				google.maps.event.addListener(shape[0], 'click', function(e) {
+				google.maps.event.addListener(shape[0], 'click', function(){//e) {
 											self.set_drawingSelection(shape[0]);
 											handling.onDrag();
 										});
-				
-										
-										
 				//google.maps.event.trigger(shape[0], 'click');
 			}
 
-			if(typeof(handling.onDrag)=='function'){
+			if(typeof(handling.onDrag)==='function'){
 				if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape) ){
-					google.maps.event.addListener(shape, 'click', function(event) {
-						if(typeof(handling.onDrag)=='function'){
+					google.maps.event.addListener(shape, 'click', function(){//event) {
+						if(typeof(handling.onDrag)==='function'){
 							handling.onDrag();
 						}
 					});
@@ -46,16 +43,20 @@
 			}
 			google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
 				var newShape = e.overlay;
-            	newShape.type = e.type;
+				newShape.type = e.type;
 				
 				drawingManager.setDrawingMode(null);
 				self.get('_drawings',[]).push(newShape);
 				
 				self.unset_drawingSelection;
-				google.maps.event.addListener(newShape, 'click', function() { self.set_drawingSelection(newShape); handling.onDrag(); });
+				google.maps.event.addListener(newShape, 'click', function() {
+					self.set_drawingSelection(newShape); handling.onDrag();
+				});
 				self.set_drawingSelection(newShape);
 				
-				if(typeof(handling.overlaycomplete)=='function'){handling.overlaycomplete(self.get_updated_data());}
+				if(typeof(handling.overlaycomplete)==='function'){
+					handling.overlaycomplete(self.get_updated_data());
+				}
 				
 				var ele_count = self.get('_drawings',[]).length;
 				if( ele_count >= handling.limit) {
@@ -67,11 +68,11 @@
 			});
 			google.maps.event.addListener(drawingManager, 'drawingmode_changed', function() {
 				self.unset_drawingSelection();
-				if(typeof(handling.drawingmode_changed)=='function'){
+				if(typeof(handling.drawingmode_changed)==='function'){
 					handling.drawingmode_changed( self.get_drawingMode() );
 				}
 			});
-			if(typeof(handling.onComplete)=='function'){
+			if(typeof(handling.onComplete)==='function'){
 				handling.onComplete(drawingManager , ((typeof(shape)!=="undefined")?shape:null) );
 			//google.maps.event.addListener(self.get('map'), 'click', function(){handling.onDrag();self.unset_drawingSelection();});
 			}
@@ -82,26 +83,26 @@
 			return $(drawingManager);
 		},
 		hide_drawingControl: function() {
-			if ( this.get('drawingManager') != null ) {
+			if ( this.get('drawingManager') !== null ) {
 				this.get('drawingManager').setOptions({  drawingControl: false});
 			}
 			return this;
 		},
 		show_drawingControl: function() {
-			if ( this.get('drawingManager') != null ) {
+			if ( this.get('drawingManager') !== null ) {
 				this.get('drawingManager').setOptions({drawingControl: true});
 			}
 			return this;
 		},
 		start_drawing: function(OverlayType,drawingControl){
-			if ( this.get('drawingManager') != null ) {
+			if ( this.get('drawingManager') !== null ) {
 				this.get('drawingManager').setOptions({  drawingControl: (typeof(drawingControl) !== 'undefined'?drawingControl:true) });
 				this.get('drawingManager').setDrawingMode(OverlayType);
 			}
 			return this;
 		},
 		stop_drawing: function(){
-			if ( this.get('drawingManager') != null ) {
+			if ( this.get('drawingManager') !== null ) {
 				this.get('drawingManager').setOptions({  drawingControl: false});
 				this.get('drawingManager').setDrawingMode(null);
 			}
@@ -109,7 +110,7 @@
 		},	
 		destroy_drawing: function(){
 			this.stop_drawing();
-			if ( this.get('drawingManager') != null ) {
+			if ( this.get('drawingManager') !== null ) {
 				this.get('drawingManager').setMap(null);
 			}
 			this.clear('markers');
@@ -118,17 +119,19 @@
 			return this;
 		},
 		refresh_drawing: function(clear){
-			if(typeof(clear)!=='undefined' && clear)this.clear_drawings();
+			if(typeof(clear)!=='undefined' && clear){
+				this.clear_drawings();
+			}
 			this.destroy_drawing();
 			this.init_drawing( this.get('drawingOptions') , this.get('handling') ); 
 			return this;
 		},	
 		get_drawnElementCount: function(type){
 			var count = this.get('_drawings',[]).length;
-			if( (count==0 || count == null) && typeof(type) !== 'undefined'){
-				var count = this.get_shapeCount(type);
+			if( (count===0 || count === null) && typeof(type) !== 'undefined'){
+				count = this.get_shapeCount(type);
 			}
-			return (count==0 || count == null) ? 0 : count;
+			return (count===0 || count === null) ? 0 : count;
 		},		
 		get_drawingMode: function(){
 			return this.get('drawingManager').getDrawingMode();
@@ -145,7 +148,7 @@
 		unset_drawingSelection:function() {
 			var sel = this.get('selected');
 			if( sel != null) {
-				if(sel.type  == google.maps.drawing.OverlayType.MARKER ) {
+				if(sel.type  === google.maps.drawing.OverlayType.MARKER ) {
 					sel.setDraggable(true);
 				}else{
 					sel.setEditable(false);
@@ -158,7 +161,7 @@
 				this.unset_drawingSelection();
 				this.set('selected',shape);
 				this.set('type',shape.type);
-				if(typeof(shape.type)!=="undefined" && shape.type  == google.maps.drawing.OverlayType.MARKER ) {
+				if(typeof(shape.type)!=="undefined" && shape.type  === google.maps.drawing.OverlayType.MARKER ) {
 					shape.setDraggable(true);
 				}else{
 					shape.setEditable(true);
@@ -169,19 +172,21 @@
 			return this.get('selected');
 		},
 		delete_drawingSelection:function() {
-			if (this.get('selected') != null) {
-			  	this.get('selected').setMap(null);
+			if (this.get('selected') !== null) {
+				this.get('selected').setMap(null);
 			}
 		},		
 		get_updated_data:function(shape) {
 			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
-			if(typeof(overlay)!="undefined" && overlay != null){
-				if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
-					var paths = overlay.getBounds();
-					var points = paths.toString();
-				}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
-					var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
-				}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
+			var points;
+			var paths;
+			if(typeof(overlay)!=="undefined" && overlay !== null){
+				if (overlay.type === google.maps.drawing.OverlayType.CIRCLE || overlay.type === 'Circle') { 
+					paths = overlay.getBounds();
+					points = paths.toString();
+				}else if (overlay.type === google.maps.drawing.OverlayType.POLYLINE || overlay.type === 'Polyline') {
+					points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
+				}else if (overlay.type === google.maps.drawing.OverlayType.POLYGON || overlay.type === 'Polygon') {
 					if($.isArray(overlay.getPaths())){
 						/*
 						* i think this needs to move somewhere.. in regrades to the 
@@ -189,20 +194,20 @@
 						* they don't let you and we need to fake it
 						*/
 						//alert('is a array so you are making holes');
-						var paths = overlay.getPaths();
+						paths = overlay.getPaths();
 						if(paths.length){
-							for(i=0; i<=paths.length-1; i++){
-								var path = this.convert_gmap_LatLng(paths[i])
+							for(var i=0; i<=paths.length-1; i++){
+								var path = this.convert_gmap_LatLng(paths[i]);
 								i % 2 > 0 ? path.reverse() : '';
 								points.push();
 							}
 						}
 					}else{
-						var points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
+						points = this.convert_gmap_LatLng(overlay.getPath(),  this.get('handling'));
 					}
-				}else if(overlay.type == google.maps.drawing.OverlayType.RECTANGLE || overlay.type == 'Rectangle'){
-						var paths = overlay.getBounds();					
-						var points = paths.toString();
+				}else if(overlay.type === google.maps.drawing.OverlayType.RECTANGLE || overlay.type === 'Rectangle'){
+					paths = overlay.getBounds();					
+					points = paths.toString();
 				}
 				return points;
 			}else{
@@ -218,8 +223,8 @@
 			addDeleteButton(poly, 'http://i.imgur.com/RUrKV.png');
 			function addDeleteButton(poly, imageUrl) {
 				var path = poly.getPath();
-				path["btnDeleteClickHandler"] = {};
-				path["btnDeleteImageUrl"] = imageUrl;
+				path.btnDeleteClickHandler = {};
+				path.btnDeleteImageUrl = imageUrl;
 				
 				google.maps.event.addListener(poly.getPath(),'set_at',pointUpdated);
 				google.maps.event.addListener(poly.getPath(),'insert_at',pointUpdated);
@@ -268,13 +273,15 @@
 		*/
 		
 		get_updated_data_encoded:function(shape) {
+			var self = this;
+			var points;
 			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
 			//var overlay = this.get('selected');
-			if (overlay.type == google.maps.drawing.OverlayType.CIRCLE || overlay.type == 'Circle') { 
-				var points = overlay.getRadius();
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYLINE || overlay.type == 'Polyline') {
-				var points = overlay.getPath();
-			}else if (overlay.type == google.maps.drawing.OverlayType.POLYGON || overlay.type == 'Polygon') {
+			if (overlay.type === google.maps.drawing.OverlayType.CIRCLE || overlay.type === 'Circle') { 
+				points = overlay.getRadius();
+			}else if (overlay.type === google.maps.drawing.OverlayType.POLYLINE || overlay.type === 'Polyline') {
+				points = overlay.getPath();
+			}else if (overlay.type === google.maps.drawing.OverlayType.POLYGON || overlay.type === 'Polygon') {
 				if($.isArray(overlay.getPaths())){
 					/*
 					* i think this needs to move somewhere.. in regrades to the 
@@ -284,14 +291,14 @@
 					//alert('is a array so you are making holes');
 					var paths = overlay.getPaths();
 					if(paths.length){
-						for(i=0; i<=paths.length-1; i++){
-							var path = self.convert_gmap_LatLng(paths[i])
+						for(var i=0; i<=paths.length-1; i++){
+							var path = self.convert_gmap_LatLng(paths[i]);
 							i % 2 > 0 ? path.reverse() : '';
 							points.push();
 						}
 					}
 				}else{
-					var points = overlay.getPath();
+					points = overlay.getPath();
 				}
 			}
 			var result = google.maps.geometry.encoding.encodePath(points);
@@ -308,7 +315,7 @@
 		polygon_containsLatLng:function(polygon,latLng) {
 		  // Exclude points outside of bounds as there is no way they are in the poly
 		  var bounds = polygon.getBounds();
-		  if(bounds != null && !bounds.contains(latLng)) {
+		  if(bounds !== null && !bounds.contains(latLng)) {
 			return false;
 		  }
 		  // Raycast point in polygon method
@@ -341,9 +348,9 @@
 				if(handling.encodePaths){
 					points = google.maps.geometry.encoding.encodePath(points);
 				}else{
-					if(handling.data_return == 'str'){
+					if(handling.data_return === 'str'){
 						points = this.make_latlng_str(points,handling);
-					}else if(handling.data_return == 'array'){
+					}else if(handling.data_return === 'array'){
 						points = points; // ie: array of gmaps latlng objs here for now but waste of processes i know
 					}
 				}
@@ -351,10 +358,10 @@
 		}, 
 		make_latlng_str: function(points,handling) {
 			var pathString='';
-			for(i=0;i<points.length;i++){
+			for(var i=0;i<points.length;i++){
 				var point=points.getAt(i);
-				var delimiter = (typeof(handling.delimiter)!=='undefined' && handling.delimiter !='') ?  handling.delimiter : ',';
-				if(typeof(handling.data_pattern)!=='undefined' && handling.data_pattern !=''){
+				var delimiter = (typeof(handling.delimiter)!=='undefined' && handling.delimiter !=='') ?  handling.delimiter : ',';
+				if(typeof(handling.data_pattern)!=='undefined' && handling.data_pattern !==''){
 					pathString +=  handling.data_pattern
 												.replace('{lat}',point.lat())
 												.replace('{lng}',point.lng())
