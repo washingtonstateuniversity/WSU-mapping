@@ -8,33 +8,34 @@
 -------------------------------------------------------------
 */
 
-var debug=false;
+//var debug=false;
 
 
 //var FileName='';
 //var $tabs;
 var siteroot=siteroot||"";
 var view=view||"";
+var mcv_action=mcv_action||"";
 var place_id=place_id||-1;
 var i=i||-1;
 var image_count=image_count||-1;
 var url_parts = $.wsu_maps.util.parseUri(window.location);
 
-(function($){
+(function($) {
 	$.fn.blink = function(options){
-		var defaults = { delay:500 };
-		var options = $.extend(defaults, options);
+		options = $.extend({ delay:500 }, options);
 		return this.each(function(){
-			var obj = $(this);
-			window.setInterval(function(){
-				if($(obj).css("visibility") === "visible"){
-					$(obj).css('visibility','hidden');
-				}else{
-					$(obj).css('visibility','visible');
-				}
-			}, options.delay);
-	});
-}}(jQuery));
+				var obj = $(this);
+				window.setInterval(function(){
+					if($(obj).css("visibility") === "visible"){
+						$(obj).css('visibility','hidden');
+					}else{
+						$(obj).css('visibility','visible');
+					}
+				}, options.delay);
+			});
+	};
+})(jQuery);
 
 $.wsu_maps.admin = {
 	ini:function(){},
@@ -48,24 +49,24 @@ function setup_fixedNav(){
 	if ($(window).scrollTop()>= 122) {
 		$('.admin #adminNav').addClass('fixed');
 	}
-	$(window).scroll(function (event) {
+	$(window).scroll(function (){//event) {
 		if ($(this).scrollTop()>= 122) {     
 			$('.admin #adminNav').addClass('fixed');
 		} else { 
 			$('.admin #adminNav').removeClass('fixed');
 		}  
 	});
-	$('.Cancel a').click(function(e){
+	$('.Cancel a').on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		$("input[value='Cancel']:first").trigger('click');
 	});
-	$('.Submit a').click(function(e){
+	$('.Submit a').on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		$("input[value='Submit']:first").trigger('click');
 	});	
-	$('.Apply a').click(function(e){
+	$('.Apply a').on("click",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		$("input[value='Apply']:first").trigger('click');
@@ -103,11 +104,19 @@ function setup_fixedNav(){
 }*/
 	
 function alertLoadingSaving(mess){
-	var mess=mess||'Saving . . .';
+	mess=mess||'Saving . . .';
 	if($('dialog').length===0){
 		$('body').append('<div id="dialog" style="display:none;"><h3>'+mess+'</h3></div>');
 	}
-	$( "#dialog" ).dialog({position: ['center','top'],minHeight:'55px',hide: 'slide',resizable: false,draggable: false,close: function(event, ui) {}});
+	$( "#dialog" ).dialog({
+		position: ['center','top'],
+		minHeight:'55px',
+		hide: 'slide',
+		resizable: false,
+		draggable: false,
+		close: function(){//event, ui) {
+		}
+	});
 }
 
 
@@ -149,7 +158,7 @@ function loadStat(stat,place_id,diaObj){
 	$.ajaxSetup ({cache: false}); 
 	var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 	//alert(place_id);
-	$.get(siteroot+view+'setStatus.castle?id='+place_id+'&status='+stat , function(response, status, xhr) {
+	$.get(siteroot+view+'setStatus.castle?id='+place_id+'&status='+stat , function(response) {//, status, xhr) {
 		var statIs = $("<div>").append(response.replace(rscript, "")).find('.place_'+place_id+' .Status div');
 		$('body .place_'+place_id+' .Status').empty().append(statIs.html());
 		$('body li.place_'+place_id).clone().prependTo('.list_'+stat);
@@ -164,7 +173,7 @@ function sendBr(place_id,diaObj){
 	$.ajaxSetup ({cache: false}); 
 	//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 	//alert(place_id);
-	$.get(siteroot+view+'end_breaking_single.castle?id='+place_id , function(response, status, xhr) {
+	$.get(siteroot+view+'end_breaking_single.castle?id='+place_id , function(response) {//, status, xhr) {
 		diaObj.dialog( "close" );
 		if(response!=='true'){
 			alertLoadingSaving(response);
@@ -181,17 +190,23 @@ function clearLock(item_id,diaObj,callback){
 	$.ajaxSetup ({cache: false,async:false}); 
 	//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 	//alert(place_id);
-	$.get(siteroot+view+'clearLock.castle?id='+item_id, function(response, status, xhr) {
+	$.get(siteroot+view+'clearLock.castle?id='+item_id, function(response) {//, status, xhr) {
 		if(response==='true'){
-			if(typeof(diaObj) !== 'undefined'&&diaObj!=''){
-				$('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){$('body li.item_'+item_id).find('.inEdit').remove();});
-				$('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){$('body li.item_'+item_id).find('.UinEdit').remove();});
+			if(typeof(diaObj)!=='undefined' && diaObj!==''){
+				$('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){
+					$('body li.item_'+item_id).find('.inEdit').remove();
+				});
+				$('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){
+					$('body li.item_'+item_id).find('.UinEdit').remove();
+				});
 				$( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
 				$( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
 				$('body li.item_'+item_id).find('.buttons.editIt').attr('href','_edit.castle?id='+item_id);
 				diaObj.dialog( "close" );	
 			}
-			if($.isFunction(callback)) callback();
+			if($.isFunction(callback)){
+				callback();
+			}
 		}
 	});                       
 }
@@ -201,9 +216,11 @@ function Checktitle(title,getid,callback){
 	$.ajaxSetup ({cache: false}); 
 	//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 	//alert(place_id);
-	var returnId=getid?'&id=true':''
-	$.get(siteroot+view+'checktitle.castle?title='+title+returnId, function(response, status, xhr) {
-			if($.isFunction(callback)) callback(response);
+	var returnId=getid?'&id=true':'';
+	$.get(siteroot+view+'checktitle.castle?title='+title+returnId, function(response) {//, status, xhr) {
+		if($.isFunction(callback)){
+			callback(response);
+		}
 	});                       
 }
 
@@ -238,9 +255,9 @@ function addLiveActionAnimation(){
 	);	
 	
 }
-function tinyResize(id){
+function tinyResize(){//id){
 	$(window).resize(function(){
-		$.each($('textarea.tinyEditor.tinyLoaded'), function(i, v) {
+		$.each($('textarea.tinyEditor.tinyLoaded'), function(){//i, v) {
 			var id=$(this).attr('id');
 			$('#'+id+"_tbl").width($(this).closest('div').width()-40);
 		});
@@ -261,7 +278,7 @@ $(function() {
 	}
 	
 	if($("input.all").length){
-		$("input.all").on('click',function(e) {
+		$("input.all").on('click',function(){//e) {
 			var ele = $(this);
 			if(!ele.attr('checked')){
 				ele.closest('div').find('select option').removeAttr('selected');
@@ -284,7 +301,7 @@ $(function() {
 	if(typeof(tinyMCE) !== 'undefined' && $('textarea.tinyEditor').length>0){
 		$.each($('textarea.tinyEditor'),function(i){
 			if(!$(this).is($(".tinyLoaded"))){
-				if(typeof($(this).attr('id'))=="undefined"){
+				if(typeof($(this).attr('id'))==="undefined"){
 					$(this).attr('id','temp_'+i);
 				}
 				if($(this).is($(".full"))){
@@ -305,22 +322,24 @@ $(function() {
 			helper:	'clone',
 			items: 'li',
 			maxLevels: 3,
-			opacity: .6,
+			opacity: 0.6,
 			placeholder: 'placeholder',
 			revert: 250,
 			tabSize: 25,
 			tolerance: 'pointer',
 			toleranceElement: '> div',
-			update: function(event, ui) {
-					if(!$('.menu.formAction.Submit').is(':visible'))$('.menu.formAction.Submit').show();
-					var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
-					$.each($('li','ol.sortable'),function(i,v){
-						$(this).find('.nav_level').val(arraied[i+1]["depth"]);
-						$(this).find('.nav_position').val(i+1);
-						$(this).find('.nav_level_display .value').text(arraied[i+1]["depth"]);
-						$(this).find('.nav_position_display .value').text(i+1);
-					});
+			update: function(){//event, ui) {
+				if(!$('.menu.formAction.Submit').is(':visible')){
+					$('.menu.formAction.Submit').show();
 				}
+				var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
+				$.each($('li','ol.sortable'),function(i){//,v){
+					$(this).find('.nav_level').val(arraied[i+1].depth);
+					$(this).find('.nav_position').val(i+1);
+					$(this).find('.nav_level_display .value').text(arraied[i+1].depth);
+					$(this).find('.nav_position_display .value').text(i+1);
+				});
+			}
 		});
 	}
 /* General Actions */
@@ -338,7 +357,7 @@ $(function() {
 	}
 	if($( ".admin input[type='submit']" ).length > 0){$("input[type='submit']" ).button();}
 	if($('.NOTED').length){
-		$('.NOTED strong').on('click',function(e){
+		$('.NOTED strong').on('click',function(){//e){
 			var self = $(this);
 			var parent = $(this).closest('span');
 			parent.find('span').slideToggle('fast',function(){
@@ -377,8 +396,8 @@ $(function() {
 					window.location = deleteing;
 				},
 				Cancel: function() {
-						$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-						$( this ).dialog( "close" );
+					$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
+					$( this ).dialog( "close" );
 				}
 			}
 		});
@@ -466,16 +485,16 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 }
 
 
-	function post_tmp(form_obj,diaObj,callback){
+	function post_tmp(form_obj){//,diaObj,callback){
 		$.ajaxSetup ({cache: false,async:false}); 
 		//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 		//alert(place_id);
-		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res, status, request) {
-				  var Location = '/place/_edit.castle?id='+res; 
-
-								window.location= Location; 
-				$('body #content_area').fadeTo('fast',25);
-		}); 	                    
+		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res){//, status, request) {
+			var Location = '/place/_edit.castle?id='+res; 
+			
+			window.location= Location; 
+			$('body #content_area').fadeTo('fast',25);
+		});
 	} 
 	function pagLoad(){
 		if($('.ui-tabs-panel .pagination').length){
@@ -524,19 +543,19 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	function tabsToAccordions(){
 		$(".tabs").each(function(){
 			var e=$('<div class="accordion">');
-			var t=new Array;
+			var t=[];
 			$.each($(this).find(">ul>li"),function(){
-				t.push("<h3>"+$(this).html()+"</h3>")
+				t.push("<h3>"+$(this).html()+"</h3>");
 			});
-			var n=new Array;
+			var n=[];
 			$.each($(this).find(">div"),function(){
 				n.push("<div>"+$(this).html()+"</div>");
 			});
 			for(var r=0;r<t.length;r++){
-				e.append(t[r]).append(n[r])
+				e.append(t[r]).append(n[r]);
 			}
 			$(this).before(e);
-			$(this).remove()
+			$(this).remove();
 		});
 		$(".accordion").accordion({
 			heightStyle: "content",
@@ -558,7 +577,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 				var r=$("");
 				$(this).find(">div").each(function(){
 					t++;
-					r=r.add('<div id="tabs-'+t+'">'+$(this).html()+"</div>")
+					r=r.add('<div id="tabs-'+t+'">'+$(this).html()+"</div>");
 				});
 				e.append(n).append(r);
 				$(this).before(e);
@@ -577,7 +596,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 
 	function applyTabToAccordion(){	
 		// event handler for window resize
-		$(window).resize(function(e){
+		$(window).resize(function(){//e){
 			updateUI();
 		});
 		updateUI();
@@ -602,7 +621,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			var activeTab = $.cookie('tabs'+areaId);
 			target.tabs($.extend( taboptions, typeof(place_id) !== 'undefined'&&place_id===0?{ disabled: [3] }:{}, {
 				active: activeTab||0,
-				create: function(event, ui) {
+				create: function(){//event, ui) {
 					if($('#place_id').length){
 						tinyMCE.triggerSave();
 						tinyResize();
@@ -622,7 +641,9 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	}else{
 		setInfoSlide();	
 	}
-	if($("#tabs").length>0){$("#tabs").tabs()}
+	if($("#tabs").length>0){
+		$("#tabs").tabs();
+	}
 	if( (typeof(place_id) !== 'undefined'&&place_id===0) ){
 		if($( "#chooseModel" ).length===0){
 			$( "body" ).append('<div id="chooseModel" title="Choose the place model">'+
@@ -644,7 +665,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 				"Ok": function() {
 					if($('#set_model :selected').val() !==''){
 						$( this ).dialog( "close" );
-						if($( "#loading_tmp" ).length==0){
+						if($( "#loading_tmp" ).length===0){
 								$( "body" ).append('<div id="loading_tmp" title="Loading">'+
 								'<img src="/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
 								'</div>');
@@ -669,15 +690,15 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		});
 		$('#set_model').combobox();
 		$('#set_model').next('.ui-autocomplete-input').on('change',function(){
-					if($('#set_model :selected').val() !==''){
-						if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
-							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
-						}
-					}else{
-						$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
-					}
-					$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
-					$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
+			if($('#set_model :selected').val() !==''){
+				if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
+					$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
+				}
+			}else{
+				$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+			}
+			$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
+			$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
 		});
 	}  
 
@@ -691,7 +712,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		e.stopPropagation();
 		$(this).next().val($(this).text()).focus(); 
 		$(this).parent().addClass("editing"); 
-		var TAR=$(this).attr('rel')
+		var TAR=$(this).attr('rel');
 		var cache = {},
 			lastXhr;
 		$(this).next().autocomplete({
@@ -735,7 +756,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 
 
 	$('[name="ele.type"]').not('#style_of').change(function(){
-		if($('[name="ele.type"] :selected').val()=="dropdown"){
+		if($('[name="ele.type"] :selected').val()==="dropdown"){
 			$('#optionsSelection').slideDown('fast');
 			$('#optionsSelectionDefaults').slideUp('fast');
 		}else{
@@ -779,7 +800,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		var tarParent = tar.closest('.podContainer');
 		tar.remove();
 		tarParent.find('.pod').each(function(i){
-			$(this).find('input').each(function(j){
+			$(this).find('input').each(function(){//j){
 				$(this).attr('name',$(this).attr('name').replace(/[\d+]/g, (i>-1?i:i+1)) );
 			});
 		});
@@ -799,10 +820,10 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 				ampm: true,
 				hourGrid: 4,
 				minuteGrid: 10,
-				onClose: function(dateText, inst) {
+				onClose: function(dateText){//, inst) {
 					//auto take off a null time.. ie if left at midnight, it's not wanted.
 					if (dateText.indexOf('00:00')!==-1||dateText.indexOf('12:00 AM')!==-1||dateText.indexOf('12:00 am')!==-1){
-						temp = dateText.split(' ');
+						var temp = dateText.split(' ');
 						$(this).val(temp[0]);
 					}
 				}
@@ -946,7 +967,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			var author_id = $(this).attr('title');
 			var PlaceId = $(this).attr('rel');
 			alertLoadingSaving();
-			$.get(siteroot+view+'DeleteAuthor.castle?id='+author_id+'&placeId='+PlaceId, function(data){
+			$.get(siteroot+view+'DeleteAuthor.castle?id='+author_id+'&placeId='+PlaceId, function(){//data){
 				 $("div#AuthorDiv #div" + author_id).remove();
 				window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
 			});
@@ -957,7 +978,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			var PlaceId = $(this).attr('title');
 			var tag_id = $(this).attr('rel');
 			alertLoadingSaving();
-			$.get(siteroot+view+'DeleteTag.castle?id='+tag_id+'&placeId='+PlaceId, function(data){
+			$.get(siteroot+view+'DeleteTag.castle?id='+tag_id+'&placeId='+PlaceId, function(){//data){
 				$("#tag_"+ tag_id).closest('li').remove();
 				window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
 			});
@@ -1002,7 +1023,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		
 		//This is so that you can use the nav when leaving the editing area.  IE: the same as clicking cancel
 		if(url_parts.path==='/place/Edit_place.castle'){
-			$( "#main_nav a,a.PDF.creation " ).on('click',function(e) {
+			$( "#main_nav a,a.PDF.creation " ).on('click',function(){//e) {
 				//e.preventDefault();
 				//e.stopPropagation();
 				//var obj=$(this);
@@ -1057,7 +1078,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			});
 		
 		
-		var click=0;
+		//var click=0;
 		/*
 		$('body,html').not('textarea,iframe').bind('keydown', function(e) { 
 			if((e.keyCode || e.which)  == 13) {
@@ -1076,7 +1097,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			}
 		});
 		*/
-		var clear=false;
+		//var clear=false;
 		/*$('input[type=submit]:not(".cancel_btn")').on('click', function(e) {
 			if(clear!=true){
 				e.preventDefault();
@@ -1112,12 +1133,12 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 
 /* -----------
 	for persons(Editors)
-	---------------- */
+	---------------- 
 	if(typeof(availablePositions) !== 'undefined'){
 		$( "#person_position" ).autocomplete({
 			source: availablePositions
 		});
-	}
+	}*/
 
 
 

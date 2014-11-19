@@ -166,7 +166,8 @@ module.exports = function(grunt) {
 					setTimeout:true,
 					ZeroClipboard:true,
 					MutationObserver:true,
-					google:true
+					google:true,
+					tinyMCE:true
 				}
 			}
 		},
