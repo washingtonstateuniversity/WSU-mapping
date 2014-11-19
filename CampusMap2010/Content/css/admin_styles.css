@@ -4,12 +4,12 @@ html,body{height:auto;}
 
 
 legend{
-	    color: #323232;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    margin-top: -3px;
-	}
+	color: #323232;
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+	margin-top: -3px;
+}
 
 
 .clear{clear:both;}
