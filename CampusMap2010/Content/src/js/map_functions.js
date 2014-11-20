@@ -1,8 +1,4 @@
-﻿var sensor=false;
-var lang='';
-var vbtimer;
-var ibOpen=false;
-var reopen=false;
+﻿
 
 
 
@@ -57,10 +53,7 @@ function empty_input_recursive(obj){
 }
 */
 /* set up parts of the map NOTE: should be worked into the jquery plugin jMaps*/
-function setGeoCoder(){
-	if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
-	return geocoder;
-}
+
 
 /*
 function setDirectionsRenderer(){

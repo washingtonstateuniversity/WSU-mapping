@@ -125,7 +125,7 @@ LocalResult.prototype.highlight = function(highlight) {
   this.node().className = "unselected" + (highlight ? " red" : "");
 }
 function codeAddress(address) {
-	  setGeoCoder().geocode( { 'address': address}, function(results, status) {
+	  $.wsu_maps.general.setGeoCoder().geocode( { 'address': address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				map.setCenter(results[0].geometry.location);
 				/*var marker = new google.maps.Marker({
@@ -233,7 +233,7 @@ $.wsu_maps.initialize=function() {
 			 // if (geocoder == null){
 			 //  geocoder = new google.maps.Geocoder();
 			 // }
-				 setGeoCoder().geocode( {'address': request.term }, function(results, status) {
+				 $.wsu_maps.general.setGeoCoder().geocode( {'address': request.term }, function(results, status) {
 				   if (status == google.maps.GeocoderStatus.OK) {
 	
 						var searchLoc = results[0].geometry.location;
@@ -242,7 +242,7 @@ $.wsu_maps.initialize=function() {
 						var latlng = new google.maps.LatLng(lat, lng);
 						var bounds = results[0].geometry.bounds;
 	
-					  setGeoCoder().geocode({'latLng': latlng}, function(results1, status1) {
+					  $.wsu_maps.general.setGeoCoder().geocode({'latLng': latlng}, function(results1, status1) {
 						  if (status1 == google.maps.GeocoderStatus.OK) {
 							if (results1[1]) {
 							 response($.map(results1, function(loc) {
@@ -282,7 +282,7 @@ $.wsu_maps.initialize=function() {
 	if($('.sortStyleOps.orgin').length){
 		//make_wsu_logo_map(map,"polygon");
 		if($('#style_of').val()!=''){
-			set_default_shape(map,$('#style_of :selected').text());
+			$.wsu_maps.general.set_default_shape(map,$('#style_of :selected').text());
 			$('#style_of').trigger('change');
 		}
 	}
@@ -470,7 +470,7 @@ return temp_var;
 }	
 function codeLatLng(lat,lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
-	setGeoCoder().geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
+	$.wsu_maps.general.setGeoCoder().geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
 	  if (status == google.maps.GeocoderStatus.OK) {
 		if (results[1]) {
 			//alert( results[1].formatted_address);

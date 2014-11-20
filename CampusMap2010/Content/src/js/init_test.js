@@ -2,15 +2,22 @@
 /* this should be only created as needed */
 
 $.wsu_maps.state = {
+	mapInst:null,
+	
 	ib:[],
 	ibh:[],
+	ibHover:false,
+	ibOpen:false,
+	reopen:false,
+		
 	markerLog:[],
 	markerbyid:[],
 	mid:[],
 	shapes:[],
 	listOffset:0,
-	ibHover:false,
+	
 	currentControl:"ROADMAP",
+	
 	cTo:"",
 	cFrom:"",
 	hasDirection:false,
@@ -20,13 +27,20 @@ $.wsu_maps.state = {
 	cur_mid:0,
 	hasListing:false,
 	hasDirections:false,
-	mapInst:null,
+
 	
 	
 	api:null,
 	apiL:null,
 	apiD:null,
 	api_nav:null,
+
+	//sensor:false,
+	//lang:'',
+	//vbtimer:null,
+
+
+
 	
 };
 
@@ -151,7 +165,7 @@ var startingUrl=startingUrl||null;
 					$.wsu_maps.poi_setup($('#centralMap'));
 					addCentralControlls();
 					if(typeof(data)!=='undefined'){
-						loadData($('#centralMap'),data);
+						$.wsu_maps.general.loadData($('#centralMap'),data);
 					}
 					if($('.mobile').length){
 						$.wsu_maps.geoLocate();
@@ -651,11 +665,11 @@ function updateMap(jObj,_load,showSum,callback){
 				}
 			});
 			if(typeof(cleanedData)!=='undefined'){
-				loadData(jObj,cleanedData,callback);
+				$.wsu_maps.general.loadData(jObj,cleanedData,callback);
 			}
 			loadListings(cleanedData,showSum);
 		}
-		prep();
+		$.wsu_maps.general.prep_html();
 	});
 }
 
@@ -704,465 +718,123 @@ function close_toolTips(){
 		$.each($.wsu_maps.state.ibh, function(i) {$.wsu_maps.state.ibh[i].close();});
 	}
 }
-
-function addShapeToMap(jObj,i,shape){
-	var pointHolder = {};
-	var style = {};
-	if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polyline'){ 
-		pointHolder = {'path' : shape.latlng_str };
-	}
-	if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polygon'){ 
-		pointHolder = {'paths' : shape.latlng_str };
-	}
-	if(typeof(shape.encoded)!=="undefined"){ 
-		pointHolder = {'paths' : shape.encoded };
-	}
-	if(typeof(shape.style)==="undefined"||shape.style===''){
-		style = shape.type==='polygon'? {'fillOpacity':0.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':0.99,'strokeColor':'#262A2D','strokeWeight':2};
-	}else{
-		style =  shape.style.events.rest;
-	}
-	if(!$.isEmptyObject(pointHolder)){
-		style = $.extend( style , pointHolder );
-	}
-	
-	if((typeof(shape.style)==="undefined"||shape.style==='') && typeof(shape.type)!=="undefined"){
-		jObj.gmap('addShape',(shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style);
-	}else{
-		// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
-		jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
-		$(shape_obj).on('click',function(){
-			if(typeof(shape.style.events.click)!=="undefined" && shape.style.events.click !== ""){
-				jObj.gmap('setOptions',shape.style.events.click,this);
-				if(typeof(shape.style.events.click.onEnd)!=="undefined" && shape.style.events.click.onEnd !== ""){
-					(function(){
-						window.jObj=jObj; window.i=i;
-						var p= shape.style.events.click.onEnd.replace('\u0027',"'"); 
-						var f=  new Function(p); 
-						f();
-					})();
-				}
-			}
-		 }).mouseover(function(){
-			 if(typeof(shape.style.events.mouseover)!=="undefined" && shape.style.events.mouseover !== ""){
-				 jObj.gmap('setOptions',shape.style.events.mouseover,this);
-				if(typeof(shape.style.events.mouseover.onEnd)!=="undefined" && shape.style.events.mouseover.onEnd !== ""){
-					(function(){
-						window.jObj=jObj; window.i=i;
-						var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'"); 
-						var f=  new Function(p); 
-						f();
-					})();
-				}		
-			 }
-		}).mouseout(function(){
-			if(typeof(shape.style.events.rest)!=="undefined" && shape.style.events.rest !== ""){
-				jObj.gmap('setOptions',shape.style.events.rest,this);
-				if(typeof(shape.style.events.rest.onEnd)!=="undefined" && shape.style.events.rest.onEnd !== ""){
-					(function(){
-						window.jObj=jObj; window.i=i;
-						var p= shape.style.events.rest.onEnd.replace('\u0027',"'"); 
-						var f=  new Function(p); 
-						f();
-					})();
-				}
-			}
-		}).dblclick(function(){
-			if(typeof(shape.style.events.dblclick)!=="undefined" && shape.style.events.dblclick !== ""){
-				jObj.gmap('setOptions',shape.style.events.dblclick,this);
-					(function(){
-						window.jObj=jObj; window.i=i;
-						var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'"); 
-						var f=  new Function(p); 
-						f();
-					})();
-			}
-		})
-		.trigger('mouseover')
-		.trigger('mouseout');
-		});
-	}	
-}
-
-function make_InfoWindow(jObj,i,marker){
-	var nav='';
-	var content='';
-	if($.isArray(marker.info.content)){
-		$.each( marker.info.content, function(j, html) {	
-			nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
-		});
-		
-		$.each( marker.info.content, function(j, html) {
-			content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace("'",'_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
-		});				
-	
-	}else{
-		nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-		content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
-	}
-	var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
-				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-				content+
-				'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
-			'</div>';
-
-	/* so need to remove this and create the class for it */
-	var boxText = document.createElement("div");
-	boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-	boxText.innerHTML = marker.info.content;
-	var myOptions = {
-		alignBottom:true,
-		content: box,//boxText
-		disableAutoPan: false,
-		maxWidth: 0,
-		height:"340px",
-		pixelOffset: new google.maps.Size(-200, -103),
-		zIndex: 999,
-		boxStyle: {
-			width: ($('#centralMap').width()<425?$('#centralMap').width()-25:400)+"px"
-		},
-		closeBoxHTML:"<span class='tabedBox infoClose'></span>",
-		infoBoxClearance: new google.maps.Size(75,60),
-		isHidden: false,
-		pane: "floatPane",
-		enableEventPropagation: false,
-		onClose:function(){
-			$.wsu_maps.state.ibHover =  false;
-			if(typeof($.fn.cycle)!=="undefined" && $('.cWrap .items li').length>1){
-				$('.cWrap .items').cycle('destroy');
-			}
-			if(typeof($.jtrack)!=="undefined"){
-				$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
-			}
-			$('#taby'+i).tabs('destroy').tabs();
-		},
-		onOpen:function(){
-			if(jObj.gmap("hasPanorama")){
-				var pano = jObj.gmap("getPanorama");
-				pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
-				google.maps.event.addListener(pano, 'position_changed', function() {
-					if(jObj.gmap("hasPanorama")){
-						var pov = pano.getPov();
-						var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
-						pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
-						pano.setPov(pov);
-					}
-				});
-			}else{
-				
-			}
-			needsMoved=0;
-			$.wsu_maps.state.ibHover =  true;
-			$('#taby'+i).tabs('destroy').tabs({
-					select: function(event, ui) {
-						if(typeof($.jtrack)!=="undefined"){
-							$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
-						}
-					}
-				});
-			$("#campusmap .ui-tabs .ui-tabs-panel .content").width(($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?$('#campusmap .ui-tabs .ui-tabs-panel').width()-35:365)+"px");
-			if($('.cWrap .items li').length>1 && typeof($.fn.cycle)!=="undefined"){
-				var currSlide=0; 
-				$('.cWrap .items').cycle('destroy');
-				$('.cWrap .items').cycle({
-					fx:     'scrollHorz',
-					delay:  -2000,
-					pauseOnPagerHover: 1,
-					pause:1,
-					timeout:0, 
-					pager:'.cNav',
-					prev:   '.prev',
-					next:   '.next', 
-					onPagerEvent:function(i){//,ele){
-						if(currSlide-i<0){ 
-							if(typeof($.jtrack)!=="undefined"){
-								$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
-							}
-						}else{ 
-							if(typeof($.jtrack)!=="undefined"){
-								$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
-							}
-						} 
-						currSlide = i; 
-					},
-					onPrevNextEvent:function(isNext){//,i,ele){
-							if(isNext){
-								if(typeof($.jtrack)!=="undefined"){
-									$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
-								}
-							}else{
-								if(typeof($.jtrack)!=="undefined"){
-									$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
-								}
-							}
-						},
-					
-					pagerAnchorBuilder: function(idx){//, slide) {
-						return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';
-					} 
-				});/*	*/
-			}
-			$('.infoBox .ui-tabs-panel a').attr('target','_blank');
-			$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
-				if(typeof($.jtrack)!=="undefined"){
-					$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
-				}
-			});
-			if($('.layoutfree').length){
-				$('.infoBox .ui-tabs-panel .content a').on("click",function(e){
-					e.stopPropagation();
-					e.preventDefault();	
-					return false;
-				});
-			}
-			
-			
-			$('a.gouped').off().on('click',function(e){
-				e.preventDefault();
-				e.stopPropagation();
-				$('a.gouped').colorbox({
-					photo:true,
-					scrolling:false,
-					scalePhotos:true,
-					opacity:0.7,
-					maxWidth:"75%",
-					maxHeight:"75%",
-					transition:"none",
-					slideshow:true,
-					slideshowAuto:false,
-					open:true,
-					current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-					onOpen:function(){
-						if(typeof($.jtrack)!=="undefined"){
-							$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
-						}
-					},
-					onClosed:function(){
-						if(typeof($.jtrack)!=="undefined"){
-							$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
-						}
-						$('#colorbox #cb_nav').html("");
-						$('#ttl').text(0);
-						$('#ttl').text(1);
-					},
-					onComplete:function(){
-						
-						if($('#colorbox #cb_nav').length){
-							$('#colorbox #cb_nav').html("");
-						}
-						if($('#ttl').length){
-							var t=parseInt($('#ttl').text(), 10);
-							var li="";
-							if(t>1){
-								for(var j=0; j<t; j++){
-									li+="<li><a href='#'></a></li>";
-								}
-								if($('#colorbox #cb_nav').length===0){
-									$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
-								}else{
-									$('#colorbox #cb_nav').html(li);
-								}
-							}
-							if($('#colorbox #cb_nav').length){
-								$('#colorbox #cb_nav .active').removeClass('active');
-								$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text(), 10)-1) +')').addClass('active');
-								if(needsMoved<0||needsMoved>0){
-									//alert(needsMoved);
-									if(needsMoved<0){
-										$.colorbox.next();
-										if(needsMoved===-1 && typeof($.jtrack)!=="undefined"){
-											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-										}
-										needsMoved++;
-									}else{
-										$.colorbox.prev();
-										if(needsMoved===1 && typeof($.jtrack)!=="undefined"){
-											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-										}
-										needsMoved--;
-									}
-								}
-								$('#colorbox #cb_nav li').off().on('click',function(){
-									var cur=(parseInt($('#cboxCurrent #cur').text(), 10)-1);
-									var selected=$(this).index('#cb_nav li');
-									var dif=cur-selected;
-									needsMoved=dif;
-									if(dif<0||dif>0){
-										if(dif<0){
-											$.colorbox.next();
-											//if(dif>-2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title);
-											needsMoved++;
-										}else{
-											$.colorbox.prev();
-											//if(dif<2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title);
-											needsMoved--;
-										}
-									}
-								});
-								$('#cboxNext,#cboxLoadedContent').off('click.track').on('click.track',function(){
-									if(typeof($.jtrack)!=="undefined"){
-										$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-									}
-								});
-								$('#cboxPrevious').off('click.track').on('click.track',function(){
-									if(typeof($.jtrack)!=="undefined"){
-										$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-									}
-								});
-							}
-						}
-					}
-				});
-			});
-			addErrorReporting(marker);
-
-			$('.ui-tabs-panel').hover(function(){
-				$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: true});
-				jObj.gmap('stop_scroll_zoom');
-			},function(){
-				$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: false});
-				jObj.gmap('set_scroll_zoom');
-			});
-			$.wsu_maps.state.ib[i].rePosition();
-			$.wsu_maps.state.ibHover =  false;
-			
-			
-
-			var minHeight=0;
-			$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-				minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
-				
-			}).css('min-height',minHeight); 
-			var settings = {
-				verticalDragMinHeight: 50
-				//showArrows: true
-			};
-			var pane = $('#campusmap .ui-tabs .ui-tabs-panel .content:not(".Views")');
-			if(minHeight>235){
-				pane.bind(
-					'jsp-scroll-y',
-					function(event, scrollPositionY, isAtTop, isAtBottom){
-						//var isAtBottom= isAtBottom;	
-						//var isAtTop= isAtTop;			
-						pane.mousewheel(function(event,delta){ 
-							//var media = $(this).find('.mediaPanel'); 
-							if (delta > 0) { 
-								if(isAtTop){
-									return false;
-								}
-							} else { 
-								if(isAtBottom){
-									return false;
-								}
-							}         
-						});
-					}
-	
-				).jScrollPane(settings);
-				$.wsu_maps.state.api = pane.data('jsp');
-			}
-			prep();
+$.wsu_maps.mapping={
+	addShapeToMap:function(jObj,i,shape){
+		var pointHolder = {};
+		var style = {};
+		if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polyline'){ 
+			pointHolder = {'path' : shape.latlng_str };
 		}
-	};
-	$.wsu_maps.state.ib[i] = new InfoBox(myOptions,function(){
-		//$('#taby'+i).tabs();
-		//alert('tring to tab it, dabnab it, from the INI');
-	});
-}
-function make_ToolTip(jObj,i,marker){
-	//end of the bs that is well.. bs of a implamentation
-	/* so need to remove this and create the class for it */
-	var boxText = document.createElement("div");
-	boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
-	boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
-	var myHoverOptions = {
-		alignBottom:true,
-		content: boxText,
-		pixelOffset: new google.maps.Size(15,-15),
-		zIndex: 999,
-		boxStyle: {
-			minWidth: "250px"
-		},
-		infoBoxClearance: new google.maps.Size(1, 1),
-		isHidden: false,
-		pane: "floatPane",
-		boxClass:"hoverbox",
-		enableEventPropagation: false,
-		disableAutoPan:true,
-		onOpen:function(){}
-	};
-	$.wsu_maps.state.ibh[i] = new InfoBox(myHoverOptions,function(){});
-}
-function make_Marker(jObj,i,id,marker,markerCallback){	
-	if(marker.style.icon){
-		marker.style.icon = marker.style.icon.replace('{$i}',i+1);
+		if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polygon'){ 
+			pointHolder = {'paths' : shape.latlng_str };
+		}
+		if(typeof(shape.encoded)!=="undefined"){ 
+			pointHolder = {'paths' : shape.encoded };
+		}
+		if(typeof(shape.style)==="undefined"||shape.style===''){
+			style = shape.type==='polygon'? {'fillOpacity':0.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':0.99,'strokeColor':'#262A2D','strokeWeight':2};
+		}else{
+			style =  shape.style.events.rest;
+		}
+		if(!$.isEmptyObject(pointHolder)){
+			style = $.extend( style , pointHolder );
+		}
+		
+		if((typeof(shape.style)==="undefined"||shape.style==='') && typeof(shape.type)!=="undefined"){
+			jObj.gmap('addShape',(shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style);
+		}else{
+			// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
+			jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
+			$(shape_obj).on('click',function(){
+				if(typeof(shape.style.events.click)!=="undefined" && shape.style.events.click !== ""){
+					jObj.gmap('setOptions',shape.style.events.click,this);
+					if(typeof(shape.style.events.click.onEnd)!=="undefined" && shape.style.events.click.onEnd !== ""){
+						(function(){
+							window.jObj=jObj; window.i=i;
+							var p= shape.style.events.click.onEnd.replace('\u0027',"'"); 
+							var f=  new Function(p); 
+							f();
+						})();
+					}
+				}
+			 }).mouseover(function(){
+				 if(typeof(shape.style.events.mouseover)!=="undefined" && shape.style.events.mouseover !== ""){
+					 jObj.gmap('setOptions',shape.style.events.mouseover,this);
+					if(typeof(shape.style.events.mouseover.onEnd)!=="undefined" && shape.style.events.mouseover.onEnd !== ""){
+						(function(){
+							window.jObj=jObj; window.i=i;
+							var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'"); 
+							var f=  new Function(p); 
+							f();
+						})();
+					}		
+				 }
+			}).mouseout(function(){
+				if(typeof(shape.style.events.rest)!=="undefined" && shape.style.events.rest !== ""){
+					jObj.gmap('setOptions',shape.style.events.rest,this);
+					if(typeof(shape.style.events.rest.onEnd)!=="undefined" && shape.style.events.rest.onEnd !== ""){
+						(function(){
+							window.jObj=jObj; window.i=i;
+							var p= shape.style.events.rest.onEnd.replace('\u0027',"'"); 
+							var f=  new Function(p); 
+							f();
+						})();
+					}
+				}
+			}).dblclick(function(){
+				if(typeof(shape.style.events.dblclick)!=="undefined" && shape.style.events.dblclick !== ""){
+					jObj.gmap('setOptions',shape.style.events.dblclick,this);
+						(function(){
+							window.jObj=jObj; window.i=i;
+							var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'"); 
+							var f=  new Function(p); 
+							f();
+						})();
+				}
+			})
+			.trigger('mouseover')
+			.trigger('mouseout');
+			});
+		}	
+	},
+};
+$.wsu_maps.markers = {
+	make_Marker:function (jObj,i,id,marker,markerCallback){	
+		if(marker.style.icon){
+			marker.style.icon = marker.style.icon.replace('{$i}',i+1);
+		}
+		jObj.gmap('addMarker', $.extend({ 
+				'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
+				'z-index':1,
+				'title':marker.title
+			},marker.style),function(ops,marker){
+				$.wsu_maps.state.markerLog[i]=marker;
+				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
+				 // these too are needing to be worked together
+				jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
+				if(typeof(markerCallback)!=="undefined" && $.isFunction(markerCallback)){
+					markerCallback(marker);
+				}
+			})
+		.click(function() {
+				open_info(jObj,i,marker);
+				if(typeof($.jtrack)!=="undefined"){
+					$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
+				}
+			})
+		.rightclick(function(event){showContextMenu(event.latLng);})
+		.mouseover(function(){//event){
+			open_toolTip(jObj,i,marker);
+		})
+		.mouseout(function(){//event){
+			close_toolTips();
+		});
 	}
-	jObj.gmap('addMarker', $.extend({ 
-			'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),
-			'z-index':1,
-			'title':marker.title
-		},marker.style),function(ops,marker){
-			$.wsu_maps.state.markerLog[i]=marker;
-			$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
-			 // these too are needing to be worked together
-			jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
-			if(typeof(markerCallback)!=="undefined" && $.isFunction(markerCallback)){
-				markerCallback(marker);
-			}
-		})
-	.click(function() {
-			open_info(jObj,i,marker);
-			if(typeof($.jtrack)!=="undefined"){
-				$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
-			}
-		})
-	.rightclick(function(event){showContextMenu(event.latLng);})
-	.mouseover(function(){//event){
-		open_toolTip(jObj,i,marker);
-	})
-	.mouseout(function(){//event){
-		close_toolTips();
-	});
-}
+};
 
 
 var needsMoved=0;
-function loadData(jObj,data,callback,markerCallback){
-	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
-		$.each( data.shapes, function(i, shape) {
-			if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-				addShapeToMap(jObj,i,shape);
-			}
-		});
-	}
-	if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
-		//var l = data.markers.length;
-		$.each( data.markers, function(i, marker) {	
-			if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
-				$.each( marker.shapes, function(index, shape) {	
-					if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-						addShapeToMap(jObj,i,shape);
-					}
-				});
-			}
-			//alert(dump(marker));
-			//var _mid= marker.id;
-			$.wsu_maps.state.mid[i]=marker.id;
-			//var pid = marker.id;
-			make_InfoWindow(jObj,i,marker);
-			make_ToolTip(jObj,i,marker);
-			make_Marker(jObj,i,marker.id,marker,markerCallback);
-			
-			if(i===(data.markers.length-1) && $.isFunction(callback)){
-				callback();
-			}
-		});
-		if($('.mobile').length){
-			$.wsu_maps.geoLocate();
-		}
-	}
-	//if($.isFunction(callback))callback();return;
-}
+
 
 
 var last_searched=0;
@@ -1209,13 +881,13 @@ function getSignlePlace(jObj,id){
 					jObj.gmap('clear','markers');
 					jObj.gmap('clear','overlays');
 					if(typeof(data)!=='undefined'){
-						loadData(jObj,data,null,function(marker){
+						$.wsu_maps.general.loadData(jObj,data,null,function(marker){
 							$.wsu_maps.state.ib[0].open(jObj.gmap('get','map'), marker);
 							$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[0];
 						});
 					}
 					//loadListings(data,true);
-					prep();
+					$.wsu_maps.general.prep_html();
 					last_searched = id;
 				//});
 			}
@@ -1233,13 +905,13 @@ function getSignlePlace(jObj,id){
 			jObj.gmap('clear','markers');
 			jObj.gmap('clear','overlays');
 			if(typeof(data)!=='undefined'){
-				loadData(jObj,data,null,function(marker){
+				$.wsu_maps.general.loadData(jObj,data,null,function(marker){
 					$.wsu_maps.state.ib[0].open(jObj.gmap('get','map'), marker);
 					$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[0];
 				});
 			}
 			//loadListings(data,true);
-			prep();
+			$.wsu_maps.general.prep_html();
 			last_searched = id;
 		});
 	}
@@ -1537,12 +1209,7 @@ function setup_mapsearch(jObj){
 
 
 
-function prep(){
-	$(' [placeholder]:not(.not) ').defaultValue();
-	$("a").each(function() {
-		$(this).attr("hideFocus", "true").css("outline", "none");
-	});
-}
+
 
 
 
@@ -1649,7 +1316,8 @@ function setup_directions(jObj){
 						transition:"none",
 						width:450,
 						open:true,
-						onComplete:function(){prep();
+						onComplete:function(){
+							$.wsu_maps.general.prep_html();
 							$.colorbox.resize();
 						}
 					});
@@ -2002,7 +1670,8 @@ function makeRequestCustom(){
 				onOpen:function(){
 					$('#colorbox').addClass('norm');
 				},
-				onComplete:function(){prep();
+				onComplete:function(){
+					$.wsu_maps.general.prep_html();
 					if($('#colorbox #cb_nav').length){
 						$('#colorbox #cb_nav').html("");
 					}
@@ -2094,7 +1763,8 @@ $('.errorReporting').off().on("click",function(e){
 				$('#colorbox').removeClass('norm');
 			},
 			onOpen:function(){$('#colorbox').addClass('norm');},
-			onComplete:function(){prep();
+			onComplete:function(){
+				$.wsu_maps.general.prep_html();
 				if($('#colorbox #cb_nav').length){
 					$('#colorbox #cb_nav').html("");
 				}
@@ -2155,7 +1825,8 @@ $('#emailDir').off().on('click',function(e){
 				$('#colorbox').removeClass('norm');
 			},
 			onOpen:function(){$('#colorbox').addClass('norm');},
-			onComplete:function(){prep();
+			onComplete:function(){
+				$.wsu_maps.general.prep_html();
 				if($('#colorbox #cb_nav').length){
 					$('#colorbox #cb_nav').html("");
 				}
@@ -2291,14 +1962,14 @@ function setup(){//jObj){
 					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
 					$('#centralMap').gmap('clear','markers');
 					
-					loadData($('#centralMap'),data,null,function(){//marker){
+					$.wsu_maps.general.loadData($('#centralMap'),data,null,function(){//marker){
 						//ib[0].open($('#centralMap').gmap('get','map'), marker);
 						//$.wsu_maps.state.cur_mid = mid[0];
 					});
 					if(show_global_nav){
 						loadListings(data,false);
 					}
-					prep();
+					$.wsu_maps.general.prep_html();
 				});
 			}	
 		}
@@ -2311,7 +1982,7 @@ function setup(){//jObj){
 				$.getJSON(url+'?callback=?&ids[]='+sids.replace(", 0",""), function(data) {
 					$('#centralMap').gmap('clear','overlays');
 					$.each( data.shapes, function(i, shape) {	
-						addShapeToMap($('#centralMap'),i, shape);
+						$.wsu_maps.mapping.addShapeToMap($('#centralMap'),i, shape);
 					});
 				});
 			}

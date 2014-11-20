@@ -1,90 +1,5 @@
 
-/* 
- * DEFAULT_overlay=apply_element(map,type,_option);  << that needs fixed
- * with paths: get_wsu_logo_shape(), as option
- * TODO besides listed above is circle and rec and marker
- */
-function set_default_shape(mapSelector,type,op){
-	var capedType=type.charAt(0).toUpperCase() + type.slice(1)
-	if(typeof(op)==='undefined')op={};
-	switch(type){
-		case "polygon" :
-			// default ploygon style
-				_option = {
-						rest:{
-							options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: get_wsu_logo_shape()})
-						},
-						mouseover:{
-							options:typeof(op.mouseover)!=='undefined'?op.mouseover:{fillColor: "#a90533",fillOpacity: 0.35}
-						},
-						mouseout:{
-							options:typeof(op.mouseout)!=='undefined'?op.mouseout:{fillColor: "#a90533",fillOpacity: 0.35}
-						},
-						click:{
-							options:typeof(op.click)!=='undefined'?op.click:{fillColor: "#a90533",fillOpacity: 0.35}
-						}
-					}
-				DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
 
-				return DEFAULT_overlay;
-			break;
-		case "rectangle" :
-				return null;
-			break;
-		case "circle" :
-				return null;
-			break;			
-		case "polyline" :
-			// default ploygon style
-			DEFAULT_polylines = [];
-			var polyline =get_wsu_logo_shape();
-					if(polyline.length){
-						for(i=0; i<=polyline.length-1; i++){
-							_option = {
-								rest:{
-									options:$.extend(typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
-								},	
-								mouseover:{
-									options:typeof(op.mouseover)!=='undefined'?op.mouseover:{strokeColor: "#a90533",strokeOpacity: 0.35}
-								},	
-								mouseout:{
-									options:typeof(op.mouseout)!=='undefined'?op.mouseout:{strokeColor: "#a90533",strokeOpacity: 0.35}
-								},	
-								click:{
-									options:typeof(op.click)!=='undefined'?op.click:{strokeColor: "#a90533",strokeOpacity: 0.35}
-								}
-							}
-							DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
-							DEFAULT_polylines.push(DEFAULT_overlay);
-							google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
-								for(i=0; i<=DEFAULT_polylines.length-1; i++){
-									DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
-								}
-							});  
-							google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
-								for(i=0; i<=DEFAULT_polylines.length-1; i++){
-									DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
-								}
-							});
-						}
-					}
-					/*_option = {path:[
-						new google.maps.LatLng("46.732537","-117.160091"),
-						new google.maps.LatLng("46.732596","-117.146745")
-						]
-					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-					apply_element(map,capedType,_option);*/
-					
-
-					
-					
-				return polyline;
-			break;				
-		case "marker" :
-				return null;
-			break;
-	};
-}
 
 
 
@@ -204,35 +119,169 @@ function apply_element(mapOjb,type,style){
 	}*/
 }
 
-
-
-function rebuild_example(tabs,mapSelector,type){
-	var _op={};
-	$.each(tabs, function(){
-		var tab = $(this);
-		var mode = tab.closest('.tabed').attr('id');//.split('__')[1].split('_')[1];
-		var ele = tab.find(':input').not('h3 :input,input:hidden');
-		
-		
-		var options={}
-			if(
-				( ele.is(':checked') 
-					|| (ele.val()!='' 
-						&& ele.not(':checkbox')
-						)
-					) 
-				&& ele.not('[type=hidden]') 
-				&& typeof( ele.attr('rel') ) !== 'undefined' 
-				){
-			   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
+$.wsu_maps.general = {
+	prep_html:function (){
+		$(' [placeholder]:not(.not) ').defaultValue();
+		$("a").each(function() {
+			$(this).attr("hideFocus", "true").css("outline", "none");
+		});
+	},
+	setGeoCoder:function (){
+		if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
+		return geocoder;
+	},
+	rebuild_example:function (tabs,mapSelector,type){
+		var _op={};
+		$.each(tabs, function(){
+			var tab = $(this);
+			var mode = tab.closest('.tabed').attr('id');//.split('__')[1].split('_')[1];
+			var ele = tab.find(':input').not('h3 :input,input:hidden');
+			
+			
+			var options={}
+				if(
+					( ele.is(':checked') 
+						|| (ele.val()!='' 
+							&& ele.not(':checkbox')
+							)
+						) 
+					&& ele.not('[type=hidden]') 
+					&& typeof( ele.attr('rel') ) !== 'undefined' 
+					){
+				   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
+				}
+			
+			_op[ mode ] = $.extend({},_op[ mode ],options); 
+		});
+		mapSelector.gmap('clear_map');	
+		$.wsu_maps.general.set_default_shape(mapSelector,type,_op);
+	},
+	/* 
+	 * DEFAULT_overlay=apply_element(map,type,_option);  << that needs fixed
+	 * with paths: get_wsu_logo_shape(), as option
+	 * TODO besides listed above is circle and rec and marker
+	 */
+	set_default_shape:function (mapSelector,type,op){
+		var capedType=type.charAt(0).toUpperCase() + type.slice(1)
+		if(typeof(op)==='undefined')op={};
+		switch(type){
+			case "polygon" :
+				// default ploygon style
+					_option = {
+							rest:{
+								options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: get_wsu_logo_shape()})
+							},
+							mouseover:{
+								options:typeof(op.mouseover)!=='undefined'?op.mouseover:{fillColor: "#a90533",fillOpacity: 0.35}
+							},
+							mouseout:{
+								options:typeof(op.mouseout)!=='undefined'?op.mouseout:{fillColor: "#a90533",fillOpacity: 0.35}
+							},
+							click:{
+								options:typeof(op.click)!=='undefined'?op.click:{fillColor: "#a90533",fillOpacity: 0.35}
+							}
+						}
+					DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
+	
+					return DEFAULT_overlay;
+				break;
+			case "rectangle" :
+					return null;
+				break;
+			case "circle" :
+					return null;
+				break;			
+			case "polyline" :
+				// default ploygon style
+				DEFAULT_polylines = [];
+				var polyline =get_wsu_logo_shape();
+						if(polyline.length){
+							for(i=0; i<=polyline.length-1; i++){
+								_option = {
+									rest:{
+										options:$.extend(typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
+									},	
+									mouseover:{
+										options:typeof(op.mouseover)!=='undefined'?op.mouseover:{strokeColor: "#a90533",strokeOpacity: 0.35}
+									},	
+									mouseout:{
+										options:typeof(op.mouseout)!=='undefined'?op.mouseout:{strokeColor: "#a90533",strokeOpacity: 0.35}
+									},	
+									click:{
+										options:typeof(op.click)!=='undefined'?op.click:{strokeColor: "#a90533",strokeOpacity: 0.35}
+									}
+								}
+								DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
+								DEFAULT_polylines.push(DEFAULT_overlay);
+								google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
+									for(i=0; i<=DEFAULT_polylines.length-1; i++){
+										DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
+									}
+								});  
+								google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
+									for(i=0; i<=DEFAULT_polylines.length-1; i++){
+										DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
+									}
+								});
+							}
+						}
+						/*_option = {path:[
+							new google.maps.LatLng("46.732537","-117.160091"),
+							new google.maps.LatLng("46.732596","-117.146745")
+							]
+						,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
+						apply_element(map,capedType,_option);*/
+						
+	
+						
+						
+					return polyline;
+				break;				
+			case "marker" :
+					return null;
+				break;
+		};
+	},	
+	loadData:function (jObj,data,callback,markerCallback){
+		if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
+			$.each( data.shapes, function(i, shape) {
+				if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
+					$.wsu_maps.mapping.addShapeToMap(jObj,i,shape);
+				}
+			});
+		}
+		if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
+			//var l = data.markers.length;
+			$.each( data.markers, function(i, marker) {	
+				if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
+					$.each( marker.shapes, function(index, shape) {	
+						if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
+							$.wsu_maps.mapping.addShapeToMap(jObj,i,shape);
+						}
+					});
+				}
+				//alert(dump(marker));
+				//var _mid= marker.id;
+				$.wsu_maps.state.mid[i]=marker.id;
+				//var pid = marker.id;
+				$.wsu_maps.infobox.make_InfoWindow(jObj,i,marker);
+				$.wsu_maps.infobox.make_ToolTip(jObj,i,marker);
+				$.wsu_maps.markers.make_Marker(jObj,i,marker.id,marker,markerCallback);
+				
+				if(i===(data.markers.length-1) && $.isFunction(callback)){
+					callback();
+				}
+			});
+			if($('.mobile').length){
+				$.wsu_maps.geoLocate();
 			}
-		
-		_op[ mode ] = $.extend({},_op[ mode ],options); 
-	});
-	mapSelector.gmap('clear_map');	
-	set_default_shape(mapSelector,type,_op);
-}
-
+		}
+		//if($.isFunction(callback))callback();return;
+	},
+	
+	
+	
+};
 
 
 
@@ -314,6 +363,318 @@ function filter_map_element(type,op){
 
 
 $.wsu_maps.infobox = {
+	make_ToolTip:function (jObj,i,marker){
+		//end of the bs that is well.. bs of a implamentation
+		/* so need to remove this and create the class for it */
+		var boxText = document.createElement("div");
+		boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
+		boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
+		var myHoverOptions = {
+			alignBottom:true,
+			content: boxText,
+			pixelOffset: new google.maps.Size(15,-15),
+			zIndex: 999,
+			boxStyle: {
+				minWidth: "250px"
+			},
+			infoBoxClearance: new google.maps.Size(1, 1),
+			isHidden: false,
+			pane: "floatPane",
+			boxClass:"hoverbox",
+			enableEventPropagation: false,
+			disableAutoPan:true,
+			onOpen:function(){}
+		};
+		$.wsu_maps.state.ibh[i] = new InfoBox(myHoverOptions,function(){});
+	},
+	make_InfoWindow:function (jObj,i,marker){
+		var nav='';
+		var content='';
+		if($.isArray(marker.info.content)){
+			$.each( marker.info.content, function(j, html) {	
+				nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+			});
+			
+			$.each( marker.info.content, function(j, html) {
+				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace("'",'_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+			});				
+		
+		}else{
+			nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
+			content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+		}
+		var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
+					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+					content+
+					'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
+				'</div>';
+	
+		/* so need to remove this and create the class for it */
+		var boxText = document.createElement("div");
+		boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+		boxText.innerHTML = marker.info.content;
+		var myOptions = {
+			alignBottom:true,
+			content: box,//boxText
+			disableAutoPan: false,
+			maxWidth: 0,
+			height:"340px",
+			pixelOffset: new google.maps.Size(-200, -103),
+			zIndex: 999,
+			boxStyle: {
+				width: ($('#centralMap').width()<425?$('#centralMap').width()-25:400)+"px"
+			},
+			closeBoxHTML:"<span class='tabedBox infoClose'></span>",
+			infoBoxClearance: new google.maps.Size(75,60),
+			isHidden: false,
+			pane: "floatPane",
+			enableEventPropagation: false,
+			onClose:function(){
+				$.wsu_maps.state.ibHover =  false;
+				if(typeof($.fn.cycle)!=="undefined" && $('.cWrap .items li').length>1){
+					$('.cWrap .items').cycle('destroy');
+				}
+				if(typeof($.jtrack)!=="undefined"){
+					$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
+				}
+				$('#taby'+i).tabs('destroy').tabs();
+			},
+			onOpen:function(){
+				if(jObj.gmap("hasPanorama")){
+					var pano = jObj.gmap("getPanorama");
+					pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+					google.maps.event.addListener(pano, 'position_changed', function() {
+						if(jObj.gmap("hasPanorama")){
+							var pov = pano.getPov();
+							var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+							pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
+							pano.setPov(pov);
+						}
+					});
+				}else{
+					
+				}
+				needsMoved=0;
+				$.wsu_maps.state.ibHover =  true;
+				$('#taby'+i).tabs('destroy').tabs({
+						select: function(event, ui) {
+							if(typeof($.jtrack)!=="undefined"){
+								$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+							}
+						}
+					});
+				$("#campusmap .ui-tabs .ui-tabs-panel .content").width(($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?$('#campusmap .ui-tabs .ui-tabs-panel').width()-35:365)+"px");
+				if($('.cWrap .items li').length>1 && typeof($.fn.cycle)!=="undefined"){
+					var currSlide=0; 
+					$('.cWrap .items').cycle('destroy');
+					$('.cWrap .items').cycle({
+						fx:     'scrollHorz',
+						delay:  -2000,
+						pauseOnPagerHover: 1,
+						pause:1,
+						timeout:0, 
+						pager:'.cNav',
+						prev:   '.prev',
+						next:   '.next', 
+						onPagerEvent:function(i){//,ele){
+							if(currSlide-i<0){ 
+								if(typeof($.jtrack)!=="undefined"){
+									$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+								}
+							}else{ 
+								if(typeof($.jtrack)!=="undefined"){
+									$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+								}
+							} 
+							currSlide = i; 
+						},
+						onPrevNextEvent:function(isNext){//,i,ele){
+								if(isNext){
+									if(typeof($.jtrack)!=="undefined"){
+										$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+									}
+								}else{
+									if(typeof($.jtrack)!=="undefined"){
+										$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+									}
+								}
+							},
+						
+						pagerAnchorBuilder: function(idx){//, slide) {
+							return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';
+						} 
+					});/*	*/
+				}
+				$('.infoBox .ui-tabs-panel a').attr('target','_blank');
+				$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
+					if(typeof($.jtrack)!=="undefined"){
+						$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
+					}
+				});
+				if($('.layoutfree').length){
+					$('.infoBox .ui-tabs-panel .content a').on("click",function(e){
+						e.stopPropagation();
+						e.preventDefault();	
+						return false;
+					});
+				}
+				
+				
+				$('a.gouped').off().on('click',function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					$('a.gouped').colorbox({
+						photo:true,
+						scrolling:false,
+						scalePhotos:true,
+						opacity:0.7,
+						maxWidth:"75%",
+						maxHeight:"75%",
+						transition:"none",
+						slideshow:true,
+						slideshowAuto:false,
+						open:true,
+						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
+						onOpen:function(){
+							if(typeof($.jtrack)!=="undefined"){
+								$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
+							}
+						},
+						onClosed:function(){
+							if(typeof($.jtrack)!=="undefined"){
+								$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
+							}
+							$('#colorbox #cb_nav').html("");
+							$('#ttl').text(0);
+							$('#ttl').text(1);
+						},
+						onComplete:function(){
+							
+							if($('#colorbox #cb_nav').length){
+								$('#colorbox #cb_nav').html("");
+							}
+							if($('#ttl').length){
+								var t=parseInt($('#ttl').text(), 10);
+								var li="";
+								if(t>1){
+									for(var j=0; j<t; j++){
+										li+="<li><a href='#'></a></li>";
+									}
+									if($('#colorbox #cb_nav').length===0){
+										$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
+									}else{
+										$('#colorbox #cb_nav').html(li);
+									}
+								}
+								if($('#colorbox #cb_nav').length){
+									$('#colorbox #cb_nav .active').removeClass('active');
+									$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text(), 10)-1) +')').addClass('active');
+									if(needsMoved<0||needsMoved>0){
+										//alert(needsMoved);
+										if(needsMoved<0){
+											$.colorbox.next();
+											if(needsMoved===-1 && typeof($.jtrack)!=="undefined"){
+												$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+											}
+											needsMoved++;
+										}else{
+											$.colorbox.prev();
+											if(needsMoved===1 && typeof($.jtrack)!=="undefined"){
+												$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+											}
+											needsMoved--;
+										}
+									}
+									$('#colorbox #cb_nav li').off().on('click',function(){
+										var cur=(parseInt($('#cboxCurrent #cur').text(), 10)-1);
+										var selected=$(this).index('#cb_nav li');
+										var dif=cur-selected;
+										needsMoved=dif;
+										if(dif<0||dif>0){
+											if(dif<0){
+												$.colorbox.next();
+												//if(dif>-2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title);
+												needsMoved++;
+											}else{
+												$.colorbox.prev();
+												//if(dif<2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title);
+												needsMoved--;
+											}
+										}
+									});
+									$('#cboxNext,#cboxLoadedContent').off('click.track').on('click.track',function(){
+										if(typeof($.jtrack)!=="undefined"){
+											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+										}
+									});
+									$('#cboxPrevious').off('click.track').on('click.track',function(){
+										if(typeof($.jtrack)!=="undefined"){
+											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+										}
+									});
+								}
+							}
+						}
+					});
+				});
+				addErrorReporting(marker);
+	
+				$('.ui-tabs-panel').hover(function(){
+					$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: true});
+					jObj.gmap('stop_scroll_zoom');
+				},function(){
+					$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: false});
+					jObj.gmap('set_scroll_zoom');
+				});
+				$.wsu_maps.state.ib[i].rePosition();
+				$.wsu_maps.state.ibHover =  false;
+				
+				
+	
+				var minHeight=0;
+				$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+					minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
+					
+				}).css('min-height',minHeight); 
+				var settings = {
+					verticalDragMinHeight: 50
+					//showArrows: true
+				};
+				var pane = $('#campusmap .ui-tabs .ui-tabs-panel .content:not(".Views")');
+				if(minHeight>235){
+					pane.bind(
+						'jsp-scroll-y',
+						function(event, scrollPositionY, isAtTop, isAtBottom){
+							//var isAtBottom= isAtBottom;	
+							//var isAtTop= isAtTop;			
+							pane.mousewheel(function(event,delta){ 
+								//var media = $(this).find('.mediaPanel'); 
+								if (delta > 0) { 
+									if(isAtTop){
+										return false;
+									}
+								} else { 
+									if(isAtBottom){
+										return false;
+									}
+								}         
+							});
+						}
+		
+					).jScrollPane(settings);
+					$.wsu_maps.state.api = pane.data('jsp');
+				}
+				$.wsu_maps.general.prep_html();
+			}
+		};
+		$.wsu_maps.state.ib[i] = new InfoBox(myOptions,function(){
+			//$('#taby'+i).tabs();
+			//alert('tring to tab it, dabnab it, from the INI');
+		});
+	}
+	
+	
+	
 	build_infobox_content:function(item){
 		if(typeof(item.info)==='undefined'){item.info={};}
 		if(typeof(item.info.content)==='undefined'){item.info.content=[];}
@@ -384,10 +745,10 @@ $.wsu_maps.infobox = {
 			enableEventPropagation: false,
 			onClose:function(){
 				$.wsu_maps.state.ibHover =  false;
-				ibOpen=false;
+				$.wsu_maps.state.ibOpen=false;
 			},
 			onOpen:function(){
-				ibOpen=true;
+				$.wsu_maps.state.ibOpen=true;
 				$.wsu_maps.state.ibHover =  true;
 				if($(".cWrap").length){
 					$('.cWrap a.gouped').on('click',function(e){
@@ -414,7 +775,7 @@ $.wsu_maps.infobox = {
 						prev:   '.prev',     next:   '.next', 
 						pagerAnchorBuilder: function(idx, slide) { return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';} 
 					});
-					prep();
+					$.wsu_maps.general.prep_html();
 				}
 				$('#taby'+i).tabs();
 				var minHeight=0;
