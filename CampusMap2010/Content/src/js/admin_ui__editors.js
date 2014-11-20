@@ -82,10 +82,10 @@ function add_place_point(lat,lng,clear){
 				reopen = false;
 			}
 			if($("#placeShape :selected").length && $("#placeShape :selected").val()!==""){
-				shapes=[];
+				$.wsu_maps.state.shapes=[];
 				
 				loadPlaceShape($("#placeShape :selected").val(),function(shape){
-					$('#place_drawing_map').gmap("attach_shape_to_marker",shapes[0],marker);
+					$('#place_drawing_map').gmap("attach_shape_to_marker",$.wsu_maps.state.shapes[0],marker);
 				});
 			}			
 	}).click(function() {
@@ -99,8 +99,8 @@ function add_place_point(lat,lng,clear){
 		var placePos = this.getPosition();
 		var lat = placePos.lat();
 		var lng = placePos.lng();
-		if(typeof(shapes)!=="undefined" && shapes.length>0){
-			$('#place_drawing_map').gmap("move_shape",shapes[0],placePos);
+		if(typeof($.wsu_maps.state.shapes)!=="undefined" && $.wsu_maps.state.shapes.length>0){
+			$('#place_drawing_map').gmap("move_shape",$.wsu_maps.state.shapes[0],placePos);
 		}
 		$('#Lat').val(lat);
 		$('#Long').val(lng);
@@ -822,7 +822,7 @@ $.wsu_maps.admin.style = {
 };
 $.wsu_maps.admin.view = {
 	load_editor:function () {
-		var api = null;
+		$.wsu_maps.state.api = null;
 		var lat = $('#Lat').val();
 		var lng = $('#Long').val();	
 		var width = $('#width').val();
@@ -921,7 +921,7 @@ $.wsu_maps.admin.view = {
 					
 					
 					$('jspContainer').css('height','auto');
-					api.reinitialise();
+					$.wsu_maps.state.api.reinitialise();
 					reloadShapes();
 					reloadPlaces();
 					if(container.find('.ini').length===0 && container.find('li').size()===0){
@@ -982,7 +982,7 @@ $.wsu_maps.admin.view = {
 				}
 
 			).jScrollPane(settings);
-			api = pane.data('jsp');
+			$.wsu_maps.state.api = pane.data('jsp');
 	
 			createDeleteRow();
 	
@@ -1013,7 +1013,7 @@ $.wsu_maps.admin.view = {
 					}
 					container.find('ol.sortable').nestedSortable("refresh");
 					$('jspContainer').css('height','auto');
-					api.reinitialise();
+					$.wsu_maps.state.api.reinitialise();
 					reloadShapes();
 					reloadPlaces();
 					createDeleteRow();

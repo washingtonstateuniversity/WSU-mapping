@@ -27,7 +27,7 @@ $.wsu_maps.admin.ui.tinymce = {
 		if(typeof(uploadonly)==='undefined'){
 			uploadonly=false;
 		}
-		if($('#dialog-pickimage').length==0){
+		if($('#dialog-pickimage').length===0){
 			$('body').append('<div id="dialog-pickimage">');
 		}
 		$('#dialog-pickimage').dialog("resize", "auto"); 
@@ -59,7 +59,7 @@ $.wsu_maps.admin.ui.tinymce = {
 					});
 					
 					$('#imagePicker').on('change',function(){
-						if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+						if($('#imgPre img').length===0){$('#imgPre').append('<img width="150" height="150" />');}
 						if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 							$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 							var imgid=$('#imagePicker :selected').val();
@@ -101,7 +101,7 @@ $.wsu_maps.admin.ui.tinymce = {
 											  
 											  $('#uploadMess').fadeOut('fast',function(){
 												  $('#uploadMess').remove();
-												  if($('#nextUpload').length==0){
+												  if($('#nextUpload').length===0){
 													  $('#ISIUarea').append('<div id="nextUpload"><h2>Next...</h2><!--<h3><a href="#" id="place">Insert the new image</a></h3>--><h3><a href="#" id="again">Add more</a></h3></div>');
 													  }
 												  });
@@ -113,7 +113,7 @@ $.wsu_maps.admin.ui.tinymce = {
 												image_Caption = $('input#image_Caption').val();
 
 											  //add to 
-											  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+											  if($('#imgPre img').length===0){$('#imgPre').append('<img width="150" height="150" />');}
 											  $('#imagePicker :selected').attr('selected',false);//reset selection
 											  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
 												$('#imgPre img').attr('src',siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
@@ -148,17 +148,17 @@ $.wsu_maps.admin.ui.tinymce = {
 										  }else{
 											 $('#uploadMess').fadeOut('fast',function(){
 												 $('#uploadMess').remove();
-												 if($('#nextUpload').length==0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
+												 if($('#nextUpload').length===0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
 											 });
 										  }
 									  }, 
 									  'onStart': function() { 
 										 FileName=$('input#image_FileName').val();
-										 if(FileName=="")FileName=$('input#image_id').val();
+										 if(FileName==="")FileName=$('input#image_id').val();
 										 //alert('pause');
 										//if(!weWantedTo) return false; // cancels upload 
 										$('#ISIUarea form').fadeOut('fast',function(){
-											if($('#uploadMess').length==0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
+											if($('#uploadMess').length===0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
 											});
 									  }, 
 									  'onCancel': function() { 
@@ -175,7 +175,7 @@ $.wsu_maps.admin.ui.tinymce = {
 							 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
 							 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
 						 });
-						if( $('#ISIUarea').css('display')=='none'){
+						if( $('#ISIUarea').css('display')==='none'){
 							$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
 							$('#imagePicker :selected').attr('selected',false);
 						}
@@ -192,7 +192,7 @@ $.wsu_maps.admin.ui.tinymce = {
 
 function openImgResource(ed,uploadOnly){
 	if(typeof(uploadonly)==='undefined'){uploadonly=false;}
-	if($('#dialog-pickimage').length==0){$('body').append('<div id="dialog-pickimage">')}
+	if($('#dialog-pickimage').length===0){$('body').append('<div id="dialog-pickimage">')}
 								$('#dialog-pickimage').dialog("resize", "auto"); 
 								$( "#dialog-pickimage" ).dialog({
 									resizable: false,
@@ -222,7 +222,7 @@ function openImgResource(ed,uploadOnly){
 											});
 											
 											$('#imagePicker').on('change',function(){
-												if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+												if($('#imgPre img').length===0){$('#imgPre').append('<img width="150" height="150" />');}
 												if( $('#ISIUarea').css('display')!='none'){$('#inlinePlaceImageUpload').click();}
 													$('#imgPre img').css({'opacity':'.65'}).attr('src','');
 													var imgid=$('#imagePicker :selected').val();
@@ -235,7 +235,7 @@ function openImgResource(ed,uploadOnly){
 													$('input[type=file]').ajaxfileupload({ 
 															  'action': siteroot+'media/update.castle', 
 															  'params': { 
-															  	'image.id':'',
+																'image.id':'',
 																'image.FileName':$('input#image_FileName'),
 																'image.Caption':$('input#image_Caption'),
 																'image.Credit':$('input#image_Credit'),
@@ -249,7 +249,7 @@ function openImgResource(ed,uploadOnly){
 																	  
 																	  $('#uploadMess').fadeOut('fast',function(){
 																		  $('#uploadMess').remove();
-																		  if($('#nextUpload').length==0){
+																		  if($('#nextUpload').length===0){
 																			  $('#ISIUarea').append('<div id="nextUpload"><h2>Next...</h2><h3><a href="#" id="place">Insert the new image</a></h3><h3><a href="#" id="again">Add more</a></h3></div>');
 																			  }
 																		  });
@@ -261,7 +261,7 @@ function openImgResource(ed,uploadOnly){
 																		image_Caption = $('input#image_Caption').val();
 																	  
 																	  //add to 
-																	  if($('#imgPre img').length==0){$('#imgPre').append('<img width="150" height="150" />');}
+																	  if($('#imgPre img').length===0){$('#imgPre').append('<img width="150" height="150" />');}
 																	  $('#imagePicker :selected').attr('selected',false);//reset selection
 																	  $('#imagePicker option:first').after('<option value="'+image_id+'" selected="selected">'+FileName+'</option>');// add new and select
 																		$('#imgPre img').attr('src','media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=150&h=150&pre=TMP');
@@ -281,7 +281,7 @@ function openImgResource(ed,uploadOnly){
 																			e.preventDefault();
 																			e.stopPropagation();
 																			$('#ISIUarea input[type=text]').each(function(){$(this).val('');});
-																		    $('#ISIUarea input[type=file]').each(function(){$(this).val('');});
+																			$('#ISIUarea input[type=file]').each(function(){$(this).val('');});
 																			//alert(image_id);
 																			//var imgmar=;
 																			//alert(imgmar);
@@ -297,16 +297,16 @@ function openImgResource(ed,uploadOnly){
 																  }else{
 																	 $('#uploadMess').fadeOut('fast',function(){
 																		 $('#uploadMess').remove();
-																		 if($('#nextUpload').length==0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
+																		 if($('#nextUpload').length===0){$('#ISIUarea').append('<div id="nextUpload"><h2>Error</h2><h3><a href="#" id="again">Try Again</a></h3><p>There was an issue uploading<br/>Mess: '+JSON.stringify(response)+'<p/></div>');}
 																	 });
 																  }
 															  }, 
 															  'onStart': function() { 
-															  	 FileName=$('input#image_FileName').val();
+																 FileName=$('input#image_FileName').val();
 																 //alert('pause');
 																//if(!weWantedTo) return false; // cancels upload 
 																$('#ISIUarea form').fadeOut('fast',function(){
-																	if($('#uploadMess').length==0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
+																	if($('#uploadMess').length===0){$('#ISIUarea').append('<div id="uploadMess"><h2>Uploading</h2></div>');}
 																	});
 																
 																
@@ -325,7 +325,7 @@ function openImgResource(ed,uploadOnly){
 													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
 													 $('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-s');
 												 });
-												if( $('#ISIUarea').css('display')=='none'){
+												if( $('#ISIUarea').css('display')==='none'){
 													$('#imgPre img').css({'opacity':'.0'}).attr('src','#');
 													$('#imagePicker :selected').attr('selected',false);
 												}
@@ -361,7 +361,7 @@ function contextmenu_fix(ed) {
 			var has=false;
 			for (var itemName in menu.items) {
 				var item = menu.items[itemName];
-				if(item.settings.title=='Edit image'){
+				if(item.settings.title==='Edit image'){
 					has=true;
 					continue;
 				}
@@ -414,8 +414,8 @@ function contextmenu_fix(ed) {
 
 
 function editor_oninit(ed) {
-    // Add hook for onContextMenu so that Insert Image can be removed
-    ed.plugins.contextmenu.onContextMenu.add(editor_remove_insertImage);
+	// Add hook for onContextMenu so that Insert Image can be removed
+	ed.plugins.contextmenu.onContextMenu.add(editor_remove_insertImage);
 	if(typeof(place_id) !== 'undefined'&&place_id>0 && $('#place_Bodytext').val()!=''){
 		setTimeout(function () {
 			ed.controlManager.setActive('spellchecker', true);
@@ -428,7 +428,7 @@ function editor_oninit(ed) {
 // replace your editor_remove_insertImage function with this:
 function editor_remove_insertImage(sender, menu) {
 
-    var otherItems = {};
+	var otherItems = {};
 	if(isIMG()){
 		for (var itemName in menu.items) {
 			var item = menu.items[itemName];
@@ -438,26 +438,26 @@ function editor_remove_insertImage(sender, menu) {
 			otherItems[itemName] = item;
 		}
 	}
-    for (var itemName in menu.items) {
-        var item = menu.items[itemName];
-        if(item.settings.title=='Edit image'){
-            continue;
-        }
+	for (var itemName in menu.items) {
+		var item = menu.items[itemName];
+		if(item.settings.title==='Edit image'){
+			continue;
+		}
 		
-        if (/^mce_/.test(itemName)) {
-            if (item.settings) {
-                if (item.settings.cmd == "mceImage" || item.settings.cmd == "mceAdvImage" || (isIMG() && item.settings.title=='Edit image')) {
-                    // skip these items
-                    continue;
-                }
-            }
-        }
-        // add all other items to this new object, so it is effectively a clone
-        // of menu.items but without the offending entries
-        otherItems[itemName] = item;
-    }
-    // replace menu.items with our new object
-    menu.items = otherItems;
+		if (/^mce_/.test(itemName)) {
+			if (item.settings) {
+				if (item.settings.cmd === "mceImage" || item.settings.cmd === "mceAdvImage" || (isIMG() && item.settings.title==='Edit image')) {
+					// skip these items
+					continue;
+				}
+			}
+		}
+		// add all other items to this new object, so it is effectively a clone
+		// of menu.items but without the offending entries
+		otherItems[itemName] = item;
+	}
+	// replace menu.items with our new object
+	menu.items = otherItems;
 
 }
 
@@ -476,7 +476,7 @@ function get_TinyMCE_InlinYouTube(yCode,title,w,h,yclass){
 	var baseurl='/';
 	var MACRO="#youtube('"+yCode+"' '"+title+"' "+w+" "+h+" '"+yclass+"')";
 	var html ='<img class="tinyImgHolder" src="http://img.youtube.com/vi/'+yCode+'/0.jpg" style="width:250px;" alt="youtubingIt|'+yCode+'|'+title+'" title="'+MACRO+'"/>';
-    return html;   
+	return html;   
 }
 
 
@@ -492,7 +492,7 @@ function get_TinyMCE_imagegallery(w,h,yclass){
 	var baseurl='/';
 	var MACRO="#imagegallery('"+place_id+"' "+w+" "+h+" '"+yclass+"')";
 	var html ='<img src="'+baseurl+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=250&h=250&pre=TMP&mark=SLIDESHOW" class="tinyImgHolder" alt="gallerya|'+image_id+'" title="'+MACRO+'"/>';
-    return html;   
+	return html;   
 }
 
 
@@ -502,8 +502,8 @@ function tinyoptions(which,id){
 	var id = typeof(id)!=='undefined'&& id!=null?id:"place_details";
 	
 	
-    switch(which){
-       case "bodytext":
+	switch(which){
+	   case "bodytext":
 			$.getJSON("/admin/getInfoTemplates.castle", function(result) {
 				// Creates a new plugin class and a custom listbox
 				
@@ -564,20 +564,20 @@ function tinyoptions(which,id){
 				// Register plugin with a short name
 				tinyMCE.PluginManager.add('templatevariables', tinyMCE.plugins.ExamplePlugin);
 			});
-            return {
-                mode : "exact", 
-                body_id : "left_col",
-                elements : id,
-                theme : "advanced",
+			return {
+				mode : "exact", 
+				body_id : "left_col",
+				elements : id,
+				theme : "advanced",
 				width:"685",
 				force_br_newlines : true, 
 				force_p_newlines : false,
 				forced_root_block : '',
-                plugins : "-templatevariables,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
-                theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
-                theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace", 
-                theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect,|,variablesListBox",
-                spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker",
+				plugins : "-templatevariables,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale", 
+				theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,"+placeImgBtn+"|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
+				theme_advanced_buttons2 : "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace", 
+				theme_advanced_buttons3 : "styleselect,formatselect,fontselect,fontsizeselect,|,variablesListBox",
+				spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker",
 				theme_advanced_toolbar_location : "top", 
 				theme_advanced_toolbar_align : "left", 
 				theme_advanced_statusbar_location : "bottom", 
@@ -588,27 +588,27 @@ function tinyoptions(which,id){
 					//myCustomSetupContent();
 				},				
 				// Style formats
-                style_formats : [
-                        {title : 'Bold text', inline : 'b'},
-                        {title : 'FLoat it left', selector : 'img', classes : 'fLeft'},
-                        {title : 'FLoat it right', selector : 'img', classes : 'fRight'}
-                ],
+				style_formats : [
+						{title : 'Bold text', inline : 'b'},
+						{title : 'FLoat it left', selector : 'img', classes : 'fLeft'},
+						{title : 'FLoat it right', selector : 'img', classes : 'fRight'}
+				],
 				formats : {
-                        alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'left'},
-                        aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'center'},
-                        alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'right'},
-                        alignfull : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'full'},
-                        bold : {inline : 'span', 'classes' : 'bold'},
-                        italic : {inline : 'span', 'classes' : 'italic'},
-                        underline : {inline : 'span', 'classes' : 'underline', exact : true},
-                        strikethrough : {inline : 'del'},
-                        forecolor : {inline : 'span', classes : 'forecolor', styles : {color : '%value'}},
-                        hilitecolor : {inline : 'span', classes : 'hilitecolor', styles : {backgroundColor : '%value'}},
-                        custom_format : {block : 'h1', attributes : {title : "Header"}, styles : {color : 'red'}}
-                },
+						alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'left'},
+						aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'center'},
+						alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'right'},
+						alignfull : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'full'},
+						bold : {inline : 'span', 'classes' : 'bold'},
+						italic : {inline : 'span', 'classes' : 'italic'},
+						underline : {inline : 'span', 'classes' : 'underline', exact : true},
+						strikethrough : {inline : 'del'},
+						forecolor : {inline : 'span', classes : 'forecolor', styles : {color : '%value'}},
+						hilitecolor : {inline : 'span', classes : 'hilitecolor', styles : {backgroundColor : '%value'}},
+						custom_format : {block : 'h1', attributes : {title : "Header"}, styles : {color : 'red'}}
+				},
 				handle_node_change_callback :function(ed, node, undo_index, undo_levels, visual_aid, any_selection){
 							//console.debug('Editor was clicked: ' + e.target.nodeName);
-							if (node.nodeName == null || node.nodeName != 'IMG')
+							if (node.nodeName === null || node.nodeName != 'IMG')
 								return
 								//alert(node.nodeName);
 							var imgNode=$(node);
@@ -619,17 +619,17 @@ function tinyoptions(which,id){
 								var theclass=imgNode.attr('class');
 									theclass=theclass.split('tinyImgHolder');
 									//alert(theclass[1]);
-								if(image[0]=="imagingIt"){
+								if(image[0]==="imagingIt"){
 									var image_id = image[1];
 									imgNode.attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width() + ' ' + imgNode.height()+' \''+ theclass[1] +'\')');
 									contextmenu_fix(ed);
 								}
-								if(image[0]=="youtubingIt"){
+								if(image[0]==="youtubingIt"){
 									var yCode=image[1];
 									var title=image[2];
 									imgNode.attr('title','#youtube(\''+yCode+'\' \''+title+'\' '+ imgNode.width() +' '+ imgNode.height() +' \''+ theclass[1] +'\')');
 								}
-								if(image[0]=="gallerya"){
+								if(image[0]==="gallerya"){
 									var image_id = image[1];
 									imgNode.attr('title','#imagegallery(\''+place_id+'\' '+ imgNode.width() +' '+ imgNode.height() +' \''+ theclass[1] +'\')');
 								}
@@ -657,7 +657,7 @@ function tinyoptions(which,id){
 								// Add you own code to execute something on click
 								ed.focus();
 								var myBookmark = tinyMCE.activeEditor.selection.getBookmark();
-								if($('#dialog-youtube').length==0){$('body').append('<div id="dialog-youtube">')}
+								if($('#dialog-youtube').length===0){$('body').append('<div id="dialog-youtube">')}
 								$( "#dialog-youtube" ).dialog({
 									resizable: false,
 									height:240,
@@ -704,7 +704,7 @@ function tinyoptions(which,id){
 						
 						
 					},
-				    advimagescale_maintain_aspect_ratio: false, /* this is the default behavior */
+					advimagescale_maintain_aspect_ratio: false, /* this is the default behavior */
 					advimagescale_fix_border_glitch: true, /* also the default behavior */
 					advimagescale_noresize_all: false, /* set to true to prevent all resizing on images */
 					advimagescale_append_to_url: true, /* apply dimensions to image URL on resize */
@@ -726,11 +726,11 @@ function tinyoptions(which,id){
 						var yclass=$(imgNode).attr('class');
 						var theclass=$(imgNode).attr('class');
 								theclass=theclass.split('tinyImgHolder');
-						if(image[0]=="imagingIt"){
+						if(image[0]==="imagingIt"){
 							var image_id = image[1];
 								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
 						}
-						if(image[0]=="youtubingIt"){
+						if(image[0]==="youtubingIt"){
 							var yCode=image[1];
 							var title=image[2];
 								$(imgNode).attr('title','#youtube(\''+yCode+'\' \''+title+'\' '+ imgNode.width +' '+ imgNode.height +' \''+ theclass[1] +'\')');
@@ -744,11 +744,11 @@ function tinyoptions(which,id){
 						var yclass=$(imgNode).attr('class');
 						var theclass=$(imgNode).attr('class');
 								theclass=theclass.split('tinyImgHolder');
-						if(image[0]=="imagingIt"){
+						if(image[0]==="imagingIt"){
 							var image_id = image[1];
 								$(imgNode).attr('title','#Inline_Iamge('+image_id+' '+place_id+' ' + imgNode.width + ' ' + imgNode.height+' \''+ theclass[1] +'\')');
 						}
-						if(image[0]=="youtubingIt"){
+						if(image[0]==="youtubingIt"){
 							var yCode=image[1];
 							var title=image[2];
 								$(imgNode).attr('title','#youtube(\''+yCode+'\' \''+title+'\' '+ imgNode.width +' '+ imgNode.height +' \''+ theclass[1] +'\')');
@@ -756,14 +756,14 @@ function tinyoptions(which,id){
 						//editorInstance.activeEditor.selection.collapse();
 						//alert('resized to ' + imgNode.width + 'x' + imgNode.height);
 					}
-            }
-        break;
-       case "simple":
-            return {
-                mode : "exact", 
-                elements : id?id:"place_summary",
-                theme : "advanced",
-                width : "685", 
+			}
+		break;
+	   case "simple":
+			return {
+				mode : "exact", 
+				elements : id?id:"place_summary",
+				theme : "advanced",
+				width : "685", 
 				height:  "150",
 				force_br_newlines : true, 
 				force_p_newlines : false,
@@ -778,19 +778,19 @@ function tinyoptions(which,id){
 						$.wsu_maps.admin.ui.tinymce.tinyResize(ed.id);
 					});
 				},
-                plugins : "paste, spellchecker, autoresize",
-                theme_advanced_buttons1 : "bold,italic,underline,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,spellchecker",
-                theme_advanced_buttons2 : "", 
-                theme_advanced_buttons3 : "",
-                spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker"
-            }
-        break;
-        default:
-        case "default":
-            return {
-                mode : "exact", 
-                elements : id?id:"tinyedit",
-                theme : "advanced",
+				plugins : "paste, spellchecker, autoresize",
+				theme_advanced_buttons1 : "bold,italic,underline,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,spellchecker",
+				theme_advanced_buttons2 : "", 
+				theme_advanced_buttons3 : "",
+				spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker"
+			}
+		break;
+		default:
+		case "default":
+			return {
+				mode : "exact", 
+				elements : id?id:"tinyedit",
+				theme : "advanced",
 				width : "685", 
 				height:  "350",
 				force_br_newlines : true, 
@@ -806,14 +806,14 @@ function tinyoptions(which,id){
 						$.wsu_maps.admin.ui.tinymce.tinyResize(ed.id);
 					});
 				},
-                plugins : "paste, spellchecker, autoresize,advlink",
-                theme_advanced_buttons1 : "bold,italic,underline,|,undo,redo,|,link,unlink,|,cut,copy,paste,pastetext,pasteword,|,spellchecker",
-                theme_advanced_buttons2 : "", 
-                theme_advanced_buttons3 : "",
-                spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker"
-            }
-        break;
-    }
+				plugins : "paste, spellchecker, autoresize,advlink",
+				theme_advanced_buttons1 : "bold,italic,underline,|,undo,redo,|,link,unlink,|,cut,copy,paste,pastetext,pasteword,|,spellchecker",
+				theme_advanced_buttons2 : "", 
+				theme_advanced_buttons3 : "",
+				spellchecker_rpc_url: "/TinyMCEHandler.aspx?module=SpellChecker"
+			}
+		break;
+	}
 }
 
 

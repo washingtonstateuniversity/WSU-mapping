@@ -349,11 +349,11 @@ $.wsu_maps.infobox = {
 		if($.isArray(item.info.content)){
 				var nav='';
 				$.each( item.info.content, function(j, html) {	
-					nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 				});
 				var content='';
 				$.each( item.info.content, function(j, html) {
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j==0?mainimage:'')+html.block+'</div></div>';
+					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html.block+'</div></div>';
 				});
 		}else{
 			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
@@ -383,12 +383,12 @@ $.wsu_maps.infobox = {
 			pane: "floatPane",
 			enableEventPropagation: false,
 			onClose:function(){
-				ibHover =  false;
+				$.wsu_maps.state.ibHover =  false;
 				ibOpen=false;
 			},
 			onOpen:function(){
 				ibOpen=true;
-				ibHover =  true;
+				$.wsu_maps.state.ibHover =  true;
 				if($(".cWrap").length){
 					$('.cWrap a.gouped').on('click',function(e){
 						e.preventDefault();

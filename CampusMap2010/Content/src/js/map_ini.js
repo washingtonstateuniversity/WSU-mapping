@@ -1,13 +1,13 @@
 $(function(){
 	
-	mapInst=$('#centralMap');
+	$.wsu_maps.state.mapInst=$('#centralMap');
 	
 	$(window).resize(function(){
 		if($('.veiw_base_layout.public').length){
-			if(mapInst.width()<=320){
+			if($.wsu_maps.state.mapInst.width()<=320){
 				$('html').removeClass('narrow');
 				$('html').addClass('mobile');
-			}else if(mapInst.width()<=600){
+			}else if($.wsu_maps.state.mapInst.width()<=600){
 				$('html').addClass('narrow');
 				$('html').removeClass('mobile');
 			}else{
@@ -30,14 +30,14 @@ $(function(){
 	}).trigger("resize");
 	var listOffset=0;
 	//$(' [placeholder] ').defaultValue();
-	if(mapInst.length){
-		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
+	if($.wsu_maps.state.mapInst.length){
+		$.wsu_maps.state.mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		if($('.veiw_base_layout').length){
-			$.wsu_maps.ini_map_view(mapInst,setup);
+			$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,setup);
 		}else{
 			$.wsu_maps.iniMap("",setup);
 		}
-		if(mapInst.length){
+		if($.wsu_maps.state.mapInst.length){
 							var mHeight = ($(window).height()<=404?0:130);
 				if($('.embeded').length)mHeight = 0;
 				if($('.layoutfree').length)mHeight = 93;
@@ -55,9 +55,9 @@ $(function(){
 				$('#navwrap').height($('#centralMap_wrap').height()-70);
 				$.wsu_maps.resizeBg($('.cAssest'),mHeight);
 				
-				reset_Dirscrollbar();
-				reset_Listscrollbar();
-				reset_Navscrollbar();
+				$.wsu_maps.listings.reset_Dirscrollbar();
+				$.wsu_maps.listings.reset_Listscrollbar();
+				$.wsu_maps.nav.reset_Navscrollbar();
 				//if($('#listing').length)setup_scrollbar($('#listing'));
 				
 			}).trigger("resize");
@@ -71,18 +71,18 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 		
-		reset_listings();
+		$.wsu_maps.listings.reset_listings();
 		$('#main_nav').find('.active').removeClass('active');
 		$('#campusmap input[type="text"]').val('');
 		if($('#directionsTo').is(':visible'))$('#directionsTo').hide();
 		if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
 		//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
 		//$('.mapControl').remove();
-		mapInst.gmap("destroy",function(ele){
-			mapInst.html('');
+		$.wsu_maps.state.mapInst.gmap("destroy",function(ele){
+			$.wsu_maps.state.mapInst.html('');
 			$('.mapControl').remove(); 
 			if($('.veiw_base_layout').length){
-				$.wsu_maps.ini_map_view(mapInst,setup);
+				$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,setup);
 			}else{
 				$.wsu_maps.iniMap("",setup);
 			}
