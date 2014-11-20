@@ -1,4 +1,8 @@
-
+var siteroot=siteroot||"";
+var view=view||"";
+var mcv_action=mcv_action||"";
+var campus=campus||"";
+var campus_latlng_str=campus_latlng_str||"";
 
 function loadPlaceShape(_load,callback){
 	/*if(typeof(_load)==='undefined') var _load = false;
@@ -64,7 +68,7 @@ function add_place_point(lat,lng,clear){
 	if( typeof(clear)!=='undefined' && clear ){
 		marker.info={};
 	}
-	marker=$.extend(marker,build_infobox(marker));
+	marker=$.extend(marker,$.wsu_maps.infobox.build_infobox(marker));
 	
 	if(marker.style.icon){
 		marker.style.icon = marker.style.icon.replace('{$i}',i+1);
@@ -291,7 +295,7 @@ function int_infotabs(){
 		var tabs = $('#dynoTab');
 		var panels = tabs.children('.ui-tabs-panel');
 		panels.sort(function (a,b){return $(a).attr('role') >$(b).attr('role') ? 1 : -1;}).appendTo('#dynoTab');
-  		$.each(panels, function(i, v) {
+		$.each(panels, function(i, v) {
 			var id=$(this).find('textarea:first').attr('id');
 			if( !$(this).find('textarea:first').is($(".tinyLoaded")) ){ 
 				$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",id);
@@ -341,7 +345,7 @@ function int_infotabs(){
 		if($( "#deleteconfirm" ).length===0){
 			$('body').append('<div id="deleteconfirm">If you delete this you will have to refresh the page to get it back.<br/><h2>Are you sure?</h2></div>');
 		}
-	 	$( "#deleteconfirm" ).dialog({
+		$( "#deleteconfirm" ).dialog({
 			autoOpen: false,
 			modal: true,
 			buttons: {
@@ -1069,7 +1073,7 @@ $.wsu_maps.admin.view = {
 				waiting = true;
 				//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
 				$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+view.replace("/",""), function(data) {
-					if(data=="true"){
+					if(data==="true"){
 						$('.aliasState').addClass('error');
 						$('.aliasState').removeClass('ok');
 						$('.aliasState').text('  :  taken');
@@ -1201,10 +1205,10 @@ function reloadShapes(){
 }
 /*function addShapeToMap(i, shape){
 	var pointHolder = {};
-	if(shape.latlng_str!='' && shape.type=='polyline'){ 
+	if(shape.latlng_str!='' && shape.type==='polyline'){ 
 		var pointHolder = {'path' : shape.latlng_str };
 	}
-	if(shape.latlng_str!='' && shape.type=='polygon'){ 
+	if(shape.latlng_str!='' && shape.type==='polygon'){ 
 		var pointHolder = {'paths' : shape.latlng_str };
 	}
 	if(typeof(shape.encoded)!="undefined"){ 
@@ -1529,7 +1533,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 					callback();
 				}
 		});
-		geoLocate();
+		$.wsu_maps.geoLocate();
 		
 	}
 	//if($.isFunction(callback))callback();return;

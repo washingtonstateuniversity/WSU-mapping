@@ -33,9 +33,9 @@ $(function(){
 	if(mapInst.length){
 		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 		if($('.veiw_base_layout').length){
-			ini_map_view(mapInst,setup);
+			$.wsu_maps.ini_map_view(mapInst,setup);
 		}else{
-			iniMap("",setup);
+			$.wsu_maps.iniMap("",setup);
 		}
 		if(mapInst.length){
 							var mHeight = ($(window).height()<=404?0:130);
@@ -82,9 +82,9 @@ $(function(){
 			mapInst.html('');
 			$('.mapControl').remove(); 
 			if($('.veiw_base_layout').length){
-				ini_map_view(mapInst,setup);
+				$.wsu_maps.ini_map_view(mapInst,setup);
 			}else{
-				iniMap("",setup);
+				$.wsu_maps.iniMap("",setup);
 			}
 			$(window).trigger("resize");
 		});
