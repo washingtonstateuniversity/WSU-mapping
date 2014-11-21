@@ -153,6 +153,7 @@ $.wsu_maps.admin.ui.tinymce = {
 								$('#place').on('click', function(e) {
 									e.preventDefault();
 									e.stopPropagation();
+									var ed = ed||null;
 									$('#ISIUarea input[type=text]').each(function() {
 										$(this).val('');
 									});
@@ -414,6 +415,34 @@ $.wsu_maps.admin.ui.tinymce = {
 		}
 		return true;
 	},
+	editor_addimg:function(ui, v) {
+		var imgNode = $(tinyMCE.activeEditor.selection.getContent());
+		var imgid = imgNode.attr('alt').split('|');
+		var orgUrl = imgNode.attr('src');
+		//alert(v);
+		//alert(orgUrl);
+		var url = orgUrl.split('id=' + imgid[1] + '&placeid').join('id=' + v + '&placeid');
+		//alert(url);
+		imgNode.css({
+			'opacity': '.65'
+		});
+	
+		var orgtitle = imgNode.attr('title');
+		var newtitle = orgtitle.split('(' + imgid[1] + ' ').join('(' + v + ' ');
+		//alert(newtitle);
+		imgNode.attr('alt', imgid[1] + '|' + v);
+		imgNode.attr('title', newtitle);
+		imgNode.attr('data-mce-src', url);
+		imgNode.attr('src', url);
+		//var newUrl = imgNode.attr('src');
+		//alert(newUrl);
+		tinyMCE.activeEditor.execCommand('mceRepaint');
+		imgNode.on('load',function() {
+			imgNode.css({
+				'opacity': '1.0'
+			});
+		});
+	},
 	contextmenu_fix: function() { //ed) {
 		if ($.wsu_maps.admin.ui.tinymce.isIMG()) {
 			tinyMCE.activeEditor.plugins.contextmenu.onContextMenu.add(function(sender, menu) {
@@ -442,38 +471,7 @@ $.wsu_maps.admin.ui.tinymce = {
 							cmd: 'editor_addimages_' + i,
 							value: image_id
 						});
-						tinyMCE.activeEditor.addCommand('editor_addimages_' + i, function(ui, v) {
-							var imgNode = $(tinyMCE.activeEditor.selection.getContent());
-							var imgid = imgNode.attr('alt').split('|');
-							var orgUrl = imgNode.attr('src');
-							alert(v);
-							alert(orgUrl);
-							var url = orgUrl.split('id=' + imgid[1] + '&placeid').join('id=' + v + '&placeid');
-							alert(url);
-							imgNode.css({
-								'opacity': '.65'
-							});
-
-							var orgtitle = imgNode.attr('title');
-							var newtitle = orgtitle.split('(' + imgid[1] + ' ').join('(' + v + ' ');
-							alert(newtitle);
-							imgNode.attr('alt', imgid[1] + '|' + v);
-
-							imgNode.attr('title', newtitle);
-
-							imgNode.attr('data-mce-src', url);
-
-							imgNode.attr('src', url);
-
-							var newUrl = imgNode.attr('src');
-							alert(newUrl);
-							tinyMCE.activeEditor.execCommand('mceRepaint');
-							imgNode.load(function() {
-								imgNode.css({
-									'opacity': '1.0'
-								});
-							});
-						});
+						tinyMCE.activeEditor.addCommand('editor_addimages_' + i,$.wsu_maps.admin.ui.tinymce.editor_addimg);
 						i++;
 					}
 				}

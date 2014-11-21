@@ -752,6 +752,33 @@
 			}
 			return _op;
 		},
+		
+		
+		
+		createDeleteRow:function (){
+			$('.tiny.buttons.deleteplace').off().on('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				var container = $(this).closest('ol.sortable');
+				var role=container.closest('fieldset').attr('role');
+				var val=$(this).closest('li').find('input').val();
+				$('select#'+role+'_select [value="'+val+'"]').removeAttr('disabled');
+				$(this).closest('li').remove();
+				container.nestedSortable("refresh");
+				
+				
+				$('jspContainer').css('height','auto');
+				$.wsu_maps.state.api.reinitialise();
+				$.wsu_maps.mapping.reloadShapes();
+				$.wsu_maps.mapping.reloadPlaces();
+				if(container.find('.ini').length===0 && container.find('li').size()===0){
+					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+				}
+			});
+		},
+		
+		
+		
 	};
 
 
