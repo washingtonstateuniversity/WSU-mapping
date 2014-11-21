@@ -28,6 +28,9 @@ module.exports = function(grunt) {
 			front_scripts: {
 				src: [
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.util.js',
+					'src/js/wsu_maps.general.js',
+					'src/js/wsu_maps.nav.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					'src/js/infobox-1.1.12.js',
@@ -52,9 +55,10 @@ module.exports = function(grunt) {
 			admin_scripts: {
 				src: [
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.util.js',
+					'src/js/wsu_maps.general.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
-					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/utilities_general.js',
 					'src/js/jquery.mjs.nestedSortable.js',
 					'src/js/colorpicker/jpicker-1.1.6.min.js',
@@ -112,6 +116,9 @@ module.exports = function(grunt) {
 		jshint: {
 			files: [
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.util.js',
+					'src/js/wsu_maps.general.js',
+					'src/js/wsu_maps.nav.js',
 					//'src/js/modernizr-2.0.6/modernizr.min.js',
 					//'src/js/jquery.defaultvalue.js',
 					//'src/js/modernizr-2.0.6/modernizr.min.js',

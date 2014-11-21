@@ -1,7 +1,7 @@
 
 
-
-
+var pageTracker = pageTracker || null;
+var needsMoved = needsMoved || 0;
 
 /* rework to move into the default cache folder */
 function get_wsu_logo_shape(){
@@ -11,10 +11,14 @@ function get_wsu_logo_shape(){
 	
 	var Rows=shape.split('\n');
 	if(Rows.length){
-		for(i=0; i<=Rows.length-1; i++){
+		/*for(i=0; i<=Rows.length-1; i++){
 			var cord=Rows[i].split(',');
 			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
-		}
+		}*/
+		$.each(Rows.length,function(i){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		});
 	}
 	Coords.push(shaped.reverse());
 	var shaped = [];
@@ -22,40 +26,56 @@ function get_wsu_logo_shape(){
 	
 	var Rows=shape.split('\n');
 	if(Rows.length){
-		for(i=0; i<=Rows.length-1; i++){
+		/*for(i=0; i<=Rows.length-1; i++){
 			var cord=Rows[i].split(',');
 			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
-		}
+		}*/
+		$.each(Rows.length,function(i){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		});
 	}
 	Coords.push(shaped);
 	var shaped = [];
 	var shape = "-117.153010,46.737331,\n-117.154212,46.737037,\n-117.155070,46.736625,\n-117.156014,46.736155,\n-117.156487,46.735831,\n-117.155628,46.735214,\n-117.155328,46.735449,\n-117.155285,46.734802,\n-117.155242,46.734008,\n-117.155714,46.734449,\n-117.156143,46.734772,\n-117.155929,46.734978,\n-117.156658,46.735625,\n-117.157130,46.735214,\n-117.157688,46.734537,\n-117.157903,46.734096,\n-117.156873,46.733508,\n-117.156744,46.733772,\n-117.156487,46.733361,\n-117.156487,46.732919,\n-117.156572,46.732507,\n-117.156701,46.732213,\n-117.156959,46.732655,\n-117.157216,46.732890,\n-117.157044,46.733272,\n-117.157946,46.733802,\n-117.158418,46.733066,\n-117.158976,46.732302,\n-117.159662,46.731566,\n-117.160220,46.731154,\n-117.159019,46.731301,\n-117.158074,46.731478,\n-117.158160,46.730860,\n-117.158504,46.730095,\n-117.159019,46.729507,\n-117.158160,46.729684,\n-117.157130,46.730154,\n-117.156229,46.730860,\n-117.155457,46.731625,\n-117.155156,46.732184,\n-117.154899,46.731596,\n-117.154813,46.730566,\n-117.154427,46.730537,\n-117.153912,46.730566,\n-117.153482,46.730743,\n-117.153654,46.730713,\n-117.153225,46.731007,\n-117.153010,46.731507,\n-117.153010,46.732184,\n-117.153139,46.733008,\n-117.153397,46.733713,\n-117.153654,46.734537,\n-117.153869,46.735302,\n-117.153869,46.735919,\n-117.153783,46.736419,\n-117.153482,46.736802,\n-117.153311,46.737067,\n-117.153010,46.737331";	
 	var Rows=shape.split('\n');
 	if(Rows.length){
-		for(i=0; i<=Rows.length-1; i++){
+		/*for(i=0; i<=Rows.length-1; i++){
 			var cord=Rows[i].split(',');
 			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
-		}
+		}*/
+		$.each(Rows.length,function(i){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		});
 	}
 	Coords.push(shaped);
 	var shaped = [];
 	var shape = "-117.150521,46.733684,\n-117.150435,46.733066,\n-117.150307,46.732537,\n-117.150092,46.732096,\n-117.149792,46.731596,\n-117.149448,46.731213,\n-117.148976,46.730919,\n-117.148461,46.730801,\n-117.148075,46.730772,\n-117.147689,46.730801,\n-117.147346,46.730949,\n-117.147045,46.731125,\n-117.146745,46.731449,\n-117.146616,46.731860,\n-117.146616,46.732243,\n-117.146702,46.732743,\n-117.146788,46.733213,\n-117.146916,46.733508,\n-117.147131,46.733919,\n-117.147088,46.733537,\n-117.147088,46.733155,\n-117.147217,46.732802,\n-117.147431,46.732478,\n-117.147818,46.732272,\n-117.148290,46.732184,\n-117.148719,46.732213,\n-117.149277,46.732419,\n-117.149620,46.732625,\n-117.150006,46.732919,\n-117.150221,46.733155,\n-117.150350,46.733390,\n-117.150521,46.733684";	
 	var Rows=shape.split('\n');
 	if(Rows.length){
-		for(i=0; i<=Rows.length-1; i++){
+		/*for(i=0; i<=Rows.length-1; i++){
 			var cord=Rows[i].split(',');
 			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
-		}
+		}*/
+		$.each(Rows.length,function(i){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		});
 	}
 	Coords.push(shaped);
 	var shaped = [];
 	var shape = "-117.150006,46.730154,\n-117.150221,46.729684,\n-117.150693,46.729331,\n-117.151165,46.729125,\n-117.149706,46.729095,\n-117.149749,46.729566,\n-117.149835,46.729890,\n-117.150006,46.730154";	
 	var Rows=shape.split('\n');
 	if(Rows.length){
-		for(i=0; i<=Rows.length-1; i++){
+		/*for(i=0; i<=Rows.length-1; i++){
 			var cord=Rows[i].split(',');
 			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
-		}
+		}*/
+		$.each(Rows.length,function(i){
+			var cord=Rows[i].split(',');
+			shaped.push(new google.maps.LatLng(parseFloat(cord[1]),parseFloat(cord[0])));
+		});
 	}
 	Coords.push(shaped);
 	return Coords;
@@ -119,169 +139,7 @@ function apply_element(mapOjb,type,style){
 	}*/
 }
 
-$.wsu_maps.general = {
-	prep_html:function (){
-		$(' [placeholder]:not(.not) ').defaultValue();
-		$("a").each(function() {
-			$(this).attr("hideFocus", "true").css("outline", "none");
-		});
-	},
-	setGeoCoder:function (){
-		if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
-		return geocoder;
-	},
-	rebuild_example:function (tabs,mapSelector,type){
-		var _op={};
-		$.each(tabs, function(){
-			var tab = $(this);
-			var mode = tab.closest('.tabed').attr('id');//.split('__')[1].split('_')[1];
-			var ele = tab.find(':input').not('h3 :input,input:hidden');
-			
-			
-			var options={}
-				if(
-					( ele.is(':checked') 
-						|| (ele.val()!='' 
-							&& ele.not(':checkbox')
-							)
-						) 
-					&& ele.not('[type=hidden]') 
-					&& typeof( ele.attr('rel') ) !== 'undefined' 
-					){
-				   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
-				}
-			
-			_op[ mode ] = $.extend({},_op[ mode ],options); 
-		});
-		mapSelector.gmap('clear_map');	
-		$.wsu_maps.general.set_default_shape(mapSelector,type,_op);
-	},
-	/* 
-	 * DEFAULT_overlay=apply_element(map,type,_option);  << that needs fixed
-	 * with paths: get_wsu_logo_shape(), as option
-	 * TODO besides listed above is circle and rec and marker
-	 */
-	set_default_shape:function (mapSelector,type,op){
-		var capedType=type.charAt(0).toUpperCase() + type.slice(1)
-		if(typeof(op)==='undefined')op={};
-		switch(type){
-			case "polygon" :
-				// default ploygon style
-					_option = {
-							rest:{
-								options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: get_wsu_logo_shape()})
-							},
-							mouseover:{
-								options:typeof(op.mouseover)!=='undefined'?op.mouseover:{fillColor: "#a90533",fillOpacity: 0.35}
-							},
-							mouseout:{
-								options:typeof(op.mouseout)!=='undefined'?op.mouseout:{fillColor: "#a90533",fillOpacity: 0.35}
-							},
-							click:{
-								options:typeof(op.click)!=='undefined'?op.click:{fillColor: "#a90533",fillOpacity: 0.35}
-							}
-						}
-					DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
-	
-					return DEFAULT_overlay;
-				break;
-			case "rectangle" :
-					return null;
-				break;
-			case "circle" :
-					return null;
-				break;			
-			case "polyline" :
-				// default ploygon style
-				DEFAULT_polylines = [];
-				var polyline =get_wsu_logo_shape();
-						if(polyline.length){
-							for(i=0; i<=polyline.length-1; i++){
-								_option = {
-									rest:{
-										options:$.extend(typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
-									},	
-									mouseover:{
-										options:typeof(op.mouseover)!=='undefined'?op.mouseover:{strokeColor: "#a90533",strokeOpacity: 0.35}
-									},	
-									mouseout:{
-										options:typeof(op.mouseout)!=='undefined'?op.mouseout:{strokeColor: "#a90533",strokeOpacity: 0.35}
-									},	
-									click:{
-										options:typeof(op.click)!=='undefined'?op.click:{strokeColor: "#a90533",strokeOpacity: 0.35}
-									}
-								}
-								DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
-								DEFAULT_polylines.push(DEFAULT_overlay);
-								google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
-									for(i=0; i<=DEFAULT_polylines.length-1; i++){
-										DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
-									}
-								});  
-								google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
-									for(i=0; i<=DEFAULT_polylines.length-1; i++){
-										DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
-									}
-								});
-							}
-						}
-						/*_option = {path:[
-							new google.maps.LatLng("46.732537","-117.160091"),
-							new google.maps.LatLng("46.732596","-117.146745")
-							]
-						,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-						apply_element(map,capedType,_option);*/
-						
-	
-						
-						
-					return polyline;
-				break;				
-			case "marker" :
-					return null;
-				break;
-		};
-	},	
-	loadData:function (jObj,data,callback,markerCallback){
-		if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
-			$.each( data.shapes, function(i, shape) {
-				if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-					$.wsu_maps.mapping.addShapeToMap(jObj,i,shape);
-				}
-			});
-		}
-		if(typeof(data.markers)!=='undefined' &&  !$.isEmptyObject( data.markers )){
-			//var l = data.markers.length;
-			$.each( data.markers, function(i, marker) {	
-				if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
-					$.each( marker.shapes, function(index, shape) {	
-						if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-							$.wsu_maps.mapping.addShapeToMap(jObj,i,shape);
-						}
-					});
-				}
-				//alert(dump(marker));
-				//var _mid= marker.id;
-				$.wsu_maps.state.mid[i]=marker.id;
-				//var pid = marker.id;
-				$.wsu_maps.infobox.make_InfoWindow(jObj,i,marker);
-				$.wsu_maps.infobox.make_ToolTip(jObj,i,marker);
-				$.wsu_maps.markers.make_Marker(jObj,i,marker.id,marker,markerCallback);
-				
-				if(i===(data.markers.length-1) && $.isFunction(callback)){
-					callback();
-				}
-			});
-			if($('.mobile').length){
-				$.wsu_maps.geoLocate();
-			}
-		}
-		//if($.isFunction(callback))callback();return;
-	},
-	
-	
-	
-};
+
 
 
 
@@ -617,7 +475,7 @@ $.wsu_maps.infobox = {
 						}
 					});
 				});
-				addErrorReporting(marker);
+				$.wsu_maps.general.addErrorReporting(marker);
 	
 				$('.ui-tabs-panel').hover(function(){
 					$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: true});
@@ -708,14 +566,14 @@ $.wsu_maps.infobox = {
 		infoTitle = '<h2 class="header">'+ $("#name").val() +'</h2>';
 		
 		if($.isArray(item.info.content)){
-				var nav='';
-				$.each( item.info.content, function(j, html) {	
-					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
-				});
-				var content='';
-				$.each( item.info.content, function(j, html) {
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html.block+'</div></div>';
-				});
+			var nav='';
+			$.each( item.info.content, function(j, html) {	
+				nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+			});
+			var content='';
+			$.each( item.info.content, function(j, html) {
+				content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html.block+'</div></div>';
+			});
 		}else{
 			var nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
 			var content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+item.info.content+'</div></div>';
@@ -783,14 +641,14 @@ $.wsu_maps.infobox = {
 					minHeight = Math.max(minHeight, $(this).find('.content').height()); 
 				}).css('min-height',minHeight); 
 				$('#taby'+i).hover(function(){
-					ib[0].setOptions({enableEventPropagation: true});
+					$.wsu_maps.state.ib[0].setOptions({enableEventPropagation: true});
 				},function(){
-					ib[0].setOptions({enableEventPropagation: false});
+					$.wsu_maps.state.ib[0].setOptions({enableEventPropagation: false});
 				});
-				ib[0].rePosition();
+				$.wsu_maps.state.ib[0].rePosition();
 			}
 		};
-		ib[0] = new InfoBox(myOptions,function(){});
+		$.wsu_maps.state.ib[0] = new InfoBox(myOptions,function(){});
 		return item;
 	},
 };
@@ -801,7 +659,7 @@ $.wsu_maps.infobox = {
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* this is where the fuss start and needs to be 
 cleaned out or refactored back up the chain here */
-function turnOnPOI(){
+/*function turnOnPOI(){
 	var onPOIbiz = [
 	  {
 		featureType: 'poi',
@@ -816,8 +674,8 @@ function turnOnPOI(){
 'No Stations' });	
 	map.mapTypes.set('nostations', mapType);
 	map.setMapTypeId('nostations');
-}
-function turnOffPOI(){
+}*/
+/*function turnOffPOI(){
 	var offPOIbiz = [
 	  {
 		featureType: 'poi',
@@ -834,9 +692,9 @@ function turnOffPOI(){
 	map.setMapTypeId('nostations');
 	
 	
-	}
+	}*/
 
-function applyType(type){
+/*function applyType(type){
 	var applyTypeOf = [
 	  {
 		featureType: 'poi',
@@ -856,7 +714,7 @@ function applyType(type){
 	var mapType = new google.maps.StyledMapType(applyTypeOf, { name:'No Stations' });	
 	map.mapTypes.set('nostations', mapType);
 	map.setMapTypeId('nostations');
-}
+}*/
 
 /* check for deletion */	
 function getResolution(lat, zoom, tile_side){
@@ -866,7 +724,7 @@ function getResolution(lat, zoom, tile_side){
   ret.cmperpixel = ret.meterperpixel * 100;
   ret.mmperpixel = ret.meterperpixel * 1000;
   ret.pretty = ( Math.round(ret.meterprepixel) ) + ' meters/px';
-  if (ret.meterperpixel < 10)	{ ret.pretty = ( Math.round( ret.meterperpixel * 10 ) / 10 ) +' meters/px';}
+  if (ret.meterperpixel < 10)	{ ret.pretty = ( Math.round( ret.meterperpixel * 10 ) / 10 ) + ' meters/px';}
   if (ret.meterperpixel < 2)	{ ret.pretty = ( Math.round( ret.cmperpixel ) ) + ' cm/px';}
   if (ret.cmperpixel < 10)		{ ret.pretty = ( Math.round( ret.cmperpixel * 10 ) / 10 ) + ' cm/px';}
   if (ret.cmperpixel < 2) 		{ ret.pretty = ( Math.round( ret.mmperpixel ) ) + ' mm/px';}

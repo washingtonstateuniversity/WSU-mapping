@@ -1,4 +1,4 @@
-
+var availablecredits = availablecredits|| "";
 
 $.wsu_maps.admin.ui.media = {
 	ini:function(){},
@@ -40,16 +40,22 @@ $.wsu_maps.admin.ui.media = {
 			}
 	},
 	addToImgRoster:function (id,name){
-		if(typeof(id)==='undefined'||id<=0){return}
+		if(typeof(id)==='undefined'||id<=0){return;}
 		if(typeof(name)==='undefined'){name="";}
-		$.wsu_maps.admin.ui.tinymce.tinyMCEImageList.push({id:""+id,name:name,url:$.wsu_maps.state.siteroot+"media/download.castle?id="+id+"&placeid="+$.wsu_maps.admin.defaults.place_id+"&m=crop&w=250&h=250&pre=TMP"});	
+		$.wsu_maps.admin.ui.tinymce.tinyMCEImageList.push({
+			id:""+id,
+			name:name,
+			url:$.wsu_maps.state.siteroot+"media/download.castle?id="+id+"&placeid="+$.wsu_maps.admin.defaults.place_id+"&m=crop&w=250&h=250&pre=TMP"
+		});	
 	},
 	removeFromImgRoster:function (id){
-		if(typeof(id)==='undefined'||id<=0){return}
+		if(typeof(id)==='undefined'||id<=0){
+			return;
+		}
 		var i=0;			
 		for (var image in $.wsu_maps.admin.ui.tinymce.tinyMCEImageList) {
 			var node=$.wsu_maps.admin.ui.tinymce.tinyMCEImageList[image];
-			if(node.id==id){
+			if(node.id===id){
 				$.wsu_maps.admin.ui.tinymce.tinyMCEImageList.remove(i);
 			}
 			i++;
@@ -61,7 +67,7 @@ $.wsu_maps.admin.ui.media = {
 	
 };
 
-
+/*
 function updateaddImageDIV(transport){
     var temp = document.getElementById("NextImageID");
     var newdiv = document.createElement('div');
@@ -71,19 +77,19 @@ function updateaddImageDIV(transport){
     newdiv.innerHTML = transport.responseText;
     var ni = document.getElementById('NewImageHolderDiv');
     ni.appendChild(newdiv);
-}
+}*/
 
 
 
 
-
+/*
 function DeleteImage(image_id,placeId){
     $.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteImage.castle?id='+image_id+'&placeId='+placeId, function(data){});
     $("#ImageDiv div#" + image_id).remove();
 	//RemoveNode(ImageId);
 	//removeFromImgRoster(image_id);
-}
-
+}*/
+/*
 function  RemoveNode(ImageId){
 //    var parent = document.getElementById('ImageDiv');
 //    var childId = "div" + ImageId;
@@ -91,7 +97,7 @@ function  RemoveNode(ImageId){
 //    parent.removeChild(child);
     $("#ImageDiv div#" + ImageId).remove();
 }
-
+*/
 
 
 
@@ -124,9 +130,9 @@ $(function() {
             var id = $(this).attr('rel');
             var image_id = $(this).attr('title');
             var obj = $(this);
-            alertLoadingSaving();
-			obj.closest('.imageBox').find('.previewImg').css({opacity:.45});
-	        $.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteImage.castle?imageid='+image_id+'&id='+id, function(data){
+            $.wsu_maps.admin.alertLoadingSaving();
+			obj.closest('.imageBox').find('.previewImg').css({opacity:0.45});
+	        $.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteImage.castle?imageid='+image_id+'&id='+id, function(){//data){
 	            obj.closest('.imageBox').fadeOut('fast',function(){obj.closest('.imageBox').remove();});
 				$.wsu_maps.admin.ui.media.removeFromImgRoster(image_id);
 	            setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
@@ -140,7 +146,7 @@ $(function() {
 	/* for image editing */
     if($('#imageTypeDD').length>0){
         $("#imageTypeDD").on('change',function () {
-            if($(this).find(':selected').val()=='1'){
+            if($(this).find(':selected').val()==='1'){
                 $('#imageTypes').show();
             }else{
                 $('#imageTypes').hide();
@@ -161,9 +167,9 @@ $(function() {
     }
 	$('#browserBox').sortable({
 		placeholder: "ui-state-highlight",
-		update: function(event, ui) {
-		$('#browserBox .placeOrder').each(function(){
-			$(this).val($('#browserBox .placeOrder').index($(this)));
+		update: function(){//event, ui) {
+			$('#browserBox .placeOrder').each(function(){
+				$(this).val($('#browserBox .placeOrder').index($(this)));
 			});
 		}
 	});
@@ -194,8 +200,7 @@ $(function() {
 					height: "175px"
 				}, 500, function() {
 				// Animation complete.
-				
-					addToggle();
+					$.wsu_maps.admin.addToggle();
 				});
 			});
 			self.removeClass('list');
@@ -208,7 +213,6 @@ $(function() {
 	
 	$('#img_layout_choice').toggle(
 		function(){
-		
 			$('.imageBox').stop().animate({
 				width:"100%",
 				height: "175px",
@@ -220,10 +224,8 @@ $(function() {
 				$('#browserBox').addClass('list');
 				$.wsu_maps.admin.ui.media.removeToggle();
 			});
-			  
 		},
 		function(){
-		
 			$('.imageBox').stop().animate({
 				width:"175px",
 				height: "175px"
@@ -232,9 +234,8 @@ $(function() {
 				$('#img_layout_choice').removeClass('list');
 				$('#browserBox').removeClass('list');
 				$('#browserBox').addClass('grid');
-				addToggle();
+				$.wsu_maps.admin.addToggle();
 			});
-			  
 		}
 	);	
 	
