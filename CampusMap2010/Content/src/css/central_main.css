@@ -62,7 +62,7 @@ html, body {
 }
 .admin #content {
 	position: relative;
-	padding-top: 130px;
+	/*padding-top: 130px;*/
 	z-index: 1;
 	width: 100%;
 	min-width: 1026px;
