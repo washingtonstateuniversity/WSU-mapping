@@ -62,7 +62,7 @@
 <link media='screen' href='//images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
 <link media='screen' href='//images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
 
-$scriptsService.Css("~/Content/css/admin_styles.css,~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/map_admin.css,~/Content/css/colorbox.css")
+$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")
 
 
 
