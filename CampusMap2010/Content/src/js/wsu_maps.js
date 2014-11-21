@@ -1,5 +1,12 @@
 // JavaScript Document
+
+var siteroot=siteroot||"";
+var view=view||"";
+var mcv_action=mcv_action||"";
+var campus=campus||"";
+var campus_latlng_str=campus_latlng_str||"";
 (function($) {
+	
 	$.wsu_maps={};		
 	$.wsu_maps.ini=	function (){//options){
 		return '';//$.wsu_maps.ready(options);
@@ -56,5 +63,53 @@
 			$.wsu_maps.general.prep_html();
 		});
 	};
+
+
+
+	$.wsu_maps.state = {
+		mapInst:null,
+		
+		ib:[],
+		ibh:[],
+		ibHover:false,
+		ibOpen:false,
+		reopen:false,
+			
+		markerLog:[],
+		markerbyid:[],
+		mid:[],
+		shapes:[],
+		listOffset:0,
+		
+		currentControl:"ROADMAP",
+	
+		siteroot:siteroot||"",
+		view:view||"",
+		mcv_action:mcv_action||"",
+		campus:campus||"",
+		campus_latlng_str:campus_latlng_str||"",
+			
+		cTo:"",
+		cFrom:"",
+		hasDirection:false,
+		mapview:"central",
+		
+		cur_nav:"",
+		cur_mid:0,
+		hasListing:false,
+		hasDirections:false,
+	
+		
+		api:null,
+		apiL:null,
+		apiD:null,
+		api_nav:null,
+	
+		//sensor:false,
+		//lang:'',
+		//vbtimer:null,
+	
+	};
+	$.wsu_maps.state.currentLocation=$.wsu_maps.state.siteroot+$.wsu_maps.state.mapview;
 
 })(jQuery);

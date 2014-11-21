@@ -1,5 +1,5 @@
 $(function(){
-	
+
 	$.wsu_maps.state.mapInst=$('#centralMap');
 	
 	$(window).resize(function(){
@@ -72,7 +72,6 @@ $(function(){
 		$('#campusmap input[type="text"]').val('');
 		$.wsu_maps.general.prep_html();
 	}
-
 	$('#resetmap').on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();

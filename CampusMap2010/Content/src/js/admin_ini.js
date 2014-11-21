@@ -30,9 +30,6 @@ $(document).ready(function(){
 	}
 	
 
-	
-	
-
 	var cache = {},lastXhr;
 	$( "#tags" ).bind( "keydown", function( event ) {
 		if ( event.keyCode === $.ui.keyCode.TAB &&

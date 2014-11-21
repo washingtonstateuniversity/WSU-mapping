@@ -68,7 +68,7 @@
 	
 	
 	
-		timers_arr:$.wsu_maps.util.timers_arr|| [],
+		timers_arr:[],
 		clearCount:function (timer){
 			var t = $.wsu_maps.util.timers_arr;
 			if(typeof(t[timer])!=='undefined'){

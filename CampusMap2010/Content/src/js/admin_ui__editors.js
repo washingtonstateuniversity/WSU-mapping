@@ -5,7 +5,11 @@
 var campus_latlng_str=campus_latlng_str||"";
 
 
-$.wsu_maps.admin.editors = {};
+$.wsu_maps.admin.editors = {
+	place:{},
+	geometrics:{},
+	media:{}
+};
 
 
 
@@ -245,7 +249,7 @@ var $tab_title_input = $( "#tab_title"),
 	$tab_content_input = $( "#tab_content" );
 
 function int_infotabs(){
-	$.each('.dyno_tabs',function(i){//,v){
+	$.each($('.dyno_tabs'),function(i){//,v){
 		//replaced "tab_"+i for $(this).attr('id')
 		/*if(!$(this).is($(".tinyLoaded"))){
 			$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",$(this).attr('id'));

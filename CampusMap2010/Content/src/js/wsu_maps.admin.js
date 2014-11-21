@@ -1,9 +1,10 @@
 // JavaScript Document
 (function($) {
 	$.wsu_maps.admin = {
+		ui:{},
 		ini:function(){},
 		defaults:{
-			place_id:place_id||-1,
+			place_id:-1,
 		},
 		removeAlertLoadingSaving:function (){
 			$( "#dialog" ).dialog( "close" );

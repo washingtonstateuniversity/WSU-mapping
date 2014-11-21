@@ -67,31 +67,34 @@ module.exports = function(grunt) {
 			},
 			admin_scripts: {
 				src: [
-					'src/js/wsu_maps.js',
-					'src/js/wsu_maps.util.js',
-					'src/js/wsu_maps.general.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
-					'src/js/utilities_general.js',
 					'src/js/jquery.mjs.nestedSortable.js',
 					'src/js/colorpicker/jpicker-1.1.6.min.js',
+					'src/js/scrollbar/jquery.mousewheel.js',
+					'src/js/scrollbar/jquery.jscrollpane.min.js',
+					'src/js/jquery.colorbox-min.js',
+					'src/js/zeroclipboard/ZeroClipboard.js',
+					'src/js/utilities_general.js',
+
 					'src/js/infobox.js',
 					'src/js/jquery.ui.map.js',
 					'src/js/jquery.ui.map.drawingmanager.js',
 					'src/js/jquery.ui.map.extensions.js',
 					'src/js/jquery.ui.map.services.js',
 					'src/js/jquery.ui.map.overlays.js',
-					'src/js/jquery.defaultvalue.js',
-					'src/js/jquery.colorbox-min.js',
+
+					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.util.js',
+					'src/js/wsu_maps.general.js',
 					'src/js/map_editor_vars.js',
 					'src/js/admin_ui__map_functions.js',
 					'src/js/wsu_maps.infobox.js',
-					'src/js/scrollbar/jquery.mousewheel.js',
-					'src/js/scrollbar/jquery.jscrollpane.min.js',
+					'src/js/wsu_maps.admin.js',
 					'src/js/admin_ui__media.js',
 					'src/js/wsu_maps.admin.ui.tinymce.js',
 					'src/js/admin_ui__editors.js',
-					'src/js/zeroclipboard/ZeroClipboard.js',
+					
 					'src/js/init_test.js',
 					'src/js/admin_ini.js',
 					'src/js/admin_init.js'
@@ -104,9 +107,13 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n' +
 					'/*   */\n'
 			},
-			build: {
+			front_build: {
 				src: 'build/js/maps.wsu.edu.js',
 				dest: 'dis/js/maps.wsu.edu.js'
+			},
+			admin_build: {
+				src: 'build/js/admin.maps.wsu.edu.js',
+				dest: 'dis/js/admin.maps.wsu.edu.js'
 			}
 		},
 		autoprefixer: {
