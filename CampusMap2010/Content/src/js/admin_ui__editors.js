@@ -1,7 +1,7 @@
-var siteroot=siteroot||"";
-var view=view||"";
-var mcv_action=mcv_action||"";
-var campus=campus||"";
+
+
+
+
 var campus_latlng_str=campus_latlng_str||"";
 
 function loadPlaceShape(_load){//,callback){
@@ -42,7 +42,7 @@ function loadPlaceShape(_load){//,callback){
 			});
 		}
 	});*/
-	var url=siteroot+"public/getShapesJson_byIds.castle";
+	var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
 	
 	if(typeof(_load)!=="undefined"){
 		$.getJSON(url+'?callback=?&ids[]='+_load, function(data) {
@@ -64,7 +64,7 @@ function loadPlaceShape(_load){//,callback){
 function add_place_point(lat,lng,clear){
 	var i=0;
 	var marker = {};
-	marker.style = {"icon":siteroot+"Content/images/map_icons/default_icon_{$i}.png"};
+	marker.style = {"icon":$.wsu_maps.state.siteroot+"Content/images/map_icons/default_icon_{$i}.png"};
 	if( typeof(clear)!=='undefined' && clear ){
 		marker.info={};
 	}
@@ -154,11 +154,11 @@ function add_place_point(lat,lng,clear){
 		$('.blink1').blink(100);
 		$('.blink2').blink(150);
 		$('.blink3').blink(200);
-		$.each(gmap_location_types.length,function(i){//,v){
+		$.each($.wsu_maps.defaults.gmap_location_types.length,function(i){//,v){
 			var requested = {
 			  location: loca,
 			  radius:0.1,
-			  keyword:gmap_location_types[i]//,
+			  keyword:$.wsu_maps.defaults.gmap_location_types[i]//,
 			  //types : [gmap_location_types[i]]
 			};
 			var gmap = $('#place_drawing_map').gmap('get','map');
@@ -468,7 +468,7 @@ $.wsu_maps.admin.place = {
 		var lat = $('#Lat').val();
 		var lng = $('#Long').val();	
 		$('#place_drawing_map').gmap({
-				'center': (typeof(lat)==='undefined' || lat==='')? campus_latlng_str : new google.maps.LatLng(lat,lng),
+				'center': (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng),
 				'zoom':15,
 				'zoomControl': false,
 				'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},
@@ -552,7 +552,7 @@ $.wsu_maps.admin.place = {
 };
 $.wsu_maps.admin.geometrics = {
 	load_editor:function () {
-		 $('#geometrics_drawing_map').gmap({'center': campus_latlng_str , 'zoom':15 }).bind('init', function () {
+		 $('#geometrics_drawing_map').gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 }).bind('init', function () {
 			var controlOn=true;
 			//var drawingMode = false;
 			
@@ -698,7 +698,7 @@ $.wsu_maps.admin.geometrics = {
 function get_style(jObj,style_id,type){
 	//if((typeof(type)==="undefined" || type==="undefined") || (typeof(style_id)==="undefined" || style_id==="undefined") )alert('error'); return false;
 	
-	var url=siteroot+"public/get_style.castle";
+	var url=$.wsu_maps.state.siteroot+"public/get_style.castle";
 	$.getJSON(url+'?callback=?&id='+style_id, function(data) {
 		var typed = type.charAt(0).toUpperCase() + type.slice(1);
 		var overlays = jObj.gmap('get','overlays > '+typed);
@@ -711,9 +711,9 @@ function get_style(jObj,style_id,type){
 $.wsu_maps.admin.style = {
 	load_editor:function (){
 		//var gmap;
-		campus_latlng_str = '46.73276783809271,-117.15300628829834';
+		$.wsu_maps.state.campus_latlng_str = '46.73276783809271,-117.15300628829834';
 	
-		 $('#style_map').gmap({'center': campus_latlng_str , 'zoom':15,'disableDoubleClickZoom':true,'draggable':false,'zoomControl': false,'mapTypeControl': false,'panControl':false,'streetViewControl': false  }).bind('init', function () {
+		 $('#style_map').gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15,'disableDoubleClickZoom':true,'draggable':false,'zoomControl': false,'mapTypeControl': false,'panControl':false,'streetViewControl': false  }).bind('init', function () {
 			$('#style_map').gmap('stop_scroll_zoom');
 			
 			$.wsu_maps.general.set_default_shape($('#style_map'),$('#style_of').val());
@@ -845,10 +845,10 @@ $.wsu_maps.admin.view = {
 		//var width = $('#width').val();
 		//var height = $('#height').val();
 		var options = {
-			'center': (typeof(lat)==='undefined' || lat==='')? campus_latlng_str : new google.maps.LatLng(lat,lng) ,
+			'center': (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
 			'zoom':15
 		};
-		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 		
 		$('.codeurllink').on('click',function(){
 			window.open($(this).prev('.codeurl').text());
@@ -1096,7 +1096,7 @@ $.wsu_maps.admin.view = {
 			if(!waiting){
 				waiting = true;
 				//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
-				$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+view.replace("/",""), function(data) {
+				$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+$.wsu_maps.state.view.replace("/",""), function(data) {
 					if(data==="true"){
 						$('.aliasState').addClass('error');
 						$('.aliasState').removeClass('ok');
@@ -1122,7 +1122,7 @@ $.wsu_maps.admin.view = {
 					self.closest('fieldset').find('.subFilter').hide();
 					self.closest('fieldset').find('.mainFilter').hide();
 				}else{
-					$.getJSON(siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
+					$.getJSON($.wsu_maps.state.siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
 						if(data==="false"){
 							alert("false");
 							$.colorbox({
@@ -1169,7 +1169,7 @@ $.wsu_maps.admin.view = {
 			$(".onsubfliterList").on('change',function () {
 				var self=$(this);
 				var role = self.closest('fieldset').attr('role');
-				$.getJSON(siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
+				$.getJSON($.wsu_maps.state.siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
 					self.closest('fieldset').find('.finFill').html(function(){
 						var str="<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
 						$.each(data,function(i,v){
@@ -1189,7 +1189,7 @@ $.wsu_maps.admin.view = {
 };
 	
 function reloadPlaces(){
-	var url=siteroot+"public/getPlaceJson_byIds.castle";
+	var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
 	var ids;
 	
 	$.each($('[name="placelist[]"]'),function(){
@@ -1212,7 +1212,7 @@ function reloadPlaces(){
 	//alert('order::'+ids);
 }
 function reloadShapes(){
-	var url=siteroot+"public/getShapesJson_byIds.castle";
+	var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
 	var ids;
 	$.each($('[name="geolist[]"]'),function(){
 			ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();

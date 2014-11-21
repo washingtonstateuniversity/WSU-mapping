@@ -7,8 +7,8 @@ $.wsu_maps.admin.ui.media = {
 		var image_Caption='';
 		var HTML ='<span class="imageBox">';
 			HTML+='<input type="hidden" value="'+image_id+'" name="images['+image_id+'].id"  class="placeImages">';
-			HTML+='<img src="'+siteroot+'media/download.castle?id='+image_id+'&placeid='+place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
-			HTML+='<a title="'+image_id+'" rel="'+place_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
+			HTML+='<img src="'+$.wsu_maps.state.siteroot+'media/download.castle?id='+image_id+'&placeid='+$.wsu_maps.admin.defaults.place_id+'&m=crop&w=175&h=175&pre=borwser" class="previewImg" />';
+			HTML+='<a title="'+image_id+'" rel="'+$.wsu_maps.admin.defaults.place_id+'" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">';
 			HTML+='<span class="ui-icon ui-icon-trash"></span>';
 			HTML+='</a>';
 			
@@ -42,15 +42,15 @@ $.wsu_maps.admin.ui.media = {
 	addToImgRoster:function (id,name){
 		if(typeof(id)==='undefined'||id<=0){return}
 		if(typeof(name)==='undefined'){name="";}
-		tinyMCEImageList.push({id:""+id,name:name,url:siteroot+"media/download.castle?id="+id+"&placeid="+place_id+"&m=crop&w=250&h=250&pre=TMP"});	
+		$.wsu_maps.admin.ui.tinymce.tinyMCEImageList.push({id:""+id,name:name,url:$.wsu_maps.state.siteroot+"media/download.castle?id="+id+"&placeid="+$.wsu_maps.admin.defaults.place_id+"&m=crop&w=250&h=250&pre=TMP"});	
 	},
 	removeFromImgRoster:function (id){
 		if(typeof(id)==='undefined'||id<=0){return}
 		var i=0;			
-		for (var image in tinyMCEImageList) {
-			var node=tinyMCEImageList[image];
+		for (var image in $.wsu_maps.admin.ui.tinymce.tinyMCEImageList) {
+			var node=$.wsu_maps.admin.ui.tinymce.tinyMCEImageList[image];
 			if(node.id==id){
-				tinyMCEImageList.remove(i);
+				$.wsu_maps.admin.ui.tinymce.tinyMCEImageList.remove(i);
 			}
 			i++;
 		}
@@ -78,7 +78,7 @@ function updateaddImageDIV(transport){
 
 
 function DeleteImage(image_id,placeId){
-    $.get(siteroot+view+'DeleteImage.castle?id='+image_id+'&placeId='+placeId, function(data){});
+    $.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteImage.castle?id='+image_id+'&placeId='+placeId, function(data){});
     $("#ImageDiv div#" + image_id).remove();
 	//RemoveNode(ImageId);
 	//removeFromImgRoster(image_id);
@@ -126,7 +126,7 @@ $(function() {
             var obj = $(this);
             alertLoadingSaving();
 			obj.closest('.imageBox').find('.previewImg').css({opacity:.45});
-	        $.get(siteroot+view+'DeleteImage.castle?imageid='+image_id+'&id='+id, function(data){
+	        $.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteImage.castle?imageid='+image_id+'&id='+id, function(data){
 	            obj.closest('.imageBox').fadeOut('fast',function(){obj.closest('.imageBox').remove();});
 				$.wsu_maps.admin.ui.media.removeFromImgRoster(image_id);
 	            setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);

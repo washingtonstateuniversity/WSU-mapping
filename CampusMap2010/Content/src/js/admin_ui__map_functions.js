@@ -671,7 +671,7 @@ $.wsu_maps.infobox = {
 			//$('#taby'+i).tabs();
 			//alert('tring to tab it, dabnab it, from the INI');
 		});
-	}
+	},
 	
 	
 	
@@ -702,7 +702,7 @@ $.wsu_maps.infobox = {
 		}
 		var mainimage = "";
 		if($(".placeImages").length){
-			mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
+			mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+$.wsu_maps.state.siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
 		}
 		var infoTitle = "";
 		infoTitle = '<h2 class="header">'+ $("#name").val() +'</h2>';

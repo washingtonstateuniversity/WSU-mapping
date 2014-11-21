@@ -1,7 +1,5 @@
-var siteroot=siteroot||"";
-var view=view||"";
-var mcv_action=mcv_action||"";
-	
+
+
 $(document).ready(function(){
 	var ed=ed||false;
 	if($('.admin.view._editor').length){
@@ -123,7 +121,7 @@ $(document).ready(function(){
 				}, 250, function() {
 					$(href).addClass('tabactive');
 					obj.addClass('active ui-state-hover');
-					$.cookie('tabedArea', href, {expires: 1, path: '/'+view+mcv_action+'.castle' });
+					$.cookie('tabedArea', href, {expires: 1, path: '/'+$.wsu_maps.state.view+$.wsu_maps.state.mcv_action+'.castle' });
 					window.history.replaceState(null, null,  href);
 				});
 			});

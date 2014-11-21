@@ -168,6 +168,7 @@ module.exports = function(grunt) {
 					MutationObserver:true,
 					google:true,
 					tinyMCE:true,
+					tinymce:true,
 					addthis:true,
 				}
 			}
