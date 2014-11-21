@@ -29,11 +29,11 @@
 				jObj.gmap('clear','overlays');
 				if($(this).is($('.active'))){
 					$.wsu_maps.nav.setup_Navscrollbar();
-					updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
+					$.wsu_maps.updateMap(jObj,encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 				}else{
 					if($('#directions-panel').length){
 						$('#directions').trigger('click');
-						reset_listingarea();
+						$.wsu_maps.general.reset_listingarea();
 					}else{
 						$.wsu_maps.listings.reset_listings();
 					}
@@ -56,7 +56,7 @@
 					});
 					$.wsu_maps.nav.reset_Navscrollbar();
 					
-					updateMap(jObj,encodeURI(params.substring(0, params.length - 1)),true);
+					$.wsu_maps.updateMap(jObj,encodeURI(params.substring(0, params.length - 1)),true);
 				}else{
 					$.wsu_maps.nav.destroy_Navscrollbar(function(){});
 					$('*:focus').blur();

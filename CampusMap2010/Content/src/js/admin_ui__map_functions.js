@@ -2,7 +2,7 @@
 
 var pageTracker = pageTracker || null;
 var needsMoved = needsMoved || 0;
-
+var map = map || null;
 
 
 
@@ -19,64 +19,7 @@ var needsMoved = needsMoved || 0;
  * }
  *
 */
-function apply_element(mapOjb,type,style){
-	mapOjb.gmap('addShape', type, $.wsu_maps.general.filter_map_element(type,style.rest.options), function(shape){
-		$(shape).click(function(){
-			if(style.click){
-				if(style.click.options){
-					mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.click.options),this);
-				}
-				if(style.click.callback){
-					style.click.callback();
-				}
-			}
-		 }).mouseover(function(){
-			 if(style.mouseover){
-				 if(style.mouseover.options){
-					 mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.mouseover.options),this);
-				 }
-				 if(style.mouseover.callback){
-					 style.mouseover.callback();
-				 }
-			 }
-		}).mouseout(function(){
-			if(style.rest){
-				if(style.rest.options){
-					mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.rest.options),this);
-				}
-				if(style.rest.callback){
-					style.rest.callback();
-				}
-			}
-		}).dblclick(function(){
-			if(style.dblclick){
-				if(style.dblclick.options){
-					mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.dblclick.options),this);
-				}
-				if(style.dblclick.callback){
-					style.dblclick.callback();
-				}
-			}
-		})
-		.trigger('mouseover')
-		.trigger('mouseout');
-		
-		var placePos = mapOjb.gmap("get_map_center");
-		
-		if(typeof(shape)!=="undefined"){
-			//mapOjb.gmap("move_shape",shape,placePos);
-		}
-		
-		
-	});
-	/*,
-	rightclick: function(){
-		if(style.dblclick){
-			if(style.rightclick.options)mapOjb.gmap('get','map').setCenter(filter_map_element(type,style.rightclick.options),this);
-			if(style.rightclick.callback)style.hover.callback();
-		}
-	}*/
-}
+
 
 
 
@@ -150,19 +93,27 @@ cleaned out or refactored back up the chain here */
 	map.setMapTypeId('nostations');
 }*/
 
-/* check for deletion */	
+/* check for deletion 
 function getResolution(lat, zoom, tile_side){
-  var grid = tile_side || 256;
-  var ret = {};
-  ret.meterperpixel = 2 * Math.PI * 6378100 * Math.cos(lat * Math.PI/180) / Math.pow(2, zoom) / grid;
-  ret.cmperpixel = ret.meterperpixel * 100;
-  ret.mmperpixel = ret.meterperpixel * 1000;
-  ret.pretty = ( Math.round(ret.meterprepixel) ) + ' meters/px';
-  if (ret.meterperpixel < 10)	{ ret.pretty = ( Math.round( ret.meterperpixel * 10 ) / 10 ) + ' meters/px';}
-  if (ret.meterperpixel < 2)	{ ret.pretty = ( Math.round( ret.cmperpixel ) ) + ' cm/px';}
-  if (ret.cmperpixel < 10)		{ ret.pretty = ( Math.round( ret.cmperpixel * 10 ) / 10 ) + ' cm/px';}
-  if (ret.cmperpixel < 2) 		{ ret.pretty = ( Math.round( ret.mmperpixel ) ) + ' mm/px';}
-  return ret;
+	var grid = tile_side || 256;
+	var ret = {};
+	ret.meterperpixel = 2 * Math.PI * 6378100 * Math.cos(lat * Math.PI/180) / Math.pow(2, zoom) / grid;
+	ret.cmperpixel = ret.meterperpixel * 100;
+	ret.mmperpixel = ret.meterperpixel * 1000;
+	ret.pretty = ( Math.round(ret.meterprepixel) ) + ' meters/px';
+	if (ret.meterperpixel < 10) {
+	  ret.pretty = ( Math.round( ret.meterperpixel * 10 ) / 10 ) + ' meters/px';
+	}
+	if (ret.meterperpixel < 2) {
+		ret.pretty = ( Math.round( ret.cmperpixel ) ) + ' cm/px';
+	}
+	if (ret.cmperpixel < 10) {
+		ret.pretty = ( Math.round( ret.cmperpixel * 10 ) / 10 ) + ' cm/px';
+	}
+	if (ret.cmperpixel < 2) {
+		ret.pretty = ( Math.round( ret.mmperpixel ) ) + ' mm/px';
+	}
+	return ret;
 }
 function setZoomTooltip(){
 	var res = getResolution(map.getCenter().lat(), map.getZoom()).pretty;
@@ -174,7 +125,7 @@ function setZoomTooltip(){
 		}
 	}
 }
-
+*/	
 
 
 

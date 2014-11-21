@@ -107,7 +107,7 @@ $.wsu_maps.defaults = {
 
 };
 
-
+/*
 
 var ib = [];
 var timeouts;
@@ -115,7 +115,7 @@ var timeouts;
 var map;
 var infowindow,
 	service;
-
+*/
 
 //var	rest_Options={fillColor: "#a90533"};
 //var	hover_Options={fillColor: "#5f1212"};	

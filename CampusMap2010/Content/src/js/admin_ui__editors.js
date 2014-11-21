@@ -1532,16 +1532,16 @@ function loadJsonData(jObj,data,callback,markerCallback){
 						if($.isFunction(markerCallback))markerCallback(marker);
 					})
 				.click(function() {
-						open_info(jObj,i);
+						$.wsu_maps.infobox.open_info(jObj,i);
 					})
 				.rightclick(function(event){showContextMenu(event.latLng);})
 				.mouseover(function(event){
 					
-					open_toolTip(jObj,i);
+					$.wsu_maps.infobox.open_toolTip(jObj,i);
 					
 				})
 				.mouseout(function(event){
-					close_toolTips();
+					$.wsu_maps.infobox.close_toolTips();
 				});
 				
 				

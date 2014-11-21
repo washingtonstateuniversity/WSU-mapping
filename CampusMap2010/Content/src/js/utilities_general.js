@@ -106,7 +106,8 @@
 		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
 		return !$.cookie(key);
 	};
-}));//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+}));
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // WSU map utilities
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------	
 
@@ -159,44 +160,44 @@ function param(name,url){
 */
 	
 ///* hash handlings  *///
-	$(window).bind('load', function() {
-		//If we use it as docs page, go to the selected option
-		if(window.location.hash && window.location.href.indexOf('/docs/') !== -1) {
-			gotoHash();
+$(window).bind('load', function() {
+	//If we use it as docs page, go to the selected option
+	if(window.location.hash && window.location.href.indexOf('/docs/') !== -1) {
+		gotoHash();
+	}
+});
+/*function listenToHashChange() {
+	var savedHash = window.location.hash;
+	window.setInterval(function() {
+		if(savedHash !== window.location.hash) {
+			savedHash = window.location.hash;
+			if(window.location.hash && window.location.href.indexOf('/docs/') !== -1){
+				gotoHash();
+			}
+			//Since we have bind click event on demos link and load hash on document.ready
+			//if(window.location.hash && window.location.href.indexOf('/demos/') != -1)
+			// loadHash();
+		}
+	},200);
+}*/
+/*function loadHash() {
+	$('#demo-config-menu a').each(function() {
+		if(this.getAttribute('href').indexOf('/'+window.location.hash.substr(1)+'.html') !== -1) {
+			$(this).parents('ul').find('li').removeClass('demo-config-on');
+			$(this).parent().addClass('demo-config-on');
+			loadDemo(this.getAttribute('href'));
 		}
 	});
-	/*function listenToHashChange() {
-		var savedHash = window.location.hash;
-		window.setInterval(function() {
-			if(savedHash !== window.location.hash) {
-				savedHash = window.location.hash;
-				if(window.location.hash && window.location.href.indexOf('/docs/') !== -1){
-					gotoHash();
-				}
-				//Since we have bind click event on demos link and load hash on document.ready
-				//if(window.location.hash && window.location.href.indexOf('/demos/') != -1)
-				// loadHash();
-			}
-		},200);
-	}*/
-	/*function loadHash() {
-		$('#demo-config-menu a').each(function() {
-			if(this.getAttribute('href').indexOf('/'+window.location.hash.substr(1)+'.html') !== -1) {
-				$(this).parents('ul').find('li').removeClass('demo-config-on');
-				$(this).parent().addClass('demo-config-on');
-				loadDemo(this.getAttribute('href'));
-			}
-		});
-	}*/
-	function gotoHash() {
-		var hash = window.location.hash.substr(1).split('-');
-		var go = hash[1] ? hash[1] : hash[0];
-		var resolve = { overview: 0,option: 1,event: 2,method: 3,theming: 4 };
-		$("#widget-docs").tabs('select', resolve[hash[0]]);
-		var h3 = $("#widget-docs a:contains("+go+")").parent();
-		h3.parent().parent().toggleClass("param-open").end().next().toggle();
-		$(document).scrollTop(h3.parent().effect('highlight', null, 2000).offset().top);
-	}
+}*/
+function gotoHash() {
+	var hash = window.location.hash.substr(1).split('-');
+	var go = hash[1] ? hash[1] : hash[0];
+	var resolve = { overview: 0,option: 1,event: 2,method: 3,theming: 4 };
+	$("#widget-docs").tabs('select', resolve[hash[0]]);
+	var h3 = $("#widget-docs a:contains("+go+")").parent();
+	h3.parent().parent().toggleClass("param-open").end().next().toggle();
+	$(document).scrollTop(h3.parent().effect('highlight', null, 2000).offset().top);
+}
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // jeremy's timer funtions
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -46,7 +46,6 @@ module.exports = function(grunt) {
 					'src/js/jPrint.js',
 					'src/js/map_editor_vars.js',
 					'src/js/wsu_maps.infobox.js',
-					'src/js/map_functions.js',
 					'src/js/init_test.js',
 					'src/js/map_ini.js',
 					'src/js/addthis_ini.js'
@@ -72,7 +71,6 @@ module.exports = function(grunt) {
 					'src/js/jquery.defaultvalue.js',
 					'src/js/jquery.colorbox-min.js',
 					'src/js/map_editor_vars.js',
-					'src/js/map_functions.js',
 					'src/js/admin_ui__map_functions.js',
 					'src/js/wsu_maps.infobox.js',
 					'src/js/scrollbar/jquery.mousewheel.js',
@@ -136,7 +134,6 @@ module.exports = function(grunt) {
 					//'src/js/jquery.defaultvalue.js',
 					//'src/js/jquery.colorbox-min.js',
 					'src/js/map_editor_vars.js',
-					'src/js/map_functions.js',
 					'src/js/admin_ui__map_functions.js',
 					'src/js/wsu_maps.infobox.js',
 					//'src/js/scrollbar/jquery.mousewheel.js',
