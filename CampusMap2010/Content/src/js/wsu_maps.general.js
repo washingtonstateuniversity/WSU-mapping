@@ -1,15 +1,14 @@
-// JavaScript Document
 (function($) {
 	
 	$.wsu_maps.general = {
 		prep_html:function (){
 			$(' [placeholder]:not(.not) ').defaultValue();
-			$("a").each(function() {
+			$.each($("a"),function() {
 				$(this).attr("hideFocus", "true").css("outline", "none");
 			});
 		},
 		setGeoCoder:function (){
-			if(typeof(geocoder)==='undefined'){geocoder = new google.maps.Geocoder();}
+			var geocoder = geocoder||new google.maps.Geocoder();
 			return geocoder;
 		},
 		rebuild_example:function (tabs,mapSelector,type){
@@ -20,7 +19,7 @@
 				var ele = tab.find(':input').not('h3 :input,input:hidden');
 				
 				
-				var options={}
+				var options={};
 				var drity_check =  ( ele.is(':checked') || (ele.val()!=='' && ele.not(':checkbox') ) ) ;
 				if( drity_check && ele.not('[type=hidden]') && typeof( ele.attr('rel') ) !== 'undefined' ){
 				   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
@@ -37,15 +36,16 @@
 		 * TODO besides listed above is circle and rec and marker
 		 */
 		set_default_shape:function (mapSelector,type,op){
-			var capedType=type.charAt(0).toUpperCase() + type.slice(1)
+			var capedType=type.charAt(0).toUpperCase() + type.slice(1);
 			op=op||{};
 			var return_item;
+			var DEFAULT_overlay;
 			switch(type){
 				case "polygon" :
 					// default ploygon style
 						_option = {
 								rest:{
-									options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: get_wsu_logo_shape()})
+									options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: $.wsu_maps.defaults.get_wsu_logo_shape()})
 								},
 								mouseover:{
 									options:typeof(op.mouseover)!=='undefined'?op.mouseover:{fillColor: "#a90533",fillOpacity: 0.35}
@@ -56,8 +56,8 @@
 								click:{
 									options:typeof(op.click)!=='undefined'?op.click:{fillColor: "#a90533",fillOpacity: 0.35}
 								}
-							}
-						var DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
+							};
+						DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
 		
 						return_item=DEFAULT_overlay;
 					break;
@@ -70,55 +70,51 @@
 				case "polyline" :
 					// default ploygon style
 					var DEFAULT_polylines = [];
-					var polyline =get_wsu_logo_shape();
-							if(polyline.length){
-								for(var i=0; i<=polyline.length-1; i++){
-									_option = {
-										rest:{
-											options:$.extend(typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
-										},	
-										mouseover:{
-											options:typeof(op.mouseover)!=='undefined'?op.mouseover:{strokeColor: "#a90533",strokeOpacity: 0.35}
-										},	
-										mouseout:{
-											options:typeof(op.mouseout)!=='undefined'?op.mouseout:{strokeColor: "#a90533",strokeOpacity: 0.35}
-										},	
-										click:{
-											options:typeof(op.click)!=='undefined'?op.click:{strokeColor: "#a90533",strokeOpacity: 0.35}
-										}
-									}
-									DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
-									DEFAULT_polylines.push(DEFAULT_overlay);
-									google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
-										for(var j=0; j<=DEFAULT_polylines.length-1; j++){
-											DEFAULT_polylines[j].setOptions({strokeColor: "#a90533"}); 
-										}
-									});  
-									google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
-										for(var k=0; k<=DEFAULT_polylines.length-1; k++){
-											DEFAULT_polylines[k].setOptions({strokeColor: "#5f1212"}); 
-										}
-									});
-								}
+					var polyline = $.wsu_maps.defaults.get_wsu_logo_shape();
+					$.each(polyline,function(i){
+						_option = {
+							rest:{
+								options:$.extend(op.rest||{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
+							},	
+							mouseover:{
+								options:op.mouseover||{strokeColor: "#a90533",strokeOpacity: 0.35}
+							},	
+							mouseout:{
+								options:op.mouseout||{strokeColor: "#a90533",strokeOpacity: 0.35}
+							},	
+							click:{
+								options:op.click||{strokeColor: "#a90533",strokeOpacity: 0.35}
 							}
-							/*_option = {path:[
-								new google.maps.LatLng("46.732537","-117.160091"),
-								new google.maps.LatLng("46.732596","-117.146745")
-								]
-							,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-							apply_element(map,capedType,_option);*/
-							
-		
-							
-							
+						};
+						DEFAULT_overlay=apply_element(mapSelector,capedType,_option);
+						DEFAULT_polylines.push(DEFAULT_overlay);
+						google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
+							$.each(DEFAULT_polylines,function(i){
+								DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
+							});
+						});  
+						google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
+							$.each(DEFAULT_polylines,function(i){
+								DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
+							});
+						});
+					});
+
+					/*_option = {path:[
+						new google.maps.LatLng("46.732537","-117.160091"),
+						new google.maps.LatLng("46.732596","-117.146745")
+						]
+					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
+					apply_element(map,capedType,_option);*/
+
 						return_item=polyline;
 					break;				
 				case "marker" :
 						return_item=null;
 					break;
-			};
+			}
 			return return_item;
-		},	
+		},
 		loadData:function (jObj,data,callback,markerCallback){
 			if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 				$.each( data.shapes, function(i, shape) {
@@ -163,7 +159,7 @@
 				$.colorbox.remove();
 				makeEmbeder();
 			});
-		},	
+		},
 		addErrorReporting:function (marker){
 			$('.errorReporting').off().on("click",function(e){
 				e.stopPropagation();
@@ -225,8 +221,82 @@
 				});
 			});	
 			
-		}
-		
+		},
+		/*
+		 * returns gmap element options from a possibly dirty source
+		 * for a type ie:polygon
+		 *	example:
+		 *		op={fillColor="#000"}
+		 *		but type == "polyline"
+		 *		filter_map_element(type,op) returns op={}
+		 *		as polyline doesn't support fillColor
+		 *	
+		 *	Look to abstarct build from a list may-be since it's just
+		 *	a filter if in proper json ---euff
+		*/
+		filter_map_element:function (type,op){
+			if(typeof(op)==="undefined"){
+				return;
+			}
+			var _op={};
+			typeof(op.clickable)!=="undefined"		?_op.clickable=op.clickable:null;
+			typeof(op.visible)!=="undefined"		?_op.visible=op.visible:null;
+			typeof(op.zIndex)!=="undefined"		?_op.zIndex=op.zIndex:null;
+			
+			switch(type.toLowerCase()){
+				case "polygon" :
+							typeof(op.editable)!=="undefined"		?_op.editable=op.editable:null;
+							typeof(op.geodesic)!=="undefined"		?_op.geodesic=op.geodesic:null;
+							typeof(op.paths)!=="undefined"			?_op.paths=op.paths:null;
+							typeof(op.strokeColor)!=="undefined"		?_op.strokeColor=op.strokeColor:null;
+							typeof(op.strokeOpacity)!=="undefined"	?_op.strokeOpacity=op.strokeOpacity:null;
+							typeof(op.strokeWeight)!=="undefined"	?_op.strokeWeight=op.strokeWeight:null;
+							typeof(op.fillColor)!=="undefined"		?_op.fillColor=op.fillColor:null;
+							typeof(op.fillOpacity)!=="undefined"		?_op.fillOpacity=op.fillOpacity:null;
+					break;
+				case "rectangle" :
+							typeof(op.editable)!=="undefined"		?_op.editable=op.editable:null;
+							typeof(op.bounds)!=="undefined"			?_op.bounds=op.bounds:null;
+							typeof(op.strokeColor)!=="undefined"		?_op.strokeColor=op.strokeColor:null;
+							typeof(op.strokeOpacity)!=="undefined"	?_op.strokeOpacity=op.strokeOpacity:null;
+							typeof(op.strokeWeight)!=="undefined"	?_op.strokeWeight=op.strokeWeight:null;
+							typeof(op.fillColor)!=="undefined"		?_op.fillColor=op.fillColor:null;
+							typeof(op.fillOpacity)!=="undefined"		?_op.fillOpacity=op.fillOpacity:null;
+					break;
+				case "circle" :
+							typeof(op.editable)!=="undefined"		?_op.editable=op.editable:null;
+							typeof(op.center)!=="undefined"			?_op.center=op.center:null;
+							typeof(op.radius)!=="undefined"			?_op.radius=op.radius:null;
+							typeof(op.strokeColor)!=="undefined"		?_op.strokeColor=op.strokeColor:null;
+							typeof(op.strokeOpacity)!=="undefined"	?_op.strokeOpacity=op.strokeOpacity:null;
+							typeof(op.strokeWeight)!=="undefined"	?_op.strokeWeight=op.strokeWeight:null;
+							typeof(op.fillColor)!=="undefined"		?_op.fillColor=op.fillColor:null;
+							typeof(op.fillOpacity)!=="undefined"		?_op.fillOpacity=op.fillOpacity:null;
+					break;			
+				case "polyline" :
+							typeof(op.editable)!=="undefined"		?_op.editable=op.editable:null;
+							typeof(op.geodesic)!=="undefined"		?_op.geodesic=op.geodesic:null;
+							typeof(op.path)!=="undefined"		?_op.path=op.path:null;
+							typeof(op.strokeColor)!=="undefined"		?_op.strokeColor=op.strokeColor:null;
+							typeof(op.strokeOpacity)!=="undefined"	?_op.strokeOpacity=op.strokeOpacity:null;
+							typeof(op.strokeWeight)!=="undefined"	?_op.strokeWeight=op.strokeWeight:null;
+					break;				
+				case "marker" :
+							typeof(op.animation)!=="undefined"		?_op.animation=op.animation:null;
+							typeof(op.cursor)!=="undefined"			?_op.cursor=op.cursor:null;
+							typeof(op.draggable)!=="undefined"		?_op.draggable=op.draggable:null;
+							typeof(op.flat)!=="undefined"		?_op.flat=op.flat:null;
+							typeof(op.icon)!=="undefined"			?_op.icon=op.icon:null;
+							typeof(op.optimized)!=="undefined"		?_op.optimized=op.optimized:null;
+							typeof(op.position)!=="undefined"		?_op.position=op.position:null;					
+							typeof(op.raiseOnDrag)!=="undefined"		?_op.raiseOnDrag=op.raiseOnDrag:null;					
+							typeof(op.shadow)!=="undefined"			?_op.shadow=op.shadow:null;	
+							typeof(op.shape)!=="undefined"			?_op.shape=op.shape:null;						
+							typeof(op.title)!=="undefined"			?_op.title=op.title:null;	
+					break;
+			}
+			return _op;
+		},
 	};
 
 

@@ -7,7 +7,9 @@
 
 	$.wsu_maps.resizeBg=function(obj,height,width) {
 		obj.height($(window).height()-height);
-		if(typeof(width)!=="undefined"&&width>0)obj.width($(window).width()-width);
+		if(typeof(width)!=="undefined"&&width>0){
+			obj.width($(window).width()-width);
+		}
 	};
 
 })(jQuery);

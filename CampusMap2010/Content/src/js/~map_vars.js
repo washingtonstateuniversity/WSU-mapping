@@ -1,7 +1,7 @@
 
 var ib = [];
 var timeouts;
-var DOMAIN='http://localhost:50759';
+
 
 
 
@@ -133,19 +133,19 @@ var tinyShadow = new google.maps.MarkerImage(
     new google.maps.Point(5,1)
 );
 var imageNormal = new google.maps.MarkerImage(
-	DOMAIN+"/Content/images/square.png",
+	$.wsu_maps.defaults.DOMAIN+"/Content/images/square.png",
 	new google.maps.Size(11, 11),
 	new google.maps.Point(0, 0),
 	new google.maps.Point(6, 6)
 );
 var imageHover = new google.maps.MarkerImage(
-	DOMAIN+"/Content/images/square_over.png",
+	$.wsu_maps.defaults.DOMAIN+"/Content/images/square_over.png",
 	new google.maps.Size(11, 11),
 	new google.maps.Point(0, 0),
 	new google.maps.Point(6, 6)
 );
 var imageNormalMidpoint = new google.maps.MarkerImage(
-	DOMAIN+"/Content/images/square_transparent.png",
+	$.wsu_maps.defaults.DOMAIN+"/Content/images/square_transparent.png",
 	new google.maps.Size(11, 11),
 	new google.maps.Point(0, 0),
 	new google.maps.Point(6, 6)

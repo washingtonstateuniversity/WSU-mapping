@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 	
 	
-	var DOMAIN=DOMAIN||"";
+
 	var cache = {},lastXhr;
 	$( "#tags" ).bind( "keydown", function( event ) {
 		if ( event.keyCode === $.ui.keyCode.TAB &&
@@ -51,7 +51,7 @@ $(document).ready(function(){
 					return;
 				}
 	
-				lastXhr = $.getJSON( DOMAIN+"/public/get_pace_type.castle", request, function( data, status, xhr ) {
+				lastXhr = $.getJSON( $.wsu_maps.defaults.DOMAIN+"/public/get_pace_type.castle", request, function( data, status, xhr ) {
 					cache[ term ] = data;
 					if ( xhr === lastXhr ) {
 						response( $.ui.autocomplete.filter(

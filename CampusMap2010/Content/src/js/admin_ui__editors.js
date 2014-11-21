@@ -452,13 +452,7 @@ function watchMediaTab(){
 			$('#viewTab').remove();
 		}
 	}
-function setup_massTags(){
-	$('#massTagging').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				$('#massTaggingarea').slideToggle();
-			});	
-}
+
 
 /*
  * EDITOR CONTORL SCRIPTS
@@ -547,7 +541,7 @@ $.wsu_maps.admin.place = {
 					self.find('.'+tar).addClass('active');
 				});
 		});
-		setup_massTags();
+		$.wsu_maps.admin.setup_massTags();
 	}
 };
 $.wsu_maps.admin.geometrics = {
@@ -1088,7 +1082,7 @@ $.wsu_maps.admin.view = {
 		});
 		*/
 		
-		setup_massTags();
+		$.wsu_maps.admin.setup_massTags();
 		
 		var waiting = false;	
 		$('#urlAlias').on('keyup',function(){
