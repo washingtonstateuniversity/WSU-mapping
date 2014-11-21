@@ -21,9 +21,22 @@ module.exports = function(grunt) {
 			tasks: [ 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' ]
 		},
 		concat: {
-			styles: {
-				src: ['src/css/*.css'],
-				dest: 'build/css/styles.css',
+			front_styles: {
+				src: [
+					'src/css/central_main.css',
+					'src/css/map_admin.css',
+					'src/css/share_link.css',
+					'src/css/reactive.css'
+				],
+				dest: 'build/css/front.styles.css',
+			},
+			admin_styles: {
+				src: [
+					'src/css/central_main.css',
+					'src/css/map_admin.css',
+					'src/css/admin_styles.css',
+				],
+				dest: 'build/css/admin.styles.css',
 			},
 			front_scripts: {
 				src: [
@@ -100,16 +113,21 @@ module.exports = function(grunt) {
 			options: {
 				browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie 8', 'ie 9','ie 10']
 			},
-			single_file: {
-				src: 'build/css/styles.css',
-				dest: 'build/_precss/style.css'
+			front_styles: {
+				src: 'build/css/front.styles.css',
+				dest: 'build/_precss/front.styles.css'
+			},
+			admin_styles: {
+				src: 'build/css/admin.styles.css',
+				dest: 'build/_precss/admin.styles.css'
 			},
 		},
 		cssmin: {
 			combine: {
 				files: {
 					// Hmmm, in reverse order
-					'dis/css/style.css': ['build/_precss/style.css']
+					'dis/css/admin.styles.css': ['build/_precss/admin.styles.css'],
+					'dis/css/front.styles.css': ['build/_precss/front.styles.css'],
 				}
 			}
 		},
