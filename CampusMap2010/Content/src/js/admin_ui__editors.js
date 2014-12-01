@@ -364,7 +364,10 @@ function int_infotabs(){
 			buttons: {
 				Delete: function() {
 					var index = $( "li", $tabs ).index( $( this ).parent() );
-					$dynotabs.tabs( "remove", index );
+					//$dynotabs.tabs( "remove", index );
+					$dynotabs.find(".ui-tabs-nav li:eq(" + index + ")").remove();
+					$dynotabs.find(".ui-tabs-panel:eq(" + index + ")").remove();
+     				$dynotabs.tabs("refresh");
 					$( this ).dialog( "close" );
 				},
 				Cancel: function() {
