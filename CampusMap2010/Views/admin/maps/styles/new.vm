@@ -39,7 +39,7 @@
 		<div class="TABS EVENT_TABS ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
 			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 				#foreach($event in $style_events)
-					<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+					<li class="ui-state-default ui-corner-top">
 						<a href="#${event.name}">#if(${event.friendly_name}!='')${event.friendly_name}#else${event.name}#end</a>
 					</li>
 				#end
