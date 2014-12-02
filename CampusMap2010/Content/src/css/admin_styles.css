@@ -852,10 +852,12 @@ span.UinEdit {
 	overflow: hidden;
 	display: inline-block;
 	float: left;
+	top:-9999em;
 }
 .tabactive {
 	width: 100%;
 	position: relative;
+	top:auto;
 }
 .tabedArea .listTitle {
 	display: inline-block;

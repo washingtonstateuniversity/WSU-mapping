@@ -76,7 +76,7 @@ $(document).ready(function(){
 
 
 
-
+/*
 	$( "#addGeometrics" ).click(function(){
 		//if($('#dialog-form').length==0){$('#staging').append('<div id="dialog-form" title="Create new location"></div>');}
 		$( "#addGeom" ).dialog({
@@ -100,7 +100,7 @@ $(document).ready(function(){
 		});
 		$( "#addGeom" ).dialog("open").dialog('widget');
 	});
-
+*/
 
 	$('.ListingChoices').on('click',function(){//e) {
 		var obj=$(this);
