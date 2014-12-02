@@ -14,7 +14,8 @@
 
 		
 		apply_element:function (mapOjb,type,style){
-			mapOjb.gmap('addShape', type, $.wsu_maps.general.filter_map_element(type,style.rest.options), function(shape){
+			var rest_shape = $.wsu_maps.general.filter_map_element(type,style.rest.options);
+			mapOjb.gmap('addShape', type, rest_shape, function(shape){
 				$(shape).click(function(){
 					if(style.click){
 						if(style.click.options){
@@ -82,22 +83,24 @@
 			op=op||{};
 			var return_item;
 			var DEFAULT_overlay;
+			var default_paths = $.wsu_maps.defaults.get_wsu_logo_shape();
 			var _option={};
 			switch(type){
 				case "polygon" :
 					// default ploygon style
 						_option = {
 								rest:{
-									options:$.extend((typeof(op.rest)!=='undefined'?op.rest:{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24}),{paths: $.wsu_maps.defaults.get_wsu_logo_shape()})
+									options:$.extend(op.rest||{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24},
+											{ paths: default_paths })
 								},
 								mouseover:{
-									options:typeof(op.mouseover)!=='undefined'?op.mouseover:{fillColor: "#a90533",fillOpacity: 0.35}
+									options:op.mouseover||{fillColor: "#a90533",fillOpacity: 0.35}
 								},
 								mouseout:{
-									options:typeof(op.mouseout)!=='undefined'?op.mouseout:{fillColor: "#a90533",fillOpacity: 0.35}
+									options:op.mouseout||{fillColor: "#a90533",fillOpacity: 0.35}
 								},
 								click:{
-									options:typeof(op.click)!=='undefined'?op.click:{fillColor: "#a90533",fillOpacity: 0.35}
+									options:op.click||{fillColor: "#a90533",fillOpacity: 0.35}
 								}
 							};
 						DEFAULT_overlay=$.wsu_maps.general.apply_element(mapSelector,capedType,_option);

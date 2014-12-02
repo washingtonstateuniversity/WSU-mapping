@@ -109,8 +109,6 @@
 				});
 			});	
 		},
-		
-		
 	};
 	$.wsu_maps.admin.style = {
 		rebuild_example:function (tabs,mapSelector,type){
@@ -140,8 +138,8 @@
 				'center': campus_latlng_str,
 				'zoom':15,
 				'disableDoubleClickZoom':true,
-				'draggable':false,
-				'zoomControl': false,
+				//'draggable':false,
+				//'zoomControl': false,
 				'mapTypeControl': false,
 				'panControl':false,
 				'streetViewControl': false
@@ -163,9 +161,7 @@
 						$(this).tabs();
 					});
 				}
-		
 
-		
 				$.wsu_maps.admin.editors.style.int_form();
 				$.wsu_maps.admin.style.rebuild_example($('.accordion'),$('#style_map'),$('#style_of').val());
 			});
