@@ -11,25 +11,7 @@
 			var geocoder = geocoder||new google.maps.Geocoder();
 			return geocoder;
 		},
-		rebuild_example:function (tabs,mapSelector,type){
-			var _op={};
-			$.each(tabs, function(){
-				var tab = $(this);
-				var mode = tab.closest('.tabed').attr('id');//.split('__')[1].split('_')[1];
-				var ele = tab.find(':input').not('h3 :input,input:hidden');
-				
-				
-				var options={};
-				var drity_check =  ( ele.is(':checked') || (ele.val()!=='' && ele.not(':checkbox') ) ) ;
-				if( drity_check && ele.not('[type=hidden]') && typeof( ele.attr('rel') ) !== 'undefined' ){
-				   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
-				}
-				
-				_op[ mode ] = $.extend({},_op[ mode ],options); 
-			});
-			mapSelector.gmap('clear_map');	
-			$.wsu_maps.general.set_default_shape(mapSelector,type,_op);
-		},
+
 		
 		apply_element:function (mapOjb,type,style){
 			mapOjb.gmap('addShape', type, $.wsu_maps.general.filter_map_element(type,style.rest.options), function(shape){
