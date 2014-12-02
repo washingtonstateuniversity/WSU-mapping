@@ -1,21 +1,21 @@
 <div id="tabs" class="${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
 	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#campuses">Campuses</a>
 		</li>
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#colleges">Colleges</a>
 		</li>
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#departments">Academic Departments</a>
 		</li>
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#admindepartments">Administrative Departments</a>
 		</li>
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#programs">Programs</a>
 		</li>
-		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+		<li class="ui-state-default ui-corner-top">
 			<a href="#schools">Schools</a>
 		</li>
 	</ul>
