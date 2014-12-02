@@ -405,13 +405,20 @@ function set_tab_editable(i){
 		}
 	});
 }
+
+
+
+
+
+
+
 function addTab(i,title,content,useWysiwyg,useControlls) {
 	
 	title = title||false;
 	content = content||false; 
 	useWysiwyg = useWysiwyg||true;
 	useControlls = useControlls||true;
-	
+	var tabs = $('#dynoTab');
 	var tab_title = title || $tab_title_input.val() || "Tab " + i;
 	
 	var controll="";
@@ -420,15 +427,23 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 							 '<span class="edit ui-icon ui-icon-pencil"></span>';
 	}
 	
-	$dynotabs.tabs( "option" , "tabTemplate" , "<li>"+
-												"<a href='#{href}' hideFocus='true'>#{label}</a>"+
-													"<input type='hidden' name='tabs["+i+"].id' value='' id='tab_id_"+i+"'/>"+
-													"<input type='hidden' name='tabs["+i+"].title' value=\"#{label}\" id='tab_title_"+i+"'/>"+
-													"<input type='hidden' name='tabs["+i+"].template.id' value='' id='tab_template_id_"+i+"'/>"+
-													"<input type='hidden' name='tabs["+i+"].sort' value='' id='tab_sort_"+i+"'class='sort' />"+
-												controll+
-											"</li>" );
-	$dynotabs.tabs( "add", "#tabs-" + i, tab_title.replace('{$i}',i));
+	var tabTemplate = "<a href='#{href}' hideFocus='true'>#{label}</a>"+
+						"<input type='hidden' name='tabs["+i+"].id' value='' id='tab_id_"+i+"'/>"+
+						"<input type='hidden' name='tabs["+i+"].title' value=\"#{label}\" id='tab_title_"+i+"'/>"+
+						"<input type='hidden' name='tabs["+i+"].template.id' value='' id='tab_template_id_"+i+"'/>"+
+						"<input type='hidden' name='tabs["+i+"].sort' value='' id='tab_sort_"+i+"'class='sort' />"+
+						controll;
+
+		var tab_id = "tabs-"+ i;
+      var li = $( tabTemplate.replace( /#\{href\}/g, "#" + tab_id ).replace( /#\{label\}/g, tab_title.replace('{$i}',i) ) );
+			
+      tabs.find( ".ui-tabs-nav" ).append( li );
+      
+	var tabContentHtml = content || "Tab " + i + " content.";
+	tabs.append( "<div id='" + tab_id + "'>" + tabContentHtml + "</div>" );
+	tabs.tabs( "refresh" );
+
+
 
 	
 	$.each($("#dynoTab li.ui-state-default"),function(i){//,v){
@@ -436,14 +451,12 @@ function addTab(i,title,content,useWysiwyg,useControlls) {
 		set_tab_editable(i);
 	});
 	
-	if(content!==false){
-		$("#tabs-" + i).html( content );
-	}
+
+	
 	if(useWysiwyg){
 		$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext","tab_"+i);
 	}
-	
-	
+
 	return i++;
 }
 
