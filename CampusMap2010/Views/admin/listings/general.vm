@@ -4,7 +4,7 @@
 	#parse("admin/listings/areas/pagination.vm")
 	
 	<div class="listTitle">${controller.getView()} List :</div>
-	<a href=""$helper.getAdminUrl("${controller.getView()}/new")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;float:left;margin-top:6px;">
+	<a href="$helper.getAdminUrl("${controller.getView()}/new")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;float:left;margin-top:6px;">
 	  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
 	</a>
 	<br style="clear:both;"/>

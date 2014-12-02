@@ -1,7 +1,6 @@
 // JavaScript Document
 (function($) {
 	$.wsu_maps.admin = {
-		ui:{},
 		ini:function(){},
 		defaults:{
 			place_id:-1,
