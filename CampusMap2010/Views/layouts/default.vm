@@ -23,7 +23,7 @@
 				<!-- CONTENT -->
 				<main>
 					#parse("admin/header_html.vm")
-					<section class="row single gutter pad-bottom tall"> 
+					<section class="row single gutter pad short narrow"> 
 						<div class="column one">     
 							<div id="content">
 								<div id="main">
