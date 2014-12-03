@@ -12,6 +12,10 @@ legend {
 }
 hr{
 	margin:1px;
+	border:1px solid #979797;
+}
+fieldset{
+	border:1px solid #979797;
 }
 .clear {
 	clear: both;
@@ -38,7 +42,7 @@ hr{
 	background-color: #5E6A71;
 }
 #siteID h1 {
-	padding: 14px 0 0 177px;
+	/**/padding: 14px 0 0 0px;/*177px;*/
 	text-align: right;
 	width: auto;
 }

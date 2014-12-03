@@ -60,13 +60,12 @@ html, body {
 	margin-left: 16px;
 	position: relative;
 }
-.admin #content {
+/*.admin #content {
 	position: relative;
-	/*padding-top: 130px;*/
 	z-index: 1;
 	width: 100%;
 	min-width: 1026px;
-}
+}*/
 #localfooter {
 	font-size: 10px;
 	color: #262A2D;
@@ -463,9 +462,9 @@ table.ui-widget tbody tr.odd td {
 #content_area {
 	padding: 0 0 0 185px;
 }
-.admin #content_tar {
+/*.admin #content_tar {
 	padding: 0 0 0 10px;
-}
+}*/
 .central #content_tar {
 	padding: 0px;
 }
