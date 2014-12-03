@@ -17,6 +17,9 @@ hr{
 fieldset{
 	border:1px solid #979797;
 }
+input{
+	max-width:100%;
+}
 .clear {
 	clear: both;
 }
@@ -297,25 +300,32 @@ table.ui-widget tbody tr.odd td {
 }
 .w500 {
 	width: 500px !important;
+	max-width:100%;
 }
 .w300 {
 	min-width: 150px;
-	max-width: 300px !important;
+	width: 300px !important;
+	max-width:100%;
 }
 .w250 {
 	width: 250px !important;
+	max-width:100%;
 }
 .w200 {
 	width: 200px !important;
+	max-width:100%;
 }
 .w150 {
 	width: 150px !important;
+	max-width:100%;
 }
 .w100 {
 	width: 100px !important;
+	max-width:100%;
 }
 .w50 {
 	width: 50px !important;
+	max-width:100%;
 }
 .listing_switch {
 	height: 37px;
