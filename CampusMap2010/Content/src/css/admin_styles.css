@@ -10,6 +10,9 @@ legend {
 	letter-spacing: 1.5px;
 	margin-top: -3px;
 }
+hr{
+	margin:1px;
+}
 .clear {
 	clear: both;
 }
@@ -1338,3 +1341,11 @@ ol.sortable {
 .column .gm-style img {
 	max-width: none !important;
 }
+
+/* jQuery UI overrides */
+#wsu_ui .ui-dialog .ui-dialog-titlebar-close span{
+	margin:-8px;
+	}
+
+
+

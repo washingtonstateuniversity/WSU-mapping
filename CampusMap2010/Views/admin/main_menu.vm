@@ -35,7 +35,6 @@
 			#if($userService.checkPrivleage("modify_views"))
 				<li><a class=" #if($controller.getView()=='view')active#end" href="$helper.getAdminUrl("view/list")" data-overview="Map view List"><b>Map views</b></a>
 					<ul>
-						<li><a href="$helper.getAdminUrl("view/list")">Map view list</a></li>
 						<li><a href="$helper.getAdminUrl("view/new")">New Map view</a></li>
 						<li><hr/></li>
 						#if($userService.checkPrivleage("modify_global_nav"))<li><a href="$helper.getAdminUrl("view/list_nav")">Global Navagation</a></li>#end
