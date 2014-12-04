@@ -17,7 +17,7 @@ hr{
 fieldset{
 	border:1px solid #979797;
 }
-input{
+input,select,textarea{
 	max-width:100%;
 }
 .clear {
@@ -1008,7 +1008,8 @@ span.UinEdit {
 	color: #0C0;
 }
 .listPicker {
-	height: 150px;
+	height:100%;
+	min-height: 150px;
 	margin: 0 auto;
 	max-width: 99%;
 	overflow-y: auto;

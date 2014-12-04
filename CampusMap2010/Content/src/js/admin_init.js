@@ -579,6 +579,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	}
 	if($("#tabs").length>0){
 		$("#tabs").tabs();
+		applyTabToAccordion();
 	}
 	if( ($.wsu_maps.admin.defaults.place_id===0) ){
 		if($( "#chooseModel" ).length===0){
