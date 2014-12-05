@@ -300,6 +300,7 @@ $.wsu_maps.admin.view = {
 				if(self.val()===""){
 					self.closest('fieldset').find('.subFilter').hide();
 					self.closest('fieldset').find('.mainFilter').hide();
+					$('body').spine("equalizing");
 				}else{
 					$.getJSON($.wsu_maps.state.siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
 						if(data==="false"){
@@ -357,6 +358,7 @@ $.wsu_maps.admin.view = {
 						}else{
 							self.closest('fieldset').find('.subFilter').show();	
 						}
+						$('body').spine("equalizing");
 					});
 				}
 			});
@@ -365,8 +367,9 @@ $.wsu_maps.admin.view = {
 			$(".onsubfliterList").on('change',function () {
 				var self=$(this);
 				var role = self.closest('fieldset').attr('role');
+				var list = self.closest('fieldset').find('.finFill');
 				$.getJSON($.wsu_maps.state.siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
-					self.closest('fieldset').find('.finFill').html(function(){
+					list.html(function(){
 						var str="";//"<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
 						$.each(data,function(i,v){
 									var name = typeof(v.prime_name)==="undefined"?v.name:v.prime_name;
@@ -390,8 +393,21 @@ $.wsu_maps.admin.view = {
 						position: {
 							my: 'left top',
 							at: 'left bottom'
-						}
+						},
+						open:function(){
+							$('.jselect-menu:visible').find('img').tooltip({
+								position: {
+									my: "left top",
+									at: "right+5 top-5"
+								},
+								content: function() {
+									var element = $( this ).find('img');
+									return "<img src='"+element.attr( "src" )+"' style='max-width:200px;'/>";
+								}
+							});
+						},
 					}).jselectfilter();
+					$('body').spine("equalizing");
 				});
 			});
 		}

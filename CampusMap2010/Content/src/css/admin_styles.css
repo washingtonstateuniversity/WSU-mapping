@@ -23,6 +23,19 @@ input,select,textarea{
 .clear {
 	clear: both;
 }
+
+/* spine overrides */
+.pad-right-none .column, .padded-right-none {
+    padding-right: 0px !important;
+}
+.pad-top-none .column, .padded-top-none {
+    padding-top: 0px !important;
+}
+
+
+
+
+
 #wrapper {
 	width: 100%;
 	min-width: 956px;
@@ -938,6 +951,10 @@ span.UinEdit {
 	background: transparent url(../../../Content/images/size_guide_ticks.png) repeat-x left bottom;
 	border-left: 1px solid transparent;
 }
+.ui-tooltip {z-index:99999;}
+
+
+
 #place_drawing_map {
 	box-shadow: 2px 2px 5px 2px rgba(25, 25, 25, .35);
 	border-bottom: 1px solid #5f5f5f;
