@@ -505,7 +505,7 @@ namespace campusMap.Controllers {
             String nsql = "SELECT p FROM place AS p WHERE " + id + " in Elements(p." + by + ")";
             SimpleQuery<place> nq = new SimpleQuery<place>(typeof(place), nsql);
             var tmp = nq.Execute();
-            var tmp2 = tmp.ToArray().Select(i => new { i.id, i.prime_name });
+            var tmp2 = tmp.ToArray().Select(i => new { i.id, i.prime_name, i.staticMap  });
 
             if (tmp2.Count() > 0) {
                 render_list_json(tmp2, callback);

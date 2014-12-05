@@ -32,6 +32,8 @@ module.exports = function(grunt) {
 			},
 			admin_styles: {
 				src: [
+					'src/css/jSelect.min.css',
+					'src/css/jSelect.filter.min.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
 					'src/css/admin_styles.css',
@@ -75,6 +77,8 @@ module.exports = function(grunt) {
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
 					'src/js/jquery.colorbox-min.js',
 					'src/js/zeroclipboard/ZeroClipboard.js',
+					'src/js/jSelect.js',
+					'src/js/jSelect.filter.js',
 					'src/js/utilities_general.js',
 
 					'src/js/infobox.js',

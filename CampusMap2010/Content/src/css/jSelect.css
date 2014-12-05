@@ -1,0 +1,129 @@
+.jselect {
+	padding: 2px 0 2px 4px;
+	text-align: left;
+}
+
+.jselect span.ui-icon {
+	float: right;
+}
+
+.jselect-single .jselect-checkboxes input {
+	position: absolute !important;
+	top: auto !important;
+	left: -9999px;
+}
+
+.jselect-single .jselect-checkboxes label {
+	padding: 5px !important;
+}
+
+.jselect-header {
+	margin-bottom: 3px;
+	padding: 3px 0 3px 4px;
+}
+
+.jselect-header ul {
+	font-size: 0.9em;
+}
+
+.jselect-header ul li {
+	float: left;
+	padding: 0 10px 0 0;
+}
+
+.jselect-header a {
+	text-decoration: none;
+}
+
+.jselect-header a:hover {
+	text-decoration: underline;
+}
+
+.jselect-header span.ui-icon {
+	float: left;
+}
+
+.jselect-header li.jselect-close {
+	float: right;
+	text-align: right;
+	padding-right: 0;
+}
+
+.jselect-menu {
+	display: none;
+	padding: 3px;
+	position: absolute;
+	z-index: 10000;
+	text-align: left;
+}
+
+.jselect-checkboxes {
+	position: relative /* fixes bug in IE6/7 */;
+	overflow-y: auto;
+}
+
+.jselect-checkboxes label {
+	cursor: default;
+	display: block;
+	border: 1px solid transparent;
+	padding: 3px 1px;
+	position: relative;
+}
+
+.jselect-checkboxes label input {
+	position: absolute;
+	top:27%;
+	left:1px;
+}
+.jselect-checkboxes label span {
+	position: relative;
+	/*top: 10px;*/
+	vertical-align: middle;
+	display: inline-flex;
+	margin-left: 25px;
+}
+
+
+
+.jselect-checkboxes li {
+	clear: both;
+	font-size: 0.9em;
+	padding-right: 3px;
+}
+
+.jselect-checkboxes li.jselect-optgroup-label {
+	text-align: center;
+	font-weight: bold;
+	border-bottom: 1px solid;
+}
+
+.jselect-checkboxes li.jselect-optgroup-label a {
+	display: block;
+	padding: 3px;
+	margin: 1px 0;
+	text-decoration: none;
+}
+
+.jselect-checkboxes .jselect-img label span {
+	position: relative;
+	/*top: 10px;*/
+	vertical-align: middle;
+	display: inline-flex;
+	margin-left: 15px;
+}
+
+.jselect-checkboxes .jselect-img label input {
+	vertical-align: -2px;
+}
+
+.jselect-img img {
+	position: relative;
+	height: 30px;
+	margin: 2px 6px;
+	/*top: -10px;*/
+}
+
+* html .jselect-checkboxes label {
+	border: none;
+}
+

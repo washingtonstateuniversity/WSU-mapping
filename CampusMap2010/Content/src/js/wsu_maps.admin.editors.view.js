@@ -4,6 +4,28 @@
 		ini:function(){},
 		defaults:{
 		},
+		createDeleteRow:function (){
+			$('.tiny.buttons.deleteplace').off().on('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				var container = $(this).closest('ol.sortable');
+				var role=container.closest('fieldset').attr('role');
+				var val=$(this).closest('li').find('input').val();
+				$('select#'+role+'_select [value="'+val+'"]').removeAttr('disabled');
+				$(this).closest('li').remove();
+				container.nestedSortable("refresh");
+				
+				
+				$('jspContainer').css('height','auto');
+				$.wsu_maps.state.api.reinitialise();
+				$.wsu_maps.mapping.reloadShapes();
+				$.wsu_maps.mapping.reloadPlaces();
+				if(container.find('.ini').length===0 && container.find('li').size()===0){
+					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+				}
+				$("select#"+role+"_select").jselect('refresh');
+			});
+		},
 	};
 $.wsu_maps.admin.view = {
 	load_editor:function () {
@@ -98,6 +120,11 @@ $.wsu_maps.admin.view = {
 				$('#place_drawing_map').gmap('refresh');
 			}
 		});
+		
+
+		
+		
+		
 		if($('.sortable').length){
 
 			$('ol.sortable').nestedSortable({
@@ -127,7 +154,7 @@ $.wsu_maps.admin.view = {
 						container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
 					}
 
-					$.wsu_maps.general.createDeleteRow();
+					$.wsu_maps.admin.editors.view.createDeleteRow();
 				}
 			});
 			var settings = {
@@ -156,40 +183,44 @@ $.wsu_maps.admin.view = {
 			).jScrollPane(settings);
 			$.wsu_maps.state.api = pane.data('jsp');
 	
-			$.wsu_maps.general.createDeleteRow();
+			$.wsu_maps.admin.editors.view.createDeleteRow();
 	
 			$('.addSelecttion').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
 				
 				var container = $(this).closest('fieldset');
-				var role=container.attr('role');
-				var selection = $('select#'+role+'_select').val();
-				
-				if(selection!==""){
-					var name = $('select#'+role+'_select :selected').text();
-					$('select#'+role+'_select :selected').attr('disabled','disabled');
-					$('select#'+role+'_select').val('');
-					var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
-									'<div style="padding: 1px;">'+
-										'<span style="font-size:0.5em; float:right;">'+
-											'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
-												'<span class="ui-icon ui-icon-trash"></span>'+
-											'</a>'+
-										'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
-									'</div>'+
-								'</li>';
-					container.find('ol.sortable').append(addEle);
-					if(container.find('.ini').length>0){
-						container.find('.ini').remove();
+				var role = container.attr('role');
+				var sortList = container.find('ol.sortable');
+				$.each($('select#'+role+'_select option[aria-selected="true"]'),function(){
+					var option = $(this);
+					var selection = option.val();
+					option.attr('disabled','disabled');
+					if(selection!=="" && sortList.find('input[value="'+selection+'"]').length<=0 ){
+						var name = option.text();
+						//$('select#'+role+'_select').val('');
+						var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
+										'<div style="padding: 1px;">'+
+											'<span style="font-size:0.5em; float:right;">'+
+												'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
+													'<span class="ui-icon ui-icon-trash"></span>'+
+												'</a>'+
+											'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
+										'</div>'+
+									'</li>';
+						sortList.append(addEle);
 					}
-					container.find('ol.sortable').nestedSortable("refresh");
-					$('jspContainer').css('height','auto');
-					$.wsu_maps.state.api.reinitialise();
-					$.wsu_maps.mapping.reloadShapes();
-					$.wsu_maps.mapping.reloadPlaces();
-					$.wsu_maps.general.createDeleteRow();
+				});
+				if(container.find('.ini').length>0){
+					container.find('.ini').remove();
 				}
+				sortList.nestedSortable("refresh");
+				$('jspContainer').css('height','auto');
+				$.wsu_maps.state.api.reinitialise();
+				$.wsu_maps.mapping.reloadShapes();
+				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.admin.editors.view.createDeleteRow();
+				$("select#"+role+"_select").jselect('refresh');
 			});
 		}
 		
@@ -304,7 +335,24 @@ $.wsu_maps.admin.view = {
 									str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
 								});
 								self.closest('fieldset').find('.mainFilter').show();
+										
 								return str;
+							});
+							self.closest('fieldset').find('.finFill').jselect({
+								multiple: true,
+								minWidth: 150,
+								//height: '105px',
+								noneSelectedText:'Select '+role+'s and then click add',
+								selectedText: function(numChecked, numTotal){//, checkedItems){
+									return numChecked + ' of ' + numTotal + ' checked';
+								},
+								//selectedList: false,
+								//show: ['blind', 200],
+								//hide: ['fade', 200],
+								position: {
+									my: 'left top',
+									at: 'left bottom'
+								}
 							});
 						}else{
 							self.closest('fieldset').find('.subFilter').show();	
@@ -319,21 +367,39 @@ $.wsu_maps.admin.view = {
 				var role = self.closest('fieldset').attr('role');
 				$.getJSON($.wsu_maps.state.siteroot+"public/get_"+self.closest('fieldset').attr('role')+"_list_attr.castle?callback=?",{'id':self.val(),'by':self.attr('role')},function(data){
 					self.closest('fieldset').find('.finFill').html(function(){
-						var str="<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
+						var str="";//"<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
 						$.each(data,function(i,v){
 									var name = typeof(v.prime_name)==="undefined"?v.name:v.prime_name;
-									str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
+									var image = typeof(v.staticMap)!=="undefined"?"data-image='/media/getmap.castle?path="+v.staticMap+"'":"";
+									str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+" "+image+" >"+name+"</option>";
 						});
 						self.closest('fieldset').find('.mainFilter').show();
 						return str;
 					});
+					self.closest('fieldset').find('.finFill').jselect({
+						multiple: true,
+						minWidth: 150,
+						//height: '105px',
+						noneSelectedText:'Select '+role+'s and then click add',
+						selectedText: function(numChecked, numTotal, availableItems){//, checkedItems){
+							return numChecked + ' of ' + availableItems + ' available';
+						},
+						//selectedList: false,
+						//show: ['blind', 200],
+						//hide: ['fade', 200],
+						position: {
+							my: 'left top',
+							at: 'left bottom'
+						}
+					}).jselectfilter();
 				});
 			});
 		}
 		
 		
 		
-	}
+	},
+
 };
 	
 	

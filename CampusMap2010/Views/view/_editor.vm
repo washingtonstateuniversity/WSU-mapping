@@ -177,9 +177,9 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 						   
 							<span class="mainFilter" style="display:none;">
 								<select id="place_select" class="finFill" style="width:171px;">
-									<option class="place" value="">Select to add</option>
+									<!--<option class="place" value="">Select to add</option>-->
 									#foreach($place in $places)
-										<option class="place" value="$place.id" #if($view.places.Contains($place))disabled="disabled"#end>$!place.prime_name</option>
+										<option class="place" value="$place.id" #if($place.staticMap)data-image="$helper.getAdminUrl("media/getmap")?path=$siteroot${place.staticMap}"#end #if($view.places.Contains($place))disabled="disabled"#end >$!place.prime_name</option>
 									#end
 								</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a><br/>
 							</span>
