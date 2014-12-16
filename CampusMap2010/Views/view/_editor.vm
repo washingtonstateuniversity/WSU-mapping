@@ -54,65 +54,76 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<input type="hidden" name="forced_tmp" value="1" />
 		#end
 		<fieldset style="position:relative;"><legend>Map Basics</legend>
-				
-				<label for="Lat"><strong>Name: </strong></label>
-				<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all w500" /><br/>
-				<hr/>
-				<label for="name">Alias</label>
-				
-				<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" required="required"/>
-				#set($mess="You must provide this url.  All output will be called with this string. Note you will not want to use characters such as &quot; _ | ' ? &map; % ^ &quot;  being that  those are going to destroy the optimal efficiency of the map displaying.")
-				#parse("admin/noted.vm")<br/>
-				<strong>The url is <span class="aliasState">needed to access your map view.</span></strong>
-			
-				<hr/>
-			<label for="campus"><strong>Campus:</strong></label>&nbsp;
-				<select name="view.campus" id="commentable">
-					#foreach($campus in $campuses)
-						<option class="type" value="$campus.id" #if($view.campus == $campus) selected="selected" #end>$!campus.name</option>
-					#end
-				</select>
-				#set($mess="Every map is tied to down to a campus.  Thou you could make a map that incorporates other campus places, there has to be a home point for the map view.")
-				#parse("admin/noted.vm")
-				<hr/>
-			<label for="commentable"><strong>Commentable:</strong></label>&nbsp;
-				<select name="view.commentable" id="commentable">
-					<option value="true" #if($view.commentable && $view.commentable=="true")selected="selected"#end >Yes</option>
-					<option value="false" #if(!$view.commentable || $view.commentable=="false")selected="selected"#end >No</option>
-				</select>
-				#set($mess="Any item that gets any comments will ONLY show up under this view.  In no other view will the comment ever show up regardless if the item it's self is shared between any other map view.")
-				#parse("admin/noted.vm")
-				<hr/>
-			<label for="sharable"><strong>Sharable:</strong></label>&nbsp;
-				<select name="view.sharable" id="sharable">
-					<option value="true" #if($view.sharable && $view.sharable=="true")selected="selected"#end >Yes</option>
-					<option value="false" #if(!$view.sharable || $view.sharable=="false")selected="selected"#end >No</option>
-				</select>
-				#set($mess="Give the clients/end users access to the urls and code that would let them embed and or share socially this map view.")
-				#parse("admin/noted.vm")
+			<div class="row side-right equalize">
+				<div class="column one padless">
+					<label for="Lat"><strong>Name: </strong><br/>
+					<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all w500" />
+					</label>
+				</div>
+				<div class="column two padless">
+					<label for="name"><strong>Alias</strong><br/>
+					<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" required="required"/></label><span class="aliasState"></span><br/>
+					<strong> This is used in the url and needed to access your map view.</strong>
+					#set($mess="You must provide this url.  All output will be called with this string. Note you will not want to use characters such as &quot; _ | ' ? &map; % ^ &quot;  being that  those are going to destroy the optimal efficiency of the map displaying.")
+					#parse("admin/noted.vm")
+					
+				</div>
+			</div>
+			<hr/>
+			<div class="row thirds equalize">
+				<div class="column one padless">
+					<label for="campus"><strong>Campus:</strong></label>&nbsp;
+						<select name="view.campus" id="commentable">
+							#foreach($campus in $campuses)
+								<option class="type" value="$campus.id" #if($view.campus == $campus) selected="selected" #end>$!campus.name</option>
+							#end
+						</select>
+						#set($mess="Every map is tied to down to a campus.  Thou you could make a map that incorporates other campus places, there has to be a home point for the map view.")
+						#parse("admin/noted.vm")
+				</div>
+				<div class="column two padless">
+					<label for="commentable"><strong>Commentable:</strong></label>&nbsp;
+						<select name="view.commentable" id="commentable">
+							<option value="true" #if($view.commentable && $view.commentable=="true")selected="selected"#end >Yes</option>
+							<option value="false" #if(!$view.commentable || $view.commentable=="false")selected="selected"#end >No</option>
+						</select>
+						#set($mess="Any item that gets any comments will ONLY show up under this view.  In no other view will the comment ever show up regardless if the item it's self is shared between any other map view.")
+						#parse("admin/noted.vm")
+				</div>
+				<div class="column three padless">
+					<label for="sharable"><strong>Sharable:</strong></label>&nbsp;
+						<select name="view.sharable" id="sharable">
+							<option value="true" #if($view.sharable && $view.sharable=="true")selected="selected"#end >Yes</option>
+							<option value="false" #if(!$view.sharable || $view.sharable=="false")selected="selected"#end >No</option>
+						</select>
+						#set($mess="Give the clients/end users access to the urls and code that would let them embed and or share socially this map view.")
+						#parse("admin/noted.vm")
+				</div>
+			</div>
 		</fieldset>
 		<div class="row halves equalize">
-			<fieldset style="position:relative;" class="column one">
+			<fieldset class="column one">
 				<legend>Dimensions</legend>
-				<h6><em>Both will default to 100% if blank or 0</em></h6>
-				<div class="col2"  style="">	
+				
+				<div>	
 					<label for="Lat"><strong>Width</strong></label><br/>
 					<input type="text" name="view.width" id="width" #if($view.width)value="$!view.width" #else value="500" #end class="text ui-widget-content ui-corner-all" />
-				</div><br/> 
-				<div class="col2"  style="">	
+				</div>
+				<div>	
 					<label for="Lat"><strong>Height</strong></label><br/>
 					<input type="text" name="view.height" id="height" #if($view.height)value="$!view.height" #else value="500" #end class="text ui-widget-content ui-corner-all" />
 					#set($mess="You may resize the map thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> by simply draging the corner of the map to the size you wish to see")
 					#parse("admin/noted.vm")
 				</div>
+				<b><em>*** Both value can default to 100% if the input is blank or 0 ***</em></b>
 			</fieldset>
-			<fieldset style="position:relative;" class="column two">
+			<fieldset class="column two">
 				<legend>Center</legend>
-				<div class="col2"  style="">
+				<div>
 					<label for="Lat"><strong>Latitude</strong></label><br/>
 					<input type="text" name="Length" id="Lat" #if($lat && $lat!="") value="$lat" #else #if($campus.latitude && $campus.latitude!="") value="$campus.latitude" #else value="46.73304697156661" #end #end class="text ui-widget-content ui-corner-all" required="required" />
-				</div><br/> 
-				<div class="col2"  style="">
+				</div>
+				<div>
 					<label for="Long"><strong>Longitude</strong></label><br/>
 					<input type="text" name="LongLength" id="Long" #if($long && $long!="") value="$long" #else #if($campus.longitude && $campus.longitude!="") value="$campus.longitude" #else value="-117.15406340441444" #end #end class="text ui-widget-content ui-corner-all" required="required" />
 					#set($mess="by draging the map with drag mode on thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> and simple draging the map to the view you wish to see")

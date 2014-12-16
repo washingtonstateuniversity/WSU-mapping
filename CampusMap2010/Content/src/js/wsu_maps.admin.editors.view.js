@@ -269,14 +269,15 @@ $.wsu_maps.admin.view = {
 		
 		$.wsu_maps.admin.setup_massTags();
 		
-		var waiting = false;	
+		var waiting = false;
+		var starting_alias = $('#urlAlias').val();
 		$('#urlAlias').on('keyup',function(){
 			var val = $(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
-			if(!waiting){
+			if(!waiting && val!==""){
 				waiting = true;
 				//$.post('/view/aliasCheck.castle?alias='+val, function(data) {
 				$.post('/admin/checkAlias.castle?alias='+val+'&typeName='+$.wsu_maps.state.view.replace("/",""), function(data) {
-					if(data==="true"){
+					if(data==="true" && val!==starting_alias){
 						$('.aliasState').addClass('error');
 						$('.aliasState').removeClass('ok');
 						$('.aliasState').text('  :  taken');
