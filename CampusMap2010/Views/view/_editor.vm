@@ -70,7 +70,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 				</div>
 			</div>
 			<hr/>
-			<div class="row thirds equalize">
+			<div class="row thirds equalize at-medium-full-width">
 				<div class="column one padless">
 					<label for="campus"><strong>Campus:</strong></label>&nbsp;
 						<select name="view.campus" id="commentable">
@@ -115,7 +115,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 					#set($mess="You may resize the map thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> by simply draging the corner of the map to the size you wish to see")
 					#parse("admin/noted.vm")
 				</div>
-				<b><em>*** Both value can default to 100% if the input is blank or 0 ***</em></b>
+				<b><em>*** Both values can default to 100% if the input is blank or 0 ***</em></b>
 			</fieldset>
 			<fieldset class="column two">
 				<legend>Center</legend>
