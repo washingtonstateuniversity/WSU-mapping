@@ -37,7 +37,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
       <a href="#tabs_FIELDS">Fields</a>
     </li>   #end
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs_OUTPUT">Output</a>
+      <a href="#tabs_OUTPUT">Output/Embed</a>
     </li>
     #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-top">
       <a href="#tabs_COMMENTS">Comments</a>
