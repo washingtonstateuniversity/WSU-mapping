@@ -158,7 +158,8 @@ $.wsu_maps.admin.view = {
 				}
 			});
 			var settings = {
-				verticalDragMinHeight: 50
+				verticalDragMinHeight: 50,
+				autoReinitialise: true
 				//showArrows: true
 			};
 	
@@ -185,19 +186,23 @@ $.wsu_maps.admin.view = {
 	
 			$.wsu_maps.admin.editors.view.createDeleteRow();
 	
-			$('.addSelecttion').on('click',function(e){
+			$('.addSelection').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
 				
 				var container = $(this).closest('fieldset');
 				var role = container.attr('role');
+				var orginal_select = $('#'+role+'_select');
 				var sortList = container.find('ol.sortable');
-				$.each($('select#'+role+'_select option[aria-selected="true"]'),function(){
+				$.each($('[name="jselect_'+role+'_select"][aria-selected="true"]'),function(){
 					var option = $(this);
+					//var root_container = option.closest('ul');
+					var root_item = option.closest('li');
 					var selection = option.val();
-					option.attr('disabled','disabled');
+					orginal_select.find('[value="'+selection+'"]').attr('disabled','disabled');
+					root_item.addClass('selected');
 					if(selection!=="" && sortList.find('input[value="'+selection+'"]').length<=0 ){
-						var name = option.text();
+						var name = option.closest('li').text();
 						//$('select#'+role+'_select').val('');
 						var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
 										'<div style="padding: 1px;">'+
@@ -210,6 +215,7 @@ $.wsu_maps.admin.view = {
 									'</li>';
 						sortList.append(addEle);
 					}
+					root_item.hide();
 				});
 				if(container.find('.ini').length>0){
 					container.find('.ini').remove();
@@ -348,7 +354,7 @@ $.wsu_maps.admin.view = {
 								selectedText: function(numChecked, numTotal){//, checkedItems){
 									return numChecked + ' of ' + numTotal + ' checked';
 								},
-								//selectedList: false,
+								selectedList: false,
 								//show: ['blind', 200],
 								//hide: ['fade', 200],
 								position: {
@@ -383,6 +389,8 @@ $.wsu_maps.admin.view = {
 					self.closest('fieldset').find('.finFill').jselect({
 						multiple: true,
 						minWidth: 150,
+						menuWidth:"100%",
+						menuMaxWidth:500,
 						//height: '105px',
 						noneSelectedText:'Select '+role+'s and then click add',
 						selectedText: function(numChecked, numTotal, availableItems){//, checkedItems){
@@ -401,6 +409,7 @@ $.wsu_maps.admin.view = {
 									my: "left top",
 									at: "right+5 top-5"
 								},
+								tooltipClass:"jselect-menu-imgtooltip",
 								content: function() {
 									var element = $( this ).find('img');
 									return "<img src='"+element.attr( "src" )+"' style='max-width:200px;'/>";

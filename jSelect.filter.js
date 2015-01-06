@@ -1,0 +1,179 @@
+/*
+ * Depends:
+ *   - jQuery UI jselect widget
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ */
+(function($, undefined) {
+	var rEscape = /[\-\[\]{}()*+?.,\\\^$|#\s]/g;
+
+	$.widget('ui.jselectfilter', {
+
+		options: {
+			label: 'Filter:',
+			width: null,
+			/* override default width set in css file (px). null will inherit */
+			placeholder: 'Enter keywords',
+			autoReset: false
+		},
+
+		_create: function() {
+			var opts = this.options;
+			var elem = $(this.element);
+
+			// get the jselect instance
+			var instance = (this.instance = (elem.data("ui-jselect") || elem.jselect( "instance" ) || elem.data('jselect')));
+
+			// store header; add filter class so the close/check all/uncheck all links can be positioned correctly
+			(this.header = instance.menu.find('.jselect-header').addClass('jselect-hasfilter'));
+
+			// wrapper elem
+			var wrapper = (this.wrapper = $('<div class="jselect-filter">' + (opts.label.length ? opts.label : '') + '<input placeholder="' + opts.placeholder + '" type="search"' + (/\d/.test(opts.width) ? 'style="width:' + opts.width + 'px"' : '') + ' /></div>').prependTo(this.header));
+
+			// reference to the actual inputs
+			this.inputs = instance.menu.find('input[type="checkbox"], input[type="radio"]');
+
+			// build the input box
+			this.input = wrapper.find('input').bind({
+				keydown: function(e) {
+					// prevent the enter key from submitting the form / closing the widget
+					if (e.which === 13) {
+						e.preventDefault();
+					}
+				},
+				keyup: $.proxy(function(e) {
+					if (e && e.which === 40) { // down
+						// Focus out from filter's input and trigger mouse-over on first visible menu label to enable keyboard menu traverse.
+						this.input.blur();
+						this.input.parents(".jselect-menu").find(".jselect-checkboxes label:visible:first").mouseover();
+						return;
+					}
+					this._handler(e);
+				}, this),
+				click: $.proxy(this._handler, this)
+			});
+
+			// cache input values for searching
+			this.updateCache();
+
+			// rewrite internal _toggleChecked fn so that when checkAll/uncheckAll is fired,
+			// only the currently filtered elements are checked
+			instance._toggleChecked = function(flag, group) {
+				var $inputs = (group && group.length) ? group : this.labels.find('input');
+				var _self = this;
+
+				// do not include hidden elems if the menu isn't open.
+				var selector = instance._isOpen ? ':disabled, :hidden' : ':disabled';
+
+				$inputs = $inputs
+					.not(selector)
+					.each(this._toggleState('checked', flag));
+
+				// update text
+				this.update();
+
+				// gather an array of the values that actually changed
+				var values = $inputs.map(function() {
+					return this.value;
+				}).get();
+
+				// select option tags
+				this.element.find('option').filter(function() {
+					if (!this.disabled && $.inArray(this.value, values) > -1) {
+						_self._toggleState('selected', flag).call(this);
+					}
+				});
+
+				// trigger the change event on the select
+				if ($inputs.length) {
+					this.element.trigger('change');
+				}
+			};
+
+			// rebuild cache when jselect is updated
+			var doc = $(document).bind('jselectrefresh', $.proxy(function() {
+				this.updateCache();
+				this._handler();
+			}, this));
+
+			// automatically reset the widget on close?
+			if (this.options.autoReset) {
+				doc.bind('jselectclose', $.proxy(this._reset, this));
+			}
+		},
+
+		// thx for the logic here ben alman
+		_handler: function(e) {
+			var term = $.trim(this.input[0].value.toLowerCase()),
+
+				// speed up lookups
+				rows = this.rows,
+				inputs = this.inputs,
+				cache = this.cache;
+
+			if (!term) {
+				rows.show();
+			} else {
+				rows.hide();
+
+				var regex = new RegExp(term.replace(rEscape, "\\$&"), 'gi');
+
+				this._trigger("filter", e, $.map(cache, function(v, i) {
+					if (v.search(regex) !== -1) {
+						rows.eq(i).show();
+						return inputs.get(i);
+					}
+
+					return null;
+				}));
+			}
+
+			// show/hide optgroups
+			this.instance.menu.find(".jselect-optgroup-label").each(function() {
+				var $this = $(this);
+				var isVisible = $this.nextUntil('.jselect-optgroup-label').filter(function() {
+					return $.css(this, "display") !== 'none';
+				}).length;
+
+				$this[isVisible ? 'show' : 'hide']();
+			});
+		},
+
+		_reset: function() {
+			this.input.val('').trigger('keyup');
+		},
+
+		updateCache: function() {
+			// each list item
+			this.rows = this.instance.menu.find(".jselect-checkboxes li:not(.jselect-optgroup-label)");
+
+			// cache
+			this.cache = this.element.children().map(function() {
+				var elem = $(this);
+
+				// account for optgroups
+				if (this.tagName.toLowerCase() === "optgroup") {
+					elem = elem.children();
+				}
+
+				return elem.map(function() {
+					return this.innerHTML.toLowerCase();
+				}).get();
+			}).get();
+		},
+
+		widget: function() {
+			return this.wrapper;
+		},
+
+		destroy: function() {
+			$.Widget.prototype.destroy.call(this);
+			this.input.val('').trigger("keyup");
+			this.wrapper.remove();
+		}
+	});
+
+})(jQuery);

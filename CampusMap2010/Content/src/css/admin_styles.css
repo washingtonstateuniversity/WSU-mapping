@@ -1103,9 +1103,13 @@ fieldset {
 .ini div {
 	cursor: default !important;
 }
+.addSelection.dynoList{
+    background-color: #00a5bd !important;
+    background-image: none !important;
+}
 #wsu_ui .dynoList.ui-button-text-only .ui-button-text {
 	margin-top: -3px;
-	padding: 1px 5px;
+	padding:5px 5px;
 }
 #wsu_ui .tiny.ui-button .ui-button-text {
 	margin-top: -3px;
@@ -1380,4 +1384,20 @@ ol.sortable {
 	}
 
 
+
+.jselect-menu{
+	z-index:99200;
+}
+.jselect-menu-imgtooltip{
+	z-index:99210;
+}
+#jselect_selected{
+	max-width:100%;
+	  list-style-position:inside;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;    
+}
+
+.jspVerticalBar{right:10px;}
 

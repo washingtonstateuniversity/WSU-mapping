@@ -140,7 +140,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 				<fieldset role="place">
 					<legend>Places Used</legend>
 					
-					<div class="row halves equalize">
+					<div class="row halves equalize at-large-full-width">
 					
 						<div class="column one padless">
 							<div class="listPicker ui-widget-content ui-corner-top">	
@@ -192,7 +192,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 									#foreach($place in $places)
 										<option class="place" value="$place.id" #if($place.staticMap)data-image="$helper.getAdminUrl("media/getmap")?path=$siteroot${place.staticMap}"#end #if($view.places.Contains($place))disabled="disabled"#end >$!place.prime_name</option>
 									#end
-								</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a><br/>
+								</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelection dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a><br/>
 							</span>
 							
 							<br/>
@@ -221,7 +221,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 					<legend>Shapes Used</legend>
 					
 					
-					<div class="row halves equalize">
+					<div class="row halves equalize at-large-full-width">
 					
 						<div class="column one padless">
 							<div class="listPicker ui-widget-content ui-corner-top">		
@@ -258,7 +258,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 									#foreach($geo in $geometrics)
 										<option class="geo" value="$geo.id" #if($view.geometrics.Contains($geo))disabled="disabled"#end>$!geo.name</option>
 									#end
-								</select><a href="#" title="Add Shapes" id="addGeoSelect" class="addSelecttion dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+								</select><a href="#" title="Add Shapes" id="addGeoSelect" class="addSelection dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
 								<br/>
 							</span>
 							
