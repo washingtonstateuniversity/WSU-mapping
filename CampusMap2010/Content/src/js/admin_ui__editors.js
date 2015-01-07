@@ -277,7 +277,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 							$.wsu_maps.general.prep_html();
 						}
 				};
-				ib[i] = new InfoBox(myOptions,function(){
+				ib[i] = InfoBox(myOptions,function(){
 					//$('#taby'+i).tabs();
 					//alert('tring to tab it, dabnab it, from the INI');
 				});
@@ -304,7 +304,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 					,onOpen:function(){}
 					
 				};
-				ibh[i] = new InfoBox(myHoverOptions,function(){});
+				ibh[i] = InfoBox(myHoverOptions,function(){});
 				if(marker.style.icon){marker.style.icon = marker.style.icon.replace('{$i}',i+1);}
 				jObj.gmap('addMarker', $.extend({ 
 						'position': new google.maps.LatLng(marker.position.latitude, marker.position.longitude),

@@ -881,9 +881,13 @@
 								window.jObj=jObj;
 								window.i=i;
 								/* jshint ignore:start */ //the safer eval still throws lint error
-								var p= shape.style.events.click.onEnd.replace('\u0027',"'");
-								var f=  new Function(p); 
-								f();
+								try{
+									var p= shape.style.events.click.onEnd.replace('\u0027',"'");
+									var f=  new Function(p); 
+									f();
+								}catch(err) {
+									console.log(err);
+								}
 								/* jshint ignore:end */
 							})();
 						}
@@ -896,9 +900,13 @@
 								window.jObj=jObj;
 								window.i=i;
 								/* jshint ignore:start */ //the safer eval still throws lint error
-								var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'");
-								var f=  new Function(p); 
-								f();
+								try{
+									var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'");
+									var f=  new Function(p); 
+									f();
+								}catch(err) {
+									console.log(err);
+								}
 								/* jshint ignore:end */
 							})();
 						}		
@@ -911,9 +919,13 @@
 								window.jObj=jObj;
 								window.i=i;
 								/* jshint ignore:start */ //the safer eval still throws lint error
-								var p= shape.style.events.rest.onEnd.replace('\u0027',"'");
-								var f=  new Function(p); 
-								f();
+								try{
+									var p= shape.style.events.rest.onEnd.replace('\u0027',"'");
+									var f=  new Function(p); 
+									f();
+								}catch(err) {
+									console.log(err);
+								}
 								/* jshint ignore:end */
 							})();
 						}
@@ -925,9 +937,13 @@
 								window.jObj=jObj;
 								window.i=i;
 								/* jshint ignore:start */ //the safer eval still throws lint error
-								var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'");
-								var f=  new Function(p); 
-								f();
+								try{
+									var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'");
+									var f=  new Function(p); 
+									f();
+								}catch(err) {
+									console.log(err);
+								}
 								/* jshint ignore:end */
 							})();
 					}

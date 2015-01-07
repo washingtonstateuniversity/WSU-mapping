@@ -44,11 +44,14 @@ module.exports = function(grunt) {
 				src: [
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
-					'src/js/infobox-1.1.12.js',
+					
 					'src/js/jquery.ui.map.js',
 					'src/js/jquery.ui.map.extensions.js',
 					'src/js/jquery.ui.map.services.js',
 					'src/js/jquery.ui.map.overlays.js',
+					
+					'src/js/infobox-1.1.12.js',
+					
 					'src/js/jquery.colorbox-min.js',
 					'src/js/jquery.cycle.all.js',
 					'src/js/scrollbar/jquery.mousewheel.js',
@@ -89,12 +92,12 @@ module.exports = function(grunt) {
 					'src/js/jquery.ui.map.extensions.js',
 					'src/js/jquery.ui.map.services.js',
 					'src/js/jquery.ui.map.overlays.js',
-					
+					'src/js/infobox-1.1.12.js',
 
 					'src/js/wsu_maps.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
-					'src/js/infobox-1.1.12.js',
+					
 					'src/js/map_editor_vars.js',
 					'src/js/admin_ui__map_functions.js',
 					'src/js/wsu_maps.infobox.js',
@@ -169,6 +172,7 @@ module.exports = function(grunt) {
 					'src/js/jquery.ui.map.extensions.js',
 					'src/js/jquery.ui.map.services.js',
 					'src/js/jquery.ui.map.overlays.js',
+					'src/js/infobox-1.1.12.js',
 				
 					'src/js/utilities_general.js',
 					'src/js/wsu_maps.js',

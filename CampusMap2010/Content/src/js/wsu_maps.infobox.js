@@ -27,7 +27,7 @@
 				disableAutoPan:true,
 				onOpen:function(){}
 			};
-			$.wsu_maps.state.ibh[i] = new InfoBox(myHoverOptions,function(){});
+			$.wsu_maps.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
 		},
 
 		build_options:function(jObj,marker,i,content){
@@ -132,7 +132,7 @@
 			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
 			boxText.innerHTML = marker.info.content;
 			var myOptions = $.wsu_maps.infobox.build_options(jObj,marker,i,content);
-			$.wsu_maps.state.ib[i] = new InfoBox(myOptions,function(){
+			$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
 				//$('#taby'+i).tabs();
 				//alert('tring to tab it, dabnab it, from the INI');
 			});
@@ -194,7 +194,7 @@
 					'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
 				'</div>';		
 			var IW_options = $.wsu_maps.infobox.build_options(jObj,marker,0,box_content);
-			$.wsu_maps.state.ib[0] = new InfoBox(IW_options,function(){});
+			$.wsu_maps.state.ib[0] = new window.InfoBox(IW_options,function(){});
 			return marker;
 		},
 		close_IW:function(marker,i){

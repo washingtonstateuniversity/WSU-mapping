@@ -13,7 +13,7 @@ var pos=pos||{};
 var base=base||{};
 var pageTracker=pageTracker||null;
 var styles=styles||{};
-var InfoBox=InfoBox||null;
+
 var startingUrl=startingUrl||null;
 
 /* seed it */
@@ -706,7 +706,7 @@ var startingUrl=startingUrl||null;
 
 		setup:function (){//jObj){
 			$('#loading').remove();
-			if(typeof(startingUrl)!=="undefined"){
+			if(typeof(startingUrl)!=="undefined" && startingUrl!==null){
 				$.wsu_maps.updateMap($('#centralMap'),encodeURI(startingUrl.indexOf("&")?startingUrl.split('=')[1].split('&')[0]:startingUrl.split('=')[1]),false,function(){
 						if(parseInt(startingUrl.split('=')[1], 10)>0){
 							var marker = $.wsu_maps.state.markerbyid[parseInt(startingUrl.split('=')[1], 10)];
@@ -746,16 +746,11 @@ var startingUrl=startingUrl||null;
 			}
 			if($( "#placeSearch input[type=text]" ).length){
 				$.wsu_maps.search.setup_mapsearch($('#centralMap'));
-				
 			}
-			if($('.veiw_base_layout.public').length){
-		
-				
+			if($('.veiw_base_layout.public').length){	
 				$.wsu_maps.mapping.reloadShapes();
 				$.wsu_maps.mapping.reloadPlaces();
 			}
-			
-			
 		},
 
 
