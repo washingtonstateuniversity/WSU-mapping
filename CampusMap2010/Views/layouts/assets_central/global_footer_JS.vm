@@ -46,10 +46,17 @@
 
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&domready=1" id="addthisScript"></script>
 #* PLUGINS *#     #*modernizr-2.0.6/modernizr.min.js modernizr.custom.16671.js*#
-$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox-1.1.12.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js,~/Content/js/zeroclipboard/ZeroClipboard.js,~/Content/js/jPrint.js")
+#*$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/infobox-1.1.12.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/jquery.cycle.all.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js,~/Content/js/zeroclipboard/ZeroClipboard.js,~/Content/js/jPrint.js")
+*#
 
-#* Controls *#
-$scriptsService.Js("~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/init_test.js,~/Content/js/map_ini.js,~/Content/js/addthis_ini.js")
+#* Controls
+$scriptsService.Js("~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/init_test.js,~/Content/js/map_ini.js,~/Content/js/addthis_ini.js") *#
+
+$scriptsService.Js("~/Content/build/js/maps.wsu.edu.js",true)
+
+
+
+
 #*
 
 

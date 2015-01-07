@@ -2,6 +2,7 @@
 (function($) {
 	$.wsu_maps.admin = {
 		ini:function(){
+			$.wsu_maps.is_frontend=false;
 			var ed=ed||false;
 			if($('.admin.view._editor').length){
 				$.wsu_maps.admin.view.load_editor();

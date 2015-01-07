@@ -375,7 +375,7 @@
 			if( typeof(clear)!=='undefined' && clear ){
 				marker.info={};
 			}
-			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox(marker));
+			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox($('#place_drawing_map'),marker,i));
 			
 			if(marker.style.icon){
 				marker.style.icon = marker.style.icon.replace('{$i}',i+1);

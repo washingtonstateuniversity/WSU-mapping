@@ -42,10 +42,6 @@ module.exports = function(grunt) {
 			},
 			front_scripts: {
 				src: [
-					'src/js/wsu_maps.js',
-					'src/js/wsu_maps.util.js',
-					'src/js/wsu_maps.general.js',
-					'src/js/wsu_maps.nav.js',
 					'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					'src/js/infobox-1.1.12.js',
@@ -59,10 +55,15 @@ module.exports = function(grunt) {
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
 					'src/js/zeroclipboard/ZeroClipboard.js',
 					'src/js/jPrint.js',
-					'src/js/map_editor_vars.js',
-					'src/js/wsu_maps.infobox.js',
+					'src/js/wsu_maps.js',
 					'src/js/init_test.js',
-					'src/js/map_ini.js',
+					'src/js/map_editor_vars.js',
+					'src/js/wsu_maps.util.js',
+					'src/js/wsu_maps.general.js',
+					'src/js/wsu_maps.nav.js',
+					'src/js/wsu_maps.infobox.js',
+					'src/js/wsu_maps.frontend.js',
+					
 					'src/js/addthis_ini.js'
 				],
 				dest: 'build/js/maps.wsu.edu.js',
@@ -90,6 +91,7 @@ module.exports = function(grunt) {
 					
 
 					'src/js/wsu_maps.js',
+					'src/js/init_test.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
 					'src/js/infobox-1.1.12.js',
@@ -108,7 +110,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.admin.editors.view.js',
 					'src/js/wsu_maps.admin.editors.style.js',
 					
-					'src/js/init_test.js',
+					
 					'src/js/admin_ini.js',
 					'src/js/admin_init.js'
 				],
@@ -186,6 +188,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.admin.editors.media.js',
 					'src/js/wsu_maps.admin.editors.view.js',
 					'src/js/wsu_maps.admin.editors.style.js',
+					'src/js/wsu_maps.frontend.js',
 					//'src/js/zeroclipboard/ZeroClipboard.js',
 					'src/js/init_test.js',
 					'src/js/admin_ini.js',
