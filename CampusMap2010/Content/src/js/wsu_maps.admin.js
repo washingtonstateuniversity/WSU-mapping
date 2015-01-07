@@ -208,4 +208,5 @@
 		},
 	};
 	$.wsu_maps.admin.ini();
+	
 })(jQuery);
