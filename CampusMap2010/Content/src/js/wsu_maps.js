@@ -1059,9 +1059,6 @@ var startingUrl=startingUrl||null;
 			});	
 		
 		},
-		
-		
-		
 	};
 	$.wsu_maps.ini();
 })(jQuery);

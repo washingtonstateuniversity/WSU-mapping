@@ -112,9 +112,6 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.admin.editors.media.js',
 					'src/js/wsu_maps.admin.editors.view.js',
 					'src/js/wsu_maps.admin.editors.style.js',
-					
-					
-					'src/js/admin_ini.js',
 					'src/js/admin_init.js'
 				],
 				dest: 'build/js/admin.maps.wsu.edu.js',
@@ -200,7 +197,6 @@ module.exports = function(grunt) {
 					
 					'src/js/wsu_maps.frontend.js',
 					//'src/js/zeroclipboard/ZeroClipboard.js',
-					'src/js/admin_ini.js',
 					'src/js/admin_init.js'
 				],
 			options: {
