@@ -87,7 +87,7 @@
 					$('#directionsTo').hide();
 				}
 				if(typeof($.jtrack)!=="undefined"){
-					$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
+					//$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
 				}
 				//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
 				//$('.mapControl').remove();

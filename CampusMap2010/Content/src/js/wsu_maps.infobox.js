@@ -51,7 +51,7 @@
 					$.wsu_maps.infobox.close_IW(marker,i);
 				},
 				onOpen:function(){
-					$.wsu_maps.open_IW(jObj,marker,i);
+					$.wsu_maps.infobox.open_IW(jObj,marker,i);
 					/*note from backend, so may need to port something, remove when done */
 					/*$.wsu_maps.state.ibOpen = true;
 					$.wsu_maps.state.ibHover = true;
@@ -205,7 +205,7 @@
 				$('.cWrap .items').cycle('destroy');
 			}
 			if(typeof($.jtrack)!=="undefined"){
-				$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
+				//$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
 			}
 			if($('#taby'+i).length){
 				$('#taby'+i).tabs('destroy').tabs();
@@ -217,10 +217,13 @@
 
 			needsMoved=0;
 			$.wsu_maps.state.ibHover =  true;
-			$('#taby'+i).tabs('destroy').tabs({
-				select: function(event, ui) {
+			if($('#taby'+i).is(':ui-tabs')){
+				$('#taby'+i).tabs('destroy');
+			}
+			$('#taby'+i).tabs({
+				select: function(){//event, ui) {
 					if(typeof($.jtrack)!=="undefined"){
-						$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+						//$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
 					}
 				}
 			});
@@ -300,7 +303,7 @@
 			$('.infoBox .ui-tabs-panel a').attr('target','_blank');
 			$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
 				if(typeof($.jtrack)!=="undefined"){
-					$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
+					//$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
 				}
 			});
 			if($('.layoutfree').length){
@@ -311,7 +314,7 @@
 				});
 			}
 		},
-		init_img_cycler:function(marker){
+		init_img_cycler:function(){//marker){
 			if($('.cWrap .items li').length>1 && typeof($.fn.cycle)!=="undefined"){
 				var currSlide=0; 
 				$('.cWrap .items').cycle('destroy');
@@ -327,11 +330,11 @@
 					onPagerEvent:function(i){//,ele){
 						if(currSlide-i<0){ 
 							if(typeof($.jtrack)!=="undefined"){
-								$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+								//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
 							}
 						}else{ 
 							if(typeof($.jtrack)!=="undefined"){
-								$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+								//$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
 							}
 						} 
 						currSlide = i; 
@@ -339,11 +342,11 @@
 					onPrevNextEvent:function(isNext){//,i,ele){
 							if(isNext){
 								if(typeof($.jtrack)!=="undefined"){
-									$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+									//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
 								}
 							}else{
 								if(typeof($.jtrack)!=="undefined"){
-									$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+									//$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
 								}
 							}
 						},
@@ -354,7 +357,7 @@
 				});
 			}
 		},
-		init_img_modal:function(marker){
+		init_img_modal:function(){//marker){
 			$('a.gouped').off().on('click',function(e){
 				e.preventDefault();
 				e.stopPropagation();
@@ -372,12 +375,12 @@
 					current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 					onOpen:function(){
 						if(typeof($.jtrack)!=="undefined"){
-							$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
+							//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
 						}
 					},
 					onClosed:function(){
 						if(typeof($.jtrack)!=="undefined"){
-							$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
+							//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
 						}
 						$('#colorbox #cb_nav').html("");
 						$('#ttl').text(0);
@@ -409,13 +412,13 @@
 									if(needsMoved<0){
 										$.colorbox.next();
 										if(needsMoved===-1 && typeof($.jtrack)!=="undefined"){
-											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+											//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 										}
 										needsMoved++;
 									}else{
 										$.colorbox.prev();
 										if(needsMoved===1 && typeof($.jtrack)!=="undefined"){
-											$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+											//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 										}
 										needsMoved--;
 									}
@@ -428,23 +431,23 @@
 									if(dif<0||dif>0){
 										if(dif<0){
 											$.colorbox.next();
-											//if(dif>-2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title);
+											//if(dif>-2)//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title);
 											needsMoved++;
 										}else{
 											$.colorbox.prev();
-											//if(dif<2)$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title);
+											//if(dif<2)//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title);
 											needsMoved--;
 										}
 									}
 								});
 								$('#cboxNext,#cboxLoadedContent').off('click.track').on('click.track',function(){
 									if(typeof($.jtrack)!=="undefined"){
-										$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+										//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 									}
 								});
 								$('#cboxPrevious').off('click.track').on('click.track',function(){
 									if(typeof($.jtrack)!=="undefined"){
-										$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+										//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 									}
 								});
 							}

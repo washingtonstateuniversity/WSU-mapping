@@ -21,7 +21,7 @@
 			.click(function() {
 					$.wsu_maps.infobox.open_info(jObj,i,marker);
 					if(typeof($.jtrack)!=="undefined"){
-						$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
+						//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 					}
 				})
 			.rightclick(function(event){$.wsu_maps.showContextMenu(event.latLng);})

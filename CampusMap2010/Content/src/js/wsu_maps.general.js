@@ -460,7 +460,7 @@
 							
 							if(valid){
 								$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
-									$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
+									//$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
 									$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
 									$.colorbox.resize();
 								});
@@ -614,7 +614,7 @@
 					//var pid = btn.attr("role");
 					$.wsu_maps.state.ib[i].open($('#centralMap').gmap('get','map'), $.wsu_maps.state.markerLog[i]);
 					if(typeof($.jtrack)!=="undefined"){
-						$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
+						//$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
 					}
 					$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[i];
 				});
