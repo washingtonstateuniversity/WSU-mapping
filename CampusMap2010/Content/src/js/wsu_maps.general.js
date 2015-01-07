@@ -763,14 +763,180 @@
 			}
 			return _op;
 		},
-		
-		
-		
 
-		
-		
-		
 	};
+	$.wsu_maps.mapping={
+		/* one of these must leave
+		reloadPlaces:function (){
+			var show_global_nav=show_global_nav||true;
+			var ids=ids||"";
+			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
+			if(typeof(ids)!==""){
+				$.getJSON(url+'?callback=?&ids[]='+ids.replace(", 0",""), function(data) {
+					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
+					$('#centralMap').gmap('clear','markers');
+					
+					$.wsu_maps.general.loadData($('#centralMap'),data,null,function(){//marker){
+						//ib[0].open($('#centralMap').gmap('get','map'), marker);
+						//$.wsu_maps.state.cur_mid = mid[0];
+					});
+					if(show_global_nav){
+						$.wsu_maps.general.loadListings(data,false);
+					}
+					$.wsu_maps.general.prep_html();
+				});
+			}	
+		},
+		reloadShapes:function (){
+			var sids=sids||"";
+			var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
+			//var jObj=$('#centralMap');
+			
+			if(typeof(ids)!=="undefined"){
+				$.getJSON(url+'?callback=?&ids[]='+sids.replace(", 0",""), function(data) {
+					$('#centralMap').gmap('clear','overlays');
+					$.each( data.shapes, function(i, shape) {	
+						$.wsu_maps.mapping.addShapeToMap($('#centralMap'),i, shape);
+					});
+				});
+			}
+		},*/
+		
+		
+		reloadPlaces:function (){
+			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
+			var ids;
+			
+			$.each($('[name="placelist[]"]'),function(){
+				ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
+			});
+			var jObj=$('#place_drawing_map');
+			jObj.gmap('clear','markers');
+			if(typeof(ids)!=="undefined"){
+				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
+					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
+					
+					
+					$.wsu_maps.general.loadData(jObj,data,null,function(){//marker){
+						//ib[0].open($('#place_drawing_map').gmap('get','map'), marker);
+						//cur_mid = mid[0];
+					});
+					$.wsu_maps.general.prep_html();
+				});
+			}
+			//alert('order::'+ids);
+		},
+		reloadShapes:function (){
+			var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
+			var ids;
+			$.each($('[name="geolist[]"]'),function(){
+					ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
+			});
+			var jObj=$('#place_drawing_map');
+			jObj.gmap('clear','overlays');
+			if(typeof(ids)!=="undefined"){
+				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
+					$.each( data.shapes, function(i, shape) {	
+						$.wsu_maps.mapping.addShapeToMap(jObj,i, shape);
+					});
+				});
+			}	
+		},
+		
+		
+		
+		addShapeToMap:function(jObj,i,shape){
+			var pointHolder = {};
+			var style = {};
+			if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polyline'){ 
+				pointHolder = {'path' : shape.latlng_str };
+			}
+			if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polygon'){ 
+				pointHolder = {'paths' : shape.latlng_str };
+			}
+			if(typeof(shape.encoded)!=="undefined"){ 
+				pointHolder = {'paths' : shape.encoded };
+			}
+			if(typeof(shape.style)==="undefined"||shape.style===''){
+				style = shape.type==='polygon'? {'fillOpacity':0.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':0.99,'strokeColor':'#262A2D','strokeWeight':2};
+			}else{
+				style =  shape.style.events.rest;
+			}
+			if(!$.isEmptyObject(pointHolder)){
+				style = $.extend( style , pointHolder );
+			}
+			
+			if((typeof(shape.style)==="undefined"||shape.style==='') && typeof(shape.type)!=="undefined"){
+				jObj.gmap('addShape',(shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style);
+			}else{
+				
+				// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
+				jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
+				$(shape_obj).on('click',function(){
+					if(typeof(shape.style.events.click)!=="undefined" && shape.style.events.click !== ""){
 
+						jObj.gmap('setOptions',shape.style.events.click,this);
+						if(typeof(shape.style.events.click.onEnd)!=="undefined" && shape.style.events.click.onEnd !== ""){
+							(function(){
+								window.jObj=jObj;
+								window.i=i;
+								/* jshint ignore:start */ //the safer eval still throws lint error
+								var p= shape.style.events.click.onEnd.replace('\u0027',"'");
+								var f=  new Function(p); 
+								f();
+								/* jshint ignore:end */
+							})();
+						}
+					}
+				 }).mouseover(function(){
+					 if(typeof(shape.style.events.mouseover)!=="undefined" && shape.style.events.mouseover !== ""){
+						 jObj.gmap('setOptions',shape.style.events.mouseover,this);
+						if(typeof(shape.style.events.mouseover.onEnd)!=="undefined" && shape.style.events.mouseover.onEnd !== ""){
+							(function(){
+								window.jObj=jObj;
+								window.i=i;
+								/* jshint ignore:start */ //the safer eval still throws lint error
+								var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'");
+								var f=  new Function(p); 
+								f();
+								/* jshint ignore:end */
+							})();
+						}		
+					 }
+				}).mouseout(function(){
+					if(typeof(shape.style.events.rest)!=="undefined" && shape.style.events.rest !== ""){
+						jObj.gmap('setOptions',shape.style.events.rest,this);
+						if(typeof(shape.style.events.rest.onEnd)!=="undefined" && shape.style.events.rest.onEnd !== ""){
+							(function(){
+								window.jObj=jObj;
+								window.i=i;
+								/* jshint ignore:start */ //the safer eval still throws lint error
+								var p= shape.style.events.rest.onEnd.replace('\u0027',"'");
+								var f=  new Function(p); 
+								f();
+								/* jshint ignore:end */
+							})();
+						}
+					}
+				}).dblclick(function(){
+					if(typeof(shape.style.events.dblclick)!=="undefined" && shape.style.events.dblclick !== ""){
+						jObj.gmap('setOptions',shape.style.events.dblclick,this);
+							(function(){
+								window.jObj=jObj;
+								window.i=i;
+								/* jshint ignore:start */ //the safer eval still throws lint error
+								var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'");
+								var f=  new Function(p); 
+								f();
+								/* jshint ignore:end */
+							})();
+					}
+				})
+				.trigger('mouseover')
+				.trigger('mouseout');
+				});
+			}	
+		},
+	};
 
 })(jQuery);

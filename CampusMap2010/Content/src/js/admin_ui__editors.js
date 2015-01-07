@@ -1,32 +1,12 @@
-
-
-
-
 var campus_latlng_str=campus_latlng_str||"";
-
-
 $.wsu_maps.admin.editors = {
 	place:{},
 	geometrics:{},
 	media:{}
 };
-
-
-
-
-
-
-
 /*
  * EDITOR CONTORL SCRIPTS
  */
-
-
-
-
-
-	
-
 /*function addShapeToMap(i, shape){
 	var pointHolder = {};
 	if(shape.latlng_str!='' && shape.type==='polyline'){ 
