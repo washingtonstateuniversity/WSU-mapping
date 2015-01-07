@@ -81,16 +81,18 @@ module.exports = function(grunt) {
 					'src/js/jSelect.filter.js',
 					'src/js/utilities_general.js',
 
-					'src/js/infobox.js',
+					
 					'src/js/jquery.ui.map.js',
 					'src/js/jquery.ui.map.drawingmanager.js',
 					'src/js/jquery.ui.map.extensions.js',
 					'src/js/jquery.ui.map.services.js',
 					'src/js/jquery.ui.map.overlays.js',
+					
 
 					'src/js/wsu_maps.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
+					'src/js/infobox-1.1.12.js',
 					'src/js/map_editor_vars.js',
 					'src/js/admin_ui__map_functions.js',
 					'src/js/wsu_maps.infobox.js',

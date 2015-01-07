@@ -1,5 +1,31 @@
+/*jshint -W054 */
 (function($) {
 	var pageTracker =pageTracker || null;
+	
+	$.runTemplate = $.runTemplate||function(html, options) {
+		var re,add,match,cursor,code,reExp,result;
+		re = /<%(.+?)%>/g, reExp = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g, code = "var r=[];\n", cursor = 0;
+		add = function(line, js) {
+					if(js){
+						code += line.match(reExp) ? line + "\n" : "r.push(" + line + ");\n";
+					}else{
+						code += line !== "" ? "r.push('" + line.replace(/'/g, "\"") + "');\n" : "";
+					}
+					return add;
+				};
+		while(match = re.exec(html)) {
+			add(html.slice(cursor, match.index))(match[1], true);
+			cursor = match.index + match[0].length;
+		}
+		add(html.substr(cursor, html.length - cursor));
+		code = (code + "return r.join('');").replace(/[\r\t\n]/g, "");
+		result = new Function(code).apply(options);
+		//try { result = new Function(code).apply(options); }
+		//catch(err) { console.error("'" + err.message + "'", " in \n\nCode:\n", code, "\n"); }
+		return result;
+	};
+	
+	
 	$.wsu_maps.general = {
 		prep_html:function (){
 			$(' [placeholder]:not(.not) ').defaultValue();

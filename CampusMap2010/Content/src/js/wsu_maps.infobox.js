@@ -29,33 +29,8 @@
 			};
 			$.wsu_maps.state.ibh[i] = new InfoBox(myHoverOptions,function(){});
 		},
-		make_InfoWindow:function (jObj,i,marker){
-			var nav='';
-			var content='';
-			if($.isArray(marker.info.content)){
-				$.each( marker.info.content, function(j, html) {	
-					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
-				});
-				
-				$.each( marker.info.content, function(j, html) {
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace("'",'_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
-				});				
-			
-			}else{
-				nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
-			}
-			var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
-						'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
-						content+
-						'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
-					'</div>';
-		
-			/* so need to remove this and create the class for it */
-			var boxText = document.createElement("div");
-			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-			boxText.innerHTML = marker.info.content;
-			var myOptions = {
+		build_options:function(jObj,marker,box){
+			var options = {
 				alignBottom:true,
 				content: box,//boxText
 				disableAutoPan: false,
@@ -99,12 +74,12 @@
 					needsMoved=0;
 					$.wsu_maps.state.ibHover =  true;
 					$('#taby'+i).tabs('destroy').tabs({
-							select: function(event, ui) {
-								if(typeof($.jtrack)!=="undefined"){
-									$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
-								}
+						select: function(event, ui) {
+							if(typeof($.jtrack)!=="undefined"){
+								$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
 							}
-						});
+						}
+					});
 					$("#campusmap .ui-tabs .ui-tabs-panel .content").width(($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?$('#campusmap .ui-tabs .ui-tabs-panel').width()-35:365)+"px");
 					if($('.cWrap .items li').length>1 && typeof($.fn.cycle)!=="undefined"){
 						var currSlide=0; 
@@ -309,6 +284,39 @@
 					$.wsu_maps.general.prep_html();
 				}
 			};
+			return options;
+		},
+		build_IW_content:function(marker){
+			var nav='';
+			var content='';
+			if($.isArray(marker.info.content)){
+				$.each( marker.info.content, function(j, html) {	
+					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
+				});
+				
+				$.each( marker.info.content, function(j, html) {
+					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace("'",'_').replace('/','_')+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+				});				
+			
+			}else{
+				nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
+				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+			}
+			var box='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
+				'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
+				content+
+				'<div class="ui-tabs-panel-cap ui-corner-bottom"><span class="arrow L5"></span><span class="arrow L4"></span><span class="arrow L3"></span><span class="arrow L2"></span></div>'+
+			'</div>';
+			return box;
+		},
+		make_InfoWindow:function (jObj,i,marker){
+			var content= $.wsu_maps.infobox.build_IW_content(marker);
+		
+			/* so need to remove this and create the class for it */
+			var boxText = document.createElement("div");
+			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+			boxText.innerHTML = marker.info.content;
+			var myOptions = $.wsu_maps.infobox.build_options(jObj,marker,content);
 			$.wsu_maps.state.ib[i] = new InfoBox(myOptions,function(){
 				//$('#taby'+i).tabs();
 				//alert('tring to tab it, dabnab it, from the INI');
