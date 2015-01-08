@@ -541,6 +541,7 @@ namespace campusMap.Controllers {
             if (forced_tmp && view.id == 0) {
                 view.tmp = true;
             } else {
+                view.tmp = false;
                 string gemSql = "POINT (" + LongLength + " " + Length + ")";
                 string wkt = gemSql;
                 SqlChars udtText = new SqlChars(wkt);
