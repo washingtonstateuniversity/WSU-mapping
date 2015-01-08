@@ -194,6 +194,12 @@ var startingUrl=startingUrl||null;
 				obj.width($(window).width()-width);
 			}
 		},
+		resizeMaxBg:function(obj,height,width) {
+			obj.css({"max-height":$(window).height()-height});
+			if(typeof(width)!=="undefined"&&width>0){
+				obj.css({"max-width":$(window).width()-width});
+			}
+		},
 		iniMap:function (url,callback){
 			var padder = 130;
 			if($('.layoutfree').lenght){

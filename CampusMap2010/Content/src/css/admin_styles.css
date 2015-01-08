@@ -952,17 +952,24 @@ span.UinEdit {
 	border-left: 1px solid transparent;
 }*/
 .ui-tooltip {z-index:99999;}
-
-#wsu_ui.admin.view._editor ul.ui-tabs-nav{ position:absolute;left:-35px;top:0px;}
-#wsu_ui.admin.view._editor ul.ui-tabs-nav li{float: none;}
-#wsu_ui.admin.view._editor ul.ui-tabs-nav li a{
+#settings_wrap{position:absolute;top:100px;right: -5px; max-width:80%;}
+#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav{ position:absolute;left:-40px;top:0px;width: 38px;
+padding-right: 0px !important;
+text-align: center;}
+#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav li{float: none;padding-right: 0px !important;
+margin-right: 0px !important;}
+#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav li a{
 	float: none;
 padding:5px;
 text-decoration: none;
 display: block;
 height: 25px;
 width: 25px;
+font-size:25px;
+line-height:25px;
 }
+#tabs_Options{ overflow-y:scroll;}
+#wsu_ui.admin.view._editor #editor_form{margin-bottom:0px;padding-bottom: 0px;}
 
 #wsu_ui.admin.view._editor .row.single.gutter.pad.short.narrow .column.one{padding:0px;}
 #wsu_ui.admin.view._editor #content_area{padding:0px;}
