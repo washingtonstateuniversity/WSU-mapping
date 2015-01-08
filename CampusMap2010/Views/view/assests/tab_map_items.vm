@@ -1,0 +1,157 @@
+<fieldset id="onMap"><legend>On The Map</legend>
+		
+		
+		
+		<div class="row halves equalize at-intermediate-full-width at-small-full-width">
+			<div class="column one padless">
+				<fieldset role="place">
+					<legend>Places Used</legend>
+					
+					<div class="row halves equalize at-large-full-width">
+					
+						<div class="column one padless">
+							<div class="listPicker ui-widget-content ui-corner-top">	
+								<ol id="places" class="sortable">
+									#set($c=0)
+									#foreach($place in $view.places)
+										<li  id="list_${c}">
+											<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
+												$!place.prime_name<input type="hidden" name="placelist[]" class="list_place" value="$place.id" /><em></em>
+											</div>	
+										</li>
+										#set($c=$c+1)
+									#end
+									#if($c==0)
+										<li class="ini"><div><h5>Add place from below</h5></div></li>
+									#end
+								</ol>		
+							</div>	
+								<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to change the order.</h6>
+						</div>
+						<div class="column two padded-right-none padded-top-none">
+							<label for="places">Add Places to the Map,</label><br/>
+							<strong>Under:</strong>
+							<select id="placeFilter" class="onfliterList">
+								<option value="">Filter Selection</option>
+								<option value="authors_places">Your Places</option>
+								<!--<option value="owned_sections">Your Sections</option>-->
+								<option value="all_places">All</option>
+								<option value="categories">Categories</option>
+								<option value="colleges">Colleges</option>
+								<option value="admindepartments">Admin Departments</option>
+								<option value="departments">Departments</option>
+								<option value="schools">Schools</option>
+								<option value="programs">Programs</option>
+							</select><br/>
+							<span class="subFilter" style="display:none;">
+								<strong>for:</strong>
+								<select id="placeSubFilter" class="onsubfliterList w200">
+									<option value="">All</option>
+									#foreach($cat in $listcats)
+										<option value="$cat.id" #if($searchId == $cat.id) selected="selected" #end>$Controller.repeatStr("- ",$cat.level)$cat.name</option>
+									#end
+								</select><br/>
+							</span>
+						   
+							<span class="mainFilter" style="display:none;">
+								<select id="place_select" class="finFill" style="width:171px;">
+									<!--<option class="place" value="">Select to add</option>-->
+									#foreach($place in $places)
+										<option class="place" value="$place.id" #if($place.staticMap)data-image="$helper.getAdminUrl("media/getmap")?path=$siteroot${place.staticMap}"#end #if($view.places.Contains($place))disabled="disabled"#end >$!place.prime_name</option>
+									#end
+								</select><a href="#" title="Add Place" id="addPlaceSelect" class="addSelection dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a><br/>
+							</span>
+							
+							<br/>
+							#set($mess="If a place has a shape <br/>you may wish to not pick <br/>a Geometric Shape.")
+							#parse("admin/noted.vm")
+							
+							
+							
+							<br/><strong>force marker style:</strong>
+							<select name="view.forced_marker_style" id="forced_marker_style">
+								<option class="geometric" value="" #if($!view.forced_marker_style) selected="selected" #end>Passthru (none)</option>
+								#set($i=0)
+								#foreach($style in $styles_marker)
+									#if($i==0)<optgroup label="Marker styles">#end
+									<option class="geometric" value="$style.id" #if($view.forced_marker_style.id == $style.id) selected="selected" #end>$!style.name</option>
+									#set($i=$i+1)
+								#end
+							</select>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="column two padless">
+				<fieldset role="geo">
+				
+					<legend>Shapes Used</legend>
+					
+					
+					<div class="row halves equalize at-large-full-width">
+					
+						<div class="column one padless">
+							<div class="listPicker ui-widget-content ui-corner-top">		
+								<ol id="geos" class="sortable">
+									#set($c=0)
+									#foreach($geo in $view.geometrics)
+										<li  id="list_${c}">
+											<div style="padding: 1px;"><span style="font-size:0.5em; float:right;"> <a href="#" title="Remove" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-trash"></span></a></span>
+												$!geo.name<input type="hidden" name="geolist[]" class="list_geo" value="$geo.id" /><em></em>
+											</div>	
+										</li>
+										#set($c=$c+1)
+									#end
+									#if($c==0)
+										<li class="ini"><div><h5>Add shape from below</h5></div></li>
+									#end
+								</ol>		
+							</div>	
+							<h6 style="color: #981E32;font-size: 9px; padding: 0px; line-height: 10px; text-align: center; height: 10px; margin-top: 2px;">Simply drag the bars to change the order.</h6>
+						</div>
+						<div class="column two padded-right-none padded-top-none">
+			
+							<label for="name">Add Shapes to the Map,</label><br/>
+							<strong>Under:</strong>
+							<select id="geoFilter" class="onfliterList">
+								<option value="">Filter Selection</option>
+								<option value="authors_geometrics">Your Shapes</option>
+								<!--<option value="owned_sections">Your Sections</option>-->
+								<option value="all_geometrics">All</option>
+							</select><br/>
+							<span class="mainFilter" style="display:none;"><br/>
+								<select id="geo_select" class="finFill" style="width:171px;">
+									<option class="place" value="">Select to add</option>
+									#foreach($geo in $geometrics)
+										<option class="geo" value="$geo.id" #if($view.geometrics.Contains($geo))disabled="disabled"#end>$!geo.name</option>
+									#end
+								</select><a href="#" title="Add Shapes" id="addGeoSelect" class="addSelection dynoList buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-icon ui-icon-plus"></span></a>
+								<br/>
+							</span>
+							
+							<br/><strong>force shape style:</strong>
+							<select name="view.forced_shapes_style" id="forced_shapes_style">
+								<option class="geometric" value="" #if($!view.forced_shapes_style) selected="selected" #end>Passthru (none)</option>
+								#set($i=0)
+								#foreach($style in $styles_polygon)
+									#if($i==0)<optgroup label="Polygon styles">#end
+									<option class="geometric" value="$style.id" #if($view.forced_shapes_style.id == $style.id) selected="selected" #end>$!style.name</option>
+									#set($i=$i+1)
+								#end
+								#if($i>0)</optgroup>#end
+								
+								#set($j=0)
+								#foreach($style in $styles_polyline)
+									#if($j==0)<optgroup label="Polyline styles">#end
+									<option class="geometric" value="$style.id" #if($view.forced_shapes_style.id == $style.id) selected="selected" #end>$!style.name</option>
+									#set($j=$j+1)
+								#end
+								#if($j>0)</optgroup>#end
+							</select>
+						</div>
+				</fieldset>  
+			</div>
+		</div>
+			
+			
+		</fieldset>
