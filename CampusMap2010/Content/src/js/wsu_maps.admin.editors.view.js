@@ -30,6 +30,14 @@
 $.wsu_maps.admin.view = {
 	load_editor:function () {
 		$.wsu_maps.state.api = null;
+		
+		$("#side_tabs").tabs({
+			active:false,
+			collapsible: true,
+			'hide':{ effect: 'slide', direction: 'right', duration: 300 },
+			'show':{ effect: 'slide', direction: 'right', duration: 300 }
+		});
+
 		var lat = $('#Lat').val();
 		var lng = $('#Long').val();	
 		//var width = $('#width').val();
@@ -109,7 +117,7 @@ $.wsu_maps.admin.view = {
 			$.wsu_maps.mapping.reloadShapes();
 			$.wsu_maps.mapping.reloadPlaces();
 			
-		}).resizable({
+		})/*.resizable({
 			helper: "ui-resizable-helper",
 			stop: function(event, ui) {
 				//var width = $('#width').val(ui.size.width);
@@ -119,12 +127,11 @@ $.wsu_maps.admin.view = {
 				$('.heightOutput').text(ui.size.height);
 				$('#place_drawing_map').gmap('refresh');
 			}
-		});
+		})*/;
 		
 
 		
-		
-		
+
 		if($('.sortable').length){
 
 			$('ol.sortable').nestedSortable({

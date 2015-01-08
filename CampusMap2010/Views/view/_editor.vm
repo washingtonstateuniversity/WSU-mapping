@@ -19,35 +19,70 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 		$Flash.error
 	</p>
 #end
-<div id="" class="tabs ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
+<form action="update.castle" method="post" id="editor_form">
+	$formbuttons
+
+<style>
+	#resizable { width: 150px; height: 150px; padding: 0.5em; }
+	#resizable h3 { text-align: center; margin: 0; }
+	.ui-resizable-helper { border: 2px dotted #00F; }
+	</style>
+		
+		#if($view.height>0)
+			#set($height = "${view.height}px")
+		#else
+			#set($height = "520px")
+		#end
+		
+		#if($view.width>0)
+			#set($width = "${view.width}px")
+		#else
+			#set($width = "100%")
+		#end
+		<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
+		</lable> | 
+		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
+		</lable>
+		<div class="clear"></div>
+		<!--<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>-->
+		<div id="campusmap">
+			<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
+		</div>
+
+
+<div style="position:absolute;top:75px;right:0px; max-width:80%;">
+<div id="side_tabs" class=" ui-tabs ui-widget ui-widget-content ui-corner-all place_new" >
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-      <a href="#tabs_Basic">Basic</a>
+    <li class="ui-state-default ui-corner-top">
+      <a href="#tabs_Basic" title="Basic"><span class="fa-stack fa-md">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-cog fa-stack-1x fa-inverse"></i>
+</span></a>
     </li>
    <li class="ui-state-default ui-corner-top">
-      <a href="#tabs_Options">Options</a>
+      <a href="#tabs_Options" title="Map Options"><i class="fa fa-sliders"></i></a>
     </li>
-    <li class="ui-state-default ui-corner-top">
+    #*<li class="ui-state-default ui-corner-top">
       <a href="#tabs_SAMPLE">Map Preview</a>
-    </li>
+    </li>*#
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs_Detail">Detail</a>
+      <a href="#tabs_Detail" title="Display and Details"><i class="fa fa-users"></i></a>
     </li>
      #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
       <a href="#tabs_FIELDS">Fields</a>
     </li>   #end
     <li class="ui-state-default ui-corner-top">
-      <a href="#tabs_OUTPUT">Output/Embed</a>
+      <a href="#tabs_OUTPUT" title="Output/Embed"><i class="fa fa-info-circle"></i></a>
     </li>
     #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-top">
       <a href="#tabs_COMMENTS">Comments</a>
     </li>#end
   </ul>
   
-<form action="update.castle" method="post" id="editor_form">
+
 
   <div id="tabs_Basic" class="mainAreaTabs">
-		$formbuttons
+  	<h3>Basic</h3>
 		<p class="validateTips">* fields are required.</p>
         $Form.HiddenField("view.id")
 		#if( $view.id==0 || $view.tmp)
@@ -288,14 +323,11 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			
 			
 		</fieldset>
-     $formbuttons
     <div class="clear"></div>
   </div>
   
  <div id="tabs_Options" class="mainAreaTabs">
-		$formbuttons <div class="clear"></div>
-		
-		
+		<h3>Map Options</h3>
 		<fieldset>
 			<label for="show_global_nav"><strong>Show tab nav:</strong></label>&nbsp;
 				<select name="view.show_global_nav" id="show_global_nav">
@@ -624,16 +656,11 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 		</fieldset>
 
 		
-		
-		
-		
-		
-		
-     $formbuttons
+
     <div class="clear"></div>
   </div>
   
-  
+  #*
 <div id="tabs_SAMPLE" class="mainAreaTabs">
 	$formbuttons <div class="clear"></div>
 
@@ -665,7 +692,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 	$formbuttons
 	<div class="clear"></div>
   <br/>    
-</div>
+</div>*#
   
   #*
   <div id="tabs_Text" class="mainAreaTabs">
@@ -749,10 +776,7 @@ $formbuttons
   *#
   
   <div id="tabs_Detail" class="mainAreaTabs">
-$formbuttons <div class="clear"></div>
-
-
-
+  	<h3>Display and Details</h3>
  	#if($userService.checkPrivleage("can_publish"))
 		<div id="StatusDiv">
 		  <h3 style="display:inline-block;">Place Status:</h3>
@@ -813,15 +837,12 @@ $formbuttons <div class="clear"></div>
     </div>
 
     <a style="cursor:pointer;" onclick="AddAuthor()">+ add additional authors</a>
-    
-    $formbuttons
-    <div class="clear"></div>
   <br/>
     
   </div>
 
 #if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
-	$formbuttons <div class="clear"></div>
+
         <fieldset><legend>Place fields: </legend>
 
 			#foreach($field in $fields)          
@@ -830,7 +851,7 @@ $formbuttons <div class="clear"></div>
 			<hr/>
 			#end
         </fieldset> 
-    $formbuttons
+
     <div class="clear"></div>
   <br/>    
 </div>
@@ -889,8 +910,8 @@ $formbuttons
 	
 
 	<div id="tabs_OUTPUT" class="mainAreaTabs">
-		$formbuttons
-        <h3>NOTE: you must apply your changes to have them reflect here</h3>
+		<h3>Output/Embed</h3>
+        <h4>NOTE: you must apply your changes to have them reflect here</h4>
 		<fieldset><legend>Output url: </legend>
 			<label for="name">URL</label><br/>	
 			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
@@ -925,11 +946,8 @@ $formbuttons
 			<pre>[wsuwp_map alias="<span class="outputurl">$!{view.alias}</span>"]</pre>
 			This will let you use this <a href="https://github.com/washingtonstateuniversity/WSUWP-Maps" target="_blank">plugin's shortcode</a>.
 		</fieldset>
-		$formbuttons
-		<div class="clear"></div>
-	  <br/>    
 	</div>
-</form>
+
   #if($comments.TotalItems&&$comments.TotalItems!=0)
   <div id="tabs_COMMENTS" class="mainAreaTabs">
 
@@ -998,8 +1016,8 @@ $formbuttons
 
 
 </div>
-
-
+</div>
+</form>
 
 	<div id="page_dialog">
 		<form id="taber" name="">

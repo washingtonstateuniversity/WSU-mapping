@@ -476,7 +476,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	}
 
 
-	function tabsToAccordions(){
+	/*function tabsToAccordions(){
 		$(".tabs").each(function(){
 			var e=$('<div class="accordion">');
 			var t=[];
@@ -536,7 +536,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			updateUI();
 		});
 		updateUI();
-	}
+	}*/
 
 	
 	if($( "#sub_tabs" ).length>0){
@@ -573,13 +573,13 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 	}
 	if($(".tabs").length>0){
 		initalize_tabs();
-		applyTabToAccordion();
+		//applyTabToAccordion();
 	}else{
 		setInfoSlide();	
 	}
 	if($("#tabs").length>0){
 		$("#tabs").tabs();
-		applyTabToAccordion();
+		//applyTabToAccordion();
 	}
 	if( ($.wsu_maps.admin.defaults.place_id===0) ){
 		if($( "#chooseModel" ).length===0){
