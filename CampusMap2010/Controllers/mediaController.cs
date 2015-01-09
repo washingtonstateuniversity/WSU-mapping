@@ -1098,32 +1098,33 @@ namespace campusMap.Controllers
             {
 
                 string baseFile = uploadPath + id + ".ext";
-                if (!File.Exists(baseFile))
-                { baseFile = uploadPath + image.file_name; }
-
-                System.Drawing.Image processed_image = System.Drawing.Image.FromFile(HttpContext.Server.MapPath(baseFile));
-                //set some defaults
-                ImageService.imageMethod methodChoice = ImageService.imageMethod.Percent;
-                ImageService.Dimensions dimensional = ImageService.Dimensions.Width;
-
-                //choose medth of sizing and set their defaults
-                switch (m)
-                {
-                    case "percent":
-                        methodChoice = ImageService.imageMethod.Percent;
-                        break;
-                    case "constrain": 
-                        methodChoice = ImageService.imageMethod.Constrain;
-                        dimensional = w != 0 ? ImageService.Dimensions.Width : ImageService.Dimensions.Height;
-                        break;
-                    case "fixed": 
-                        methodChoice = ImageService.imageMethod.Fixed;
-                        break;
-                    case "crop":  
-                        methodChoice=ImageService.imageMethod.Crop;
-                        break;
+                if (!File.Exists(baseFile)) { 
+                    baseFile = uploadPath + image.file_name; 
                 }
-                imageService.process(id, processed_image, newFile, methodChoice, p, h, w, dimensional, protect, mark, image.ext);
+                if (File.Exists(HttpContext.Server.MapPath(baseFile))) {
+                    System.Drawing.Image processed_image = System.Drawing.Image.FromFile(HttpContext.Server.MapPath(baseFile));
+                    //set some defaults
+                    ImageService.imageMethod methodChoice = ImageService.imageMethod.Percent;
+                    ImageService.Dimensions dimensional = ImageService.Dimensions.Width;
+
+                    //choose medth of sizing and set their defaults
+                    switch (m) {
+                        case "percent":
+                            methodChoice = ImageService.imageMethod.Percent;
+                            break;
+                        case "constrain":
+                            methodChoice = ImageService.imageMethod.Constrain;
+                            dimensional = w != 0 ? ImageService.Dimensions.Width : ImageService.Dimensions.Height;
+                            break;
+                        case "fixed":
+                            methodChoice = ImageService.imageMethod.Fixed;
+                            break;
+                        case "crop":
+                            methodChoice = ImageService.imageMethod.Crop;
+                            break;
+                    }
+                    imageService.process(id, processed_image, newFile, methodChoice, p, h, w, dimensional, protect, mark, image.ext);
+                }
             }
 
             // Read in the file into a byte array
@@ -1188,9 +1189,11 @@ namespace campusMap.Controllers
                 HttpContext.Response.Cache.SetMaxAge(new TimeSpan(84, 0, 0, 0, 0));
                 // Write the file to the response
                 HttpContext.Response.BinaryWrite(contents);
+                log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
-            log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
+            RenderText("false");
+           
         }
         //private string GetFileName(HttpPostedFile file)
         //{
