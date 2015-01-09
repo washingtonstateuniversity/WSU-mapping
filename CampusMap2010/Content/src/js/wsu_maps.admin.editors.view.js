@@ -45,7 +45,7 @@ $.wsu_maps.admin.view = {
 			}
 		});
 		$(window).resize(function(){
-			$.wsu_maps.resizeBg($('#place_drawing_map'),100);
+			$.wsu_maps.resizeBg($('#place_drawing_map'),112);
 			$.wsu_maps.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 		}).trigger("resize");
 		

@@ -5,8 +5,8 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 
 #capturefor(formbuttons)
     <input type="submit" value="Exit" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
-    <input type="submit" value="Save and Return" title="Save and Return"  name="apply" style="float:right" class="ui-button ui-widget ui-state-default ui-corner-all" />
-    <input type="submit" value="Save and Exit" title="Save and Exit"  style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Save and Return" name="apply" style="float:right" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Save"  style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
 #end
 
 <div id="runningOptions">$!options_json</div>
@@ -22,6 +22,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 #end
 
 <form action="update.castle" method="post" id="editor_form">
+	<div style="height:35px;padding-bottom:5px;">
 	$formbuttons
 
 	<style>
@@ -46,6 +47,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 	<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
 	</lable>
 	<div class="clear"></div>
+	</div>
 	<!--<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>-->
 	<div id="campusmap">
 		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
