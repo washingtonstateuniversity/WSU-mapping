@@ -1,0 +1,36 @@
+<h3>Output/Embed</h3>
+<h4>NOTE: you must apply your changes to have them reflect here</h4>
+<fieldset><legend>Output url: </legend>
+	<label for="name">URL</label><br/>	
+	<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
+</fieldset> 
+
+
+<fieldset><legend>Themed Output: </legend>
+	<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
+</fieldset>
+	
+<fieldset><legend>Feed Output: </legend>
+	<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json</pre>
+	<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
+	<h4 style="clear:left;">Callback for jsonp</h4>
+	<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json&callback=test</pre>
+	 <h6><em><strong>Note:</strong> the url query value "test" for the name "callback" is an example and could be anything.  It's highly suggested to make this a random value to avoid any client side cache uses. <strong>ex: callback=jQuery172012056579411266988_1344368945782 via jquery jsonp using callback=?</strong> </em></h6>
+</fieldset>
+
+<fieldset><legend>Standalone Output: </legend>
+	<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
+	<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
+</fieldset>		
+<fieldset><legend>Embeding in html: </legend>
+	<pre>&lt;script type="text/javascript" src="$siteroot/embed/<span class="outputurl">$!{view.alias}</span>"&gt;&lt;/script&gt;
+	</pre>
+	This is what you'll want to use most of the time.
+</fieldset>	
+<fieldset><legend>Embed iframe code example <em><b>(deprecated)</b></em>: </legend>
+	<pre>&lt;iframe src=&quot;http://map.wsu.edu/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot; width="<span class="widthOutput">$!{view.width}</span>" height="<span class="heightOutput">$!{view.height}</span>"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" &gt;&lt;/iframe&gt;</pre>
+</fieldset>
+<fieldset><legend>WordPress Shortcode example: </legend>
+	<pre>[wsuwp_map alias="<span class="outputurl">$!{view.alias}</span>"]</pre>
+	This will let you use this <a href="https://github.com/washingtonstateuniversity/WSUWP-Maps" target="_blank">plugin's shortcode</a>.
+</fieldset>

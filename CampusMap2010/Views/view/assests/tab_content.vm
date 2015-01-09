@@ -1,0 +1,72 @@
+<style>
+#dialog label, #dialog input { display:block; }
+#dialog label { margin-top: 0.5em; }
+#dialog input, #dialog textarea { width: 95%; }
+#tabs { margin-top: 1em; }
+#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#add_tab { cursor: pointer; }
+</style>
+
+
+
+<div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+$formbuttons
+
+
+	<h3>Summary :</h3>
+	
+	<textarea id="place_summary" name="view.summary"  class="tinyEditor">$!view.summary</textarea>
+				<br/>
+	<hr/>
+	<h3>Short codes <a href="#" title="show" id="shortcode">+</a></h3>
+<div id="shortcodes">
+
+#foreach($short_code in $short_codes)
+$short_code<br/>
+#end
+
+</div>
+<h6><em>When using the short codes, adding the ! mark between the $ and { ( ie: &#36;!{notes_comments} ) will let the code retrun nothing if there is a value is unset.</em></h6>
+	<br/>
+	<hr/>
+	<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!view.infoTitle" placeholder="Title to show at top of each tab" name="view.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="view.hideTitles" >
+		<option class="author" value="true" #if(${view.hideTitles}) selected="selected" #end>Yes</option>
+		<option class="author" value="false" #if(!${view.hideTitles}) selected="selected" #end>No</option>
+	</select></label>
+	<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the view.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
+	<br/>
+	<hr/>
+	<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label>Enable: <select name="view.autoAccessibility" >
+		<option class="author" value="true" #if(${view.autoAccessibility}) selected="selected" #end>Yes</option>
+		<option class="author" value="false" #if(!${view.autoAccessibility}) selected="selected" #end>No</option>
+	</select></label>
+	<h6><em>By using the Auto Accessibility feature, a default template is used to display all feilds defined.  You can always use the short codes and disableing this to design your own tab layout.</em></h6>
+	<hr/>
+	<br/>
+	<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
+	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<li class="ui-state-default ui-corner-top nonsort"><a href="#dyno_tab1">Overview</a></li>
+		#set($T = 0)
+		#foreach($tab in $tabs) 
+			<li class="ui-state-default ui-corner-top">
+				<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
+				<input type="hidden" name="tabs[$T].id" value="" />
+				<input type="hidden" name="tabs[$T].title" value="$!tab.title" /> 
+				<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' />
+				<span class='ui-icon ui-icon-close'>Remove Tab</span>
+			</li>
+			#set($T = $T+1)
+		#end
+	</ul>
+	<div id="dyno_tab1">
+		<h3>Details:</h3>
+		<textarea id="place_details" name="view.details"  class="tinyEditor full">$!view.details</textarea>
+	</div>
+	#set($T = 0)
+	#foreach($tab in $tabs) 
+		<div id="dyno_tabs_$T">
+			<textarea id='tab_$T' class='tinyEditor dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
+		</div>
+		#set($T = $T+1)
+	#end
+</div>

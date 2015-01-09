@@ -4,13 +4,14 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 
 
 #capturefor(formbuttons)
-    <input type="submit" value="Cancel" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
-    <input type="submit" value="#if($view.id!=0) Apply #else Save #end" name="apply" style="float:right" title="#if($view.id!=0)Apply #else Save #end and Return" class="ui-button ui-widget ui-state-default ui-corner-all" />
-    <input type="submit" value="Submit" style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Exit" name="cancel" style="float:right"  class="cancel_btn ui-button ui-widget ui-state-default ui-corner-all"/>
+    <input type="submit" value="Save and Return" title="Save and Return"  name="apply" style="float:right" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    <input type="submit" value="Save and Exit" title="Save and Exit"  style="float:right" class="submit_btn ui-button ui-widget ui-state-default ui-corner-all" />
 #end
 
 <div id="runningOptions">$!options_json</div>
 <div id="shape" style="position:absolute;top:-9999em;left:-9999em;">$!shapes</div>
+
 <script type="text/javascript">
 	var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
 </script>
@@ -19,521 +20,134 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 		$Flash.error
 	</p>
 #end
+
 <form action="update.castle" method="post" id="editor_form">
 	$formbuttons
 
-<style>
-	#resizable { width: 150px; height: 150px; padding: 0.5em; }
-	#resizable h3 { text-align: center; margin: 0; }
-	.ui-resizable-helper { border: 2px dotted #00F; }
-	</style>
-		
-		#if($view.height>0)
-			#set($height = "${view.height}px")
-		#else
-			#set($height = "520px")
-		#end
-		
-		#if($view.width>0)
-			#set($width = "${view.width}px")
-		#else
-			#set($width = "100%")
-		#end
-		<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
-		</lable> | 
-		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
-		</lable>
-		<div class="clear"></div>
-		<!--<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>-->
-		<div id="campusmap">
-			<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
-		</div>
-
-
-<div id="settings_wrap">
-<div id="side_tabs" class=" ui-tabs ui-widget ui-widget-content ui-corner-left place_new" >
-  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-left">
-    <li class="ui-state-default ui-corner-left #if( $view.id==0 || $view.tmp) ui-state-active #end">
-      <a href="#tabs_Basic" title="Basic"><i class="fa fa-cog"></i></a>
-    </li>
-   <li class="ui-state-default ui-corner-left">
-      <a href="#tab_map_items" title="Map Items"><i class="fa fa-map-marker"></i></a>
-    </li>
-   <li class="ui-state-default ui-corner-left">
-      <a href="#tabs_Options" title="Map Options"><i class="fa fa-sliders"></i></a>
-    </li>
-
-	
-	
-	
-	
-    #*<li class="ui-state-default ui-corner-left">
-      <a href="#tabs_SAMPLE">Map Preview</a>
-    </li>*#
-    <li class="ui-state-default ui-corner-left">
-      <a href="#tabs_Detail" title="Display and Details"><i class="fa fa-users"></i></a>
-    </li>
-     #if(${fields.count}>0)<li class="ui-state-default ui-corner-top">
-      <a href="#tabs_FIELDS">Fields</a>
-    </li>   #end
-    <li class="ui-state-default ui-corner-left">
-      <a href="#tabs_OUTPUT" title="Output/Embed"><i class="fa fa-info-circle"></i></a>
-    </li>
-    #if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-left">
-      <a href="#tabs_COMMENTS">Comments</a>
-    </li>#end
-  </ul>
-  
-
-
-  <div id="tabs_Basic" class="mainAreaTabs">
-  	<h3>Basic</h3>
-		<p class="validateTips">* fields are required.</p>
-        $Form.HiddenField("view.id")
-		#if( $view.id==0 || $view.tmp)
-			<input type="hidden" name="forced_tmp" value="1" />
-		#end
-		<fieldset style="position:relative;"><legend>Map Basics</legend>
-			<div class="row side-right equalize">
-				<div class="column one padless">
-					<label for="Lat"><strong>Name: </strong><br/>
-					<input type="text" name="view.name" id="name" value="$!view.name" class="text ui-widget-content ui-corner-all w500" />
-					</label>
-				</div>
-				<div class="column two padless">
-					<label for="name"><strong>Alias</strong><br/>
-					<input type="text" name="view.alias" value="$!{view.alias}" id="urlAlias" required="required"/></label><span class="aliasState"></span><br/>
-					<strong> This is used in the url and needed to access your map view.</strong>
-					#set($mess="You must provide this url.  All output will be called with this string. Note you will not want to use characters such as &quot; _ | ' ? &map; % ^ &quot;  being that  those are going to destroy the optimal efficiency of the map displaying.")
-					#parse("admin/noted.vm")
-					
-				</div>
-			</div>
-			<hr/>
-			<div class="row thirds equalize at-medium-full-width">
-				<div class="column one padless">
-					<label for="campus"><strong>Campus:</strong></label>&nbsp;
-						<select name="view.campus" id="commentable">
-							#foreach($campus in $campuses)
-								<option class="type" value="$campus.id" #if($view.campus == $campus) selected="selected" #end>$!campus.name</option>
-							#end
-						</select>
-						#set($mess="Every map is tied to down to a campus.  Thou you could make a map that incorporates other campus places, there has to be a home point for the map view.")
-						#parse("admin/noted.vm")
-				</div>
-				<div class="column two padless">
-					<label for="commentable"><strong>Commentable:</strong></label>&nbsp;
-						<select name="view.commentable" id="commentable">
-							<option value="true" #if($view.commentable && $view.commentable=="true")selected="selected"#end >Yes</option>
-							<option value="false" #if(!$view.commentable || $view.commentable=="false")selected="selected"#end >No</option>
-						</select>
-						#set($mess="Any item that gets any comments will ONLY show up under this view.  In no other view will the comment ever show up regardless if the item it's self is shared between any other map view.")
-						#parse("admin/noted.vm")
-				</div>
-				<div class="column three padless">
-					<label for="sharable"><strong>Sharable:</strong></label>&nbsp;
-						<select name="view.sharable" id="sharable">
-							<option value="true" #if($view.sharable && $view.sharable=="true")selected="selected"#end >Yes</option>
-							<option value="false" #if(!$view.sharable || $view.sharable=="false")selected="selected"#end >No</option>
-						</select>
-						#set($mess="Give the clients/end users access to the urls and code that would let them embed and or share socially this map view.")
-						#parse("admin/noted.vm")
-				</div>
-			</div>
-		</fieldset>
-		<div class="row halves equalize">
-			<fieldset class="column one">
-				<legend>Dimensions</legend>
-				
-				<div>	
-					<label for="Lat"><strong>Width</strong></label><br/>
-					<input type="text" name="view.width" id="width" #if($view.width)value="$!view.width" #else value="500" #end class="text ui-widget-content ui-corner-all" />
-				</div>
-				<div>	
-					<label for="Lat"><strong>Height</strong></label><br/>
-					<input type="text" name="view.height" id="height" #if($view.height)value="$!view.height" #else value="500" #end class="text ui-widget-content ui-corner-all" />
-					#set($mess="You may resize the map thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> by simply draging the corner of the map to the size you wish to see")
-					#parse("admin/noted.vm")
-				</div>
-				<b><em>*** Both values can default to 100% if the input is blank or 0 ***</em></b>
-			</fieldset>
-			<fieldset class="column two">
-				<legend>Center</legend>
-				<div>
-					<label for="Lat"><strong>Latitude</strong></label><br/>
-					<input type="text" name="Length" id="Lat" #if($lat && $lat!="") value="$lat" #else #if($campus.latitude && $campus.latitude!="") value="$campus.latitude" #else value="46.73304697156661" #end #end class="text ui-widget-content ui-corner-all" required="required" />
-				</div>
-				<div>
-					<label for="Long"><strong>Longitude</strong></label><br/>
-					<input type="text" name="LongLength" id="Long" #if($long && $long!="") value="$long" #else #if($campus.longitude && $campus.longitude!="") value="$campus.longitude" #else value="-117.15406340441444" #end #end class="text ui-widget-content ui-corner-all" required="required" />
-					#set($mess="by draging the map with drag mode on thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> and simple draging the map to the view you wish to see")
-					#parse("admin/noted.vm")
-				</div>
-			</fieldset>
-		</div>
-		
-    <div class="clear"></div>
-  </div>
-<div id="tab_map_items" class="mainAreaTabs">#parse("view/assests/tab_map_items.vm")</div>  
-<div id="tabs_Options" class="mainAreaTabs">#parse("view/assests/tab_map_options.vm")</div>
-  
-  #*
-<div id="tabs_SAMPLE" class="mainAreaTabs">
-	$formbuttons <div class="clear"></div>
-
-<style>
-	#resizable { width: 150px; height: 150px; padding: 0.5em; }
-	#resizable h3 { text-align: center; margin: 0; }
-	.ui-resizable-helper { border: 2px dotted #00F; }
-	</style>
-		
-		#if($view.height>0)
-			#set($height = "${view.height}px")
-		#else
-			#set($height = "520px")
-		#end
-		
-		#if($view.width>0)
-			#set($width = "${view.width}px")
-		#else
-			#set($width = "100%")
-		#end
-		<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
-		</lable> | 
-		<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
-		</lable><br/>
-		<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>
-		<div id="campusmap">
-		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
-		</div>
-	$formbuttons
-	<div class="clear"></div>
-  <br/>    
-</div>*#
-  
-  #*
-  <div id="tabs_Text" class="mainAreaTabs">
-$formbuttons
-
 	<style>
-	#dialog label, #dialog input { display:block; }
-	#dialog label { margin-top: 0.5em; }
-	#dialog input, #dialog textarea { width: 95%; }
-	#tabs { margin-top: 1em; }
-	#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
-	#add_tab { cursor: pointer; }
+	#resizable { width: 150px; height: 150px; padding: 0.5em; }
+	#resizable h3 { text-align: center; margin: 0; }
+	.ui-resizable-helper { border: 2px dotted #00F; }
 	</style>
-
-
-
-<div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
-$formbuttons
-
-
-			<h3>Summary :</h3>
-			
-			<textarea id="place_summary" name="view.summary"  class="tinyEditor">$!view.summary</textarea>
-						<br/>
-			<hr/>
-			<h3>Short codes <a href="#" title="show" id="shortcode">+</a></h3>
-<div id="shortcodes">
-
-	#foreach($short_code in $short_codes)
-		$short_code<br/>
+		
+	#if($view.height>0)
+		#set($height = "${view.height}px")
+	#else
+		#set($height = "520px")
 	#end
 	
-</div>
-<h6><em>When using the short codes, adding the ! mark between the $ and { ( ie: &#36;!{notes_comments} ) will let the code retrun nothing if there is a value is unset.</em></h6>
-			<br/>
-			<hr/>
-			<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!view.infoTitle" placeholder="Title to show at top of each tab" name="view.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="view.hideTitles" >
-				<option class="author" value="true" #if(${view.hideTitles}) selected="selected" #end>Yes</option>
-				<option class="author" value="false" #if(!${view.hideTitles}) selected="selected" #end>No</option>
-			</select></label>
-			<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the view.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
-			<br/>
-			<hr/>
-			<h3 style="display:inline-block;">Auto apply Accessibility Tab:</h3><label>Enable: <select name="view.autoAccessibility" >
-				<option class="author" value="true" #if(${view.autoAccessibility}) selected="selected" #end>Yes</option>
-				<option class="author" value="false" #if(!${view.autoAccessibility}) selected="selected" #end>No</option>
-			</select></label>
-			<h6><em>By using the Auto Accessibility feature, a default template is used to display all feilds defined.  You can always use the short codes and disableing this to design your own tab layout.</em></h6>
-			<hr/>
-			<br/>
-			<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
-			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-				<li class="ui-state-default ui-corner-top nonsort"><a href="#dyno_tab1">Overview</a></li>
-				#set($T = 0)
-				#foreach($tab in $tabs) 
-					<li class="ui-state-default ui-corner-top">
-						<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
-						<input type="hidden" name="tabs[$T].id" value="" />
-						<input type="hidden" name="tabs[$T].title" value="$!tab.title" /> 
-						<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' />
-						<span class='ui-icon ui-icon-close'>Remove Tab</span>
-					</li>
-					#set($T = $T+1)
-				#end
-			</ul>
-			<div id="dyno_tab1">
-				<h3>Details:</h3>
-				<textarea id="place_details" name="view.details"  class="tinyEditor full">$!view.details</textarea>
-			</div>
-			#set($T = 0)
-			#foreach($tab in $tabs) 
-				<div id="dyno_tabs_$T">
-					<textarea id='tab_$T' class='tinyEditor dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
-				</div>
-				#set($T = $T+1)
-			#end
-		</div>
-		$formbuttons
-    <div class="clear"></div>
-  </div>
-  *#
-  
-  <div id="tabs_Detail" class="mainAreaTabs">
-  	<h3>Display and Details</h3>
- 	#if($userService.checkPrivleage("can_publish"))
-		<div id="StatusDiv">
-		  <h3 style="display:inline-block;">Place Status:</h3>
-		  $Form.Select("view.status.id", $statuslists, "%{value='id', text='name'}")
-		  <h6><em>Changing this will tell whether or not the public can see this place in a map view.</em></h6>
-		</div>
-		<hr/>
+	#if($view.width>0)
+		#set($width = "${view.width}px")
+	#else
+		#set($width = "100%")
 	#end
-	
-		<div id="publicDiv">
-		  <h3 style="display:inline-block;">Public:</h3>
-			<select name="view.isPublic" >
-				<option class="author" value="true" #if(${view.isPublic}) selected="selected" #end>Yes</option>
-				<option class="author" value="false" #if(!${view.isPublic}) selected="selected" #end>No</option>
-			</select>
-		  <h6><em>Changing this will tell whether or not the public can see this place in a map view <strong>even thou it's published</strong> ie: Internal to WSU only.</em></h6>
-		</div>
-		<hr/>
-	
-	
-    <div id="AuthorDiv">
-      <h3>Authors</h3>
-      <h6><em>Select or create new author (if one isn't already created)</em></h6>
-      #set($count = 0)
-      #set($id = 0)
-      #foreach($placeauthor in $placeauthors)
-          <div id="div$placeauthor.id">
-            <select name="Authors[$!count].id" id="author$placeauthor" class="authorSelect">
-              <option class="" value="">-select-</option>
-              #foreach($author in $authors)
-              <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
-              #set($id = $placeauthor.id)
-              #end
-            </select>
-    
-            #if($id!=0)
-            <a title="$id" rel="$view.id"  style="cursor:pointer;display: inline-block;" class="deleteAuthor ui-state-error ui-corner-all">
-              <span class="ui-icon ui-icon-trash"></span>
-            </a>
-        #end
-        <div class="lightLine"></div>
-      </div>
-      #set($count = $count + 1)
-      #end
-
-      #*<select name="authors[$!count].id" id="author">
-        <option class="" value="">-select-</option>
-        #foreach($author in $authors)
-        <option class="author" value="$author.id" #if($placeauthor == $author) selected="selected" #end>$!author.Name</option>
-        #end
-      </select>*#
-
-
-      <div class="lightLine"></div>
-      <input type="hidden" id="NextAuthorID" name="NextAuthorID" value="$my_var"/>
-
-      <div id="NewAuthorHolderDiv"></div>
-    </div>
-
-    <a style="cursor:pointer;" onclick="AddAuthor()">+ add additional authors</a>
-  <br/>
-    
-  </div>
-
-#if($fields.count>0)<div id="tabs_FIELDS" class="mainAreaTabs">
-
-        <fieldset><legend>Place fields: </legend>
-
-			#foreach($field in $fields)          
-				$field
-			#between
-			<hr/>
-			#end
-        </fieldset> 
-
-    <div class="clear"></div>
-  <br/>    
-</div>
-  #end
-   #* <div id="tabs_IMAGES" class="mainAreaTabs">
-$formbuttons     
-        <div id="ImageDiv">
-            <h3>Place Images</h3>
-        
-            <a href="#" class="insotryupload buttons">Upload Images</a>
-            
-			 
-           
-		   <h6><strong>Note:</strong><em>The first image in the list is the main image.  Any layout that calls the Main image will be calling this first image.  To make another image be the main image, simply drag the desired image before the first.</em></h6>
-		   <span id="img_layout_choice" class="grid"></span><br/>
-            <div id="browserBox" class="ui-corner-all grid">
-                #foreach($placeimage in $placeimages)
-                    #if($placeimage.id!=0)
-                    
-                        <span class="imageBox">
-							<input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" class="placeImages"/>
-                            <img src="/media/download.castle?id=${placeimage.id}&placeid=${view.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
-                            <a title="$placeimage.id" rel="$view.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
-                                <span class="ui-icon ui-icon-trash"></span>
-                            </a>
-                            <span class="imgInfo">
-                              <span><label>Caption:</label><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
-                              <span><label>Credit:</label><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
-                              <span><label>Order:</label>
-                              <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
-                              <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
-                              <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>
-                              </span>
-                            </span>
-                        </span>
-                    #end
-                #end
-                <div class="clearings" style="clear:both;"></div>
-            </div>
-            $formbuttons
-    <div class="clear"></div>
-        </div>
-    </div>*#
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	<div id="tabs_OUTPUT" class="mainAreaTabs">
-		<h3>Output/Embed</h3>
-        <h4>NOTE: you must apply your changes to have them reflect here</h4>
-		<fieldset><legend>Output url: </legend>
-			<label for="name">URL</label><br/>	
-			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
-		</fieldset> 
-
-
-		<fieldset><legend>Themed Output: </legend>
-			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span></pre>
-		</fieldset>
-			
-		<fieldset><legend>Feed Output: </legend>
-			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json</pre>
-			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
-			<h4 style="clear:left;">Callback for jsonp</h4>
-			<pre>$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=json&callback=test</pre>
-			 <h6><em><strong>Note:</strong> the url query value "test" for the name "callback" is an example and could be anything.  It's highly suggested to make this a random value to avoid any client side cache uses. <strong>ex: callback=jQuery172012056579411266988_1344368945782 via jquery jsonp using callback=?</strong> </em></h6>
-		</fieldset>
-
-		<fieldset><legend>Standalone Output: </legend>
-			<pre style="float:left; margin-right:15px;"  class="codeurl">$siteroot/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone</pre>
-			<a style="float:left;" href="#" title="View Standalone Output" class="codeurllink buttons ui-button ui-widget "><span class="ui-icon ui-icon-search"></span></a>
-		</fieldset>		
-		<fieldset><legend>Embeding in html: </legend>
-			<pre>&lt;script type="text/javascript" src="$siteroot/embed/<span class="outputurl">$!{view.alias}</span>"&gt;&lt;/script&gt;
-			</pre>
-			This is what you'll want to use most of the time.
-		</fieldset>	
-		<fieldset><legend>Embed iframe code example <em><b>(deprecated)</b></em>: </legend>
-			<pre>&lt;iframe src=&quot;http://map.wsu.edu/rt/<span class="outputurl">$!{view.alias}</span>?mode=standalone&quot; width="<span class="widthOutput">$!{view.width}</span>" height="<span class="heightOutput">$!{view.height}</span>"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" &gt;&lt;/iframe&gt;</pre>
-		</fieldset>
-		<fieldset><legend>WordPress Shortcode example: </legend>
-			<pre>[wsuwp_map alias="<span class="outputurl">$!{view.alias}</span>"]</pre>
-			This will let you use this <a href="https://github.com/washingtonstateuniversity/WSUWP-Maps" target="_blank">plugin's shortcode</a>.
-		</fieldset>
+	<lable for="dragCenter"><input type="checkbox" value="" id="dragCenter" /><strong>dragable</strong><b class="tips" title="">?<em>Turn this on if you have your option to include "dragable:no" so that you may use the drag feature of the map to set the center.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this preview to be dragable.</em></b>
+	</lable> | 
+	<lable for="setZoom"><input type="checkbox" value="" id="setZoom" /><strong>Set Zoom</strong><b class="tips" title="">?<em>Turn this on if you have your options set to include "scaleControl:no", "zoomControl:no", and "scrollwheel:no" (which make the map un zoom-able) you may use this zoom feature of the map to set the zoom level.  This will not overwirte the option set in the Options tab on output of this map view.  Only temperatally set this scroll zoom to be working. <br/><strong>NOTE: this will only set the scrollwheel </strong></em></b>
+	</lable>
+	<div class="clear"></div>
+	<!--<div id="size_guide_ticks"><div id="size_guide"><a href="http://identity.wsu.edu/web/guidelines/dimensions.aspx" target="_blank" style="float:right;">Other WSU sizes</a></div></div>-->
+	<div id="campusmap">
+		<div id="place_drawing_map" style="width:${width}; height:${height};"></div>
 	</div>
 
-  #if($comments.TotalItems&&$comments.TotalItems!=0)
-  <div id="tabs_COMMENTS" class="mainAreaTabs">
 
-
-    <h3>Comment List</h3>
-
-    <table width="100%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
-      <tr>
-        <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
-        <td align="right">
-          #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
-          | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
-          #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
-          | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
-        </td>
-      </tr>
-    </table>
-    <table  width="100%" class="ui-widget ui-widget-content">
-      <thead>
-        <tr class="ui-widget-header ">
-          <th>Place</th>
-          <th>Comments</th>
-          <th>Flagged</th>
-          <th>Published</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        #set ($c=0)
-        #foreach($comment in $comments)
-        <tr class="#if($c%2>0) even #else odd #end #if($comment.adminRead==false) ui-state-highlight #end ">
-          <td>$!comment.view.id</td>
-          <td>$Text.Fold($Controller.StripHtml($!comment.Comments,false),100)</td>
-          <td #if($comment.Flagged==true) class="ui-state-error" #end>$!comment.Flagged</td>
-          <td>$!comment.published</td>
-          <td class='actionArea'>
-
-            <span style='font-size:0.7em;'>
-              <a href="../comment/edit.castle?id=$!{comment.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                <span class="ui-icon ui-icon-pencil"></span>
-              </a>
-              <a href="../comment/delete.castle?id=$!{comment.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                <span class="ui-icon ui-icon-trash"></span>
-              </a>
-            </span>
-          </td>
-        </tr>
-        #set ($c=$c+1)
-        #end
-      </tbody>
-    </table>
-    <table width="100%" border="0" >
-      <tr>
-        <td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
-        <td align="right">
-          #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
-          | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
-          #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
-          | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
-        </td>
-      </tr>
-    </table>
-  </div>
-  #end
-
-
-</div>
-</div>
+	<div id="settings_wrap">
+		<div id="side_tabs" class=" ui-tabs ui-widget ui-widget-content ui-corner-left place_new" >
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-left">
+				<li class="ui-state-default ui-corner-left #if( $view.id==0 || $view.tmp) ui-state-active #end">
+					<a href="#tabs_Basic" title="Basic"><i class="fa fa-cog"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
+					<a href="#tab_map_items" title="Map Items"><i class="fa fa-map-marker"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
+					<a href="#tabs_Options" title="Map Options"><i class="fa fa-sliders"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
+					<a href="#tabs_Detail" title="Display and Details"><i class="fa fa-users"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
+					<a href="#tabs_OUTPUT" title="Output/Embed"><i class="fa fa-info-circle"></i></a>
+				</li>
+				#if($comments.TotalItems&&$comments.TotalItems!=0)<li class="ui-state-default ui-corner-left">
+					<a href="#tabs_COMMENTS">Comments</a>
+				</li>#end
+			</ul>
+			<div id="tabs_Basic" class="mainAreaTabs" #if( $view.id!=0 && !$view.tmp) style="display: none;" #end>#parse("view/assests/tab_basic.vm")</div>  
+			<div id="tab_map_items" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_map_items.vm")</div>  
+			<div id="tabs_Options" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_map_options.vm")</div>
+			#*
+			<div id="tabs_Text" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_content.vm")</div>
+			*#
+			<div id="tabs_Detail" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_display.vm")</div>
+			<div id="tabs_OUTPUT" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_output.vm")</div>
+		
+			#if($comments.TotalItems&&$comments.TotalItems!=0)
+			<div id="tabs_COMMENTS" class="mainAreaTabs">
+				<h3>Comment List</h3>
+			
+				<table width="100%" border="0" style="float:right;margin-right:5px;margin-top:7px;">
+				  <tr>
+					<td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
+					<td align="right">
+					  #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
+					  | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
+					  #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
+					  | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
+					</td>
+				  </tr>
+				</table>
+				<table  width="100%" class="ui-widget ui-widget-content">
+				  <thead>
+					<tr class="ui-widget-header ">
+					  <th>Place</th>
+					  <th>Comments</th>
+					  <th>Flagged</th>
+					  <th>Published</th>
+					  <th>&nbsp;</th>
+					</tr>
+				  </thead>
+				  <tbody>
+			
+					#set ($c=0)
+					#foreach($comment in $comments)
+					<tr class="#if($c%2>0) even #else odd #end #if($comment.adminRead==false) ui-state-highlight #end ">
+					  <td>$!comment.view.id</td>
+					  <td>$Text.Fold($Controller.StripHtml($!comment.Comments,false),100)</td>
+					  <td #if($comment.Flagged==true) class="ui-state-error" #end>$!comment.Flagged</td>
+					  <td>$!comment.published</td>
+					  <td class='actionArea'>
+			
+						<span style='font-size:0.7em;'>
+						  <a href="../comment/edit.castle?id=$!{comment.id}" title="Edit" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+							<span class="ui-icon ui-icon-pencil"></span>
+						  </a>
+						  <a href="../comment/delete.castle?id=$!{comment.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+							<span class="ui-icon ui-icon-trash"></span>
+						  </a>
+						</span>
+					  </td>
+					</tr>
+					#set ($c=$c+1)
+					#end
+				  </tbody>
+				</table>
+				<table width="100%" border="0" >
+				  <tr>
+					<td>Showing $comments.FirstItem - $comments.LastItem of $comments.TotalItems</td>
+					<td align="right">
+					  #if($comments.HasPrevious) $PaginationHelper.CreatePageLink( 1, "first" )
+					  | $PaginationHelper.CreatePageLink( $comments.PreviousIndex, "prev" ) #end
+					  #if($comments.HasNext) | $PaginationHelper.CreatePageLink( $comments.NextIndex, "next" )
+					  | $PaginationHelper.CreatePageLink( $comments.LastIndex, "last" ) #end
+					</td>
+				  </tr>
+				</table>
+			  </div>
+		  #end
+		</div>
+	</div>
 </form>
 
 	<div id="page_dialog">
