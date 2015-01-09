@@ -968,7 +968,9 @@ width: 25px;
 font-size:25px;
 line-height:25px;
 }
-#tabs_Options{ overflow-y:scroll;}
+#wsu_ui.admin.view._editor .ui-tabs .ui-tabs-panel{overflow-y: auto;
+overflow-x: hidden;}
+
 #wsu_ui.admin.view._editor #editor_form{margin-bottom:0px;padding-bottom: 0px;}
 
 #wsu_ui.admin.view._editor .row.single.gutter.pad.short.narrow .column.one{padding:0px;}

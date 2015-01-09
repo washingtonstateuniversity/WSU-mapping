@@ -28,6 +28,9 @@
 		},
 	};
 $.wsu_maps.admin.view = {
+	status:{
+		loaded_options:false
+	},
 	load_editor:function () {
 		$.wsu_maps.state.api = null;
 		
@@ -133,7 +136,7 @@ $.wsu_maps.admin.view = {
 			$(this).val(val);
 		});
 	},
-	init_editorMap:function(){
+	create_ui_mapobj:function(){
 		var lat = $('#Lat').val();
 		var lng = $('#Long').val();	
 		//var width = $('#width').val();
@@ -143,7 +146,7 @@ $.wsu_maps.admin.view = {
 			'zoom':15
 		};
 		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
-		if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
+		if( $.wsu_maps.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){
 			$.each($('#tabs_Options input.text'),function(){//i,v){
 				var tmpVal = $(this).val();
 				var tmp = {};
@@ -170,10 +173,12 @@ $.wsu_maps.admin.view = {
 			//alert(dump(options));
 			//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 		}
-		//alert(dump(options));
-		
-	
-	
+		$.wsu_maps.admin.view.loaded_options=options;
+		console.log(options);
+		return options;
+	},
+	init_editorMap:function(){
+		var options = $.wsu_maps.admin.view.create_ui_mapobj();
 		$('#place_drawing_map').gmap(options).bind('init', function () {
 			//alert(dump(options));
 			//if(lat!='')add_place_point(lat,lng);
@@ -191,7 +196,7 @@ $.wsu_maps.admin.view = {
 			});
 			$.wsu_maps.mapping.reloadShapes();
 			$.wsu_maps.mapping.reloadPlaces();
-			
+			$.wsu_maps.util.debug_positional_log();
 		})/*.resizable({
 			helper: "ui-resizable-helper",
 			stop: function(event, ui) {
@@ -203,6 +208,17 @@ $.wsu_maps.admin.view = {
 				$('#place_drawing_map').gmap('refresh');
 			}
 		})*/;
+		$('select,input,textarea','#tabs_Options').on('change',function(){
+			var t = setTimeout(function(){
+				window.clearTimeout(t);
+				t=null;
+				$.wsu_maps.admin.view.init_editorMap();
+			},500);
+		});
+		
+		
+		
+		
 		$('#dragCenter').on('change',function(){
 			if($(this).is(":checked")){
 				$('#place_drawing_map').gmap('setOptions',{"draggable":true});
