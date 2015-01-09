@@ -25,7 +25,7 @@
 	#if($options.TryGetValue("mapTypeId",$value))	#set($mapTypeId=$!options.mapTypeId)#end	
 	<fieldset>
 		<label for="mapTypeId"><strong>Map Type Control Options:</strong></label>&nbsp;
-			<select name="options.mapTypeId" >
+			<select id="mapTypeId" name="options.mapTypeId" >
 				<option class="author" value="ROADMAP" #if($!{mapTypeId} || ${mapTypeId}=="ROADMAP") selected="selected" #end>ROADMAP</option>
 				<option class="author" value="SATELLITE" #if(${mapTypeId}=="SATELLITE") selected="selected" #end>SATELLITE</option>
 				<option class="author" value="HYBRID" #if(${mapTypeId}=="HYBRID") selected="selected" #end>HYBRID</option>

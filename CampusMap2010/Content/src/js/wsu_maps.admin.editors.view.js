@@ -147,17 +147,19 @@ $.wsu_maps.admin.view = {
 		};
 		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 		if( $.wsu_maps.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){
-			$.each($('#tabs_Options input.text'),function(){//i,v){
+			$.each($('select,input,textarea','#tabs_Options'),function(){//i,v){
 				var tmpVal = $(this).val();
 				var tmp = {};
 				if(tmpVal!==""){
 					if($.wsu_maps.util.isNumber(tmpVal)){
+						tmpVal=parseFloat(tmpVal);
 						if(tmpVal>0){
 							tmp[$(this).attr("id")]=tmpVal;
 							options=$.extend(options,tmp);
 						}
 					}else{
-						tmp[$(this).attr("id")]=tmpVal;
+						tmpVal = tmpVal.toLowerCase() === 'true' || (tmpVal.toLowerCase() === 'false' ? false : ($(this).attr("id")==="mapTypeId"?tmpVal.toLowerCase():tmpVal) );
+						tmp[$(this).attr("id")]= tmpVal;
 						options=$.extend(options,tmp);
 					}
 				}
@@ -173,48 +175,65 @@ $.wsu_maps.admin.view = {
 			//alert(dump(options));
 			//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 		}
-		$.wsu_maps.admin.view.loaded_options=options;
+		$.wsu_maps.admin.view.status.loaded_options=options;
 		console.log(options);
 		return options;
 	},
 	init_editorMap:function(){
+		var new_map = $.wsu_maps.admin.view.status.loaded_options === false;
+		console.log(new_map);
 		var options = $.wsu_maps.admin.view.create_ui_mapobj();
-		$('#place_drawing_map').gmap(options).bind('init', function () {
-			//alert(dump(options));
-			//if(lat!='')add_place_point(lat,lng);
-			//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-			//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-			google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
-				var center = $('#place_drawing_map').gmap('get_map_center');
-				//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
-				$('#Lat').val( center.lat() );//var lat = 
-				$('#Long').val( center.lng() );//var lng = 
-			});
-			google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'zoom_changed',function(){
-				var zoomLevel = $('#place_drawing_map').gmap('get','map').getZoom();
-				$('#zoom').val( zoomLevel );//var zoom = 
-			});
-			$.wsu_maps.mapping.reloadShapes();
-			$.wsu_maps.mapping.reloadPlaces();
-			$.wsu_maps.util.debug_positional_log();
-		})/*.resizable({
-			helper: "ui-resizable-helper",
-			stop: function(event, ui) {
-				//var width = $('#width').val(ui.size.width);
-				//var height = $('#height').val(ui.size.height);
-				
-				$('.widthOutput').text(ui.size.width);
-				$('.heightOutput').text(ui.size.height);
-				$('#place_drawing_map').gmap('refresh');
-			}
-		})*/;
-		$('select,input,textarea','#tabs_Options').on('change',function(){
-			var t = setTimeout(function(){
-				window.clearTimeout(t);
-				t=null;
-				$.wsu_maps.admin.view.init_editorMap();
-			},500);
-		});
+		if(!new_map){
+			$('#place_drawing_map').gmap('setOptions',options);
+		}else{
+			$('#place_drawing_map').gmap(options).bind('init', function () {
+				//alert(dump(options));
+				//if(lat!='')add_place_point(lat,lng);
+				//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+				//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
+				google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
+					var center = $('#place_drawing_map').gmap('get_map_center');
+					//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
+					$('#Lat').val( center.lat() );//var lat = 
+					$('#Long').val( center.lng() );//var lng = 
+				});
+				google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'zoom_changed',function(){
+					var zoomLevel = $('#place_drawing_map').gmap('get','map').getZoom();
+					$('#zoom').val( zoomLevel );//var zoom = 		
+				});
+				$.wsu_maps.mapping.reloadShapes();
+				$.wsu_maps.mapping.reloadPlaces();
+				$('select,input,textarea','#tabs_Options').on('change',function(){
+					var targ = $(this);
+					var t = setTimeout(function(){
+						window.clearTimeout(t);
+						t=null;
+						
+					
+						if(targ.is("[id='maxZoom']")){
+							var maxZoom = $('#place_drawing_map').gmap('get_maxZoom');
+							$("input[id='maxZoom']").after("<span id='maxZoomNotice'>Note: Max zoom for this map style is "+ maxZoom +" and will only be able to go lower if the user is able to switch map types.</span>");
+						}
+						
+						
+						$.wsu_maps.admin.view.init_editorMap();
+					},500);
+				});
+				$.wsu_maps.util.debug_positional_log();
+			})/*.resizable({
+				helper: "ui-resizable-helper",
+				stop: function(event, ui) {
+					//var width = $('#width').val(ui.size.width);
+					//var height = $('#height').val(ui.size.height);
+					
+					$('.widthOutput').text(ui.size.width);
+					$('.heightOutput').text(ui.size.height);
+					$('#place_drawing_map').gmap('refresh');
+				}
+			})*/;
+			
+		}
+		
 		
 		
 		

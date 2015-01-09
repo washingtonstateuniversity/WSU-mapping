@@ -382,7 +382,20 @@
 			this.get('map').setOptions({'scrollwheel':true});
 		},			
 		
-		
+		get_maxZoom:function() {
+			var center = this.get('map').gmap('get_map_center');
+			var maxZoomService = new google.maps.MaxZoomService();
+			if(center){
+				maxZoomService.getMaxZoomAtLatLng(center.lat(), function(response) {
+					if (response.status !== google.maps.MaxZoomStatus.OK) {
+						console.log("Error in MaxZoomService");
+						return;
+					} else {
+						return response.zoom;
+					}
+				});
+			}
+		},	
 		
 		
 		geolocate: function(browserSupportFlag,center,callback) {

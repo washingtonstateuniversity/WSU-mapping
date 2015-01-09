@@ -1,4 +1,5 @@
 /*jshint -W059 */
+/*jshint -W054 */
 (function($) {
 	$.wsu_maps.util = {
 		debug_positional_log:function(){
