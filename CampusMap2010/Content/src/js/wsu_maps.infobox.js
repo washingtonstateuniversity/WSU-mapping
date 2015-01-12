@@ -111,7 +111,7 @@
 		},
 
 		
-		build_IW_content:function(marker){
+		build_IW_content:function(marker,i){
 			var nav='';
 			var content='';
 			if($.isArray(marker.info.content)){
@@ -134,7 +134,7 @@
 			return $.runTemplate(tmpl,{i:i,nav:nav,content:content});
 		},
 		make_InfoWindow:function (jObj,i,marker){
-			var content= $.wsu_maps.infobox.build_IW_content(marker);
+			var content= $.wsu_maps.infobox.build_IW_content(marker,i);
 		
 			/* so need to remove this and create the class for it */
 			var boxText = document.createElement("div");
