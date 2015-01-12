@@ -26,7 +26,7 @@
 					$.wsu_maps.initialize();
 					if($('.home #map_canvas').length){
 						$(window).resize(function(){
-							$.wsu_maps.resizeBg($('#map_canvas'),170);
+							$.wsu_maps.responsive.resizeBg($('#map_canvas'),170);
 						}).trigger("resize");
 					}
 					ed = true;

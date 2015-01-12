@@ -17,7 +17,10 @@
 				
 				
 				$('jspContainer').css('height','auto');
-				$.wsu_maps.state.api.reinitialise();
+				$.each($.wsu_maps.state.api,function(index,item){
+					item.reinitialise();
+				});
+				
 				$.wsu_maps.mapping.reloadShapes();
 				$.wsu_maps.mapping.reloadPlaces();
 				if(container.find('.ini').length===0 && container.find('li').size()===0){
@@ -45,8 +48,8 @@ $.wsu_maps.admin.view = {
 			}
 		});
 		$(window).resize(function(){
-			$.wsu_maps.resizeBg($('#place_drawing_map'),112);
-			$.wsu_maps.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
+			$.wsu_maps.responsive.resizeBg($('#place_drawing_map'),112);
+			$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 		}).trigger("resize");
 		
 
@@ -375,112 +378,116 @@ $.wsu_maps.admin.view = {
 				$('body').spine("equalizing");
 			});
 		});
-
-		$('ol.sortable').nestedSortable({
-			disableNesting: 'no-nest',
-			forcePlaceholderSize: true,
-			handle: 'div:not(a)',
-			helper:	'clone',
-			items: "li:not(.ini)",
-			maxLevels:1,
-			opacity: 0.6,
-			placeholder: 'placeholder',
-			revert: 250,
-			tabSize: 25,
-			distance: 15, 
-			tolerance: 'pointer',
-			toleranceElement: '> div',
-			update: function(event, ui) {
-				var container = ui.item.closest('ol.sortable');
-				//var role=container.closest('fieldset').attr('role');
-				
-				container.find( ".buttons" ).button({text:false});
-				$.wsu_maps.mapping.reloadShapes();
-				$.wsu_maps.mapping.reloadPlaces();
-				if(container.find('.ini').length &&container.find('li').size()>1){
-					container.find('.ini').remove();
-				}else if(container.find('.ini').length===0 && container.find('li').size()===1){
-					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+		$.each($('.listPicker ol.sortable'),function(){
+			$(this).nestedSortable({
+				disableNesting: 'no-nest',
+				forcePlaceholderSize: true,
+				handle: 'div:not(a)',
+				helper:	'clone',
+				items: "li:not(.ini)",
+				maxLevels:1,
+				opacity: 0.6,
+				placeholder: 'placeholder',
+				revert: 250,
+				tabSize: 25,
+				distance: 15, 
+				tolerance: 'pointer',
+				toleranceElement: '> div',
+				update: function(event, ui) {
+					var container = ui.item.closest('ol.sortable');
+					//var role=container.closest('fieldset').attr('role');
+					
+					container.find( ".buttons" ).button({text:false});
+					$.wsu_maps.mapping.reloadShapes();
+					$.wsu_maps.mapping.reloadPlaces();
+					if(container.find('.ini').length &&container.find('li').size()>1){
+						container.find('.ini').remove();
+					}else if(container.find('.ini').length===0 && container.find('li').size()===1){
+						container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
+					}
+	
+					$.wsu_maps.admin.editors.view.createDeleteRow();
 				}
-
-				$.wsu_maps.admin.editors.view.createDeleteRow();
-			}
+			});
 		});
+
 		var settings = {
 			verticalDragMinHeight: 50
 			//showArrows: true
 		};
-
-		var pane = $('.listPicker');
-		pane.bind( 'jsp-scroll-y',
-			function(event, scrollPositionY, isAtTop, isAtBottom){
-					//var isAtBottom= isAtBottom;	
-					//var isAtTop= isAtTop;			
-				pane.mousewheel(function(event,delta){ 
-					//var media = $(this).find('.mediaPanel'); 
-					if (delta > 0) { 
-						if(isAtTop){
-							return false;
-						}
-					} else { 
-						if(isAtBottom){
-							return false;
-						}
-					}         
-				});
-			}
-		).jScrollPane(settings);
-		$.wsu_maps.state.api = pane.data('jsp');
-
-		$.wsu_maps.admin.editors.view.createDeleteRow();
-
-		$('.addSelection').on('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
-			
-			var container = $(this).closest('fieldset');
-			var role = container.attr('role');
-			var orginal_select = $('#'+role+'_select');
-			var sortList = container.find('ol.sortable');
-			$.each($('[name="jselect_'+role+'_select"][aria-selected="true"]'),function(){
-				var option = $(this);
-				//var root_container = option.closest('ul');
-				var root_item = option.closest('li');
-				var selection = option.val();
-				orginal_select.find('[value="'+selection+'"]').attr('disabled','disabled');
-				root_item.addClass('selected');
-				if(selection!=="" && sortList.find('input[value="'+selection+'"]').length<=0 ){
-					var name = option.closest('li').text();
-					//$('select#'+role+'_select').val('');
-					var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
-									'<div style="padding: 1px;">'+
-										'<span style="font-size:0.5em; float:right;">'+
-											'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
-												'<span class="ui-icon ui-icon-trash"></span>'+
-											'</a>'+
-										'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
-									'</div>'+
-								'</li>';
-					sortList.append(addEle);
+		$.each($('.listPicker ol.sortable'),function(){
+			var pane = $(this).closest('.listPicker');
+			var pane_id = $(this).attr('id');
+			pane.bind( 'jsp-scroll-y',
+				function(event, scrollPositionY, isAtTop, isAtBottom){
+						//var isAtBottom= isAtBottom;	
+						//var isAtTop= isAtTop;			
+					pane.mousewheel(function(event,delta){ 
+						//var media = $(this).find('.mediaPanel'); 
+						if (delta > 0) { 
+							if(isAtTop){
+								return false;
+							}
+						} else { 
+							if(isAtBottom){
+								return false;
+							}
+						}         
+					});
 				}
-				root_item.hide();
-			});
-			if(container.find('.ini').length>0){
-				container.find('.ini').remove();
-			}
-			sortList.nestedSortable("refresh");
-			$('.jspContainer').css('height','auto');
-			$.wsu_maps.state.api.reinitialise();
-			$.wsu_maps.mapping.reloadShapes();
-			$.wsu_maps.mapping.reloadPlaces();
+			).jScrollPane(settings);
+			$.wsu_maps.state.api[pane_id] = pane.data('jsp');
+	
 			$.wsu_maps.admin.editors.view.createDeleteRow();
-			$("select#"+role+"_select").jselect('refresh');
-		});
-		$(window).on('resize',function(){
-			if($('.jspContainer').is(':visible')){
+	
+			$('.addSelection').on('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				
+				var container = $(this).closest('fieldset');
+				var role = container.attr('role');
+				var orginal_select = $('#'+role+'_select');
+				var sortList = container.find('ol.sortable');
+				$.each($('[name="jselect_'+role+'_select"][aria-selected="true"]'),function(){
+					var option = $(this);
+					//var root_container = option.closest('ul');
+					var root_item = option.closest('li');
+					var selection = option.val();
+					orginal_select.find('[value="'+selection+'"]').attr('disabled','disabled');
+					root_item.addClass('selected');
+					if(selection!=="" && sortList.find('input[value="'+selection+'"]').length<=0 ){
+						var name = option.closest('li').text();
+						//$('select#'+role+'_select').val('');
+						var addEle = '<li id="list_'+(container.find('ol.sortable li').size()+1)+'">'+
+										'<div style="padding: 1px;">'+
+											'<span style="font-size:0.5em; float:right;">'+
+												'<a href="#" title="Reomve" class="tiny buttons deleteplace ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">'+
+													'<span class="ui-icon ui-icon-trash"></span>'+
+												'</a>'+
+											'</span>'+name+'<input type="hidden" value="'+selection+'" class="list_'+role+'" name="'+role+'list[]"/><em></em>'+
+										'</div>'+
+									'</li>';
+						sortList.append(addEle);
+					}
+					root_item.hide();
+				});
+				if(container.find('.ini').length>0){
+					container.find('.ini').remove();
+				}
+				sortList.nestedSortable("refresh");
 				$('.jspContainer').css('height','auto');
-				$.wsu_maps.state.api.reinitialise();
-			}
+				$.wsu_maps.state.api[pane_id].reinitialise();
+				$.wsu_maps.mapping.reloadShapes();
+				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.admin.editors.view.createDeleteRow();
+				$("select#"+role+"_select").jselect('refresh');
+			});
+			$(window).on('resize',function(){
+				if($('.jspContainer').is(':visible')){
+					$('.jspContainer').css('height','auto');
+					$.wsu_maps.state.api[pane_id].reinitialise();
+				}
+			});
 		});
 	},
 };
