@@ -1060,11 +1060,20 @@ where p.status = 3
             json += @"  {""shapes"":[";
             int i = 0;
             foreach (geometrics geo in tmpGeo) {
-                json += geometricService.getShapeLatLng_json_str(geo.id, true);
-                if (i < tmpGeo.Count - 1) json += ",";
-                i++;
+                if (geo!=null && geo.id > 0) {
+                    String shape = geometricService.getShapeLatLng_json_str(geo.id, true);
+                    if (!String.IsNullOrWhiteSpace(shape)) {
+                        json += shape;
+                        if (i < tmpGeo.Count - 1) {
+                            json += ",";
+                        }
+                        i++;
+                    }
+                }
             }
-            if (tmpGeo.Count == 0) json += "{}";
+            if (tmpGeo.Count == 0){
+                json += "{}";
+            }
             json += @"]}";
             if (!string.IsNullOrEmpty(callback)) {
                 json = callback + "(" + json + ")";

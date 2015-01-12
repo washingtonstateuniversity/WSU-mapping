@@ -70,9 +70,9 @@ namespace campusMap.Services {
             String shapeOptions = "";
             shapeOptions += @"       ""name"":""" + geometric.name + @""",";
             //shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
-            shapeOptions += @"       ""encoded"":""" + geometric.encoded + @""",";
+            shapeOptions += @"       ""encoded"":""" + (geometric.encoded!=null? HelperService.EscapeForJson(geometric.encoded) : "") + @""",";
             shapeOptions += (geometric.style.Count > 0 ? @"      ""style"":" + geometric.style[0].style_obj + @"," : "");
-            shapeOptions += @"      ""type"":""" + geometric.default_type.name + @"""";
+            shapeOptions += @"      ""type"":""" + (geometric.default_type!=null?geometric.default_type.name:"polygon") + @"""";
 
             shape += shapeOptions;
             shape += @"

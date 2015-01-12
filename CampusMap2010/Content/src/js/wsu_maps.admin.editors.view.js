@@ -475,7 +475,7 @@ $.wsu_maps.admin.view = {
 					container.find('.ini').remove();
 				}
 				sortList.nestedSortable("refresh");
-				$('.jspContainer').css('height','auto');
+				//$('.jspContainer').css('height','auto');
 				$.wsu_maps.state.api[pane_id].reinitialise();
 				$.wsu_maps.mapping.reloadShapes();
 				$.wsu_maps.mapping.reloadPlaces();
@@ -484,7 +484,7 @@ $.wsu_maps.admin.view = {
 			});
 			$(window).on('resize',function(){
 				if($('.jspContainer').is(':visible')){
-					$('.jspContainer').css('height','auto');
+					//$('.jspContainer').css('height','auto');
 					$.wsu_maps.state.api[pane_id].reinitialise();
 				}
 			});

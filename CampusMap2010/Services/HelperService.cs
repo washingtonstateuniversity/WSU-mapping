@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Web.Helpers;
 using campusMap.Models;
 using NVelocity;
 using NVelocity.App;
@@ -182,7 +183,10 @@ namespace campusMap.Services {
 
           }
           */
-
+        public static string EscapeForJson(string s) {
+            string quoted = System.Web.Helpers.Json.Encode(s);
+            return quoted.Substring(1, quoted.Length - 2);
+        }
         public static void writelog(string txt, users user, string controller, string action, int obj_id) {
             logs loger = new logs();
             loger.entry = txt;
