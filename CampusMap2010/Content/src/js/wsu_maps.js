@@ -54,7 +54,7 @@ var startingUrl=startingUrl||null;
 			hasDirections:false,
 		
 			
-			api:null,
+			api:[],
 			apiL:null,
 			apiD:null,
 			api_nav:null,
