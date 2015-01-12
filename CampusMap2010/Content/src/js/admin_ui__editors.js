@@ -29,10 +29,10 @@ $.wsu_maps.admin.editors = {
 		var style = {};
 	}
 	if(typeof(shape.style)=="undefined"||shape.style==''){
-		$('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style);
+		$.wsu_maps.state.mapInst.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style);
 	}else{
-		// $('#place_drawing_map').gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
-		var mapOjb = $('#place_drawing_map');
+		// $.wsu_maps.state.mapInst.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
+		var mapOjb = $.wsu_maps.state.mapInst;
 		mapOjb.gmap('addShape', (shape.type[0].toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
 		$(shape_obj).click(function(){
 			if(typeof(shape.style.events.click)!="undefined" && shape.style.events.click != ""){
@@ -107,7 +107,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			if( !$.isEmptyObject(shape)){
-				 addShapeToMap($('#place_drawing_map'),i, shape)
+				 addShapeToMap($.wsu_maps.state.mapInst,i, shape)
 			}
 		});
 	}
@@ -118,7 +118,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 			if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
 				$.each( marker.shapes, function(i, shape) {	
 					if( !$.isEmptyObject(shape)){
-						addShapeToMap($('#place_drawing_map'),i, shape)
+						addShapeToMap($.wsu_maps.state.mapInst,i, shape)
 					}
 				});
 			}

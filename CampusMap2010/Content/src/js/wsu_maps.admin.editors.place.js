@@ -31,7 +31,7 @@
 							var ele = {};
 						 }
 		
-						 $('#place_drawing_map').gmap('addShape',(type[0].toUpperCase() + type.slice(1)), ele,function(shape){
+						 $.wsu_maps.state.mapInst.gmap('addShape',(type[0].toUpperCase() + type.slice(1)), ele,function(shape){
 								 //alert('added shape');
 								shapes.push(shape);
 								if($.isFunction(callback))callback(shape);
@@ -43,13 +43,13 @@
 			
 			if(typeof(_load)!=="undefined"){
 				$.getJSON(url+'?callback=?&ids[]='+_load, function(data) {
-					$('#place_drawing_map').gmap('clear','overlays');
+					$.wsu_maps.state.mapInst.gmap('clear','overlays');
 					$.each( data.shapes, function(i, shape) {
 						if( typeof(shape.style.events.rest.fillOpacity)!=="undefined" && shape.style.events.rest.fillOpacity === 0 && (typeof(shape.style.events.rest.strokeOpacity)!=="undefined" && shape.style.events.rest.strokeOpacity === 0 || typeof(shape.style.events.rest.strokeWeight)!=="undefined" && shape.style.events.rest.strokeWeight === 0) ){
 							shape.style.events.rest.strokeWeight = 0.2;
 							shape.style.events.rest.strokeOpacity = 0.6;
 						}
-						$.wsu_maps.mapping.addShapeToMap($('#place_drawing_map'),i, shape);
+						$.wsu_maps.mapping.addShapeToMap($.wsu_maps.state.mapInst,i, shape);
 					});
 				});
 			}		
@@ -59,9 +59,10 @@
 		},
 	
 		load_editor:function () {
+			$.wsu_maps.state.mapInst=$('#place_drawing_map');
 			var lat = $('#Lat').val();
 			var lng = $('#Long').val();	
-			$('#place_drawing_map').gmap({
+			$.wsu_maps.state.mapInst.gmap({
 					'center': (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng),
 					'zoom':15,
 					'zoomControl': false,
@@ -94,7 +95,7 @@
 						var campus = $('#campus').length?$('#place_campus').val():'';
 						var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
 						if( $('#place_street').val() !=='' &&$('#place_address').val() !=='' ){
-							$.wsu_maps.admin.editors.place.get_Address_latlng($('#place_drawing_map').gmap('get','map'),lookup);
+							$.wsu_maps.admin.editors.place.get_Address_latlng($.wsu_maps.state.mapInst.gmap('get','map'),lookup);
 						}
 						$('#setLatLong').addClass('ui-state-disabled');
 					});
@@ -176,11 +177,11 @@
 					$('#Lat').val(latitude);		
 					$('#Long').val(longitude);		
 					
-					$('#place_drawing_map').gmap('addMarker', $.extend({ 
+					$.wsu_maps.state.mapInst.gmap('addMarker', $.extend({ 
 						'position': new google.maps.LatLng(latitude,longitude)
 					},{})).click(function() {
 						//$.each(ib, function(i) {ib[i].close();});
-						//ib[i].open($('#place_drawing_map').gmap('get','map'), this);
+						//ib[i].open($.wsu_maps.state.mapInst.gmap('get','map'), this);
 						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
 					});
 				} else {
@@ -351,9 +352,9 @@
 				$.wsu_maps.state.ib[0].close();
 			}
 			tinyMCE.triggerSave();
-			$('#place_drawing_map').gmap('clear','markers');
-			$('#place_drawing_map').gmap('clear','services');
-			$('#place_drawing_map').gmap('clear','overlays');	
+			$.wsu_maps.state.mapInst.gmap('clear','markers');
+			$.wsu_maps.state.mapInst.gmap('clear','services');
+			$.wsu_maps.state.mapInst.gmap('clear','overlays');	
 			$.wsu_maps.admin.editors.place.add_place_point(lat,lng,true);
 			$.wsu_maps.admin.editors.place.watchMediaTab();
 		},
@@ -375,30 +376,30 @@
 			if( typeof(clear)!=='undefined' && clear ){
 				marker.info={};
 			}
-			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox($('#place_drawing_map'),marker,i));
+			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox($.wsu_maps.state.mapInst,marker,i));
 			
 			if(marker.style.icon){
 				marker.style.icon = marker.style.icon.replace('{$i}',i+1);
 			}
 			
-			$('#place_drawing_map').gmap('addMarker', $.extend({ 
-				'position': (typeof(lat)==='undefined' || lat==='')?$('#place_drawing_map').gmap('get_map_center'):new google.maps.LatLng(lat,lng)
+			$.wsu_maps.state.mapInst.gmap('addMarker', $.extend({ 
+				'position': (typeof(lat)==='undefined' || lat==='')?$.wsu_maps.state.mapInst.gmap('get_map_center'):new google.maps.LatLng(lat,lng)
 			},{'draggable':true},marker.style),function(markerOptions, marker){
 					if($.wsu_maps.state.reopen!==false){
-						$.wsu_maps.state.ib[0].open($('#place_drawing_map').gmap('get','map'), marker);
+						$.wsu_maps.state.ib[0].open($.wsu_maps.state.mapInst.gmap('get','map'), marker);
 						$.wsu_maps.state.reopen = false;
 					}
 					if($("#placeShape :selected").length && $("#placeShape :selected").val()!==""){
 						$.wsu_maps.state.shapes=[];
 						
 						$.wsu_maps.admin.place.loadPlaceShape($("#placeShape :selected").val(),function(){//shape){
-							$('#place_drawing_map').gmap("attach_shape_to_marker",$.wsu_maps.state.shapes[0],marker);
+							$.wsu_maps.state.mapInst.gmap("attach_shape_to_marker",$.wsu_maps.state.shapes[0],marker);
 						});
 					}			
 			}).click(function() {
 				//var ib_total = 0;
 				//$.each(ib, function(i) {ib[i].close(); ib_total=i; });
-				$.wsu_maps.state.ib[0].open($('#place_drawing_map').gmap('get','map'), this);
+				$.wsu_maps.state.ib[0].open($.wsu_maps.state.mapInst.gmap('get','map'), this);
 				$.wsu_maps.state.ibOpen=true;
 				// need to finish this class
 				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
@@ -407,7 +408,7 @@
 				var lat = placePos.lat();
 				var lng = placePos.lng();
 				if(typeof($.wsu_maps.state.shapes)!=="undefined" && $.wsu_maps.state.shapes.length>0){
-					$('#place_drawing_map').gmap("move_shape",$.wsu_maps.state.shapes[0],placePos);
+					$.wsu_maps.state.mapInst.gmap("move_shape",$.wsu_maps.state.shapes[0],placePos);
 				}
 				$('#Lat').val(lat);
 				$('#Long').val(lng);
@@ -468,10 +469,10 @@
 					  keyword:$.wsu_maps.defaults.gmap_location_types[i]//,
 					  //types : [gmap_location_types[i]]
 					};
-					var gmap = $('#place_drawing_map').gmap('get','map');
+					var gmap = $.wsu_maps.state.mapInst.gmap('get','map');
 					var service = new google.maps.places.PlacesService(gmap);
 					service.search(requested, function (results, status) {
-						var gmap = $('#place_drawing_map').gmap('get','map');
+						var gmap = $.wsu_maps.state.mapInst.gmap('get','map');
 						if (status === google.maps.places.PlacesServiceStatus.OK) {
 							alert('sereching');
 							for (var i = 0; i < 1; i++) {

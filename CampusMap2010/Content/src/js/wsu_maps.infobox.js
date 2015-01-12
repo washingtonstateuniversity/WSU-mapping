@@ -29,7 +29,16 @@
 			};
 			$.wsu_maps.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
 		},
-
+		make_IW_resp:function(){
+			var IWpanels = $.wsu_maps.state.mapInst.find(".ui-tabs .ui-tabs-panel");
+			IWpanels.find(".content").width(( IWpanels.width()<400 ? IWpanels.width()-35:365 )+"px");	
+			if(IWpanels.is(":not(.resp)")){
+				$(window).resize(function(){
+					$.wsu_maps.infobox.make_IW_resp();
+				});
+				IWpanels.addClass('resp');
+			}
+		},
 		build_options:function(jObj,marker,i,content){
 			var options = {
 				alignBottom:true,
@@ -40,7 +49,7 @@
 				pixelOffset: new google.maps.Size(-200, -103),
 				zIndex: 999,
 				boxStyle: {
-					width: ($('#centralMap').width()<425?$('#centralMap').width()-25:400)+"px"
+					width: ($.wsu_maps.state.mapInst.width()<425?$.wsu_maps.state.mapInst.width()-25:400)+"px"
 				},
 				closeBoxHTML:"<span class='tabedBox infoClose'></span>",
 				infoBoxClearance: $.wsu_maps.is_frontend?new google.maps.Size(75,60):new google.maps.Size(1,50),
@@ -227,9 +236,8 @@
 					}
 				}
 			});
-			
-			var content_width= $('#campusmap .ui-tabs .ui-tabs-panel').width()<400 ? $('#campusmap .ui-tabs .ui-tabs-panel').width()-35 : 365;
-			$("#campusmap .ui-tabs .ui-tabs-panel .content").width(content_width+"px");
+			$.wsu_maps.infobox.make_IW_resp();
+
 			
 			$.wsu_maps.infobox.init_img_cycler(marker);
 			

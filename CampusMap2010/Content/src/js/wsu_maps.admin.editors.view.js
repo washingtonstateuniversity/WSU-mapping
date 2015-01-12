@@ -36,7 +36,7 @@ $.wsu_maps.admin.view = {
 	},
 	load_editor:function () {
 		$.wsu_maps.state.api = null;
-		
+		$.wsu_maps.state.mapInst=$('#place_drawing_map');
 		$("#side_tabs").tabs({
 			active:$(".ui-tabs-nav li").is('.ui-state-active')?$(".ui-tabs-nav li").index($(".ui-state-active")):false,
 			collapsible: true,
@@ -48,7 +48,7 @@ $.wsu_maps.admin.view = {
 			}
 		});
 		$(window).resize(function(){
-			$.wsu_maps.responsive.resizeBg($('#place_drawing_map'),112);
+			$.wsu_maps.responsive.resizeBg($.wsu_maps.state.mapInst,112);
 			$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 		}).trigger("resize");
 		
@@ -187,21 +187,21 @@ $.wsu_maps.admin.view = {
 		console.log(new_map);
 		var options = $.wsu_maps.admin.view.create_ui_mapobj();
 		if(!new_map){
-			$('#place_drawing_map').gmap('setOptions',options);
+			$.wsu_maps.state.mapInst.gmap('setOptions',options);
 		}else{
-			$('#place_drawing_map').gmap(options).bind('init', function () {
+			$.wsu_maps.state.mapInst.gmap(options).bind('init', function () {
 				//alert(dump(options));
 				//if(lat!='')add_place_point(lat,lng);
 				//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 				//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-				google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'drag',function(){
-					var center = $('#place_drawing_map').gmap('get_map_center');
-					//$('#place_drawing_map').gmap('setOptions',{center},$('#place_drawing_map').gmap('get','map'));
+				google.maps.event.addListener($.wsu_maps.state.mapInst.gmap('get','map'), 'drag',function(){
+					var center = $.wsu_maps.state.mapInst.gmap('get_map_center');
+					//$.wsu_maps.state.mapInst.gmap('setOptions',{center},$.wsu_maps.state.mapInst.gmap('get','map'));
 					$('#Lat').val( center.lat() );//var lat = 
 					$('#Long').val( center.lng() );//var lng = 
 				});
-				google.maps.event.addListener($('#place_drawing_map').gmap('get','map'), 'zoom_changed',function(){
-					var zoomLevel = $('#place_drawing_map').gmap('get','map').getZoom();
+				google.maps.event.addListener($.wsu_maps.state.mapInst.gmap('get','map'), 'zoom_changed',function(){
+					var zoomLevel = $.wsu_maps.state.mapInst.gmap('get','map').getZoom();
 					$('#zoom').val( zoomLevel );//var zoom = 		
 				});
 				$.wsu_maps.mapping.reloadShapes();
@@ -214,7 +214,7 @@ $.wsu_maps.admin.view = {
 						
 					
 						if(targ.is("[id='maxZoom']")){
-							var maxZoom = $('#place_drawing_map').gmap('get_maxZoom');
+							var maxZoom = $.wsu_maps.state.mapInst.gmap('get_maxZoom');
 							$("input[id='maxZoom']").after("<span id='maxZoomNotice'>Note: Max zoom for this map style is "+ maxZoom +" and will only be able to go lower if the user is able to switch map types.</span>");
 						}
 						
@@ -231,7 +231,7 @@ $.wsu_maps.admin.view = {
 					
 					$('.widthOutput').text(ui.size.width);
 					$('.heightOutput').text(ui.size.height);
-					$('#place_drawing_map').gmap('refresh');
+					$.wsu_maps.state.mapInst.gmap('refresh');
 				}
 			})*/;
 			
@@ -243,17 +243,17 @@ $.wsu_maps.admin.view = {
 		
 		$('#dragCenter').on('change',function(){
 			if($(this).is(":checked")){
-				$('#place_drawing_map').gmap('setOptions',{"draggable":true});
+				$.wsu_maps.state.mapInst.gmap('setOptions',{"draggable":true});
 			}else{
-				$('#place_drawing_map').gmap('setOptions',{"draggable":$('#draggable').is(":checked")});
+				$.wsu_maps.state.mapInst.gmap('setOptions',{"draggable":$('#draggable').is(":checked")});
 			}
 		});
 			
 		$('#setZoom').on('change',function(){
 			if($(this).is(":checked")){
-				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":true});
+				$.wsu_maps.state.mapInst.gmap('setOptions',{"scrollwheel":true});
 			}else{
-				$('#place_drawing_map').gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")});
+				$.wsu_maps.state.mapInst.gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")});
 			}
 		});
 	},
