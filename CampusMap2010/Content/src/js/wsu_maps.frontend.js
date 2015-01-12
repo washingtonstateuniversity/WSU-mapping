@@ -56,14 +56,14 @@
 						var map_obj = $('.central_layout.public.central #centralMap');
 						var win_w = $(window).width();
 						var mWidth = ( $('.embeded').length?0:( win_w<=404?0:(win_w<=600?155:201) ) ) + $('#selectedPlaceList').width();
-						$.wsu_maps.resizeBg(map_obj, mHeight, mWidth);
+						$.wsu_maps.responsive.resizeBg(map_obj, mHeight, mWidth);
 					}).trigger("resize");
 					$(window).resize(function(){
 						// can't us mapInst here cause it's still in the admin area.  Split that.
 		
 						
 						$('#navwrap').height($('#centralMap_wrap').height()-70);
-						$.wsu_maps.resizeBg($('.cAssest'),mHeight);
+						$.wsu_maps.responsive.resizeBg($('.cAssest'),mHeight);
 						
 						$.wsu_maps.listings.reset_Dirscrollbar();
 						$.wsu_maps.listings.reset_Listscrollbar();
