@@ -182,7 +182,7 @@
 					},{})).click(function() {
 						//$.each(ib, function(i) {ib[i].close();});
 						//ib[i].open($.wsu_maps.state.mapInst.gmap('get','map'), this);
-						//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+						//$.wsu_maps.state.mapInst.gmap('openInfoWindow', { 'content': marker.info.content }, this);
 					});
 				} else {
 					alert("Geocode was not successful for the following reason: " + status);
@@ -402,7 +402,7 @@
 				$.wsu_maps.state.ib[0].open($.wsu_maps.state.mapInst.gmap('get','map'), this);
 				$.wsu_maps.state.ibOpen=true;
 				// need to finish this class
-				//$('#centralMap').gmap('openInfoWindow', { 'content': marker.info.content }, this);
+				//$.wsu_maps.state.mapInst.gmap('openInfoWindow', { 'content': marker.info.content }, this);
 			}).dragend(function(){//e) {
 				var placePos = this.getPosition();
 				var lat = placePos.lat();

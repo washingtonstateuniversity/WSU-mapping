@@ -3,8 +3,10 @@
 (function($) {
 	$.wsu_maps.util = {
 		debug_positional_log:function(){
-			var caller=arguments.callee.caller.name;
-			console.log(caller);
+			var caller=arguments.callee.caller.caller;
+			if(caller!==null){
+				console.log(caller.name);
+			}
 			/*$.wsu_maps.call();
 			var native = window.alert;
 			window.alert = function(){
