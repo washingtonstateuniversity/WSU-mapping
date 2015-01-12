@@ -35,7 +35,7 @@ $.wsu_maps.admin.view = {
 		loaded_options:false
 	},
 	load_editor:function () {
-		$.wsu_maps.state.api = null;
+		//$.wsu_maps.state.api = null;
 		$.wsu_maps.state.mapInst=$('#place_drawing_map');
 		$("#side_tabs").tabs({
 			active:$(".ui-tabs-nav li").is('.ui-state-active')?$(".ui-tabs-nav li").index($(".ui-state-active")):false,
