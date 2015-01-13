@@ -29,7 +29,7 @@
 			};
 			$.wsu_maps.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
 		},
-		make_IW_resp:function(){
+		make_IW_resp:function(i){
 			var IWpanels = $.wsu_maps.state.mapInst.find(".ui-tabs .ui-tabs-panel");
 			IWpanels.find(".content").width(( IWpanels.width()<400 ? IWpanels.width()-35:365 )+"px");	
 			if(IWpanels.is(":not(.resp)")){
@@ -38,6 +38,11 @@
 				});
 				IWpanels.addClass('resp');
 			}
+			var minHeight=0;
+			$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+				minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
+			}).css('min-height',minHeight); 
+			$.wsu_maps.infobox.apply_scroller(minHeight);
 		},
 		build_options:function(jObj,marker,i,content){
 			var options = {
@@ -226,23 +231,18 @@
 
 			needsMoved=0;
 			$.wsu_maps.state.ibHover =  true;
-			if($('#taby'+i).is(':ui-tabs')){
-				$('#taby'+i).tabs('destroy');
-			}
-			$('#taby'+i).tabs({
-				select: function(){//event, ui) {
-					if(typeof($.jtrack)!=="undefined"){
-						//$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+			if( !$('#taby'+i).is(':ui-tabs') ){
+				$('#taby'+i).tabs({
+					select: function(){//event, ui) {
+						if(typeof($.jtrack)!=="undefined"){
+							//$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+						}
 					}
-				}
-			});
-			$.wsu_maps.infobox.make_IW_resp();
-
-			
+				});
+			}
+			$.wsu_maps.infobox.make_IW_resp(i);
 			$.wsu_maps.infobox.init_img_cycler(marker);
-			
 			$.wsu_maps.infobox.contain_content_events();
-			
 			$.wsu_maps.infobox.init_img_modal(marker);
 			$.wsu_maps.general.addErrorReporting(marker);
 
@@ -256,11 +256,8 @@
 			$.wsu_maps.state.ib[i].rePosition();
 			$.wsu_maps.state.ibHover =  false;
 
-			var minHeight=0;
-			$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-				minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
-			}).css('min-height',minHeight); 
-			$.wsu_maps.infobox.apply_scroller(minHeight);
+
+			
 			//$.wsu_maps.general.prep_html();
 		},
 		apply_scroller:function(minHeight){

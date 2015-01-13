@@ -17,63 +17,28 @@
 		<input type="hidden" name="forced_tmp" value="1" />
 	#end
 	
-	<fieldset><legend>General Information</legend>
-		<p style="float:left; margin-right:15px;">Name:<br/>
-			<input type="text" value="$!geometric.name" name="geometric.name" id="type_name" class="ui-widget ui-widget-content ui-corner-all " />
-		</p>
-		<p style="float:left; margin-right:15px;">Geometry Type :<br/>
-		#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end
-		#*<span style="position:absolute;top:-999em;left-999em;">
-		<input type="hidden" id="startingValue" value="$geometric.default_type.name" />
-			<select name="geom_type" id="style_of">
-				<option value="" #if($geometric.default_type.id==0  || $selectedType==0)selected='selected'#end>Select a geometry type</option>
-				<option value="marker" #if($geometric.default_type.id=='1' || $selectedType==1)selected='selected'#end>Marker</option>
-				<option value="polyline" #if($geometric.default_type.id=='2' || $selectedType==2)selected='selected'#end>Line</option>
-				<option value="polygon" #if($geometric.default_type.id=='3' || $selectedType==3)selected='selected'#end>Polygon</option>
-				<option value="rectangle" #if($geometric.default_type.id=='4' || $selectedType==4)selected='selected'#end>Rectangle</option>
-				<option value="circle" #if($geometric.default_type.id=='5' || $selectedType==5)selected='selected'#end>Circle</option>
-			</select>
-			<input type="hidden" id="pickedValue" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
-		</span>*#
-			<input type="hidden" id="startingValue" value="$!{geometric.default_type.name}" />
-			<input type="hidden" id="pickedValue" name="geom_type" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
-		</p>
-		<p style="float:left;">Geometry Style:<br/>  
-			<select name="geometric.style[]" id="style">
-				<option value="" #if($ele.type=='')selected='selected'#end>Defaults</option>
-				#foreach($style in $styles)
-					<option class="type" value="$style.id" #if($geometric.style.Contains($style)) selected="selected" #end>$style.name</option>
-				#end
-			</select>
-		</p>
-	</fieldset>
-	<div style="clear:left;"></div>
-	<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all place_new">
-		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-				<a href="#Visual">Visual</a>
-			</li>
-			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-				<a href="#Manual">Manual</a>
-			</li>
-		</ul>
-	  
-		<div id="Visual">
-				<button id="drawingcontrolls" class="showing">Hide controlls</button>
-				<button id="restart" >Restart</button>
-				<button id="update" >Update</button>
-				<button id="unselect" >un select selected</button>
-				<div id="geometrics_drawing_map" style="width:100%;height:450px;opacity: 0.8;"></div>
-			$formbuttons
-		</div>
-		<div id="Manual">
-			<fieldset><legend>Latitudes and Longitudes</legend>
-				<textarea name="boundary" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
-			</fieldset>
-			<p>Encoded:<br/>
-				<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" cols="80"  rows="5">$!geometric.encoded</textarea>
-			</p>
-			$formbuttons
+	<div style="height:35px;padding-bottom:5px;">
+		<button id="drawingcontrolls" class="showing">Hide controlls</button>
+		<button id="restart" >Restart</button>
+		<button id="update" >Update</button>
+		<button id="unselect" >un select selected</button>
+		<div class="clear"></div>
+	</div>
+
+	<div id="geometrics_drawing_map" style="width:100%;min-height:450px;opacity: 0.8;"></div>
+
+	<div id="settings_wrap">
+		<div id="side_tabs" class=" ui-widget ui-widget-content ui-corner-left place_new" >
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-left">
+				<li class="ui-state-default ui-corner-left #if( $view.id==0 || $view.tmp) ui-state-active #end">
+					<a href="#tabs_General" title="General Settings"><i class="fa fa-cog"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
+					<a href="#tab_Manual" title="Manual Entry"><i class="fa fa-pencil"></i></a>
+				</li>
+			</ul>
+			<div id="tabs_General" class="mainAreaTabs" #if( $view.id!=0 && !$view.tmp) style="display: none;" #end>#parse("geometrics/tabs/tab_general.vm")</div>  
+			<div id="tab_Manual" class="mainAreaTabs" style="display: none;">#parse("geometrics/tabs/tab_manual.vm")</div>  
 		</div>
 	</div>
 </form>

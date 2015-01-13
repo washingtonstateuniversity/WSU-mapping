@@ -16,7 +16,7 @@
 				container.nestedSortable("refresh");
 				
 				
-				$('jspContainer').css('height','auto');
+				//$('jspContainer').css('height','auto');
 				$.each($.wsu_maps.state.api,function(index,item){
 					item.reinitialise();
 				});
@@ -38,7 +38,7 @@ $.wsu_maps.admin.view = {
 		//$.wsu_maps.state.api = null;
 		$.wsu_maps.state.mapInst=$('#place_drawing_map');
 		$("#side_tabs").tabs({
-			active:$(".ui-tabs-nav li").is('.ui-state-active')?$(".ui-tabs-nav li").index($(".ui-state-active")):false,
+			active:$("#side_tabs .ui-tabs-nav li").is('.ui-state-active')?$("#side_tabs .ui-tabs-nav li").index($(".ui-state-active")):false,
 			collapsible: true,
 			heightStyle: "content",
 			hide:{ effect: 'slide', direction: 'right', duration: 300 },
@@ -419,11 +419,8 @@ $.wsu_maps.admin.view = {
 			var pane = $(this).closest('.listPicker');
 			var pane_id = $(this).attr('id');
 			pane.bind( 'jsp-scroll-y',
-				function(event, scrollPositionY, isAtTop, isAtBottom){
-						//var isAtBottom= isAtBottom;	
-						//var isAtTop= isAtTop;			
+				function(event, scrollPositionY, isAtTop, isAtBottom){		
 					pane.mousewheel(function(event,delta){ 
-						//var media = $(this).find('.mediaPanel'); 
 						if (delta > 0) { 
 							if(isAtTop){
 								return false;

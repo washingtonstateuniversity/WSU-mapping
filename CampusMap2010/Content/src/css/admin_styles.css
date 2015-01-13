@@ -953,12 +953,12 @@ span.UinEdit {
 }*/
 .ui-tooltip {z-index:99999;}
 #settings_wrap{position:absolute;top:100px;right: -5px; max-width:80%;}
-#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav{ position:absolute;left:-40px;top:0px;width: 38px;
+#wsu_ui #settings_wrap ul.ui-tabs-nav{ position:absolute;left:-40px;top:0px;width: 38px;
 padding-right: 0px !important;
 text-align: center;}
-#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav li{float: none;padding-right: 0px !important;
+#wsu_ui #settings_wrap ul.ui-tabs-nav li{float: none;padding-right: 0px !important;
 margin-right: 0px !important;}
-#wsu_ui.admin.view._editor #settings_wrap ul.ui-tabs-nav li a{
+#wsu_ui #settings_wrap ul.ui-tabs-nav li a{
 	float: none;
 padding:5px;
 text-decoration: none;
@@ -968,14 +968,23 @@ width: 25px;
 font-size:25px;
 line-height:25px;
 }
-#wsu_ui.admin.view._editor .ui-tabs .ui-tabs-panel{overflow-y: auto;
+#wsu_ui #settings_wrap .ui-tabs .ui-tabs-panel{overflow-y: auto;
 overflow-x: hidden;}
 
-#wsu_ui.admin.view._editor #editor_form{margin-bottom:0px;padding-bottom: 0px;}
+#wsu_ui.admin.view._editor #editor_form,
+#wsu_ui.admin.geometrics.editor #shapeEditor
+{margin-bottom:0px;padding-bottom: 0px;}
 
-#wsu_ui.admin.view._editor .row.single.gutter.pad.short.narrow .column.one{padding:0px;}
-#wsu_ui.admin.view._editor #content_area{padding:0px;}
-#wsu_ui.admin.view._editor #content_tar {padding:0px;}
+#wsu_ui.admin.view._editor .row.single.gutter.pad.short.narrow .column.one,
+#wsu_ui.admin.geometrics.editor .row.single.gutter.pad.short.narrow .column.one
+{padding:0px;}
+
+#wsu_ui.admin.view._editor #content_area,
+#wsu_ui.admin.geometrics.editor #content_area
+{padding:0px;}
+#wsu_ui.admin.view._editor #content_tar,
+#wsu_ui.admin.geometrics.editor #content_tar
+{padding:0px;}
 
 #place_drawing_map {
 	box-shadow: 2px 2px 5px 2px rgba(25, 25, 25, .35);

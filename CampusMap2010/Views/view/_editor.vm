@@ -55,7 +55,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 
 
 	<div id="settings_wrap">
-		<div id="side_tabs" class=" ui-tabs ui-widget ui-widget-content ui-corner-left place_new" >
+		<div id="side_tabs" class=" ui-widget ui-widget-content ui-corner-left place_new" >
 			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-left">
 				<li class="ui-state-default ui-corner-left #if( $view.id==0 || $view.tmp) ui-state-active #end">
 					<a href="#tabs_Basic" title="Basic"><i class="fa fa-cog"></i></a>
