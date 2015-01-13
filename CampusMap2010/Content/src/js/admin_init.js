@@ -19,7 +19,7 @@
 //var place_id=place_id||-1;
 var i=i||-1;
 var image_count=image_count||-1;
-var url_parts = $.wsu_maps.util.parseUri(window.location);
+//var url_parts = $.wsu_maps.util.parseUri(window.location);
 
 (function($) {
 	$.fn.blink = function(options){
@@ -140,64 +140,6 @@ function sendBr(place_id,diaObj){
 
 
 
-function clearLock(item_id,diaObj,callback){
-	$.ajaxSetup ({cache: false,async:false}); 
-	//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-	$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'clearLock.castle?id='+item_id, function(response) {//, status, xhr) {
-		if(response==='true'){
-			if(typeof(diaObj)!=='undefined' && diaObj!==''){
-				$('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){
-					$('body li.item_'+item_id).find('.inEdit').remove();
-				});
-				$('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){
-					$('body li.item_'+item_id).find('.UinEdit').remove();
-				});
-				$( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
-				$( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
-				$('body li.item_'+item_id).find('.buttons.editIt').attr('href','_edit.castle?id='+item_id);
-				diaObj.dialog( "close" );	
-			}
-			if($.isFunction(callback)){
-				callback();
-			}
-		}
-	});                       
-}
-
-
-function Checktitle(title,getid,callback){
-	$.ajaxSetup ({cache: false}); 
-	//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-	var returnId=getid?'&id=true':'';
-	$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'checktitle.castle?title='+title+returnId, function(response) {//, status, xhr) {
-		if($.isFunction(callback)){
-			callback(response);
-		}
-	});                       
-}
-
-
-
-function addLiveActionAnimation(){
-	if($( ".buttons" ).length > 0){
-		$( ".buttons" ).button({text:false});
-	}
-	$('div.actionCol a').hover(
-		function(){
-			$(this).find('.actionText').stop().animate({width: '100%'}, 500, function() {});
-			$(this).stop().animate({width:85}, 500, function() {});
-			$(this).find('.actionpropt').stop().animate({width: 0}, 250, function() {});
-		},
-		function(){
-			$(this).find('.actionText').stop().animate({width: 0}, 250, function() {});
-			$(this).stop().animate({width:37}, 250, function() {});
-			$(this).find('.actionpropt').stop().animate({width: 10}, 250, function() {});
-		}
-	);	
-	
-}
-
-
 $(function() {
 	$.wsu_maps.admin.setup_fixedNav();
 	$('.insotryupload').on('click',function(){
@@ -206,7 +148,7 @@ $(function() {
 	$('.imgInfo').slideToggle();
 	$('.DeleteImage').fadeToggle();	
 	$.wsu_maps.admin.addToggle();
-	addLiveActionAnimation();
+	$.wsu_maps.lists.addLiveActionAnimation();
 	if($(".lazy img,img.lazy").length){
 		$(".lazy img,img.lazy").lazyload();
 	}
@@ -302,170 +244,6 @@ $(function() {
 	}
 
 	
-	if($( "a[title='Delete']" ).length>0){
-		var deleteing='';
-		var name='';
-		if($( "#deleteModule" ).length===0){
-			$( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
-		}
-		$( "a[title='Delete']" ).on('click',function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			deleteing=$(this).attr('href');
-			name=$(this).closest('tr').find('.name').html();
-			$('#tar_item').html(name!==''&&name!=='undfinded'?name:'this');
-			$( "#deleteModule" ).dialog( "open" );
-		});
-		$( "#deleteModule" ).dialog({
-			autoOpen: false,
-			height:225,
-			width:400,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				"Delete": function() {
-					$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-					window.location = deleteing;
-				},
-				Cancel: function() {
-					$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-	}
-
-
-/* note this is for the gem area only */
-if($('a[href$="/geometrics/new.castle"]').length){
-	$('a[href$="/geometrics/new.castle"]').on('click',function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		
-		if($( "#choosegType" ).length===0){
-			$( "body" ).append('<div id="choosegType" title="Choose the place model">'+
-			'<p><strong>Choose a type</strong>'+
-			'that the style will be for.</p>'+
-			'</div>');
-		}
-		$("#choosegType").dialog({
-			autoOpen: true,
-			height: 275,
-			width:350,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				/*"Marker": function() {
-					window.location = "/geometrics/new.castle?type=1"
-				},*/
-				"Polyline": function() {
-					window.location = "/geometrics/new.castle?type=2";
-				},
-				"Polygon": function() {
-					window.location = "/geometrics/new.castle?type=3";
-				}/*,
-				"Rectangle": function() {
-					window.location = "/geometrics/new.castle?type=4"
-				},
-				"Circle": function() {
-					window.location = "/geometrics/new.castle?type=5"
-				}*/
-			}
-		});
-	});
-}
-if($('a[href$="/geometrics/new_style.castle"]').length){
-	$('a[href$="/geometrics/new_style.castle"]').on('click',function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		
-		if($( "#chooseSType" ).length===0){
-			$( "body" ).append('<div id="chooseSType" title="Choose the place model">'+
-			'<p><strong>Choose a type</strong>'+
-			'that the style will be for.</p>'+
-			'</div>');
-		}
-		$("#chooseSType").dialog({
-			autoOpen: true,
-			height: 275,
-			width:350,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				/*"Marker": function() {
-					window.location = "/geometrics/new_style.castle?type=1"
-				},*/
-				"Polyline": function() {
-					window.location = "/geometrics/new_style.castle?type=2";
-				},
-				"Polygon": function() {
-					window.location = "/geometrics/new_style.castle?type=3";
-				}/*,
-				"Rectangle": function() {
-					window.location = "/geometrics/new_style.castle?type=4"
-				},
-				"Circle": function() {
-					window.location = "/geometrics/new_style.castle?type=5"
-				}*/
-			}
-		});
-	});
-}
-
-
-	function post_tmp(form_obj){//,diaObj,callback){
-		$.ajaxSetup ({cache: false,async:false}); 
-		//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-
-		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res){//, status, request) {
-			var Location = '/place/_edit.castle?id='+res; 
-			
-			window.location= Location; 
-			$('body #content_area').fadeTo('fast',25);
-		});
-	} 
-	function pagLoad(){
-		if($('.ui-tabs-panel .pagination').length){
-			$.each($('.pagination'),function(){
-				var panleId = $(this).closest('.ui-tabs-panel').attr('id');
-				$(this).find('a').on('click',function(e){
-					$('body').append('<h1 style="position:fixed; top:25%; left:45%; z-index:9999;text-align: center;" id="loading"><img src="../Content/images/loading.gif"/></br>Loading</h1>');
-					e.stopPropagation();
-					e.preventDefault();
-					//panleId
-					$.ajaxSetup ({cache: false}); 
-					$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){ pagLoad(); $('#loading').remove(); });
-				});
-			});
-			addLiveActionAnimation();
-		}
-	}
-
-	function setInfoSlide(){
-		if($('.detailInfoBut')){
-			$('.detailInfoBut').on('click', function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				if($(this).closest('.detailCol').width()<=1){
-					$(this).closest('.detailCol').stop().animate({
-						width:"125px"
-						}, 500, function() {
-					});
-				}else{
-					$(this).closest('.detailCol').stop().animate({
-						width:"0px"
-						}, 500, function() {
-					});
-				}
-			});
-		}
-	}
 
 	
 
@@ -562,8 +340,8 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 						tinyMCE.triggerSave();
 						$.wsu_maps.admin.ui.tinymce.tinyResize();
 					}
-					pagLoad();
-					setInfoSlide();
+					$.wsu_maps.lists.pagLoad();
+					$.wsu_maps.lists.setInfoSlide();
 				},
 				activate: function( event, ui ) {
 					$.cookie('tabs'+areaId, ui.newTab.index(), {expires: 1, path: '/'+$.wsu_maps.state.view+$.wsu_maps.state.mcv_action+'.castle' });
@@ -575,7 +353,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 		initalize_tabs();
 		//applyTabToAccordion();
 	}else{
-		setInfoSlide();	
+		$.wsu_maps.lists.setInfoSlide();	
 	}
 	if($("#tabs").length>0){
 		$("#tabs").tabs();
@@ -616,7 +394,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 								resizable: false,
 								draggable: false
 							});
-							post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
+							$.wsu_maps.lists.post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
 					}else{
 						$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
 					}
@@ -941,7 +719,7 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			buttons: {
 				"Steal": function() {
 					var diaObj=$(this);
-					clearLock($.wsu_maps.admin.defaults.place_id,diaObj);
+					$.wsu_maps.general.clearLock($.wsu_maps.admin.defaults.place_id,diaObj);
 				},
 				Cancel: function() {
 						$( ".buttons.steal" ).removeClass('ui-state-focus'); 
@@ -958,114 +736,6 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 			$( "#clearLock" ).dialog( "open" );
 		});
 		
-		//This is so that you can use the nav when leaving the editing area.  IE: the same as clicking cancel
-		if(url_parts.path==='/place/Edit_place.castle'){
-			$( "#main_nav a,a.PDF.creation " ).on('click',function(){//e) {
-				//e.preventDefault();
-				//e.stopPropagation();
-				//var obj=$(this);
-				clearLock($('#place_Id').val(),'',function(){
-					//window.location=obj.attr('href');
-					});
-			});
-		}
-		if(url_parts.path==='/place/new.castle'){
-			$('input#place_title').keyup(function() {
-				var val=$('input#place_title').val();
-				val=val.split(' ').join('-');
-				val=val.split("'").join('');
-				val=val.split('"').join('');
-				val=val.split(';').join('');
-				val=val.split(':').join('');
-				$('#place_CustomUrl').val(val);
-				$.wsu_maps.util.clearCount('titleCheck');
-				$.wsu_maps.util.setCount('titleCheck',200,function(){
-					Checktitle($('#place_CustomUrl').val(),false,function(data){
-							if(data==='true'){
-								if($('#hasTitle').length===0){
-									$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
-								}
-							}else{
-								if($('#hasTitle').length>0){
-									$('#hasTitle').remove();
-								}
-							}
-							$.wsu_maps.util.clearCount('titleCheck');
-						});
-				});
-			});
-		}
-		if(url_parts.path==='/place/new.castle'||url_parts.path==='/place/Edit_place.castle'){
-			$('#place_CustomUrl').keyup(function() {
-				$.wsu_maps.util.clearCount('titleCheck');
-				$.wsu_maps.util.setCount('titleCheck',200,function(){
-					Checktitle($('#place_CustomUrl').val(),false,function(data){
-							if(data==='true'){
-								if($('#hasTitle').length===0){
-									$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
-								}
-							}else{
-								if($('#hasTitle').length>0){
-									$('#hasTitle').remove();
-								}
-							}
-							$.wsu_maps.util.clearCount('titleCheck');
-						});
-				});
-			});
-		
-		
-		//var click=0;
-		/*
-		$('body,html').not('textarea,iframe').bind('keydown', function(e) { 
-			if((e.keyCode || e.which)  == 13) {
-				e.preventDefault();
-				e.stopPropagation();
-				$('.submit_btn').first().focus();
-				Checktitle($('#place_CustomUrl').val(),false,function(data){
-					if(data=='true'){
-						if($('#hasTitle').length==0){
-							$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
-						}
-					}else{
-						 $('input[type=submit]').click();
-					}
-				});
-			}
-		});
-		*/
-		//var clear=false;
-		/*$('input[type=submit]:not(".cancel_btn")').on('click', function(e) {
-			if(clear!=true){
-				e.preventDefault();
-				e.stopPropagation();
-			}
-			var clicked=$(this);
-			Checktitle($('#place_CustomUrl').val(),true,function(data){
-				if(data!='0'&&data!=$('#place_Id').val()&&data!="false"){
-					if($('#hasTitle').length==0){
-						$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
-					}
-					if($('#hasTitleAlert').length==0){
-						$('#main').prepend('<div id="hasTitleAlert" style="padding: 0 .7em;" class="ui-state-error ui-corner-all"><p style="line-height: 15px;padding-bottom: 0;"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span><strong>Alert:</strong>This url is in use.</p></div>');
-					}
-					click=0;
-				}else{
-					if(clear!=true){
-						clear=true;
-						clicked.click();
-					}
-					if($('#hasTitleAlert').length>0){$('#hasTitleAlert').remove();}
-					if(click>0){
-						e.preventDefault();
-						e.stopPropagation();
-					}
-					click++
-				}
-			});
-		}); */
-   }
-
 
 
 /* -----------

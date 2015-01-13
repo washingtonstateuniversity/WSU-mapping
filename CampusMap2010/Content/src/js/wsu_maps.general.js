@@ -737,6 +737,29 @@
 			}
 			return _op;
 		},
+		clearLock:function (item_id,diaObj,callback){
+			$.ajaxSetup ({cache: false,async:false}); 
+			//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'clearLock.castle?id='+item_id, function(response) {//, status, xhr) {
+				if(response==='true'){
+					if(typeof(diaObj)!=='undefined' && diaObj!==''){
+						$('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){
+							$('body li.item_'+item_id).find('.inEdit').remove();
+						});
+						$('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){
+							$('body li.item_'+item_id).find('.UinEdit').remove();
+						});
+						$( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
+						$( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
+						$('body li.item_'+item_id).find('.buttons.editIt').attr('href','_edit.castle?id='+item_id);
+						diaObj.dialog( "close" );	
+					}
+					if($.isFunction(callback)){
+						callback();
+					}
+				}
+			});                       
+		},
 
 	};
 	$.wsu_maps.mapping={
