@@ -133,23 +133,24 @@ if($('a[href$="/geometrics/new_style.castle"]').length){
 }
 
 
-	function post_tmp(form_obj){//,diaObj,callback){
-		$.ajaxSetup ({cache: false,async:false}); 
-		//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 
-		$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res){//, status, request) {
-			var Location = '/place/_edit.castle?id='+res; 
-			
-			window.location= Location; 
-			$('body #content_area').fadeTo('fast',25);
-		});
-	} 
 
 
 
 
 		},
-		 addLiveActionAnimation:function(){
+		post_tmp:function(form_obj){//,diaObj,callback){
+			$.ajaxSetup ({cache: false,async:false}); 
+			//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+	
+			$.post(form_obj.attr('action')+'?apply=Save', form_obj.serialize(), function(res){//, status, request) {
+				var Location = '/place/_edit.castle?id='+res; 
+				
+				window.location= Location; 
+				$('body #content_area').fadeTo('fast',25);
+			});
+		},
+		addLiveActionAnimation:function(){
 			if($( ".buttons" ).length > 0){
 				$( ".buttons" ).button({text:false});
 			}
