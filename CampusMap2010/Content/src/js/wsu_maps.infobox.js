@@ -126,8 +126,8 @@
 				
 				$.each( marker.info.content, function(j, html) {
 					var title = html.title.replace(' ','_').replace("'",'_').replace('/','_');
-					var hideTab = ( j>0 ?' ui-tabs-hide':'');
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+hideTab+'"><div class="content '+title+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+					var hideTab = ( j>0 ?' display:none;':'');
+					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 				});				
 			
 			}else{
