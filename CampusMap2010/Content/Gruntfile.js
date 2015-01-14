@@ -105,6 +105,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.responsive.js',
 					'src/js/wsu_maps.admin.js',
 					'src/js/wsu_maps.admin.ui.js',
+					'src/js/wsu_maps.admin.ui.fields.js',
 					'src/js/admin_ui__media.js',
 					'src/js/wsu_maps.admin.ui.tinymce.js',
 					
@@ -114,7 +115,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.admin.editors.media.js',
 					'src/js/wsu_maps.admin.editors.view.js',
 					'src/js/wsu_maps.admin.editors.style.js',
-					'src/js/admin_init.js'
+
 				],
 				dest: 'build/js/admin.maps.wsu.edu.js',
 			},
@@ -189,6 +190,7 @@ module.exports = function(grunt) {
 					//'src/js/scrollbar/jquery.jscrollpane.min.js',
 					'src/js/wsu_maps.admin.js',
 					'src/js/wsu_maps.admin.ui.js',
+					'src/js/wsu_maps.admin.ui.fields.js',
 					'src/js/admin_ui__media.js',
 					'src/js/wsu_maps.admin.ui.tinymce.js',
 					'src/js/admin_ui__editors.js',
@@ -200,7 +202,7 @@ module.exports = function(grunt) {
 					
 					'src/js/wsu_maps.frontend.js',
 					//'src/js/zeroclipboard/ZeroClipboard.js',
-					'src/js/admin_init.js'
+
 				],
 			options: {
 				// options here to override JSHint defaults

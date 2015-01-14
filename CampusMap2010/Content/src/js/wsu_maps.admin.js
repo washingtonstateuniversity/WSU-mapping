@@ -1,8 +1,12 @@
 // JavaScript Document
+var i=i||-1;
+var image_count=image_count||-1;
+
 (function($) {
 	$.wsu_maps.is_frontend=false;
 	$.wsu_maps.admin = {
 		ini:function(){
+			$.wsu_maps.admin.tmp_ini();
 			$(document).ready(function(){
 				var ed=ed||false;
 				if($('.admin.view._editor').length){
@@ -205,6 +209,594 @@
 				e.preventDefault();
 				$('#massTaggingarea').slideToggle();
 			});	
+		},
+		tmp_ini:function(){
+			
+			
+			
+			
+			
+			
+			
+					
+					
+					
+			$.wsu_maps.admin.setup_fixedNav();
+			$('.insotryupload').on('click',function(){
+				$.wsu_maps.admin.ui.openImgUploader();
+			});
+			$('.imgInfo').slideToggle();
+			$('.DeleteImage').fadeToggle();	
+			$.wsu_maps.admin.addToggle();
+			$.wsu_maps.lists.addLiveActionAnimation();
+			if($(".lazy img,img.lazy").length){
+				$(".lazy img,img.lazy").lazyload();
+			}
+			
+			if($("input.all").length){
+				$("input.all").on('click',function(){//e) {
+					var ele = $(this);
+					if(!ele.attr('checked')){
+						ele.closest('div').find('select option').removeAttr('selected');
+					}else{
+						ele.closest('div').find('select option').attr('selected',true);
+					}
+				});
+				
+				$("input.all").closest('div').find('select').on('mouseup',function(){
+					if($(this).find('option').size() === $(this).find(':selected').size()){
+						$(this).closest('div').find('input.all').attr("checked",true);
+					}else{
+						$(this).closest('div').find('input.all').removeAttr("checked");
+					}
+				});
+				
+				
+			}
+			
+			if(typeof(tinyMCE) !== 'undefined' && $('textarea.tinyEditor').length>0){
+				$.each($('textarea.tinyEditor'),function(i){
+					if(!$(this).is($(".tinyLoaded"))){
+						if(typeof($(this).attr('id'))==="undefined"){
+							$(this).attr('id','temp_'+i);
+						}
+						if($(this).is($(".full"))){
+							$.wsu_maps.admin.ui.tinymce.load_tiny("bodytext",$(this).attr('id'));
+						}else{
+							$.wsu_maps.admin.ui.tinymce.load_tiny("simple",$(this).attr('id'));
+						}
+						$(this).addClass("tinyLoaded");
+						$.wsu_maps.admin.ui.tinymce.tinyResize();
+					}
+				});
+			}
+			if($('.sortable.nav').length){
+				$('ol.sortable').nestedSortable({
+					disableNesting: 'no-nest',
+					forcePlaceholderSize: true,
+					handle: 'div',
+					helper:	'clone',
+					items: 'li',
+					maxLevels: 3,
+					opacity: 0.6,
+					placeholder: 'placeholder',
+					revert: 250,
+					tabSize: 25,
+					tolerance: 'pointer',
+					toleranceElement: '> div',
+					update: function(){//event, ui) {
+						if(!$('.menu.formAction.Submit').is(':visible')){
+							$('.menu.formAction.Submit').show();
+						}
+						var arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
+						$.each($('li','ol.sortable'),function(i){//,v){
+							$(this).find('.nav_level').val(arraied[i+1].depth);
+							$(this).find('.nav_position').val(i+1);
+							$(this).find('.nav_level_display .value').text(arraied[i+1].depth);
+							$(this).find('.nav_position_display .value').text(i+1);
+						});
+					}
+				});
+			}
+		/* General Actions */
+		
+		
+		
+		
+		
+		
+		
+		
+		/* setup UI */
+			if($( ".buttons" ).length > 0){
+				$( ".buttons" ).button({text:false});
+			}
+			if($( ".admin input[type='submit']" ).length > 0){$("input[type='submit']" ).button();}
+			if($('.NOTED').length){
+				$('.NOTED strong').on('click',function(){//e){
+					var self = $(this);
+					var parent = $(this).closest('span');
+					parent.find('span').slideToggle('fast',function(){
+						self.is('.open') ? self.removeClass('open') :self.addClass('open');
+						parent.find('em').text((self.is('.open')?' (-)':' (+)'));
+					});
+				});
+			}
+		
+			
+		
+			
+		
+			if($('.autoselect').length){
+				$.each($( ".autoselect" ),function(){
+					$(this).combobox();
+				});
+			}
+		
+		
+			/*function tabsToAccordions(){
+				$(".tabs").each(function(){
+					var e=$('<div class="accordion">');
+					var t=[];
+					$.each($(this).find(">ul>li"),function(){
+						t.push("<h3>"+$(this).html()+"</h3>");
+					});
+					var n=[];
+					$.each($(this).find(">div"),function(){
+						n.push("<div>"+$(this).html()+"</div>");
+					});
+					for(var r=0;r<t.length;r++){
+						e.append(t[r]).append(n[r]);
+					}
+					$(this).before(e);
+					$(this).remove();
+				});
+				$(".accordion").accordion({
+					heightStyle: "content",
+					collapsible: true
+				});
+			}
+			 //document.location.hash
+			// changes accordions to tabs (jquery ui)
+			function accordionsToTabs(){
+				if($(".accordion").length){
+					$(".accordion").each(function(){
+						var e=$('<div class="tabs">');
+						var t=0;
+						var n=$("<ul>");
+						$.each($(this).find(">h3"),function(i){
+							n.append('<li><a href="#tabs-'+i+'">'+$(this).text()+"</a></li>");
+						});
+						t=0;
+						var r=$("");
+						$(this).find(">div").each(function(){
+							t++;
+							r=r.add('<div id="tabs-'+t+'">'+$(this).html()+"</div>");
+						});
+						e.append(n).append(r);
+						$(this).before(e);
+						$(this).remove();
+					});
+					initalize_tabs();
+				}
+			}
+			function updateUI(){
+				if($(window).width() <= 480){
+					tabsToAccordions();
+				} else {
+					accordionsToTabs();
+				}
+			}
+		
+			function applyTabToAccordion(){	
+				// event handler for window resize
+				$(window).resize(function(){//e){
+					updateUI();
+				});
+				updateUI();
+			}*/
+		
+			
+			if($( "#sub_tabs" ).length>0){
+				$( "#sub_tabs" ).tabs();
+			}
+			if($( ".sub_tabs" ).length>0){
+				$( ".sub_tabs" ).each(function(){
+					$(this).tabs();
+				});
+			}
+			
+			function initalize_tabs(){
+				var  taboptions={};
+				
+				$(".tabs").each(function(){
+					var target = $(this);
+					var areaId = target.closest('.tabedArea').attr('id');
+					var activeTab = $.cookie('tabs'+areaId);
+					target.tabs($.extend( taboptions, $.wsu_maps.admin.defaults.place_id===0?{ disabled: [3] }:{}, {
+						active: activeTab||0,
+						create: function(){//event, ui) {
+							if($('#place_id').length){
+								tinyMCE.triggerSave();
+								$.wsu_maps.admin.ui.tinymce.tinyResize();
+							}
+							$.wsu_maps.lists.pagLoad();
+							$.wsu_maps.lists.setInfoSlide();
+						},
+						activate: function( event, ui ) {
+							$.cookie('tabs'+areaId, ui.newTab.index(), {expires: 1, path: '/'+$.wsu_maps.state.view+$.wsu_maps.state.mcv_action+'.castle' });
+						}
+					 } ));
+				});
+			}
+			if($(".tabs").length>0){
+				initalize_tabs();
+				//applyTabToAccordion();
+			}else{
+				$.wsu_maps.lists.setInfoSlide();	
+			}
+			if($("#tabs").length>0){
+				$("#tabs").tabs();
+				//applyTabToAccordion();
+			}
+			if( ($.wsu_maps.admin.defaults.place_id===0) ){
+				if($( "#chooseModel" ).length===0){
+					$( "body" ).append('<div id="chooseModel" title="Choose the place model">'+
+					'<p><strong>Choose a model </strong>'+
+					'that the place will be.  This will set forth all the options it can have.'+
+					'<br/><select name="set_model" id="set_model">'+
+					$('#LocationModelSelect').clone().html()+
+					'</select></div>');
+				}
+				$("#chooseModel").dialog({
+					autoOpen: true,
+					height: 275,
+					width:350,
+					modal: true,
+					hide: 'blind',
+					resizable: false,
+					draggable: false,
+					buttons: {
+						"Ok": function() {
+							if($('#set_model :selected').val() !==''){
+								$( this ).dialog( "close" );
+								if($( "#loading_tmp" ).length===0){
+										$( "body" ).append('<div id="loading_tmp" title="Loading">'+
+										'<img src="/Content/images/loading.gif" style="margin: 0 auto; display:block;" />'+
+										'</div>');
+									}
+									$( "#loading_tmp" ).dialog({
+										autoOpen: true,
+										height: 155,
+										width:125,
+										modal: true,
+										hide: 'blind',
+										resizable: false,
+										draggable: false
+									});
+									$.wsu_maps.lists.post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
+							}else{
+								$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+							}
+		
+						}
+						
+					}
+				});
+				$('#set_model').combobox();
+				$('#set_model').next('.ui-autocomplete-input').on('change',function(){
+					if($('#set_model :selected').val() !==''){
+						if($('#set_model').next('.ui-autocomplete-input').is('errored')){ // changed hasClass for is for speed
+							$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #23b618'}).removeClass('errored');
+						}
+					}else{
+						$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
+					}
+					$("#LocationModelSelect option[value='"+$('#set_model :selected').val()+"']").attr("selected","selected");
+					$("#LocationModelSelect").next('input').val($('#set_model :selected').text());
+				});
+			}  
+		
+			
+		
+		
+			$('[name="ele.type"]').not('#style_of').change(function(){
+				if($('[name="ele.type"] :selected').val()==="dropdown"){
+					$('#optionsSelection').slideDown('fast');
+					$('#optionsSelectionDefaults').slideUp('fast');
+				}else{
+					$('#optionsSelection').slideUp('fast');
+		
+					$('#optionsSelectionDefaults').slideDown('fast');
+					$('#ops').html('');
+				}
+			});
+			$("#ele_attr_multiple").on("change",function(){
+				if($("#ele_attr_multiple:checked").length){
+					$('.pod [type=radio]:checked').attr("checked",false);
+					$('.pod [type=checkbox]:checked').attr("checked",false);
+					$('.pod [type=radio]').hide();
+					$('.pod [type=checkbox]').show();
+				}else{
+					$('.pod [type=radio]:checked').attr("checked",false);
+					$('.pod [type=checkbox]:checked').attr("checked",false);
+					$('.pod [type=radio]').show();
+					$('.pod [type=checkbox]').hide();
+				}
+			});
+			$('.pod [type=radio]').on("change",function(){
+				$('.pod :checked').attr("checked",false);
+				$(this).attr("checked",true);
+			});
+			$('.pod .opVal').on("change",function(){
+				$(this).siblings('[type=radio]').val($(this).val());
+				$(this).siblings('[type=checkbox]').val($(this).val());
+			});
+		
+			$('#addOption').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				i=$('#ops .pod').size();
+				$('#ops').append($('#option_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ) );
+			});
+			$('.deleteOption').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				var tar = $(this).closest('.pod');
+				var tarParent = tar.closest('.podContainer');
+				tar.remove();
+				tarParent.find('.pod').each(function(i){
+					$(this).find('input').each(function(){//j){
+						$(this).attr('name',$(this).attr('name').replace(/[\d+]/g, (i>-1?i:i+1)) );
+					});
+				});
+			});
+		
+		
+			if($( ".datepicker.optionsA" ).length>0){
+				$( ".datepicker.optionsA" ).each(function(){
+					$(this).datetimepicker({
+						showOtherMonths: true,
+						selectOtherMonths: true,
+						changeMonth: true,
+						changeYear: true,
+						showButtonPanel: true,
+						showAnim:"fold",
+						dateFormat: 'mm/dd/yy',
+						ampm: true,
+						hourGrid: 4,
+						minuteGrid: 10,
+						onClose: function(dateText){//, inst) {
+							//auto take off a null time.. ie if left at midnight, it's not wanted.
+							if (dateText.indexOf('00:00')!==-1||dateText.indexOf('12:00 AM')!==-1||dateText.indexOf('12:00 am')!==-1){
+								var temp = dateText.split(' ');
+								$(this).val(temp[0]);
+							}
+						}
+					});
+				});
+			}
+		
+		
+		
+		
+			
+		
+		
+		
+			
+		
+		
+		  
+		
+		
+		/* -----------
+			for stories
+			---------------- */
+		
+			/* for place listings */
+			
+				if($('.fliterList').length>0){
+					$(".fliterList").on('change',function () {
+						window.location = $.wsu_maps.state.siteroot+$.wsu_maps.state.view+"list.castle?searchId="+$(this).find(':selected').val(); 
+					});
+				}
+			
+				$( "#dialog" ).dialog({
+					autoOpen: false,
+					height: 165,
+					width: 440,
+					modal: true,
+					hide: 'blind',
+					resizable: false,
+					draggable: false,
+					buttons: {
+						"Draft": function() {
+							var diaObj=$(this);
+							$.wsu_maps.general.loadState(1,$.wsu_maps.admin.defaults.place_id,diaObj);
+						},
+						"Review": function() {
+							var diaObj=$(this);
+							$.wsu_maps.general.loadState(2,$.wsu_maps.admin.defaults.place_id,diaObj);
+		
+						},
+						"Published": function() {
+							var diaObj=$(this);
+							$.wsu_maps.general.loadState(3,$.wsu_maps.admin.defaults.place_id,diaObj);
+						},
+						Cancel: function() {
+							$( ".buttons.pubState" ).removeClass('ui-state-focus'); 
+							$( this ).dialog( "close" );
+						}
+					}
+				});
+				$( ".pubState" )
+					.on('click',function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					$.wsu_maps.admin.defaults.place_id=$(this).closest('.place_aTar').attr('title');
+					$( "#dialog" ).dialog( "open" );
+				});
+		
+		
+				if($('#sendBR').length===0){
+					$('body').append('<div id="sendBR" title="Send" style="display:none;"><p>Release the Place out in email<br/><strong>Note:</strong>If You don\'t want to over use this.</p></div>');
+				}
+				$( "#sendBR" ).dialog({
+					autoOpen: false,
+					height: 165,
+					width: 440,
+					modal: true,
+					hide: 'blind',
+					resizable: false,
+					draggable: false,
+					buttons: {
+						"Send": function() {
+							var diaObj=$(this);
+							$.wsu_maps.general.sendBr($.wsu_maps.admin.defaults.place_id,diaObj);
+						},
+						Cancel: function() {
+							$( ".buttons.sendBR" ).removeClass('ui-state-focus'); 
+							$( this ).dialog( "close" );
+						}
+					}
+				});
+				$( ".sendBR" ).on('click',function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					$.wsu_maps.admin.defaults.place_id=$(this).closest('.place_aTar').attr('title');
+					$( "#sendBR" ).dialog( "open" );
+				});
+		
+		
+		
+		
+				
+		
+				
+		
+			/* for place editing */
+		
+			var availableTags = [
+					"Food",
+					"Fun",
+					"Facts",
+					"Foo",
+					"Far",
+					"From"
+				];
+				$( "#place_Location" ).autocomplete({
+					source: availableTags
+				});
+			
+			if($('.imagedropDown').length>0){
+				$(".imagedropDown").on('change',function () {
+					if( $(this).closest('div').find(".selectedImage").length===0 ){
+						$(this).closest('div').append('<img src="" class="selectedImage" width="100" />');
+					}
+					$(this).closest('div').find(".selectedImage").attr('src', $.wsu_maps.state.siteroot+'media/download.castle?id=' + $(this).val());
+				});
+			}
+			
+		
+		
+			if($('.addImage').length>0){
+				$(".addImage").on('click',function () {
+					$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'GetAddImage.castle?count='+image_count, function(data){
+						$('#ExistingImagesDiv').append(data);
+						++image_count;
+					});
+				});
+			}
+			if($('.deleteAuthor').length>0){
+				$('.deleteAuthor').on('click',function(){
+					var author_id = $(this).attr('title');
+					var PlaceId = $(this).attr('rel');
+					$.wsu_maps.admin.alertLoadingSaving();
+					$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteAuthor.castle?id='+author_id+'&placeId='+PlaceId, function(){//data){
+						 $("div#AuthorDiv #div" + author_id).remove();
+						window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
+					});
+				});
+			}
+			if($('.DeleteTag').length>0){
+				$('.DeleteTag').on('click',function(){
+					var PlaceId = $(this).attr('title');
+					var tag_id = $(this).attr('rel');
+					$.wsu_maps.admin.alertLoadingSaving();
+					$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'DeleteTag.castle?id='+tag_id+'&placeId='+PlaceId, function(){//data){
+						$("#tag_"+ tag_id).closest('li').remove();
+						window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
+					});
+				});
+			}
+		
+		
+		   // $(".imagedropDown").change(function (){
+		   //      $(".selectedImage",$(this).parent()).attr('src','media/download.castle?id=' + $(this).val());});	   
+		   //  });
+			/* for place listings */
+			if($('#clearLock').length===0){
+				$('body').append('<div id="clearLock" title="Clear Place Editing Lock" style="display:none;"><p>Release the Place for editing<br/><strong>Note:</strong>If some one is editing it you may wish to ask to make sure they are done.</p></div>');
+				}
+				$( "#clearLock" ).dialog({
+					autoOpen: false,
+					height: 165,
+					width: 440,
+					modal: true,
+					hide: 'blind',
+					resizable: false,
+					draggable: false,
+					buttons: {
+						"Steal": function() {
+							var diaObj=$(this);
+							$.wsu_maps.general.clearLock($.wsu_maps.admin.defaults.place_id,diaObj);
+						},
+						Cancel: function() {
+								$( ".buttons.steal" ).removeClass('ui-state-focus'); 
+								$( this ).dialog( "close" );
+						}
+					}
+				});
+		
+				$( ".steal" )
+					.on('click',function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					$.wsu_maps.admin.defaults.place_id=$(this).attr('rel');
+					$( "#clearLock" ).dialog( "open" );
+				});
+				
+		
+		
+		/* -----------
+			for persons(Editors)
+			---------------- 
+			if(typeof(availablePositions) !== 'undefined'){
+				$( "#person_position" ).autocomplete({
+					source: availablePositions
+				});
+			}*/
+		
+		
+		
+		/* -----------
+			for adverts
+			---------------- */
+			if($('#add_ad_image').length>0){
+				$("#add_ad_image").on('click',function () {
+					$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'GetAddImage.castle?count='+image_count, function(data){
+						$('#NewImageHolderDiv').html($('#NewImageHolderDiv').html()+ data);
+						++image_count;
+					});
+				});
+			}
+
+			
+			
+			
+			
+			
 		},
 	};
 	$.wsu_maps.admin.ini();

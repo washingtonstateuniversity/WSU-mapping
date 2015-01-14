@@ -2,135 +2,122 @@
 	var pageTracker = pageTracker || null;
 	$.wsu_maps.lists = {
 		ini:function(){
-			
-
-
-
-
-
-
-
-
-
-
-			
-			
-			
-				if($( "a[title='Delete']" ).length>0){
-		var deleteing='';
-		var name='';
-		if($( "#deleteModule" ).length===0){
-			$( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
-		}
-		$( "a[title='Delete']" ).on('click',function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			deleteing=$(this).attr('href');
-			name=$(this).closest('tr').find('.name').html();
-			$('#tar_item').html(name!==''&&name!=='undfinded'?name:'this');
-			$( "#deleteModule" ).dialog( "open" );
-		});
-		$( "#deleteModule" ).dialog({
-			autoOpen: false,
-			height:225,
-			width:400,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				"Delete": function() {
-					$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-					window.location = deleteing;
-				},
-				Cancel: function() {
-					$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
-					$( this ).dialog( "close" );
+		
+			if($( "a[title='Delete']" ).length>0){
+				var deleteing='';
+				var name='';
+				if($( "#deleteModule" ).length===0){
+					$( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
 				}
+				$( "a[title='Delete']" ).on('click',function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					deleteing=$(this).attr('href');
+					name=$(this).closest('tr').find('.name').html();
+					$('#tar_item').html(name!==''&&name!=='undfinded'?name:'this');
+					$( "#deleteModule" ).dialog( "open" );
+				});
+				$( "#deleteModule" ).dialog({
+					autoOpen: false,
+					height:225,
+					width:400,
+					modal: true,
+					hide: 'blind',
+					resizable: false,
+					draggable: false,
+					buttons: {
+						"Delete": function() {
+							$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
+							window.location = deleteing;
+						},
+						Cancel: function() {
+							$( "a[title='Delete'].ui-state-focus" ).removeClass('ui-state-focus'); 
+							$( this ).dialog( "close" );
+						}
+					}
+				});
 			}
-		});
-	}
-
-
-/* note this is for the gem area only */
-if($('a[href$="/geometrics/new.castle"]').length){
-	$('a[href$="/geometrics/new.castle"]').on('click',function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		
-		if($( "#choosegType" ).length===0){
-			$( "body" ).append('<div id="choosegType" title="Choose the place model">'+
-			'<p><strong>Choose a type</strong>'+
-			'that the style will be for.</p>'+
-			'</div>');
-		}
-		$("#choosegType").dialog({
-			autoOpen: true,
-			height: 275,
-			width:350,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				/*"Marker": function() {
-					window.location = "/geometrics/new.castle?type=1"
-				},*/
-				"Polyline": function() {
-					window.location = "/geometrics/new.castle?type=2";
-				},
-				"Polygon": function() {
-					window.location = "/geometrics/new.castle?type=3";
-				}/*,
-				"Rectangle": function() {
-					window.location = "/geometrics/new.castle?type=4"
-				},
-				"Circle": function() {
-					window.location = "/geometrics/new.castle?type=5"
-				}*/
+			
+			
+			/* note this is for the gem area only */
+			if($('a[href$="/geometrics/new.castle"]').length){
+				$('a[href$="/geometrics/new.castle"]').on('click',function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					
+					if($( "#choosegType" ).length===0){
+						$( "body" ).append('<div id="choosegType" title="Choose the place model">'+
+						'<p><strong>Choose a type</strong>'+
+						'that the style will be for.</p>'+
+						'</div>');
+					}
+					$("#choosegType").dialog({
+						autoOpen: true,
+						height: 275,
+						width:350,
+						modal: true,
+						hide: 'blind',
+						resizable: false,
+						draggable: false,
+						buttons: {
+							/*"Marker": function() {
+								window.location = "/geometrics/new.castle?type=1"
+							},*/
+							"Polyline": function() {
+								window.location = "/geometrics/new.castle?type=2";
+							},
+							"Polygon": function() {
+								window.location = "/geometrics/new.castle?type=3";
+							}/*,
+							"Rectangle": function() {
+								window.location = "/geometrics/new.castle?type=4"
+							},
+							"Circle": function() {
+								window.location = "/geometrics/new.castle?type=5"
+							}*/
+						}
+					});
+				});
 			}
-		});
-	});
-}
-if($('a[href$="/geometrics/new_style.castle"]').length){
-	$('a[href$="/geometrics/new_style.castle"]').on('click',function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		
-		if($( "#chooseSType" ).length===0){
-			$( "body" ).append('<div id="chooseSType" title="Choose the place model">'+
-			'<p><strong>Choose a type</strong>'+
-			'that the style will be for.</p>'+
-			'</div>');
-		}
-		$("#chooseSType").dialog({
-			autoOpen: true,
-			height: 275,
-			width:350,
-			modal: true,
-			hide: 'blind',
-			resizable: false,
-			draggable: false,
-			buttons: {
-				/*"Marker": function() {
-					window.location = "/geometrics/new_style.castle?type=1"
-				},*/
-				"Polyline": function() {
-					window.location = "/geometrics/new_style.castle?type=2";
-				},
-				"Polygon": function() {
-					window.location = "/geometrics/new_style.castle?type=3";
-				}/*,
-				"Rectangle": function() {
-					window.location = "/geometrics/new_style.castle?type=4"
-				},
-				"Circle": function() {
-					window.location = "/geometrics/new_style.castle?type=5"
-				}*/
+			if($('a[href$="/geometrics/new_style.castle"]').length){
+				$('a[href$="/geometrics/new_style.castle"]').on('click',function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					
+					if($( "#chooseSType" ).length===0){
+						$( "body" ).append('<div id="chooseSType" title="Choose the place model">'+
+						'<p><strong>Choose a type</strong>'+
+						'that the style will be for.</p>'+
+						'</div>');
+					}
+					$("#chooseSType").dialog({
+						autoOpen: true,
+						height: 275,
+						width:350,
+						modal: true,
+						hide: 'blind',
+						resizable: false,
+						draggable: false,
+						buttons: {
+							/*"Marker": function() {
+								window.location = "/geometrics/new_style.castle?type=1"
+							},*/
+							"Polyline": function() {
+								window.location = "/geometrics/new_style.castle?type=2";
+							},
+							"Polygon": function() {
+								window.location = "/geometrics/new_style.castle?type=3";
+							}/*,
+							"Rectangle": function() {
+								window.location = "/geometrics/new_style.castle?type=4"
+							},
+							"Circle": function() {
+								window.location = "/geometrics/new_style.castle?type=5"
+							}*/
+						}
+					});
+				});
 			}
-		});
-	});
-}
 
 
 

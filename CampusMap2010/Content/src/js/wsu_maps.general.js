@@ -760,6 +760,35 @@
 				}
 			});                       
 		},
+		sendBr:function (place_id,diaObj){
+			$.ajaxSetup ({cache: false}); 
+			//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'end_breaking_single.castle?id='+place_id , function(response) {//, status, xhr) {
+				diaObj.dialog( "close" );
+				if(response!=='true'){
+					$.wsu_maps.admin.alertLoadingSaving(response);
+				}else{
+					$.wsu_maps.admin.alertLoadingSaving('Emails sent');
+					window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
+				}
+			});                       
+		},
+		loadState:function (stat,place_id,diaObj){
+			$.ajaxSetup ({cache: false}); 
+			var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+		
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'setStatus.castle?id='+place_id+'&status='+stat , function(response) {//, status, xhr) {
+				var statIs = $("<div>").append(response.replace(rscript, "")).find('.place_'+place_id+' .Status div');
+				$('body .place_'+place_id+' .Status').empty().append(statIs.html());
+				$('body li.place_'+place_id).clone().prependTo('.list_'+stat);
+				$('body li.place_'+place_id).not('.list_'+stat+' li.place_'+place_id+':first').remove();
+				$( ".buttons.pubState" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
+				$( "#dialog .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
+				diaObj.dialog( "close" );	
+			});                       
+		},
+
+
 
 	};
 	$.wsu_maps.mapping={

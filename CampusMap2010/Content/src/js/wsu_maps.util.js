@@ -145,7 +145,7 @@
 			return dumped_text;
 		},
 	};
-		$.runTemplate = $.runTemplate||function(html, options) {
+	$.runTemplate = $.runTemplate||function(html, options) {
 			var re,add,match,cursor,code,reExp,result;
 			re = /<%(.+?)%>/g, reExp = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g, code = "var r=[];\n", cursor = 0;
 			add = function(line, js) {
@@ -167,4 +167,17 @@
 			//catch(err) { console.error("'" + err.message + "'", " in \n\nCode:\n", code, "\n"); }
 			return result;
 		};
+	$.fn.blink = function(options){
+		options = $.extend({ delay:500 }, options);
+		return this.each(function(){
+				var obj = $(this);
+				window.setInterval(function(){
+					if($(obj).css("visibility") === "visible"){
+						$(obj).css('visibility','hidden');
+					}else{
+						$(obj).css('visibility','visible');
+					}
+				}, options.delay);
+			});
+	};
 })(jQuery);
