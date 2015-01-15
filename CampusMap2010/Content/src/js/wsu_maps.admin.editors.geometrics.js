@@ -114,9 +114,9 @@
 									
 								},
 							onDrag:function(){//data){
-									var points=$('#drawing_map').gmap('get_updated_data');
+									var points=jObj.gmap('get_updated_data');
 									if(points.length){
-										alert(points);
+										//alert(points);
 										$('#latLong').val(points);
 										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',points,false,false))));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
@@ -135,8 +135,8 @@
 								if(shape!==null){
 									//$('#latLong').val($.wsu_maps.state.mapInst.gmap('get_updated_data',$.wsu_maps.state.mapInst.gmap('overlays')));
 									//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded',shape));
-									$('#drawing_map').gmap('zoom_to_bounds',{},shape,function(){
-										alert('zoomed?');
+									jObj.gmap('zoom_to_bounds',{},shape,function(){
+										//alert('zoomed?');
 									});
 								}else{
 								
@@ -251,10 +251,11 @@
 		
 		
 		clearSelection:function () {
-			if ($.wsu_maps.admin.geometrics.selectedShape) {
+			/*if ($.wsu_maps.admin.geometrics.selectedShape) {
 				$.wsu_maps.admin.geometrics.selectedShape.setEditable(false);
 				$.wsu_maps.admin.geometrics.selectedShape = null;
-			}
+			}*/
+			$.wsu_maps.state.mapInst.gmap('unset_drawingSelection');
 		},
 		setSelection:function (shape) {
 			$.wsu_maps.admin.geometrics.clearSelection();
@@ -263,9 +264,10 @@
 			$.wsu_maps.admin.geometrics.selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 		},
 		deleteSelectedShape:function () {
-			if ($.wsu_maps.admin.geometrics.selectedShape) {
+			/*if ($.wsu_maps.admin.geometrics.selectedShape) {
 				$.wsu_maps.admin.geometrics.selectedShape.setMap(null);
-			}
+			}*/
+			$.wsu_maps.state.mapInst.gmap('delete_drawingSelection');
 		},
 		deleteAllShape:function () {
 			for (var i = 0; i < $.wsu_maps.admin.geometrics.loaded_shapes.length; i++) {
