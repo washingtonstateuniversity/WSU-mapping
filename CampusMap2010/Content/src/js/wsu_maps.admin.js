@@ -6,8 +6,9 @@ var image_count=image_count||-1;
 	$.wsu_maps.is_frontend=false;
 	$.wsu_maps.admin = {
 		ini:function(){
-			$.wsu_maps.admin.tmp_ini();
 			$(document).ready(function(){
+				$.wsu_maps.admin.tmp_ini();
+				
 				var ed=ed||false;
 				if($('.admin.view._editor').length){
 					$.wsu_maps.admin.view.load_editor();
@@ -141,6 +142,7 @@ var image_count=image_count||-1;
 					}
 					$("[href='"+href+"']").trigger('click');
 				}
+			
 			});
 		},
 		defaults:{
@@ -228,7 +230,7 @@ var image_count=image_count||-1;
 			$('.imgInfo').slideToggle();
 			$('.DeleteImage').fadeToggle();	
 			$.wsu_maps.admin.addToggle();
-			$.wsu_maps.lists.addLiveActionAnimation();
+			$.wsu_maps.admin.lists.addLiveActionAnimation();
 			if($(".lazy img,img.lazy").length){
 				$(".lazy img,img.lazy").lazyload();
 			}
@@ -420,8 +422,8 @@ var image_count=image_count||-1;
 								tinyMCE.triggerSave();
 								$.wsu_maps.admin.ui.tinymce.tinyResize();
 							}
-							$.wsu_maps.lists.pagLoad();
-							$.wsu_maps.lists.setInfoSlide();
+							$.wsu_maps.admin.lists.pagLoad();
+							$.wsu_maps.admin.lists.setInfoSlide();
 						},
 						activate: function( event, ui ) {
 							$.cookie('tabs'+areaId, ui.newTab.index(), {expires: 1, path: '/'+$.wsu_maps.state.view+$.wsu_maps.state.mcv_action+'.castle' });
@@ -433,7 +435,7 @@ var image_count=image_count||-1;
 				initalize_tabs();
 				//applyTabToAccordion();
 			}else{
-				$.wsu_maps.lists.setInfoSlide();	
+				$.wsu_maps.admin.lists.setInfoSlide();	
 			}
 			if($("#tabs").length>0){
 				$("#tabs").tabs();
@@ -474,7 +476,7 @@ var image_count=image_count||-1;
 										resizable: false,
 										draggable: false
 									});
-									$.wsu_maps.lists.post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
+									$.wsu_maps.admin.lists.post_tmp($('#editor_form'),$( "#loading_tmp" ),function(){});
 							}else{
 								$('#set_model').next('.ui-autocomplete-input').css({'box-shadow':'0px 0px 10px 0px #f00'}).addClass('errored');
 							}
@@ -799,6 +801,6 @@ var image_count=image_count||-1;
 			
 		},
 	};
-	$.wsu_maps.admin.ini();
+	//$.wsu_maps.admin.ini();
 	
 })(jQuery);

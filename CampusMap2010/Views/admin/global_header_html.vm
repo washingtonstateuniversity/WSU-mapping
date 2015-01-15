@@ -26,11 +26,11 @@
 	<link type="text/html" rel="help" href="https://github.com/washingtonstateuniversity/WSU-mapping">
 
 
-<style type="text/css">
-  /*body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}*/
-  .at300bs.at15t_compact{background-image:none;}
-  .at300bs{display:inline;}
-</style>
+	<style type="text/css">
+	  /*body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}*/
+	  .at300bs.at15t_compact{background-image:none;}
+	  .at300bs{display:inline;}
+	</style>
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
@@ -59,7 +59,7 @@
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
 <link type='text/css' href='//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
-<link media='screen' href='//images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
+<link type='text/css' href='//images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' rel='stylesheet' media='screen' />
 <link media='screen' href='//images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
 
 $scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")

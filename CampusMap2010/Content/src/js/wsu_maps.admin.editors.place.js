@@ -236,7 +236,7 @@ var i=i||-1;
 					$('#place_CustomUrl').val(val);
 					$.wsu_maps.util.clearCount('titleCheck');
 					$.wsu_maps.util.setCount('titleCheck',200,function(){
-						$.wsu_maps.lists.Checktitle($('#place_CustomUrl').val(),false,function(data){
+						$.wsu_maps.admin.lists.Checktitle($('#place_CustomUrl').val(),false,function(data){
 								if(data==='true'){
 									if($('#hasTitle').length===0){
 										$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');
@@ -255,7 +255,7 @@ var i=i||-1;
 				$('#place_CustomUrl').keyup(function() {
 					$.wsu_maps.util.clearCount('titleCheck');
 					$.wsu_maps.util.setCount('titleCheck',200,function(){
-						$.wsu_maps.lists.Checktitle($('#place_CustomUrl').val(),false,function(data){
+						$.wsu_maps.admin.lists.Checktitle($('#place_CustomUrl').val(),false,function(data){
 								if(data==='true'){
 									if($('#hasTitle').length===0){
 										$('#place_CustomUrl').after('<span id="hasTitle">This url is in use.</span>');

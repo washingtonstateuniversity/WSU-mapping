@@ -132,7 +132,10 @@
 				count = this.get_shapeCount(type);
 			}
 			return (count===0 || count === null) ? 0 : count;
-		},		
+		},	
+		get_drawingManager: function(){
+			return this.get('drawingManager');
+		},	
 		get_drawingMode: function(){
 			return this.get('drawingManager').getDrawingMode();
 		},

@@ -1,6 +1,7 @@
 (function($) {
 	var pageTracker = pageTracker || null;
-	$.wsu_maps.lists = {
+	
+	$.wsu_maps.admin.lists = {
 		ini:function(){
 		
 			if($( "a[title='Delete']" ).length>0){
@@ -167,11 +168,11 @@
 						//panleId
 						$.ajaxSetup ({cache: false}); 
 						$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){ 
-							$.wsu_maps.lists.pagLoad(); $('#loading').remove();
+							$.wsu_maps.admin.lists.pagLoad(); $('#loading').remove();
 						});
 					});
 				});
-				$.wsu_maps.lists.addLiveActionAnimation();
+				$.wsu_maps.admin.lists.addLiveActionAnimation();
 			}
 		},
 		Checktitle:function(title,getid,callback){
