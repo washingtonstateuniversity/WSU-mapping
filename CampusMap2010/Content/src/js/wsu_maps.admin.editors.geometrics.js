@@ -117,10 +117,10 @@
 									var points=jObj.gmap('get_updated_data');
 									if(points.length){
 										//alert(points);
-										$('#latLong').val(points);
+										$('[name*="boundary"]').eq(0).val(points);
 										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',points,false,false))));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-										$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
+										$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary"]').eq(0).val(),true,false)));
 										//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded'));
 									}
 								},

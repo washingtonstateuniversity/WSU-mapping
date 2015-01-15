@@ -1,6 +1,20 @@
 <h3>Manual shape input</h3>
 <hr/>
 <h5>Latitudes and Longitudes:</h5>
-	<textarea name="boundary" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
+	#if($spatial)
+	$spatial ||
+	$real_sp_type
+		#set($i = 0)
+		#if($spatial.PropertyType().IsArray)
+			#foreach($item in $!spatial )
+				<textarea name="boundary[$i]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!item</textarea>
+				#set($i = $i +1)
+			#end
+		#else
+			<textarea name="boundary[0]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
+		#end
+	#else
+		<textarea name="boundary[0]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
+	#end
 <h5>Encoded:</h5>
 	<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" cols="80"  rows="5">$!geometric.encoded</textarea>

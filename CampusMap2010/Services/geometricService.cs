@@ -245,9 +245,14 @@ namespace campusMap.Services {
         }
         public string outputRawPolygon(SqlGeography shape) {
             StringBuilder coordsString = new StringBuilder("");
-            for (int k = 1; k <= shape.RingN(1).STNumPoints(); k++) {
-                coordsString.Append(string.Format("{0},{1},{2}", shape.RingN(1).STPointN(k).Long.ToString(), shape.RingN(1).STPointN(k).Lat.ToString(), 0));
-                coordsString.Append(Environment.NewLine);
+            for (int i = 1; i <= shape.NumRings(); i++) {
+                for (int k = 1; k <= shape.RingN(i).STNumPoints(); k++) {
+                    coordsString.Append(string.Format("{0},{1},{2}", shape.RingN(i).STPointN(k).Long.ToString(), shape.RingN(i).STPointN(k).Lat.ToString(), 0));
+                    coordsString.Append(Environment.NewLine);
+                }
+                if (coordsString.Length > 0) {
+                    coordsString.Append("SPLIT");
+                }
             }
             return coordsString.ToString();
         }

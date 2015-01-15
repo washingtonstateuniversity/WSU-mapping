@@ -443,6 +443,8 @@ namespace campusMap.Controllers {
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             string gem = "";
+            string[] lines;
+            PropertyBag["spatial"] = gem;
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
             if (geometric.boundary != null) {
                 SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
@@ -450,21 +452,30 @@ namespace campusMap.Controllers {
                 switch (sp_type) {
                     case "POINT":
                         gem = geometricService.outputRawPoint(spatial);
+                        PropertyBag["spatial"] = gem;
                         break;
                     case "LINESTRING":
                         gem = geometricService.outputRawLineString(spatial);
+                        PropertyBag["spatial"] = gem;
                         break;
                     case "POLYGON":
                         gem = geometricService.outputRawPolygon(spatial);
+                        PropertyBag["spatial"] = gem;
                         break;
                     case "MULTIPOINT":
                         break;
                     case "MULTILINESTRING":
                         break;
                     case "MULTIPOLYGON":
+                        gem = geometricService.outputRawPolygon(spatial);
+                        lines = gem.Split(new string[] { "SPLIT" }, StringSplitOptions.None);
+                        PropertyBag["spatial"] = lines;
+                        PropertyBag["real_sp_type"] = sp_type;
                         break;
                 }
+                PropertyBag["real_sp_type"] = sp_type;
             }
+            
             PropertyBag["sp_type"] = geometric.default_type;
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             IList<styles> items;
@@ -474,7 +485,7 @@ namespace campusMap.Controllers {
             //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = "";//items;
 
-            PropertyBag["spatial"] = gem;
+            
 
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
@@ -661,7 +672,7 @@ namespace campusMap.Controllers {
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
-            string boundary,
+            string[] boundary,
             string geom_type,
             [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
             Flash["geometric"] = geometric;
@@ -738,32 +749,39 @@ namespace campusMap.Controllers {
             string gemtype = "";
             switch (geom_type) {
                 case "marker": //case "POINT":
-                    if (boundary != null) {
-                        gemSql = "POINT (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    if (boundary.Length>0) {
+                        gemSql = "POINT (" + normaliz_latsLongs(boundary[0], geom_type) + ")";
                     }
                     gemtype = "Marker";
                     break;
                 case "polyline": //case "LINESTRING":
-                    if (boundary != null) {
-                        gemSql = "LINESTRING (" + normaliz_latsLongs(boundary, geom_type) + ")";
+                    if (boundary.Length > 0) {
+                        gemSql = "LINESTRING (" + normaliz_latsLongs(boundary[0], geom_type) + ")";
                     }
                     gemtype = "Line";
                     break;
                 case "polygon": //case "POLYGON":
-                    if (boundary != null) {
-                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary.Length == 1) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary[0], geom_type) + "))";
+                    }
+                    if (boundary.Length > 1) {
+                        String WKT_OBJ_STR = "";
+                        foreach (String bound in boundary) {
+                            WKT_OBJ_STR += (String.IsNullOrWhiteSpace(WKT_OBJ_STR)?"":",") + "((" + normaliz_latsLongs(bound, geom_type) + "))";
+                        }
+                        gemSql = "MULTIPOLYGON (" + WKT_OBJ_STR + ")";
                     }
                     gemtype = "Shape";
                     break;
                 case "rectangle":
-                    if (boundary != null) {
-                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary.Length > 0) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary[0], geom_type) + "))";
                     }
                     gemtype = "Shape";
                     break;
                 case "circle":
-                    if (boundary != null) {
-                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary, geom_type) + "))";
+                    if (boundary.Length > 0) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary[0], geom_type) + "))";
                     }
                     gemtype = "Shape";
                     break;
