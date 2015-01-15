@@ -858,3 +858,18 @@
 [hideFocus="true"] {
 	outline: none;
 }
+
+
+.gmap_arrow{
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 75px 15px 0 15px;
+	border-color: #FFF transparent transparent transparent;
+	box-shadow: 0px 5px 19px 0px rgba(50, 50, 50, 0.75);
+}
+
+
+
+
+

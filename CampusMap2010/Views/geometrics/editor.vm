@@ -23,6 +23,9 @@
 		<button id="update" >Update</button>
 		<button id="unselect" >un select selected</button>|  <button id="delete-button">Delete Selected Shape</button>
     <button id="delete-all-button">Delete All Shapes</button>
+	
+	  ||  
+	$formbuttons
 	<div id="color-palette"></div>
 
 		<div class="clear"></div>
