@@ -174,7 +174,7 @@
 		get_drawingSelection: function(){
 			return this.get('selected');
 		},
-		delete_drawingSelection:function(confrim) {
+		delete_drawingSelection:function() {
 			if (this.get('selected') !== null) {
 				this.get('selected').setMap(null);
 			}
