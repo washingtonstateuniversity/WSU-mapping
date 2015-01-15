@@ -1212,7 +1212,7 @@ where p.status = 3
             String jsonStr = "";
             int count = 0;
             foreach (place item in items) {
-                if ((item.status.id == 3 && item.isPublic) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["all"])) {
+                if ((item != null && item.status!=null && item.status.id == 3 && item.isPublic) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["all"])) {
                     if (item.coordinate != null) {
 
                         string file = item.id + "_centralplace" + ".ext";
@@ -1390,13 +1390,21 @@ where p.status = 3
                                 ActiveRecordMediator<place>.Refresh(item);
                                 placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
                             }
-                            if(dataGood)
+                            if (dataGood) { 
                                 setJsonCache(cachePath, file, placeList);
+                            }
                         }
                         jsonStr += System.IO.File.ReadAllText(cachePath + file) + ",";
                         count++;
                     }
+                } else {
+                    if (item != null) {
+                        item.outputError = true;
+                        ActiveRecordMediator<place>.Save(item);
+                    }
+
                 }
+
             }
             String json = "";
             json += @"  {
