@@ -32,7 +32,7 @@ namespace campusMap.Models {
         [Property(SqlType = "geography", ColumnType = "BinaryBlob")]
         virtual public byte[] boundary { get; set; }
 
-        virtual public String latlongs {
+        virtual public dynamic latlongs {
             get
             {
                 var gem = "";
@@ -56,6 +56,10 @@ namespace campusMap.Models {
                         case "MULTILINESTRING":
                             break;
                         case "MULTIPOLYGON":
+                            gem = geometricService.outputRawPolygon(spatial);
+                            lines = gem.Split(new string[] { "SPLIT" }, StringSplitOptions.None);
+                            return lines;
+
                             break;
                     }
                 }
@@ -63,6 +67,10 @@ namespace campusMap.Models {
             }
             set{}
         }
+
+
+
+
 
         [Property]
         virtual public string name { get; set; }
@@ -84,7 +92,6 @@ namespace campusMap.Models {
             return geo;
         }
 
-
         public static byte[] AsByteArray(SqlGeography geography) {
             if (geography == null)
                 return null;
@@ -99,6 +106,12 @@ namespace campusMap.Models {
 
         [BelongsTo("default_type")]
         virtual public geometrics_types default_type { get; set; }
+
+        [BelongsTo("parent")]
+        virtual public geometrics parent { get; set; }
+
+        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "geometrics_to_geoparents", ColumnKey = "parent_geometric_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        virtual public IList<geometrics> children { get; set; }
 
 
 
@@ -131,12 +144,8 @@ namespace campusMap.Models {
 
 
 
-
-
-
-
-
     }
+
 
     [ActiveRecord(Lazy = true, BatchSize = 5)]
     public class geometrics_types : ActiveRecordBase<geometrics_types> {

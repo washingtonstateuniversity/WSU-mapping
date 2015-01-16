@@ -526,7 +526,6 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\Iesi.Collections.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\log4net.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Microsoft.SqlServer.SqlClrProvider.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Microsoft.SqlServer.Types.dll
-D:\_GIT\WSU-mapping\CampusMap2010\bin\MonoRailHelper.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Newtonsoft.Json.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\NHibernate.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\NVelocity.dll
@@ -537,12 +536,8 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.dl
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.DictionaryAdapter.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\NHibernate.Linq.dll
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Recaptcha.dll
-D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Antlr3.Runtime.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Lucene.Net.dll
-D:\_GIT\WSU-mapping\CampusMap2010\bin\AjaxMin.pdb
-D:\_GIT\WSU-mapping\CampusMap2010\bin\AutoMapper.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.ActiveRecord.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.ActiveRecord.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Binder.pdb
@@ -550,10 +545,8 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Binder.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Pagination.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Validator.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Validator.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.EmailSender.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Core.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Core.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.DynamicProxy.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Facilities.ActiveRecordIntegration.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Facilities.ActiveRecordIntegration.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Facilities.AutomaticTransactionManagement.xml
@@ -569,15 +562,8 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Services.Transaction.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Windsor.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Iesi.Collections.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\log4net.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\MonoRailHelper.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Newtonsoft.Json.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Nullables.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Nullables.NHibernate.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\NVelocity.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Omu.ValueInjecter.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Rejuicer.pdb
-D:\_GIT\WSU-mapping\CampusMap2010\bin\SquishIt.Framework.pdb
-D:\_GIT\WSU-mapping\CampusMap2010\bin\SquishIt.Mvc.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\NHibernate.ByteCode.Castle.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.DynamicProxy2.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.pdb
@@ -585,8 +571,6 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.xm
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Castle.Components.DictionaryAdapter.xml
-D:\_GIT\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
-D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\es\Castle.Components.Validator.resources.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\fr\Castle.Components.Validator.resources.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\it\Castle.Components.Validator.resources.dll

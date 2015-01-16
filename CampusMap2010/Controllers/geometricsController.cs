@@ -442,39 +442,9 @@ namespace campusMap.Controllers {
             PropertyBag["imagetypes"] = ActiveRecordBase<media_types>.FindAll();
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
-            string gem = "";
-            string[] lines;
-            PropertyBag["spatial"] = gem;
+
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            if (geometric.boundary != null) {
-                SqlGeography spatial = geometrics.AsGeography(geometric.boundary);
-                string sp_type = spatial.STGeometryType().ToString().ToUpper();
-                switch (sp_type) {
-                    case "POINT":
-                        gem = geometricService.outputRawPoint(spatial);
-                        PropertyBag["spatial"] = gem;
-                        break;
-                    case "LINESTRING":
-                        gem = geometricService.outputRawLineString(spatial);
-                        PropertyBag["spatial"] = gem;
-                        break;
-                    case "POLYGON":
-                        gem = geometricService.outputRawPolygon(spatial);
-                        PropertyBag["spatial"] = gem;
-                        break;
-                    case "MULTIPOINT":
-                        break;
-                    case "MULTILINESTRING":
-                        break;
-                    case "MULTIPOLYGON":
-                        gem = geometricService.outputRawPolygon(spatial);
-                        lines = gem.Split(new string[] { "SPLIT" }, StringSplitOptions.None);
-                        PropertyBag["spatial"] = lines;
-                        PropertyBag["real_sp_type"] = sp_type;
-                        break;
-                }
-                PropertyBag["real_sp_type"] = sp_type;
-            }
+            PropertyBag["spatial"] = geometric.latlongs();
             
             PropertyBag["sp_type"] = geometric.default_type;
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
@@ -672,6 +642,7 @@ namespace campusMap.Controllers {
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
+            [ARDataBind("child_geos", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics child_geos,
             string[] boundary,
             string geom_type,
             [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
@@ -744,6 +715,10 @@ namespace campusMap.Controllers {
                 if (author.id > 0)
                     geometric.Authors.Add(author);
             }
+
+
+
+
 
             string gemSql = "";
             string gemtype = "";
