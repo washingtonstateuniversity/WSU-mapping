@@ -444,7 +444,7 @@ namespace campusMap.Controllers {
 
 
             geometrics geometric = ActiveRecordBase<geometrics>.Find(id);
-            PropertyBag["spatial"] = geometric.latlongs();
+            //PropertyBag["spatial"] = geometric.latlongs();
             
             PropertyBag["sp_type"] = geometric.default_type;
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();

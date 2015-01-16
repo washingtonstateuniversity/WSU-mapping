@@ -55,7 +55,7 @@
 				self.set_drawingSelection(newShape);
 				
 				if(typeof(handling.overlaycomplete)==='function'){
-					handling.overlaycomplete(self.get_updated_data());
+					handling.overlaycomplete(e);
 				}
 				
 				var ele_count = self.get('_drawings',[]).length;
@@ -278,7 +278,7 @@
 		get_updated_data_encoded:function(shape) {
 			var self = this;
 			var points;
-			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
+			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape).overlay:this.get('selected');
 			//var overlay = this.get('selected');
 			if (overlay.type === google.maps.drawing.OverlayType.CIRCLE || overlay.type === 'Circle') { 
 				points = overlay.getRadius();

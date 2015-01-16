@@ -56,8 +56,9 @@
 			if(typeof(shapeOptions.encoded)==='string'){
 				shapeOptions.paths = google.maps.geometry.encoding.decodePath(shapeOptions.encoded);
 			}
-			
-			var shape = new google.maps[shapeType](jQuery.extend({'map': self.get('map')}, shapeOptions));
+			var shapeObj = jQuery.extend({'map': self.get('map')}, shapeOptions);
+			var tmpShape = shapeType.charAt(0).toUpperCase() + shapeType.substring(1).toLowerCase();
+			var shape = new google.maps[tmpShape](shapeObj);
 			this.get('overlays > ' + shapeType, []).push(shape);
 			this._call(callback, shape);
 			return $(shape);

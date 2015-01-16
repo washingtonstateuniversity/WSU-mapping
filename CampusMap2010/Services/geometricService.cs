@@ -244,17 +244,19 @@ namespace campusMap.Services {
             }
         }
         public string outputRawPolygon(SqlGeography shape) {
-            StringBuilder coordsString = new StringBuilder("");
+            StringBuilder outputString = new StringBuilder("");
             for (int i = 1; i <= shape.NumRings(); i++) {
+                StringBuilder coordsString = new StringBuilder("");
                 for (int k = 1; k <= shape.RingN(i).STNumPoints(); k++) {
                     coordsString.Append(string.Format("{0},{1},{2}", shape.RingN(i).STPointN(k).Long.ToString(), shape.RingN(i).STPointN(k).Lat.ToString(), 0));
                     coordsString.Append(Environment.NewLine);
                 }
-                if (coordsString.Length > 0) {
-                    coordsString.Append("SPLIT");
+                if (outputString.Length > 0) {
+                    outputString.Append("SPLIT");
                 }
+                outputString.Append(coordsString.ToString());
             }
-            return coordsString.ToString();
+            return outputString.ToString();
         }
         public string outputRawPoint(SqlGeography shape) {
             StringBuilder coordsString = new StringBuilder("");

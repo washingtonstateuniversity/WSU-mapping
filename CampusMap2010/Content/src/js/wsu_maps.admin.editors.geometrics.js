@@ -50,6 +50,7 @@
 				//var drawingMode = false;
 				
 				var type= $('#startingValue').val();
+				
 				var coords=$('#latLong').val();
 				if(coords===''){
 					coords=$('#geometric_encoded').val();
@@ -87,7 +88,7 @@
 									if(data!==null){
 										$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
 										alert(data);
-										$('#latLong').val(data);
+										$('#latLong').val(jObj.gmap('get_updated_data'));
 										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',data,false,false))));
 										//$('#geometric_encoded').val(google.maps.geometry.encoding.decodePath(data));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
@@ -97,7 +98,7 @@
 										$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
 										///process_coords: function(coordinates,flip,reverse_array)
 										$.wsu_maps.admin.geometrics.loaded_shapes.push(data);
-										if (data.type !== google.maps.drawing.OverlayType.MARKER) {
+										if (data.type !== undefined && data.type !== google.maps.drawing.OverlayType.MARKER) {
 											// Switch back to non-drawing mode after drawing a shape.
 											$.wsu_maps.admin.geometrics.drawingManager.setDrawingMode(null);
 											
@@ -145,12 +146,20 @@
 						},
 						/*note we are extending the settings with the shape */
 						$('#pickedValue').val()===''?{}:{
-							loaded_type: ($('#pickedValue').val().charAt(0).toUpperCase() + $('#pickedValue').val().slice(1)),
-							loaded_shape:shape
-						}
-					)
+							//loaded_type: ($('#pickedValue').val().charAt(0).toUpperCase() + $('#pickedValue').val().slice(1)),
+							//loaded_shape:shape
+						} )
 				);
 				google.maps.event.addListener(jObj.gmap('get','map'), 'click', $.wsu_maps.admin.geometrics.clearSelection);
+
+				$.each($("[data-child_id]"),function(idx){
+					$.wsu_maps.admin.geometrics.resolve_loaded_shapes(idx);
+				});
+
+
+
+
+
 
 				
 				$('#delete-button').on('click',function(e){
@@ -222,6 +231,30 @@
 			});
 			 
 		},
+
+		resolve_loaded_shapes:function(idx){
+			var type= $('[name="child_geos['+idx+'].geom_type"]').val();
+			var coords=$('[name="child_geos['+idx+'].boundary[0]"]').val();
+			if(coords===''){
+				coords=$('[name="child_geos['+idx+'].encoded"]').val();
+			}
+			var pointHolder = {};
+			if(coords!=='' && type==='polyline'){ 
+				pointHolder = {'path' : coords };
+			}
+			if(coords!=='' && type==='polygon'){ 
+				pointHolder = {'paths' : coords };
+			}
+			var shape = {};
+			if( !$.isEmptyObject(pointHolder) ){
+				shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+				$.wsu_maps.state.mapInst.gmap('addShape', type, shape, function(map_shape){
+					$.wsu_maps.state.mapInst.gmap('zoom_to_bounds',{},map_shape,function(){ });
+				});
+			}
+		},
+
+
 		
 		
 		makeColorButton:function (color) {

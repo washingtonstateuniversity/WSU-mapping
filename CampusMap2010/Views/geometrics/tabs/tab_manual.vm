@@ -1,20 +1,30 @@
 <h3>Manual shape input</h3>
 <hr/>
-<h5>Latitudes and Longitudes:</h5>
-	#if($spatial)
-	<!--$spatial ||
-	$real_sp_type-->
-		#if($spatial.PropertyType().IsArray)
-			#set($i = 0)
-			#foreach($item in $!spatial )
-				<textarea name="boundary[$i]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!item</textarea>
-				#set($i = $i +1)
-			#end
-		#else
-			<textarea name="boundary[0]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
+<div class="min_tab">
+	<a href="#" id="add_shape_child" >Add Shape</a>
+	<ul>
+	#if($geometric.children.Length>0)
+		#foreach($child_item in $geometric.children)
+			<li><a href="#child_${velocityCount}" title="($!child_item.name)">1</a></li>
 		#end
 	#else
-		<textarea name="boundary[0]" style="width:100%;height:250px;" id="latLong" cols="80" rows="25">$!spatial</textarea>
+		<li><a href="#child_1" title="($!geometric.name)">1</a></li>
 	#end
-<h5>Encoded:</h5>
-	<textarea name="geometric.encoded" id="geometric_encoded" class="ui-widget ui-widget-content ui-corner-all" style="width:100%;height:50px;" cols="80"  rows="5">$!geometric.encoded</textarea>
+	</ul>
+	
+	
+	#if($geometric.children>0)
+		#foreach($child_item in $geometric.children)
+			#set($idx = ${velocityCount})
+			<div>
+				#parse("geometrics/tabs/tabsec_manual_child.vm")
+			</div>
+		#end
+	#else
+		<div>
+			#set($child_item = $geometric)
+			#set($idx = 0)
+			#parse("geometrics/tabs/tabsec_manual_child.vm")
+		</div>
+	#end
+</div>

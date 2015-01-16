@@ -36,9 +36,9 @@ namespace campusMap.Models {
             get
             {
                 var gem = "";
-                if (boundary != null)
+                if (this.boundary != null)
                 {
-                    SqlGeography spatial = geometrics.AsGeography(boundary);
+                    SqlGeography spatial = geometrics.AsGeography(this.boundary);
                     string sp_type = spatial.STGeometryType().ToString().ToUpper();
                     switch (sp_type)
                     {
@@ -57,7 +57,7 @@ namespace campusMap.Models {
                             break;
                         case "MULTIPOLYGON":
                             gem = geometricService.outputRawPolygon(spatial);
-                            lines = gem.Split(new string[] { "SPLIT" }, StringSplitOptions.None);
+                            String[] lines = gem.Split(new string[] { "SPLIT" }, StringSplitOptions.None);
                             return lines;
 
                             break;

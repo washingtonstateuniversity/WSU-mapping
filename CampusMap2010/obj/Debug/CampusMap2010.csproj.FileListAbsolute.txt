@@ -587,3 +587,9 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.
 D:\_GIT\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
 D:\_GIT\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.dll
 D:\_GIT\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.pdb
+D:\_GIT\WSU-mapping\CampusMap2010\bin\MonoRailHelper.dll
+D:\_GIT\WSU-mapping\CampusMap2010\bin\Recaptcha.dll
+D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.dll
+D:\_GIT\WSU-mapping\CampusMap2010\bin\MonoRailHelper.pdb
+D:\_GIT\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
+D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
