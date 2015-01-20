@@ -180,7 +180,7 @@
 			}
 		},		
 		get_updated_data:function(shape) {
-			var overlay = (typeof(shape)!=="undefined")?this._unwrap(shape):this.get('selected');
+			var overlay = (typeof(shape)!=="undefined")?shape.overlay:this.get('selected');//this._unwrap(shape)
 			var points;
 			var paths;
 			if(typeof(overlay)!=="undefined" && overlay !== null){

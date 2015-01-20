@@ -1,4 +1,5 @@
 // JavaScript Document
+/*jshint multistr: true */
 (function($) {
 	$.wsu_maps.admin.editors.geometrics = {
 		ini:function(){},
@@ -27,6 +28,16 @@
 		selectedColor:null,
 		colors:['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'],
 		drawingManager:null,
+		shape_count:0,
+		form_tmp:"\
+<input type='hidden' name='child_geos[0].id' value='<%this.id%>' data-child_id='<%this.id%>'>\
+<input type='hidden' name='child_geos[0].geom_type' value='<%this.type%>'>\
+<input type='hidden' name='child_geos[0].name' value='<%this.name%>'>\
+<input type='hidden' name='child_geos[0].style[]' value='<%this.style%>'>\
+<h5>Latitudes and Longitudes:</h5>\
+<textarea name='child_geos[0].boundary[0]' style='width:100%;height:250px;' id='latLong' cols='80' rows='25'><%this.boundary%></textarea>\
+<h5>Encoded:</h5>\
+<textarea name='child_geos[0].encoded' class='ui-widget ui-widget-content ui-corner-all' style='width:100%;height:50px;' cols='80' rows='5'><%this.encoded%></textarea>",
 		load_editor:function () {
 			
 			$.wsu_maps.state.mapInst=$('#geometrics_drawing_map');
@@ -40,6 +51,10 @@
 					$(window).trigger("resize");
 				}
 			});
+			
+			
+			$('.min_tab').tabs();
+			
 			$(window).resize(function(){
 				$.wsu_maps.responsive.resizeBg($.wsu_maps.state.mapInst,112);
 				$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
@@ -86,42 +101,42 @@
 							delimiter:',',
 							overlaycomplete:function(data){
 									if(data!==null){
+										var currect_count = $.wsu_maps.admin.geometrics.shape_count;
 										$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
-										alert(data);
-										$('#latLong').val(jObj.gmap('get_updated_data'));
-										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',data,false,false))));
-										//$('#geometric_encoded').val(google.maps.geometry.encoding.decodePath(data));
-										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-										//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded'));
-										
-										$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,false)));
-										///process_coords: function(coordinates,flip,reverse_array)
 										$.wsu_maps.admin.geometrics.loaded_shapes.push(data);
+										
 										if (data.type !== undefined && data.type !== google.maps.drawing.OverlayType.MARKER) {
-											// Switch back to non-drawing mode after drawing a shape.
 											$.wsu_maps.admin.geometrics.drawingManager.setDrawingMode(null);
 											
-											// Add an event listener that selects the newly-drawn shape when the user
-											// mouses down on it.
 											var newShape = data.overlay;
 											newShape.type = data.type;
+											
 											google.maps.event.addListener(newShape, 'click', function() {
 												$.wsu_maps.admin.geometrics.setSelection(newShape);
 											});
 											$.wsu_maps.admin.geometrics.setSelection(newShape);
+											var points = jObj.gmap('get_updated_data',data);
+											$.wsu_maps.admin.geometrics.add_shape_tab({
+												id:currect_count,
+												name:"",
+												boundary:points,
+												type:$('[name="geom_type"]').val(),
+												style:$('[name="geometric.style[]"]').val(),
+												encoded:jObj.gmap('process_coords',points,true,false)
+											});
 										}
+										$.wsu_maps.admin.geometrics.shape_count++;
 									}
 									
 								},
-							onDrag:function(){//data){
+							onDrag:function(data){
 									var points=jObj.gmap('get_updated_data');
 									if(points.length){
 										//alert(points);
-										$('[name*="boundary"]').eq(0).val(points);
+										$('[name*="boundary"]').eq(data.group_index).val(points);
 										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',points,false,false))));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-										$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary"]').eq(0).val(),true,false)));
+										$('[name*="boundary"]').eq(data.group_index).val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary"]').eq(data.group_index).val(),true,false)));
 										//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded'));
 									}
 								},
@@ -249,11 +264,24 @@
 			if( !$.isEmptyObject(pointHolder) ){
 				shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
 				$.wsu_maps.state.mapInst.gmap('addShape', type, shape, function(map_shape){
+					map_shape=$.extend(map_shape,{group_index:$.wsu_maps.admin.geometrics.shape_count});
 					$.wsu_maps.state.mapInst.gmap('zoom_to_bounds',{},map_shape,function(){ });
+					$.wsu_maps.admin.geometrics.shape_count++;
 				});
 			}
 		},
 
+		add_shape_tab:function(options){
+			var tabs = $('.min_tab');
+			var html = $.runTemplate($.wsu_maps.admin.geometrics.form_tmp,options);
+			var ul = tabs.find( "ul" );
+			var tab_count = tabs.find( "ul li" ).length;
+			var name = typeof options.name !== "undefined" && options.name !== "" ? "("+options.name+")" : "";
+			$( "<li><a href='#child_"+(tab_count+1)+"'>" + (tab_count+1) + name +"</a></li>" ).appendTo( ul );
+			$( "<div id='child_"+(tab_count+1)+"'>" + html + "</div>" ).appendTo( tabs );
+			tabs.tabs( "refresh" );
+			tabs.tabs("option", 'activate', tab_count+1);
+		},
 
 		
 		

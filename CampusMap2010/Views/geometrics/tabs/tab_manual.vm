@@ -1,29 +1,31 @@
 <h3>Manual shape input</h3>
 <hr/>
+<a href="#" id="Load_child" >Load Shape</a>
 <div class="min_tab">
-	<a href="#" id="add_shape_child" >Add Shape</a>
+	
 	<ul>
 	#if($geometric.children.Length>0)
 		#foreach($child_item in $geometric.children)
-			<li><a href="#child_${velocityCount}" title="($!child_item.name)">1</a></li>
+			#set($idx = $velocityCount-1)
+			<li><a href="#child_${idx}" title="($!child_item.name)">1</a></li>
 		#end
 	#else
-		<li><a href="#child_1" title="($!geometric.name)">1</a></li>
+		<li><a href="#child_0" title="($!geometric.name)">1</a></li>
 	#end
 	</ul>
 	
 	
 	#if($geometric.children>0)
 		#foreach($child_item in $geometric.children)
-			#set($idx = ${velocityCount})
-			<div>
+			#set($idx = $velocityCount-1)
+			<div id="child_${idx}">
 				#parse("geometrics/tabs/tabsec_manual_child.vm")
 			</div>
 		#end
 	#else
-		<div>
-			#set($child_item = $geometric)
-			#set($idx = 0)
+		#set($child_item = $geometric)
+		#set($idx = 0)
+		<div id="child_${idx}">
 			#parse("geometrics/tabs/tabsec_manual_child.vm")
 		</div>
 	#end

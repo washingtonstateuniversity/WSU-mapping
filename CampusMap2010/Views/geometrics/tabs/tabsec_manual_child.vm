@@ -12,7 +12,7 @@
 		#end
 	#end
 #end
-<input type="hidden" name="child_geos[$idx].style[]" value="$styleChoice"/>
+<input type="hidden" name="child_geos[$idx].style[]" value="$styleChoice.Trim()"/>
 
 
 
