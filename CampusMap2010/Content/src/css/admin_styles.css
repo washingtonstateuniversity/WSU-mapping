@@ -94,11 +94,11 @@ input,select,textarea{
 /*    Admin Splash   */
 
 #sideinfo {
-	width: 250px;
-	float: left;
+	/*width: 250px;
+	float: left;*/
 }
 #mainsplash {
-	margin-left: 270px;
+	/*margin-left: 270px;*/
 }
 .displaybox {
 	width: 400px;
