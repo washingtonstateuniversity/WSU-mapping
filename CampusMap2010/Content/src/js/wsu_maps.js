@@ -212,8 +212,56 @@ var startingUrl=startingUrl||null;
 					if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom+1;}
 					if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}
 				}
-				styles={};
-				map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
+				//styles={};
+				map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false,styles:[
+				  {
+					"featureType": "water",
+					"elementType": "geometry.fill",
+					"stylers": [
+					  { "color": "#2f78c4" }
+					]
+				  },{
+					"featureType": "landscape.natural",
+					"elementType": "geometry.fill",
+					"stylers": [
+					  { "lightness": 77 }
+					]
+				  },{
+					"featureType": "landscape.man_made",
+					"stylers": [
+					  { "color": "#808080" },
+					  { "lightness": 83 }
+					]
+				  },{
+					"featureType": "poi.school",
+					"elementType": "geometry.fill",
+					"stylers": [
+					  { "lightness": 51 },
+					  { "gamma": 0.36 },
+					  { "hue": "#fff700" },
+					  { "saturation": 67 }
+					]
+				  },{
+					"featureType": "poi.park",
+					"elementType": "geometry.fill",
+					"stylers": [
+					  { "color": "#34ad6b" }
+					]
+				  },{
+					"featureType": "poi.sports_complex",
+					"elementType": "geometry.fill",
+					"stylers": [
+					  { "color": "#c15e1f" },
+					  { "lightness": 50 }
+					]
+				  },{
+					"featureType": "road.highway",
+					"elementType": "geometry",
+					"stylers": [
+					  { "color": "#f1b127" }
+					]
+				  }
+				]});
 				if($('.layoutfree').length){
 					styles={
 						zoom:17
@@ -226,8 +274,7 @@ var startingUrl=startingUrl||null;
 				stylers:[{
 					visibility:"off"
 				}]
-				}]*/
-						
+				}]*/					
 				map_op=$.extend(map_op,styles);
 				if($('#runningOptions').length){
 					if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
@@ -774,7 +821,60 @@ var startingUrl=startingUrl||null;
 			}
 		},
 		ini_map_view:function (map_ele_obj,callback){
-			var map_op = {'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 };
+			var map_op = {'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15, 
+			'styles':[
+			  {
+				"featureType": "water",
+				"elementType": "geometry.fill",
+				"stylers": [
+				  { "color": "#2f78c4" }
+				]
+			  },{
+				"featureType": "landscape.natural",
+				"elementType": "geometry.fill",
+				"stylers": [
+				  { "lightness": 77 }
+				]
+			  },{
+				"featureType": "landscape.man_made",
+				"stylers": [
+				  { "color": "#808080" },
+				  { "lightness": 83 }
+				]
+			  },{
+				"featureType": "poi.school",
+				"elementType": "geometry.fill",
+				"stylers": [
+				  { "lightness": 51 },
+				  { "gamma": 0.36 },
+				  { "hue": "#fff700" },
+				  { "saturation": 67 }
+				]
+			  },{
+				"featureType": "poi.park",
+				"elementType": "geometry.fill",
+				"stylers": [
+				  { "color": "#34ad6b" }
+				]
+			  },{
+				"featureType": "poi.sports_complex",
+				"elementType": "geometry.fill",
+				"stylers": [
+				  { "color": "#c15e1f" },
+				  { "lightness": 50 }
+				]
+			  },{
+				"featureType": "road.highway",
+				"elementType": "geometry",
+				"stylers": [
+				  { "color": "#f1b127" }
+				]
+			  },{
+			  }
+			]
+			
+			
+			};
 			//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 			if($('#runningOptions').length){
 				if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
