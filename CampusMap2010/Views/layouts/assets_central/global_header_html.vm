@@ -52,7 +52,7 @@ $Controller.getView()
   .at300bs.at15t_compact{background-image:none;}
   .at300bs{display:inline;}
 </style>
-<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />
+<!--<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />-->
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 #*
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
@@ -64,8 +64,12 @@ $Controller.getView()
 <link media='screen' href='$siteroot/content/js/colorpicker/css/jpicker-1.1.6.min.css' type='text/css' rel='stylesheet' />
 <link type="text/css" href="$siteroot/Content/css/map_admin.css" rel="stylesheet" />
 <link type="text/css" href="$siteroot/Content/css/colorbox.css" rel="stylesheet" />
-*#
+
 $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/css/share_link.css,~/Content/css/reactive.css")
+*#
+$scriptsService.Css("~/Content/build/css/front.styles.css",true)
+
+
 #*
 <style type="text/css" >
   .infoBoxin{-webkit-border-radius:68px;-moz-border-radius:68px;border-radius:68px;}

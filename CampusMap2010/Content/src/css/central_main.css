@@ -2,7 +2,9 @@
 
 html, body {
 	height: 100%;
-	background-color: #edefee;
+	background-color: #fff;
+	margin:0px !important;
+	color:#222222;
 }
 .clear {
 	clear: both;
@@ -29,20 +31,20 @@ html, body {
 #wrapper #toolbar {
 	width: 100%;
 	float: none;
-	background-color: #5E6A71;
+	/*background-color: #5E6A71;*/
 }
 #toolbar .addthis_button_compact span {
 	height: 0;
 	width: 0;
 }
-#siteID h2 {
+/*#siteID h2 {
 	margin: 0 0 0 180px;
 	width: auto;
 }
 #siteID h1 {
 	margin: 15px 0 0 185px;
 	width: auto;
-}
+}*/
 #logo {
 	display: inline;
 	float: none;
@@ -55,11 +57,20 @@ html, body {
 	text-indent: -9999em;
 }
 #header_bar {
-	background-color: #5E6A71;
-	height: 130px;
-	margin-left: 16px;
+	border-top: 4px solid #9a1b2f;
+	/*background-color: #5E6A71;*/
+	height: 39px;
+	margin-left:198px;
 	position: relative;
 }
+#header_bar h1 {
+	width: auto;
+	font-size:24px !important;
+	display:inline-block;
+	margin:5px 0px;
+	color:#585858;
+}
+
 /*.admin #content {
 	position: relative;
 	z-index: 1;
