@@ -1,4 +1,4 @@
-<div id="globalnav">
+<!--<div id="globalnav">
   <ul>
     <li><a href="http://index.wsu.edu/">A-Z Index</a></li>
     <li><a href="http://www.about.wsu.edu/statewide/">Statewide</a></li>
@@ -20,17 +20,16 @@
 <div id="siteID">
   <h2></h2>
   <h1>#if($campus.name!="")${campus.name} #end Campus Map</h1>
-</div>
+</div>-->
 <div id="toolbar">
   <ul>
-  	<li style="float:left"><a href="#" id="resetmap">Reset Map</a></li>
+  	<li><h1>#if($campus.name!="")${campus.name} #end Campus Map</h1></li>
+	<li><img src="/Content/fake/map-toolbar.png"/></li>
+  	<!--<li style="float:left"><a href="#" id="resetmap">Reset Map</a></li>
     <li><a href="#" id="embed">Link<span id="embedlink">/Embed</span></a></li>
 	<li class="sharearea">
         <a href="#" class="clickshare">Share</a>
         <div id="sharing-menu">
-            <!--<div id="share-header">
-                <p>Washington State University</p>
-            </div>-->
             <div id="social-list">
                 <ul>
                     <li><a class="addthis_button_facebook">Facebook</a></li>
@@ -43,6 +42,6 @@
      </li>
      <li>
          <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank" hidefocus="true" style="outline: medium none;">Report&nbsp;&nbsp;Error</a>
-     </li>
+     </li>-->
   </ul>
 </div>
