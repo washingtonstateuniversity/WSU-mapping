@@ -2,25 +2,22 @@
 <!--<meta content='initial-scale=1,width=device-width' name='viewport' /> -->
 
 <meta content='True' name='HandheldFriendly' />
- <meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' name='viewport' />
- <meta name="viewport" content="width=device-width" />
-
+<meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' name='viewport' />
+<meta name="viewport" content="width=device-width" />
 
 <meta name="google-site-verification" content="xhwREwkwhYoAUqVEoe6o8jpnm9YYtDrJlUnhRWYNqDQ" />
 <meta name="msvalidate.01" content="73B464C828058D51A426DC1B61D99824" />
 
-
 #if($Controller.isLocal()==false)
 	#*<base href="http://dev-mcweb.it.wsu.edu/campusmap.com/" />*#
 #end
-
 
 <title>The WSU #if($campus.name!="")${campus.name}#end Campus Map</title>
 <meta name="description" content="Washington State University provides this maping system to help you find the best of the area." />
 <meta name="keywords" content="Learning, Research, Community, WSU, Wazzu, Washington State University, Cougs, Cougars, President Elson S. Floyd, Pullman, Spokane, Tri-Cities, Vancouver, Extension, WSU West, Undergraduate, Graduate School, Eastern Washington, Clean Technologies, School for Global Animal Health, Food Supply, Future and Current Students, Facutly, Staff, Alumni, Friends, Parents, Athletics, Give to WSU" />
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
-<script src="//use.typekit.net/roi0hte.js"></script><!--eav6eju is under map.wsu.edu via jeremyBass for tmp ref-->
+<script src="//use.typekit.net/eav6eju.js"></script><!--eav6eju is under map.wsu.edu via jeremyBass for tmp ref, roi0hte is the real one-->
 <script>try{Typekit.load();}catch(e){}</script>
 
 
@@ -51,11 +48,11 @@ $Controller.getView()
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
-<style type="text/css">
+<!--<style type="text/css">
   body{font: normal 1em Verdana, Geneva, Arial, Helvetica, sans-serif;}
   .at300bs.at15t_compact{background-image:none;}
   .at300bs{display:inline;}
-</style>
+</style>-->
 <!--<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />-->
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
 #*
