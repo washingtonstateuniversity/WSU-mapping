@@ -17,7 +17,7 @@
 					$.wsu_maps.iniMap("",$.wsu_maps.setup);
 				}
 				if($.wsu_maps.state.mapInst.length){
-					var mHeight = ($(window).height()<=404?0:130);
+					var mHeight = ($(window).height()<=404?0:43);
 					if($('.embeded').length){
 						mHeight = 0;
 					}

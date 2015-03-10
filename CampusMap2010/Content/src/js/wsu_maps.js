@@ -189,7 +189,7 @@ var startingUrl=startingUrl||null;
 			});
 		},
 		iniMap:function (url,callback){
-			var padder = 130;
+			var padder = 49;
 			if($('.layoutfree').lenght){
 				padder = 0;
 			}
