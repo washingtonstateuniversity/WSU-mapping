@@ -1199,6 +1199,13 @@ where p.status = 3
             Response.ContentType = "application/json; charset=UTF-8";
             RenderText(json);
         }
+
+        public void markerSVG(int idx) {
+            String json = "<?xml version='1.0' encoding='utf-8'?><!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version='1.1' id='Layer_2' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='23 157 278.2 388.8' enable-background='new 23 157 278.2 388.8' xml:space='preserve'><path fill='#9E1D32' d='M263.1,275.2c0,57-96.5,255.8-103.3,255.8c-8.3,0-103.3-198.7-103.3-255.8s46.2-103.3,103.3-103.3 S263.1,218.1,263.1,275.2z'/><text x='90' y='20' transform='matrix(1 0 0 1 75.1343 311.3325)' text-anchor='middle'  fill='#F1F1F1' font-size='100' id='marker-number'>" + idx + "</text></svg>";
+            Response.ContentType = "image/svg+xml; charset=UTF-8";
+            RenderText(json);
+        }
+
         public static String returnPlaceJson(place[] items) {
             String json = new publicController().createPlaceJson(items);
             return json;
