@@ -2,9 +2,13 @@
 
 html, body {
 	height: 100%;
-	background-color: #fff;
+
 	margin:0px !important;
 	color:#222222;
+	font-family: 'proxima-nova', "Lucida Sans", sans-serif;
+	font-weight: 400;
+	background-color: #fff;
+	color: #2a3033;
 }
 .clear {
 	clear: both;
