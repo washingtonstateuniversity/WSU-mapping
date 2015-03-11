@@ -25,6 +25,7 @@ module.exports = function(grunt) {
 				src: [
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
+					'src/css/info_windows.css',
 					'src/css/share_link.css',
 					'src/css/reactive.css'
 				],
@@ -36,6 +37,7 @@ module.exports = function(grunt) {
 					'src/css/jSelect.filter.min.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
+					'src/css/info_windows.css',
 					'src/css/admin_styles.css',
 				],
 				dest: 'build/css/admin.styles.css',
