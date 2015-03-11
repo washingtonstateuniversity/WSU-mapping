@@ -31,6 +31,7 @@ var startingUrl=startingUrl||null;
 				
 			markerLog:[],
 			markerbyid:[],
+			active_marker:null,
 			mid:[],
 			shapes:[],
 			listOffset:0,
