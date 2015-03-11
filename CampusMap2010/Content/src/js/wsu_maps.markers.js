@@ -16,7 +16,7 @@
 				marker.setIcon(marker.marker_style.icon);
 		},
 		get_lat_zIndex: function(latitude){
-			var intLat = parseInt( ( parseFloat( latitude ).toFixed(2) ).toString().split('.').join('') );
+			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 4) );
 			
 			console.log( latitude );
 			console.log( intLat*(-1) );
