@@ -120,6 +120,11 @@
 		build_IW_content:function(marker,i){
 			var nav='';
 			var content='';
+			
+			var infoTitle = "";
+			infoTitle = '<h2 class="header"><span class="iw_id">'+(i+1)+'</span>'+ marker.title +'</h2>';
+			
+			
 			if($.isArray(marker.info.content)){
 				$.each( marker.info.content, function(j, html) {	
 					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
@@ -128,7 +133,9 @@
 				$.each( marker.info.content, function(j, html) {
 					var title = html.title.replace(' ','_').replace("'",'_').replace('/','_');
 					var hideTab = ( j>0 ?' display:none;':'');
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+html.block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+					var re = /<h2 class='header'>.*<\/h2>/gmi; 
+					var html_block = html.block.replace(re,'');
+					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+infoTitle+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 				});				
 			
 			}else{
@@ -186,8 +193,8 @@
 				mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+$.wsu_maps.state.siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
 			}
 			var infoTitle = "";
-			infoTitle = '<h2 class="header">'+ $("#name").val() +'</h2>';
-			
+			infoTitle = '<h2 class="header"><span class="iw_id">'+i+'</span>'+ $("#name").val() +'</h2>';
+
 			var nav='';
 			var content='';
 			if($.isArray(marker.info.content)){

@@ -126,7 +126,22 @@
 */
 
 /* info boxes content */	
-
+.iw_id{
+font-size: 14px;
+  font-weight: bold;
+  display: block;
+  border-radius: 22px;
+  line-height: 22px;
+  height: 22px;
+  width: 22px;
+  text-align: center;
+  border: 2px solid #3b3b3b;
+  background: #3b3b3b;
+  color: #F1F1F1;
+  margin-right: 10px;
+  margin-top: -6px;
+  float: left;
+}
 #campusmap .ui-tabs .ui-tabs-hide {
 	/*display: block !important;
 	position: absolute !important;
@@ -164,11 +179,12 @@
 	padding: 0px 4px;
 }
 #campusmap .ui-tabs .ui-tabs-panel .content .header {
-	font-size: 14px;
-	color: #981e32;
-	font-weight: bold;
-	margin-top: 0;
-	padding-top: 0;
+	font-size: 22px;
+	color: #3b3b3b;
+	font-weight: normal;
+	margin-top: 0px;
+	padding-top: 5px;
+	margin-bottom: 5px;
 }
 #campusmap .ui-tabs .ui-tabs-panel .content ul {
 	list-style: none outside none;
