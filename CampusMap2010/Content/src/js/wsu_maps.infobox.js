@@ -5,6 +5,7 @@
 	var i = i || 0;
 
 	$.wsu_maps.infobox = {
+		pano_init : false,
 		make_ToolTip:function (jObj,i,marker){
 			//end of the bs that is well.. bs of a implamentation
 			/* so need to remove this and create the class for it */
@@ -15,7 +16,7 @@
 				alignBottom:true,
 				content: boxText,
 				pixelOffset: new google.maps.Size(35,-15),
-				zIndex: 999,
+				zIndex: 99999,
 				boxStyle: {
 					minWidth: "250px"
 				},
@@ -290,16 +291,28 @@
 			}
 		},
 		apply_panoramas:function(jObj,marker){
-			if(jObj.gmap("hasPanorama")){
-				$.wsu_maps.state.in_pano=true;
-				var pano = jObj.gmap("getPanorama");
-				google.maps.event.addListener(pano, 'pano_changed', function() {
-					if(jObj.gmap("hasPanorama")){
+			
+			var pano = jObj.gmap("getPanorama");
+			
+
+			google.maps.event.addListener(pano, 'visible_changed', function() {
+
+				if(jObj.gmap("hasPanorama")){
+					if($.wsu_maps.infobox.pano_init===false){
 						$.wsu_maps.markers.init_street_view_markers();
-					}else{
-						$.wsu_maps.markers.init_map_markers();
+						$.wsu_maps.infobox.pano_init=true;	
 					}
-				});
+					$.wsu_maps.state.in_pano=true;
+				}else{
+					$.wsu_maps.state.in_pano=false;
+					if($.wsu_maps.infobox.pano_init===true){
+						$.wsu_maps.markers.init_map_markers();
+						$.wsu_maps.infobox.pano_init=false;	
+					}
+				}
+			});			
+			
+			if(jObj.gmap("hasPanorama")){
 				
 				pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
 				google.maps.event.addListener(pano, 'position_changed', function() {

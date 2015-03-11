@@ -12,7 +12,7 @@
 		},
 		highlight_marker:function(marker){
 			if($.wsu_maps.state.in_pano){
-				marker = $.wsu_maps.markers.alter_marker_icon(marker,15);				
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,8);				
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker,1.25);	
 			}
@@ -21,7 +21,7 @@
 		},
 		unhighlight_marker:function(marker){
 			if($.wsu_maps.state.in_pano){
-				marker = $.wsu_maps.markers.alter_marker_icon(marker,15);	
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,7.5);	
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker);
 			}
@@ -39,7 +39,7 @@
 			});
 		},
 		set_street_view_marker_size:function(marker){
-			marker = $.wsu_maps.markers.alter_marker_icon(marker,15);	
+			marker = $.wsu_maps.markers.alter_marker_icon(marker,7.5);	
 			marker.setIcon(marker.marker_style.icon);
 		},
 		set_map_marker_size:function(marker){
