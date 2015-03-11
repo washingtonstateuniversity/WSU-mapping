@@ -28,14 +28,16 @@
 	-webkit-transform: translateZ(0px);
 	border: medium none;
 	width: 100%;
-	box-shadow: 0 5px 14px 5px rgba(0, 0, 0, 0.4);
+	box-shadow: -1px 1px 2px 0px rgba(0,0,0,0.64);
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
+	border: rgba(188,188,188,0.89) 1px solid;
 }
 #campusmap .ui-tabs .ui-widget-header {
 	-webkit-transform: translateZ(0px);
 	height: 19px;
 	background:#adc6cb;
+	border:medium none;
 }
 #campusmap .ui-tabs .ui-tabs-nav {
 	-webkit-transform: translateZ(0px);
@@ -48,6 +50,7 @@
 	border: medium none;
 	top: -3px;
 	font-size: 13px;
+	border-radius:0px;
 }
 #campusmap .ui-tabs .ui-tabs-nav li.ui-state-active {
 	border: medium none;
@@ -64,6 +67,7 @@
 	line-height: 16px;
 	padding: 5px 1.5em 3px 1.5em;
 	color: #FFF;
+	border-radius:0px;
 }
 #campusmap .ui-tabs .ui-tabs-nav li a:hover {
 	color: #b6bf00;
