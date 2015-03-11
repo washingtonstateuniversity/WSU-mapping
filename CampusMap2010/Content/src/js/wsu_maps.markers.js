@@ -21,7 +21,7 @@
 		},
 		unhighlight_marker:function(marker){
 			if($.wsu_maps.state.in_pano){
-				marker = $.wsu_maps.markers.alter_marker_icon(marker,7.5);	
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,6.5);	
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker);
 			}
