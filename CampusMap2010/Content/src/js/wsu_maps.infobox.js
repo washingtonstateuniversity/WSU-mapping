@@ -14,7 +14,7 @@
 			var myHoverOptions = {
 				alignBottom:true,
 				content: boxText,
-				pixelOffset: new google.maps.Size(15,-15),
+				pixelOffset: new google.maps.Size(35,-15),
 				zIndex: 999,
 				boxStyle: {
 					minWidth: "250px"

@@ -8,14 +8,14 @@
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
 					'z-index':1,
-					'title':marker_obj.title,
+					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
 						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon,
 						scaledSize: new google.maps.Size(30,50),
 						size: new google.maps.Size(30,50),
 						origin: new google.maps.Point(0,0), // origin
-						anchor: new google.maps.Point(0, 0) // anchor
+						anchor: new google.maps.Point(0, 50) // anchor
 					}
 				});
 
@@ -28,18 +28,26 @@
 					if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
 						markerCallback( marker );
 					}
+					
 				})
 			.click(function() {
-					$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
+				
+				$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
+				$.wsu_maps.state.markerLog[i].setZIndex(99);
 					if(typeof($.jtrack)!=="undefined"){
 						//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 					}
 				})
 			.rightclick(function(event){$.wsu_maps.showContextMenu(event.latLng);})
 			.mouseover(function(){//event){
+				//$('[src*="public/markerSVG.castle?idx='+idx+'"]').closest('div').addClass('svg_clip');
 				$.wsu_maps.infobox.open_toolTip(jObj,i,$.wsu_maps.state.markerLog[i]);
-				marker_style.icon.scaledSize  = new google.maps.Size(45,75);
-				marker_style.icon.size  = new google.maps.Size(45,75);
+				marker_style.icon.scaledSize  = new google.maps.Size(45,62.5);
+				marker_style.icon.size  = new google.maps.Size(37.5,62.5);
+				marker_style.icon.anchor = new google.maps.Point(3.75, 62.5); 
+
+				$.wsu_maps.state.markerLog[i].setZIndex(99);
+				// anchor
 				//jObj.gmap('setOptions', marker_style, $.wsu_maps.state.markerLog[i]);
 				//[src*="placeholder.png?1"]
 				console.log(marker_style);
@@ -49,6 +57,9 @@
 				$.wsu_maps.infobox.close_toolTips();
 				marker_style.icon.scaledSize  = new google.maps.Size(30,50);
 				marker_style.icon.size  = new google.maps.Size(30,50);
+				marker_style.icon.anchor = new google.maps.Point(0, 50);
+				$.wsu_maps.state.markerLog[i].setZIndex(1);
+				// anchor
 				//jObj.gmap('setOptions', marker_style, $.wsu_maps.state.markerLog[i]);
 				console.log(marker_style);
 				$.wsu_maps.state.markerLog[i].setIcon(marker_style.icon);
