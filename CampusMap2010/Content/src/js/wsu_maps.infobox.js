@@ -51,7 +51,7 @@
 				disableAutoPan: false,
 				maxWidth: 0,
 				height:"340px",
-				pixelOffset: new google.maps.Size(-200, -95),
+				pixelOffset: new google.maps.Size(-200, -75),
 				zIndex: 999,
 				boxStyle: {
 					width: ($.wsu_maps.state.mapInst.width()<425?$.wsu_maps.state.mapInst.width()-25:400)+"px"
