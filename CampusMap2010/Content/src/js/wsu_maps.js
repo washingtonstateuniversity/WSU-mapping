@@ -43,7 +43,9 @@ var startingUrl=startingUrl||null;
 			mcv_action:mcv_action||"",
 			campus:campus||"",
 			campus_latlng_str:campus_latlng_str||"",
-				
+			
+			in_pano:false,
+			
 			cTo:"",
 			cFrom:"",
 			hasDirection:false,

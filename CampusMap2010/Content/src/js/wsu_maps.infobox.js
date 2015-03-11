@@ -291,7 +291,16 @@
 		},
 		apply_panoramas:function(jObj,marker){
 			if(jObj.gmap("hasPanorama")){
+				$.wsu_maps.state.in_pano=true;
 				var pano = jObj.gmap("getPanorama");
+				google.maps.event.addListener(pano, 'pano_changed', function() {
+					if(jObj.gmap("hasPanorama")){
+						$.wsu_maps.markers.init_street_view_markers();
+					}else{
+						$.wsu_maps.markers.init_map_markers();
+					}
+				});
+				
 				pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
 				google.maps.event.addListener(pano, 'position_changed', function() {
 					if(jObj.gmap("hasPanorama")){
@@ -301,6 +310,11 @@
 						pano.setPov(pov);
 					}
 				});
+			}else{
+				if($.wsu_maps.state.in_pano){
+					$.wsu_maps.markers.init_map_markers();
+				}
+				$.wsu_maps.state.in_pano = false;
 			}
 		},
 		contain_content_events:function(){

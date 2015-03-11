@@ -1,19 +1,50 @@
 (function($) {
 	var pageTracker = pageTracker || null;
 	$.wsu_maps.markers = {
+		alter_marker_icon:function(marker,multiplier){
+			multiplier = multiplier||1;
+			var width = marker.marker_style.icon.width * multiplier;
+			var height = marker.marker_style.icon.height * multiplier;
+			marker.marker_style.icon.scaledSize  = new google.maps.Size(width,height);
+			marker.marker_style.icon.size  = new google.maps.Size(width,height);
+			marker.marker_style.icon.anchor = new google.maps.Point( (multiplier>1 ? (width*0.125) : 0) ,  (multiplier>1 ? height+(height*0.125) : height) );	
+			return marker;
+		},
 		highlight_marker:function(marker){
-				marker.marker_style.icon.scaledSize  = new google.maps.Size(37.5,62.5);
-				marker.marker_style.icon.size  = new google.maps.Size(37.5,62.5);
-				marker.marker_style.icon.anchor = new google.maps.Point(3.75, 62.5);
-				marker.setZIndex(99);
-				marker.setIcon(marker.marker_style.icon);
+			if($.wsu_maps.state.in_pano){
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,15);				
+			}else{
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,1.25);	
+			}
+			marker.setZIndex(99);
+			marker.setIcon(marker.marker_style.icon);
 		},
 		unhighlight_marker:function(marker){
-				marker.marker_style.icon.scaledSize  = new google.maps.Size(30,50);
-				marker.marker_style.icon.size  = new google.maps.Size(30,50);
-				marker.marker_style.icon.anchor = new google.maps.Point(0, 50);
-				marker.setZIndex(marker.marker_style.zFrezze);
-				marker.setIcon(marker.marker_style.icon);
+			if($.wsu_maps.state.in_pano){
+				marker = $.wsu_maps.markers.alter_marker_icon(marker,15);	
+			}else{
+				marker = $.wsu_maps.markers.alter_marker_icon(marker);
+			}
+			marker.setZIndex(marker.marker_style.zFrezze);
+			marker.setIcon(marker.marker_style.icon);
+		},
+		init_street_view_markers:function(){
+			$.each($.wsu_maps.state.markerLog, function(idx,marker){
+				$.wsu_maps.markers.set_street_view_marker_size(marker);
+			});
+		},
+		init_map_markers:function(){
+			$.each($.wsu_maps.state.markerLog, function(idx,marker){
+				$.wsu_maps.markers.set_map_marker_size(marker);
+			});
+		},
+		set_street_view_marker_size:function(marker){
+			marker = $.wsu_maps.markers.alter_marker_icon(marker,15);	
+			marker.setIcon(marker.marker_style.icon);
+		},
+		set_map_marker_size:function(marker){
+			marker = $.wsu_maps.markers.alter_marker_icon(marker);
+			marker.setIcon(marker.marker_style.icon);
 		},
 		get_lat_zIndex: function(latitude){
 			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 4) );
@@ -35,11 +66,17 @@
 					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
+						width:30,
+						height:50,
 						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon,
 						scaledSize: new google.maps.Size(30,50),
 						size: new google.maps.Size(30,50),
 						origin: new google.maps.Point(0,0), // origin
-						anchor: new google.maps.Point(0, 50) // anchor
+						anchor: new google.maps.Point(0, 50), // anchor
+						original_scaledSize: new google.maps.Size(30,50),
+						original_size: new google.maps.Size(30,50),
+						original_origin: new google.maps.Point(0,0), // origin
+						original_anchor: new google.maps.Point(0, 50) // anchor
 					}
 				});
 
