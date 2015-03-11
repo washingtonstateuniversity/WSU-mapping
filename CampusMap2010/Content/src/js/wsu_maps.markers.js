@@ -4,24 +4,25 @@
 		highlight_marker:function(marker){
 				marker.marker_style.icon.scaledSize  = new google.maps.Size(37.5,62.5);
 				marker.marker_style.icon.size  = new google.maps.Size(37.5,62.5);
-				marker.marker_style.icon.anchor = new google.maps.Point(3.75, 62.5); 
-
+				marker.marker_style.icon.anchor = new google.maps.Point(3.75, 62.5);
 				marker.setZIndex(99);
-				// anchor
-				//jObj.gmap('setOptions', marker_style, $.wsu_maps.state.markerLog[i]);
-				//[src*="placeholder.png?1"]
-				console.log(marker.marker_style);
 				marker.setIcon(marker.marker_style.icon);
 		},
 		unhighlight_marker:function(marker){
 				marker.marker_style.icon.scaledSize  = new google.maps.Size(30,50);
 				marker.marker_style.icon.size  = new google.maps.Size(30,50);
 				marker.marker_style.icon.anchor = new google.maps.Point(0, 50);
-				marker.setZIndex(1);
-				// anchor
-				//jObj.gmap('setOptions', marker_style, $.wsu_maps.state.markerLog[i]);
-				console.log(marker.marker_style);
+				marker.setZIndex(marker.marker_style.zFrezze);
 				marker.setIcon(marker.marker_style.icon);
+		},
+		get_lat_zIndex: function(latitude){
+			var intLat = parseInt( ( parseFloat( latitude ).toFixed(2) ).toString().split('.').join('') );
+			
+			console.log( latitude );
+			console.log( intLat*(-1) );
+			
+			
+			return intLat*(-1);
 		},
 		make_Marker:function (jObj,i,id,marker_obj,markerCallback){	
 		
@@ -29,7 +30,8 @@
 			var idx = i+1;
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
-					'z-index':1,
+					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
+					'zFrezze':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
 					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
