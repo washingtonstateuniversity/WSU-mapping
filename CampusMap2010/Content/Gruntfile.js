@@ -23,9 +23,13 @@ module.exports = function(grunt) {
 		concat: {
 			front_styles: {
 				src: [
+				'src/css/central_main.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
 					'src/css/info_windows.css',
+					'src/js/scrollbar/style/jquery.jscrollpane.css',
+					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
+					'src/css/colorbox.css',
 					'src/css/share_link.css',
 					'src/css/reactive.css'
 				],
