@@ -1,0 +1,18 @@
+
+
+.place_order{
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	border-radius: 22px;
+	line-height: 22px;
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	border: 2px solid #3b3b3b;
+	background: #3b3b3b;
+	color: #F1F1F1;
+	margin-right: 10px;
+	margin-top: -6px;
+	float: left;
+}

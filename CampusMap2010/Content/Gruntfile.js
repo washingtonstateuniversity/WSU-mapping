@@ -23,10 +23,12 @@ module.exports = function(grunt) {
 		concat: {
 			front_styles: {
 				src: [
-				'src/css/central_main.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
-					'src/css/info_windows.css',
+					'src/css/wsu_maps.infobox.css',
+					'src/css/wsu_maps.central.nav.css',
+					'src/css/wsu_maps.listings.css',
+					'src/css/wsu_maps.google_map_overriders.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
 					'src/css/colorbox.css',
@@ -37,12 +39,12 @@ module.exports = function(grunt) {
 			},
 			admin_styles: {
 				src: [
-					'src/css/jSelect.min.css',
-					'src/css/jSelect.filter.min.css',
+					'src/css/admin/jSelect.min.css',
+					'src/css/admin/jSelect.filter.min.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
-					'src/css/info_windows.css',
-					'src/css/admin_styles.css',
+					'src/css/wsu_maps.infobox.css',
+					'src/css/admin/style.css',
 				],
 				dest: 'build/css/admin.styles.css',
 			},
