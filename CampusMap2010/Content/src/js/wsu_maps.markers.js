@@ -55,11 +55,10 @@
 		},
 		get_lat_zIndex: function(latitude){
 			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 4) );
-			
+			/*
 			console.log( latitude );
 			console.log( intLat*(-1) );
-			
-			
+			*/
 			return intLat*(-1);
 		},
 		make_Marker:function (jObj,i,id,marker_obj,markerCallback){	
