@@ -23,6 +23,11 @@ var startingUrl=startingUrl||null;
 		state:{
 			mapInst:null,
 			
+			active:{
+				marker:null,
+				iw:null,
+			},
+			
 			ib:[],
 			ibh:[],
 			ibHover:false,
@@ -31,7 +36,6 @@ var startingUrl=startingUrl||null;
 				
 			markerLog:[],
 			markerbyid:[],
-			active_marker:null,
 			mid:[],
 			shapes:[],
 			listOffset:0,
@@ -171,8 +175,6 @@ var startingUrl=startingUrl||null;
 			listings:{
 				width:235
 			},
-			
-			
 			//DEFAULT_overlay:null,
 			//DEFAULT_polylines:[],
 		},

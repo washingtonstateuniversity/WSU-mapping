@@ -1,6 +1,13 @@
 (function($) {
 	var pageTracker = pageTracker || null;
 	$.wsu_maps.markers = {
+		
+		defaults:{
+			width:30,
+			height:50,
+		},
+		
+		
 		alter_marker_icon:function(marker,multiplier){
 			multiplier = multiplier||1;
 			var width = marker.marker_style.icon.width * multiplier;
@@ -66,17 +73,18 @@
 					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
-						width:30,
-						height:50,
+						/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
+						width:$.wsu_maps.markers.defaults.width,
+						height:$.wsu_maps.markers.defaults.height,
 						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon,
-						scaledSize: new google.maps.Size(30,50),
-						size: new google.maps.Size(30,50),
+						scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						origin: new google.maps.Point(0,0), // origin
-						anchor: new google.maps.Point(0, 50), // anchor
-						original_scaledSize: new google.maps.Size(30,50),
-						original_size: new google.maps.Size(30,50),
+						anchor: new google.maps.Point(0, $.wsu_maps.markers.defaults.height), // anchor
+						original_scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						original_size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						original_origin: new google.maps.Point(0,0), // origin
-						original_anchor: new google.maps.Point(0, 50) // anchor
+						original_anchor: new google.maps.Point(0, $.wsu_maps.markers.defaults.height) // anchor
 					}
 				});
 
@@ -93,13 +101,13 @@
 					
 				})
 			.click(function() {
-					if($.wsu_maps.state.active_marker !== null){
-						$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active_marker);
+					if($.wsu_maps.state.active.marker !== null){
+						$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active.marker);
 					}
-					$.wsu_maps.state.active_marker = null;
+					$.wsu_maps.state.active.marker = null;
 					$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
 					$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
-					$.wsu_maps.state.active_marker = $.wsu_maps.state.markerLog[i];
+					$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
 					if(typeof($.jtrack)!=="undefined"){
 						//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 					}
@@ -112,7 +120,7 @@
 			})
 			.mouseout(function(){//event){
 				$.wsu_maps.infobox.close_toolTips();
-				if( $.wsu_maps.state.active_marker !== $.wsu_maps.state.markerLog[i]){
+				if( $.wsu_maps.state.active.marker !== $.wsu_maps.state.markerLog[i]){
 					$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.markerLog[i]);
 				}
 			});
