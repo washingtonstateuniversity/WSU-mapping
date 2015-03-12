@@ -551,7 +551,7 @@
 					}
 					var p_id = marker.id;
 					listing+='<li class="">'+
-								'<a href="#" class="" role="'+p_id+'"><img src="'+$.wsu_maps.state.siteroot+'Content/images/list_numbers/li_'+(i+1)+'.png"/>'+marker.title+'</a>'+
+								'<a href="#" class="" role="'+p_id+'"><span class="place_order">'+(i+1)+'</span>'+marker.title+'</a>'+
 								sum+
 							'</div>';
 					$.wsu_maps.state.hasListing = false;

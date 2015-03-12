@@ -259,6 +259,30 @@ html, body {
 	font-style: italic;
 	background: none repeat scroll 0 0 transparent;
 }
+
+.place_order{
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	border-radius: 22px;
+	line-height: 22px;
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	border: 2px solid #3b3b3b;
+	background: #3b3b3b;
+	color: #F1F1F1;
+	margin-right: 10px;
+	margin-top: -6px;
+	float: left;
+}
+
+
+
+
+
+
+
 #toolbar ul {
 	float: right;
 	padding: 0px;
