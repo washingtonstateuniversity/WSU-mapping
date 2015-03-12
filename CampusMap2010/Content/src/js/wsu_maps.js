@@ -167,6 +167,12 @@ var startingUrl=startingUrl||null;
 				return Coords;
 			},
 			DOMAIN:'http://localhost:50759',
+			
+			listings:{
+				width:235
+			},
+			
+			
 			//DEFAULT_overlay:null,
 			//DEFAULT_polylines:[],
 		},

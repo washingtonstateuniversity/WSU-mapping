@@ -26,8 +26,7 @@
 	min-height: 350px;
 	height: auto;
 	z-index: 9;
-	border-radius: 0px 0px 0px 20px;
-	background: url("../../Content/images/assests_central/selectlist_shadow.png") repeat-y scroll left center transparent;
+	background: #eeeff1;/*url("/Content/images/assests_central/selectlist_shadow.png") repeat-y scroll left center transparent;*/
 }
 #selectedPlaceList.active {
 	border-left: 1px solid #B8B8B8;
@@ -43,7 +42,7 @@
 	height: 57px;
 	display: inline-block;
 	text-indent: -9999px;
-	background: url(../../Content/images/placelist_tab.png) no-repeat left top transparent;
+	background: url(/Content/images/placelist_tab.png) no-repeat left top transparent;
 }
 #selectedPlaceList_btn:hover {
 	background-position: left bottom;
@@ -55,7 +54,7 @@
 	background-position: right bottom;
 }
 #selectedPlaceList_area {
-	background: url(../../Content/images/placelist_bk.png) repeat left center transparent;
+	/*background: url(../../Content/images/placelist_bk.png) repeat left center transparent;*/
 	overflow: hidden;
 	min-height: 350px;
 	height: auto;
@@ -63,7 +62,6 @@
 	position: relative;
 	width: 100%;
 	z-index: 1;
-	border-radius: 0px 0px 0px 20px;
 }
 
 #selectedPlaceList_area.active {

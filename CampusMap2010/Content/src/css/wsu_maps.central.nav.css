@@ -1,11 +1,11 @@
 #mainNavArea {
 	float: left;
 	left: 0;
-  position: relative;
-  top: -35px;
+	position: relative;
+	top: -35px;
 	width: 201px;
 	z-index: 999;
-	background: url(../../../../../Content/images/bg-nav.png) no-repeat scroll -99px 0 transparent;
+	/*background: url(../../../../../Content/images/bg-nav.png) no-repeat scroll -99px 0 transparent;*/
 }
 /* Nav */
 #navwrap_outer {

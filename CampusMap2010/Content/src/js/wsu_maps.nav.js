@@ -110,7 +110,7 @@
 				if(btn.closest('#selectedPlaceList').width()<=1){
 					$('#selectedPlaceList').addClass("active");
 					btn.closest('#selectedPlaceList').stop().animate({
-						width:"190px"
+						width:$.wsu_maps.defaults.listings.width+"px"
 						}, 250, function() {
 							btn.addClass("active");
 							if($('#directions-panel').length){
@@ -122,8 +122,8 @@
 							//$(window).trigger("resize");
 					});
 					$('.central_layout.public.central #centralMap').animate({
-						'margin-left':'190px','width':
-						$('.central_layout.public.central #centralMap').width()-190
+						'margin-left':$.wsu_maps.defaults.listings.width+'px','width':
+						$('.central_layout.public.central #centralMap').width()-$.wsu_maps.defaults.listings.width
 					},
 					250,
 					function() {
@@ -139,7 +139,7 @@
 							$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 							//$(window).trigger("resize");
 					});
-					$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+190}, 500, function() {}).removeClass("opended");
+					$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+$.wsu_maps.defaults.listings.width}, 500, function() {}).removeClass("opended");
 					//$(window).trigger("resize");
 					//listOffset=0;
 				}
