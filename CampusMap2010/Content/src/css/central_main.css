@@ -13,6 +13,28 @@ html, body {
 .clear {
 	clear: both;
 }
+
+/*media all*/
+#wsu-signature {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 150px auto;
+    background-color: transparent;
+    height: 155px;
+    display: block;
+    text-indent: 120%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 99;
+    background-image: url(https://repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg);
+}
+
+
+
+
+
+
 #campusmap {
 	overflow: hidden;
 }
@@ -111,8 +133,8 @@ html, body {
 #mainNavArea {
 	float: left;
 	left: 0;
-	position: static;
-	top: 0;
+  position: relative;
+  top: -35px;
 	width: 201px;
 	z-index: 999;
 	background: url(../../../../../Content/images/bg-nav.png) no-repeat scroll -99px 0 transparent;
