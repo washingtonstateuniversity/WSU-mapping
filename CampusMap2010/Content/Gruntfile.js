@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 			},
 			front_scripts: {
 				src: [
-					'src/js/modernizr-2.0.6/modernizr.min.js',
+					//'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					
 					'src/js/jquery.ui.map.js',
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 			},
 			admin_scripts: {
 				src: [
-					'src/js/modernizr-2.0.6/modernizr.min.js',
+					//'src/js/modernizr-2.0.6/modernizr.min.js',
 					'src/js/jquery.defaultvalue.js',
 					'src/js/jquery.mjs.nestedSortable.js',
 					'src/js/colorpicker/jpicker-1.1.6.min.js',
@@ -90,8 +90,8 @@ module.exports = function(grunt) {
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
 					'src/js/jquery.colorbox-min.js',
 					'src/js/zeroclipboard/ZeroClipboard.js',
-					'src/js/jSelect.js',
-					'src/js/jSelect.filter.js',
+					'src/js/admin/jSelect.js',
+					'src/js/admin/jSelect.filter.js',
 					'src/js/utilities_general.js',
 
 					

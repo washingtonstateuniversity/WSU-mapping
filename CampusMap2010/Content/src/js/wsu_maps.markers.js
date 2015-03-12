@@ -63,7 +63,7 @@
 		},
 		make_Marker:function (jObj,i,id,marker_obj,markerCallback){	
 		
-			console.log(marker_obj.style.icon);
+			//console.log(marker_obj.style.icon);
 			var idx = i+1;
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
@@ -89,28 +89,28 @@
 
 			
 			jObj.gmap('addMarker', marker_style,function(ops,marker){
-					marker.marker_style = marker_style;
-					$.wsu_maps.state.markerLog[i]=marker;
-					$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
-					// these too are needing to be worked together
-					//jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
-					if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
-						markerCallback( marker );
-					}
-					
-				})
+				marker.marker_style = marker_style;
+				$.wsu_maps.state.markerLog[i]=marker;
+				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
+				// these too are needing to be worked together
+				//jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
+				if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
+					markerCallback( marker );
+				}
+				
+			})
 			.click(function() {
-					if($.wsu_maps.state.active.marker !== null){
-						$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active.marker);
-					}
-					$.wsu_maps.state.active.marker = null;
-					$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
-					$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
-					$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
-					if(typeof($.jtrack)!=="undefined"){
-						//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
-					}
-				})
+				if($.wsu_maps.state.active.marker !== null){
+					$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active.marker);
+				}
+				$.wsu_maps.state.active.marker = null;
+				$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
+				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
+				$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
+				if(typeof($.jtrack)!=="undefined"){
+					//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
+				}
+			})
 			.rightclick(function(event){$.wsu_maps.showContextMenu(event.latLng);})
 			.mouseover(function(){//event){
 				//$('[src*="public/markerSVG.castle?idx='+idx+'"]').closest('div').addClass('svg_clip');

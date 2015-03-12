@@ -1,4 +1,3 @@
-// JavaScript Document
 /*
 * globals from the page, inline
 */
