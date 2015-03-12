@@ -105,14 +105,17 @@
 			$('#selectedPlaceList_btn').off().on('click', function(e){
 				e.stopPropagation();
 				e.preventDefault();
+				
 				var btn=$(this);
 				$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
-				if(btn.closest('#selectedPlaceList').width()<=1){
-					$('#selectedPlaceList').addClass("active");
-					btn.closest('#selectedPlaceList').stop().animate({
+				
+				if( ! $('#selectedPlaceList').is(".active") ){
+					
+					$('#selectedPlaceList').stop().animate({
 						width:$.wsu_maps.defaults.listings.width+"px"
 						}, 250, function() {
 							btn.addClass("active");
+							$('#selectedPlaceList').addClass("active");
 							if($('#directions-panel').length){
 								$.wsu_maps.listings.setup_Dirscrollbar($('#directions-panel'));
 							}
@@ -122,24 +125,27 @@
 							//$(window).trigger("resize");
 					});
 					$('.central_layout.public.central #centralMap').animate({
-						'margin-left':$.wsu_maps.defaults.listings.width+'px','width':
-						$('.central_layout.public.central #centralMap').width()-$.wsu_maps.defaults.listings.width
-					},
-					250,
-					function() {
-						}).addClass("opended");
+						'margin-left':$.wsu_maps.defaults.listings.width+'px',
+						'width':$('.central_layout.public.central #centralMap').width()-$.wsu_maps.defaults.listings.width
+					},250,function() {
+					}).addClass("opended");
 					//listOffset=190;
 					//$(window).trigger("resize");
 				}else{
-					$('#selectedPlaceList').removeClass("active");
-					btn.closest('#selectedPlaceList').stop().animate({
+					
+					$('#selectedPlaceList').stop().animate({
 						width:"0px"
 						}, 250, function() {
 							btn.removeClass("active");
+							$('#selectedPlaceList').removeClass("active");
 							$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 							//$(window).trigger("resize");
 					});
-					$('.central_layout.public.central #centralMap').animate({'margin-left':'0px','width':$('.central_layout.public.central #centralMap').width()+$.wsu_maps.defaults.listings.width}, 500, function() {}).removeClass("opended");
+					$('.central_layout.public.central #centralMap').animate({
+						'margin-left':'0px',
+						'width':$('.central_layout.public.central #centralMap').width()+$.wsu_maps.defaults.listings.width
+					}, 500, function() {
+					}).removeClass("opended");
 					//$(window).trigger("resize");
 					//listOffset=0;
 				}
