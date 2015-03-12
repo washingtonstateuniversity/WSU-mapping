@@ -47,13 +47,7 @@ html, body {
 	float: none;
 	background: none repeat scroll 0 0 #981E32;
 }
-#siteID {
-	background: none repeat scroll 0 0 #262A2D;
-	color: #FFFFFF;
-	float: none;
-	height: 80px;
-	width: 100%;
-}
+
 #wrapper #toolbar {
 	width: 100%;
 	float: none;
@@ -63,25 +57,8 @@ html, body {
 	height: 0;
 	width: 0;
 }
-/*#siteID h2 {
-	margin: 0 0 0 180px;
-	width: auto;
-}
-#siteID h1 {
-	margin: 15px 0 0 185px;
-	width: auto;
-}*/
-#logo {
-	display: inline;
-	float: none;
-	height: 105px;
-	left: 0;
-	position: absolute;
-	top: 30px;
-	width: 185px;
-	background: #fff url("../../Content/images/bg-logo3.jpg") no-repeat center center;
-	text-indent: -9999em;
-}
+
+
 #header_bar {
 	border-top: 4px solid #9a1b2f;
 	/*background-color: #5E6A71;*/
