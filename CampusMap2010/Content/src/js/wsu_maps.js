@@ -975,7 +975,7 @@ var startingUrl=startingUrl||null;
 		},
 
 		ini_GAtracking:function (gacode){
-			var data = [
+			/*var data = [
 				{
 					"element":"a[href^='http']:not([href*='wsu.edu'])",
 					"options":{
@@ -1003,16 +1003,16 @@ var startingUrl=startingUrl||null;
 						"overwrites":"true"
 						}
 				}
-			];
+			];*/
 			//$.jtrack.defaults.debug.run = false;
 			//$.jtrack.defaults.debug.v_console = false;
 			//$.jtrack.defaults.debug.console = true;
 			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
 		ini_addthis:function (username){
-			if(typeof(username)==="undefined"){
+			/*if(typeof(username)==="undefined"){
 				username="mcwsu";
-			}
+			}*/
 			/*var addthis_config = {
 				  services_compact: 'email, facebook, twitter, myspace, google, more',
 				  services_exclude: 'print',
