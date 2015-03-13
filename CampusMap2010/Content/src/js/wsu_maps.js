@@ -1007,7 +1007,7 @@ var startingUrl=startingUrl||null;
 			//$.jtrack.defaults.debug.run = false;
 			//$.jtrack.defaults.debug.v_console = false;
 			//$.jtrack.defaults.debug.console = true;
-			$.jtrack({load_analytics:{account:gacode}, trackevents:data });
+			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
 		ini_addthis:function (username){
 			if(typeof(username)==="undefined"){
@@ -1021,7 +1021,7 @@ var startingUrl=startingUrl||null;
 			/*var addthis_share ={
 				templates: {twitter: 'check out {{url}} '}
 			};*/
-			if($('body.addthis').length===0){
+			/*if($('body.addthis').length===0){
 				$.wsu_maps.getSmUrl("",function(url){
 					$('#addthisScript').attr('src', "http://s7.addthis.com/js/250/addthis_widget.js#async=1&username="+username+"&" + Math.random() );
 					$.getScript( "http://s7.addthis.com/js/250/addthis_widget.js#async=1&username="+username+"&" + Math.random());
@@ -1040,7 +1040,7 @@ var startingUrl=startingUrl||null;
 					//addthis.update('share', 'title', window.document.title); // new title. 
 					addthis.ready();
 				});
-			});
+			});*/
 		},
 		poi_setup:function (){//jObj){
 			var proto = google.maps.InfoWindow.prototype,
