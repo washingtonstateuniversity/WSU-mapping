@@ -19,7 +19,7 @@ $url_10: url('/Content/images/jCellNav_btn.png');
 //@extend-elements
 //original selectors
 //#campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_h, #campusmap .ui-tabs .ui-tabs-panel .content .cycle ul li .headImage.orientation_
-%extend_1 {
+%extend_inforbase {
 	background: $url_5 no-repeat scroll center top transparent;
 	margin-left: 0;
 	padding: 13px;
@@ -198,10 +198,10 @@ $url_10: url('/Content/images/jCellNav_btn.png');
 					float: left;
 					position: relative;
 					&.orientation_h {
-						@extend %extend_1;
+						@extend %extend_inforbase;
 					}
 					&.orientation_ {
-						@extend %extend_1;
+						@extend %extend_inforbase;
 					}
 					&.orientation_v {
 						background: $url_6 no-repeat scroll center top transparent;

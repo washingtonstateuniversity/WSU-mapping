@@ -12,7 +12,7 @@ $url_5: url('/Content/images/map_icons/svg_marker.svg');
 //@extend-elements
 //original selectors
 //html, body
-%extend_1 {
+%primary_base {
 	height: 100%;
 	margin: 0 !important;
 	font-family: $font_primary, $font_secondary, $font_tertiary;
@@ -23,10 +23,10 @@ $url_5: url('/Content/images/map_icons/svg_marker.svg');
 
 
 html {
-	@extend %extend_1;
+	@extend %primary_base;
 }
 body {
-	@extend %extend_1;
+	@extend %primary_base;
 }
 #body {
 	width: 100%;

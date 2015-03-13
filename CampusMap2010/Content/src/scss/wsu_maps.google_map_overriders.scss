@@ -6,7 +6,7 @@
 //@extend-elements
 //original selectors
 //#selectedPlaceList .adp-step, #selectedPlaceList .adp-text
-%extend_1 {
+%gmap_overrider_base {
 	font-size: 12px;
 	font-weight: bold;
 	line-height: 12px;
@@ -37,10 +37,10 @@
 		}
 	}
 	.adp-step {
-		@extend %extend_1;
+		@extend %gmap_overrider_base;
 	}
 	.adp-text {
-		@extend %extend_1;
+		@extend %gmap_overrider_base;
 	}
 	.adp-summary {
 		color: $color_WSU_Crimson;
