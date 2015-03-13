@@ -18,7 +18,7 @@ body {
 	font-weight: 400;
 	margin: 0;
 	background: $white $url_0 repeat-x center top;
-	color: $color_shuttle_gray_approx;
+	color: $color_WSU_Gray;
 	padding: 0;
 }
 p {
@@ -31,21 +31,21 @@ p {
 	font-variant: normal;
 }
 h1 {
-	color: $color_mexican_red_approx;
+	color: $color_WSU_Crimson;
 	padding: 10px 300px 10px 0;
 	text-transform: uppercase;
 	font: bold 72px/70px $font_primary, $font_quaternary, $font_tertiary;
 	margin: 0;
 }
 h2 {
-	color: $color_mexican_red_approx;
+	color: $color_WSU_Crimson;
 	padding: 10px 380px 10px 0;
 	text-transform: uppercase;
 	font: bold 32px/30px $font_primary, $font_quaternary, $font_tertiary;
 	margin: 0;
 }
 a {
-	color: $color_mexican_red_approx;
+	color: $color_WSU_Crimson;
 	text-decoration: none;
 	&:hover {
 		color: $color_french_gray_approx;

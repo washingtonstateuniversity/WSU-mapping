@@ -50,7 +50,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 #globalnav {
 	width: auto;
 	float: none;
-	background: none repeat scroll 0 0 $color_mexican_red_approx;
+	background: none repeat scroll 0 0 $color_WSU_Crimson;
 }
 #toolbar {
 	ul {
@@ -80,7 +80,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 	}
 }
 #header_bar {
-	border-top: 4px solid $color_mexican_red_approx;
+	border-top: 4px solid $color_WSU_Crimson;
 	height: 39px;
 	margin-left: 198px;
 	position: relative;
@@ -209,7 +209,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 			border-bottom: none;
 			//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 			border-radius: 10px 0 0 0;
-			color: $color_shuttle_gray_approx;
+			color: $color_WSU_Gray;
 			//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 			box-shadow: -3px 0 20px -5px $color_rangoon_green_25_approx;
 			min-height: 29px !important;
@@ -229,7 +229,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 	height: 18px;
 	margin: 6px 6px 11px;
 	a {
-		color: $color_shuttle_gray_approx;
+		color: $color_WSU_Gray;
 		display: inline-block;
 		font-size: 11px;
 		height: 12px;
@@ -238,7 +238,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 		text-align: left;
 		text-decoration: none;
 		&:hover {
-			color: $color_mexican_red_approx;
+			color: $color_WSU_Crimson;
 			background-color: $color_bon_jour_approx;
 		}
 	}
@@ -250,7 +250,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 		font-size: 16px;
 	}
 	h3 {
-		color: $color_mexican_red_approx;
+		color: $color_WSU_Crimson;
 		font-weight: normal;
 		font-size: 13px;
 		margin: 0;
@@ -324,7 +324,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 		font-size: 16px;
 	}
 	h3 {
-		color: $color_mexican_red_approx;
+		color: $color_WSU_Crimson;
 		font-weight: normal;
 		font-size: 13px;
 		margin: 0;
@@ -336,7 +336,7 @@ $url_4: url('/Content/images/map_icons/svg_marker.svg');
 }
 #emailDirs {
 	h3 {
-		color: $color_mexican_red_approx;
+		color: $color_WSU_Crimson;
 		font-weight: normal;
 		font-size: 13px;
 		margin: 0;

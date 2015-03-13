@@ -59,7 +59,7 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 		li {
 			&.active {
 				a {
-					color: $color_mexican_red_approx;
+					color: $color_WSU_Crimson;
 				}
 				ul {
 					display: block;
@@ -67,16 +67,16 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 				li {
 					a {
 						padding-left: 13px;
-						color: $color_shuttle_gray_approx;
+						color: $color_WSU_Gray;
 						background: $url_2 no-repeat scroll left center transparent;
 					}
 					&.checked a {
-						color: $color_mexican_red_approx;
+						color: $color_WSU_Crimson;
 						background: $url_3 no-repeat scroll left center transparent;
 					}
 				}
 				a.parentalLink.childSelected {
-					color: $color_shuttle_gray_approx;
+					color: $color_WSU_Gray;
 				}
 			}
 			a em {
@@ -117,9 +117,9 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 	}
 	a {
 		display: block !important;
-		color: $color_shuttle_gray_approx;
+		color: $color_WSU_Gray;
 		&:hover {
-			color: $color_mexican_red_approx !important;
+			color: $color_WSU_Crimson !important;
 		}
 	}
 	&:hover {

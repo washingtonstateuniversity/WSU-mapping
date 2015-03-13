@@ -198,13 +198,13 @@ $url_2: url('/Content/PIE.htc');
 		}
 		.ui-menu-item a {
 			font-size: 10.5px;
-			color: $color_shuttle_gray_approx;
+			color: $color_WSU_Gray;
 			margin: 3px 0 2px;
 			display: block;
 			border: 1px transparent solid;
 			&.ui-state-hover {
 				font-size: 10.5px;
-				color: $color_mexican_red_approx;
+				color: $color_WSU_Crimson;
 				margin: 3px 0 2px;
 				display: block;
 				border: 1px $color_celeste_approx solid;
@@ -215,16 +215,16 @@ $url_2: url('/Content/PIE.htc');
 #getDirections {
 	margin-top: 5px;
 	input::-webkit-input-placeholder {
-		color: $color_shuttle_gray_approx !important;
+		color: $color_WSU_Gray !important;
 	}
 	input:-moz-placeholder {
-		color: $color_shuttle_gray_approx !important;
+		color: $color_WSU_Gray !important;
 	}
 }
 #directionsTo {
 	margin-top: 5px;
 	input {
-		color: $color_shuttle_gray_approx;
+		color: $color_WSU_Gray;
 		background: $url_1 no-repeat scroll left 1px transparent;
 		height: 22px;
 		border: medium none;
@@ -272,7 +272,7 @@ $url_2: url('/Content/PIE.htc');
 	h3 {
 		text-align: center;
 		a {
-			color: $color_mexican_red_approx;
+			color: $color_WSU_Crimson;
 			font-size: 18px;
 			text-decoration: none;
 			&:hover {
@@ -307,11 +307,11 @@ $url_2: url('/Content/PIE.htc');
 	a {
 		display: block;
 		cursor: pointer;
-		color: $color_shuttle_gray_approx;
+		color: $color_WSU_Gray;
 		border: 1px solid $color_celeste_approx;
 		&:hover {
 			color: $color_sapphire_approx;
-			border: 1px solid $color_shuttle_gray_approx;
+			border: 1px solid $color_WSU_Gray;
 		}
 		&.active {
 			display: none;
@@ -330,7 +330,7 @@ $url_2: url('/Content/PIE.htc');
 	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: 0 0 8px 1px $black_25;
 	&:hover {
-		background-color: $color_shuttle_gray_approx;
+		background-color: $color_WSU_Gray;
 		color: $white;
 	}
 	&.TOP {
@@ -381,7 +381,7 @@ $url_2: url('/Content/PIE.htc');
 	height: 285px;
 }
 #directionsFrom input {
-	color: $color_shuttle_gray_approx;
+	color: $color_WSU_Gray;
 	background: $url_1 no-repeat scroll left 1px transparent;
 	height: 22px;
 	border: medium none;
