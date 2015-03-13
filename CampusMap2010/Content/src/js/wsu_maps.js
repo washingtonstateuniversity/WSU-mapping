@@ -564,7 +564,27 @@ var startingUrl=startingUrl||null;
 				}]
 				}]*/					
 				map_op=$.extend(map_op,styles);
-				if($('#runningOptions').length){
+				
+				
+				var ops = "";
+				
+				if($('#runningOptions').length && !($('#runningOptions').html()==="{}"||$('#runningOptions').html()==="") ){
+					$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
+					ops = $('#runningOptions').html();
+				}
+				if( typeof(window.running_options) !== "undefined" ){
+					ops=window.running_options;
+				}
+				
+				
+				if(ops!==""){
+					//var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+					ops = ops.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+					$.extend(map_op,pos,base,$.parseJSON(ops));
+				}
+				
+				
+				/*if($('#runningOptions').length){
 					if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
 				
 					}else{
@@ -578,7 +598,7 @@ var startingUrl=startingUrl||null;
 						//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 						//alert(dump(map_op));
 					}
-				}
+				}*/
 				$.wsu_maps.state.mapInst.gmap(map_op).bind('init', function() { 
 					$.wsu_maps.ini_GAtracking('UA-22127038-5');
 					$.wsu_maps.poi_setup($.wsu_maps.state.mapInst);
@@ -593,7 +613,7 @@ var startingUrl=startingUrl||null;
 					$(window).trigger('resize');
 					$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 					/* addthis setup */
-					$.wsu_maps.ini_addthis("mcwsu");
+					//$.wsu_maps.ini_addthis("mcwsu");
 				});
 			//});
 		},
@@ -1137,6 +1157,7 @@ var startingUrl=startingUrl||null;
 				if($('.mobile').length){
 					$.wsu_maps.geoLocate();
 				}
+				$.wsu_maps.fit_to_location($.wsu_maps.state.mapInst.gmap('get','map'),'WA');
 				callback();
 			});
 		},
@@ -1258,6 +1279,24 @@ var startingUrl=startingUrl||null;
 				});
 			});*/
 		},
+		
+		fit_to_location:function(map,localation){
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode( { 'address': localation}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					if (status !== google.maps.GeocoderStatus.ZERO_RESULTS) {
+						if (results && results[0]&& results[0].geometry && results[0].geometry.viewport){
+							map.fitBounds(results[0].geometry.viewport);
+						}
+					}
+				}
+			});
+		},
+		
+		
+		
+		
+		
 		poi_setup:function (){//jObj){
 			var proto = google.maps.InfoWindow.prototype,
 				open = proto.open;
