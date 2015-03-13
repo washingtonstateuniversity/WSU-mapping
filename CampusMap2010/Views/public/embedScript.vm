@@ -39,7 +39,7 @@ var running_options = '$!options_json';
 	t =  document.scripts[document.scripts.length - 1];
 	a = document.createElement('div');
 	a.id='centralMap';
-	a.setAttribute("style", "width:100%;padding-top:50%;min-height: 0px;");
+	a.setAttribute("style", "width:100%;padding-top:66%;min-height: 0px;");
 	a.setAttribute("class","WSU_MAPS_NS");
 	t.parentNode.insertBefore(a,t.nextSibling);
 	i['GoogleAnalyticsObject']=r;
