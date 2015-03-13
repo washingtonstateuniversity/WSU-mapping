@@ -1,48 +1,46 @@
-/*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.id=r;a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
-})(window,document,'script','/content/src/js/bootstrap.js',"WSUMAPS");*/
-		#capturefor(site)
-			#if($Controller.isLocal()==false)
-				http://map.wsu.edu/
-			#else
-				#if($siteroot && $siteroot !='')
-					$siteroot
-				#elseif($Controller.isLocal())
-					$Controller.getRootUrl()
-				#else
-					http://map.wsu.edu/
-				#end
-			#end
+#capturefor(site)
+	#if($Controller.isLocal()==false)
+		http://map.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl()
+		#else
+			http://map.wsu.edu/
 		#end
-		#capturefor(view)
-		$Controller.getView()
-		#end
-		var map_view = true;
-		  var siteroot = '$site.Trim()';
-		  var view = '$view.Trim()/';
-		  #if($urlQueries && $urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
-		  #if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
-		  var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
-		  #if($campus.url!="")var url = '$campus.url'; #end
-		  var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
-		  var pos = {"center":"$map.getLat(),$map.getLong()"};
-		  
-		  #if(${map.places})
-		  #set($c=0)
-		  var ids = "#foreach($place in $map.places)$!place.id,#end 0";
-		  #end
-		  #if(${map.geometrics})
-		  #set($c=0)
-		  var sids = "#foreach($geo in $map.geometrics)$!geo.id,#end 0";
-		  #end
-		  var show_global_nav = #if(${map.show_global_nav})true; #else false; #end
-			var running_options = '$!options_json';
+	#end
+#end
+#capturefor(view)
+$Controller.getView()
+#end
+var map_view = true;
+var siteroot = '$site.Trim()';
+var view = '$view.Trim()/';
+#if($urlQueries && $urlQueries!="")var startingUrl = 'cat[]=$urlQueries'; #end
+#if($activePlace && $activePlace != "")var activePlace = $!activePlace; #end
+var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
+#if($campus.url!="")var url = '$campus.url'; #end
+var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
+var pos = {"center":"$map.getLat(),$map.getLong()"};
+
+#if(${map.places})
+#set($c=0)
+var ids = "#foreach($place in $map.places)$!place.id,#end 0";
+#end
+#if(${map.geometrics})
+#set($c=0)
+var sids = "#foreach($geo in $map.geometrics)$!geo.id,#end 0";
+#end
+var show_global_nav = #if(${map.show_global_nav})true; #else false; #end
+var running_options = '$!options_json';
+
 (function(i,s,o,g,r,t,a,m){
 	t =  document.scripts[document.scripts.length - 1];
 	a = document.createElement('div');
 	a.id='centralMap';
 	a.setAttribute("style", "width:100%;padding-top:50%;min-height: 0px;");
+	a.setAttribute("class","WSU_MAPS_NS");
 	t.parentNode.insertBefore(a,t.nextSibling);
 	i['GoogleAnalyticsObject']=r;
 	i[r]=i[r]||function(){
@@ -79,6 +77,6 @@ m=s.getElementsByTagName(o)[0];a.id=r;a.async=1;a.src=g;m.parentNode.insertBefor
 		'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
 		'/content/src/js/bootstrap.js',
 		'/content/build/js/maps.wsu.edu.js',
-		'/content/build/css/map.view.styles.css'
+		'/content/dis/css/map.view.styles.css'
 	]
 ,"WSUMAPS");
