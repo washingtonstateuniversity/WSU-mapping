@@ -9,7 +9,7 @@
 		},
 		set_body_resp_state:function(){
 			$(window).resize(function(){
-				if($('.veiw_base_layout.public').length){
+				if($('.veiw_base_layout.public').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){
 					if($.wsu_maps.state.mapInst.width()<=320){
 						$('html').removeClass('narrow');
 						$('html').addClass('mobile');

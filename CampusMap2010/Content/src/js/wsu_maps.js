@@ -901,18 +901,22 @@ var startingUrl=startingUrl||null;
 					]
 			};
 			//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
-			if($('#runningOptions').length){
-				if($('#runningOptions').html()==="{}"||$('#runningOptions').html()===""){
 			
-				}else{
-					//map_op= {}
-					$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
-					var jsonStr = $('#runningOptions').html();
-					//var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
-					jsonStr = jsonStr.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
-		
-					$.extend(map_op,pos,base,$.parseJSON(jsonStr));
-				}
+			var ops = "";
+			
+			if($('#runningOptions').length && !($('#runningOptions').html()==="{}"||$('#runningOptions').html()==="") ){
+				$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
+				ops = $('#runningOptions').html();
+			}
+			if( typeof(window.running_options) !== "undefined" ){
+				ops=window.running_options;
+			}
+			
+			
+			if(ops!==""){
+				//var mapType = jsonStr.replace(/.*?(\"mapTypeId\":"(\w+)".*$)/g,"$2");
+				ops = ops.replace(/("\w+":\"\",)/g,'').replace(/(\"mapTypeId\":"\w+",)/g,'');
+				$.extend(map_op,pos,base,$.parseJSON(ops));
 			}
 			map_ele_obj.gmap(map_op).bind('init', function() { 
 				//var map = map_ele_obj.gmap("get","map");
@@ -968,13 +972,13 @@ var startingUrl=startingUrl||null;
 			if($( "#placeSearch input[type=text]" ).length){
 				$.wsu_maps.search.setup_mapsearch($.wsu_maps.state.mapInst);
 			}
-			if($('.veiw_base_layout.public').length){	
+			if($('.veiw_base_layout.public').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){	
 				$.wsu_maps.mapping.reloadShapes();
 				$.wsu_maps.mapping.reloadPlaces();
 			}
 		},
 
-		ini_GAtracking:function (gacode){
+		ini_GAtracking:function (){//gacode){
 			/*var data = [
 				{
 					"element":"a[href^='http']:not([href*='wsu.edu'])",
@@ -1009,7 +1013,7 @@ var startingUrl=startingUrl||null;
 			//$.jtrack.defaults.debug.console = true;
 			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
-		ini_addthis:function (username){
+		ini_addthis:function (){//username){
 			/*if(typeof(username)==="undefined"){
 				username="mcwsu";
 			}*/

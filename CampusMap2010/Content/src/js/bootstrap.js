@@ -1,4 +1,4 @@
-alert('hello');
+//alert('hello');
 
 /*
 var scriptTag =  document.getElementById('WSUMAPS');//document.currentScript;//document.scripts[document.scripts.length - 1];

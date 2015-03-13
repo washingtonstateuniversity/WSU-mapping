@@ -11,7 +11,7 @@
 			//$(' [placeholder] ').defaultValue();
 			if($.wsu_maps.state.mapInst.length){
 				$.wsu_maps.state.mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
-				if($('.veiw_base_layout').length){
+				if($('.veiw_base_layout').length || ( typeof(window.map_view) !== "undefined" && window.map_view === true)){
 					$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,$.wsu_maps.setup);
 				}else{
 					$.wsu_maps.iniMap("",$.wsu_maps.setup);
@@ -69,7 +69,7 @@
 				$.wsu_maps.state.mapInst.gmap("destroy",function(){//ele){
 					$.wsu_maps.state.mapInst.html('');
 					$('.mapControl').remove(); 
-					if($('.veiw_base_layout').length){
+					if($('.veiw_base_layout').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){
 						$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,$.wsu_maps.setup);
 					}else{
 						$.wsu_maps.iniMap("",$.wsu_maps.setup);

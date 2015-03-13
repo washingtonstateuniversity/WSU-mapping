@@ -13,15 +13,15 @@
 	<link rel="shortcut icon" href="http://repo.wsu.edu/spine/1/favicon.ico" />
 
 	<!-- STYLESHEETS -->
-	<link href="https://repo.wsu.edu/spine/develop/spine.min.css" rel="stylesheet" type="text/css" />
+	<link href="//repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
 	<!-- Your custom stylesheets here -->
 	<!-- RESPOND -->
 	<meta name="viewport" content="width=device-width, user-scalable=yes">
 
 	<!-- SCRIPTS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<script src="https://repo.wsu.edu/spine/develop/spine.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
 	<!-- COMPATIBILITY -->
 	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<noscript><style>#spine .spine-sitenav ul ul li { display: block !important; }</style></noscript>
@@ -36,16 +36,18 @@
 
 <!-- WRAPPING -->
 <div id="jacket">
-<div id="binder" class=" hybrid">
+<div id="binder" class=" fuild max-1980">
 <!-- GRID BEHAVIOR: Default behavior can be changed by changing "hybrid" to "fixed" or "fluid". -->
 <!-- CONTENT -->
 <main>
-
+		<div>
+		<script type="text/javascript" src="/embed/parking"></script>
+		</div>
 	<!-- Responsive Sections -->
-		<section class="row side-right gutter pad-bottom tall">
+		<div class="row side-right gutter pad-bottom tall">
 
 	<div class="column one" id="test">
-		<script type="text/javascript" src="/embed/parking"></script>
+		
 		<article class="post-15 page type-page status-publish hentry" id="post-15">
 
 			<p><big>Integer vestibulum</big> quis lacus imperdiet imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla sollicitudin mauris a augue mattis, in sollicitudin felis tincidunt. Nulla id leo et justo molestie egestas. Mauris ultrices metus nunc, vel tempor diam molestie id. Ut vitae porttitor massa. Ut posuere enim at turpis tristique varius. Praesent pellentesque augue nulla. In consequat dui quam. Duis pellentesque in orci cursus varius. Ut vehicula enim libero, sit amet porta dui suscipit in.</p>
@@ -75,7 +77,7 @@
 
 	</div><!--/column-->
 
-</section>
+</div>
 </main>
 <!-- /CONTENT -->
 
