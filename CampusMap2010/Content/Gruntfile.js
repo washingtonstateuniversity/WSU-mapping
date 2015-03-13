@@ -32,32 +32,23 @@ module.exports = function(grunt) {
 		concat: {
 			front_styles: {
 				src: [
-					'src/css/central_main.css',
-					'src/css/map_admin.css',
-					'src/css/wsu_maps.infobox.css',
-					'src/css/wsu_maps.central.nav.css',
-					'src/css/wsu_maps.listings.css',
-					'src/css/wsu_maps.google_map_overriders.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
 					'src/css/colorbox.css',
 					'src/css/share_link.css',
-					'src/css/reactive.css'
+					'src/css/reactive.css',
+					'build/_pre_sass/front.styles.css'
 				],
 				dest: 'build/css/front.styles.css',
 			},
 			map_view_styles: {
 				src: [
-					'src/css/wsu_maps.view.css',
-					'src/css/wsu_maps.infobox.css',
-					'src/css/wsu_maps.central.nav.css',
-					'src/css/wsu_maps.listings.css',
-					'src/css/wsu_maps.google_map_overriders.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
 					'src/css/colorbox.css',
 					'src/css/share_link.css',
-					'src/css/reactive.css'
+					'src/css/reactive.css',
+					'build/_pre_sass/map.view.styles.css'
 				],
 				dest: 'build/css/map.view.styles.css',
 			},
@@ -65,6 +56,7 @@ module.exports = function(grunt) {
 				src: [
 					'src/css/admin/jSelect.min.css',
 					'src/css/admin/jSelect.filter.min.css',
+					'build/_pre_sass/admin.styles.css',
 					'src/css/central_main.css',
 					'src/css/map_admin.css',
 					'src/css/wsu_maps.infobox.css',
