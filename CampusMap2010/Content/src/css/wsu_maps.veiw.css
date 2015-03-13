@@ -1,0 +1,413 @@
+#centralMap_wrap {}
+#campusmap {
+	overflow: hidden;
+}
+#centralMap {
+	width: 100%;
+	min-height: 350px;
+	height: auto;
+	max-height: 100%;
+	border-radius: 0px 0px 0px 20px;
+}
+#centralMap.opended {
+	border-radius: 0px 0px 0px 0px;
+}
+#centralMap_wrap {
+	background-color: transparent;
+	display: block;
+	height: auto;
+	margin-left: 201px;
+	max-height: 100%;
+	min-height: 350px;
+	position: relative;
+}
+.embeded #centralMap_wrap, .embeded #centralMap {
+	margin-left: 0px;
+	height: 100%;
+}
+#globalnav {
+	width: auto;
+	float: none;
+	background: none repeat scroll 0 0 #981E32;
+}
+
+#wrapper #toolbar {
+	width: 100%;
+	float: none;
+	/*background-color: #5E6A71;*/
+}
+#toolbar .addthis_button_compact span {
+	height: 0;
+	width: 0;
+}
+
+
+#header_bar {
+	border-top: 4px solid #9a1b2f;
+	/*background-color: #5E6A71;*/
+	height: 39px;
+	margin-left:198px;
+	position: relative;
+}
+#header_bar h1 {
+	width: auto;
+	font-size:24px !important;
+	display:inline-block;
+	margin:5px 0px;
+	color:#585858;
+}
+
+/*.admin #content {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	min-width: 1026px;
+}*/
+#localfooter {
+	font-size: 10px;
+	color: #262A2D;
+	height: 25px;
+	text-align: center;
+	padding-top: 5px;/*position: absolute;bottom:3px;padding-left: 250px;*/
+}
+#localfooter #wsufooter {
+	background: none repeat scroll 0 0 transparent;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
+	width: auto;
+	height: auto;
+}
+.central #content {
+	min-width: 1026px;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	float: left;
+}
+#main {
+	padding: 0px;
+	width: 100%;
+	position: relative;
+}
+
+
+
+
+
+
+
+#toolbar ul {
+	float: right;
+	padding: 0px;
+	margin: -1px 15px 0 0;
+	height: 20px;
+}
+#toolbar ul li {
+	display: block;
+	float: left;
+	line-height: 15px;
+	padding: 0px 0px 0px 21px;
+}
+#toolbar a {
+	color: #cfd4d7;
+	font-size: 11px;
+	text-decoration: none;
+	line-height: 20px;
+}
+#toolbar a:hover {
+	color: #fff !important;
+}/**/
+#placeSearch {
+	height: 23px;
+	position: relative;
+	width: 147px;
+	background: url("../../Content/images/assests_central/placeSerachBar.png") no-repeat scroll left top transparent;
+}
+#placeSearch:focus {
+	background-position: left bottom;
+}
+#placeSearch input[type=text] {
+	background: url("../../Content/images/assests_central/placeSerachBar_magGlass.png") no-repeat scroll 95% center transparent;
+	border: medium none;
+	color: #1F4799;
+	font-size: 12px;
+	height: 23px;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	width: 116px;
+}
+#placeSearch input[type=text] {
+	left: 0px;
+	padding-left: 5px;
+	padding-right: 25px;
+}
+.ie #placeSearch input[type=text] {
+	left: 0px;
+	padding-top: 3px;
+}
+#placeSearch input:focus {/*background-position:left bottom;*/
+}
+#placeSearch .submit {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	cursor: pointer;
+	font-size: 0;
+	height: 22px;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 22px;
+}
+/*#placeSearch .submit:focus,#placeSearch .submit:hover{background-position:right bottom;}*/
+
+
+/*
+  set up for the ui to over power the default css
+*/
+#wsu_ui .ui-tabs .ui-tabs-nav {
+	margin: 0 !important;
+	padding: 0.2em 0.2em 0 !important;
+}
+#wsu_ui .ui-tabs .ui-tabs-nav li {
+	margin: 0 0.2em 1px 0 !important;
+	padding: 0 !important;
+}
+#wsu_ui .ui-tabs .ui-tabs-hide {
+	position: absolute;
+	left: -10000px;
+	top: -10000px;
+	display: block !important;
+}
+.buttons .ui-icon {
+	display: block !important;
+}
+#wsu_ui #main_nav .ui-button {
+	text-align: left;
+	padding: 0 15px;
+}
+#wsu_ui .ui-widget input[type=submit], #wsu_ui input[type=submit].ui-widget {
+	padding: 4px 7px !important;
+}
+.inlineIcon {
+	display: inline-block !important;
+	float: left;
+	margin: 2px 5px 0 -5px;
+}
+
+
+
+
+
+
+#option {
+	display: block;
+	height: 31px;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	top: -1px;
+}
+#option li {
+	line-height: 27px;
+	background-color: #dfdfdf;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0;
+	padding: 3px 0 0 0 !important;
+	text-align: center;
+	width: 49%;
+	border-bottom: 1px solid #b8b8b8;
+	min-height: 27px !important;
+}
+#option li:hover {
+	color: #000!important;
+}
+#option li.active {
+	color: #981e32;
+	border-left: 1px #b8b8b8 solid;
+	border-bottom: none;
+	border-radius: 10px 0px 0px 0px;
+	color: #5e6a71;
+	box-shadow: -3px 0px 20px -5px rgba(25, 25, 25, .25);
+	min-height: 29px !important;
+	background-color: #EEEEEE;
+}
+#option li.DIVIT.active {
+	border-left: none;
+	border-right: 1px #b8b8b8 solid;
+	border-radius: 0px 10px 0px 0px;
+	box-shadow: 3px 0px 20px -5px rgba(25, 25, 25, .25);
+}
+#campusmap .ui-tabs .ui-tabs-panel .content.Views {
+	overflow: hidden;
+}
+#output {
+	height: 18px;
+	margin: 6px 6px 11px;
+}
+#output a {
+	color: #5E6A71;
+	display: inline-block;
+	font-size: 11px;
+	height: 12px;
+	line-height: 12px;
+	margin-right: 9px;
+	text-align: left;
+	text-decoration: none;
+}
+#output a:hover {
+	color: #981e32;
+	background-color: #e2e2e2;
+}
+/* embeding */
+#embedArea {
+	padding: 0 0 0 15px;
+}
+#embedArea h2 {
+	margin: 0;
+	font-size: 16px;
+}
+#embedArea h3 {
+	color: #981E32;
+	font-weight: normal;
+	font-size: 13px;
+	margin: 0;
+}
+#linkurl {
+	color: #a61232;
+}
+#embedArea textarea {
+	border: medium none;
+	color: #C07C8B;
+	float: left;
+	font-size: 11px;
+	height: 140px;
+	margin-left: 7px;
+	resize: none;
+	width: 195px;
+	background-color: transparent;
+	overflow: hidden;
+}
+#embedArea #custom {
+	float: left;
+	background: url(../../../Content/images/embed_code_braket.png) no-repeat scroll right top transparent;
+	padding-right: 13px;
+	width: 180px;
+	min-height: 155px;
+}
+#cSize {
+	border-top: 1px solid #C2C2C2;
+	font-size: 12px;
+	margin-top: 7px;
+	padding-top: 7px;
+}
+#request {
+	font-size: 13px;
+}
+.my_clip_button {
+	border: 1px solid #5e5e5e;
+	cursor: pointer;
+	font-size: 11px;
+	line-height: 13px;
+	height: 13px;
+	margin: 10px 0;
+	padding: 2px;
+	text-align: center;
+	width: 55px;
+	display: inline-block;
+	background: url(../../../Content/wsu_ui/images/ui-bg_highlight-hard_100_eeeeee_1x100.png) repeat-x scroll 50% 50% #3B4044;
+	border-radius: 15px;
+	color: #252525;
+}
+.my_clip_button.hover {
+	background-color: #eee;
+}
+.my_clip_button.active {
+	background-color: #aaa;
+}
+#embedArea label {
+	display: block;
+	font-size: 11px;
+	height: 18px;
+	line-height: 18px;
+}
+#emailRequest {
+	padding: 0 0 0 15px;
+}
+/* error */
+#errorReporting {
+}
+#errorReporting h2 {
+	margin: 0;
+	font-size: 16px;
+}
+#errorReporting h3 {
+	color: #981E32;
+	font-weight: normal;
+	font-size: 13px;
+	margin: 0;
+}
+#errorReporting textarea {
+	width: 100%;
+	height: 101px;
+}
+#emailDirs h3 {
+	color: #981E32;
+	font-weight: normal;
+	font-size: 13px;
+	margin: 0;
+}
+#emailDirs h2 {
+	margin: 0;
+	font-size: 16px;
+}
+#emailDirs h4 {
+	color: #262a2d;
+	font-weight: normal;
+	font-size: 12px;
+	margin: 0;
+}
+#emailDirs textarea {
+	width: 100%;
+	height: 101px;
+}
+
+.hoverbox img[src*="close.gif"]{display:none;}
+
+[src*="placeholder.png"]{
+	background: transparent url('/Content/images/map_icons/svg_marker.svg') center center no-repeat;
+	background-size:contain;
+	background-repeat:none;
+	width:30px;
+	height:50px;
+}
+.svg_clip{
+clip: polygon(51% 0, 31% 6%, 20% 24%, 21% 48%, 48% 100%, 78% 49%, 79% 22%, 71% 6%);
+-webkit-clip-path: polygon(51% 0, 31% 6%, 20% 24%, 21% 48%, 48% 100%, 78% 49%, 79% 22%, 71% 6%);
+clip-path: polygon(51% 0, 31% 6%, 20% 24%, 21% 48%, 48% 100%, 78% 49%, 79% 22%, 71% 6%);
+overflow:hidden;
+}
+.marker-number{
+	color:blue;
+}
+
+/*
+img[src*="placeholder.png"] {
+	width:30px !important;
+	height:50px !important;
+  transition:width 0.3s, height 0.3s;
+}
+ 
+img[src*="placeholder.png?1"]:hover {
+	width:45px !important;
+	height:75px !important;
+  transition: width 0.3s,height 0.3s;
+}*/
+
+
+
+

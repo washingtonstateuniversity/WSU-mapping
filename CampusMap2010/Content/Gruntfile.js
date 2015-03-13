@@ -18,7 +18,16 @@ module.exports = function(grunt) {
 			files: [
 				'src/**/*'
 			],
-			tasks: [ 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' ]
+			tasks: [ 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' ]
+		},
+		sass: {	
+			dev: {
+				files: [
+					{ src: "src/scss/admin.scss", dest: "build/_pre_sass/admin.styles.css" },
+					{ src: "src/scss/centrals.scss", dest: "build/_pre_sass/front.styles.css" },
+					{ src: "src/scss/embeds.scss", dest: "build/_pre_sass/map.view.styles.css" },
+				]
+			},
 		},
 		concat: {
 			front_styles: {
@@ -36,6 +45,21 @@ module.exports = function(grunt) {
 					'src/css/reactive.css'
 				],
 				dest: 'build/css/front.styles.css',
+			},
+			map_view_styles: {
+				src: [
+					'src/css/wsu_maps.view.css',
+					'src/css/wsu_maps.infobox.css',
+					'src/css/wsu_maps.central.nav.css',
+					'src/css/wsu_maps.listings.css',
+					'src/css/wsu_maps.google_map_overriders.css',
+					'src/js/scrollbar/style/jquery.jscrollpane.css',
+					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
+					'src/css/colorbox.css',
+					'src/css/share_link.css',
+					'src/css/reactive.css'
+				],
+				dest: 'build/css/map.view.styles.css',
 			},
 			admin_styles: {
 				src: [
@@ -76,7 +100,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.responsive.js',
 					'src/js/wsu_maps.frontend.js',
 					
-					'src/js/addthis_ini.js'
+					//'src/js/addthis_ini.js'
 				],
 				dest: 'build/js/maps.wsu.edu.js',
 			},
@@ -151,6 +175,10 @@ module.exports = function(grunt) {
 				src: 'build/css/front.styles.css',
 				dest: 'build/_precss/front.styles.css'
 			},
+			map_view_styles: {
+				src: 'build/css/map.view.styles.css',
+				dest: 'build/_precss/map.view.styles.css'
+			},
 			admin_styles: {
 				src: 'build/css/admin.styles.css',
 				dest: 'build/_precss/admin.styles.css'
@@ -162,6 +190,7 @@ module.exports = function(grunt) {
 					// Hmmm, in reverse order
 					'dis/css/admin.styles.css': ['build/_precss/admin.styles.css'],
 					'dis/css/front.styles.css': ['build/_precss/front.styles.css'],
+					'dis/css/map.view.styles.css': ['build/_precss/map.view.styles.css'],
 				}
 			}
 		},
@@ -259,10 +288,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	// Default task(s).
 	grunt.registerTask('start', ['watch']);
 	grunt.registerTask('default', ['jshint']);
-	grunt.registerTask('prod', ['env:prod', 'concat','preprocess:js','autoprefixer','cssmin','uglify','copy','includereplace','preprocess:html']);
+	grunt.registerTask('prod', ['env:prod','concat','preprocess:js','autoprefixer','cssmin','uglify','copy','includereplace','preprocess:html']);
 
 	grunt.registerTask('dev', [ 'concat', 'jshint', 'env:dev','autoprefixer', 'cssmin', 'uglify', ]);
 

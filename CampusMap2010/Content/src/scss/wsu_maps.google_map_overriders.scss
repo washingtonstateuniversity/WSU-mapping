@@ -1,0 +1,61 @@
+@import 'vars/global';
+@import 'vars/colors';
+
+
+
+//@extend-elements
+//original selectors
+//#selectedPlaceList .adp-step, #selectedPlaceList .adp-text
+%extend_1 {
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 12px;
+	width: 100%;
+}
+
+
+#directions-panel {
+	margin: 26px 0 0;
+	width: 190px !important;
+}
+#selectedPlaceList {
+	.adp-details {
+		font-size: 10px !important;
+		padding-left: 5px;
+	}
+	.adp-legal {
+		font-size: 10px !important;
+		padding-left: 5px;
+	}
+	.adp-directions {
+		border-collapse: collapse;
+		cursor: pointer;
+		font-size: 11px;
+		line-height: 14px;
+		table {
+			width: 190px;
+		}
+	}
+	.adp-step {
+		@extend %extend_1;
+	}
+	.adp-text {
+		@extend %extend_1;
+	}
+	.adp-summary {
+		color: $color_mexican_red_approx;
+		font-size: 13px;
+		font-weight: bold;
+		line-height: 14px;
+		padding: 0 3px 3px;
+	}
+}
+#adp-placemark {
+	margin-top: 0 !important;
+}
+.warnbox-content {
+	background: none repeat scroll 0 0 $color_vis_vis_approx;
+	font-size: 10px;
+	line-height: 12px;
+	padding: 5px 6px;
+} 
