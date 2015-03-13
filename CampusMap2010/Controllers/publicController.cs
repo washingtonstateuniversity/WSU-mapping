@@ -195,6 +195,16 @@ namespace campusMap.Controllers {
                 return;
             }
             */
+
+            if (urlwithnoparams.ToString().IndexOf("/embed/") > -1) {
+                string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
+                String mode = "";
+                String callback = "";
+                sendEmbedScript(alias, HttpContext.Current.Request.Params["mode"], HttpContext.Current.Request.Params["callback"]);
+                return;
+            }
+
+
             if (urlwithnoparams.ToString().IndexOf("/rt/") > -1) {
                 string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
                 String mode = "";
@@ -325,8 +335,46 @@ namespace campusMap.Controllers {
 
 
 
+        
+        [Layout("blank")]
+        public void sendEmbedScript(String alias, String mode, String callback) {
+            CancelView();
+            CancelLayout();
 
+            RenderView("embedScript");
+            return;
 
+            IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
+            if (c.Count == 0) {
+                RenderText("false");
+                return;
+            }
+            if (mode == "json") {
+                CancelLayout();
+                if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
+                PropertyBag["map"] = c[0];
+                PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+                PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(\""mapTypeId\"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+
+                PropertyBag["callback"] = callback;
+
+                RenderView("map_json");
+                return;
+            }
+            if (mode == "standalone") {
+                CancelLayout();
+                PropertyBag["map"] = c[0];
+
+                PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+                PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+
+                RenderView("map_view/map_standalone");
+                return;
+            }
+            LayoutName = "map_veiws";
+            PropertyBag["map"] = c[0];
+            RenderView("map_view/map_basic");
+        }
 
         [Layout("map_veiws")]
         public void fetchMap(String alias, String mode, String callback) {
