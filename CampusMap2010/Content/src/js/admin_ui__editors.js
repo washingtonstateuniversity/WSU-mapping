@@ -320,7 +320,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 				.click(function() {
 						$.wsu_maps.infobox.open_info(jObj,i);
 					})
-				.rightclick(function(event){$.wsu_maps.showContextMenu(event.latLng);})
+				.rightclick(function(event){$.wsu_maps.controlls.showContextMenu(event.latLng);})
 				.mouseover(function(event){
 					
 					$.wsu_maps.infobox.open_toolTip(jObj,i);
