@@ -107,7 +107,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 	if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 		$.each( data.shapes, function(i, shape) {	
 			if( !$.isEmptyObject(shape)){
-				 addShapeToMap($.wsu_maps.state.map_jObj,i, shape)
+				 addShapeToMap(i, shape)
 			}
 		});
 	}
@@ -118,7 +118,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 			if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
 				$.each( marker.shapes, function(i, shape) {	
 					if( !$.isEmptyObject(shape)){
-						addShapeToMap($.wsu_maps.state.map_jObj,i, shape)
+						addShapeToMap(i, shape)
 					}
 				});
 			}

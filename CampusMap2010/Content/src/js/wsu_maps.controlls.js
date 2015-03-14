@@ -190,7 +190,7 @@
 					return false;
 				}
 				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere($.wsu_maps.state.map_jObj);
+				$.wsu_maps.hereToThere();
 			});
 			$('.contextmenu #from').click(function(){
 				$.wsu_maps.state.cFrom=caurrentLatLng.lat()+","+caurrentLatLng.lng();
@@ -201,7 +201,7 @@
 					return false;
 				}
 				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere($.wsu_maps.state.map_jObj);
+				$.wsu_maps.hereToThere();
 			});
 		},
 		hideContextMenu:function() {

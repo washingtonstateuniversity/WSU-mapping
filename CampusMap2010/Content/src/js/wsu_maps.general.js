@@ -161,11 +161,12 @@
 			}
 			return return_item;
 		},
-		loadData:function (jObj,data,callback,markerCallback){
+		loadData:function (data,callback,markerCallback){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
 				$.each( data.shapes, function(i, shape) {
 					if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-						$.wsu_maps.mapping.addShapeToMap(jObj,i,shape);
+						$.wsu_maps.mapping.addShapeToMap(i,shape);
 					}
 				});
 			}
@@ -175,7 +176,7 @@
 					if(typeof(marker.shapes)!=='undefined' && !$.isEmptyObject(marker.shapes)){
 						$.each( marker.shapes, function(index, shape) {	
 							if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape)){
-								$.wsu_maps.mapping.addShapeToMap(jObj,idx,shape);
+								$.wsu_maps.mapping.addShapeToMap(idx,shape);
 							}
 						});
 					}
@@ -183,9 +184,9 @@
 					//var _mid= marker.id;
 					$.wsu_maps.state.mid[idx]=marker.id;
 					//var pid = marker.id;
-					$.wsu_maps.infobox.make_InfoWindow(jObj,idx,marker);
-					$.wsu_maps.infobox.make_ToolTip(jObj,idx,marker);
-					$.wsu_maps.markers.make_Marker(jObj,idx,marker.id,marker,markerCallback);
+					$.wsu_maps.infobox.make_InfoWindow(idx,marker);
+					$.wsu_maps.infobox.make_ToolTip(idx,marker);
+					$.wsu_maps.markers.make_Marker(idx,marker.id,marker,markerCallback);
 					
 					if(idx===(data.markers.length-1) && $.isFunction(callback)){
 						callback();
@@ -802,7 +803,7 @@
 					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
 					$.wsu_maps.state.map_jObj.gmap('clear','markers');
 					
-					$.wsu_maps.general.loadData($.wsu_maps.state.map_jObj,data,null,function(){//marker){
+					$.wsu_maps.general.loadData(data,null,function(){//marker){
 						//ib[0].open($.wsu_maps.state.map_inst, marker);
 						//$.wsu_maps.state.cur_mid = mid[0];
 					});
@@ -822,12 +823,11 @@
 				$.getJSON(url+'?callback=?&ids[]='+sids.replace(", 0",""), function(data) {
 					$.wsu_maps.state.map_jObj.gmap('clear','overlays');
 					$.each( data.shapes, function(i, shape) {	
-						$.wsu_maps.mapping.addShapeToMap($.wsu_maps.state.map_jObj,i, shape);
+						$.wsu_maps.mapping.addShapeToMap(i, shape);
 					});
 				});
 			}
 		},*/
-		
 		
 		reloadPlaces:function (){
 			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
@@ -843,7 +843,7 @@
 					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
 					
 					
-					$.wsu_maps.general.loadData($.wsu_maps.state.map_jObj,data,null,function(){//marker){
+					$.wsu_maps.general.loadData(data,null,function(){//marker){
 						//ib[0].open($.wsu_maps.state.map_inst, marker);
 						//cur_mid = mid[0];
 					});
@@ -863,15 +863,14 @@
 			if(typeof(ids)!=="undefined"){
 				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 					$.each( data.shapes, function(i, shape) {	
-						$.wsu_maps.mapping.addShapeToMap($.wsu_maps.state.map_jObj,i, shape);
+						$.wsu_maps.mapping.addShapeToMap(i, shape);
 					});
 				});
 			}	
 		},
-		
-		
-		
-		addShapeToMap:function(jObj,i,shape){
+
+		addShapeToMap:function(i,shape){
+			var jObj = $.wsu_maps.state.map_jObj;
 			var pointHolder = {};
 			var style = {};
 			if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polyline'){ 

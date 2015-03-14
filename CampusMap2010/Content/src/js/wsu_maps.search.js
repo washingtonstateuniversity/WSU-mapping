@@ -4,7 +4,7 @@
 	$.wsu_maps.search={
 		focuseitem:{},
 		last_searched:0,
-		setup_mapsearch:function (jObj){
+		setup_mapsearch:function (){
 			/* Search autocomplete */
 			//var cur_search = "";
 			//var termTemplate = "<strong>%s</strong>";
@@ -52,7 +52,7 @@
 						if(typeof($.jtrack)!=="undefined"){
 							//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 						}
-						$.wsu_maps.getSignlePlace(jObj,id);
+						$.wsu_maps.getSignlePlace(id);
 					}
 					
 					$( "#placeSearch input[type=text]" ).autocomplete("close");
@@ -88,7 +88,7 @@
 						//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 					}
 					$( "#placeSearch input[type=text]" ).autocomplete("close");
-					$.wsu_maps.getSignlePlace(jObj,id);
+					$.wsu_maps.getSignlePlace(id);
 					
 				}
 			});	
@@ -98,7 +98,7 @@
 				//var btn=$(this);
 				var url = url||"";
 				var id   = (typeof($.wsu_maps.search.focuseitem.id)!=="undefined"&&$.wsu_maps.search.focuseitem.id!=="")?$.wsu_maps.search.focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
-				$.wsu_maps.getSignlePlace(jObj,id);
+				$.wsu_maps.getSignlePlace(id);
 				if(typeof($.jtrack)!=="undefined"){
 					//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 				}

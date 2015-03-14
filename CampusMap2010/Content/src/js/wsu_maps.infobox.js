@@ -6,7 +6,8 @@
 
 	$.wsu_maps.infobox = {
 		pano_init : false,
-		make_ToolTip:function (jObj,i,marker){
+		make_ToolTip:function (i,marker){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			//end of the bs that is well.. bs of a implamentation
 			/* so need to remove this and create the class for it */
 			var boxText = document.createElement("div");
@@ -45,7 +46,8 @@
 			}).css('min-height',minHeight); 
 			$.wsu_maps.infobox.apply_scroller(minHeight);
 		},
-		build_options:function(jObj,marker,i,content){
+		build_options:function(marker,i,content){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			var options = {
 				alignBottom:true,
 				content: content,//boxText
@@ -66,7 +68,7 @@
 					$.wsu_maps.infobox.close_IW(marker,i);
 				},
 				onOpen:function(){
-					$.wsu_maps.infobox.open_IW(jObj,marker,i);
+					$.wsu_maps.infobox.open_IW(marker,i);
 					/*note from backend, so may need to port something, remove when done */
 					/*$.wsu_maps.state.ibOpen = true;
 					$.wsu_maps.state.ibHover = true;
@@ -116,7 +118,6 @@
 			return options;
 		},
 
-		
 		build_IW_content:function(marker,i){
 			var nav='';
 			var content='';
@@ -146,14 +147,15 @@
 			'</div>';
 			return $.runTemplate(tmpl,{i:i,nav:nav,content:content});
 		},
-		make_InfoWindow:function (jObj,i,marker){
+		make_InfoWindow:function (i,marker){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			var content= $.wsu_maps.infobox.build_IW_content(marker,i);
 		
 			/* so need to remove this and create the class for it */
 			var boxText = document.createElement("div");
 			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
 			boxText.innerHTML = marker.info.content;
-			var myOptions = $.wsu_maps.infobox.build_options(jObj,marker,i,content);
+			var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
 			$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
 				//$('#taby'+i).tabs();
 				//alert('tring to tab it, dabnab it, from the INI');
@@ -184,7 +186,8 @@
 			}
 			return item;
 		},
-		build_infobox:function (jObj,marker,i){
+		build_infobox:function (marker,i){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			if(typeof(marker.info)==='undefined' || $.isEmptyObject(marker.info) || typeof(marker.info.content)==='undefined' || $.isEmptyObject(marker.info.content)){
 				marker=$.wsu_maps.infobox.build_infobox_markerobj(marker);
 			}
@@ -214,7 +217,7 @@
 					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
 					content+
 				'</div>';		
-			var IW_options = $.wsu_maps.infobox.build_options(jObj,marker,0,box_content);
+			var IW_options = $.wsu_maps.infobox.build_options(marker,0,box_content);
 			$.wsu_maps.state.ib[0] = new window.InfoBox(IW_options,function(){});
 			return marker;
 		},
@@ -235,8 +238,9 @@
 			$.wsu_maps.state.active.marker = null;
 		},
 		
-		open_IW:function(jObj,marker,i){			
-			$.wsu_maps.infobox.apply_panoramas(jObj,marker);
+		open_IW:function(marker,i){
+			var jObj = $.wsu_maps.state.map_jObj;			
+			$.wsu_maps.infobox.apply_panoramas(marker);
 
 			needsMoved=0;
 			$.wsu_maps.state.ibHover =  true;
@@ -302,8 +306,8 @@
 				$.wsu_maps.state.api = pane.data('jsp');
 			}
 		},
-		apply_panoramas:function(jObj,marker){
-			
+		apply_panoramas:function(marker){
+			var jObj = $.wsu_maps.state.map_jObj;
 			var pano = jObj.gmap("getPanorama");
 			
 
@@ -499,12 +503,9 @@
 				});
 			});
 		},
-		
-		
-		
-		
-		
-		open_info:function (jObj,i){//,marker){
+
+		open_info:function (i){
+			var jObj = $.wsu_maps.state.map_jObj;
 			if($.wsu_maps.state.ib.length>0){
 				$.each($.wsu_maps.state.ib, function(i) {
 					$.wsu_maps.state.ib[i].close();
@@ -529,7 +530,8 @@
 			}
 			$.wsu_maps.state.ibHover =  false;		
 		},
-		open_toolTip:function (jObj,i){
+		open_toolTip:function (i){
+			//var jObj = $.wsu_maps.state.map_jObj;
 			if($.wsu_maps.state.ibh.length>0){
 				$.each($.wsu_maps.state.ibh, function(i) {$.wsu_maps.state.ibh[i].close();});
 				$('.infoBox').hover( 

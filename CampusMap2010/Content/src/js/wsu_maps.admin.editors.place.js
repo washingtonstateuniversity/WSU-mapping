@@ -50,7 +50,7 @@ var i=i||-1;
 							shape.style.events.rest.strokeWeight = 0.2;
 							shape.style.events.rest.strokeOpacity = 0.6;
 						}
-						$.wsu_maps.mapping.addShapeToMap($.wsu_maps.state.map_jObj,i, shape);
+						$.wsu_maps.mapping.addShapeToMap(i, shape);
 					});
 				});
 			}		
@@ -561,7 +561,7 @@ var i=i||-1;
 			if( typeof(clear)!=='undefined' && clear ){
 				marker.info={};
 			}
-			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox($.wsu_maps.state.map_jObj,marker,i));
+			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox(marker,i));
 			
 			if(marker.style.icon){
 				marker.style.icon = marker.style.icon.replace('{$i}',i+1);

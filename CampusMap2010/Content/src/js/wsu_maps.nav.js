@@ -17,7 +17,8 @@
 				jObj.closest('.depth_3').closest('.depth_2.checked').removeClass('checked');
 			}
 		},
-		setup_nav:function (jObj){
+		setup_nav:function (){
+			var jObj = $.wsu_maps.state.map_jObj;
 			$('#main_nav li.parent:not(".altAction")').off().on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();

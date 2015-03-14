@@ -6,8 +6,6 @@
 			width:30,
 			height:50,
 		},
-		
-		
 		alter_marker_icon:function(marker,multiplier){
 			multiplier = multiplier||1;
 			var width = marker.marker_style.icon.width * multiplier;
@@ -61,8 +59,8 @@
 			*/
 			return intLat*(-1);
 		},
-		make_Marker:function (jObj,i,id,marker_obj,markerCallback){	
-		
+		make_Marker:function (i,id,marker_obj,markerCallback){	
+			var jObj = $.wsu_maps.state.map_jObj;
 			//console.log(marker_obj.style.icon);
 			var idx = i+1;
 			var marker_style = $.extend(marker_obj.style,{
@@ -104,7 +102,7 @@
 					$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active.marker);
 				}
 				$.wsu_maps.state.active.marker = null;
-				$.wsu_maps.infobox.open_info(jObj,i,$.wsu_maps.state.markerLog[i]);
+				$.wsu_maps.infobox.open_info(i,$.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
 				if(typeof($.jtrack)!=="undefined"){
