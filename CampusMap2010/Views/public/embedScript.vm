@@ -24,13 +24,15 @@ var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
 var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
 var pos = {"center":"$map.getLat(),$map.getLong()"};
 
-#if(${map.places})
+#if($!map.places)
 #set($c=0)
-var ids = "#foreach($place in $map.places)$!place.id,#end 0";
+#capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
+var embeded_place_ids = "${places.Replace(", 0","").Replace(" 0","")}";
 #end
-#if(${map.geometrics})
+#if($!map.geometrics)
 #set($c=0)
-var sids = "#foreach($geo in $map.geometrics)$!geo.id,#end 0";
+#capturefor(shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
+var embeded_shape_ids = "${shapes.Replace(", 0","").Replace(" 0","")}";
 #end
 var show_global_nav = #if(${map.show_global_nav})true; #else false; #end
 var running_options = '$!options_json';

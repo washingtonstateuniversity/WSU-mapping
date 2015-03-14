@@ -83,10 +83,13 @@
 		reloadPlaces:function (){
 			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
 			var ids;
-			
-			$.each($('[name="placelist[]"]'),function(){
-				ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
-			});
+			if(typeof(window.embeded_place_ids)!=="undefined"){
+				ids =window.embeded_place_ids;
+			}else{
+				$.each($('[name="placelist[]"]'),function(){
+					ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
+				});
+			}
 
 			$.wsu_maps.state.map_jObj.gmap('clear','markers');
 			if(typeof(ids)!=="undefined"){
