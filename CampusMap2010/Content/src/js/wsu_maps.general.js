@@ -11,8 +11,6 @@
 			var geocoder = geocoder||new google.maps.Geocoder();
 			return geocoder;
 		},
-
-		
 		apply_element:function (mapOjb,type,style){
 			var rest_shape = $.wsu_maps.general.filter_map_element(type,style.rest.options);
 			mapOjb.gmap('addShape', type, rest_shape, function(shape){

@@ -171,7 +171,7 @@
 			$.wsu_maps.controlls.setMenuXY(caurrentLatLng);
 			contextmenuDir.style.visibility = "visible";
 			if($.wsu_maps.state.cTo==="" && $.wsu_maps.state.cFrom ===""){
-				$.wsu_maps.clearHereToThere();
+				$.wsu_maps.directions.clearHereToThere();
 			}
 			
 		
@@ -189,8 +189,8 @@
 				if($.wsu_maps.state.cTo==="" || $.wsu_maps.state.cFrom ===""){
 					return false;
 				}
-				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere();
+				$.wsu_maps.directions.clearHereToThere();
+				$.wsu_maps.directions.hereToThere();
 			});
 			$('.contextmenu #from').click(function(){
 				$.wsu_maps.state.cFrom=caurrentLatLng.lat()+","+caurrentLatLng.lng();
@@ -200,8 +200,8 @@
 				if($.wsu_maps.state.cTo==="" || $.wsu_maps.state.cFrom ===""){
 					return false;
 				}
-				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere();
+				$.wsu_maps.directions.clearHereToThere();
+				$.wsu_maps.directions.hereToThere();
 			});
 		},
 		hideContextMenu:function() {

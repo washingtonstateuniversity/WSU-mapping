@@ -52,7 +52,7 @@
 						if(typeof($.jtrack)!=="undefined"){
 							//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 						}
-						$.wsu_maps.getSignlePlace(id);
+						$.wsu_maps.places.getSignlePlace(id);
 					}
 					
 					$( "#placeSearch input[type=text]" ).autocomplete("close");
@@ -88,7 +88,7 @@
 						//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 					}
 					$( "#placeSearch input[type=text]" ).autocomplete("close");
-					$.wsu_maps.getSignlePlace(id);
+					$.wsu_maps.places.getSignlePlace(id);
 					
 				}
 			});	
@@ -98,7 +98,7 @@
 				//var btn=$(this);
 				var url = url||"";
 				var id   = (typeof($.wsu_maps.search.focuseitem.id)!=="undefined"&&$.wsu_maps.search.focuseitem.id!=="")?$.wsu_maps.search.focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
-				$.wsu_maps.getSignlePlace(id);
+				$.wsu_maps.places.getSignlePlace(id);
 				if(typeof($.jtrack)!=="undefined"){
 					//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 				}
