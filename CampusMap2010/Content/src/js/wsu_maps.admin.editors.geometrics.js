@@ -61,6 +61,8 @@
 			}).trigger("resize");
 			
 			$.wsu_maps.state.map_jObj.gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 }).bind('init', function () {
+				var jObj = $.wsu_maps.state.map_jObj;
+				$.wsu_maps.state.map_inst = jObj.gmap('get','map');
 				var controlOn=true;
 				//var drawingMode = false;
 				
@@ -81,7 +83,7 @@
 				if(!$.isEmptyObject(pointHolder)){
 					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
 				}
-				var jObj = $.wsu_maps.state.map_jObj;
+				
 				$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
 				jObj.gmap('init_drawing', 
 					{ 
@@ -165,7 +167,7 @@
 							//loaded_shape:shape
 						} )
 				);
-				google.maps.event.addListener(jObj.gmap('get','map'), 'click', $.wsu_maps.admin.geometrics.clearSelection);
+				google.maps.event.addListener($.wsu_maps.state.map_inst, 'click', $.wsu_maps.admin.geometrics.clearSelection);
 
 				$.each($("[data-child_id]"),function(idx){
 					$.wsu_maps.admin.geometrics.resolve_loaded_shapes(idx);

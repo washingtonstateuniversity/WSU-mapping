@@ -48,7 +48,7 @@
 					}).trigger("resize");
 				}
 				$('#directionsTo').hide();
-				$('#campusmap input[type="text"]').val('');
+				$.wsu_maps.state.map_jObj.find('input[type="text"]').val('');
 				$.wsu_maps.general.prep_html();
 			}
 			$('#resetmap').on('click',function(e){
@@ -57,7 +57,7 @@
 				
 				$.wsu_maps.listings.reset_listings();
 				$('#main_nav').find('.active').removeClass('active');
-				$('#campusmap input[type="text"]').val('');
+				$.wsu_maps.state.map_jObj.find('input[type="text"]').val('');
 				if($('#directionsTo').is(':visible')){
 					$('#directionsTo').hide();
 				}

@@ -511,7 +511,7 @@
 					jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
 				});
 				if(typeof($.wsu_maps.state.ib[i])!=="undefined"){
-					$.wsu_maps.state.ib[i].open(jObj.gmap('get','map'), $.wsu_maps.state.markerLog[i],function(){
+					$.wsu_maps.state.ib[i].open($.wsu_maps.state.map_inst, $.wsu_maps.state.markerLog[i],function(){
 						$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[i];
 					});
 				}
@@ -537,7 +537,7 @@
 					function() { $.wsu_maps.state.ibHover =  false;  } 
 				); 
 				if($.wsu_maps.state.ibHover!==true && typeof($.wsu_maps.state.ibh[i])!=="undefined"){
-					$.wsu_maps.state.ibh[i].open(jObj.gmap('get','map'), $.wsu_maps.state.markerLog[i]);
+					$.wsu_maps.state.ibh[i].open($.wsu_maps.state.map_inst, $.wsu_maps.state.markerLog[i]);
 				}
 			}
 		},

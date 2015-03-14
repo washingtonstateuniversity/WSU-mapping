@@ -144,6 +144,7 @@
 				'panControl':false,
 				'streetViewControl': false
 			}).bind('init', function () {
+				$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
 				$('#style_map').gmap('stop_scroll_zoom');
 			
 				$.wsu_maps.general.set_default_shape($('#style_map'),$('#style_of').val());

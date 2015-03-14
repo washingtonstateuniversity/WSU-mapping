@@ -78,7 +78,7 @@ function open_info(jObj,i){
 			ib[i].close();
 			jObj.gmap('setOptions', {'zIndex':1}, markerLog[i]);
 		});
-		ib[i].open(jObj.gmap('get','map'), markerLog[i],function(){
+		ib[i].open($.wsu_maps.state.map_inst, markerLog[i],function(){
 				cur_mid = mid[i];
 				//updateUrl(cur_nav,mid[i]);
 			});
@@ -96,7 +96,7 @@ function open_toolTip(jObj,i){
 		function() { ibHover =  true; }, 
 		function() { ibHover =  false;  } 
 	); 
-	if(ibHover!=true)ibh[i].open(jObj.gmap('get','map'), markerLog[i]);
+	if(ibHover!=true)ibh[i].open($.wsu_maps.state.map_inst, markerLog[i]);
 }
 function close_toolTips(){
 	$.each(ibh, function(i) {ibh[i].close();});
