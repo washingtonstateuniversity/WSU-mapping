@@ -20,7 +20,8 @@ var startingUrl=startingUrl||null;
 	$.wsu_maps={
 		is_frontend:true,
 		state:{
-			mapInst:null,
+			map_jObj:null,
+			map_inst:null,
 			
 			active:{
 				marker:null,
@@ -599,23 +600,50 @@ var startingUrl=startingUrl||null;
 						//alert(dump(map_op));
 					}
 				}*/
-				$.wsu_maps.state.mapInst.gmap(map_op).bind('init', function() { 
+				$.wsu_maps.state.map_jObj.gmap(map_op).bind('init', function() { 
+					$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
 					$.wsu_maps.ini_GAtracking('UA-22127038-5');
-					$.wsu_maps.poi_setup($.wsu_maps.state.mapInst);
+					$.wsu_maps.poi_setup();
 					$.wsu_maps.addCentralControlls();
 					if(typeof(data)!=='undefined'){
-						$.wsu_maps.general.loadData($.wsu_maps.state.mapInst,data);
+						$.wsu_maps.general.loadData($.wsu_maps.state.map_jObj,data);
 					}
 					if($('.mobile').length){
 						$.wsu_maps.geoLocate();
 					}
 					callback();
 					$(window).trigger('resize');
+					$.wsu_maps.on_zoom_corrections();
 					$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 					/* addthis setup */
 					//$.wsu_maps.ini_addthis("mcwsu");
 				});
 			//});
+		},
+		on_zoom_corrections:function(){
+			google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
+				//var zoomLevel = $.wsu_maps.state.map_jObj.gmap('get','map').getZoom();
+				//$('#zoom').val( zoomLevel );//var zoom = 	
+				$.wsu_maps.state.timed_event = null;
+				window.clearTimeout($.wsu_maps.state.timed_event);
+				$.wsu_maps.state.timed_event = window.setTimeout(function() {
+				//map.panTo(marker.getPosition());
+					$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
+				}, 750);
+			});
+		},
+		on_pan_corrections:function(){
+			$.wsu_maps.state['timed_event'] = $.wsu_maps.state.timed_event ||  null;
+			google.maps.event.addListener($.wsu_maps.state.map_inst, 'center_changed', function() {
+				// 3 seconds after the center of the map has changed, pan back to the
+				// marker.
+				$.wsu_maps.state.timed_event = null;
+				window.clearTimeout($.wsu_maps.state.timed_event);
+				$.wsu_maps.state.timed_event = window.setTimeout(function() {
+				//map.panTo(marker.getPosition());
+					$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
+				}, 750);
+			});
 		},
 		updateMap:function (jObj,_load,showSum,callback){
 			if(typeof(_load)==='undefined'){
@@ -679,11 +707,11 @@ var startingUrl=startingUrl||null;
 					controlText.className = 'text';
 					controlText.innerHTML = 'Aerial Views';
 					controlUI.appendChild(controlText);
-					$.wsu_maps.state.mapInst.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+					$.wsu_maps.state.map_jObj.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 					google.maps.event.addDomListener(controlUI, 'click', function() {
 						$('.mapControl').removeClass('activeControl');
 						$(this).addClass('activeControl');
-					 //$.wsu_maps.state.mapInst.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+					 //$.wsu_maps.state.map_jObj.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
 						$('[rel="aerial_gouped"]').colorbox({
 							photo:true,
 							scrolling:false,
@@ -700,7 +728,7 @@ var startingUrl=startingUrl||null;
 								$('.activeControl').removeClass('activeControl');
 								$('#'+$.wsu_maps.state.currentControl).addClass('activeControl');
 								//$('#'+currentControl).trigger('click');
-								//$.wsu_maps.state.mapInst.gmap("setOptions",{'mapTypeId':currentControl.toLowerCase()});
+								//$.wsu_maps.state.map_jObj.gmap("setOptions",{'mapTypeId':currentControl.toLowerCase()});
 							},
 							onComplete:function(){
 								if($('#colorbox #cb_nav').length){
@@ -742,11 +770,11 @@ var startingUrl=startingUrl||null;
 				controlText.className = 'text';
 				controlText.innerHTML = 'Map';
 				controlUI.appendChild(controlText);
-				$.wsu_maps.state.mapInst.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+				$.wsu_maps.state.map_jObj.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 				google.maps.event.addDomListener(controlUI, 'click', function() {
 					$('.mapControl').removeClass('activeControl');
 					$(this).addClass('activeControl');
-					$.wsu_maps.state.mapInst.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
+					$.wsu_maps.state.map_jObj.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
 					$.wsu_maps.state.currentControl="ROADMAP";
 				});
 				
@@ -764,11 +792,11 @@ var startingUrl=startingUrl||null;
 				controlText.className = 'text';
 				controlText.innerHTML = 'Satellite';
 				controlUI.appendChild(controlText);
-				$.wsu_maps.state.mapInst.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+				$.wsu_maps.state.map_jObj.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 				google.maps.event.addDomListener(controlUI, 'click', function() {
 					$('.mapControl').removeClass('activeControl');
 					$(this).addClass('activeControl');
-					$.wsu_maps.state.mapInst.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
+					$.wsu_maps.state.map_jObj.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.SATELLITE});
 					$.wsu_maps.state.currentControl="SATELLITE";
 				});
 				
@@ -788,11 +816,11 @@ var startingUrl=startingUrl||null;
 				
 				controlText.innerHTML = 'Hybrid';
 				controlUI.appendChild(controlText);
-				$.wsu_maps.state.mapInst.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
+				$.wsu_maps.state.map_jObj.gmap("addControl", controlUI, google.maps.ControlPosition.RIGHT_TOP);
 				google.maps.event.addDomListener(controlUI, 'click', function() {
 					$('.mapControl').removeClass('activeControl');
 					$(this).addClass('activeControl');
-					$.wsu_maps.state.mapInst.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
+					$.wsu_maps.state.map_jObj.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.HYBRID});
 					$.wsu_maps.state.currentControl="HYBRID";
 				});
 			}
@@ -883,7 +911,7 @@ var startingUrl=startingUrl||null;
 			/* this need to be abstracked out into the jMap plugin */
 			function setMenuXY(caurrentLatLng){
 				function getCanvasXY(caurrentLatLng){
-					var map = $.wsu_maps.state.mapInst.gmap("get","map");
+					var map = $.wsu_maps.state.map_jObj.gmap("get","map");
 					var scale = Math.pow(2, map.getZoom());
 					var nw = new google.maps.LatLng(
 						map.getBounds().getNorthEast().lat(),
@@ -897,8 +925,8 @@ var startingUrl=startingUrl||null;
 					);
 					return caurrentLatLngOffset;
 				}
-				var mapWidth = $.wsu_maps.state.mapInst.width();
-				var mapHeight = $.wsu_maps.state.mapInst.height();
+				var mapWidth = $.wsu_maps.state.map_jObj.width();
+				var mapHeight = $.wsu_maps.state.map_jObj.height();
 				var menuWidth = $('.contextmenu').width();
 				var menuHeight = $('.contextmenu').height();
 				var clickedPosition = getCanvasXY(caurrentLatLng);
@@ -915,7 +943,7 @@ var startingUrl=startingUrl||null;
 				$('.contextmenu').css('left',x  );
 				$('.contextmenu').css('top',y );
 			}
-			var map = $.wsu_maps.state.mapInst.gmap("get","map");
+			var map = $.wsu_maps.state.map_jObj.gmap("get","map");
 			var projection;
 			var contextmenuDir;
 			projection = map.getProjection();
@@ -946,7 +974,7 @@ var startingUrl=startingUrl||null;
 					return false;
 				}
 				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere($.wsu_maps.state.mapInst);
+				$.wsu_maps.hereToThere($.wsu_maps.state.map_jObj);
 			});
 			$('.contextmenu #from').click(function(){
 				$.wsu_maps.state.cFrom=caurrentLatLng.lat()+","+caurrentLatLng.lng();
@@ -957,7 +985,7 @@ var startingUrl=startingUrl||null;
 					return false;
 				}
 				$.wsu_maps.clearHereToThere();
-				$.wsu_maps.hereToThere($.wsu_maps.state.mapInst);
+				$.wsu_maps.hereToThere($.wsu_maps.state.map_jObj);
 			});
 		},
 		hideContextMenu:function() {
@@ -988,8 +1016,8 @@ var startingUrl=startingUrl||null;
 				}			
 			});
 			function fireDirections(){
-				//$.wsu_maps.state.mapInst.gmap('clear','markers');
-				//$.wsu_maps.state.mapInst.gmap('clear','overlays');
+				//$.wsu_maps.state.map_jObj.gmap('clear','markers');
+				//$.wsu_maps.state.map_jObj.gmap('clear','overlays');
 				jObj.gmap('clear','serivces');
 				jObj.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 				var from=$('#directionsFrom input').val();
@@ -1115,14 +1143,14 @@ var startingUrl=startingUrl||null;
 		
 		geoLocate:function (){
 			if($('.geolocation').length){
-				$.wsu_maps.state.mapInst.gmap("geolocate",true,false,function(mess, pos){
-					//$.wsu_maps.state.mapInst.gmap("make_latlng_str",pos)//alert('hello');
-					$.wsu_maps.state.mapInst.gmap('addMarker', { 
+				$.wsu_maps.state.map_jObj.gmap("geolocate",true,false,function(mess, pos){
+					//$.wsu_maps.state.map_jObj.gmap("make_latlng_str",pos)//alert('hello');
+					$.wsu_maps.state.map_jObj.gmap('addMarker', { 
 							position: pos,
 							icon:$.wsu_maps.state.siteroot+"Content/images/map_icons/geolocation_icon.png"
 						},function(){//ops,marker){
 						//markerLog[i]=marker;
-						//$.wsu_maps.state.mapInst.gmap('setOptions', {'zIndex':1}, markerLog[i]);
+						//$.wsu_maps.state.map_jObj.gmap('setOptions', {'zIndex':1}, markerLog[i]);
 						//if($.isFunction(callback))callback(marker);
 					});
 				});
@@ -1153,11 +1181,11 @@ var startingUrl=startingUrl||null;
 			map_ele_obj.gmap(map_op).bind('init', function() { 
 				//var map = map_ele_obj.gmap("get","map");
 				$.wsu_maps.ini_GAtracking('UA-22127038-5');
-				$.wsu_maps.poi_setup($.wsu_maps.state.mapInst);
+				$.wsu_maps.poi_setup();
 				if($('.mobile').length){
 					$.wsu_maps.geoLocate();
 				}
-				$.wsu_maps.fit_to_location($.wsu_maps.state.mapInst.gmap('get','map'),'WA');
+				$.wsu_maps.fit_to_location($.wsu_maps.state.map_jObj.gmap('get','map'),'WA');
 				callback();
 			});
 		},
@@ -1165,7 +1193,7 @@ var startingUrl=startingUrl||null;
 		setup:function (){//jObj){
 			$('#loading').remove();
 			if(typeof(startingUrl)!=="undefined" && startingUrl!==null){
-				$.wsu_maps.updateMap($.wsu_maps.state.mapInst,encodeURI(startingUrl.indexOf("&")?startingUrl.split('=')[1].split('&')[0]:startingUrl.split('=')[1]),false,function(){
+				$.wsu_maps.updateMap($.wsu_maps.state.map_jObj,encodeURI(startingUrl.indexOf("&")?startingUrl.split('=')[1].split('&')[0]:startingUrl.split('=')[1]),false,function(){
 						if(parseInt(startingUrl.split('=')[1], 10)>0){
 							var marker = $.wsu_maps.state.markerbyid[parseInt(startingUrl.split('=')[1], 10)];
 							
@@ -1185,9 +1213,9 @@ var startingUrl=startingUrl||null;
 			}
 		
 		
-			$.wsu_maps.listings.setup_listingsBar($.wsu_maps.state.mapInst);
-			$.wsu_maps.setup_directions($.wsu_maps.state.mapInst);
-			$.wsu_maps.nav.setup_nav($.wsu_maps.state.mapInst);
+			$.wsu_maps.listings.setup_listingsBar($.wsu_maps.state.map_jObj);
+			$.wsu_maps.setup_directions($.wsu_maps.state.map_jObj);
+			$.wsu_maps.nav.setup_nav($.wsu_maps.state.map_jObj);
 			$.wsu_maps.general.setup_embeder();
 			$.wsu_maps.general.addErrorReporting();
 			
@@ -1203,7 +1231,7 @@ var startingUrl=startingUrl||null;
 				});
 			}
 			if($( "#placeSearch input[type=text]" ).length){
-				$.wsu_maps.search.setup_mapsearch($.wsu_maps.state.mapInst);
+				$.wsu_maps.search.setup_mapsearch($.wsu_maps.state.map_jObj);
 			}
 			if($('.veiw_base_layout.public').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){	
 				$.wsu_maps.mapping.reloadShapes();
@@ -1311,8 +1339,8 @@ var startingUrl=startingUrl||null;
 				$.wsu_maps.state.hasDirection=false;
 				$.wsu_maps.state.cFrom="";
 				$.wsu_maps.state.cTo="";
-				$.wsu_maps.state.mapInst.gmap('clear','overlays');
-				$.wsu_maps.state.mapInst.gmap('clear','serivces');
+				$.wsu_maps.state.map_jObj.gmap('clear','overlays');
+				$.wsu_maps.state.map_jObj.gmap('clear','serivces');
 			}
 		},
 		

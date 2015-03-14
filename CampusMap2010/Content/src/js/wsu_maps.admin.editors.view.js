@@ -36,7 +36,7 @@ $.wsu_maps.admin.view = {
 	},
 	load_editor:function () {
 		//$.wsu_maps.state.api = null;
-		$.wsu_maps.state.mapInst=$('#place_drawing_map');
+		$.wsu_maps.state.map_jObj=$('#place_drawing_map');
 		$("#side_tabs").tabs({
 			active:$("#side_tabs .ui-tabs-nav li").is('.ui-state-active')?$("#side_tabs .ui-tabs-nav li").index($(".ui-state-active")):false,
 			collapsible: true,
@@ -48,7 +48,7 @@ $.wsu_maps.admin.view = {
 			}
 		});
 		$(window).resize(function(){
-			$.wsu_maps.responsive.resizeBg($.wsu_maps.state.mapInst,112);
+			$.wsu_maps.responsive.resizeBg($.wsu_maps.state.map_jObj,112);
 			$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 		}).trigger("resize");
 		
@@ -187,21 +187,21 @@ $.wsu_maps.admin.view = {
 		console.log(new_map);
 		var options = $.wsu_maps.admin.view.create_ui_mapobj();
 		if(!new_map){
-			$.wsu_maps.state.mapInst.gmap('setOptions',options);
+			$.wsu_maps.state.map_jObj.gmap('setOptions',options);
 		}else{
-			$.wsu_maps.state.mapInst.gmap(options).bind('init', function () {
+			$.wsu_maps.state.map_jObj.gmap(options).bind('init', function () {
 				//alert(dump(options));
 				//if(lat!='')add_place_point(lat,lng);
 				//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 				//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-				google.maps.event.addListener($.wsu_maps.state.mapInst.gmap('get','map'), 'drag',function(){
-					var center = $.wsu_maps.state.mapInst.gmap('get_map_center');
-					//$.wsu_maps.state.mapInst.gmap('setOptions',{center},$.wsu_maps.state.mapInst.gmap('get','map'));
+				google.maps.event.addListener($.wsu_maps.state.map_jObj.gmap('get','map'), 'drag',function(){
+					var center = $.wsu_maps.state.map_jObj.gmap('get_map_center');
+					//$.wsu_maps.state.map_jObj.gmap('setOptions',{center},$.wsu_maps.state.map_jObj.gmap('get','map'));
 					$('#Lat').val( center.lat() );//var lat = 
 					$('#Long').val( center.lng() );//var lng = 
 				});
-				google.maps.event.addListener($.wsu_maps.state.mapInst.gmap('get','map'), 'zoom_changed',function(){
-					var zoomLevel = $.wsu_maps.state.mapInst.gmap('get','map').getZoom();
+				google.maps.event.addListener($.wsu_maps.state.map_jObj.gmap('get','map'), 'zoom_changed',function(){
+					var zoomLevel = $.wsu_maps.state.map_jObj.gmap('get','map').getZoom();
 					$('#zoom').val( zoomLevel );//var zoom = 		
 				});
 				$.wsu_maps.mapping.reloadShapes();
@@ -214,7 +214,7 @@ $.wsu_maps.admin.view = {
 						
 					
 						if(targ.is("[id='maxZoom']")){
-							var maxZoom = $.wsu_maps.state.mapInst.gmap('get_maxZoom');
+							var maxZoom = $.wsu_maps.state.map_jObj.gmap('get_maxZoom');
 							$("input[id='maxZoom']").after("<span id='maxZoomNotice'>Note: Max zoom for this map style is "+ maxZoom +" and will only be able to go lower if the user is able to switch map types.</span>");
 						}
 						
@@ -231,7 +231,7 @@ $.wsu_maps.admin.view = {
 					
 					$('.widthOutput').text(ui.size.width);
 					$('.heightOutput').text(ui.size.height);
-					$.wsu_maps.state.mapInst.gmap('refresh');
+					$.wsu_maps.state.map_jObj.gmap('refresh');
 				}
 			})*/;
 			
@@ -243,17 +243,17 @@ $.wsu_maps.admin.view = {
 		
 		$('#dragCenter').on('change',function(){
 			if($(this).is(":checked")){
-				$.wsu_maps.state.mapInst.gmap('setOptions',{"draggable":true});
+				$.wsu_maps.state.map_jObj.gmap('setOptions',{"draggable":true});
 			}else{
-				$.wsu_maps.state.mapInst.gmap('setOptions',{"draggable":$('#draggable').is(":checked")});
+				$.wsu_maps.state.map_jObj.gmap('setOptions',{"draggable":$('#draggable').is(":checked")});
 			}
 		});
 			
 		$('#setZoom').on('change',function(){
 			if($(this).is(":checked")){
-				$.wsu_maps.state.mapInst.gmap('setOptions',{"scrollwheel":true});
+				$.wsu_maps.state.map_jObj.gmap('setOptions',{"scrollwheel":true});
 			}else{
-				$.wsu_maps.state.mapInst.gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")});
+				$.wsu_maps.state.map_jObj.gmap('setOptions',{"scrollwheel":$('#scrollwheel').is(":checked")});
 			}
 		});
 	},

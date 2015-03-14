@@ -4,19 +4,19 @@
 	$.wsu_maps.frontend = {
 		ini:function(){
 			$.wsu_maps.is_frontend=true;
-			$.wsu_maps.state.mapInst=$('#centralMap');
+			$.wsu_maps.state.map_jObj=$('#centralMap');
 			
 
 			//var listOffset=0;
 			//$(' [placeholder] ').defaultValue();
-			if($.wsu_maps.state.mapInst.length){
-				$.wsu_maps.state.mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
+			if($.wsu_maps.state.map_jObj.length){
+				$.wsu_maps.state.map_jObj.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
 				if($('.veiw_base_layout').length || ( typeof(window.map_view) !== "undefined" && window.map_view === true)){
-					$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,$.wsu_maps.setup);
+					$.wsu_maps.ini_map_view($.wsu_maps.state.map_jObj,$.wsu_maps.setup);
 				}else{
 					$.wsu_maps.iniMap("",$.wsu_maps.setup);
 				}
-				if($.wsu_maps.state.mapInst.length){
+				if($.wsu_maps.state.map_jObj.length){
 					var mHeight = ($(window).height()<=404?0:43);
 					if($('.embeded').length){
 						mHeight = 0;
@@ -26,7 +26,7 @@
 					}
 					$(window).resize(function(){
 						//alert( ($('.embeded').length||$('.layoutfree').length) ?0:130 );
-						// can't us mapInst here cause it's still in the admin area.  Split that.
+						// can't us map_jObj here cause it's still in the admin area.  Split that.
 		
 						var map_obj = $('.central_layout.public.central #centralMap');
 						var win_w = $(window).width();
@@ -34,7 +34,7 @@
 						$.wsu_maps.responsive.resizeBg(map_obj, mHeight, mWidth);
 					}).trigger("resize");
 					$(window).resize(function(){
-						// can't us mapInst here cause it's still in the admin area.  Split that.
+						// can't us map_jObj here cause it's still in the admin area.  Split that.
 		
 						
 						$('#navwrap').height($('#centralMap_wrap').height()-70);
@@ -64,13 +64,13 @@
 				if(typeof($.jtrack)!=="undefined"){
 					//$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
 				}
-				//google.maps.event.clearListeners(mapInst.gmap("get","map")); 
+				//google.maps.event.clearListeners(map_jObj.gmap("get","map")); 
 				//$('.mapControl').remove();
-				$.wsu_maps.state.mapInst.gmap("destroy",function(){//ele){
-					$.wsu_maps.state.mapInst.html('');
+				$.wsu_maps.state.map_jObj.gmap("destroy",function(){//ele){
+					$.wsu_maps.state.map_jObj.html('');
 					$('.mapControl').remove(); 
 					if($('.veiw_base_layout').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){
-						$.wsu_maps.ini_map_view($.wsu_maps.state.mapInst,$.wsu_maps.setup);
+						$.wsu_maps.ini_map_view($.wsu_maps.state.map_jObj,$.wsu_maps.setup);
 					}else{
 						$.wsu_maps.iniMap("",$.wsu_maps.setup);
 					}

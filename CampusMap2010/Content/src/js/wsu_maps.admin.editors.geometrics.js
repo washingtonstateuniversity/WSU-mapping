@@ -40,7 +40,7 @@
 <textarea name='child_geos[0].encoded' class='ui-widget ui-widget-content ui-corner-all' style='width:100%;height:50px;' cols='80' rows='5'><%this.encoded%></textarea>",
 		load_editor:function () {
 			
-			$.wsu_maps.state.mapInst=$('#geometrics_drawing_map');
+			$.wsu_maps.state.map_jObj=$('#geometrics_drawing_map');
 			$("#side_tabs").tabs({
 				active:$("#side_tabs .ui-tabs-nav li").is('.ui-state-active')?$("#side_tabs .ui-tabs-nav li").index($(".ui-state-active")):false,
 				collapsible: true,
@@ -56,11 +56,11 @@
 			$('.min_tab').tabs();
 			
 			$(window).resize(function(){
-				$.wsu_maps.responsive.resizeBg($.wsu_maps.state.mapInst,112);
+				$.wsu_maps.responsive.resizeBg($.wsu_maps.state.map_jObj,112);
 				$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 			}).trigger("resize");
 			
-			$.wsu_maps.state.mapInst.gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 }).bind('init', function () {
+			$.wsu_maps.state.map_jObj.gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 }).bind('init', function () {
 				var controlOn=true;
 				//var drawingMode = false;
 				
@@ -81,7 +81,7 @@
 				if(!$.isEmptyObject(pointHolder)){
 					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
 				}
-				var jObj = $.wsu_maps.state.mapInst;
+				var jObj = $.wsu_maps.state.map_jObj;
 				$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
 				jObj.gmap('init_drawing', 
 					{ 
@@ -134,10 +134,10 @@
 									if(points.length){
 										//alert(points);
 										$('[name*="boundary"]').eq(data.group_index).val(points);
-										//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',points,false,false))));
+										//alert(dump($.wsu_maps.state.map_jObj.gmap('encode',$.wsu_maps.state.map_jObj.gmap('process_coords',points,false,false))));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
 										$('[name*="boundary"]').eq(data.group_index).val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary"]').eq(data.group_index).val(),true,false)));
-										//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded'));
+										//$('#geometric_encoded').val($.wsu_maps.state.map_jObj.gmap('get_updated_data_encoded'));
 									}
 								},
 							drawingmode_changed:function(type){
@@ -149,8 +149,8 @@
 								},
 							onComplete:function(dm,shape){
 								if(shape!==null){
-									//$('#latLong').val($.wsu_maps.state.mapInst.gmap('get_updated_data',$.wsu_maps.state.mapInst.gmap('overlays')));
-									//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded',shape));
+									//$('#latLong').val($.wsu_maps.state.map_jObj.gmap('get_updated_data',$.wsu_maps.state.map_jObj.gmap('overlays')));
+									//$('#geometric_encoded').val($.wsu_maps.state.map_jObj.gmap('get_updated_data_encoded',shape));
 									jObj.gmap('zoom_to_bounds',{},shape,function(){
 										//alert('zoomed?');
 									});
@@ -215,9 +215,9 @@
 						$('#latLong').val(jObj.gmap('get_updated_data'));
 					}
 					
-					//alert(dump($.wsu_maps.state.mapInst.gmap('encode',$.wsu_maps.state.mapInst.gmap('process_coords',$('#latLong').val(),false,false))));
+					//alert(dump($.wsu_maps.state.map_jObj.gmap('encode',$.wsu_maps.state.map_jObj.gmap('process_coords',$('#latLong').val(),false,false))));
 					
-					//$('#geometric_encoded').val($.wsu_maps.state.mapInst.gmap('get_updated_data_encoded'));
+					//$('#geometric_encoded').val($.wsu_maps.state.map_jObj.gmap('get_updated_data_encoded'));
 					if(jObj.gmap('get_updated_data')){
 						$('#geometric_encoded').val(jObj.gmap('encode',jObj.gmap('process_coords',$('#latLong').val(),true,true)));
 					}
@@ -263,9 +263,9 @@
 			var shape = {};
 			if( !$.isEmptyObject(pointHolder) ){
 				shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
-				$.wsu_maps.state.mapInst.gmap('addShape', type, shape, function(map_shape){
+				$.wsu_maps.state.map_jObj.gmap('addShape', type, shape, function(map_shape){
 					map_shape=$.extend(map_shape,{group_index:$.wsu_maps.admin.geometrics.shape_count});
-					$.wsu_maps.state.mapInst.gmap('zoom_to_bounds',{},map_shape,function(){ });
+					$.wsu_maps.state.map_jObj.gmap('zoom_to_bounds',{},map_shape,function(){ });
 					$.wsu_maps.admin.geometrics.shape_count++;
 				});
 			}
@@ -316,7 +316,7 @@
 				$.wsu_maps.admin.geometrics.selectedShape.setEditable(false);
 				$.wsu_maps.admin.geometrics.selectedShape = null;
 			}*/
-			$.wsu_maps.state.mapInst.gmap('unset_drawingSelection');
+			$.wsu_maps.state.map_jObj.gmap('unset_drawingSelection');
 		},
 		setSelection:function (shape) {
 			$.wsu_maps.admin.geometrics.clearSelection();
@@ -328,7 +328,7 @@
 			/*if ($.wsu_maps.admin.geometrics.selectedShape) {
 				$.wsu_maps.admin.geometrics.selectedShape.setMap(null);
 			}*/
-			$.wsu_maps.state.mapInst.gmap('delete_drawingSelection');
+			$.wsu_maps.state.map_jObj.gmap('delete_drawingSelection');
 		},
 		deleteAllShape:function () {
 			for (var i = 0; i < $.wsu_maps.admin.geometrics.loaded_shapes.length; i++) {
@@ -343,7 +343,7 @@
 				$.wsu_maps.admin.geometrics.colorButtons[currColor].style.border = currColor === color ? '2px solid #789' : '2px solid #fff';
 			}
 			if($.wsu_maps.admin.geometrics.drawingManager===null || $.wsu_maps.admin.geometrics.drawingManager === undefined){
-				$.wsu_maps.admin.geometrics.drawingManager=$.wsu_maps.state.mapInst.gmap('get_drawingManager');
+				$.wsu_maps.admin.geometrics.drawingManager=$.wsu_maps.state.map_jObj.gmap('get_drawingManager');
 			}
 			// Retrieves the current options from the drawing manager and replaces the
 			// stroke or fill color as appropriate.
