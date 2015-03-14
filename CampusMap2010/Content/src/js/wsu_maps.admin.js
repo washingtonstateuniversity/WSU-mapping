@@ -223,7 +223,7 @@ var image_count=image_count||-1;
 					
 					
 					
-			$.wsu_maps.admin.setup_fixedNav();
+			//$.wsu_maps.admin.setup_fixedNav();
 			$('.insotryupload').on('click',function(){
 				$.wsu_maps.admin.ui.openImgUploader();
 			});
