@@ -50,7 +50,7 @@ var i=i||-1;
 							shape.style.events.rest.strokeWeight = 0.2;
 							shape.style.events.rest.strokeOpacity = 0.6;
 						}
-						$.wsu_maps.mapping.addShapeToMap(i, shape);
+						$.wsu_maps.shapes.addShapeToMap(i, shape);
 					});
 				});
 			}		

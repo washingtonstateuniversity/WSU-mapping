@@ -21,8 +21,8 @@
 					item.reinitialise();
 				});
 				
-				$.wsu_maps.mapping.reloadShapes();
-				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.shapes.reloadShapes();
+				$.wsu_maps.places.reloadPlaces();
 				if(container.find('.ini').length===0 && container.find('li').size()===0){
 					container.append('<li class="ini"><div><h5>Add '+container.closest('fieldset').find('legend span').text()+' from below</h5</div></li>');
 				}
@@ -205,8 +205,8 @@ $.wsu_maps.admin.view = {
 					var zoomLevel = $.wsu_maps.state.map_inst.getZoom();
 					$('#zoom').val( zoomLevel );//var zoom = 		
 				});
-				$.wsu_maps.mapping.reloadShapes();
-				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.shapes.reloadShapes();
+				$.wsu_maps.places.reloadPlaces();
 				$('select,input,textarea','#tabs_Options').on('change',function(){
 					var targ = $(this);
 					var t = setTimeout(function(){
@@ -399,8 +399,8 @@ $.wsu_maps.admin.view = {
 					//var role=container.closest('fieldset').attr('role');
 					
 					container.find( ".buttons" ).button({text:false});
-					$.wsu_maps.mapping.reloadShapes();
-					$.wsu_maps.mapping.reloadPlaces();
+					$.wsu_maps.shapes.reloadShapes();
+					$.wsu_maps.places.reloadPlaces();
 					if(container.find('.ini').length &&container.find('li').size()>1){
 						container.find('.ini').remove();
 					}else if(container.find('.ini').length===0 && container.find('li').size()===1){
@@ -475,8 +475,8 @@ $.wsu_maps.admin.view = {
 				sortList.nestedSortable("refresh");
 				//$('.jspContainer').css('height','auto');
 				$.wsu_maps.state.api[pane_id].reinitialise();
-				$.wsu_maps.mapping.reloadShapes();
-				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.shapes.reloadShapes();
+				$.wsu_maps.places.reloadPlaces();
 				$.wsu_maps.admin.editors.view.createDeleteRow();
 				$("select#"+role+"_select").jselect('refresh');
 			});

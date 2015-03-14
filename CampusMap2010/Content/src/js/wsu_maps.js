@@ -701,8 +701,8 @@ var startingUrl=startingUrl||null;
 				$.wsu_maps.search.setup_mapsearch();
 			}
 			if($('.veiw_base_layout.public').length|| ( typeof(window.map_view) !== "undefined" && window.map_view === true)){	
-				$.wsu_maps.mapping.reloadShapes();
-				$.wsu_maps.mapping.reloadPlaces();
+				$.wsu_maps.shapes.reloadShapes();
+				$.wsu_maps.places.reloadPlaces();
 			}
 		},
 		
