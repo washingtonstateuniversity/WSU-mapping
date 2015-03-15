@@ -83,7 +83,9 @@
 			return uri;
 		},
 	
-	
+		joiner:function(){
+			//to be the option joiner for just the maps
+		},
 	
 		timers_arr:[],
 		clearCount:function (timer){

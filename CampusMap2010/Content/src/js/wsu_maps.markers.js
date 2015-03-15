@@ -86,7 +86,6 @@
 					}
 				});
 
-			
 			jObj.gmap('addMarker', marker_style,function(ops,marker){
 				marker.marker_style = marker_style;
 				$.wsu_maps.state.markerLog[i]=marker;
