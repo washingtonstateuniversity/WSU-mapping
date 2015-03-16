@@ -836,12 +836,22 @@ var startingUrl=startingUrl||null;
 			}
 		},
 		fit_to_location:function(localation){
+			if($.wsu_maps.state.hold_bounds===false){
+				return;
+			}
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode( { 'address': localation}, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					if (status !== google.maps.GeocoderStatus.ZERO_RESULTS) {
 						if (results && results[0]&& results[0].geometry && results[0].geometry.viewport){
 							$.wsu_maps.state.map_inst.fitBounds(results[0].geometry.viewport);
+							window.tmp_fuc = function(){
+								google.maps.event.addListenerOnce($.wsu_maps.state.map_inst, 'idle', function() {
+									$.wsu_maps.state.hold_bounds=true;
+									window.tmp_fuc = null;
+								});
+							};
+							window.tmp_fuc();
 						}
 					}
 				}
@@ -856,34 +866,28 @@ var startingUrl=startingUrl||null;
 				}
 			};
 		},
+		poi_rest:function(){
+			$.wsu_maps.state.timed_event = $.wsu_maps.state.timed_event ||  null;
+			window.clearTimeout($.wsu_maps.state.timed_event);
+			$.wsu_maps.state.timed_event = window.setTimeout(function() {
+			//map.panTo(marker.getPosition());
+				$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
+			}, 750);
+		},
 		on_zoom_corrections:function(){
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
-				$.wsu_maps.state.hold_bounds=false;
-				//var zoomLevel = $.wsu_maps.state.map_inst.getZoom();
-				//$('#zoom').val( zoomLevel );//var zoom = 	
-				$.wsu_maps.state.timed_event = null;
-				window.clearTimeout($.wsu_maps.state.timed_event);
-				$.wsu_maps.state.timed_event = window.setTimeout(function() {
-				//map.panTo(marker.getPosition());
-					$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
-				}, 750);
+				$.wsu_maps.poi_rest();
 			});
 		},
 		on_pan_corrections:function(){
-			$.wsu_maps.state.timed_event = $.wsu_maps.state.timed_event ||  null;
-			google.maps.event.addListener($.wsu_maps.state.map_inst, 'center_changed', function() {
+			google.maps.event.addListener($.wsu_maps.state.map_inst, 'drag', function() {
 				$.wsu_maps.state.hold_bounds=false;
-				// 3 seconds after the center of the map has changed, pan back to the
-				// marker.
-				$.wsu_maps.state.timed_event = null;
-				window.clearTimeout($.wsu_maps.state.timed_event);
-				$.wsu_maps.state.timed_event = window.setTimeout(function() {
-				//map.panTo(marker.getPosition());
-					$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
-				}, 750);
+				$.wsu_maps.poi_rest();
+			});
+			google.maps.event.addListener($.wsu_maps.state.map_inst, 'center_changed', function() {
+				$.wsu_maps.poi_rest();
 			});
 		},
-
 		getSmUrl:function (query,callback){
 			
 			var url = $.wsu_maps.getUrlPath(query);

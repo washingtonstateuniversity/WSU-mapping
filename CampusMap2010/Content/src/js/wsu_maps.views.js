@@ -36,11 +36,10 @@ var base=base||{};
 				if($('.mobile').length){
 					$.wsu_maps.geoLocate();
 				}
-				
+				$.wsu_maps.on_zoom_corrections();
+				$.wsu_maps.on_pan_corrections();
 				$(window).resize(function(){
-					if($.wsu_maps.state.hold_bounds!==false){
-						$.wsu_maps.fit_to_location('WA');
-					}
+					$.wsu_maps.fit_to_location('WA');
 				}).trigger("resize");
 				
 				
