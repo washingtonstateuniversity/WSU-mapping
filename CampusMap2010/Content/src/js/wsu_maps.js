@@ -49,7 +49,7 @@ var startingUrl=startingUrl||null;
 			campus_latlng_str:campus_latlng_str||"",
 			
 			in_pano:false,
-			
+			hold_bounds:true,
 			cTo:"",
 			cFrom:"",
 			hasDirection:false,
@@ -664,7 +664,10 @@ var startingUrl=startingUrl||null;
 				$.wsu_maps.places.reloadPlaces();
 			}
 		},
-
+		get_option:function(){//prop){
+			//the goal is that we will pull any option not directly 
+			
+		},
 		updateMap:function (_load,showSum,callback){
 			//var jObj = $.wsu_maps.state.map_jObj;
 			if(typeof(_load)==='undefined'){
@@ -855,6 +858,7 @@ var startingUrl=startingUrl||null;
 		},
 		on_zoom_corrections:function(){
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
+				$.wsu_maps.state.hold_bounds=false;
 				//var zoomLevel = $.wsu_maps.state.map_inst.getZoom();
 				//$('#zoom').val( zoomLevel );//var zoom = 	
 				$.wsu_maps.state.timed_event = null;
@@ -868,6 +872,7 @@ var startingUrl=startingUrl||null;
 		on_pan_corrections:function(){
 			$.wsu_maps.state.timed_event = $.wsu_maps.state.timed_event ||  null;
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'center_changed', function() {
+				$.wsu_maps.state.hold_bounds=false;
 				// 3 seconds after the center of the map has changed, pan back to the
 				// marker.
 				$.wsu_maps.state.timed_event = null;
