@@ -593,3 +593,5 @@ D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.dll
 D:\_GIT\WSU-mapping\CampusMap2010\bin\MonoRailHelper.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
 D:\_GIT\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
+D:\_GIT\WSU-mapping\CampusMap2010\bin\System.Web.Helpers.dll
+D:\_GIT\WSU-mapping\CampusMap2010\bin\System.Web.Helpers.xml
