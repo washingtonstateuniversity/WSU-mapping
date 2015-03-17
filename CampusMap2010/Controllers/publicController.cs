@@ -293,7 +293,7 @@ namespace campusMap.Controllers {
                     || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
                     || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("blackBerry")
                     ) {
-                    HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
+                    //HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                 }
             }
 
