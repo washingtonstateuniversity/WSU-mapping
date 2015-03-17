@@ -69,7 +69,7 @@
 					'panControl':false,
 					'streetViewControl': false,
 					styles:$.wsu_maps.defaults.map.styles
-				}).bind('init', function () {
+			}).bind('init', function () {
 				var jObj = $.wsu_maps.state.map_jObj;
 				$.wsu_maps.state.map_inst = jObj.gmap('get','map');
 				var controlOn=true;
@@ -88,9 +88,9 @@
 				if(coords!=='' && type==='polygon'){ 
 					pointHolder = {'paths' : coords };
 				}
-				var shape = {};
+				var shape = {draggable: true, geodesic: true, 'editable':true};
 				if(!$.isEmptyObject(pointHolder)){
-					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3, draggable: true, geodesic: true, 'editable':true} , pointHolder );
+					shape = $.extend( shape, { 'strokeColor':'#000', 'strokeWeight':3 } , pointHolder );
 				}
 				
 				$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
@@ -114,7 +114,7 @@
 									if(data!==null){
 										var currect_count = $.wsu_maps.admin.geometrics.shape_count;
 										$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
-										$.wsu_maps.admin.geometrics.loaded_shapes.push(data);
+										$.wsu_maps.admin.geometrics.loaded_shapes.push( $.extend({geodesic: true, draggable: true},data));
 										
 										if (data.type !== undefined && data.type !== google.maps.drawing.OverlayType.MARKER) {
 											$.wsu_maps.admin.geometrics.drawingManager.setDrawingMode(null);
@@ -273,7 +273,7 @@
 			}
 			var shape = {};
 			if( !$.isEmptyObject(pointHolder) ){
-				shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+				shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true,geodesic: true, draggable: true} , pointHolder );
 				$.wsu_maps.state.map_jObj.gmap('addShape', type, shape, function(map_shape){
 					map_shape=$.extend(map_shape,{group_index:$.wsu_maps.admin.geometrics.shape_count});
 					$.wsu_maps.state.map_jObj.gmap('zoom_to_bounds',{},map_shape,function(){ });
