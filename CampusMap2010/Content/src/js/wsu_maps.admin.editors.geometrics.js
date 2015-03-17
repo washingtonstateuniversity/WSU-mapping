@@ -60,7 +60,16 @@
 				$.wsu_maps.responsive.resizeMaxBg($('#side_tabs .ui-tabs-panel'),250);
 			}).trigger("resize");
 			
-			$.wsu_maps.state.map_jObj.gmap({'center': $.wsu_maps.state.campus_latlng_str , 'zoom':15 }).bind('init', function () {
+			$.wsu_maps.state.map_jObj.gmap({
+					'center': $.wsu_maps.state.campus_latlng_str ,
+					'zoom': $.wsu_maps.defaults.map.zoom,
+					'disableDoubleClickZoom':true,
+					//'draggable':false,
+					//'zoomControl': false,
+					'panControl':false,
+					'streetViewControl': false,
+					styles:$.wsu_maps.defaults.map.styles
+				}).bind('init', function () {
 				var jObj = $.wsu_maps.state.map_jObj;
 				$.wsu_maps.state.map_inst = jObj.gmap('get','map');
 				var controlOn=true;
@@ -81,7 +90,7 @@
 				}
 				var shape = {};
 				if(!$.isEmptyObject(pointHolder)){
-					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , {'editable':true} , pointHolder );
+					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3, draggable: true, geodesic: true, 'editable':true} , pointHolder );
 				}
 				
 				$.wsu_maps.admin.geometrics.drawingManager=jObj.gmap('get_drawingManager');
@@ -92,7 +101,7 @@
 							position: google.maps.ControlPosition.TOP_CENTER,
 							drawingModes: $('#pickedValue').val()!==""?[$('#pickedValue').val()]:[google.maps.drawing.OverlayType.POLYLINE, google.maps.drawing.OverlayType.POLYGON]
 						  }:false,
-						polylineOptions:{editable: true} 
+						polylineOptions:{editable: true, geodesic: true, draggable: true} 
 					}, $.extend( {
 							limit:1,
 							limit_reached:function(){//gmap){
@@ -370,7 +379,7 @@
 			var polygonOptions = $.wsu_maps.admin.geometrics.drawingManager.get('polygonOptions');
 			if(polygonOptions!==undefined){
 				polygonOptions.fillColor = color;
-				$.wsu_maps.admin.geometrics.drawingManager.set('polygonOptions', polygonOptions);
+				$.wsu_maps.admin.geometrics.drawingManager.set('polygonOptions', $.extend({geodesic: true, draggable: true},polygonOptions));
 			}
 		},
 		
