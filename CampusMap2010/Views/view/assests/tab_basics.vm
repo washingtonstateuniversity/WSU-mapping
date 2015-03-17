@@ -77,7 +77,13 @@ $Form.HiddenField("view.id")
 		<div>
 			<label for="Long"><strong>Longitude</strong></label><br/>
 			<input type="text" name="LongLength" id="Long" #if($long && $long!="") value="$long" #else #if($campus.longitude && $campus.longitude!="") value="$campus.longitude" #else value="-117.15406340441444" #end #end class="text ui-widget-content ui-corner-all" required="required" />
-			#set($mess="by draging the map with drag mode on thru the <a href='#tabs_SAMPLE' onclick='$tabs.tabs(\"select\",\"#tabs_SAMPLE\");'>Preview tab</a> and simple draging the map to the view you wish to see")
+			#set($mess="by draging the map to the view you wish to see, it will corespond to the center that is see in the view.")
+			#parse("admin/noted.vm")
+		</div>
+		<div>
+			<label for="Long"><strong>Bound to address</strong></label><br/>
+			<input type="text" name="view.fit_to_bound" id="fit_to_bound" value="$!view.fit_to_bound" class="text ui-widget-content ui-corner-all" />
+			#set($mess="By putting an address eg: 'WA' the map will try to fit that location in the map.")
 			#parse("admin/noted.vm")
 		</div>
 	</fieldset>

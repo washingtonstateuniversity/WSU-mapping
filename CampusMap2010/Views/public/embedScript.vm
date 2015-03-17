@@ -36,7 +36,7 @@ var embeded_shape_ids = "${shapes.Replace(", 0","").Replace(" 0","")}";
 #end
 var show_global_nav = #if(${map.show_global_nav})true; #else false; #end
 var running_options = '$!options_json';
-
+var fit_to_bound = '$!map.fit_to_bound';
 (function(i,s,o,g,r,t,a,m){
 	t =  document.scripts[document.scripts.length - 1];
 	a = document.createElement('div');

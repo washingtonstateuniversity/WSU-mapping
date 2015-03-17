@@ -224,6 +224,19 @@ $.wsu_maps.admin.view = {
 					},500);
 				});
 				$.wsu_maps.util.debug_positional_log();
+				$(window).resize(function(){
+					if(typeof(window.fit_to_bound) !== "undefined" && window.fit_to_bound !==""){
+						$.wsu_maps.fit_to_location(window.fit_to_bound);
+					}
+					$.wsu_maps.keep_center();
+				}).trigger("resize");
+				$.wsu_maps.on_zoom_corrections();
+				$.wsu_maps.on_pan_corrections();
+				$.wsu_maps.on_bounds_changed_corrections();
+				
+				
+				
+				
 			})/*.resizable({
 				helper: "ui-resizable-helper",
 				stop: function(event, ui) {

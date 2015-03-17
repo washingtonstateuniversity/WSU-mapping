@@ -14,6 +14,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 
 <script type="text/javascript">
 	var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
+	var fit_to_bound = '${view.fit_to_bound}';
 </script>
 #if($Flash.error)
 	<p style="color: red; font-weight: bold;">

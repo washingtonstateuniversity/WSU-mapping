@@ -613,14 +613,16 @@ var startingUrl=startingUrl||null;
 					}
 					callback();
 					
+
+					$(window).resize(function(){
+						if(typeof(window.fit_to_bound) !== "undefined" && window.fit_to_bound !==""){
+							$.wsu_maps.fit_to_location(window.fit_to_bound);
+						}
+						$.wsu_maps.keep_center();
+					}).trigger("resize");
 					$.wsu_maps.on_zoom_corrections();
 					$.wsu_maps.on_pan_corrections();
 					$.wsu_maps.on_bounds_changed_corrections();
-					$(window).resize(function(){
-						//$.wsu_maps.fit_to_location('WA');
-						$.wsu_maps.keep_center();
-					}).trigger("resize");
-					
 					$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 					/* addthis setup */
 					//$.wsu_maps.ini_addthis("mcwsu");
