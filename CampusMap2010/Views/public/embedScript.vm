@@ -77,8 +77,8 @@ var fit_to_bound = '$!map.fit_to_bound';
 		//'http://www.google.com/uds/api?file=uds.js&v=1.0',
 		'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
 		'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-		'/content/src/js/bootstrap.js',
-		'/content/build/js/maps.wsu.edu.js',
-		'/content/dis/css/map.view.styles.css'
+		'//beta.maps.wsu.edu/content/src/js/bootstrap.js',
+		'http://beta.maps.wsu.edu/content/build/js/maps.wsu.edu.js',
+		'//beta.maps.wsu.edu/content/dis/css/map.view.styles.css'
 	]
 ,"WSUMAPS");
