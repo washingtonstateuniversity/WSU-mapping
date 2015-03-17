@@ -7,7 +7,7 @@
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			http://map.wsu.edu/
+			http://beta.maps.wsu.edu/
 		#end
 	#end
 #end
