@@ -11,13 +11,14 @@
 			var geocoder = geocoder||new google.maps.Geocoder();
 			return geocoder;
 		},
-		apply_element:function (mapOjb,type,style){
+		apply_element:function (type,style){
+			
 			var rest_shape = $.wsu_maps.general.filter_map_element(type,style.rest.options);
-			mapOjb.gmap('addShape', type, rest_shape, function(shape){
+			$.wsu_maps.state.map_jObj.gmap('addShape', type, rest_shape, function(shape){
 				$(shape).click(function(){
 					if(style.click){
 						if(style.click.options){
-							mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.click.options),this);
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.click.options),this);
 						}
 						if(style.click.callback){
 							style.click.callback();
@@ -26,7 +27,7 @@
 				 }).mouseover(function(){
 					 if(style.mouseover){
 						 if(style.mouseover.options){
-							 mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.mouseover.options),this);
+							 $.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.mouseover.options),this);
 						 }
 						 if(style.mouseover.callback){
 							 style.mouseover.callback();
@@ -35,7 +36,7 @@
 				}).mouseout(function(){
 					if(style.rest){
 						if(style.rest.options){
-							mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.rest.options),this);
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.rest.options),this);
 						}
 						if(style.rest.callback){
 							style.rest.callback();
@@ -44,7 +45,7 @@
 				}).dblclick(function(){
 					if(style.dblclick){
 						if(style.dblclick.options){
-							mapOjb.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.dblclick.options),this);
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.general.filter_map_element(type,style.dblclick.options),this);
 						}
 						if(style.dblclick.callback){
 							style.dblclick.callback();
@@ -76,7 +77,7 @@
 		 * with paths: get_wsu_logo_shape(), as option
 		 * TODO besides listed above is circle and rec and marker
 		 */
-		set_default_shape:function (mapSelector,type,op){
+		set_default_shape:function (type,op){
 			var capedType=type.charAt(0).toUpperCase() + type.slice(1);
 			op=op||{};
 			var return_item;
@@ -101,7 +102,7 @@
 									options:op.click||{fillColor: "#a90533",fillOpacity: 0.35}
 								}
 							};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(mapSelector,capedType,_option);
+						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
 		
 						return_item=DEFAULT_overlay;
 					break;
@@ -130,7 +131,7 @@
 								options:op.click||{strokeColor: "#a90533",strokeOpacity: 0.35}
 							}
 						};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(mapSelector,capedType,_option);
+						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
 						DEFAULT_polylines.push(DEFAULT_overlay);
 						google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
 							$.each(DEFAULT_polylines,function(i){
@@ -149,7 +150,7 @@
 						new google.maps.LatLng("46.732596","-117.146745")
 						]
 					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-					$.wsu_maps.general.apply_element(map,capedType,_option);*/
+					$.wsu_maps.general.apply_element(capedType,_option);*/
 
 						return_item=polyline;
 					break;				

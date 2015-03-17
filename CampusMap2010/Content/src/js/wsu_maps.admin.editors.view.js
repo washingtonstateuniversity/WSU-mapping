@@ -145,8 +145,9 @@ $.wsu_maps.admin.view = {
 		//var width = $('#width').val();
 		//var height = $('#height').val();
 		var options = {
-			'center': (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
-			'zoom':15
+			center: (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
+			zoom:$.wsu_maps.defaults.map.zoom,
+			styles:$.wsu_maps.defaults.map.styles
 		};
 		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 		if( $.wsu_maps.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){
@@ -218,8 +219,7 @@ $.wsu_maps.admin.view = {
 							var maxZoom = $.wsu_maps.state.map_jObj.gmap('get_maxZoom');
 							$("input[id='maxZoom']").after("<span id='maxZoomNotice'>Note: Max zoom for this map style is "+ maxZoom +" and will only be able to go lower if the user is able to switch map types.</span>");
 						}
-						
-						
+
 						$.wsu_maps.admin.view.init_editorMap();
 					},500);
 				});
