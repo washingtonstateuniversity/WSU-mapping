@@ -27,6 +27,10 @@
 	#end
 #end
 
+#capturefor(folder)
+#if($Controller.isLocal()==false) dis #else build #end
+#end
+
 
 #capturefor(view)
 $Controller.getView()
@@ -94,7 +98,7 @@ var fit_to_bound = '$!map.fit_to_bound';
 		//'http://www.google.com/uds/api?file=uds.js&v=1.0',
 		'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
 		'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-		'${site_base.Trim()}content/#if($Controller.isLocal()==false) dis #else build #end/js/maps.wsu.edu.js',
-		'${site_base.Trim()}content/#if($Controller.isLocal()==false) dis #else build #end/css/map.view.styles.css'
+		'${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js',
+		'${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css'
 	]
 ,"WSUMAPS");
