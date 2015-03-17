@@ -32,6 +32,7 @@ namespace campusMap
         {
             container = new WindsorContainer(new XmlInterpreter());
             // ActiveRecordStarter.CreateSchema();
+
             try {
                 if (Context.Request.IsLocal) { 
                     ActiveRecordStarter.GenerateCreationScripts(Context.Server.MapPath("/config/export.sql"));

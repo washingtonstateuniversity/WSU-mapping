@@ -50,6 +50,10 @@ var startingUrl=startingUrl||null;
 			
 			in_pano:false,
 			hold_bounds:true,
+			hold_center:true,
+			
+			center:null,
+			
 			cTo:"",
 			cFrom:"",
 			hasDirection:false,
@@ -531,9 +535,9 @@ var startingUrl=startingUrl||null;
 			var winH = $(window).height()-padder;
 			var winW = $(window).width();
 			var zoom = $.wsu_maps.defaults.map.zoom;
-			if(winW>=500 && winH>=200){zoom = 14;}
+			/*if(winW>=500 && winH>=200){zoom = 14;}
 			if(winW>=700 && winH>=400){zoom = 15;}
-			if(winW>=900 && winH>=600){zoom = 16;}
+			if(winW>=900 && winH>=600){zoom = 16;}*/
 			//var _load = false;
 			//url='http://images.wsu.edu/javascripts/campus_map_configs/pick.asp';			
 			//$.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data) {
@@ -543,9 +547,9 @@ var startingUrl=startingUrl||null;
 					map_op = {'center': $.wsu_maps.state.campus_latlng_str , 'zoom':zoom };
 				}else{
 					map_op = data.mapOptions;
-					if(winW>=500 && winH>=300){map_op.zoom = map_op.zoom;}
+					/*if(winW>=500 && winH>=300){map_op.zoom = map_op.zoom;}
 					if(winW>=700 && winH>=500){map_op.zoom = map_op.zoom+1;}
-					if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}
+					if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}*/
 				}
 				//styles={};
 				map_op = $.extend(map_op,{
@@ -597,6 +601,7 @@ var startingUrl=startingUrl||null;
 				}*/
 				$.wsu_maps.state.map_jObj.gmap(map_op).bind('init', function() { 
 					$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
+					$.wsu_maps.state.center = $.wsu_maps.state.map_jObj.gmap("get_map_center");
 					//$.wsu_maps.ini_GAtracking('UA-22127038-5');
 					$.wsu_maps.poi_setup();
 					$.wsu_maps.controlls.setup_map_type_controlls();
@@ -607,8 +612,15 @@ var startingUrl=startingUrl||null;
 						$.wsu_maps.geoLocate();
 					}
 					callback();
-					$(window).trigger('resize');
+					
 					$.wsu_maps.on_zoom_corrections();
+					$.wsu_maps.on_pan_corrections();
+					$.wsu_maps.on_bounds_changed_corrections();
+					$(window).resize(function(){
+						//$.wsu_maps.fit_to_location('WA');
+						$.wsu_maps.keep_center();
+					}).trigger("resize");
+					
 					$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
 					/* addthis setup */
 					//$.wsu_maps.ini_addthis("mcwsu");
@@ -857,37 +869,69 @@ var startingUrl=startingUrl||null;
 				}
 			});
 		},
+		
+		keep_center:function(){
+			if( $.wsu_maps.state.hold_center !== false && $.wsu_maps.state.center !== null){
+				$.wsu_maps.state.map_inst.panTo($.wsu_maps.state.center);
+			}
+		},
+		
+		
 		poi_setup:function (){//jObj){
-			var proto = google.maps.InfoWindow.prototype,
-				open = proto.open;
+			var proto = google.maps.InfoWindow.prototype, open = proto.open;
 			proto.open = function(map, anchor, please) {
 				if (please) {
 					return open.apply(this, arguments);
 				}
 			};
 		},
+		set_center:function(){
+			$.wsu_maps.state.map_jObj.dequeue("set_center");
+			$.wsu_maps.state.map_jObj.queue("set_center", function() {
+				
+				setTimeout(function() {
+					$.wsu_maps.state.center = $.wsu_maps.state.map_jObj.gmap("get_map_center");
+					$.wsu_maps.state.map_jObj.dequeue("set_center");
+				}, 750);
+			});
+		},
+		
 		poi_rest:function(){
-			$.wsu_maps.state.timed_event = $.wsu_maps.state.timed_event ||  null;
-			window.clearTimeout($.wsu_maps.state.timed_event);
-			$.wsu_maps.state.timed_event = window.setTimeout(function() {
-			//map.panTo(marker.getPosition());
-				$.wsu_maps.poi_setup();	 // point is to null out any new POI that may come up
-			}, 750);
+			$.wsu_maps.state.map_jObj.dequeue("poi_rest");
+			$.wsu_maps.state.map_jObj.queue("poi_rest", function() {
+				setTimeout(function() {
+					$.wsu_maps.poi_setup();	
+					$.wsu_maps.state.map_jObj.dequeue("poi_rest");
+				}, 750);
+			});
 		},
 		on_zoom_corrections:function(){
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
 				$.wsu_maps.poi_rest();
+				$.wsu_maps.set_center();
 			});
 		},
 		on_pan_corrections:function(){
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'drag', function() {
 				$.wsu_maps.state.hold_bounds=false;
+				$.wsu_maps.set_center();
 				$.wsu_maps.poi_rest();
+				
 			});
 			google.maps.event.addListener($.wsu_maps.state.map_inst, 'center_changed', function() {
 				$.wsu_maps.poi_rest();
 			});
 		},
+		on_bounds_changed_corrections:function(){
+			google.maps.event.addListener($.wsu_maps.state.map_inst, 'bounds_changed',function(){
+				$.wsu_maps.poi_rest();
+				$.wsu_maps.set_center();
+			});
+		},
+		
+		
+		
+		
 		getSmUrl:function (query,callback){
 			
 			var url = $.wsu_maps.getUrlPath(query);

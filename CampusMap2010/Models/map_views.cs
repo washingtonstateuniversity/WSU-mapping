@@ -53,6 +53,8 @@ namespace campusMap.Models {
         [Property]
         virtual public int height { get; set; }
 
+        [Property]
+        virtual public string fit_to_bound { get; set; }
 
         private IList<users> _authors = new List<users>();
         [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]

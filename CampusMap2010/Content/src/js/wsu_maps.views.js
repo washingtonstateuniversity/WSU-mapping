@@ -29,7 +29,7 @@ var base=base||{};
 			}
 			$.wsu_maps.state.map_jObj.gmap(map_op).bind('init', function() { 
 				$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
-
+				$.wsu_maps.set_center();
 				//var map = map_ele_obj.gmap("get","map");
 				$.wsu_maps.ini_GAtracking('UA-22127038-5');
 				$.wsu_maps.poi_setup();
@@ -38,11 +38,11 @@ var base=base||{};
 				}
 				$.wsu_maps.on_zoom_corrections();
 				$.wsu_maps.on_pan_corrections();
+				$.wsu_maps.on_bounds_changed_corrections();
 				$(window).resize(function(){
 					$.wsu_maps.fit_to_location('WA');
+					$.wsu_maps.keep_center();
 				}).trigger("resize");
-				
-				
 				callback();
 			});
 		},

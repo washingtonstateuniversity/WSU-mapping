@@ -10,7 +10,6 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
        geometric_id INT not null
     )
 
-	
 	ALTER TABLE geometrics
 		ADD parent INT null
 
@@ -19,8 +18,11 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
         foreign key (parent) 
         references geometrics
 
-
     ALTER TABLE geometrics_to_geoparents 
         add constraint FK36ED1C56214520DC 
         foreign key (parent_geometric_id) 
         references geometrics
+
+
+	ALTER TABLE map_views
+		ADD fit_to_bound NVARCHAR(255) null
