@@ -3,8 +3,8 @@
 	$.wsu_maps.markers = {
 		
 		defaults:{
-			width:30,
-			height:50,
+			width:15,//30,
+			height:25,//50,
 		},
 		alter_marker_icon:function(marker,multiplier){
 			multiplier = multiplier||1;
@@ -63,7 +63,7 @@
 		make_Marker:function (i,id,marker_obj,markerCallback){	
 			var jObj = $.wsu_maps.state.map_jObj;
 			//console.log(marker_obj.style.icon);
-			var idx = i+1;
+			//var idx = i+1;
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
 					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
@@ -74,7 +74,7 @@
 						/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
 						width:$.wsu_maps.markers.defaults.width,
 						height:$.wsu_maps.markers.defaults.height,
-						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon,
+						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon,
 						scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						origin: new google.maps.Point(0,0), // origin
