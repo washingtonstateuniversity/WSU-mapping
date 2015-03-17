@@ -11,6 +11,23 @@
 		#end
 	#end
 #end
+
+
+#capturefor(site_base)
+	#if($Controller.isLocal()==false)
+		//beta.maps.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot.Replace('http:','')
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl().Replace('http:','')
+		#else
+			//beta.maps.wsu.edu/
+		#end
+	#end
+#end
+
+
 #capturefor(view)
 $Controller.getView()
 #end
@@ -77,8 +94,8 @@ var fit_to_bound = '$!map.fit_to_bound';
 		//'http://www.google.com/uds/api?file=uds.js&v=1.0',
 		'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
 		'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-		'//beta.maps.wsu.edu/content/src/js/bootstrap.js',
-		'http://beta.maps.wsu.edu/content/build/js/maps.wsu.edu.js',
-		'//beta.maps.wsu.edu/content/dis/css/map.view.styles.css'
+		'${site_base.Trim()}content/src/js/bootstrap.js',
+		'${site_base.Trim()}content/build/js/maps.wsu.edu.js',
+		'${site_base.Trim()}content/dis/css/map.view.styles.css'
 	]
 ,"WSUMAPS");

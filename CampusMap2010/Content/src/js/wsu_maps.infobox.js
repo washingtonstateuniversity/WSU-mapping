@@ -121,7 +121,7 @@
 		build_IW_content:function(marker,i){
 			var nav='';
 			var content='';
-			
+			//var empty = false;
 			var infoTitle = "";
 			infoTitle = '<h2 class="header"><span class="iw_id">'+(i+1)+'</span>'+ marker.title +'</h2>';
 			
@@ -140,8 +140,15 @@
 				});				
 			
 			}else{
+					var re = /<h2 class='header'>.*<\/h2>/gmi; 
+					var html_block = marker.info.content.replace(re,'');
+				
+				
+				if(html_block===""){
+					return false;
+				}
 				nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+marker.info.content+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 			}
 			var tmpl='<div id="taby<%this.i%>" class="ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> <%this.nav%> </ul> <%this.content%>'+
 			'</div>';
@@ -150,16 +157,17 @@
 		make_InfoWindow:function (i,marker){
 			//var jObj = $.wsu_maps.state.map_jObj;
 			var content= $.wsu_maps.infobox.build_IW_content(marker,i);
-		
-			/* so need to remove this and create the class for it */
-			var boxText = document.createElement("div");
-			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-			boxText.innerHTML = marker.info.content;
-			var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
-			$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
-				//$('#taby'+i).tabs();
-				//alert('tring to tab it, dabnab it, from the INI');
-			});
+			if(content!==false){
+				/* so need to remove this and create the class for it */
+				var boxText = document.createElement("div");
+				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+				boxText.innerHTML = marker.info.content;
+				var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
+				$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
+					//$('#taby'+i).tabs();
+					//alert('tring to tab it, dabnab it, from the INI');
+				});
+			}
 		},
 		build_infobox_markerobj:function(item){
 			if(typeof(item.info)==='undefined'){
