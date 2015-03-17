@@ -930,10 +930,7 @@ var startingUrl=startingUrl||null;
 				$.wsu_maps.set_center();
 			});
 		},
-		
-		
-		
-		
+
 		getSmUrl:function (query,callback){
 			
 			var url = $.wsu_maps.getUrlPath(query);
@@ -967,5 +964,4 @@ var startingUrl=startingUrl||null;
 			$.wsu_maps.state.cur_mid = pid;
 		}*/
 	};
-	$.wsu_maps.ini();
 })(jQuery);
