@@ -127,7 +127,7 @@ namespace campusMap.Controllers {
 
 
 
-            if (httpRequest.Browser.IsMobileDevice && !((urlwithnoparams.ToString().IndexOf("/rt/") > -1) || (urlwithnoparams.ToString().IndexOf("/t/") > -1))) {
+            if (httpRequest.Browser.IsMobileDevice && !((urlwithnoparams.ToString().IndexOf("/embed/") > -1) || (urlwithnoparams.ToString().IndexOf("/rt/") > -1) || (urlwithnoparams.ToString().IndexOf("/t/") > -1))) {
                 HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
             }
 
