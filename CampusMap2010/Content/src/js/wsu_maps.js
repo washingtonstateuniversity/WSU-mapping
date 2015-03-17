@@ -528,12 +528,12 @@ var startingUrl=startingUrl||null;
 		},
 		
 		iniMap:function (url,callback){
-			var padder = 130;
+			/*var padder = 130;
 			if($('.layoutfree').lenght){
 				padder = 0;
 			}
 			var winH = $(window).height()-padder;
-			var winW = $(window).width();
+			var winW = $(window).width();*/
 			var zoom = $.wsu_maps.defaults.map.zoom;
 			/*if(winW>=500 && winH>=200){zoom = 14;}
 			if(winW>=700 && winH>=400){zoom = 15;}
