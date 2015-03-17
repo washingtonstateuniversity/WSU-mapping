@@ -599,13 +599,13 @@ namespace campusMap.Controllers {
                     RedirectToReferrer();
                 }
                 return;
-            }/*
+            }
+            /*
             //map_views_options tmp = view.options;
             var jss = new JavaScriptSerializer();
             var json = jss.Serialize(tmp);
             view.options_obj = json;
-*/
-
+            */
             Dictionary<string, string> urlparams = getPostParmasAsObj_obj("options");
             var jss = new JavaScriptSerializer();
             //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });

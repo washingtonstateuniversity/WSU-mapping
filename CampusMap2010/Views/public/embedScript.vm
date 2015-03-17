@@ -1,6 +1,6 @@
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		http://map.wsu.edu/
+		http://beta.map.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
