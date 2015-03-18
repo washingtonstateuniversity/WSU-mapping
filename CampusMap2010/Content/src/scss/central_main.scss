@@ -220,6 +220,18 @@ img{
 		padding: 4px 7px !important;
 	}
 }
+#loading{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:35px;
+	height:35px;
+	animation: spin 4s infinite linear;
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
 .inlineIcon {
 	display: inline-block !important;
 	float: left;
