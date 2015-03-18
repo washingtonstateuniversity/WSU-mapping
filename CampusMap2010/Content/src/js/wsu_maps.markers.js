@@ -64,6 +64,24 @@
 			var jObj = $.wsu_maps.state.map_jObj;
 			//console.log(marker_obj.style.icon);
 			//var idx = i+1;
+			//this is just for tmp reasons.. will come back in a day or so to fix.. mark it 3-17-15 my b day so I'll remeber right.. right? .. sure.. 
+			$.wsu_maps.markers.defaults.width=15;
+			$.wsu_maps.markers.defaults.height=25;
+			var title = marker_obj.title;
+			var titles_to_mark = [
+				"WSU Pullman",
+				"WSU Spokane",
+				"WSU Tri-Cities",
+				"WSU Vancouver",
+				//"Everett University Center",
+			];
+			console.log(title);
+			var icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
+			if(titles_to_mark.indexOf(title)> -1){	
+				icon =	$.wsu_maps.state.siteroot+"public/coug_marker.castle";
+				$.wsu_maps.markers.defaults.width=45;
+				$.wsu_maps.markers.defaults.height=75;
+			}
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
 					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
@@ -74,7 +92,7 @@
 						/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
 						width:$.wsu_maps.markers.defaults.width,
 						height:$.wsu_maps.markers.defaults.height,
-						url : marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon,
+						url : icon,
 						scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
 						origin: new google.maps.Point(0,0), // origin
