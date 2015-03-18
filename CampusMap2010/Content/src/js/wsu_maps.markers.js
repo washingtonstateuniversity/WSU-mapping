@@ -75,7 +75,7 @@
 				"WSU Vancouver",
 				//"Everett University Center",
 			];
-			console.log(title);
+			//console.log(title);
 			var icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
 			if(titles_to_mark.indexOf(title)> -1){	
 				icon =	$.wsu_maps.state.siteroot+"public/coug_marker.castle";
