@@ -1,13 +1,13 @@
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		http://beta.maps.wsu.edu/
+		https://beta.maps.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			http://beta.maps.wsu.edu/
+			https://beta.maps.wsu.edu/
 		#end
 	#end
 #end
