@@ -583,7 +583,7 @@
 						btn.addClass('active');
 					}
 					$.each($.wsu_maps.state.ib, function(i){//,v) {
-						if($.wsu_maps.state.ib[i].opened === true){
+						if(typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();
 						}
 					});
