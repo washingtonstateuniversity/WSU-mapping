@@ -45,6 +45,15 @@ var campus = #if($campus.name!="")'$campus.name'#else "Pullman" #end;
 var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
 var pos = {"center":"$map.getLat(),$map.getLong()"};
 
+#*#set($libs="places,geometry,weather,visualization")*#
+#set($libs="places")
+
+#*#set($signed_in="&signed_in=true")*#
+#set($signed_in="")
+
+
+
+
 #if($!map.places)
 #set($c=0)
 #capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
@@ -89,23 +98,30 @@ map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.style
 	
 	a=s.createElement(o);
 	a.async=0;
-	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places,geometry,weather,visualization&sensor=false&callback=startEmbeded';
+	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded';
 	t.parentNode.insertBefore(a,t);	
 	
 	i.startEmbeded = function(){
+  document.onreadystatechange = function () {
+     if (document.readyState == "complete") {
 		var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
-		for (j = 0; j < g.length; j++) { 
-			if(g[j].indexOf('.js')>-1){
-				a=s.createElement(o);
-				a.async=1;
-				a.src=g[j];
-			}else{
-				a=s.createElement("link");
-				a.setAttribute("rel", "stylesheet");
-				a.setAttribute("type", "text/css");
-				a.setAttribute("href", g[j]);
+			for (j = 0; j < g.length; j++) { 
+				if(g[j].indexOf('.js')>-1){
+					a=s.createElement(o);
+					a.async=1;
+					a.src=g[j];
+				}else{
+					a=s.createElement("link");
+					a.setAttribute("rel", "stylesheet");
+					a.setAttribute("type", "text/css");
+					a.setAttribute("href", g[j]);
+				}
+				t.parentNode.insertBefore(a,t);
 			}
-			t.parentNode.insertBefore(a,t);
-		}
+   }
+ }
+
+		
+		
 	};
 })(window,document,'script',map_scripts,"WSUMAPS");
