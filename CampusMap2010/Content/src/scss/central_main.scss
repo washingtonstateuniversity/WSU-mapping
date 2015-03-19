@@ -39,6 +39,19 @@ img{
 .clear {
 	clear: both;
 }
+
+a {
+	font-size: 12px;
+	font-weight: normal;
+	border: medium none;
+	box-shadow:none;
+	color: $white;
+	&:hover {
+		color: $color_WSU_Crimson;
+	}
+}
+
+
 #wsu-signature {
 	background-repeat: no-repeat;
 	background-position: center center;
