@@ -117,7 +117,7 @@
 		},
 		display_directions:function (results){
 			var jObj = $.wsu_maps.state.map_jObj;
-			$.wsu_maps.general.autoOpenListPanel(function(){
+			$.wsu_maps.listings.autoOpenListPanel(function(){
 				
 				
 				if($('#directions-panel').length===0){
@@ -140,7 +140,7 @@
 					$.wsu_maps.listings.setup_Dirscrollbar($('#directions-panel'));
 				}); 
 				directionsDisplay.setDirections(results);
-				$.wsu_maps.general.listTabs("directions");
+				$.wsu_maps.listings.listTabs("directions");
 				$.wsu_maps.general.addEmailDir();
 			});
 		},
