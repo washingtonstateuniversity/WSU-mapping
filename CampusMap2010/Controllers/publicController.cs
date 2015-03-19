@@ -1391,7 +1391,8 @@ where p.status = 3
                                 if (String.IsNullOrEmpty(item.details)) {
                                     infotabs += @"""" + infoTitle + @"""";
                                 } else {
-                                    infotabs += @"""" + infoTitle + mainimage + jsonEscape(details) + @"""";
+                                    string content = jsonEscape(autoFeildProcessing(item, details));
+                                    infotabs += @"""" + infoTitle + mainimage + content + @"""";
                                 }
                             }
 
