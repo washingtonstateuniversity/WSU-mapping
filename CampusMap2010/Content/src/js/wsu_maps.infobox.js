@@ -31,6 +31,7 @@
 			};
 			$.wsu_maps.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
 		},
+		
 		make_IW_resp:function(i){
 			var IWpanels = $.wsu_maps.state.map_jObj.find(".ui-tabs .ui-tabs-panel");
 			IWpanels.find(".content").width(( IWpanels.width()<400 ? IWpanels.width()-35:365 )+"px");	
@@ -54,12 +55,12 @@
 				disableAutoPan: false,
 				maxWidth: 0,
 				height:"340px",
-				pixelOffset: new google.maps.Size(-200, -75),
+				pixelOffset: new google.maps.Size(-200, -225),
 				zIndex: 999,
 				boxStyle: {
 					width: ($.wsu_maps.state.map_jObj.width()<425?$.wsu_maps.state.map_jObj.width()-25:400)+"px"
 				},
-				closeBoxHTML:"<span class='tabedBox infoClose'></span>",
+				closeBoxHTML:"<span class='tabedBox infoClose'>X</span>",
 				infoBoxClearance: $.wsu_maps.is_frontend?new google.maps.Size(75,60):new google.maps.Size(1,50),
 				isHidden: false,
 				pane: "floatPane",

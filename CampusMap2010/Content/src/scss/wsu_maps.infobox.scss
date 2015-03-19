@@ -58,15 +58,16 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			//vendor-prefix found
 			//-webkit-transform: translateZ(0px)
 			padding: 0.2em 0 0;
+			padding-top: 0px;
 			//Instead of the line below you could use @includeborder-bottom-left-radius($radius)
 			border-bottom-left-radius: 0;
 			//Instead of the line below you could use @includeborder-bottom-right-radius($radius)
 			border-bottom-right-radius: 0;
 			li {
-				&.ui-state-active {
-					border: medium none;
-					background: none repeat scroll 0 0 $white;
-				}
+				border: medium none;
+				background: none;
+				padding-top: 0px;
+				
 				&.first {
 					margin-left: -1px;
 				}
@@ -74,12 +75,13 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 					font-size: 12px;
 					font-weight: normal;
 					line-height: 16px;
-					padding: 5px 1.5em 3px 1.5em;
+					padding: 2px 1.5em 3px 1.5em;
+					
 					color: $white;
 					//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 					border-radius: 0;
 					&:hover {
-						color: $color_la_rioja_approx;
+						color: $color_WSU_Crimson;
 					}
 				}
 				&.ui-tabs-selected {
@@ -88,9 +90,13 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 						color: $color_shark_approx;
 					}
 				}
+				&.ui-state-active.ui-tabs-active {
+					background: none repeat scroll 0 0 $white;
+					
+				}/**/
 			}
 		}
-		.ui-tabs-panel-cap {
+		/*.ui-tabs-panel-cap {
 			background-color: $color_shark_approx;
 			bottom: -7px;
 			height: 7px;
@@ -100,7 +106,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			z-index: 9;
 		}
 		.ui-tabs-hide {
-		}
+		}*/
 		.ui-tabs-panel {
 			font-size: 12px;
 			line-height: 16px;
@@ -450,12 +456,19 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 		z-index: 1;
 		//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 		border-radius: 15px;
+		
 		background-color: $color_old_brick_approx;
 		cursor: pointer;
 		display: block;
 		height: 22px;
 		position: absolute;
 		width: 22px;
+		line-height: 22px;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+		color: #e2e2e2;
+
 		&:hover {
 			background-position: center bottom;
 		}
