@@ -68,6 +68,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			background: none;
 			padding-top: 0px;
 			border-radius: 0;
+			box-shadow:none;
 			&.first {
 				margin-left: -1px;
 			}
@@ -77,6 +78,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 				line-height: 16px;
 				padding: 2px 1.5em 3px 1.5em;
 				border: medium none;
+				box-shadow:none;
 				color: $white;
 				//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 				border-radius: 0;
@@ -235,6 +237,8 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			position: absolute;
 			right: 7px;
 			text-decoration: none;
+			border: medium none;
+			box-shadow:none;
 			&:hover {
 				color: $color_WSU_Crimson;
 			}
