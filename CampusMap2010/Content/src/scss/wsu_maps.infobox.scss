@@ -70,7 +70,8 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			border-radius: 0;
 			box-shadow:none;
 			&.first {
-				margin-left: -1px;
+				margin-left: 0px;
+  				margin-top: -3px;
 			}
 			a {
 				font-size: 12px;
