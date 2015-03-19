@@ -35,9 +35,13 @@ $Controller.getView()
 #*#set($signed_in="&signed_in=true")*#
 #set($signed_in="")
 
-var map_view = window.map_view || {
+
+
+
+var map_view =  {
 	siteroot : '$site.Trim()',
-	view_id : "WSU_MAPS_NS",
+	view_id : window.map_view_id ||"WSU_MAPS_NS",
+	map_view_scripts_block : window.map_view_scripts_block || false,
 	view : '$view.Trim()/',
 #if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end
 #if($activePlace && $activePlace != "")	activePlace : $!activePlace, #end
@@ -64,15 +68,20 @@ var map_view = window.map_view || {
 
 var map_scripts = [];
 //map_scripts.push('http://www.google.com/uds/api?file=uds.js&v=1.0');
-if ( !window.jQuery ) {
-	map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
-}
-if ( !window.jQuery.ui ) {
-	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
-}
+
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
-map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
-map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
+
+if( map_view.map_view_scripts_block === false ){
+	if ( !window.jQuery ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+	}
+	if ( !window.jQuery.ui ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
+	}
+	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
+	map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
+}
+
 
 (function(i,s,o,g,r,t,a,m){
 	t = document.scripts[document.scripts.length - 1];
