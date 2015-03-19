@@ -54,7 +54,7 @@ $Controller.getView()
   .at300bs{display:inline;}
 </style>-->
 <!--<link rel="stylesheet" type="text/css" href="http://designer.wsu.edu/template/css2.aspx?key=0ea2b8zs010"  />-->
-<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' media='screen' />
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
 #*
 <link media='screen' href='http://images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' 	type='text/css' rel='stylesheet' />
 <link media='screen' href='http://images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />

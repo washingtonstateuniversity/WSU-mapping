@@ -4,9 +4,9 @@
 
 
 
-<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 #parse("layouts/assets_central/google-analytics.vm")
 <!--
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&domready=1" id="addthisScript"></script>
