@@ -35,7 +35,7 @@ $Controller.getView()
 #*#set($signed_in="&signed_in=true")*#
 #set($signed_in="")
 
-var map_view = {
+var map_view = window.map_view || {
 	siteroot : '$site.Trim()',
 	view_id : "WSU_MAPS_NS",
 	view : '$view.Trim()/',
@@ -76,12 +76,15 @@ map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.style
 
 (function(i,s,o,g,r,t,a,m){
 	t = document.scripts[document.scripts.length - 1];
-	a = document.createElement('div');
-	a.setAttribute( "style", "width:100%;padding-top:66%;min-height: 0px;" );
-	a.setAttribute( "class", "WSU_MAPS_NS" );
-	a.id=r;
-	t.parentNode.insertBefore(a,t.nextSibling);
-	a=s.createElement(o);
+	m = document.getElementById(r);
+	if(m===null){
+		a = document.createElement('div');
+		a.setAttribute( "style", "width:100%;padding-top:66%;min-height: 0px;" );
+		a.setAttribute( "class", "WSU_MAPS_NS" );
+		a.id=r;
+		t.parentNode.insertBefore(a,t.nextSibling);
+		a=s.createElement(o);
+	}
 	a.async=0;
 	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded';
 	t.parentNode.insertBefore(a,t);	
