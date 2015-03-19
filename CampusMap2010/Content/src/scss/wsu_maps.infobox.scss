@@ -34,344 +34,400 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 	//-webkit-transform: translateZ(0px)
 }
 
-	.ui-tabs {
-		padding: 0;
-		padding-bottom: 5px;
+.ui-tabs {
+	padding: 0;
+	padding-bottom: 5px;
+	//vendor-prefix found
+	//-webkit-transform: translateZ(0px)
+	width: 100%;
+	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: -1px 1px 2px 0 $black_64;
+	//Instead of the line below you could use @includeborder-bottom-left-radius($radius)
+	border-bottom-left-radius: 0;
+	//Instead of the line below you could use @includeborder-bottom-right-radius($radius)
+	border-bottom-right-radius: 0;
+	border: $color_silver_89_approx 1px solid;
+	.ui-widget-header {
 		//vendor-prefix found
 		//-webkit-transform: translateZ(0px)
-		width: 100%;
-		//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		box-shadow: -1px 1px 2px 0 $black_64;
+		height: 19px;
+		background: $color_opal_approx;
+		border: medium none;
+	}
+	.ui-tabs-nav {
+		//vendor-prefix found
+		//-webkit-transform: translateZ(0px)
+		padding: 0.2em 0 0;
+		padding-top: 0px;
 		//Instead of the line below you could use @includeborder-bottom-left-radius($radius)
 		border-bottom-left-radius: 0;
 		//Instead of the line below you could use @includeborder-bottom-right-radius($radius)
 		border-bottom-right-radius: 0;
-		border: $color_silver_89_approx 1px solid;
-		.ui-widget-header {
-			//vendor-prefix found
-			//-webkit-transform: translateZ(0px)
-			height: 19px;
-			background: $color_opal_approx;
+		li {
 			border: medium none;
-		}
-		.ui-tabs-nav {
-			//vendor-prefix found
-			//-webkit-transform: translateZ(0px)
-			padding: 0.2em 0 0;
+			background: none;
 			padding-top: 0px;
-			//Instead of the line below you could use @includeborder-bottom-left-radius($radius)
-			border-bottom-left-radius: 0;
-			//Instead of the line below you could use @includeborder-bottom-right-radius($radius)
-			border-bottom-right-radius: 0;
-			li {
+			border-radius: 0;
+			&.first {
+				margin-left: -1px;
+			}
+			a {
+				font-size: 12px;
+				font-weight: normal;
+				line-height: 16px;
+				padding: 2px 1.5em 3px 1.5em;
 				border: medium none;
-				background: none;
-				padding-top: 0px;
-				
-				&.first {
-					margin-left: -1px;
-				}
-				a {
-					font-size: 12px;
-					font-weight: normal;
-					line-height: 16px;
-					padding: 2px 1.5em 3px 1.5em;
-					
-					color: $white;
-					//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-					border-radius: 0;
-					&:hover {
-						color: $color_WSU_Crimson;
-					}
-				}
-				&.ui-tabs-selected {
-					padding-bottom: 1px;
-					a {
-						color: $color_shark_approx;
-					}
-				}
-				&.ui-state-active.ui-tabs-active {
-					background: none repeat scroll 0 0 $white;
-					
-				}/**/
-			}
-		}
-		/*.ui-tabs-panel-cap {
-			background-color: $color_shark_approx;
-			bottom: -7px;
-			height: 7px;
-			left: 0;
-			position: absolute;
-			width: 100%;
-			z-index: 9;
-		}
-		.ui-tabs-hide {
-		}*/
-		.ui-tabs-panel {
-			font-size: 12px;
-			line-height: 16px;
-			color: $color_shark_approx;
-			max-height: 240px;
-			min-height: 0;
-			padding: 5px;
-			position: relative;
-			.content {
-				min-height: 0;
-				max-height: 240px;
-				overflow-x: hidden;
-				overflow-y: auto;
-				padding: 0 15px;
-				left: 0;
-				top: 0;
-				float: left;
-				&.Views_Vids {
-					padding: 0 4px;
-					.cycle ul li span {
-						padding: 12px 10px;
-					}
-				}
-				.header {
-					font-size: 22px;
-					color: $color_masala_approx;
-					font-weight: normal;
-					margin-top: 0;
-					padding-top: 5px;
-					margin-bottom: 5px;
-				}
-				ul {
-					list-style: none outside none;
-					padding: 0;
-					margin: 0;
-					li {
-						padding-bottom: 5px;
-						li {
-							padding-bottom: 0;
-						}
-						h4 {
-							padding-top: 5px;
-							font-weight: bold;
-							font-size: 12px;
-							line-height: 16px;
-							margin: 0;
-						}
-						strong {
-							display: block;
-						}
-						span {
-							padding-left: 35px;
-							display: inline-block;
-						}
-					}
-				}
-				.headImage {
-					float: left;
-					padding: 10px;
-					margin-right: 9px;
-					position: relative;
-					cursor: pointer;
-					margin-left: -4px;
-					margin-top: -1px;
-					&:hover {
-						//vendor-prefix found
-						//-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"
-						filter: alpha(opacity=80);
-						opacity: .8;
-						.imgEnlarge {
-							background-position: center bottom;
-						}
-					}
-					&.orientation_h {
-						background: $url_2 repeat-x scroll 50% top $white;
-					}
-					&.orientation_ {
-						background: $url_2 repeat-x scroll 50% top $white;
-					}
-					&.orientation_v {
-						background: $url_3 repeat-x scroll 50% top $white;
-					}
-					.imgEnlarge {
-						background: $url_4 no-repeat scroll center top transparent;
-						top: 6px;
-						display: block;
-						height: 14px;
-						right: 4px;
-						position: absolute;
-						width: 14px;
-						padding: 0;
-					}
-				}
-				.cycle ul li .headImage {
-					float: left;
-					position: relative;
-					&.orientation_h {
-						@extend %extend_inforbase;
-					}
-					&.orientation_ {
-						@extend %extend_inforbase;
-					}
-					&.orientation_v {
-						background: $url_6 no-repeat scroll center top transparent;
-						margin-left: 67px;
-						padding: 12px 9px;
-					}
-					.imgEnlarge {
-						background: $url_7 no-repeat scroll center top transparent;
-						right: 5px;
-						height: 18px;
-						width: 18px;
-					}
-					&:hover .imgEnlarge {
-						background-position: center bottom;
-					}
-				}
-			}
-			.errorReporting {
-				bottom: -2px;
-				color: $color_masala_approx;
-				display: block;
-				font-size: 11px;
-				letter-spacing: 0;
-				padding: 0 5px;
-				position: absolute;
-				right: 7px;
-				text-decoration: none;
+				color: $white;
+				//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+				border-radius: 0;
 				&:hover {
 					color: $color_WSU_Crimson;
 				}
 			}
+			&.ui-tabs-selected {
+				padding-bottom: 1px;
+				a {
+					color: $color_shark_approx;
+				}
+			}
+			&.ui-state-active.ui-tabs-active {
+				background: none repeat scroll 0 0 $white;
+				
+			}/**/
 		}
 	}
-	.cycle {
+	/*.ui-tabs-panel-cap {
+		background-color: $color_shark_approx;
+		bottom: -7px;
+		height: 7px;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 9;
+	}
+	.ui-tabs-hide {
+	}*/
+	.ui-tabs-panel {
+		font-size: 12px;
+		line-height: 16px;
+		color: $color_shark_approx;
+		max-height: 240px;
+		min-height: 0;
+		padding: 5px;
 		position: relative;
-		width: 344px;
+		.content {
+			min-height: 0;
+			max-height: 240px;
+			overflow-x: hidden;
+			overflow-y: auto;
+			padding: 0 15px;
+			left: 0;
+			top: 0;
+			float: left;
+			&.Views_Vids {
+				padding: 0 4px;
+				.cycle ul li span {
+					padding: 12px 10px;
+				}
+			}
+			.header {
+				font-size: 22px;
+				color: $color_masala_approx;
+				font-weight: normal;
+				margin-top: 0;
+				padding-top: 5px;
+				margin-bottom: 5px;
+			}
+			ul {
+				list-style: none outside none;
+				padding: 0;
+				margin: 0;
+				li {
+					padding-bottom: 5px;
+					li {
+						padding-bottom: 0;
+					}
+					h4 {
+						padding-top: 5px;
+						font-weight: bold;
+						font-size: 12px;
+						line-height: 16px;
+						margin: 0;
+					}
+					strong {
+						display: block;
+					}
+					span {
+						padding-left: 35px;
+						display: inline-block;
+					}
+				}
+			}
+			.headImage {
+				float: left;
+				padding: 10px;
+				margin-right: 9px;
+				position: relative;
+				cursor: pointer;
+				margin-left: -4px;
+				margin-top: -1px;
+				&:hover {
+					//vendor-prefix found
+					//-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"
+					filter: alpha(opacity=80);
+					opacity: .8;
+					.imgEnlarge {
+						background-position: center bottom;
+					}
+				}
+				&.orientation_h {
+					background: $url_2 repeat-x scroll 50% top $white;
+				}
+				&.orientation_ {
+					background: $url_2 repeat-x scroll 50% top $white;
+				}
+				&.orientation_v {
+					background: $url_3 repeat-x scroll 50% top $white;
+				}
+				.imgEnlarge {
+					background: $url_4 no-repeat scroll center top transparent;
+					top: 6px;
+					display: block;
+					height: 14px;
+					right: 4px;
+					position: absolute;
+					width: 14px;
+					padding: 0;
+				}
+			}
+			.cycle ul li .headImage {
+				float: left;
+				position: relative;
+				&.orientation_h {
+					@extend %extend_inforbase;
+				}
+				&.orientation_ {
+					@extend %extend_inforbase;
+				}
+				&.orientation_v {
+					background: $url_6 no-repeat scroll center top transparent;
+					margin-left: 67px;
+					padding: 12px 9px;
+				}
+				.imgEnlarge {
+					background: $url_7 no-repeat scroll center top transparent;
+					right: 5px;
+					height: 18px;
+					width: 18px;
+				}
+				&:hover .imgEnlarge {
+					background-position: center bottom;
+				}
+			}
+		}
+		.errorReporting {
+			bottom: -2px;
+			color: $color_masala_approx;
+			display: block;
+			font-size: 11px;
+			letter-spacing: 0;
+			padding: 0 5px;
+			position: absolute;
+			right: 7px;
+			text-decoration: none;
+			&:hover {
+				color: $color_WSU_Crimson;
+			}
+		}
+	}
+}
+.cycle {
+	position: relative;
+	width: 344px;
+	height: 190px;
+	margin-left: 10px;
+	//vendor-prefix found
+	//-webkit-transform: translateZ(0px)
+	.cWrap {
+		margin: 0 auto;
 		height: 190px;
-		margin-left: 10px;
+		width: 263px !important;
 		//vendor-prefix found
 		//-webkit-transform: translateZ(0px)
-		.cWrap {
+		ul {
+			display: block;
+			list-style: none outside none;
 			margin: 0 auto;
 			height: 190px;
-			width: 263px !important;
-			//vendor-prefix found
-			//-webkit-transform: translateZ(0px)
+			li {
+				width: 344px !important;
+				height: 190px;
+			}
+		}
+	}
+	.prev {
+		left: 0;
+		top: 55px;
+		text-indent: -9999em;
+		display: block;
+		width: 24px;
+		height: 71px;
+		position: absolute;
+		background: $url_8 no-repeat scroll left top transparent;
+		z-index: 9;
+		&:hover {
+			background-position: left bottom;
+		}
+	}
+	.next {
+		right: 0;
+		top: 55px;
+		text-indent: -9999em;
+		display: block;
+		width: 24px;
+		height: 71px;
+		position: absolute;
+		background: $url_8 no-repeat scroll right top transparent;
+		z-index: 9;
+		&:hover {
+			background-position: right bottom;
+		}
+	}
+}
+#cboxContent {
+	overflow: visible;
+	.cycle {
+		position: relative;
+		width: 75%;
+		height: 100%;
+		margin: 0 auto;
+		.cWrap {
+			margin: 0 auto;
+			height: 100%;
+			width: auto !important;
 			ul {
 				display: block;
 				list-style: none outside none;
 				margin: 0 auto;
-				height: 190px;
+				height: 100%;
 				li {
-					width: 344px !important;
-					height: 190px;
+					width: auto !important;
+					height: 100%;
+					padding-left: 24px;
+					img {
+						height: 100%;
+					}
 				}
 			}
 		}
 		.prev {
-			left: 0;
-			top: 55px;
-			text-indent: -9999em;
-			display: block;
-			width: 24px;
-			height: 71px;
-			position: absolute;
-			background: $url_8 no-repeat scroll left top transparent;
-			z-index: 9;
-			&:hover {
-				background-position: left bottom;
-			}
+			top: 50%;
 		}
 		.next {
-			right: 0;
-			top: 55px;
-			text-indent: -9999em;
-			display: block;
-			width: 24px;
-			height: 71px;
-			position: absolute;
-			background: $url_8 no-repeat scroll right top transparent;
-			z-index: 9;
-			&:hover {
-				background-position: right bottom;
-			}
+			top: 50%;
 		}
 	}
-	#cboxContent {
-		overflow: visible;
-		.cycle {
-			position: relative;
-			width: 75%;
-			height: 100%;
-			margin: 0 auto;
-			.cWrap {
-				margin: 0 auto;
-				height: 100%;
-				width: auto !important;
-				ul {
-					display: block;
-					list-style: none outside none;
-					margin: 0 auto;
-					height: 100%;
-					li {
-						width: auto !important;
-						height: 100%;
-						padding-left: 24px;
-						img {
-							height: 100%;
-						}
-					}
-				}
-			}
-			.prev {
-				top: 50%;
-			}
-			.next {
-				top: 50%;
-			}
-		}
-		#cboxPrevious {
-			left: -50px;
-			top: 40%;
-			text-indent: -9999em;
-			display: block;
-			width: 24px;
-			height: 71px;
-			position: absolute;
-			background: $url_8 no-repeat scroll left top transparent;
-			z-index: 9;
-			&:hover {
-				background-position: left bottom;
-			}
-		}
-		#cboxNext {
-			right: -50px;
-			top: 40%;
-			text-indent: -9999em;
-			display: block;
-			width: 24px;
-			height: 71px;
-			position: absolute;
-			background: $url_8 no-repeat scroll right top transparent;
-			z-index: 9;
-			&:hover {
-				background-position: right bottom;
-			}
-		}
-	}
-	#cboxSlideshow {
-		display: none !important;
-	}
-	#cboxCurrent {
+	#cboxPrevious {
+		left: -50px;
+		top: 40%;
+		text-indent: -9999em;
+		display: block;
+		width: 24px;
+		height: 71px;
 		position: absolute;
-		top: -9999em;
+		background: $url_8 no-repeat scroll left top transparent;
+		z-index: 9;
+		&:hover {
+			background-position: left bottom;
+		}
 	}
-	#cb_nav {
-		bottom: 0;
+	#cboxNext {
+		right: -50px;
+		top: 40%;
+		text-indent: -9999em;
+		display: block;
+		width: 24px;
+		height: 71px;
+		position: absolute;
+		background: $url_8 no-repeat scroll right top transparent;
+		z-index: 9;
+		&:hover {
+			background-position: right bottom;
+		}
+	}
+}
+#cboxSlideshow {
+	display: none !important;
+}
+#cboxCurrent {
+	position: absolute;
+	top: -9999em;
+}
+#cb_nav {
+	bottom: 0;
+	display: inline;
+	left: 0;
+	margin: 5px auto;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	li {
 		display: inline;
-		left: 0;
-		margin: 5px auto;
+		padding: 0 4px;
+		line-height: 8px;
+		height: 8px;
+		a {
+			display: inline-block;
+			margin: 0 2px;
+			width: 8px;
+			height: 8px;
+			text-indent: -9999em;
+			background: $url_10 no-repeat scroll right center transparent;
+			&:hover {
+				background-position: center center;
+			}
+		}
+		&.active a {
+			background-position: left center;
+		}
+	}
+}
+.navArea {
+	position: relative;
+	clear: both;
+	text-align: center;
+	display: block;
+	margin-left: -8px;
+	.photos {
+		color: $color_WSU_Gray;
+		font-size: 12px;
+		text-transform: uppercase;
+		text-decoration: none;
+		&.active {
+			color: $color_scooter_approx;
+		}
+		&:hover {
+			color: $color_la_rioja_approx;
+		}
+	}
+	.vids {
+		color: $color_WSU_Gray;
+		font-size: 12px;
+		text-transform: uppercase;
+		text-decoration: none;
+		margin-right: 18px;
+		&.active {
+			color: $color_scooter_approx;
+		}
+		&:hover {
+			color: $color_la_rioja_approx;
+		}
+	}
+	ul.cNav {
+		display: inline;
+		margin: 5px;
 		padding: 0;
-		position: absolute;
-		text-align: center;
-		width: 100%;
 		li {
 			display: inline;
 			padding: 0 4px;
@@ -388,91 +444,35 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 					background-position: center center;
 				}
 			}
-			&.active a {
+			&.activeSlide a {
 				background-position: left center;
 			}
 		}
 	}
-	.navArea {
-		position: relative;
-		clear: both;
-		text-align: center;
-		display: block;
-		margin-left: -8px;
-		.photos {
-			color: $color_WSU_Gray;
-			font-size: 12px;
-			text-transform: uppercase;
-			text-decoration: none;
-			&.active {
-				color: $color_scooter_approx;
-			}
-			&:hover {
-				color: $color_la_rioja_approx;
-			}
-		}
-		.vids {
-			color: $color_WSU_Gray;
-			font-size: 12px;
-			text-transform: uppercase;
-			text-decoration: none;
-			margin-right: 18px;
-			&.active {
-				color: $color_scooter_approx;
-			}
-			&:hover {
-				color: $color_la_rioja_approx;
-			}
-		}
-		ul.cNav {
-			display: inline;
-			margin: 5px;
-			padding: 0;
-			li {
-				display: inline;
-				padding: 0 4px;
-				line-height: 8px;
-				height: 8px;
-				a {
-					display: inline-block;
-					margin: 0 2px;
-					width: 8px;
-					height: 8px;
-					text-indent: -9999em;
-					background: $url_10 no-repeat scroll right center transparent;
-					&:hover {
-						background-position: center center;
-					}
-				}
-				&.activeSlide a {
-					background-position: left center;
-				}
-			}
-		}
-	}
-	.tabedBox.infoClose {
-		right: -9px;
-		top: -9px;
-		z-index: 1;
-		//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-		border-radius: 15px;
-		
-		background-color: $color_old_brick_approx;
-		cursor: pointer;
-		display: block;
-		height: 22px;
-		position: absolute;
-		width: 22px;
-		line-height: 22px;
-		font-size: 16px;
-		font-weight: bold;
-		text-align: center;
-		color: #e2e2e2;
+}
+.tabedBox.infoClose {
+	right: -9px;
+	top: -9px;
+	z-index: 1;
+	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+	border-radius: 15px;
+	
+	background-color: $color_old_brick_approx;
+	cursor: pointer;
+	display: block;
+	height: 22px;
+	position: absolute;
+	width: 22px;
+	line-height: 22px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	color: #e2e2e2;
 
-		&:hover {
-			background-position: center bottom;
-		}
+	&:hover {
+		background-position: center bottom;
 	}
+}
 
 .iw_id {
 	font-size: 14px;
