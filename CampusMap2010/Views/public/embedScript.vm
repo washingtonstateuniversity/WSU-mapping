@@ -68,6 +68,7 @@ if ( !window.jQuery.ui ) {
 	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
 }
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
+map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
 
 
