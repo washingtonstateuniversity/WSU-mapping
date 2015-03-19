@@ -32,7 +32,7 @@ header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, vid
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	line-height: auto;
+	line-height: initial;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -78,9 +78,9 @@ a {
 	font-weight: normal;
 	border: medium none;
 	box-shadow:none;
-	color: $white;
+	color: $color_WSU_Crimson;
 	&:hover {
-		color: $color_WSU_Crimson;
+		color: $color_WSU_Gray;
 	}
 }
 p{
