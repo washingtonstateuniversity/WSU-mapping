@@ -1,11 +1,7 @@
 /*
 * globals from the page, inline
 */
-var siteroot=siteroot||"";
-var view=view||"";
-var mcv_action=mcv_action||"";
-var campus=campus||"";
-var campus_latlng_str=campus_latlng_str||"";
+
 
 /* think these should be removed at some point when cleared */
 var pos=pos||{};
@@ -22,7 +18,7 @@ var startingUrl=startingUrl||null;
 		state:{
 			map_jObj:null,
 			map_inst:null,
-			
+						
 			active:{
 				marker:null,
 				iw:null,
@@ -42,11 +38,11 @@ var startingUrl=startingUrl||null;
 			
 			currentControl:"ROADMAP",
 		
-			siteroot:siteroot||"",
-			view:view||"",
-			mcv_action:mcv_action||"",
-			campus:campus||"",
-			campus_latlng_str:campus_latlng_str||"",
+			siteroot: typeof(window.map_view) !== "undefined" && typeof(window.map_view.siteroot) !== "undefined" ? window.map_view.siteroot : "",
+			view: typeof(window.map_view) !== "undefined" && typeof(window.map_view.view) !== "undefined" ? window.map_view.view : "",
+			mcv_action: typeof(window.map_view) !== "undefined" && typeof(window.map_view.mcv_action) !== "undefined" ? window.map_view.mcv_action : "",
+			campus: typeof(window.map_view) !== "undefined" && typeof(window.map_view.campus) !== "undefined" ? window.map_view.campus : "",
+			campus_latlng_str: typeof(window.map_view) !== "undefined" && typeof(window.map_view.campus_latlng_str) !== "undefined" ? window.map_view.campus_latlng_str : "",
 			
 			in_pano:false,
 			hold_bounds:true,
@@ -573,8 +569,8 @@ var startingUrl=startingUrl||null;
 					$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
 					ops = $('#runningOptions').html();
 				}
-				if( typeof(window.running_options) !== "undefined" ){
-					ops=window.running_options;
+				if( typeof(window.map_view) !== "undefined" && typeof(window.map_view.running_options) !== "undefined" ){
+					ops=window.map_view.running_options;
 				}
 				
 				
@@ -616,8 +612,8 @@ var startingUrl=startingUrl||null;
 					
 
 					$(window).resize(function(){
-						if(typeof(window.fit_to_bound) !== "undefined" && window.fit_to_bound !==""){
-							$.wsu_maps.fit_to_location(window.fit_to_bound);
+						if( typeof(window.map_view) !== "undefined" && typeof(window.map_view.fit_to_bound) !== "undefined" && window.map_view.fit_to_bound !=="" ){
+							$.wsu_maps.fit_to_location(window.map_view.fit_to_bound);
 						}
 						$.wsu_maps.keep_center();
 					}).trigger("resize");
@@ -674,7 +670,7 @@ var startingUrl=startingUrl||null;
 			if($( "#placeSearch input[type=text]" ).length){
 				$.wsu_maps.search.setup_mapsearch();
 			}
-			if($('.veiw_base_layout.public').length || ( typeof(window.map_view) !== "undefined" && window.map_view === true)){	
+			if($('.veiw_base_layout.public').length || ( typeof(window.map_view) !== "undefined" )){	
 				$.wsu_maps.shapes.reloadShapes();
 				$.wsu_maps.places.reloadPlaces();
 			}

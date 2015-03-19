@@ -28,8 +28,8 @@ var base=base||{};
 				$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
 				ops = $('#runningOptions').html();
 			}
-			if( typeof(window.running_options) !== "undefined" ){
-				ops=window.running_options;
+			if( typeof(window.map_view) !== "undefined" && typeof(window.map_view.running_options) !== "undefined" ){
+				ops=window.map_view.running_options;
 			}
 			
 			
@@ -51,8 +51,8 @@ var base=base||{};
 				}
 
 				$(window).resize(function(){
-					if(typeof(window.fit_to_bound) !== "undefined" && window.fit_to_bound !==""){
-						$.wsu_maps.fit_to_location(window.fit_to_bound);
+					if(  typeof(window.map_view) !== "undefined" && typeof(window.map_view.fit_to_bound) !== "undefined" && window.map_view.fit_to_bound !==""  ){
+						$.wsu_maps.fit_to_location(window.map_view.fit_to_bound);
 					}
 					$.wsu_maps.keep_center();
 				}).trigger("resize");
