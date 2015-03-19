@@ -583,7 +583,9 @@
 						btn.addClass('active');
 					}
 					$.each($.wsu_maps.state.ib, function(i){//,v) {
-						$.wsu_maps.state.ib[i].close();
+						if($.wsu_maps.state.ib[i].opened === true){
+							$.wsu_maps.state.ib[i].close();
+						}
 					});
 					//var pid = btn.attr("role");
 					$.wsu_maps.state.ib[i].open($.wsu_maps.state.map_inst, $.wsu_maps.state.markerLog[i]);

@@ -24,7 +24,11 @@
 				e.preventDefault();
 				$.wsu_maps.nav.menuDressChild($(this));
 				if($.wsu_maps.state.ib.length>0){
-					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
+					$.each($.wsu_maps.state.ib, function(i) {
+						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+							$.wsu_maps.state.ib[i].close();
+						}
+					});
 				}
 				jObj.gmap('clear','markers');
 				jObj.gmap('clear','overlays');
@@ -46,7 +50,11 @@
 				e.preventDefault();
 				$.wsu_maps.nav.menuDressChild($(this));
 				if($.wsu_maps.state.ib.length>0){
-					$.each($.wsu_maps.state.ib, function(i) {$.wsu_maps.state.ib[i].close();});
+					$.each($.wsu_maps.state.ib, function(i) {
+						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+							$.wsu_maps.state.ib[i].close();
+						}
+					});
 				}
 				jObj.gmap('clear','markers');
 				jObj.gmap('clear','overlays');

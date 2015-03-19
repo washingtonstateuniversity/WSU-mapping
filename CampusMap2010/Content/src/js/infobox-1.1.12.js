@@ -123,6 +123,7 @@ function InfoBox(opt_opts,callback) {
     
   this.onClose = opt_opts.onClose || callback;
   this.onOpen = opt_opts.onOpen || callback;
+  this.opened = false;
   
   if(typeof(callback)!=='undefined'){
 	  callback();
@@ -790,7 +791,7 @@ InfoBox.prototype.open = function (map, anchor) {
   }
 
   this.setMap(map);
-
+	this.opened = true;
  if (this.div_) {
     this.panBox_();
   }else{
@@ -833,4 +834,9 @@ InfoBox.prototype.close = function () {
   }
 
   this.setMap(null);
+  this.opened = false;
+};
+
+InfoBox.prototype.opened = function () {
+	return this.opened;
 };
