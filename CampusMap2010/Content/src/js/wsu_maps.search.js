@@ -68,7 +68,7 @@
 				open: function(){//e,ui) {
 					$('.ui-autocomplete.ui-menu').removeClass( "ui-corner-all" );
 				 }
-			}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 				var text =item.label;
 				if(item.related==="header"){
 					text = "<em>Related search items</em>";
@@ -76,7 +76,7 @@
 					text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
 				}
 				return $( "<li></li>" )
-					.data( "item.autocomplete", item )
+					.data( "ui-autocomplete-item", item )
 					.append( text )
 					.appendTo( ul );
 			};
