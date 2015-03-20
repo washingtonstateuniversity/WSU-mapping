@@ -269,7 +269,7 @@
 			$.wsu_maps.infobox.init_img_cycler(marker);
 			$.wsu_maps.infobox.contain_content_events();
 			$.wsu_maps.infobox.init_img_modal(marker);
-			$.wsu_maps.general.addErrorReporting(marker);
+			$.wsu_maps.errors.addErrorReporting(marker);
 
 			$('.ui-tabs-panel').hover(function(){
 				$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: true});

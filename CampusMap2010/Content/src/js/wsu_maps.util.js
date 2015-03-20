@@ -124,7 +124,111 @@
 			return caurrentLatLngOffset;
 		},
 
-	
+		popup_message:function (options){
+			if($("#mess").length<=0){
+				$('body').append('<div id="mess">');
+			}
+			var jObj = $( "#mess" );
+			if(typeof(options.clean)==="undefined"){
+				options.clean=true;
+			}
+			var defaults = {
+				autoOpen: true,
+				resizable: false,
+				width: 350,
+				minHeight: 25,
+				modal: true,
+				draggable : false,
+				buttons_parts:{},
+				create:function(){
+					if(options.clean){
+						$('.ui-dialog-titlebar').remove();
+						$(".ui-dialog-buttonpane").remove();
+					}
+					$('body').css({overflow:"hidden"});
+					if($.isFunction(options.onCreate)){
+						options.onCreate(jObj);
+					}
+				},
+				open:function(){
+					if($.isFunction(options.onOpen)){
+						options.onOpen(jObj);
+					}
+				},
+				buttons:{},
+				close: function() {
+					if($.isFunction(options.onClose)){
+						options.onClose(jObj);
+					}
+					$.wsu_maps.util.close_dialog_modle(jObj);
+				}
+			};
+			options = $.extend(defaults,options);
+
+
+			jObj.html( (typeof options.html === 'string' || options.html instanceof String) ? options.html : options.html.html() );
+			var buttons_parts = {};
+			$.each(options.buttons_parts,function(i,v){
+				buttons_parts[v.name]=function(){
+					$( this ).dialog( "close" );
+					if($.isFunction(v.callback)){
+						v.callback(jObj);
+					}
+				};
+			});
+			options.buttons = buttons_parts;
+			jObj.dialog(options);
+		},
+		confirmation_message:function (html_message,callback){
+			if($("#mess").length<=0){
+				$('body').append('<div id="mess">');
+			}
+			$("#mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
+			$( "#mess" ).dialog({
+				autoOpen: true,
+				resizable: false,
+				width: 350,
+				minHeight: 25,
+				modal: true,
+				draggable : false,
+				create:function(){
+					$('.ui-dialog-titlebar').remove();
+					$('body').css({overflow:"hidden"});
+				},
+				buttons:{
+					Yes:function(){
+						if($.isFunction(callback.yes)){
+							callback.yes();
+						}
+						$( this ).dialog( "close" );
+					},
+					No: function() {
+						if($.isFunction(callback.no)){
+							callback.no();
+						}
+						$( this ).dialog( "close" );
+					}
+				},
+				close: function() {
+					$.wsu_maps.util.close_dialog_modle($( "#mess" ));
+				}
+			});
+		},	
+		set_diamodle_resizing:function(jObj){
+			$(window).resize(function(){
+				jObj.dialog('option', {
+					width: $(window).width()-50,
+					height: $(window).height()-50
+				});
+			});
+		},
+		close_dialog_modle: function(jObj){
+			jObj.dialog( "destroy" );
+			jObj.remove();
+			if($(".ui-dialog.ui-widget.ui-widget-content").length<=0){
+				$('body').css({overflow:"auto"});
+			}
+		},	
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		// jeremy's debuging funtions
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------	

@@ -660,7 +660,7 @@ var startingUrl=startingUrl||null;
 			$.wsu_maps.directions.setup_directions();
 			$.wsu_maps.nav.setup_nav();
 			$.wsu_maps.general.setup_embeder();
-			$.wsu_maps.general.addErrorReporting();
+			$.wsu_maps.errors.addErrorReporting();
 			
 			$.wsu_maps.setup_pdfprints();
 			if($('.layoutfree').length){
