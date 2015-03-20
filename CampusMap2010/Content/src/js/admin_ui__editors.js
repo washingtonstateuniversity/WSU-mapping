@@ -323,7 +323,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 				.rightclick(function(event){$.wsu_maps.controlls.showContextMenu(event.latLng);})
 				.mouseover(function(event){
 					
-					$.wsu_maps.infobox.open_toolTip(jObj,i);
+					$.wsu_maps.infobox.open_toolTip(i);
 					
 				})
 				.mouseout(function(event){

@@ -132,7 +132,7 @@
 			.rightclick(function(event){$.wsu_maps.controlls.showContextMenu(event.latLng);})
 			.mouseover(function(){//event){
 				//$('[src*="public/markerSVG.castle?idx='+idx+'"]').closest('div').addClass('svg_clip');
-				$.wsu_maps.infobox.open_toolTip(jObj,i,$.wsu_maps.state.markerLog[i]);
+				$.wsu_maps.infobox.open_toolTip(i);
 				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
 			})
 			.mouseout(function(){//event){
