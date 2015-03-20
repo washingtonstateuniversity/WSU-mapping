@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 			files: [
 				'src/**/*'
 			],
-			tasks: [ 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' ]
+			tasks: [ 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' , 'copy:maps' ]
 		},
 		sass: {	
 			dev: {
@@ -28,6 +28,14 @@ module.exports = function(grunt) {
 					{ src: "src/scss/embeds.scss", dest: "build/_pre_sass/map.view.styles.css" },
 				]
 			},
+		},
+		copy:{
+			maps: {
+				files: [ // This can be drastically simplified by putting this stuff in a `src` folder.
+					{ expand: true, src: ["build/_pre_sass/*.map"], dest: "build/css/", flatten: true, },
+					{ expand: true, src: ["build/_pre_sass/*.map"], dest: "dis/css/", flatten: true, },
+				]
+			}
 		},
 		concat: {
 			front_styles: {
@@ -302,14 +310,15 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	// Default task(s).
 	grunt.registerTask('start', ['watch']);
 	grunt.registerTask('default', ['jshint']);
-	grunt.registerTask('prod', ['env:prod','concat','preprocess:js','autoprefixer','cssmin','uglify','copy','includereplace','preprocess:html']);
+	grunt.registerTask('prod', ['env:prod', 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' , 'copy:maps' ]);
 
-	grunt.registerTask('dev', [ 'concat', 'jshint', 'env:dev','autoprefixer', 'cssmin', 'uglify', ]);
+	grunt.registerTask('dev', [ 'env:dev', 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' , 'copy:maps'  ]);
 
 };

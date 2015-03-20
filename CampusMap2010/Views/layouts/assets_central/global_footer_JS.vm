@@ -1,14 +1,72 @@
+#capturefor(site)
+	#if($Controller.isLocal()==false)
+		https://beta.maps.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl()
+		#else
+			https://beta.maps.wsu.edu/
+		#end
+	#end
+#end
+#capturefor(site_base)
+	#if($Controller.isLocal()==false)
+		//beta.maps.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot.Replace('http:','')
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl().Replace('http:','')
+		#else
+			//beta.maps.wsu.edu/
+		#end
+	#end
+#end
+#capturefor(folder)
+#if($Controller.isLocal()==false) dis #else build #end
+#end
+#capturefor(view)
+$Controller.getView()
+#end
+
+#set($libs="places,geometry,weather,visualization")
+
+#set($signed_in="&signed_in=true")
+
+
+
+#capturefor(site)
+	#if($Controller.isLocal()==false)
+		#*http://map.wsu.edu/*# $Controller.getRootUrl()
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl()
+		#else
+			http://map.wsu.edu/
+		#end
+	#end
+#end
+#capturefor(view)
+$Controller.getView()
+#end
+
+
+
 <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>-->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places,geometry,weather,visualization&sensor=false"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded"></script>
 
 
 
 
-<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<!--<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 #parse("layouts/assets_central/google-analytics.vm")
 <!--
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&domready=1" id="addthisScript"></script>
 -->
-$scriptsService.Js("~/Content/build/js/maps.wsu.edu.js",true)
+$scriptsService.Js("~/Content/${folder.Trim()}/js/maps.wsu.edu.js",true)

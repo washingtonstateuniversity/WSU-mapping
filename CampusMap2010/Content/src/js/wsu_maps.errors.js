@@ -5,7 +5,6 @@
 			$('.errorReporting').off().on("click",function(e){
 				e.stopPropagation();
 				e.preventDefault();
-				//var trigger=$(this);
 				var id= typeof(marker)!=="undefined"?marker.id:0;
 				var title= typeof(marker)!=="undefined" && typeof(marker.title)!=="undefined"?marker.title:"";
 				
@@ -61,9 +60,6 @@
 						});
 					}
 				});
-				
-				
-				
 				/*
 				$.colorbox({
 					html:function(){

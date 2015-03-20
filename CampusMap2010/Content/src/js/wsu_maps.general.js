@@ -60,16 +60,16 @@
 				if(typeof(shape)!=="undefined"){
 					//mapOjb.gmap("move_shape",shape,placePos);
 				}
-				
+				/*,
+				.rightclick(function(){ //maybe keep but most likely lose this
+					if(style.rightclick){
+						if(style.rightclick.options)$.wsu_maps.state.map_inst.setCenter(filter_map_element(type,style.rightclick.options),this);
+						if(style.rightclick.callback)style.hover.callback();
+					}
+				})*/
 				
 			});
-			/*,
-			rightclick: function(){
-				if(style.dblclick){
-					if(style.rightclick.options)$.wsu_maps.state.map_inst.setCenter(filter_map_element(type,style.rightclick.options),this);
-					if(style.rightclick.callback)style.hover.callback();
-				}
-			}*/
+
 		},
 		
 		/* 
@@ -197,6 +197,7 @@
 			}
 			//if($.isFunction(callback))callback();return;
 		},
+		
 		setup_embeder:function (){
 			$('#embed').off().on("click",function(e){
 				e.stopPropagation();
