@@ -26,7 +26,8 @@
 
     using System.Reflection;
 
-using System.Linq.Expressions; 
+using System.Linq.Expressions;
+using System.Web; 
 
 #endregion
 namespace campusMap.Controllers {
@@ -126,6 +127,14 @@ namespace campusMap.Controllers {
             output = output.Replace(@"\\", @"\");
             return output;
         }
+
+        public string UrlEncode(string inputString) {
+            String output = HttpUtility.UrlEncode(inputString);
+            return output;
+        }
+
+        
+
         #endregion
 
         #region MCV INFO METHODS

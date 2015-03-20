@@ -651,7 +651,7 @@ namespace campusMap.Controllers {
 
 
         }
-        public void reportError(String name, String email, int place_id, String description, String issueType) {
+        public void reportError(String name, String email, String reported_url, int place_id, String description, String issueType) {
             CancelView();
             CancelLayout();
 
@@ -663,32 +663,45 @@ namespace campusMap.Controllers {
             PropertyBag["description"] = description;
             PropertyBag["name"] = name;
             PropertyBag["email"] = email;
+            PropertyBag["reported_url"] = reported_url;
             PropertyBag["place_id"] = place_id;
             PropertyBag["issueType"] = issueType;
-
             
-                
-                    System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
-                    email_mass.IsBodyHtml = true;
-                    email_mass.From = new MailAddress("noreply@wsu.edu");
-                    email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
 
-                    if (issueType == "local" || issueType == "local") {
-                        place place = ActiveRecordBase<place>.Find(place_id);
-                        foreach (users auth in place.authors) {
-                            email_mass.To.Add(new MailAddress(auth.email, auth.name));
-                        }
+            // Create and return new Hashtable.
+            Hashtable emails = new Hashtable();
+            emails.Add("jeremy.bass@wsu.edu", "Jeremy Bass");
+            if (!String.IsNullOrWhiteSpace(email) && !String.IsNullOrWhiteSpace(name)) {
+                emails.Add(email, name);
+            }
+
+            foreach (DictionaryEntry entry in emails) {
+                PropertyBag["reporter"] = false;
+                if (!String.IsNullOrWhiteSpace(name) && entry.Value.ToString() == name) {
+                    PropertyBag["reporter"] = true;
+                }
+                System.Net.Mail.MailMessage email_mass = RenderMailMessage("place_errors", null, PropertyBag);
+                email_mass.IsBodyHtml = true;
+                email_mass.From = new MailAddress("noreply@wsu.edu");
+                email_mass.To.Add(new MailAddress(entry.Key.ToString(), entry.Value.ToString()));
+
+                if (issueType == "local" || issueType == "local") {
+                    place place = ActiveRecordBase<place>.Find(place_id);
+                    foreach (users auth in place.authors) {
+                        email_mass.To.Add(new MailAddress(auth.email, auth.name));
                     }
+                }
 
 
-                    email_mass.Subject = "Reported Map error: " + issueType;
-                    
-                        try {
-                            DeliverEmail(email_mass);
-                            RenderText("Sent");
-                        } catch (Exception ex) {
-                            RenderText(ex.ToString());
-                        }
+                email_mass.Subject = "Reported Map error: " + issueType;
+
+                try {
+                    DeliverEmail(email_mass);
+                } catch (Exception ex) {
+                    RenderText(ex.ToString());
+                }
+            }
+
                     //if (!String.IsNullOrWhiteSpace(user.email)) {}
                 //if (user.nid == "jeremy.bass") {}
             //foreach (users user in users) {}

@@ -1,11 +1,37 @@
-<h3><span style="color:#7F9D6A;">Reported on $date</span></h3>
-<p><strong>$name said,</strong><br/>
-   $description        
-</p>
+#capturefor(report)
+<br/>
+<h3>Report made:</h3>
 <hr/>
-Place id: $place_id
+#if($place_id)
+Place id: ${place_id}
+<hr/>
+#end
+<p> $description </p>
 <hr/>
 Sender's email: $email
 <hr/>
+Issue Type: $issueType
+<hr/>
+Location: $reported_url
+#end
 
 
+
+
+
+#if($reporter)
+
+<h3><span style="color:#860C0E;">Reported on $date</span></h3>
+<h4>Hello $name,</h4>
+<p>We just wanted to take this second to <strong>thank you</strong> again for taking the time to error the mapping issue. This email is to confirm that we have received the report and will be looking into it soon.</p>
+
+#else
+
+<h3><span style="color:#860C0E;">Reported on $date</span></h3>
+<h4>We have a new issue report from $name,</h4>
+<p>$description</p>
+<p>Lets take action: Push to <a href="#">github issues</a> or <a href="mailto:${email}?cc=web.support@wsu.edu&subject=Mapping%20issue%20report&body=%0A%0A%3C%3A%3A%20RESPONED%20ABOVE%20%3A%3A%3E%0A$report">respond back to them</a>
+
+#end
+
+$report

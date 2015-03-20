@@ -14,7 +14,7 @@
 									'<h4>Found an error?</h4>'+
 									'<h5>Please provide some information to help us correct this issue.</h5>'+
 									'<input type="hidden" value="'+id+'" name="place_id"/>'+
-									'<input type="hidden" value="'+window.location+'" name="url"/>'+
+									'<input type="hidden" value="'+window.location+'" name="reported_url"/>'+
 									'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"/></lable><br/>'+
 									'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+
 									'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
@@ -45,12 +45,12 @@
 							if(valid){
 								$.post($('#wsumap_errorReporting form').attr('action'), $('#wsumap_errorReporting form').serialize(),function(){
 									//$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
-									$('#wsumap_errorReporting').html('<h3>Thank you for reporting the error.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/>');
+									/*$('#wsumap_errorReporting').html('<h3>Thank you for reporting the error.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/>');
 									$('#wsumap_errorClose').off().on("click",function(e){
 										e.stopPropagation();
 										e.preventDefault();
 										jObj.dialog( "close" );
-									});
+									});*/
 								});
 							}else{
 								if($('#valid').length===0){
