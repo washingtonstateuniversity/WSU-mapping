@@ -38,11 +38,11 @@ var startingUrl=startingUrl||null;
 			
 			currentControl:"ROADMAP",
 		
-			siteroot: typeof(window.map_view) !== "undefined" && typeof(window.map_view.siteroot) !== "undefined" ? window.map_view.siteroot : "",
-			view: typeof(window.map_view) !== "undefined" && typeof(window.map_view.view) !== "undefined" ? window.map_view.view : "",
-			mcv_action: typeof(window.map_view) !== "undefined" && typeof(window.map_view.mcv_action) !== "undefined" ? window.map_view.mcv_action : "",
-			campus: typeof(window.map_view) !== "undefined" && typeof(window.map_view.campus) !== "undefined" ? window.map_view.campus : "",
-			campus_latlng_str: typeof(window.map_view) !== "undefined" && typeof(window.map_view.campus_latlng_str) !== "undefined" ? window.map_view.campus_latlng_str : "",
+			siteroot: "",
+			view: "",
+			mcv_action: "",
+			campus: "",
+			campus_latlng_str: "",
 			
 			in_pano:false,
 			hold_bounds:true,
@@ -504,10 +504,11 @@ var startingUrl=startingUrl||null;
 		},
 
 		ini:function (options){
-			$.wsu_maps.ready(options||{});
+			$.extend($.wsu_maps.state,options);
+			$.wsu_maps.ready();
 		},
 		ready:function (options){
-			$.wsu_maps.state.currentLocation=$.wsu_maps.state.siteroot+$.wsu_maps.state.mapview;
+			$.wsu_maps.state.currentLocation = $.wsu_maps.state.siteroot+$.wsu_maps.state.mapview;
 			$(document).ready(function() {
 				var page,location;
 				

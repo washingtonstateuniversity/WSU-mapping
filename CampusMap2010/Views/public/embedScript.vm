@@ -43,6 +43,7 @@ var map_view =  {
 	view_id : window.map_view_id ||"WSU_MAPS_NS",
 	map_view_scripts_block : window.map_view_scripts_block || false,
 	view : '$view.Trim()/',
+	error_reporting : false,
 #if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end
 #if($activePlace && $activePlace != "")	activePlace : $!activePlace, #end
 	campus : #if($campus.name!="")'$campus.name'#else "Pullman" #end,
