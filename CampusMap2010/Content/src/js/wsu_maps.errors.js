@@ -7,13 +7,14 @@
 				e.preventDefault();
 				//var trigger=$(this);
 				var id= typeof(marker)!=="undefined"?marker.id:0;
-				
+				var title= typeof(marker)!=="undefined" && typeof(marker.title)!=="undefined"?marker.title:"";
 				
 				$.wsu_maps.util.popup_message({
 					html:'<div id="wsumap_errorReporting"><form action="'+$.wsu_maps.state.siteroot+'/public/reportError.castle" method="post">'+
 									'<h4>Found an error?</h4>'+
 									'<h5>Please provide some information to help us correct this issue.</h5>'+
 									'<input type="hidden" value="'+id+'" name="place_id"/>'+
+									'<input type="hidden" value="'+title+'" name="place_name"/>'+
 									'<input type="hidden" value="'+window.location+'" name="reported_url"/>'+
 									'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"/></lable><br/>'+
 									'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+

@@ -2,6 +2,10 @@
 <br/>
 <h3>Report made:</h3>
 <hr/>
+#if($place_name)
+Place Name: ${place_name}
+<hr/>
+#end
 #if($place_id)
 Place id: ${place_id}
 <hr/>
