@@ -11,6 +11,8 @@
 			var min_width = marker.marker_style.icon.width*0.5;
 			var width = marker.marker_style.icon.width * multiplier;
 			var height = marker.marker_style.icon.height * multiplier;
+			marker.marker_style.icon.cur_width = width;
+			marker.marker_style.icon.cur_height = height;
 			marker.marker_style.icon.scaledSize  = new google.maps.Size(width,height);
 			marker.marker_style.icon.size  = new google.maps.Size(width,height);
 			marker.marker_style.icon.anchor = new google.maps.Point( (multiplier>1 ? (min_width * multiplier) : min_width) ,  (multiplier>1 ? height+(height*0.125) : height) );	
