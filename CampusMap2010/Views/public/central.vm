@@ -4,7 +4,7 @@
 		<div id='selectedPlaceList_area' class='cAssest'>
 		</div>
 	</div>
-	<div id="centralMap"></div>
+	<div id="centralMap" class="WSU_MAPS_NS"></div>
 </div>
 
 
