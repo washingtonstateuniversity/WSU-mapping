@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .WSU_MAPS_NS{ //the NS should be a var.. 
 	&{
+		@import 'wsu_maps.embed_reset';
 		@import 'central_main';
 		@import 'map_admin';
 		@import 'wsu_maps.infobox';
