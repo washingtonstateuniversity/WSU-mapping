@@ -45,12 +45,12 @@
 							if(valid){
 								$.post($('#wsumap_errorReporting form').attr('action'), $('#wsumap_errorReporting form').serialize(),function(){
 									//$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
-									/*$('#wsumap_errorReporting').html('<h3>Thank you for reporting the error.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/>');
+									$('#wsumap_errorReporting').html('<h3>Thank you for reporting the error.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/>');
 									$('#wsumap_errorClose').off().on("click",function(e){
 										e.stopPropagation();
 										e.preventDefault();
 										jObj.dialog( "close" );
-									});*/
+									});
 								});
 							}else{
 								if($('#valid').length===0){
