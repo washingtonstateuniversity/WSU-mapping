@@ -19,10 +19,9 @@
 
 <script src="//use.typekit.net/eav6eju.js"></script><!--eav6eju is under map.wsu.edu via jeremyBass for tmp ref, roi0hte is the real one-->
 <script>try{Typekit.load();}catch(e){}</script>
-
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		https://beta.maps.wsu.edu/
+		#*https://beta.maps.wsu.edu/*#$Controller.getRootUrl()
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
@@ -46,35 +45,20 @@
 		#end
 	#end
 #end
-#capturefor(folder)
+
+
+#capturefor(jsfolder)
 #if($Controller.isLocal()==false) dis #else build #end
 #end
+
 #capturefor(view)
 $Controller.getView()
 #end
-#*#set($libs="places,geometry,weather,visualization")*#
-#set($libs="places")
-#*#set($signed_in="&signed_in=true")*#
-#set($signed_in="")
+#*places,geometry,weather,visualization*#
+#set($libs="places,geometry")
 
+#set($signed_in="&signed_in=true")
 
-
-#capturefor(site)
-	#if($Controller.isLocal()==false)
-		#*http://map.wsu.edu/*# $Controller.getRootUrl()
-	#else
-		#if($siteroot && $siteroot !='')
-			$siteroot
-		#elseif($Controller.isLocal())
-			$Controller.getRootUrl()
-		#else
-			http://map.wsu.edu/
-		#end
-	#end
-#end
-#capturefor(view)
-$Controller.getView()
-#end
 <script type="text/javascript">
 	/*var siteroot = '$site.Trim()';
 	var view = '$view.Trim()/';
@@ -84,12 +68,11 @@ $Controller.getView()
 	#if($campus.url!="")var url = '$campus.url'; #end
 	var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;*/
 var map_view =  {
-	inview:true,
+	inview : false,
 	siteroot : '$site.Trim()',
-	view_id : window.map_view_id ||"WSU_MAPS_NS",
-	map_view_scripts_block : window.map_view_scripts_block || false,
+	view_id : "centralMap",
 	view : '$view.Trim()/',
-	error_reporting : false,
+	error_reporting : true,
 #if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end
 #if($activePlace && $activePlace != "")	activePlace : $!activePlace, #end
 	campus : #if($campus.name!="")'$campus.name'#else "Pullman" #end,
@@ -141,7 +124,7 @@ var map_view =  {
 
 $scriptsService.Css("~/Content/css/jquery-ui-1.8.19.custom.css,~/Content/css/central_main.css,~/Content/css/map_admin.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/css/share_link.css,~/Content/css/reactive.css")
 *#
-$scriptsService.Css("~/Content/${folder.Trim()}/css/front.styles.css",true)
+$scriptsService.Css("~/Content/${jsfolder.Trim()}/css/front.styles.css",true)
 
 
 #*
