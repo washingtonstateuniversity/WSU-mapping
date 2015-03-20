@@ -11,6 +11,9 @@ var base=base||{};
 			if(typeof(map_op.styles)!=="undefined"){
 				delete(map_op.styles);
 			}
+			if(typeof(map_op.zoom)!=="undefined"){
+				delete(map_op.zoom);
+			}
 			$.wsu_maps.views.inital_options = map_op;
 		},
 		ini_map_view:function (callback){
