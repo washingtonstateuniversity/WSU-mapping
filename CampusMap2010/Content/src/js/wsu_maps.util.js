@@ -125,10 +125,10 @@
 		},
 
 		popup_message:function (options){
-			if($("#mess").length<=0){
-				$('body').append('<div id="mess">');
+			if($("#wsumap_mess").length<=0){
+				$('body').append('<div id="wsumap_mess">');
 			}
-			var jObj = $( "#mess" );
+			var jObj = $( "#wsumap_mess" );
 			if(typeof(options.clean)==="undefined"){
 				options.clean=true;
 			}
@@ -180,11 +180,11 @@
 			jObj.dialog(options);
 		},
 		confirmation_message:function (html_message,callback){
-			if($("#mess").length<=0){
+			if($("#wsumap_mess").length<=0){
 				$('body').append('<div id="mess">');
 			}
-			$("#mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
-			$( "#mess" ).dialog({
+			$("#wsumap_mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
+			$( "#wsumap_mess" ).dialog({
 				autoOpen: true,
 				resizable: false,
 				width: 350,
@@ -210,7 +210,7 @@
 					}
 				},
 				close: function() {
-					$.wsu_maps.util.close_dialog_modle($( "#mess" ));
+					$.wsu_maps.util.close_dialog_modle($( "#wsumap_mess" ));
 				}
 			});
 		},	
