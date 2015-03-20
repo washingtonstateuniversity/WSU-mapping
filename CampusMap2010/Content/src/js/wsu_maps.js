@@ -18,7 +18,12 @@ var startingUrl=startingUrl||null;
 		state:{
 			map_jObj:null,
 			map_inst:null,
-						
+			view_id:'centralMap',
+			
+			running_options:false,
+			fit_to_bound:false,
+			embeded_place_ids:false,
+			
 			active:{
 				marker:null,
 				iw:null,
@@ -570,8 +575,8 @@ var startingUrl=startingUrl||null;
 					$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
 					ops = $('#runningOptions').html();
 				}
-				if( typeof(window.map_view) !== "undefined" && typeof(window.map_view.running_options) !== "undefined" ){
-					ops=window.map_view.running_options;
+				if( $.wsu_maps.state.running_options !== false ){
+					ops=$.wsu_maps.state.running_options;
 				}
 				
 				

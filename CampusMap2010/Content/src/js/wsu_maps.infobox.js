@@ -244,7 +244,7 @@
 				$('#taby'+i).tabs('destroy').tabs();
 			}
 			$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.markerLog[i]);
-			if($.wsu_maps.views.inview){
+			if($.wsu_maps.state.inview){
 				$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.views.inital_options);	
 			}
 			$.wsu_maps.state.active.marker = null;
@@ -276,10 +276,8 @@
 				jObj.gmap('stop_scroll_zoom');
 			},function(){
 				$.wsu_maps.state.ib[i].setOptions({enableEventPropagation: false});
-				if($.wsu_maps.views.inview){
-					
+				if($.wsu_maps.state.inview){
 					$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.views.inital_options);	
-					
 				}else{
 					jObj.gmap('set_scroll_zoom');
 				}

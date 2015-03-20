@@ -87,8 +87,8 @@
 		reloadPlaces:function (){
 			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
 			var ids;
-			if(typeof(window.map_view) !== "undefined" && typeof(window.map_view.embeded_place_ids) !== "undefined"){
-				ids = window.map_view.embeded_place_ids;
+			if( $.wsu_maps.state.embeded_place_ids !== false ){
+				ids = $.wsu_maps.state.embeded_place_ids;
 			}else{
 				$.each($('[name="placelist[]"]'),function(){
 					ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();

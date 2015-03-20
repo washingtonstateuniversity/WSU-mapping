@@ -39,6 +39,7 @@ $Controller.getView()
 
 
 var map_view =  {
+	inview:true,
 	siteroot : '$site.Trim()',
 	view_id : window.map_view_id ||"WSU_MAPS_NS",
 	map_view_scripts_block : window.map_view_scripts_block || false,

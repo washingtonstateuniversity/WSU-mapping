@@ -4,7 +4,6 @@ var base=base||{};
 (function($) {
 	$.wsu_maps.views = {
 		inital_options:null,
-		inview:false,
 		set_inital_options:function(map_op){
 			if(typeof(map_op.center)!=="undefined"){
 				delete(map_op.center);
@@ -28,8 +27,8 @@ var base=base||{};
 				$('#runningOptions').html($('#runningOptions').html().replace(/(\"mapTypeId\":"\w+",)/g,''));
 				ops = $('#runningOptions').html();
 			}
-			if( typeof(window.map_view) !== "undefined" && typeof(window.map_view.running_options) !== "undefined" ){
-				ops=window.map_view.running_options;
+			if( $.wsu_maps.state.running_options !== false ){
+				ops=$.wsu_maps.state.running_options;
 			}
 			
 			
@@ -41,7 +40,7 @@ var base=base||{};
 			$.wsu_maps.state.map_jObj.gmap(map_op).bind('init', function() { 
 				$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
 				$.wsu_maps.views.set_inital_options(map_op);
-				$.wsu_maps.views.inview = true;
+				$.wsu_maps.state.inview = true;
 				$.wsu_maps.set_center();
 				//var map = map_ele_obj.gmap("get","map");
 				$.wsu_maps.ini_GAtracking('UA-22127038-5');
