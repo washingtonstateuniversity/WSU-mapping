@@ -59,7 +59,7 @@
 										e.preventDefault();
 										e.stopPropagation();
 										var map = $.wsu_maps.state.map_inst;
-										var baseUrl = "http://maps.googleapis.com/maps/api/staticmap?";
+										var baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
 										 
 										var params = [];
 										params.push("sensor=false");
