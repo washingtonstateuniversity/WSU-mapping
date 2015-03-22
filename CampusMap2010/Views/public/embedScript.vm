@@ -100,8 +100,11 @@ if( map_view.map_view_scripts_block === false ){
 		a.setAttribute( "class", "WSU_MAPS_NS" );
 		a.id=r;
 		t.parentNode.insertBefore(a,t.nextSibling);
-		a=s.createElement(o);
+	}else{
+		m.setAttribute( "class", "WSU_MAPS_NS" );
+		m.setAttribute( "style", "width:100%;padding-top:66%;min-height: 0px;" );
 	}
+	a=s.createElement(o);
 	a.async=0;
 	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded';
 	t.parentNode.insertBefore(a,t);	
@@ -125,7 +128,7 @@ if( map_view.map_view_scripts_block === false ){
 		}
 	}	
 	};
-})(window,document,'script',map_scripts,"WSU_MAPS_NS");
+})(window,document,'script',map_scripts,map_view.view_id);
 #end
 $Controller.cacheMapView($upload_path, $file, $output);
 $output

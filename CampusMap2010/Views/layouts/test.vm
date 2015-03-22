@@ -41,7 +41,16 @@
 <!-- CONTENT -->
 <main>
 		<div>
-		<script type="text/javascript" src="/embed/wsu-home"></script>
+		<!---->
+		
+		<script type='text/javascript'>
+		/* <![CDATA[ */
+		map_view_id = "WSU_MAPS_NS_2";
+		/* ]]> */
+		</script>
+		
+		<div style="width: 100%; padding-top: 66%; min-height: 0px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(255, 255, 255);" id="WSU_MAPS_NS_2"></div>
+		
 		</div>
 	<!-- Responsive Sections -->
 		<div class="row side-right gutter pad-bottom tall">
@@ -186,7 +195,7 @@
 	<span itemprop="contactPoint" content="http://contactpage.wsu.edu"></span>
 	<span itemprop="url" content="http://your-unit.wsu.edu"></span>
 </div>
-
+<script type="text/javascript" src="/embed/wsu-home"></script>
 </body>
 </html>
 
