@@ -27,17 +27,27 @@
 #capturefor(folder)
 #if($Controller.isLocal()==false) dis #else build #end
 #end
+
 #capturefor(view)
 $Controller.getView()
 #end
+
 #*#set($libs="places,geometry,weather,visualization")*#
 #set($libs="places")
 #*#set($signed_in="&signed_in=true")*#
 #set($signed_in="")
 
+#if($!map.geometrics)
+#set($c=0)
+	#capturefor(shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
+#end
 
+#if($!map.places)
+#set($c=0)
+	#capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
+#end
 
-
+#capturefor(output)
 var map_view =  {
 	inview:true,
 	siteroot : '$site.Trim()',
@@ -54,13 +64,9 @@ var map_view =  {
 		"center" : "$map.getLat(),$map.getLong()"
 	},
 #if($!map.places)
-#set($c=0)
-#capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
 	embeded_place_ids : "${places.Replace(", 0","").Replace(" 0","")}",
 #end
 #if($!map.geometrics)
-#set($c=0)
-#capturefor(shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
 	embeded_shape_ids : "${shapes.Replace(", 0","").Replace(" 0","")}",
 #end
 	show_global_nav : #if(${map.show_global_nav})true, #else false, #end
@@ -120,3 +126,6 @@ if( map_view.map_view_scripts_block === false ){
 	}	
 	};
 })(window,document,'script',map_scripts,"WSU_MAPS_NS");
+#end
+$Controller.cacheMapView($upload_path, $file, $output);
+$output

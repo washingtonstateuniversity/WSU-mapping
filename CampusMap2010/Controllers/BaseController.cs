@@ -223,7 +223,12 @@ namespace campusMap.Controllers {
 
 
         #endregion
-
+        public void cacheMapView(string uploadPath, string file, string blob) {
+            if (!HelperService.DirExists(uploadPath)) {
+                System.IO.Directory.CreateDirectory(uploadPath);
+            }
+            System.IO.File.WriteAllText(uploadPath + file, blob);
+        }
     }
 
     public class DynamicEntity : DynamicObject {

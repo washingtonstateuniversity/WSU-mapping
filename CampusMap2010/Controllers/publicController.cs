@@ -340,21 +340,30 @@ namespace campusMap.Controllers {
         public void sendEmbedScript(String alias, String mode, String callback) {
             CancelView();
             CancelLayout();
+            String output = "";
+            string appPath = getRootPath();
+            String cachePath = appPath + "cache/embeds/";
+            string file = HelperService.CalculateMD5Hash(alias + mode) + "_centralplace" + ".ext";
+            if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
 
-            
-
-            IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
-            if (c.Count == 0) {
-                RenderText("false");
+                IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
+                if (c.Count == 0) {
+                    RenderText("false");
+                    return;
+                }
+                PropertyBag["map"] = c[0];
+                PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
+                PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+                PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                PropertyBag["upload_path"] = cachePath;
+                PropertyBag["file"] = file;
+                Response.ContentType = "text/javascript; charset=UTF-8";
+                RenderView("embedScript");
                 return;
             }
-            PropertyBag["map"] = c[0];
-            PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
-            PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
-            PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
-
+            output = System.IO.File.ReadAllText(cachePath + file);
             Response.ContentType = "text/javascript; charset=UTF-8";
-            RenderView("embedScript");
+            RenderText(output);
             return;
 
         }
@@ -871,6 +880,7 @@ namespace campusMap.Controllers {
             System.IO.File.WriteAllText(uploadPath + file, blob);
         }
 
+        
         public static place[] searchAndAddResultsToHashtable(String hql, String searchterm) {
             SimpleQuery<place> query = new SimpleQuery<place>(typeof(place), hql);
             query.SetParameter("searchterm", "%" + searchterm + "%");
