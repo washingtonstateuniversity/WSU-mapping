@@ -21,6 +21,7 @@
 				boxStyle: {
 					minWidth: "250px"
 				},
+				closeBoxURL:'',
 				infoBoxClearance: new google.maps.Size(1, 1),
 				isHidden: false,
 				pane: "floatPane",
