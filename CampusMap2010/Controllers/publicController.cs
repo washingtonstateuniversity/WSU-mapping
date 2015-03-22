@@ -343,7 +343,7 @@ namespace campusMap.Controllers {
             String output = "";
             string appPath = getRootPath();
             String cachePath = appPath + "cache/embeds/";
-            string file = HelperService.CalculateMD5Hash(alias + mode) + "_centralplace" + ".ext";
+            string file = HelperService.CalculateMD5Hash(alias)  + ".ext";
             if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
 
                 IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);

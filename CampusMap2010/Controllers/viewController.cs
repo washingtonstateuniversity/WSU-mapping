@@ -635,6 +635,13 @@ namespace campusMap.Controllers {
 
 
             ActiveRecordMediator<map_views>.Save(view);
+            string appPath = getRootPath();
+            String cachePath = appPath + "cache/embeds/";
+            string file = HelperService.CalculateMD5Hash(view.alias) + ".ext";
+            String file_path = cachePath + file;
+            if (File.Exists(file_path)) {
+                File.Delete(file_path);
+            }
 
             cleanUpview_media(view.id);
 
