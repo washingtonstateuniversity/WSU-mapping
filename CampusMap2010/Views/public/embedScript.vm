@@ -129,6 +129,5 @@ if( map_view.map_view_scripts_block === false ){
 	}	
 	};
 })(window,document,'script',map_scripts,map_view.view_id);
-#end
-$Controller.cacheMapView($upload_path, $file, $output);
+#end $Controller.cacheMapView($upload_path, $file, $output);
 $output
