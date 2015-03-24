@@ -75,7 +75,7 @@
 				"WSU Spokane",
 				"WSU Tri-Cities",
 				"WSU Vancouver",
-				"Everett University Center",
+				"WSU North Puget Sound at Everett",
 			];
 			//console.log(title);
 			var icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
