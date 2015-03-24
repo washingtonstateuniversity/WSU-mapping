@@ -140,7 +140,9 @@
 					//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 				}
 			})
-			.rightclick(function(event){$.wsu_maps.controlls.showContextMenu(event.latLng);})
+			.rightclick(function(event){
+				$.wsu_maps.controlls.showContextMenu(event.latLng);
+			})
 			.mouseover(function(){//event){
 				//$('[src*="public/markerSVG.castle?idx='+idx+'"]').closest('div').addClass('svg_clip');
 				$.wsu_maps.infobox.open_toolTip(i);

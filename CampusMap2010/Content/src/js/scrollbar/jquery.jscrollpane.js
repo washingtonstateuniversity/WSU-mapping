@@ -1,14 +1,14 @@
 /*!
- * jScrollPane - v2.0.0beta11 - 2012-05-14
+ * jScrollPane - v2.0.21 - 2015-02-24
  * http://jscrollpane.kelvinluck.com/
  *
- * Copyright (c) 2010 Kelvin Luck
- * Dual licensed under the MIT and GPL licenses.
+ * Copyright (c) 2014 Kelvin Luck
+ * Dual licensed under the MIT or GPL licenses.
  */
 
 // Script: jScrollPane - cross browser customisable scrollbars
 //
-// *Version: 2.0.0beta11, Last updated: 2012-05-14*
+// *Version: 2.0.21, Last updated: 2015-02-24*
 //
 // Project Home - http://jscrollpane.kelvinluck.com/
 // GitHub       - http://github.com/vitch/jScrollPane
@@ -17,7 +17,7 @@
 //
 // About: License
 //
-// Copyright (c) 2012 Kelvin Luck
+// Copyright (c) 2014 Kelvin Luck
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // http://jscrollpane.kelvinluck.com/MIT-LICENSE.txt
 // http://jscrollpane.kelvinluck.com/GPL-LICENSE.txt
@@ -32,13 +32,23 @@
 // This plugin is tested on the browsers below and has been found to work reliably on them. If you run
 // into a problem on one of the supported browsers then please visit the support section on the jScrollPane
 // website (http://jscrollpane.kelvinluck.com/) for more information on getting support. You are also
-// welcome to fork the project on GitHub if you can contribute a fix for a given issue. 
+// welcome to fork the project on GitHub if you can contribute a fix for a given issue.
 //
 // jQuery Versions - tested in 1.4.2+ - reported to work in 1.3.x
 // Browsers Tested - Firefox 3.6.8, Safari 5, Opera 10.6, Chrome 5.0, IE 6, 7, 8
 //
 // About: Release History
 //
+// 2.0.21 - (2015-02-24) Simplify UMD pattern: fixes browserify when loading jQuery outside of bundle
+// 2.0.20 - (2014-10-23) Adds AMD support (thanks @carlosrberto) and support for overflow-x/overflow-y (thanks @darimpulso)
+// 2.0.19 - (2013-11-16) Changes for more reliable scroll amount with latest mousewheel plugin (thanks @brandonaaron)
+// 2.0.18 - (2013-10-23) Fix for issue with gutters and scrollToElement (thanks @Dubiy)
+// 2.0.17 - (2013-08-17) Working correctly when box-sizing is set to border-box (thanks @pieht)
+// 2.0.16 - (2013-07-30) Resetting left position when scroll is removed. Fixes #189
+// 2.0.15 - (2013-07-29) Fixed issue with scrollToElement where the destX and destY are undefined.
+// 2.0.14 - (2013-05-01) Updated to most recent mouse wheel plugin (see #106) and related changes for sensible scroll speed
+// 2.0.13 - (2013-05-01) Switched to semver compatible version name
+// 2.0.0beta12 - (2012-09-27) fix for jQuery 1.8+
 // 2.0.0beta11 - (2012-05-14)
 // 2.0.0beta10 - (2011-04-17) cleaner required size calculation, improved keyboard support, stickToBottom/Left, other small fixes
 // 2.0.0beta9 - (2011-01-31) new API methods, bug fixes and correct keyboard support for FF/OSX
@@ -53,7 +63,18 @@
 //							 elements and dynamically sized elements.
 // 1.x - (2006-12-31 - 2010-07-31) Initial version, hosted at googlecode, deprecated
 
-(function($,window,undefined){
+(function (factory) {
+  if ( typeof define === 'function' && define.amd ) {
+      // AMD. Register as an anonymous module.
+      define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+      // Node/CommonJS style for Browserify
+      module.exports = factory(require('jquery'));
+  } else {
+      // Browser globals
+      factory(jQuery);
+  }
+}(function($){
 
 	$.fn.jScrollPane = function(settings)
 	{
@@ -70,12 +91,17 @@
 				originalElement = elem.clone(false, false).empty(),
 				mwEvent = $.fn.mwheelIntent ? 'mwheelIntent.jsp' : 'mousewheel.jsp';
 
-			originalPadding = elem.css('paddingTop') + ' ' +
-								elem.css('paddingRight') + ' ' +
-								elem.css('paddingBottom') + ' ' +
-								elem.css('paddingLeft');
-			originalPaddingTotalWidth = (parseInt(elem.css('paddingLeft'), 10) || 0) +
-										(parseInt(elem.css('paddingRight'), 10) || 0);
+			if (elem.css('box-sizing') === 'border-box') {
+				originalPadding = 0;
+				originalPaddingTotalWidth = 0;
+			} else {
+				originalPadding = elem.css('paddingTop') + ' ' +
+									elem.css('paddingRight') + ' ' +
+									elem.css('paddingBottom') + ' ' +
+									elem.css('paddingLeft');
+				originalPaddingTotalWidth = (parseInt(elem.css('paddingLeft'), 10) || 0) +
+											(parseInt(elem.css('paddingRight'), 10) || 0);
+			}
 
 			function initialise(s)
 			{
@@ -102,7 +128,7 @@
 					paneHeight = elem.innerHeight();
 
 					elem.width(paneWidth);
-					
+
 					pane = $('<div class="jspPane" />').css('padding', originalPadding).append(elem.children());
 					container = $('<div class="jspContainer" />')
 						.css({
@@ -113,7 +139,7 @@
 
 					/*
 					// Move any margins from the first and last children up to the container so they can still
-					// collapse with neighbouring elements as they would before jScrollPane 
+					// collapse with neighbouring elements as they would before jScrollPane
 					firstChild = pane.find(':first-child');
 					lastChild = pane.find(':last-child');
 					elem.css(
@@ -148,7 +174,7 @@
 						return;
 					}
 					previousContentWidth = contentWidth;
-					
+
 					pane.css('width', '');
 					elem.width(paneWidth);
 
@@ -175,7 +201,8 @@
 				if (!(isScrollableH || isScrollableV)) {
 					elem.removeClass('jspScrollable');
 					pane.css({
-						top: 0,
+            top: 0,
+            left: 0,
 						width: container.width() - originalPaddingTotalWidth
 					});
 					removeMousewheel();
@@ -203,14 +230,14 @@
 					initFocusHandler();
 					initMousewheel();
 					initTouch();
-					
+
 					if (settings.enableKeyboardNavigation) {
 						initKeyboardNav();
 					}
 					if (settings.clickOnTrack) {
 						initClickOnTrack();
 					}
-					
+
 					observeHash();
 					if (settings.hijackInternalLinks) {
 						hijackInternalLinks();
@@ -471,7 +498,7 @@
 			function appendArrows(ele, p, a1, a2)
 			{
 				var p1 = "before", p2 = "after", aTemp;
-				
+
 				// Sniff for mac... Is there a better way to determine whether the arrows would naturally appear
 				// at the top or the bottom of the bar?
 				if (p == "os") {
@@ -586,7 +613,7 @@
 						}
 					);
 				}
-				
+
 				if (isScrollableH) {
 					horizontalTrack.bind(
 						'mousedown.jsp',
@@ -691,7 +718,7 @@
 				}
 
 				container.scrollTop(0);
-				verticalDragPosition = destY;
+				verticalDragPosition = destY || 0;
 
 				var isAtTop = verticalDragPosition === 0,
 					isAtBottom = verticalDragPosition == dragMaxY,
@@ -703,7 +730,7 @@
 					wasAtBottom = isAtBottom;
 					elem.trigger('jsp-arrow-change', [wasAtTop, wasAtBottom, wasAtLeft, wasAtRight]);
 				}
-				
+
 				updateVerticalArrows(isAtTop, isAtBottom);
 				pane.css('top', destTop);
 				elem.trigger('jsp-scroll-y', [-destTop, isAtTop, isAtBottom]).trigger('scroll');
@@ -738,7 +765,7 @@
 				}
 
 				container.scrollTop(0);
-				horizontalDragPosition = destX;
+				horizontalDragPosition = destX ||0;
 
 				var isAtLeft = horizontalDragPosition === 0,
 					isAtRight = horizontalDragPosition == dragMaxX,
@@ -750,7 +777,7 @@
 					wasAtRight = isAtRight;
 					elem.trigger('jsp-arrow-change', [wasAtTop, wasAtBottom, wasAtLeft, wasAtRight]);
 				}
-				
+
 				updateHorizontalArrows(isAtLeft, isAtRight);
 				pane.css('left', destLeft);
 				elem.trigger('jsp-scroll-x', [-destLeft, isAtLeft, isAtRight]).trigger('scroll');
@@ -800,7 +827,7 @@
 
 				container.scrollTop(0);
 				container.scrollLeft(0);
-				
+
 				// loop through parents adding the offset top of any elements that are relatively positioned between
 				// the focused element and the jspPane so we can get the true distance from the top
 				// of the focused element to the top of the scrollpane...
@@ -817,14 +844,14 @@
 				viewportTop = contentPositionY();
 				maxVisibleEleTop = viewportTop + paneHeight;
 				if (eleTop < viewportTop || stickToTop) { // element is above viewport
-					destY = eleTop - settings.verticalGutter;
+					destY = eleTop - settings.horizontalGutter;
 				} else if (eleTop + eleHeight > maxVisibleEleTop) { // element is below viewport
-					destY = eleTop - paneHeight + eleHeight + settings.verticalGutter;
+					destY = eleTop - paneHeight + eleHeight + settings.horizontalGutter;
 				}
-				if (destY) {
+				if (!isNaN(destY)) {
 					scrollToY(destY, animate);
 				}
-				
+
 				viewportLeft = contentPositionX();
 	            maxVisibleEleLeft = viewportLeft + paneWidth;
 	            if (eleLeft < viewportLeft || stickToTop) { // element is to the left of viewport
@@ -832,7 +859,7 @@
 	            } else if (eleLeft + eleWidth > maxVisibleEleLeft) { // element is to the right viewport
 	                destX = eleLeft - paneWidth + eleWidth + settings.horizontalGutter;
 	            }
-	            if (destX) {
+	            if (!isNaN(destX)) {
 	                scrollToX(destX, animate);
 	            }
 
@@ -865,8 +892,12 @@
 				container.unbind(mwEvent).bind(
 					mwEvent,
 					function (event, delta, deltaX, deltaY) {
-						var dX = horizontalDragPosition, dY = verticalDragPosition;
-						jsp.scrollBy(deltaX * settings.mouseWheelSpeed, -deltaY * settings.mouseWheelSpeed, false);
+
+                        if (!horizontalDragPosition) horizontalDragPosition = 0;
+                        if (!verticalDragPosition) verticalDragPosition = 0;
+
+						var dX = horizontalDragPosition, dY = verticalDragPosition, factor = event.deltaFactor || settings.mouseWheelSpeed;
+						jsp.scrollBy(deltaX * factor, -deltaY * factor, false);
 						// return true if there was no movement so rest of screen can scroll
 						return dX == horizontalDragPosition && dY == verticalDragPosition;
 					}
@@ -898,13 +929,13 @@
 			{
 				pane.find(':input,a').unbind('focus.jsp');
 			}
-			
+
 			function initKeyboardNav()
 			{
 				var keyDown, elementHasScrolled, validParents = [];
 				isScrollableH && validParents.push(horizontalBar[0]);
 				isScrollableV && validParents.push(verticalBar[0]);
-				
+
 				// IE also focuses elements that don't have tabindex set.
 				pane.focus(
 					function()
@@ -912,7 +943,7 @@
 						elem.focus();
 					}
 				);
-				
+
 				elem.attr('tabindex', 0)
 					.unbind('keydown.jsp keypress.jsp')
 					.bind(
@@ -957,7 +988,7 @@
 							return !elementHasScrolled;
 						}
 					);
-				
+
 				if (settings.hideFocus) {
 					elem.css('outline', 'none');
 					if ('hideFocus' in container[0]){
@@ -969,7 +1000,7 @@
 						elem.attr('hideFocus', false);
 					}
 				}
-				
+
 				function keyDownHandler()
 				{
 					var dX = horizontalDragPosition, dY = verticalDragPosition;
@@ -999,7 +1030,7 @@
 					return elementHasScrolled;
 				}
 			}
-			
+
 			function removeKeyboardNav()
 			{
 				elem.attr('tabindex', '-1')
@@ -1111,7 +1142,7 @@
 					event.preventDefault();
 				});
 			}
-			
+
 			// Init touch on iPad, iPhone, iPod, Android
 			function initTouch()
 			{
@@ -1121,7 +1152,7 @@
 					touchStartY,
 					moved,
 					moving = false;
-  
+
 				container.unbind('touchstart.jsp touchmove.jsp touchend.jsp click.jsp-touchclick').bind(
 					'touchstart.jsp',
 					function(e)
@@ -1141,14 +1172,14 @@
 						if(!moving) {
 							return;
 						}
-						
+
 						var touchPos = ev.originalEvent.touches[0],
 							dX = horizontalDragPosition, dY = verticalDragPosition;
-						
+
 						jsp.scrollTo(startX + touchStartX - touchPos.pageX, startY + touchStartY - touchPos.pageY);
-						
+
 						moved = moved || Math.abs(touchStartX - touchPos.pageX) > 5 || Math.abs(touchStartY - touchPos.pageY) > 5;
-						
+
 						// return true if there was no movement so rest of screen can scroll
 						return dX == horizontalDragPosition && dY == verticalDragPosition;
 					}
@@ -1172,7 +1203,7 @@
 					}
 				);
 			}
-			
+
 			function destroy(){
 				var currentY = contentPositionY(),
 					currentX = contentPositionX();
@@ -1369,15 +1400,15 @@
 					}
 				}
 			);
-			
+
 			initialise(s);
 		}
 
 		// Pluginifying code...
 		settings = $.extend({}, $.fn.jScrollPane.defaults, settings);
-		
+
 		// Apply default speed
-		$.each(['mouseWheelSpeed', 'arrowButtonSpeed', 'trackClickSpeed', 'keyboardSpeed'], function() {
+		$.each(['arrowButtonSpeed', 'trackClickSpeed', 'keyboardSpeed'], function() {
 			settings[this] = settings[this] || settings.speed;
 		});
 
@@ -1388,6 +1419,7 @@
 				if (jspApi) {
 					jspApi.reinitialise(settings);
 				} else {
+					$("script",elem).filter('[type="text/javascript"],:not([type])').remove();
 					jspApi = new JScrollPane(elem, settings);
 					elem.data('jsp', jspApi);
 				}
@@ -1414,7 +1446,7 @@
 		hijackInternalLinks			: false,
 		verticalGutter				: 4,
 		horizontalGutter			: 4,
-		mouseWheelSpeed				: 0,
+		mouseWheelSpeed				: 3,
 		arrowButtonSpeed			: 0,
 		arrowRepeatFreq				: 50,
 		arrowScrollOnHover			: false,
@@ -1430,5 +1462,4 @@
 		scrollPagePercent			: .8		// Percent of visible area scrolled when pageUp/Down or track area pressed
 	};
 
-})(jQuery,this);
-
+}));
