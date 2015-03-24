@@ -89,6 +89,8 @@ $Controller.getView()
 	show_global_nav : #if(${map.show_global_nav})true, #else false, #end
 	running_options : '$!options_json',
 	fit_to_bound : '$!map.fit_to_bound',
+#else
+	fit_to_bound : 'Washington State University Pullman, Washington USA',
 #end
 }
 #end
