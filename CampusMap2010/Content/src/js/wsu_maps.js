@@ -685,6 +685,26 @@ var startingUrl=startingUrl||null;
 			//the goal is that we will pull any option not directly 
 			
 		},
+		clean_map:function(){
+			var jObj = $.wsu_maps.state.map_jObj;
+			jObj.gmap('clear','markers');
+			jObj.gmap('clear','overlays');
+			$.wsu_maps.state.ib=[];
+			$.wsu_maps.state.ibh=[];
+			$.wsu_maps.listings.reset_listings();
+			$.wsu_maps.listings.reset_Dirscrollbar();
+			$.wsu_maps.listings.reset_Listscrollbar();
+			$.wsu_maps.nav.reset_Navscrollbar();
+			
+
+			$('#main_nav').find('.active').removeClass('active');
+			$.wsu_maps.state.map_jObj.find('input[type="text"]').val('');
+			if($('#directionsTo').is(':visible')){
+				$('#directionsTo').hide();
+			}
+			
+			//$.wsu_maps.listings.reset_listings();
+		},
 		updateMap:function (_load,showSum,callback){
 			//var jObj = $.wsu_maps.state.map_jObj;
 			if(typeof(_load)==='undefined'){

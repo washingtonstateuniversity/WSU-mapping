@@ -183,8 +183,8 @@
 					//var _mid= marker.id;
 					$.wsu_maps.state.mid[idx]=marker.id;
 					//var pid = marker.id;
-					$.wsu_maps.infobox.make_InfoWindow(idx,marker);
-					$.wsu_maps.infobox.make_ToolTip(idx,marker);
+					//$.wsu_maps.infobox.make_InfoWindow(idx,marker);
+					//$.wsu_maps.infobox.make_ToolTip(idx,marker);
 					$.wsu_maps.markers.make_Marker(idx,marker.id,marker,markerCallback);
 					
 					if(idx===(data.markers.length-1) && $.isFunction(callback)){

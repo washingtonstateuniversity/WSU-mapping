@@ -90,6 +90,7 @@
 			}else{
 				icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon );
 			}
+			
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
 					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
@@ -112,14 +113,18 @@
 					}
 				});
 
-			jObj.gmap('addMarker', marker_style,function(ops,marker){
-				marker.marker_style = marker_style;
-				$.wsu_maps.state.markerLog[i]=marker;
+			jObj.gmap('addMarker', marker_style,function(ops,made_marker){
+				made_marker.marker_style = marker_style;
+				made_marker.info = marker_obj.info;
+				made_marker.title = marker_obj.title;
+				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
+				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);
+				$.wsu_maps.infobox.make_ToolTip(i,made_marker);
 				// these too are needing to be worked together
 				//jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
 				if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
-					markerCallback( marker );
+					markerCallback( made_marker );
 				}
 				
 			})
