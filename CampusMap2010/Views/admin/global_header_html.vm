@@ -34,37 +34,91 @@
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		$Controller.getRootUrl()
+		#*https://beta.maps.wsu.edu/*#$Controller.getRootUrl()
 	#else
-		#if($siteroot && $siteroot !='/')
+		#if($siteroot && $siteroot !='')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			http://map.wsu.edu/
+			https://beta.maps.wsu.edu/
 		#end
 	#end
 #end
-#capturefor(view)$Controller.getView()#end
-#capturefor(mcv_action)$Controller.getAction()#end
+#capturefor(site_base)
+	#if($Controller.isLocal()==false)
+		//beta.maps.wsu.edu/
+	#else
+		#if($siteroot && $siteroot !='')
+			$siteroot.Replace('http:','')
+		#elseif($Controller.isLocal())
+			$Controller.getRootUrl().Replace('http:','')
+		#else
+			//beta.maps.wsu.edu/
+		#end
+	#end
+#end
+
+
+#capturefor(jsfolder)
+#if($Controller.isLocal()==false) dis #else build #end
+#end
+
+#capturefor(view)
+$Controller.getView()
+#end
+#*places,geometry,weather,visualization*#
+#set($libs="places,geometry")
+
+#set($signed_in="&signed_in=true")
+
+#capturefor(options_block)
+{
+	inview : false,
+	siteroot : '$site.Trim()',
+	view_id : "centralMap",
+	view : '$view.Trim()/',
+	error_reporting : true,
+#if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end
+#if($activePlace && $activePlace != "")	activePlace : $!activePlace, #end
+	campus : #if($campus.name!="")'$campus.name'#else "Pullman" #end,
+#if($campus.url!="")	url : '$campus.url', #end
+	campus_latlng_str : #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else '46.73304697156661,-117.15406340441444' #end,
+	
+#if($map) #* note that this will change when the central map gets it's own view *#
+	pos : { 
+		"center" : "$map.getLat(),$map.getLong()"
+	},
+#if($!map.places)
+#set($c=0)
+#capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
+	embeded_place_ids : "${places.Replace(", 0","").Replace(" 0","")}",
+#end
+#if($!map.geometrics)
+#set($c=0)
+#capturefor(shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
+	embeded_shape_ids : "${shapes.Replace(", 0","").Replace(" 0","")}",
+#end
+	show_global_nav : #if(${map.show_global_nav})true, #else false, #end
+	running_options : '$!options_json',
+	fit_to_bound : '$!map.fit_to_bound',
+#end
+}
+#end
+
+
 
 <script type="text/javascript">
-	var siteroot = #if($site.Trim()=="") '/' #else '$site.Trim()' #end;
-	var view = #if($view!="") '$view.Trim()/' #else "" #end;
-	var mcv_action = #if($mcv_action!="") '$mcv_action.Trim()' #else "" #end;
-	var campus = #if($campus.name!="") '$campus.name' #else "Pullman" #end;
-	#if($campus.url!="") var url = '$campus.url'; #end
-	var campus_latlng_str = #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else "46.73304697156661,-117.15406340441444"; #end;
+var map_view = $options_block;
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
-<link type='text/css' href='//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
+<link type='text/css' href='//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
 <link type='text/css' href='//images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' rel='stylesheet' media='screen' />
 <link media='screen' href='//images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
 
-$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")
-
-
+#*$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")*#
+$scriptsService.Css("~/Content/${jsfolder.Trim()}/css/admin.styles.css",true)
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>

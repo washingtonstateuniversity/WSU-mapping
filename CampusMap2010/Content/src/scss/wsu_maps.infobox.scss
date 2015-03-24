@@ -27,18 +27,15 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 
 
 .infoBox {
-	//vendor-prefix found
-	//-webkit-transform: translateZ(0px)
+	-webkit-transform: translateZ(0px);
 	max-height: 270px;
-	//vendor-prefix found
-	//-webkit-transform: translateZ(0px)
+	-webkit-transform: translateZ(0px);
 }
 
 .ui-tabs {
 	padding: 0;
 	padding-bottom: 5px;
-	//vendor-prefix found
-	//-webkit-transform: translateZ(0px)
+	-webkit-transform: translateZ(0px);
 	width: 100%;
 	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: -1px 1px 2px 0 $black_64;
@@ -48,15 +45,13 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 	border-bottom-right-radius: 0;
 	border: $color_silver_89_approx 1px solid;
 	.ui-widget-header {
-		//vendor-prefix found
-		//-webkit-transform: translateZ(0px)
+		-webkit-transform: translateZ(0px);
 		height: 19px;
 		background: $color_opal_approx;
 		border: medium none;
 	}
 	.ui-tabs-nav {
-		//vendor-prefix found
-		//-webkit-transform: translateZ(0px)
+		-webkit-transform: translateZ(0px);
 		padding: 0.2em 0 0;
 		padding-top: 0px;
 		//Instead of the line below you could use @includeborder-bottom-left-radius($radius)
@@ -251,14 +246,12 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 	width: 344px;
 	height: 190px;
 	margin-left: 10px;
-	//vendor-prefix found
-	//-webkit-transform: translateZ(0px)
+	-webkit-transform: translateZ(0px);
 	.cWrap {
 		margin: 0 auto;
 		height: 190px;
 		width: 263px !important;
-		//vendor-prefix found
-		//-webkit-transform: translateZ(0px)
+		-webkit-transform: translateZ(0px);
 		ul {
 			display: block;
 			list-style: none outside none;
