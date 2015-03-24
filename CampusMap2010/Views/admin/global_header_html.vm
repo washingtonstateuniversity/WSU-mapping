@@ -85,7 +85,7 @@ $Controller.getView()
 #if($campus.url!="")	url : '$campus.url', #end
 	campus_latlng_str : #if($campus.latitude!="" && $campus.longitude!="")'$campus.latitude,$campus.longitude'#else '46.73304697156661,-117.15406340441444' #end,
 	
-#if($map) #* note that this will change when the central map gets it's own view *#
+#if( $map ) #* note that this will change when the central map gets it's own view *#
 	pos : { 
 		"center" : "$map.getLat(),$map.getLong()"
 	},
@@ -96,12 +96,18 @@ $Controller.getView()
 #end
 #if($!map.geometrics)
 #set($c=0)
-#capturefor(shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
-	embeded_shape_ids : "${shapes.Replace(", 0","").Replace(" 0","")}",
+#capturefor(_shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
+	embeded_shape_ids : "${_shapes.Replace(", 0","").Replace(" 0","")}",
 #end
 	show_global_nav : #if(${map.show_global_nav})true, #else false, #end
 	running_options : '$!options_json',
+	#if($map.fit_to_bound)
 	fit_to_bound : '$!map.fit_to_bound',
+	#else
+	fit_to_bound : 'Washington State University Pullman, Washington USA',
+	#end
+#else
+	fit_to_bound : 'Washington State University Pullman, Washington USA',
 #end
 }
 #end
