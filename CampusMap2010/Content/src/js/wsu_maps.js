@@ -689,6 +689,11 @@ var startingUrl=startingUrl||null;
 			var jObj = $.wsu_maps.state.map_jObj;
 			jObj.gmap('clear','markers');
 			jObj.gmap('clear','overlays');
+			$.each($.wsu_maps.state.ib,function(i){
+				if($.wsu_maps.state.ib[i].opened === true){
+					$.wsu_maps.state.ib[i].close();
+				}
+			});
 			$.wsu_maps.state.ib=[];
 			$.wsu_maps.state.ibh=[];
 			$.wsu_maps.listings.reset_listings();
