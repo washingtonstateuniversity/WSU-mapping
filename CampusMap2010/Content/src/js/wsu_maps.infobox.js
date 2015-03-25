@@ -252,9 +252,7 @@
 		},
 		
 		open_IW:function(marker,i){
-			var jObj = $.wsu_maps.state.map_jObj;			
-			$.wsu_maps.infobox.apply_panoramas(marker);
-
+			var jObj = $.wsu_maps.state.map_jObj;
 			needsMoved=0;
 			$.wsu_maps.state.ibHover =  true;
 			if( !$('#taby'+i).is(':ui-tabs') ){
@@ -363,6 +361,19 @@
 				}
 				$.wsu_maps.state.in_pano = false;
 			}
+		},
+		pano_marker_click:function(marker){
+			var jObj = $.wsu_maps.state.map_jObj;
+			var pano = jObj.gmap("getPanorama");
+			
+			pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+			google.maps.event.addListener(pano, 'position_changed', function() {
+				var pov = pano.getPov();
+				var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+				pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
+				pano.setPov(pov);
+				if(jObj.gmap("hasPanorama")){}
+			});
 		},
 		contain_content_events:function(){
 			$('.infoBox .ui-tabs-panel a').attr('target','_blank');

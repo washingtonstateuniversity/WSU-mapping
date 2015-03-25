@@ -55,7 +55,7 @@
 $Controller.getView()
 #end
 #*places,geometry,weather,visualization*#
-#set($libs="places,geometry")
+#set($libs="places,geometry,visualization")
 
 #set($signed_in="&signed_in=true")
 

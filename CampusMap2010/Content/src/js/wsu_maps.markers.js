@@ -121,6 +121,8 @@
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
 				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);
 				$.wsu_maps.infobox.make_ToolTip(i,made_marker);
+				$.wsu_maps.infobox.apply_panoramas(made_marker);
+
 				// these too are needing to be worked together
 				//jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
 				if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
@@ -133,9 +135,16 @@
 					$.wsu_maps.markers.unhighlight_marker($.wsu_maps.state.active.marker);
 				}
 				$.wsu_maps.state.active.marker = null;
-				$.wsu_maps.infobox.open_info(i,$.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
+				
+				
+				if(!$.wsu_maps.state.in_pano){
+					$.wsu_maps.infobox.open_info(i);
+				}else{
+					$.wsu_maps.infobox.pano_marker_click($.wsu_maps.state.markerLog[i]);	
+				}
+
 				if(typeof($.jtrack)!=="undefined"){
 					//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 				}
