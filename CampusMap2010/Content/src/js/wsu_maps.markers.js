@@ -64,6 +64,9 @@
 		},
 		make_Marker:function (i,id,marker_obj,markerCallback){	
 			var jObj = $.wsu_maps.state.map_jObj;
+			
+			
+			
 			//console.log(marker_obj.style.icon);
 			var idx = i+1;
 			var icon = null;
@@ -90,11 +93,12 @@
 			}else{
 				icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+idx : marker_obj.style.icon );
 			}
-			
+			//re NS position, it should have a new json name but this is as far as time lets on the correction atm
+			marker_obj.marker_position = marker_obj.position;
 			var marker_style = $.extend(marker_obj.style,{
-					'position': new google.maps.LatLng(marker_obj.position.latitude, marker_obj.position.longitude),
-					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
-					'zFrezze':$.wsu_maps.markers.get_lat_zIndex(marker_obj.position.latitude),
+					'position': new google.maps.LatLng(marker_obj.marker_position.latitude, marker_obj.marker_position.longitude),
+					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.marker_position.latitude),
+					'zFrezze':$.wsu_maps.markers.get_lat_zIndex(marker_obj.marker_position.latitude),
 					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
@@ -117,6 +121,7 @@
 				made_marker.marker_style = marker_style;
 				made_marker.info = marker_obj.info;
 				made_marker.title = marker_obj.title;
+				made_marker.marker_position = marker_obj.marker_position;
 				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
 				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);

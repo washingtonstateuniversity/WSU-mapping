@@ -346,11 +346,11 @@
 			
 			if(jObj.gmap("hasPanorama")){
 				
-				pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+				pano.setPosition(new google.maps.LatLng(marker.marker_position.latitude, marker.marker_position.longitude));
 				google.maps.event.addListener(pano, 'position_changed', function() {
 					if(jObj.gmap("hasPanorama")){
 						var pov = pano.getPov();
-						var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+						var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.marker_position.latitude, marker.marker_position.longitude));
 						pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
 						pano.setPov(pov);
 					}
@@ -366,12 +366,12 @@
 			var jObj = $.wsu_maps.state.map_jObj;
 			var pano = jObj.gmap("getPanorama");
 			window._d("position changing");
-			pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+			pano.setPosition(new google.maps.LatLng(marker.marker_position.latitude, marker.marker_position.longitude));
 			window._d(marker);
 			google.maps.event.addListener(pano, 'position_changed', function() {
 				window._d("position changed");
 				var pov = pano.getPov();
-				var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+				var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.marker_position.latitude, marker.marker_position.longitude));
 				pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
 				pano.setPov(pov);
 				if(jObj.gmap("hasPanorama")){}
