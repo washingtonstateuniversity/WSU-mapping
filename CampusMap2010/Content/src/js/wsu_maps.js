@@ -11,6 +11,13 @@ var styles=styles||{};
 
 var startingUrl=startingUrl||null;
 
+function _def(n){ return typeof n!=="undefined"; }
+function _d(n){
+	return ($.wsu_maps.defaults.debug===true) && _def(window.console) && _def(window.console.debug) && window.console.debug(n);
+}
+
+
+
 /* seed it */
 (function($) {
 	$.wsu_maps={
@@ -507,6 +514,12 @@ var startingUrl=startingUrl||null;
 			//DEFAULT_overlay:null,
 			//DEFAULT_polylines:[],
 		},
+
+
+
+
+
+
 
 		ini:function (options){
 			$.extend($.wsu_maps.state,options);
