@@ -1,8 +1,6 @@
 @import 'vars/global';
 @import 'vars/colors';
 
-
-
 //urls
 $url_0: url('/Content/images/bg-nav.png');
 $url_1: url('/Content/images/nav_top_scroll_shadow.png');
@@ -56,7 +54,37 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 	}
 	#main_nav {
 		padding: 0;
+		list-style:none;
 		li {
+			width: 153px;
+			li {
+				width: 115px;
+			}
+			a {
+				display: block !important;
+				color: $color_WSU_Gray;
+				em {
+					font-style: normal;
+				}
+				&:hover {
+					color: $color_WSU_Crimson !important;
+				}
+			}
+			&:hover {
+				font-weight: normal;
+			}
+			&.sep {
+				cursor: default;
+				min-height: 3px;
+			}
+			&.endcap {
+				cursor: default;
+				min-height: 15px;
+			}
+			&.quickActions {
+				border-right: 3px solid $color_chocolate_approx;
+				width: 150px;
+			}
 			&.active {
 				a {
 					color: $color_WSU_Crimson;
@@ -79,13 +107,12 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 					color: $color_WSU_Gray;
 				}
 			}
-			a em {
-				font-style: normal;
-			}
+
 		}
 		ul {
 			display: none;
 			margin-left: 14px;
+			list-style:none;
 			li {
 				padding-bottom: 2px;
 				&.subNarrow {
@@ -96,45 +123,6 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 		}
 	}
 }
-#mob {
-	margin: 0 !important;
-	padding: 0;
-}
-#mob_link {
-	position: absolute;
-	top: -9999em;
-	left: -9999em;
-}
-#mob_li {
-	padding: 0 !important;
-}
+
 #navwrap .jspContainer {
 }
-#main_nav li {
-	width: 153px;
-	li {
-		width: 115px;
-	}
-	a {
-		display: block !important;
-		color: $color_WSU_Gray;
-		&:hover {
-			color: $color_WSU_Crimson !important;
-		}
-	}
-	&:hover {
-		font-weight: normal;
-	}
-	&.sep {
-		cursor: default;
-		min-height: 3px;
-	}
-	&.endcap {
-		cursor: default;
-		min-height: 15px;
-	}
-	&.quickActions {
-		border-right: 3px solid $color_chocolate_approx;
-		width: 150px;
-	}
-} 
