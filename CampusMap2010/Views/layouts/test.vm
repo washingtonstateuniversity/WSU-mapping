@@ -19,9 +19,9 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes">
 
 	<!-- SCRIPTS -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+	<script src="//repo.wsu.edu/spine/1/spine.js"></script>
 	<!-- COMPATIBILITY -->
 	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<noscript><style>#spine .spine-sitenav ul ul li { display: block !important; }</style></noscript>
@@ -195,7 +195,7 @@
 	<span itemprop="contactPoint" content="http://contactpage.wsu.edu"></span>
 	<span itemprop="url" content="http://your-unit.wsu.edu"></span>
 </div>
-<script type="text/javascript" src="/embed/wsu-home"></script>
+<script type="text/javascript" src="/embed/wsu-home?dyno=true"></script>
 </body>
 </html>
 
