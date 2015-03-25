@@ -170,6 +170,157 @@ p{
 	width: 100%;
 	position: relative;
 }
+
+#mainNavArea {
+	.ui-autocomplete-loading {
+		background: $url_0 no-repeat scroll right center transparent !important;
+	}
+}
+.ui-autocomplete.ui-menu {
+	max-height: 285px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-left: 5px;
+	padding-right: 20px;
+	width: 120px;
+	z-index: 999;
+	border: 1px solid $color_french_gray_approx;
+	//vendor-prefix found
+	//-webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.55)
+	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 5px 10px -5px $black_55;
+	em {
+		border-bottom: 1px solid $color_celeste_approx;
+		color: $color_storm_dust_approx;
+		display: block;
+		font-size: 10.5px;
+		font-weight: bold;
+		margin-top: 5px;
+	}
+	.ui-menu-item a {
+		font-size: 10.5px;
+		color: $color_WSU_Gray;
+		margin: 3px 0 2px;
+		display: block;
+		border: 1px transparent solid;
+		&.ui-state-hover {
+			font-size: 10.5px;
+			color: $color_WSU_Crimson;
+			margin: 3px 0 2px;
+			display: block;
+			border: 1px $color_celeste_approx solid;
+		}
+	}
+}
+
+#getDirections {
+	margin-top: 5px;
+	input::-webkit-input-placeholder {
+		color: $color_WSU_Gray !important;
+	}
+	input:-moz-placeholder {
+		color: $color_WSU_Gray !important;
+	}
+}
+#directionsTo {
+	margin-top: 5px;
+	input {
+		color: $color_WSU_Gray;
+		background: $url_1 no-repeat scroll left 1px transparent;
+		height: 22px;
+		border: medium none;
+		margin-top: 5px;
+		padding: 0 15px 0 5px;
+		width: 127px;
+	}
+}
+#directionsFrom input {
+	color: $color_WSU_Gray;
+	background: $url_1 no-repeat scroll left 1px transparent;
+	height: 22px;
+	border: medium none;
+	padding: 0 15px 0 5px;
+	width: 127px;
+} 
+.ie {
+	.mapControl {
+		//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 8px 1px $color_mountain_mist_5_approx;
+		behavior: $url_2;
+	}
+	#directionsFrom input {
+		left: 0;
+		padding-top: 3px;
+	}
+	#directionsTo input {
+		left: 0;
+		padding-top: 3px;
+	}
+}
+#printPdfs {
+	h2 {
+		text-align: center;
+		margin: 0 0 15px;
+	}
+	div {
+		float: left;
+		text-align: center;
+		padding-right: 20px;
+		&.last {
+			padding: 0;
+		}
+	}
+	h3 {
+		text-align: center;
+		a {
+			color: $color_WSU_Crimson;
+			font-size: 18px;
+			text-decoration: none;
+			&:hover {
+				color: $color_la_rioja_approx;
+				span {
+					background-position: left bottom;
+				}
+			}
+			span {
+				width: 170px;
+				height: 125px;
+				display: block;
+			}
+		}
+	}
+}
+.contextmenu {
+	visibility: hidden;
+	background: $white;
+	border: 1px solid $color_portage_approx;
+	z-index: 10;
+	font-size: 12px;
+	position: relative;
+	width: 150px;
+	div {
+		padding-left: 5px;
+	}
+	#to {
+	}
+	#from {
+	}
+	a {
+		display: block;
+		cursor: pointer;
+		color: $color_WSU_Gray;
+		border: 1px solid $color_celeste_approx;
+		&:hover {
+			color: $color_sapphire_approx;
+			border: 1px solid $color_WSU_Gray;
+		}
+		&.active {
+			display: none;
+		}
+	}
+}
+
+
 #placeSearch {
 	height: 23px;
 	position: relative;
@@ -206,35 +357,17 @@ p{
 	}
 	input:focus {
 	}
-}
-#wsu_ui {
-	.ui-tabs {
-		.ui-tabs-nav {
-			margin: 0 !important;
-			padding: 0.2em 0.2em 0 !important;
-			li {
-				margin: 0 0.2em 1px 0 !important;
-				padding: 0 !important;
-			}
-		}
-		.ui-tabs-hide {
-			position: absolute;
-			left: -10000px;
-			top: -10000px;
-			display: block !important;
-		}
+	input::-webkit-input-placeholder {
+		color: $color_sapphire_approx !important;
 	}
-	#main_nav .ui-button {
-		text-align: left;
-		padding: 0 15px;
-	}
-	.ui-widget input[type=submit] {
-		padding: 4px 7px !important;
-	}
-	input[type=submit].ui-widget {
-		padding: 4px 7px !important;
+	input:-moz-placeholder {
+		color: $color_sapphire_approx !important;
 	}
 }
+* html .ui-autocomplete {
+	height: 285px;
+}
+
 #loading{
 	position:absolute;
 	top:50%;
