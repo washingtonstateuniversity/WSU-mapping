@@ -62,15 +62,15 @@
 				if($('#directionsTo').is(':visible')){
 					$('#directionsTo').hide();
 				}
-				if(typeof($.jtrack)!=="undefined"){
+				//if(window._defined($.jtrack)){
 					//$.jtrack.trackEvent(pageTracker,"Map status", "Reset");
-				}
+				//}
 				//google.maps.event.clearListeners(map_jObj.gmap("get","map")); 
 				//$('.mapControl').remove();
 				$.wsu_maps.state.map_jObj.gmap("destroy",function(){//ele){
 					$.wsu_maps.state.map_jObj.html('');
 					$('.mapControl').remove(); 
-					if($('.veiw_base_layout').length|| ( typeof(window.map_view) !== "undefined" )){
+					if($('.veiw_base_layout').length|| window._defined(window.map_view) ){
 						$.wsu_maps.views.ini_map_view($.wsu_maps.setup);
 					}else{
 						$.wsu_maps.iniMap("",$.wsu_maps.setup);

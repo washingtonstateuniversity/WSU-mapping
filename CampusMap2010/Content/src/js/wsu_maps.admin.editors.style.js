@@ -122,7 +122,7 @@
 				
 				var options={};
 				var drity_check =  ( ele.is(':checked') || (ele.val()!=='' && ele.not(':checkbox') ) ) ;
-				if( drity_check && ele.not('[type=hidden]') && typeof( ele.attr('rel') ) !== 'undefined' ){
+				if( drity_check && ele.not('[type=hidden]') && window._defined( ele.attr('rel') ) ){
 				   options[ele.attr('rel')]= (ele.is($('.color_picker')) ? '#' : '') +''+ele.val();// changed hasClass for is for speed
 				}
 				

@@ -336,10 +336,10 @@ var image_count=image_count||-1;
 				
 			}
 			
-			if(typeof(tinyMCE) !== 'undefined' && $('textarea.tinyEditor').length>0){
+			if(window._defined(tinyMCE) && $('textarea.tinyEditor').length>0){
 				$.each($('textarea.tinyEditor'),function(i){
 					if(!$(this).is($(".tinyLoaded"))){
-						if(typeof($(this).attr('id'))==="undefined"){
+						if(!window._defined($(this).attr('id'))){
 							$(this).attr('id','temp_'+i);
 						}
 						if($(this).is($(".full"))){
@@ -695,16 +695,16 @@ var image_count=image_count||-1;
 					buttons: {
 						"Draft": function() {
 							var diaObj=$(this);
-							$.wsu_maps.general.loadState(1,$.wsu_maps.admin.defaults.place_id,diaObj);
+							$.wsu_maps.admin.loadState(1,$.wsu_maps.admin.defaults.place_id,diaObj);
 						},
 						"Review": function() {
 							var diaObj=$(this);
-							$.wsu_maps.general.loadState(2,$.wsu_maps.admin.defaults.place_id,diaObj);
+							$.wsu_maps.admin.loadState(2,$.wsu_maps.admin.defaults.place_id,diaObj);
 		
 						},
 						"Published": function() {
 							var diaObj=$(this);
-							$.wsu_maps.general.loadState(3,$.wsu_maps.admin.defaults.place_id,diaObj);
+							$.wsu_maps.admin.loadState(3,$.wsu_maps.admin.defaults.place_id,diaObj);
 						},
 						Cancel: function() {
 							$( ".buttons.pubState" ).removeClass('ui-state-focus'); 
@@ -735,7 +735,7 @@ var image_count=image_count||-1;
 					buttons: {
 						"Send": function() {
 							var diaObj=$(this);
-							$.wsu_maps.general.sendBr($.wsu_maps.admin.defaults.place_id,diaObj);
+							$.wsu_maps.admin.sendBr($.wsu_maps.admin.defaults.place_id,diaObj);
 						},
 						Cancel: function() {
 							$( ".buttons.sendBR" ).removeClass('ui-state-focus'); 
@@ -832,7 +832,7 @@ var image_count=image_count||-1;
 					buttons: {
 						"Steal": function() {
 							var diaObj=$(this);
-							$.wsu_maps.general.clearLock($.wsu_maps.admin.defaults.place_id,diaObj);
+							$.wsu_maps.admin.clearLock($.wsu_maps.admin.defaults.place_id,diaObj);
 						},
 						Cancel: function() {
 								$( ".buttons.steal" ).removeClass('ui-state-focus'); 
@@ -854,7 +854,7 @@ var image_count=image_count||-1;
 		/* -----------
 			for persons(Editors)
 			---------------- 
-			if(typeof(availablePositions) !== 'undefined'){
+			if(window._defined(availablePositions)){
 				$( "#person_position" ).autocomplete({
 					source: availablePositions
 				});
@@ -880,7 +880,20 @@ var image_count=image_count||-1;
 			
 			
 		},
+		loadState:function (stat,place_id,diaObj){
+			$.ajaxSetup ({cache: false}); 
+			var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
 		
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'setStatus.castle?id='+place_id+'&status='+stat , function(response) {//, status, xhr) {
+				var statIs = $("<div>").append(response.replace(rscript, "")).find('.place_'+place_id+' .Status div');
+				$('body .place_'+place_id+' .Status').empty().append(statIs.html());
+				$('body li.place_'+place_id).clone().prependTo('.list_'+stat);
+				$('body li.place_'+place_id).not('.list_'+stat+' li.place_'+place_id+':first').remove();
+				$( ".buttons.pubState" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
+				$( "#dialog .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover'); 
+				diaObj.dialog( "close" );	
+			});                       
+		},
 		/* 
 		 * DEFAULT_overlay=apply_element(map,type,_option);  << that needs fixed
 		 * with paths: get_wsu_logo_shape(), as option
@@ -911,7 +924,7 @@ var image_count=image_count||-1;
 									options:op.click||{fillColor: "#a90533",fillOpacity: 0.35}
 								}
 							};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
+						DEFAULT_overlay=$.wsu_maps.admin.apply_element(capedType,_option);
 		
 						return_item=DEFAULT_overlay;
 					break;
@@ -940,7 +953,7 @@ var image_count=image_count||-1;
 								options:op.click||{strokeColor: "#a90533",strokeOpacity: 0.35}
 							}
 						};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
+						DEFAULT_overlay=$.wsu_maps.admin.apply_element(capedType,_option);
 						DEFAULT_polylines.push(DEFAULT_overlay);
 						google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
 							$.each(DEFAULT_polylines,function(i){
@@ -959,7 +972,7 @@ var image_count=image_count||-1;
 						new google.maps.LatLng("46.732596","-117.146745")
 						]
 					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-					$.wsu_maps.general.apply_element(capedType,_option);*/
+					$.wsu_maps.admin.apply_element(capedType,_option);*/
 
 						return_item=polyline;
 					break;				
@@ -970,6 +983,178 @@ var image_count=image_count||-1;
 			return return_item;
 		},
 		
+		
+		/*
+		 * returns gmap element options from a possibly dirty source
+		 * for a type ie:polygon
+		 *	example:
+		 *		op={fillColor="#000"}
+		 *		but type == "polyline"
+		 *		filter_map_element(type,op) returns op={}
+		 *		as polyline doesn't support fillColor
+		 *	
+		 *	Look to abstarct build from a list may-be since it's just
+		 *	a filter if in proper json ---euff
+		*/
+		filter_map_element:function (type,op){
+			if( !window._defined(op) ){
+				return;
+			}
+			var _op={};
+			window._defined(op.clickable)		?_op.clickable=op.clickable:null;
+			window._defined(op.visible)		?_op.visible=op.visible:null;
+			window._defined(op.zIndex)		?_op.zIndex=op.zIndex:null;
+			
+			switch(type.toLowerCase()){
+				case "polygon" :
+							window._defined(op.editable) 		?_op.editable=op.editable:null;
+							window._defined(op.geodesic)		?_op.geodesic=op.geodesic:null;
+							window._defined(op.paths)			?_op.paths=op.paths:null;
+							window._defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+							window._defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+							window._defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+							window._defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+							window._defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+					break;
+				case "rectangle" :
+							window._defined(op.editable)		?_op.editable=op.editable:null;
+							window._defined(op.bounds)			?_op.bounds=op.bounds:null;
+							window._defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+							window._defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+							window._defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+							window._defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+							window._defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+					break;
+				case "circle" :
+							window._defined(op.editable)		?_op.editable=op.editable:null;
+							window._defined(op.center)			?_op.center=op.center:null;
+							window._defined(op.radius)			?_op.radius=op.radius:null;
+							window._defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+							window._defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+							window._defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+							window._defined(op.fillColor)		?_op.fillColor=op.fillColor:null;
+							window._defined(op.fillOpacity)		?_op.fillOpacity=op.fillOpacity:null;
+					break;			
+				case "polyline" :
+							window._defined(op.editable)		?_op.editable=op.editable:null;
+							window._defined(op.geodesic)		?_op.geodesic=op.geodesic:null;
+							window._defined(op.path)			?_op.path=op.path:null;
+							window._defined(op.strokeColor)		?_op.strokeColor=op.strokeColor:null;
+							window._defined(op.strokeOpacity)	?_op.strokeOpacity=op.strokeOpacity:null;
+							window._defined(op.strokeWeight)	?_op.strokeWeight=op.strokeWeight:null;
+					break;				
+				case "marker" :
+							window._defined(op.animation)		?_op.animation=op.animation:null;
+							window._defined(op.cursor)			?_op.cursor=op.cursor:null;
+							window._defined(op.draggable)		?_op.draggable=op.draggable:null;
+							window._defined(op.flat)			?_op.flat=op.flat:null;
+							window._defined(op.icon)			?_op.icon=op.icon:null;
+							window._defined(op.optimized)		?_op.optimized=op.optimized:null;
+							window._defined(op.position)		?_op.position=op.position:null;					
+							window._defined(op.raiseOnDrag)		?_op.raiseOnDrag=op.raiseOnDrag:null;					
+							window._defined(op.shadow)			?_op.shadow=op.shadow:null;	
+							window._defined(op.shape)			?_op.shape=op.shape:null;						
+							window._defined(op.title)			?_op.title=op.title:null;	
+					break;
+			}
+			return _op;
+		},
+		clearLock:function (item_id,diaObj,callback){
+			$.ajaxSetup ({cache: false,async:false}); 
+			//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'clearLock.castle?id='+item_id, function(response) {//, status, xhr) {
+				if(response==='true'){
+					if(window._defined(diaObj) && diaObj!==''){
+						$('body li.item_'+item_id).find('.inEdit').fadeOut('fast',function(){
+							$('body li.item_'+item_id).find('.inEdit').remove();
+						});
+						$('body li.item_'+item_id).find('.UinEdit').fadeOut('fast',function(){
+							$('body li.item_'+item_id).find('.UinEdit').remove();
+						});
+						$( ".buttons.steal" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
+						$( "#clearLock .buttons" ).removeClass('ui-state-focus').removeClass('ui-state-hover');
+						$('body li.item_'+item_id).find('.buttons.editIt').attr('href','_edit.castle?id='+item_id);
+						diaObj.dialog( "close" );	
+					}
+					if($.isFunction(callback)){
+						callback();
+					}
+				}
+			});                       
+		},
+		sendBr:function (place_id,diaObj){
+			$.ajaxSetup ({cache: false}); 
+			//var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+			$.get($.wsu_maps.state.siteroot+$.wsu_maps.state.view+'end_breaking_single.castle?id='+place_id , function(response) {//, status, xhr) {
+				diaObj.dialog( "close" );
+				if(response!=='true'){
+					$.wsu_maps.admin.alertLoadingSaving(response);
+				}else{
+					$.wsu_maps.admin.alertLoadingSaving('Emails sent');
+					window.setTimeout($.wsu_maps.admin.removeAlertLoadingSaving(),1500);
+				}
+			});                       
+		},
+		apply_element:function (type,style){
+			
+			var rest_shape = $.wsu_maps.admin.filter_map_element(type,style.rest.options);
+			$.wsu_maps.state.map_jObj.gmap('addShape', type, rest_shape, function(shape){
+				$(shape).click(function(){
+					if(style.click){
+						if(style.click.options){
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.admin.filter_map_element(type,style.click.options),this);
+						}
+						if(style.click.callback){
+							style.click.callback();
+						}
+					}
+				 }).mouseover(function(){
+					 if(style.mouseover){
+						 if(style.mouseover.options){
+							 $.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.admin.filter_map_element(type,style.mouseover.options),this);
+						 }
+						 if(style.mouseover.callback){
+							 style.mouseover.callback();
+						 }
+					 }
+				}).mouseout(function(){
+					if(style.rest){
+						if(style.rest.options){
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.admin.filter_map_element(type,style.rest.options),this);
+						}
+						if(style.rest.callback){
+							style.rest.callback();
+						}
+					}
+				}).dblclick(function(){
+					if(style.dblclick){
+						if(style.dblclick.options){
+							$.wsu_maps.state.map_jObj.gmap('setOptions',$.wsu_maps.admin.filter_map_element(type,style.dblclick.options),this);
+						}
+						if(style.dblclick.callback){
+							style.dblclick.callback();
+						}
+					}
+				})
+				.trigger('mouseover')
+				.trigger('mouseout');
+				
+				//var placePos = mapOjb.gmap("get_map_center");
+				
+				if( window._defined(shape) ){
+					//mapOjb.gmap("move_shape",shape,placePos);
+				}
+				/*,
+				.rightclick(function(){ //maybe keep but most likely lose this
+					if(style.rightclick){
+						if(style.rightclick.options)$.wsu_maps.state.map_inst.setCenter(filter_map_element(type,style.rightclick.options),this);
+						if(style.rightclick.callback)style.hover.callback();
+					}
+				})*/
+				
+			});
+
+		},
 		
 		
 	};

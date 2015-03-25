@@ -130,7 +130,7 @@
 
 				// these too are needing to be worked together
 				//jObj.gmap('setOptions', {'zIndex':1}, $.wsu_maps.state.markerLog[i]);
-				if( typeof(markerCallback) !== "undefined" && $.isFunction( markerCallback ) ){
+				if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
 					markerCallback( made_marker );
 				}
 				
@@ -151,7 +151,7 @@
 					$.wsu_maps.infobox.pano_marker_click($.wsu_maps.state.markerLog[i]);	
 				}
 
-				if(typeof($.jtrack)!=="undefined"){
+				if(window._defined($.jtrack)){
 					//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 				}
 			})

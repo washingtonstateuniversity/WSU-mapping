@@ -5,8 +5,8 @@
 			$('.errorReporting').off().on("click",function(e){
 				e.stopPropagation();
 				e.preventDefault();
-				var id= typeof(marker)!=="undefined"?marker.id:0;
-				var title= typeof(marker)!=="undefined" && typeof(marker.title)!=="undefined"?marker.title:"";
+				var id= window._defined(marker) ?marker.id:0;
+				var title= window._defined(marker) && window._defined(marker.title) ? marker.title : "";
 				
 				$.wsu_maps.util.popup_message({
 					html:'<div id="wsumap_errorReporting"><form action="'+$.wsu_maps.state.siteroot+'/public/reportError.castle" method="post">'+

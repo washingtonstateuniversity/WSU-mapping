@@ -26,7 +26,7 @@
 				$.wsu_maps.nav.menuDressChild($(this));
 				if($.wsu_maps.state.ib.length>0){
 					$.each($.wsu_maps.state.ib, function(i) {
-						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+						if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();
 						}
 					});
@@ -52,7 +52,7 @@
 				$.wsu_maps.nav.menuDressChild($(this));
 				if($.wsu_maps.state.ib.length>0){
 					$.each($.wsu_maps.state.ib, function(i) {
-						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+						if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();
 						}
 					});

@@ -6,7 +6,7 @@
 		defaults:{
 		},
 		get_style:function (jObj,style_id,type){
-			//if((typeof(type)==="undefined" || type==="undefined") || (typeof(style_id)==="undefined" || style_id==="undefined") )alert('error'); return false;
+			//if((!window._defined(type) || type==="undefined") || (!window._defined(style_id) || style_id==="undefined") )alert('error'); return false;
 
 			var url=$.wsu_maps.state.siteroot+"public/get_style.castle";
 			$.getJSON(url+'?callback=?&id='+style_id, function(data) {

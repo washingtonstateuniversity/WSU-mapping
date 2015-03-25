@@ -5,11 +5,11 @@
 			var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
 			var ids;
 			$.each($('[name="geolist[]"]'),function(){
-					ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
+					ids =(!window._defined(ids)?'':ids+',')+$(this).val();
 			});
 
 			$.wsu_maps.state.map_jObj.gmap('clear','overlays');
-			if(typeof(ids)!=="undefined"){
+			if(window._defined(ids)){
 				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 					$.each( data.shapes, function(i, shape) {	
 						$.wsu_maps.shapes.addShapeToMap(i, shape);
@@ -21,16 +21,16 @@
 			var jObj = $.wsu_maps.state.map_jObj;
 			var pointHolder = {};
 			var style = {};
-			if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polyline'){ 
+			if(!window._defined(shape.latlng_str) && shape.latlng_str!=='' && shape.type==='polyline'){ 
 				pointHolder = {'path' : shape.latlng_str };
 			}
-			if(typeof(shape.latlng_str)==="undefined" && shape.latlng_str!=='' && shape.type==='polygon'){ 
+			if(!window._defined(shape.latlng_str) && shape.latlng_str!=='' && shape.type==='polygon'){ 
 				pointHolder = {'paths' : shape.latlng_str };
 			}
-			if(typeof(shape.encoded)!=="undefined"){ 
+			if(window._defined(shape.encoded)){ 
 				pointHolder = {'paths' : shape.encoded };
 			}
-			if(typeof(shape.style)==="undefined"||shape.style===''){
+			if(!window._defined(shape.style)||shape.style===''){
 				style = shape.type==='polygon'? {'fillOpacity':0.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':0.99,'strokeColor':'#262A2D','strokeWeight':2};
 			}else{
 				style =  shape.style.events.rest;
@@ -39,17 +39,17 @@
 				style = $.extend( style , pointHolder );
 			}
 			
-			if((typeof(shape.style)==="undefined"||shape.style==='') && typeof(shape.type)!=="undefined"){
+			if((!window._defined(shape.style)||shape.style==='') && window._defined(shape.type)){
 				jObj.gmap('addShape',(shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style);
 			}else{
 				
 				// $.wsu_maps.state.map_jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
 				jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
 				$(shape_obj).on('click',function(){
-					if(typeof(shape.style.events.click)!=="undefined" && shape.style.events.click !== ""){
+					if(window._defined(shape.style.events.click) && shape.style.events.click !== ""){
 
 						jObj.gmap('setOptions',shape.style.events.click,this);
-						if(typeof(shape.style.events.click.onEnd)!=="undefined" && shape.style.events.click.onEnd !== ""){
+						if(window._defined(shape.style.events.click.onEnd) && shape.style.events.click.onEnd !== ""){
 							(function(){
 								window.jObj=jObj;
 								window.i=i;
@@ -66,9 +66,9 @@
 						}
 					}
 				 }).mouseover(function(){
-					 if(typeof(shape.style.events.mouseover)!=="undefined" && shape.style.events.mouseover !== ""){
+					 if(window._defined(shape.style.events.mouseover) && shape.style.events.mouseover !== ""){
 						 jObj.gmap('setOptions',shape.style.events.mouseover,this);
-						if(typeof(shape.style.events.mouseover.onEnd)!=="undefined" && shape.style.events.mouseover.onEnd !== ""){
+						if(window._defined(shape.style.events.mouseover.onEnd) && shape.style.events.mouseover.onEnd !== ""){
 							(function(){
 								window.jObj=jObj;
 								window.i=i;
@@ -85,9 +85,9 @@
 						}		
 					 }
 				}).mouseout(function(){
-					if(typeof(shape.style.events.rest)!=="undefined" && shape.style.events.rest !== ""){
+					if(window._defined(shape.style.events.rest) && shape.style.events.rest !== ""){
 						jObj.gmap('setOptions',shape.style.events.rest,this);
-						if(typeof(shape.style.events.rest.onEnd)!=="undefined" && shape.style.events.rest.onEnd !== ""){
+						if(window._defined(shape.style.events.rest.onEnd) && shape.style.events.rest.onEnd !== ""){
 							(function(){
 								window.jObj=jObj;
 								window.i=i;
@@ -104,7 +104,7 @@
 						}
 					}
 				}).dblclick(function(){
-					if(typeof(shape.style.events.dblclick)!=="undefined" && shape.style.events.dblclick !== ""){
+					if(window._defined(shape.style.events.dblclick) && shape.style.events.dblclick !== ""){
 						jObj.gmap('setOptions',shape.style.events.dblclick,this);
 							(function(){
 								window.jObj=jObj;

@@ -5,13 +5,13 @@ var base=base||{};
 	$.wsu_maps.views = {
 		inital_options:null,
 		set_inital_options:function(map_op){
-			if(typeof(map_op.center)!=="undefined"){
+			if(window._defined(map_op.center)){
 				delete(map_op.center);
 			}
-			if(typeof(map_op.styles)!=="undefined"){
+			if(window._defined(map_op.styles)){
 				delete(map_op.styles);
 			}
-			if(typeof(map_op.zoom)!=="undefined"){
+			if(window._defined(map_op.zoom)){
 				delete(map_op.zoom);
 			}
 			$.wsu_maps.views.inital_options = map_op;
@@ -53,7 +53,7 @@ var base=base||{};
 				}
 
 				$(window).resize(function(){
-					if(  typeof(window.map_view) !== "undefined" && typeof(window.map_view.fit_to_bound) !== "undefined" && window.map_view.fit_to_bound !==""  ){
+					if(  window._defined(window.map_view) && window._defined(window.map_view.fit_to_bound) && window.map_view.fit_to_bound !==""  ){
 						$.wsu_maps.fit_to_location(window.map_view.fit_to_bound);
 					}
 					$.wsu_maps.keep_center();

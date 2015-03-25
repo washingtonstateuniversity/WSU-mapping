@@ -30,14 +30,14 @@
 								//$('#selectedPlaceList_btn').trigger('click');
 							}
 							$.each($.wsu_maps.state.ib, function(i) {
-								if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+								if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 									$.wsu_maps.state.ib[i].close();
 								}
 							});
 							jObj.gmap('clear','markers');
 							jObj.gmap('clear','overlays');*/
 							$.wsu_maps.clean_map();
-							if(typeof(data)!=='undefined'){
+							if(window._defined(data)){
 								$.wsu_maps.general.loadData(data,null,function(marker){
 									$.wsu_maps.state.ib[0].open($.wsu_maps.state.map_inst, marker);
 									$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[0];
@@ -57,14 +57,14 @@
 						//$('#selectedPlaceList_btn').trigger('click');
 					}
 					$.each($.wsu_maps.state.ib, function(i) {
-						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+						if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();
 						}
 					});
 					jObj.gmap('clear','markers');
 					jObj.gmap('clear','overlays');*/
 					$.wsu_maps.clean_map();
-					if(typeof(data)!=='undefined'){
+					if(window._defined(data)){
 						$.wsu_maps.general.loadData(data,null,function(marker){
 							$.wsu_maps.state.ib[0].open($.wsu_maps.state.map_inst, marker);
 							$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[0];
@@ -83,16 +83,16 @@
 				ids = $.wsu_maps.state.embeded_place_ids;
 			}else{
 				$.each($('[name="placelist[]"]'),function(){
-					ids =(typeof(ids)==="undefined"?'':ids+',')+$(this).val();
+					ids =(!window._defined(ids)?'':ids+',')+$(this).val();
 				});
 			}
 			
 			$.wsu_maps.state.map_jObj.gmap('clear','markers');
 			$.wsu_maps.state.ib=[];
-			if(typeof(ids)!=="undefined"){console.log(ids);
+			if(window._defined(ids)){console.log(ids);
 				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {console.log(data);
 					/*$.each($.wsu_maps.state.ib, function(i) {
-						if( typeof($.wsu_maps.state.ib[i])!=="undefined" && $.wsu_maps.state.ib[i].opened === true){
+						if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();
 						}
 					});*/

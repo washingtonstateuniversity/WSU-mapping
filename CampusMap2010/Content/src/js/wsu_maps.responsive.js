@@ -9,7 +9,7 @@
 		},
 		set_body_resp_state:function(){
 			$(window).resize(function(){
-				if($('.veiw_base_layout.public').length|| ( typeof(window.map_view) !== "undefined" )){
+				if($('.veiw_base_layout.public').length|| ( window._defined(window.map_view) )){
 					if($.wsu_maps.state.map_jObj.width()<=320){
 						$('html').removeClass('narrow');
 						$('html').addClass('mobile');
@@ -36,13 +36,13 @@
 		},
 		resizeBg:function(obj,height,width) {
 			obj.height($(window).height()-height);
-			if(typeof(width)!=="undefined"&&width>0){
+			if(window._defined(width)&&width>0){
 				obj.width($(window).width()-width);
 			}
 		},
 		resizeMaxBg:function(obj,height,width) {
 			obj.css({"max-height":$(window).height()-height});
-			if(typeof(width)!=="undefined"&&width>0){
+			if(window._defined(width)&&width>0){
 				obj.css({"max-width":$(window).width()-width});
 			}
 		},

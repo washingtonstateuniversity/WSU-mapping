@@ -145,11 +145,11 @@ $.wsu_maps.admin.view = {
 		//var width = $('#width').val();
 		//var height = $('#height').val();
 		var options = {
-			center: (typeof(lat)==='undefined' || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
+			center: (!window._defined(lat) || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
 			zoom:$.wsu_maps.defaults.map.zoom,
 			styles:$.wsu_maps.defaults.map.styles
 		};
-		//var options = {'center': (typeof(lat)==='undefined' || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
+		//var options = {'center': (!window._defined(lat) || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 		if( $.wsu_maps.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){
 			$.each($('select,input,textarea','#tabs_Options'),function(){//i,v){
 				var tmpVal = $(this).val();
@@ -312,7 +312,7 @@ $.wsu_maps.admin.view = {
 						self.closest('fieldset').find('.finFill').html(function(){
 							var str="<option value=''>Select a "+role+"</option>";
 							$.each(data,function(i,v){
-								var name = typeof(v.prime_name)==="undefined"?v.name:v.prime_name;
+								var name = !window._defined(v.prime_name)?v.name:v.prime_name;
 								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+">"+name+"</option>";
 							});
 							self.closest('fieldset').find('.mainFilter').show();
@@ -351,8 +351,8 @@ $.wsu_maps.admin.view = {
 				list.html(function(){
 					var str="";//"<option value=''>Select a "+self.closest('fieldset').attr('role')+"</option>";
 					$.each(data,function(i,v){
-								var name = typeof(v.prime_name)==="undefined"?v.name:v.prime_name;
-								var image = typeof(v.staticMap)!=="undefined"?"data-image='/media/getmap.castle?path="+v.staticMap+"'":"";
+								var name = window._defined(v.prime_name) ? v.prime_name : v.name;
+								var image = window._defined(v.staticMap) ? "data-image='/media/getmap.castle?path="+v.staticMap+"'" : "" ;
 								str += "<option value='"+v.id+"' "+($('.list_'+role+'[value="'+v.id+'"]').length>0?" disabled='disabled'":"")+" "+image+" >"+name+"</option>";
 					});
 					self.closest('fieldset').find('.mainFilter').show();

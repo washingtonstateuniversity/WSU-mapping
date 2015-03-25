@@ -8,10 +8,10 @@ $.wsu_maps.admin.ui.tinymce = {
 
 
 	load_tiny: function(which, id) {
-		if (typeof(which) === 'undefined') {
+		if (!window._defined(which)) {
 			which = "default";
 		}
-		if (typeof(id) === 'undefined') {
+		if (!window._defined(id)) {
 			id = null;
 		}
 		tinyMCE.init( $.wsu_maps.admin.ui.tinymce.tinyoptions(which, id) );
@@ -485,7 +485,7 @@ $.wsu_maps.admin.ui.tinymce = {
 	
 	
 	tinyoptions:function (which, id) {
-		id = typeof(id) !== 'undefined' && id !== null ? id : "place_details";
+		id = window._defined(id) && id !== null ? id : "place_details";
 		var tiny_options={};
 		switch (which) {
 			case "bodytext":
@@ -649,7 +649,7 @@ $.wsu_maps.admin.ui.tinymce = {
 						}
 						//alert(node.nodeName);
 						var imgNode = $(node);
-						if (typeof(imgNode.attr('src')) !== 'undefined') {
+						if (window._defined(imgNode.attr('src'))) {
 							//alert(imgNode.attr('src'));
 							var image = imgNode.attr('alt').split('|');
 							//alert(image[0]);

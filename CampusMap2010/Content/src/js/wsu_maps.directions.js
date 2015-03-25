@@ -141,7 +141,7 @@
 				}); 
 				directionsDisplay.setDirections(results);
 				$.wsu_maps.listings.listTabs("directions");
-				$.wsu_maps.general.addEmailDir();
+				$.wsu_maps.directions.addEmailDir();
 			});
 		},
 		hereToThere:function (){
@@ -206,6 +206,78 @@
 				$.wsu_maps.state.map_jObj.gmap('clear','overlays');
 				$.wsu_maps.state.map_jObj.gmap('clear','serivces');
 			}
+		},
+		addEmailDir:function (){
+			$('#emailDir').off().on('click',function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				//var trigger=$(this);
+				$.colorbox({
+					html:function(){
+						return '<div id="emailDirs"><form action="../public/emailDir.castle" method="post">'+
+									'<h2>Want to email the directions?</h2>'+
+									'<h4>Please provide you email and the email of the person you wish to send the directions to.</h4>'+
+									'<textarea name="directions" style="position:absolute;top:-9999em;left:-9999em;">'+$('#directions-panel').html()+'</textarea>'+
+									'<lable>Your Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
+									'<lable>Your Email:<br/><input type="email" value="" required placeholder="Your email address" id="email" name="email"></lable><br/>'+
+									'<lable>Recipient Name:<br/><input type="text" value="" required placeholder="First and Last" name="recipientname"></lable><br/>'+
+									'<lable>Recipient Email:<br/><input type="email" value="" required placeholder="Destination email address" id="recipientemail" name="recipientemail"></lable><br/>'+
+									'<lable>Notes to recipient: <br/>'+
+									'<textarea required placeholder="Some notes on the directions" name="notes"></textarea></lable><br/>'+
+									'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
+								'</from></div>';
+					},
+					scrolling:false,
+					opacity:0.7,
+					transition:"none",
+					innerWidth:450,
+					//height:450,
+					open:true,
+					onClosed:function(){
+						$('#colorbox').removeClass('norm');
+					},
+					onOpen:function(){$('#colorbox').addClass('norm');},
+					onComplete:function(){
+						$.wsu_maps.general.prep_html();
+						if($('#colorbox #cb_nav').length){
+							$('#colorbox #cb_nav').html("");
+						}
+						$.colorbox.resize();	
+						$('#emailDirs [type="Submit"]').off().on('click',function(e){
+							e.stopPropagation();
+							e.preventDefault();
+							$('#valid').remove();
+							var valid=true;
+							$.each($('#emailDirs [required]'),function(){
+								if($(this).val()===""){
+									valid=false;
+								}
+							});
+							
+							if(valid){
+								$.post($('#emailDirs form').attr('action'), $('#emailDirs form').serialize(),function(data){
+									if(data==="email:false"){
+										$('#emailDirs').prepend("<div id='valid'><h3>Your email is not a valid email.  Please enter it again</h3></div>");
+										$('#email').focus();
+										$.colorbox.resize();
+									}else if(data==="recipientemail:false"){
+										$('#emailDirs').prepend("<div id='valid'><h3>The recipient's email is not a valid email.  Please enter it again</h3></div>");
+										$('#recipientemail').focus();
+										$.colorbox.resize();
+									}else{
+										$('#emailDirs').html('<h2>You will recive an email shortly as a copy.</h2>'+'');
+										$.colorbox.resize();
+									}
+								});
+							}else{
+								if($('#valid').length===0){
+									$('#emailDirs').prepend("<div id='valid'><h3>Please completely fill out the form.</h3></div>");
+								}
+							}
+						});
+					}
+				});
+			});		
 		},
 	};
 })(jQuery,window);

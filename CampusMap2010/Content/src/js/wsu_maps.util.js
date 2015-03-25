@@ -32,14 +32,14 @@
 			s.async = true;
 			s.src = url;
 			var x = document.getElementsByTagName('script')[0];
-			if(typeof(callback)!=='undefined' && typeof(callback.onreadystatechange)==='undefined'){
+			if(!window._defined(callback)!=='undefined' && typeof(callback.onreadystatechange)){
 				s.onreadystatechange = callback.onreadystatechange;
 				s.onload = callback.onload;
 			}
 			headID.appendChild(s);
 		}*/
 		
-		//function defined(obj){ return typeof(obj)!=='undefined'; }
+		//function defined(obj){ return window._defined(obj); }
 		//function shuffle(ary){ return ary.sort(function(){ Math.random() - 0.5; }); }
 		isNumber:function (n){ 
 			return (!isNaN(parseFloat(n))&& isFinite(n)) || n.match(/^\d+$/) ;
@@ -90,7 +90,7 @@
 		timers_arr:[],
 		clearCount:function (timer){
 			var t = $.wsu_maps.util.timers_arr;
-			if(typeof(t[timer])!=='undefined'){
+			if(window._defined(t[timer])){
 				/// clear the time from timer
 				window.clearTimeout(t[timer]);
 				/// Make sure it's clear  
@@ -101,7 +101,7 @@
 		setCount:function (timer,time,func){
 			var t = $.wsu_maps.util.timers_arr;
 			$.wsu_maps.util.clearCount(timer);
-			if(t[timer]===0||typeof(t[timer]) === 'undefined'){
+			if(t[timer]===0||!window._defined(t[timer])){
 				t[timer]=window.setTimeout(function(){
 					func();                                                 
 				},time);
@@ -129,7 +129,7 @@
 				$('body').append('<div id="wsumap_mess">');
 			}
 			var jObj = $( "#wsumap_mess" );
-			if(typeof(options.clean)==="undefined"){
+			if(!window._defined(options.clean)){
 				options.clean=true;
 			}
 			var defaults = {
