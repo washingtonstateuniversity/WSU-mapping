@@ -80,11 +80,11 @@ var map_scripts = [];
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
 
 if( map_view.map_view_scripts_block === false ){
-	if ( !window.jQuery ) {
-		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+	if ( typeof( $ ) === "undefined" || typeof(jQuery) === "undefined" ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
 	}
-	if ( !window.jQuery.ui ) {
-		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
+	if ( typeof( $['ui'] ) === "undefined" || typeof(jQuery.ui) === "undefined" ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js');
 	}
 	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
 	map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
@@ -92,6 +92,7 @@ if( map_view.map_view_scripts_block === false ){
 
 
 (function(i,s,o,g,r,t,a,m){
+
 	t = document.scripts[document.scripts.length - 1];
 	m = document.getElementById(r);
 	if(m===null){
@@ -109,25 +110,25 @@ if( map_view.map_view_scripts_block === false ){
 	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded';
 	t.parentNode.insertBefore(a,t);	
 	i.startEmbeded = function(){
-		s.onreadystatechange = function () {
-		 if (s.readyState == "complete") {
-			var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
-			for (j = 0; j < g.length; j++) { 
-				if(g[j].indexOf('.js')>-1){
-					a=s.createElement(o);
-					a.async=1;
-					a.src=g[j];
-				}else{
-					a=s.createElement("link");
-					a.setAttribute("rel", "stylesheet");
-					a.setAttribute("type", "text/css");
-					a.setAttribute("href", g[j]);
+		(function($) {
+			$(document).ready(function(){
+				var base = {#if(${baseJson})"mapTypeId":google.maps.MapTypeId.${baseJson}#end};
+				for (j = 0; j < g.length; j++) { 
+					if(g[j].indexOf('.js')>-1){
+						a=s.createElement(o);
+						a.async=1;
+						a.src=g[j];
+					}else{
+						a=s.createElement("link");
+						a.setAttribute("rel", "stylesheet");
+						a.setAttribute("type", "text/css");
+						a.setAttribute("href", g[j]);
+					}
+					t.parentNode.insertBefore(a,t);
 				}
-				t.parentNode.insertBefore(a,t);
-			}
-		}
-	}	
+			});
+		})(jQuery);
 	};
 })(window,document,'script',map_scripts,map_view.view_id);
-#end $Controller.cacheMapView($upload_path, $file, $output);
+#end $Controller.cacheMapView($upload_path, $file, $output)
 $output
