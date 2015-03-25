@@ -693,6 +693,7 @@ var startingUrl=startingUrl||null;
 				if($.wsu_maps.state.ib[i].opened === true){
 					$.wsu_maps.state.ib[i].close();
 				}
+				$.wsu_maps.state.ib[i].onRemove();
 			});
 			$.wsu_maps.state.ib=[];
 			$.wsu_maps.state.ibh=[];
