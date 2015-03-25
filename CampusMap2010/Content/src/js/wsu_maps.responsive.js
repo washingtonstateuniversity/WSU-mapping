@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.responsive={
 		ini:function (options){
 			$.wsu_maps.ready(options||{});
@@ -47,4 +47,4 @@
 			}
 		},
 	};
-})(jQuery);
+})(jQuery,window);

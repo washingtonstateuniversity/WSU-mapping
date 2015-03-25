@@ -1,6 +1,6 @@
 /*jshint -W059 */
 /*jshint -W054 */
-(function($) {
+(function($,window) {
 	$.wsu_maps.util = {
 		debug_positional_log:function(){
 			var caller=arguments.callee.caller.caller;
@@ -303,4 +303,4 @@
 				}, options.delay);
 			});
 	};
-})(jQuery);
+})(jQuery,window);

@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.controlls = {
 		defaults:{ },
 		setup_map_type_controlls:function (){
@@ -158,7 +158,7 @@
 		},
 		showContextMenu:function(caurrentLatLng  ){
 			/* this need to be abstracked out into the jMap plugin */
-
+			window._d("altering the right click options");
 			var map = $.wsu_maps.state.map_inst;
 			var projection;
 			var contextmenuDir;
@@ -206,6 +206,6 @@
 		},
 		hideContextMenu:function() {
 			$('.contextmenu').remove();
-		}	,
+		},
 	};
-})(jQuery);
+})(jQuery,window);

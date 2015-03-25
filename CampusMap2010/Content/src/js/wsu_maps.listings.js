@@ -1,7 +1,8 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.listings = {
 		setup_listingsBar:function (){//jObj){
+			window._d("setting up 'listingsBar'");
 			/* Other after gmap ini */
 			$('#selectedPlaceList_btn').off().on('click', function(e){
 				e.stopPropagation();
@@ -276,4 +277,4 @@
 			});
 		},		
 	};	
-})(jQuery);
+})(jQuery,window);

@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.directions = {
 		setup_directions:function(){
 			var kStroke;
@@ -208,4 +208,4 @@
 			}
 		},
 	};
-})(jQuery);
+})(jQuery,window);

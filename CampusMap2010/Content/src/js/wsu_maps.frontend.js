@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	var pageTracker = pageTracker||null;
 	$.wsu_maps.frontend = {
 		defaults:{ },
@@ -81,4 +81,4 @@
 		},
 		
 	};
-})(jQuery);
+})(jQuery,window);

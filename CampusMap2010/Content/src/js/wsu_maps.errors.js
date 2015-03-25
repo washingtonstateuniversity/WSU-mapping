@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.errors = {
 		addErrorReporting:function (marker){
 			$('.errorReporting').off().on("click",function(e){
@@ -118,4 +118,4 @@
 			
 		},
 	};
-})(jQuery);
+})(jQuery,window);

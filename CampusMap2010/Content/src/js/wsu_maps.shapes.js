@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.shapes = {
 		reloadShapes:function (){
 			var url=$.wsu_maps.state.siteroot+"public/getShapesJson_byIds.castle";
@@ -127,4 +127,4 @@
 			}	
 		},
 	};
-})(jQuery);
+})(jQuery,window);

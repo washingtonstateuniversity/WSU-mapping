@@ -1,4 +1,4 @@
-(function($) {
+(function($,window) {
 	var pageTracker = pageTracker || null;
 	$.wsu_maps.markers = {
 		
@@ -142,6 +142,7 @@
 				if(!$.wsu_maps.state.in_pano){
 					$.wsu_maps.infobox.open_info(i);
 				}else{
+					window._d("react from a pano marker click");
 					$.wsu_maps.infobox.pano_marker_click($.wsu_maps.state.markerLog[i]);	
 				}
 
@@ -166,4 +167,4 @@
 		}
 	};
 
-})(jQuery);
+})(jQuery,window);

@@ -1,4 +1,4 @@
-(function($) {
+(function($,window) {
 	var pageTracker =pageTracker || null;
 	$.wsu_maps.general = {
 		prep_html:function (){
@@ -72,94 +72,7 @@
 
 		},
 		
-		/* 
-		 * DEFAULT_overlay=apply_element(map,type,_option);  << that needs fixed
-		 * with paths: get_wsu_logo_shape(), as option
-		 * TODO besides listed above is circle and rec and marker
-		 */
-		set_default_shape:function (type,op){
-			var capedType=type.charAt(0).toUpperCase() + type.slice(1);
-			op=op||{};
-			var return_item;
-			var DEFAULT_overlay;
-			var default_paths = $.wsu_maps.defaults.get_wsu_logo_shape();
-			var _option={};
-			switch(type){
-				case "polygon" :
-					// default ploygon style
-						_option = {
-								rest:{
-									options:$.extend(op.rest||{strokeColor: "#5f1212",strokeOpacity:0.24,strokeWeight: 2,fillColor: "#5f1212",fillOpacity: 0.24},
-											{ paths: default_paths })
-								},
-								mouseover:{
-									options:op.mouseover||{fillColor: "#a90533",fillOpacity: 0.35}
-								},
-								mouseout:{
-									options:op.mouseout||{fillColor: "#a90533",fillOpacity: 0.35}
-								},
-								click:{
-									options:op.click||{fillColor: "#a90533",fillOpacity: 0.35}
-								}
-							};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
-		
-						return_item=DEFAULT_overlay;
-					break;
-				case "rectangle" :
-						return_item=null;
-					break;
-				case "circle" :
-						return_item=null;
-					break;			
-				case "polyline" :
-					// default ploygon style
-					var DEFAULT_polylines = [];
-					var polyline = $.wsu_maps.defaults.get_wsu_logo_shape();
-					$.each(polyline,function(i){
-						_option = {
-							rest:{
-								options:$.extend(op.rest||{strokeColor: "#5f1212",strokeOpacity: 0.24,strokeWeight: 2},{path: polyline[i]})
-							},	
-							mouseover:{
-								options:op.mouseover||{strokeColor: "#a90533",strokeOpacity: 0.35}
-							},	
-							mouseout:{
-								options:op.mouseout||{strokeColor: "#a90533",strokeOpacity: 0.35}
-							},	
-							click:{
-								options:op.click||{strokeColor: "#a90533",strokeOpacity: 0.35}
-							}
-						};
-						DEFAULT_overlay=$.wsu_maps.general.apply_element(capedType,_option);
-						DEFAULT_polylines.push(DEFAULT_overlay);
-						google.maps.event.addListener(DEFAULT_overlay,"mouseover",function (){
-							$.each(DEFAULT_polylines,function(i){
-								DEFAULT_polylines[i].setOptions({strokeColor: "#a90533"}); 
-							});
-						});  
-						google.maps.event.addListener(DEFAULT_overlay,"mouseout",function (){
-							$.each(DEFAULT_polylines,function(i){
-								DEFAULT_polylines[i].setOptions({strokeColor: "#5f1212"}); 
-							});
-						});
-					});
 
-					/*_option = {path:[
-						new google.maps.LatLng("46.732537","-117.160091"),
-						new google.maps.LatLng("46.732596","-117.146745")
-						]
-					,strokeColor: "#5f1212",strokeOpacity:1,strokeWeight:10};
-					$.wsu_maps.general.apply_element(capedType,_option);*/
-
-						return_item=polyline;
-					break;				
-				case "marker" :
-						return_item=null;
-					break;
-			}
-			return return_item;
-		},
 		loadData:function (data,callback,markerCallback){
 			//var jObj = $.wsu_maps.state.map_jObj;
 			if(typeof(data.shapes)!=='undefined' && !$.isEmptyObject(data.shapes)){
@@ -588,4 +501,4 @@
 			});                       
 		},
 	};
-})(jQuery);
+})(jQuery,window);

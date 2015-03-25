@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.nav = {
 		menuDressChild:function (jObj){
 			if(jObj.is($('.parent'))){
@@ -19,6 +19,7 @@
 		},
 		setup_nav:function (){
 			var jObj = $.wsu_maps.state.map_jObj;
+			window._d("setting up nav");
 			$('#main_nav li.parent:not(".altAction")').off().on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();
@@ -108,4 +109,4 @@
 			}
 		},
 	};	
-})(jQuery);
+})(jQuery,window);

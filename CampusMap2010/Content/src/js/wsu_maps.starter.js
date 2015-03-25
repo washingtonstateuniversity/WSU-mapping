@@ -1,3 +1,3 @@
-(function($,w) {
-	$.wsu_maps.ini(w.map_view||{});
+(function($,window) {
+	$.wsu_maps.ini(window.map_view||{});
 })(jQuery,window);

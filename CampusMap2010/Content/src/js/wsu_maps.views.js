@@ -1,7 +1,7 @@
 // JavaScript Document
 var pos=pos||{};
 var base=base||{};
-(function($) {
+(function($,window) {
 	$.wsu_maps.views = {
 		inital_options:null,
 		set_inital_options:function(map_op){
@@ -65,4 +65,4 @@ var base=base||{};
 			});
 		},
 	};
-})(jQuery);
+})(jQuery,window);

@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	var pageTracker=pageTracker||null;
 	$.wsu_maps.search={
 		focuseitem:{},
@@ -8,7 +8,7 @@
 			/* Search autocomplete */
 			//var cur_search = "";
 			//var termTemplate = "<strong>%s</strong>";
-
+			window._d("setting up 'mapsearch'");
 			var term = "";
 			$( "#placeSearch input[type=text]" ).autocomplete({
 				source: function( request, response ) {
@@ -105,4 +105,4 @@
 			});
 		},
 	};
-})(jQuery);
+})(jQuery,window);

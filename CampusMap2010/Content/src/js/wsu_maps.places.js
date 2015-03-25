@@ -1,5 +1,5 @@
 // JavaScript Document
-(function($) {
+(function($,window) {
 	$.wsu_maps.places = {
 		getSignlePlace:function (id){
 			var url=$.wsu_maps.state.siteroot+"public/get_place.castle";
@@ -106,4 +106,4 @@
 			//alert('order::'+ids);
 		},
 	};
-})(jQuery);
+})(jQuery,window);

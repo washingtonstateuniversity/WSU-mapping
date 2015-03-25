@@ -1,4 +1,4 @@
-(function($) {
+(function($,window) {
 	var pageTracker = pageTracker || null;
 	var needsMoved = needsMoved || 0;
 	var InfoBox = InfoBox || null;	
@@ -365,9 +365,11 @@
 		pano_marker_click:function(marker){
 			var jObj = $.wsu_maps.state.map_jObj;
 			var pano = jObj.gmap("getPanorama");
-			
+			window._d("position changing");
 			pano.setPosition(new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
+			window._d(marker);
 			google.maps.event.addListener(pano, 'position_changed', function() {
+				window._d("position changed");
 				var pov = pano.getPov();
 				var heading = google.maps.geometry.spherical.computeHeading(pano.getPosition(),new google.maps.LatLng(marker.position.latitude, marker.position.longitude));
 				pov.heading = heading>360?(heading)-360:heading<0?(heading)+360:heading;
@@ -589,4 +591,4 @@
 		},
 	};
 
-})(jQuery);
+})(jQuery,window);
