@@ -880,6 +880,10 @@ var image_count=image_count||-1;
 			
 			
 		},
+		setGeoCoder:function (){
+			var geocoder = geocoder||new google.maps.Geocoder();
+			return geocoder;
+		},
 		loadState:function (stat,place_id,diaObj){
 			$.ajaxSetup ({cache: false}); 
 			var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;

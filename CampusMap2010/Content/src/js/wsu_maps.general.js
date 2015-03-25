@@ -7,10 +7,7 @@
 				$(this).attr("hideFocus", "true").css("outline", "none");
 			});
 		},
-		setGeoCoder:function (){
-			var geocoder = geocoder||new google.maps.Geocoder();
-			return geocoder;
-		},
+		
 		
 		
 

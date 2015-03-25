@@ -349,7 +349,7 @@ var i=i||-1;
 		defaults:{
 		},
 		get_Address_latlng:function (map,address) {
-		  $.wsu_maps.general.setGeoCoder().geocode( { 'address': address}, function(results, status) {
+		  $.wsu_maps.admin.setGeoCoder().geocode( { 'address': address}, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					map.setCenter(results[0].geometry.location);
 					/*var marker = new google.maps.Marker({
@@ -603,7 +603,7 @@ var i=i||-1;
 				//setTimeout(function() {},  200);
 				if($('#revGoeLookup').is(":checked")){
 					var loca = new google.maps.LatLng(lat,lng);
-					$.wsu_maps.general.setGeoCoder().geocode({'latLng':loca}, function(results, status) {
+					$.wsu_maps.admin.setGeoCoder().geocode({'latLng':loca}, function(results, status) {
 						if (status === google.maps.GeocoderStatus.OK) { 
 							var arrAddress = results[0].address_components;
 							
