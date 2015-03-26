@@ -20,7 +20,7 @@ var base=base||{};
 			var map_op = {
 				'center': $.wsu_maps.state.campus_latlng_str,
 				'zoom': $.wsu_maps.defaults.map.zoom, 
-				'styles': $.wsu_maps.defaults.map.styles
+				'styles': $.wsu_maps.defaults.map.home_styles//needs to be built!!
 			};
 			//map_op = $.extend(map_op,{"mapTypeControl":false,"panControl":false});
 			
@@ -53,8 +53,8 @@ var base=base||{};
 				}
 
 				$(window).resize(function(){
-					if(  window._defined(window.map_view) && window._defined(window.map_view.fit_to_bound) && window.map_view.fit_to_bound !==""  ){
-						$.wsu_maps.fit_to_location(window.map_view.fit_to_bound);
+					if( $.wsu_maps.state.fit_to_bound !== false ){
+						$.wsu_maps.fit_to_location( $.wsu_maps.state.fit_to_bound );
 					}
 					$.wsu_maps.keep_center();
 				}).trigger("resize");

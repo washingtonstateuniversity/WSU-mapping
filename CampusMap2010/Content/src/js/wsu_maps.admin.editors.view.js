@@ -226,7 +226,7 @@ $.wsu_maps.admin.view = {
 				$.wsu_maps.util.debug_positional_log();
 				$(window).resize(function(){
 					if( $.wsu_maps.state.fit_to_bound !== false ){
-						$.wsu_maps.fit_to_location(window.map_view.fit_to_bound);
+						$.wsu_maps.fit_to_location( $.wsu_maps.state.fit_to_bound );
 					}
 					$.wsu_maps.keep_center();
 				}).trigger("resize");
