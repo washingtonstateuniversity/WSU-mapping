@@ -26,3 +26,6 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
 
 	ALTER TABLE map_views
 		ADD fit_to_bound NVARCHAR(255) null
+
+	ALTER TABLE map_views
+		ADD json_style_override NVARCHAR(MAX) null		

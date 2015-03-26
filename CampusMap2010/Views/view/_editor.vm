@@ -68,6 +68,9 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 					<a href="#tabs_Options" title="Map Options"><i class="fa fa-sliders"></i></a>
 				</li>
 				<li class="ui-state-default ui-corner-left">
+					<a href="#tabs_Styles" title="Map Styles"><i class="fa fa-paint-brush"></i></a>
+				</li>
+				<li class="ui-state-default ui-corner-left">
 					<a href="#tabs_Detail" title="Display and Details"><i class="fa fa-users"></i></a>
 				</li>
 				<li class="ui-state-default ui-corner-left">
@@ -80,6 +83,7 @@ NOTE COMMENTED OUT PARTS ARE THE PART THAT THOU WORK FOR THE MOST PART ARE THERE
 			<div id="tabs_Basic" class="mainAreaTabs" #if( $view.id!=0 && !$view.tmp) style="display: none;" #end>#parse("view/assests/tab_basics.vm")</div>  
 			<div id="tab_map_items" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_map_items.vm")</div>  
 			<div id="tabs_Options" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_map_options.vm")</div>
+			<div id="tabs_Styles" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_map_styles.vm")</div>
 			#*
 			<div id="tabs_Text" class="mainAreaTabs" style="display: none;">#parse("view/assests/tab_content.vm")</div>
 			*#
