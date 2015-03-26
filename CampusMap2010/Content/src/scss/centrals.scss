@@ -1,10 +1,14 @@
 @charset "UTF-8";
+
+@import 'wsu_maps.reset';
+@import 'wsu_maps.central.global';
 #campusmap{ //the NS should be a var.. 
 	&{
 		@import 'central_main';
 		//@import 'map_admin';
 		@import 'wsu_maps.infobox';
 		@import 'wsu_maps.central.nav';
+		@import 'wsu_maps.search';
 		@import 'wsu_maps.listings';
 		@import 'wsu_maps.google_map_overriders';
 	}
