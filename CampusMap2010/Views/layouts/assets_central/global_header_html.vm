@@ -17,7 +17,7 @@
 <meta name="keywords" content="Learning, Research, Community, WSU, Wazzu, Washington State University, Cougs, Cougars, President Elson S. Floyd, Pullman, Spokane, Tri-Cities, Vancouver, Extension, WSU West, Undergraduate, Graduate School, Eastern Washington, Clean Technologies, School for Global Animal Health, Food Supply, Future and Current Students, Facutly, Staff, Alumni, Friends, Parents, Athletics, Give to WSU" />
 <link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 
-<script src="//use.typekit.net/eav6eju.js"></script><!--eav6eju is under map.wsu.edu via jeremyBass for tmp ref, roi0hte is the real one-->
+<script src="//use.typekit.net/roi0hte.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 #capturefor(site)
 	#if($Controller.isLocal()==false)
