@@ -15,7 +15,7 @@ var startingUrl=startingUrl||null;
 
 function _defined(n){ return typeof n !== "undefined"; }
 function _d(n){
-	return _defined($.wsu_maps) && ($.wsu_maps.defaults.debug===true) && _defined(window.console) && _defined(window.console.debug) && window.console.debug(n);
+	return _defined(jQuery.wsu_maps) && (jQuery.wsu_maps.defaults.debug===true) && _defined(window.console) && _defined(window.console.debug) && window.console.debug(n);
 }
 
 /* seed it */
