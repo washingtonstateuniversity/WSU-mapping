@@ -147,7 +147,7 @@ $.wsu_maps.admin.view = {
 		var options = {
 			center: (!window._defined(lat) || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) ,
 			zoom:$.wsu_maps.defaults.map.zoom,
-			styles:$.wsu_maps.defaults.map.styles
+			styles:$.wsu_maps.state.json_style_override!==false?$.wsu_maps.state.json_style_override:$.wsu_maps.defaults.map.styles
 		};
 		//var options = {'center': (!window._defined(lat) || lat=='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 		if( $.wsu_maps.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){

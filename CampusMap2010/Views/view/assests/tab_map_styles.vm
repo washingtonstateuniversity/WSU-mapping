@@ -1,4 +1,4 @@
 <h3>Map Styles</h3>
 <label for="name">Json Style override</label><br/>	
-<textarea name="view.json_style_override">$!{view.json_style_override}</textarea>
+<textarea name="view.json_style_override" style="min-height:500px;">$!{view.json_style_override}</textarea>
 <p>Note that if you put anything in here, it'll be used.  Nothing will be built, and defaults will not load.  You will have a pain jane google map, if it doens't error itself.</p>

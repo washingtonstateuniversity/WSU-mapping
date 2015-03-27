@@ -89,6 +89,7 @@ $Controller.getView()
 	pos : { 
 		"center" : "$map.getLat(),$map.getLong()"
 	},
+	json_style_override : #if(${map.json_style_override}) ${map.json_style_override} #else false #end,
 #if($!map.places)
 #set($c=0)
 #capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
