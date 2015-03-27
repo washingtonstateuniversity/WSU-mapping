@@ -1,0 +1,93 @@
+<div id="infotabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+	<h3>Summary :</h3>
+	<textarea id="place_summary" name="place.summary"  class="tinyEditor">$!place.summary</textarea>
+				<br/>
+	<hr/>
+	<h3>Short codes <a href="#" title="show" id="shortcode">+</a></h3>
+	<div id="shortcodes">
+#foreach($short_code in $short_codes)
+$short_code<br/>
+#end
+</div>
+	<h6><em>When using the short codes, adding the ! mark between the $ and { ( ie: &#36;!{notes_comments} ) will let the code retrun nothing if there is a value is unset.</em></h6>
+	<br/>
+	<hr/>
+	#*<h3 style="display:inline-block;">Info Window Title:</h3><input type="text" value="$!place.infoTitle" placeholder="Title to show at top of each tab" name="place.infoTitle" style="width:50%;" id="infoTitle"/><label>Hide:<select name="place.hideTitles" >
+		<option class="author" value="true" #if(${place.hideTitles}) selected="selected" #end>Yes</option>
+		<option class="author" value="false" #if(!${place.hideTitles}) selected="selected" #end>No</option>
+	</select></label>
+	<h6><em>Shows up on all tabs of the info window; leaving this blank will default to the Primary Name of the place.  If it’s wished to only show a title on one tab, click the hide checkbox while using the wysiwyg with an H2 tag to do so.</em></h6>
+	<br/>
+	<hr/>*#
+	<br/>
+	<div id="dynoTab">
+		<button id="add_tab" style="float: right; margin:5px;">Add Tab</button>
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top nonsort"><a href="#tab_overview">Overview</a></li>
+			#set($T = 0)
+			#foreach($tab in $tabs)
+				#if($tab.title=="Views" && $tab.content=="")
+					#if($placeimages.count>0)
+						<li class="ui-state-default ui-corner-top">
+							<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
+							<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
+							<input type="hidden" name="tabs[$T].title" value="$!tab.title" id='tab_title_${T}'/> 
+							<input type='hidden' name='tabs[$T].template.id' value='$!tab.template.id'  class='sort' id='tab_template_id_${T}'/>
+							<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' id='tab_counter${T}'/>
+						</li>
+					#end
+				#else
+					#if($tab.title=="Views")
+						#if($placeimages.count>0)
+							<li class="ui-state-default ui-corner-top">
+								<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
+								<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
+								<input type="hidden" name="tabs[$T].title" value="$!tab.title" id='tab_title_${T}'/> 
+								<input type='hidden' name='tabs[$T].template.id' value='$!tab.template.id'  class='sort' id='tab_template_id_${T}'/>
+								<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' id='tab_counter${T}'/>
+							</li>
+						#end
+					#else
+						<li class="ui-state-default ui-corner-top">
+							<a href="#dyno_tabs_$T" hideFocus='true'>$tab.title</a>
+							<input type="hidden" name="tabs[$T].id" value="$!tab.id" id='tab_id_${T}'/>
+							<input type="hidden" name="tabs[$T].title" value="$!tab.title" id='tab_title_${T}'/> 
+							<input type='hidden' name='tabs[$T].template.id' value='$!tab.template.id'  class='sort' id='tab_template_id_${T}'/>
+							<input type='hidden' name='tabs[$T].sort' value='$!tab.sort'  class='sort' id='tab_counter${T}'/>
+							#if($tab.title!="Views")
+								<span class='ui-icon ui-icon-close'>Remove Tab</span>
+								<span class="edit ui-icon ui-icon-pencil"></span>
+							#end
+						</li>
+					#end
+				#end
+				#set($T = $T+1)
+			#end
+		</ul>
+		<div id="tab_overview">
+			<h3>Details:</h3>
+			<textarea id="place_details" name="place.details"  class="tinyEditor full">$!place.details</textarea>
+		</div>
+		#set($T = 0)
+		#foreach($tab in $tabs) 
+			<div id="dyno_tabs_$T">
+				#if($tab.title=="Views" && $tab.content=="")
+					#if($placeimages.count>0)
+						<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id='viewTab' width="297" height="201" />
+						<input type="hidden" id='tab_$T' name="tabs[$T].content" value="<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />" />
+					#end
+				#else
+					#if($tab.title=="Views")
+						#if($placeimages.count>0)
+							<img class="infotabTemplate" src="../Content/images/gallery_placeholder.png"  id='viewTab' width="297" height="201" />
+						<input type="hidden" id='tab_$T' name="tabs[$T].content" value="<img class='infotabTemplate' src='../Content/images/gallery_placeholder.png'  id='viewTab' width='297' height='201' />" />
+						#end
+					#else
+						<textarea id='tab_$T' class='tinyEditor full dyno_tabs'  name="tabs[$T].content">$!tab.content</textarea>
+					#end
+				#end
+			</div>
+			#set($T = $T+1)
+		#end
+	</div>
+</div>

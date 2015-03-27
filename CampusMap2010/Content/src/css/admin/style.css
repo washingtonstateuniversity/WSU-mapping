@@ -1882,7 +1882,7 @@ span.UinEdit {
 	top:auto;
 }
 .place._editor .ui-tabs-panel {
-	margin-right: 310px;
+	margin-right: 0px;
 	min-height: 535px;
 }
 .place._editor .sub_tabs .ui-tabs-panel {

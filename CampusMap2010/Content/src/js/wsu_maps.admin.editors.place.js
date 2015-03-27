@@ -115,7 +115,7 @@ var i=i||-1;
 				});
 			}
 			$.wsu_maps.admin.ui.tinymce.tinyResize();
-			if ($(window).scrollTop()>= 175) {
+			/*if ($(window).scrollTop()>= 175) {
 				if($(window).width()<=1065){
 					$('#campusmap').addClass('fixed_min');}else{$('#campusmap').addClass('fixed');
 				}
@@ -130,7 +130,7 @@ var i=i||-1;
 					$('#campusmap').removeClass('fixed');   
 				}  
 			});
-			$.wsu_maps.admin.setup_fixedNav();
+			$.wsu_maps.admin.setup_fixedNav();*/
 			$('#shortcode').on('click',function(e){
 				e.stopPropagation();
 				e.preventDefault();

@@ -1,0 +1,239 @@
+<h3>Basic</h3>
+<p class="validateTips">* fields are required.</p>
+$Form.HiddenField("place.id")
+#if( $place.id==0 || $place.tmp)
+<input type="hidden" name="forced_tmp" value="1" />
+#end
+<fieldset style="min-width:455px;">
+
+
+<fieldset><legend>Naming</legend>
+	<span style="float:left;display:inline-block;"><label for="place.prime_name">Preferred Map Name</label><br/>
+	<input type="text" name="place.prime_name" id="name" value="$!place.prime_name" class="text ui-widget-content ui-corner-all"  size="50" maxlength="1025"/></span>
+	<span style="float:left;display:inline-block;"><label for="place.abbrev_name">Bldg Abbrev</label><br/>
+	<input type="text" name="place.abbrev_name" id="Abbrev" value="$!place.abbrev_name" class="text ui-widget-content ui-corner-all" /></span><br/><br/><br/>
+	
+	#capturefor(nameblock)
+		#set($c=0)
+		#foreach($altname in $place_names)
+		<span class="pod name">
+			<input type="hidden" name="place_names[$c].id" value="$altname.id"/>
+			<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+			<span>Type:</span>
+			<select id="LocationModelSelect" name="place_names[$c].label.id"  class="" >
+				#set($pt=$altname.label.id)
+				#foreach($pTypes in $place_name_types)
+					<option class="model" value="$pTypes.id" #if($pt == $pTypes.id) selected="selected" #end> $!pTypes.type</option>
+				#end
+			</select>
+			<br/><span>Name:</span>
+			<input type="text" id="place_names_$c" name="place_names[$c].name" value="$altname.name"  class="text ui-widget-content ui-corner-all"/><br/>
+			#set($c=$c+1)
+			</span>
+		#end  
+	#end
+	
+	
+	
+	
+	<fieldset style="clear:left;"><legend id="customName"><label>Custom Naming</label> (<span id="nameCount">$c</span> name#if($c==0||$c>1)s#end) <em>+</em></legend>
+		<div id="customNames">
+			<div id="names" class="podContainer">
+				$nameblock
+			</div>
+			
+			<a href="#" id="PlaceNameCreate" class=" creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-icon ui-icon-plusthick inlineIcon"></span>Add name
+			</a>
+			<div id="name_clonebed" class="clonebed">         
+				<span class="pod name">    
+					<input type="hidden" name="||place_names[9999].id" value=""/>
+					<a href="#" title="Delete option" class="deleteOption ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float:left;"><span class="ui-icon ui-icon-trash"></span></a>
+					<span>Type:</span>
+					<select id="LocationModelSelect" name="||place_names[9999].label.id"  class="" >
+						#foreach($pTypes in $place_name_types)
+							<option class="model" value="$pTypes.id">$!pTypes.type</option>
+						#end
+					</select>
+					<br/><span>Name:</span>
+					<input type="text" name="||place_names[9999].name" value=""  class="text ui-widget-content ui-corner-all"/><br/>
+				</span>
+			</div>
+		</div>
+	</fieldset>
+</fieldset>
+
+
+
+<div class="row side-right equalize">
+	<div class="column one padless">
+#if( !$ajaxed )
+	<fieldset id='campusmap' style="min-width:425px;width:100%;min-height:520px;height:100%;"><legend>Sample</legend>
+		<!--<div id="map_canvas" style="width:300px;height: 520px;"></div>-->
+		<div id="place_drawing_map" style="min-width:425px;width:100%;min-height:520px;height:100%;"></div>
+	</fieldset>
+#end	
+	</div>
+	<div class="column two padless">
+
+		<fieldset ><legend>Location</legend>
+			<div class="container" style="width:100%;">
+				<label for="LocationModelSelect"><strong>Location Model</strong></label><br/>
+				<select id="LocationModelSelect" name="place.model.id"  class="autoselect">
+					<option value="">Select one...</option>
+					#foreach($model in $models)
+						<option class="model" value="$model.id" #if($place.model.id == $model.id) selected="selected" #end>$!model.name</option>
+					#end
+				</select>
+				<br/>
+				
+				<fieldset style="position:relative;"><a href="#" title="Set Latitude/Longitude" id="setLatLong" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="position: absolute; right: 5px; top: 5px;"><span class="ui-icon ui-icon-pin-s"></span></a>
+					<div class="col2"  style="">	
+						<label for="Lat"><strong>Latitude</strong></label><br/>
+						<input type="text" name="Length" id="Lat" value="$!lat" class="text ui-widget-content ui-corner-all" />
+					</div><br/> 
+					<div class="col2"  style="">
+		
+						<label for="Long"><strong>Longitude</strong></label><br/>
+						<input type="text" name="LongLength" id="Long" value="$!long" class="text ui-widget-content ui-corner-all" />
+					</div>
+					<!--
+					<fieldset id="estimated_places" style="display:none;"><legend>Places At or Near this point</legend>
+					<div id="local_place_names"></div>
+					</fieldset>
+					-->
+				</fieldset>
+			</div>  
+		</fieldset>
+		
+		<fieldset ><legend>Address Options</legend>
+			<div class="col2 w100"  style="display:inline-block;">
+				<label for="street_address">Address</label><br/>
+				<input type="text" name="place.address" id="place_address" value="$!place.address" class="text ui-widget-content ui-corner-all w100"/>
+			</div>
+			<div class="col2 w200"  style="display:inline-block;">
+				<label for="street_address">Street</label><br/>
+				<input type="text" name="place.street" id="place_street" value="$!place.street" class="text ui-widget-content ui-corner-all w300"/>
+			</div>	
+			<hr/>
+			<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/><em style="font-size:8px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em></label>		
+			<hr/>	
+			#if($place.campus.zipcode)<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
+			<span id="zcode">$place.campus.zipcode</span> - 
+			<input type="text" name="place.plus_four_code" id="place_plus_four_code" value="$!place.plus_four_code" class="text ui-widget-content ui-corner-all w50" />
+			<br/>#end
+			
+			<div class="col2"  style="display:inline-block;">
+				<label for="place.campus"><strong>Campus</strong></label><br/>
+				<select id="place_campus" class="autoselect" name="place.campus.id">
+					<option value="">Select one...</option>
+					#foreach($campus in $campuses)
+						<option class="type" value="$campus.id" #if($place.campus == $campus) selected="selected" #end>$!campus.name</option>
+					#end
+				</select>
+			</div>
+		</fieldset>
+		
+
+
+	</div>
+</div>
+
+<fieldset style="min-width:455px;">
+<div class="row side-right equalize">
+	<div class="column one padless">
+		<fieldset><legend>WSU Properties</legend>
+		
+			<div class="col2"  style="display:inline-block; float:left;margin-right:13px;">
+				<label for="place.college" style="font-size:13px;"><strong>College</strong></label><br/>
+				<select id="place.college" name="place.college[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($college in $colleges)
+						<option class="model" value="$college.id" #if($place.college.Contains($college)) selected="selected" #end >$!college.name</option>
+					#end
+				</select>
+			</div>
+			<div class="col2" style="display:inline-block; float:left;margin-right:13px;">
+				<label for="place.school" style="font-size:13px;"><strong>School</strong></label><br/>
+				<select id="place.school" name="place.school[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($school in $schools)
+						<option class="model" value="$school.id" #if($place.school.Contains($school)) selected="selected" #end >$!school.name</option>
+					#end
+				</select>
+			</div>
+			<div  style="display:inline-block; float:left;margin-right:13px;">
+				<label for="place.department" style="font-size:13px;"><strong>Academic Departments</strong></label><br/>
+				<select id="place.department" name="place.department[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($department in $departments)
+						<option class="model" value="$department.id" #if($place.department.Contains($department)) selected="selected" #end >$!department.name</option>
+					#end
+				</select>
+			</div>
+			<div  style="display:inline-block; float:left;margin-right:9px;">
+				<label for="place.admindepartment" style="font-size:13px;"><strong>Administrative Departments</strong></label><br/>
+				<select id="place.admindepartment" name="place.admindepartment[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($admindepartment in $admindepartments)
+						<option class="model" value="$admindepartment.id" #if($place.admindepartment.Contains($admindepartment)) selected="selected" #end >$!admindepartment.name</option>
+					#end
+				</select>
+			</div>				
+			<div  style="display:inline-block; float:left;margin-right:13px;">
+				<label for="place.program" style="font-size:13px;"><strong>Programs</strong></label><br/>
+				<select id="place.program" name="place.program[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($program in $programs)
+						<option class="model" value="$program.id" #if($place.program.Contains($program)) selected="selected" #end >$!program.name</option>
+					#end
+				</select>
+			</div>
+		</fieldset>	
+	</div>
+	<div class="column two padless">
+		<fieldset class="switch"><legend><a href="#" id="cat" class="active">Categories</a>/<a href="#" id="types">Types</a></legend>
+			<div class="container cat active" style="width:100%;">
+				<label for="LocationModelSelect"><strong>Choose the Categories:</strong></label><br/>
+				<select id="LocationModelSelect" name="place.categories[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($cat in $categories)
+						<option class="model" value="$cat.id" #if($place.categories.Contains($cat)) selected="selected" #end > $Controller.repeatStr("- ",$cat.level) $!cat.name</option>
+					#end
+				</select>
+			</div>  
+			<div class="container types" style="width:100%;">
+			<label for="LocationTypeSelect"><strong>Location Type</strong></label><br/>
+				<select id="LocationTypeSelect" name="place.place_types[]"  class="" multiple="multiple" size="9" style="width:205px;">
+					#foreach($type in $types)
+						<option class="type" value="$type.id" #if($place.place_types.Contains($type)) selected="selected" #end>$!type.friendly</option>
+					#end
+				</select>
+			</div>
+			<h6><em>Use Ctrl/Option + click to select or deselect items in the lists.</em></h6>
+		</fieldset>
+	</div>
+</div>
+</fieldset>
+
+
+
+<div class="row halves equalize">
+	<div class="column one padless">
+		<fieldset><legend>Geometrics</legend>
+			<label for="name">Geometric Object to repersent this place.</label><br/>
+			<select name="place.geometrics[]" id="placeShape">   
+				<option class="geometric" value="" >Select an optional shape.</option> 
+				#foreach($geo in $geometrics)
+					<option class="geometric" value="$geo.id" #if($place.geometrics.Contains($geo)) selected="selected" #end>$!geo.name</option>
+				#end
+			</select>
+		</fieldset>    
+	</div>
+	<div class="column two padless">
+		<fieldset><legend>Map Point</legend>
+			<label for="name">Choose a map point</label><br/>
+			<select name="place.pointImg" id="placeShape">   
+				<option class="geometric" value="" >Auto indexed numbering</option> 
+				#foreach($img in $pointImgs)
+					<option class="mappoint" value="$img" #if($place.pointImg == $img) selected="selected" #end>$img</option>
+				#end
+			</select>
+		</fieldset>               
+	</div>
+</div>
+

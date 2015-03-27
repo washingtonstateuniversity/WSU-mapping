@@ -1,0 +1,32 @@
+<div id="ImageDiv">
+	<h3>Place Images</h3>
+	<a href="#" class="insotryupload buttons">Upload Images</a>
+   <h6><strong>Note:</strong><em>The first image in the list is the main image.  Any layout that calls the Main image will be calling this first image.  To make another image be the main image, simply drag the desired image before the first.</em></h6>
+   <span id="img_layout_choice" class="grid"></span><br/>
+	<div id="browserBox" class="ui-corner-all grid">
+		#foreach($placeimage in $placeimages)
+			#if($placeimage.id!=0)
+			
+				<span class="imageBox">
+					<input type="hidden" name="images[$!{placeimage.id}].id" value="$!{placeimage.id}" class="placeImages"/>
+					<img src="/media/download.castle?id=${placeimage.id}&placeid=${place.id}&m=crop&w=175&h=175&pre=borwser" class="previewImg" width="175" height="175"/>
+					<a title="$placeimage.id" rel="$place.id" style="cursor:pointer;display: inline-block;" class="DeleteImage ui-state-error ui-corner-all">
+						<span class="ui-icon ui-icon-trash"></span>
+					</a>
+					<span class="imgInfo">
+					  <span><label>Caption:</label><input type="text" value="$!{placeimage.caption}" name="images[$!{placeimage.id}].Caption" class=""/></span>
+					  <span><label>Credit:</label><input type="text" value="$!{placeimage.credit}" name="images[$!{placeimage.id}].Credit" class="placeCredit"/></span>
+					  <span><label>Order:</label>
+					  <input type="hidden" value="$!{placeimage.PlaceImages.get_Item(0).id}" name="PlaceImages[$!{placeimage.id}].id" class=""/>
+					  <input type="text" value="$!{placeimage.PlaceImages.get_Item(0).placeOrder}" name="PlaceImages[$!{placeimage.id}].placeOrder" class="placeOrder"/>
+					  <input type="hidden" value="$!{placeimage.id}" name="PlaceImages[$!{placeimage.id}].Image.id" class="placeOrderId"/>
+					  </span>
+					</span>
+				</span>
+			#end
+		#end
+		<div class="clearings" style="clear:both;"></div>
+	</div>
+	$formbuttons
+<div class="clear"></div>
+</div>
