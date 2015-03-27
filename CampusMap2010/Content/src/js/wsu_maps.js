@@ -17,7 +17,14 @@ function _defined(n){ return typeof n !== "undefined"; }
 function _d(n){
 	return _defined(jQuery.wsu_maps) && (jQuery.wsu_maps.defaults.debug===true) && _defined(window.console) && _defined(window.console.debug) && window.console.debug(n);
 }
-
+if (!Array.prototype.indexOf) {
+	Array.prototype.indexOf = function(obj, start) {
+		 for (var i = (start || 0), j = this.length; i < j; i++) {
+			 if (this[i] === obj) { return i; }
+		 }
+		 return -1;
+	};
+}
 /* seed it */
 (function($,window) {
 
