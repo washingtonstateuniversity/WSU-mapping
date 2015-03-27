@@ -115,6 +115,13 @@ $Form.HiddenField("place.id")
 				<label for="street_address">Street</label><br/>
 				<input type="text" name="place.street" id="place_street" value="$!place.street" class="text ui-widget-content ui-corner-all w300"/>
 			</div>	
+			
+			<div class="col2 w200"  style="display:inline-block;">
+				<label for="city">City</label><br/>
+				<input type="text" name="place.city" id="place_city" value="$!place.city" class="text ui-widget-content ui-corner-all w300"/>
+			</div>	
+			
+			
 			<hr/>
 			<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/><em style="font-size:8px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em></label>		
 			<hr/>	

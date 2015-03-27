@@ -54,13 +54,14 @@ namespace campusMap.Models {
         [Property]
         virtual public string street { get; set; }
 
-
-        [Property(SqlType = "tinyint")]
-        virtual public int plus_four_code { get; set; }
+        [Property]
+        virtual public string city { get; set; }
 
         [Property]
         virtual public int zip_code { get; set; }
 
+        [Property(SqlType = "tinyint")]
+        virtual public int plus_four_code { get; set; }
 
         [Property(SqlType = "geography")]
         virtual public Byte[] coordinate { get; set; }

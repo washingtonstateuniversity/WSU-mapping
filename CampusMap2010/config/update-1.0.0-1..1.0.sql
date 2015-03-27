@@ -31,3 +31,6 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
 
 	ALTER TABLE place
 		ADD zip_code INT null
+
+	ALTER TABLE place
+		ADD city INT null

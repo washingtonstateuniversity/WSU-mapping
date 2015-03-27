@@ -93,10 +93,10 @@ var i=i||-1;
 				$("#place_street,#place_address").on('keyup',function () {
 					$.wsu_maps.util.clearCount('codeAddress');
 					$.wsu_maps.util.setCount('codeAddress',500,function(){
-						var zip = $('#zcode').length?$('#zcode').text():'';
-						var campus = $('#campus').length?$('#place_campus').val():'';
-						var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+campus+' WA '+zip+' USA'; 
 						if( $('#place_street').val() !=='' &&$('#place_address').val() !=='' ){
+							var zip = $('#place_zip_code').length?$('#place_zip_code').val():'';
+							var city = $('#place_city').length?$('#place_city').val():'';
+							var lookup = $('#place_street').val()+' '+$('#place_address').val()+', '+city+' WA '+zip+' USA'; 
 							$.wsu_maps.admin.editors.place.get_Address_latlng($.wsu_maps.state.map_inst,lookup);
 						}
 						$('#setLatLong').addClass('ui-state-disabled');
@@ -197,7 +197,7 @@ var i=i||-1;
 			
 			 
 			$('#customNames').slideToggle().click();
-			$('#customName').click(function(){
+			$('#customName').on("click",function(){
 				$('#customName em').text( $('#customName em').text() === '+' ? '-' : '+' );
 				$('#customNames').slideToggle();
 			});
@@ -364,7 +364,7 @@ var i=i||-1;
 					
 					$.wsu_maps.state.map_jObj.gmap('addMarker', $.extend({ 
 						'position': new google.maps.LatLng(latitude,longitude)
-					},{})).click(function() {
+					},{})).on("click",function() {
 						//$.each(ib, function(i) {ib[i].close();});
 						//ib[i].open($.wsu_maps.state.map_inst, this);
 						//$.wsu_maps.state.map_jObj.gmap('openInfoWindow', { 'content': marker.info.content }, this);
@@ -584,7 +584,7 @@ var i=i||-1;
 							$.wsu_maps.state.map_jObj.gmap("attach_shape_to_marker",$.wsu_maps.state.shapes[0],marker);
 						});
 					}			
-			}).click(function() {
+			}).on("click",function() {
 				//var ib_total = 0;
 				//$.each(ib, function(i) {ib[i].close(); ib_total=i; });
 				$.wsu_maps.state.ib[0].open($.wsu_maps.state.map_inst, this);
@@ -622,12 +622,14 @@ var i=i||-1;
 								}
 								if (address_component.types[0] === "locality"){//"town:"
 									itemLocality = address_component.long_name;
+									$('#place_city').val(itemLocality);
 								}
 								if (address_component.types[0] === "country"){ //"country:"
 									itemCountry = address_component.long_name;
 								}
 								if (address_component.types[0] === "postal_code_prefix"){ //"pc:"
 									itemPc = address_component.long_name;
+									$('#place_zip_code').val(itemPc);
 								}
 								if (address_component.types[0] === "street_number"){ //"street_number:"
 									itemSnumber = address_component.long_name;
