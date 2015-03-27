@@ -11,15 +11,16 @@ var styles=styles||{};
 
 var startingUrl=startingUrl||null;
 
+
+
 function _defined(n){ return typeof n !== "undefined"; }
 function _d(n){
 	return ($.wsu_maps.defaults.debug===true) && _defined(window.console) && _defined(window.console.debug) && window.console.debug(n);
 }
 
-
-
 /* seed it */
 (function($,window) {
+
 	$.wsu_maps={
 		is_frontend:true,
 		state:{
@@ -85,7 +86,7 @@ function _d(n){
 		
 		},	
 		defaults:{
-			debug:true,
+			debug:false,
 			gmap_location_types:['building','accounting','airport','amusement_park','aquarium','art_gallery','atm','bakery','bank','bar',
 								'beauty_salon','bicycle_store','book_store','bowling_alley','bus_station','cafe','campground','car_dealer',
 								'car_rental','car_repair','car_wash','casino','cemetery','church','city_hall','clothing_store','convenience_store',
