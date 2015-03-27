@@ -63,13 +63,15 @@ var i=i||-1;
 			$.wsu_maps.state.map_jObj=$('#place_drawing_map');
 			var lat = $('#Lat').val();
 			var lng = $('#Long').val();	
+
 			$.wsu_maps.state.map_jObj.gmap({
-					'center': (!window._defined(lat) || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng),
-					'zoom':15,
-					'zoomControl': false,
-					'mapTypeControl': {  panControl: true,  mapTypeControl: true, overviewMapControl: true},
-					'panControlOptions': {'position':google.maps.ControlPosition.LEFT_BOTTOM},
-					'streetViewControl': false 
+					center: (!window._defined(lat) || lat==='')? $.wsu_maps.state.campus_latlng_str : new google.maps.LatLng(lat,lng),
+					zoom:$.wsu_maps.defaults.map.zoom,
+					zoomControl: false,
+					styles:$.wsu_maps.state.json_style_override!==false?$.wsu_maps.state.json_style_override:$.wsu_maps.defaults.map.styles,
+					mapTypeControl: {	panControl: true,  mapTypeControl: true, overviewMapControl: true},
+					panControlOptions: {'position':google.maps.ControlPosition.LEFT_BOTTOM},
+					streetViewControl: false 
 				}).bind('init', function () {
 					$.wsu_maps.state.map_inst = $.wsu_maps.state.map_jObj.gmap('get','map');
 					if(lat!==''){
@@ -559,19 +561,35 @@ var i=i||-1;
 		add_place_point:function (lat,lng,clear){
 			var i=0;
 			var marker = {};
-			marker.style = {"icon":$.wsu_maps.state.siteroot+"Content/images/map_icons/default_icon_{$i}.png"};
+			marker.style = {
+					'optimized':false,
+					'draggable':true,
+					icon:{
+						/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
+						width:$.wsu_maps.markers.defaults.width,
+						height:$.wsu_maps.markers.defaults.height,
+						url : $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx="+1,
+						scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						origin: new google.maps.Point(0,0), // origin
+						anchor: new google.maps.Point(($.wsu_maps.markers.defaults.width*0.5), $.wsu_maps.markers.defaults.height), // anchor
+						original_scaledSize: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						original_size: new google.maps.Size($.wsu_maps.markers.defaults.width,$.wsu_maps.markers.defaults.height),
+						original_origin: new google.maps.Point(0,0), // origin
+						original_anchor: new google.maps.Point(($.wsu_maps.markers.defaults.width*0.5), $.wsu_maps.markers.defaults.height) // anchor
+					}
+				};
 			if( window._defined(clear) && clear ){
 				marker.info={};
 			}
 			marker=$.extend(marker,$.wsu_maps.infobox.build_infobox(marker,i));
 			
-			if(marker.style.icon){
-				marker.style.icon = marker.style.icon.replace('{$i}',i+1);
-			}
-			
-			$.wsu_maps.state.map_jObj.gmap('addMarker', $.extend({ 
+			$.extend(marker.style,{ 
 				'position': (!window._defined(lat) || lat==='')?$.wsu_maps.state.map_jObj.gmap('get_map_center'):new google.maps.LatLng(lat,lng)
-			},{'draggable':true},marker.style),function(markerOptions, marker){
+			});
+			
+			
+			$.wsu_maps.state.map_jObj.gmap('addMarker',marker.style,function(markerOptions, marker){
 					if($.wsu_maps.state.reopen!==false){
 						$.wsu_maps.state.ib[0].open($.wsu_maps.state.map_inst, marker);
 						//c = true;

@@ -123,7 +123,9 @@ $Form.HiddenField("place.id")
 			
 			
 			<hr/>
-			<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/><em style="font-size:8px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em></label>		
+			<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/>
+				<em style="font-size:8px; line-height:10px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em>
+			</label>		
 			<hr/>	
 			<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
 			<span id="zcode">
