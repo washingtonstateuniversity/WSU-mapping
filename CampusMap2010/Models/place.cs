@@ -82,6 +82,9 @@ namespace campusMap.Models {
         virtual public int plus_four_code { get; set; }
 
         [Property]
+        virtual public int zip_code { get; set; }
+
+        [Property]
         virtual public bool hideTitles { get; set; }
 
         [Property]
