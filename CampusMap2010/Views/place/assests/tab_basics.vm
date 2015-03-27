@@ -118,10 +118,22 @@ $Form.HiddenField("place.id")
 			<hr/>
 			<label style="font-size:10px;"><input type="checkbox" value="" id="revGoeLookup" />Reverse geolookup address? <br/><em style="font-size:8px;">(temperarly gets address from map as you drag marker, or sets marker to address typed)</em></label>		
 			<hr/>	
-			#if($place.campus.zipcode)<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
-			<span id="zcode">$place.campus.zipcode</span> - 
+			<br/><label for="place.plus_four_code">Plus Four Code</label><br/>
+			<span id="zcode">
+			#capturefor(zip)
+				#if( $place.zip_code && $place.zip_code != 0 )
+					$!place.zip_code
+				#else
+					#if($place.campus.zipcode)
+						$!place.campus.zipcode
+					#end
+				#end
+			#end
+			<input type="text" name="place.zip_code" id="place_zip_code" value="$zip.Trim()" class="text ui-widget-content ui-corner-all w100"/>
+			
+			</span> - 
 			<input type="text" name="place.plus_four_code" id="place_plus_four_code" value="$!place.plus_four_code" class="text ui-widget-content ui-corner-all w50" />
-			<br/>#end
+			<br/>
 			
 			<div class="col2"  style="display:inline-block;">
 				<label for="place.campus"><strong>Campus</strong></label><br/>
