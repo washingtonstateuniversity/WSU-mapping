@@ -12,7 +12,10 @@
 			/* so need to remove this and create the class for it */
 			var boxText = document.createElement("div");
 			boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
-			boxText.innerHTML = "<h3 style='font-weight: normal !important; padding: 0px; margin: 0px;'>"+marker.title+"</h3>";
+			
+			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+			
+			boxText.innerHTML = "<h3 class='tooltip_title'>"+marker.labels.title + acro +"</h3>";
 			var myHoverOptions = {
 				alignBottom:true,
 				content: boxText,
