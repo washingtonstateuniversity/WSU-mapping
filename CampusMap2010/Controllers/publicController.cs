@@ -1252,7 +1252,7 @@ where p.status = 3
         }
 
         public void send_place_json(place[] items, string callback) {
-            String json = createPlaceJson(items);
+            String json = create_place_json(items);
             if (!string.IsNullOrEmpty(callback)) {
                 json = callback + "(" + json + ")";
             }
@@ -1536,7 +1536,7 @@ where p.status = 3
                     if (item.coordinate != null) {
                         String view = HttpContext.Current.Request.Params["view"];
                         String style = HttpContext.Current.Request.Params["style"];
-                        string file = item.id + (!String.IsNullOrWhiteSpace(view) ? "-" + view + "-" : "") + (!String.IsNullOrWhiteSpace(style) ? "-" + style + "-" : "") + "-render" + ".ext";
+                        string file = item.id + (!String.IsNullOrWhiteSpace(view) ? "_" + view + "_" : "") + (!String.IsNullOrWhiteSpace(style) ? "_" + style + "_" : "") + "_render" + ".ext";
                         if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
                             //dynamic value;
                             var jss = new JavaScriptSerializer();
@@ -1556,7 +1556,7 @@ where p.status = 3
                                         ""src"":""" + getRootUrl() + "media/download.castle?placeid=" + (item.id)  + "&id=" + (item.Images[0].id) + @""",
                                         ""thumb_params"":""&m=crop&" + (size) + @""",
                                         ""caption"":"""+ (String.IsNullOrEmpty(item.Images[0].caption) ? "" : item.Images[0].caption) + @""",
-                                        ""orientation"":""" + (item.Images[0].orientation) + @""",
+                                        ""orientation"":""" + (item.Images[0].orientation) + @"""
                                     },";
                             }
 
@@ -1598,9 +1598,9 @@ where p.status = 3
                                             ""caption"":""" + (media.caption) + @""",
                                             ""orientation"":""" + (media.orientation) + @""",
                                             ""type"":""" + (media.type.name) + @"""
-                                        }";
+                                        },";
                                 }
-                                media_obj = @"]";
+                                media_obj = media_obj.TrimEnd(',') + @"],";
                                 String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") +
                                     (c > 2 ? "<ul class='cNav'>" +
                                     //repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) +
@@ -1685,21 +1685,22 @@ where p.status = 3
                             placeList = @"
                                 {
                                     ""id"":""" + item.id + @""",
-                                    ""gamedayparkingpercentfull"":""" + item.percentfull + @""",
                                     ""position"":{
                                                 ""latitude"":""" + item.getLat() + @""",
                                                 ""longitude"":""" + item.getLong() + @"""
                                                 },
                                     ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
-                                    ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     " + mainimage + @"
                                     " + labeling + @"
                                     " + media_obj + @"
                                     " + style_obj + @"
-                                    ""info"":{
-                                            ""content"":" + infotabs + @",
-                                            ""title"":""" + item.prime_name + @"""
-                                            },
+                                    ""content"":" + infotabs + @",
+                                    ""metadata"":[
+                                                {
+                                                    ""name"":""gamedayparkingpercentfull"",
+                                                    ""value"":""" + item.percentfull + @"""
+                                                }
+                                            ],
                                     ""shapes"":" + loadPlaceShape(item) + @"
                                 }";
                             placeList = jsonEscape(placeList);

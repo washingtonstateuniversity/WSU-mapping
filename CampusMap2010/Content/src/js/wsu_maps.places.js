@@ -77,7 +77,7 @@
 			}
 		},
 		reloadPlaces:function (){
-			var url=$.wsu_maps.state.siteroot+"public/getPlaceJson_byIds.castle";
+			var url=$.wsu_maps.state.siteroot+"public/get_places.castle";
 			var ids;
 			if( $.wsu_maps.state.embeded_place_ids !== false ){
 				ids = $.wsu_maps.state.embeded_place_ids;
