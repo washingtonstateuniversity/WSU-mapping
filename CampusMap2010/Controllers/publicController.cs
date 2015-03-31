@@ -982,7 +982,30 @@ namespace campusMap.Controllers {
                 RenderText("false");
             }
         }
-
+        public void get_place_obj(String id, string callback) {
+            CancelView();
+            CancelLayout();
+            Response.ContentType = "application/json; charset=UTF-8";
+            int sid = 0;
+            if (!int.TryParse(id, out sid)) {
+                String term = id.Trim();
+                SortedDictionary<string, int> results = search_place_string(term);
+                foreach (String key in results.Keys) {
+                    if (key.Split(':')[1].ToLower().Trim() == id.ToLower().Trim() || key.Split(':')[1].ToLower().Trim().Contains(id.ToLower().Trim())) {
+                        sid = int.Parse(results[key].ToString());
+                        break;
+                    }
+                }
+            }
+            if (sid > 0) {
+                place item = ActiveRecordBase<place>.Find(sid);
+                place[] obj = new place[1];
+                obj[0] = item;
+                send_place_json(obj, callback);
+            } else {
+                RenderText("false");
+            }
+        }
         public static SortedDictionary<string, int> search_place_string(string term) {
             // Use hashtable to store name/value pairs
             SortedDictionary<string, int> results = new SortedDictionary<string, int>();
@@ -1146,8 +1169,7 @@ where p.status = 3
             return json;
         }
 
-        public void get_place_by_name(string name, string callback)
-        {
+        public void get_place_by_name(string name, string callback) {
             CancelView();
             CancelLayout();
             string cleanedname = Regex.Replace(name, @"\(.*?\)", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
@@ -1168,6 +1190,7 @@ where p.status = 3
             sendPlaceJson(list, callback);
         }
 
+        //deprecated
         public void get_place_by_category(string[] cat, string pid, string callback) {
             CancelView();
             CancelLayout();
@@ -1201,6 +1224,40 @@ where p.status = 3
             sendPlaceJson(items, callback);
         }
 
+
+        public void get_place_obj_by_category(string[] cat, string pid, string callback) {
+            CancelView();
+            CancelLayout();
+
+            String sql = "from place p where ";
+            int id = 1;
+            foreach (string category in cat) {
+                string cats = HttpUtility.UrlDecode(category);
+                IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                if (c.Count > 0) {
+                    sql += " :p" + id + " in elements(p.categories) ";
+                    id = id + 1;
+                    sql += " or ";
+                }
+            }
+            sql += " 1=0 ";
+            sql += " ORDER BY p.prime_name ASC ";
+            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+            id = 1;
+            foreach (string category in cat) {
+                string cats = HttpUtility.UrlDecode(category);
+                IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                if (c.Count > 0) {
+                    q.SetParameter("p" + id, c[0]);
+                    id = id + 1;
+                }
+            }
+            place[] items = q.Execute();
+            send_place_json(items, callback);
+        }
+
+
+
         public void gamedaytourmode()  {
             Hashtable result = new Hashtable();
             campus thecampus = ActiveRecordBase<campus>.Find(1);
@@ -1226,6 +1283,7 @@ where p.status = 3
             sendPlaceJson(placeservice.getPlacesByKeyword(str), callback);
         }
 
+        //deprecated
         public void getPlaceJson_byIds(int[] ids, string callback) {
             List<place> items = new List<place> { };
             foreach (int id in ids) {
@@ -1233,6 +1291,7 @@ where p.status = 3
             }
             sendPlaceJson(items.ToArray(), callback);
         }
+        //deprecated
         public void sendPlaceJson(place[] items, string callback) {
             String json = createPlaceJson(items);
             if (!string.IsNullOrEmpty(callback)) {
