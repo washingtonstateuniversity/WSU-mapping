@@ -155,15 +155,17 @@
 				showSum=false;
 			}
 			$.each( data.markers, function(i, marker) {	
-				if(window._defined(marker.info)){
+				if(window._defined(marker.labels)){
 					var sum="";
 					
 					if(window._defined(marker.summary) && !$.isEmptyObject(marker.summary)){
 						sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
 					}
 					var p_id = marker.id;
+					var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+					var title = marker.labels.title + acro;
 					listing+='<li class="">'+
-								'<a href="#" class="" role="'+p_id+'"><span class="place_order">'+(i+1)+'</span>'+marker.title+'</a>'+
+								'<a href="#" class="" role="'+p_id+'"><span class="place_order">'+(i+1)+'</span>'+title+'</a>'+
 								sum+
 							'</div>';
 					$.wsu_maps.state.hasListing = false;
