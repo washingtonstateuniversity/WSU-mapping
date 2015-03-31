@@ -1511,19 +1511,22 @@ where p.status = 3
                                     height = 148;
                                 }
                                 String size = "w=" + width + "&h=" + height + "";
-                                mainimage =  @"{
+                                mainimage = @"""prime_image"":{
                                         ""src"":""" + getRootUrl() + "media/download.castle?placeid=" + (item.id)  + "&id=" + (item.Images[0].id) + @""",
                                         ""thumb_params"":""&m=crop&" + (size) + @""",
                                         ""caption"":"""+ (String.IsNullOrEmpty(item.Images[0].caption) ? "" : item.Images[0].caption) + @""",
                                         ""orientation"":""" + (item.Images[0].orientation) + @""",
-                                        ""width"":""" + (width) + @""",
-                                        ""height"":""" + (height) + @""",
-                                    }";
+                                    },";
                             }
 
-                            String infoTitle = "";
+                            String labeling = "";
                             if (item.hideTitles != true) {
-                                infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + "</h2>";
+                                labeling = @"""labels"":{
+                                    ""title"":""" + (!string.IsNullOrEmpty(item.infoTitle) ? item.infoTitle.Trim() : item.prime_name.Trim()) + @""",
+                                    ""prime_abbrev"":""" + (!string.IsNullOrEmpty(item.abbrev_name) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
+                                    ""other_names"":""""
+
+                                },";
                             }
 
 
@@ -1635,7 +1638,8 @@ where p.status = 3
                                                 },
                                     ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
-                                    ""prime_image"":"""+mainimage+@""",
+                                    " + mainimage + @"
+                                    " +labeling+@"
                                     ""style"":{
                                             ""icon"":""" + (!String.IsNullOrWhiteSpace(item.pointImg) ? getRootUrl() + @"Content/images/map_icons/" + item.pointImg : "null") + @"""
                                             },
