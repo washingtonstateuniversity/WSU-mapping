@@ -1547,18 +1547,19 @@ where p.status = 3
                                     ""title"":""" + (!string.IsNullOrEmpty(item.infoTitle) ? item.infoTitle.Trim() : item.prime_name.Trim()) + @""",
                                     ""prime_abbrev"":""" + (!string.IsNullOrEmpty(item.abbrev_name) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     ""other_names"":""""
-
                                 },";
                             }
 
 
 
                             String imgGallery = "";
+                            String media_obj = "";
                             if (item.Images.Count > 1) {
                                 String galImg = "";
                                 int c = 0;
                                 bool hasImg = false;
                                 bool hasVid = false;
+                                media_obj += @"""media"":[";
                                 foreach (media_repo media in item.Images) {
                                     if (c > 0) {
                                         /* note the width and height should be abstracted out into a map preference*/
@@ -1570,7 +1571,24 @@ where p.status = 3
                                         if (media.type.name == "general_video") hasVid = true;
                                     }
                                     c++;
+
+
+                                    media_obj += @"
+                                        {
+                                            ""id"":""" + media.id + @""",
+                                            ""caption"":""" + (media.caption) + @""",
+                                            ""orientation"":""" + (media.orientation) + @""",
+                                            ""type"":""" + (media.type.name) + @"""
+                                        }";
+
+
+
+
+
+
+
                                 }
+                                media_obj = @"]";
                                 String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") +
                                     (c > 2 ? "<ul class='cNav'>" +
                                     //repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) +
@@ -1661,7 +1679,8 @@ where p.status = 3
                                     ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
                                     ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
                                     " + mainimage + @"
-                                    " +labeling+@"
+                                    " + labeling + @"
+                                    " + media_obj + @"
                                     ""style"":{
                                             ""icon"":""" + (!String.IsNullOrWhiteSpace(item.pointImg) ? getRootUrl() + @"Content/images/map_icons/" + item.pointImg : "null") + @"""
                                             },
