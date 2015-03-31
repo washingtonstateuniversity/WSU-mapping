@@ -417,16 +417,6 @@ namespace campusMap.Controllers {
                 RenderText("false");
             }
         }
-        /*
-        public void getCategories(int parentid) {
-            categories parent = null;
-            parent = ActiveRecordBase<categories>.TryFind(parentid);
-            categories[] cats = ActiveRecordBase<categories>.FindAllByProperty("Parent", parent);
-
-            RenderText(JsonConvert.SerializeObject(cats));
-            CancelView();
-        }
-         */
         public void get_colleges_list(String callback) {
             CancelView();
             CancelLayout();
@@ -1492,7 +1482,218 @@ where p.status = 3
             return json;
         }
 
+        public String create_place_json(place[] items) {
+            /* the responsable thing to do here is to remove the html into a template */
+            /* secound make the feed a template too so there should be 3 templates */
+            string appPath = getRootPath();
+            String cachePath = appPath + "cache/places/";
+            String placeList = "";
+            String jsonStr = "";
+            int count = 0;
+            foreach (place item in items) {
+                if ((item != null && item.status != null && item.status.id == 3 && item.isPublic) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["all"])) {
+                    if (item.coordinate != null) {
+                        String view = HttpContext.Current.Request.Params["view"];
+                        String style = HttpContext.Current.Request.Params["style"];
+                        string file = item.id + (!String.IsNullOrWhiteSpace(view) ? "-" + view + "-" : "") + (!String.IsNullOrWhiteSpace(style) ? "-" + style + "-" : "") + "-render" + ".ext";
+                        if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
+                            //dynamic value;
+                            var jss = new JavaScriptSerializer();
+                            string details = ((!string.IsNullOrEmpty(item.details)) ? processFields(item.details, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ') : "");
 
+                            String mainimage = "";
+                            if (item.Images.Count > 0) {
+                                //NOTE THIS IS AN EXAMPLE OF A DEFAULT SIZE; SIZE IS CHOSEN ON THE CLEINT SIDE
+                                int width = 148;
+                                int height = 100;
+                                if (item.Images[0].orientation == "v") {
+                                    width = 100;
+                                    height = 148;
+                                }
+                                String size = "w=" + width + "&h=" + height + "";
+                                mainimage =  @"{
+                                        ""src"":""" + getRootUrl() + "media/download.castle?placeid=" + (item.id)  + "&id=" + (item.Images[0].id) + @""",
+                                        ""thumb_params"":""&m=crop&" + (size) + @""",
+                                        ""caption"":"""+ (String.IsNullOrEmpty(item.Images[0].caption) ? "" : item.Images[0].caption) + @""",
+                                        ""orientation"":""" + (item.Images[0].orientation) + @""",
+                                        ""width"":""" + (width) + @""",
+                                        ""height"":""" + (height) + @""",
+                                    }";
+                            }
+
+                            String infoTitle = "";
+                            if (item.hideTitles != true) {
+                                infoTitle = "<h2 class='header'>" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + "</h2>";
+                            }
+
+
+
+                            String imgGallery = "";
+                            if (item.Images.Count > 1) {
+                                String galImg = "";
+                                int c = 0;
+                                bool hasImg = false;
+                                bool hasVid = false;
+                                foreach (media_repo media in item.Images) {
+                                    if (c > 0) {
+                                        /* note the width and height should be abstracted out into a map preference*/
+                                        galImg += "<li><a href='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "'  hidefocus='true' rel='gouped' class='gouped headImage orientation_" + media.orientation + "'>" +
+                                            "<span class=' imgEnlarge'></span>" +
+                                            "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' alt='" + media.caption + "' class='img-main' />" +
+                                        "</a></li>";
+                                        if (media.type.name == "general_image") hasImg = true;
+                                        if (media.type.name == "general_video") hasVid = true;
+                                    }
+                                    c++;
+                                }
+                                String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") +
+                                    (c > 2 ? "<ul class='cNav'>" +
+                                    //repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) +
+                                    "</ul>" : "") + (hasImg && hasVid ? "<a href='#' class='vids' hidefocus='true'>Video</a>" : "") + "</div>";
+                                String gallery = "<div class='cycleArea'><div class='cycle'>" + (c > 2 ? "<a href='#' class='prev' hidefocus='true'>Prev</a>" : "") + "<div class='cWrap'><ul class='items'>" + galImg + "</ul></div>" + (c > 2 ? "<a href='#' class='next' hidefocus='true'>Next</a>" : "") + "</div>" + nav + "</div>";
+
+                                imgGallery += @"
+                                        {
+                                            ""block"":""" + gallery + @""",
+                                            ""title"":""" + (hasImg ? "Views" : "") + (hasImg && hasVid ? "/" : "") + (hasVid ? "Vids" : "") + @"""
+                                        }";
+                            }
+
+
+                            String autoAccessibility = "";
+                            if (item.autoAccessibility) {
+                                string renderedTxt = autoProcessFeilds(item).Trim();
+                                //autoProcessFeilds(item)
+                                //processFields(defaultAccessibility, item)
+                                if (!String.IsNullOrEmpty(renderedTxt)) {
+                                    autoAccessibility += @"
+                                        {
+                                            ""block"":""" + "<ul>" + jsonEscape(renderedTxt) + @"</ul>" + @""",
+                                            ""title"":""Accessibility""
+                                        }";
+                                }
+                            }
+                            String infotabs = "";
+                            if (item.infotabs.Count > 0 || imgGallery != "" || autoAccessibility != "") {
+                                infotabs += @"[";
+
+                                String tabStr = "";
+
+                                infotabs += @"
+                                            {
+                                                ""block"":""" + details + @""",
+                                                ""title"":""Overview""
+                                            }";
+                                if (item.infotabs.Count > 0) {
+                                    int c = 0;
+                                    foreach (infotabs tab in item.infotabs) {
+                                        c++;
+                                        if (tab.title == "Views") {
+                                            if (!String.IsNullOrEmpty(imgGallery)) {
+                                                tabStr += imgGallery;
+                                                if (c < item.infotabs.Count) tabStr += ",";
+                                            }
+                                        } else {
+
+                                            //string content = processFields(tab.content, item).Replace("\"", @"\""").Replace('\r', ' ').Replace('\n', ' ');
+                                            string content = jsonEscape(autoFeildProcessing(item, tab.content));
+                                            if (!String.IsNullOrWhiteSpace(content)) {
+                                                tabStr += @"
+                                                {
+                                                    ""block"":""" + content.Replace("\"", @"\""") + @""",
+                                                    ""title"":""" + tab.title + @"""
+                                                }";
+                                                if (c < item.infotabs.Count) tabStr += ",";
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                                infotabs += (!string.IsNullOrEmpty(tabStr) ? "," : "") + tabStr.TrimEnd(',');
+                                infotabs += (!string.IsNullOrEmpty(autoAccessibility) ? "," : "") + autoAccessibility;
+                                infotabs += @"]";
+                            } else {
+                                if (String.IsNullOrEmpty(item.details)) {
+                                    infotabs += @"""""";
+                                } else {
+                                    string content = jsonEscape(autoFeildProcessing(item, details));
+                                    infotabs += @"""" + content + @"""";
+                                }
+                            }
+
+
+
+
+                            placeList = @"
+                                {
+                                    ""id"":""" + item.id + @""",
+                                    ""gamedayparkingpercentfull"":""" + item.percentfull + @""",
+                                    ""position"":{
+                                                ""latitude"":""" + item.getLat() + @""",
+                                                ""longitude"":""" + item.getLong() + @"""
+                                                },
+                                    ""summary"":""" + ((!string.IsNullOrEmpty(item.summary)) ? StripHtml(jsonEscape(item.summary), false) : Truncate(StripHtml(jsonEscape(details), false), 65) + "...") + @""",
+                                    ""title"":""" + ((!string.IsNullOrEmpty(item.infoTitle)) ? item.infoTitle.Trim() : item.prime_name.Trim()) + ((!string.IsNullOrEmpty(item.abbrev_name)) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
+                                    ""prime_image"":"""+mainimage+@""",
+                                    ""style"":{
+                                            ""icon"":""" + (!String.IsNullOrWhiteSpace(item.pointImg) ? getRootUrl() + @"Content/images/map_icons/" + item.pointImg : "null") + @"""
+                                            },
+                                    ""info"":{
+                                            ""content"":" + infotabs + @",
+                                            ""title"":""" + item.prime_name + @"""
+                                            },
+                                    ""shapes"":" + loadPlaceShape(item) + @"
+                                }";
+                            placeList = jsonEscape(placeList);
+
+                            // the goal with this is to make sure the maps don't break by simple testing that the data can be read
+                            // if it can not be read then we place a friendly showing that the data is bad to keep the map working
+                            bool dataGood = true;
+
+                            try { jss.Deserialize<Dictionary<string, dynamic>>(placeList); } catch (Exception e) {
+                                dataGood = false;
+                            }
+
+                            if (dataGood) {
+                                item.outputError = false;
+                                ActiveRecordMediator<place>.Save(item);
+                                ActiveRecordMediator<place>.Refresh(item);
+                            } else {
+                                item.outputError = true;
+                                ActiveRecordMediator<place>.Save(item);
+                                ActiveRecordMediator<place>.Refresh(item);
+                                placeList = @"{""error"":""Error in the output.  This place needs to be edited.""}";
+                            }
+                            if (dataGood) {
+                                setJsonCache(cachePath, file, placeList);
+                            }
+                        }
+                        jsonStr += System.IO.File.ReadAllText(cachePath + file) + ",";
+                        count++;
+                    }
+                } else {
+                    if (item != null) {
+                        item.outputError = true;
+                        ActiveRecordMediator<place>.Save(item);
+                    }
+
+                }
+
+            }
+            String json = "";
+            json += @"  {
+";
+            if (count > 0) {
+                json += @"""markers"":[";
+                json += jsonStr.TrimEnd(',');
+                json += @"]";
+            }
+
+            json += @"
+    }";
+            return json;
+        }
 
 
         private void getPlaces() {

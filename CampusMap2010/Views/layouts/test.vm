@@ -29,7 +29,6 @@
 	<!-- DOCS -->
 	<link type="text/plain" rel="author" href="http://repo.wsu.edu/spine/1/authors.txt">
 	<link type="text/html" rel="help" href="http://brand.wsu.edu">
-
 </head>
 
 <body class="">
@@ -52,6 +51,10 @@
 		<div style="width: 100%; padding-top: 66%; min-height: 0px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(255, 255, 255);" id="WSU_MAPS_NS_2"></div>
 		
 		</div>
+
+		
+		
+		
 	<!-- Responsive Sections -->
 		<div class="row side-right gutter pad-bottom tall">
 
