@@ -74,7 +74,7 @@
 			if($.wsu_maps.state.inview){
 				$.wsu_maps.markers.defaults.width=15;
 				$.wsu_maps.markers.defaults.height=25;
-				var title = marker_obj.lables.title;
+				var title = marker_obj.labels.title;
 				var titles_to_mark = [
 					"WSU Pullman",
 					"WSU Spokane",
@@ -120,9 +120,9 @@
 			jObj.gmap('addMarker', marker_style,function(ops,made_marker){
 				made_marker.marker_style = marker_style;
 				made_marker.content = marker_obj.content;
-				made_marker.title = marker_obj.lables.title;
+				made_marker.title = marker_obj.labels.title;
 				made_marker.marker_position = marker_obj.marker_position;
-				made_marker.lables = marker_obj.lables;
+				made_marker.labels = marker_obj.labels;
 				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
 				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);

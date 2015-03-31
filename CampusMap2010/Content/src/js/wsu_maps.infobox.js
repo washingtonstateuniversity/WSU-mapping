@@ -138,7 +138,7 @@
 					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 				});
 				
-				$.each( marker.info.content, function(j, html) {
+				$.each( marker.content, function(j, html) {
 					var title = html.title
 									.split(' ').join('_')
 									.split(' ').join('_')
@@ -169,7 +169,7 @@
 				/* so need to remove this and create the class for it */
 				var boxText = document.createElement("div");
 				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-				boxText.innerHTML = marker.info.content;
+				boxText.innerHTML = marker.content;
 				var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
 				$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
 					//$('#taby'+i).tabs();

@@ -130,11 +130,11 @@ function loadJsonData(jObj,data,callback,markerCallback){
 			mid[i]=marker.id;
 				if($.isArray(marker.info.content)){
 					var nav='';
-					$.each( marker.info.content, function(j, html) {	
+					$.each( marker.content, function(j, html) {	
 						nav += '	<li class="ui-state-default ui-corner-top '+( j==0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 					});
 					var content='';
-					$.each( marker.info.content, function(j, html) {
+					$.each( marker.content, function(j, html) {
 						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content '+html.title.replace(' ','_').replace('/','_')+'">'+html.block+'</div></div>';
 					});				
 				
@@ -152,7 +152,7 @@ function loadJsonData(jObj,data,callback,markerCallback){
 				
 				var boxText = document.createElement("div");
 				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-				boxText.innerHTML = marker.info.content;
+				boxText.innerHTML = marker.content;
 		
 		
 				

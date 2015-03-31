@@ -2,7 +2,7 @@
 (function($,window) {
 	$.wsu_maps.places = {
 		getSignlePlace:function (id){
-			var url=$.wsu_maps.state.siteroot+"public/get_place.castle";
+			var url=$.wsu_maps.state.siteroot+"public/get_place_obj.castle";
 			//var jObj = $.wsu_maps.state.map_jObj;
 			$( "#placeSearch input[type=text]" ).autocomplete("close").val('').blur();
 			var found=false;
