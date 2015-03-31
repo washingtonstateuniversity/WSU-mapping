@@ -1482,6 +1482,28 @@ where p.status = 3
             return json;
         }
 
+        //for the gameday parking and anything else that can take use
+
+        /*
+         Allow one API post request from the front to update A value on a meta(aka field) property
+         -Must be signed in at the least and have the session, but OAuth support later
+         -Only allows updating on ONE value, which is filtered
+         */
+        public Boolean post_place_value_update(int place_id, String field_name, String value) {
+            //check that the place is there
+            place item = ActiveRecordBase<place>.Find(place_id);
+            //get the place fields
+            //check that the field requested is there
+            //if there set value
+            //if value set save field and place accordenly
+            //return true if nothing wronge, else
+            return false;
+        }
+
+
+
+
+
         public String create_place_json(place[] items) {
             /* the responsable thing to do here is to remove the html into a template */
             /* secound make the feed a template too so there should be 3 templates */
