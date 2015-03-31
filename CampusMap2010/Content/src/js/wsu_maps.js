@@ -654,9 +654,9 @@ if (!Array.prototype.indexOf) {
 			$.wsu_maps.state.cur_nav = _load;
 			var url="";
 			if($.isNumeric(_load)){
-				url=$.wsu_maps.state.siteroot+"public/get_place.castle";
+				url=$.wsu_maps.state.siteroot+"public/get_place_obj.castle";
 			}else{
-				url=$.wsu_maps.state.siteroot+"public/get_place_by_category.castle";	
+				url=$.wsu_maps.state.siteroot+"public/get_place_obj_by_category.castle";	
 			}
 			$.getJSON(url+'?callback=?'+(_load!==false && !$.isNumeric(_load)?'&cat[]='+_load:($.isNumeric(_load)?'&id='+_load:'')), function(data) {
 				if(!$.isNumeric(_load)){

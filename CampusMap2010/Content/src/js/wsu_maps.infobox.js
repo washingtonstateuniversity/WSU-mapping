@@ -128,27 +128,30 @@
 			var content='';
 			//var empty = false;
 			var infoTitle = "";
-			infoTitle = '<h2 class="header"><span class="iw_id">'+(i+1)+'</span>'+ marker.title +'</h2>';
+			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+			var title = marker.labels.title + acro;
+			infoTitle = '<h2 class="header"><span class="iw_id">'+(i+1)+'</span>'+ title + '</h2>';
 			
 			
-			if($.isArray(marker.info.content)){
-				$.each( marker.info.content, function(j, html) {	
+			if($.isArray(marker.content)){
+				$.each( marker.content, function(j, html) {	
 					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 				});
 				
 				$.each( marker.info.content, function(j, html) {
-					var title = html.title.replace(' ','_').replace("'",'_').replace('/','_');
+					var title = html.title
+									.split(' ').join('_')
+									.split(' ').join('_')
+									.split('\'').join('_')
+									.split('/').join('_')
+									.split('__').join('_');
 					var hideTab = ( j>0 ?' display:none;':'');
-					var re = /<h2 class='header'>.*<\/h2>/gmi; 
-					var html_block = html.block.replace(re,'');
+					var html_block = html.block;
 					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+infoTitle+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 				});				
 			
 			}else{
-					var re = /<h2 class='header'>.*<\/h2>/gmi; 
-					var html_block = marker.info.content.replace(re,'');
-				
-				
+				var html_block = marker.content;
 				if(html_block===""){
 					return false;
 				}
@@ -213,18 +216,18 @@
 
 			var nav='';
 			var content='';
-			if($.isArray(marker.info.content)){
+			if($.isArray(marker.content)){
 				
-				$.each( marker.info.content, function(j, html) {	
+				$.each( marker.content, function(j, html) {	
 					nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 				});
 				
-				$.each( marker.info.content, function(j, html) {
+				$.each( marker.content, function(j, html) {
 					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html.block+'</div></div>';
 				});
 			}else{
 				nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';
-				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+marker.info.content+'</div></div>';
+				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content">'+infoTitle+mainimage+marker.content+'</div></div>';
 			}
 			var box_content='<div id="taby'+i+'" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'+
 					'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">'+nav+'</ul>'+
