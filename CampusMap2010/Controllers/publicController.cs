@@ -1623,7 +1623,7 @@ where p.status = 3
                             if (item.hideTitles != true) {
                                 labeling = @"""labels"":{
                                     ""title"":""" + (!string.IsNullOrEmpty(item.infoTitle) ? item.infoTitle.Trim() : item.prime_name.Trim()) + @""",
-                                    ""prime_abbrev"":""" + (!string.IsNullOrEmpty(item.abbrev_name) ? " (" + item.abbrev_name.Trim() + ")" : "") + @""",
+                                    ""prime_abbrev"":""" + (!string.IsNullOrEmpty(item.abbrev_name) ? item.abbrev_name.Trim() : "") + @""",
                                     ""other_names"":""""
                                 },";
                             }

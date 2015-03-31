@@ -5,6 +5,19 @@
 	var i = i || 0;
 
 	$.wsu_maps.infobox = {
+		defaults:{
+			templates:{
+				window_content:'<div id="taby<%this.i%>" class="ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> <%this.nav%> </ul> <%this.content%>',
+				infoTitle:'<h2 class="header"><span class="iw_id"><%this.iw_id%></span><%this.title%></h2>',
+				overview_image:"<a href='<%this.base_url%>' alt='<%this.alt%>' hidefocus='true' <%this.attr%>  class='<%this.linkclasses%>'> <span class='imgEnlarge'></span> <img src='<%this.base_url%><%this.img_url_options%>' rel='gouped' title='<%this.base_url%>' alt='<%this.alt%>' class='<%this.img_classes%>' width='<%this.img_width%>' height='<%this.img_height%>'/> </a>",
+			},
+			overview:{
+				image:{
+					height:75,
+					width:135
+				}
+			}
+		},
 		pano_init : false,
 		make_ToolTip:function (i,marker){
 			//var jObj = $.wsu_maps.state.map_jObj;
@@ -52,7 +65,6 @@
 			$.wsu_maps.infobox.apply_scroller(minHeight);
 		},
 		build_options:function(marker,i,content){
-			//var jObj = $.wsu_maps.state.map_jObj;
 			var options = {
 				alignBottom:true,
 				content: content,//boxText
@@ -74,50 +86,6 @@
 				},
 				onOpen:function(){
 					$.wsu_maps.infobox.open_IW(marker,i);
-					/*note from backend, so may need to port something, remove when done */
-					/*$.wsu_maps.state.ibOpen = true;
-					$.wsu_maps.state.ibHover = true;
-					if($(".cWrap").length){
-						$('.cWrap a.gouped').on('click',function(e){
-							e.preventDefault();
-							e.stopImmediatePropagation();
-							$('.cWrap a.gouped').colorbox({
-								photo:true,
-								scrolling:false,
-								opacity:0.7,
-								transition:"none",
-								width:"75%",
-								height:"75%",
-								slideshow:true,
-								slideshowAuto:false,
-								open:true
-							});
-						});
-						$('.cWrap .items').cycle({
-							fx: 'scrollLeft',
-							delay: -2000,
-							pauseOnPagerHover: 1,
-							pause:1,
-							pager:'.cNav',
-							prev: '.prev',
-							next: '.next', 
-							pagerAnchorBuilder: function(idx){//, slide) {
-								 return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';
-							} 
-						});
-						$.wsu_maps.general.prep_html();
-					}
-					$('#taby'+i).tabs();
-					var minHeight=0;
-					$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-						minHeight = Math.max(minHeight, $(this).find('.content').height()); 
-					}).css('min-height',minHeight); 
-					$('#taby'+i).hover(function(){
-						$.wsu_maps.state.ib[0].setOptions({enableEventPropagation: true});
-					},function(){
-						$.wsu_maps.state.ib[0].setOptions({enableEventPropagation: false});
-					});
-					$.wsu_maps.state.ib[0].rePosition();*/
 				}
 			};
 			return options;
@@ -129,9 +97,34 @@
 			//var empty = false;
 			var infoTitle = "";
 			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
-			var title = marker.labels.title + acro;
-			infoTitle = '<h2 class="header"><span class="iw_id">'+(i+1)+'</span>'+ title + '</h2>';
+
+			infoTitle =  $.runTemplate( $.wsu_maps.infobox.defaults.templates.info_title, { iw_id:(i+1), title:marker.labels.title + acro } );
+
 			
+			
+			var prime_image = "";
+			if( window._defined(marker.prime_image) ){
+			
+				var width = $.wsu_maps.infobox.defaults.overview.image.width;
+				var height = $.wsu_maps.infobox.defaults.overview.image.height;
+				if (marker.prime_image.orientation === "v") {
+					width = $.wsu_maps.infobox.defaults.overview.image.height;
+					height = $.wsu_maps.infobox.defaults.overview.image.width;
+				}
+	
+				var params = {
+					//i:i,nav:nav,content:content
+					base_url:marker.prime_image.src,
+					alt:( window._defined(marker.prime_image.caption) ? marker.prime_image.caption : "" ),
+					attr:"rel='gouped'",
+					linkclasses:"gouped headImage orientation_" + marker.prime_image.orientation + "",
+					img_url_options:"&m=crop&w=" + width + "&h=" + height + "",
+					img_classes:"gouped headImage orientation_" + marker.prime_image.orientation + "",
+					img_width:width,
+					img_height:height
+				};
+				prime_image = $.runTemplate( $.wsu_maps.infobox.defaults.templates.overview_image, params );
+			}
 			
 			if($.isArray(marker.content)){
 				$.each( marker.content, function(j, html) {	
@@ -145,8 +138,8 @@
 									.split('\'').join('_')
 									.split('/').join('_')
 									.split('__').join('_');
-					var hideTab = ( j>0 ?' display:none;':'');
-					var html_block = html.block;
+					var hideTab = ( j>0 ?' display:none;' : '' );
+					var html_block = ( j<1 ? prime_image : "" ) + html.block;
 					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+infoTitle+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 				});				
 			
@@ -156,11 +149,9 @@
 					return false;
 				}
 				nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first"><a href="#tabs-1" hideFocus="true">Overview</a></li>';
-				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+infoTitle+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+				content='<div id="tabs-" class="ui-tabs-panel ui-widget-content ui-corner-bottom  "><div class="content overview">'+infoTitle+prime_image+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 			}
-			var tmpl='<div id="taby<%this.i%>" class="ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> <%this.nav%> </ul> <%this.content%>'+
-			'</div>';
-			return $.runTemplate(tmpl,{i:i,nav:nav,content:content});
+			return $.runTemplate( $.wsu_maps.infobox.defaults.templates.window_content,{i:i,nav:nav,content:content});
 		},
 		make_InfoWindow:function (i,marker){
 			//var jObj = $.wsu_maps.state.map_jObj;
