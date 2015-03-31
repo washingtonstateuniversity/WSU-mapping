@@ -1243,6 +1243,25 @@ where p.status = 3
         }
 
 
+        public void get_places(int[] ids, string callback) {
+            List<place> items = new List<place> { };
+            foreach (int id in ids) {
+                items.Add(ActiveRecordBase<place>.Find(id));
+            }
+            send_place_json(items.ToArray(), callback);
+        }
+
+        public void send_place_json(place[] items, string callback) {
+            String json = createPlaceJson(items);
+            if (!string.IsNullOrEmpty(callback)) {
+                json = callback + "(" + json + ")";
+            }
+            Response.ContentType = "application/json; charset=UTF-8";
+            RenderText(json);
+        }
+
+
+
 
         public void markerSVG(string idx) {
             CancelView();
@@ -1580,13 +1599,6 @@ where p.status = 3
                                             ""orientation"":""" + (media.orientation) + @""",
                                             ""type"":""" + (media.type.name) + @"""
                                         }";
-
-
-
-
-
-
-
                                 }
                                 media_obj = @"]";
                                 String nav = "<div class='navArea'>" + (hasImg && hasVid ? "<a href='#' class='photos active' hidefocus='true'>Photos</a>" : "") +
@@ -1665,7 +1677,9 @@ where p.status = 3
                                 }
                             }
 
-
+                            String style_obj = @"""style"":{
+                                            ""icon"":""" + (!String.IsNullOrWhiteSpace(item.pointImg) ? getRootUrl() + @"Content/images/map_icons/" + item.pointImg : "null") + @"""
+                                            },";
 
 
                             placeList = @"
@@ -1681,9 +1695,7 @@ where p.status = 3
                                     " + mainimage + @"
                                     " + labeling + @"
                                     " + media_obj + @"
-                                    ""style"":{
-                                            ""icon"":""" + (!String.IsNullOrWhiteSpace(item.pointImg) ? getRootUrl() + @"Content/images/map_icons/" + item.pointImg : "null") + @"""
-                                            },
+                                    " + style_obj + @"
                                     ""info"":{
                                             ""content"":" + infotabs + @",
                                             ""title"":""" + item.prime_name + @"""
