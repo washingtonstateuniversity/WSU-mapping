@@ -39,7 +39,7 @@
 				if(_url===null){
 					url = encodeURI($(self).find('a:first').attr('href').split('=')[1]);
 				}
-				$.wsu_maps.updateMap();
+				$.wsu_maps.updateMap(url);
 			}else{
 				$.wsu_maps.listings.reset_listings();
 				$.wsu_maps.nav.reset_Navscrollbar();
