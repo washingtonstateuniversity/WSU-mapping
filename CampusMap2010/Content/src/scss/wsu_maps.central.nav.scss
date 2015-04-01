@@ -8,12 +8,13 @@ $url_2: url('/Content/images/assests_central/unchecked_menu.png');
 $url_3: url('/Content/images/assests_central/checked_menu.png');
 
 #mainNavArea {
-	float: left;
 	left: 0;
-	position: relative;
-	top: -35px;
+	position: absolute;
+	top: 0px;
 	width: 201px;
 	z-index: 999;
+	min-height:100%;
+	max-height:100%;
 }
 #navwrap_outer {
 	left: 0;
@@ -166,29 +167,38 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 		-moz-osx-font-smoothing: grayscale;
 	}
 	.spine-global-links {
-	
 		font-size: .9em;
 		border-top-width: 1px;
 		border-top-style: solid;
+		border-top-color: $gray-light;
 		padding-top: 5px;
 		margin-top: 5px;
-		width: 100%;
-	
+		//width: 100%;
+		padding-right: 10px;
+  		padding-left: 10px;
+		
 		ul {
 			display: table;
 			width: 100%;
+			li {
+				font-size: .8em;
+				line-height: 1em;
+				display: table-cell;
+				text-transform: uppercase;
+				text-align: left;
+				a {
+					color: $gray-light;
+					text-decoration:none;
+					&:hover {
+						color: $gray;
+					}
+				}
+			}
+			li:nth-of-type(1) { text-align: left; width: 29%; }
+			li:nth-of-type(2) { text-align: left; width: 31%; }
+			li:nth-of-type(3) { text-align: left; width: 30%; }
+			li:nth-of-type(4) { text-align: right; width: 10%; }
 		}
-		ul li {
-			font-size: .8em;
-			line-height: 1em;
-			display: table-cell;
-			text-transform: uppercase;
-			text-align: left;
-		}
-		ul li:nth-of-type(1) { text-align: left; width: 29%; }
-		ul li:nth-of-type(2) { text-align: left; width: 31%; }
-		ul li:nth-of-type(3) { text-align: left; width: 30%; }
-		ul li:nth-of-type(4) { text-align: right; width: 10%; }
 	
 		small {
 			font-size: .7em;
@@ -199,19 +209,14 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 			margin: 0px 0px;
 			padding: 6px 0px;
 		}
-		.copyright-link a {
-			color: #8b9399;
-		}
-		.copyright-link a:hover {
-			color: $gray;
-		}
 	}
 }
+
 footer {
 	position: absolute;
 	bottom: 0px;
 	padding: 1.75em 0 0.75em 0;
-	width: 198px; // 198px - ( ( 1.75em x 12px ) x 2 = 42 )
+	width: 201px; // 198px - ( ( 1.75em x 12px ) x 2 = 42 )
 	nav {
 		margin: 0;
 		ul li {

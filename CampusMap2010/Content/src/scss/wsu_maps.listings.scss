@@ -80,7 +80,8 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 		width: 100%;
 		li {
 			position: relative;
-			padding-left: 28px;
+			padding-left: 12px;
+			padding-right: 18px;
 			min-height: 28px;
 			a {
 				color: $color_regal_blue_approx;
@@ -107,6 +108,9 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 				line-height: 1.2em;
 				padding-left: 5px;
 				padding-right: 5px;
+				padding-top:4px;
+				margin-left: 32px;
+				border-top:1px solid $gray;
 			}
 		}
 	}

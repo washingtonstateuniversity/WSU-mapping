@@ -42,7 +42,16 @@
 			}
 		},
 		resizeMaxBg:function(obj,height,width) {
+			height = height || 0;
 			obj.css({"max-height":$(window).height()-height});
+			if(window._defined(width)&&width>0){
+				obj.css({"max-width":$(window).width()-width});
+			}
+		},
+		resizeMaxMinBg:function(obj,height,width) {
+			height = height || 0;
+			height = $(window).height()-height;
+			obj.css({ "max-height":height, "min-height":height });
 			if(window._defined(width)&&width>0){
 				obj.css({"max-width":$(window).width()-width});
 			}
