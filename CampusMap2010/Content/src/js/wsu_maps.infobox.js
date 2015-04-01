@@ -26,7 +26,7 @@
 			var boxText = document.createElement("div");
 			boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
 			
-			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? " (" +marker.labels.prime_abbrev + ")" : "";
 			
 			boxText.innerHTML = "<h3 class='tooltip_title'>"+marker.labels.title + acro +"</h3>";
 			var myHoverOptions = {
@@ -96,7 +96,7 @@
 			var content='';
 			//var empty = false;
 			var infoTitle = "";
-			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+			var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? " (" +marker.labels.prime_abbrev + ")" : "";
 
 			infoTitle =  $.runTemplate( $.wsu_maps.infobox.defaults.templates.info_title, { iw_id:(i+1), title:marker.labels.title + acro } );
 

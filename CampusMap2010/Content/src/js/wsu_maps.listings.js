@@ -172,7 +172,7 @@
 						sum='<div '+(showSum?'':'style="display:none;"')+'>'+marker.summary+'</div>';
 					}
 					var p_id = marker.id;
-					var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? "( " +marker.labels.prime_abbrev + " )" : "";
+					var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? " (" +marker.labels.prime_abbrev + ")" : "";
 					var title = marker.labels.title + acro;
 					listing+='<li class="">'+
 								'<a href="#" class="" role="'+p_id+'"><span class="place_order">'+(i+1)+'</span>'+title+'</a>'+
