@@ -71,7 +71,7 @@
 				disableAutoPan: false,
 				maxWidth: 0,
 				height:"340px",
-				pixelOffset: new google.maps.Size(-200, -($.wsu_maps.markers.defaults.height + 5)),
+				pixelOffset: new google.maps.Size(-200, -($.wsu_maps.markers.defaults.height + 25)),
 				zIndex: 999,
 				boxStyle: {
 					width: ($.wsu_maps.state.map_jObj.width()<425?$.wsu_maps.state.map_jObj.width()-25:400)+"px"
@@ -90,7 +90,6 @@
 			};
 			return options;
 		},
-
 		build_IW_content:function(marker,i){
 			var nav='';
 			var content='';

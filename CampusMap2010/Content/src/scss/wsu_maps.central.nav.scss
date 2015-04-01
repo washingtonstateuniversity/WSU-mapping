@@ -366,7 +366,7 @@ a.clickshare{}
 }
 
 .jspVerticalBar {
-	background: #eeeef4;
+	background: #eaedf2;
 	width:8px;
 	margin-right:8px;
 	.jspArrow {
@@ -374,61 +374,37 @@ a.clickshare{}
 	}
 }
 
+
 .jspTrack {
-	background: #eeeef4;
+	background: #eaedf2;
+	border-right:1px solid #dde0e5;
 	&.jspActive {
-		background: #8b8b9f;
+		background: #e8ebf1;
 	}
 	&.jspHover {
-		background: #8b8b9f;
+		background: #e8ebf1;
 	}
 }
 .jspDrag {
-	background: #bbd;
+	background: #adc6cb;
 	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 	border-radius: 10px;
 	&:hover {
-		background: #8b8b9f;
+		background: #9ec4cb;
 	}
 }
 .jspArrow {
-	background: url(../../image/ui-icons_222222_256x240.png) no-repeat;
 	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 	border-radius: 10px;
-	&:hover {
-		background-image: url(../../image/ui-icons_cd0a0a_256x240.png);
-	}
 }
 .jspVerticalBar {
 	&.jspActive {
-		background-image: url(../../image/ui-icons_cd0a0a_256x240.png);
 	}
 	&.jspDisabled {
 		background-color: transparent;
-		background-image: url(../../image/ui-icons_888888_256x240.png);
 		&:hover {
 			background-color: transparent;
-			background-image: url(../../image/ui-icons_888888_256x240.png);
 		}
 	}
 }
-.jspArrowUp {
-	background-position: 0 0;
-}
-.jspArrowDown {
-	background-position: -64px 0 !important;
-}
-.jspArrowLeft {
-	background-position: -96px 0 !important;
-}
-.jspArrowRight {
-	background-position: -32px 0 !important;
-}
-.jspHorizontalBar>.jspDisabled {
-	background-color: transparent;
-	background-image: url(../../image/ui-icons_888888_256x240.png);
-	&:hover {
-		background-color: transparent;
-		background-image: url(../../image/ui-icons_888888_256x240.png);
-	}
-} 
+

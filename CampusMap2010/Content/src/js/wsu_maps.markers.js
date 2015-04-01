@@ -169,6 +169,7 @@
 				$.wsu_maps.state.active.marker = null;
 				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
+				$(".open_marker").removeClass('open_marker');
 				$("[src*='"+$.wsu_maps.state.active.marker.marker_style.icon.url+"']").addClass('open_marker');
 				
 				if(!$.wsu_maps.state.in_pano){
