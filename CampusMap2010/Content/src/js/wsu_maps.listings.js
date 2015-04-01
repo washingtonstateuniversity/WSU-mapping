@@ -209,9 +209,9 @@
 					$.wsu_maps.state.cur_mid = $.wsu_maps.state.mid[i];
 				});
 			});
-			google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
-					$('#selectedPlaceList_area .active').trigger('click');
-				});
+			/*google.maps.event.addListener($.wsu_maps.state.map_inst, 'zoom_changed',function(){
+				$('#selectedPlaceList_area .active').trigger('click');
+			});*///not sure on why or what this solves...
 			
 			
 		},

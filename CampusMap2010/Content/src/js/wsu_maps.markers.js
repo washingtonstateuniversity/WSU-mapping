@@ -95,10 +95,11 @@
 			}
 			//re NS position, it should have a new json name but this is as far as time lets on the correction atm
 			marker_obj.marker_position = marker_obj.position;
+			var zIndex = $.wsu_maps.markers.get_lat_zIndex(marker_obj.marker_position.latitude);
 			var marker_style = $.extend(marker_obj.style,{
 					'position': new google.maps.LatLng(marker_obj.marker_position.latitude, marker_obj.marker_position.longitude),
-					'z-index':$.wsu_maps.markers.get_lat_zIndex(marker_obj.marker_position.latitude),
-					'zFrezze':$.wsu_maps.markers.get_lat_zIndex(marker_obj.marker_position.latitude),
+					'z-index':zIndex,
+					'zFrezze':zIndex,
 					'title':'',//marker_obj.title,//why? cause we do our own tool tips
 					'optimized':false,
 					icon:{
@@ -152,7 +153,7 @@
 					$.wsu_maps.infobox.pano_marker_click($.wsu_maps.state.markerLog[i]);	
 				}
 
-				if(window._defined($.jtrack)){
+				if( window._defined($.jtrack) ){
 					//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 				}
 			})
