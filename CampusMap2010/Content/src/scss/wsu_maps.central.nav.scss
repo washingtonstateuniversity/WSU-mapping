@@ -2,7 +2,6 @@
 @import 'vars/colors';
 
 //urls
-$url_1: url('/Content/images/nav_top_scroll_shadow.png');
 $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 
 #mainNavArea {
@@ -22,9 +21,6 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 	width: 201px;
 	float: left;
 	padding-top: 10px;
-	&.active {
-		background: $url_1 no-repeat scroll 6px 0 transparent;
-	}
 }
 #nav {
 	background: none;
