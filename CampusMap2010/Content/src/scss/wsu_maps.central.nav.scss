@@ -321,5 +321,114 @@ a.errorReporting{}
 a.clickshare{}
 #sharing-menu{display:none;}
 
+.jspContainer .jspVerticalBar{
+	opacity: 0;
+}
+.jspContainer:hover .jspVerticalBar,
+.jspContainer *:hover~.jspVerticalBar,
+.jspContainer .jspVerticalBar:hover {
+    -webkit-animation: fadein 0.5s ease-in-out 0.15s forwards; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s ease-in-out 0.15s forwards; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s ease-in-out 0.15s forwards; /* Internet Explorer */
+         -o-animation: fadein 0.5s ease-in-out 0.15s forwards; /* Opera < 12.1 */
+	animation: fadein 0.5s ease-in-out 0.15s forwards;	
+	//opacity: 1;
+}
+
+@keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
 
 
+.jspHorizontalBar {
+	background: #eeeef4;
+	.jspArrow {
+		width: 15px;
+	}
+}
+
+.jspVerticalBar {
+	background: #eeeef4;
+	width:8px;
+	margin-right:8px;
+	.jspArrow {
+		height: 15px;
+	}
+}
+
+.jspTrack {
+	background: #eeeef4;
+	&.jspActive {
+		background: #8b8b9f;
+	}
+	&.jspHover {
+		background: #8b8b9f;
+	}
+}
+.jspDrag {
+	background: #bbd;
+	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+	border-radius: 10px;
+	&:hover {
+		background: #8b8b9f;
+	}
+}
+.jspArrow {
+	background: url(../../image/ui-icons_222222_256x240.png) no-repeat;
+	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+	border-radius: 10px;
+	&:hover {
+		background-image: url(../../image/ui-icons_cd0a0a_256x240.png);
+	}
+}
+.jspVerticalBar {
+	&.jspActive {
+		background-image: url(../../image/ui-icons_cd0a0a_256x240.png);
+	}
+	&.jspDisabled {
+		background-color: transparent;
+		background-image: url(../../image/ui-icons_888888_256x240.png);
+		&:hover {
+			background-color: transparent;
+			background-image: url(../../image/ui-icons_888888_256x240.png);
+		}
+	}
+}
+.jspArrowUp {
+	background-position: 0 0;
+}
+.jspArrowDown {
+	background-position: -64px 0 !important;
+}
+.jspArrowLeft {
+	background-position: -96px 0 !important;
+}
+.jspArrowRight {
+	background-position: -32px 0 !important;
+}
+.jspHorizontalBar>.jspDisabled {
+	background-color: transparent;
+	background-image: url(../../image/ui-icons_888888_256x240.png);
+	&:hover {
+		background-color: transparent;
+		background-image: url(../../image/ui-icons_888888_256x240.png);
+	}
+} 
