@@ -8,23 +8,7 @@ $url_0: url('//beta.maps.wsu.edu/Content/images/assests_central/selectlist_shado
 $url_1: url('//beta.maps.wsu.edu/Content/images/placelist_tab.png');
 $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 
-.place_order {
-	font-size: 14px;
-	font-weight: bold;
-	display: block;
-	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-	border-radius: 22px;
-	line-height: 22px;
-	height: 22px;
-	width: 22px;
-	text-align: center;
-	border: 2px solid $color_masala_approx;
-	background: $color_masala_approx;
-	color: $seashell;
-	margin-right: 10px;
-	margin-top: -6px;
-	float: left;
-}
+
 #selectedPlaceList {
 	float: left;
 	padding-right: 20px;
@@ -80,34 +64,46 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 		width: 100%;
 		li {
 			position: relative;
-			padding-left: 12px;
+			margin-left: 12px;
 			padding-right: 18px;
-			min-height: 28px;
+			padding-bottom: 3px;
+			padding-top: 7px;
+			min-height: 21px;
 			a {
 				color: $color_regal_blue_approx;
 				display: block;
 				font-size: 12px;
 				line-height: 17px;
-				padding-left: 5px;
+				padding-left: 31px;
 				padding-right: 5px;
-				padding-top: 7px;
+				
 				text-decoration: none;
 				&.active {
 					color: $color_WSU_Crimson;
 					font-weight: bold;
 				}
-				img {
-					position: absolute;
-					top: 2px;
-					left: 2px;
+				.place_order {
+				  font-size: 14px;
+				  font-weight: bold;
+				  display: block;
+				  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+				  border-radius: 25px;
+				  line-height: 22px;
+				  height: 22px;
+				  width: 22px;
+				  text-align: center;
+				  border: 2px solid #3b3b3b;
+				  background: #3b3b3b;
+				  color: #f1f1f1;
+				  position: absolute;
+				  top: 2px;
+				  left: 0px;
 				}
 			}
 			div {
 				font-size: 0.7em;
 				font-weight: normal;
 				line-height: 1.2em;
-				padding-left: 5px;
-				padding-right: 5px;
 				padding-top:4px;
 				margin-left: 32px;
 				border-top:1px solid $gray;
