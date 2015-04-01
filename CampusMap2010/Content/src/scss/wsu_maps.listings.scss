@@ -109,6 +109,50 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 				border-top:1px solid $gray;
 			}
 		}
+		&#option {
+			display: block;
+			height: 31px;
+			left: 0;
+			overflow: hidden;
+			position: absolute;
+			top: -1px;
+			li {
+				line-height: 27px;
+				background-color: $color_bon_jour_approx;
+				cursor: pointer;
+				display: inline-block;
+				font-size: 12px;
+				margin: 0;
+				padding: 3px 0 0 0 !important;
+				text-align: center;
+				width: 49%;
+				border-bottom: 1px solid $color_pink_swan_approx;
+				min-height: 27px !important;
+				&:hover {
+					color: $black!important;
+				}
+				&.active {
+					border-left: 1px $color_pink_swan_approx solid;
+					border-bottom: none;
+					//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+					border-radius: 10px 0 0 0;
+					color: $color_WSU_Gray;
+					//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: -3px 0 20px -5px $color_rangoon_green_25_approx;
+					min-height: 29px !important;
+					background-color: $color_gallery_approx;
+				}
+				&.DIVIT.active {
+					border-left: none;
+					border-right: 1px $color_pink_swan_approx solid;
+					//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+					border-radius: 0 10px 0 0;
+					//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: 3px 0 20px -5px $color_rangoon_green_25_approx;
+				}
+				
+			}
+		}
 	}
 }
 #listing {
@@ -116,4 +160,26 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 	margin-top: 36px !important;
 	overflow-y: auto;
 	height: 100%;
-} 
+}
+#emailDirs {
+	h3 {
+		color: $color_WSU_Crimson;
+		font-weight: normal;
+		font-size: 13px;
+		margin: 0;
+	}
+	h2 {
+		margin: 0;
+		font-size: 16px;
+	}
+	h4 {
+		color: $color_shark_approx;
+		font-weight: normal;
+		font-size: 12px;
+		margin: 0;
+	}
+	textarea {
+		width: 100%;
+		height: 101px;
+	}
+}

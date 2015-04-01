@@ -76,7 +76,7 @@
 				boxStyle: {
 					width: ($.wsu_maps.state.map_jObj.width()<425?$.wsu_maps.state.map_jObj.width()-25:400)+"px"
 				},
-				closeBoxHTML:"<span class='tabedBox infoClose'>X</span>",
+				closeBoxHTML:content===""?"<i></i>":"<span class='tabedBox infoClose'>X</span>",
 				infoBoxClearance: $.wsu_maps.is_frontend?new google.maps.Size(75,60):new google.maps.Size(1,50),
 				isHidden: false,
 				pane: "floatPane",
@@ -156,17 +156,19 @@
 		make_InfoWindow:function (i,marker){
 			//var jObj = $.wsu_maps.state.map_jObj;
 			var content= $.wsu_maps.infobox.build_IW_content(marker,i);
-			if(content!==false){
-				/* so need to remove this and create the class for it */
-				var boxText = document.createElement("div");
-				boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-				boxText.innerHTML = marker.content;
-				var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
-				$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
-					//$('#taby'+i).tabs();
-					//alert('tring to tab it, dabnab it, from the INI');
-				});
+			if(content===false){
+				content = "";
 			}
+			/* so need to remove this and create the class for it 
+			var boxText = document.createElement("div");
+			boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+			boxText.innerHTML = marker.content;*/
+			var myOptions = $.wsu_maps.infobox.build_options(marker,i,content);
+			$.wsu_maps.state.ib[i] = new window.InfoBox(myOptions,function(){
+				//$('#taby'+i).tabs();
+				//alert('tring to tab it, dabnab it, from the INI');
+			});
+			
 		},
 		build_infobox_markerobj:function(item){
 			if(!window._defined(item.info)){

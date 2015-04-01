@@ -39,7 +39,7 @@
 					$.wsu_maps.markers.make_Marker(idx,marker.id,marker,markerCallback);
 					
 					if(idx===(data.markers.length-1) && $.isFunction(callback)){
-						callback();
+						callback(marker);
 					}
 				});
 				if($('.mobile').length){

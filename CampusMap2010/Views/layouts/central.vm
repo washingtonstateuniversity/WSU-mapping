@@ -40,7 +40,7 @@
 			<div id="mainNavArea">
 				<div id="nav_head">
 					<a id="wsu-signature" href="https://wsu.edu">Washington State University</a>
-					<form action="#" id="placeSearch" style="margin: 19px 0 10px 33px;">
+					<form action="#" id="placeSearch">
 						<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
 					</form>
                 </div>

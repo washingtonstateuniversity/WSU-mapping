@@ -2,10 +2,8 @@
 @import 'vars/colors';
 
 //urls
-$url_0: url('/Content/images/bg-nav.png');
 $url_1: url('/Content/images/nav_top_scroll_shadow.png');
-$url_2: url('/Content/images/assests_central/unchecked_menu.png');
-$url_3: url('/Content/images/assests_central/checked_menu.png');
+$logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 
 #mainNavArea {
 	left: 0;
@@ -111,7 +109,6 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 						height: auto;
 						position: relative;
 						font-weight: normal;
-						/*background: $url_2 no-repeat scroll left center transparent;*/
 						&:before{
 							content:"";
 							height:9px;
@@ -127,7 +124,6 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 					}
 					&.checked a {
 						color: $color_WSU_Crimson;
-						/*background: $url_3 no-repeat scroll left center transparent;*/
 						&:before{
 							background-color:#222;
 						}
@@ -227,4 +223,55 @@ footer {
 			position: relative;
 		}
 	}
+}
+
+
+#placeSearch {
+	height: 23px;
+	position: relative;
+	width: 210px;
+	&.ui-autocomplete-loading {
+		background: $logo_bug no-repeat scroll right center transparent !important;
+	}
+	&:focus {
+		background-position: left bottom;
+	}
+	input[type=text] {
+		border: medium none;
+		border-bottom:1px solid $gray;
+		color: $color_sapphire_approx;
+		font-size: 12px;
+		height: 23px;
+		padding: 0;
+		position: absolute;
+		top: 0;
+		width: 140px;
+		left: 0;
+		padding-left: 5px;
+		padding-right: 25px;
+		margin:0px 15px;
+	}
+	.submit {
+		background: none repeat scroll 0 0 transparent;
+		border: medium none;
+		cursor: pointer;
+		font-size: 0;
+		height: 22px;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 22px;
+	}
+	input:focus {
+	}
+	input::-webkit-input-placeholder {
+		color: $color_sapphire_approx !important;
+	}
+	input:-moz-placeholder {
+		color: $color_sapphire_approx !important;
+	}
+}
+* html .ui-autocomplete {
+	height: 285px;
 }
