@@ -34,7 +34,7 @@
 			
 			
 			marker.setIcon(marker.marker_style.icon);
-			marker.setZIndex(99);
+			marker.setZIndex(9999);
 			
 			//marker.setOpacity(1);
 			//$("[src*='"+marker.marker_style.icon.url+"']").addClass('active_marker');
@@ -46,13 +46,16 @@
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker);
 			}
-
 			/*$.wsu_maps.time_it('de_highlight',200,function(){
 				$.each($.wsu_maps.state.markerLog,function(idx,notmarker){
 					notmarker.setOpacity(1);
 				});
 			});*/
-			
+			$.each($.wsu_maps.state.markerLog,function(idx,notmarker){
+				if(notmarker !== $.wsu_maps.state.active.marker ){
+					notmarker.setZIndex(notmarker.marker_style.zFrezze);
+				}
+			});
 			//$( $('.open_marker').length ? '.active_marker ':'' +'.active_marker:not(.open_marker)').removeClass('active_marker');
 			marker.setIcon(marker.marker_style.icon);
 			marker.setZIndex(marker.marker_style.zFrezze);
@@ -76,7 +79,7 @@
 			marker.setIcon(marker.marker_style.icon);
 		},
 		get_lat_zIndex: function(latitude){
-			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 5) );
+			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 8) );
 			/*
 			console.log( latitude );
 			console.log( intLat*(-1) );
@@ -145,7 +148,7 @@
 				//made_marker.title = marker_obj.labels.title;
 				made_marker.marker_position = marker_obj.marker_position;
 				made_marker.labels = marker_obj.labels;
-				
+				made_marker.setZIndex(made_marker.marker_style.zFrezze);
 				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
 				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);
