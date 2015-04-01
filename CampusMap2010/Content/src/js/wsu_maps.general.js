@@ -54,28 +54,17 @@
 				e.stopPropagation();
 				e.preventDefault();
 				//var trigger=$(this);
-				$.colorbox.remove();
+				//$.colorbox.remove();
 				$.wsu_maps.general.makeEmbeder();
 			});
 		},
 		makeEmbeder:function (){
-			$.colorbox({
-				rel:'gouped',
-				html:function(){
-					
-					return '<div id="embedArea">  <h2>Page Link</h2>  <h3 id="ebLink"><em id="linkurl">#</em></h3>  <div id="ebLink_con" style="position:relative; float:right;">  <div id="ebLink_but" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <h2> Embed code </h2>  <div id="custom">  <label>  <input type="radio" value="s" name="size"/>  Small <em>(214 x 161)</em></label>  <label>  <input type="radio" value="m" name="size"/>  Medium <em>(354 x 266)</em></label>  <label>  <input type="radio" checked="checked" name="size" value="l"/>  Large <em>(495 x 372)</em></label>  <label>  <input type="radio" name="size" value="xl"/>  Largest <em>(731 x 549)</em></label>  <label>  <input type="radio" value="c" name="size"/>  Custom</label>  <div id="cSize" style="display: none; font-size:12px;">Width:  <input id="w" value="" style="width:50px;" />px<br/>  Height  <input id="h" value=""  style="width:50px;" />px  </div>  </div>  <textarea id="embedCode" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe>  </textarea>  <div id="d_clip_container" style="position:relative; float:right;">  <div id="d_clip_button" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <a href="#" id="request">WSU units: Request access to create your own map. &raquo;</a></div>';	
-				},
-				scrolling:false,
-				opacity:0.7,
-				transition:"none",
-				innerWidth:450,
-				open:true,
-				onClosed:function(){
-					$('#colorbox').removeClass('norm');
-				},
-				onOpen:function(){$('#colorbox').addClass('norm');},
-				onComplete:function(){
-	
+			$.wsu_maps.util.popup_message({
+				html:'<div id="embedArea"><span class="tabedBox infoClose">X</span>  <h2>Page Link</h2>  <h3 id="ebLink"><em id="linkurl">#</em></h3>  <div id="ebLink_con" style="position:relative; float:right;">  <div id="ebLink_but" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <h2> Embed code </h2>  <div id="custom">  <label>  <input type="radio" value="s" name="size"/>  Small <em>(214 x 161)</em></label>  <label>  <input type="radio" value="m" name="size"/>  Medium <em>(354 x 266)</em></label>  <label>  <input type="radio" checked="checked" name="size" value="l"/>  Large <em>(495 x 372)</em></label>  <label>  <input type="radio" name="size" value="xl"/>  Largest <em>(731 x 549)</em></label>  <label>  <input type="radio" value="c" name="size"/>  Custom</label>  <div id="cSize" style="display: none; font-size:12px;">Width:  <input id="w" value="" style="width:50px;" />px<br/>  Height  <input id="h" value=""  style="width:50px;" />px  </div>  </div>  <textarea id="embedCode" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe>  </textarea>  <div id="d_clip_container" style="position:relative; float:right;">  <div id="d_clip_button" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <a href="#" id="request">WSU units: Request access to create your own map. &raquo;</a></div>',
+				maxWidth:$(window).width()*0.85,
+				minWidth:$(window).width()*0.2,
+				width:450,
+				onCreate:function(jObj){
 					var clip = new ZeroClipboard.Client();
 					clip.setHandCursor( true );
 					clip.setText($('#embedCode').text());
@@ -83,7 +72,7 @@
 						alert("Copied code to your clipboard: ");
 					});
 					clip.glue( 'd_clip_button', 'd_clip_container' );
-			
+					
 					var clipL = new ZeroClipboard.Client();
 					clipL.setHandCursor( true );
 					clipL.setText($('#ebLink').text());
@@ -99,8 +88,13 @@
 						$('#embedCode').text('<iframe width="495" height="372" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'+url+'" ></iframe>');
 						clip.setText($('#embedCode').text());
 					});
-			
-					$.colorbox.resize();
+					$('.tabedBox.infoClose').off().on('click',function(e){
+							e.stopPropagation();
+							e.preventDefault();
+						jObj.dialog( "close" );
+					});
+					
+					
 					$('input[name="size"]').off().on('change',function(){
 						var val = $(this).val();
 						function changeEmText(w,h){
@@ -150,18 +144,16 @@
 								break;
 						}
 					});
-					
-					
-					$.wsu_maps.general.makeRequestCustom();
+					$.wsu_maps.general.makeRequestCustom();	
 				}
-			});	
+			});
 		},
 		makeRequestCustom:function (){
-			$('#request').off().on('click',function(){
-				//$.colorbox.close();
-				$.colorbox({
-					html:function(){
-						return '<div id="emailRequest"><form action="../public/emailRequest.castle" method="post">'+
+			$('#request').off().on('click',function(e){
+							e.stopPropagation();
+							e.preventDefault();
+				$.wsu_maps.util.popup_message({
+					html:'<div id="emailRequest"><span class="tabedBox infoClose">X</span><form action="../public/emailRequest.castle" method="post">'+
 									'<h2>Want to make your own map?</h2>'+
 									'<h4>Please provide you email and as much information about your needs.</h4>'+
 									'<lable>Your Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
@@ -171,40 +163,30 @@
 									'<textarea required placeholder="Some notes" name="notes"></textarea></lable><br/>'+
 									'<br/><input type="Submit" id="requestSubmit" value="Submit"/><br/>'+
 									'<a href="#" id="embedback">&laquo; Back to custom embedding</a>'+
-								'</from></div>';
-					},
-					scrolling:false,
-					opacity:0.7,
-					transition:"none",
-					innerWidth:450,
-					//height:450,
-					open:true,
-					onClosed:function(){
-						$('#colorbox').removeClass('norm');
-					},
-					onOpen:function(){
-						$('#colorbox').addClass('norm');
-					},
-					onComplete:function(){
+								'</from></div>',
+					maxWidth:$(window).width()*0.85,
+					minWidth:$(window).width()*0.2,
+					width:450,
+					onCreate:function(jObj){
 						$.wsu_maps.general.prep_html();
 						if($('#colorbox #cb_nav').length){
 							$('#colorbox #cb_nav').html("");
 						}
-						$.colorbox.resize();
-						
 						$.getJSON("/public/get_admindepartments_list.castle",function(data){
 							$.each(data,function(i,val){
 								$('[name="Deparments"]').append("<option value='"+val.name+"("+val.id+")'>"+val.name+"</option>");
 							});
 						});
-						
-						
-						
-						
-						$('#embedback').off().on('click',function(){//e){
+						$('#embedback').off().on('click',function(e){
+							e.stopPropagation();
+							e.preventDefault();
 							$.wsu_maps.general.makeEmbeder();
 						});
-							
+						$('.tabedBox.infoClose').off().on('click',function(e){
+							e.stopPropagation();
+							e.preventDefault();
+							jObj.dialog( "close" );
+						});
 						$('#emailRequest [type="Submit"]').off().on('click',function(e){
 							e.stopPropagation();
 							e.preventDefault();
@@ -236,7 +218,10 @@
 						});
 					}
 				});
+				
+				
 			});
+			
 		},
 
 		

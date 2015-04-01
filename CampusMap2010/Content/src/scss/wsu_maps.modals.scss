@@ -1,0 +1,17 @@
+@import 'vars/global';
+@import 'vars/colors';
+
+.ui-effects-wrapper,
+.ui-effects-animated,
+.ui-effects-placeholder,
+.ui-dialog,
+.ui-dialog .ui-dialog-content{
+	overflow:visible;
+}
+
+.ui-widget-overlay{
+	z-index:999!important;
+}
+.ui-dialog{
+	z-index:1000!important;
+}

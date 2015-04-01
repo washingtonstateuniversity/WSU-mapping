@@ -134,6 +134,16 @@
 			}
 			var defaults = {
 				autoOpen: true,
+				show: {
+					effect: "scale",
+					easing:"easeInOutQuint",
+					duration: 650
+				},
+				hide: {
+					effect: "scale",
+					easing:"easeInOutQuint",
+					duration: 350
+				},
 				resizable: false,
 				width: 350,
 				minHeight: 25,
