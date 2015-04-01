@@ -24,7 +24,15 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 	margin-left: 0;
 	padding: 13px;
 }
-
+/*.active_marker {
+	& .markers img{
+		opacity:0.5 !important;
+		&.active_marker{
+			opacity: 1 !important;
+		}
+	}
+	
+}*/
 .tooltip_title{
 	font-weight: normal !important;
 	padding: 0px;
@@ -87,16 +95,22 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 					color: $color_WSU_Crimson;
 				}
 			}
+			&.ui-state-active.ui-tabs-active {
+				background: none repeat scroll 0 0 $white;
+				a {
+					color: $black;
+					&:hover {
+						color: $color_WSU_Crimson;
+					}
+				}
+			}
 			&.ui-tabs-selected {
 				padding-bottom: 1px;
 				a {
 					color: $color_shark_approx;
 				}
 			}
-			&.ui-state-active.ui-tabs-active {
-				background: none repeat scroll 0 0 $white;
-				
-			}/**/
+/**/
 		}
 	}
 	/*.ui-tabs-panel-cap {
@@ -118,6 +132,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 		min-height: 0;
 		padding: 5px;
 		position: relative;
+		padding-bottom: 1.4em;
 		.content {
 			min-height: 0;
 			max-height: 240px;
@@ -126,7 +141,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			padding: 0 15px;
 			left: 0;
 			top: 0;
-			float: left;
+			//float: left;
 			&.Views_Vids {
 				padding: 0 4px;
 				.cycle ul li span {
@@ -138,8 +153,26 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 				color: $color_masala_approx;
 				font-weight: normal;
 				margin-top: 0;
-				padding-top: 5px;
-				margin-bottom: 5px;
+				padding-top: 6px;
+				margin-bottom: 10px;
+				position: relative;
+				padding-left: 32px;
+				.iw_id {
+					font-size: 14px;
+					font-weight: bold;
+					display: block;
+					border-radius: 25px;
+					line-height: 22px;
+					height: 22px;
+					width: 22px;
+					text-align: center;
+					border: 2px solid #3b3b3b;
+					background: #3b3b3b;
+					color: #f1f1f1;
+					position: absolute;
+					top: 0.15em;
+					left: 0px;
+				}
 			}
 			ul {
 				list-style: none outside none;
@@ -477,23 +510,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 	}
 }
 
-.iw_id {
-	font-size: 14px;
-	font-weight: bold;
-	display: block;
-	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-	border-radius: 22px;
-	line-height: 22px;
-	height: 22px;
-	width: 22px;
-	text-align: center;
-	border: 2px solid $color_masala_approx;
-	background: $color_masala_approx;
-	color: $seashell;
-	margin-right: 10px;
-	margin-top: -6px;
-	float: left;
-}
+
 #cboxLoadedContent {
 	overflow: visible !important;
 }

@@ -89,46 +89,7 @@ p{
 	float: none;
 	background: none repeat scroll 0 0 $color_WSU_Crimson;
 }
-#toolbar {
-	ul {
-		float: right;
-		padding: 0;
-		margin: -1px 15px 0 0;
-		height: 20px;
-		li {
-			display: block;
-			float: left;
-			line-height: 15px;
-			padding: 0 0 0 21px;
-		}
-	}
-	a {
-		color: $color_iron_approx;
-		font-size: 11px;
-		text-decoration: none;
-		line-height: 20px;
-		&:hover {
-			color: $white !important;
-		}
-	}
-	.addthis_button_compact span {
-		height: 0;
-		width: 0;
-	}
-}
-#header_bar {
-	border-top: 4px solid $color_WSU_Crimson;
-	height: 39px;
-	margin-left: 198px;
-	position: relative;
-	h1 {
-		width: auto;
-		font-size: 24px !important;
-		display: inline-block;
-		margin: 5px 0;
-		color: $color_chicago_approx;
-	}
-}
+
 #localfooter {
 	font-size: 10px;
 	color: $color_shark_approx;

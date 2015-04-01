@@ -19,13 +19,26 @@
 			return marker;
 		},
 		highlight_marker:function(marker){
+			
 			if($.wsu_maps.state.in_pano){
 				marker = $.wsu_maps.markers.alter_marker_icon(marker,8);				
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker,1.25);	
 			}
-			marker.setZIndex(99);
+			
+			//$.wsu_maps.state.map_jObj.addClass('active_marker');
+			/*$.wsu_maps.kill_time('de_highlight');
+			$.each($.wsu_maps.state.markerLog,function(idx,notmarker){
+				notmarker.setOpacity(0.5);
+			});*/
+			
+			
 			marker.setIcon(marker.marker_style.icon);
+			marker.setZIndex(99);
+			
+			//marker.setOpacity(1);
+			//$("[src*='"+marker.marker_style.icon.url+"']").addClass('active_marker');
+			//$("[src*='"+marker.marker_style.icon.url+"']").closest('div:not(.gmnoprint)').addClass('markers');
 		},
 		unhighlight_marker:function(marker){
 			if($.wsu_maps.state.in_pano){
@@ -33,8 +46,16 @@
 			}else{
 				marker = $.wsu_maps.markers.alter_marker_icon(marker);
 			}
-			marker.setZIndex(marker.marker_style.zFrezze);
+
+			/*$.wsu_maps.time_it('de_highlight',200,function(){
+				$.each($.wsu_maps.state.markerLog,function(idx,notmarker){
+					notmarker.setOpacity(1);
+				});
+			});*/
+			
+			//$( $('.open_marker').length ? '.active_marker ':'' +'.active_marker:not(.open_marker)').removeClass('active_marker');
 			marker.setIcon(marker.marker_style.icon);
+			marker.setZIndex(marker.marker_style.zFrezze);
 		},
 		init_street_view_markers:function(){
 			$.each($.wsu_maps.state.markerLog, function(idx,marker){
@@ -55,7 +76,7 @@
 			marker.setIcon(marker.marker_style.icon);
 		},
 		get_lat_zIndex: function(latitude){
-			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 4) );
+			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 5) );
 			/*
 			console.log( latitude );
 			console.log( intLat*(-1) );
@@ -124,6 +145,7 @@
 				//made_marker.title = marker_obj.labels.title;
 				made_marker.marker_position = marker_obj.marker_position;
 				made_marker.labels = marker_obj.labels;
+				
 				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
 				$.wsu_maps.infobox.make_InfoWindow(i,made_marker);
@@ -144,7 +166,7 @@
 				$.wsu_maps.state.active.marker = null;
 				$.wsu_maps.markers.highlight_marker($.wsu_maps.state.markerLog[i]);
 				$.wsu_maps.state.active.marker = $.wsu_maps.state.markerLog[i];
-				
+				$("[src*='"+$.wsu_maps.state.active.marker.marker_style.icon.url+"']").addClass('open_marker');
 				
 				if(!$.wsu_maps.state.in_pano){
 					$.wsu_maps.infobox.open_info(i);

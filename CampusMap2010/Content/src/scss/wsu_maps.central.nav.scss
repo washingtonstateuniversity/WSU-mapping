@@ -54,10 +54,12 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 		}
 	}
 	#main_nav {
-
 		li {
 			width: 165px;
 			border-bottom:1px solid #e4e4e4;
+			&.off_place_action{
+				border-bottom:none medium;
+			}
 			li {
 				width: 154px;
 				border-bottom:none;
@@ -275,3 +277,53 @@ footer {
 * html .ui-autocomplete {
 	height: 285px;
 }
+#toolbar {
+	ul {
+		float: right;
+		padding: 0;
+		margin: -1px 15px 0 0;
+		height: 39px;
+		li {
+			display: block;
+			float: left;
+			line-height: 39px;
+			padding: 0 0 0 21px;
+			a {
+				text-decoration: none;
+				line-height:39px;
+				font-size:1.25em;
+				color:$gray;
+				display:inline-block;
+				&:hover{
+					color:$gray-light;
+				}
+			}
+			.addthis_button_compact span {
+				height: 0;
+				width: 0;
+			}
+		}
+	}
+}
+#header_bar {
+	border-top: 4px solid $color_WSU_Crimson;
+	height: 39px;
+	margin-left: 198px;
+	position: relative;
+	h1 {
+		width: auto;
+		font-size: 24px !important;
+		display: inline-block;
+		margin: 5px 0;
+		color: $color_chicago_approx;
+	}
+}
+
+a#resetmap{}
+a#embed{}
+a.errorReporting{}
+a.clickshare{}
+#sharing-menu{display:none;}
+
+
+

@@ -919,5 +919,17 @@ if (!Array.prototype.indexOf) {
 			$.wsu_maps.state.cur_nav = nav;
 			$.wsu_maps.state.cur_mid = pid;
 		}*/
+		time_it:function(name,time,func){
+			$.wsu_maps.state.map_jObj.dequeue(name);
+			$.wsu_maps.state.map_jObj.queue(name, function() {
+				setTimeout(function() {
+					func();
+					$.wsu_maps.state.map_jObj.dequeue(name);
+				}, time);
+			});
+		},
+		kill_time:function(name){
+			$.wsu_maps.state.map_jObj.dequeue(name);
+		},
 	};
 })(jQuery,window,_d);

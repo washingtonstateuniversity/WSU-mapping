@@ -140,7 +140,7 @@
 									.split('__').join('_');
 					var hideTab = ( j>0 ?' display:none;' : '' );
 					var html_block = ( j<1 ? prime_image : "" ) + html.block;
-					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+infoTitle+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
+					content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+(title !== 'Views'?infoTitle:'')+html_block+'</div><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 				});				
 			
 			}else{
