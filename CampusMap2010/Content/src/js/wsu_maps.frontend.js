@@ -18,7 +18,7 @@
 					$.wsu_maps.iniMap("",$.wsu_maps.setup);
 				}
 				if($.wsu_maps.state.map_jObj.length){
-					var mHeight = ($(window).height()<=404?0:43);
+					var mHeight = ($(window).height()<=404?0:$('#header_bar').outerHeight());
 					if($('.embeded').length){
 						mHeight = 0;
 					}
@@ -38,12 +38,10 @@
 						// can't us map_jObj here cause it's still in the admin area.  Split that.
 		
 						
-						$('#navwrap').height($('#centralMap_wrap').height()-70);
+						
 						$.wsu_maps.responsive.resizeBg($('.cAssest'),mHeight);
 						
-						$.wsu_maps.listings.reset_Dirscrollbar();
-						$.wsu_maps.listings.reset_Listscrollbar();
-						$.wsu_maps.nav.reset_Navscrollbar();
+						
 						//if($('#listing').length)setup_scrollbar($('#listing'));
 						
 					}).trigger("resize");

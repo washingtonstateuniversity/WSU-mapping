@@ -10,7 +10,19 @@
 				
 				var btn=$(this);
 				$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
+
+				if($('#directions_area').length===0){
+					if($('#directions-panel').length===0){
+						$('#selectedPlaceList_area').append('<div id="directions-panel">');
+					}
+					if($('#directions-panel #output').length===0){
+						$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
+					}
+					$('#directions-panel').append('<div id="directions_area">');
+				}	
+
 				
+							
 				if( ! $('#selectedPlaceList').is(".active") ){
 					
 					$('#selectedPlaceList').stop().animate({
@@ -18,9 +30,7 @@
 						}, 250, function() {
 							btn.addClass("active");
 							$('#selectedPlaceList').addClass("active");
-							if($('#directions-panel').length){
-								$.wsu_maps.listings.setup_Dirscrollbar($('#directions-panel'));
-							}
+							$.wsu_maps.listings.setup_Dirscrollbar($('#directions-panel'));
 							//$('#selectedPlaceList_area').css({'overflow-y':'auto'});
 							//setup_scrollbar($('#listing'));	
 							
@@ -217,8 +227,7 @@
 		},
 		listTabs:function (prime){
 			
-			if($('#selectedPlaceList_area #listing').length>0 && $('#selectedPlaceList_area #directions-panel').length>0){
-				if($('#selectedPlaceList_area #option').length===0){
+			if($('#selectedPlaceList_area #option').length===0){
 					$('#selectedPlaceList_area').prepend('<ul id="option">');
 				}
 		
@@ -259,11 +268,6 @@
 						$('#directions').trigger('click');
 					}
 				}
-			}else{
-				if($('#selectedPlaceList_area #option').length>0){
-					$('#selectedPlaceList_area #option').remove();
-				}
-			}
 		
 		},
 		reset_listingarea:function (){

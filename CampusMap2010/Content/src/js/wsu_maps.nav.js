@@ -73,18 +73,25 @@
 					$(this).closest('.parent').find('.parentalLink').trigger('click');
 				}
 			});
-			
+			$(window).on('resize', function(){				
+				$.wsu_maps.responsive.resizeBg( $('#mainNavArea') );
+				$.wsu_maps.responsive.resizeBg( $('#navwrap_outer'), ($('#nav_head').outerHeight()) - ($('footer.spine-footer').outerHeight()) );
+				
+				$.wsu_maps.listings.reset_Dirscrollbar();
+				$.wsu_maps.listings.reset_Listscrollbar();
+				$.wsu_maps.nav.reset_Navscrollbar();
+			}).trigger('resize');
 		},
 		setup_Navscrollbar:function (){
 			
-			var settings = {
+			/*var settings = {
 				maintainPosition:true,
 				stickToBottom:true
 				//showArrows: true
 			};
 			var pane = $("#navwrap");
 			pane.jScrollPane(settings);
-			$.wsu_maps.state.api_nav = pane.data('jsp');
+			$.wsu_maps.state.api_nav = pane.data('jsp');*/
 			if($('#nav').height()>$('#navwrap_outer').height()){
 				$('#navwrap_outer').addClass('active');
 			}else{

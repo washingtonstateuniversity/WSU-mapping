@@ -118,23 +118,12 @@
 		display_directions:function (results){
 			var jObj = $.wsu_maps.state.map_jObj;
 			$.wsu_maps.listings.autoOpenListPanel(function(){
-				
-				
-				if($('#directions-panel').length===0){
-					$('#selectedPlaceList_area').append('<div id="directions-panel">');
-				}
-				if($('#directions_area').length===0){
-					$('#directions-panel').append('<div id="directions_area">');
-				}
 				$.wsu_maps.listings.destroy_Dirscrollbar();
 				
 				var directionsDisplay = jObj.gmap('get','services > DirectionsRenderer');
 				directionsDisplay.setPanel(document.getElementById('directions_area'));
 				directionsDisplay.setDirections(results);
-											
-				if($('#directions-panel #output').length===0){
-					$('#directions-panel').prepend('<div id="output"><a href="#" id="printDir">Print</a><a href="#" id="emailDir">Email</a></div>');
-				}
+
 				google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
 					$.wsu_maps.listings.destroy_Dirscrollbar();
 					$.wsu_maps.listings.setup_Dirscrollbar($('#directions-panel'));

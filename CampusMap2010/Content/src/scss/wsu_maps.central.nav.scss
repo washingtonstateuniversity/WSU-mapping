@@ -155,3 +155,71 @@ $url_3: url('/Content/images/assests_central/checked_menu.png');
 
 #navwrap .jspContainer {
 }
+.spine-footer  {
+
+	button:before {
+		font-family: "Spine-Icons";
+		text-indent: 0px;
+		position: absolute;
+		left: 0px;	top: 0em; right: 0px; bottom: 0px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	.spine-global-links {
+	
+		font-size: .9em;
+		border-top-width: 1px;
+		border-top-style: solid;
+		padding-top: 5px;
+		margin-top: 5px;
+		width: 100%;
+	
+		ul {
+			display: table;
+			width: 100%;
+		}
+		ul li {
+			font-size: .8em;
+			line-height: 1em;
+			display: table-cell;
+			text-transform: uppercase;
+			text-align: left;
+		}
+		ul li:nth-of-type(1) { text-align: left; width: 29%; }
+		ul li:nth-of-type(2) { text-align: left; width: 31%; }
+		ul li:nth-of-type(3) { text-align: left; width: 30%; }
+		ul li:nth-of-type(4) { text-align: right; width: 10%; }
+	
+		small {
+			font-size: .7em;
+			line-height: 1em;
+			color: #b6bcbf;
+			display: block;
+			text-align: center;
+			margin: 0px 0px;
+			padding: 6px 0px;
+		}
+		.copyright-link a {
+			color: #8b9399;
+		}
+		.copyright-link a:hover {
+			color: $gray;
+		}
+	}
+}
+footer {
+	position: absolute;
+	bottom: 0px;
+	padding: 1.75em 0 0.75em 0;
+	width: 198px; // 198px - ( ( 1.75em x 12px ) x 2 = 42 )
+	nav {
+		margin: 0;
+		ul li {
+			border-top: none !important;
+			text-align: center;
+		}
+		html.lt-ie9 & {
+			position: relative;
+		}
+	}
+}

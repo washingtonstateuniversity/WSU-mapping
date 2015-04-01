@@ -38,11 +38,12 @@
 				#parse("layouts/assets_central/header_html.vm")
 			</div>
 			<div id="mainNavArea">
-				<a id="wsu-signature" href="http://wsu.edu">Washington State University</a>
-                <form action="#" id="placeSearch" style="margin: 19px 0 10px 33px;">
-                    <input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
-                </form>
-                
+				<div id="nav_head">
+					<a id="wsu-signature" href="https://wsu.edu">Washington State University</a>
+					<form action="#" id="placeSearch" style="margin: 19px 0 10px 33px;">
+						<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+					</form>
+                </div>
                 <div id="navwrap_outer">
                     <div id="navwrap">
                         <div id="nav">
@@ -50,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-
+				#parse("layouts/assets_central/footer.vm")
 			</div>
 		#end
 		

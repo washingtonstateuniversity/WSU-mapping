@@ -35,6 +35,7 @@
 			}).trigger("resize");
 		},
 		resizeBg:function(obj,height,width) {
+			height = height || 0;
 			obj.height($(window).height()-height);
 			if(window._defined(width)&&width>0){
 				obj.width($(window).width()-width);
