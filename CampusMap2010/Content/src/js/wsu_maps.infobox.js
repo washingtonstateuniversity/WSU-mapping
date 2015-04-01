@@ -8,7 +8,7 @@
 		defaults:{
 			templates:{
 				window_content:'<div id="taby<%this.i%>" class="ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> <%this.nav%> </ul> <%this.content%>',
-				infoTitle:'<h2 class="header"><span class="iw_id"><%this.iw_id%></span><%this.title%></h2>',
+				info_title:'<h2 class="header"><span class="iw_id"><%this.iw_id%></span><%this.title%></h2>',
 				overview_image:"<a href='<%this.base_url%>' alt='<%this.alt%>' hidefocus='true' <%this.attr%>  class='<%this.linkclasses%>'> <span class='imgEnlarge'></span> <img src='<%this.base_url%><%this.img_url_options%>' rel='gouped' title='<%this.base_url%>' alt='<%this.alt%>' class='<%this.img_classes%>' width='<%this.img_width%>' height='<%this.img_height%>'/> </a>",
 			},
 			overview:{
