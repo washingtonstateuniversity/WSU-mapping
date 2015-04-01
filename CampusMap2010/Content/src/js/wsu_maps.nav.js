@@ -37,12 +37,15 @@
 					$.wsu_maps.nav.setup_Navscrollbar();
 					$.wsu_maps.updateMap(encodeURI($(this).find('a:first').attr('href').split('=')[1]));
 				}else{
-					if($('#directions-panel').length){
+					/*if($('#directions-panel').length){
 						$('#directions').trigger('click');
 						$.wsu_maps.listings.reset_listingarea();
 					}else{
 						$.wsu_maps.listings.reset_listings();
-					}
+					}*/
+					
+					$.wsu_maps.listings.reset_listings();
+					
 					$.wsu_maps.nav.reset_Navscrollbar();
 				}
 			});
