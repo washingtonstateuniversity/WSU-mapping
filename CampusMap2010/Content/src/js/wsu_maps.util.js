@@ -145,7 +145,7 @@
 					duration: 350
 				},
 				resizable: false,
-				width: 350,
+				minWidth: 350,
 				minHeight: 25,
 				modal: true,
 				draggable : false,

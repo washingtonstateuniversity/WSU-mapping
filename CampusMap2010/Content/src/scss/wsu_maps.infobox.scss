@@ -211,12 +211,10 @@ img.open_marker {
 			}
 			.headImage {
 				float: left;
-				padding: 10px;
-				margin-right: 9px;
+				margin-right: 6px;
 				position: relative;
 				cursor: pointer;
-				margin-left: -4px;
-				margin-top: -1px;
+				margin-bottom: 4px;
 				&:hover {
 					opacity: .8;
 					.imgEnlarge {
@@ -224,23 +222,24 @@ img.open_marker {
 					}
 				}
 				&.orientation_h {
-					background: $url_2 repeat-x scroll 50% top $white;
+					//background: $url_2 repeat-x scroll 50% top $white;
 				}
 				&.orientation_ {
-					background: $url_2 repeat-x scroll 50% top $white;
+					//background: $url_2 repeat-x scroll 50% top $white;
 				}
 				&.orientation_v {
-					background: $url_3 repeat-x scroll 50% top $white;
+					//background: $url_3 repeat-x scroll 50% top $white;
 				}
 				.imgEnlarge {
 					background: $url_4 no-repeat scroll center top transparent;
-					top: 6px;
+					top: 0px;
 					display: block;
 					height: 14px;
-					right: 4px;
+					right: 6px;
 					position: absolute;
 					width: 14px;
 					padding: 0;
+					z-index: 1;
 				}
 			}
 			.cycle ul li .headImage {
@@ -267,6 +266,57 @@ img.open_marker {
 					background-position: center bottom;
 				}
 			}
+			.cycle {
+				position: relative;
+				width: 344px;
+				height: 190px;
+				margin-left: 10px;
+				-webkit-transform: translateZ(0px);
+				.cWrap {
+					margin: 0 auto;
+					height: 190px;
+					width: 263px !important;
+					-webkit-transform: translateZ(0px);
+					ul {
+						display: block;
+						list-style: none outside none;
+						margin: 0 auto;
+						height: 190px;
+						li {
+							width: 344px !important;
+							height: 190px;
+						}
+					}
+				}
+				.prev {
+					left: 0;
+					top: 55px;
+					text-indent: -9999em;
+					display: block;
+					width: 24px;
+					height: 71px;
+					position: absolute;
+					background: $url_8 no-repeat scroll left top transparent;
+					z-index: 9;
+					&:hover {
+						background-position: left bottom;
+					}
+				}
+				.next {
+					right: 0;
+					top: 55px;
+					text-indent: -9999em;
+					display: block;
+					width: 24px;
+					height: 71px;
+					position: absolute;
+					background: $url_8 no-repeat scroll right top transparent;
+					z-index: 9;
+					&:hover {
+						background-position: right bottom;
+					}
+				}
+			}
 		}
 		.errorReporting {
 			bottom: -2px;
@@ -286,57 +336,7 @@ img.open_marker {
 		}
 	}
 }
-.cycle {
-	position: relative;
-	width: 344px;
-	height: 190px;
-	margin-left: 10px;
-	-webkit-transform: translateZ(0px);
-	.cWrap {
-		margin: 0 auto;
-		height: 190px;
-		width: 263px !important;
-		-webkit-transform: translateZ(0px);
-		ul {
-			display: block;
-			list-style: none outside none;
-			margin: 0 auto;
-			height: 190px;
-			li {
-				width: 344px !important;
-				height: 190px;
-			}
-		}
-	}
-	.prev {
-		left: 0;
-		top: 55px;
-		text-indent: -9999em;
-		display: block;
-		width: 24px;
-		height: 71px;
-		position: absolute;
-		background: $url_8 no-repeat scroll left top transparent;
-		z-index: 9;
-		&:hover {
-			background-position: left bottom;
-		}
-	}
-	.next {
-		right: 0;
-		top: 55px;
-		text-indent: -9999em;
-		display: block;
-		width: 24px;
-		height: 71px;
-		position: absolute;
-		background: $url_8 no-repeat scroll right top transparent;
-		z-index: 9;
-		&:hover {
-			background-position: right bottom;
-		}
-	}
-}
+
 #cboxContent {
 	overflow: visible;
 	.cycle {

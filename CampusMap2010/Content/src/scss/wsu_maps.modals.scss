@@ -1,6 +1,12 @@
 @import 'vars/global';
 @import 'vars/colors';
 
+
+$url_8: url('//beta.maps.wsu.edu/Content/images/tab_next_prev.png');
+$url_9: url('//beta.maps.wsu.edu/Content/images/play_pause.png');
+$url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
+
+
 .ui-effects-wrapper,
 .ui-effects-animated,
 .ui-effects-placeholder,
@@ -14,4 +20,55 @@
 }
 .ui-dialog{
 	z-index:1000!important;
+	.cycle {
+		position: relative;
+		width: 344px;
+		height: 190px;
+		margin-left: 10px;
+		-webkit-transform: translateZ(0px);
+		.cWrap {
+			margin: 0 auto;
+			height: 190px;
+			width: 263px !important;
+			-webkit-transform: translateZ(0px);
+			ul {
+				display: block;
+				list-style: none outside none;
+				margin: 0 auto;
+				height: 190px;
+				li {
+					width: 344px !important;
+					height: 190px;
+				}
+			}
+		}
+		.prev {
+			left: 0;
+			top: 55px;
+			text-indent: -9999em;
+			display: block;
+			width: 24px;
+			height: 71px;
+			position: absolute;
+			background: $url_8 no-repeat scroll left top transparent;
+			z-index: 9;
+			&:hover {
+				background-position: left bottom;
+			}
+		}
+		.next {
+			right: 0;
+			top: 55px;
+			text-indent: -9999em;
+			display: block;
+			width: 24px;
+			height: 71px;
+			position: absolute;
+			background: $url_8 no-repeat scroll right top transparent;
+			z-index: 9;
+			&:hover {
+				background-position: right bottom;
+			}
+		}
+	}
 }
