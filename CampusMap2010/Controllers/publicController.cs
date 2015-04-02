@@ -684,7 +684,7 @@ namespace campusMap.Controllers {
                 email_mass.From = new MailAddress("noreply@wsu.edu");
                 email_mass.To.Add(new MailAddress(entry.Key.ToString(), entry.Value.ToString()));
 
-                if (issueType == "local" || issueType == "local") {
+                if ((issueType == "local" || issueType == "local") && place_id > 0) {
                     place place = ActiveRecordBase<place>.Find(place_id);
                     foreach (users auth in place.authors) {
                         email_mass.To.Add(new MailAddress(auth.email, auth.name));

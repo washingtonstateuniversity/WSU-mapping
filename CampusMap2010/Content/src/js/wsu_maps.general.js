@@ -203,23 +203,21 @@
 									if(data==="email:false"){
 										$('#emailRequest').prepend("<div id='valid'><h3>Your email is not a valid email.  Please enter it again</h3></div>");
 										$('#email').focus();
-										$.colorbox.resize();
+										//$.colorbox.resize();
 									}else{
 										$('#emailRequest').html('<h2>You will recive an email shortly as a copy.</h2>'+'');
-										$.colorbox.resize();
+										//$.colorbox.resize();
 									}
 								});
 							}else{
 								if($('#valid').length===0){
 									$('#emailRequest').prepend("<div id='valid'><h3>Please completely fill out the form.</h3></div>");
 								}
-								$.colorbox.resize();
+								//$.colorbox.resize();
 							}
 						});
 					}
 				});
-				
-				
 			});
 			
 		},
