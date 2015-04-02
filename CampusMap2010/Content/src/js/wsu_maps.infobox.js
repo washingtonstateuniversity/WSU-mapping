@@ -394,7 +394,7 @@
 				});
 			}
 		},
-		init_img_cycler:function(jObj){//marker){
+		init_img_cycler:function(jObj,callbacks){//marker){
 			jObj = jObj || $('body');
 			var items = jObj.find('.cWrap .items');
 			if(items.find('li').length>1 && window._defined($.fn.cycle)){
@@ -419,6 +419,9 @@
 								//$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
 							}
 						} 
+						if(window._defined(callbacks) && window._defined(callbacks.onPagerEvent)){
+							callbacks.onPagerEvent(i);
+						}
 						currSlide = i; 
 					},
 					onPrevNextEvent:function(isNext){//,i,ele){
@@ -441,28 +444,25 @@
 		},
 		init_img_modal:function(){//marker){
 			var img_area = $('.ui-tabs .ui-tabs-panel .content.Views');
-			var imgs = $('.ui-tabs .ui-tabs-panel .content.Views').html();
+			var imgs = img_area.html();
 			if(window._defined(imgs)){
-				imgs = imgs.split('<span class="imgEnlarge"></span>').join();
+				imgs = imgs.split('<span class="imgEnlarge"></span>').join('');
 				$.wsu_maps.util.popup_message({
 					html: (function(imgs){
 						var html = $(imgs);
-						
 						$.each(html.find('.items a'),function(){
 							var href = $(this).attr('href');
-							$(this).find('img').attr('src',href);
-							var img = $(this).html();
+							var img = $(this).find( 'img' ).attr( 'src', href ).attr( 'style', '' ).html();
 							$(this).replaceWith(img);
 						});
 						$.each(html.find('li'),function(){
 							$(this).attr('style','');
 						});
-						
 						return html;
 					})(imgs),
-					maxWidth:$(window).width()*0.85,
+					width:$(window).width()*0.85,
 					minWidth:$(window).width()*0.2,
-					maxHeight:$(window).height()*0.85,
+					height:$(window).height()*0.85,
 					minHeight:$(window).height()*0.2,
 					autoOpen: false,
 					onCreate:function(jObj){
@@ -473,8 +473,13 @@
 						});
 					},
 					onOpen:function(jObj){
-						$.wsu_maps.infobox.init_img_cycler(jObj);
-							/*if($('#colorbox #cb_nav').length){
+						$.wsu_maps.infobox.init_img_cycler(jObj,{
+							onPagerEvent:function(i){
+								jObj.dialog( "width", jObj.find('img').eq(i).width() );
+								jObj.dialog( "height", jObj.find('img').eq(i).height() );
+							}
+						});
+						/*if($('#colorbox #cb_nav').length){
 								$('#colorbox #cb_nav').html("");
 							}
 							if($('#ttl').length){
