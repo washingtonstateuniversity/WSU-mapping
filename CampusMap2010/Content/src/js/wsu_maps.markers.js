@@ -81,8 +81,8 @@
 		get_lat_zIndex: function(latitude){
 			var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 8) );
 			/*
-			console.log( latitude );
-			console.log( intLat*(-1) );
+			window._d( latitude );
+			window._d( intLat*(-1) );
 			*/
 			return intLat*(-1);
 		},
@@ -106,7 +106,7 @@
 					"WSU Vancouver",
 					"WSU North Puget Sound at Everett",
 				];
-				//console.log(title);
+				//window._d(title);
 				icon = ( marker_obj.style.icon === "null" ? $.wsu_maps.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
 	
 				if(titles_to_mark.indexOf(title)> -1){	

@@ -89,8 +89,10 @@
 			
 			$.wsu_maps.state.map_jObj.gmap('clear','markers');
 			$.wsu_maps.state.ib=[];
-			if(window._defined(ids)){console.log(ids);
-				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {console.log(data);
+			if(window._defined(ids)){
+				window._d(ids);
+				$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
+					window._d(data);
 					/*$.each($.wsu_maps.state.ib, function(i) {
 						if( window._defined($.wsu_maps.state.ib[i]) && $.wsu_maps.state.ib[i].opened === true){
 							$.wsu_maps.state.ib[i].close();

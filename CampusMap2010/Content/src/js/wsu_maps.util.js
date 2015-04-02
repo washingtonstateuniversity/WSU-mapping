@@ -5,14 +5,14 @@
 		debug_positional_log:function(){
 			var caller=arguments.callee.caller.caller;
 			if(caller!==null){
-				console.log(caller.name);
+				window._d(caller.name);
 			}
 			/*$.wsu_maps.call();
 			var native = window.alert;
 			window.alert = function(){
-				console.log('alerting...');
+				window._d('alerting...');
 				native.apply(window, arguments);
-				console.log('alerted!');
+				window._d('alerted!');
 			};
 			
 			alert('test');*/

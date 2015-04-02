@@ -59,7 +59,7 @@
 									var f=  new Function(p); 
 									f();
 								}catch(err) {
-									console.log(err);
+									window._d(err);
 								}
 								/* jshint ignore:end */
 							})();
@@ -78,7 +78,7 @@
 									var f=  new Function(p); 
 									f();
 								}catch(err) {
-									console.log(err);
+									window._d(err);
 								}
 								/* jshint ignore:end */
 							})();
@@ -97,7 +97,7 @@
 									var f=  new Function(p); 
 									f();
 								}catch(err) {
-									console.log(err);
+									window._d(err);
 								}
 								/* jshint ignore:end */
 							})();
@@ -115,7 +115,7 @@
 									var f=  new Function(p); 
 									f();
 								}catch(err) {
-									console.log(err);
+									window._d(err);
 								}
 								/* jshint ignore:end */
 							})();
