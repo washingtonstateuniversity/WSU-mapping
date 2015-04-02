@@ -68,7 +68,7 @@
 				$.wsu_maps.state.map_jObj.gmap("destroy",function(){//ele){
 					$.wsu_maps.state.map_jObj.html('');
 					$('.mapControl').remove(); 
-					if($('.veiw_base_layout').length|| window._defined(window.map_view) ){
+					if($('.veiw_base_layout').length || $.wsu_maps.state.inview ){
 						$.wsu_maps.views.ini_map_view($.wsu_maps.setup);
 					}else{
 						$.wsu_maps.iniMap("",$.wsu_maps.setup);
