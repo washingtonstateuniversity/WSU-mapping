@@ -148,6 +148,7 @@
 				//made_marker.title = marker_obj.labels.title;
 				made_marker.marker_position = marker_obj.marker_position;
 				made_marker.labels = marker_obj.labels;
+				made_marker.prime_image = marker_obj.prime_image;
 				made_marker.setZIndex(made_marker.marker_style.zFrezze);
 				$.wsu_maps.state.markerLog[i]=made_marker;
 				$.wsu_maps.state.markerbyid[id] = $.wsu_maps.state.markerLog[i];
