@@ -47,7 +47,7 @@ p{
 	z-index: 99;
 	background-image: $url_0;
 }
-#centralMap_wrap {
+#centralmap_wrap {
 	background-color: transparent;
 	display: block;
 	height: auto;
@@ -62,24 +62,23 @@ p{
 		overflow: hidden;
 	}
 }
-#centralMap {
+#centralmap {
 	width: 100%;
 	min-height: 350px;
 	height: auto;
 	max-height: 100%;
-	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-	border-radius: 0 0 0 20px;
+	box-shadow: inset 0px 0px 125px -6px rgba(255,255,255,1) !important;
 	&.opended {
 		//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
 		border-radius: 0 0 0 0;
 	}
 }
 .embeded {
-	#centralMap_wrap {
+	#centralmap_wrap {
 		margin-left: 0;
 		height: 100%;
 	}
-	#centralMap {
+	#centralmap {
 		margin-left: 0;
 		height: 100%;
 	}

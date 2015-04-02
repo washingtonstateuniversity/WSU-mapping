@@ -63,7 +63,7 @@ $Controller.getView()
 {
 	inview : false,
 	siteroot : '$site.Trim()',
-	view_id : "centralMap",
+	view_id : "centralmap",
 	view : '$view.Trim()/',
 	error_reporting : true,
 #if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end

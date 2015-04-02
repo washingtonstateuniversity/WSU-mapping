@@ -218,9 +218,6 @@ img.open_marker {
 				margin-left: -4px;
 				margin-top: -1px;
 				&:hover {
-					//vendor-prefix found
-					//-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"
-					filter: alpha(opacity=80);
 					opacity: .8;
 					.imgEnlarge {
 						background-position: center bottom;

@@ -10,7 +10,7 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/embed_code_braket.png');
 $url_3: url('//beta.maps.wsu.edu/Content/wsu_ui/images/ui-bg_highlight-hard_100_eeeeee_1x100.png');
 $url_4: url('//beta.maps.wsu.edu/Content/images/map_icons/svg_marker.svg');
 
-#centralMap_wrap {
+#centralmap_wrap {
 	background-color: transparent;
 	display: block;
 	height: auto;
@@ -25,7 +25,7 @@ $url_4: url('//beta.maps.wsu.edu/Content/images/map_icons/svg_marker.svg');
 		overflow: hidden;
 	}
 }
-#centralMap {
+#centralmap {
 	width: 100%;
 	min-height: 350px;
 	height: auto;
@@ -37,11 +37,11 @@ $url_4: url('//beta.maps.wsu.edu/Content/images/map_icons/svg_marker.svg');
 	}
 }
 .embeded {
-	#centralMap_wrap {
+	#centralmap_wrap {
 		margin-left: 0;
 		height: 100%;
 	}
-	#centralMap {
+	#centralmap {
 		margin-left: 0;
 		height: 100%;
 	}

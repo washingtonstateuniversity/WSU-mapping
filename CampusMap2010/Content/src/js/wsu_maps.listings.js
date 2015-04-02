@@ -36,9 +36,9 @@
 							
 							//$(window).trigger("resize");
 					});
-					$('.central_layout.public.central #centralMap').animate({
+					$('.central_layout.public.central #centralmap').animate({
 						'margin-left':$.wsu_maps.defaults.listings.width+'px',
-						'width':$('.central_layout.public.central #centralMap').width()-$.wsu_maps.defaults.listings.width
+						'width':$('.central_layout.public.central #centralmap').width()-$.wsu_maps.defaults.listings.width
 					},250,function() {
 					}).addClass("opended");
 					//listOffset=190;
@@ -53,9 +53,9 @@
 							$('#selectedPlaceList_area').css({'overflow-y':'hidden'});
 							//$(window).trigger("resize");
 					});
-					$('.central_layout.public.central #centralMap').animate({
+					$('.central_layout.public.central #centralmap').animate({
 						'margin-left':'0px',
-						'width':$('.central_layout.public.central #centralMap').width()+$.wsu_maps.defaults.listings.width
+						'width':$('.central_layout.public.central #centralmap').width()+$.wsu_maps.defaults.listings.width
 					}, 500, function() {
 					}).removeClass("opended");
 					//$(window).trigger("resize");

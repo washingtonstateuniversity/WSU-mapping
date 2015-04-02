@@ -83,7 +83,7 @@
 										
 										$("#pArea").html($('#directions_area').html()+'<img src="'+baseUrl+'" alt="map" width="700" height="504"/>');
 										/*if($.browser.msie){
-											$("#pArea").prepend("<style>@media print {#header_bar,#centralMap_wrap,#mainNavArea {display:none;}}</style>");
+											$("#pArea").prepend("<style>@media print {#header_bar,#centralmap_wrap,#mainNavArea {display:none;}}</style>");
 											window.print();
 										}else{
 											$("#pArea").jprint();

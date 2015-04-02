@@ -33,7 +33,7 @@ if (!Array.prototype.indexOf) {
 		state:{
 			map_jObj:null,
 			map_inst:null,
-			view_id:'centralMap',
+			view_id:'centralmap',
 			
 			running_options:false,
 			fit_to_bound:false,

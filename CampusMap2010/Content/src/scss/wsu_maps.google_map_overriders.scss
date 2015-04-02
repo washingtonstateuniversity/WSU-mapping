@@ -13,6 +13,36 @@
 	width: 100%;
 }
 
+.mapControl {
+	background-color: $white;
+	margin-top: 4px;
+	margin-right: 20px;
+	width: 65px;
+	cursor: pointer;
+	text-align: center;
+	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 8px 1px $black_25;
+
+	&.TOP {
+		margin-top: 20px;
+	}
+	&.TYPE {
+		margin-top: 7px;
+	}
+	&.activeControl {
+		background-color: $color_scooter_approx !important;
+		color: $white !important;
+	}
+	.text {
+		font: 12px/12px $font_primary, $font_secondary, $font_tertiary, $font_primary;
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+	&:hover {
+		background-color: $color_WSU_Gray;
+		color: $white;
+	}
+}
 
 #directions-panel {
 	margin: 26px 0 0;

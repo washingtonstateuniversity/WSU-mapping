@@ -74,6 +74,13 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 					color: $color_WSU_Crimson !important;
 				}
 			}
+			
+			&.altAction{
+				a{
+					line-height: 20px;
+					height: 22px;	
+				}
+			}
 			&:hover {
 				font-weight: normal;
 			}
@@ -150,6 +157,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 
 #navwrap .jspContainer {
 }
+
 .spine-footer  {
 
 	button:before {
@@ -193,7 +201,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 			li:nth-of-type(3) { text-align: left; width: 30%; }
 			li:nth-of-type(4) { text-align: right; width: 10%; }
 		}
-	
+
 		small {
 			font-size: .7em;
 			line-height: 1em;
@@ -210,7 +218,7 @@ footer {
 	position: absolute;
 	bottom: 0px;
 	padding: 1.75em 0 0.75em 0;
-	width: 201px; // 198px - ( ( 1.75em x 12px ) x 2 = 42 )
+	width: 182px; // 198px - ( ( 1.75em x 12px ) x 2 = 42 )
 	nav {
 		margin: 0;
 		ul li {

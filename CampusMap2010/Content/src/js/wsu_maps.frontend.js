@@ -29,7 +29,7 @@
 						//alert( ($('.embeded').length||$('.layoutfree').length) ?0:130 );
 						// can't us map_jObj here cause it's still in the admin area.  Split that.
 		
-						var map_obj = $('.central_layout.public.central #centralMap');
+						var map_obj = $('.central_layout.public.central #centralmap');
 						var win_w = $(window).width();
 						var mWidth = ( $('.embeded').length?0:( win_w<=404?0:(win_w<=600?155:201) ) ) + $('#selectedPlaceList').width();
 						$.wsu_maps.responsive.resizeBg(map_obj, mHeight, mWidth);
