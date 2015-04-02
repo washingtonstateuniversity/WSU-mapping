@@ -17,6 +17,14 @@ Sender's email: $email
 Issue Type: $issueType
 <hr/>
 Location: $reported_url
+
+#if(!$reporter)
+<hr/>
+User Agent: $ua
+
+#end
+
+
 #end
 
 

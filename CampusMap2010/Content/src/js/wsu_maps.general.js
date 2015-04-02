@@ -192,6 +192,9 @@
 							e.preventDefault();
 							$('#valid').remove();
 							var valid=true;
+							
+
+							
 							$.each($('#emailRequest [required]'),function(){
 								if($(this).val()===""){
 									valid=false;

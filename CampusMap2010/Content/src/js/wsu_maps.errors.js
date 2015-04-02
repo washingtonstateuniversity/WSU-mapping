@@ -19,6 +19,7 @@
 									'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+
 									'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
 									'<lable>Describe the issues: <br/>'+
+									'<input type="hidden" value="unknown" name="ua" id="user_agent__reporting"/>'+
 									'<textarea required placeholder="Description" name="description"></textarea></lable><br/>'+
 									'<br/><input type="Submit" id="wsumap_errorSubmit" value="Submit"/><input type="Submit" id="wsumap_errorClose" value="Close"/><br/>'+
 								'</from></div>',
@@ -32,6 +33,8 @@
 							e.preventDefault();
 							jObj.dialog( "close" );
 						});
+						var ua = window.navigator.userAgent;
+						$('#user_agent__reporting').val(ua);
 						$('#wsumap_errorSubmit').off().on('click',function(e){
 							e.stopPropagation();
 							e.preventDefault();

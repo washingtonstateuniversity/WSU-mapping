@@ -650,15 +650,15 @@ namespace campusMap.Controllers {
 
 
         }
-        public void reportError(String name, String email, String reported_url, String place_name, int place_id, String description, String issueType) {
+        public void reportError(String name, String email, String reported_url, String place_name, int place_id, String ua, String description, String issueType) {
             CancelView();
             CancelLayout();
 
             //users[] users = ActiveRecordBase<users>.FindAllByProperty("access_levels", ActiveRecordBase<user_groups>.Find(1));
 
             List<String> sentemails = new List<String>();
-
-            PropertyBag["date"] = formatDate(DateTime.Now);
+            String date = formatDate(DateTime.Now);
+            PropertyBag["date"] = date;
             PropertyBag["description"] = description;
             PropertyBag["name"] = name;
             PropertyBag["email"] = email;
@@ -666,6 +666,7 @@ namespace campusMap.Controllers {
             PropertyBag["place_id"] = place_id;
             PropertyBag["issueType"] = issueType;
             PropertyBag["place_name"] = place_name;
+            PropertyBag["ua"] = ua;
 
             // Create and return new Hashtable.
             Hashtable emails = new Hashtable();
