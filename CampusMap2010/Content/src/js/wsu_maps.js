@@ -499,11 +499,11 @@ if (!Array.prototype.indexOf) {
 					if(winW>=900 && winH>=700){map_op.zoom = map_op.zoom;}*/
 				}
 				//styles={};
-				var override = window._defined($.wsu_maps.defaults.json_style_override) && $.wsu_maps.defaults.json_style_override!==false && $.wsu_maps.defaults.json_style_override!=="";
+				var override = window._defined($.wsu_maps.state.json_style_override) && $.wsu_maps.state.json_style_override!==false && $.wsu_maps.state.json_style_override!=="";
 				map_op = $.extend(map_op,{
 					"mapTypeControl":false,
 					"panControl":false,
-					styles: override ? $.wsu_maps.defaults.json_style_override:$.wsu_maps.defaults.map.styles
+					styles: override ? $.wsu_maps.state.json_style_override:$.wsu_maps.defaults.map.styles
 				});
 				if($('.layoutfree').length){
 					styles={

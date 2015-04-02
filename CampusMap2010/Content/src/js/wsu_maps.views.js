@@ -17,7 +17,7 @@ var base=base||{};
 			$.wsu_maps.views.inital_options = map_op;
 		},
 		ini_map_view:function (callback){
-			var override = window._defined($.wsu_maps.defaults.json_style_override) && $.wsu_maps.defaults.json_style_override!==false && $.wsu_maps.defaults.json_style_override!=="";
+			var override = window._defined($.wsu_maps.state.json_style_override) && $.wsu_maps.state.json_style_override!==false && $.wsu_maps.state.json_style_override!=="";
 			var map_op = {
 				'center': $.wsu_maps.state.campus_latlng_str,
 				'zoom': $.wsu_maps.defaults.map.zoom, 
