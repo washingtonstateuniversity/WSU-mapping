@@ -103,6 +103,7 @@ var map_view = $options_block;
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
+<link href="https://repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
 $scriptsService.Css("~/Content/${jsfolder.Trim()}/css/front.styles.css",true)
 
 #if($admin_js)${admin_js}#end
