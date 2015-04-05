@@ -149,8 +149,8 @@
 		listen_for_popstate:function(){
 			window.addEventListener('popstate', function(event) {
 				$.wsu_maps.nav.onpop=true;
-				console.log(event.state);
-				console.log(event);
+				window._d(event.state);
+				window._d(event);
 				
 				$('#main_nav .active').removeClass('active');
 				$('#main_nav .checked').removeClass('checked');

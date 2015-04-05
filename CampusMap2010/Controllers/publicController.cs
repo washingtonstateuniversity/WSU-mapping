@@ -1306,7 +1306,9 @@ where p.status = 3
         public void get_places(int[] ids, string callback) {
             List<place> items = new List<place> { };
             foreach (int id in ids) {
-                items.Add(ActiveRecordBase<place>.Find(id));
+                if (id > 0) {
+                    items.Add(ActiveRecordBase<place>.Find(id));
+                }
             }
             send_place_json(items.ToArray(), callback);
         }
