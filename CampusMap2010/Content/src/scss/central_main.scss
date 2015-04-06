@@ -33,7 +33,7 @@ p{
 	line-height:12px;
 }
 
-#wsu-signature {
+/*#wsu-signature {
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 150px auto;
@@ -46,12 +46,13 @@ p{
 	position: relative;
 	z-index: 99;
 	background-image: $url_0;
-}
+}*/
+
 #centralmap_wrap {
 	background-color: transparent;
 	display: block;
 	height: auto;
-	margin-left: 201px;
+	//margin-left: 201px;
 	max-height: 100%;
 	min-height: 350px;
 	position: relative;
