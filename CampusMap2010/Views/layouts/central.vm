@@ -1,8 +1,10 @@
 #capturefor(html)<!DOCTYPE html>
-<!--[if IE 7]><html class="no-js ie7 ie" lang="en"><![endif]-->
-<!--[if IE 8]><html class="no-js ie8 ie" lang="en"><![endif]-->
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--><html itemscope="itemscope" itemtype="http://schema.org/WebPage" class="no-js" lang="en" dir="ltr"><!--<![endif]-->
-    <head><script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
+    <head>
+		<script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
     	<meta charset="utf-8">
 		#* all the JS and CSS that is site wide *#
 		#parse("layouts/assets_central/global_header_html.vm")
@@ -33,29 +35,40 @@
 		
 	</head>
 	<body id='campusmap' class="#if($embeded)embeded #end #if(!$layout)layoutfree #end central_layout ${controller.getView()} ${controller.getAction()}">
-		#if(!$embeded && $layout!="false")
-			<div id="header_bar">
-				#parse("layouts/assets_central/header_html.vm")
-			</div>
-			<div id="mainNavArea">
-				<div id="nav_head">
-					<a id="wsu-signature" href="https://wsu.edu">Washington State University</a>
-					<form action="#" id="placeSearch">
-						<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
-					</form>
-                </div>
-                <div id="navwrap_outer">
-                    <div id="navwrap">
-                        <div id="nav">
-                            #parse("layouts/assets_central/main_menu.vm")
-                        </div>
-                    </div>
-                </div>
-				#parse("layouts/assets_central/footer.vm")
-			</div>
-		#end
-		
-		$childContent
+		<!-- WRAPPING -->
+		<div id="jacket">
+			<div id="binder" class=" hybrid">
+				<!-- GRID BEHAVIOR: Default behavior can be changed by changing "hybrid" to "fixed" or "fluid". -->
+				<!-- CONTENT -->
+				<main>
+					<div id="header_bar">
+						#parse("layouts/assets_central/header_html.vm")
+					</div>
+					$childContent
+				</main>
+				<!-- /CONTENT -->
+				<!-- SPINE -->
+				<div id="spine" class="spine-column shelved color bleed">
+					<div id="glue" class="spine-glue">			
+						<div id="glue" class="spine-glue">
+							<header class="spine-header">
+								<a href="http://www.wsu.edu/" id="wsu-signature" class="spine-signature">Washington State University</a>
+							</header>
+							<form action="#" id="placeSearch">
+								<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+							</form>
+							<section id="spine-navigation" class="spine-navigation">
+								<nav class="spine-sitenav">
+									#parse("layouts/assets_central/main_menu.vm")
+								</nav>
+							</section>
+							#parse("layouts/assets_central/footer.vm")
+						</div>
+					</div><!--/glue-->
+				</div><!--/spine-->
+				<!-- /SPINE -->
+			</div><!--/cover-->
+		</div><!--/jacket-->
 		
 		#if(!$embeded)
 			#parse("layouts/assets_central/aerial.vm")
