@@ -42,11 +42,10 @@
 				$.wsu_maps.general.prep_html();
 			}
 			$('#resetmap').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				
 				$.wsu_maps.listings.reset();
-				$('#main_nav').find('.active').removeClass('active');
+				$('#main_nav .active').removeClass('active');
 				$.wsu_maps.state.map_jObj.find('input[type="text"]').val('');
 				if($('#directionsTo').is(':visible')){
 					$('#directionsTo').hide();

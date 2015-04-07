@@ -613,12 +613,10 @@ if (!Array.prototype.indexOf) {
 			$.wsu_maps.setup_pdfprints();
 			if($('.layoutfree').length){
 				$('a').not('#nav a').on("click",function(e){
-					e.stopPropagation();
-					e.preventDefault();	
+					$.wsu_maps.util.nullout_event(e);
 				});
 				$('.ui-tabs-panel .content a').on("click",function(e){
-					e.stopPropagation();
-					e.preventDefault();	
+					$.wsu_maps.util.nullout_event(e);
 				});
 			}
 			if($( "#placeSearch input[type=text]" ).length){
@@ -712,8 +710,7 @@ if (!Array.prototype.indexOf) {
 
 		setup_pdfprints:function (){
 			$('#printPdfs').off().on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				//var trigger=$(this);
 				$.colorbox.remove();
 				$.colorbox({

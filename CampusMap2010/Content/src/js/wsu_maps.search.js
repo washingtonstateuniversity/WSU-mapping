@@ -93,8 +93,7 @@
 				}
 			});	
 			$("#placeSearch input[type='submit']").off().on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				//var btn=$(this);
 				var url = url||"";
 				var id   = (window._defined($.wsu_maps.search.focuseitem.id)&&$.wsu_maps.search.focuseitem.id!=="")?$.wsu_maps.search.focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();

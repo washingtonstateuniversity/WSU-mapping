@@ -5,8 +5,7 @@
 			window._d("setting up 'listingsBar'");
 			/* Other after gmap ini */
 			$('#selectedPlaceList_btn').off().on('click', function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				
 				var btn=$(this);
 				$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
@@ -211,8 +210,7 @@
 			$.each($('#selectedPlaceList_area #listing a'),function(i){//,v){
 				var btn=$(this);
 				btn.off().on('click',function(e){
-					e.stopPropagation();
-					e.preventDefault();
+					$.wsu_maps.util.nullout_event(e);
 					if(!btn.is('active') && !btn.next('div').is(':visible')){// changed hasClass for is for speed
 						//$('#selectedPlaceList_area .active').next('div').toggle('showOrHide');
 						$('#selectedPlaceList_area .active').removeClass('active');

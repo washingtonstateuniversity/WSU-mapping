@@ -51,8 +51,7 @@
 		
 		setup_embeder:function (){
 			$('#embed').off().on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				//var trigger=$(this);
 				//$.colorbox.remove();
 				$.wsu_maps.general.makeEmbeder();
@@ -89,8 +88,7 @@
 						clip.setText($('#embedCode').text());
 					});
 					$('.tabedBox.infoClose').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+						$.wsu_maps.util.nullout_event(e);
 						jObj.dialog( "close" );
 					});
 					
@@ -150,8 +148,7 @@
 		},
 		makeRequestCustom:function (){
 			$('#request').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$.wsu_maps.util.popup_message({
 					html:'<div id="emailRequest"><span class="tabedBox infoClose">X</span><form action="../public/emailRequest.castle" method="post">'+
 									'<h2>Want to make your own map?</h2>'+
@@ -178,18 +175,15 @@
 							});
 						});
 						$('#embedback').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							$.wsu_maps.general.makeEmbeder();
 						});
 						$('.tabedBox.infoClose').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							jObj.dialog( "close" );
 						});
 						$('#emailRequest [type="Submit"]').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							$('#valid').remove();
 							var valid=true;
 							

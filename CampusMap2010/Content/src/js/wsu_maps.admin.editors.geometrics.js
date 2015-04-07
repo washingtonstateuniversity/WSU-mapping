@@ -189,13 +189,11 @@
 
 				
 				$('#delete-button').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$.wsu_maps.admin.geometrics.deleteSelectedShape();
 				});
 				$('#delete-all-button').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$.wsu_maps.admin.geometrics.deleteAllShape();
 				});
 				
@@ -203,25 +201,21 @@
 				$.wsu_maps.admin.geometrics.buildColorPalette();
 				
 				$('#drawingcontrolls.showing').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					jObj.gmap('hide_drawingControl');
 					$(this).removeClass('showing').addClass('hidden').text('Show controlls');
 				});
 				$('#drawingcontrolls.hidden').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					jObj.gmap('show_drawingControl');
 					$(this).removeClass('hidden').addClass('showing').text('Hide controlls');
 				});
 				$('#restart').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					jObj.gmap('refresh_drawing',false);
 				});
 				$('#update').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					if(jObj.gmap('get_updated_data')){
 						$('#latLong').val(jObj.gmap('get_updated_data'));
 					}
@@ -239,8 +233,7 @@
 					 }
 				});
 				$('#unselect').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$('#latLong').val(jObj.gmap('unset_drawingSelection'));
 				});
 				//var selected_type = '';

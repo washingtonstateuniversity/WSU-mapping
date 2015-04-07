@@ -6,8 +6,7 @@
 		},
 		createDeleteRow:function (){
 			$('.tiny.buttons.deleteplace').off().on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				var container = $(this).closest('ol.sortable');
 				var role=container.closest('fieldset').attr('role');
 				var val=$(this).closest('li').find('input').val();
@@ -73,8 +72,7 @@ $.wsu_maps.admin.view = {
 		//$.wsu_maps.admin.setup_fixedNav();
 		
 		$('#shortcode').click(function(e){
-			e.stopPropagation();
-			e.preventDefault();
+			$.wsu_maps.util.nullout_event(e);
 			$('#shortcodes').toggle(0,function(){ 
 				$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
 			});
@@ -83,8 +81,7 @@ $.wsu_maps.admin.view = {
 		$.each($('.switch'),function(){//i,v){
 			var self = $(this);
 			self.find('a').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				self.find('.active').removeClass('active');
 				var tar=$(this).attr('id');
 				$(this).addClass('active');
@@ -99,8 +96,7 @@ $.wsu_maps.admin.view = {
 		});
 		/*
 		$('[href$="guidelines/dimensions.aspx"]').on('click',function(e){
-			e.stopPropagation();
-			e.preventDefault();
+			$.wsu_maps.util.nullout_event(e);
 			$("<div>").load($(this).attr('href')+' #main',function(data){
 				$.colorbox({html:data});
 			});
@@ -452,8 +448,7 @@ $.wsu_maps.admin.view = {
 			$.wsu_maps.admin.editors.view.createDeleteRow();
 	
 			$('.addSelection').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				
 				var container = $(this).closest('fieldset');
 				var role = container.attr('role');

@@ -3,8 +3,7 @@
 	$.wsu_maps.errors = {
 		addErrorReporting:function (marker){
 			$('.errorReporting').off().on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				var id= window._defined(marker) ?marker.id:0;
 				var title= window._defined(marker) && window._defined(marker.title) ? marker.title : "";
 				
@@ -29,15 +28,13 @@
 					onOpen:function(jObj){
 						$.wsu_maps.general.prep_html();
 						$('#wsumap_errorClose').off().on("click",function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							jObj.dialog( "close" );
 						});
 						var ua = window.navigator.userAgent;
 						$('#user_agent__reporting').val(ua);
 						$('#wsumap_errorSubmit').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							var valid=true;
 							$.each($('#wsumap_errorReporting [required]'),function(){
 								if($(this).val()===""){
@@ -50,8 +47,7 @@
 									//$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
 									$('#wsumap_errorReporting').html('<h3>Thank you for reporting the error. &nbsp;&nbsp;&nbsp;<input type="Submit" id="wsumap_errorClose" value="Close"/></h3>');
 									$('#wsumap_errorClose').off().on("click",function(e){
-										e.stopPropagation();
-										e.preventDefault();
+										$.wsu_maps.util.nullout_event(e);
 										jObj.dialog( "close" );
 									});
 								});
@@ -94,8 +90,7 @@
 							$('#colorbox #cb_nav').html("");
 						}
 						$('#errorReporting [type="Submit"]').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							var valid=true;
 							$.each($('#errorReporting [required]'),function(){
 								if($(this).val()===""){

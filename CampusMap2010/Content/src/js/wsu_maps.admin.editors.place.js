@@ -134,8 +134,7 @@ var i=i||-1;
 			});
 			$.wsu_maps.admin.setup_fixedNav();*/
 			$('#shortcode').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$('#shortcodes').toggle(0,function(){ 
 					$("#shortcode").html($("#shortcodes").is(':visible') ? '-' : '+'); 
 				});
@@ -145,8 +144,7 @@ var i=i||-1;
 			$.each($('.switch'),function(){//i,v){
 				var self = $(this);
 				self.find('a').on('click',function(e){
-						e.stopPropagation();
-						e.preventDefault();
+						$.wsu_maps.util.nullout_event(e);
 						self.find('.active').removeClass('active');
 						var tar=$(this).attr('id');
 						$(this).addClass('active');
@@ -162,8 +160,7 @@ var i=i||-1;
 				txt.parent(".pod").removeClass("editing"); 
 			}); 
 			$(".pod .editable").on('click',function(e) { 
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				$(this).next().val($(this).text()).focus(); 
 				$(this).parent().addClass("editing"); 
 				var TAR=$(this).attr('rel');
@@ -187,8 +184,7 @@ var i=i||-1;
 				});
 			});
 			$('#PlaceTagCreate').on('click',function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				i=$('#taged .pod').size();
 				if(i===0){
 					$('#taged').html('');
@@ -206,8 +202,7 @@ var i=i||-1;
 		
 
 			$('#PlaceNameCreate').on('click',function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				i=$('#names .pod').size();
 				$('#names').append($('#name_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ).replace(/\|\|/g, '' ) );
 			});
@@ -220,8 +215,7 @@ var i=i||-1;
 			//This is so that you can use the nav when leaving the editing area.  IE: the same as clicking cancel
 			if(url_parts.path==='/place/Edit_place.castle'){
 				$( "#main_nav a,a.PDF.creation " ).on('click',function(){//e) {
-					//e.preventDefault();
-					//e.stopPropagation();
+					//$.wsu_maps.util.nullout_event(e);
 					//var obj=$(this);
 					$.wsu_maps.admin.clearLock($('#place_Id').val(),'',function(){
 						//window.location=obj.attr('href');
@@ -278,8 +272,7 @@ var i=i||-1;
 			/*
 			$('body,html').not('textarea,iframe').bind('keydown', function(e) { 
 				if((e.keyCode || e.which)  == 13) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$('.submit_btn').first().focus();
 					Checktitle($('#place_CustomUrl').val(),false,function(data){
 						if(data=='true'){
@@ -296,8 +289,7 @@ var i=i||-1;
 			//var clear=false;
 			/*$('input[type=submit]:not(".cancel_btn")').on('click', function(e) {
 				if(clear!=true){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 				}
 				var clicked=$(this);
 				Checktitle($('#place_CustomUrl').val(),true,function(data){
@@ -316,8 +308,7 @@ var i=i||-1;
 						}
 						if($('#hasTitleAlert').length>0){$('#hasTitleAlert').remove();}
 						if(click>0){
-							e.preventDefault();
-							e.stopPropagation();
+							$.wsu_maps.util.nullout_event(e);
 						}
 						click++
 					}
@@ -498,8 +489,7 @@ var i=i||-1;
 			});
 			// addTab button: just opens the dialog
 			$( "#add_tab" ).button().on('click',function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+					$.wsu_maps.util.nullout_event(e);
 					$dialog.dialog( "open" );
 				});
 			// close icon: removing the tab on click

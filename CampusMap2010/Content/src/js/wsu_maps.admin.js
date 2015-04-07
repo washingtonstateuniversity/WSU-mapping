@@ -243,18 +243,15 @@ var image_count=image_count||-1;
 				}  
 			});
 			$('.Cancel a').on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$("input[value='Cancel']:first").trigger('click');
 			});
 			$('.Submit a').on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$("input[value='Submit']:first").trigger('click');
 			});	
 			$('.Apply a').on("click",function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$("input[value='Apply']:first").trigger('click');
 			});
 		},
@@ -287,8 +284,7 @@ var image_count=image_count||-1;
 		},
 		setup_massTags:function (){
 			$('#massTagging').on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				$('#massTaggingarea').slideToggle();
 			});	
 		},
@@ -616,14 +612,12 @@ var image_count=image_count||-1;
 			});
 		
 			$('#addOption').on('click',function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				i=$('#ops .pod').size();
 				$('#ops').append($('#option_clonebed').html().replace(/[9]{4}/g, (i>-1?i:i+1) ) );
 			});
 			$('.deleteOption').on('click',function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				var tar = $(this).closest('.pod');
 				var tarParent = tar.closest('.podContainer');
 				tar.remove();
@@ -712,10 +706,8 @@ var image_count=image_count||-1;
 						}
 					}
 				});
-				$( ".pubState" )
-					.on('click',function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+				$( ".pubState" ).on('click',function(e) {
+					$.wsu_maps.util.nullout_event(e);
 					$.wsu_maps.admin.defaults.place_id=$(this).closest('.place_aTar').attr('title');
 					$( "#dialog" ).dialog( "open" );
 				});
@@ -744,8 +736,7 @@ var image_count=image_count||-1;
 					}
 				});
 				$( ".sendBR" ).on('click',function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$.wsu_maps.admin.defaults.place_id=$(this).closest('.place_aTar').attr('title');
 					$( "#sendBR" ).dialog( "open" );
 				});
@@ -843,8 +834,7 @@ var image_count=image_count||-1;
 		
 				$( ".steal" )
 					.on('click',function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					$.wsu_maps.admin.defaults.place_id=$(this).attr('rel');
 					$( "#clearLock" ).dialog( "open" );
 				});

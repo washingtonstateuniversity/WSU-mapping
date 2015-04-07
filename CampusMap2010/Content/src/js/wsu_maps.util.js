@@ -17,6 +17,10 @@
 			
 			alert('test');*/
 		},
+		nullout_event:function(e){
+			e.stopPropagation();
+			e.preventDefault();
+		},
 		ini:function(){},
 		/*async_load_css:function(url,callback){
 			var headID = document.getElementsByTagName("head")[0],node = document.createElement('link');

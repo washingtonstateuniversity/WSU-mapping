@@ -11,8 +11,7 @@
 					$( "body" ).append('<div id="deleteModule" title="Deleting"><h2 class="ui-state-error ui-corner-all"><span style="float: left; margin-right: .3em;margin-top:15px;margin-bottom:15px;" class="ui-icon ui-icon-alert"></span>Are you sure you<br/>wish to delete <span id="tar_item"></span>?</h2></div>');
 				}
 				$( "a[title='Delete']" ).on('click',function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					deleteing=$(this).attr('href');
 					name=$(this).closest('tr').find('.name').html();
 					$('#tar_item').html(name!==''&&name!=='undfinded'?name:'this');
@@ -43,8 +42,7 @@
 			/* note this is for the gem area only */
 			if($('a[href$="/geometrics/new.castle"]').length){
 				$('a[href$="/geometrics/new.castle"]').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					
 					if($( "#choosegType" ).length===0){
 						$( "body" ).append('<div id="choosegType" title="Choose the place model">'+
@@ -82,8 +80,7 @@
 			}
 			if($('a[href$="/geometrics/new_style.castle"]').length){
 				$('a[href$="/geometrics/new_style.castle"]').on('click',function(e){
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					
 					if($( "#chooseSType" ).length===0){
 						$( "body" ).append('<div id="chooseSType" title="Choose the place model">'+
@@ -162,10 +159,8 @@
 					var self = $(this);
 					var panleId = self.closest('.ui-tabs-panel').attr('id');
 					self.find('a').on('click',function(e){
+						$.wsu_maps.util.nullout_event(e);
 						$('body').append('<h1 style="position:fixed; top:25%; left:45%; z-index:9999;text-align: center;" id="loading"><img src="../Content/images/loading.gif"/></br>Loading</h1>');
-						e.stopPropagation();
-						e.preventDefault();
-						//panleId
 						$.ajaxSetup ({cache: false}); 
 						$('#'+panleId).load( $(this).attr('href')+'&ajax=1 #'+panleId+'>.tab_tar',function(){ 
 							$.wsu_maps.admin.lists.pagLoad(); $('#loading').remove();
@@ -188,8 +183,7 @@
 		setInfoSlide:function(){
 			if($('.detailInfoBut')){
 				$('.detailInfoBut').on('click', function(e){
-					e.stopPropagation();
-					e.preventDefault();
+					$.wsu_maps.util.nullout_event(e);
 					if($(this).closest('.detailCol').width()<=1){
 						$(this).closest('.detailCol').stop().animate({
 							width:"125px"

@@ -7,8 +7,7 @@
 				$('#directionsTo').show();
 			}
 			$('#directionsFrom input,#directionsTo input').off().on('keyup',function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				$.wsu_maps.util.nullout_event(e);
 				if($('#directionsFrom input').val() !==''){
 					if($('#directionsTo').css('display')==='none'){
 						$('#directionsTo').show();
@@ -56,8 +55,7 @@
 								$.wsu_maps.directions.display_directions(results);
 								if($('#directions_area').length){
 									$('#printDir').off().on('click',function(e){
-										e.preventDefault();
-										e.stopPropagation();
+										$.wsu_maps.util.nullout_event(e);
 										var map = $.wsu_maps.state.map_inst;
 										var baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
 										 
@@ -155,8 +153,7 @@
 					//if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");
 					$('#modeArea [type="Submit"]').off().on('click',function(e){
 						$.colorbox.close();
-						e.stopPropagation();
-						e.preventDefault();
+						$.wsu_maps.util.nullout_event(e);
 						var mode;
 						switch($('#trasMode').val()){
 							case "Walk":
@@ -198,8 +195,7 @@
 		},
 		addEmailDir:function (){
 			$('#emailDir').off().on('click',function(e){
-				e.stopPropagation();
-				e.preventDefault();
+				$.wsu_maps.util.nullout_event(e);
 				//var trigger=$(this);
 				$.colorbox({
 					html:function(){
@@ -233,8 +229,7 @@
 						}
 						$.colorbox.resize();	
 						$('#emailDirs [type="Submit"]').off().on('click',function(e){
-							e.stopPropagation();
-							e.preventDefault();
+							$.wsu_maps.util.nullout_event(e);
 							$('#valid').remove();
 							var valid=true;
 							$.each($('#emailDirs [required]'),function(){

@@ -137,8 +137,7 @@ $.wsu_maps.admin.ui.tinymce = {
 								});
 
 								$('#again').on('click', function(e) {
-									e.preventDefault();
-									e.stopPropagation();
+									$.wsu_maps.util.nullout_event(e);
 									$('#ISIUarea input[type=text]').each(function() {
 										$(this).val('');
 									});
@@ -151,8 +150,7 @@ $.wsu_maps.admin.ui.tinymce = {
 									});
 								});
 								$('#place').on('click', function(e) {
-									e.preventDefault();
-									e.stopPropagation();
+									$.wsu_maps.util.nullout_event(e);
 									var ed = ed||null;
 									$('#ISIUarea input[type=text]').each(function() {
 										$(this).val('');
@@ -200,8 +198,7 @@ $.wsu_maps.admin.ui.tinymce = {
 				});
 
 				$('#inlinePlaceImageUpload').bind('click', function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					//var imgid=$('#imagePicker :selected').val();
 					$('#ISIUarea').slideToggle('fast', function() {
 						$('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
@@ -319,8 +316,7 @@ $.wsu_maps.admin.ui.tinymce = {
 								});
 
 								$('#again').on('click', function(e) {
-									e.preventDefault();
-									e.stopPropagation();
+									$.wsu_maps.util.nullout_event(e);
 									$('#ISIUarea input[type=text]').each(function() {
 										$(this).val('');
 									});
@@ -333,8 +329,7 @@ $.wsu_maps.admin.ui.tinymce = {
 									});
 								});
 								$('#place').on('click', function(e) {
-									e.preventDefault();
-									e.stopPropagation();
+									$.wsu_maps.util.nullout_event(e);
 									$('#ISIUarea input[type=text]').each(function() {
 										$(this).val('');
 									});
@@ -378,8 +373,7 @@ $.wsu_maps.admin.ui.tinymce = {
 				});
 
 				$('#inlinePlaceImageUpload').bind('click', function(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					$.wsu_maps.util.nullout_event(e);
 					//var imgid=$('#imagePicker :selected').val();
 					$('#ISIUarea').slideToggle('fast', function() {
 						$('#inlinePlaceImageUpload span').toggleClass('ui-icon-carat-1-n');
