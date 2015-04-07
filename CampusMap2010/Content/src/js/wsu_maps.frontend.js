@@ -4,14 +4,11 @@
 	$.wsu_maps.frontend = {
 		defaults:{ },
 		ini:function(){
-			$.wsu_maps.is_frontend=true;
-			$.wsu_maps.state.map_jObj= $( '#' + $.wsu_maps.state.view_id  );
-			
+			$.wsu_maps.is_frontend = true;
+			$.wsu_maps.state.map_jObj = $( '#' + $.wsu_maps.state.view_id  );
 
-			//var listOffset=0;
-			//$(' [placeholder] ').defaultValue();
 			if($.wsu_maps.state.map_jObj.length){
-				$.wsu_maps.state.map_jObj.append('<img src="'+$.wsu_maps.state.siteroot+'Content/images/loading_icon.svg" id="loading"/>');
+				$.wsu.maps.apply_loader();
 				if($('.veiw_base_layout').length || $.wsu_maps.state.inview ){
 					$.wsu_maps.views.ini_map_view($.wsu_maps.setup);
 				}else{

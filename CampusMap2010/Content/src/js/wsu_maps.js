@@ -118,6 +118,7 @@ if (!Array.prototype.indexOf) {
 			listings:{
 				width:235
 			},
+			loading_html:'<img src="'+$.wsu_maps.state.siteroot+'Content/images/loading_icon.svg" />', //note: and id will be applied
 			map:{
 				zoom:15,
 				styles:[
@@ -631,6 +632,12 @@ if (!Array.prototype.indexOf) {
 		get_option:function(){//prop){
 			//the goal is that we will pull any option not directly 
 			
+		},
+		apply_loader:function(){
+			$.wsu_maps.state.map_jObj.append( $( $.wsu_maps.defaults.map.loading_html ).attr('id',"loading") );
+		},
+		remove_loader:function(){
+			$("#loading");
 		},
 		clean_map:function(){
 			var jObj = $.wsu_maps.state.map_jObj;
