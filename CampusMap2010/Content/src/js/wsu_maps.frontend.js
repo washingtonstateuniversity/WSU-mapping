@@ -52,6 +52,7 @@
 					//google.maps.event.clearListeners(map_jObj.gmap("get","map")); 
 					//$('.mapControl').remove();
 					WSU_MAP.state.map_jObj.gmap("destroy",function(){//ele){
+						WSU_MAP.state.startingUrl = "";
 						WSU_MAP.nav.push_state({},"/");
 						WSU_MAP.state.map_jObj.html('');
 						$('.mapControl').remove(); 
