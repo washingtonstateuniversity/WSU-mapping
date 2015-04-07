@@ -205,7 +205,6 @@ if (!Array.prototype.indexOf) {
 		},
 		get_option:function(){//prop){
 			//the goal is that we will pull any option not directly 
-			
 		},
 		apply_loader:function(){
 			WSU_MAP.state.map_jObj.append( $( WSU_MAP.defaults.map.loading_html ).attr('id',"loading") );

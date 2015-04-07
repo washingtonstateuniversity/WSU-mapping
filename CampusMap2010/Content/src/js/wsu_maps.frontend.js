@@ -63,6 +63,7 @@
 						}else{
 							WSU_MAP.iniMap("",WSU_MAP.setup);
 						}
+						WSU_MAP.nav.push_state({},"/");
 						$(window).trigger("resize");
 					});
 				});
