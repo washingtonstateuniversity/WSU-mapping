@@ -45,7 +45,7 @@
 				e.stopPropagation();
 				e.preventDefault();
 				
-				$.wsu_maps.listings.reset_listings();
+				$.wsu_maps.listings.reset();
 				$('#main_nav').find('.active').removeClass('active');
 				$.wsu_maps.state.map_jObj.find('input[type="text"]').val('');
 				if($('#directionsTo').is(':visible')){

@@ -651,9 +651,7 @@ if (!Array.prototype.indexOf) {
 			});
 			$.wsu_maps.state.ib=[];
 			$.wsu_maps.state.ibh=[];
-			$.wsu_maps.listings.reset_listings();
-			$.wsu_maps.listings.reset_Dirscrollbar();
-			$.wsu_maps.listings.reset_Listscrollbar();
+			$.wsu_maps.listings.reset();
 			$.wsu_maps.nav.reset_Navscrollbar();
 			
 

@@ -99,6 +99,9 @@
 				$.extend($.wsu_maps.state.apiD,{settings:settings});
 			}
 		},
+		
+		/* setup */
+		/* reset */
 		reset_Listscrollbar:function(){
 			if($.wsu_maps.state.apiL!==null){
 				$.wsu_maps.listings.destroy_Listscrollbar(function(){
@@ -106,6 +109,19 @@
 					//apiL.reinitialise();
 				});
 			}
+		},
+		reset_listings:function (){
+			if(!$('#selectedPlaceList').is($('.ini'))){
+				$.wsu_maps.listings.destroy_Dirscrollbar(function(){
+					$.wsu_maps.listings.destroy_Listscrollbar(function(){
+						$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
+						$('#selectedPlaceList').addClass('ini');
+						$('#selectedPlaceList_area').html("");
+					});
+				});
+			}
+			$('#selectedPlaceList_btn').css('display',"none");
+			$.wsu_maps.listings.reset_Listscrollbar();
 		},
 		reset_Dirscrollbar:function(){
 			if($.wsu_maps.state.apiD!==null){
@@ -115,6 +131,11 @@
 				});
 			}
 		},
+		reset:function(){
+			$.wsu_maps.listings.reset_listings();
+			$.wsu_maps.listings.reset_Dirscrollbar();
+		},
+		/* destroy */
 		destroy_Listscrollbar:function (callback){
 			if($.wsu_maps.state.apiL!==null && !$.isEmptyObject($.wsu_maps.state.apiL.jObj)){
 				$.wsu_maps.state.apiL.destroy();
@@ -133,17 +154,9 @@
 				callback();
 			}
 		},
-		reset_listings:function (){
-			if(!$('#selectedPlaceList').is($('.ini'))){
-				$.wsu_maps.listings.destroy_Dirscrollbar(function(){
-					$.wsu_maps.listings.destroy_Listscrollbar(function(){
-						$('#selectedPlaceList').width()>0?$('#selectedPlaceList_btn').trigger('click'):null;
-						$('#selectedPlaceList').addClass('ini');
-						$('#selectedPlaceList_area').html("");
-					});
-				});
-			}
-			$('#selectedPlaceList_btn').css('display',"none");
+		destroy:function(){
+			$.wsu_maps.listings.destroy_Listscrollbar();
+			$.wsu_maps.listings.destroy_Dirscrollbar();
 		},
 		autoOpenListPanel:function (callback){
 			$('#selectedPlaceList').removeClass('ini');
