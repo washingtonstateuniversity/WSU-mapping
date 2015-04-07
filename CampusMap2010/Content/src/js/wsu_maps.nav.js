@@ -113,13 +113,13 @@
 					stickToBottom:true
 					//showArrows: true
 				};
-				var pane = $("#navwrap");
+				var pane = $("#spine");
 				pane.jScrollPane(settings);
 				WSU_MAP.state.api_nav = pane.data('jsp');/**/
-				if($('#nav').height()>$('#navwrap_outer').height()){
-					$('#navwrap_outer').addClass('active');
+				if($('#nav').height()>$('#spine').height()){//@todo i am not 100% this is needed, track back and weed
+					$('#spine').addClass('active');
 				}else{
-					$('#navwrap_outer').removeClass('active');	
+					$('#spine').removeClass('active');	
 				}
 			},
 			reset_Navscrollbar:function (){
