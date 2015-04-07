@@ -39,6 +39,9 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
     filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
 }
 */
+img {
+-webkit-transform: translateZ(0px);	
+}
 img.open_marker {
   -webkit-filter: drop-shadow(0px 0px 1px #222);
   filter: drop-shadow(0px 0px 1px #222);
