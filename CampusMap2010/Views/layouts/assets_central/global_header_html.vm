@@ -66,7 +66,7 @@ $Controller.getView()
 	view_id : "centralmap",
 	view : '$view.Trim()/',
 	error_reporting : true,
-#if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end
+#if($urlQueries && $urlQueries!="")	startingUrl : '$urlQueries', #end
 #if($activePlace && $activePlace != "")	activePlace : $!activePlace, #end
 	campus : #if($campus.name!="")'$campus.name'#else "Pullman" #end,
 #if($campus.url!="")	url : '$campus.url', #end
