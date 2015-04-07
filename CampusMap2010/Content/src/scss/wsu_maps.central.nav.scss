@@ -12,6 +12,20 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 	z-index: 999;
 	min-height:100%;
 	max-height:100%;
+	.spine-sitenav>ul>li:first-child>a,
+	.spine-sitenav>ul>li.active:first-child>a{
+		background: none;
+		padding-left: 0px;
+	}
+	nav ul li{
+		border:none medium;	
+		&.parent.opened>a:after, &.parent>a:after,
+		&.parent:not(.active)>a:after{
+			content:"";	
+		}
+		
+	}
+	
 	#glue {
 		left: 0;
 		position: static;
@@ -53,7 +67,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 			}
 			#main_nav {
 				li {
-					width: 165px;
+					//width: 165px;
 					border-bottom:1px solid #e4e4e4;
 					&.off_place_action{
 						border-bottom:none medium;
