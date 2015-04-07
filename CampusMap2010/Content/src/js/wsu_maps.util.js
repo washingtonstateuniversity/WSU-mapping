@@ -1,13 +1,13 @@
 /*jshint -W059 */
 /*jshint -W054 */
-(function($,window) {
-	$.wsu_maps.util = {
+(function($,window,WSU_MAP) {
+	WSU_MAP.util = {
 		debug_positional_log:function(){
 			var caller=arguments.callee.caller.caller;
 			if(caller!==null){
 				window._d(caller.name);
 			}
-			/*$.wsu_maps.call();
+			/*WSU_MAP.call();
 			var native = window.alert;
 			window.alert = function(){
 				window._d('alerting...');
@@ -49,7 +49,7 @@
 			return (!isNaN(parseFloat(n))&& isFinite(n)) || n.match(/^\d+$/) ;
 		},
 		split:function (val){ return val.split( /,\s*/ ); },
-		extractLast:function (term){ return $.wsu_maps.util.split( term ).pop(); },
+		extractLast:function (term){ return WSU_MAP.util.split( term ).pop(); },
 		
 		
 		
@@ -68,7 +68,7 @@
 			}
 		},
 		parseUri:function  (str) {
-			var	o   = $.wsu_maps.util.parseUri_obj.options,
+			var	o   = WSU_MAP.util.parseUri_obj.options,
 				m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
 				uri = {},
 				i   = 14;
@@ -93,7 +93,7 @@
 	
 		timers_arr:[],
 		clearCount:function (timer){
-			var t = $.wsu_maps.util.timers_arr;
+			var t = WSU_MAP.util.timers_arr;
 			if(window._defined(t[timer])){
 				/// clear the time from timer
 				window.clearTimeout(t[timer]);
@@ -103,8 +103,8 @@
 			}
 		},
 		setCount:function (timer,time,func){
-			var t = $.wsu_maps.util.timers_arr;
-			$.wsu_maps.util.clearCount(timer);
+			var t = WSU_MAP.util.timers_arr;
+			WSU_MAP.util.clearCount(timer);
 			if(t[timer]===0||!window._defined(t[timer])){
 				t[timer]=window.setTimeout(function(){
 					func();                                                 
@@ -113,7 +113,7 @@
 		},
 
 		getCanvasXY:function (caurrentLatLng){
-			var map = $.wsu_maps.state.map_inst;
+			var map = WSU_MAP.state.map_inst;
 			var scale = Math.pow(2, map.getZoom());
 			var nw = new google.maps.LatLng(
 				map.getBounds().getNorthEast().lat(),
@@ -174,7 +174,7 @@
 					if($.isFunction(options.onClose)){
 						options.onClose(jObj);
 					}
-					$.wsu_maps.util.close_dialog_modle(jObj);
+					WSU_MAP.util.close_dialog_modle(jObj);
 				}
 			};
 			options = $.extend(defaults,options);
@@ -224,7 +224,7 @@
 					}
 				},
 				close: function() {
-					$.wsu_maps.util.close_dialog_modle($( "#wsumap_mess" ));
+					WSU_MAP.util.close_dialog_modle($( "#wsumap_mess" ));
 				}
 			});
 		},	
@@ -270,7 +270,7 @@
 		
 						if(typeof(value) === "object") { //If it is an array,
 							dumped_text += level_padding + "'" + item + "' ...\n";
-							dumped_text += $.wsu_maps.util.dump(value,limit,level+1);
+							dumped_text += WSU_MAP.util.dump(value,limit,level+1);
 						} else {
 							dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
 						}
@@ -317,4 +317,4 @@
 				}, options.delay);
 			});
 	};
-})(jQuery,window);
+})(jQuery,window,jQuery.wsu_maps||(jQuery.wsu_maps={}));

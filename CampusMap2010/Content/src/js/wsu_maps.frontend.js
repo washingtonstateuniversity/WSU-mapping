@@ -8,7 +8,7 @@
 			$.wsu_maps.state.map_jObj = $( '#' + $.wsu_maps.state.view_id  );
 
 			if($.wsu_maps.state.map_jObj.length){
-				$.wsu.maps.apply_loader();
+				$.wsu_maps.apply_loader();
 				if($('.veiw_base_layout').length || $.wsu_maps.state.inview ){
 					$.wsu_maps.views.ini_map_view($.wsu_maps.setup);
 				}else{

@@ -37,7 +37,7 @@
 				$.wsu_maps.nav.setup_Navscrollbar();
 				
 				if(_url===null){
-					url = encodeURI($(self).find('a:first').attr('href').split('=')[1]);
+					url = encodeURI( $(self).find('a:first').attr('href').split('=')[1] );
 				}
 				$.wsu_maps.updateMap(url);
 			}else{
