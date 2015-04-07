@@ -130,6 +130,7 @@
 				}
 			},
 			destroy_Navscrollbar:function (callback){
+				WSU_MAP.state.api_nav = WSU_MAP.state.api_nav || null;
 				if(WSU_MAP.state.api_nav!==null && !$.isEmptyObject(WSU_MAP.state.api_nav.jObj)){
 					WSU_MAP.state.api_nav.scrollToY(0);
 					WSU_MAP.state.api_nav.destroy();

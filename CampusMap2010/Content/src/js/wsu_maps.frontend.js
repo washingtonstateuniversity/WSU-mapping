@@ -9,11 +9,7 @@
 	
 				if(WSU_MAP.state.map_jObj.length){
 					WSU_MAP.apply_loader();
-					if($('.veiw_base_layout').length || WSU_MAP.state.inview ){
-						WSU_MAP.views.ini_map_view(WSU_MAP.setup);
-					}else{
-						WSU_MAP.iniMap("",WSU_MAP.setup);
-					}
+					WSU_MAP.iniMap("",WSU_MAP.setup);
 					if(WSU_MAP.state.map_jObj.length){
 						
 						$(window).resize(function(){
@@ -56,14 +52,10 @@
 					//google.maps.event.clearListeners(map_jObj.gmap("get","map")); 
 					//$('.mapControl').remove();
 					WSU_MAP.state.map_jObj.gmap("destroy",function(){//ele){
+						WSU_MAP.nav.push_state({},"/");
 						WSU_MAP.state.map_jObj.html('');
 						$('.mapControl').remove(); 
-						if($('.veiw_base_layout').length || WSU_MAP.state.inview ){
-							WSU_MAP.views.ini_map_view(WSU_MAP.setup);
-						}else{
-							WSU_MAP.iniMap("",WSU_MAP.setup);
-						}
-						WSU_MAP.nav.push_state({},"/");
+						WSU_MAP.iniMap("",WSU_MAP.setup);
 						$(window).trigger("resize");
 					});
 				});

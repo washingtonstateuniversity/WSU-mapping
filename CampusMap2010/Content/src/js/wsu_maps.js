@@ -53,6 +53,10 @@ if (!Array.prototype.indexOf) {
 		},
 		
 		iniMap:function (url,callback){
+			if($('.veiw_base_layout').length || WSU_MAP.state.inview ){
+				WSU_MAP.views.ini_map_view(WSU_MAP.setup);
+				return;
+			}
 			/*var padder = 130;
 			if($('.layoutfree').lenght){
 				padder = 0;
