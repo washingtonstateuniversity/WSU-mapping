@@ -1318,7 +1318,7 @@ where p.status = 3
             if (!string.IsNullOrEmpty(callback)) {
                 json = callback + "(" + json + ")";
             }
-            Response.ContentType = "application/json; charset=UTF-8";
+            Response.ContentType = "text/javascript; charset=UTF-8";
             RenderText(json);
         }
 
