@@ -124,7 +124,7 @@ if (!Array.prototype.indexOf) {
 		setup:function (){//jObj){
 			$('#loading').remove();
 			var used_url = WSU_MAP.state.startingUrl;
-			if( window._defined( used_url ) && used_url!==null && used_url!="" ){
+			if( window._defined( used_url ) && used_url!==null && used_url!=="" ){
 				var url = encodeURI( used_url.indexOf("&") ? used_url.split('=')[1].split('&')[0] : used_url.split('=')[1] );
 				WSU_MAP.updateMap(url,false,function(){
 						if( parseInt( used_url.split('=')[1], 10) > 0 ){
@@ -143,8 +143,7 @@ if (!Array.prototype.indexOf) {
 					WSU_MAP.nav.menuDressChild($('#main_nav a[href$="'+link+'"]'));
 				}		
 			}
-		
-		
+			
 			WSU_MAP.listings.setup_listingsBar(WSU_MAP.state.map_jObj);
 			WSU_MAP.directions.setup_directions();
 			WSU_MAP.nav.setup_nav();

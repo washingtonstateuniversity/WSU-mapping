@@ -50,21 +50,19 @@
 				<!-- /CONTENT -->
 				<!-- SPINE -->
 				<div id="spine" class="spine-column shelved color bleed">
-					<div id="glue" class="spine-glue">			
-						<div id="glue" class="spine-glue">
-							<header class="spine-header">
-								<a href="http://www.wsu.edu/" id="wsu-signature" class="spine-signature">Washington State University</a>
-							</header>
-							<form action="#" id="placeSearch">
-								<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
-							</form>
-							<section id="spine-navigation" class="spine-navigation">
-								<nav class="spine-sitenav">
-									#parse("layouts/assets_central/main_menu.vm")
-								</nav>
-							</section>
-							#parse("layouts/assets_central/footer.vm")
-						</div>
+					<div id="glue" class="spine-glue">
+						<header class="spine-header">
+							<a href="http://www.wsu.edu/" id="wsu-signature" class="spine-signature">Washington State University</a>
+						</header>
+						<form action="#" id="placeSearch">
+							<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
+						</form>
+						<section id="spine-navigation" class="spine-navigation">
+							<nav class="spine-sitenav">
+								#parse("layouts/assets_central/main_menu.vm")
+							</nav>
+						</section>
+						#parse("layouts/assets_central/footer.vm")
 					</div><!--/glue-->
 				</div><!--/spine-->
 				<!-- /SPINE -->
