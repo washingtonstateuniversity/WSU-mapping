@@ -5,13 +5,17 @@
 	max-height: 285px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	padding-left: 5px;
-	padding-right: 20px;
-	width: 120px;
+	
+	//padding-right: 20px;
+	width: 175px;
 	z-index: 999;
 	border: 1px solid $color_french_gray_approx;
 	//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: 0 5px 10px -5px $black_55;
+	li{
+		padding-left: 5px;	
+	}
+
 	em {
 		border-bottom: 1px solid $color_celeste_approx;
 		color: $color_storm_dust_approx;
@@ -21,17 +25,32 @@
 		margin-top: 5px;
 	}
 	.ui-menu-item a {
-		font-size: 10.5px;
+		font-size: 0.65em;
 		color: $color_WSU_Gray;
 		margin: 3px 0 2px;
 		display: block;
 		border: 1px transparent solid;
+		line-height: 1.45em;
 		&.ui-state-hover {
-			font-size: 10.5px;
-			color: $color_WSU_Crimson;
-			margin: 3px 0 2px;
-			display: block;
+			color:#E7E7E7;
+			//margin: 3px 0 2px;
+			//display: block;
 			border: 1px $color_celeste_approx solid;
 		}
 	}
+	.ui-state-focus{
+		background:#313131;
+		&.related{
+			background:none;
+			border: 1px transparent solid;
+			a{
+				cursor:default;
+			}
+		}
+		a{
+			color:#E7E7E7;
+			
+		}
+	}
+	
 }

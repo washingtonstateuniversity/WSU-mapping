@@ -57,8 +57,12 @@
 						
 						$( "#placeSearch input[type=text]" ).autocomplete("close");
 					},
+					autocompleteselect:function(e, ui) {
+						var id = ui.item.place_id;
+						WSU_MAP.places.getSignlePlace(id);
+					},
 					focus: function( event, ui ) {
-						$( "#placeSearch [type=text]" ).val( ui.item.label );
+						//$( "#placeSearch [type=text]" ).val( ui.item.label );
 						WSU_MAP.search.focuseitem={
 							label:ui.item.label,
 							id:ui.item.place_id
@@ -70,12 +74,14 @@
 					 }
 				}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 					var text =item.label;
+					var related = false;
 					if(item.related==="header"){
+						related = true;
 						text = "<em>Related search items</em>";
 					}else{
 						text ="<a>" + text.replace( new RegExp( "(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi" ), "<strong>$1</strong>" )+"</a>";
 					}
-					return $( "<li></li>" )
+					return $( "<li class='"+(related?"related":"")+"'></li>" )
 						.data( "ui-autocomplete-item", item )
 						.append( text )
 						.appendTo( ul );
