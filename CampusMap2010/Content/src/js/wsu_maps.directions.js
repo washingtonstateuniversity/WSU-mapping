@@ -129,56 +129,47 @@
 				});
 			},
 			hereToThere:function (){
-				var jObj = WSU_MAP.state.map_jObj;
+				
 				if(WSU_MAP.state.cTo===""||WSU_MAP.state.cFrom ===""){
 					return false;
 				}
 				WSU_MAP.directions.clearHereToThere();
-				
-				$.colorbox.remove();
-				$.colorbox({
-					rel:'gouped',
-					html:function(){
-						return '<div id="modeArea"><h2>Choose Mode</h2><select id="trasMode"><option value="Walk">Walk</option><option value="Bike">Bike</option><option value="Car">Car</option><option value="Transit">Transit</option></select><br/><input type="Submit" value="Continue" name="modeSubmit"/></div>';
-					},
-					scrolling:false,
-					opacity:0.7,
-					transition:"none",
-					width:275,
-					open:true,
-					onComplete:function(){
-						//if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");
-						$('#modeArea [type="Submit"]').off().on('click',function(e){
-							$.colorbox.close();
-							WSU_MAP.util.nullout_event(e);
-							var mode;
-							switch($('#trasMode').val()){
-								case "Walk":
-									mode = google.maps.DirectionsTravelMode.WALKING;
-									break;
-								case "Bike":
-									mode = google.maps.DirectionsTravelMode.BICYCLING;
-									break;
-								case "Car":
-									mode = google.maps.DirectionsTravelMode.DRIVING;
-									break;
-								case "Transit":
-									mode = google.maps.DirectionsTravelMode.TRANSIT;
-									break;
-							}
-							jObj.gmap('displayDirections',
-								{origin:WSU_MAP.state.cFrom,destination:WSU_MAP.state.cTo,travelMode: mode},
-								{draggable: true},
-								function(results){
-									WSU_MAP.state.cFrom="";
-									WSU_MAP.state.cTo="";
-									WSU_MAP.state.hasDirection=true;
-									$('#loading').remove();
-									WSU_MAP.directions.display_directions(results);
+				WSU_MAP.util.popup_message({
+						html:'<div id="modeArea"><h2>Choose Mode</h2><select id="trasMode"><option value="Walk">Walk</option><option value="Bike">Bike</option><option value="Car">Car</option><option value="Transit">Transit</option></select><br/><input type="Submit" value="Continue" name="modeSubmit"/></div>',
+						width:275,
+						onCreate:function(){//jObj){
+							$('#modeArea [type="Submit"]').off().on('click',function(e){
+								WSU_MAP.util.nullout_event(e);
+								var jObj = WSU_MAP.state.map_jObj;
+								var mode;
+								switch($('#trasMode').val()){
+									case "Walk":
+										mode = google.maps.DirectionsTravelMode.WALKING;
+										break;
+									case "Bike":
+										mode = google.maps.DirectionsTravelMode.BICYCLING;
+										break;
+									case "Car":
+										mode = google.maps.DirectionsTravelMode.DRIVING;
+										break;
+									case "Transit":
+										mode = google.maps.DirectionsTravelMode.TRANSIT;
+										break;
+								}
+								jObj.gmap('displayDirections',
+									{origin:WSU_MAP.state.cFrom,destination:WSU_MAP.state.cTo,travelMode: mode},
+									{draggable: true},
+									function(results){
+										WSU_MAP.state.cFrom="";
+										WSU_MAP.state.cTo="";
+										WSU_MAP.state.hasDirection=true;
+										$('#loading').remove();
+										WSU_MAP.directions.display_directions(results);
+								});
 							});
-						});
-					}
-				});	
+						}
+					});
+
 			
 			},
 			clearHereToThere:function (){
@@ -209,7 +200,7 @@
 										'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 									'</from></div>',
 						width:450,
-						onCreate:function(jObj){
+						onCreate:function(){//jObj){
 							WSU_MAP.general.prep_html();
 							$('#emailDirs [type="Submit"]').off().on('click',function(e){
 								WSU_MAP.util.nullout_event(e);
