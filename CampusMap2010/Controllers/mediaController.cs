@@ -992,39 +992,38 @@ namespace campusMap.Controllers
             byte[] contents = null;
 
             String cachePath = getRootPath();
+            if (File.Exists(cachePath + path)) { //@todo again needs a fallback image
+                try  {
+                    contents = File.ReadAllBytes(cachePath + path);
+                }
+                catch (Exception ex)  {
+                    log.Error("Error uploading file", ex);
+                }
+           
+                HttpContext.Response.ClearContent();
+                HttpContext.Response.ClearHeaders();
+                if (contents != null)
+                {
+                    String contentDisposition = "inline; filename=\"" + path + "\"";
 
-            try
-            {
-                contents = File.ReadAllBytes(cachePath + path);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error uploading file", ex);
-            }
+                    Response.Clear();
+                    String contentType = "image/gif";
 
-            HttpContext.Response.ClearContent();
-            HttpContext.Response.ClearHeaders();
-            if (contents != null)
-            {
-                String contentDisposition = "inline; filename=\"" + path + "\"";
-
-                Response.Clear();
-                String contentType = "image/gif";
-
-                // Setup the response
-                HttpContext.Response.Buffer = true;
-                HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
-                DateTime dt = DateTime.Now.AddYears(1);
-                HttpContext.Response.Cache.SetExpires(dt);
-                HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
-                HttpContext.Response.Cache.SetValidUntilExpires(true);
-                HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-                HttpContext.Response.Expires = 780000;
-                HttpContext.Response.ContentType = contentType;
+                    // Setup the response
+                    HttpContext.Response.Buffer = true;
+                    HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
+                    DateTime dt = DateTime.Now.AddYears(1);
+                    HttpContext.Response.Cache.SetExpires(dt);
+                    HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
+                    HttpContext.Response.Cache.SetValidUntilExpires(true);
+                    HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+                    HttpContext.Response.Expires = 780000;
+                    HttpContext.Response.ContentType = contentType;
                 
-                // Write the file to the response
-                HttpContext.Response.BinaryWrite(contents);
-                //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+                    // Write the file to the response
+                    HttpContext.Response.BinaryWrite(contents);
+                    //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+                }
             }
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
