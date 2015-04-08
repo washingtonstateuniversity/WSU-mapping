@@ -22,7 +22,7 @@
 	<noscript><style>#spine .spine-sitenav ul ul li { display: block !important; }</style></noscript>
 
 	<!-- DOCS -->
-	<link type="text/plain" rel="author" href="http://repo.wsu.edu/spine/1/authors.txt">
+	<link type="text/plain" rel="author" href="https://repo.wsu.edu/spine/1/authors.txt">
 	<link type="text/html" rel="help" href="https://github.com/washingtonstateuniversity/WSU-mapping">
 
 
@@ -128,14 +128,14 @@ var map_view = $options_block;
 #*$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")*#
 $scriptsService.Css("~/Content/${jsfolder.Trim()}/css/admin.styles.css",true)
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
-<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.1.10.x.js"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
-<script type="text/javascript" src="http://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
+<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.1.10.x.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
 
 <script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 
