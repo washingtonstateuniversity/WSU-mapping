@@ -53,8 +53,6 @@
 			setup_embeder:function (){
 				$('#embed').off().on("click",function(e){
 					WSU_MAP.util.nullout_event(e);
-					//var trigger=$(this);
-					//$.colorbox.remove();
 					WSU_MAP.general.makeEmbeder();
 				});
 			},
@@ -106,7 +104,7 @@
 							function dynoSize(){
 								if(!$('#cSize').is(':visible')){
 									$('#cSize').slideToggle('fast', function() {
-									   $.colorbox.resize();
+									   //$.colorbox.resize();
 									});
 								}
 								$('#cSize input').off().on('keyup',function(){
@@ -167,9 +165,6 @@
 						width:450,
 						onCreate:function(jObj){
 							WSU_MAP.general.prep_html();
-							if($('#colorbox #cb_nav').length){
-								$('#colorbox #cb_nav').html("");
-							}
 							$.getJSON("/public/get_admindepartments_list.castle",function(data){
 								$.each(data,function(i,val){
 									$('[name="Deparments"]').append("<option value='"+val.name+"("+val.id+")'>"+val.name+"</option>");
@@ -187,8 +182,6 @@
 								WSU_MAP.util.nullout_event(e);
 								$('#valid').remove();
 								var valid=true;
-								
-	
 								
 								$.each($('#emailRequest [required]'),function(){
 									if($(this).val()===""){

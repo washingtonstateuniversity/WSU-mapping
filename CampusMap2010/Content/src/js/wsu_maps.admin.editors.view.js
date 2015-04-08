@@ -97,21 +97,6 @@
 				$('#height').on('keyup',function(){
 					$('.heightOutput').text($(this).val());
 				});
-				/*
-				$('[href$="guidelines/dimensions.aspx"]').on('click',function(e){
-					WSU_MAP.util.nullout_event(e);
-					$("<div>").load($(this).attr('href')+' #main',function(data){
-						$.colorbox({html:data});
-					});
-				});
-				*/
-				
-				
-				
-				
-				
-				
-				
 			},
 			init_alaisChecker:function(){
 				var waiting = false;
@@ -284,19 +269,19 @@
 						$.getJSON(WSU_MAP.state.siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
 							if(data==="false"){
 								alert("false");
-								$.colorbox({
-									html:function(){
-										return '<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3></div>';
-									},
-									scrolling:false,
-									opacity:0.7,
-									transition:"none",
-									open:true,
-									onComplete:function(){
-										WSU_MAP.general.prep_html();
-										$.colorbox.resize();
+
+								WSU_MAP.util.popup_message({
+									html:'<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/></div>',
+									width:450,
+									onCreate:function(jObj){
+										$('#wsumap_errorClose').off().on("click",function(e){
+											WSU_MAP.util.nullout_event(e);
+											jObj.dialog( "close" );
+										});
 									}
 								});
+								
+								
 								return false;
 							}
 							self.closest('fieldset').find('.onsubfliterList').html(function(){
