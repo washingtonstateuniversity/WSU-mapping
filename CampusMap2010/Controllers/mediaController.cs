@@ -1023,7 +1023,6 @@ namespace campusMap.Controllers
                             send_static_map(contents, path);
                         }
                     }
-                    send_static_map(contents, path);
                 }
             }
             HttpContext.Current.ApplicationInstance.CompleteRequest();

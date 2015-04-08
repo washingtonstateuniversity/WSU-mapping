@@ -1502,7 +1502,7 @@ namespace campusMap.Controllers {
             }
         }
         public static void makePlaceStaticMap(place place) {
-            string url = "http://maps.google.com/staticmap?center=" + place.getLat() + "," + place.getLong() + "&size=250x145&maptype=mobile&markers=" + place.getLat() + "," + place.getLong() + ",red&sensor=false";
+            string url = "https://maps.googleapis.com/maps/api/staticmap?center=" + place.getLat() + "," + place.getLong() + "&size=250x145&maptype=mobile&markers=" + place.getLat() + "," + place.getLong() + ",red&sensor=false";
             String uploadPath = getRootPath();
 
             String imagePath = @"";
