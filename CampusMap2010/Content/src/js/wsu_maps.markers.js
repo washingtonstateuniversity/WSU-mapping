@@ -170,7 +170,6 @@
 					if(WSU_MAP.state.active.marker !== null){
 						WSU_MAP.markers.unhighlight_marker(WSU_MAP.state.active.marker);
 					}
-					WSU_MAP.state.active.marker = null;
 					WSU_MAP.markers.highlight_marker(WSU_MAP.state.markerLog[i]);
 					WSU_MAP.state.active.marker = WSU_MAP.state.markerLog[i];
 					$(".open_marker").removeClass('open_marker');

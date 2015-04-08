@@ -1124,6 +1124,8 @@ namespace campusMap.Controllers
                             break;
                     }
                     imageService.process(id, processed_image, newFile, methodChoice, p, h, w, dimensional, protect, mark, image.ext);
+                } else {
+                    //@todo put in placeholder
                 }
             }
 
