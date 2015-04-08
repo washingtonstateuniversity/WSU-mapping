@@ -164,7 +164,6 @@
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
 						markerCallback( made_marker );
 					}
-					
 				})
 				.click(function() {
 					if(WSU_MAP.state.active.marker !== null){

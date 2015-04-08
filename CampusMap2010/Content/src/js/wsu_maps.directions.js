@@ -95,18 +95,14 @@
 									}
 								});
 						} else {
-							$.colorbox({
-								html:function(){
-									return '<div id="errorReporting"><h2>Error</h2><h3>Google couldn\'t pull up the directions, Please try again</h3><h4>Google was having a hard time finding your location for this reason:'+ status +' </h4></div>';
-								},
-								scrolling:false,
-								opacity:0.7,
-								transition:"none",
+							WSU_MAP.util.popup_message({
+								html:'<div id="errorReporting"><h2>Error</h2><h3>Google couldn\'t pull up the directions, Please try again</h3><h4>Google was having a hard time finding your location for this reason:'+ status +' </h4><input type="Submit" id="wsumap_errorClose" value="Close"/></div>',
 								width:450,
-								open:true,
-								onComplete:function(){
-									WSU_MAP.general.prep_html();
-									$.colorbox.resize();
+								onCreate:function(jObj){
+									$('#wsumap_errorClose').off().on("click",function(e){
+										WSU_MAP.util.nullout_event(e);
+										jObj.dialog( "close" );
+									});
 								}
 							});
 						}
