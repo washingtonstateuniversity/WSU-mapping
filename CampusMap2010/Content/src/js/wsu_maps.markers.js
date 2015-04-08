@@ -80,12 +80,13 @@
 			},
 			get_lat_zIndex: function(latitude){
 				var intLat = parseInt( latitude.toString().split('.').join('').substring(0, 8) );
-				/*
+				
 				window._d( latitude );
 				window._d( intLat*(-1) );
-				*/
-				//return intLat*(-1);
-				return 1;//intLat/3;
+				
+				//return 1;//intLat/3;
+				return intLat*(-1);
+				
 			},
 			make_Marker:function (i,id,marker_obj,markerCallback){	
 				var jObj = WSU_MAP.state.map_jObj;
@@ -150,13 +151,16 @@
 					made_marker.marker_position = marker_obj.marker_position;
 					made_marker.labels = marker_obj.labels;
 					made_marker.prime_image = marker_obj.prime_image;
+
 					made_marker.setZIndex(made_marker.marker_style.zFrezze);
 					WSU_MAP.state.markerLog[i]=made_marker;
 					WSU_MAP.state.markerbyid[id] = WSU_MAP.state.markerLog[i];
 					WSU_MAP.infobox.make_InfoWindow(i,made_marker);
 					WSU_MAP.infobox.make_ToolTip(i,made_marker);
 					WSU_MAP.infobox.apply_panoramas(made_marker);
-	
+					var img = $('img[src*="'+marker_style.icon.url+'"]');
+					img.css({"-webkit-transform":"translateZ(0px)"});
+					img.closest('div').css({"-webkit-transform":"translateZ(0px)"});
 					// these too are needing to be worked together
 					//jObj.gmap('setOptions', {'zIndex':1}, WSU_MAP.state.markerLog[i]);
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){

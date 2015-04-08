@@ -12,6 +12,7 @@
 			
 	
 			loadData:function (data,callback,markerCallback){
+				window._d("loading data");
 				//var jObj = WSU_MAP.state.map_jObj;
 				if( window._defined(data.shapes) && !$.isEmptyObject(data.shapes)){
 					$.each( data.shapes, function(i, shape) {

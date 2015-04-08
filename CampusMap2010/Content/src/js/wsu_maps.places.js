@@ -78,6 +78,7 @@
 				}
 			},
 			reloadPlaces:function (){
+				window._d("start to reload places");
 				var url=WSU_MAP.state.siteroot+"public/get_places.castle";
 				var ids;
 				if( WSU_MAP.state.embeded_place_ids !== false ){
@@ -94,6 +95,7 @@
 					window._d(ids);
 					$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 						window._d(data);
+						window._d("loaded place obj");
 						/*$.each(WSU_MAP.state.ib, function(i) {
 							if( window._defined(WSU_MAP.state.ib[i]) && WSU_MAP.state.ib[i].opened === true){
 								WSU_MAP.state.ib[i].close();
@@ -102,6 +104,7 @@
 						WSU_MAP.general.loadData(data,null,function(){//marker){
 							//ib[0].open(WSU_MAP.state.map_inst, marker);
 							//cur_mid = mid[0];
+							window._d("applied loaded data");
 						});
 						WSU_MAP.general.prep_html();
 					});

@@ -123,8 +123,10 @@ if (!Array.prototype.indexOf) {
 
 		setup:function (){//jObj){
 			$('#loading').remove();
+			window._d("setting up map state");
 			var used_url = WSU_MAP.state.startingUrl;
 			if( window._defined( used_url ) && used_url!==null && used_url!=="" ){
+				window._d("appling a url to update against");
 				var url = encodeURI( used_url.indexOf("&") ? used_url.split('=')[1].split('&')[0] : used_url.split('=')[1] );
 				WSU_MAP.updateMap(url,false,function(){
 						if( parseInt( used_url.split('=')[1], 10) > 0 ){
@@ -148,17 +150,18 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.directions.setup_directions();
 				WSU_MAP.nav.setup_nav();
 				WSU_MAP.general.setup_embeder();
+				WSU_MAP.setup_pdfprints();
 			}
 			WSU_MAP.errors.addErrorReporting();
-			WSU_MAP.setup_pdfprints();
-			if($('.layoutfree').length){
+			
+			/*if($('.layoutfree').length){
 				$('a').not('#nav a').on("click",function(e){
 					WSU_MAP.util.nullout_event(e);
 				});
 				$('.ui-tabs-panel .content a').on("click",function(e){
 					WSU_MAP.util.nullout_event(e);
 				});
-			}
+			}*/
 			if($( "#placeSearch input[type=text]" ).length){
 				WSU_MAP.search.setup_mapsearch();
 			}
