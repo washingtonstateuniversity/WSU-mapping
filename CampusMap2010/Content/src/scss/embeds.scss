@@ -1,8 +1,8 @@
 @charset "UTF-8";
 .WSU_MAPS_NS{ //the NS should be a var.. 
--webkit-transform: translateZ(0px);	
-div{
 	-webkit-transform: translateZ(0px);	
+	div{
+		-webkit-transform: translateZ(0px);	
 	}
 	&{
 		@import 'wsu_maps.embed_reset';
