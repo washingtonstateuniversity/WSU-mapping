@@ -672,4 +672,4 @@ var i=i||-1;
 		}
 	});
 
-})(jQuery);
+})(jQuery,window,jQuery.wsu_maps||(jQuery.wsu_maps={}));

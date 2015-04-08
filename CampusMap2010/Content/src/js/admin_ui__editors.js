@@ -1,9 +1,5 @@
 var campus_latlng_str=campus_latlng_str||"";
-$.wsu_maps.admin.editors = {
-	place:{},
-	geometrics:{},
-	media:{}
-};
+
 /*
  * EDITOR CONTORL SCRIPTS
  */

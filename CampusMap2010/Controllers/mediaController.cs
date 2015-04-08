@@ -999,35 +999,44 @@ namespace campusMap.Controllers
                 catch (Exception ex)  {
                     log.Error("Error uploading file", ex);
                 }
-           
+                 
                 HttpContext.Response.ClearContent();
                 HttpContext.Response.ClearHeaders();
-                if (contents != null)
-                {
-                    String contentDisposition = "inline; filename=\"" + path + "\"";
-
-                    Response.Clear();
-                    String contentType = "image/gif";
-
-                    // Setup the response
-                    HttpContext.Response.Buffer = true;
-                    HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
-                    DateTime dt = DateTime.Now.AddYears(1);
-                    HttpContext.Response.Cache.SetExpires(dt);
-                    HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
-                    HttpContext.Response.Cache.SetValidUntilExpires(true);
-                    HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-                    HttpContext.Response.Expires = 780000;
-                    HttpContext.Response.ContentType = contentType;
-                
-                    // Write the file to the response
-                    HttpContext.Response.BinaryWrite(contents);
-                    //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+                if (contents != null) {
+                    send_static_map(contents, path);
+                }
+            } else {
+                if (!String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["id"])) {
+                    String id = HttpContext.Current.Request.Params["id"];
+                    place item = ActiveRecordBase<place>.Find(int.Parse(id));
+                    placeController.makePlaceStaticMap(item);
+                    send_static_map(contents, path);
                 }
             }
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
+        public void send_static_map(byte[] contents, String path) {
+            String contentDisposition = "inline; filename=\"" + path + "\"";
+
+            Response.Clear();
+            String contentType = "image/gif";
+
+            // Setup the response
+            HttpContext.Response.Buffer = true;
+            HttpContext.Response.AddHeader("Content-Length", contents.Length.ToString());
+            DateTime dt = DateTime.Now.AddYears(1);
+            HttpContext.Response.Cache.SetExpires(dt);
+            HttpContext.Response.Cache.SetMaxAge(new TimeSpan(dt.ToFileTime()));
+            HttpContext.Response.Cache.SetValidUntilExpires(true);
+            HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+            HttpContext.Response.Expires = 780000;
+            HttpContext.Response.ContentType = contentType;
+
+            // Write the file to the response
+            HttpContext.Response.BinaryWrite(contents);
+            //log.Info("Finished download for image id " + id + ", length: " + contents.Length.ToString() + " bytes");
+        }
 
         // h = height , w = width , p = percent, m = method , protect= stop sizing up of image, pre = prefix to image name 
         [SkipFilter()]

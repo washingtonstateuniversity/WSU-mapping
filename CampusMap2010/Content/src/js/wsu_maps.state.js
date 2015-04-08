@@ -1,4 +1,3 @@
-// JavaScript Document
 (function($,window,WSU_MAP) {
 	$.extend( WSU_MAP, {
 		state:{

@@ -1153,4 +1153,14 @@ var image_count=image_count||-1;
 	//WSU_MAP.admin.ini();
 		}
 	});
+	
+	
+	$.extend( WSU_MAP.admin, {
+		editors : {
+			place:{},
+			geometrics:{},
+			media:{}
+		},
+	});
+
 })(jQuery,window,jQuery.wsu_maps||(jQuery.wsu_maps={}));

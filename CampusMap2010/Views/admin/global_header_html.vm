@@ -116,6 +116,7 @@ $Controller.getView()
 
 
 <script type="text/javascript">
+var siteroot = '$site.Trim()';
 var map_view = $options_block;
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))

@@ -134,8 +134,8 @@ module.exports = function(grunt) {
 					'src/js/jquery.ui.map.overlays.js',
 					'src/js/infobox-1.1.12.js',
 
-					'src/js/wsu_maps.defaults.js',
 					'src/js/wsu_maps.state.js',
+					'src/js/wsu_maps.defaults.js',
 					'src/js/wsu_maps.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
@@ -229,8 +229,9 @@ module.exports = function(grunt) {
 					'src/js/infobox-1.1.12.js',
 				
 					'src/js/utilities_general.js',
-					'src/js/wsu_maps.defaults.js',
 					'src/js/wsu_maps.state.js',
+					'src/js/wsu_maps.defaults.js',
+					
 					'src/js/wsu_maps.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
