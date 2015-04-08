@@ -268,8 +268,7 @@
 					}else{
 						$.getJSON(WSU_MAP.state.siteroot+"public/get_"+self.val()+"_list.castle?callback=?",function(data){
 							if(data==="false"){
-								alert("false");
-
+								
 								WSU_MAP.util.popup_message({
 									html:'<div id="errorReporting"><h2>Error</h2><h3>It seems there was nothing returned.</h3><input type="Submit" id="wsumap_errorClose" value="Close"/></div>',
 									width:450,
@@ -280,8 +279,7 @@
 										});
 									}
 								});
-								
-								
+								window._d(data);
 								return false;
 							}
 							self.closest('fieldset').find('.onsubfliterList').html(function(){

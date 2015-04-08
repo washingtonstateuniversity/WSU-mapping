@@ -137,6 +137,7 @@
 				options.clean=true;
 			}
 			var defaults = {
+				show_close:false,
 				autoOpen: true,
 				show: {
 					effect: "scale",
@@ -155,6 +156,10 @@
 				draggable : false,
 				buttons_parts:{},
 				create:function(){
+					jObj.find('.infoClose').off().on("click",function(e){
+						WSU_MAP.util.nullout_event(e);
+						jObj.dialog( "close" );
+					});
 					if(options.clean){
 						$('.ui-dialog-titlebar').remove();
 						$(".ui-dialog-buttonpane").remove();
@@ -179,8 +184,8 @@
 			};
 			options = $.extend(defaults,options);
 
-
-			jObj.html( (typeof options.html === 'string' || options.html instanceof String) ? options.html : options.html.html() );
+			var closer = options.show_close?'<span class="tabedBox infoClose">X</span>':'';
+			jObj.html( ( (typeof options.html === 'string' || options.html instanceof String) ? options.html : options.html.html() ) + closer );
 			var buttons_parts = {};
 			$.each(options.buttons_parts,function(i,v){
 				buttons_parts[v.name]=function(){

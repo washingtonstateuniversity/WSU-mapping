@@ -24,7 +24,7 @@
 							$('.mapControl').removeClass('activeControl');
 							$(this).addClass('activeControl');
 						 //WSU_MAP.state.map_jObj.gmap("setOptions",{'mapTypeId':google.maps.MapTypeId.ROADMAP});
-							$('[rel="aerial_gouped"]').colorbox({
+							/*$('[rel="aerial_gouped"]').colorbox({
 								photo:true,
 								scrolling:false,
 								scalePhotos:true,
@@ -65,7 +65,7 @@
 										}
 									}
 								}
-							});
+							});*/
 						});
 					}
 				

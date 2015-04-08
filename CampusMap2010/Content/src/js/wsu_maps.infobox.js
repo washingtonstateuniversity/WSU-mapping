@@ -460,6 +460,7 @@
 	
 					WSU_MAP.util.popup_message({
 						html:html,
+						show_close:true,
 						width:$(window).width()*0.85,
 						minWidth:$(window).width()*0.2,
 						height:$(window).height()*0.85,
@@ -469,11 +470,6 @@
 							img_area.find('a').on('click',function(e){
 								WSU_MAP.util.nullout_event(e);
 								jObj.dialog("open");
-							});
-							jObj.append("<span class='tabedBox infoClose'>X</span>");
-							jObj.find('.infoClose').on('click',function(){
-								jObj.dialog("close");
-								WSU_MAP.infobox.init_img_modal();
 							});
 						},
 						onOpen:function(jObj){
@@ -557,108 +553,6 @@
 						}
 					});
 				}
-				
-				
-				
-				
-				
-				
-				/*$('a.gouped').off().on('click',function(e){
-					WSU_MAP.util.nullout_event(e);
-					$('a.gouped').colorbox({
-						photo:true,
-						scrolling:false,
-						scalePhotos:true,
-						opacity:0.7,
-						maxWidth:"75%",
-						maxHeight:"75%",
-						transition:"none",
-						slideshow:true,
-						slideshowAuto:false,
-						open:true,
-						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
-						onOpen:function(){
-							if(window._defined($.jtrack)){
-								//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
-							}
-						},
-						onClosed:function(){
-							if(window._defined($.jtrack)){
-								//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
-							}
-							$('#colorbox #cb_nav').html("");
-							$('#ttl').text(0);
-							$('#ttl').text(1);
-						},
-						onComplete:function(){
-							
-							if($('#colorbox #cb_nav').length){
-								$('#colorbox #cb_nav').html("");
-							}
-							if($('#ttl').length){
-								var t=parseInt($('#ttl').text(), 10);
-								var li="";
-								if(t>1){
-									for(var j=0; j<t; j++){
-										li+="<li><a href='#'></a></li>";
-									}
-									if($('#colorbox #cb_nav').length===0){
-										$('#cboxCurrent').after('<ul id="cb_nav">'+li+'</ul>');
-									}else{
-										$('#colorbox #cb_nav').html(li);
-									}
-								}
-								if($('#colorbox #cb_nav').length){
-									$('#colorbox #cb_nav .active').removeClass('active');
-									$('#colorbox #cb_nav').find('li:eq('+ (parseInt($('#cboxCurrent #cur').text(), 10)-1) +')').addClass('active');
-									if(needsMoved<0||needsMoved>0){
-										//alert(needsMoved);
-										if(needsMoved<0){
-											$.colorbox.next();
-											if(needsMoved===-1 && window._defined($.jtrack)){
-												//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-											}
-											needsMoved++;
-										}else{
-											$.colorbox.prev();
-											if(needsMoved===1 && window._defined($.jtrack)){
-												//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-											}
-											needsMoved--;
-										}
-									}
-									$('#colorbox #cb_nav li').off().on('click',function(){
-										var cur=(parseInt($('#cboxCurrent #cur').text(), 10)-1);
-										var selected=$(this).index('#cb_nav li');
-										var dif=cur-selected;
-										needsMoved=dif;
-										if(dif<0||dif>0){
-											if(dif<0){
-												$.colorbox.next();
-												//if(dif>-2)//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title);
-												needsMoved++;
-											}else{
-												$.colorbox.prev();
-												//if(dif<2)//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title);
-												needsMoved--;
-											}
-										}
-									});
-									$('#cboxNext,#cboxLoadedContent').off('click.track').on('click.track',function(){
-										if(window._defined($.jtrack)){
-											//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-										}
-									});
-									$('#cboxPrevious').off('click.track').on('click.track',function(){
-										if(window._defined($.jtrack)){
-											//$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
-										}
-									});
-								}
-							}
-						}
-					});
-				});*/
 			},
 	
 			open_info:function (i){

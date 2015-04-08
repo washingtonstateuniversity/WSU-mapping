@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 				src: [
 					'src/js/scrollbar/style/jquery.jscrollpane.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
-					'src/css/colorbox.css',
+					//'src/css/colorbox.css',
 					'src/css/share_link.css',
 					'src/css/reactive.css',
 					'build/_pre_sass/front.styles.css'
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 				src: [
 					'src/js/scrollbar/style/jquery.jscrollpane.css',
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
-					'src/css/colorbox.css',
+					//'src/css/colorbox.css',
 					'src/css/share_link.css',
 					'src/css/reactive.css',
 					'build/_pre_sass/map.view.styles.css'
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 					
 					'src/js/infobox-1.1.12.js',
 					
-					'src/js/jquery.colorbox-min.js',
+					//'src/js/jquery.colorbox-min.js',
 					'src/js/jquery.cycle.all.js',
 					'src/js/scrollbar/jquery.mousewheel.js',
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
 					'src/js/colorpicker/jpicker-1.1.6.min.js',
 					'src/js/scrollbar/jquery.mousewheel.js',
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
-					'src/js/jquery.colorbox-min.js',
+					//'src/js/jquery.colorbox-min.js',
 					'src/js/zeroclipboard/ZeroClipboard.js',
 					'src/js/admin/jSelect.js',
 					'src/js/admin/jSelect.filter.js',

@@ -58,11 +58,12 @@
 			},
 			makeEmbeder:function (){
 				WSU_MAP.util.popup_message({
-					html:'<div id="embedArea"><span class="tabedBox infoClose">X</span>  <h2>Page Link</h2>  <h3 id="ebLink"><em id="linkurl">#</em></h3>  <div id="ebLink_con" style="position:relative; float:right;">  <div id="ebLink_but" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <h2> Embed code </h2>  <div id="custom">  <label>  <input type="radio" value="s" name="size"/>  Small <em>(214 x 161)</em></label>  <label>  <input type="radio" value="m" name="size"/>  Medium <em>(354 x 266)</em></label>  <label>  <input type="radio" checked="checked" name="size" value="l"/>  Large <em>(495 x 372)</em></label>  <label>  <input type="radio" name="size" value="xl"/>  Largest <em>(731 x 549)</em></label>  <label>  <input type="radio" value="c" name="size"/>  Custom</label>  <div id="cSize" style="display: none; font-size:12px;">Width:  <input id="w" value="" style="width:50px;" />px<br/>  Height  <input id="h" value=""  style="width:50px;" />px  </div>  </div>  <textarea id="embedCode" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe>  </textarea>  <div id="d_clip_container" style="position:relative; float:right;">  <div id="d_clip_button" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <a href="#" id="request">WSU units: Request access to create your own map. &raquo;</a></div>',
+					html:'<div id="embedArea"><h2>Page Link</h2>  <h3 id="ebLink"><em id="linkurl">#</em></h3>  <div id="ebLink_con" style="position:relative; float:right;">  <div id="ebLink_but" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <h2> Embed code </h2>  <div id="custom">  <label>  <input type="radio" value="s" name="size"/>  Small <em>(214 x 161)</em></label>  <label>  <input type="radio" value="m" name="size"/>  Medium <em>(354 x 266)</em></label>  <label>  <input type="radio" checked="checked" name="size" value="l"/>  Large <em>(495 x 372)</em></label>  <label>  <input type="radio" name="size" value="xl"/>  Largest <em>(731 x 549)</em></label>  <label>  <input type="radio" value="c" name="size"/>  Custom</label>  <div id="cSize" style="display: none; font-size:12px;">Width:  <input id="w" value="" style="width:50px;" />px<br/>  Height  <input id="h" value=""  style="width:50px;" />px  </div>  </div>  <textarea id="embedCode" disabled="disabled"><iframe  width="495" height="372"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="#" ></iframe>  </textarea>  <div id="d_clip_container" style="position:relative; float:right;">  <div id="d_clip_button" class="my_clip_button"><b>Copy</b></div>  </div>  <hr style="clear:both;"/>  <a href="#" id="request">WSU units: Request access to create your own map. &raquo;</a></div>',
+					show_close:true,
 					maxWidth:$(window).width()*0.85,
 					minWidth:$(window).width()*0.2,
 					width:450,
-					onCreate:function(jObj){
+					onCreate:function(){//jObj){
 						var clip = new ZeroClipboard.Client();
 						clip.setHandCursor( true );
 						clip.setText($('#embedCode').text());
@@ -86,12 +87,6 @@
 							$('#embedCode').text('<iframe width="495" height="372" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'+url+'" ></iframe>');
 							clip.setText($('#embedCode').text());
 						});
-						$('.tabedBox.infoClose').off().on('click',function(e){
-							WSU_MAP.util.nullout_event(e);
-							jObj.dialog( "close" );
-						});
-						
-						
 						$('input[name="size"]').off().on('change',function(){
 							var val = $(this).val();
 							function changeEmText(w,h){
@@ -149,7 +144,7 @@
 				$('#request').off().on('click',function(e){
 					WSU_MAP.util.nullout_event(e);
 					WSU_MAP.util.popup_message({
-						html:'<div id="emailRequest"><span class="tabedBox infoClose">X</span><form action="../public/emailRequest.castle" method="post">'+
+						html:'<div id="emailRequest"><form action="../public/emailRequest.castle" method="post">'+
 										'<h2>Want to make your own map?</h2>'+
 										'<h4>Please provide you email and as much information about your needs.</h4>'+
 										'<lable>Your Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
@@ -163,7 +158,7 @@
 						maxWidth:$(window).width()*0.85,
 						minWidth:$(window).width()*0.2,
 						width:450,
-						onCreate:function(jObj){
+						onCreate:function(){//jObj){
 							WSU_MAP.general.prep_html();
 							$.getJSON("/public/get_admindepartments_list.castle",function(data){
 								$.each(data,function(i,val){
@@ -173,10 +168,6 @@
 							$('#embedback').off().on('click',function(e){
 								WSU_MAP.util.nullout_event(e);
 								WSU_MAP.general.makeEmbeder();
-							});
-							$('.tabedBox.infoClose').off().on('click',function(e){
-								WSU_MAP.util.nullout_event(e);
-								jObj.dialog( "close" );
 							});
 							$('#emailRequest [type="Submit"]').off().on('click',function(e){
 								WSU_MAP.util.nullout_event(e);
@@ -194,17 +185,14 @@
 										if(data==="email:false"){
 											$('#emailRequest').prepend("<div id='valid'><h3>Your email is not a valid email.  Please enter it again</h3></div>");
 											$('#email').focus();
-											//$.colorbox.resize();
 										}else{
 											$('#emailRequest').html('<h2>You will recive an email shortly as a copy.</h2>'+'');
-											//$.colorbox.resize();
 										}
 									});
 								}else{
 									if($('#valid').length===0){
 										$('#emailRequest').prepend("<div id='valid'><h3>Please completely fill out the form.</h3></div>");
 									}
-									//$.colorbox.resize();
 								}
 							});
 						}

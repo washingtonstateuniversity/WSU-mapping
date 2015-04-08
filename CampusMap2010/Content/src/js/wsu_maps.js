@@ -261,26 +261,16 @@ if (!Array.prototype.indexOf) {
 			$('#printPdfs').off().on("click",function(e){
 				WSU_MAP.util.nullout_event(e);
 				//var trigger=$(this);
-				$.colorbox.remove();
-				$.colorbox({
-					html:function(){
-						return '<div id="printPdfs">'+
+				WSU_MAP.util.popup_message({
+					show_close:true,
+					html:'<div id="printPdfs">'+
 									'<h2>Printable Maps</h2>'+
 									'<div><h3><a href="http://www.parking.wsu.edu/docs/map.pdf" target="_blank">Parking<br/><span id="parking" style="background-image:url('+WSU_MAP.state.siteroot+'Content/images/print/parking_icon.jpg);"></span></a></h3></div>'+
 									'<div><h3><a href="https://map.wsu.edu/pdfs/areamap-10-18-12.pdf" target="_blank">Area<br/><span id="area" style="background-image:url('+WSU_MAP.state.siteroot+'Content/images/print/area_icon-10-18-12.jpg);"></span></a></h3></div>'+
 									'<div class="last"><h3><a href="https://map.wsu.edu/pdfs/washingtonmap.pdf" target="_blank">Washington State<br/><span id="state" style="background-image:url('+WSU_MAP.state.siteroot+'Content/images/print/state_icon.jpg);"></span></a></h3></div>'+
-								'</div>';
-					},
-					scrolling:false,
-					opacity:0.7,
-					transition:"none",
-					width:710,
-					height:350,
-					open:true,
-					onComplete:function(){
-						if($('#colorbox #cb_nav').length){
-							$('#colorbox #cb_nav').html("");
-						}
+								'</div>',
+					width:450,
+					onCreate:function(){//jObj){
 						$.each($('#printPdfs a'),function(){
 							var self = $(this); 
 							self.off().on('click',function(){//e){
@@ -289,6 +279,7 @@ if (!Array.prototype.indexOf) {
 						});
 					}
 				});
+				
 			});	
 		},
 
