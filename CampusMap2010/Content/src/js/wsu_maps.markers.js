@@ -84,8 +84,8 @@
 				window._d( latitude );
 				window._d( intLat*(-1) );
 				*/
-				return intLat*(-1);
-				//return 1;//intLat/3;
+				//return intLat*(-1);
+				return 1;//intLat/3;
 			},
 			make_Marker:function (i,id,marker_obj,markerCallback){	
 				var jObj = WSU_MAP.state.map_jObj;

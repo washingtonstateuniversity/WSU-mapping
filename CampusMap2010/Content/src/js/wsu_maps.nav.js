@@ -97,7 +97,9 @@
 					WSU_MAP.util.nullout_event(e);
 					WSU_MAP.nav.reacton_child(this);
 				});
-				WSU_MAP.nav.listen_for_popstate();
+				if( !WSU_MAP.state.inview ){
+					WSU_MAP.nav.listen_for_popstate();
+				}
 				$(window).on('resize', function(){				
 					WSU_MAP.responsive.resizeBg( $('#mainNavArea') );
 					WSU_MAP.responsive.resizeMaxMinBg( $('#navwrap'), ($('#nav_head').outerHeight()) + ($('.spine-footer').outerHeight()) );
