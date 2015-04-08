@@ -486,4 +486,4 @@
 	});
 	
 	
-})(jQuery);
+})(jQuery,window,jQuery.wsu_maps||(jQuery.wsu_maps={}));
