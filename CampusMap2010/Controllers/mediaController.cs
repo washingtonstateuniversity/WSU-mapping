@@ -1010,6 +1010,19 @@ namespace campusMap.Controllers
                     String id = HttpContext.Current.Request.Params["id"];
                     place item = ActiveRecordBase<place>.Find(int.Parse(id));
                     placeController.makePlaceStaticMap(item);
+                    if (File.Exists(cachePath + path)) { //@todo again needs a fallback image
+                        try {
+                            contents = File.ReadAllBytes(cachePath + path);
+                        } catch (Exception ex) {
+                            log.Error("Error uploading file", ex);
+                        }
+
+                        HttpContext.Response.ClearContent();
+                        HttpContext.Response.ClearHeaders();
+                        if (contents != null) {
+                            send_static_map(contents, path);
+                        }
+                    }
                     send_static_map(contents, path);
                 }
             }
