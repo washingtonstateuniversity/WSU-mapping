@@ -113,7 +113,8 @@
 				window._d("setting up nav scrollbar");
 				var settings = {
 					maintainPosition:true,
-					stickToBottom:true
+					stickToBottom:true,
+					contentWidth: '0px'
 					//showArrows: true
 				};
 				var pane = $("#spine-navigation");
