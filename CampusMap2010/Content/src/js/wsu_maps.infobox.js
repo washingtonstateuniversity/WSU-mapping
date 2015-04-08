@@ -677,7 +677,7 @@
 					}
 					jObj.gmap('setOptions', {'zIndex':9}, WSU_MAP.state.markerLog[i]);
 					$('#selectedPlaceList_area .active').removeClass('active');
-					$('#selectedPlaceList_area a:eq('+i+')').addClass('active');
+					$('#selectedPlaceList_area a:eq('+(i+2)+')').addClass('active');
 					WSU_MAP.state.cur_mid = WSU_MAP.state.mid[i];
 					if($('.layoutfree').length){
 						$('.ui-tabs-panel .content a').on("click",function(e){
