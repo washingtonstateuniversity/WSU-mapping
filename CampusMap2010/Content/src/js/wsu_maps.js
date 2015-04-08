@@ -57,6 +57,7 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.views.ini_map_view(WSU_MAP.setup);
 				return;
 			}
+			window._d("starting map");
 			var zoom = WSU_MAP.defaults.map.zoom;
 			var data = {};
 			
@@ -125,16 +126,27 @@ if (!Array.prototype.indexOf) {
 			$('#loading').remove();
 			window._d("setting up map state");
 			var used_url = WSU_MAP.state.startingUrl;
+			
+
+			if( !WSU_MAP.state.inview ){
+				WSU_MAP.nav.setup_nav();
+				WSU_MAP.nav.setup_Navscrollbar();
+				WSU_MAP.listings.setup_listingsBar();
+				WSU_MAP.directions.setup_directions();
+				
+				WSU_MAP.general.setup_embeder();
+				WSU_MAP.setup_pdfprints();
+			}
 			if( window._defined( used_url ) && used_url!==null && used_url!=="" ){
 				window._d("appling a url to update against");
 				var url = encodeURI( used_url.indexOf("&") ? used_url.split('=')[1].split('&')[0] : used_url.split('=')[1] );
 				WSU_MAP.updateMap(url,false,function(){
-						if( parseInt( used_url.split('=')[1], 10) > 0 ){
-							var marker = WSU_MAP.state.markerbyid[parseInt( used_url.split('=')[1], 10 )];
-							//google.maps.event.trigger(marker, 'click');
-							$(marker).triggerEvent('click');
-						}
-					});
+					if( parseInt( used_url.split('=')[1], 10) > 0 ){
+						var marker = WSU_MAP.state.markerbyid[parseInt( used_url.split('=')[1], 10 )];
+						//google.maps.event.trigger(marker, 'click');
+						$(marker).triggerEvent('click');
+					}
+				});
 				var link = used_url.split('=')[1].split('&')[0].toString(); 
 				//alert(link);
 				if( used_url.split('=')[1].indexOf(',')>0 ){
@@ -145,13 +157,7 @@ if (!Array.prototype.indexOf) {
 					WSU_MAP.nav.menuDressChild($('#main_nav a[href$="'+link+'"]'));
 				}		
 			}
-			if( !WSU_MAP.state.inview ){
-				WSU_MAP.listings.setup_listingsBar(WSU_MAP.state.map_jObj);
-				WSU_MAP.directions.setup_directions();
-				WSU_MAP.nav.setup_nav();
-				WSU_MAP.general.setup_embeder();
-				WSU_MAP.setup_pdfprints();
-			}
+
 			WSU_MAP.errors.addErrorReporting();
 			
 			/*if($('.layoutfree').length){

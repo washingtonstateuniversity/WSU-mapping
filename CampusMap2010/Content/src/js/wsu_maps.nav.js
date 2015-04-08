@@ -102,7 +102,7 @@
 				}
 				$(window).on('resize', function(){				
 					WSU_MAP.responsive.resizeBg( $('#mainNavArea') );
-					WSU_MAP.responsive.resizeMaxMinBg( $('#navwrap'), ($('#nav_head').outerHeight()) + ($('.spine-footer').outerHeight()) );
+					WSU_MAP.responsive.resizeMaxMinBg( $('#spine-navigation'), ($('#placeSearch').outerHeight()) + ($('.spine-header').outerHeight()) + ($('.spine-footer').outerHeight()) );
 					
 					WSU_MAP.listings.reset_Dirscrollbar();
 					WSU_MAP.listings.reset_Listscrollbar();

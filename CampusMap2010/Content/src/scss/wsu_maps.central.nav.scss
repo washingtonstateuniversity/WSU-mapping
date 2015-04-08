@@ -54,6 +54,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 				padding: 0;
 				list-style:none;
 				padding-right: 25px;
+				
 				ul {
 					margin: 0;
 					padding: 3px 0 3px 3px;
@@ -72,6 +73,10 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 				li.ui-state-active ul {
 					margin: 0 0 0 -14px;
 				}
+			}
+			form ul{
+				padding-right:0px;
+				width:175px;
 			}
 			#main_nav {
 				li {

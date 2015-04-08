@@ -17,6 +17,7 @@ var base=base||{};
 			WSU_MAP.views.inital_options = map_op;
 		},
 		ini_map_view:function (callback){
+			window._d("starting map view");
 			WSU_MAP.state.inview = true;
 			var override = window._defined(WSU_MAP.state.json_style_override) && WSU_MAP.state.json_style_override!==false && WSU_MAP.state.json_style_override!=="";
 			var map_op = {

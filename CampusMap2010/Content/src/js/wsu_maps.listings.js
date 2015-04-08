@@ -2,7 +2,7 @@
 (function($,window,WSU_MAP) {
 	$.extend( WSU_MAP, {
 		listings : {
-			setup_listingsBar:function (){//jObj){
+			setup_listingsBar:function (){
 				window._d("setting up 'listingsBar'");
 				/* Other after gmap ini */
 				$('#selectedPlaceList_btn').off().on('click', function(e){

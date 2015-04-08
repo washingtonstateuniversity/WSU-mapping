@@ -63,6 +63,7 @@ $Controller.getView()
 {
 	inview : false,
 	siteroot : '$site.Trim()',
+	debug : $!debug,
 	view_id : "centralmap",
 	view : '$view.Trim()/',
 	error_reporting : true,

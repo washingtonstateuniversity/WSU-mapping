@@ -313,7 +313,7 @@ namespace campusMap.Controllers {
             PropertyBag["header"]=header;
             PropertyBag["search"]=search;
             PropertyBag["directions"]=directions;
-
+            PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"]) ? "true" : "false";
 
 
 
