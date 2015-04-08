@@ -2,6 +2,7 @@
 (function($,window,WSU_MAP) {
 	$.extend( WSU_MAP, {
 		state:{
+			debug:false,
 			map_jObj:null,
 			map_inst:null,
 			view_id:'centralmap',
