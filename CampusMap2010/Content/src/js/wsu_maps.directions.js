@@ -194,9 +194,9 @@
 				$('#emailDir').off().on('click',function(e){
 					WSU_MAP.util.nullout_event(e);
 					//var trigger=$(this);
-					$.colorbox({
-						html:function(){
-							return '<div id="emailDirs"><form action="../public/emailDir.castle" method="post">'+
+					
+					WSU_MAP.util.popup_message({
+						html:'<div id="emailDirs"><form action="../public/emailDir.castle" method="post">'+
 										'<h2>Want to email the directions?</h2>'+
 										'<h4>Please provide you email and the email of the person you wish to send the directions to.</h4>'+
 										'<textarea name="directions" style="position:absolute;top:-9999em;left:-9999em;">'+$('#directions-panel').html()+'</textarea>'+
@@ -207,24 +207,10 @@
 										'<lable>Notes to recipient: <br/>'+
 										'<textarea required placeholder="Some notes on the directions" name="notes"></textarea></lable><br/>'+
 										'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
-									'</from></div>';
-						},
-						scrolling:false,
-						opacity:0.7,
-						transition:"none",
-						innerWidth:450,
-						//height:450,
-						open:true,
-						onClosed:function(){
-							$('#colorbox').removeClass('norm');
-						},
-						onOpen:function(){$('#colorbox').addClass('norm');},
-						onComplete:function(){
+									'</from></div>',
+						width:450,
+						onCreate:function(jObj){
 							WSU_MAP.general.prep_html();
-							if($('#colorbox #cb_nav').length){
-								$('#colorbox #cb_nav').html("");
-							}
-							$.colorbox.resize();	
 							$('#emailDirs [type="Submit"]').off().on('click',function(e){
 								WSU_MAP.util.nullout_event(e);
 								$('#valid').remove();
@@ -234,20 +220,16 @@
 										valid=false;
 									}
 								});
-								
 								if(valid){
 									$.post($('#emailDirs form').attr('action'), $('#emailDirs form').serialize(),function(data){
 										if(data==="email:false"){
 											$('#emailDirs').prepend("<div id='valid'><h3>Your email is not a valid email.  Please enter it again</h3></div>");
 											$('#email').focus();
-											$.colorbox.resize();
 										}else if(data==="recipientemail:false"){
 											$('#emailDirs').prepend("<div id='valid'><h3>The recipient's email is not a valid email.  Please enter it again</h3></div>");
 											$('#recipientemail').focus();
-											$.colorbox.resize();
 										}else{
 											$('#emailDirs').html('<h2>You will recive an email shortly as a copy.</h2>'+'');
-											$.colorbox.resize();
 										}
 									});
 								}else{
@@ -258,6 +240,8 @@
 							});
 						}
 					});
+					
+					
 				});		
 			},
 		}
