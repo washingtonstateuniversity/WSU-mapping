@@ -158,9 +158,7 @@
 					WSU_MAP.infobox.make_InfoWindow(i,made_marker);
 					WSU_MAP.infobox.make_ToolTip(i,made_marker);
 					WSU_MAP.infobox.apply_panoramas(made_marker);
-					var img = $('img[src*="'+marker_style.icon.url+'"]');
-					img.css({"-webkit-transform":"translateZ(0px)"});
-					img.closest('div').css({"-webkit-transform":"translateZ(0px)"});
+
 					// these too are needing to be worked together
 					//jObj.gmap('setOptions', {'zIndex':1}, WSU_MAP.state.markerLog[i]);
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
