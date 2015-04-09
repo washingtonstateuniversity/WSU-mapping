@@ -61,6 +61,7 @@ var base=base||{};
 						WSU_MAP.fit_to_location( WSU_MAP.state.fit_to_bound );
 					}
 					WSU_MAP.keep_center();
+					WSU_MAP.watch_map();
 				}).trigger("resize");
 				WSU_MAP.on_zoom_corrections();
 				WSU_MAP.on_pan_corrections();
