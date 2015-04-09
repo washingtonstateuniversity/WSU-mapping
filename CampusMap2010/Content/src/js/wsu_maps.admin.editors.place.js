@@ -585,7 +585,9 @@ var i=i||-1;
 					// need to finish this class
 					//WSU_MAP.state.map_jObj.gmap('openInfoWindow', { 'content': marker.content }, this);
 				}).dragend(function(){//e) {
-					var placePos = this.getPosition();
+					//this == marker
+					var drug_marker = this;
+					var placePos = drug_marker.getPosition();
 					var lat = placePos.lat();
 					var lng = placePos.lng();
 					if(window._defined(WSU_MAP.state.shapes) && WSU_MAP.state.shapes.length>0){
@@ -593,6 +595,10 @@ var i=i||-1;
 					}
 					$('#Lat').val(lat);
 					$('#Long').val(lng);
+					
+					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_dragend',[ drug_marker ]);
+					
+					
 					//setTimeout(function() {},  200);
 					if($('#revGoeLookup').is(":checked")){
 						var loca = new google.maps.LatLng(lat,lng);

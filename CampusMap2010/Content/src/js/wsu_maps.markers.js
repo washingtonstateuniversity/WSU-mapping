@@ -161,6 +161,7 @@
 
 					// these too are needing to be worked together
 					//jObj.gmap('setOptions', {'zIndex':1}, WSU_MAP.state.markerLog[i]);
+					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_added',[ made_marker ]);
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
 						markerCallback( made_marker );
 					}
@@ -169,8 +170,9 @@
 					if(WSU_MAP.state.active.marker !== null){
 						WSU_MAP.markers.unhighlight_marker(WSU_MAP.state.active.marker);
 					}
-					WSU_MAP.markers.highlight_marker(WSU_MAP.state.markerLog[i]);
-					WSU_MAP.state.active.marker = WSU_MAP.state.markerLog[i];
+					var marker = WSU_MAP.state.markerLog[i];
+					WSU_MAP.markers.highlight_marker( marker );
+					WSU_MAP.state.active.marker = marker;
 					$(".open_marker").removeClass('open_marker');
 					$("[src*='"+WSU_MAP.state.active.marker.marker_style.icon.url+"']").addClass('open_marker');
 					
@@ -178,12 +180,15 @@
 						WSU_MAP.infobox.open_info(i);
 					}else{
 						window._d("react from a pano marker click");
-						WSU_MAP.infobox.pano_marker_click(WSU_MAP.state.markerLog[i]);	
+						WSU_MAP.infobox.pano_marker_click( marker );
 					}
-	
+					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_clicked',[ marker ]);
 					if( window._defined($.jtrack) ){
 						//$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 					}
+				})
+				.dragend(function(){//e) {
+					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_dragend',[ WSU_MAP.state.markerLog[i] ]);
 				})
 				.rightclick(function(event){
 					WSU_MAP.controlls.showContextMenu(event.latLng);
