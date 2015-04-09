@@ -134,7 +134,10 @@ if (!Array.prototype.indexOf) {
 						if(WSU_MAP.state.map_jObj.is(':visible')){
 							window._d('corrected things');
 							WSU_MAP.state.map_jObj.triggerEvent('resize');
-							//$(window).trigger('resize');
+							if( WSU_MAP.state.fit_to_bound !== false ){
+								WSU_MAP.fit_to_location( WSU_MAP.state.fit_to_bound );
+							}
+							WSU_MAP.keep_center();
 						}else{
 							check_area();
 							window._d('checking');
