@@ -1,7 +1,6 @@
 /*jshint -W059 */
 /*jshint -W054 */
 (function($,window,WSU_MAP) {
-	WSU_MAP.is_frontend=false;
 	$.extend( WSU_MAP, {
 		util : {
 			debug_positional_log:function(){
