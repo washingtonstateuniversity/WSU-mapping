@@ -92,7 +92,8 @@
 				var jObj = WSU_MAP.state.map_jObj;
 				
 				
-				
+				marker_obj.style = marker_obj.style || {};
+
 				//console.log(marker_obj.style.icon);
 				var idx = i+1;
 				var icon = null;
@@ -109,7 +110,7 @@
 						"WSU North Puget Sound at Everett",
 					];
 					//window._d(title);
-					icon = ( marker_obj.style.icon === "null" ? WSU_MAP.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
+					icon = ( !window._defined(marker_obj.style.icon) || marker_obj.style.icon === "null" ? WSU_MAP.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
 		
 					if(titles_to_mark.indexOf(title)> -1){	
 						icon =	WSU_MAP.state.siteroot+"public/coug_marker.castle";
