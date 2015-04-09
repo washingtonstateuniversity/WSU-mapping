@@ -154,7 +154,7 @@ namespace campusMap.Controllers {
             PropertyBag["draftButtonSet"] = buttons;
             PropertyBag["hideFilter"] = true;
 
-            RenderView("../admin/_listings/list");
+            RenderView("../view/_listings/list");
         }
         public bool canEdit(map_views views, users user) {
             bool flag = false;

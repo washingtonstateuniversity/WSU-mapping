@@ -1,7 +1,7 @@
 <div class="tab_tar">
 	#set($Pagination_location='top')
 	#set($target = $status.name)
-	#parse("admin/_listings/areas/pagination.vm")
+	#parse("view/_listings/areas/pagination.vm")
 	
 	<div class="listTitle">${controller.getView()} List :</div>
 	<a href="$helper.getAdminUrl("${controller.getView()}/new")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;float:left;margin-top:6px;">
@@ -39,11 +39,11 @@
 		#foreach($item in $list_items)
 		
 		
-	#if($item.prime_name)
-		 #set($name=$!item.prime_name) 
-	#elseif($item.name)
-		  #set($name=$!item.name)
-	#end
+			#if($item.prime_name)
+				 #set($name=$!item.prime_name) 
+			#elseif($item.name)
+				  #set($name=$!item.name)
+			#end
 
 			<tr class="#if($!item.outputError)itemError#end #if($item.editing && $item.editing.name!="" && $item.editing.name != $user.name ) inuse #end" 
 				#if($!item.outputError)data-error="There seems to be an error on this item and it will not show on the map it's placed in." #end
@@ -72,15 +72,15 @@
 					#end
 				</td>
 				<td>
-					#*#if($buttons)
-						<ul>
-							#foreach($button in $buttons)
-								#parse("admin/_listings/buttons/${button}.vm")
-							#end
-						</ul>
-					#end*#
+					#if($buttons)
+					<span class="action_button_area">
+						#foreach($button in $buttons)
+							#parse("view/_listings/buttons/${button}.vm")
+						#end
+						</span>
+					#end
 				</td>
-				#*#parse("admin/_listings/item.vm")*#
+				#*#parse("view/_listings/item.vm")*#
 			</tr>
 		#end
 	</tbody>
@@ -95,7 +95,7 @@
 		<ul class="editablelistUL list_1">
 			#foreach($item in $list_items)
 				<li class="ui-widget-content ui-corner-all item_$!item.id con">
-					#parse("admin/_listings/item.vm")
+					#parse("view/_listings/item.vm")
 				</li>
 		  	#end
 		</ul>

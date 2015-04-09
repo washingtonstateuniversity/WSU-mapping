@@ -813,6 +813,42 @@ input,select,textarea {
 		}
 	}
 }
+.datagrid{
+	vertical-align:middle;	
+}
+.datagrid .action_button_area{
+	float: right;
+}
+.action_button{
+	font-size: 1.25em;
+	line-height: 1.45em;
+	height: 1.45em;
+	color: #353535 !important;
+	background-color: #A0C6ED;
+	padding: 0px 5px;
+	margin-right: 3px;
+	text-align: center;
+	display: inline-block;
+	&.copy{
+		background-color:#C4DF86;
+	}
+	&.delete{
+		background-color:#C7373A;
+		&:hover{
+			color:#DCDCDC !important;
+			background-color:#FF1519;
+		}
+	}
+	&:hover{
+		color:#1E1E1E !important;
+		background-color:#D7E9FB;
+	}
+
+}
+
+
+
+
 .tips {
 	background-color: $color_blue_approx;
 	//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
