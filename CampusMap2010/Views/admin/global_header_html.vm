@@ -13,13 +13,23 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes">
 
 	<!-- SCRIPTS -->
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
+	<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="//repo.wsu.edu/spine/1/spine.min.js"></script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+
+
 	<!-- COMPATIBILITY -->
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<noscript><style>#spine .spine-sitenav ul ul li { display: block !important; }</style></noscript>
+
+
+	<style type="text/css" title="currentStyle">
+		@import "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css";
+		@import "http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.1/themes/cupertino/jquery-ui.css";
+	</style>
+
 
 	<!-- DOCS -->
 	<link type="text/plain" rel="author" href="https://repo.wsu.edu/spine/1/authors.txt">

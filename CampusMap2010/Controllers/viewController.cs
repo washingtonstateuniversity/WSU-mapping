@@ -62,7 +62,7 @@ namespace campusMap.Controllers {
             PropertyBag["BreakingNews"] = view;
         }
         
-        public void List(int page, int searchId, string status, Boolean ajax) {
+        public void List(int page, int searchId, string status, Boolean ajax, String json ) {
             //clearConnections();
             UserService.clearConnections<map_views>();
             users user = UserService.getUserFull();
@@ -154,7 +154,7 @@ namespace campusMap.Controllers {
             PropertyBag["draftButtonSet"] = buttons;
             PropertyBag["hideFilter"] = true;
 
-            RenderView("../admin/listings/list");
+            RenderView("../admin/_listings/list");
         }
         public bool canEdit(map_views views, users user) {
             bool flag = false;

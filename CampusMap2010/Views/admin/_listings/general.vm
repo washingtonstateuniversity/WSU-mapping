@@ -1,0 +1,103 @@
+<div class="tab_tar">
+	#set($Pagination_location='top')
+	#set($target = $status.name)
+	#parse("admin/_listings/areas/pagination.vm")
+	
+	<div class="listTitle">${controller.getView()} List :</div>
+	<a href="$helper.getAdminUrl("${controller.getView()}/new")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:inline-block;float:left;margin-top:6px;">
+	  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New ${controller.getView()}
+	</a>
+	<br style="clear:both;"/>
+	
+	
+
+<table width="100%" class="display datagrid" id="listing" cellspacing="0">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Authors</th>
+			<th>Discription</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Authors</th>
+			<th>Discription</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</tfoot>
+
+	<tbody>
+		#foreach($item in $list_items)
+		
+		
+	#if($item.prime_name)
+		 #set($name=$!item.prime_name) 
+	#elseif($item.name)
+		  #set($name=$!item.name)
+	#end
+
+			<tr class="#if($!item.outputError)itemError#end #if($item.editing && $item.editing.name!="" && $item.editing.name != $user.name ) inuse #end" 
+				#if($!item.outputError)data-error="There seems to be an error on this item and it will not show on the map it's placed in." #end
+				#if($item.editing && $item.editing.name!="" && $item.editing.name != $user.name ) data-current_editor="$!item.editing.name" #end
+			>
+				<td>ID</td>
+				<td>$name</td>
+				<td>
+					#if($item.authors && $item.authors!='')
+						#foreach($author in $item.authors)
+							<span>Authors: $author.name</span>
+						#between
+							,
+						#end
+					#end
+				</td>
+				<td>--</td>
+				<td>
+					#if($item.tags && $item.tags!="")
+						#foreach($tag in $item.tags)
+							$!tag.name
+						#between
+							,
+						#end
+					#end
+				</td>
+				<td>
+					#*#if($buttons)
+						<ul>
+							#foreach($button in $buttons)
+								#parse("admin/_listings/buttons/${button}.vm")
+							#end
+						</ul>
+					#end*#
+				</td>
+				#*#parse("admin/_listings/item.vm")*#
+			</tr>
+		#end
+	</tbody>
+
+</table>
+	
+	
+	#*#set($c=0)
+	#foreach($item in $list_items)#set($c=$c+1)#end
+	#if($list_items && $c>0)
+
+		<ul class="editablelistUL list_1">
+			#foreach($item in $list_items)
+				<li class="ui-widget-content ui-corner-all item_$!item.id con">
+					#parse("admin/_listings/item.vm")
+				</li>
+		  	#end
+		</ul>
+		#set($Pagination_location='bottom')
+		#parse("listing_parts/areas/pagination.vm")
+	#end*#
+	<div class="clear"></div>
+</div>

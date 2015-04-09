@@ -1,0 +1,9 @@
+#if($item.editing && $item.editing.name!="" && $item.editing.name != $user.name ) 
+<span class="UinEdit ui-corner-bottom">
+      &nbsp;&nbsp;&nbsp;$item.editing.name is editing this geo 
+	  <a href="#" title="Published" rel="$item.id" class="buttons steal ui-button ui-widget ui-state-default ui-corner-all">
+        <span class="ui-icon ui-icon-unlocked"> </span> Click to Release
+      </a>
+</span>
+<div class="inEdit ui-corner-all"> </div>
+#end

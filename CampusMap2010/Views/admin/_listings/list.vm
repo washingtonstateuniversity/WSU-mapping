@@ -1,0 +1,144 @@
+	<div class="listing_switch">
+		<a href="#_Listing" id="Listing_choice"  class="ui-state-default ui-corner-left ListingChoices ui-state-hover active">
+			<span>${controller.getView()} List</span>
+		</a>
+		#if($types && (($userService.checkPrivleage("modify_place_types") && ${controller.getView()}=="place") || ($userService.checkPrivleage("modify_geo_types") && ${controller.getView()}=="geometrics")) )
+			<a href="#_Types" id="Types_choice" class="ui-state-default ListingChoices ">
+				<span>Types</span>
+			</a>
+		#end
+		#if($styles && $userService.checkPrivleage("modify_styles"))
+			<a href="#_styles" id="styles_choice" class="ui-state-default ListingChoices ">
+				<span>Styles</span>
+			</a>
+		#end
+		#if($place_name_types && $userService.checkPrivleage("modify_place_name_types"))
+			<a href="#_name_types" id="name_types_choice" class="ui-state-default ListingChoices ">
+				<span>Name Types</span>
+			</a>
+		#end
+		#if($templates && $userService.checkPrivleage("modify_templates"))	
+			<a href="#_template" id="template_choice" class="ui-state-default ListingChoices ">
+				<span>Infotab Templates</span>
+			</a>
+		#end		
+		
+		#if($fields && $userService.checkPrivleage("modify_fields"))	
+			<a href="#_Fields" id="Fields_choice" class="ui-state-default ui-corner-right ListingChoices ">
+				<span>Fields</span>
+			</a>
+		#end
+	</div>
+	<div id="_Listing" class="tabedArea tabactive" >
+		
+		<div style="position:relative;" >
+			
+			#parse("/admin/_listings/filters.vm")
+			#set($list_items=$controller.getVar("filteredResults_list"))
+			#if($list_items)
+				#set($buttons=$controller.getVar("filteredResults_ButtonSet"))
+				#parse("admin/_listings/general.vm")
+			#else
+				<div id="" class="tabs ${controller.getView()}list ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+						#set($c=0)
+						#foreach($status in $statuses)
+							<li class="ui-state-default ui-corner-top">
+								<a href="#${status.name}">${status.name} ($controller.getVar("${status.name}_list").TotalItems)</a>
+							</li>
+							#set($c=$c+1)
+						#end
+					</ul>
+					#foreach($STATUS in $statuses)
+					  <div id="${STATUS.name}" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+							#set($buttons=$controller.getVar("${STATUS.name}ButtonSet"))
+							#set($list_items=$controller.getVar("${STATUS.name}_list"))
+							#parse("admin/_listings/general.vm")
+							
+					  </div>
+					#end
+				</div>
+			#end
+		</div>	
+	</div>
+
+	#if($types && (($userService.checkPrivleage("modify_place_types") && ${controller.getView()}=="place") || ($userService.checkPrivleage("modify_geo_types") && ${controller.getView()}=="geometrics")))
+		<div id="_Types" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+		<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+			<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
+			  <p>
+				<a href="$helper.getAdminUrl("${controller.getView()}/new_type")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Type
+				</a>&nbsp;
+			  </p>
+			</div>
+			<h3 style="float: left; display:inline-block;">${controller.getView()} Types ($types.TotalItems)</h3>
+			#parse("/admin/types/list.vm")	
+		</div>
+	</div></div>
+	#end	
+	#if($styles && $userService.checkPrivleage("modify_styles"))
+		<div id="_styles" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index:1;top:0px;">
+				  <p>
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_style")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create style
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Styles ($styles.Count)</h3>
+				#parse("/admin/maps/styles/list.vm")	
+			</div>
+		</div></div>	
+	#end
+	#if($place_name_types && $userService.checkPrivleage("modify_place_name_types"))
+		<div id="_name_types" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width: auto; z-index: 1;top:0px;">
+				  <p>
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_name_type")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>Create Name Type
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Name Types ($place_name_types.TotalItems)</h3>
+				#parse("/admin/place_name_type/list.vm")	
+			</div>
+		</div></div>	
+	#end
+
+	#if($templates && $userService.checkPrivleage("modify_templates"))
+		<div id="_template" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
+				  <p>
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_template")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New template
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} templates ($templates.TotalItems)</h3>
+				#parse("/admin/templates/list.vm")
+			</div>
+		</div></div>
+	#end	
+	#if($fields && $userService.checkPrivleage("modify_fields"))
+		<div id="_Fields" class="tabedArea ui-tabs-panel"><div class="tab_tar">
+			<div class="placelist ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div style="float: right; height: 37px; margin-top: 9px; position: relative; width:auto; z-index: 1;top:0px;">
+				  <p>
+					<a href="$helper.getAdminUrl("${controller.getView()}/new_field")" class="creation buttons ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+					  <span class="ui-icon ui-icon-plusthick inlineIcon"></span>New Field
+					</a>&nbsp;
+				  </p>
+				</div>
+				<h3 style="float: left; display:inline-block;">${controller.getView()} Fields ($fields.TotalItems)</h3>
+				#parse("/admin/fields/list.vm")
+			</div>
+		</div></div>
+	#end	
+
+	
+	
+<!-- <div> -->

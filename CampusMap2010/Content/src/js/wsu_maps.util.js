@@ -1,292 +1,295 @@
 /*jshint -W059 */
 /*jshint -W054 */
 (function($,window,WSU_MAP) {
-	WSU_MAP.util = {
-		debug_positional_log:function(){
-			var caller=arguments.callee.caller.caller;
-			if(caller!==null){
-				window._d(caller.name);
-			}
-			/*WSU_MAP.call();
-			var native = window.alert;
-			window.alert = function(){
-				window._d('alerting...');
-				native.apply(window, arguments);
-				window._d('alerted!');
-			};
+	WSU_MAP.is_frontend=false;
+	$.extend( WSU_MAP, {
+		util : {
+			debug_positional_log:function(){
+				var caller=arguments.callee.caller.caller;
+				if(caller!==null){
+					window._d(caller.name);
+				}
+				/*WSU_MAP.call();
+				var native = window.alert;
+				window.alert = function(){
+					window._d('alerting...');
+					native.apply(window, arguments);
+					window._d('alerted!');
+				};
+				
+				alert('test');*/
+			},
+			nullout_event:function(e){
+				e.stopPropagation();
+				e.preventDefault();
+			},
+			ini:function(){},
+			/*async_load_css:function(url,callback){
+				var headID = document.getElementsByTagName("head")[0],node = document.createElement('link');
+				node.type = 'text/css';
+				node.rel = 'stylesheet';
+				node.href = url;
+				node.media = 'screen';
+				headID.appendChild(node);
+			},
+			async_load_js:function(url,callback){
+				var headID = document.getElementsByTagName("head")[0], s = document.createElement('script');
+				s.type = 'text/javascript';
+				s.async = true;
+				s.src = url;
+				var x = document.getElementsByTagName('script')[0];
+				if(!window._defined(callback)!=='undefined' && typeof(callback.onreadystatechange)){
+					s.onreadystatechange = callback.onreadystatechange;
+					s.onload = callback.onload;
+				}
+				headID.appendChild(s);
+			}*/
 			
-			alert('test');*/
-		},
-		nullout_event:function(e){
-			e.stopPropagation();
-			e.preventDefault();
-		},
-		ini:function(){},
-		/*async_load_css:function(url,callback){
-			var headID = document.getElementsByTagName("head")[0],node = document.createElement('link');
-			node.type = 'text/css';
-			node.rel = 'stylesheet';
-			node.href = url;
-			node.media = 'screen';
-			headID.appendChild(node);
-		},
-		async_load_js:function(url,callback){
-			var headID = document.getElementsByTagName("head")[0], s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = url;
-			var x = document.getElementsByTagName('script')[0];
-			if(!window._defined(callback)!=='undefined' && typeof(callback.onreadystatechange)){
-				s.onreadystatechange = callback.onreadystatechange;
-				s.onload = callback.onload;
-			}
-			headID.appendChild(s);
-		}*/
-		
-		//function defined(obj){ return window._defined(obj); }
-		//function shuffle(ary){ return ary.sort(function(){ Math.random() - 0.5; }); }
-		isNumber:function (n){ 
-			return (!isNaN(parseFloat(n))&& isFinite(n)) || n.match(/^\d+$/) ;
-		},
-		split:function (val){ return val.split( /,\s*/ ); },
-		extractLast:function (term){ return WSU_MAP.util.split( term ).pop(); },
-		
-		
-		
-		parseUri_obj:{
-			options : {
-				strictMode: false,
-				key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
-				q:   {
-					name:   "queryKey",
-					parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-				},
-				parser: {
-					strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-					loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+			//function defined(obj){ return window._defined(obj); }
+			//function shuffle(ary){ return ary.sort(function(){ Math.random() - 0.5; }); }
+			isNumber:function (n){ 
+				return (!isNaN(parseFloat(n))&& isFinite(n)) || n.match(/^\d+$/) ;
+			},
+			split:function (val){ return val.split( /,\s*/ ); },
+			extractLast:function (term){ return WSU_MAP.util.split( term ).pop(); },
+			
+			
+			
+			parseUri_obj:{
+				options : {
+					strictMode: false,
+					key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+					q:   {
+						name:   "queryKey",
+						parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+					},
+					parser: {
+						strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+						loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+					}
 				}
-			}
-		},
-		parseUri:function  (str) {
-			var	o   = WSU_MAP.util.parseUri_obj.options,
-				m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
-				uri = {},
-				i   = 14;
-		
-			while (i--){
-				uri[o.key[i]] = m[i] || "";
-			}
-		
-			uri[o.q.name] = {};
-			uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-				if ($1){
-					uri[o.q.name][$1] = $2;
+			},
+			parseUri:function  (str) {
+				var	o   = WSU_MAP.util.parseUri_obj.options,
+					m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+					uri = {},
+					i   = 14;
+			
+				while (i--){
+					uri[o.key[i]] = m[i] || "";
 				}
-			});
+			
+				uri[o.q.name] = {};
+				uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+					if ($1){
+						uri[o.q.name][$1] = $2;
+					}
+				});
+			
+				return uri;
+			},
 		
-			return uri;
-		},
+			joiner:function(){
+				//to be the option joiner for just the maps
+			},
+		
+			timers_arr:[],
+			clearCount:function (timer){
+				var t = WSU_MAP.util.timers_arr;
+				if(window._defined(t[timer])){
+					/// clear the time from timer
+					window.clearTimeout(t[timer]);
+					/// Make sure it's clear  
+					t[''+timer+'']=0;
+					delete t[''+timer+''];
+				}
+			},
+			setCount:function (timer,time,func){
+				var t = WSU_MAP.util.timers_arr;
+				WSU_MAP.util.clearCount(timer);
+				if(t[timer]===0||!window._defined(t[timer])){
+					t[timer]=window.setTimeout(function(){
+						func();                                                 
+					},time);
+				}
+			},
 	
-		joiner:function(){
-			//to be the option joiner for just the maps
-		},
+			getCanvasXY:function (caurrentLatLng){
+				var map = WSU_MAP.state.map_inst;
+				var scale = Math.pow(2, map.getZoom());
+				var nw = new google.maps.LatLng(
+					map.getBounds().getNorthEast().lat(),
+					map.getBounds().getSouthWest().lng()
+				);
+				var worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw);
+				var worldCoordinate = map.getProjection().fromLatLngToPoint(caurrentLatLng);
+				var caurrentLatLngOffset = new google.maps.Point(
+					Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale),
+					Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
+				);
+				return caurrentLatLngOffset;
+			},
 	
-		timers_arr:[],
-		clearCount:function (timer){
-			var t = WSU_MAP.util.timers_arr;
-			if(window._defined(t[timer])){
-				/// clear the time from timer
-				window.clearTimeout(t[timer]);
-				/// Make sure it's clear  
-				t[''+timer+'']=0;
-				delete t[''+timer+''];
-			}
-		},
-		setCount:function (timer,time,func){
-			var t = WSU_MAP.util.timers_arr;
-			WSU_MAP.util.clearCount(timer);
-			if(t[timer]===0||!window._defined(t[timer])){
-				t[timer]=window.setTimeout(function(){
-					func();                                                 
-				},time);
-			}
-		},
-
-		getCanvasXY:function (caurrentLatLng){
-			var map = WSU_MAP.state.map_inst;
-			var scale = Math.pow(2, map.getZoom());
-			var nw = new google.maps.LatLng(
-				map.getBounds().getNorthEast().lat(),
-				map.getBounds().getSouthWest().lng()
-			);
-			var worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw);
-			var worldCoordinate = map.getProjection().fromLatLngToPoint(caurrentLatLng);
-			var caurrentLatLngOffset = new google.maps.Point(
-				Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale),
-				Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
-			);
-			return caurrentLatLngOffset;
-		},
-
-		popup_message:function (options){
-			if($("#wsumap_mess").length<=0){
-				$('body').append('<div id="wsumap_mess">');
-			}
-			var jObj = $( "#wsumap_mess" );
-			if(!window._defined(options.clean)){
-				options.clean=true;
-			}
-			var defaults = {
-				show_close:false,
-				autoOpen: true,
-				show: {
-					effect: "scale",
-					easing:"easeInOutQuint",
-					duration: 650
-				},
-				hide: {
-					effect: "scale",
-					easing:"easeInOutQuint",
-					duration: 350
-				},
-				resizable: false,
-				minWidth: 350,
-				minHeight: 25,
-				modal: true,
-				draggable : false,
-				buttons_parts:{},
-				create:function(){
-					jObj.find('.infoClose').off().on("click",function(e){
-						WSU_MAP.util.nullout_event(e);
-						jObj.dialog( "close" );
-					});
-					if(options.clean){
-						$('.ui-dialog-titlebar').remove();
-						$(".ui-dialog-buttonpane").remove();
-					}
-					$('body').css({overflow:"hidden"});
-					if($.isFunction(options.onCreate)){
-						options.onCreate(jObj);
-					}
-				},
-				open:function(){
-					if($.isFunction(options.onOpen)){
-						options.onOpen(jObj);
-					}
-				},
-				buttons:{},
-				close: function() {
-					if($.isFunction(options.onClose)){
-						options.onClose(jObj);
-					}
-					WSU_MAP.util.close_dialog_modle(jObj);
+			popup_message:function (options){
+				if($("#wsumap_mess").length<=0){
+					$('body').append('<div id="wsumap_mess">');
 				}
-			};
-			options = $.extend(defaults,options);
-
-			var closer = options.show_close?'<span class="tabedBox infoClose">X</span>':'';
-			jObj.html( ( (typeof options.html === 'string' || options.html instanceof String) ? options.html : options.html.html() ) + closer );
-			var buttons_parts = {};
-			$.each(options.buttons_parts,function(i,v){
-				buttons_parts[v.name]=function(){
-					$( this ).dialog( "close" );
-					if($.isFunction(v.callback)){
-						v.callback(jObj);
+				var jObj = $( "#wsumap_mess" );
+				if(!window._defined(options.clean)){
+					options.clean=true;
+				}
+				var defaults = {
+					show_close:false,
+					autoOpen: true,
+					show: {
+						effect: "scale",
+						easing:"easeInOutQuint",
+						duration: 650
+					},
+					hide: {
+						effect: "scale",
+						easing:"easeInOutQuint",
+						duration: 350
+					},
+					resizable: false,
+					minWidth: 350,
+					minHeight: 25,
+					modal: true,
+					draggable : false,
+					buttons_parts:{},
+					create:function(){
+						jObj.find('.infoClose').off().on("click",function(e){
+							WSU_MAP.util.nullout_event(e);
+							jObj.dialog( "close" );
+						});
+						if(options.clean){
+							$('.ui-dialog-titlebar').remove();
+							$(".ui-dialog-buttonpane").remove();
+						}
+						$('body').css({overflow:"hidden"});
+						if($.isFunction(options.onCreate)){
+							options.onCreate(jObj);
+						}
+					},
+					open:function(){
+						if($.isFunction(options.onOpen)){
+							options.onOpen(jObj);
+						}
+					},
+					buttons:{},
+					close: function() {
+						if($.isFunction(options.onClose)){
+							options.onClose(jObj);
+						}
+						WSU_MAP.util.close_dialog_modle(jObj);
 					}
 				};
-			});
-			options.buttons = buttons_parts;
-			jObj.dialog(options);
-		},
-		confirmation_message:function (html_message,callback){
-			if($("#wsumap_mess").length<=0){
-				$('body').append('<div id="mess">');
-			}
-			$("#wsumap_mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
-			$( "#wsumap_mess" ).dialog({
-				autoOpen: true,
-				resizable: false,
-				width: 350,
-				minHeight: 25,
-				modal: true,
-				draggable : false,
-				create:function(){
-					$('.ui-dialog-titlebar').remove();
-					$('body').css({overflow:"hidden"});
-				},
-				buttons:{
-					Yes:function(){
-						if($.isFunction(callback.yes)){
-							callback.yes();
-						}
+				options = $.extend(defaults,options);
+	
+				var closer = options.show_close?'<span class="tabedBox infoClose">X</span>':'';
+				jObj.html( ( (typeof options.html === 'string' || options.html instanceof String) ? options.html : options.html.html() ) + closer );
+				var buttons_parts = {};
+				$.each(options.buttons_parts,function(i,v){
+					buttons_parts[v.name]=function(){
 						$( this ).dialog( "close" );
-					},
-					No: function() {
-						if($.isFunction(callback.no)){
-							callback.no();
+						if($.isFunction(v.callback)){
+							v.callback(jObj);
 						}
-						$( this ).dialog( "close" );
-					}
-				},
-				close: function() {
-					WSU_MAP.util.close_dialog_modle($( "#wsumap_mess" ));
-				}
-			});
-		},	
-		set_diamodle_resizing:function(jObj){
-			$(window).resize(function(){
-				jObj.dialog('option', {
-					width: $(window).width()-50,
-					height: $(window).height()-50
+					};
 				});
-			});
-		},
-		close_dialog_modle: function(jObj){
-			jObj.dialog( "destroy" );
-			jObj.remove();
-			if($(".ui-dialog.ui-widget.ui-widget-content").length<=0){
-				$('body').css({overflow:"auto"});
-			}
-		},	
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------------
-		// jeremy's debuging funtions
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------------	
-		
-		dump:function(arr,limit,level) {
-			var dumped_text, level_padding, j, item, value;
-			dumped_text = "";
-			if(!limit){
-				limit=3;
-			}
-			if(!level){
-				level = 0;
-			}
-		
-			//The padding given at the beginning of the line.
-			level_padding = "";
-			for(j=0;j<level+1;j++){
-				level_padding += "	";
-			}
-		
-			if(typeof(arr) === "object") { //Array/Hashes/Objects
-				if(level<=limit){
-					for(item in arr) {
-						value = arr[item];
-		
-						if(typeof(value) === "object") { //If it is an array,
-							dumped_text += level_padding + "'" + item + "' ...\n";
-							dumped_text += WSU_MAP.util.dump(value,limit,level+1);
-						} else {
-							dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+				options.buttons = buttons_parts;
+				jObj.dialog(options);
+			},
+			confirmation_message:function (html_message,callback){
+				if($("#wsumap_mess").length<=0){
+					$('body').append('<div id="mess">');
+				}
+				$("#wsumap_mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
+				$( "#wsumap_mess" ).dialog({
+					autoOpen: true,
+					resizable: false,
+					width: 350,
+					minHeight: 25,
+					modal: true,
+					draggable : false,
+					create:function(){
+						$('.ui-dialog-titlebar').remove();
+						$('body').css({overflow:"hidden"});
+					},
+					buttons:{
+						Yes:function(){
+							if($.isFunction(callback.yes)){
+								callback.yes();
+							}
+							$( this ).dialog( "close" );
+						},
+						No: function() {
+							if($.isFunction(callback.no)){
+								callback.no();
+							}
+							$( this ).dialog( "close" );
+						}
+					},
+					close: function() {
+						WSU_MAP.util.close_dialog_modle($( "#wsumap_mess" ));
+					}
+				});
+			},	
+			set_diamodle_resizing:function(jObj){
+				$(window).resize(function(){
+					jObj.dialog('option', {
+						width: $(window).width()-50,
+						height: $(window).height()-50
+					});
+				});
+			},
+			close_dialog_modle: function(jObj){
+				jObj.dialog( "destroy" );
+				jObj.remove();
+				if($(".ui-dialog.ui-widget.ui-widget-content").length<=0){
+					$('body').css({overflow:"auto"});
+				}
+			},	
+			//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+			// jeremy's debuging funtions
+			//-------------------------------------------------------------------------------------------------------------------------------------------------------------	
+			
+			dump:function(arr,limit,level) {
+				var dumped_text, level_padding, j, item, value;
+				dumped_text = "";
+				if(!limit){
+					limit=3;
+				}
+				if(!level){
+					level = 0;
+				}
+			
+				//The padding given at the beginning of the line.
+				level_padding = "";
+				for(j=0;j<level+1;j++){
+					level_padding += "	";
+				}
+			
+				if(typeof(arr) === "object") { //Array/Hashes/Objects
+					if(level<=limit){
+						for(item in arr) {
+							value = arr[item];
+			
+							if(typeof(value) === "object") { //If it is an array,
+								dumped_text += level_padding + "'" + item + "' ...\n";
+								dumped_text += WSU_MAP.util.dump(value,limit,level+1);
+							} else {
+								dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+							}
 						}
 					}
+				} else { //Stings/Chars/Numbers etc.
+					dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
 				}
-			} else { //Stings/Chars/Numbers etc.
-				dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
-			}
-			return dumped_text;
-		},
-	};
+				return dumped_text;
+			},
+		}
+	});
 	$.runTemplate = $.runTemplate||function(html, options) {
 			var re,add,match,cursor,code,reExp,result;
 			re = /<%(.+?)%>/g, reExp = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g, code = "var r=[];\n", cursor = 0;

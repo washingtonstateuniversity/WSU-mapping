@@ -1,0 +1,11 @@
+
+	<li>
+		<a href="$helper.getAdminUrl("${controller.getView()}/delete")?id=$!{item.id}" title="Delete" class="buttons ui-button ui-widget ui-state-default ui-corner-all ">
+		  <i class="fa fa-trash"></i>
+		  <span class="actionText">Delete</span>
+		  <span class="actionpropt">&#187;</span>
+		</a>
+	</li>
+#if($Controller.canEdit($item,$user.id) || $item.editing == $user || $item.isCheckedOutNull())
+    
+#end
