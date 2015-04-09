@@ -17,13 +17,5 @@ $scriptsService.Js("~/content/${jsfolder.Trim()}/js/maps.wsu.edu.js")
 
 
 
-<script type="text/javascript">
-	(function($){
-		$(function() {
-			$('#centralmap').on('wsu_maps:completed',function(){
-				console.log("fired it right");
-			});
-		});
-	})(jQuery);
-</script>
+
 						
