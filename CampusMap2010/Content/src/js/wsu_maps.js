@@ -119,6 +119,7 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.on_pan_corrections();
 				WSU_MAP.on_bounds_changed_corrections();
 				$('.gmnoprint[controlheight]:first').css({'margin-left':'21px'});
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:completed');
 			});
 		},
 
