@@ -20,34 +20,33 @@
 			},
 			pano_init : false,
 			make_ToolTip:function (i,marker){
-				window._d("make tooltip");
-				//var jObj = WSU_MAP.state.map_jObj;
-				//end of the bs that is well.. bs of a implamentation
-				/* so need to remove this and create the class for it */
-				var boxText = document.createElement("div");
-				boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
-				
 				var acro = window._defined(marker.labels.prime_abbrev) && marker.labels.prime_abbrev !== ""  ? " (" +marker.labels.prime_abbrev + ")" : "";
+				var text = marker.labels.title + acro;
+				if(text!==""){
+					window._d("make tooltip");
+					var boxText = document.createElement("div");
+					boxText.style.cssText = "border: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(226, 226, 226); padding: 2px; display: inline-block; font-size: 10px !important; font-weight: normal !important;";
 				
-				boxText.innerHTML = "<h3 class='tooltip_title'>"+marker.labels.title + acro +"</h3>";
-				var myHoverOptions = {
-					alignBottom:true,
-					content: boxText,
-					pixelOffset: new google.maps.Size(35,-15),
-					zIndex: 99999,
-					boxStyle: {
-						minWidth: "250px"
-					},
-					closeBoxURL:'',
-					infoBoxClearance: new google.maps.Size(1, 1),
-					isHidden: false,
-					pane: "floatPane",
-					boxClass:"hoverbox",
-					enableEventPropagation: false,
-					disableAutoPan:true,
-					onOpen:function(){}
-				};
-				WSU_MAP.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
+					boxText.innerHTML = "<h3 class='tooltip_title'>"+marker.labels.title + acro +"</h3>";
+					var myHoverOptions = {
+						alignBottom:true,
+						content: boxText,
+						pixelOffset: new google.maps.Size(35,-15),
+						zIndex: 99999,
+						boxStyle: {
+							minWidth: "250px"
+						},
+						closeBoxURL:'',
+						infoBoxClearance: new google.maps.Size(1, 1),
+						isHidden: false,
+						pane: "floatPane",
+						boxClass:"hoverbox",
+						enableEventPropagation: false,
+						disableAutoPan:true,
+						onOpen:function(){}
+					};
+					WSU_MAP.state.ibh[i] = new window.InfoBox(myHoverOptions,function(){});
+				}
 			},
 			
 			make_IW_resp:function(i){
