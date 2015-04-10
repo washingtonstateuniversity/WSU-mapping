@@ -88,12 +88,11 @@
 						ids =(!window._defined(ids)?'':ids+',')+$(this).val();
 					});
 				}
-				
-				WSU_MAP.state.map_jObj.gmap('clear','markers');
-				WSU_MAP.state.ib=[];
 				if(window._defined(ids)){
 					window._d(ids);
 					if($.trim(ids)!==""){
+						WSU_MAP.state.map_jObj.gmap('clear','markers');
+						WSU_MAP.state.ib=[];
 						$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 							window._d(data);
 							window._d("loaded place obj");
