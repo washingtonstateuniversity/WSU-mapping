@@ -90,8 +90,8 @@
 			},
 			make_Marker:function (i,id,marker_obj,markerCallback){	
 				var jObj = WSU_MAP.state.map_jObj;
-				
-				
+				window._d("starting to make a marker for "+id);
+				window._d(marker_obj);
 				marker_obj.style = marker_obj.style || {};
 
 				//console.log(marker_obj.style.icon);
