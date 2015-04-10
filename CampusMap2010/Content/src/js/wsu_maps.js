@@ -390,6 +390,61 @@ if (!Array.prototype.indexOf) {
 				});
 			}
 		},
+		geocode:function(lat,lng){
+			var loca = new google.maps.LatLng(lat,lng);
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({'latLng':loca}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) { 
+					var arrAddress = results[0].address_components;
+					
+					var itemRoute='';
+					var itemLocality='';
+					var itemCountry='';
+					var itemPc='';
+					var itemState='';
+					var itemSnumber='';
+					//$('#place_address').val('');
+					//$('#place_street').val('');			
+					// iterate through address_component array
+					$.each(arrAddress, function (i, address_component) {
+						if (address_component.types[0] === "route"){//": route:"
+							itemRoute = address_component.long_name;
+						}
+						if (address_component.types[0] === "locality"){//"town:"
+							itemLocality = address_component.long_name;
+						}
+						if (address_component.types[0] === "country"){ //"country:"
+							itemCountry = address_component.long_name;
+						}
+						if (address_component.types[0] === "postal_code"){ //"pc:"
+							itemPc = address_component.long_name;
+							
+						}
+						if (address_component.types[0] === "administrative_area_level_1"){ //"pc:"
+							itemState = address_component.long_name;
+						}
+						if (address_component.types[0] === "street_number"){ //"street_number:"
+							itemSnumber = address_component.long_name;
+						}
+						$('#location_zip').val(itemPc);
+						$('#location_city').val(itemLocality);
+						$('#location_state').val(itemState);
+						$('#location_street').val(itemSnumber + ' ' + itemRoute);
+						
+					});
+					return {
+						'street_number':itemSnumber,
+						'street':itemRoute,
+						'city':itemLocality,
+						'state':itemState,
+						'zip':itemPc,
+						'country':itemCountry,
+					};
+				} else {
+					alert("Geocoder failed due to: " + status);
+				}
+			});
+		},
 		fit_to_location:function(localation){
 			if(WSU_MAP.state.hold_bounds===false || WSU_MAP.state.in_pano){
 				return;
