@@ -146,7 +146,7 @@
 					});
 	
 				jObj.gmap('addMarker', marker_style,function(ops,made_marker){
-					window._d("made a marker for "+id);
+					
 					
 					made_marker.marker_style = marker_style;
 					made_marker.content = marker_obj.content;
@@ -157,7 +157,7 @@
 
 					made_marker.setZIndex(made_marker.marker_style.zFrezze);
 					
-					window._d(made_marker);
+					
 					
 					WSU_MAP.state.markerLog[i]=made_marker;
 					WSU_MAP.state.markerbyid[id] = WSU_MAP.state.markerLog[i];
@@ -167,6 +167,8 @@
 
 					// these too are needing to be worked together
 					//jObj.gmap('setOptions', {'zIndex':1}, WSU_MAP.state.markerLog[i]);
+					window._d(made_marker);
+					window._d("made a marker for "+id);
 					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_added',[ made_marker ]);
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
 						markerCallback( made_marker );
