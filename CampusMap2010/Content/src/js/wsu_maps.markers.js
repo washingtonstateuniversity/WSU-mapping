@@ -52,7 +52,7 @@
 					});
 				});*/
 				$.each(WSU_MAP.state.markerLog,function(idx,notmarker){
-					if(notmarker !== WSU_MAP.state.active.marker ){
+					if( window._defined(notmarker.marker_style.zFrezze) && notmarker !== WSU_MAP.state.active.marker ){
 						notmarker.setZIndex(notmarker.marker_style.zFrezze);
 					}
 				});
