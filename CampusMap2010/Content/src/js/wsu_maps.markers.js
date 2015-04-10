@@ -147,7 +147,7 @@
 	
 				jObj.gmap('addMarker', marker_style,function(ops,made_marker){
 					window._d("made a marker for "+id);
-					window._d(made_marker);
+					
 					made_marker.marker_style = marker_style;
 					made_marker.content = marker_obj.content;
 					//made_marker.title = marker_obj.labels.title;
@@ -156,6 +156,9 @@
 					made_marker.prime_image = marker_obj.prime_image;
 
 					made_marker.setZIndex(made_marker.marker_style.zFrezze);
+					
+					window._d(made_marker);
+					
 					WSU_MAP.state.markerLog[i]=made_marker;
 					WSU_MAP.state.markerbyid[id] = WSU_MAP.state.markerLog[i];
 					WSU_MAP.infobox.make_InfoWindow(i,made_marker);

@@ -20,6 +20,7 @@
 			},
 			pano_init : false,
 			make_ToolTip:function (i,marker){
+				window._d("make tooltip");
 				//var jObj = WSU_MAP.state.map_jObj;
 				//end of the bs that is well.. bs of a implamentation
 				/* so need to remove this and create the class for it */
@@ -167,7 +168,7 @@
 					//$('#taby'+i).tabs();
 					//alert('tring to tab it, dabnab it, from the INI');
 				});
-				
+				window._d("made infowindow");
 			},
 			build_infobox_markerobj:function(item){
 				if(!window._defined(item.info)){
