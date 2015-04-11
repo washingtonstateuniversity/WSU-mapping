@@ -105,7 +105,9 @@ if (!Array.prototype.indexOf) {
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				window._d('initalized the map');
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
-				WSU_MAP.state.center = WSU_MAP.state.map_jObj.gmap("get_map_center");
+				
+				var latLng = map_op.center.split(',');
+				$.wsu_maps.state.center = new google.maps.LatLng(latLng[0],latLng[1]);
 				//WSU_MAP.ini_GAtracking('UA-22127038-5');
 				WSU_MAP.poi_setup();
 				WSU_MAP.controlls.setup_map_type_controlls();

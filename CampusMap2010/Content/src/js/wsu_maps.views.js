@@ -56,7 +56,9 @@ var base=base||{};
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
 				WSU_MAP.views.set_inital_options(map_op);
 				
-				WSU_MAP.set_center();
+								
+				var latLng = map_op.center.split(',');
+				$.wsu_maps.state.center = new google.maps.LatLng(latLng[0],latLng[1]);
 				//var map = map_ele_obj.gmap("get","map");
 				//WSU_MAP.ini_GAtracking('UA-22127038-5');
 				WSU_MAP.poi_setup();
