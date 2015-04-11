@@ -97,6 +97,9 @@ if (!Array.prototype.indexOf) {
 				$.extend(map_op,pos,base,$.parseJSON(ops));
 			}
 			
+			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:lodaed_options', [map_op]);
+			$.extend(map_op,op_override||{});
+			
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
 				WSU_MAP.state.center = WSU_MAP.state.map_jObj.gmap("get_map_center");
