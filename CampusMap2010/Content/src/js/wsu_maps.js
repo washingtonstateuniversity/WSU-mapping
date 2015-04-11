@@ -98,9 +98,12 @@ if (!Array.prototype.indexOf) {
 			}
 			
 			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:lodaed_options', [map_op]);
+			window._d('recived a value for the `wsu_maps:lodaed_options` event');
+			window._d(op_override);
 			$.extend(map_op,op_override||{});
 			
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
+				window._d('initalized the map');
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
 				WSU_MAP.state.center = WSU_MAP.state.map_jObj.gmap("get_map_center");
 				//WSU_MAP.ini_GAtracking('UA-22127038-5');
