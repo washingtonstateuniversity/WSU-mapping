@@ -49,7 +49,8 @@ var base=base||{};
 			window._d(op_override);
 			$.extend(map_op,op_override||{});
 			
-			
+			window._d('for view, using options of');
+			window._d(map_op);
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				window._d("created map view");
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
