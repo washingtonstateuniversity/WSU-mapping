@@ -44,10 +44,12 @@ var base=base||{};
 				$.extend(map_op,pos,base,$.parseJSON(ops));
 			}
 			
-			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:lodaed_options', [map_op]);
-			window._d('recived a value for the `wsu_maps:lodaed_options` event');
-			window._d(op_override);
-			$.extend(map_op,op_override||{});
+			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:loaded_options', [map_op]);
+			if(window._defined(op_override)){	
+				window._d('recived a value for the `wsu_maps:lodaed_options` event');
+				window._d(op_override);
+				$.extend(map_op,op_override||{});
+			}
 			
 			window._d('for view, using options of');
 			window._d(map_op);

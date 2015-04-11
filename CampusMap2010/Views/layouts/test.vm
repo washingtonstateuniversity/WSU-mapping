@@ -198,6 +198,24 @@
 	<span itemprop="contactPoint" content="http://contactpage.wsu.edu"></span>
 	<span itemprop="url" content="http://your-unit.wsu.edu"></span>
 </div>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var map = $('#WSU_MAPS_NS');
+
+			map.on('wsu_maps:loaded_options',function(e,map_op){
+				console.log("setting up options before load");
+				console.log(map_op);
+				
+				jQuery.wsu_maps.state.fit_to_bound=false;
+
+				return { 'center':"46.725722661815745,-117.16131040741038" , 'zoom':15 };
+			});
+
+		});
+
+	})(jQuery);
+</script>
 <script type="text/javascript" src="/embed/wsu-home?dyno=true&debug=true"></script>
 </body>
 </html>

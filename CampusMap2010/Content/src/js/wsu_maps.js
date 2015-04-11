@@ -97,11 +97,13 @@ if (!Array.prototype.indexOf) {
 				$.extend(map_op,pos,base,$.parseJSON(ops));
 			}
 			
-			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:lodaed_options', [map_op]);
-			window._d('recived a value for the `wsu_maps:lodaed_options` event');
-			window._d(op_override);
-			$.extend(map_op,op_override||{});
-			
+			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:loaded_options', [map_op]);
+			if(window._defined(op_override)){	
+				window._d('recived a value for the `wsu_maps:lodaed_options` event');
+				window._d(op_override);
+				$.extend(map_op,op_override||{});
+			}
+
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				window._d('initalized the map');
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
