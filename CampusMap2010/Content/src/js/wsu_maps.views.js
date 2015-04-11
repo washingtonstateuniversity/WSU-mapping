@@ -48,22 +48,24 @@ var base=base||{};
 			if(window._defined(op_override)){	
 				window._d('recived a value for the `wsu_maps:lodaed_options` event');
 				window._d(op_override);
-				$.extend(map_op,op_override||{});
+				map_op = $.extend(map_op,op_override||{});
 			}
 			
 			window._d('for view, using options of');
 			window._d(map_op);
+			WSU_MAP.state.map_jObj.map_options = map_op;
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				window._d("created map view");
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
-				WSU_MAP.views.set_inital_options(map_op);
-				
-				if(window._defined(map_op.center)){			
-					var latLng = map_op.center.split(',');
+				if(window._defined(WSU_MAP.state.map_jObj.map_options.center)){		
+					var center = WSU_MAP.state.map_jObj.map_options.center;	
+					var latLng = center.split(',');
 					$.wsu_maps.state.center = new google.maps.LatLng(latLng[0],latLng[1]);
+					window._d('set center state as:' + center);
 				}else{
 					WSU_MAP.set_center();	
 				}
+				WSU_MAP.views.set_inital_options(WSU_MAP.state.map_jObj.map_options);
 				//var map = map_ele_obj.gmap("get","map");
 				//WSU_MAP.ini_GAtracking('UA-22127038-5');
 				WSU_MAP.poi_setup();

@@ -47,7 +47,19 @@
 		map_view_id = "WSU_MAPS_NS_2";
 		/* ]]> */
 		</script>
-		
+		<script type="text/javascript">
+			(function($){
+				$(function() {
+					var map = $('#WSU_MAPS_NS_2');
+					map.on('wsu_maps:loaded_options',function(e,map_op){
+						console.log("setting up options before load");
+						console.log(map_op);
+						jQuery.wsu_maps.state.fit_to_bound=false;
+						return { 'center': '46.73207659846422,-117.15444395233226', 'zoom':15 };
+					});
+				});
+			})(jQuery);
+		</script>
 		<div style="width: 100%; padding-top: 66%; min-height: 0px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(255, 255, 255);" id="WSU_MAPS_NS_2"></div>
 		
 		</div>
