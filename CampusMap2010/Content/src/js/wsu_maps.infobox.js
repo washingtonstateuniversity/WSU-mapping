@@ -623,9 +623,20 @@
 
 					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs'), header_height + iw_ui_nav_height );
 					
-					var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
-					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs-panel'), iw_ui_tabs_height + iw_ui_nav_height );
-
+					//var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
+					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs-panel'), (header_height + iw_ui_nav_height + iw_ui_nav_height) - 15  );
+					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs-panel .content'), (header_height + iw_ui_nav_height + iw_ui_nav_height) - 15 );
+					$('.full_screen_iw .ui-tabs').tabs({
+						select: function(){//event, ui) {
+							if(window._defined($.jtrack)){
+								//$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+							}
+						}
+					});
+					WSU_MAP.infobox.init_img_cycler();
+					WSU_MAP.infobox.contain_content_events();
+					WSU_MAP.infobox.init_img_modal();
+					WSU_MAP.errors.addErrorReporting(WSU_MAP.state.active.marker);
 					$('.full_screen_iw .infoClose').on('click',function(){
 						$('.gm-style .infoClose').trigger('click');
 						WSU_MAP.infobox.destroy_fullscreen_iw();
