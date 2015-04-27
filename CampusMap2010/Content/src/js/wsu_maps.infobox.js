@@ -76,7 +76,7 @@
 					boxStyle: {
 						width: (WSU_MAP.state.map_jObj.width()<425?WSU_MAP.state.map_jObj.width()-25:400)+"px"
 					},
-					closeBoxHTML:content===""?"<i></i>":"<span class='tabedBox infoClose'>X</span>",
+					closeBoxHTML:content===""?" ":"<span class='tabedBox infoClose'>X</span>",
 					infoBoxClearance: WSU_MAP.is_frontend?new google.maps.Size(75,60):new google.maps.Size(1,50),
 					isHidden: false,
 					pane: "floatPane",
@@ -243,6 +243,7 @@
 					$('#taby'+i).tabs('destroy').tabs();
 				}
 				WSU_MAP.markers.unhighlight_marker(WSU_MAP.state.markerLog[i]);
+				WSU_MAP.infobox.destroy_fullscreen_iw();
 				if(WSU_MAP.state.inview){
 					WSU_MAP.state.map_jObj.gmap('setOptions',WSU_MAP.views.inital_options);	
 				}
@@ -267,10 +268,10 @@
 				WSU_MAP.infobox.contain_content_events();
 				WSU_MAP.infobox.init_img_modal();
 				WSU_MAP.errors.addErrorReporting(marker);
+				WSU_MAP.infobox.setup_fullscreen_iw();
 	
 	
-	
-				$('.ui-tabs-panel').hover(function(){
+				$('.gm-style .ui-tabs-panel').hover(function(){
 					WSU_MAP.state.ib[i].setOptions({enableEventPropagation: true});
 					jObj.gmap('stop_scroll_zoom');
 				},function(){
@@ -573,6 +574,7 @@
 					$('#selectedPlaceList_area .active').removeClass('active');
 					$('#selectedPlaceList_area a:eq('+(i+2)+')').addClass('active');
 					WSU_MAP.state.cur_mid = WSU_MAP.state.mid[i];
+					
 					if($('.layoutfree').length){
 						$('.ui-tabs-panel .content a').on("click",function(e){
 							WSU_MAP.util.nullout_event(e);	
@@ -607,6 +609,31 @@
 						}
 					});
 				}
+			},
+			setup_fullscreen_iw:function(){
+				var iw_html = $('.infoBox:visible').html();
+				if($.trim(iw_html)!==""){
+					if( $('.full_screen_iw').length<=0 ){
+						$('body').append('<div class="full_screen_iw">');
+					}
+					$('.full_screen_iw').html(iw_html);
+					var header_height = $('.spine-header').height();
+					var iw_ui_nav_height = $('.full_screen_iw .ui-tabs-nav').height();
+					WSU_MAP.responsive.resizeBg( $('.full_screen_iw'), header_height );
+
+					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs'), header_height + iw_ui_nav_height );
+					
+					var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
+					WSU_MAP.responsive.resizeBg( $('.full_screen_iw .ui-tabs-panel'), iw_ui_tabs_height + iw_ui_nav_height );
+
+					$('.full_screen_iw .infoClose').on('click',function(){
+						$('.gm-style .infoClose').trigger('click');
+						WSU_MAP.infobox.destroy_fullscreen_iw();
+					});
+				}
+			},
+			destroy_fullscreen_iw:function(){
+				$('.full_screen_iw').remove();
 			},
 		}
 	});
