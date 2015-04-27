@@ -548,12 +548,12 @@
 							mode: "exact",
 							body_id: "left_col",
 							elements: id,
-							theme: "advanced",
+							theme: "modern",
 							width: "685",
 							force_br_newlines: true,
 							force_p_newlines: false,
 							forced_root_block: '',
-							plugins: "-templatevariables,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,autoresize,advimagescale",
+							plugins: "-templatevariables,autolink,lists,spellchecker,pagebreak,layer,table,save,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,autoresize,anchor, charmap,hr, image, link, emoticons, code,textcolor",//advhr,advimage,advlink,emotions,iespell,inlinepopups,style,xhtmlxtras, compat3x, advimagescale,
 							theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink," + placeImgBtn + "|,youTube,|,cleanup,|,outdent,indent,|,removeformat|,anchor,|,cite,abbr,acronym,del,ins,attribs",
 							theme_advanced_buttons2: "visualchars,nonbreaking,pagebreak,|,undo,redo,|,cut,copy,paste,pastetext,pasteword,|,forecolor,backcolor,|,help,|,fullscreen,|,code,|,spellchecker,search,replace",
 							theme_advanced_buttons3: "styleselect,formatselect,fontselect,fontsizeselect,|,variablesListBox",
@@ -671,7 +671,10 @@
 			
 								//add edit images menu
 								//push edit images to top and remove unwanted
-								ed.onInit.add(WSU_MAP.admin.ui.tinymce.editor_oninit);
+								//ed.onInit.add(WSU_MAP.admin.ui.tinymce.editor_oninit);
+								ed.on('init', function(){//args) {
+									WSU_MAP.admin.ui.tinymce.editor_oninit(ed);
+								});
 								// Add a custom button
 								ed.addButton('mainImage', {
 									title: 'Main Image',
@@ -738,79 +741,79 @@
 			
 			
 							},
-							advimagescale_maintain_aspect_ratio: false,
-							/* this is the default behavior */
-							advimagescale_fix_border_glitch: true,
-							/* also the default behavior */
-							advimagescale_noresize_all: false,
-							/* set to true to prevent all resizing on images */
-							advimagescale_append_to_url: true,
-							/* apply dimensions to image URL on resize */
-							advimagescale_url_width_key: 'w',
-							/* apply width to URL as w= param */
-							advimagescale_url_height_key: 'h',
-							/* apply height to URL as h= param */
-							advimagescale_max_height: 650,
-							/* limit maximum image height to 200px */
-							advimagescale_max_width: 650,
-							/* limit maximum image width to 200px */
-							advimagescale_min_height: 150,
-							/* minimum image height is 20px */
-							advimagescale_min_width: 150,
-							/* minimum image width is 20px */
-							/* call this function when an image is loading */
-							advimagescale_loading_callback: function(imgNode) {
-								$(imgNode).css({
-									'opacity': '.65'
-								});
-							},
-							/* call this function when an image is finished loading */
-							advimagescale_loaded_callback: function(imgNode) {
-								$(imgNode).css({
-									'opacity': '1.0'
-								});
-			
-								var image = $(imgNode).attr('alt').split('|');
-								//var yclass=$(imgNode).attr('class');
-								var theclass = $(imgNode).attr('class');
-								theclass = theclass.split('tinyImgHolder');
-								if (image[0] === "imagingIt") {
-									var image_id = image[1];
-									$(imgNode).attr('title', '#Inline_Iamge(' + image_id + ' ' + WSU_MAP.admin.defaults.place_id + ' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
-								}
-								if (image[0] === "youtubingIt") {
-									var yCode = image[1];
-									var title = image[2];
-									$(imgNode).attr('title', '#youtube(\'' + yCode + '\' \'' + title + '\' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
-								}
-							},
-							/* call this function when an image has been resized */
-							advimagescale_resize_callback: function(editorInstance, imgNode) {
-								editorInstance.execCommand("mceRepaint");
-			
-								var image = $(imgNode).attr('alt').split('|');
-								//var yclass=$(imgNode).attr('class');
-								var theclass = $(imgNode).attr('class');
-								theclass = theclass.split('tinyImgHolder');
-								if (image[0] === "imagingIt") {
-									var image_id = image[1];
-									$(imgNode).attr('title', '#Inline_Iamge(' + image_id + ' ' + WSU_MAP.admin.defaults.place_id + ' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
-								}
-								if (image[0] === "youtubingIt") {
-									var yCode = image[1];
-									var title = image[2];
-									$(imgNode).attr('title', '#youtube(\'' + yCode + '\' \'' + title + '\' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
-								}
-								//editorInstance.activeEditor.selection.collapse();
-								//alert('resized to ' + imgNode.width + 'x' + imgNode.height);
-							}
+							//advimagescale_maintain_aspect_ratio: false,
+//							/* this is the default behavior */
+//							advimagescale_fix_border_glitch: true,
+//							/* also the default behavior */
+//							advimagescale_noresize_all: false,
+//							/* set to true to prevent all resizing on images */
+//							advimagescale_append_to_url: true,
+//							/* apply dimensions to image URL on resize */
+//							advimagescale_url_width_key: 'w',
+//							/* apply width to URL as w= param */
+//							advimagescale_url_height_key: 'h',
+//							/* apply height to URL as h= param */
+//							advimagescale_max_height: 650,
+//							/* limit maximum image height to 200px */
+//							advimagescale_max_width: 650,
+//							/* limit maximum image width to 200px */
+//							advimagescale_min_height: 150,
+//							/* minimum image height is 20px */
+//							advimagescale_min_width: 150,
+//							/* minimum image width is 20px */
+//							/* call this function when an image is loading */
+//							advimagescale_loading_callback: function(imgNode) {
+//								$(imgNode).css({
+//									'opacity': '.65'
+//								});
+//							},
+//							/* call this function when an image is finished loading */
+//							advimagescale_loaded_callback: function(imgNode) {
+//								$(imgNode).css({
+//									'opacity': '1.0'
+//								});
+//			
+//								var image = $(imgNode).attr('alt').split('|');
+//								//var yclass=$(imgNode).attr('class');
+//								var theclass = $(imgNode).attr('class');
+//								theclass = theclass.split('tinyImgHolder');
+//								if (image[0] === "imagingIt") {
+//									var image_id = image[1];
+//									$(imgNode).attr('title', '#Inline_Iamge(' + image_id + ' ' + WSU_MAP.admin.defaults.place_id + ' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
+//								}
+//								if (image[0] === "youtubingIt") {
+//									var yCode = image[1];
+//									var title = image[2];
+//									$(imgNode).attr('title', '#youtube(\'' + yCode + '\' \'' + title + '\' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
+//								}
+//							},
+//							/* call this function when an image has been resized */
+//							advimagescale_resize_callback: function(editorInstance, imgNode) {
+//								editorInstance.execCommand("mceRepaint");
+//			
+//								var image = $(imgNode).attr('alt').split('|');
+//								//var yclass=$(imgNode).attr('class');
+//								var theclass = $(imgNode).attr('class');
+//								theclass = theclass.split('tinyImgHolder');
+//								if (image[0] === "imagingIt") {
+//									var image_id = image[1];
+//									$(imgNode).attr('title', '#Inline_Iamge(' + image_id + ' ' + WSU_MAP.admin.defaults.place_id + ' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
+//								}
+//								if (image[0] === "youtubingIt") {
+//									var yCode = image[1];
+//									var title = image[2];
+//									$(imgNode).attr('title', '#youtube(\'' + yCode + '\' \'' + title + '\' ' + imgNode.width + ' ' + imgNode.height + ' \'' + theclass[1] + '\')');
+//								}
+//								//editorInstance.activeEditor.selection.collapse();
+//								//alert('resized to ' + imgNode.width + 'x' + imgNode.height);
+//							}
 						};
 						break;
 					case "simple":
 						tiny_options={
 							mode: "exact",
 							elements: id || "place_summary",
-							theme: "advanced",
+							theme: "modern",
 							width: "685",
 							height: "150",
 							force_br_newlines: true,
@@ -818,16 +821,19 @@
 							forced_root_block: '',
 							theme_advanced_resizing_min_height: 150,
 							setup: function(ed) {
-								ed.onInit.add(function() {
-									/*
-									var e = tinymce.DOM.get(ed.id + '_tbl');
-									var ifr = tinymce.DOM.get(ed.id + '_ifr');
-									var w = ed.getWin();
-									var dh;
-									var h = 200; //new height of edit area
-									dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
-									//ed.theme.resizeTo(685, h + dh);
-									*/
+								//ed.onInit.add(function() {
+//									/*
+//									var e = tinymce.DOM.get(ed.id + '_tbl');
+//									var ifr = tinymce.DOM.get(ed.id + '_ifr');
+//									var w = ed.getWin();
+//									var dh;
+//									var h = 200; //new height of edit area
+//									dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
+//									//ed.theme.resizeTo(685, h + dh);
+//									*/
+//									WSU_MAP.admin.ui.tinymce.tinyResize(ed.id);
+//								});
+								ed.on('init', function(){//args) {
 									WSU_MAP.admin.ui.tinymce.tinyResize(ed.id);
 								});
 							},
@@ -843,7 +849,7 @@
 						tiny_options= {
 							mode: "exact",
 							elements: id || "tinyedit",
-							theme: "advanced",
+							theme: "modern",
 							width: "685",
 							height: "350",
 							force_br_newlines: true,
@@ -851,13 +857,16 @@
 							forced_root_block: '',
 							theme_advanced_resizing_min_height: 150,
 							setup: function(ed) {
-								ed.onInit.add(function() {
-									/*
-									var e = tinymce.DOM.get(ed.id + '_tbl'), ifr = tinymce.DOM.get(ed.id + '_ifr'), w = ed.getWin(), dh;
-									var h = 200; //new height of edit area
-									dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
-									//ed.theme.resizeTo(685, h + dh);
-									*/
+								//ed.onInit.add(function() {
+//									/*
+//									var e = tinymce.DOM.get(ed.id + '_tbl'), ifr = tinymce.DOM.get(ed.id + '_ifr'), w = ed.getWin(), dh;
+//									var h = 200; //new height of edit area
+//									dh = e.clientHeight - ifr.clientHeight; //get the height of the toolbars
+//									//ed.theme.resizeTo(685, h + dh);
+//									*/
+//									WSU_MAP.admin.ui.tinymce.tinyResize(ed.id);
+//								});
+								ed.on('init', function(){//args) {
 									WSU_MAP.admin.ui.tinymce.tinyResize(ed.id);
 								});
 							},
@@ -873,7 +882,7 @@
 			},
 			editor_oninit:function (ed) {
 				// Add hook for onContextMenu so that Insert Image can be removed
-				ed.plugins.contextmenu.onContextMenu.add(WSU_MAP.admin.ui.tinymce.editor_remove_insertImage);
+				//ed.plugins.contextmenu.onContextMenu.add(WSU_MAP.admin.ui.tinymce.editor_remove_insertImage);
 				if (WSU_MAP.admin.defaults.place_id > 0 && $('#place_Bodytext').val() !== '') {
 					setTimeout(function() {
 						ed.controlManager.setActive('spellchecker', true);
