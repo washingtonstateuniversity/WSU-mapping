@@ -15,7 +15,11 @@
 <title>The WSU #if($campus.name!="")${campus.name}#end Campus Map</title>
 <meta name="description" content="Washington State University provides this maping system to help you find the best of the area." />
 <meta name="keywords" content="Learning, Research, Community, WSU, Wazzu, Washington State University, Cougs, Cougars, President Elson S. Floyd, Pullman, Spokane, Tri-Cities, Vancouver, Extension, WSU West, Undergraduate, Graduate School, Eastern Washington, Clean Technologies, School for Global Animal Health, Food Supply, Future and Current Students, Facutly, Staff, Alumni, Friends, Parents, Athletics, Give to WSU" />
-<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+
+
+
+<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
+<link href="https://repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
 
 <script src="//use.typekit.net/roi0hte.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
@@ -103,9 +107,8 @@ var map_view = $options_block;
 </script>
 #set($siteroot=$site.Trim().TrimEnd("/"))
 
-<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
-<link href="https://repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
 $scriptsService.Css("~/Content/${jsfolder.Trim()}/css/front.styles.css",true)
 
 #if($admin_js)${admin_js}#end
 
+<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
