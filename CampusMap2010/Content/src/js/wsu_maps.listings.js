@@ -97,7 +97,7 @@
 					pane.jScrollPane(settings);
 					WSU_MAP.state.apiD = pane.data('jsp');
 					$.extend( WSU_MAP.state.apiD,{ jObj:jObj , settings:settings } );
-					jObj.show();
+					//jObj.show();
 				}
 			},
 			
