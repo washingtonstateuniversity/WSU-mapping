@@ -69,15 +69,52 @@
 			cursor: pointer;
 			font-size: 11px;
 			line-height: 14px;
-			table {
-				width: 190px;
+			//width: 190px;
+			margin-top:20px;
+			tr{
+				&:first-child{
+					td{
+						border:none;
+					}
+				}
 			}
+		}
+		
+		[jsdisplay="duration"]{
+			color:#2dad00;
 		}
 		.adp-step {
 			@extend %gmap_overrider_base;
 		}
+		.adp-substep {
+			position: relative;
+			color: #7E7E7E;
+			.adp b, .adp-list b{
+				color: #000;
+			}
+		}
+		tr td.adp-substep{
+			font-size: 1.25em;
+			&:last-child{
+				padding-left: 30px;
+				color: #000;
+			}
+			&:first-child{
+				color: #000;
+			}
+		}
+		.adp-distance{
+			white-space: nowrap;
+			font-weight: bold;
+			display: inline-block;
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+		}
 		.adp-text {
-			@extend %gmap_overrider_base;
+			font-size: 1.25em;
+			line-height: 1em;
+			width: 100%;
 		}
 		.adp-summary {
 			color: $color_WSU_Crimson;
@@ -85,15 +122,38 @@
 			font-weight: bold;
 			line-height: 14px;
 			padding: 0 3px 3px;
+			text-align: center;
+		}
+		.adp-placemark {
+			//margin-top: 0 !important;
+			&:last-child{
+				margin: 0px 10px;
+				margin-top: 15px;
+				border: none;
+				border-top: 1px solid #3b3b3b;
+			}
+			&#adp-placemark{
+				margin: 0px 10px;
+				margin-bottom: 15px;
+				border: none;
+				border-bottom: 1px solid #3b3b3b;
+			}
+			
+		}
+		.adp-warnbox {
+			margin: 0px;
+			width: 235px;
+			margin-left: -5px;
+			margin-bottom: 5px;
+			div{
+				border-radius: 0px;
+				font-size: 1.25em;
+				line-height: 1em;
+				&.warnbox-content {
+					padding:10px 15px;
+					background: none repeat scroll 0 0 #fff1a8;
+				} 
+			}
 		}
 	}
 }
-#adp-placemark {
-	margin-top: 0 !important;
-}
-.warnbox-content {
-	background: none repeat scroll 0 0 $color_vis_vis_approx;
-	font-size: 10px;
-	line-height: 12px;
-	padding: 5px 6px;
-} 
