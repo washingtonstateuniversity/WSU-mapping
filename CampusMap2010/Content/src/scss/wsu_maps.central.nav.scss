@@ -53,7 +53,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 			ul {
 				padding: 0;
 				list-style:none;
-				padding-right: 25px;
+				padding-right: 16px;
 				
 				ul {
 					margin: 0;
@@ -74,10 +74,45 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 					margin: 0 0 0 -14px;
 				}
 			}
-			form ul{
-				padding-right:0px;
-				width:175px;
+			form#getDirections {
+				margin-top: 45px;
+				input::-webkit-input-placeholder {
+					color: $color_WSU_Gray !important;
+				}
+				input:-moz-placeholder {
+					color: $color_WSU_Gray !important;
+				}
+				ul{
+					padding-right:0px;
+					width:175px;
+					#directionsTo {
+						margin-top: 5px;
+						input {
+							color: $color_WSU_Gray;
+							//background: $url_1 no-repeat scroll left 1px transparent;
+							height: 22px;
+							border: medium none;
+							margin-top: 5px;
+							padding: 0 15px 0 5px;
+							width: 127px;
+							border-bottom:1px solid #C0C0C0;
+						}
+					}
+					#directionsFrom input {
+						color: $color_WSU_Gray;
+						//background: $url_1 no-repeat scroll left 1px transparent;
+						height: 22px;
+						border: medium none;
+						padding: 0 15px 0 5px;
+						width: 127px;
+						border-bottom:1px solid #C0C0C0;
+						
+					} 
+
+				}
 			}
+			
+			 
 			#main_nav {
 				li {
 					//width: 165px;

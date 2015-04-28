@@ -114,49 +114,21 @@ p{
 
 
 
-#getDirections {
-	margin-top: 5px;
-	input::-webkit-input-placeholder {
-		color: $color_WSU_Gray !important;
-	}
-	input:-moz-placeholder {
-		color: $color_WSU_Gray !important;
-	}
-}
-#directionsTo {
-	margin-top: 5px;
-	input {
-		color: $color_WSU_Gray;
-		background: $url_1 no-repeat scroll left 1px transparent;
-		height: 22px;
-		border: medium none;
-		margin-top: 5px;
-		padding: 0 15px 0 5px;
-		width: 127px;
-	}
-}
-#directionsFrom input {
-	color: $color_WSU_Gray;
-	background: $url_1 no-repeat scroll left 1px transparent;
-	height: 22px;
-	border: medium none;
-	padding: 0 15px 0 5px;
-	width: 127px;
-} 
+
 .ie {
 	.mapControl {
 		//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 		box-shadow: 0 0 8px 1px $color_mountain_mist_5_approx;
 		behavior: $url_2;
 	}
-	#directionsFrom input {
+	/*#directionsFrom input {
 		left: 0;
 		padding-top: 3px;
 	}
 	#directionsTo input {
 		left: 0;
 		padding-top: 3px;
-	}
+	}*/
 }
 #printPdfs {
 	h2 {
