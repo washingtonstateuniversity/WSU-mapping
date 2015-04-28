@@ -90,6 +90,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.state.js',
 					'src/js/wsu_maps.defaults.js',
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.lightbox.js',
 					
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
@@ -137,6 +138,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.state.js',
 					'src/js/wsu_maps.defaults.js',
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.lightbox.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
 					'src/js/wsu_maps.errors.js',
@@ -233,6 +235,7 @@ module.exports = function(grunt) {
 					'src/js/wsu_maps.defaults.js',
 					
 					'src/js/wsu_maps.js',
+					'src/js/wsu_maps.lightbox.js',
 					'src/js/wsu_maps.util.js',
 					'src/js/wsu_maps.general.js',
 					'src/js/wsu_maps.errors.js',

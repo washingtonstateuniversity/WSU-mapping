@@ -88,7 +88,7 @@
 				if(window._defined(jObj)){
 					jObj.removeAttr('height');
 					jObj.find('.cAssest').removeAttr('style');
-					jObj.height($('#selectedPlaceList_area').height()-(window._defined(jObj.css("margin-top"))?jObj.css("margin-top").split('px')[0]:0) );
+					jObj.height( $('#selectedPlaceList_area').height()-( window._defined(jObj.css("margin-top")) ? jObj.css("margin-top").split('px')[0] : 0 ) );
 					
 					var settings = {
 						//showArrows: true
@@ -96,8 +96,7 @@
 					var pane = jObj;
 					pane.jScrollPane(settings);
 					WSU_MAP.state.apiD = pane.data('jsp');
-					$.extend(WSU_MAP.state.apiD,{jObj:jObj});
-					$.extend(WSU_MAP.state.apiD,{settings:settings});
+					$.extend( WSU_MAP.state.apiD,{ jObj:jObj , settings:settings } );
 					jObj.show();
 				}
 			},
