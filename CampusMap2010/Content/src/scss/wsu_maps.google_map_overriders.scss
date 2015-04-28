@@ -46,38 +46,46 @@
 
 #directions-panel {
 	margin: 26px 0 0;
-	width: 190px !important;
+	width: 235px !important;
 }
 #selectedPlaceList {
-	.adp-details {
-		font-size: 10px !important;
-		padding-left: 5px;
-	}
-	.adp-legal {
-		font-size: 10px !important;
-		padding-left: 5px;
-	}
-	.adp-directions {
-		border-collapse: collapse;
-		cursor: pointer;
-		font-size: 11px;
-		line-height: 14px;
-		table {
-			width: 190px;
+	#directions_area{
+		width:215px;
+	
+		.adp, .adp table {
+			margin-left: 5px;
+			font: 12px/12px $font_primary, $font_secondary, $font_tertiary, $font_primary;
 		}
-	}
-	.adp-step {
-		@extend %gmap_overrider_base;
-	}
-	.adp-text {
-		@extend %gmap_overrider_base;
-	}
-	.adp-summary {
-		color: $color_WSU_Crimson;
-		font-size: 13px;
-		font-weight: bold;
-		line-height: 14px;
-		padding: 0 3px 3px;
+		.adp-details {
+			font-size: 10px !important;
+			padding-left: 5px;
+		}
+		.adp-legal {
+			font-size: 10px !important;
+			padding-left: 5px;
+		}
+		.adp-directions {
+			border-collapse: collapse;
+			cursor: pointer;
+			font-size: 11px;
+			line-height: 14px;
+			table {
+				width: 190px;
+			}
+		}
+		.adp-step {
+			@extend %gmap_overrider_base;
+		}
+		.adp-text {
+			@extend %gmap_overrider_base;
+		}
+		.adp-summary {
+			color: $color_WSU_Crimson;
+			font-size: 13px;
+			font-weight: bold;
+			line-height: 14px;
+			padding: 0 3px 3px;
+		}
 	}
 }
 #adp-placemark {

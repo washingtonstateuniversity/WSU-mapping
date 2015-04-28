@@ -241,46 +241,46 @@
 			listTabs:function (prime){
 				
 				if($('#selectedPlaceList_area #option').length===0){
-						$('#selectedPlaceList_area').prepend('<ul id="option">');
+					$('#selectedPlaceList_area').prepend('<ul id="option">');
+				}
+		
+				if($('#selectedPlaceList_area #listing').length>0 && $('#selectedPlaceList_area #option #locations').length===0){
+					$('#selectedPlaceList_area #option').append('<li id="locations">Locations</li>');
+				}
+				if($('#selectedPlaceList_area #directions-panel').length>0 && $('#selectedPlaceList_area #option #directions').length===0){
+					$('#selectedPlaceList_area #option').append('<li id="directions">Directions</li>');
+				}
+				
+				if($('#selectedPlaceList_area #option li').length>1){
+					$('#selectedPlaceList_area #option li:first').addClass('DIVIT');	
+				}else{
+					$('#option .DIVIT').removeClass('DIVIT');	
+				}
+				if($('#option .active').length){
+					$('#option .active').removeClass('active');
+				}
+				
+				$('#locations').off().on('click',function(){
+					$('#option .active').removeClass('active');
+					$('#listing').show();
+					$('#directions-panel').hide();
+					$('#locations').addClass('active');
+				});
+				$('#directions').off().on('click',function(){
+					$('#option .active').removeClass('active');
+					$('#listing').hide();
+					$('#directions-panel').show();
+					$('#directions').addClass('active');
+		
+				});
+				if(window._defined(prime) && prime!=null){
+					if(prime==="locations"){
+						$('#locations').trigger('click');
 					}
-			
-					if($('#selectedPlaceList_area #listing').length>0 && $('#selectedPlaceList_area #option #locations').length===0){
-						$('#selectedPlaceList_area #option').append('<li id="locations">Locations</li>');
+					if(prime==="directions"){
+						$('#directions').trigger('click');
 					}
-					if($('#selectedPlaceList_area #directions-panel').length>0 && $('#selectedPlaceList_area #option #directions').length===0){
-						$('#selectedPlaceList_area #option').append('<li id="directions">Directions</li>');
-					}
-					
-					if($('#selectedPlaceList_area #option li').length>1){
-						$('#selectedPlaceList_area #option li:first').addClass('DIVIT');	
-					}else{
-						$('#option .DIVIT').removeClass('DIVIT');	
-					}
-					if($('#option .active').length){
-						$('#option .active').removeClass('active');
-					}
-					
-					$('#locations').off().on('click',function(){
-						$('#option .active').removeClass('active');
-						$('#listing').show();
-						$('#directions-panel').hide();
-						$('#locations').addClass('active');
-					});
-					$('#directions').off().on('click',function(){
-						$('#option .active').removeClass('active');
-						$('#listing').hide();
-						$('#directions-panel').show();
-						$('#directions').addClass('active');
-			
-					});
-					if(window._defined(prime) && prime!=null){
-						if(prime==="locations"){
-							$('#locations').trigger('click');
-						}
-						if(prime==="directions"){
-							$('#directions').trigger('click');
-						}
-					}
+				}
 			
 			},
 			reset_listingarea:function (){

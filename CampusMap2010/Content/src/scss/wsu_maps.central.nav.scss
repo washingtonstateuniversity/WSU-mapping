@@ -98,6 +98,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 							//margin-top: 5px;
 							padding: 0 15px 0 5px;
 							font-size:1.25em;
+							width: 165px;
 							&:focus {
 								box-shadow:none;
 							}
@@ -110,6 +111,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 						}
 						
 						&:before {
+							@include fa(); 
 							content: "\f041";
 							color: #2dad00;
 							position: absolute;
@@ -130,6 +132,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 							border: medium none;
 							padding: 0 15px 0 5px;
 							font-size:1.25em;
+							width: 165px;
 							&:focus {
 								box-shadow:none;
 							}
@@ -141,6 +144,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 							}
 						}
 						&:before {
+							@include fa(); 
 							content: "\f041";
 							color: #991b2f;
 							position: absolute;
@@ -396,6 +400,7 @@ footer {
 	}
 	
 	&:before {
+		@include fa(); 
 		content:"\f002";
 		color: #bec3c6;
 		position: absolute;

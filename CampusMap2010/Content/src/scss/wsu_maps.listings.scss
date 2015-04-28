@@ -69,8 +69,19 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 			padding-bottom: 3px;
 			padding-top: 7px;
 			min-height: 21px;
+			&#locations{
+				&:before {
+					@include fa(); 
+					content: "\f041";
+					color: #3b3b3b;
+					position: absolute;
+					left: 15px;
+					top: 5px;
+					font-size: 1.75em;
+				}
+			}
 			a {
-				color: $color_regal_blue_approx;
+				color: #3b3b3b;
 				display: block;
 				font-size: 12px;
 				line-height: 17px;
