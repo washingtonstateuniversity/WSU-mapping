@@ -54,7 +54,7 @@
 						<header class="spine-header">
 							<a href="http://www.wsu.edu/" id="wsu-signature" class="spine-signature">Washington State University</a>
 						</header>
-						<form action="#" id="placeSearch" class="fa">
+						<form action="#" id="placeSearch">
 							<input type="text" value="" placeholder="Search for a place" /><input type="submit" class="submit" value="placeSearching" />
 						</form>
 						<section id="spine-navigation" class="spine-navigation">

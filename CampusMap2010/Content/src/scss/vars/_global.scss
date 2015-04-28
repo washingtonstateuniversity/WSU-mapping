@@ -3,3 +3,14 @@ $font_primary: 'proxima-nova';
 $font_secondary: 'Lucida Sans';
 $font_tertiary: 'sans-serif';
 $font_quaternary: 'Arial';
+
+
+@mixin fa(){
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);	
+}

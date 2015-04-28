@@ -42,8 +42,8 @@
 
 <form action="#" id="getDirections">
 	<ul id="dir">
-		<li id="directionsFrom" class="fa"><input type="text" value="" placeholder="Directions from..." class="not" /></li>
-		<li id="directionsTo" class="fa"><input type="text" value="" placeholder="To WSU $!campus.name" /></li>
+		<li id="directionsFrom"><input type="text" value="" placeholder="Directions from..." class="not" /></li>
+		<li id="directionsTo"><input type="text" value="" placeholder="To WSU $!campus.name" /></li>
 	</ul>
 </form>
 
