@@ -4,7 +4,7 @@
 	
   	<li style="float:left"><a href="#" id="resetmap">Reset Map</a></li>
     <li><a href="#" id="embed">Link<span id="embedlink">/Embed</span></a></li>
-	<li class="sharearea">
+	<!--<li class="sharearea">
         <a href="#" class="clickshare">Share</a>
         <div id="sharing-menu">
             <div id="social-list">
@@ -16,7 +16,7 @@
                 <div class="mid"><a class="addthis_button_expanded">More Destinations...</a></div>
             </div>
         </div>
-     </li>
+     </li>-->
      <li>
          <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank">Report&nbsp;&nbsp;Error</a>
      </li>
