@@ -86,33 +86,72 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 					padding-right:0px;
 					width:175px;
 					#directionsTo {
-						margin-top: 5px;
+						
+						border-bottom:1px solid #C0C0C0;
+						width: 165px;
+						padding-left: 15px;
 						input {
 							color: $color_WSU_Gray;
 							//background: $url_1 no-repeat scroll left 1px transparent;
 							height: 22px;
 							border: medium none;
-							margin-top: 5px;
+							//margin-top: 5px;
 							padding: 0 15px 0 5px;
-							width: 127px;
-							border-bottom:1px solid #C0C0C0;
+							font-size:1.25em;
+							&:focus {
+								box-shadow:none;
+							}
+							&::-webkit-input-placeholder {
+								color: #bec3c6 !important;
+							}
+							&:-moz-placeholder {
+								color: #bec3c6 !important;
+							}
+						}
+						
+						&:before {
+							content: "\f041";
+							color: #2dad00;
+							position: absolute;
+							left: 0px;
+							top: 0px;
+							font-size: 2em;
 						}
 					}
-					#directionsFrom input {
-						color: $color_WSU_Gray;
-						//background: $url_1 no-repeat scroll left 1px transparent;
-						height: 22px;
-						border: medium none;
-						padding: 0 15px 0 5px;
-						width: 127px;
+					#directionsFrom {
+						margin-bottom: 15px;
 						border-bottom:1px solid #C0C0C0;
-						
-					} 
-
+						width: 165px;
+						padding-left: 15px;
+						input {
+							color: $color_WSU_Gray;
+							//background: $url_1 no-repeat scroll left 1px transparent;
+							height: 22px;
+							border: medium none;
+							padding: 0 15px 0 5px;
+							font-size:1.25em;
+							&:focus {
+								box-shadow:none;
+							}
+							&::-webkit-input-placeholder {
+								color: #bec3c6 !important;
+							}
+							&:-moz-placeholder {
+								color: #bec3c6 !important;
+							}
+						}
+						&:before {
+							content: "\f041";
+							color: #991b2f;
+							position: absolute;
+							left: 0px;
+							top: 0px;
+							font-size: 2em;
+						}
+					}
 				}
 			}
-			
-			 
+
 			#main_nav {
 				li {
 					//width: 165px;
@@ -306,7 +345,9 @@ footer {
 #placeSearch {
 	height: 23px;
 	position: relative;
-	width: 210px;
+	width: 170px;
+	border-bottom:1px solid #bec3c6;
+	margin-left: 13px;
 	&.ui-autocomplete-loading {
 		background: $logo_bug no-repeat scroll right center transparent !important;
 	}
@@ -315,18 +356,28 @@ footer {
 	}
 	input[type=text] {
 		border: medium none;
-		border-bottom:1px solid $gray;
-		color: $color_sapphire_approx;
-		font-size: 12px;
+		background:none;
+
+		font-size:1.25em;
 		height: 23px;
 		padding: 0;
 		position: absolute;
 		top: 0;
-		width: 140px;
+		width: 170px;
 		left: 0;
-		padding-left: 5px;
-		padding-right: 25px;
+		padding-left: 10px;
 		margin:0px 15px;
+		color: $color_WSU_Gray;
+		padding: 0 15px 0 5px;
+		&:focus {
+			box-shadow:none;
+		}
+		&::-webkit-input-placeholder {
+			color: #bec3c6 !important;
+		}
+		&:-moz-placeholder {
+			color: #bec3c6 !important;
+		}
 	}
 	.submit {
 		background: none repeat scroll 0 0 transparent;
@@ -340,13 +391,22 @@ footer {
 		top: 0;
 		width: 22px;
 	}
-	input:focus {
+	input {
+
 	}
-	input::-webkit-input-placeholder {
-		color: $color_sapphire_approx !important;
-	}
-	input:-moz-placeholder {
-		color: $color_sapphire_approx !important;
+	
+	&:before {
+		content:"\f002";
+		color: #bec3c6;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		font-size: 1.25em;
+		//-moz-transform: scale(-1, 1);
+		//-webkit-transform: scale(-1, 1);
+		//-o-transform: scale(-1, 1);
+		//-ms-transform: scale(-1, 1);
+		transform: scale(-1, 1);
 	}
 }
 * html .ui-autocomplete {
@@ -366,7 +426,7 @@ footer {
 			a {
 				text-decoration: none;
 				line-height:39px;
-				font-size:1.25em;
+				font-size:1em;
 				color:$gray;
 				display:inline-block;
 				&:hover{
@@ -383,14 +443,16 @@ footer {
 #header_bar {
 	border-top: 4px solid $color_WSU_Crimson;
 	height: 39px;
-	//margin-left: 198px;
 	position: relative;
+	font-size: 1em;
 	h1 {
 		width: auto;
-		font-size: 24px !important;
+		font-size:1.5em;
 		display: inline-block;
 		margin: 5px 0;
 		color: $color_chicago_approx;
+		line-height: 22px;
+		font-weight: bold;
 	}
 }
 
