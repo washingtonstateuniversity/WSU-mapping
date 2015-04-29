@@ -460,7 +460,7 @@
 				}
 			},
 			init_img_modal:function(){//marker){
-				var img_area = $('.ui-tabs .ui-tabs-panel .content.Views');
+				var img_area = $('.ui-tabs .ui-tabs-panel .content.Views:visible');
 				var imgs = img_area.html();
 				if(window._defined(imgs)){
 					imgs = imgs.split('<span class="imgEnlarge"></span>').join('');
@@ -478,8 +478,44 @@
 					img_area.find('.items a').lightbox({
 						gallery: {
 							enabled: true,
-							loop: true
-						}
+							loop: true,
+							
+						},
+						dialog:{
+							//resizeOnWindowResize: true,
+							//resizeAccordingToViewport: true,
+							//resizeToBestPossibleSize: true,
+							draggable: false,
+							resizable: false,
+							modal: true,
+							/*show: {
+								effect: "scale",
+								easing:"easeInOutQuint",
+								duration: 650
+							},
+							hide: {
+								effect: "scale",
+								easing:"easeInOutQuint",
+								duration: 350
+							},*/
+							onCreate:function(){
+								$('.ui-dialog-titlebar').remove();
+								$(".ui-dialog-buttonpane").remove();
+								$('body').css({overflow:"hidden"});
+							},
+							onOpen:function(){
+								
+								$('.lightbox-content').prepend('<span class="tabedBox infoClose">X</span>');
+								$('.lightbox-content').find('.infoClose').off().on("click",function(e){
+									WSU_MAP.util.nullout_event(e);
+									$('.lightbox').dialog( "close" );
+								});
+							},
+							onClose: function() {
+								WSU_MAP.util.close_dialog_modle($('.lightbox'));
+							}
+							
+						},
 					});
 
 					//WSU_MAP.util.popup_message({

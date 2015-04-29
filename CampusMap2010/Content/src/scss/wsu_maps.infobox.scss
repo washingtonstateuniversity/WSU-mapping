@@ -377,7 +377,18 @@ img.open_marker {
 		}
 	}
 }
-
+.lightbox {
+	.ui-widget-header{
+		backgound:none;
+		border:none;
+		span{
+			display:none;
+		}
+		.button{
+				
+		}
+	}
+}
 #cboxContent {
 	overflow: visible;
 	.cycle {

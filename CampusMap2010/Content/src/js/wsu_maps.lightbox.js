@@ -22,7 +22,9 @@
 				duration: 500,
 				queue: false
 			},
-	
+			onClose:null,
+			onCreate:null,
+			onOpen:null,
 			// callbacks
 			resized: null
 		},
@@ -384,7 +386,7 @@
 				scrollWithViewport: true,
 				resizeAccordingToViewport: true,
 				resizeToBestPossibleSize: false,
-	
+
 				/**
 				 * Animate the resizing and positioning mechanism
 				 * @property dialog.useAnimation
@@ -409,12 +411,14 @@
 				buttons: null, // options: null (default, adds pre/next buttons in gallery mode), {} (no buttons at all), or use as default dialog option
 				
 				/**
-				 * jQuery UI Dialog resize callback event (please note: native close, open and resize callbacks are not available)
+				 * jQuery UI Dialog callback events
 				 * @property dialog.resized
 				 * @type Function
 				 */
 				resized: null,
-	
+				onClose:null,
+				onCreate:null,
+				onOpen:null,
 				/**
 				 * Do not alter this property!
 				 * @property dialog.useContentSize
@@ -462,7 +466,7 @@
 						test: function( href ) {
 							return href.match( /\.(jpg|jpeg|png|gif)(\?.*)?$/ );
 						},
-						template: "<a href='#next' class='multibox-api next' rel='next'></a><a href='#prev' class='multibox-api prev' rel='prev'></a><img width='100%' height='100%' alt='{alt}' title='{title}' src='{path}' />",
+						template: "<a href='#next' class='lightbox-api next' rel='next'></a><a href='#prev' class='lightbox-api prev' rel='prev'></a><img width='100%' height='100%' alt='{alt}' title='{title}' src='{path}' />",
 						title: function( element ) {
 							return element.find( "img" ).attr( "alt" ) || element.text();
 						},
@@ -947,28 +951,41 @@
 				"id": this.uid + "-desc",
 				html: $( "<div class='inner'>" )
 			}).appendTo( this.uiDialog );
-	
-			// create dialog
-			this.uiDialog.dialog(
-				$.extend( true, {}, that.options.dialog, {
+			var options = that.options.dialog;
+			
+			var built_options = $.extend( {}, options, {
 					dialogClass: this.widgetName + " " + that.options.dialog.dialogClass,
 					close: function( event ){
+						if($.isFunction(options.onClose)){
+							that.options.onClose(this.uiDialog);
+						}
 						that._close( event );
+					},
+					create: function(  ){
+						if($.isFunction(options.onCreate)){
+							options.onCreate(this.uiDialog);
+						}
 					},
 					width: size.width,
 					height: size.height,
 					open: function() {
 						that.isOpen = true;
+						if($.isFunction(options.onOpen)){
+							options.onOpen(this.uiDialog);
+						}
 						that._fireCallback( "open", data );
 					}
-				})
-			);
+				});
+			
+			
+			// create dialog
+			this.uiDialog.dialog(built_options);
 			this.uiDialogWidget = this.uiDialog.dialog( "widget" );
 			this._setDesc( data );
 			this._setTitle( data );
 	
 			// search for api links
-			this.uiDialogWidget.on( "click." + this.widgetName, ".multibox-api[rel]", function( event ){
+			this.uiDialogWidget.on( "click." + this.widgetName, ".lightbox-api[rel]", function( event ){
 				that._move( $( this ).attr( "rel" ) );
 				event.preventDefault();
 			});
