@@ -305,15 +305,28 @@ img.open_marker {
 					height: 190px;
 					width: 263px !important;
 					-webkit-transform: translateZ(0px);
-					ul {
+					div {
 						display: block;
 						list-style: none outside none;
 						margin: 0 auto;
 						height: 190px;
-						li {
-							width: 344px !important;
-							height: 190px;
-						}
+						//li {
+							//width: 344px !important;
+							//height: 190px;
+							a{
+								position:relative;
+								&:before {
+									@include fa(); 
+									content: "\f0fe";
+									color: #3b3b3b;
+									position: absolute;
+									right: 5px;
+									top: 3px;
+									font-size: 1.75em;
+									z-index:1;
+								}
+							}
+						//}
 					}
 				}
 				.prev {

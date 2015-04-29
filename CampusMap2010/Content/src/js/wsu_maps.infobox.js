@@ -410,18 +410,22 @@
 			init_img_cycler:function(jObj,callbacks){//marker){
 				jObj = jObj || $('body');
 				var items = jObj.find('.cWrap .items');
-				if(items.find('li').length>1 && window._defined($.fn.cycle)){
-					var currSlide=0; 
-					items.cycle('destroy');
+				if(items.find('img').length>1 && window._defined($.fn.cycle)){
+					var currSlide=0;
+					if(items.data('cycle.opts') !== undefined){
+						//items.cycle('destroy');
+					}
 					items.cycle({
 						fx:     'scrollHorz',
 						delay:  -2000,
-						pauseOnPagerHover: 1,
+						pauseOnHover: 1,
 						pause:1,
 						timeout:0, 
 						pager:'.cNav',
 						prev: '.prev',
 						next: '.next', 
+						slides:'> a',
+						pagerTemplate: '<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
 						onPagerEvent:function(i){//,ele){
 							if(currSlide-i<0){ 
 								if(window._defined($.jtrack)){
@@ -452,9 +456,6 @@
 							}
 						},
 						
-						pagerAnchorBuilder: function(idx){//, slide) {
-							return '<li><a href="#" hidefocus="true">'+idx+'</a></li>';
-						} 
 					});
 				}
 			},

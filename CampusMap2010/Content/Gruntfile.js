@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 					'src/js/infobox-1.1.12.js',
 					
 					//'src/js/jquery.colorbox-min.js',
-					'src/js/jquery.cycle.all.js',
+					'src/js/jquery.cycle2.min.js',
 					'src/js/scrollbar/jquery.mousewheel.js',
 					'src/js/scrollbar/jquery.jscrollpane.min.js',
 					'src/js/zeroclipboard/ZeroClipboard.js',

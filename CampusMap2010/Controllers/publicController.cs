@@ -1645,10 +1645,10 @@ where p.status = 3
                                 foreach (media_repo media in item.Images) {
                                     if (c > 0) {
                                         /* note the width and height should be abstracted out into a map preference*/
-                                        galImg += "<li><a href='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "'  hidefocus='true' rel='gouped' class='gouped headImage orientation_" + media.orientation + "'>" +
-                                            "<span class=' imgEnlarge'></span>" +
+                                        galImg += "<a href='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "' alt='" + media.caption + "'  hidefocus='true' class='headImage orientation_" + media.orientation + "'>" +
+                                            //"<span class=' imgEnlarge'></span>" +
                                             "<img src='" + getRootUrl() + "media/download.castle?placeid=" + item.id + "&id=" + media.id + "&m=constrain&h=156' alt='" + media.caption + "' class='img-main' />" +
-                                        "</a></li>";
+                                        "</a>";
                                         if (media.type.name == "general_image") hasImg = true;
                                         if (media.type.name == "general_video") hasVid = true;
                                     }
@@ -1668,7 +1668,7 @@ where p.status = 3
                                     (c > 2 ? "<ul class='cNav'>" +
                                     //repeatStr("<li><a href='#' hidefocus='true'>{$i}</a></li>", item.Images.Count - 1) +
                                     "</ul>" : "") + (hasImg && hasVid ? "<a href='#' class='vids' hidefocus='true'>Video</a>" : "") + "</div>";
-                                String gallery = "<div class='cycleArea'><div class='cycle'>" + (c > 2 ? "<a href='#' class='prev' hidefocus='true'>Prev</a>" : "") + "<div class='cWrap'><ul class='items'>" + galImg + "</ul></div>" + (c > 2 ? "<a href='#' class='next' hidefocus='true'>Next</a>" : "") + "</div>" + nav + "</div>";
+                                String gallery = "<div class='cycleArea'><div class='cycle'>" + (c > 2 ? "<a href='#' class='prev' hidefocus='true'>Prev</a>" : "") + "<div class='cWrap'><div class='items'>" + galImg + "</div></div>" + (c > 2 ? "<a href='#' class='next' hidefocus='true'>Next</a>" : "") + "</div>" + nav + "</div>";
 
                                 imgGallery += @"
                                         {

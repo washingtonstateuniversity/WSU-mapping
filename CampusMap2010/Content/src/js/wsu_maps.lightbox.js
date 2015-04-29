@@ -650,7 +650,6 @@
 		// test each configured content type
 		_getType: function( href ) {
 			var type = "";
-	
 			$.each( this.options.types.config, function( _type, config ) {
 				if ( config.test.call( this, href ) ) {
 					type = _type;
