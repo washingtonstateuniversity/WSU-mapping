@@ -422,10 +422,10 @@
 						pause:1,
 						timeout:0, 
 						pager:'.cNav',
-						prev: '.prev',
-						next: '.next', 
+						prev:'.prev',
+						next:'.next', 
 						slides:'> a',
-						pagerTemplate: '<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
+						pagerTemplate:'<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
 						onPagerEvent:function(i){//,ele){
 							if(currSlide-i<0){ 
 								if(window._defined($.jtrack)){
