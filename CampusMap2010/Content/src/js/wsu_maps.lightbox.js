@@ -952,18 +952,18 @@
 				html: $( "<div class='inner'>" )
 			}).appendTo( this.uiDialog );
 			var options = that.options.dialog;
-			
+			var dOject = this.uiDialog;
 			var built_options = $.extend( {}, options, {
 					dialogClass: this.widgetName + " " + that.options.dialog.dialogClass,
 					close: function( event ){
 						if($.isFunction(options.onClose)){
-							that.options.onClose(this.uiDialog);
+							options.onClose(dOject);
 						}
 						that._close( event );
 					},
 					create: function(  ){
 						if($.isFunction(options.onCreate)){
-							options.onCreate(this.uiDialog);
+							options.onCreate(dOject);
 						}
 					},
 					width: size.width,
@@ -971,7 +971,7 @@
 					open: function() {
 						that.isOpen = true;
 						if($.isFunction(options.onOpen)){
-							options.onOpen(this.uiDialog);
+							options.onOpen(dOject);
 						}
 						that._fireCallback( "open", data );
 					}
