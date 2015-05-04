@@ -139,6 +139,23 @@
 										.split('__').join('_');
 						var hideTab = ( j>0 ?' display:none;' : '' );
 						var html_block = ( j === 0 ? prime_image : "" ) + html.block;
+						
+						if(title === 'Views' && window._defined(marker.media)){
+							var view_block = "<div class='cycleArea'><div class='cycle'><a href='#' class='prev' hidefocus='true'>Prev</a><div class='cWrap'><div class='items'>";
+							
+							//<a href='http://localhost:56180/media/download.castle?placeid=197&id=614' alt='' hidefocus='true' class='headImage orientation_h'><img src='http://localhost:56180/media/download.castle?placeid=197&id=614&m=constrain&h=156' alt='' class='img-main' /></a>
+							
+							$.each( marker.media, function(j, img) {
+								view_block += "<a href='/media/download.castle?placeid="+marker.id+"&id="+img.id+"' alt='' hidefocus='true' class='headImage orientation_"+img.orientation+"'><span><img src='/media/download.castle?placeid="+marker.id+"&id="+img.id+"&m=constrain&h=190' alt='' class='img-main' /></span></a>";
+							});
+							
+							
+							view_block += "</div></div><a href='#' class='next' hidefocus='true'>Next</a></div><div class='navArea'><ul class='cNav'></ul></div></div>";
+							
+							html_block = view_block;
+						}
+						
+						
 						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom " style="'+hideTab+'"><div class="content '+title+'">'+(title !== 'Views'?infoTitle:'')+html_block+'</div><a class="directionsTo" href="#" data-goto="'+marker.id+'" >Directions from</a><a class="errorReporting" href="?reportError=&place=' + marker.id + '" >Report&nbsp;&nbsp;error</a></div>';
 					});				
 				
@@ -204,7 +221,8 @@
 					mainimage = "<span class='headImage' rel='gouped'><a href='#' class='imgEnlarge'></a><img src='"+WSU_MAP.state.siteroot+"media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "&m=crop&w=148&h=100' title='media/download.castle?placeid=" + $("#place_id").val() + "&id=" + $(".placeImages").first().val() + "' alt='Main Image' class='img-main'/></span>";
 				}
 				var infoTitle = "";
-				infoTitle = '<h2 class="header"><span class="iw_id">'+i+'</span>'+ $("#name").val() +'</h2>';
+				var title = $("#name").val();
+				infoTitle = '<h2 class="header"><span class="iw_id">'+i+'</span>'+ title +'</h2>';
 	
 				var nav='';
 				var content='';
@@ -213,9 +231,26 @@
 					$.each( marker.content, function(j, html) {	
 						nav += '	<li class="ui-state-default ui-corner-top '+( j===0 ?'first ui-tabs-selected ui-state-active':'')+'"><a href="#tabs-'+j+'" hideFocus="true">'+html.title+'</a></li>';
 					});
-					
+
 					$.each( marker.content, function(j, html) {
-						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html.block+'</div></div>';
+						
+						
+						var html_block = html.block;
+						if(title === 'Views' && window._defined(marker.media)){
+							var view_block = "<div class='cycleArea'><div class='cycle'><a href='#' class='prev' hidefocus='true'>Prev</a><div class='cWrap'><div class='items'>";
+							
+							//<a href='http://localhost:56180/media/download.castle?placeid=197&id=614' alt='' hidefocus='true' class='headImage orientation_h'><img src='http://localhost:56180/media/download.castle?placeid=197&id=614&m=constrain&h=156' alt='' class='img-main' /></a>
+							
+							$.each( marker.media, function(j, img) {
+								view_block += "<a href='/media/download.castle?placeid="+marker.id+"&id="+img.id+"' alt='' hidefocus='true' class='headImage orientation_"+img.orientation+"'><span><img src='/media/download.castle?placeid="+marker.id+"&id="+img.id+"&m=constrain&h=156' alt='' class='img-main' /></span></a>";
+							});
+							
+							
+							view_block += "</div></div><a href='#' class='next' hidefocus='true'>Next</a></div><div class='navArea'><ul class='cNav'></ul></div></div>";
+							
+							html_block = view_block;
+						}
+						content += '<div id="tabs-'+j+'" class="ui-tabs-panel ui-widget-content ui-corner-bottom  '+( j>0 ?' ui-tabs-hide':'')+'"><div class="content">'+infoTitle+(j===0?mainimage:'')+html_block+'</div></div>';
 					});
 				}else{
 					nav = '	<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active first" ><a href="#tabs-1"  hideFocus="true">Overview</a></li>';

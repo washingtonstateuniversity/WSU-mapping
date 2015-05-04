@@ -154,6 +154,8 @@
 					made_marker.marker_position = marker_obj.marker_position;
 					made_marker.labels = marker_obj.labels;
 					made_marker.prime_image = marker_obj.prime_image;
+					made_marker.media = marker_obj.media;
+					made_marker.id = marker_obj.id;
 
 					made_marker.setZIndex(made_marker.marker_style.zFrezze);
 					

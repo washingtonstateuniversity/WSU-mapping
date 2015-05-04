@@ -308,7 +308,7 @@ img.open_marker {
 				.cWrap {
 					margin: 0 auto;
 					height: 190px;
-					width: 263px !important;
+					width: 279px !important;
 					-webkit-transform: translateZ(0px);
 					div {
 						display: block;
@@ -319,16 +319,26 @@ img.open_marker {
 							//width: 344px !important;
 							//height: 190px;
 							a{
-								position:relative;
-								&:before {
-									@include fa(); 
-									content: "\f0fe";
-									color: #3b3b3b;
-									position: absolute;
-									right: 5px;
-									top: 3px;
-									font-size: 1.75em;
-									z-index:1;
+								width: 262px !important;
+								height: 190px;
+								text-align: center;
+								span{
+									position:relative;
+									display: inline-block;
+									&:before {
+										@include fa(); 
+										content: "\f0fe";
+										color: #3b3b3b;
+										position: absolute;
+										right: 5px;
+										top: 3px;
+										font-size: 1.75em;
+										z-index:1;
+									}
+									img{
+										postion:absolute;
+											
+									}
 								}
 							}
 						//}
