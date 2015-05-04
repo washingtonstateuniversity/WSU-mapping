@@ -26,6 +26,14 @@
 					}			
 				});
 			},
+			add_iw_directions:function(){
+				$('.directionsTo').on('click',function(e){
+					WSU_MAP.util.nullout_event(e);
+					var currentMarker = WSU_MAP.state.active.marker;
+					WSU_MAP.state.cFrom=currentMarker.position.latitude+","+currentMarker.position.longitude;
+					WSU_MAP.directions.hereToThere();
+				});
+			},
 			fireDirections:function (){
 				//WSU_MAP.state.map_jObj.gmap('clear','markers');
 				//WSU_MAP.state.map_jObj.gmap('clear','overlays');

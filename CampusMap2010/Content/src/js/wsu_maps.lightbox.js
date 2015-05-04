@@ -129,7 +129,6 @@
 				this._animateSize();
 				return;
 			}
-	
 			if ( this.options.useContentSize ) {
 				this._contentSize();
 				return;

@@ -380,6 +380,35 @@ img.open_marker {
 				color: $color_WSU_Crimson;
 			}
 		}
+		.directionsTo{
+			bottom: -2px;
+			color: $color_masala_approx;
+			display: block;
+			font-size: 11px;
+			letter-spacing: 0;
+			padding: 0 5px;
+			position: absolute;
+			left: 19px;
+			text-decoration: none;
+			border: medium none;
+			box-shadow:none;
+			padding-left: 15px;
+			&:hover {
+				color: $color_WSU_Crimson;
+				&:before {
+					color: #0A2700;
+				}
+			}
+			&:before {
+				@include fa(); 
+				content: "\f041";
+				color: #2dad00;
+				position: absolute;
+				left: 0px;
+				top: -3px;
+				font-size: 2em;
+			}
+		}
 	}
 }
 .lightbox {
