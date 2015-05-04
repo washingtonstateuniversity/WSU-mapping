@@ -19,7 +19,7 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 	}
 	nav ul{
 		li{
-			border:none medium;	
+			border:0px solid #fff;	
 			&.parent.opened>a:after, &.parent>a:after,
 			&.parent:not(.active)>a:after{
 				content:"";	
