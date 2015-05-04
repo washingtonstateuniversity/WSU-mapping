@@ -161,7 +161,8 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 					//width: 165px;
 					border-bottom:1px solid #e4e4e4;
 					&.off_place_action{
-						border-bottom:none medium;
+						//border-bottom:none medium;
+						border:0px solid #fff;
 					}
 					li {
 						width: 154px;
