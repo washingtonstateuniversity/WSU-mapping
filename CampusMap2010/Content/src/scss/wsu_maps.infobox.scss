@@ -256,12 +256,16 @@ img.open_marker {
 				}
 				&.orientation_h {
 					//background: $url_2 repeat-x scroll 50% top $white;
+					width:135px;
+					height:75px;
 				}
 				&.orientation_ {
 					//background: $url_2 repeat-x scroll 50% top $white;
 				}
 				&.orientation_v {
 					//background: $url_3 repeat-x scroll 50% top $white;
+					width:75px;
+					height:135px;
 				}
 				.imgEnlarge {
 					background: $url_4 no-repeat scroll center top transparent;
@@ -315,33 +319,38 @@ img.open_marker {
 						list-style: none outside none;
 						margin: 0 auto;
 						height: 190px;
-						//li {
-							//width: 344px !important;
-							//height: 190px;
-							a{
-								width: 262px !important;
-								height: 190px;
-								text-align: center;
+						a{
+							width: 262px !important;
+							height: 190px;
+							text-align: center;
+							span{
+								position:relative;
+								display: inline-block;
+								&:before {
+									@include fa(); 
+									content: "\f0fe";
+									color: #EBEBEB;
+									position: absolute;
+									right: 5px;
+									top: 3px;
+									font-size: 1.75em;
+									z-index:1;
+									text-shadow: #3b3b3b 0px 0px 5px;
+								}
+								img{
+									postion:absolute;
+										
+								}
+							}
+							&:hover{
 								span{
-									position:relative;
-									display: inline-block;
 									&:before {
-										@include fa(); 
-										content: "\f0fe";
 										color: #3b3b3b;
-										position: absolute;
-										right: 5px;
-										top: 3px;
-										font-size: 1.75em;
-										z-index:1;
-									}
-									img{
-										postion:absolute;
-											
+										text-shadow: #EBEBEB 0px 0px 5px;
 									}
 								}
 							}
-						//}
+						}
 					}
 				}
 				.prev {
