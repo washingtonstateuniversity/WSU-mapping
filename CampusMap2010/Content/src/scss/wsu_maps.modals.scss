@@ -75,9 +75,9 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 		background: trasparent;
 		display: block;
 		position: absolute;
-		top: 0px;
+		top: 9px;
 		height: 100%;
-		width: 5%;
+		width: 15%;
 		z-index: 1;
 		&:before {
 			@include fa();
@@ -97,7 +97,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			&:hover {
 				background-position: right bottom;
 				&:before {
-					right: 50%;
+					right: 25%;
 					opacity:1;
 				}
 			}
@@ -110,7 +110,7 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			&:hover {
 				background-position: right bottom;
 				&:before {
-					left: 50%;
+					left: 25%;
 					opacity:1;
 				}
 			}
