@@ -270,6 +270,7 @@
 	
 				if(window._defined($.fn.cycle) && $('.cWrap .items li').length>1){
 					$('.cWrap .items').cycle('destroy');
+					WSU_MAP.state.map_jObj.has_cycle=false;
 				}
 				if(window._defined($.jtrack)){
 					//$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
@@ -282,6 +283,7 @@
 				if(WSU_MAP.state.inview){
 					WSU_MAP.state.map_jObj.gmap('setOptions',WSU_MAP.views.inital_options);	
 				}
+				
 				WSU_MAP.state.active.marker = null;
 			},
 			
@@ -299,7 +301,7 @@
 					});
 				}
 				WSU_MAP.infobox.make_IW_resp(i);
-				WSU_MAP.infobox.init_img_cycler();
+				WSU_MAP.infobox.init_img_cycler(jObj);
 				WSU_MAP.infobox.contain_content_events();
 				WSU_MAP.infobox.init_img_modal();
 				/*$('.content.Views .items a').lightbox({
@@ -445,18 +447,19 @@
 			init_img_cycler:function(jObj,callbacks){//marker){
 				jObj = jObj || $('body');
 				var items = jObj.find('.cWrap .items');
-				if(items.find('img').length>1 && window._defined($.fn.cycle)){
+				if(items.find('img').length>1 && window._defined($.fn.cycle)){// && (!window._defined(jObj.has_cycle) || jObj.has_cycle===false) 
 					var currSlide=0;
 					if(items.data('cycle.opts') !== undefined){
 						//items.cycle('destroy');
 					}
+					jObj.has_cycle=true;
 					items.cycle({
 						fx:     'scrollHorz',
 						delay:  -2000,
 						pauseOnHover: 1,
 						pause:1,
 						timeout:0, 
-						pager:'.cNav',
+						pager:jObj.find('.cNav'),
 						prev:'.prev',
 						next:'.next', 
 						slides:'> a',
@@ -752,7 +755,7 @@
 							}
 						}
 					});
-					WSU_MAP.infobox.init_img_cycler();
+					WSU_MAP.infobox.init_img_cycler(full_screen_object);
 					WSU_MAP.infobox.contain_content_events();
 					WSU_MAP.infobox.init_img_modal(full_screen_object);
 					WSU_MAP.errors.addErrorReporting(WSU_MAP.state.active.marker);
