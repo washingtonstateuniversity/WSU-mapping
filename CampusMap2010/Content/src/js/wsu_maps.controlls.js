@@ -174,8 +174,6 @@
 				if(WSU_MAP.state.cTo==="" && WSU_MAP.state.cFrom ===""){
 					WSU_MAP.directions.clearHereToThere();
 				}
-				
-			
 				if(WSU_MAP.state.cTo!==""){
 					$('.contextmenu #to').addClass('active');
 				}
