@@ -16,10 +16,10 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 }
 
 .ui-widget-overlay{
-	z-index:999!important;
+	z-index:10000 !important;
 }
 .ui-dialog{
-	z-index:1000!important;
+	z-index:10100 !important;
 	.cycle {
 		position: relative;
 		//width: 344px;

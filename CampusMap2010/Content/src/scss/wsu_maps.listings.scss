@@ -18,7 +18,7 @@ $url_2: url('//beta.maps.wsu.edu/Content/images/placelist_bk.png');
 	overflow: visible;
 	min-height: 350px;
 	height: auto;
-	z-index: 9;
+	z-index: 9999;
 	&.active {
 		border-left: 1px solid $color_pink_swan_approx;
 	}
