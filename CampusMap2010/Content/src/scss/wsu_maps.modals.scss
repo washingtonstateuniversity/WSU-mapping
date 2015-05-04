@@ -71,4 +71,49 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 			}
 		}
 	}
+	.lightbox-api{
+		background: trasparent;
+		display: block;
+		position: absolute;
+		top: 0px;
+		height: 100%;
+		width: 5%;
+		z-index: 1;
+		&:before {
+			@include fa();
+			color: #991b2f;
+			position: absolute;
+			font-size: 3em;
+			font-weight: 900;
+			top: 50%;
+			text-shadow: #fff 0px 0px 5px;
+			opacity:0;
+		}
+		&.next{
+			right:0;
+			&:before {
+				content: "\f101";
+			}
+			&:hover {
+				background-position: right bottom;
+				&:before {
+					right: 50%;
+					opacity:1;
+				}
+			}
+		}
+		&.prev{
+			left:0;
+			&:before {
+				content: "\f100";
+			}
+			&:hover {
+				background-position: right bottom;
+				&:before {
+					left: 50%;
+					opacity:1;
+				}
+			}
+		}
+	}
 }
