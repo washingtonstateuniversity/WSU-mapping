@@ -293,6 +293,7 @@
 				WSU_MAP.state.ibHover =  true;
 				if( !$('#taby'+i).is(':ui-tabs') ){
 					$('#taby'+i).tabs({
+						heightStyle: "content",
 						select: function(){//event, ui) {
 							if(window._defined($.jtrack)){
 								//$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
@@ -304,19 +305,6 @@
 				WSU_MAP.infobox.init_img_cycler(jObj);
 				WSU_MAP.infobox.contain_content_events();
 				WSU_MAP.infobox.init_img_modal();
-				/*$('.content.Views .items a').lightbox({
-					gallery: {
-						enabled: true,
-						loop: true
-					},
-					dialog: {
-						resizeToBestPossibleSize: true
-					}
-				});*/
-				
-				
-				
-				
 				WSU_MAP.errors.addErrorReporting(marker);
 				WSU_MAP.infobox.setup_fullscreen_iw();
 	

@@ -185,6 +185,9 @@ img.open_marker {
 			left: 0;
 			top: 0;
 			//float: left;
+			&.Views {
+				min-height:214px;
+			}
 			&.Views_Vids {
 				padding: 0 4px;
 				.cycle ul li span {
