@@ -263,7 +263,46 @@ namespace campusMap.Controllers {
             }
             return sm_url;
         }
+        public void produce_sitemap() {
+            CancelView();
+            CancelLayout();
+            small_url[] urls = ActiveRecordBase<small_url>.FindAll(); //ActiveRecordBase<small_url>.FindAllByProperty("sm_url", smallUrl);
+            if (urls.Count() == 0) {
+                RenderText("false");
+                return;
+            }
+            String appPath = getRootPath();
+            String cachePath = appPath + "/";
+            String file = "sitemap.xml";
+            if (!File.Exists(cachePath + file) || !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["dyno"])) {
+                String sitemap = "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'> ";
 
+
+                foreach (small_url url in urls) {
+                    sitemap += @"
+    <url>
+        <loc>https://maps/wsu.edu/t/" + url.sm_url + @"</loc>
+    </url>";
+                   /* string[] queries = url.or_url.Split('?')[1].Split('&');
+                    string[] cats = url.or_url.Contains("cat") ? null : new string[0];
+                    int activePlace = url.or_url.Contains("activePlace") ? -1 : 0;
+                    int pid = url.or_url.Contains("pid") ? -1 : 0;
+                    Boolean eb = url.or_url.Contains("eb") ? false : false;
+                    Boolean layout = true;
+                    url.
+                    foreach (string query in queries) {
+                        if (cats == null && query.Contains("cat")) cats = query.ToString().Replace("cat[]=", "").Split(',');
+                        if (activePlace == -1 && query.Contains("activePlace")) activePlace = int.Parse(query.ToString().Replace("activePlace=", ""));
+                        if (pid == -1 && query.Contains("pid")) pid = int.Parse(query.ToString().Replace("pid=", ""));
+                        if (query.Contains("eb")) eb = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
+                    }*/
+                }
+                sitemap += @"
+</urlset>";
+                setJsonCache(cachePath, file, sitemap);
+            }
+                
+        }
         /* this is to be turned into to the main map view switcher */
         //[Layout("central")]
         //[DefaultAction]
