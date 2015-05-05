@@ -536,7 +536,7 @@ img.open_marker {
 				background-position: center center;
 			}
 		}
-		&.active a {
+		&.cycle-pager-active a {
 			background-position: left center;
 		}
 	}
@@ -592,7 +592,7 @@ img.open_marker {
 					background-position: center center;
 				}
 			}
-			&.activeSlide a {
+			&.cycle-pager-active a {
 				background-position: left center;
 			}
 		}
