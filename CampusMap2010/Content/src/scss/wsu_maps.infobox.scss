@@ -251,12 +251,30 @@ img.open_marker {
 				position: relative;
 				cursor: pointer;
 				margin-bottom: 4px;
-				&:hover {
+				&:before {
+					@include fa(); 
+					content: "\f0fe";
+					color: #EBEBEB;
+					position: absolute;
+					right: 5px;
+					top: 3px;
+					font-size: .95em;
+					z-index:1;
+					text-shadow: #3b3b3b 0px 0px 5px;
+				}
+				&:hover{
+					opacity: .8;
+					&:before {
+						color: #3b3b3b;
+						text-shadow: #EBEBEB 0px 0px 5px;
+					}
+				}
+				/*&:hover {
 					opacity: .8;
 					.imgEnlarge {
 						background-position: center bottom;
 					}
-				}
+				}*/
 				&.orientation_h {
 					//background: $url_2 repeat-x scroll 50% top $white;
 					width:135px;
@@ -270,7 +288,7 @@ img.open_marker {
 					width:75px;
 					height:135px;
 				}
-				.imgEnlarge {
+				/*.imgEnlarge {
 					background: $url_4 no-repeat scroll center top transparent;
 					top: 0px;
 					display: block;
@@ -280,7 +298,7 @@ img.open_marker {
 					width: 14px;
 					padding: 0;
 					z-index: 1;
-				}
+				}*/
 			}
 			.cycle ul li .headImage {
 				float: left;
@@ -292,11 +310,28 @@ img.open_marker {
 					@extend %extend_inforbase;
 				}
 				&.orientation_v {
-					background: $url_6 no-repeat scroll center top transparent;
+					//background: $url_6 no-repeat scroll center top transparent;
 					margin-left: 67px;
 					padding: 12px 9px;
 				}
-				.imgEnlarge {
+				&:before {
+					@include fa(); 
+					content: "\f0fe";
+					color: #EBEBEB;
+					position: absolute;
+					right: 5px;
+					top: 3px;
+					font-size: .75em;
+					z-index:1;
+					text-shadow: #3b3b3b 0px 0px 5px;
+				}
+				&:hover{
+					&:before {
+						color: #3b3b3b;
+						text-shadow: #EBEBEB 0px 0px 5px;
+					}
+				}
+				/*.imgEnlarge {
 					background: $url_7 no-repeat scroll center top transparent;
 					right: 5px;
 					height: 18px;
@@ -304,7 +339,7 @@ img.open_marker {
 				}
 				&:hover .imgEnlarge {
 					background-position: center bottom;
-				}
+				}*/
 			}
 			.cycle {
 				position: relative;
