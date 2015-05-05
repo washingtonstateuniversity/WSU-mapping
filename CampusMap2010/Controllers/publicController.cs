@@ -281,7 +281,7 @@ namespace campusMap.Controllers {
                 foreach (small_url url in urls) {
                     sitemap += @"
     <url>
-        <loc>https://maps/wsu.edu/t/" + url.sm_url + @"</loc>
+        <loc>https://map/wsu.edu/t/" + url.sm_url + @"</loc>
     </url>";
                    /* string[] queries = url.or_url.Split('?')[1].Split('&');
                     string[] cats = url.or_url.Contains("cat") ? null : new string[0];
