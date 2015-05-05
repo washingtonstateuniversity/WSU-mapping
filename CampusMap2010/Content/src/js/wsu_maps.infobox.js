@@ -54,15 +54,15 @@
 				IWpanels.find(".content").width(( IWpanels.width()<400 ? IWpanels.width()-35:365 )+"px");	
 				if(IWpanels.is(":not(.resp)")){
 					$(window).resize(function(){
-						WSU_MAP.infobox.make_IW_resp();
+						WSU_MAP.infobox.make_IW_resp(i);
 					});
 					IWpanels.addClass('resp');
 				}
-				var minHeight=0;
-				$.each($('#taby'+i+' .ui-tabs-panel'),function() {
-					minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
-				}).css('min-height',minHeight); 
-				WSU_MAP.infobox.apply_scroller(minHeight);
+				//var minHeight=0;
+				//$.each($('#taby'+i+' .ui-tabs-panel'),function() {
+				//	minHeight = Math.max(minHeight, $(this).find('.content').height())+3; 
+				//}).css('min-height',minHeight); 
+				//WSU_MAP.infobox.apply_scroller(minHeight);
 			},
 			build_options:function(marker,i,content){
 				var options = {
@@ -281,15 +281,17 @@
 						}
 					});
 				}
+				
 				WSU_MAP.infobox.make_IW_resp(i);
 				WSU_MAP.infobox.init_img_cycler(jObj);
 				WSU_MAP.infobox.contain_content_events();
 				WSU_MAP.infobox.init_img_modal();
 				WSU_MAP.errors.addErrorReporting(marker);
 				WSU_MAP.infobox.setup_fullscreen_iw();
+				
 	
 	
-				$('.gm-style .ui-tabs-panel').hover(function(){
+				$('.gm-style .infoBox').hover(function(){
 					WSU_MAP.state.ib[i].setOptions({enableEventPropagation: true});
 					jObj.gmap('stop_scroll_zoom');
 				},function(){
@@ -346,10 +348,7 @@
 			apply_panoramas:function(marker){
 				var jObj = WSU_MAP.state.map_jObj;
 				var pano = jObj.gmap("getPanorama");
-				
-	
 				google.maps.event.addListener(pano, 'visible_changed', function() {
-	
 					if(jObj.gmap("hasPanorama")){
 						if(WSU_MAP.infobox.pano_init===false){
 							WSU_MAP.markers.init_street_view_markers();
@@ -366,7 +365,6 @@
 				});			
 				
 				if(jObj.gmap("hasPanorama")){
-					
 					pano.setPosition(new google.maps.LatLng(marker.marker_position.latitude, marker.marker_position.longitude));
 					google.maps.event.addListener(pano, 'position_changed', function() {
 						if(jObj.gmap("hasPanorama")){

@@ -177,7 +177,7 @@ img.open_marker {
 		position: relative;
 		padding-bottom: 1.4em;
 		.content {
-			min-height: 0;
+			min-height: 25px;
 			max-height: 240px;
 			overflow-x: hidden;
 			overflow-y: auto;

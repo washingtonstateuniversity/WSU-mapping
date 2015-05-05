@@ -29,6 +29,10 @@ if (!Array.prototype.indexOf) {
 (function( $, window, WSU_MAP ) {
 	WSU_MAP.state.currentLocation = WSU_MAP.state.siteroot+WSU_MAP.state.mapview;
 	$.extend( WSU_MAP||(WSU_MAP={}), {
+		
+		
+		//WSU_MAP.do('infobox.make_IW_resp',[i]);
+		
 		is_frontend:true,
 		ini:function (options){
 			$.extend(WSU_MAP.state,options);
