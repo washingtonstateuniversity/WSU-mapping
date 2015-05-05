@@ -267,7 +267,6 @@
 				
 				WSU_MAP.state.active.marker = null;
 			},
-			
 			open_IW:function(marker,i){
 				var jObj = WSU_MAP.state.map_jObj;
 				needsMoved=0;
