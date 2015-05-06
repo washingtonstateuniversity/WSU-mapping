@@ -209,6 +209,7 @@
 										'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
 									'</from></div>',
 						width:450,
+						show_close:true,
 						onCreate:function(){//jObj){
 							WSU_MAP.general.prep_html();
 							$('#emailDirs [type="Submit"]').off().on('click',function(e){
