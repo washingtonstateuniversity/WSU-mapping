@@ -154,6 +154,7 @@
 					minWidth: 350,
 					minHeight: 25,
 					modal: true,
+					height:"auto",
 					draggable : false,
 					buttons_parts:{},
 					create:function(){
