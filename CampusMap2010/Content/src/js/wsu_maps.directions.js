@@ -67,10 +67,11 @@
 											WSU_MAP.util.nullout_event(e);
 											var map = WSU_MAP.state.map_inst;
 											var baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-											 
+											 //https://maps.googleapis.com/maps/api/staticmap?center=" + place.getLat() + "," + place.getLong() + "&size=250x145&zoom=18&size=400x400&maptype=roadmap&markers=" + place.getLat() + "," + place.getLong() + "
 											var params = [];
 											params.push("sensor=false");
 											params.push("size=700x504");
+											params.push("maptype=roadmap");
 											params.push("center=" + map.getCenter().lat().toFixed(6) + "," + map.getCenter().lng().toFixed(6));
 											//params.push("zoom=" + map.getZoom());
 		
