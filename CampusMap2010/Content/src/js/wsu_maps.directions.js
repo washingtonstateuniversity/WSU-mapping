@@ -79,7 +79,12 @@
 											markersArray.push("markers=color:green%7Clabel:A%7C"+results.routes[0].legs[0].start_location.toString().replace(')','').replace('(',''));
 											markersArray.push("markers=color:green%7Clabel:B%7C"+results.routes[0].legs[0].end_location.toString().replace(')','').replace('(',''));
 											params.push(markersArray.join("&"));
-											var path = google.maps.geometry.encoding.decodePath(results.routes[0].overview_polyline.points);   
+											var path = "";
+											if(typeof results.routes[0].overview_polyline === "string"){
+												path = google.maps.geometry.encoding.decodePath(results.routes[0].overview_polyline);  
+											}else{
+												path = google.maps.geometry.encoding.decodePath(results.routes[0].overview_polyline.points);   
+											}
 		
 											params.push("path=weight:3%7Ccolor:blue%7Cenc:" + google.maps.geometry.encoding.encodePath(path) );
 											baseUrl += params.join("&");

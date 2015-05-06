@@ -12,7 +12,6 @@
 	background-color: $white;
 	color: $color_charade_approx;
 }
-
 html {
 	@extend %primary_base;
 }
@@ -24,3 +23,11 @@ body {
 	height: 100%;
 }
 :focus { outline: none; }
+#hide{
+	position:absolute;
+	top:-999em;
+	left:-999em;
+	overflow:auto;
+	height:0px;
+	width:0px;
+}

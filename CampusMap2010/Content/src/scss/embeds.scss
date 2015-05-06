@@ -1,4 +1,12 @@
 @charset "UTF-8";
+#hide{
+	position:absolute;
+	top:-999em;
+	left:-999em;
+	overflow:auto;
+	height:0px;
+	width:0px;
+}
 .WSU_MAPS_NS{ //the NS should be a var.. 
 	-webkit-transform: translateZ(0px);	
 	div{
