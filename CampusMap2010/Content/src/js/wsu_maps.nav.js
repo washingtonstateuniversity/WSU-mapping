@@ -4,7 +4,7 @@
 		nav: {
 			onpop:false,
 			menuDressChild:function (jObj){
-				if(jObj.is($('.parent:not(".altAction")'))){
+				if(jObj.is($('.parent'))){
 					var self_active = jObj.is($('.active'));
 					$('#main_nav .active').removeClass('active');
 					$('.checked').removeClass('checked');
@@ -89,11 +89,11 @@
 			setup_nav:function (){
 				//var jObj = WSU_MAP.state.map_jObj;
 				window._d("setting up nav");
-				$('#main_nav li.parent:not(".altAction")').off().on('click',function(){//e){
+				$('#main_nav li.parent:not(".altAction")').off().on('click',function(e){
 					WSU_MAP.util.nullout_event(e);
 					WSU_MAP.nav.reacton_parent(this);
 				});
-				$('#main_nav .parent li a').off().on('click',function(){//e){
+				$('#main_nav .parent li a').off().on('click',function(e){
 					WSU_MAP.util.nullout_event(e);
 					WSU_MAP.nav.reacton_child(this);
 				});
