@@ -26,6 +26,7 @@ module.exports = function(grunt) {
 					{ src: "src/scss/admin.scss", dest: "build/_pre_sass/admin.styles.css" },
 					{ src: "src/scss/centrals.scss", dest: "build/_pre_sass/front.styles.css" },
 					{ src: "src/scss/embeds.scss", dest: "build/_pre_sass/map.view.styles.css" },
+					{ src: "src/scss/rescue.scss", dest: "build/_pre_sass/map.rescue.styles.css" },
 				]
 			},
 		},
@@ -44,7 +45,7 @@ module.exports = function(grunt) {
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
 					//'src/css/colorbox.css',
 					'src/css/share_link.css',
-					'src/css/reactive.css',
+					//'src/css/reactive.css',
 					'build/_pre_sass/front.styles.css'
 				],
 				dest: 'build/css/front.styles.css',
@@ -55,10 +56,18 @@ module.exports = function(grunt) {
 					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
 					//'src/css/colorbox.css',
 					'src/css/share_link.css',
-					'src/css/reactive.css',
+					//'src/css/reactive.css',
 					'build/_pre_sass/map.view.styles.css'
 				],
 				dest: 'build/css/map.view.styles.css',
+			},
+			rescue_styles: {
+				src: [
+					'src/js/scrollbar/style/jquery.jscrollpane.css',
+					'src/js/scrollbar/style/jquery.jscrollpane.lozenge.css',
+					'build/_pre_sass/map.rescue.styles.css',
+				],
+				dest: 'build/css/map.rescue.styles.css',
 			},
 			admin_styles: {
 				src: [
@@ -202,12 +211,17 @@ module.exports = function(grunt) {
 				src: 'build/css/admin.styles.css',
 				dest: 'build/_precss/admin.styles.css'
 			},
+			rescue_styles: {
+				src: 'build/css/map.rescue.styles.css',
+				dest: 'build/_precss/map.rescue.styles.css'
+			},
 		},
 		cssmin: {
 			combine: {
 				files: {
 					// Hmmm, in reverse order
 					'dis/css/admin.styles.css': ['build/_precss/admin.styles.css'],
+					'dis/css/map.rescue.styles.css': ['build/_precss/map.rescue.styles.css'],
 					'dis/css/front.styles.css': ['build/_precss/front.styles.css'],
 					'dis/css/map.view.styles.css': ['build/_precss/map.view.styles.css'],
 				}
