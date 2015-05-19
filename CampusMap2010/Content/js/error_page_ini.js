@@ -23,8 +23,11 @@ $(document).ready(function(){
 							'<h2>Found an error?</h2>'+
 							'<h3>Please provide some information to help us correct this issue.</h3>'+
 							'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"/></lable><br/>'+
-							'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+
-							'<lable>Type:<br/><select name="issueType" required><option value="">Choose</option><option value="tech">Technical</option><option value="local">Location</option><option value="content">Content</option></select></lable><br/>'+
+							'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address"  name="email"/></lable><br/>'+							
+							'<lable>Type:<br/>Technical<input name="issueType" value="tech" type="hidden" /></lable><br/>'+
+							'<textarea name="data" style="position:absolute; top:-999em;height:0px; width:0px;">'+$('#report_area_details').html()+'</textarea>'+
+							'<input type="hidden" value="'+window.location+'" name="reported_url"/>'+
+							'<input type="hidden" value="unknown" name="ua" id="user_agent__reporting"/>'+
 							'<lable>Describe the issues: <br/>'+
 							'<textarea required placeholder="Description" name="description"></textarea></lable><br/>'+
 							'<br/><input type="Submit" id="errorSubmit" value="Submit"/><br/>'+
@@ -36,8 +39,13 @@ $(document).ready(function(){
 			width:"80%",
 			//height:450,
 			open:true,
-			onComplete:function(){prep();
-				if($('#colorbox #cb_nav').length)$('#colorbox #cb_nav').html("");
+			onComplete:function(){
+				prep();
+				var ua = window.navigator.userAgent;
+				$('#user_agent__reporting').val(ua);
+				if($('#colorbox #cb_nav').length){
+					$('#colorbox #cb_nav').html("");
+				}
 				$('#errorReporting [type="Submit"]').off().on('click',function(e){
 					e.stopPropagation();
 					e.preventDefault();

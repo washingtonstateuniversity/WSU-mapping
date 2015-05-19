@@ -144,3 +144,17 @@ img {
 		text-shadow: #3b3b3b 0px 0px 5px;
 	}
 }
+.errorReporting{
+	padding-left:25px;
+	&:before {
+		@include fa(); 
+		content: "\f0a1";
+		color: #EBEBEB;
+		position: absolute;
+		left: 5px;
+		top: 3px;
+		font-size: .95em;
+		z-index:1;
+		text-shadow: #3b3b3b 0px 0px 5px;
+	}
+}

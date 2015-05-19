@@ -20,8 +20,10 @@ Location: $reported_url
 
 #if(!$reporter)
 <hr/>
-User Agent: $ua
-
+User Agent: $!ua
+<hr/>
+Data: $!data
+<hr/>
 #end
 
 

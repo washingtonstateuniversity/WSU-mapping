@@ -690,7 +690,7 @@ namespace campusMap.Controllers {
 
 
         }
-        public void reportError(String name, String email, String reported_url, String place_name, int place_id, String ua, String description, String issueType) {
+        public void reportError(String name, String email, String reported_url, String place_name, int place_id, String ua, String description, String issueType, String data) {
             CancelView();
             CancelLayout();
 
@@ -707,6 +707,8 @@ namespace campusMap.Controllers {
             PropertyBag["issueType"] = issueType;
             PropertyBag["place_name"] = place_name;
             PropertyBag["ua"] = ua;
+            PropertyBag["data"] = data;
+            
 
             // Create and return new Hashtable.
             Hashtable emails = new Hashtable();
