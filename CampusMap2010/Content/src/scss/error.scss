@@ -10,6 +10,7 @@ $url_1: url('/Content/images/colorbox/cbox_close.png');
 html {
 	margin: 0;
 	padding: 0;
+	background: #fdfdfd $url_0 repeat-x center top;
 }
 body {
 	text-rendering: optimizeLegibility;
@@ -17,7 +18,7 @@ body {
 	font-family: $font_primary, $font_secondary, $font_tertiary;
 	font-weight: 400;
 	margin: 0;
-	background: $white $url_0 repeat-x center top;
+	background: #fdfdfd $url_0 repeat-x center top;
 	color: $color_WSU_Gray;
 	padding: 0;
 }
@@ -70,7 +71,7 @@ li {
 	margin-right: auto;
 	margin-left: auto;
 	text-align: left;
-	padding: 100px 10px;
+	padding: 20px 10px;//100px 10px;
 	position: relative;
 	* {
 		position: relative;
@@ -108,4 +109,38 @@ li {
 }
 img {
 	padding: 40px 0 0;
-} 
+}
+#report_area_details{
+	display:none;
+}
+#show_hide_error{
+	&:before {
+		@include fa(); 
+		content: "\f119";
+		color: #EBEBEB;
+		/*position: absolute;
+		right: 5px;
+		top: 3px;*/
+		font-size: .95em;
+		z-index:1;
+		text-shadow: #3b3b3b 0px 0px 5px;
+	}
+	&.open{
+		&:before {
+		}
+	}
+}
+#get_back{
+	padding-left:25px;
+	&:before {
+		@include fa(); 
+		content: "\f112";
+		color: #EBEBEB;
+		position: absolute;
+		left: 5px;
+		top: 3px;
+		font-size: .95em;
+		z-index:1;
+		text-shadow: #3b3b3b 0px 0px 5px;
+	}
+}

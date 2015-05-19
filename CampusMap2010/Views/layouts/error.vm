@@ -13,7 +13,8 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
 		<link href="https://repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />		
-		
+		<script src="//use.typekit.net/roi0hte.js"></script>
+		<script>try{Typekit.load();}catch(e){}</script>
 		$scriptsService.Css("~/Content/${jsfolder.Trim()}/css/map.rescue.styles.css",true)
 		<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
 	</head>
