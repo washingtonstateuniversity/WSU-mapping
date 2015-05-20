@@ -609,7 +609,6 @@
 						//iw_base.show();
 						$('.gm-style .infoClose').trigger('click');
 						WSU_MAP.infobox.destroy_fullscreen_iw();
-						
 					});
 				}
 			},

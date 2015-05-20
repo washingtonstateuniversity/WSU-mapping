@@ -433,10 +433,10 @@
 			}
 			self.get('map').fitBounds(bounds);
 			if(typeof mapDim !== "undefined"){
-				console.log(mapDim);
+				//console.log(mapDim);
 				var zoom = self.getBoundsZoomLevel(bounds,mapDim);
-				console.log(bounds);
-				console.log(zoom);
+				//console.log(bounds);
+				//console.log(zoom);
 				self.get('map').setZoom(zoom);
 			}
 		},
