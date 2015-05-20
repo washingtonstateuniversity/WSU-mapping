@@ -422,7 +422,16 @@
 		},			
 		
 		
-		
+		fitBoundsToVisibleMarkers: function (markers) {
+			var self=this;
+			var bounds = new google.maps.LatLngBounds();
+			for (var i=0; i<markers.length; i++) {
+				if(markers[i].getVisible()) {
+					bounds.extend( markers[i].getPosition() );
+				}
+			}
+			self.get('map').fitBounds(bounds);
+		},
 		
 		
 		
