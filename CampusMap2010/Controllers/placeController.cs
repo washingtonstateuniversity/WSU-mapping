@@ -1446,7 +1446,7 @@ namespace campusMap.Controllers {
 
             String cachePath = getRootPath() + "cache/places/";
 
-            string file = place.id + "_centralplace" + ".ext";
+            string file = place.id + "_render" + ".ext";
             String file_path = cachePath + file;
             if (File.Exists(file_path)) {
                 File.Delete(file_path);
