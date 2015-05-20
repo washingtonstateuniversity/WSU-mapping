@@ -422,7 +422,7 @@
 		},			
 		
 		
-		fitBoundsToVisibleMarkers: function (markers,mapDim) {
+		fitBoundsToVisibleMarkers: function (markers,mapDim,max_zoom) {
 			console.log(markers);
 			var self=this;
 			var bounds = new google.maps.LatLngBounds();
@@ -437,6 +437,9 @@
 				var zoom = self.getBoundsZoomLevel(bounds,mapDim);
 				//console.log(bounds);
 				//console.log(zoom);
+				if(zoom>max_zoom){
+					zoom=max_zoom;
+				}
 				self.get('map').setZoom(zoom);
 			}
 		},
@@ -468,7 +471,17 @@
 		
 			return Math.min(latZoom, lngZoom, ZOOM_MAX);
 		},	
-		
+		panToWithOffset:function(latlng, offsetX, offsetY) {
+			var self=this;
+			var overlay = new google.maps.OverlayView();
+			overlay.draw = function() {};
+			overlay.setMap(self.get('map'));
+			var proj = overlay.getProjection();
+			var point = proj.fromLatLngToDivPixel(latlng);
+			point.x = point.x+offsetX;
+			point.y = point.y+offsetY;
+			self.get('map').panTo(proj.fromDivPixelToLatLng(point));			
+		},	
 				
 		/**
 		 * Helper method for unwrapping jQuery/DOM/string elements
