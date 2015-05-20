@@ -160,7 +160,7 @@
 					made_marker.setZIndex(made_marker.marker_style.zFrezze);
 					
 					
-					
+					WSU_MAP.state.displayedMarkers[i]=made_marker;
 					WSU_MAP.state.markerLog[i]=made_marker;
 					WSU_MAP.state.markerbyid[id] = WSU_MAP.state.markerLog[i];
 					WSU_MAP.infobox.make_InfoWindow(i,made_marker);

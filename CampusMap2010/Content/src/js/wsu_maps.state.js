@@ -24,6 +24,7 @@
 				
 			markerLog:[],
 			markerbyid:[],
+			displayedMarkers:[],
 			mid:[],
 			shapes:[],
 			listOffset:0,

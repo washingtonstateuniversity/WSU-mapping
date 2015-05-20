@@ -573,7 +573,8 @@
 				}
 			},
 			setup_fullscreen_iw:function(){
-				var iw_html = $('.infoBox:visible').html();
+				var iw_base = $('.infoBox:visible');
+				var iw_html = iw_base.html();
 				if($.trim(iw_html)!==""){
 					var full_screen_object = WSU_MAP.state.map_jObj.find('.full_screen_iw');
 					if( full_screen_object.length<=0 ){
@@ -584,13 +585,14 @@
 					full_screen_object.html(iw_html);
 					var header_height = $('.spine-header').height();
 					var iw_ui_nav_height = full_screen_object.find('.ui-tabs-nav').height();
-					WSU_MAP.responsive.resizeBg( full_screen_object, header_height );
+					var iw_map_clearence = 150;
+					WSU_MAP.responsive.resizeBg( full_screen_object, header_height + iw_map_clearence );
 
-					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), header_height + iw_ui_nav_height );
+					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), header_height + iw_ui_nav_height  + iw_map_clearence);
 					
 					//var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
-					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs-panel'), (header_height + iw_ui_nav_height + iw_ui_nav_height) - 15  );
-					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs-panel .content'), (header_height + iw_ui_nav_height + iw_ui_nav_height) - 15 );
+					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs-panel'), (header_height + iw_ui_nav_height + iw_ui_nav_height + iw_map_clearence) - 15  );
+					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs-panel .content'), (header_height + iw_ui_nav_height + iw_ui_nav_height + iw_map_clearence) - 15 );
 					full_screen_object.find('.ui-tabs').tabs({
 						select: function(){//event, ui) {
 							if(window._defined($.jtrack)){
@@ -602,9 +604,12 @@
 					WSU_MAP.infobox.contain_content_events();
 					WSU_MAP.infobox.init_img_modal(full_screen_object);
 					WSU_MAP.errors.addErrorReporting(WSU_MAP.state.active.marker);
+					//iw_base.hide();
 					full_screen_object.find('.infoClose').on('click',function(){
+						//iw_base.show();
 						$('.gm-style .infoClose').trigger('click');
 						WSU_MAP.infobox.destroy_fullscreen_iw();
+						
 					});
 				}
 			},
