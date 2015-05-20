@@ -17,6 +17,10 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 		background: none;
 		padding-left: 0px;
 	}
+	
+	&.unshelved {
+		top:0px !important;
+	}
 	nav ul{
 		li{
 			border:0px solid #fff;	
@@ -32,7 +36,6 @@ $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
 		  display: inherit;
 		}
 	}
-	
 	#glue {
 		left: 0;
 		position: static;
