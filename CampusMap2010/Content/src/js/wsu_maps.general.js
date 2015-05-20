@@ -43,6 +43,11 @@
 							callback(marker);
 						}
 					});
+					
+					var jObj = WSU_MAP.state.map_jObj;
+					jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.markerLog);
+					
+					
 					if($('.mobile').length){
 						WSU_MAP.geoLocate();
 					}
