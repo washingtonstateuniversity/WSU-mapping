@@ -608,6 +608,11 @@
 					WSU_MAP.state.map_jObj.on("wsu_maps:iw_opened",function(){
 						if(full_screen_object.is(":visible")){
 							iw_base.hide();
+							WSU_MAP.state.map_jObj.gmap('fitBoundsToVisibleMarkers',[WSU_MAP.state.active.marker], {height:WSU_MAP.state.map_jObj.height(),width:WSU_MAP.state.map_jObj.width()}, 18);
+							WSU_MAP.state.map_jObj.gmap('set_map_center',WSU_MAP.state.active.marker.getPosition(),function(){
+								WSU_MAP.state.map_jObj.gmap('panToWithOffset', WSU_MAP.state.active.marker.getPosition(), 0, -(150+WSU_MAP.markers.defaults.height));
+							});
+							
 						}
 					});
 					full_screen_object.find('.infoClose').on('click',function(){
