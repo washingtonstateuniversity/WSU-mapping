@@ -708,7 +708,13 @@ namespace campusMap.Controllers {
             PropertyBag["place_name"] = place_name;
             PropertyBag["ua"] = ua;
             PropertyBag["data"] = data;
-            
+
+            if ((issueType == "local" || issueType == "content") && place_id > 0) {
+                place item = ActiveRecordBase<place>.Find(place_id);
+                item.needs_update = true;
+                ActiveRecordMediator<place>.Save(item);
+                ActiveRecordMediator<place>.Refresh(item);
+            }
 
             // Create and return new Hashtable.
             Hashtable emails = new Hashtable();
@@ -727,7 +733,7 @@ namespace campusMap.Controllers {
                 email_mass.From = new MailAddress("noreply@wsu.edu");
                 email_mass.To.Add(new MailAddress(entry.Key.ToString(), entry.Value.ToString()));
 
-                if ((issueType == "local" || issueType == "local") && place_id > 0) {
+                if ((issueType == "local" || issueType == "content") && place_id > 0) {
                     place place = ActiveRecordBase<place>.Find(place_id);
                     foreach (users auth in place.authors) {
                         email_mass.To.Add(new MailAddress(auth.email, auth.name));
