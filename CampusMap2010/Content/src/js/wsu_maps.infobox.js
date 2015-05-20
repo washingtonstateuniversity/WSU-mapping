@@ -306,7 +306,7 @@
 				WSU_MAP.state.active.marker = WSU_MAP.state.markerLog[i];
 					$(".open_marker").removeClass('open_marker');
 					$("[src*='"+WSU_MAP.state.active.marker.marker_style.icon.url+"']").addClass('open_marker');
-	
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:iw_opened',[ marker ]);
 				//WSU_MAP.general.prep_html();
 			},
 			hold_zoom_action:function(i){
@@ -604,7 +604,12 @@
 					WSU_MAP.infobox.contain_content_events();
 					WSU_MAP.infobox.init_img_modal(full_screen_object);
 					WSU_MAP.errors.addErrorReporting(WSU_MAP.state.active.marker);
-					//iw_base.hide();
+
+					WSU_MAP.state.map_jObj.on("wsu_maps:iw_opened",function(){
+						if(full_screen_object.is(":visible")){
+							iw_base.hide();
+						}
+					});
 					full_screen_object.find('.infoClose').on('click',function(){
 						//iw_base.show();
 						$('.gm-style .infoClose').trigger('click');
