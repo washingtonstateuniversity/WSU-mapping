@@ -64,6 +64,9 @@ namespace campusMap.Models {
         [Property(Default = "1")]
         virtual public Boolean isPublic { get; set; }
 
+        [Property(Default = "0")]
+        virtual public Boolean needs_update { get; set; }
+
         [BelongsTo]
         virtual public users editing { get; set; }
 

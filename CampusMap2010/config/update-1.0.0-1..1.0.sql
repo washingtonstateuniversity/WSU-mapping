@@ -34,3 +34,15 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
 
 	ALTER TABLE place
 		ADD city INT null
+
+	ALTER TABLE infotabs_templates
+		ADD needs_update BIT default 0  null
+
+	ALTER TABLE geometrics
+		ADD needs_update BIT default 0  null
+
+	ALTER TABLE place
+		ADD needs_update BIT default 0  null
+
+	ALTER TABLE map_views
+		ADD needs_update BIT default 0  null
