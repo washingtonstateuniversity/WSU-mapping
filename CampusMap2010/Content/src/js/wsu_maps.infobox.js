@@ -616,7 +616,8 @@
 						}
 					});
 					full_screen_object.find('.infoClose').on('click',function(){
-						//iw_base.show();
+						iw_base.show();
+						WSU_MAP.state.map_jObj.gmap('set_map_center',WSU_MAP.state.active.marker.getPosition(),function(){});
 						$('.gm-style .infoClose').trigger('click');
 						WSU_MAP.infobox.destroy_fullscreen_iw();
 					});
