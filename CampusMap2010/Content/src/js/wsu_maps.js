@@ -268,7 +268,9 @@ if (!Array.prototype.indexOf) {
 			}
 			$.getJSON(url+'?callback=?'+(_load!==false && !$.isNumeric(_load)?'&cat[]='+_load:($.isNumeric(_load)?'&id='+_load:'')), function(data) {
 				if(!$.isNumeric(_load)){
-					WSU_MAP.listings.autoOpenListPanel();
+					if($(window).width()>530){
+						WSU_MAP.listings.autoOpenListPanel();
+					}
 				}
 				var cleanedData = [];
 				cleanedData.markers = [];
