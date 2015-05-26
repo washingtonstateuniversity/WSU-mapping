@@ -610,7 +610,8 @@
 							iw_base.hide();
 							WSU_MAP.state.map_jObj.gmap('fitBoundsToVisibleMarkers',[WSU_MAP.state.active.marker], {height:WSU_MAP.state.map_jObj.height(),width:WSU_MAP.state.map_jObj.width()}, 18);
 							WSU_MAP.state.map_jObj.gmap('set_map_center',WSU_MAP.state.active.marker.getPosition(),function(){
-								WSU_MAP.state.map_jObj.gmap('panToWithOffset', WSU_MAP.state.active.marker.getPosition(), 0, -(150+WSU_MAP.markers.defaults.height));
+								//console.log(-(WSU_MAP.state.map_jObj.height()*0.5 - ((150*0.5) - WSU_MAP.markers.defaults.height)));
+								WSU_MAP.state.map_jObj.gmap('panToWithOffset', WSU_MAP.state.active.marker.getPosition(), 0, -(WSU_MAP.state.map_jObj.height()*0.5 - ((150*0.5) - WSU_MAP.markers.defaults.height)));
 							});
 							
 						}
