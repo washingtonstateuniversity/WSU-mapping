@@ -20,9 +20,11 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link type='text/css' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css' rel='stylesheet' media='screen' />
 <link href="https://repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
-
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2C400%2C400italic%2C600%2C700%7COpen+Sans+Condensed%3A700&#038;subset=latin%2Clatin-ext&#038;ver=4.2.2' type='text/css' media='all' />
+#*
 <script src="//use.typekit.net/roi0hte.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
+*#
 #capturefor(site)
 	#if($Controller.isLocal()==false)
 		#*https://beta.maps.wsu.edu/*#$Controller.getRootUrl()
