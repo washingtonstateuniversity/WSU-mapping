@@ -164,12 +164,12 @@
 					//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 				}
 				WSU_MAP.admin.view.status.loaded_options=options;
-				console.log(options);
+				//console.log(options);
 				return options;
 			},
 			init_editorMap:function(){
 				var new_map = WSU_MAP.admin.view.status.loaded_options === false;
-				console.log(new_map);
+				//console.log(new_map);
 				var options = WSU_MAP.admin.view.create_ui_mapobj();
 				if(!new_map){
 					WSU_MAP.state.map_jObj.gmap('setOptions',options);

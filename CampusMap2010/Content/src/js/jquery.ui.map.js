@@ -423,7 +423,7 @@
 		
 		
 		fitBoundsToVisibleMarkers: function (markers,mapDim,max_zoom) {
-			console.log(markers);
+			//console.log(markers);
 			var self=this;
 			var bounds = new google.maps.LatLngBounds();
 			for (var i=0; i<markers.length; i++) {
