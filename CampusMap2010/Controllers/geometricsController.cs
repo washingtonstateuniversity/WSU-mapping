@@ -80,37 +80,49 @@ namespace campusMap.Controllers {
 
         public void makePlaceStaticMap(geometrics item) {
 
-                String url = "";
-                String fill = "";
-                if( item.default_type.name == "polygon" || item.default_type.name == "rectangle"){
+            String url = "";
+            String fill = "";
+            if (item.default_type == null) {
+                return;
+            }
+            if (item.default_type.name == "polygon" || item.default_type.name == "rectangle" || item.children.Count() > 0) {
                     
-					if(item.style.Count()>0){
-						fill = item.style[0].getoptionValue("rest","fillColor").Replace("#","");
-					}
-					if(fill==""){
-                        fill="981F32";
-                    }
-
-                    String sfill = "";
-					if(item.style.Count()>0){
-						sfill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
-                    }
-                    String stroke = "";
-					if(sfill==""){
-						stroke = "weight:0";
-					}else{
-                        stroke = "weight:3%7Ccolor:0x" + sfill + "";
-					}
-					url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path="+stroke+"%7Cfillcolor:0x"+fill+"%7Cenc:"+item.encoded+"&sensor=false";
-                }else if(item.default_type.name == "polyline"){
-					if(item.style.Count()>0){
-						fill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
-					}
-					if(fill==""){
-                        fill = "981F32";
-                    }
-					url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path=weight:3%7Ccolor:0x"+fill+"%7Cenc:"+item.encoded+"&sensor=false" ;
+				if(item.style.Count()>0){
+					fill = item.style[0].getoptionValue("rest","fillColor").Replace("#","");
+				}
+				if(fill==""){
+                    fill="981F32";
                 }
+
+                String sfill = "";
+				if(item.style.Count()>0){
+					sfill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
+                }
+                String stroke = "";
+				if(sfill==""){
+					stroke = "weight:0";
+				}else{
+                    stroke = "weight:3%7Ccolor:0x" + sfill + "";
+				}
+                if(item.children.Count()>0){
+                    String path = "";
+                    foreach(geometrics child in item.children){
+                        path += "&path=" + stroke + "%7Cfillcolor:0x" + fill + "%7Cenc:" + child.encoded + "";
+                    }
+                    url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145" + path;    
+                }else{
+                    url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path="+stroke+"%7Cfillcolor:0x"+fill+"%7Cenc:"+item.encoded;    
+                }
+				
+            }else if(item.default_type.name == "polyline"){
+				if(item.style.Count()>0){
+					fill = item.style[0].getoptionValue("rest","strokeColor").Replace("#","");
+				}
+				if(fill==""){
+                    fill = "981F32";
+                }
+				url = "http://maps.googleapis.com/maps/api/staticmap?size=250x145&path=weight:3%7Ccolor:0x"+fill+"%7Cenc:"+item.encoded;
+            }
 
             String uploadPath = getRootPath();
 
@@ -167,7 +179,7 @@ namespace campusMap.Controllers {
                 }
                 baseEx.Add(Expression.In("geometric_id", obj));
             }
-
+            
             //PUBLISHED
 
             var pageing = new Dictionary<string, int>();
@@ -211,6 +223,7 @@ namespace campusMap.Controllers {
                 List<AbstractCriterion> revEx = new List<AbstractCriterion>();
                 revEx.AddRange(baseEx);
                 revEx.Add(Expression.Eq("status", stat));
+                revEx.Add(Expression.IsNull("parent"));
                 listtems = ActiveRecordBase<geometrics>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
                 foreach (geometrics item in listtems) {
                     makePlaceStaticMap(item);
@@ -450,8 +463,8 @@ namespace campusMap.Controllers {
             PropertyBag["_types"] = ActiveRecordBase<geometrics_types>.FindAll();
             IList<styles> items;
 
-            List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
-            pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type.id)));
+            //List<AbstractCriterion> pubEx = new List<AbstractCriterion>();
+           // pubEx.Add(Expression.Eq("type", ActiveRecordBase<geometrics_types>.FindAllByProperty("id", geometric.default_type.id)));
             //items = ActiveRecordBase<styles>.FindAll(Order.Desc("name"), pubEx.ToArray());
             PropertyBag["_styles"] = "";//items;
 
@@ -494,8 +507,8 @@ namespace campusMap.Controllers {
             //if (page == 0)
             //    page = 1;
             //int pagesize = 10;
-            List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
-            baseEx.Add(Expression.Eq("Place", geometric));
+            //List<AbstractCriterion> baseEx = new List<AbstractCriterion>();
+            //baseEx.Add(Expression.Eq("Place", geometric));
 
 
 
@@ -616,7 +629,7 @@ namespace campusMap.Controllers {
 
             bool longFirst = true;
             if (!latLong.StartsWith("-")) { longFirst = false; }
-
+            latLong = latLong.Replace(",0", ",");
             latLong = latLong.Replace(",", "|");
             latLong = latLong.Replace("|\r\n", ",");
             latLong = latLong.Replace("|", " ");
@@ -642,8 +655,9 @@ namespace campusMap.Controllers {
             [ARDataBind("tags", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]tags[] tags, String[] newtag,
             [ARDataBind("images", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]media_repo[] images,
             [ARDataBind("authors", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)]users[] authors,
-            [ARDataBind("child_geos", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics child_geos,
+            [ARDataBind("child_geos", Validate = true, AutoLoad = AutoLoadBehavior.NewRootInstanceIfInvalidKey)] geometrics[] child_geos, // 
             string[] boundary,
+            string[] boundary_parts,
             string geom_type,
             [ARDataBind("geometric_media", Validate = true, AutoLoad = AutoLoadBehavior.OnlyNested)]geometrics_media[] media, string apply, string cancel) {
             Flash["geometric"] = geometric;
@@ -715,10 +729,157 @@ namespace campusMap.Controllers {
                 if (author.id > 0)
                     geometric.Authors.Add(author);
             }
+            ActiveRecordMediator<geometrics>.Save(geometric);
+            if (geometric.children != null) {
+               // geometric.children.Clear();
+            }
+            if (geometric.children == null) geometric.children = new List<geometrics>();
+            geometrics_types geo_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) });
+            int i = 0;
+            foreach (geometrics geom in child_geos) {
+                //geom.id = 0;
+                //geometrics item = make_gem(geom_type, geom, boundary_parts, geometric);
+
+                //users user = UserService.getUserFull();
+                geom.editing = user;
+                geom.status = ActiveRecordBase<status>.Find(requestedStatus);
+
+                if (String.IsNullOrEmpty(geom.name)) {
+                    geom.name = "Untitled";
+                }
+
+                //geometric.parent = parent;
+
+                // geometric.tags.Clear(); 
+                //place.Images.Clear();
+
+                /*if (apply != null) {
+
+                } else {
+                    geometric.editing = null;
+                }*/
+
+
+                if (geom.id == 0) {
+                    //PlaceStatus stat = ActiveRecordBase<PlaceStatus>.Find(1);
+                    //place.Status = stat;
+                    geom.creation_date = DateTime.Now;
+                } else {
+                    geom.updated_date = DateTime.Now;
+                }
+
+                /*if (geometric.Authors != null && geometric.Authors.Count() > 0) geometric.Authors.Clear();
+                foreach (users author in authors) {
+                    if (author.id > 0)
+                        geometric.Authors.Add(author);
+                }*/
 
 
 
 
+
+                string gemSql = "";
+                string gemtype = "";
+                switch (geom_type) {
+                    case "marker": //case "POINT":
+                        if (boundary_parts.Length > 0) {
+                            gemSql = "POINT (" + normaliz_latsLongs(boundary_parts[i], geom_type) + ")";
+                        }
+                        gemtype = "Marker";
+                        break;
+                    case "polyline": //case "LINESTRING":
+                        if (boundary_parts.Length > 0) {
+                            gemSql = "LINESTRING (" + normaliz_latsLongs(boundary_parts[i], geom_type) + ")";
+                        }
+                        gemtype = "Line";
+                        break;
+                    case "polygon": //case "POLYGON":
+                        if (boundary_parts.Length > 0) {
+                            gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[i], geom_type) + "))";
+                        }
+                        
+                        /*
+
+
+                        if (boundary_parts.Length == 1) {
+                            gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[i], geom_type) + "))";
+                        }
+                        if (boundary_parts.Length > 1) {
+                            String WKT_OBJ_STR = "";
+                            foreach (String bound in boundary_parts) {
+                                WKT_OBJ_STR += (String.IsNullOrWhiteSpace(WKT_OBJ_STR) ? "" : ",") + "((" + normaliz_latsLongs(bound, geom_type) + "))";
+                            }
+                            gemSql = "MULTIPOLYGON (" + WKT_OBJ_STR + ")";
+                        }*/
+                        gemtype = "Shape";
+                        break;
+                    case "rectangle":
+                        if (boundary_parts.Length > 0) {
+                            gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[i], geom_type) + "))";
+                        }
+                        gemtype = "Shape";
+                        break;
+                    case "circle":
+                        if (boundary_parts.Length > 0) {
+                            gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[i], geom_type) + "))";
+                        }
+                        gemtype = "Shape";
+                        break;
+                    case "MULTIPOINT":
+
+                    case "MULTILINESTRING":
+                    case "MULTIPOLYGON":
+                    case "GEOMETRYCOLLECTION":
+                        break;
+                }
+
+                geom.default_type = geo_type;
+                //geometric.geometric_types = geom_type;
+                if (boundary_parts[i] != null) {
+                    string wkt = gemSql;
+
+                    // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
+                    SqlChars udtText = new SqlChars(wkt);
+
+
+                    // a helper SqlGeometry, which isn't picky about ring orientation
+                    var geometryHelper =
+                        SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+
+                    // STUnion will automagically correct any bad ring orientation
+                    var validGeom =
+                        geometryHelper.STUnion(geometryHelper.STStartPoint());
+
+                    // use the validGeom with correct ring orientation to 
+                    // create a SqlGeography.
+                    var sqlGeometry1 =
+                        SqlGeography.STGeomFromText(validGeom.STAsText(), 4326);
+
+
+
+                    //SqlGeometry sqlGeometry1 = SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+                    //SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+
+                    MemoryStream ms = new MemoryStream();
+                    BinaryWriter bw = new BinaryWriter(ms);
+                    byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
+                    //bw.Write(WKB);
+
+                    //byte[] b2 = ms.ToArray();
+                    //SqlBytes udtBinary2 = new SqlBytes(b2);
+                    //SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
+
+                    geom.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
+                }
+
+
+                //ActiveRecordMediator<geometrics>.Update(geom);
+                geometric.children.Add(geom);
+                i++;
+            }
+            
+
+            /*
 
             string gemSql = "";
             string gemtype = "";
@@ -798,17 +959,17 @@ namespace campusMap.Controllers {
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter bw = new BinaryWriter(ms);
                 byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
-                /*bw.Write(WKB);
+                //bw.Write(WKB);
 
-                byte[] b2 = ms.ToArray();
-                SqlBytes udtBinary2 = new SqlBytes(b2);
-                SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
-                */
+                //byte[] b2 = ms.ToArray();
+                //SqlBytes udtBinary2 = new SqlBytes(b2);
+                //SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
+
                 geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
-            }
+            }*/
 
 
-            ActiveRecordMediator<geometrics>.Save(geometric);
+            ActiveRecordMediator<geometrics>.SaveAndFlush(geometric);
             clearPlaceStaticMap(geometric);
             makePlaceStaticMap(geometric);
             
@@ -824,13 +985,145 @@ namespace campusMap.Controllers {
 
             if (apply != null) {
                 if (apply != " Save ") {
-                    RedirectToUrl("_edit.castle?id=" + geometric.id);
+                    RedirectToUrl("~/geometrics/_edit.castle?id=" + geometric.id);
                 } else {
                     RedirectToReferrer();
                 }
             } else {
                 RedirectToAction("list");
             }
+        }
+        public geometrics make_gem(String geom_type, geometrics geometric, string[] boundary_parts, geometrics parent) {
+            users user = UserService.getUserFull();
+            geometric.editing = user;
+
+            int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
+
+            if (String.IsNullOrEmpty(geometric.name)) {
+                geometric.name = "Untitled";
+            }
+
+            //geometric.parent = parent;
+
+            // geometric.tags.Clear(); 
+            //place.Images.Clear();
+
+            /*if (apply != null) {
+
+            } else {
+                geometric.editing = null;
+            }*/
+
+
+            if (geometric.id == 0) {
+                //PlaceStatus stat = ActiveRecordBase<PlaceStatus>.Find(1);
+                //place.Status = stat;
+                geometric.creation_date = DateTime.Now;
+            } else {
+                geometric.updated_date = DateTime.Now;
+            }
+
+            /*if (geometric.Authors != null && geometric.Authors.Count() > 0) geometric.Authors.Clear();
+            foreach (users author in authors) {
+                if (author.id > 0)
+                    geometric.Authors.Add(author);
+            }*/
+
+
+            
+
+
+            string gemSql = "";
+            string gemtype = "";
+            switch (geom_type) {
+                case "marker": //case "POINT":
+                    if (boundary_parts.Length > 0) {
+                        gemSql = "POINT (" + normaliz_latsLongs(boundary_parts[0], geom_type) + ")";
+                    }
+                    gemtype = "Marker";
+                    break;
+                case "polyline": //case "LINESTRING":
+                    if (boundary_parts.Length > 0) {
+                        gemSql = "LINESTRING (" + normaliz_latsLongs(boundary_parts[0], geom_type) + ")";
+                    }
+                    gemtype = "Line";
+                    break;
+                case "polygon": //case "POLYGON":
+                    if (boundary_parts.Length == 1) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[0], geom_type) + "))";
+                    }
+                    if (boundary_parts.Length > 1) {
+                        String WKT_OBJ_STR = "";
+                        foreach (String bound in boundary_parts) {
+                            WKT_OBJ_STR += (String.IsNullOrWhiteSpace(WKT_OBJ_STR) ? "" : ",") + "((" + normaliz_latsLongs(bound, geom_type) + "))";
+                        }
+                        gemSql = "MULTIPOLYGON (" + WKT_OBJ_STR + ")";
+                    }
+                    gemtype = "Shape";
+                    break;
+                case "rectangle":
+                    if (boundary_parts.Length > 0) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[0], geom_type) + "))";
+                    }
+                    gemtype = "Shape";
+                    break;
+                case "circle":
+                    if (boundary_parts.Length > 0) {
+                        gemSql = "POLYGON ((" + normaliz_latsLongs(boundary_parts[0], geom_type) + "))";
+                    }
+                    gemtype = "Shape";
+                    break;
+                case "MULTIPOINT":
+
+                case "MULTILINESTRING":
+                case "MULTIPOLYGON":
+                case "GEOMETRYCOLLECTION":
+                    break;
+            }
+
+            geometric.default_type = ActiveRecordBase<geometrics_types>.FindFirst(new ICriterion[] { Expression.Eq("name", geom_type) });
+            //geometric.geometric_types = geom_type;
+            if (boundary_parts != null) {
+                string wkt = gemSql;
+
+                // string wkt = "POLYGON ((-117.170966 46.741963,-117.174914 46.736375,-117.181094 46.730551,-117.182382 46.729080,-117.178176 46.728786,-117.176459 46.729492,-117.173627 46.729316,-117.170966 46.728139,-117.166160 46.725374,-117.164958 46.723197,-117.163070 46.721549,-117.153800 46.721902,-117.137492 46.729080,-117.138694 46.748609,-117.145560 46.751197,-117.158435 46.748727,-117.165988 46.744492 ,-117.170966 46.741963))";
+                SqlChars udtText = new SqlChars(wkt);
+
+
+                // a helper SqlGeometry, which isn't picky about ring orientation
+                var geometryHelper =
+                    SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+
+                // STUnion will automagically correct any bad ring orientation
+                var validGeom =
+                    geometryHelper.STUnion(geometryHelper.STStartPoint());
+
+                // use the validGeom with correct ring orientation to 
+                // create a SqlGeography.
+                var sqlGeometry1 =
+                    SqlGeography.STGeomFromText(validGeom.STAsText(), 4326);
+
+
+
+                //SqlGeometry sqlGeometry1 = SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+                //SqlGeometry.STGeomFromText(udtText, 4326).MakeValid();
+
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter bw = new BinaryWriter(ms);
+                byte[] WKB = sqlGeometry1.STAsBinary().Buffer;
+                //bw.Write(WKB);
+
+                //byte[] b2 = ms.ToArray();
+                //SqlBytes udtBinary2 = new SqlBytes(b2);
+                //SqlGeography sqlGeometry2 = SqlGeography.STGeomFromWKB(udtBinary2, 4326);
+
+                geometric.boundary = geometrics.AsByteArray(sqlGeometry1);//WKB;//
+            }
+
+
+            ActiveRecordMediator<geometrics>.Save(geometric);
+            return geometric;
         }
         public void _copy(int id, String name) {
             CancelLayout();

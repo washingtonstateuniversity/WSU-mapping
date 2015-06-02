@@ -1482,6 +1482,7 @@ ol {
 	li {
 		margin: 5px 0 0;
 		padding: 0;
+		width:100%;
 		div {
 			border: 1px solid $color_quill_gray_approx;
 			//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
@@ -1735,4 +1736,14 @@ span.UinEdit {
 	margin-right: 5px;
 	margin-top: 7px;
 	width: 100%;
-} 
+}
+
+
+.dataTables_wrapper{
+	label{
+		color:#e2e2e2;
+	}
+}
+
+
+

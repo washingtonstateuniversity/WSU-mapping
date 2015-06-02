@@ -110,7 +110,8 @@ namespace campusMap.Models {
         [BelongsTo("parent")]
         virtual public geometrics parent { get; set; }
 
-        [HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "geometrics_to_geoparents", ColumnKey = "parent_geometric_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        //[HasAndBelongsToMany(typeof(geometrics), Lazy = true, Table = "geometrics_to_geoparents", ColumnKey = "parent_geometric_id", ColumnRef = "geometric_id", Inverse = true, NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+        [HasMany(typeof(geometrics), Lazy = false, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         virtual public IList<geometrics> children { get; set; }
 
 

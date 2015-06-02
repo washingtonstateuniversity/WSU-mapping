@@ -15,9 +15,11 @@
 		<option value="circle" #if($geometric.default_type.id=='5' || $selectedType==5)selected='selected'#end>Circle</option>
 	</select>
 	<input type="hidden" id="pickedValue" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
-</span>*#
+</span>
 	<input type="hidden" id="startingValue" value="$!{geometric.default_type.name}" />
-	<input type="hidden" id="pickedValue" name="geom_type" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />
+	<input type="hidden" id="pickedValue" name="geom_type" value="#if($geometric.default_type.id=='2' || $selectedType==2)polyline#else#if($geometric.default_type.id=='3' || $selectedType==3)polygon#end#end" />*#
+	<input type="hidden" id="startingValue" value="polygon" />
+	<input type="hidden" id="pickedValue" name="geom_type" value="polygon" />
 </p>
 <p style="float:left;">Geometry Style:<br/>  
 	<select name="geometric.style[]" id="style">

@@ -18,7 +18,7 @@
 	#end
 	
 	<div style="height:35px;padding-bottom:5px;">
-		<button id="drawingcontrolls" class="showing">Hide controlls</button>
+		<button id="drawingcontrolls" class="showing_controll">Hide controlls</button>
 		<button id="restart" >Restart</button>
 		<button id="update" >Update</button>
 		<button id="unselect" >un select selected</button>|  <button id="delete-button">Delete Selected Shape</button>

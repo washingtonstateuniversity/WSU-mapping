@@ -18,7 +18,7 @@
 	fsize_5
 	#end'><h3><span>Name: </span>$!name</h3><hr/></li>
 	#end
-	#if($item.coordinate || $item.encoded)
+	#if($item.coordinate || $item.encoded || $item.children.Count()>0 )
 		#if($item.coordinate)
 			<li class='previewMap'>
 				#* old url for static map http://maps.google.com/staticmap?center=${item.getLat()},${item.getLong()}&amp;size=250x145&amp;maptype=mobile&amp;markers=${item.getLat()},${item.getLong()},red&amp;sensor=false*#

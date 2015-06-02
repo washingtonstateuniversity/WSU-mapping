@@ -4,29 +4,45 @@
 <div class="min_tab">
 	
 	<ul>
-	#if($geometric.children.Length>0)
+	#if($!geometric.children.Count>0)
+		#set($idx = 0)
 		#foreach($child_item in $geometric.children)
-			#set($idx = $velocityCount-1)
-			<li><a href="#child_${idx}" title="($!child_item.name)">1</a></li>
+			#set($counter = $idx+1)
+			<li><a href="#child_${idx}" title="($!child_item.name)">${counter}</a></li>
+			#set($idx = $idx+1)
 		#end
+	
 	#else
-		<li><a href="#child_0" title="($!geometric.name)">1</a></li>
+		#set($child_item = $geometric)
+		#set($spatialpart = $child_item.latlongs())
+		#if($spatialpart!="")
+			<li><a href="#child_0" title="($!geometric.name)">1</a></li>
+		#end
+		#* *#
 	#end
 	</ul>
 	
 	
-	#if($geometric.children>0)
+	#if($!geometric.children.Count>0)
+		#set($idx = 0)
 		#foreach($child_item in $geometric.children)
-			#set($idx = $velocityCount-1)
+			
+			<div id="child_${idx}">
+				#parse("geometrics/tabs/tabsec_manual_child.vm")
+			</div>
+			#set($idx = $idx+1)
+		#end
+	
+	#else
+	
+		#set($child_item = $geometric)
+		#set($spatialpart = $child_item.latlongs())
+		#if($spatialpart!="")
+			#set($idx = 0)
 			<div id="child_${idx}">
 				#parse("geometrics/tabs/tabsec_manual_child.vm")
 			</div>
 		#end
-	#else
-		#set($child_item = $geometric)
-		#set($idx = 0)
-		<div id="child_${idx}">
-			#parse("geometrics/tabs/tabsec_manual_child.vm")
-		</div>
+		#*	*#
 	#end
 </div>

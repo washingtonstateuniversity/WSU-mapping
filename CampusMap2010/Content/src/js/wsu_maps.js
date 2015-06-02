@@ -235,8 +235,12 @@ if (!Array.prototype.indexOf) {
 			});
 			WSU_MAP.state.ib=[];
 			WSU_MAP.state.ibh=[];
-			WSU_MAP.listings.reset();
-			WSU_MAP.nav.reset_Navscrollbar();
+			if(window._defined(WSU_MAP.listings)){
+				WSU_MAP.listings.reset();
+			}
+			if(window._defined(WSU_MAP.nav)){
+				WSU_MAP.nav.reset_Navscrollbar();
+			}
 			
 
 			$('#main_nav').find('.active').removeClass('active');

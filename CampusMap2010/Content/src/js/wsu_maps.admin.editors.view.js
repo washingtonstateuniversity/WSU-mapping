@@ -47,6 +47,16 @@
 					show:{ effect: 'slide', direction: 'right', duration: 300 },
 					activate:function(){
 						$(window).trigger("resize");
+
+						
+						var sortList = $('ol.sortable:visible');
+						if(sortList.length>0){
+							$.each(sortList,function(idx,item){
+								$(item).nestedSortable("refresh");
+								var pane_id = $(item).attr('id');
+								WSU_MAP.state.api[pane_id].reinitialise();
+							});
+						}
 					}
 				});
 				$(window).resize(function(){
@@ -467,6 +477,7 @@
 							container.find('.ini').remove();
 						}
 						sortList.nestedSortable("refresh");
+						//WSU_MAP.clean_map();
 						//$('.jspContainer').css('height','auto');
 						WSU_MAP.state.api[pane_id].reinitialise();
 						WSU_MAP.shapes.reloadShapes();
