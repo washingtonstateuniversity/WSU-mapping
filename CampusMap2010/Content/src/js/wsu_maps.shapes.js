@@ -5,10 +5,16 @@
 			reloadShapes:function (){
 				var url=WSU_MAP.state.siteroot+"public/getShapesJson_byIds.castle";
 				var ids;
-				$.each($('[name="geolist[]"]'),function(){
+				/*$.each($('[name="geolist[]"]'),function(){
 						ids =(!window._defined(ids)?'':ids+',')+$(this).val();
-				});
-	
+				});*/
+				if( WSU_MAP.state.embeded_shape_ids !== false ){
+					ids = WSU_MAP.state.embeded_shape_ids;
+				}else{
+					$.each($('[name="placelist[]"]'),function(){
+						ids =(!window._defined(ids)?'':ids+',')+$(this).val();
+					});
+				}
 				WSU_MAP.state.map_jObj.gmap('clear','overlays');
 				if(window._defined(ids)){
 					$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {

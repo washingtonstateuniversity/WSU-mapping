@@ -33,7 +33,7 @@ $Controller.getView()
 #end
 
 #*#set($libs="places,geometry,weather,visualization")*#
-#set($libs="places")
+#set($libs="places,geometry")
 #*#set($signed_in="&signed_in=true")*#
 #set($signed_in="")
 
