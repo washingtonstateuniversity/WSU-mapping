@@ -54,12 +54,12 @@
 					map.on('wsu_maps:loaded_options',function(e,map_op){
 						console.log("setting up options before load");
 						console.log(map_op);
-						jQuery.wsu_maps.state.fit_to_bound=false;
-						return { 'center': '46.73207659846422,-117.15444395233226', 'zoom':15 };
+						//jQuery.wsu_maps.state.fit_to_bound=false;
+						//return { 'center': '46.73207659846422,-117.15444395233226', 'zoom':15 };
 					});
 				});
 			})(jQuery);
-		</script>
+		</script><!---->
 		<div style="width: 100%; padding-top: 66%; min-height: 0px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(255, 255, 255);" id="WSU_MAPS_NS_2"></div>
 		
 		</div>
@@ -210,25 +210,25 @@
 	<span itemprop="contactPoint" content="http://contactpage.wsu.edu"></span>
 	<span itemprop="url" content="http://your-unit.wsu.edu"></span>
 </div>
-<script type="text/javascript">
+<!--<script type="text/javascript">
 	(function($){
 		$(function() {
 			var map = $('#WSU_MAPS_NS');
 
 			map.on('wsu_maps:loaded_options',function(e,map_op){
-				console.log("setting up options before load");
-				console.log(map_op);
+				//console.log("setting up options before load");
+				//console.log(map_op);
 				
-				jQuery.wsu_maps.state.fit_to_bound=false;
+				//jQuery.wsu_maps.state.fit_to_bound=false;
 
-				return { 'center':"46.725722661815745,-117.16131040741038" , 'zoom':15 };
+				//return { 'center':"46.725722661815745,-117.16131040741038" , 'zoom':15 };
 			});
 
 		});
 
 	})(jQuery);
-</script>
-<script type="text/javascript" src="/embed/wsu-home?dyno=true&debug=true"></script>
+</script>-->
+<script type="text/javascript" src="/embed/tester?dyno=true&debug=true"></script>
 </body>
 </html>
 

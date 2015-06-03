@@ -556,7 +556,7 @@ namespace campusMap.Controllers {
         public void get_all_places_list(String callback) {
             CancelView();
             CancelLayout();
-            var tmp = ActiveRecordBase<place>.FindAll().Select(i => new { i.id, i.prime_name });
+            var tmp = ActiveRecordBase<place>.FindAll().Select(i => new { i.id, i.prime_name});
             if (tmp.Count() > 0) {
                 render_list_json(tmp, callback);
             } else {
@@ -606,7 +606,7 @@ namespace campusMap.Controllers {
         public void get_all_geometrics_list(String callback) {
             CancelView();
             CancelLayout();
-            var tmp = ActiveRecordBase<geometrics>.FindAll().Select(i => new { i.id, i.name });
+            var tmp = ActiveRecordBase<geometrics>.FindAll().Select(i => new { i.id, i.name, i.parent }).Where(x => x.parent==null);
             if (tmp.Count() > 0) {
                 render_list_json(tmp, callback);
             } else {
