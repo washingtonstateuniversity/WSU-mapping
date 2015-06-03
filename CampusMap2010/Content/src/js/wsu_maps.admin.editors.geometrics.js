@@ -27,6 +27,7 @@
 			colorButtons:{},
 			selectedShape:null,
 			selectedColor:null,
+			bounds:null,
 			colors:['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'],
 			drawingManager:null,
 			shape_count:0,
@@ -183,7 +184,7 @@
 					$.each($("[data-child_id]"),function(idx){
 						WSU_MAP.admin.geometrics.resolve_loaded_shapes(idx);
 					});
-	
+					WSU_MAP.state.map_inst.fitBounds(WSU_MAP.admin.geometrics.bounds); 
 	
 	
 	
@@ -290,6 +291,14 @@
 						map_shape=$.extend(map_shape,{group_index:idx});//WSU_MAP.admin.geometrics.shape_count
 						WSU_MAP.state.map_jObj.gmap('zoom_to_bounds',{},map_shape,function(){ });
 						WSU_MAP.admin.geometrics.shape_count++;
+						if(WSU_MAP.admin.geometrics.bounds === null){
+          					WSU_MAP.admin.geometrics.bounds=new google.maps.LatLngBounds();
+						}
+						map_shape.latLngs.getArray().forEach(function(path){
+							path.getArray().forEach(function(latLng){
+								WSU_MAP.admin.geometrics.bounds.extend(latLng);
+							});
+						});
 					});
 				}
 			},
