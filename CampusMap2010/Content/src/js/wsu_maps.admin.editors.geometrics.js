@@ -168,6 +168,7 @@
 										});
 									}else{
 									
+									
 									}
 								}
 							},
@@ -267,8 +268,25 @@
 				}
 				var shape = {};
 				if( !$.isEmptyObject(pointHolder) ){
-					shape = $.extend( { 'strokeColor':'#000', 'strokeWeight':3 } , { 'editable':true, geodesic: true, draggable: true } , pointHolder );
-					WSU_MAP.state.map_jObj.gmap('addShape', type, shape, function(map_shape){
+					shape = $.extend( {
+						onDrag:function(data){
+							var jObj = WSU_MAP.state.map_jObj;
+							var points=jObj.gmap('get_updated_data');
+							if(typeof points !== "undefined" && points.length){
+								//alert(points);
+								$('[name*="boundary_parts"]').eq(data.group_index).val(points);
+								//alert(dump(WSU_MAP.state.map_jObj.gmap('encode',WSU_MAP.state.map_jObj.gmap('process_coords',points,false,false))));
+								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+								$('[name*="boundary_parts"]').eq(data.group_index).val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
+								$('[name*="encoded"]').val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
+								//$('#geometric_encoded').val(WSU_MAP.state.map_jObj.gmap('get_updated_data_encoded'));
+							}
+						},
+						'strokeColor':'#000',
+						'strokeWeight':3
+					} , { 'editable':true, geodesic: true, draggable: true } , pointHolder );
+					WSU_MAP.state.map_jObj.gmap('add_drawing_shape', type, shape, function(map_shape){
+						WSU_MAP.admin.geometrics.loaded_shapes[idx]=map_shape;
 						map_shape=$.extend(map_shape,{group_index:idx});//WSU_MAP.admin.geometrics.shape_count
 						WSU_MAP.state.map_jObj.gmap('zoom_to_bounds',{},map_shape,function(){ });
 						WSU_MAP.admin.geometrics.shape_count++;

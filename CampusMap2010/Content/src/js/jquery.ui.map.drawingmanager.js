@@ -11,6 +11,7 @@
 
 
 	$.extend($.ui.gmap.prototype, {
+		loaded_shapes:[],
 		init_drawing: function(drawingOptions , handling) {
 			var self = this;	
 			var shape;
@@ -23,24 +24,25 @@
 			
 			if( typeof(handling.loaded_shape)!=='undefined' && !$.isEmptyObject(handling.loaded_shape) ){
 				shape = self.addShape(handling.loaded_type, handling.loaded_shape);
-				shape[0].type = handling.loaded_type;
-				self.set_drawingSelection(shape[0]);
-				google.maps.event.addListener(shape[0], 'click', function(){//e) {
-											self.set_drawingSelection(shape[0]);
-											handling.onDrag();
-										});
-				//google.maps.event.trigger(shape[0], 'click');
-			}
-
-			if(typeof(handling.onDrag)==='function'){
 				if(typeof(shape)!=='undefined' && !$.isEmptyObject(shape) ){
-					google.maps.event.addListener(shape, 'click', function(){//event) {
-						if(typeof(handling.onDrag)==='function'){
-							handling.onDrag();
-						}
+					shape[0].type = handling.loaded_type;
+					//self.set_drawingSelection(shape[0]);
+					google.maps.event.addListener(shape[0], 'click', function(){//e) {
+						self.set_drawingSelection(shape[0]);
+						handling.onDrag();
 					});
+					//google.maps.event.trigger(shape[0], 'click');
+					if(typeof(handling.onDrag)==='function'){
+						google.maps.event.addListener(shape, 'click', function(){//event) {
+							if(typeof(handling.onDrag)==='function'){
+								handling.onDrag();
+							}
+						});
+					}
 				}
 			}
+
+
 			google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
 				var newShape = e.overlay;
 				newShape.type = e.type;
@@ -81,6 +83,21 @@
 			}
 			
 			return $(drawingManager);
+		},
+		add_drawing_shape:function(type, shape_options, callback){
+			var self = this;	
+			var map_shape = self.addShape(type, shape_options, function(shape){
+				self.add_delete_point(shape);
+				if(typeof callback !=="undefined"){
+					callback(shape);	
+				}
+			});
+			self.set_drawingSelection(map_shape[0]);
+			google.maps.event.addListener(map_shape[0], 'click', function() {
+				self.set_drawingSelection(map_shape[0]); shape_options.onDrag();
+			});
+			
+			return map_shape[0];
 		},
 		hide_drawingControl: function() {
 			if ( this.get('drawingManager') !== null ) {

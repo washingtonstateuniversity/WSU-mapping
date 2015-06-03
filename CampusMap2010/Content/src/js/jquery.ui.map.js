@@ -3,6 +3,7 @@
  * http://code.google.com/p/jquery-ui-map/
  * Copyright (c) 2010 - 2012 Johan Säll Larsson
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ * heavily modified by jeremyBass at wsu.edu
  */
 ( function($) {
 	
