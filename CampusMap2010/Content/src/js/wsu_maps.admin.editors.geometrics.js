@@ -28,6 +28,7 @@
 			selectedShape:null,
 			selectedColor:null,
 			bounds:null,
+			tabIdx:0,
 			colors:['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'],
 			drawingManager:null,
 			shape_count:0,
@@ -57,8 +58,9 @@
 				
 				$('.min_tab').tabs({				
 					activate: function( event, ui ) {
+						WSU_MAP.admin.geometrics.tabIdx = ui.newTab.index();
 						WSU_MAP.admin.geometrics.clearSelection();
-						WSU_MAP.admin.geometrics.setSelection(WSU_MAP.admin.geometrics.loaded_shapes[ui.newTab.index()]);
+						WSU_MAP.admin.geometrics.setSelection(WSU_MAP.admin.geometrics.loaded_shapes[WSU_MAP.admin.geometrics.tabIdx]);
 					}
 				});
 				
@@ -126,7 +128,7 @@
 											WSU_MAP.admin.geometrics.drawingManager.setDrawingMode(null);
 											
 											var newShape = data.overlay;
-											data.overlay.shape_id = 1;
+											data.overlay.shape_id = WSU_MAP.admin.geometrics.loaded_shapes.length-1;
 											newShape.type = data.type;
 											
 											google.maps.event.addListener(newShape, 'click', function() {
@@ -150,11 +152,14 @@
 									var points=jObj.gmap('get_updated_data');
 									if( window._defined(data) && points.length){
 										//alert(points);
-										$('[name*="boundary_parts"]').eq(data.group_index).val(points);
+										var tab = $('#child_'+WSU_MAP.admin.geometrics.tabIdx);
+										var boundInput = tab.find('[name*="boundary_parts"]');
+										var encodeInput = tab.find('[name*="encoded"]');
+										boundInput.val(points);
 										//alert(dump(WSU_MAP.state.map_jObj.gmap('encode',WSU_MAP.state.map_jObj.gmap('process_coords',points,false,false))));
 										//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-										$('[name*="boundary_parts"]').eq(data.group_index).val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
-										$('[name*="encoded"]').val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
+										boundInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+										encodeInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
 										//$('#geometric_encoded').val(WSU_MAP.state.map_jObj.gmap('get_updated_data_encoded'));
 									}
 								},
@@ -237,7 +242,7 @@
 					});
 					$("form#shapeEditor").autoUpdate({
 						 before:function(){ 
-							$('#update').trigger('click');
+							//$('#update').trigger('click');
 						 }
 					});
 					$('#unselect').on('click',function(e){
@@ -278,13 +283,16 @@
 						onDrag:function(data){
 							var jObj = WSU_MAP.state.map_jObj;
 							var points=jObj.gmap('get_updated_data');
-							if(typeof points !== "undefined" && points.length){
+							if( window._defined(points) && window._defined(data) && points.length){
 								//alert(points);
-								$('[name*="boundary_parts"]').eq(data.group_index).val(points);
+								var tab = $('#child_'+WSU_MAP.admin.geometrics.tabIdx);
+								var boundInput = tab.find('[name*="boundary_parts"]');
+								var encodeInput = tab.find('[name*="encoded"]');
+								boundInput.val(points);
 								//alert(dump(WSU_MAP.state.map_jObj.gmap('encode',WSU_MAP.state.map_jObj.gmap('process_coords',points,false,false))));
 								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
-								$('[name*="boundary_parts"]').eq(data.group_index).val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
-								$('[name*="encoded"]').val(jObj.gmap('encode',jObj.gmap('process_coords',$('[name*="boundary_parts"]').eq(data.group_index).val(),true,false)));
+								boundInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+								encodeInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
 								//$('#geometric_encoded').val(WSU_MAP.state.map_jObj.gmap('get_updated_data_encoded'));
 							}
 						},
@@ -292,6 +300,7 @@
 						'strokeWeight':3
 					} , { 'editable':true, geodesic: true, draggable: true } , pointHolder );
 					WSU_MAP.state.map_jObj.gmap('add_drawing_shape', type, shape, function(map_shape){
+						map_shape.type = type;
 						WSU_MAP.admin.geometrics.loaded_shapes[idx]=map_shape;
 						map_shape=$.extend(map_shape,{group_index:idx});//WSU_MAP.admin.geometrics.shape_count
 						WSU_MAP.state.map_jObj.gmap('zoom_to_bounds',{},map_shape,function(){ });
@@ -299,9 +308,41 @@
 						if(WSU_MAP.admin.geometrics.bounds === null){
           					WSU_MAP.admin.geometrics.bounds=new google.maps.LatLngBounds();
 						}
+						
+						var map_shape_path = map_shape.getPath();
+						
+						
+						google.maps.event.addListener(map_shape, 'click', function(){
+							$('.min_tab').tabs("option", "active", idx);
+						});
+						google.maps.event.addListener(map_shape_path, 'set_at', function(){
+							WSU_MAP.admin.geometrics.on_shape_change(idx,map_shape);
+						});
+						google.maps.event.addListener(map_shape_path, 'insert_at', function(){
+							WSU_MAP.admin.geometrics.on_shape_change(idx,map_shape);
+						});
+						
+						
+						/*
 						google.maps.event.addListener(map_shape, 'click', function (){//event) {
 							$('.min_tab').tabs("option", "active", idx);
-						});  
+							var jObj = WSU_MAP.state.map_jObj;
+							var points=jObj.gmap('get_updated_data',map_shape);
+							var tab = $('#child_'+idx);
+							var boundInput = tab.find('[name*="boundary_parts"]');
+							var encodeInput = tab.find('[name*="encoded"]');
+							console.log(points);
+							if( window._defined(points) && points.length){
+								//alert(points);
+
+								boundInput.val(points);
+								//alert(dump(WSU_MAP.state.map_jObj.gmap('encode',WSU_MAP.state.map_jObj.gmap('process_coords',points,false,false))));
+								//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+								boundInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+								encodeInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+								//$('#geometric_encoded').val(WSU_MAP.state.map_jObj.gmap('get_updated_data_encoded'));
+							}
+						});*/  
 						map_shape.latLngs.getArray().forEach(function(path){
 							path.getArray().forEach(function(latLng){
 								WSU_MAP.admin.geometrics.bounds.extend(latLng);
@@ -310,7 +351,25 @@
 					});
 				}
 			},
-	
+			on_shape_change:function(idx,map_shape){
+				var jObj = WSU_MAP.state.map_jObj;
+				WSU_MAP.admin.geometrics.setSelection(map_shape);
+				var points=jObj.gmap('get_updated_data');
+				var tab = $('#child_'+idx);
+				var boundInput = tab.find('[name*="boundary_parts"]');
+				var encodeInput = tab.find('[name*="encoded"]');
+				console.log(points);
+				if( window._defined(points) && points.length){
+					//alert(points);
+
+					boundInput.val(points);
+					//alert(dump(WSU_MAP.state.map_jObj.gmap('encode',WSU_MAP.state.map_jObj.gmap('process_coords',points,false,false))));
+					//$('#geometric_encoded').val($('#drawing_map').gmap('get_updated_data_encoded'));
+					//boundInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+					encodeInput.val(jObj.gmap('encode',jObj.gmap('process_coords',boundInput.val(),true,false)));
+					//$('#geometric_encoded').val(WSU_MAP.state.map_jObj.gmap('get_updated_data_encoded'));
+				}
+			},
 			add_shape_tab:function(options){
 				var tabs = $('.min_tab');
 				var ul = tabs.find( "ul" );
@@ -364,6 +423,7 @@
 				WSU_MAP.admin.geometrics.selectedShape = shape;
 				shape.setEditable(true);
 				WSU_MAP.admin.geometrics.selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+				WSU_MAP.state.map_jObj.gmap('set_drawingSelection',shape);
 			},
 			deleteSelectedShape:function () {
 				/*if (WSU_MAP.admin.geometrics.selectedShape) {
