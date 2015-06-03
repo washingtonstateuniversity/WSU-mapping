@@ -28,8 +28,18 @@
 				if(!window._defined(shape.latlng_str) && shape.latlng_str!=='' && shape.type==='polygon'){ 
 					pointHolder = {'paths' : shape.latlng_str };
 				}
+				
 				if(window._defined(shape.encoded)){ 
-					pointHolder = {'paths' : shape.encoded };
+					var path_string = "";
+					if($.isArray(shape.encoded)){
+						path_string = [];
+						$.each(shape.encoded,function(idx,ecoded){
+							path_string.push(google.maps.geometry.encoding.decodePath(ecoded));
+						});
+					}else{
+						path_string = shape.encoded;
+					}
+					pointHolder = {'paths' : path_string };
 				}
 				if(!window._defined(shape.style)||shape.style===''){
 					style = shape.type==='polygon'? {'fillOpacity':0.99,'fillColor':'#981e32','strokeColor':'#262A2D','strokeWeight':1}:{'strokeOpacity':0.99,'strokeColor':'#262A2D','strokeWeight':2};

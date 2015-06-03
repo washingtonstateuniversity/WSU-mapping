@@ -70,7 +70,22 @@ namespace campusMap.Services {
             String shapeOptions = "";
             shapeOptions += @"       ""name"":""" + geometric.name + @""",";
             //shapeOptions += (showOnlyEncoded ? @"      ""latlng_str"":""" + gem + @"""," : "");
-            shapeOptions += @"       ""encoded"":""" + (geometric.encoded!=null? HelperService.EscapeForJson(geometric.encoded) : "") + @""",";
+           // shapeOptions += @"       ""encoded"":""" + (geometric.encoded!=null? HelperService.EscapeForJson(geometric.encoded) : "") + @""",";
+            if (geometric.children.Count > 0) {
+                String obj = "";
+                foreach (geometrics child in geometric.children) {
+                    obj += (child.encoded != null ? (obj == "" ? "" : ",") + @"""" + HelperService.EscapeForJson(child.encoded) + @"""" : "");
+                }
+
+                shapeOptions += @"       ""encoded"":[" + obj + @"],";
+
+            } else {
+                shapeOptions += @"       ""encoded"":""" + (geometric.encoded != null ? HelperService.EscapeForJson(geometric.encoded) : "") + @""",";
+            }
+            
+
+
+
             shapeOptions += (geometric.style.Count > 0 ? @"      ""style"":" + geometric.style[0].style_obj + @"," : "");
             shapeOptions += @"      ""type"":""" + (geometric.default_type!=null?geometric.default_type.name:"polygon") + @"""";
 
