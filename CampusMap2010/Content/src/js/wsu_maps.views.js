@@ -16,7 +16,7 @@ var base=base||{};
 			}
 			WSU_MAP.views.inital_options = map_op;
 		},
-		ini_map_view:function (callback){
+		ini_map_view:function (){//callback){
 			window._d("starting map view");
 			WSU_MAP.state.inview = true;
 			var override = window._defined(WSU_MAP.state.json_style_override) && WSU_MAP.state.json_style_override!==false && WSU_MAP.state.json_style_override!=="";
@@ -84,8 +84,8 @@ var base=base||{};
 				WSU_MAP.on_pan_corrections();
 				WSU_MAP.on_bounds_changed_corrections();
 				WSU_MAP.state.map_jObj.trigger('wsu_maps:completed');
-				
-				callback();
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:view_setup');
+				//callback();
 			});
 		},
 	};

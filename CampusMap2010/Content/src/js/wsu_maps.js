@@ -61,7 +61,10 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.watch_map();
 			});	
 			if($('.veiw_base_layout').length || WSU_MAP.state.inview ){
-				WSU_MAP.views.ini_map_view(WSU_MAP.setup);
+				WSU_MAP.views.ini_map_view();
+				WSU_MAP.state.map_jObj.on('wsu_maps:view_setup',function(){
+					WSU_MAP.setup();
+				});	
 				return;
 			}
 			window._d("starting map");
