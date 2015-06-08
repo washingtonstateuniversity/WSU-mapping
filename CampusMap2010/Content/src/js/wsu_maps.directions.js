@@ -31,10 +31,6 @@
 					WSU_MAP.util.nullout_event(e);
 					var currentMarker = WSU_MAP.state.active.marker;
 					WSU_MAP.state.cTo=currentMarker.marker_position.latitude+","+currentMarker.marker_position.longitude;
-							console.log("---------------------- cTo");
-							console.log(currentMarker.marker_position.latitude+","+currentMarker.marker_position.longitude);
-							console.log(WSU_MAP.state.cTo);
-							console.log("----------------------");
 					WSU_MAP.directions.iw_hereToThere();
 				});
 			},
@@ -45,6 +41,7 @@
 					html:'<div id="modeArea" class="location_places"><div id="header_block">Traveling to:<span id="to_location"></span>, From:</div><a href="" id="your_location">Your Location</a><fieldset ><legend>Places On The Map</legend><ul id="onMapLocations"></ul></fieldset><div id="customLocation"><input type="text" placeholder="Custom Location"/><i></i></div></div>',
 					width:275,
 					onCreate:function(dialog){
+						var jObj = WSU_MAP.state.map_jObj;
 						$("#header_block span").html("&nbsp;"+$(".infoBox:visible h2.header:first").html());
 						$("#header_block span span").remove();
 
@@ -62,75 +59,49 @@
 						$("#onMapLocations a").on("click",function(e){
 							WSU_MAP.util.nullout_event(e);
 							var idx = $("#onMapLocations a").index(this);
-							console.log(idx);
 							var selected_marker = WSU_MAP.state.displayedMarkers[idx];
 							WSU_MAP.state.cFrom=selected_marker.marker_position.latitude+","+selected_marker.marker_position.longitude;
-							console.log("---------------------- cFrom");
-							console.log(selected_marker.marker_position.latitude+","+selected_marker.marker_position.longitude);
-							console.log(WSU_MAP.state.cFrom);
-							console.log("----------------------");
 							open_mode=true;
 							dialog.dialog('close');
 						});
 						$("#customLocation i").on("click",function(){
-							open_mode=true;
-							WSU_MAP.state.cFrom=$("#customLocation input").val();
-							dialog.dialog('close');
+							
+							jObj.gmap('search',{address:$("#customLocation input").val()+' USA'},function(results, status){
+								if (status === google.maps.GeocoderStatus.OK) {
+									WSU_MAP.state.cFrom=results[0].geometry.location;
+									open_mode=true;
+									dialog.dialog('close');
+								}else{
+								}
+							});
 						});
-						
+						$('#customLocation input').off().on('keyup',function(e){
+							WSU_MAP.util.nullout_event(e);
+							if($('#customLocation input').val() !==''){		
+								if ( e.which === 13 ){
+									jObj.gmap('search',{address:$("#customLocation input").val()+' USA'},function(results, status){
+										if (status === google.maps.GeocoderStatus.OK) {
+											WSU_MAP.state.cFrom=results[0].geometry.location;
+											console.log(results);
+											console.log(WSU_MAP.state.cFrom);
+											open_mode=true;
+											dialog.dialog('close');
+										}else{
+										}
+									});
+								}
+							}			
+						});
 						
 						
 						
 					},
 					onClose:function(){
-						console.log('open_mode:');
-						console.log(open_mode);
 						if(open_mode){
 							setTimeout(function(){ WSU_MAP.directions.open_trasportation_modes(); }, 1000);
 						}
 					}
 				});
-				
-				
-				
-				
-				/*WSU_MAP.util.popup_message({
-					html:'<div id="modeArea"><input type="Submit" value="Continue" name="modeSubmit" style="float:right;"/><h2>Choose Mode</h2><select id="trasMode"><option value="Walk">Walk</option><option value="Bike">Bike</option><option value="Car">Car</option><option value="Transit">Transit</option></select></div>',
-					width:275,
-					onCreate:function(dialog){
-						$('#modeArea [type="Submit"]').off().on('click',function(e){
-							WSU_MAP.util.nullout_event(e);
-							var jObj = WSU_MAP.state.map_jObj;
-							var mode;
-							switch($('#trasMode').val()){
-								case "Walk":
-									mode = google.maps.DirectionsTravelMode.WALKING;
-									break;
-								case "Bike":
-									mode = google.maps.DirectionsTravelMode.BICYCLING;
-									break;
-								case "Car":
-									mode = google.maps.DirectionsTravelMode.DRIVING;
-									break;
-								case "Transit":
-									mode = google.maps.DirectionsTravelMode.TRANSIT;
-									break;
-							}
-							jObj.gmap('displayDirections',
-								{origin:WSU_MAP.state.cFrom,destination:WSU_MAP.state.cTo,travelMode: mode},
-								{draggable: true},
-								function(results){
-									WSU_MAP.state.cFrom="";
-									WSU_MAP.state.cTo="";
-									WSU_MAP.state.hasDirection=true;
-									dialog.dialog('close');
-									WSU_MAP.directions.display_directions(results);
-							});
-						});
-					}
-				});*/
-
-			
 			},
 			open_trasportation_modes:function(){
 				
