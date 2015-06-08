@@ -45,8 +45,11 @@
 						$("#header_block span").html("&nbsp;"+$(".infoBox:visible h2.header:first").html());
 						$("#header_block span span").remove();
 
-						
-						$('#onMapLocations').html($('#listing .cAssest').html());
+						if($('#listing .cAssest').length>0){
+							$('#onMapLocations').html($('#listing .cAssest').html());
+						}else{
+							$('#onMapLocations').closest("fieldset").remove();
+						}
 						
 						
 						$("#your_location").on("click",function(e){
