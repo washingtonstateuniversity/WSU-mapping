@@ -82,8 +82,6 @@
 									jObj.gmap('search',{address:$("#customLocation input").val()+' USA'},function(results, status){
 										if (status === google.maps.GeocoderStatus.OK) {
 											WSU_MAP.state.cFrom=results[0].geometry.location;
-											console.log(results);
-											console.log(WSU_MAP.state.cFrom);
 											open_mode=true;
 											dialog.dialog('close');
 										}else{
@@ -131,13 +129,10 @@
 								{origin:WSU_MAP.state.cFrom,destination:WSU_MAP.state.cTo,travelMode: mode},
 								{draggable: true},
 								function(results){
-									console.log(WSU_MAP.state.cFrom);
-									console.log(WSU_MAP.state.cTo);
 									WSU_MAP.state.cFrom="";
 									WSU_MAP.state.cTo="";
 									WSU_MAP.state.hasDirection=true;
 									dialog.dialog('close');
-									console.log(results);
 									WSU_MAP.directions.display_directions(results);
 									
 							});
