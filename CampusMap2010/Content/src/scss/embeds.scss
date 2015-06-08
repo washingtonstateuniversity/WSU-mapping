@@ -7,6 +7,22 @@
 	height:0px;
 	width:0px;
 }
+$fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
+@import "#{$fontURL}/css/font-awesome.min.css";
+
+@font-face{
+	font-family:'FontAwesome';
+	src:url('#{$fontURL}/fonts/fontawesome-webfont.eot?v=4.3.0');
+	src:url('#{$fontURL}/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+		url('#{$fontURL}/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+		url('#{$fontURL}/fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'),
+		url('#{$fontURL}/fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
+		url('#{$fontURL}/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+
+
 .WSU_MAPS_NS{ //the NS should be a var.. 
 	-webkit-transform: translateZ(0px);	
 	div{
