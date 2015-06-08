@@ -441,7 +441,9 @@
 				if(zoom>max_zoom){
 					zoom=max_zoom;
 				}
-				self.get('map').setZoom(zoom);
+				if(typeof zoom !== "undefined" && !isNaN(zoom)){
+					self.get('map').setZoom(zoom);
+				}
 			}
 		},
 		
