@@ -39,7 +39,7 @@
 								jObj.gmap('clear','overlays');*/
 								WSU_MAP.clean_map();
 								if(window._defined(data)){
-									WSU_MAP.general.loadData(data,null,function(marker){
+									WSU_MAP.general.loadData(data,function(marker){
 										WSU_MAP.state.ib[0].open(WSU_MAP.state.map_inst, marker);
 										WSU_MAP.state.cur_mid = WSU_MAP.state.mid[0];
 									});
@@ -66,7 +66,7 @@
 						jObj.gmap('clear','overlays');*/
 						WSU_MAP.clean_map();
 						if(window._defined(data)){
-							WSU_MAP.general.loadData(data,null,function(marker){
+							WSU_MAP.general.loadData(data,function(marker){
 								WSU_MAP.state.ib[0].open(WSU_MAP.state.map_inst, marker);
 								WSU_MAP.state.cur_mid = WSU_MAP.state.mid[0];
 							});
@@ -101,7 +101,7 @@
 									WSU_MAP.state.ib[i].close();
 								}
 							});*/
-							WSU_MAP.general.loadData(data,null,function(){//marker){
+							WSU_MAP.general.loadData(data,function(){//marker){
 								//ib[0].open(WSU_MAP.state.map_inst, marker);
 								//cur_mid = mid[0];
 								window._d("applied loaded data");

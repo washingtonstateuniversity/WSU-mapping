@@ -288,7 +288,7 @@
 				WSU_MAP.infobox.init_img_modal();
 				WSU_MAP.errors.addErrorReporting(marker);
 				WSU_MAP.infobox.setup_fullscreen_iw();
-				
+				WSU_MAP.directions.add_iw_directions();
 	
 	
 				$('.gm-style .infoBox').hover(function(){

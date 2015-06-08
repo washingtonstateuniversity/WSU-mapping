@@ -180,13 +180,16 @@ if (!Array.prototype.indexOf) {
 			if( window._defined( used_url ) && used_url!==null && used_url!=="" ){
 				window._d("appling a url to update against");
 				var url = encodeURI( used_url.indexOf("&") ? used_url.split('=')[1].split('&')[0] : used_url.split('=')[1] );
-				WSU_MAP.updateMap(url,false,function(){
+				WSU_MAP.updateMap(url,false);
+				WSU_MAP.state.map_jObj.on('wsu_maps:data_loaded',function(){
 					if( parseInt( used_url.split('=')[1], 10) > 0 ){
 						var marker = WSU_MAP.state.markerbyid[parseInt( used_url.split('=')[1], 10 )];
 						//google.maps.event.trigger(marker, 'click');
 						$(marker).triggerEvent('click');
 					}
-				});
+				});	
+				
+				
 				var link = used_url.split('=')[1].split('&')[0].toString(); 
 				//alert(link);
 				if( used_url.split('=')[1].indexOf(',')>0 ){
@@ -214,7 +217,6 @@ if (!Array.prototype.indexOf) {
 			if( $('.veiw_base_layout.public').length || WSU_MAP.state.inview ){	
 				WSU_MAP.shapes.reloadShapes();
 				WSU_MAP.places.reloadPlaces();
-				
 			}
 		},
 		get_option:function(){//prop){
@@ -254,7 +256,7 @@ if (!Array.prototype.indexOf) {
 			
 			//WSU_MAP.listings.reset_listings();
 		},
-		updateMap:function (_load,showSum,callback){
+		updateMap:function (_load,showSum){//,callback){
 			//var jObj = WSU_MAP.state.map_jObj;
 			if(!window._defined(_load)){
 				_load = false;
@@ -262,9 +264,9 @@ if (!Array.prototype.indexOf) {
 			if(!window._defined(showSum)){
 				showSum = false;
 			}
-			if(!window._defined(callback)){
+			/*if(!window._defined(callback)){
 				callback = false;
-			}
+			}*/
 			WSU_MAP.state.cur_mid = 0;
 			WSU_MAP.state.cur_nav = _load;
 			var url="";
@@ -295,11 +297,12 @@ if (!Array.prototype.indexOf) {
 						}
 					});
 					if(window._defined(cleanedData)){
-						WSU_MAP.general.loadData(cleanedData,callback);
+						WSU_MAP.general.loadData(cleanedData);//,callback);
 					}
 					WSU_MAP.listings.loadListings(cleanedData,showSum);
 				}
 				WSU_MAP.general.prep_html();
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:map_updated');
 			});
 		},
 

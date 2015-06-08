@@ -117,3 +117,84 @@ $url_10: url('//beta.maps.wsu.edu/Content/images/jCellNav_btn.png');
 		}
 	}
 }
+
+#modeArea{
+	.location_places{
+
+	}
+	#your_location{
+		position: relative;
+		font-size: 1.5em;
+		display: inline-block;
+		width: 100%;
+		border-bottom: 1px solid #323232;
+		margin-bottom: 15px;
+		&:before {
+			@include fa(); 
+			content: "\f05b";
+			color: #2e2e2e;
+			position: absolute;
+			right: 9px;
+			top: -25spx;
+			font-size: 1.05em;
+		}
+	}
+	#header_block{
+		position:absolute;
+		bottom:100%;
+		left:0px;
+		background-color:#323232;
+		color:#DDDDDD;
+		font-weight:bold;
+		padding:1em;
+		border-radius: 10px 10px 0px 0px;
+		span{
+		}
+	}
+	fieldset{
+		border: 1px solid #DFDFDF;
+		legend{
+			position: relative;
+			padding:0px 10px;
+			/*&:before {
+				@include fa(); 
+				content: "\f041";
+				color: #9B9B9B;
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				font-size: 2em;
+			}*/
+		}
+		ul {
+			margin:2px 5px;
+		}
+	}
+	#onMapLocations{
+		max-height:250px;
+		overflow-y:auto;
+	}
+	#customLocation{
+		position: relative;
+		input{
+			&::-webkit-input-placeholder {
+				color: #bec3c6 !important;
+			}
+			&:-moz-placeholder {
+				color: #bec3c6 !important;
+			}
+		}
+		i:before {
+			@include fa(); 
+			content: "\f002";
+			color: #9B9B9B;
+			position: absolute;
+			right: 0px;
+			top: 0px;
+			font-size: 2em;
+		}
+	}
+	
+}
+
+

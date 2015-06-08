@@ -11,7 +11,7 @@
 			
 			
 	
-			loadData:function (data,callback,markerCallback){
+			loadData:function (data,markerCallback){
 				window._d("loading data");
 				//var jObj = WSU_MAP.state.map_jObj;
 				if( window._defined(data.shapes) && !$.isEmptyObject(data.shapes)){
@@ -39,12 +39,12 @@
 						//WSU_MAP.infobox.make_InfoWindow(idx,marker);
 						//WSU_MAP.infobox.make_ToolTip(idx,marker);
 						WSU_MAP.markers.make_Marker(idx,marker.id,marker,markerCallback);
-						
-						if(idx===(data.markers.length-1) && $.isFunction(callback)){
+						//WSU_MAP.state.map_jObj.trigger('wsu_maps:data_loaded_marker');
+						/*if(idx===(data.markers.length-1) && $.isFunction(callback)){
 							callback(marker);
-						}
+						}*/
 					});
-					
+					WSU_MAP.state.map_jObj.trigger('wsu_maps:data_loaded');
 					var jObj = WSU_MAP.state.map_jObj;
 					jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()});
 					
@@ -53,6 +53,7 @@
 						WSU_MAP.geoLocate();
 					}
 				}
+				
 				//if($.isFunction(callback))callback();return;
 			},
 			
