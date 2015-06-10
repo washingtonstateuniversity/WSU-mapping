@@ -107,6 +107,7 @@
 								window._d("applied loaded data");
 							});
 							WSU_MAP.general.prep_html();
+							WSU_MAP.state.map_jObj.trigger('wsu_maps:places_reloaded',[ ]);
 						});
 					}
 				}

@@ -21,6 +21,7 @@
 						$.each( data.shapes, function(i, shape) {	
 							WSU_MAP.shapes.addShapeToMap(i, shape);
 						});
+						WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
 					});
 				}	
 			},

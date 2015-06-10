@@ -253,7 +253,7 @@ if (!Array.prototype.indexOf) {
 			if($('#directionsTo').is(':visible')){
 				$('#directionsTo').hide();
 			}
-			
+			WSU_MAP.state.map_jObj.trigger('wsu_maps:map_cleaned',[ ]);
 			//WSU_MAP.listings.reset_listings();
 		},
 		updateMap:function (_load,showSum){//,callback){
@@ -505,8 +505,6 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.state.map_inst.panTo(WSU_MAP.state.center);
 			}
 		},
-		
-		
 		poi_setup:function (){//jObj){
 			var proto = google.maps.InfoWindow.prototype, open = proto.open;
 			proto.open = function(map, anchor, please) {

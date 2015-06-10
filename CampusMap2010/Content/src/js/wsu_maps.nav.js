@@ -146,6 +146,7 @@
 				if($.isFunction(callback)){
 					callback();
 				}
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:navscrollbar_destroyed',[ ]);
 			},
 			push_state : function(obj,url){
 				window._d("pushing history state");

@@ -170,6 +170,7 @@
 				if(window._defined(callback)){
 					callback();
 				}
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:listpanel_auto_opened',[ ]);
 			},
 			
 			loadListings:function (data,showSum){

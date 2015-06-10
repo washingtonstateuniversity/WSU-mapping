@@ -438,8 +438,8 @@
 						next:'.next', 
 						slides:'> a',
 						pagerTemplate:'<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
-						onPagerEvent:function(i){//,ele){
-							if(currSlide-i<0){ 
+						onPagerEvent:function(idx){//,ele){
+							if(currSlide-idx<0){ 
 								if(window._defined($.jtrack)){
 									//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
 								}
@@ -449,11 +449,12 @@
 								}
 							} 
 							if(window._defined(callbacks) && window._defined(callbacks.onPagerEvent)){
-								callbacks.onPagerEvent(i);
+								callbacks.onPagerEvent(idx);
 							}
-							currSlide = i; 
+							WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged',[ idx ]);
+							currSlide = idx; 
 						},
-						onPrevNextEvent:function(isNext,i){//,ele){
+						onPrevNextEvent:function(isNext,idx){//,ele){
 								if(isNext){
 									if(window._defined($.jtrack)){
 										//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
@@ -466,6 +467,7 @@
 							if(window._defined(callbacks) && window._defined(callbacks.onPagerEvent)){
 								callbacks.onPrevNextEvent(i,isNext);
 							}
+							WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged_next',[ idx, isNext ]);
 						},
 						
 					});
