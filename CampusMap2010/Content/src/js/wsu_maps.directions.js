@@ -38,10 +38,11 @@
 				WSU_MAP.directions.clearHereToThere();
 				var open_mode = false;
 				WSU_MAP.util.popup_message({
-					html:'<div id="modeArea" class="location_places"><div id="header_block">Traveling to:<span id="to_location"></span>, From:</div><a href="" id="your_location">Your Location</a><fieldset ><legend>Places On The Map</legend><ul id="onMapLocations"></ul></fieldset><div id="customLocation"><input type="text" placeholder="Custom Location"/><i></i></div></div>',
+					html:'<div id="modeArea" class="location_places"><a href="" id="your_location">Your Location</a><fieldset ><legend>Places On The Map</legend><ul id="onMapLocations"></ul></fieldset><div id="customLocation"><input type="text" placeholder="Custom Location"/><i></i></div></div>',
 					width:275,
 					onCreate:function(dialog){
 						var jObj = WSU_MAP.state.map_jObj;
+						$("#wsumap_mess").before('<div id="header_block"><div id="wrapped">Traveling to:<span id="to_location"></span>,<br/> From:</div></div>');
 						$("#header_block span").html("&nbsp;"+$(".infoBox:visible h2.header:first").html());
 						$("#header_block span span").remove();
 
@@ -54,9 +55,15 @@
 						
 						$("#your_location").on("click",function(e){
 							WSU_MAP.util.nullout_event(e);
-							
-							open_mode=true;
-							dialog.dialog('close');
+							WSU_MAP.getGeoLocate();
+							WSU_MAP.state.map_jObj.on("wsu_maps:geo_located",function(e,pos){
+								if(window._defined(pos)){
+									WSU_MAP.state.cFrom=pos;
+									open_mode=true;
+									dialog.dialog('close');
+								}
+							});
+
 						});
 						
 						$("#onMapLocations a").on("click",function(e){

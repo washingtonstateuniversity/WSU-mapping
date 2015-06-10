@@ -400,19 +400,25 @@ if (!Array.prototype.indexOf) {
 				});
 			});*/
 		},
-		
+		getGeoLocate:function (){
+			WSU_MAP.state.map_jObj.gmap("geolocate",true,false,function(mess, pos){
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:geo_located',[ pos ]);
+			});
+		},
 		geoLocate:function (){
 			if($('.geolocation').length){
-				WSU_MAP.state.map_jObj.gmap("geolocate",true,false,function(mess, pos){
-					//WSU_MAP.state.map_jObj.gmap("make_latlng_str",pos)//alert('hello');
-					WSU_MAP.state.map_jObj.gmap('addMarker', { 
-							position: pos,
-							icon:WSU_MAP.state.siteroot+"Content/images/map_icons/geolocation_icon.png"
-						},function(){//ops,marker){
-						//markerLog[i]=marker;
-						//WSU_MAP.state.map_jObj.gmap('setOptions', {'zIndex':1}, markerLog[i]);
-						//if($.isFunction(callback))callback(marker);
-					});
+				WSU_MAP.getGeoLocate();
+				WSU_MAP.state.map_jObj.on("wsu_maps:geo_located",function(e,pos){
+					if(window._defined(pos)){
+						WSU_MAP.state.map_jObj.gmap('addMarker', { 
+								position: pos,
+								icon:WSU_MAP.state.siteroot+"Content/images/map_icons/geolocation_icon.png"
+							},function(){//ops,marker){
+							//markerLog[i]=marker;
+							//WSU_MAP.state.map_jObj.gmap('setOptions', {'zIndex':1}, markerLog[i]);
+							//if($.isFunction(callback))callback(marker);
+						});
+					}
 				});
 			}
 		},
