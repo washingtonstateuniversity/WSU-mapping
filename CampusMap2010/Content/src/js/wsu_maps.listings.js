@@ -145,6 +145,7 @@
 				if($.isFunction(callback)){
 					callback();
 				}
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:listscrollbar_destroyed',[ ]);
 			},
 			destroy_Dirscrollbar:function (callback){
 				if(WSU_MAP.state.apiD!==null && !$.isEmptyObject(WSU_MAP.state.apiD.jObj)){
@@ -154,6 +155,7 @@
 				if($.isFunction(callback)){
 					callback();
 				}
+				WSU_MAP.state.map_jObj.trigger('wsu_maps:dirscrollbar_destroyed',[ ]);
 			},
 			destroy:function(){
 				WSU_MAP.listings.destroy_Listscrollbar();
