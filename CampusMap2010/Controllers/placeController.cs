@@ -1497,7 +1497,8 @@ namespace campusMap.Controllers {
                 place.editing = null;
                 ActiveRecordMediator<place>.Save(place);
                 //place.Refresh();
-                RedirectToAction("list");
+                //RedirectToAction("list");
+                RedirectToUrl("~/place/list.castle");
                 return;
             }
         }
