@@ -71,9 +71,10 @@ module.exports = function(grunt) {
 			},
 			admin_styles: {
 				src: [
+					'build/_pre_sass/admin.styles.css',
 					'src/css/admin/jSelect.min.css',
 					'src/css/admin/jSelect.filter.min.css',
-					'build/_pre_sass/admin.styles.css',
+					
 				],
 				dest: 'build/css/admin.styles.css',
 			},

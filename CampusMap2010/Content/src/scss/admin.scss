@@ -1,18 +1,16 @@
 @charset "UTF-8";
-
-
-
-$fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
-@import "#{$fontURL}/css/font-awesome.min.css";
+$fontURL_version: "4.3.0";
+$fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/#{$fontURL_version}";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
 
 @font-face{
 	font-family:'FontAwesome';
-	src:url('#{$fontURL}/fonts/fontawesome-webfont.eot?v=4.3.0');
-	src:url('#{$fontURL}/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
-		url('#{$fontURL}/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
-		url('#{$fontURL}/fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'),
-		url('#{$fontURL}/fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
-		url('#{$fontURL}/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+	src:url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0');
+	src:url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+		url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+		url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'),
+		url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
+		url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
 	font-weight:normal;
 	font-style:normal
 }
