@@ -245,7 +245,7 @@ namespace campusMap.Controllers {
                         makePlaceStaticMap(item);
                     }
                 }
-                PropertyBag[name + "_list"] = PaginationHelper.CreatePagination(listtems, pagesize, (pageing.TryGetValue(name + "Paging", out pag) ? pag : 0));
+                PropertyBag[name + "_list"] = listtems;//PaginationHelper.CreatePagination(listtems, pagesize, (pageing.TryGetValue(name + "Paging", out pag) ? pag : 0));
                 buttons = new List<string>();
                 buttons.Add("edit");
                 buttons.Add("delete");
@@ -285,7 +285,8 @@ namespace campusMap.Controllers {
             fieldsEx.Add(Expression.Eq("model", this.GetType().Name));
             place_fields_items = ActiveRecordBase<field_types>.FindAll(fieldsEx.ToArray());
             PropertyBag["fields"] = PaginationHelper.CreatePagination(place_fields_items, pagesize, fieldsPaging);
-            RenderView("../admin/listings/list");
+            RenderView("../place/_listings/list");
+            //RenderView("../admin/listings/list");
         }
 
         #region WSU MATRIX

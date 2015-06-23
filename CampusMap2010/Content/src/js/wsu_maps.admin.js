@@ -251,9 +251,35 @@ var image_count=image_count||-1;
 						  "orderable": false,
 						}]
 					});
+					$('.fa-search').tooltip({
+						position: {
+							my: "left top",
+							at: "right+5 top-5"
+						},
+						tooltipClass:"jselect-menu-imgtooltip",
+						content: function() {
+							var element = $( this ).attr('title');
+							return "<img src='"+element+"' style='max-width:200px;'/>";
+						}
+					});
 					datatable.on( 'draw.dt', function () {
 						WSU_MAP.admin.ini_dataTable_removals(datatable.find(".removal"));
 						WSU_MAP.admin.set_up_list_deletion();
+						
+						$('.fa-search').tooltip({
+							position: {
+								my: "left top",
+								at: "right+5 top-5"
+							},
+							tooltipClass:"jselect-menu-imgtooltip",
+							content: function() {
+								var element = $( this ).attr('title');
+								return "<img src='"+element+"' style='max-width:200px;'/>";
+							}
+						});
+						
+						
+						
 					});
 				});
 				

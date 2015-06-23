@@ -1,0 +1,3 @@
+<a href="$helper.getAdminUrl("${controller.getView()}/_copy")?id=$!{item.id}" title="Copy this item" class="editIt action_button copy">
+  <i class="fa fa-files-o"></i>
+</a>

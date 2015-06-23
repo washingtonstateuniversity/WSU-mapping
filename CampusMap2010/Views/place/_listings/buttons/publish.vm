@@ -1,0 +1,5 @@
+#if($userService.checkPrivleage("can_publish"))
+	<a href="$helper.getAdminUrl("${controller.getView()}/setStatus")?id=$!{item.id}" title="Published" class="pubState action_button">
+	  <i class="fa fa-star"></i>
+	</a>
+#end

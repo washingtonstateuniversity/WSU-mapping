@@ -499,6 +499,14 @@ input,select,textarea {
 		margin: -8px;
 	}
 }
+.itemRenderError{
+	td{background-color:#FFF4AF !important;}
+}
+.renderError{ color:#88191B; }
+.renderOk{ color:#0F6F20;}
+
+
+
 .inlineIcon {
 	display: inline-block !important;
 	float: left;
@@ -1742,6 +1750,23 @@ span.UinEdit {
 .dataTables_wrapper{
 	label{
 		color:#e2e2e2;
+	}
+	table{
+		&.dataTable{
+			td{
+				vertical-align:middle !important;
+			}
+		}
+	}
+	.dataTables_paginate.fg-buttonset{
+		a{
+			padding:3px 9px !important;
+			&:hover:not(.ui-state-disabled){
+				color:#DFDFDF !important;
+				background-color:#5A5A5A !important;
+				background-image:none !important;
+			}
+		}
 	}
 }
 
