@@ -319,7 +319,6 @@ var image_count=image_count||-1;
 				var targ = $(this);
 				WSU_MAP.util.confirmation_message("Are you sure you want send this item to the trashbin?",{
 					"yes":function(){
-						console.log('move to');
 						window.location=targ.attr("href");
 					},
 					"no":function(){}

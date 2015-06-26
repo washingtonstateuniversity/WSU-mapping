@@ -204,7 +204,6 @@
 				if($("#wsumap_mess").length<=0){
 					$('body').append('<div id="wsumap_mess">');
 				}
-				console.log('confrim it '+ html_message);
 				$("#wsumap_mess").html( (typeof html_message === 'string' || html_message instanceof String) ? html_message : html_message.html() );
 				$( "#wsumap_mess" ).dialog({
 					autoOpen: true,
@@ -214,7 +213,6 @@
 					modal: true,
 					draggable : false,
 					create:function(){
-						console.log('open it ');
 						$('.ui-dialog-titlebar').remove();
 						$('body').css({overflow:"hidden"});
 					},
