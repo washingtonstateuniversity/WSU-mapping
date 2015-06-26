@@ -1,4 +1,4 @@
-	<a href="$helper.getAdminUrl("${controller.getView()}/delete")?id=$!{item.id}" title="Delete" class="action_button delete">
+	<a href="$helper.getAdminUrl("${controller.getView()}/delete")?id=$!{item.id}" title="Delete" class="action_button delete deletion">
 		<i class="fa fa-trash"></i>
 	</a>   
 #if($Controller.canEdit($item,$user.id) || $item.editing == $user || $item.isCheckedOutNull())

@@ -2,7 +2,9 @@
 	$.extend( WSU_MAP.admin , {
 		lists : {
 			ini:function(){
-				if($( "a[title='Delete']" ).length>0){
+				
+				WSU_MAP.admin.build_general_removal_button($( "a[title='Delete']" ));
+				/*if($( "a[title='Delete']" ).length>0){
 					var deleteing='';
 					var name='';
 					if($( "#deleteModule" ).length===0){
@@ -34,7 +36,7 @@
 							}
 						}
 					});
-				}
+				}*/
 				
 				
 				/* note this is for the gem area only */

@@ -262,8 +262,11 @@ var image_count=image_count||-1;
 							return "<img src='"+element+"' style='max-width:200px;'/>";
 						}
 					});
+					WSU_MAP.admin.set_up_list_deletion();
+						
+					
 					datatable.on( 'draw.dt', function () {
-						WSU_MAP.admin.ini_dataTable_removals(datatable.find(".removal"));
+						//WSU_MAP.admin.ini_dataTable_removals(datatable.find(".removal"));
 						WSU_MAP.admin.set_up_list_deletion();
 						
 						$('.fa-search').tooltip({
@@ -277,8 +280,7 @@ var image_count=image_count||-1;
 								return "<img src='"+element+"' style='max-width:200px;'/>";
 							}
 						});
-						
-						
+						//WSU_MAP.admin.build_general_removal_button($( "a[title='Delete']" ));
 						
 					});
 				});
@@ -287,8 +289,7 @@ var image_count=image_count||-1;
 				$.each(addTos,function(){
 					var targ = $(this);
 					targ.on("click",function(e){
-						e.preventDefault();
-						e.stopPropagation();
+						WSU_MAP.util.nullout_event(e);
 						var targ = $(this);
 						var type = targ.data('type');
 						
@@ -305,7 +306,7 @@ var image_count=image_count||-1;
 					});
 				});
 				WSU_MAP.admin.set_up_list_deletion();
-				WSU_MAP.admin.ini_dataTable_removals();
+				//WSU_MAP.admin.ini_dataTable_removals();
 				
 			}
 
@@ -313,11 +314,12 @@ var image_count=image_count||-1;
 		
 		set_up_list_deletion:function(){
 			$('.deletion').off().on("click",function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				
+				WSU_MAP.util.nullout_event(e);
 				var targ = $(this);
 				WSU_MAP.util.confirmation_message("Are you sure you want send this item to the trashbin?",{
 					"yes":function(){
+						console.log('move to');
 						window.location=targ.attr("href");
 					},
 					"no":function(){}
@@ -332,8 +334,7 @@ var image_count=image_count||-1;
 		},
 		build_general_removal_button:function(jObj){
 			jObj.off().on("click",function(e){
-				e.preventDefault();
-				e.stopPropagation();
+				WSU_MAP.util.nullout_event(e);
 				var targ = $(this);
 				WSU_MAP.admin.confirmation_message("Are you sure?",{
 					"yes":function(){
