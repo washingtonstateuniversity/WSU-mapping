@@ -21,11 +21,8 @@
 					$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 						$.each( data.shapes, function(idx, shape) {
 							WSU_MAP.shapes.addShapeToMap(idx, shape);
-							if( data.shapes.length-1 === idx ){
-								WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
-								WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
-							}
 						});
+						WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
 					});
 				}
 			},

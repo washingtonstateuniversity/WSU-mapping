@@ -76,6 +76,8 @@ var base=base||{};
 				$(window).resize(function(){
 					if( WSU_MAP.state.fit_to_bound !== false ){
 						WSU_MAP.fit_to_location( WSU_MAP.state.fit_to_bound );
+					}else{
+						WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);	
 					}
 					WSU_MAP.keep_center();
 					WSU_MAP.watch_map();

@@ -217,6 +217,9 @@ if (!Array.prototype.indexOf) {
 			if( $('.veiw_base_layout.public').length || WSU_MAP.state.inview ){	
 				WSU_MAP.shapes.reloadShapes();
 				WSU_MAP.places.reloadPlaces();
+				WSU_MAP.state.map_jObj.on('wsu_maps:shapes_reloaded',function(){
+					WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
+				});	
 			}
 		},
 		get_option:function(){//prop){
