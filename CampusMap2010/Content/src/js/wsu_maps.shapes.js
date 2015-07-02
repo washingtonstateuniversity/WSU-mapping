@@ -20,9 +20,13 @@
 				if(window._defined(ids)){
 					$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
 						$.each( data.shapes, function(idx, shape) {
+							if( data.shapes.length-1 === idx ){
+								WSU_MAP.state.map_jObj.off('wsu_maps:shape_added').on('wsu_maps:shape_added',function(){
+									WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
+								});
+							}
 							WSU_MAP.shapes.addShapeToMap(idx, shape);
 						});
-						WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
 					});
 				}
 			},
@@ -65,93 +69,95 @@
 					// WSU_MAP.state.map_jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
 					jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
 						
-					if(WSU_MAP.shapes.bounds === null){
-						WSU_MAP.shapes.bounds=new google.maps.LatLngBounds();
-					}
-					shape_obj.latLngs.getArray().forEach(function(path){
-						path.getArray().forEach(function(latLng){
-							WSU_MAP.shapes.bounds.extend(latLng);
+						if(WSU_MAP.shapes.bounds === null){
+							WSU_MAP.shapes.bounds=new google.maps.LatLngBounds();
+						}
+						shape_obj.latLngs.getArray().forEach(function(path){
+							path.getArray().forEach(function(latLng){
+								WSU_MAP.shapes.bounds.extend(latLng);
+							});
 						});
-					});
-					
-					$(shape_obj).on('click',function(){
-						if(window._defined(shape.style.events.click) && shape.style.events.click !== ""){
-	
-							jObj.gmap('setOptions',shape.style.events.click,this);
-							if(window._defined(shape.style.events.click.onEnd) && shape.style.events.click.onEnd !== ""){
-								(function(){
-									window.jObj=jObj;
-									window.i=i;
-									/* jshint ignore:start */ //the safer eval still throws lint error
-									try{
-										var p= shape.style.events.click.onEnd.replace('\u0027',"'");
-										var f=  new Function(p); 
-										f();
-									}catch(err) {
-										window._d(err);
-									}
-									/* jshint ignore:end */
-								})();
+						
+						$(shape_obj).on('click',function(){
+							if(window._defined(shape.style.events.click) && shape.style.events.click !== ""){
+		
+								jObj.gmap('setOptions',shape.style.events.click,this);
+								if(window._defined(shape.style.events.click.onEnd) && shape.style.events.click.onEnd !== ""){
+									(function(){
+										window.jObj=jObj;
+										window.i=i;
+										/* jshint ignore:start */ //the safer eval still throws lint error
+										try{
+											var p= shape.style.events.click.onEnd.replace('\u0027',"'");
+											var f=  new Function(p); 
+											f();
+										}catch(err) {
+											window._d(err);
+										}
+										/* jshint ignore:end */
+									})();
+								}
 							}
-						}
-					 }).mouseover(function(){
-						 if(window._defined(shape.style.events.mouseover) && shape.style.events.mouseover !== ""){
-							 jObj.gmap('setOptions',shape.style.events.mouseover,this);
-							if(window._defined(shape.style.events.mouseover.onEnd) && shape.style.events.mouseover.onEnd !== ""){
-								(function(){
-									window.jObj=jObj;
-									window.i=i;
-									/* jshint ignore:start */ //the safer eval still throws lint error
-									try{
-										var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'");
-										var f=  new Function(p); 
-										f();
-									}catch(err) {
-										window._d(err);
-									}
-									/* jshint ignore:end */
-								})();
-							}		
-						 }
-					}).mouseout(function(){
-						if(window._defined(shape.style.events.rest) && shape.style.events.rest !== ""){
-							jObj.gmap('setOptions',shape.style.events.rest,this);
-							if(window._defined(shape.style.events.rest.onEnd) && shape.style.events.rest.onEnd !== ""){
-								(function(){
-									window.jObj=jObj;
-									window.i=i;
-									/* jshint ignore:start */ //the safer eval still throws lint error
-									try{
-										var p= shape.style.events.rest.onEnd.replace('\u0027',"'");
-										var f=  new Function(p); 
-										f();
-									}catch(err) {
-										window._d(err);
-									}
-									/* jshint ignore:end */
-								})();
+						 }).mouseover(function(){
+							 if(window._defined(shape.style.events.mouseover) && shape.style.events.mouseover !== ""){
+								 jObj.gmap('setOptions',shape.style.events.mouseover,this);
+								if(window._defined(shape.style.events.mouseover.onEnd) && shape.style.events.mouseover.onEnd !== ""){
+									(function(){
+										window.jObj=jObj;
+										window.i=i;
+										/* jshint ignore:start */ //the safer eval still throws lint error
+										try{
+											var p= shape.style.events.mouseover.onEnd.replace('\u0027',"'");
+											var f=  new Function(p); 
+											f();
+										}catch(err) {
+											window._d(err);
+										}
+										/* jshint ignore:end */
+									})();
+								}		
+							 }
+						}).mouseout(function(){
+							if(window._defined(shape.style.events.rest) && shape.style.events.rest !== ""){
+								jObj.gmap('setOptions',shape.style.events.rest,this);
+								if(window._defined(shape.style.events.rest.onEnd) && shape.style.events.rest.onEnd !== ""){
+									(function(){
+										window.jObj=jObj;
+										window.i=i;
+										/* jshint ignore:start */ //the safer eval still throws lint error
+										try{
+											var p= shape.style.events.rest.onEnd.replace('\u0027',"'");
+											var f=  new Function(p); 
+											f();
+										}catch(err) {
+											window._d(err);
+										}
+										/* jshint ignore:end */
+									})();
+								}
 							}
-						}
-					}).dblclick(function(){
-						if(window._defined(shape.style.events.dblclick) && shape.style.events.dblclick !== ""){
-							jObj.gmap('setOptions',shape.style.events.dblclick,this);
-								(function(){
-									window.jObj=jObj;
-									window.i=i;
-									/* jshint ignore:start */ //the safer eval still throws lint error
-									try{
-										var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'");
-										var f=  new Function(p); 
-										f();
-									}catch(err) {
-										window._d(err);
-									}
-									/* jshint ignore:end */
-								})();
-						}
-					})
-					.trigger('mouseover')
-					.trigger('mouseout');
+						}).dblclick(function(){
+							if(window._defined(shape.style.events.dblclick) && shape.style.events.dblclick !== ""){
+								jObj.gmap('setOptions',shape.style.events.dblclick,this);
+									(function(){
+										window.jObj=jObj;
+										window.i=i;
+										/* jshint ignore:start */ //the safer eval still throws lint error
+										try{
+											var p= shape.style.events.dblclick.onEnd.replace('\u0027',"'");
+											var f=  new Function(p); 
+											f();
+										}catch(err) {
+											window._d(err);
+										}
+										/* jshint ignore:end */
+									})();
+							}
+						})
+						.trigger('mouseover')
+						.trigger('mouseout');
+						WSU_MAP.state.map_jObj.trigger('wsu_maps:shape_added',[ ]);
+
 					});
 				}	
 			},
