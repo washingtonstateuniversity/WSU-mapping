@@ -2,6 +2,7 @@
 (function($,window,WSU_MAP) {
 	$.extend( WSU_MAP, {
 		shapes : {
+			bounds:null,
 			reloadShapes:function (){
 				var url=WSU_MAP.state.siteroot+"public/getShapesJson_byIds.castle";
 				var ids;
@@ -18,12 +19,15 @@
 				WSU_MAP.state.map_jObj.gmap('clear','overlays');
 				if(window._defined(ids)){
 					$.getJSON(url+'?callback=?&ids[]='+ids, function(data) {
-						$.each( data.shapes, function(i, shape) {	
-							WSU_MAP.shapes.addShapeToMap(i, shape);
+						$.each( data.shapes, function(idx, shape) {
+							WSU_MAP.shapes.addShapeToMap(idx, shape);
+							if( data.shapes.length-1 === idx ){
+								WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
+								WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
+							}
 						});
-						WSU_MAP.state.map_jObj.trigger('wsu_maps:shapes_reloaded',[ ]);
 					});
-				}	
+				}
 			},
 			addShapeToMap:function(i,shape){
 				var jObj = WSU_MAP.state.map_jObj;
@@ -63,6 +67,16 @@
 					
 					// WSU_MAP.state.map_jObj.gmap('addShape',(shape.type[0].toUpperCase() + shape.type.slice(1)), style)
 					jObj.gmap('addShape', (shape.type.charAt(0).toUpperCase() + shape.type.slice(1)), style, function(shape_obj){
+						
+					if(WSU_MAP.shapes.bounds === null){
+						WSU_MAP.shapes.bounds=new google.maps.LatLngBounds();
+					}
+					shape_obj.latLngs.getArray().forEach(function(path){
+						path.getArray().forEach(function(latLng){
+							WSU_MAP.shapes.bounds.extend(latLng);
+						});
+					});
+					
 					$(shape_obj).on('click',function(){
 						if(window._defined(shape.style.events.click) && shape.style.events.click !== ""){
 	

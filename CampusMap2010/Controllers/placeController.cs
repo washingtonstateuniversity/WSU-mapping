@@ -1528,7 +1528,11 @@ namespace campusMap.Controllers {
             Flash["message"] = "A Place, <strong>" + place.prime_name + "</strong>, has been <strong>deleted</strong>.";
             ActiveRecordMediator<place>.Delete(place);
             CancelLayout();
-            RedirectToAction("list");
+            String everUrl = Context.Request.RawUrl;
+            String querystring = Regex.Replace(everUrl, @"(.*?)(\&pos\&.*)", "$2");
+            //RedirectToAction("list");
+            RedirectToUrl("~/place/list.castle" + (String.IsNullOrWhiteSpace(querystring) ? "" : "?" + querystring));
+            return;
         }
         public void delete_type(int id) {
             place_types place_type = ActiveRecordBase<place_types>.Find(id);

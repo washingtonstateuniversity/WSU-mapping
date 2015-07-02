@@ -190,12 +190,12 @@
 							} )
 					);
 					google.maps.event.addListener(WSU_MAP.state.map_inst, 'click', WSU_MAP.admin.geometrics.clearSelection);
-	
-					$.each($("[data-child_id]"),function(idx){
-						WSU_MAP.admin.geometrics.resolve_loaded_shapes(idx);
-					});
-					WSU_MAP.state.map_inst.fitBounds(WSU_MAP.admin.geometrics.bounds); 
-	
+					if($("[data-child_id]").length){
+						$.each($("[data-child_id]"),function(idx){
+							WSU_MAP.admin.geometrics.resolve_loaded_shapes(idx);
+						});
+						WSU_MAP.state.map_inst.fitBounds(WSU_MAP.admin.geometrics.bounds); 
+					}
 	
 	
 	

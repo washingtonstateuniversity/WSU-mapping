@@ -3,7 +3,7 @@
 		lists : {
 			ini:function(){
 				
-				WSU_MAP.admin.build_general_removal_button($( "a[title='Delete']" ));
+				//WSU_MAP.admin.build_general_removal_button($( "a[title='Delete']" ));
 				/*if($( "a[title='Delete']" ).length>0){
 					var deleteing='';
 					var name='';

@@ -374,7 +374,7 @@ namespace campusMap.Controllers {
             levels.Add(level);
             STYLE._zoom = levels; // priming the levels with the all zoom level
 
-            PropertyBag["selectedType"] = ActiveRecordBase<geometrics_types>.Find(type); ;
+            PropertyBag["selectedType"] = ActiveRecordBase<geometrics_types>.Find(type > 0 ? type : 3);
 
             PropertyBag["style"] = STYLE;
             PropertyBag["style_types"] = ActiveRecordBase<geometrics_types>.FindAll();
@@ -559,7 +559,7 @@ namespace campusMap.Controllers {
             String availableImagesList = "";
             PropertyBag["availableImages"] = availableImagesList; // string should be "location1","location2","location3"
 
-            PropertyBag["selectedType"] = type;
+            PropertyBag["selectedType"] = type>0?type:3;
 
             PropertyBag["styles"] = ActiveRecordBase<styles>.FindAll();
             PropertyBag["images"] = Flash["images"] != null ? Flash["images"] : ActiveRecordBase<media_repo>.FindAll();

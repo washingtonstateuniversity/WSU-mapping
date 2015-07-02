@@ -54,6 +54,7 @@ var map_view =  {
 	siteroot : '$site.Trim()',
 	view_id : window.map_view_id ||"WSU_MAPS_NS",
 	map_view_scripts_block : window.map_view_scripts_block || false,
+	alias : '$map.alias',
 	view : '$view.Trim()/',
 	error_reporting : false,
 #if($urlQueries && $urlQueries!="")	startingUrl : 'cat[]=$urlQueries', #end

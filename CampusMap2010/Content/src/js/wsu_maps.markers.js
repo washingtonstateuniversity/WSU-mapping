@@ -111,7 +111,11 @@
 					];
 					//window._d(title);
 					icon = ( !window._defined(marker_obj.style.icon) || marker_obj.style.icon === "null" ? WSU_MAP.state.siteroot+"public/markerSVG.castle?idx=" : marker_obj.style.icon );
-		
+					if(window.map_view.alias!=="wsu-home"){
+						titles_to_mark = [
+							"WSU Pullman",
+						];
+					}
 					if(titles_to_mark.indexOf(title)> -1){	
 						icon =	WSU_MAP.state.siteroot+"public/coug_marker.castle";
 						WSU_MAP.markers.defaults.width=45;

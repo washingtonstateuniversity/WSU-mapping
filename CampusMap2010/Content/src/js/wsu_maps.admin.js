@@ -10,7 +10,7 @@ var image_count=image_count||-1;
 				$(document).ready(function(){
 					WSU_MAP.admin.tmp_ini();
 					WSU_MAP.admin.make_dataTables();
-					
+					WSU_MAP.admin.lists.ini();
 					var ed=ed||false;
 					if($('.admin.view._editor').length){
 						WSU_MAP.admin.view.load_editor();
@@ -319,7 +319,8 @@ var image_count=image_count||-1;
 				var targ = $(this);
 				WSU_MAP.util.confirmation_message("Are you sure you want send this item to the trashbin?",{
 					"yes":function(){
-						window.location=targ.attr("href");
+						var query = window.location.search.slice(1);
+						window.location=targ.attr("href")+"&pos&"+query;
 					},
 					"no":function(){}
 				});
