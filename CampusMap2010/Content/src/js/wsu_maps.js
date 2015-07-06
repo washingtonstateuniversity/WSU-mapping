@@ -219,7 +219,7 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.places.reloadPlaces();
 				WSU_MAP.state.map_jObj.on('wsu_maps:shapes_reloaded',function(){
 					window.setTimeout(function(){
-					WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
+						WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
 					},500);
 				});	
 			}
