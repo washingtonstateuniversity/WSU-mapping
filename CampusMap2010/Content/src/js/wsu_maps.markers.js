@@ -151,6 +151,9 @@
 				
 				
 				var override = window._defined(WSU_MAP.state.marker_json_style_override) && WSU_MAP.state.marker_json_style_override!==false && WSU_MAP.state.marker_json_style_override!=="";
+				if( override && window._defined(WSU_MAP.state.marker_json_style_override.general) ){
+					marker_style = $.extend(true,marker_obj.style,WSU_MAP.state.marker_json_style_override.general);
+				}
 				if( override && window._defined(WSU_MAP.state.marker_json_style_override[id]) ){
 					marker_style = $.extend(true,marker_obj.style,WSU_MAP.state.marker_json_style_override[id]);
 				}
