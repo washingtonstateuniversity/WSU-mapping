@@ -78,6 +78,13 @@
 									#set($i=$i+1)
 								#end
 							</select>
+							
+							<label for="name">Marker Json Style override</label><br/>	
+							<textarea name="view.marker_json_style_override" style="min-height:500px;">$!{view.marker_json_style_override}</textarea>
+							<p>Note that if you put anything in here, it'll be used.  Nothing will be built, and defaults will not load.  You will have a pain jane google map, if it doens't error itself.</p>
+							
+							
+							
 						</div>
 					</div>
 				</fieldset>

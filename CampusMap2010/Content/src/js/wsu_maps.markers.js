@@ -128,27 +128,34 @@
 				marker_obj.marker_position = marker_obj.position;
 				var zIndex = WSU_MAP.markers.get_lat_zIndex(marker_obj.marker_position.latitude);
 				var marker_style = $.extend(marker_obj.style,{
-						'position': new google.maps.LatLng(marker_obj.marker_position.latitude, marker_obj.marker_position.longitude),
-						'z-index':zIndex,
-						'zFrezze':zIndex,
-						'title':'',//marker_obj.title,//why? cause we do our own tool tips
-						'optimized':false,
-						icon:{
-							/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
-							width:WSU_MAP.markers.defaults.width,
-							height:WSU_MAP.markers.defaults.height,
-							url : icon,
-							scaledSize: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
-							size: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
-							origin: new google.maps.Point(0,0), // origin
-							anchor: new google.maps.Point((WSU_MAP.markers.defaults.width*0.5), WSU_MAP.markers.defaults.height), // anchor
-							original_scaledSize: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
-							original_size: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
-							original_origin: new google.maps.Point(0,0), // origin
-							original_anchor: new google.maps.Point((WSU_MAP.markers.defaults.width*0.5), WSU_MAP.markers.defaults.height) // anchor
-						}
-					});
-	
+					'position': new google.maps.LatLng(marker_obj.marker_position.latitude, marker_obj.marker_position.longitude),
+					'z-index':zIndex,
+					'zFrezze':zIndex,
+					'title':'',//marker_obj.title,//why? cause we do our own tool tips
+					'optimized':false,
+					icon:{
+						/* note that this is tmp.. defaults. should be used and the rest of this should be over writable */
+						width:WSU_MAP.markers.defaults.width,
+						height:WSU_MAP.markers.defaults.height,
+						url : icon,
+						scaledSize: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
+						size: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
+						origin: new google.maps.Point(0,0), // origin
+						anchor: new google.maps.Point((WSU_MAP.markers.defaults.width*0.5), WSU_MAP.markers.defaults.height), // anchor
+						original_scaledSize: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
+						original_size: new google.maps.Size(WSU_MAP.markers.defaults.width,WSU_MAP.markers.defaults.height),
+						original_origin: new google.maps.Point(0,0), // origin
+						original_anchor: new google.maps.Point((WSU_MAP.markers.defaults.width*0.5), WSU_MAP.markers.defaults.height) // anchor
+					}
+				});
+				
+				
+				var override = window._defined(WSU_MAP.state.marker_json_style_override) && WSU_MAP.state.marker_json_style_override!==false && WSU_MAP.state.marker_json_style_override!=="";
+				if( override && window._defined(WSU_MAP.state.marker_json_style_override[id]) ){
+					marker_style = $.extend(true,marker_obj.style,WSU_MAP.state.marker_json_style_override[id]);
+				}
+				
+				
 				jObj.gmap('addMarker', marker_style,function(ops,made_marker){
 					
 					
