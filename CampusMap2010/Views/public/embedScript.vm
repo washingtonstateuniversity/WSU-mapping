@@ -66,6 +66,8 @@ var map_view =  {
 		"center" : "$map.getLat(),$map.getLong()"
 	},
 	json_style_override : #if(${map.json_style_override}) ${map.json_style_override} #else false #end,
+	marker_json_style_override : #if(${map.marker_json_style_override}) ${map.marker_json_style_override} #else false #end,
+	shape_json_style_override : #if(${map.shape_json_style_override}) ${map.shape_json_style_override} #else false #end,
 #if($!map.places)
 	embeded_place_ids : "${places.Replace(", 0","").Replace(" 0","")}",
 #end
