@@ -59,6 +59,12 @@ namespace campusMap.Models {
         [Property]
         virtual public string json_style_override { get; set; }
 
+        [Property]
+        virtual public string marker_json_style_override { get; set; }
+        
+        [Property]
+        virtual public string shape_json_style_override { get; set; }
+
         private IList<users> _authors = new List<users>();
         [HasAndBelongsToMany(typeof(users), Lazy = true, BatchSize = 30, Table = "authors_to_view", ColumnKey = "view_id", ColumnRef = "author_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
         virtual public IList<users> authors {

@@ -29,6 +29,12 @@ if exists (select * from dbo.sysobjects where id = object_id(N'geometrics_to_geo
 	ALTER TABLE map_views
 		ADD json_style_override NVARCHAR(MAX) null
 
+	ALTER TABLE map_views
+		ADD marker_json_style_override NVARCHAR(MAX) null
+
+	ALTER TABLE map_views
+		ADD shape_json_style_override NVARCHAR(MAX) null
+
 	ALTER TABLE place
 		ADD zip_code INT null
 

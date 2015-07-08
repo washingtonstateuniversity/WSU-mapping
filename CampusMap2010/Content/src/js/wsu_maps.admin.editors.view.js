@@ -53,8 +53,8 @@
 						if(sortList.length>0){
 							$.each(sortList,function(idx,item){
 								$(item).nestedSortable("refresh");
-								var pane_id = $(item).attr('id');
-								WSU_MAP.state.api[pane_id].reinitialise();
+								//var pane_id = $(item).attr('id');
+								//WSU_MAP.state.api[pane_id].reinitialise();
 							});
 						}
 					}
@@ -417,14 +417,14 @@
 					});
 				});
 		
-				var settings = {
+				/*var settings = {
 					verticalDragMinHeight: 50
 					//showArrows: true
-				};
+				};*/
 				$.each($('.listPicker ol.sortable'),function(){
-					var pane = $(this).closest('.listPicker');
+					//var pane = $(this).closest('.listPicker');
 					var pane_id = $(this).attr('id');
-					pane.bind( 'jsp-scroll-y',
+					/*pane.bind( 'jsp-scroll-y',
 						function(event, scrollPositionY, isAtTop, isAtBottom){		
 							pane.mousewheel(function(event,delta){ 
 								if (delta > 0) { 
@@ -439,7 +439,7 @@
 							});
 						}
 					).jScrollPane(settings);
-					WSU_MAP.state.api[pane_id] = pane.data('jsp');
+					WSU_MAP.state.api[pane_id] = pane.data('jsp');*/
 			
 					WSU_MAP.admin.editors.view.createDeleteRow();
 			
@@ -479,7 +479,7 @@
 						sortList.nestedSortable("refresh");
 						//WSU_MAP.clean_map();
 						//$('.jspContainer').css('height','auto');
-						WSU_MAP.state.api[pane_id].reinitialise();
+						//WSU_MAP.state.api[pane_id].reinitialise();
 						WSU_MAP.shapes.reloadShapes();
 						WSU_MAP.places.reloadPlaces();
 						WSU_MAP.admin.editors.view.createDeleteRow();
