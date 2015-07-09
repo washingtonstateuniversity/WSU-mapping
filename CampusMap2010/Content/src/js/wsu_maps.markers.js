@@ -149,13 +149,30 @@
 					}
 				});
 				
-				
+				/*
+					Override marker styles
+				*/
 				var override = window._defined(WSU_MAP.state.marker_json_style_override) && WSU_MAP.state.marker_json_style_override!==false && WSU_MAP.state.marker_json_style_override!=="";
+				var custom_url = false;
 				if( override && window._defined(WSU_MAP.state.marker_json_style_override.general) ){
-					marker_style = $.extend(true,marker_obj.style,WSU_MAP.state.marker_json_style_override.general);
+					var gen = WSU_MAP.state.marker_json_style_override.general;
+					if( window._defined(gen.icon) && window._defined(gen.icon.url) ){
+						custom_url = $.runTemplate( gen.icon.url , { site_root : WSU_MAP.state.siteroot } );	
+					}
+					marker_style = $.extend( true, marker_obj.style, gen );
+					if( custom_url !== false ){
+						marker_style.icon.url = custom_url;
+					}
 				}
 				if( override && window._defined(WSU_MAP.state.marker_json_style_override[id]) ){
-					marker_style = $.extend(true,marker_obj.style,WSU_MAP.state.marker_json_style_override[id]);
+					var style = WSU_MAP.state.marker_json_style_override[id];
+					if( window._defined(style.icon) && window._defined(style.icon.url) ){
+						custom_url = $.runTemplate( style.icon.url , { site_root : WSU_MAP.state.siteroot } );	
+					}
+					marker_style = $.extend( true, marker_obj.style, style );
+					if( custom_url !== false ){
+						marker_style.icon.url = custom_url;
+					}
 				}
 				
 				
