@@ -2,7 +2,7 @@
 		
 		
 		
-		<div class="row halves equalize at-intermediate-full-width at-small-full-width">
+		<div class="row halves  at-intermediate-full-width at-small-full-width"><!-- equalize -->
 			<div class="column one padless">
 				<fieldset role="place">
 					<legend>Places Used</legend>
@@ -68,7 +68,12 @@
 							
 							
 							
-							<br/><strong>force marker style:</strong>
+							
+							
+							
+						</div>
+					</div>
+					<br/><strong>force marker style:</strong>
 							<select name="view.forced_marker_style" id="forced_marker_style">
 								<option class="geometric" value="" #if($!view.forced_marker_style) selected="selected" #end>Passthru (none)</option>
 								#set($i=0)
@@ -81,12 +86,8 @@
 							
 							<label for="name">Marker Json Style override</label><br/>	
 							<textarea name="view.marker_json_style_override" style="min-height:500px;">$!{view.marker_json_style_override}</textarea>
-							<p>Note that if you put anything in here, it'll be used.  Nothing will be built, and defaults will not load.  You will have a pain jane google map, if it doens't error itself.</p>
+							<p>Note that if you put anything in here, it'll be used.  Nothing will be built, and defaults will not load.  In other words the marker may not show up at all if there is an error in this</p>
 							
-							
-							
-						</div>
-					</div>
 				</fieldset>
 			</div>
 			<div class="column two padless">
@@ -136,7 +137,10 @@
 								<br/>
 							</span>
 							
-							<br/><strong>force shape style:</strong>
+							
+							
+						</div>
+						<br/><strong>Force shape style:</strong>
 							<select name="view.forced_shapes_style" id="forced_shapes_style">
 								<option class="geometric" value="" #if($!view.forced_shapes_style) selected="selected" #end>Passthru (none)</option>
 								#set($i=0)
@@ -155,7 +159,10 @@
 								#end
 								#if($j>0)</optgroup>#end
 							</select>
-						</div>
+							
+							<label for="name">Shape Json Style override</label><br/>	
+							<textarea name="view.shape_json_style_override" style="min-height:500px;">$!{view.shape_json_style_override}</textarea>
+							<p>Note that if you put anything in here, it'll be used.  Nothing will be built, and defaults will not load.  In other words the shape may not show up at all if there is an error in this.</p>
 				</fieldset>  
 			</div>
 		</div>
