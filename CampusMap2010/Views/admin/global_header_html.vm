@@ -101,6 +101,9 @@ $Controller.getView()
 		"center" : "$map.getLat(),$map.getLong()"
 	},
 	json_style_override : #if(${map.json_style_override}) ${map.json_style_override} #else false #end,
+					
+	marker_json_style_override : #if(${map.marker_json_style_override}) ${map.marker_json_style_override} #else false #end,
+	shape_json_style_override : #if(${map.shape_json_style_override}) ${map.shape_json_style_override} #else false #end,
 #if($!map.places)
 #set($c=0)
 #capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
@@ -124,7 +127,14 @@ $Controller.getView()
 }
 #end
 
-
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
+<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.1.10.x.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
+<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
 
 <script type="text/javascript">
 var siteroot = '$site.Trim()';
@@ -139,14 +149,7 @@ var map_view = $options_block;
 #*$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")*#
 $scriptsService.Css("~/Content/${jsfolder.Trim()}/css/admin.styles.css",true)
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&amp;sensor=false"></script>
-<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery_UI_addons/jquery-ui-combobox.1.10.x.js"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.lazyload.js"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jqueryFileUpload.js"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jQuery.autoUpdate.js"></script>
-<script type="text/javascript" src="https://images.wsu.edu/javascripts/jquery.defaultvalue.js"></script>
+
 
 <!--<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>-->
 

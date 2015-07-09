@@ -98,7 +98,7 @@
 				var idx = i+1;
 				var icon = null;
 				//this is just for tmp reasons.. will come back in a day or so to fix.. mark it 3-17-15 my b day so I'll remeber right.. right? .. sure.. 
-				if(WSU_MAP.state.inview){
+				if(WSU_MAP.state.inview || ( window._defined(WSU_MAP.admin) && WSU_MAP.admin.action === "view_editor" ) ){
 					WSU_MAP.markers.defaults.width=15;
 					WSU_MAP.markers.defaults.height=25;
 					var title = marker_obj.labels.title;
