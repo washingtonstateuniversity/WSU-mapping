@@ -6,6 +6,7 @@ var image_count=image_count||-1;
 	WSU_MAP.is_frontend=false;
 	$.extend( WSU_MAP, {
 		admin : {
+			action:null,
 			ini:function(){
 				$(document).ready(function(){
 					WSU_MAP.admin.tmp_ini();

@@ -60,6 +60,7 @@ var i=i||-1;
 				
 			},
 			load_editor:function () {
+				WSU_MAP.admin.action="place_editor";
 				WSU_MAP.state.map_jObj=$('#place_drawing_map');
 				var lat = $('#Lat').val();
 				var lng = $('#Long').val();	

@@ -37,6 +37,7 @@
 				loaded_options:false
 			},
 			load_editor:function () {
+				WSU_MAP.admin.action="view_editor";
 				//WSU_MAP.state.api = null;
 				WSU_MAP.state.map_jObj=$('#place_drawing_map');
 				$("#side_tabs").tabs({
@@ -173,6 +174,8 @@
 					//alert(dump(options));
 					//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 				}
+				WSU_MAP.state.marker_json_style_override=$('[name*="marker_json_style_override"]').val();
+				WSU_MAP.state.shape_json_style_override=$('[name*="shape_json_style_override"]').val();
 				WSU_MAP.admin.view.status.loaded_options=options;
 				//console.log(options);
 				return options;
@@ -183,6 +186,8 @@
 				var options = WSU_MAP.admin.view.create_ui_mapobj();
 				if(!new_map){
 					WSU_MAP.state.map_jObj.gmap('setOptions',options);
+					WSU_MAP.shapes.reloadShapes();
+					WSU_MAP.places.reloadPlaces();
 				}else{
 					WSU_MAP.state.map_jObj.gmap(options).bind('init', function () {
 						WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');

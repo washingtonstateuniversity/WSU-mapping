@@ -135,6 +135,7 @@
 				WSU_MAP.admin.set_default_shape(type,_op);
 			},
 			load_editor:function (){
+				WSU_MAP.admin.action="style_editor";
 				WSU_MAP.state.map_jObj = $('#style_map');
 				WSU_MAP.state.map_jObj.gmap({
 					'center': WSU_MAP.state.campus_latlng_str,

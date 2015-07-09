@@ -42,7 +42,7 @@
 	<h5>Encoded:</h5>\
 	<textarea name='child_geos[<%this.tab_count%>].encoded' class='ui-widget ui-widget-content ui-corner-all' style='width:100%;height:50px;' cols='80' rows='5'><%this.encoded%></textarea>",
 			load_editor:function () {
-				
+				WSU_MAP.admin.action="shape_editor";
 				WSU_MAP.state.map_jObj=$('#geometrics_drawing_map');
 				$("#side_tabs").tabs({
 					active:$("#side_tabs .ui-tabs-nav li").is('.ui-state-active')?$("#side_tabs .ui-tabs-nav li").index($(".ui-state-active")):false,
