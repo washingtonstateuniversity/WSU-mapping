@@ -84,10 +84,10 @@ var map_scripts = [];
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
 
 if( map_view.map_view_scripts_block === false ){
-	if ( typeof( $ ) === "undefined" || typeof(jQuery) === "undefined" ) {
+	if ( typeof(jQuery) === "undefined" ) {
 		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
 	}
-	if ( typeof( $['ui'] ) === "undefined" || typeof(jQuery.ui) === "undefined" ) {
+	if ( typeof( jQuery['ui'] ) === "undefined" || typeof(jQuery.ui) === "undefined" ) {
 		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js');
 	}
 	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');

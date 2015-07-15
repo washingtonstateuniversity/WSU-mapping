@@ -146,7 +146,7 @@
 				};
 				//var options = {'center': (!window._defined(lat) || lat=='')? WSU_MAP.state.campus_latlng_str : new google.maps.LatLng(lat,lng) , 'zoom':15};
 				if( WSU_MAP.admin.view.loaded_options !==false || ( $('#runningOptions').html()==="{}"||$('#runningOptions').html()==="" )){
-					$.each($('select,input,textarea','#tabs_Options'),function(){//i,v){
+					$.each($('select,input,textarea','.mainAreaTabs'),function(){//i,v){
 						var tmpVal = $(this).val();
 						var tmp = {};
 						if(tmpVal!==""){
@@ -174,8 +174,15 @@
 					//alert(dump(options));
 					//$(this).val().replace(/[^a-zA-Z0-9-_]/g, '-'); 
 				}
-				WSU_MAP.state.marker_json_style_override=$('[name*="marker_json_style_override"]').val();
-				WSU_MAP.state.shape_json_style_override=$('[name*="shape_json_style_override"]').val();
+				/*var marker_style = $('[name*="marker_json_style_override"]').val();
+				WSU_MAP.state.marker_json_style_override= marker_style !== "" ? $.parseJSON( $('[name*="marker_json_style_override"]').val() ) : "";
+				
+				var shape_style = $('[name*="shape_json_style_override"]').val();
+				WSU_MAP.state.shape_json_style_override= shape_style !== "" ? $.parseJSON( $('[name*="shape_json_style_override"]').val() ) : "";*/
+				
+				WSU_MAP.state.marker_json_style_override = $('[name*="marker_json_style_override"]').val();
+				WSU_MAP.state.shape_json_style_override = $('[name*="shape_json_style_override"]').val();
+				
 				WSU_MAP.admin.view.status.loaded_options=options;
 				//console.log(options);
 				return options;
@@ -195,19 +202,19 @@
 						//if(lat!='')add_place_point(lat,lng);
 						//autoUpdate($("#editor_form"),{before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
 						//$("#editor_form").autoUpdate({before:function(){tinyMCE.triggerSave();},changed:function(){infoUpdate();}});
-						google.maps.event.addListener(WSU_MAP.state.map_inst, 'drag',function(){
+						google.maps.event.addListener( WSU_MAP.state.map_inst, 'drag', function(){
 							var center = WSU_MAP.state.map_jObj.gmap('get_map_center');
 							//WSU_MAP.state.map_jObj.gmap('setOptions',{center},WSU_MAP.state.map_inst);
 							$('#Lat').val( center.lat() );//var lat = 
 							$('#Long').val( center.lng() );//var lng = 
 						});
-						google.maps.event.addListener(WSU_MAP.state.map_inst, 'zoom_changed',function(){
+						google.maps.event.addListener( WSU_MAP.state.map_inst, 'zoom_changed', function(){
 							var zoomLevel = WSU_MAP.state.map_inst.getZoom();
 							$('#zoom').val( zoomLevel );//var zoom = 		
 						});
 						WSU_MAP.shapes.reloadShapes();
 						WSU_MAP.places.reloadPlaces();
-						$('select,input,textarea','#tabs_Options').on('change',function(){
+						$( 'select,input,textarea','.mainAreaTabs' ).on( 'change', function(){
 							var targ = $(this);
 							var t = setTimeout(function(){
 								window.clearTimeout(t);
