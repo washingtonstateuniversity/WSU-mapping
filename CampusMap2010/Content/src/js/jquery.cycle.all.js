@@ -1,4 +1,4 @@
-if(typeof $.fn.cycle === "undefined"){
+if(typeof jQuery.fn.cycle === "undefined"){
 /*!
 * jQuery Cycle2; version: 2.1.6 build: 20141007
 * http://jquery.malsup.com/cycle2/
