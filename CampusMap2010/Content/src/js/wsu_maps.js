@@ -238,10 +238,12 @@ if (!Array.prototype.indexOf) {
 			jObj.gmap('clear','markers');
 			jObj.gmap('clear','overlays');
 			$.each(WSU_MAP.state.ib,function(i){
-				if( window._defined( WSU_MAP.state.ib[i] ) && WSU_MAP.state.ib[i].opened === true ){
-					WSU_MAP.state.ib[i].close();
+				if( window._defined( WSU_MAP.state.ib[i] )){
+					if(WSU_MAP.state.ib[i].opened === true ){
+						WSU_MAP.state.ib[i].close();
+					}
+					WSU_MAP.state.ib[i].onRemove();
 				}
-				WSU_MAP.state.ib[i].onRemove();
 			});
 			WSU_MAP.state.ib=[];
 			WSU_MAP.state.ibh=[];
@@ -251,8 +253,7 @@ if (!Array.prototype.indexOf) {
 			if(window._defined(WSU_MAP.nav)){
 				WSU_MAP.nav.reset_Navscrollbar();
 			}
-			
-
+			//@todo abstract this
 			$('#main_nav').find('.active').removeClass('active');
 			WSU_MAP.state.map_jObj.find('input[type="text"]').val('');
 			if($('#directionsTo').is(':visible')){
