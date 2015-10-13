@@ -2,9 +2,9 @@
 
 #end
 <div id="container" class="fluid">
-	<h2>Everything was good, then this happened,</h2>
+	<h2>Everything was good, then this happened:</h2>
 	<h1>Unexpected error</h1>
-	<p>Don't worry though we have a team of coguars already on it and tracking it down.<a href="#" id="show_hide_error"></a></p>
+	<p>Don't worry, we have a team of cougars tracking it down.<a href="#" id="show_hide_error"></a></p>
 	<div style="margin-left:15px;" id="report_area_details"> 
  
         <h3>$exception.GetType().Name</h3>
@@ -36,7 +36,7 @@
         
     </div>
 	<h2>Get Help:</h2>
-	<a href="#" class="errorReporting">Contact suport</a>
+	<a href="#" class="errorReporting">Contact support</a>
 	</br>
 	<img src="/Content/images/error/butch.png" width="451" style="max-width:451px;" height="558" alt="Butch leads the way!" id="butch" class="fluid"/>
 	<a href="#" alt="Washington State University" id="get_back" onClick="window.history.go(-1);">Go back one step.</a>
