@@ -37,7 +37,7 @@ Data: $!data
 
 <h3><span style="color:#860C0E;">Reported on $date</span></h3>
 <h4>Hello $name,</h4>
-<p>We just wanted to take this second to <strong>thank you</strong> again for taking the time to error the mapping issue. This email is to confirm that we have received the report and will be looking into it soon.</p>
+<p>Thank you for taking the time to report an issue with WSU Maps. This email is to confirm that we have received your report and will be addressing it soon.</p>
 
 #else
 
