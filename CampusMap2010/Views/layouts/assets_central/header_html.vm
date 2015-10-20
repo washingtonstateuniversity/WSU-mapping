@@ -18,7 +18,7 @@
         </div>
      </li>-->
      <li>
-         <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank">Report&nbsp;&nbsp;Error</a>
+         <a href="?reportError=&amp;place=0" class="errorReporting" target="_blank">Report Error</a>
      </li>
   </ul>
 </div>
