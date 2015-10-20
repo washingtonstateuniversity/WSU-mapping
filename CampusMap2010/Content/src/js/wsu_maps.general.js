@@ -152,13 +152,13 @@
 					WSU_MAP.util.nullout_event(e);
 					WSU_MAP.util.popup_message({
 						html:'<div id="emailRequest"><form action="../public/emailRequest.castle" method="post">'+
-										'<h1>Custom Map Request</h1><br/>'+
-										'<lable>Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
-										'<lable>Email:<br/><input type="email" value="" required placeholder="Your email address" id="email" name="email"></lable><br/>'+
+										'<h2>Want to make your own map?</h2>'+
+										'<h4>Please provide you email and as much information about your needs.</h4>'+
+										'<lable>Your Name:<br/><input type="text" value="" required placeholder="First and Last" name="name"></lable><br/>'+
+										'<lable>Your Email:<br/><input type="email" value="" required placeholder="Your email address" id="email" name="email"></lable><br/>'+
 										'<lable>Deparment:<br/><select name="Deparments"><option value="">Select your department</option></select></lable><br/>'+
-										'<lable>Custom map discription: <br/>'+
+										'<lable>Notes on your needs: <br/>'+
 										'<textarea required placeholder="Some notes" name="notes"></textarea></lable><br/>'+
-										'<h4>Please provide as much detail as possible when submitting your request. We will contact you soon with an update or any questions.</h4>'+
 										'<br/><input type="Submit" id="requestSubmit" value="Submit"/><br/>'+
 										'<a href="#" id="embedback">&laquo; Back to custom embedding</a>'+
 									'</from></div>',
