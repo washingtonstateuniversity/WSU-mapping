@@ -3,7 +3,7 @@ WSU-mapping
 
 This project is made to controll the mapping system that is using google maps to present places for WSU to users.  View it live here at [map.wsu.edu](http://map.wsu.edu)
 
-![WSU Campus map preview](http://i.imgur.com/Gtyy86y.png "smaple image")
+![WSU Campus map preview](http://i.imgur.com/1rtr0fE.png "smaple image")
 
 ##How to run localy
 This repo doesn't include the `config/properties.config` file which is what is used to set the database connection.  You'll have to create your own.  This will look like 
