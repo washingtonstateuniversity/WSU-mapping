@@ -17,4 +17,13 @@ This repo doesn't include the `config/properties.config` file which is what is u
 </configuration>
 ```
 
+Run `grunt watch` when making any alterations to the CSS or the JS
+
+```bash
+cd CampusMap2010/Content/
+grunt watch
+```
+
+
+
 **NOTE:** if you are deploying changes to the site in production, we use a different `<connectionString>` but the `export.sql` is the same as what you will run locally.
