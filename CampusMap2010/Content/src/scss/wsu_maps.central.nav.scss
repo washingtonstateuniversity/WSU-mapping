@@ -3,7 +3,9 @@
 
 //urls
 $logo_bug: url('//repo.wsu.edu/spine/develop/marks/wsu-signature-vertical.svg');
-
+#binder{
+	max-width:100% !important;
+}
 #spine {
 	left: 0;
 	position: absolute;
