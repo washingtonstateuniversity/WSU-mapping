@@ -4,10 +4,10 @@
 	</nav>
 	<nav id="wsu-global-links" class="spine-global-links">
 		<ul>
-			<li class="zzusis-link"><a href="https://my.wsu.edu/" >Zzusis</a></li>
-			<li class="access-link"><a href="https://oeo.wsu.edu/" >Access</a></li>
-			<li class="policies-link"><a href="https://policies.wsu.edu/" >Policies</a></li>
-			<li class="copyright-link"><a href="https://ucomm.wsu.edu/wsu-copyright-policy/" >&copy;</a></li>
+			<li class="zzusis-link"><a href="https://my.wsu.edu/" target="_blank">myWSU</a></li>
+			<li class="access-link"><a href="https://oeo.wsu.edu/" target="_blank">Access</a></li>
+			<li class="policies-link"><a href="https://policies.wsu.edu/" target="_blank">Policies</a></li>
+			<li class="copyright-link"><a href="https://ucomm.wsu.edu/wsu-copyright-policy/" target="_blank">&copy;</a></li>
 		</ul>
 	</nav>
 </footer>
