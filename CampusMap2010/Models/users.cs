@@ -44,8 +44,8 @@ namespace campusMap.Models {
         [Property]
         virtual public bool active { get; set; }
 
-        [Property]
-        virtual public bool logedin { get; set; }
+        [Property("logedin")]
+        virtual public bool loggedin { get; set; }
 
         private DateTime? lastActive;
         [Property]

@@ -22,7 +22,7 @@
 							}
 							
 							if($("#spine.shelved").length){
-								mHeight = $('.spine-header').outerHeight() + $('#header_bar').outerHeight();
+								//mHeight = $('.spine-header').outerHeight() + $('#header_bar').outerHeight();
 							}
 							var map_obj = $('.central_layout.public.central #centralmap');
 	

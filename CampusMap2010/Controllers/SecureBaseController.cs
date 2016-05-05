@@ -20,7 +20,7 @@ namespace campusMap.Controllers {
             foreach (users author in author_list) {
                 if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper()) { temp = author; }
             }
-            temp.logedin = false;
+            temp.loggedin = false;
             temp.Save();
             HttpContext.Session.Abandon();
             HttpContext.Response.Redirect("~/admin", false);

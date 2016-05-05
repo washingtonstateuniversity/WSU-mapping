@@ -158,7 +158,7 @@ namespace campusMap.Controllers{
 
                 PropertyBag["user"] = user;
                 IList<users> activeUser = new List<users>();
-                users[] _authors = ActiveRecordBase<users>.FindAllByProperty("logedin", true);
+                users[] _authors = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
                 foreach (users _author in _authors)
                 {
                     if (_author != null && _author.LastActive > DateTime.Today.AddHours(-1))

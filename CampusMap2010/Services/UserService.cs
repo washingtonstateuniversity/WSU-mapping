@@ -40,9 +40,9 @@ namespace campusMap.Services {
                 if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper()) { temp = author; }
             }
             if (temp != null) {
-                temp.logedin = true;
+                temp.loggedin = true;
                 temp.Save();
-                return temp.logedin;
+                return temp.loggedin;
             }
             return false;
         }
@@ -56,9 +56,9 @@ namespace campusMap.Services {
                     if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper()) { temp = author; }
                 }
                 if (temp != null) {
-                    temp.logedin = false;
+                    temp.loggedin = false;
                     temp.Save();
-                    return temp.logedin;
+                    return temp.loggedin;
                 }
                 return true;
             }
@@ -66,17 +66,17 @@ namespace campusMap.Services {
         }
 
 
-        public static users[] getLogedIn() {
-            users[] users = ActiveRecordBase<users>.FindAllByProperty("logedin", true);
+        public static users[] getLoggedIn() {
+            users[] users = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
             return users;
         }
 
-        public static Boolean isLogedIn() {
-            return isLogedIn(null);
+        public static Boolean isLoggedIn() {
+            return isLoggedIn(null);
         }
 
-        public static Boolean isLogedIn(string Nid) {
-            users[] author_list = getLogedIn();
+        public static Boolean isLoggedIn(string Nid) {
+            users[] author_list = getLoggedIn();
             bool temp = false;
             if (String.IsNullOrWhiteSpace(Nid)) Nid = getNid();
             if (!String.IsNullOrWhiteSpace(Nid)) {

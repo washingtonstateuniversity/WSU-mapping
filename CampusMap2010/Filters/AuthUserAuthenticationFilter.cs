@@ -46,7 +46,7 @@ namespace campusMap.Filters
                 users currentUser = UserService.getUserFull();
                 if (currentUser != null) {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
-                    you.logedin = true;
+                    you.loggedin = true;
                     you.LastActive = DateTime.Now;
                     ActiveRecordMediator<users>.Update(you);
                     ActiveRecordMediator<users>.Save(you);
@@ -82,13 +82,13 @@ namespace campusMap.Filters
                 System.Threading.Thread.CurrentPrincipal = user;
             }
 
-            if (UserService.isLogedIn())
+            if (UserService.isLoggedIn())
             {
                 users currentUser = UserService.getUserFull();
                 if (currentUser != null)
                 {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
-                    you.logedin = true;
+                    you.loggedin = true;
                     you.LastActive = DateTime.Now;
                     ActiveRecordMediator<users>.Update(you);
                     ActiveRecordMediator<users>.Save(you);

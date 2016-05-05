@@ -100,7 +100,7 @@ namespace campusMap.Controllers {
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = UserService.getLogedIn();
+            PropertyBag["loggedin"] = UserService.getLoggedIn();
 
 
             int typesPaging = 0;
