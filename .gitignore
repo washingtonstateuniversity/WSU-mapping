@@ -18,6 +18,8 @@ Ankh.NoLoad
 /**/properties.config
 
 CampusMap2010/log.txt*
+CampusMap2010/log*.txt
+CampusMap2010/node_modules/**/
 /CampusMap2010/cache/**/*.ext
 /cache/**/*.css
 /cache/**/*.js

@@ -67,7 +67,7 @@ var base=base||{};
 				}
 				WSU_MAP.views.set_inital_options(WSU_MAP.state.map_jObj.map_options);
 				//var map = map_ele_obj.gmap("get","map");
-				//WSU_MAP.ini_GAtracking('UA-22127038-5');
+				WSU_MAP.ini_GAtracking('UA-17815664-13');
 				WSU_MAP.poi_setup();
 				if($('.mobile').length){
 					WSU_MAP.geoLocate();

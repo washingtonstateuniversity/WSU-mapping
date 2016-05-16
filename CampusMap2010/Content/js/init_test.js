@@ -62,7 +62,7 @@ function ini_map_view(map_ele_obj,callback){
 		
 		map_ele_obj.gmap(map_op).bind('init', function() { 
 			var map = map_ele_obj.gmap("get","map");
-			ini_GAtracking('UA-22127038-5');
+			ini_GAtracking('UA-17815664-13');
 			poi_setup($('#centralMap'));
 			
 			

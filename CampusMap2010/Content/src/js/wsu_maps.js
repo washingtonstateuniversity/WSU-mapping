@@ -117,7 +117,7 @@ if (!Array.prototype.indexOf) {
 				
 				var latLng = map_op.center.split(',');
 				$.wsu_maps.state.center = new google.maps.LatLng(latLng[0],latLng[1]);
-				//WSU_MAP.ini_GAtracking('UA-22127038-5');
+				WSU_MAP.ini_GAtracking('UA-17815664-13');
 				WSU_MAP.poi_setup();
 				WSU_MAP.controlls.setup_map_type_controlls();
 				if(window._defined(data)){

@@ -13,7 +13,7 @@
 #*
 $scriptsService.Js("~/content/${jsfolder.Trim()}/js/maps.wsu.edu.js")
 *#
-<script type="text/javascript" src="${siteroot}/content/${jsfolder.Trim()}/js/maps.wsu.edu.js"></script>
+<script type="text/javascript" src="${siteroot}/content/${jsfolder.Trim()}/js/maps.wsu.edu.js"></script> 
 
 
 

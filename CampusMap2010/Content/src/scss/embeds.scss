@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 #hide{
 	position:absolute;
 	top:-999em;
@@ -8,7 +8,7 @@
 	width:0px;
 }
 $fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
-@import "#{$fontURL}/css/font-awesome.min.css";
+@import url("#{$fontURL}/css/font-awesome.min.css");
 
 @font-face{
 	font-family:'FontAwesome';

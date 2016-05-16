@@ -1,0 +1,25 @@
+{
+  "name": "inline",
+  "version": "0.0.1",
+  "build_version": "1",
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "file": "spine",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-autoprefixer": "~2.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.8.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch ": "~0.6.1",
+    "grunt-env": "~0.4.1",
+    "grunt-include-replace": "~1.2.0"
+  }
+}

@@ -40,21 +40,21 @@
 #end
 #capturefor(site_base)
 	#if($Controller.isLocal()==false)
-		//beta.maps.wsu.edu/
+		//map.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot.Replace('http:','')
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl().Replace('http:','')
 		#else
-			//beta.maps.wsu.edu/
+			//map.wsu.edu/
 		#end
 	#end
 #end
 
 
 #capturefor(jsfolder)
-#if($Controller.isLocal()==false) dis #else build #end
+#if($Controller.isLocal()==false) build #else dis #end
 #end
 
 #capturefor(view)

@@ -701,6 +701,6 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\ru\Castle.Components.Validato
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\sv\Castle.Components.Validator.resources.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\pt-BR\Castle.MonoRail.Framework.resources.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.dll
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.pdb
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache

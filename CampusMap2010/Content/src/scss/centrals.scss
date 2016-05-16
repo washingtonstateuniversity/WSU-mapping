@@ -1,9 +1,9 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 @import 'wsu_maps.reset';
 @import 'wsu_maps.central.global';
 $fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
-@import "#{$fontURL}/css/font-awesome.min.css";
+@import url("#{$fontURL}/css/font-awesome.min.css");
 
 @font-face{
 	font-family:'FontAwesome';
@@ -16,6 +16,7 @@ $fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
 	font-weight:normal;
 	font-style:normal
 }
+
 #campusmap{ //the NS should be a var.. 
 	&{
 		@import 'central_main';
