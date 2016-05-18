@@ -54,7 +54,7 @@
 
 
 #capturefor(jsfolder)
-#if($Controller.isLocal()==false) build #else dis #end
+#if($Controller.isLocal()==false) dis #else dis #end
 #end
 
 #capturefor(view)
