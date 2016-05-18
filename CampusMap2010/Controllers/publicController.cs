@@ -718,7 +718,7 @@ namespace campusMap.Controllers {
 
             // Create and return new Hashtable.
             Hashtable emails = new Hashtable();
-            emails.Add("jeremy.bass@wsu.edu", "Jeremy Bass");
+            emails.Add("nathan_owen@wsu.edu", "Nathan Owen");
             if (!String.IsNullOrWhiteSpace(email) && !String.IsNullOrWhiteSpace(name)) {
                 emails.Add(email, name);
             }
@@ -736,7 +736,7 @@ namespace campusMap.Controllers {
                 if ((issueType == "local" || issueType == "content") && place_id > 0) {
                     place place = ActiveRecordBase<place>.Find(place_id);
                     foreach (users auth in place.authors) {
-                        email_mass.To.Add(new MailAddress(auth.email, auth.name));
+                       // email_mass.To.Add(new MailAddress(auth.email, auth.name));
                     }
                 }
 
@@ -771,11 +771,11 @@ namespace campusMap.Controllers {
             PropertyBag["issueType"] = issueType;
 
             foreach (users user in users) {
-                if (user.nid == "jeremy.bass") {
+                if (user.nid == "nathan_owen") {
                     System.Net.Mail.MailMessage email_mass = RenderMailMessage("access_request", null, PropertyBag);
                     email_mass.IsBodyHtml = true;
                     email_mass.From = new MailAddress("noreply@wsu.edu");
-                    email_mass.To.Add(new MailAddress("jeremy.bass@wsu.edu", "Jeremy Bass"));
+                    email_mass.To.Add(new MailAddress("nathan_owen@wsu.edu", "Nathan Owen"));
                     email_mass.Subject = "Access to Map request: " + issueType;
                     if (!String.IsNullOrWhiteSpace(user.email)) {
                         try {
