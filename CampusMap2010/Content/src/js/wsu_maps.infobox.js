@@ -590,9 +590,9 @@
 					var iw_ui_nav_height = full_screen_object.find('.ui-tabs-nav').height();
 					var iw_map_clearence = 150;
 					var head_height = header_height + header_bar_height;
-					WSU_MAP.responsive.resizeBg( full_screen_object, head_height + iw_map_clearence );
+					//WSU_MAP.responsive.resizeBg( full_screen_object, head_height + iw_map_clearence );
 
-					WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), head_height + iw_ui_nav_height  + iw_map_clearence);
+					//WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), head_height + iw_ui_nav_height  + iw_map_clearence);
 					
 					var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
 					$(window).on('resize',function(){
