@@ -100,6 +100,8 @@ namespace campusMap.Controllers {
             return stripNonSenseContent(inputString, false);
         }
         public string stripNonSenseContent(string inputString, bool stripComments) {
+            if (HttpContext.Request.IsLocal)
+                return inputString;
             String output = Regex.Replace(inputString, @"<p>\s{0,}</p>", string.Empty);
             output = Regex.Replace(output, @"\t{1,}", " ");
             output = output.Replace('\t', ' ');

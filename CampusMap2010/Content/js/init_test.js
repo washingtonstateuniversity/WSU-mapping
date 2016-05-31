@@ -2067,7 +2067,7 @@ function setup(jObj){
 		setup_mapsearch($('#centralMap'));
 		/* EOF Search autocomplete */
 	}
-	if($('.veiw_base_layout.public').length){
+	if($('.view_base_layout.public').length){
 		function reloadPlaces(){
 			var url=siteroot+"public/getPlaceJson_byIds.castle";
 			if(typeof(ids)!="undefined"){

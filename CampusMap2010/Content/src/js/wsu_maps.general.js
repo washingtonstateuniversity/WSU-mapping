@@ -14,14 +14,17 @@
 			loadData:function (data,markerCallback){
 				window._d("loading data");
 				//var jObj = WSU_MAP.state.map_jObj;
-				if( window._defined(data.shapes) && !$.isEmptyObject(data.shapes)){
+				if (window._defined(data.shapes) && !$.isEmptyObject(data.shapes)) {
+				    window._d("loading shapes");
 					$.each( data.shapes, function(i, shape) {
 						if( window._defined(shape) && !$.isEmptyObject(shape)){
 							WSU_MAP.shapes.addShapeToMap(i,shape);
 						}
 					});
+					window._d("loaded shapes");
 				}
-				if( window._defined(data.markers) &&  !$.isEmptyObject( data.markers )){
+				if (window._defined(data.markers) && !$.isEmptyObject(data.markers)) {
+				    window._d(data.markers);
 					WSU_MAP.state.displayedMarkers=[];
 					//var l = data.markers.length;
 					$.each( data.markers, function(idx, marker) {	
@@ -53,7 +56,7 @@
 						WSU_MAP.geoLocate();
 					}
 				}
-				
+				window._d("loaded data");
 				//if($.isFunction(callback))callback();return;
 			},
 			

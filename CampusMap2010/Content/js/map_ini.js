@@ -3,7 +3,7 @@ $(function(){
 	mapInst=$('#centralMap');
 	
 	$(window).resize(function(){
-		if($('.veiw_base_layout.public').length){
+		if($('.view_base_layout.public').length){
 			if(mapInst.width()<=320){
 				$('html').removeClass('narrow');
 				$('html').addClass('mobile');
@@ -32,7 +32,7 @@ $(function(){
 	//$(' [placeholder] ').defaultValue();
 	if(mapInst.length){
 		mapInst.append('<img src="/Content/images/loading.gif" style="position:absolute; top:50%; left:50%;" id="loading"/>');
-		if($('.veiw_base_layout').length){
+		if($('.view_base_layout').length){
 			ini_map_view(mapInst,setup);
 		}else{
 			iniMap("",setup);
@@ -81,7 +81,7 @@ $(function(){
 		mapInst.gmap("destroy",function(ele){
 			mapInst.html('');
 			$('.mapControl').remove(); 
-			if($('.veiw_base_layout').length){
+			if($('.view_base_layout').length){
 				ini_map_view(mapInst,setup);
 			}else{
 				iniMap("",setup);

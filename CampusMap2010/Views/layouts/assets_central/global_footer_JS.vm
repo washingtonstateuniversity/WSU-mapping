@@ -1,5 +1,6 @@
 <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry&amp;sensor=false"></script>-->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?${signed_in}&libraries=${libs}&key=AIzaSyCWtSRIku46hs90ZlYvhdRg7x7fSaKaJF8"></script>
+
 
 <!--<script type="text/javascript" src="https://www.google.com/uds/api?file=uds.js&amp;v=1.0"></script>-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -13,7 +14,46 @@
 #*
 $scriptsService.Js("~/content/${jsfolder.Trim()}/js/maps.wsu.edu.js")
 *#
+#if($controller.isLocal())
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.defaultvalue.js"></script>
+
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.ui.map.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.ui.map.extensions.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.ui.map.overlays.js"></script>
+
+<script type="text/javascript" src="${siteroot}/content/src/js/infobox-1.1.12.js"></script>
+
+<script type="text/javascript" src="${siteroot}/content/src/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/scrollbar/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/scrollbar/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/jPrint.js"></script>
+
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.state.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.defaults.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.lightbox.js"></script>
+
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.util.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.general.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.errors.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.views.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.directions.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.controlls.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.nav.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.listings.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.markers.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.places.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.shapes.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.search.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.infobox.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.responsive.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.frontend.js"></script>
+<script type="text/javascript" src="${siteroot}/content/src/js/wsu_maps.starter.js"></script>
+#else
 <script type="text/javascript" src="${siteroot}/content/${jsfolder.Trim()}/js/maps.wsu.edu.js"></script> 
+#end
 
 
 

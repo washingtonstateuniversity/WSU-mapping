@@ -10,7 +10,7 @@
 			},
 			set_body_resp_state:function(){
 				$(window).resize(function(){
-					if($('.veiw_base_layout.public').length  || WSU_MAP.state.inview ){
+					if($('.view_base_layout.public').length  || WSU_MAP.state.inview ){
 						if(WSU_MAP.state.map_jObj.width()<=320){
 							$('html').removeClass('narrow');
 							$('html').addClass('mobile');

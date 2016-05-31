@@ -46,7 +46,7 @@ var base=base||{};
 			
 			var op_override = WSU_MAP.state.map_jObj.triggerHandler('wsu_maps:loaded_options', [map_op]);
 			if(window._defined(op_override)){	
-				window._d('recived a value for the `wsu_maps:lodaed_options` event');
+				window._d('received a value for the `wsu_maps:loaded_options` event');
 				window._d(op_override);
 				map_op = $.extend(map_op,op_override||{});
 			}
