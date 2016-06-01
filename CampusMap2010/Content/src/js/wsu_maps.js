@@ -110,7 +110,7 @@ if (!Array.prototype.indexOf) {
 				$.extend(map_op,op_override||{});
 			}
 		    //console.info("options", map_op);
-			map_op.styles = null;
+			//map_op.styles = null;
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
 				window._d('initalized the map');
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
