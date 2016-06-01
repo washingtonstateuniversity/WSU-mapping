@@ -96,7 +96,7 @@
 					view_block += "<a href='/media/download.castle?placeid="+marker.id+"&id="+img.id+"' alt='' hidefocus='true' class='orientation_"+img.orientation+"'><span><img src='/media/download.castle?placeid="+marker.id+"&id="+img.id+"&m=constrain&h=190' alt='' class='img-main' /></span></a>";
 				});
 				view_block += "</div></div><a href='#' class='next' hidefocus='true'>Next</a></div><div class='navArea'><ul class='cNav'></ul></div></div>";
-				return view_block;
+ 				return view_block;
 			},
 			build_IW_prime_image:function(marker){
 				var prime_image = "";
@@ -418,15 +418,15 @@
 					});
 				}
 			},
-			init_img_cycler:function(jObj,callbacks){//marker){
-				jObj = jObj || $('body');
+			init_img_cycler: function (jObj, callbacks) {//marker){
+			    jObj = jObj || $('body');
 				var items = jObj.find('.cWrap .items');
 				if(items.find('img').length>1 && window._defined($.fn.cycle)){// && (!window._defined(jObj.has_cycle) || jObj.has_cycle===false) 
 					var currSlide=0;
 					if(items.data('cycle.opts') !== undefined){
 						//items.cycle('destroy');
 					}
-					jObj.has_cycle=true;
+					jObj.has_cycle = true;
 					items.cycle({
 						fx:     'scrollHorz',
 						delay:  -2000,
@@ -574,7 +574,7 @@
 					});
 				}
 			},
-			setup_fullscreen_iw:function(){
+			setup_fullscreen_iw: function () {
 				var iw_base = $('.infoBox:visible');
 				var iw_html = iw_base.html();
 				if($.trim(iw_html)!==""){
