@@ -283,7 +283,7 @@
 				}
 				
 				WSU_MAP.infobox.make_IW_resp(i);
-				WSU_MAP.infobox.init_img_cycler(jObj);
+				//WSU_MAP.infobox.init_img_cycler(jObj.find(".infoBox"));
 				WSU_MAP.infobox.contain_content_events();
 				WSU_MAP.infobox.init_img_modal();
 				WSU_MAP.errors.addErrorReporting(marker);
@@ -426,51 +426,57 @@
 					if(items.data('cycle.opts') !== undefined){
 						//items.cycle('destroy');
 					}
-					jObj.has_cycle = true;
-					items.cycle({
-						fx:     'scrollHorz',
-						delay:  -2000,
-						pauseOnHover: 1,
-						pause:1,
-						timeout:0, 
-						pager:jObj.find('.cNav'),
-						prev:'.prev',
-						next:'.next', 
-						slides:'> a',
-						pagerTemplate:'<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
-						onPagerEvent:function(idx){//,ele){
-							if(currSlide-idx<0){ 
-								if(window._defined($.jtrack)){
-									//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
-								}
-							}else{ 
-								if(window._defined($.jtrack)){
-									//$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
-								}
-							} 
-							if(window._defined(callbacks) && window._defined(callbacks.onPagerEvent)){
-								callbacks.onPagerEvent(idx);
-							}
-							WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged',[ idx ]);
-							currSlide = idx; 
-						},
-						onPrevNextEvent:function(isNext,idx){//,ele){
-								if(isNext){
-									if(window._defined($.jtrack)){
-										//$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
-									}
-								}else{
-									if(window._defined($.jtrack)){
-										//$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
-									}
-								}
-							if(window._defined(callbacks) && window._defined(callbacks.onPagerEvent)){
-								callbacks.onPrevNextEvent(i,isNext);
-							}
-							WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged_next',[ idx, isNext ]);
-						},
-						
-					});
+					//if (items.has_cycle != true) {
+					    //items.data('cyclesetup', true);
+					    items.has_cycle = true;
+					    items.each(function () {
+					        console.log($(this));
+					        $(this).cycle({
+					            fx: 'scrollHorz',
+					            delay: -2000,
+					            pauseOnHover: 1,
+					            pause: 1,
+					            timeout: 0,
+					            pager: $(this).closest(".cycleArea").find('.cNav'),
+					            prev: '.prev',
+					            next: '.next',
+					            slides: '> a',
+					            pagerTemplate: '<li><a href="#" hidefocus="true">{{slideNum}}</a></li>',
+					            onPagerEvent: function (idx) {//,ele){
+					                if (currSlide - idx < 0) {
+					                    if (window._defined($.jtrack)) {
+					                        //$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+					                    }
+					                } else {
+					                    if (window._defined($.jtrack)) {
+					                        //$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+					                    }
+					                }
+					                if (window._defined(callbacks) && window._defined(callbacks.onPagerEvent)) {
+					                    callbacks.onPagerEvent(idx);
+					                }
+					                WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged', [idx]);
+					                currSlide = idx;
+					            },
+					            onPrevNextEvent: function (isNext, idx) {//,ele){
+					                if (isNext) {
+					                    if (window._defined($.jtrack)) {
+					                        //$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+					                    }
+					                } else {
+					                    if (window._defined($.jtrack)) {
+					                        //$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+					                    }
+					                }
+					                if (window._defined(callbacks) && window._defined(callbacks.onPagerEvent)) {
+					                    callbacks.onPrevNextEvent(i, isNext);
+					                }
+					                WSU_MAP.state.map_jObj.trigger('wsu_maps:gallery_paged_next', [idx, isNext]);
+					            },
+
+					        });
+					    });
+					//}
 				}
 			},
 			init_img_modal:function(root){//marker){
@@ -580,7 +586,7 @@
 				if($.trim(iw_html)!==""){
 					var full_screen_object = WSU_MAP.state.map_jObj.find('.full_screen_iw');
 					if( full_screen_object.length<=0 ){
-						WSU_MAP.state.map_jObj.append('<div class="full_screen_iw">');
+						WSU_MAP.state.map_jObj.append('<div class="full_screen_iw infoBox">');
 						full_screen_object = WSU_MAP.state.map_jObj.find('.full_screen_iw');
 					}
 
@@ -590,9 +596,9 @@
 					var iw_ui_nav_height = full_screen_object.find('.ui-tabs-nav').height();
 					var iw_map_clearence = 150;
 					var head_height = header_height + header_bar_height;
-					//WSU_MAP.responsive.resizeBg( full_screen_object, head_height + iw_map_clearence );
 
-					//WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), head_height + iw_ui_nav_height  + iw_map_clearence);
+					//WSU_MAP.responsive.resizeBg(full_screen_object, head_height + iw_map_clearence);
+                    //WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), head_height + iw_ui_nav_height  + iw_map_clearence);
 					
 					var iw_ui_tabs_height = $('.full_screen_iw .ui-tabs').height();
 					$(window).on('resize',function(){
@@ -610,12 +616,14 @@
 							}
 						}
 					});
-					WSU_MAP.infobox.init_img_cycler(full_screen_object);
+					//if(!full_screen_object.is(":visible"))
+					//    WSU_MAP.infobox.init_img_cycler(full_screen_object);
 					WSU_MAP.infobox.contain_content_events();
 					WSU_MAP.infobox.init_img_modal(full_screen_object);
 					WSU_MAP.errors.addErrorReporting(WSU_MAP.state.active.marker);
 
-					WSU_MAP.state.map_jObj.on("wsu_maps:iw_opened",function(){
+					WSU_MAP.state.map_jObj.on("wsu_maps:iw_opened", function () {
+					    WSU_MAP.infobox.init_img_cycler(WSU_MAP.state.map_jObj.find(".infoBox"));
 						if(full_screen_object.is(":visible")){
 							WSU_MAP.infobox.apply_scroller();
 							iw_base.hide();

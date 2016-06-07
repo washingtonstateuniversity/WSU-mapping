@@ -207,8 +207,8 @@
 						markerCallback( made_marker );
 					}
 				})
-				.click(function() {
-					if(WSU_MAP.state.active.marker !== null){
+				.click(function () {
+				    if(WSU_MAP.state.active.marker !== null){
 						WSU_MAP.markers.unhighlight_marker(WSU_MAP.state.active.marker);
 					}
 					var marker = WSU_MAP.state.markerLog[i];
@@ -217,9 +217,9 @@
 					$(".open_marker").removeClass('open_marker');
 					$("[src*='"+WSU_MAP.state.active.marker.marker_style.icon.url+"']").addClass('open_marker');
 					
-					if(!WSU_MAP.state.in_pano){
+					if (!WSU_MAP.state.in_pano) {
 						WSU_MAP.infobox.open_info(i);
-					}else{
+					} else {
 						window._d("react from a pano marker click");
 						WSU_MAP.infobox.pano_marker_click( marker );
 					}
