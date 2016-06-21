@@ -122,6 +122,7 @@ namespace campusMap.Controllers {
             // So strip it all out except http://sitename/pagetorender.html
             everUrl = Regex.Replace(everUrl, "(.*:80)(.*)", "$2");
             everUrl = Regex.Replace(everUrl, "(.*:443)(.*)", "$2");
+            everUrl = everUrl.Replace("/public/render.castle?everUrl=", "");
             String urlwithnoparams = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$1");
             String querystring = Regex.Replace(everUrl, @"(.*?)(\?.*)", "$2");
 

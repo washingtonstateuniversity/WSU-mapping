@@ -17,6 +17,9 @@ function _defined(n){ return typeof n !== "undefined"; }
 function _d(n){
 	return _defined(jQuery.wsu_maps) && (jQuery.wsu_maps.state.debug===true) && _defined(window.console) && _defined(window.console.debug) && window.console.debug(n);
 }
+function _i(a,b) {
+    return _defined(jQuery.wsu_maps) && (jQuery.wsu_maps.state.debug === true) && _defined(window.console) && _defined(window.console.info) && window.console.info(a,b);
+}
 if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function(obj, start) {
 		 for (var i = (start || 0), j = this.length; i < j; i++) {
@@ -61,15 +64,16 @@ if (!Array.prototype.indexOf) {
 			});	
 			if($('.view_base_layout').length || WSU_MAP.state.inview ){
 				WSU_MAP.views.ini_map_view();
-				WSU_MAP.state.map_jObj.on('wsu_maps:view_setup',function(){
-					WSU_MAP.setup();
+				WSU_MAP.state.map_jObj.on('wsu_maps:view_setup', function () {
+				    window._d("on 'wsu_maps:view_setup'");
+				    WSU_MAP.setup();
 				});	
 				return;
 			}
-			window._d("starting map");
+			window._d("starting iniMap");
 			var zoom = WSU_MAP.defaults.map.zoom;
 			var data = {};
-			
+			//alert("zoom:" + zoom);
 			var map_op = {};
 			if( $.isEmptyObject( data.mapOptions )){
 				map_op = {'center': WSU_MAP.state.campus_latlng_str , 'zoom':zoom };
@@ -110,9 +114,12 @@ if (!Array.prototype.indexOf) {
 				$.extend(map_op,op_override||{});
 			}
 		    //console.info("options", map_op);
-			//map_op.styles = null;
+		    //map_op.styles = null;
+		    //alert();
+			window._i("Map Options", map_op);
 			WSU_MAP.state.map_jObj.gmap(map_op).bind('init', function() { 
-				window._d('initalized the map');
+			    window._d('initalized the map with options');
+			    window._d(map_op);
 				WSU_MAP.state.map_inst = WSU_MAP.state.map_jObj.gmap('get','map');
 				
 				var latLng = map_op.center.split(',');
@@ -153,7 +160,8 @@ if (!Array.prototype.indexOf) {
 							window._d('corrected things');
 							WSU_MAP.state.map_jObj.triggerEvent('resize');
 							if( WSU_MAP.state.fit_to_bound !== false ){
-								//WSU_MAP.fit_to_location( WSU_MAP.state.fit_to_bound );
+							    //alert('watch_map fit_to_location');
+							    //WSU_MAP.fit_to_location( WSU_MAP.state.fit_to_bound );
 							}
 							WSU_MAP.keep_center();
 						}else{
@@ -167,9 +175,10 @@ if (!Array.prototype.indexOf) {
 			$('#loading').remove();
 			window._d("setting up map state");
 			var used_url = WSU_MAP.state.startingUrl;
-			
+			window._i("used_url", used_url);
 
-			if( !WSU_MAP.state.inview ){
+			if (!WSU_MAP.state.inview) {
+			    window._i("WSU_MAP.state.inview", WSU_MAP.state.inview);
 				WSU_MAP.nav.setup_nav();
 				WSU_MAP.nav.setup_Navscrollbar();
 				WSU_MAP.listings.setup_listingsBar();
@@ -215,7 +224,7 @@ if (!Array.prototype.indexOf) {
 			if($( "#placeSearch input[type=text]" ).length){
 				WSU_MAP.search.setup_mapsearch();
 			}
-			if( $('.view_base_layout.public').length || WSU_MAP.state.inview ){	
+			if ($('.view_base_layout.public').length || WSU_MAP.state.inview) {
 				WSU_MAP.shapes.reloadShapes();
 				WSU_MAP.places.reloadPlaces();
 				WSU_MAP.state.map_jObj.on('wsu_maps:shapes_reloaded',function(){
@@ -485,17 +494,18 @@ if (!Array.prototype.indexOf) {
 				}
 			});
 		},
-		fit_to_location:function(localation){
+		fit_to_location: function (location) {
 			if(WSU_MAP.state.hold_bounds===false || WSU_MAP.state.in_pano){
 				return;
 			}
 			var geocoder = new google.maps.Geocoder();
-			geocoder.geocode( { 'address': localation}, function(results, status) {
+			geocoder.geocode({ 'address': location }, function (results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					if (status !== google.maps.GeocoderStatus.ZERO_RESULTS) {
-						if (results && results[0]&& results[0].geometry && results[0].geometry.viewport){
-							WSU_MAP.state.map_inst.fitBounds(results[0].geometry.viewport);
-							window.tmp_fuc = function(){
+					    if (results && results[0] && results[0].geometry && results[0].geometry.viewport) {
+					        window._i("results", results);
+					        WSU_MAP.state.map_inst.fitBounds(results[0].geometry.viewport);
+					        window.tmp_fuc = function () {
 								google.maps.event.addListenerOnce(WSU_MAP.state.map_inst, 'idle', function() {
 									WSU_MAP.state.hold_bounds=true;
 									window.tmp_fuc = null;

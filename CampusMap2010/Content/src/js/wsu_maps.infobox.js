@@ -268,7 +268,7 @@
 				WSU_MAP.state.active.marker = null;
 			},
 			open_IW:function(marker,i){
-				var jObj = WSU_MAP.state.map_jObj;
+				//var jObj = WSU_MAP.state.map_jObj;
 				needsMoved=0;
 				WSU_MAP.state.ibHover =  true;
 				if( !$('#taby'+i).is(':ui-tabs') ){
@@ -591,11 +591,11 @@
 					}
 
 					full_screen_object.html(iw_html);
-					var header_height = $('.spine-header').height();
-					var header_bar_height = $('#header_bar').height();
+					//var header_height = $('.spine-header').height();
+					//var header_bar_height = $('#header_bar').height();
 					var iw_ui_nav_height = full_screen_object.find('.ui-tabs-nav').height();
 					var iw_map_clearence = 150;
-					var head_height = header_height + header_bar_height;
+					//var head_height = header_height + header_bar_height;
 
 					//WSU_MAP.responsive.resizeBg(full_screen_object, head_height + iw_map_clearence);
                     //WSU_MAP.responsive.resizeBg( full_screen_object.find('.ui-tabs'), head_height + iw_ui_nav_height  + iw_map_clearence);

@@ -1,31 +1,31 @@
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		https://beta.maps.wsu.edu/
+		https://map.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			https://beta.maps.wsu.edu/
+			https://map.wsu.edu/
 		#end
 	#end
 #end
 #capturefor(site_base)
 	#if($Controller.isLocal()==false)
-		//beta.maps.wsu.edu/
+		//map.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot.Replace('http:','')
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl().Replace('http:','')
 		#else
-			//beta.maps.wsu.edu/
+			//map.wsu.edu/
 		#end
 	#end
 #end
 #capturefor(folder)
-#if($Controller.isLocal()==false) dis #else build #end
+#if($Controller.isLocal()==false) dis #else dis #end
 #end
 
 #capturefor(view)
@@ -81,7 +81,51 @@ var map_view =  {
 var map_scripts = [];
 //map_scripts.push('http://www.google.com/uds/api?file=uds.js&v=1.0');
 
+
+#if($controller.isLocal())
+#*
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.defaultvalue.js');
+
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.ui.map.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.ui.map.extensions.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.ui.map.services.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.ui.map.overlays.js');
+
+map_scripts.push('http:${site_base.Trim()}content/src/js/infobox-1.1.12.js');
+
+map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.cycle.all.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/scrollbar/jquery.mousewheel.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/scrollbar/jquery.jscrollpane.min.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/zeroclipboard/ZeroClipboard.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/jPrint.js');
+
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.state.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.defaults.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.lightbox.js');
+
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.util.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.general.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.errors.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.views.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.directions.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.controlls.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.nav.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.listings.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.markers.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.places.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.shapes.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.search.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.infobox.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.responsive.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.frontend.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.starter.js');*#
+map_scripts.push('http:${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
+#else
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
+#end
+
+
 
 if( map_view.map_view_scripts_block === false ){
 	if ( typeof(jQuery) === "undefined" ) {

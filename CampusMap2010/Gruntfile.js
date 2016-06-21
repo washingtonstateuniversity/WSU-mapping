@@ -342,7 +342,7 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask('start', ['watch']);
 	grunt.registerTask('default', ['jshint']);
-	grunt.registerTask('prod', ['env:prod', 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify', 'copy:maps', 'clean']);
+	grunt.registerTask('prod', ['env:prod', 'sass', 'concat', 'env:dev', 'autoprefixer', 'cssmin', 'uglify', 'copy:maps', 'clean']);
 
 	grunt.registerTask('dev', [ 'env:dev', 'sass', 'concat', 'jshint', 'env:dev', 'autoprefixer', 'cssmin', 'uglify' , 'copy:maps', 'clean'  ]);
 
