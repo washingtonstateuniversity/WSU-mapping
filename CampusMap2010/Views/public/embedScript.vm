@@ -155,7 +155,7 @@ if( map_view.map_view_scripts_block === false ){
 	}
 	a=s.createElement(o);
 	a.async=0;
-	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded';
+	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbeded&key=AIzaSyCWtSRIku46hs90ZlYvhdRg7x7fSaKaJF8';
 	t.parentNode.insertBefore(a,t);	
 	i.startEmbeded = function(){
 		(function($) {

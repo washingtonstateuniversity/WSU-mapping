@@ -104,7 +104,7 @@
 							WSU_MAP.general.loadData(data,function(){//marker){
 								//ib[0].open(WSU_MAP.state.map_inst, marker);
 								//cur_mid = mid[0];
-								window._d("applied loaded data");
+								//window._d("applied loaded data");
 							});
 							WSU_MAP.general.prep_html();
 							WSU_MAP.state.map_jObj.trigger('wsu_maps:places_reloaded',[ ]);

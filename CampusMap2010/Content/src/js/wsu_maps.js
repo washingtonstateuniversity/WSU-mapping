@@ -67,7 +67,8 @@ if (!Array.prototype.indexOf) {
 				WSU_MAP.state.map_jObj.on('wsu_maps:view_setup', function () {
 				    window._d("on 'wsu_maps:view_setup'");
 				    WSU_MAP.setup();
-				});	
+				});
+				window._d("done with iniMap setup");
 				return;
 			}
 			window._d("starting iniMap");
@@ -495,6 +496,7 @@ if (!Array.prototype.indexOf) {
 			});
 		},
 		fit_to_location: function (location) {
+		    window._d('fit_tolocation');
 			if(WSU_MAP.state.hold_bounds===false || WSU_MAP.state.in_pano){
 				return;
 			}
@@ -534,7 +536,8 @@ if (!Array.prototype.indexOf) {
 		set_center: function () {
 	    	WSU_MAP.state.map_jObj.dequeue("set_center");
 			WSU_MAP.state.map_jObj.queue("set_center", function() {
-				setTimeout(function() {
+			    setTimeout(function () {
+			        window._i("zoom after set_center", WSU_MAP.state.map_inst.get("zoom"));
 					WSU_MAP.state.center = WSU_MAP.state.map_jObj.gmap("get_map_center");
 					WSU_MAP.state.map_jObj.dequeue("set_center");
 				}, 750);
@@ -551,24 +554,30 @@ if (!Array.prototype.indexOf) {
 			});
 		},
 		on_zoom_corrections:function(){
-			google.maps.event.addListener(WSU_MAP.state.map_inst, 'zoom_changed',function(){
+		    google.maps.event.addListener(WSU_MAP.state.map_inst, 'zoom_changed', function () {
+		        window._d("maps event zoom_changed");
+		        window._i("zoom after on_zoom_corrections", WSU_MAP.state.map_inst.get("zoom"));
 				WSU_MAP.poi_rest();
 				WSU_MAP.set_center();
 			});
 		},
 		on_pan_corrections:function(){
 			google.maps.event.addListener(WSU_MAP.state.map_inst, 'drag', function() {
-				WSU_MAP.state.hold_bounds=false;
+			    WSU_MAP.state.hold_bounds = false;
+			    window._d("maps event drag");
 				WSU_MAP.set_center();
 				WSU_MAP.poi_rest();
 				
 			});
-			google.maps.event.addListener(WSU_MAP.state.map_inst, 'center_changed', function() {
+			google.maps.event.addListener(WSU_MAP.state.map_inst, 'center_changed', function () {
+			    window._d("maps event center_changed");
+			    window._i("zoom after center_changed", WSU_MAP.state.map_inst.get("zoom"));
 				WSU_MAP.poi_rest();
 			});
 		},
 		on_bounds_changed_corrections:function(){
-			google.maps.event.addListener(WSU_MAP.state.map_inst, 'bounds_changed',function(){
+		    google.maps.event.addListener(WSU_MAP.state.map_inst, 'bounds_changed', function () {
+		        window._d("maps event bounds_changed")
 				WSU_MAP.poi_rest();
 				WSU_MAP.set_center();
 			});

@@ -210,6 +210,13 @@ namespace campusMap.Controllers {
                 string alias = Regex.Replace(urlwithnoparams, @"/rt/(.*)", "$1");
                 String mode = "";
                 String callback = "";
+               /* IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
+                if (c.Count == 0)
+                {
+                    RenderText("false");
+                    return;
+                }
+                int id = c[0].;*/
                 fetchMap(alias, HttpContext.Current.Request.Params["mode"], HttpContext.Current.Request.Params["callback"]);
                 return;
             }
@@ -242,6 +249,8 @@ namespace campusMap.Controllers {
             }
         }
         #endregion
+
+       
 
         public void get_sm_url(String _url) {
             CancelLayout();
@@ -412,7 +421,9 @@ namespace campusMap.Controllers {
         [Layout("map_veiws")]
         public void fetchMap(String alias, String mode, String callback) {
             CancelView();
-
+            PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"])?"true":"false";
+            PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
+            PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true);
             IList<map_views> c = ActiveRecordBase<map_views>.FindAllByProperty("alias", alias);
             if (c.Count == 0) {
                 RenderText("false");

@@ -9,11 +9,9 @@
 #set($lastLevel = 1 )
 #set($c=0)
 
-<ul id='main_nav'>
+<ul id='main_nav'> 
 	#foreach($item in $menuItems)
-		#*
-			$velocityCount
-		*#
+
 	
 		#set($Lev=$item.level)
 		#if($Lev > $lastLevel)

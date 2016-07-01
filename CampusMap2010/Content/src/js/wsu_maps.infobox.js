@@ -180,7 +180,7 @@
 					//$('#taby'+i).tabs();
 					//alert('tring to tab it, dabnab it, from the INI');
 				});
-				window._d("made infowindow");
+				//window._d("made infowindow");
 			},
 			build_infobox_markerobj:function(item){
 				if(!window._defined(item.info)){

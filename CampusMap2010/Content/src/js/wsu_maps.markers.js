@@ -200,8 +200,8 @@
 
 					// these too are needing to be worked together
 					//jObj.gmap('setOptions', {'zIndex':1}, WSU_MAP.state.markerLog[i]);
-					window._d(made_marker);
-					window._d("made a marker for "+id);
+					//window._d(made_marker);
+					//window._d("made a marker for "+id);
 					WSU_MAP.state.map_jObj.trigger('wsu_maps:marker_added',[ made_marker ]);
 					if( window._defined(markerCallback) && $.isFunction( markerCallback ) ){
 						markerCallback( made_marker );
