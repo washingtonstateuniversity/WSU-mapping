@@ -165,7 +165,7 @@
 				$('#selectedPlaceList').removeClass('ini');
 				if(!$('#selectedPlaceList_btn').is(':visible')){
 					$('#selectedPlaceList_btn').css({'display':'block'});
-					if($('.embeded').length===0){
+					if($('.embedded').length===0){
 						$('#selectedPlaceList_btn').trigger('click');
 					}
 				}

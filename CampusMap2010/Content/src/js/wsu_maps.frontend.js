@@ -14,7 +14,7 @@
 						
 						$(window).resize(function(){
 							var mHeight = $('#header_bar').outerHeight();//($(window).height()<=404?0:$('#header_bar').outerHeight());
-							if($('.embeded').length){
+							if($('.embedded').length){
 								mHeight = 0;
 							}
 							if($('.layoutfree').length){

@@ -6,6 +6,7 @@
 				width:30,
 				height:50,
 			},
+			routemarkers: {},
 			alter_marker_icon:function(marker,multiplier){
 				multiplier = multiplier||1;
 				var min_width = marker.marker_style.icon.width*0.5;
@@ -88,6 +89,23 @@
 				return intLat*(-1);
 				
 			},
+			centerOnMarkers: function(_markers)
+			{
+                var numberofmarkers = Object.keys(_markers).length;
+                //  Create a new viewpoint bound
+                var bounds = new google.maps.LatLngBounds ();
+                //  Go through each...
+                for (var m in _markers) {
+                    if(_markers[m])
+                        //  And increase the bounds to take this point
+                        try{
+                            //logDebug(_markers[m]);
+                            bounds.extend (_markers[m].getPosition());
+                        }
+                        catch (e) { window._d(e);}
+                }
+                WSU_MAP.state.map_inst.fitBounds(bounds);
+            },
 			make_Marker:function (i,id,marker_obj,markerCallback){	
 				var jObj = WSU_MAP.state.map_jObj;
 				window._d("starting to make a marker for "+id);

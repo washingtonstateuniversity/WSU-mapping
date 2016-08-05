@@ -3,8 +3,8 @@
   Insert all JS that is related only to the admin area
   
   NOTE:
-  var siteroot is set in the default veiw
-  var view is set in the default veiw
+  var siteroot is set in the default view
+  var view is set in the default view
 -------------------------------------------------------------
 */
 

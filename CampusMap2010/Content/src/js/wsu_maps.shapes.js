@@ -9,8 +9,8 @@
 				/*$.each($('[name="geolist[]"]'),function(){
 						ids =(!window._defined(ids)?'':ids+',')+$(this).val();
 				});*/
-				if( WSU_MAP.state.embeded_shape_ids !== false ){
-					ids = WSU_MAP.state.embeded_shape_ids;
+				if( WSU_MAP.state.embedded_shape_ids !== false ){
+					ids = WSU_MAP.state.embedded_shape_ids;
 				}else{
 					$.each($('[name="placelist[]"]'),function(){
 						ids =(!window._defined(ids)?'':ids+',')+$(this).val();

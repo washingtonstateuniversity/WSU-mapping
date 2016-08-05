@@ -39,14 +39,14 @@ $(function(){
 		}
 		if(mapInst.length){
 							var mHeight = ($(window).height()<=404?0:130);
-				if($('.embeded').length)mHeight = 0;
+				if($('.embedded').length)mHeight = 0;
 				if($('.layoutfree').length)mHeight = 93;
 			$(window).resize(function(){
-				//alert( ($('.embeded').length||$('.layoutfree').length) ?0:130 );
+				//alert( ($('.embedded').length||$('.layoutfree').length) ?0:130 );
 				// can't us mapInst here cause it's still in the admin area.  Split that.
 
 				
-				resizeBg($('.central_layout.public.central #centralMap'), ( mHeight),($('.embeded').length?0:($(window).width()<=404?0:($(window).width()<=600?155:201))) + $('#selectedPlaceList').width())
+				resizeBg($('.central_layout.public.central #centralMap'), ( mHeight),($('.embedded').length?0:($(window).width()<=404?0:($(window).width()<=600?155:201))) + $('#selectedPlaceList').width())
 			}).trigger("resize");
 			$(window).resize(function(){
 				// can't us mapInst here cause it's still in the admin area.  Split that.

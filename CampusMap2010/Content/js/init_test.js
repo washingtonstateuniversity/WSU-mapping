@@ -220,7 +220,7 @@ function addCentralControlls(){
 		controlUI.className = 'mapControl TOP';
 		
 		
-		if(!$('.embeded').length && campus=="Pullman"){
+		if(!$('.embedded').length && campus=="Pullman"){
 			// Set CSS for the control interior.
 			var controlText = document.createElement('div');
 			controlText.className = 'text';
@@ -1038,7 +1038,7 @@ function loadData(jObj,data,callback,markerCallback){
 
 
 var last_searched=0;
-function getSignlePlace(jObj,id){
+function getSinglePlace(jObj, id) {
 	var url=siteroot+"public/get_place.castle";
 	$( "#placeSearch input[type=text]" ).autocomplete("close");
 	$( "#placeSearch input[type=text]" ).blur();
@@ -1111,7 +1111,7 @@ function autoOpenListPanel(callback){
 	$('#selectedPlaceList').removeClass('ini');
 	if(!$('#selectedPlaceList_btn').is(':visible')){
 		$('#selectedPlaceList_btn').css({'display':'block'});
-		if($('.embeded').length==0)$('#selectedPlaceList_btn').trigger('click');
+		if($('.embedded').length==0)$('#selectedPlaceList_btn').trigger('click');
 	}
 	if(typeof(callback)!=="undefined")callback();
 }
@@ -1308,7 +1308,7 @@ function setup_mapsearch(jObj){
 			var url=siteroot+"public/get_place.castle";
 			if ( e.which != 13 ){
 				if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
-				getSignlePlace(jObj,id);
+				getSinglePlace(jObj, id);
 			}
 			
 			$( "#placeSearch input[type=text]" ).autocomplete("close");
@@ -1342,7 +1342,7 @@ function setup_mapsearch(jObj){
 			var url=siteroot+"public/get_place.castle";
 			if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 			$( "#placeSearch input[type=text]" ).autocomplete("close");
-			getSignlePlace(jObj,id);
+			getSinglePlace(jObj, id);
 			
 		}
 	});	
@@ -1351,7 +1351,7 @@ function setup_mapsearch(jObj){
 		e.preventDefault();
 		var btn=$(this);
 		var id   = (typeof(focuseitem.id)!=="undefined"&&focuseitem.id!="")?focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
-		getSignlePlace(jObj,id);
+		getSinglePlace(jObj, id);
 		if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 	});
 }

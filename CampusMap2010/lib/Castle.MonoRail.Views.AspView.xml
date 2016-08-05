@@ -42,13 +42,13 @@
             </summary>
             <returns>Array of pre-compilation steps</returns>
         </member>
-        <member name="T:Castle.MonoRail.Views.AspView.Compiler.PreCompilationSteps.EmbededServerScriptStep">
+        <member name="T:Castle.MonoRail.Views.AspView.Compiler.PreCompilationSteps.embeddedServerScriptStep">
             <summary>
             This step process &lt;script runat="server"&gt; tags, used to embed
             private methods right into the generated class.
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Views.AspView.Compiler.PreCompilationSteps.EmbededServerScriptStep.Castle#MonoRail#Views#AspView#Compiler#PreCompilationSteps#IPreCompilationStep#Process(Castle.MonoRail.Views.AspView.Compiler.SourceFile)">
+        <member name="M:Castle.MonoRail.Views.AspView.Compiler.PreCompilationSteps.embeddedServerScriptStep.Castle#MonoRail#Views#AspView#Compiler#PreCompilationSteps#IPreCompilationStep#Process(Castle.MonoRail.Views.AspView.Compiler.SourceFile)">
             <summary>
             Would remove &lt;script runat="server"&gt; tags from the file's body,
             and add them to a list, later to be added to the generated class.
@@ -128,9 +128,9 @@
             Gets list of custom providers, implementing IPreCompilationStepsProvider and IMarkupTransformersProvider
             </summary>
         </member>
-        <member name="P:Castle.MonoRail.Views.AspView.Compiler.SourceFile.EmbededScriptBlocks">
+        <member name="P:Castle.MonoRail.Views.AspView.Compiler.SourceFile.embeddedScriptBlocks">
             <summary>
-            contains the list of embeded scripts blocks (&lt;script runat="server"/&gt; elements contents) 
+            contains the list of embedded scripts blocks (&lt;script runat="server"/&gt; elements contents) 
             that will be rendered as raw class content
             </summary>
         </member>

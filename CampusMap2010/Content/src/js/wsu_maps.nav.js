@@ -152,7 +152,7 @@
 				window._d("pushing history state");
 				window.history.pushState(obj||{}, $(document).find("title").text(), url);
 			},
-			update_history:function(obj){
+			update_history: function (obj) {
 				WSU_MAP.getSmUrl("",function(url){
 					WSU_MAP.nav.push_state(obj,url);
 				});

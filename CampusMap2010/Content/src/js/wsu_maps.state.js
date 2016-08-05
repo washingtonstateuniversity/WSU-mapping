@@ -8,8 +8,8 @@
 			
 			running_options:false,
 			fit_to_bound:false,
-			embeded_place_ids:false,
-			embeded_shape_ids:false,
+			embedded_place_ids:false,
+			embedded_shape_ids:false,
 			json_style_override:false,
 			marker_json_style_override:false,
 			shape_json_style_override:false,

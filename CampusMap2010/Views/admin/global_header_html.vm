@@ -107,12 +107,12 @@ $Controller.getView()
 #if($!map.places)
 #set($c=0)
 #capturefor(places) #foreach($place in $map.places) $!place.id,#end 0#end
-	embeded_place_ids : "${places.Replace(", 0","").Replace(" 0","")}",
+	embedded_place_ids : "${places.Replace(", 0","").Replace(" 0","")}",
 #end
 #if($!map.geometrics)
 #set($c=0)
 #capturefor(_shapes) #foreach($geo in $map.geometrics) $!geo.id,#end 0#end
-	embeded_shape_ids : "${_shapes.Replace(", 0","").Replace(" 0","")}",
+	embedded_shape_ids : "${_shapes.Replace(", 0","").Replace(" 0","")}",
 #end
 	show_global_nav : #if(${map.show_global_nav})true, #else false, #end
 	running_options : '$!options_json',

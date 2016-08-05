@@ -44,7 +44,7 @@
 					},
 					minLength: 2,
 					select: function( e, ui ) {
-						var id = ui.item.place_id;
+						var id  =parseInt(ui.item.place_id);
 						//var term = ui.item.label;
 			
 						//var url=WSU_MAP.state.siteroot+"public/get_place.castle";
@@ -52,14 +52,14 @@
 							if(window._defined($.jtrack)){
 								//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 							}
-							WSU_MAP.places.getSignlePlace(id);
+							WSU_MAP.places.getSinglePlace(id);
 						}
 						
 						$( "#placeSearch input[type=text]" ).autocomplete("close");
 					},
 					autocompleteselect:function(e, ui) {
 						var id = ui.item.place_id;
-						WSU_MAP.places.getSignlePlace(id);
+						WSU_MAP.places.getSinglePlace(id);
 					},
 					focus: function( event, ui ) {
 						//$( "#placeSearch [type=text]" ).val( ui.item.label );
@@ -94,7 +94,7 @@
 							//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 						}
 						$( "#placeSearch input[type=text]" ).autocomplete("close");
-						WSU_MAP.places.getSignlePlace(id);
+						WSU_MAP.places.getSinglePlace(id);
 						
 					}
 				});	
@@ -103,7 +103,7 @@
 					//var btn=$(this);
 					var url = url||"";
 					var id   = (window._defined(WSU_MAP.search.focuseitem.id)&&WSU_MAP.search.focuseitem.id!=="")?WSU_MAP.search.focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
-					WSU_MAP.places.getSignlePlace(id);
+					WSU_MAP.places.getSinglePlace(id);
 					if(window._defined($.jtrack)){
 						//$.jtrack.trackPageview(pageTracker,url+(id!==""?'?id='+id:'')+(term!==""?'&term='+term:''));
 					}

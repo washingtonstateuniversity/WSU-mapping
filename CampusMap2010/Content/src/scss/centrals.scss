@@ -16,10 +16,13 @@ $fontURL: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0";
 	font-weight:normal;
 	font-style:normal
 }
-
+ #campusmap.embedded {
+	#spine, #header_bar { display:none;}
+    main { margin-top:0px; }
+}
 #campusmap{ //the NS should be a var.. 
 	&{
-		@import 'central_main';
+       	@import 'central_main';
 		//@import 'map_admin';
 		@import 'wsu_maps.infobox';
 		@import 'wsu_maps.central.nav';

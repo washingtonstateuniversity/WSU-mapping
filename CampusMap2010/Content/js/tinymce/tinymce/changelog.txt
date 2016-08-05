@@ -331,7 +331,7 @@ Version 3.2.2 (2009-03-05)
 	Fixed bug where autostart and other boolean values in the media dialog wouldn't be stored/parsed correctly.
 	Fixed bug where the repaint call for the media plugin wouldn't be executed due to a typo in the source.
 	Fixed bug where id attribute of object elements wasn't kept intact by the media plugin.
-	Fixed bug where preview of embeded elements when the media_use_script option was used would fail.
+	Fixed bug where preview of embedded elements when the media_use_script option was used would fail.
 	Fixed bug where inlinepopups could be rendered at an incorrect location on IE 6 while dragging.
 	Fixed bug where the blocker shim could be placed at an incorrect location on IE 6.
 	Fixed bug where the multiple and size attributes of select elements would produce incorrect values while running in IE.

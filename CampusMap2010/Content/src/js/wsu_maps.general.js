@@ -49,7 +49,7 @@
 					});
 					WSU_MAP.state.map_jObj.trigger('wsu_maps:data_loaded');
 					var jObj = WSU_MAP.state.map_jObj;
-					//jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()});
+					jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()});
 					
 					
 					if($('.mobile').length){

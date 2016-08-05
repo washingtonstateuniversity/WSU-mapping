@@ -2,8 +2,8 @@
 (function($,window,WSU_MAP) {
 	$.extend( WSU_MAP, {
 		places : {
-			getSignlePlace:function (id){
-				var url = WSU_MAP.state.siteroot+"public/get_place_obj.castle";
+		    getSinglePlace: function (id) {
+		        var url = WSU_MAP.state.siteroot+"public/get_place_obj.castle";
 				//var jObj = WSU_MAP.state.map_jObj;
 				$( "#placeSearch input[type=text]" ).autocomplete("close").val('').blur();
 				var found = false;
@@ -44,14 +44,16 @@
 										WSU_MAP.state.cur_mid = WSU_MAP.state.mid[0];
 									});
 								}
-								//loadListings(data,true);
+						    //loadListings(data,true);
+								WSU_MAP.nav.update_history({ url: '/central?pid='+id });
+								WSU_MAP.updateMap(id);
 								WSU_MAP.general.prep_html();
 								WSU_MAP.search.last_searched = id;
 							//});
 						}
 						
 					});
-				}else if(WSU_MAP.search.last_searched !== id){
+				} else if (WSU_MAP.search.last_searched !== id) {
 					$.getJSON(url+'?callback=?'+(id!==false?'&id='+id:''), function(data) {
 						/*if(!$('#selectedPlaceList_btn').is(':visible')){
 							//$('#selectedPlaceList_btn').css({'display':'block'});
@@ -64,14 +66,17 @@
 						});
 						jObj.gmap('clear','markers');
 						jObj.gmap('clear','overlays');*/
-						WSU_MAP.clean_map();
+					    WSU_MAP.clean_map();
+					    WSU_MAP.state.cur_nav = '';
 						if(window._defined(data)){
 							WSU_MAP.general.loadData(data,function(marker){
 								WSU_MAP.state.ib[0].open(WSU_MAP.state.map_inst, marker);
 								WSU_MAP.state.cur_mid = WSU_MAP.state.mid[0];
 							});
 						}
-						//loadListings(data,true);
+					    //loadListings(data,true);
+						WSU_MAP.nav.update_history({ url: '/central?pid=' + id });
+						//WSU_MAP.updateMap(id);
 						WSU_MAP.general.prep_html();
 						WSU_MAP.search.last_searched = id;
 					});
@@ -81,8 +86,8 @@
 				window._d("start to reload places");
 				var url=WSU_MAP.state.siteroot+"public/get_places.castle";
 				var ids;
-				if( WSU_MAP.state.embeded_place_ids !== false ){
-					ids = WSU_MAP.state.embeded_place_ids;
+				if( WSU_MAP.state.embedded_place_ids !== false ){
+					ids = WSU_MAP.state.embedded_place_ids;
 				}else{
 					$.each($('[name="placelist[]"]'),function(){
 						ids =(!window._defined(ids)?'':ids+',')+$(this).val();

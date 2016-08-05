@@ -13,7 +13,7 @@
 					controlUI.className = 'mapControl TOP';
 					
 					
-					if(!$('.embeded').length && WSU_MAP.state.campus==="Pullman"){
+					if(!$('.embedded').length && WSU_MAP.state.campus==="Pullman"){
 						// Set CSS for the control interior.
 						controlText = document.createElement('div');
 						controlText.className = 'text';

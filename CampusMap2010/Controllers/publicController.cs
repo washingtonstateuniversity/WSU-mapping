@@ -234,17 +234,17 @@ namespace campusMap.Controllers {
                 string[] cats = u[0].or_url.Contains("cat") ? null : new string[0];
                 int activePlace = u[0].or_url.Contains("activePlace") ? -1 : 0;
                 int pid = u[0].or_url.Contains("pid") ? -1 : 0;
-                Boolean eb = u[0].or_url.Contains("eb") ? false : false;
+                //Boolean embedded = u[0].or_url.Contains("eb") ? true : false;
                 Boolean layout = true;
                 foreach (string query in queries) {
                     if (cats == null && query.Contains("cat")) cats = query.ToString().Replace("cat[]=", "").Split(',');
                     if (activePlace == -1 && query.Contains("activePlace")) activePlace = int.Parse(query.ToString().Replace("activePlace=", ""));
                     if (pid == -1 && query.Contains("pid")) pid = int.Parse(query.ToString().Replace("pid=", ""));
-                    if (query.Contains("eb")) eb = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
+                    //if (query.Contains("eb")) embedded = Convert.ToBoolean(query.ToString().Replace("eb=", ""));
                 }
                 if (querystring.IndexOf("layout") >-1)
                     layout = Convert.ToBoolean(HttpContext.Current.Request.Params["layout"]);
-                central(cats, activePlace, pid, eb, true, smallUrl, layout);
+                central(cats, activePlace, pid, false, true, smallUrl, layout);
                 return;
             }
         }
@@ -317,22 +317,23 @@ namespace campusMap.Controllers {
         //[Layout("central")]
         //[DefaultAction]
 
-        public void central(string[] cat, int activePlace, int pid, Boolean eb) {
-            central(cat, activePlace, pid, eb, false, null, true, true, true, true);
+        public void central(string[] cat, int activePlace, int pid, Boolean embedded) {
+            central(cat, activePlace, pid, embedded, false, null, true, true, true, true);
         }
-        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url){
-            central(cat, activePlace, pid, eb, false, null, true, true, true, true); 
+        public void central(string[] cat, int activePlace, int pid, Boolean embedded, Boolean hasUrl, string sm_url){
+            central(cat, activePlace, pid, embedded, hasUrl, null, true, true, true, true); 
         }
-        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url, Boolean layout) {
-            central(cat, activePlace, pid, eb, false, null, layout, true, true, true);
+        public void central(string[] cat, int activePlace, int pid, Boolean embedded, Boolean hasUrl, string sm_url, Boolean layout) {
+            central(cat, activePlace, pid, embedded, hasUrl, sm_url, layout, true, true, true);
         }
-        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean layout) {
-            central(cat, activePlace, pid, eb, false, null, layout, true, true, true);
+        public void central(string[] cat, int activePlace, int pid, Boolean embedded, Boolean layout) {
+            central(cat, activePlace, pid, embedded, false, null, layout, true, true, true);
         }
 
 
-        public void central(string[] cat, int activePlace, int pid, Boolean eb, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions) {
+        public void central(string[] cat, int activePlace, int pid, Boolean embedded, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions) {
             /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);*/
+            //eb = true;
             if (HttpContext.Current.Request.Headers["User-Agent"] != null) {
                 if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
                     || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
@@ -345,6 +346,9 @@ namespace campusMap.Controllers {
                     //HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
                 }
             }
+
+            if (activePlace == 0 && pid != 0)
+                activePlace = pid;
 
             if (!hasUrl) {
 
@@ -369,7 +373,7 @@ namespace campusMap.Controllers {
             PropertyBag["selectedCats"] = cat;
             PropertyBag["activePlace"] = activePlace;
 
-            PropertyBag["embeded"] = eb;
+            PropertyBag["embedded"] = embedded;
 
 
             PropertyBag["urlQueries"] = String.IsNullOrWhiteSpace(urlQueries) ? "" : "cat[]=" + urlQueries.TrimStart(',');
@@ -418,7 +422,7 @@ namespace campusMap.Controllers {
 
         }
 
-        [Layout("map_veiws")]
+        [Layout("map_views")]
         public void fetchMap(String alias, String mode, String callback) {
             CancelView();
             PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"])?"true":"false";
@@ -451,7 +455,7 @@ namespace campusMap.Controllers {
                 RenderView("map_view/map_standalone");
                 return;
             }
-            LayoutName = "map_veiws";
+            LayoutName = "map_views";
             PropertyBag["map"] = c[0];
             RenderView("map_view/map_basic");
         }
