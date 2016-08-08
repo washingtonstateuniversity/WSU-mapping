@@ -423,30 +423,58 @@
 		},			
 		
 		
-		fitBoundsToVisibleMarkers: function (markers,mapDim,max_zoom) {
+		fitBoundsToVisibleMarkers: function (markers, mapDim, max_zoom) {
+		    if (markers.length == 0)
+		        return;
 			//console.log(markers);
 			var self=this;
 			var bounds = new google.maps.LatLngBounds();
 			for (var i=0; i<markers.length; i++) {
 				if(markers[i].getVisible()) {
-					bounds.extend( markers[i].getPosition() );
+				    bounds.extend(markers[i].getPosition());
+				    window._i("pos lat", markers[i].getPosition().lat());
+				    window._i("pos lng", markers[i].getPosition().lng());
 				}
 			}
 			self.get('map').fitBounds(bounds);
+            
 			if(typeof mapDim !== "undefined"){
 				//console.log(mapDim);
-				var zoom = self.getBoundsZoomLevel(bounds,mapDim);
+			    var zoom = self.getBoundsZoomLevel(bounds, mapDim);
+			    window._i("getbounds zoom ", zoom);
+			    zoom = self.getZoomByBounds(bounds);
+			    window._i("getbounds zoom ", zoom);
 				//console.log(bounds);
 				//console.log(zoom);
 				if(zoom>max_zoom){
 					zoom=max_zoom;
 				}
 				if(typeof zoom !== "undefined" && !isNaN(zoom)){
-					self.get('map').setZoom(zoom);
+					//self.get('map').setZoom(zoom);
 				}
 			}
 		},
-		
+		getZoomByBounds: function (bounds) {
+		    var map = this.get('map');
+            var MAX_ZOOM = map.mapTypes.get( map.getMapTypeId() ).maxZoom || 21 ;
+            var MIN_ZOOM = map.mapTypes.get( map.getMapTypeId() ).minZoom || 0 ;
+
+            var ne= map.getProjection().fromLatLngToPoint( bounds.getNorthEast() );
+            var sw= map.getProjection().fromLatLngToPoint( bounds.getSouthWest() ); 
+
+            var worldCoordWidth = Math.abs(ne.x-sw.x);
+            var worldCoordHeight = Math.abs(ne.y-sw.y);
+
+            //Fit padding in pixels 
+            var FIT_PAD = 40;
+
+            for( var zoom = MAX_ZOOM; zoom >= MIN_ZOOM; --zoom ){ 
+                if( worldCoordWidth*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).width() && 
+                    worldCoordHeight*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).height() )
+                    return zoom;
+            }
+            return 0;
+        },
 		getBoundsZoomLevel:function (bounds, mapDim) {
 			var WORLD_DIM = { height: 256, width: 256 };
 			var ZOOM_MAX = 21;

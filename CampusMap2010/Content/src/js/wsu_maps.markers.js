@@ -89,7 +89,12 @@
 				return intLat*(-1);
 				
 			},
-			centerOnMarkers: function(_markers)
+			centerOnMarkers: function()
+			{
+			    var jObj = WSU_MAP.state.map_jObj;
+			    jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()});
+			},
+			centerOnMarkersWorker: function(_markers)
 			{
                 var numberofmarkers = Object.keys(_markers).length;
                 //  Create a new viewpoint bound

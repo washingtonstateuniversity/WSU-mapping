@@ -48,15 +48,17 @@
 						}*/
 					});
 					WSU_MAP.state.map_jObj.trigger('wsu_maps:data_loaded');
+					window._i("zoom before fitBoundsToVisibleMarkers", WSU_MAP.state.map_inst.get("zoom"));
 					var jObj = WSU_MAP.state.map_jObj;
-					jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()});
-					
+					jObj.gmap('fitBoundsToVisibleMarkers',WSU_MAP.state.displayedMarkers, {height:jObj.height(),width:jObj.width()}, 8);
+					window._i("zoom after fitBoundsToVisibleMarkers", WSU_MAP.state.map_inst.get("zoom"));
 					
 					if($('.mobile').length){
 						//WSU_MAP.geoLocate();
 					}
 				}
 				window._d("loaded data");
+				window._i("zoom after loaded data", WSU_MAP.state.map_inst.get("zoom"));
 				//if($.isFunction(callback))callback();return;
 			},
 			

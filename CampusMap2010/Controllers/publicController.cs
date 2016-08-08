@@ -367,6 +367,8 @@ namespace campusMap.Controllers {
             PropertyBag["search"]=search;
             PropertyBag["directions"]=directions;
             PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"]) ? "true" : "false";
+            if (Request.IsLocal)
+                PropertyBag["debug"] = "true";
 
 
 

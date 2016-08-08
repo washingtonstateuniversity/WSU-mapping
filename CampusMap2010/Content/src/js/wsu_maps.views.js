@@ -93,11 +93,11 @@ var base=base||{};
 
 			    $(window).resize(function () {
 			        if( WSU_MAP.state.fit_to_bound !== false ){
-			            WSU_MAP.fit_to_location(WSU_MAP.state.fit_to_bound);
+			           // WSU_MAP.fit_to_location(WSU_MAP.state.fit_to_bound);
 			            window._i("maps view fit to location", WSU_MAP.state.fit_to_bound);
 					}else{
 						window.setTimeout(function(){
-						    WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
+						   // WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
 						    window._i("maps view fit to bounds", WSU_MAP.shapes.bounds);
 						},500);
 			        }

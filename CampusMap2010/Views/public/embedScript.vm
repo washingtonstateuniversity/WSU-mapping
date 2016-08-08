@@ -83,7 +83,7 @@ var map_scripts = [];
 
 
 #if($controller.isLocal())
-#*
+
 map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.defaultvalue.js');
 
 map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.ui.map.js');
@@ -119,8 +119,8 @@ map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.search.js');
 map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.infobox.js');
 map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.responsive.js');
 map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.frontend.js');
-map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.starter.js');*#
-map_scripts.push('http:${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
+map_scripts.push('http:${site_base.Trim()}content/src/js/wsu_maps.starter.js');
+
 #else
 map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js');
 #end
@@ -164,7 +164,8 @@ if( map_view.map_view_scripts_block === false ){
 				for (j = 0; j < g.length; j++) { 
 					if(g[j].indexOf('.js')>-1){
 						a=s.createElement(o);
-						a.async=1;
+						a.setAttribute("type", "text/javascript");
+						a.async=0;
 						a.src=g[j];
 					}else{
 						a=s.createElement("link");
