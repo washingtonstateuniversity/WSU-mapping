@@ -332,21 +332,6 @@ namespace campusMap.Controllers {
 
 
         public void central(string[] cat, int activePlace, int pid, Boolean embedded, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions) {
-            /* log.Info(HttpContext.Current.Request.Headers["User-Agent"]);*/
-            //eb = true;
-            if (HttpContext.Current.Request.Headers["User-Agent"] != null) {
-                if (HttpContext.Current.Request.Browser["IsMobileDevice"] == "true"
-                    || (HttpContext.Current.Request.Browser["BlackBerry"] != null && HttpContext.Current.Request.Browser["BlackBerry"] == "true")
-                    || (HttpContext.Current.Request.UserAgent.ToLower().Contains("iphone"))
-                    || (HttpContext.Current.Request.UserAgent.ToUpper().Contains("MIDP") || HttpContext.Current.Request.UserAgent.ToUpper().Contains("CLDC"))
-                    || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("iphone")
-                    || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("android")
-                    || HttpContext.Current.Request.Headers["User-Agent"].ToLower().Contains("blackBerry")
-                    ) {
-                    //HttpContext.Current.Response.Redirect("http://goo.gl/maps/4P71");
-                }
-            }
-
             if (activePlace == 0 && pid != 0)
                 activePlace = pid;
 
@@ -360,28 +345,32 @@ namespace campusMap.Controllers {
             foreach (string category in cat) {
                 urlQueries += "," + category;
             }
-            PropertyBag["url"] = sm_url;
-            PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
-            PropertyBag["layout"]=layout;
-            PropertyBag["header"]=header;
-            PropertyBag["search"]=search;
-            PropertyBag["directions"]=directions;
-            PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"]) ? "true" : "false";
-            if (Request.IsLocal)
-                PropertyBag["debug"] = "true";
-
-
+            PropertyBag["urlQueries"] = String.IsNullOrWhiteSpace(urlQueries) ? "" : "cat[]=" + urlQueries.TrimStart(',');
+            if (pid > 0)
+            {
+                PropertyBag["urlQueries"] += (String.IsNullOrWhiteSpace(urlQueries) ? "" : "&") + "pid=" + pid.ToString();
+            }
 
             PropertyBag["selectedCats"] = cat;
             PropertyBag["activePlace"] = activePlace;
 
+            central(embedded, hasUrl, sm_url, layout, header, search, directions);
+        }
+
+        public void central(Boolean embedded, Boolean hasUrl, string sm_url, Boolean layout, Boolean header, Boolean search, Boolean directions)
+        {
+            PropertyBag["url"] = sm_url;
+            PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
+            PropertyBag["layout"] = layout;
+            PropertyBag["header"] = header;
+            PropertyBag["search"] = search;
+            PropertyBag["directions"] = directions;
+            PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"]) ? "true" : "false";
+            if (Request.IsLocal)
+                PropertyBag["debug"] = "true";
+
             PropertyBag["embedded"] = embedded;
 
-
-            PropertyBag["urlQueries"] = String.IsNullOrWhiteSpace(urlQueries) ? "" : "cat[]=" + urlQueries.TrimStart(',');
-            if (pid > 0) {
-                PropertyBag["urlQueries"] += (String.IsNullOrWhiteSpace(urlQueries) ? "" : "&") + "pid=" + pid.ToString();
-            }
             PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true);
 
             LayoutName = "central"; // would be a var
@@ -390,7 +379,7 @@ namespace campusMap.Controllers {
 
 
 
-        
+
         [Layout("blank")]
         public void sendEmbedScript(String alias, String mode, String callback) {
             CancelView();
@@ -426,7 +415,6 @@ namespace campusMap.Controllers {
 
         [Layout("map_views")]
         public void fetchMap(String alias, String mode, String callback) {
-            CancelView();
             PropertyBag["debug"] = !String.IsNullOrWhiteSpace(HttpContext.Current.Request.Params["debug"])?"true":"false";
             PropertyBag["campus"] = ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
             PropertyBag["menuItems"] = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true);
@@ -435,6 +423,16 @@ namespace campusMap.Controllers {
                 RenderText("false");
                 return;
             }
+
+            PropertyBag["map"] = c[0];
+
+            PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
+            PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
+            PropertyBag["places"] = c[0].places;
+            PropertyBag["shapes"] = c[0].geometrics;
+            central(true, true, null, true, true, true, true);
+            return;
+            /*
             if (mode == "json") {
                 CancelLayout();
                 if (!String.IsNullOrEmpty(callback)) PropertyBag["callback"] = callback;
@@ -448,33 +446,46 @@ namespace campusMap.Controllers {
                 return;
             }
             if (mode == "standalone") {
-                CancelLayout();
                 PropertyBag["map"] = c[0];
 
                 PropertyBag["options_json"] = Regex.Replace(Regex.Replace(c[0].options_obj.Replace(@"""false""", "false").Replace(@"""true""", "true"), @"(""\w+"":\""\"",?)", "", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}"), @"""(\d+)""", "$1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant).Replace(",}", "}");
                 PropertyBag["baseJson"] = Regex.Replace(c[0].options_obj, @".*?(""mapTypeId"":""(\w+)"".*$)", "$2", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant);
-
-                RenderView("map_view/map_standalone");
+                PropertyBag["places"] = c[0].places;
+                PropertyBag["shapes"] = c[0].geometrics;
+                central(true, true, null, true, true, true, true);
+                //RenderView("map_view/map_standalone");
                 return;
             }
             LayoutName = "map_views";
             PropertyBag["map"] = c[0];
-            RenderView("map_view/map_basic");
+            RenderView("map_view/map_basic");*/
         }
 
 
         #region API get items from the db
-
-        public void get_categories_list(String callback) {
+        public void get_categories_list(String callback)
+        {
             CancelView();
             CancelLayout();
-            var tmp = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true).Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 : i.Parent.id) });
-            if (tmp.Count() > 0) {
-                render_list_json(tmp, callback);
-            } else {
-                RenderText("false");
-            }
+            String cached = getJsonCache(getDefaultAppPath(), "getCategoriesList.ext", DateTime.Now.AddDays(-7));
+            if (cached == null)
+            {
+                var tmp = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true).Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 : i.Parent.id) });
+                String result = null;
+                if (tmp.Count() > 0)
+                {
+                    result = render_list_json(tmp, callback);
+                    setJsonCache(getDefaultAppPath(), "getCategoriesList.ext", result);
+                }
+                else
+                {
+                    RenderText("false");
+                }
+            }          
+            else
+                sendCachedJson(cached, callback);
         }
+
         public void get_colleges_list(String callback) {
             CancelView();
             CancelLayout();
@@ -638,7 +649,7 @@ namespace campusMap.Controllers {
 
 
 
-        public void render_list_json(dynamic tmp, String callback) {
+        public String render_list_json(dynamic tmp, String callback) {
             var jss = new JavaScriptSerializer();
             var json = jss.Serialize(tmp);
             //String json = Serialize(tmp);
@@ -647,6 +658,7 @@ namespace campusMap.Controllers {
             }
             Response.ContentType = "application/json; charset=UTF-8";
             RenderText(json);
+            return json;
         }
 
 
@@ -937,6 +949,27 @@ namespace campusMap.Controllers {
             System.IO.File.WriteAllText(uploadPath + file, blob);
         }
 
+        public String getJsonCache(String uploadPath, string file, DateTime oldestAllowed)
+        {
+            DateTime lastWriteTime = File.GetLastWriteTime(uploadPath + file);
+            if (lastWriteTime > oldestAllowed || oldestAllowed == DateTime.MinValue)
+                return System.IO.File.ReadAllText(uploadPath + file);
+            else
+                return null;
+        }
+
+        public String getFileName(String[] categoriesarray, String pid)
+        {
+            String categories = String.Join("", categoriesarray);
+            return getFileName(categories, pid);
+        }
+
+        public String getFileName(String categories, String pid)
+        {
+            String key = categories + pid;
+            String filename = key.GetHashCode()  + "_centralplacehash.ext";
+            return filename;
+        }
         
         public static place[] searchAndAddResultsToHashtable(String hql, String searchterm) {
             SimpleQuery<place> query = new SimpleQuery<place>(typeof(place), hql);
@@ -1261,34 +1294,42 @@ where p.status = 3
         public void get_place_by_category(string[] cat, string pid, string callback) {
             CancelView();
             CancelLayout();
-
-            String sql = "from place p where ";
-            int id = 1;
-            foreach (string category in cat) {
-                string cats = HttpUtility.UrlDecode(category);
-                IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
-                if (c.Count > 0)
+            String cachedversion = getJsonCache(getDefaultAppPath(), getFileName(cat, pid), DateTime.Now.AddDays(-7));
+            if (cachedversion == null)
+            {
+                String sql = "from place p where ";
+                int id = 1;
+                foreach (string category in cat)
                 {
-                    sql += " :p" + id + " in elements(p.categories) ";
-                    id = id + 1;
-                    sql += " or ";
+                    string cats = HttpUtility.UrlDecode(category);
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                    if (c.Count > 0)
+                    {
+                        sql += " :p" + id + " in elements(p.categories) ";
+                        id = id + 1;
+                        sql += " or ";
+                    }
                 }
-            }
-            sql += " 1=0 ";
-            sql += " ORDER BY p.prime_name ASC ";
-            SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
-            id = 1;
-            foreach (string category in cat) {
-                string cats = HttpUtility.UrlDecode(category);
-                IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
-                if (c.Count > 0)
+                sql += " 1=0 ";
+                sql += " ORDER BY p.prime_name ASC ";
+                SimpleQuery<place> q = new SimpleQuery<place>(typeof(place), sql);
+                id = 1;
+                foreach (string category in cat)
                 {
-                    q.SetParameter("p" + id, c[0]);
-                    id = id + 1;
+                    string cats = HttpUtility.UrlDecode(category);
+                    IList<categories> c = ActiveRecordBase<categories>.FindAllByProperty("friendly_name", cats);
+                    if (c.Count > 0)
+                    {
+                        q.SetParameter("p" + id, c[0]);
+                        id = id + 1;
+                    }
                 }
+                place[] items = q.Execute();
+                String json = sendPlaceJson(items, callback);
+                setJsonCache(getDefaultAppPath(), getFileName(cat, pid), json);
             }
-            place[] items = q.Execute();
-            sendPlaceJson(items, callback);
+            else
+                sendCachedJson(cachedversion, callback);
         }
 
 
@@ -1359,9 +1400,20 @@ where p.status = 3
             sendPlaceJson(items.ToArray(), callback);
         }
         //deprecated
-        public void sendPlaceJson(place[] items, string callback) {
+        public String sendPlaceJson(place[] items, string callback) {
             String json = createPlaceJson(items);
             if (!string.IsNullOrEmpty(callback)) {
+                json = callback + "(" + json + ")";
+            }
+            Response.ContentType = "application/json; charset=UTF-8";
+            RenderText(json);
+            return json;
+        }
+
+        public void sendCachedJson(String json, string callback)
+        {
+            if (!string.IsNullOrEmpty(callback))
+            {
                 json = callback + "(" + json + ")";
             }
             Response.ContentType = "application/json; charset=UTF-8";
@@ -1410,6 +1462,12 @@ where p.status = 3
         public static String returnPlaceJson(place[] items) {
             String json = new publicController().createPlaceJson(items);
             return json;
+        }
+
+        public String getDefaultAppPath()
+        {
+            string appPath = getRootPath();
+            return appPath + "cache/places/";
         }
         public String createPlaceJson(place[] items) {
             /* the responsable thing to do here is to remove the html into a template */

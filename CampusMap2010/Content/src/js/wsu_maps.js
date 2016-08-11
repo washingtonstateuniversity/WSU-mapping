@@ -241,15 +241,15 @@ if (!Array.prototype.indexOf) {
 			if($( "#placeSearch input[type=text]" ).length){
 				WSU_MAP.search.setup_mapsearch();
 			}
-			if ($('.view_base_layout.public').length || WSU_MAP.state.inview) {
-				WSU_MAP.shapes.reloadShapes();
+			//if ($('.view_base_layout.public').length || WSU_MAP.state.inview) {
+				//WSU_MAP.shapes.reloadShapes();
 				WSU_MAP.places.reloadPlaces();
 				WSU_MAP.state.map_jObj.on('wsu_maps:shapes_reloaded',function(){
 					window.setTimeout(function(){
 						WSU_MAP.state.map_inst.fitBounds(WSU_MAP.shapes.bounds);
 					},500);
 				});	
-			}
+			//}
 		},
 		get_option:function(){//prop){
 			//the goal is that we will pull any option not directly 
@@ -395,10 +395,10 @@ if (!Array.prototype.indexOf) {
 						}
 				}
 			];
-			$.jtrack.defaults.debug.run = false;
-			$.jtrack.defaults.debug.v_console = false;
-			$.jtrack.defaults.debug.console = true;
-			$.jtrack({load_analytics:{account:gacode}, trackevents:data });
+			//$.jtrack.defaults.debug.run = false;
+			//$.jtrack.defaults.debug.v_console = false;
+			//$.jtrack.defaults.debug.console = true;
+			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
 		ini_addthis:function (){//username){
 			/*if(!window._defined(username)){

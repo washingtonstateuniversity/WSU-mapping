@@ -171,10 +171,10 @@ function ini_GAtracking(gacode){
 						}
 				}
 			];
-			$.jtrack.defaults.debug.run = false;
-			$.jtrack.defaults.debug.v_console = false;
-			$.jtrack.defaults.debug.console = true;
-			$.jtrack({load_analytics:{account:gacode}, trackevents:data }); 	
+			//$.jtrack.defaults.debug.run = false;
+			//$.jtrack.defaults.debug.v_console = false;
+			//$.jtrack.defaults.debug.console = true;
+			//$.jtrack({load_analytics:{account:gacode}, trackevents:data }); 	
 }
 function ini_addthis(username){
 	if(typeof(username)=="unfined"){username="mcwsu";}
@@ -745,7 +745,7 @@ function make_InfoWindow(jObj,i,marker){
 		,onClose:function(){
 			ibHover =  false;
 			if(typeof($.fn.cycle)!=="undefined" && $('.cWrap .items li').length>1){$('.cWrap .items').cycle('destroy');}
-			if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
+			//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow","manually closed",marker.title);
 			$('#taby'+i).tabs('destroy').tabs();
 		}
 		,onOpen:function(){
@@ -767,7 +767,7 @@ function make_InfoWindow(jObj,i,marker){
 				ibHover =  true;
 				$('#taby'+i).tabs('destroy').tabs({
 						select: function(event, ui) {
-							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
+						//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow tab",marker.title,$(ui.tab).text());
 						}
 					});
 					$("#campusmap .ui-tabs .ui-tabs-panel .content").width(($('#campusmap .ui-tabs .ui-tabs-panel').width()<400?$('#campusmap .ui-tabs .ui-tabs-panel').width()-35:365)+"px")
@@ -785,17 +785,17 @@ function make_InfoWindow(jObj,i,marker){
 						next:   '.next', 
 						onPagerEvent:function(i,ele){
 							if(currSlide-i<0){ 
-								if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
+							//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);
 							}else{ 
-								if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
+							//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);
 							} 
 							currSlide = i; 
 						},
 						onPrevNextEvent:function(isNext,i,ele){
 								if(isNext){
-									if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);	
+								//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "next", marker.title);	
 								}else{
-									if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);	
+								//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow views", "previous", marker.title);	
 								}
 							},
 						
@@ -804,7 +804,7 @@ function make_InfoWindow(jObj,i,marker){
 				}
 				$('.infoBox .ui-tabs-panel a').attr('target','_blank');
 				$('.infoBox .ui-tabs-panel a[target="_blank"]:not(.ui-tabs-nav a,a[href="#"])').on('click',function(){
-					if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
+					//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow link", "clicked", $(this).attr('href'));
 				});
 				if($('.layoutfree').length){
 					$('.infoBox .ui-tabs-panel .content a').on("click",function(e){
@@ -831,10 +831,10 @@ function make_InfoWindow(jObj,i,marker){
 						open:true,
 						current:"<span id='cur'>{current}</span><span id='ttl'>{total}</span>",
 						onOpen:function(){
-							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
+							//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "opened", marker.title);
 						},
 						onClosed:function(){
-							if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
+							//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "closed", marker.title);
 							$('#colorbox #cb_nav').html("");
 							$('#ttl').text(0);
 							$('#ttl').text(1);
@@ -888,10 +888,10 @@ function make_InfoWindow(jObj,i,marker){
 										}
 									});
 									$('#cboxNext,#cboxLoadedContent').off('click.track').on('click.track',function(){
-										if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+									//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "next", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 									});
 									$('#cboxPrevious').off('click.track').on('click.track',function(){
-										if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
+									//	if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow gallery", "previous", marker.title+' - media id:'+$('.cboxPhoto').attr('src').split('&id=')[1]);
 									});
 								}
 							}
@@ -994,7 +994,7 @@ function make_Marker(jObj,i,id,marker,markerCallback){
 		})
 	.click(function() {
 			open_info(jObj,i,marker);
-			if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
+			//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via marker", "opened", marker.title);
 		})
 	.rightclick(function(event){showContextMenu(event.latLng);})
 	.mouseover(function(event){
@@ -1209,7 +1209,7 @@ function loadListings(data,showSum){
 			$.each(ib, function(i,v) {ib[i].close();});
 			//var pid = btn.attr("role");
 			ib[i].open($('#centralMap').gmap('get','map'), markerLog[i]);
-			if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
+			//if(typeof($.jtrack)!=="undefined")$.jtrack.trackEvent(pageTracker,"infowindow via place list", "opened",btn.text());
 			cur_mid = mid[i];
 		});
 	});
@@ -1307,7 +1307,7 @@ function setup_mapsearch(jObj){
 
 			var url=siteroot+"public/get_place.castle";
 			if ( e.which != 13 ){
-				if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
+				//if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 				getSinglePlace(jObj, id);
 			}
 			
@@ -1340,7 +1340,7 @@ function setup_mapsearch(jObj){
 		if ( e.which == 13){
 			var id   = (typeof(focuseitem.id)!=="undefined"&&focuseitem.id!="")?focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
 			var url=siteroot+"public/get_place.castle";
-			if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
+			//if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 			$( "#placeSearch input[type=text]" ).autocomplete("close");
 			getSinglePlace(jObj, id);
 			
@@ -1352,7 +1352,7 @@ function setup_mapsearch(jObj){
 		var btn=$(this);
 		var id   = (typeof(focuseitem.id)!=="undefined"&&focuseitem.id!="")?focuseitem.id:$( "#placeSearch .ui-autocomplete-input" ).val();
 		getSinglePlace(jObj, id);
-		if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
+		//if(typeof($.jtrack)!=="undefined")$.jtrack.trackPageview(pageTracker,url+(id!=""?'?id='+id:'')+(term!=""?'&term='+term:''));
 	});
 }
 
@@ -1899,7 +1899,7 @@ $('.errorReporting').off().on("click",function(e){
 					
 					if(valid){
 						$.post($('#errorReporting form').attr('action'), $('#errorReporting form').serialize(),function(){
-							$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
+							//$.jtrack.trackEvent(pageTracker,"error reporting", "submited", $('[name="issueType"]').val());
 							$('#errorReporting').html('<h2>Thank you for reporting the error.</h2>'+'');
 							$.colorbox.resize();
 						});
@@ -2007,7 +2007,7 @@ function setup_pdfprints(){
 				$.each($('#printPdfs a'),function(){
 					var self = $(this); 
 					self.off().on('click',function(e){
-						$.jtrack.trackEvent(pageTracker,"pdf", "clicked", self.text());
+						//$.jtrack.trackEvent(pageTracker,"pdf", "clicked", self.text());
 					});
 				});
 			}

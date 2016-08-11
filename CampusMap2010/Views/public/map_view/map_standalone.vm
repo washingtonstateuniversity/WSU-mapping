@@ -43,14 +43,14 @@
 		
 		#capturefor(site)
 			#if($Controller.isLocal()==false)
-				http://map.wsu.edu/
+				https://map.wsu.edu/
 			#else
 				#if($siteroot && $siteroot !='')
 					$siteroot
 				#elseif($Controller.isLocal())
 					$Controller.getRootUrl()
 				#else
-					http://map.wsu.edu/
+					https://map.wsu.edu/
 				#end
 			#end
 		#end
