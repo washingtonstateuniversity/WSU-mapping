@@ -45,27 +45,27 @@
 
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		#*https://beta.maps.wsu.edu/*#$Controller.getRootUrl()
+		#*https://map.wsu.edu/*#$Controller.getRootUrl()
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			https://beta.maps.wsu.edu/
+			https://map.wsu.edu/
 		#end
 	#end
 #end
 #capturefor(site_base)
 	#if($Controller.isLocal()==false)
-		//beta.maps.wsu.edu/
+		//map.wsu.edu/
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot.Replace('http:','')
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl().Replace('http:','')
 		#else
-			//beta.maps.wsu.edu/
+			//map.wsu.edu/
 		#end
 	#end
 #end

@@ -27,14 +27,14 @@
 *#
 #capturefor(site)
 	#if($Controller.isLocal()==false)
-		#*https://beta.maps.wsu.edu/*#$Controller.getRootUrl()
+		#*https://map.wsu.edu/*#$Controller.getRootUrl()
 	#else
 		#if($siteroot && $siteroot !='')
 			$siteroot
 		#elseif($Controller.isLocal())
 			$Controller.getRootUrl()
 		#else
-			https://beta.maps.wsu.edu/
+			https://map.wsu.edu/
 		#end
 	#end
 #end
