@@ -61,9 +61,7 @@ namespace campusMap.Filters
             context.CurrentUser = user;
             
             // Checks if it is OK
-            if (context.CurrentUser == null ||
-                !context.CurrentUser.Identity.IsAuthenticated ||
-                !Authentication.logged_in())
+           // if (!Authentication.logged_in())
             {
                 // Not authenticated, redirect to login
                 String username = Authentication.authenticate();
@@ -72,7 +70,7 @@ namespace campusMap.Filters
 
                 if (authors.Length == 0)
                 {
-                    context.Response.RedirectToUrl("~/admin", false);
+                    context.Response.RedirectToUrl("~/", false);
                     return false;
                 }
                 context.Session["manager"] = true;
