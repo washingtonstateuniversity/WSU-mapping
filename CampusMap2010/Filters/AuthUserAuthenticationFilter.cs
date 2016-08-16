@@ -26,22 +26,23 @@ namespace campusMap.Filters
 
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
+            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
+
+            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
+            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
+            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
+            controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
+            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
+            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
+
+            controllerContext.PropertyBag["userService"] = userService;
+            controllerContext.PropertyBag["helperService"] = helperService;
+            controllerContext.PropertyBag["helper"] = helperService;
+            controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
             if (context.Request.IsLocal)
             {
-                controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
-                controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-                controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-                controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-                controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
-                controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-                controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-                controllerContext.PropertyBag["userService"] = userService;
-                controllerContext.PropertyBag["helperService"] = helperService;
-                controllerContext.PropertyBag["helper"] = helperService;
-                controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
                 users currentUser = UserService.getUserFull();
                 if (currentUser != null) {
@@ -66,6 +67,8 @@ namespace campusMap.Filters
                 // Not authenticated, redirect to login
                 String username = Authentication.authenticate();
 
+                context.Response.Write("username:" + username);
+                
                 users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
 
                 if (authors.Length == 0)
@@ -83,6 +86,10 @@ namespace campusMap.Filters
             if (UserService.isLoggedIn())
             {
                 users currentUser = UserService.getUserFull();
+
+                context.Response.Write("UserService.getUserFull()");
+                HttpContext.Current.Response.End();
+
                 if (currentUser != null)
                 {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
@@ -91,23 +98,7 @@ namespace campusMap.Filters
                     ActiveRecordMediator<users>.Update(you);
                     ActiveRecordMediator<users>.Save(you);
                 }
-
             }
-
-            controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
-
-            controllerContext.PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll();
-            controllerContext.PropertyBag["colleges"] = ActiveRecordBase<colleges>.FindAll();
-            controllerContext.PropertyBag["departments"] = ActiveRecordBase<departments>.FindAll();
-            controllerContext.PropertyBag["admindepartments"] = ActiveRecordBase<admindepartments>.FindAll();
-            controllerContext.PropertyBag["programs"] = ActiveRecordBase<programs>.FindAll();
-            controllerContext.PropertyBag["schools"] = ActiveRecordBase<schools>.FindAll();
-
-            controllerContext.PropertyBag["userService"] = userService;
-            controllerContext.PropertyBag["helperService"] = helperService;
-            controllerContext.PropertyBag["helper"] = helperService;
-            controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
-
 
             // Everything is ok
             return true;

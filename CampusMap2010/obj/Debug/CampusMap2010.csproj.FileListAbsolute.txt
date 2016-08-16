@@ -700,3 +700,7 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framewo
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.pdb
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\NHibernate.Linq.dll
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.dll
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
