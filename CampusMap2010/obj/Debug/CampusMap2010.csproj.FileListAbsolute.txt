@@ -634,8 +634,6 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.DynamicProxy2.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.DictionaryAdapter.dll
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\NHibernate.Linq.dll
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Antlr3.Runtime.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\System.Web.WebPages.dll
@@ -682,8 +680,6 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.Temp
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.pdb
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.Common.TemplateEngine.NVelocityTemplateEngine.xml
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Castle.Components.DictionaryAdapter.xml
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\System.Web.WebPages.xml
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Microsoft.Web.Infrastructure.xml
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\System.Web.Razor.xml
