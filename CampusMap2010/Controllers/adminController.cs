@@ -144,6 +144,8 @@ namespace campusMap.Controllers{
         #region VIEWS
             public void admin()
             {
+                Response.Write("admin()");
+                 HttpContext.Response.End();
                 users user = UserService.getUserFull();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
