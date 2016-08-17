@@ -112,6 +112,8 @@ namespace campusMap.Services {
             return username;
         }
         public static users setUser() {
+            HttpContext.Current.Response.Write("setUser()");
+            HttpContext.Current.Response.End();
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
@@ -121,8 +123,10 @@ namespace campusMap.Services {
             return user;
         }
         public static users getUser() {
-            users user = HttpContext.Current.Session["you"] == null ? setUser() : (users)HttpContext.Current.Session["you"];
-            return user;
+            HttpContext.Current.Response.Write("getUser()");
+            if (HttpContext.Current.Session["you"] == null)
+                HttpContext.Current.Session["you"] = setUser();
+            return (users)HttpContext.Current.Session["you"];
         }
         public static users getUserFull() {
             users user = ActiveRecordBase<users>.Find(getUser().id);
