@@ -112,12 +112,12 @@ namespace campusMap.Services {
             HttpContext.Current.Response.Write("setUser()");
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
-           
+            end();
 
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
             HttpContext.Current.Response.Write(user.id);
-            end();
+            
             return user;
         }
         public users getUser() {
