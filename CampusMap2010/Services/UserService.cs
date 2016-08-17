@@ -92,7 +92,7 @@ namespace campusMap.Services {
             if (HttpContext.Current.Request.IsLocal) {
                 username = "jeremy.bass";
             } else {
-                username = HttpContext.Current.Session["username"] == null ? "" : HttpContext.Current.Session["username"].ToString();
+                username = HttpContext.Current.Session["username"] == null ? Authentication.authenticate() : HttpContext.Current.Session["username"].ToString();
             }
             return username;
         }
