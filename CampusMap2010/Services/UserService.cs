@@ -72,19 +72,25 @@ namespace campusMap.Services {
         }
 
         public static Boolean isLoggedIn() {
-            return isLoggedIn(null);
+            return isLoggedInByNID(null);
         }
 
-        public static Boolean isLoggedIn(string Nid) {
+        public static Boolean isLoggedInByNID(string Nid) {
+            if (!String.IsNullOrWhiteSpace(getNid()))
+                return true;
+            else
+                return false;
+            /*
             users[] author_list = getLoggedIn();
             bool temp = false;
             if (String.IsNullOrWhiteSpace(Nid)) Nid = getNid();
+            
             if (!String.IsNullOrWhiteSpace(Nid)) {
                 foreach (users author in author_list) {
                     if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == Nid.ToUpper()) { temp = true; }
                 }
             }
-            return temp;
+            return temp;*/
         }
 
         public static String getNid() {
@@ -92,7 +98,8 @@ namespace campusMap.Services {
             if (HttpContext.Current.Request.IsLocal) {
                 username = "jeremy.bass";
             } else {
-                username = HttpContext.Current.Session["username"] == null ? Authentication.authenticate() : HttpContext.Current.Session["username"].ToString();
+                username = Authentication.authenticate();
+                //  username = HttpContext.Current.Session["username"] == null ? Authentication.authenticate() : HttpContext.Current.Session["username"].ToString();
             }
             return username;
         }
