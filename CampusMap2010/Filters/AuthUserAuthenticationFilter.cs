@@ -31,8 +31,6 @@ namespace campusMap.Filters
 
             if (context.Request.IsLocal)
             {
-
-
                 users currentUser = UserService.getUserFull();
                 if (currentUser != null) {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
