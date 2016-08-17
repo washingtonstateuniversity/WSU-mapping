@@ -28,6 +28,7 @@ namespace campusMap.Filters
         {
             context.Response.Write("AuthUserAuthenticationFilter");
             //HttpContext.Current.Response.End();
+            return true;
 
             if (context.Request.IsLocal)
             {
