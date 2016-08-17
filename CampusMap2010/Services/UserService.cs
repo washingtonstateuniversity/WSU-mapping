@@ -135,6 +135,9 @@ namespace campusMap.Services {
             users user = ActiveRecordBase<users>.Find(getUser().id);
             return user;
         }
+        public void test()
+        {
+        }
         public string getUserIp() {
             return GetIPAddress();
         }

@@ -176,7 +176,7 @@ namespace campusMap.Controllers{
             [SkipFilter(typeof(campusMap.Filters.AuthUserAuthenticationFilter))]
             public void natetest()
             {
-                users user = userService.getUserFull();
+                userService.test();
                // IList<place> places = user.getUserPlaces(1, 5);
                // PropertyBag["places"] = places;
 
