@@ -46,7 +46,6 @@ namespace campusMap.Filters
             context.CurrentUser = user;
             
             String username = Authentication.authenticate();
-            context.Response.Write("username:" + username);
             users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
 
             if (authors.Length == 0)
@@ -62,12 +61,8 @@ namespace campusMap.Filters
 
             if (userService.isLoggedIn())
             {
-                context.Response.Write("is loggedin finished");
                 HttpContext.Current.Response.End();
                 users currentUser = userService.getUserFull();
-
-                context.Response.Write("UserService.getUserFull()");
-                HttpContext.Current.Response.End();
                 if (currentUser != null)
                 {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
