@@ -131,6 +131,7 @@ namespace campusMap.Services {
         }
         public users getUserFull() {
             HttpContext.Current.Response.Write("getUserFull()");
+            HttpContext.Current.Response.End();
             users user = ActiveRecordBase<users>.Find(getUser().id);
             return user;
         }
