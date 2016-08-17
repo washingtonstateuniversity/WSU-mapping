@@ -104,7 +104,7 @@ namespace campusMap.Services {
                 if (HttpContext.Current.Session["username"] != null)
                     return HttpContext.Current.Session["username"].ToString();
                 username = Authentication.authenticate();
-                end();
+                //end();
                 HttpContext.Current.Session["username"] = username;
             }
            
