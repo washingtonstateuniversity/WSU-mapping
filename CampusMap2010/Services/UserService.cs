@@ -34,14 +34,14 @@ namespace campusMap.Services {
             String username = getNid();
             // save user in database
             users[] author_list = ActiveRecordBase<users>.FindAll();
-            users temp = null;
+            users foundUser = null;
             foreach (users author in author_list) {
-                if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper()) { temp = author; }
+                if (!string.IsNullOrEmpty(author.nid) && author.nid.ToUpper() == username.ToUpper()) { foundUser = author; }
             }
-            if (temp != null) {
-                temp.loggedin = true;
-                temp.Save();
-                return temp.loggedin;
+            if (foundUser != null) {
+                foundUser.loggedin = true;
+                foundUser.Save();
+                return foundUser.loggedin;
             }
             return false;
         }
