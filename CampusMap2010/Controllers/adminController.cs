@@ -174,7 +174,7 @@ namespace campusMap.Controllers{
             }
             public void natetest()
             {
-                //users user = UserService.getUserFull();
+                users user = UserService.getUserFull();
                // IList<place> places = user.getUserPlaces(1, 5);
                // PropertyBag["places"] = places;
 
