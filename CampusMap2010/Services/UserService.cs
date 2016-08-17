@@ -101,8 +101,6 @@ namespace campusMap.Services {
                 username = Authentication.authenticate();
                 //  username = HttpContext.Current.Session["username"] == null ? Authentication.authenticate() : HttpContext.Current.Session["username"].ToString();
             }
-            HttpContext.Current.Response.Write(username);
-            HttpContext.Current.Response.End();
             return username;
         }
         public static users setUser() {
@@ -110,6 +108,8 @@ namespace campusMap.Services {
             userEx.Add(Expression.Eq("nid", getNid()));
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
+            HttpContext.Current.Response.Write(user.id);
+            HttpContext.Current.Response.End();
             return user;
         }
         public static users getUser() {
