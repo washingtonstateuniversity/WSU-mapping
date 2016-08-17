@@ -16,7 +16,7 @@ using campusMap.Services;
 
 namespace campusMap.Models {
     public class _base {
-        public UserService userService = new UserService();
+        protected UserService userService = new UserService();
 
             
         private DateTime? Creation_Date;
