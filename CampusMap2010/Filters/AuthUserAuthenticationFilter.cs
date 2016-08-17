@@ -61,7 +61,6 @@ namespace campusMap.Filters
 
             if (userService.isLoggedIn())
             {
-                HttpContext.Current.Response.End();
                 users currentUser = userService.getUserFull();
                 if (currentUser != null)
                 {
