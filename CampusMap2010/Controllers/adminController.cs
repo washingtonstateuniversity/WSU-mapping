@@ -172,7 +172,14 @@ namespace campusMap.Controllers{
                 PropertyBag["activeUsers"] = activeUser;
                 RenderView("../admin/splash");
             }
-            public void _list_siteSettings()
+            public void natetest()
+            {
+            CancelView();
+            CancelLayout();
+            RenderText("natetest");
+               
+            }
+        public void _list_siteSettings()
             {
                 var values = new Dictionary<string, object>();
                 values.Add("Title", "Hello World!");
