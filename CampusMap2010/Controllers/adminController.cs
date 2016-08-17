@@ -174,9 +174,9 @@ namespace campusMap.Controllers{
             }
             public void natetest()
             {
-                users user = UserService.getUserFull();
-                IList<place> places = user.getUserPlaces(1, 5);
-                PropertyBag["places"] = places;
+                //users user = UserService.getUserFull();
+               // IList<place> places = user.getUserPlaces(1, 5);
+               // PropertyBag["places"] = places;
 
 
                 IList<place> temp = new List<place>();
@@ -186,7 +186,7 @@ namespace campusMap.Controllers{
 
 
 
-                PropertyBag["user"] = user;
+              //  PropertyBag["user"] = user;
                 IList<users> activeUser = new List<users>();
                 users[] _authors = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
                 foreach (users _author in _authors)
