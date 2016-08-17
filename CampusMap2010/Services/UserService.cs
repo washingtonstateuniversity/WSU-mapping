@@ -92,7 +92,7 @@ namespace campusMap.Services {
         }
 
         public String getNid() {
-            HttpContext.Current.Response.Write("getNid()");
+           // HttpContext.Current.Response.Write("getNid()");
             
             String username = "";
             if (HttpContext.Current.Request.IsLocal)
@@ -108,30 +108,30 @@ namespace campusMap.Services {
                 HttpContext.Current.Session["username"] = username;
             }
            
-            HttpContext.Current.Response.Write("getNid():"+username);
+           // HttpContext.Current.Response.Write("getNid():"+username);
             return username;
         }
         public users setUser() {
-            HttpContext.Current.Response.Write("setUser()");
+          //  HttpContext.Current.Response.Write("setUser()");
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
             
 
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
-            HttpContext.Current.Response.Write(user.id);
+           // HttpContext.Current.Response.Write(user.id);
             
             return user;
         }
         public users getUser() {
-            HttpContext.Current.Response.Write("getUser()"+ HttpContext.Current.Session["you"] == null);
+           // HttpContext.Current.Response.Write("getUser()"+ HttpContext.Current.Session["you"] == null);
             if (HttpContext.Current.Session["you"] == null)
                 HttpContext.Current.Session["you"] = setUser();
             
             return (users)HttpContext.Current.Session["you"];
         }
         public users getUserFull() {
-            HttpContext.Current.Response.Write("getUserFull()");
+           // HttpContext.Current.Response.Write("getUserFull()");
             users user = ActiveRecordBase<users>.Find(getUser().id);
             return user;
         }
