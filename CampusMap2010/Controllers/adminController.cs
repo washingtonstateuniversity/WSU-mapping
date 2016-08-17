@@ -172,9 +172,11 @@ namespace campusMap.Controllers{
                 PropertyBag["activeUsers"] = activeUser;
                 RenderView("../admin/splash");
             }
+
+            [SkipFilter(typeof(campusMap.Filters.AuthUserAuthenticationFilter))]
             public void natetest()
             {
-                users user = userService.getUserFull();
+               // users user = userService.getUserFull();
                // IList<place> places = user.getUserPlaces(1, 5);
                // PropertyBag["places"] = places;
 
