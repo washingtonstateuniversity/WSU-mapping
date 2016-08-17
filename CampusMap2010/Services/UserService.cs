@@ -118,7 +118,8 @@ namespace campusMap.Services {
             return user;
         }
         public users getUser() {
-            HttpContext.Current.Response.Write("getUser()");
+            HttpContext.Current.Response.Write("getUser()"+ HttpContext.Current.Session);
+            end();
             if (HttpContext.Current.Session["you"] == null)
                 HttpContext.Current.Session["you"] = setUser();
             end();
