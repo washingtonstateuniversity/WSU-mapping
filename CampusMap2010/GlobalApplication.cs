@@ -48,7 +48,7 @@ namespace campusMap
         {
            // if (Authentication.logged_in() && Services.UserService.loginUser())
             {
-                Services.HelperService.writelog("User logged in");
+              //  Services.HelperService.writelog("User logged in");
             }
         }
 
