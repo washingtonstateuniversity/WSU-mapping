@@ -138,7 +138,8 @@ namespace campusMap.Services {
         public void test()
         {
             HttpContext.Current.Response.Write("getUserFull()");
-           // HttpContext.Current.Response.End();
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.Response.End();
         }
         public string getUserIp() {
             return GetIPAddress();
