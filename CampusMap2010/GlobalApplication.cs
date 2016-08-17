@@ -46,9 +46,10 @@ namespace campusMap
 
         protected void Session_Start(object sender, EventArgs e)
         {
-           // if (Authentication.logged_in() && Services.UserService.loginUser())
+            Services.UserService userService = new Services.UserService();
+            if (Authentication.logged_in() && userService.loginUser())
             {
-              //  Services.HelperService.writelog("User logged in");
+                Services.HelperService.writelog("User logged in");
             }
         }
 
