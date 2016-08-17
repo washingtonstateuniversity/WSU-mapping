@@ -174,11 +174,32 @@ namespace campusMap.Controllers{
             }
             public void natetest()
             {
-            CancelView();
-            CancelLayout();
-            RenderText("natetest");
-               
-            }
+                users user = UserService.getUserFull();
+                IList<place> places = user.getUserPlaces(1, 5);
+                PropertyBag["places"] = places;
+
+
+                IList<place> temp = new List<place>();
+
+                place[] erroredPlaces = ActiveRecordBase<place>.FindAllByProperty("outputError", true);
+                PropertyBag["erroredPlaces"] = erroredPlaces;
+
+
+
+                PropertyBag["user"] = user;
+                IList<users> activeUser = new List<users>();
+                users[] _authors = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
+                foreach (users _author in _authors)
+                {
+                    if (_author != null && _author.LastActive > DateTime.Today.AddHours(-1))
+                    {
+                        activeUser.Add(_author);
+                    }
+                }
+                PropertyBag["activeUsers"] = activeUser;
+                RenderView("../admin/splash");
+
+        }
         public void _list_siteSettings()
             {
                 var values = new Dictionary<string, object>();
