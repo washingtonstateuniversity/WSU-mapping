@@ -104,8 +104,8 @@ namespace campusMap.Services {
                 username = Authentication.authenticate();
                 HttpContext.Current.Session["username"] = username;
             }
-            System.Diagnostics.StackTrace t = new System.Diagnostics.StackTrace();
-            HttpContext.Current.Response.Write("getNid():"+username+ t.ToString());
+           
+            HttpContext.Current.Response.Write("getNid():"+username);
             return username;
         }
         public users setUser() {
