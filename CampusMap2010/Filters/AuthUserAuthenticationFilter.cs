@@ -69,7 +69,7 @@ namespace campusMap.Filters
                 System.Threading.Thread.CurrentPrincipal = user;
             }
 
-            if (UserService.isLoggedIn())
+            if (!UserService.isLoggedIn())
             {
                 users currentUser = UserService.getUserFull();
 
