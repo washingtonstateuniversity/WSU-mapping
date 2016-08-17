@@ -34,7 +34,7 @@ namespace campusMap.Controllers {
     //[Filter(ExecuteWhen.BeforeAction, typeof(loggedinFilter))]
     [Filter(ExecuteWhen.BeforeAction, typeof(scriptFilter))]
     [Layout("default")]
-    [Rescue(typeof(RescueController))]//Rescue("generalerror")
+   // [Rescue(typeof(RescueController))]//Rescue("generalerror")
 
     public abstract class BaseController : MonoRailHelper.HelperBaseController {
         ILog log = log4net.LogManager.GetLogger("baseController");

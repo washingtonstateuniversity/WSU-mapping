@@ -8,7 +8,7 @@ using campusMap.Filters;
 using MonoRailHelper;
 namespace campusMap.Controllers {
     [Filter(ExecuteWhen.BeforeAction, typeof(AuthUserAuthenticationFilter))]
-    [Rescue(typeof(SecureRescueController))]
+    //[Rescue(typeof(SecureRescueController))]
     public abstract class SecureBaseController : BaseController {
        
         public void logout() {
