@@ -53,7 +53,7 @@ namespace campusMap.Filters
                 context.Response.Write("No users");
                 //HttpContext.Current.Response.Flush();
                 //HttpContext.Current.Response.End();
-                context.Response.RedirectToUrl("~/", false);
+                context.Response.RedirectToUrl("~/?username="+username, false);
                 return false;
             }
             context.Session["manager"] = true;
