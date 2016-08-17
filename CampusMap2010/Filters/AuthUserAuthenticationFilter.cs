@@ -50,9 +50,6 @@ namespace campusMap.Filters
 
             if (authors.Length == 0)
             {
-                context.Response.Write("No users");
-                //HttpContext.Current.Response.Flush();
-                //HttpContext.Current.Response.End();
                 context.Response.RedirectToUrl("~/?username="+username, false);
                 return false;
             }
