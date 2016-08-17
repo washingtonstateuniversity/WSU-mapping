@@ -27,7 +27,7 @@ namespace campusMap.Filters
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
             context.Response.Write("AuthUserAuthenticationFilter");
-            HttpContext.Current.Response.End();
+            //HttpContext.Current.Response.End();
 
             if (context.Request.IsLocal)
             {
