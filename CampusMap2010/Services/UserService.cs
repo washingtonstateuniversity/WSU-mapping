@@ -106,9 +106,6 @@ namespace campusMap.Services {
             }
             System.Diagnostics.StackTrace t = new System.Diagnostics.StackTrace();
             HttpContext.Current.Response.Write("getNid():"+username+ t.ToString());
-
-            
-            HttpContext.Current.Response.End();
             return username;
         }
         public users setUser() {
