@@ -150,7 +150,7 @@ namespace campusMap.Controllers {
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["loggedin"] = UserService.getLoggedIn();
+            PropertyBag["loggedin"] = UserService.getLoggedInUserList();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["ajax"] = ajax;
             //user.Sections.Contains(place.place_types);

@@ -47,27 +47,20 @@ namespace campusMap.Filters
             // Sets the principal as the current user
             context.CurrentUser = user;
             
-            // Checks if it is OK
-           // if (!Authentication.logged_in())
+            String username = Authentication.authenticate();
+            context.Response.Write("username:" + username);
+            users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
+
+            if (authors.Length == 0)
             {
-                // Not authenticated, redirect to login
-                String username = Authentication.authenticate();
-
-                context.Response.Write("username:" + username);
-                
-                users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
-
-                if (authors.Length == 0)
-                {
-                    context.Response.RedirectToUrl("~/", false);
-                    return false;
-                }
-                context.Session["manager"] = true;
-                context.Session["username"] = username;
-                user = new User(username, new String[0]);
-                context.CurrentUser = user;
-                System.Threading.Thread.CurrentPrincipal = user;
+                context.Response.RedirectToUrl("~/", false);
+                return false;
             }
+            context.Session["manager"] = true;
+            context.Session["username"] = username;
+            user = new User(username, new String[0]);
+            context.CurrentUser = user;
+            System.Threading.Thread.CurrentPrincipal = user;
 
             if (UserService.isLoggedIn())
             {

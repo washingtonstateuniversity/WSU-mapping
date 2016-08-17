@@ -73,7 +73,7 @@ namespace campusMap.Controllers {
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = UserService.getLoggedIn();
+            PropertyBag["logedin"] = UserService.getLoggedInUserList();
             PropertyBag["ajax"] = ajax;
 
 

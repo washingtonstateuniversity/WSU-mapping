@@ -31,8 +31,7 @@ using System.Text;
 namespace campusMap.Services {
     public class UserService {
         public static Boolean loginUser() {
-            String username = Authentication.authenticate();
-            HttpContext.Current.Session["username"] = username; //Maybe this should be md5'd?
+            String username = getNid();
             // save user in database
             users[] author_list = ActiveRecordBase<users>.FindAll();
             users temp = null;
@@ -47,7 +46,7 @@ namespace campusMap.Services {
             return false;
         }
         public static Boolean logoutUser() {
-            String username = HttpContext.Current.Session["username"] != null ? HttpContext.Current.Session["username"].ToString() : null;
+            String username = getNid();
             if (username != null) {
                 // save user in database
                 users[] author_list = ActiveRecordBase<users>.FindAll();
@@ -65,8 +64,7 @@ namespace campusMap.Services {
             return false;
         }
 
-
-        public static users[] getLoggedIn() {
+        public static users[] getLoggedInUserList() {
             users[] users = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
             return users;
         }
@@ -98,9 +96,13 @@ namespace campusMap.Services {
             if (HttpContext.Current.Request.IsLocal) {
                 username = "jeremy.bass";
             } else {
+                if (HttpContext.Current.Session["username"] != null)
+                    return HttpContext.Current.Session["username"].ToString();
                 username = Authentication.authenticate();
-                //  username = HttpContext.Current.Session["username"] == null ? Authentication.authenticate() : HttpContext.Current.Session["username"].ToString();
+                HttpContext.Current.Session["username"] = username;
             }
+            HttpContext.Current.Response.Write("getNid():"+username);
+            HttpContext.Current.Response.End();
             return username;
         }
         public static users setUser() {
