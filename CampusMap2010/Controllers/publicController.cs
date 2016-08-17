@@ -539,7 +539,7 @@ namespace campusMap.Controllers {
 
 
         public void get_authors_places_list(String callback) {
-            get_authors_places_list(UserService.getUserFull(), callback);
+            get_authors_places_list(userService.getUserFull(), callback);
         }
 
         public void get_authors_places_list(users user, String callback) {
@@ -615,7 +615,7 @@ namespace campusMap.Controllers {
 
 
         public void get_authors_geometrics_list(String callback) {
-            get_authors_geometrics_list(UserService.getUserFull(), callback);
+            get_authors_geometrics_list(userService.getUserFull(), callback);
         }
 
         public void get_authors_geometrics_list(users user, String callback) {

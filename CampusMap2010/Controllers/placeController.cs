@@ -49,7 +49,7 @@ namespace campusMap.Controllers {
         private void clearConnections() {
             place[] _places = ActiveRecordBase<place>.FindAll();
             foreach (place _place in _places) {
-                if (UserService.isActive(_place.editing)) {
+                if (userService.isActive(_place.editing)) {
                     _place.editing = null;
                     ActiveRecordMediator<place>.Save(_place);
                 }
@@ -87,8 +87,8 @@ namespace campusMap.Controllers {
         
         public void List(int page, int searchId, string target, string filter, Boolean ajax) {
             //clearConnections();
-            UserService.clearConnections<place>();
-            users user = UserService.getUserFull();
+            userService.clearConnections<place>();
+            users user = userService.getUserFull();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
@@ -100,7 +100,7 @@ namespace campusMap.Controllers {
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
 
             PropertyBag["user"] = user;
-            PropertyBag["loggedin"] = UserService.getLoggedInUserList();
+            PropertyBag["loggedin"] = userService.getLoggedInUserList();
 
 
             int typesPaging = 0;
@@ -469,7 +469,7 @@ namespace campusMap.Controllers {
             PropertyBag["images_inline"] = ActiveRecordBase<media_repo>.FindAll();
 
             place one_place = ActiveRecordBase<place>.Find(id);
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
 
 
 
@@ -623,7 +623,7 @@ namespace campusMap.Controllers {
 
 
             PropertyBag["placeimages"] = images;
-            PropertyBag["loginUser"] = UserService.getUserFull();
+            PropertyBag["loginUser"] = userService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -1254,7 +1254,7 @@ namespace campusMap.Controllers {
             //place.plus_four_code
             //'99164'
 
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             place.editing = user;
             if ((place.prime_name == null || place.prime_name.Length == 0)) {
                 if (!forced_tmp) {
@@ -1271,7 +1271,7 @@ namespace campusMap.Controllers {
                 RedirectToReferrer();
                 return;
             }*/
-            int requestedStatus = UserService.checkPrivleage("can_publish") && place.status != null ? place.status.id : 1;
+            int requestedStatus = userService.checkPrivleage("can_publish") && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             //place.infotabs.Clear();

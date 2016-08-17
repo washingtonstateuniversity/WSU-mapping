@@ -27,7 +27,7 @@
 #endregion
 namespace campusMap.Controllers{
     [Layout("default")]
-    public class adminController : BaseController {
+    public class adminController : SecureBaseController {
         #region JSON OUTPUT
            /* public void get_pace_type()
             {
@@ -147,7 +147,7 @@ namespace campusMap.Controllers{
                 Response.Write("admin()");
                 HttpContext.Response.End();
             return;
-                users user = UserService.getUserFull();
+                users user = userService.getUserFull();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
 
@@ -174,7 +174,7 @@ namespace campusMap.Controllers{
             }
             public void natetest()
             {
-                users user = UserService.getUserFull();
+                users user = userService.getUserFull();
                // IList<place> places = user.getUserPlaces(1, 5);
                // PropertyBag["places"] = places;
 
@@ -237,8 +237,9 @@ namespace campusMap.Controllers{
         */
             public static dynamic get_user_setting(string settingName)
             {
+                UserService userService = new UserService();
                 dynamic value = false;
-                value = get_user_setting(UserService.getUserFull(), settingName);
+                value = get_user_setting(userService.getUserFull(), settingName);
                 return value;
             }
 
@@ -265,7 +266,7 @@ namespace campusMap.Controllers{
             {
                 users user = ActiveRecordBase<users>.Find(id);
                 /* give access by group or ownership */
-                if (user.id == UserService.getUserFull().id || UserService.getUserFull().groups.id == 2)
+                if (user.id == userService.getUserFull().id || userService.getUserFull().groups.id == 2)
                 {
                     var values = new Dictionary<string, object>();
                     if (!String.IsNullOrWhiteSpace(user.settings.attr) && user.settings.attr!="{}")

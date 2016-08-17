@@ -188,10 +188,11 @@ namespace campusMap.Services {
             return quoted.Substring(1, quoted.Length - 2);
         }
         public static void writelog(string txt, users user, string controller, string action, int obj_id) {
+            UserService userService = new UserService();
             logs loger = new logs();
             loger.entry = txt;
-            loger.nid = user == null ? UserService.getNid() : user.nid;
-            loger.ip = UserService.getUserIp();
+            loger.nid = user == null ? userService.getNid() : user.nid;
+            loger.ip = userService.getUserIp();
             loger.date = DateTime.Now;
             loger.controller = controller;
             loger.action = action;
@@ -825,7 +826,8 @@ namespace campusMap.Services {
             copy.name = name;
             copy.id = copy_id;
             try {
-                copy.owner.id = UserService.getUserFull().id;
+                UserService userService = new Services.UserService();
+                copy.owner.id = userService.getUserFull().id;
             } catch (Exception ex) {
                 // caught it, it is not there.. 
             } 

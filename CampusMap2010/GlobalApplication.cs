@@ -54,10 +54,11 @@ namespace campusMap
 
         protected void Session_OnEnd(Object sender, EventArgs e)
         {
+            Services.UserService userService = new Services.UserService();
             try{
                 if (HttpContext.Current.Session["username"] != null)
                 {
-                    if (Services.UserService.logoutUser())
+                    if (userService.logoutUser())
                     {
                         Services.HelperService.writelog("User was logged out");
                     }

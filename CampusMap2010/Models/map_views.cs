@@ -21,6 +21,7 @@ namespace campusMap.Models {
     [ActiveRecord(Lazy = true, BatchSize = 30)]
     public class map_views : publish_base {
         protected HelperService helperService = new HelperService();
+        UserService userService = new UserService();
         //public map_views() { }
 
         [PrimaryKey("view_id")]
@@ -95,7 +96,7 @@ namespace campusMap.Models {
                 SqlGeography spatial = map_views.AsGeography(this.center);
                 return spatial.Lat.ToString();
             } else {
-                return UserService.getUserCoreCampus(true).latitude.ToString();
+                return userService.getUserCoreCampus(true).latitude.ToString();
             }
         }
 
@@ -104,7 +105,7 @@ namespace campusMap.Models {
                 SqlGeography spatial = map_views.AsGeography(this.center);
                 return spatial.Long.ToString();
             } else {
-                return UserService.getUserCoreCampus(true).longitude.ToString();
+                return userService.getUserCoreCampus(true).longitude.ToString();
             }
 
 

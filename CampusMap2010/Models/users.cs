@@ -99,7 +99,7 @@ namespace campusMap.Models {
 
         virtual public IList<place> getUserPlaces(int statusId, int limit) {
             IList<place> temp = new List<place>();
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             IList<place> userplaces = user.Places;
             if (statusId > 0) {
                 object[] obj = new object[userplaces.Count];

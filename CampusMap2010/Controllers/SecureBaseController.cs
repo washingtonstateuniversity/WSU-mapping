@@ -10,7 +10,7 @@ namespace campusMap.Controllers {
     [Filter(ExecuteWhen.BeforeAction, typeof(AuthUserAuthenticationFilter))]
     [Rescue(typeof(SecureRescueController))]
     public abstract class SecureBaseController : BaseController {
-        protected UserService userService = new UserService();
+       
         public void logout() {
             String username = Authentication.authenticate();
             Authentication.logout();

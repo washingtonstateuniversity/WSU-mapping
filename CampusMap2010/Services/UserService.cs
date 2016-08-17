@@ -30,7 +30,7 @@ using System.Text;
 
 namespace campusMap.Services {
     public class UserService {
-        public static Boolean loginUser() {
+        public Boolean loginUser() {
             String username = getNid();
             // save user in database
             users[] author_list = ActiveRecordBase<users>.FindAll();
@@ -45,7 +45,7 @@ namespace campusMap.Services {
             }
             return false;
         }
-        public static Boolean logoutUser() {
+        public Boolean logoutUser() {
             String username = getNid();
             if (username != null) {
                 // save user in database
@@ -64,16 +64,16 @@ namespace campusMap.Services {
             return false;
         }
 
-        public static users[] getLoggedInUserList() {
+        public users[] getLoggedInUserList() {
             users[] users = ActiveRecordBase<users>.FindAllByProperty("loggedin", true);
             return users;
         }
 
-        public static Boolean isLoggedIn() {
+        public Boolean isLoggedIn() {
             return isLoggedInByNID(null);
         }
 
-        public static Boolean isLoggedInByNID(string Nid) {
+        public Boolean isLoggedInByNID(string Nid) {
             if (!String.IsNullOrWhiteSpace(getNid()))
                 return true;
             else
@@ -91,7 +91,7 @@ namespace campusMap.Services {
             return temp;*/
         }
 
-        public static String getNid() {
+        public String getNid() {
             String username = "";
             if (HttpContext.Current.Request.IsLocal)
             {
@@ -111,7 +111,7 @@ namespace campusMap.Services {
             HttpContext.Current.Response.End();
             return username;
         }
-        public static users setUser() {
+        public users setUser() {
             HttpContext.Current.Response.Write("setUser()");
             HttpContext.Current.Response.End();
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
@@ -122,21 +122,22 @@ namespace campusMap.Services {
             HttpContext.Current.Response.End();
             return user;
         }
-        public static users getUser() {
+        public users getUser() {
             HttpContext.Current.Response.Write("getUser()");
             HttpContext.Current.Response.End();
             if (HttpContext.Current.Session["you"] == null)
                 HttpContext.Current.Session["you"] = setUser();
             return (users)HttpContext.Current.Session["you"];
         }
-        public static users getUserFull() {
+        public users getUserFull() {
+            HttpContext.Current.Response.Write("getUserFull()");
             users user = ActiveRecordBase<users>.Find(getUser().id);
             return user;
         }
-        public static string getUserIp() {
+        public string getUserIp() {
             return GetIPAddress();
         }
-        protected static string GetIPAddress() {
+        protected string GetIPAddress() {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
 
             string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
@@ -151,29 +152,29 @@ namespace campusMap.Services {
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
-        public static campus getUserCoreCampus(bool defaultCampus) {
+        public campus getUserCoreCampus(bool defaultCampus) {
             return defaultCampus ? ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0] : getUserCoreCampus();
         }
 
-        public static campus getUserCoreCampus() {
+        public campus getUserCoreCampus() {
             return getUserCoreCampus(getUserFull());
         }
 
-        public static campus getUserCoreCampus(users author) {
+        public campus getUserCoreCampus(users author) {
             campus campus = author.campus.Count() > 0 ? author.campus[0] : ActiveRecordBase<campus>.FindAllByProperty("name", "Pullman")[0];
             return campus;
         }
 
 
         public Boolean hasGroup(String group) {
-            return hasGroup(group, UserService.getUserFull());
+            return hasGroup(group, getUserFull());
         }
         public Boolean hasGroup(String group, users user){
             return group == user.groups.name;
         }
 
 
-        public static Boolean isActive(users user) {
+        public  Boolean isActive(users user) {
             int timeThreshold = -2; //TODO Set as site perference
             bool active = false;
             if (user != null && (!user.active || user.LastActive < DateTime.Today.AddHours(timeThreshold))) {
@@ -184,22 +185,22 @@ namespace campusMap.Services {
 
 
 
-        public static bool setSessionPrivleage(users user, string privilege) {
+        public  bool setSessionPrivleage(users user, string privilege) {
             bool flag = user.groups.privileges.Any(item => item.alias == privilege);
             HttpContext.Current.Session[privilege] = flag;
             return flag;
         }
-        public static bool checkPrivleage(string privilege) {
+        public  bool checkPrivleage(string privilege) {
             return checkPrivleage(getUserFull(), privilege);
         }
-        public static bool checkPrivleage(users user, string privilege) {
+        public  bool checkPrivleage(users user, string privilege) {
             bool flag = (HttpContext.Current.Session[privilege] == null || String.IsNullOrWhiteSpace(HttpContext.Current.Session[privilege].ToString())) ? setSessionPrivleage(user, privilege) : (bool)HttpContext.Current.Session[privilege];
             return flag;
         }
 
 
         /* remove */
-        public static Boolean canPublish(users user) {
+        public  Boolean canPublish(users user) {
             bool flag = false;
             switch (user.groups.name) {
                 case "Admin": flag = true; break;
@@ -210,12 +211,12 @@ namespace campusMap.Services {
 
         //This is a generic set of methods that will first check the object has a property
         //then if it does set it to null if the user is not actively editing it
-        public static Boolean clearConnections<t>() {
+        public  Boolean clearConnections<t>() {
             t[] items = ActiveRecordBase<t>.FindAll();
             bool result = false;
             foreach (dynamic item in items) {
                 if (item.GetType().GetProperty("editing") != null) {
-                    if (UserService.isActive(item.editing)) {
+                    if (isActive(item.editing)) {
                         HelperService.writelog("Releasing editor from item ", item.editing, item.id);
                         item.editing = null;
                         ActiveRecordMediator<dynamic>.Save(item);
@@ -225,7 +226,7 @@ namespace campusMap.Services {
             }
             return result;
         }
-        public static Boolean clearLocked<t>(int id, bool ajax) {
+        public  Boolean clearLocked<t>(int id, bool ajax) {
             dynamic item = ActiveRecordBase<t>.Find(id);
             bool result = false;
             if (item.GetType().GetMethod("editing") != null) {

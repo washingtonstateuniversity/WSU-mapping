@@ -32,7 +32,7 @@ namespace campusMap.Filters
 
             if (context.Request.IsLocal)
             {
-                users currentUser = UserService.getUserFull();
+                users currentUser = userService.getUserFull();
                 if (currentUser != null) {
                     users you = ActiveRecordBase<users>.Find(currentUser.id);
                     you.loggedin = true;
@@ -64,11 +64,11 @@ namespace campusMap.Filters
             context.CurrentUser = user;
             System.Threading.Thread.CurrentPrincipal = user;
 
-            if (UserService.isLoggedIn())
+            if (userService.isLoggedIn())
             {
                 context.Response.Write("is loggedin finished");
                 HttpContext.Current.Response.End();
-                users currentUser = UserService.getUserFull();
+                users currentUser = userService.getUserFull();
 
                 context.Response.Write("UserService.getUserFull()");
                 HttpContext.Current.Response.End();

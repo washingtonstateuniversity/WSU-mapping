@@ -16,6 +16,9 @@ using campusMap.Services;
 
 namespace campusMap.Models {
     public class _base {
+        public UserService userService = new UserService();
+
+            
         private DateTime? Creation_Date;
         [Property(Default = "GETDATE()")]
         virtual public DateTime? creation_date {
@@ -78,7 +81,7 @@ namespace campusMap.Models {
 
         virtual public bool isCheckedOut() {
             bool flag = false;
-            if (this.editing != null && this.editing != UserService.getUserFull())
+            if (this.editing != null && this.editing != userService.getUserFull())
                 flag = true;
             return flag;
         }

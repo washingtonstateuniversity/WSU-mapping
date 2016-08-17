@@ -40,6 +40,7 @@ namespace campusMap.Controllers {
         ILog log = log4net.LogManager.GetLogger("baseController");
 
         protected PlaceService placeService = new PlaceService();
+        protected UserService userService = new UserService();
         protected HelperService helperService = new HelperService();
         protected ImageService imageService = new ImageService();
         //protected LogService logService = new LogService();

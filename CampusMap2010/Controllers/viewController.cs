@@ -64,8 +64,8 @@ namespace campusMap.Controllers {
         
         public void List(int page, int searchId, string status, Boolean ajax, String json ) {
             //clearConnections();
-            UserService.clearConnections<map_views>();
-            users user = UserService.getUserFull();
+            userService.clearConnections<map_views>();
+            users user = userService.getUserFull();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
@@ -73,7 +73,7 @@ namespace campusMap.Controllers {
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["logedin"] = UserService.getLoggedInUserList();
+            PropertyBag["logedin"] = userService.getLoggedInUserList();
             PropertyBag["ajax"] = ajax;
 
 
@@ -272,7 +272,7 @@ namespace campusMap.Controllers {
 
             map_views view = ActiveRecordBase<map_views>.Find(id);
 
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             String username = user.nid;
             PropertyBag["loginUser"] = user;
 
@@ -359,7 +359,7 @@ namespace campusMap.Controllers {
 
             map_views view = new map_views();
 
-            PropertyBag["loginUser"] = UserService.getUserFull();
+            PropertyBag["loginUser"] = userService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -565,7 +565,7 @@ namespace campusMap.Controllers {
             //view.Images.Clear();
 
 
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             view.authors.Clear();
             if (apply != null) {
 
@@ -575,7 +575,7 @@ namespace campusMap.Controllers {
 
             if (view.id == 0) {
 
-                if (!UserService.checkPrivleage("can_publish") || view.status == null) {
+                if (!userService.checkPrivleage("can_publish") || view.status == null) {
                     status stat = ActiveRecordBase<status>.Find(1);
                     view.status = stat;
                 }

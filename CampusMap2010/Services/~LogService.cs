@@ -26,14 +26,15 @@ namespace campusMap.Services
 {
     public class LogService
 	{
-
+        
 
         public static void writelog(string txt)
         {
+            UserService userService = new UserService();
             logs loger = new logs();
             loger.entry = txt;
-            loger.nid = UserService.getNid()!=""?UserService.getNid():"";
-            loger.ip = UserService.getUserIp();
+            loger.nid = userService.getNid()!=""? userService.getNid():"";
+            loger.ip = userService.getUserIp();
             loger.date = DateTime.Now;
             loger.Save();
         }

@@ -144,13 +144,13 @@ namespace campusMap.Controllers {
             ActiveRecordMediator<geometrics>.Save(item);
         }
         public void List(int page, int searchId, string target, string filter, Boolean ajax) {
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             PropertyBag["authorname"] = user.name;
             PropertyBag["authors"] = ActiveRecordBase<users>.FindAll();
             PropertyBag["listtypes"] = ActiveRecordBase<place_types>.FindAll();
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["user"] = user;
-            PropertyBag["loggedin"] = UserService.getLoggedInUserList();
+            PropertyBag["loggedin"] = userService.getLoggedInUserList();
             PropertyBag["statuses"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["ajax"] = ajax;
             //user.Sections.Contains(place.place_types);
@@ -473,7 +473,7 @@ namespace campusMap.Controllers {
             PropertyBag["spatial_types"] = Enum.GetValues(typeof(GEOM_TYPE)); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>().ToList(); //Enum.GetValues(typeof(GEOM_TYPE)).Cast<GEOM_TYPE>(); 
 
 
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             PropertyBag["authorname"] = user;
             geometric.editing = user;
 
@@ -552,7 +552,7 @@ namespace campusMap.Controllers {
                 images.Add(new media_repo());
             }*/
             PropertyBag["geometricimages"] = images;
-            PropertyBag["loginUser"] = UserService.getUserFull();
+            PropertyBag["loginUser"] = userService.getUserFull();
             //String locationList = Getlocation();
             //PropertyBag["locations"] = locationList; // string should be "location1","location2","location3"
 
@@ -694,10 +694,10 @@ namespace campusMap.Controllers {
             //geometric.style.Clear();
 
 
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             geometric.editing = user;
 
-            int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            int requestedStatus = userService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
             geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
             if (String.IsNullOrEmpty(geometric.name)) {
@@ -994,10 +994,10 @@ namespace campusMap.Controllers {
             }
         }
         public geometrics make_gem(String geom_type, geometrics geometric, string[] boundary_parts, geometrics parent) {
-            users user = UserService.getUserFull();
+            users user = userService.getUserFull();
             geometric.editing = user;
 
-            int requestedStatus = UserService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            int requestedStatus = userService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
             geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
             if (String.IsNullOrEmpty(geometric.name)) {
