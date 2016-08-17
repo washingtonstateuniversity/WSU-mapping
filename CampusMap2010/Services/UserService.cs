@@ -110,9 +110,10 @@ namespace campusMap.Services {
         }
         public users setUser() {
             HttpContext.Current.Response.Write("setUser()");
+            end();
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
-            end();
+           
 
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
