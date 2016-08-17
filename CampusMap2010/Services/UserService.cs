@@ -127,7 +127,7 @@ namespace campusMap.Services {
             HttpContext.Current.Response.Write("getUser()"+ HttpContext.Current.Session["you"] == null);
             if (HttpContext.Current.Session["you"] == null)
                 HttpContext.Current.Session["you"] = setUser();
-            end();
+            
             return (users)HttpContext.Current.Session["you"];
         }
         public users getUserFull() {
