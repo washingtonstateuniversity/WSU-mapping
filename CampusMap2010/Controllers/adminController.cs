@@ -27,7 +27,7 @@
 #endregion
 namespace campusMap.Controllers{
     [Layout("default")]
-    public class adminController : SecureBaseController {
+    public class adminController : BaseController {
         #region JSON OUTPUT
            /* public void get_pace_type()
             {

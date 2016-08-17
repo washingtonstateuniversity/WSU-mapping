@@ -27,5 +27,6 @@ CampusMap2010/node_modules/**/
 /CampusMap2010/Content/node_modules/**/*
 /CampusMap2010/Content/build/**/*
 CampusMap2010/Content/.sass-cache/**/*scssc
+.sass-cache
 
 
