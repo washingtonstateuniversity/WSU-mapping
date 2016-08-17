@@ -93,15 +93,21 @@ namespace campusMap.Services {
 
         public static String getNid() {
             String username = "";
-            if (HttpContext.Current.Request.IsLocal) {
+            if (HttpContext.Current.Request.IsLocal)
+            {
                 username = "jeremy.bass";
-            } else {
+            }
+            else
+            {
                 if (HttpContext.Current.Session["username"] != null)
                     return HttpContext.Current.Session["username"].ToString();
                 username = Authentication.authenticate();
                 HttpContext.Current.Session["username"] = username;
             }
-            HttpContext.Current.Response.Write("getNid():"+username);
+            System.Diagnostics.StackTrace t = new System.Diagnostics.StackTrace();
+            HttpContext.Current.Response.Write("getNid():"+username+ t.ToString());
+
+            
             HttpContext.Current.Response.End();
             return username;
         }
