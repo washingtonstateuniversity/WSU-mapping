@@ -26,10 +26,6 @@ namespace campusMap.Filters
 
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-            context.Response.Write("AuthUserAuthenticationFilter");
-            //HttpContext.Current.Response.End();
-            return true;
-
             if (context.Request.IsLocal)
             {
                 users currentUser = userService.getUserFull();
@@ -96,7 +92,7 @@ namespace campusMap.Filters
             controllerContext.PropertyBag["userService"] = userService;
             controllerContext.PropertyBag["helperService"] = helperService;
             controllerContext.PropertyBag["helper"] = helperService;
-           // controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
+            controllerContext.PropertyBag["campus"] = userService.getUserCoreCampus();
 
             // Everything is ok
             return true;
