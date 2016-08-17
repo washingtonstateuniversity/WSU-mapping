@@ -74,7 +74,6 @@ namespace campusMap.Filters
                 users currentUser = UserService.getUserFull();
 
                 context.Response.Write("UserService.getUserFull()");
-                HttpContext.Current.Response.End();
 
                 if (currentUser != null)
                 {
@@ -85,6 +84,8 @@ namespace campusMap.Filters
                     ActiveRecordMediator<users>.Save(you);
                 }
             }
+
+            HttpContext.Current.Response.End();
 
             controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
