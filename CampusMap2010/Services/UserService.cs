@@ -113,31 +113,26 @@ namespace campusMap.Services {
         }
         public users setUser() {
             HttpContext.Current.Response.Write("setUser()");
-            HttpContext.Current.Response.End();
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
             HttpContext.Current.Response.Write(user.id);
-            HttpContext.Current.Response.End();
             return user;
         }
         public users getUser() {
             HttpContext.Current.Response.Write("getUser()");
-            HttpContext.Current.Response.End();
             if (HttpContext.Current.Session["you"] == null)
                 HttpContext.Current.Session["you"] = setUser();
             return (users)HttpContext.Current.Session["you"];
         }
         public users getUserFull() {
             HttpContext.Current.Response.Write("getUserFull()");
-            HttpContext.Current.Response.End();
             users user = ActiveRecordBase<users>.Find(getUser().id);
             return user;
         }
-        public void test()
+        public void end()
         {
-            HttpContext.Current.Response.Write("getUserFull()");
             HttpContext.Current.Response.Flush();
             HttpContext.Current.Response.End();
         }

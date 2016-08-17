@@ -144,9 +144,6 @@ namespace campusMap.Controllers{
         #region VIEWS
             public void admin()
             {
-                Response.Write("admin()");
-                HttpContext.Response.End();
-            return;
                 users user = userService.getUserFull();
                 IList<place> places = user.getUserPlaces(1, 5);
                 PropertyBag["places"] = places;
@@ -176,7 +173,7 @@ namespace campusMap.Controllers{
             [SkipFilter(typeof(campusMap.Filters.AuthUserAuthenticationFilter))]
             public void natetest()
             {
-                userService.test();
+                users user = userService.getUserFull();
                // IList<place> places = user.getUserPlaces(1, 5);
                // PropertyBag["places"] = places;
 
