@@ -93,7 +93,7 @@ namespace campusMap.Services {
 
         public String getNid() {
             HttpContext.Current.Response.Write("getNid()");
-            end();
+            
             String username = "";
             if (HttpContext.Current.Request.IsLocal)
             {
@@ -103,6 +103,7 @@ namespace campusMap.Services {
             {
                 if (HttpContext.Current.Session["username"] != null)
                     return HttpContext.Current.Session["username"].ToString();
+                end();
                 username = Authentication.authenticate();
                 HttpContext.Current.Session["username"] = username;
             }
