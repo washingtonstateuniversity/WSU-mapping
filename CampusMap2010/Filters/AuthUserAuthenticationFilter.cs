@@ -99,7 +99,7 @@ namespace campusMap.Filters
             controllerContext.PropertyBag["userService"] = userService;
             controllerContext.PropertyBag["helperService"] = helperService;
             controllerContext.PropertyBag["helper"] = helperService;
-            controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
+           // controllerContext.PropertyBag["campus"] = UserService.getUserCoreCampus();
 
             // Everything is ok
             return true;
