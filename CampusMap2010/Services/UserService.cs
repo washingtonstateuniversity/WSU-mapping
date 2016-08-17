@@ -92,6 +92,8 @@ namespace campusMap.Services {
         }
 
         public String getNid() {
+            HttpContext.Current.Response.Write("getNid()");
+            end();
             String username = "";
             if (HttpContext.Current.Request.IsLocal)
             {
@@ -112,7 +114,7 @@ namespace campusMap.Services {
             HttpContext.Current.Response.Write("setUser()");
             List<AbstractCriterion> userEx = new List<AbstractCriterion>();
             userEx.Add(Expression.Eq("nid", getNid()));
-            end();
+            
 
             users user = ActiveRecordBase<users>.FindFirst(userEx.ToArray());
             HttpContext.Current.Session["you"] = user;
