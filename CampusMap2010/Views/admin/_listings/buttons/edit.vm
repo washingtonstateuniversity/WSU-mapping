@@ -6,7 +6,7 @@
 	  <span class="actionpropt">&#187;</span>
 	</a>
 	</li>
-    #if($userService.checkPrivleage("make_edits") && !$item.isCheckedOut())
+    #if($userService.checkPrivilege("make_edits") && !$item.isCheckedOut())
     
     
 #end

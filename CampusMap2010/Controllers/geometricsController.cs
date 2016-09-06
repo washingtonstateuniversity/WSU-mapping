@@ -697,7 +697,7 @@ namespace campusMap.Controllers {
             users user = userService.getUserFull();
             geometric.editing = user;
 
-            int requestedStatus = userService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            int requestedStatus = userService.checkPrivilege("can_publish") && geometric.status != null ? geometric.status.id : 1;
             geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
             if (String.IsNullOrEmpty(geometric.name)) {
@@ -997,7 +997,7 @@ namespace campusMap.Controllers {
             users user = userService.getUserFull();
             geometric.editing = user;
 
-            int requestedStatus = userService.checkPrivleage("can_publish") && geometric.status != null ? geometric.status.id : 1;
+            int requestedStatus = userService.checkPrivilege("can_publish") && geometric.status != null ? geometric.status.id : 1;
             geometric.status = ActiveRecordBase<status>.Find(requestedStatus);
 
             if (String.IsNullOrEmpty(geometric.name)) {

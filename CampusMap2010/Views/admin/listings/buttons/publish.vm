@@ -1,4 +1,4 @@
-#if($userService.checkPrivleage("can_publish"))
+#if($userService.checkPrivilege("can_publish"))
   <li>
 	<a href="$helper.getAdminUrl("${controller.getView()}/setStatus")?id=$!{item.id}" title="Published" class="buttons pubState ui-button ui-widget ui-state-default ui-corner-all">
 	  <i class="fa fa-star"></i>

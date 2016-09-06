@@ -26,53 +26,6 @@ namespace campusMap.Filters
 
         public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
         {
-            if (context.Request.IsLocal)
-            {
-                users currentUser = userService.getUserFull();
-                if (currentUser != null) {
-                    users you = ActiveRecordBase<users>.Find(currentUser.id);
-                    you.loggedin = true;
-                    you.LastActive = DateTime.Now;
-                    ActiveRecordMediator<users>.Update(you);
-                    ActiveRecordMediator<users>.Save(you);
-                }
-
-                return true;
-            }
-            // Read previous authenticated principal from session 
-            // (could be from cookie although with more work)
-            User user = (User)context.Session["user"];
-            // Sets the principal as the current user
-            context.CurrentUser = user;
-            
-            String username = Authentication.authenticate();
-            users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
-
-            if (authors.Length == 0)
-            {
-                context.Response.RedirectToUrl("~/?username="+username, false);
-                return false;
-            }
-            context.Session["manager"] = true;
-            context.Session["username"] = username;
-            user = new User(username, new String[0]);
-            context.CurrentUser = user;
-            System.Threading.Thread.CurrentPrincipal = user;
-
-            if (userService.isLoggedIn())
-            {
-                users currentUser = userService.getUserFull();
-                if (currentUser != null)
-                {
-                    users you = ActiveRecordBase<users>.Find(currentUser.id);
-                    you.loggedin = true;
-                    you.LastActive = DateTime.Now;
-                    ActiveRecordMediator<users>.Update(you);
-                    ActiveRecordMediator<users>.Save(you);
-                }
-            }
-
-           
 
             controllerContext.PropertyBag["categories"] = ActiveRecordBase<categories>.FindAll();
 
@@ -86,8 +39,58 @@ namespace campusMap.Filters
             controllerContext.PropertyBag["userService"] = userService;
             controllerContext.PropertyBag["helperService"] = helperService;
             controllerContext.PropertyBag["helper"] = helperService;
-            controllerContext.PropertyBag["campus"] = userService.getUserCoreCampus();
 
+            if (context.Request.IsLocal)
+            {
+                users currentUser = userService.getUserFull();
+                if (currentUser != null)
+                {
+                    users you = ActiveRecordBase<users>.Find(currentUser.id);
+                    you.loggedin = true;
+                    you.LastActive = DateTime.Now;
+                    ActiveRecordMediator<users>.Update(you);
+                    ActiveRecordMediator<users>.Save(you);
+                }
+
+                //return true;
+            }
+            else
+            {
+                // Read previous authenticated principal from session 
+                // (could be from cookie although with more work)
+                User user = (User)context.Session["user"];
+                // Sets the principal as the current user
+                context.CurrentUser = user;
+
+                String username = Authentication.authenticate();
+                users[] authors = ActiveRecordBase<users>.FindAllByProperty("nid", username);
+
+                if (authors.Length == 0)
+                {
+                    context.Response.RedirectToUrl("~/?username=" + username, false);
+                    return false;
+                }
+                context.Session["manager"] = true;
+                context.Session["username"] = username;
+                user = new User(username, new String[0]);
+                context.CurrentUser = user;
+                System.Threading.Thread.CurrentPrincipal = user;
+
+                if (userService.isLoggedIn())
+                {
+                    users currentUser = userService.getUserFull();
+                    if (currentUser != null)
+                    {
+                        users you = ActiveRecordBase<users>.Find(currentUser.id);
+                        you.loggedin = true;
+                        you.LastActive = DateTime.Now;
+                        ActiveRecordMediator<users>.Update(you);
+                        ActiveRecordMediator<users>.Save(you);
+                    }
+                }
+            }
+
+            controllerContext.PropertyBag["campus"] = userService.getUserCoreCampus();
             // Everything is ok
             return true;
         }

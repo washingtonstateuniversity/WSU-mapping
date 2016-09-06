@@ -1271,7 +1271,7 @@ namespace campusMap.Controllers {
                 RedirectToReferrer();
                 return;
             }*/
-            int requestedStatus = userService.checkPrivleage("can_publish") && place.status != null ? place.status.id : 1;
+            int requestedStatus = userService.checkPrivilege("can_publish") && place.status != null ? place.status.id : 1;
             place.status = ActiveRecordBase<status>.Find(requestedStatus);
             place.tags.Clear();
             //place.infotabs.Clear();

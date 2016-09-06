@@ -1,4 +1,4 @@
-#if($userService.checkPrivleage("make_edits") && !$item.isCheckedOut())
+#if($userService.checkPrivilege("make_edits") && !$item.isCheckedOut())
 	<a href="$helper.getAdminUrl("${controller.getView()}/_edit")?id=$!{item.id}" title="Edit" class=" editIt action_button">
 	  <i class="fa fa-pencil-square-o"></i>
 	</a>

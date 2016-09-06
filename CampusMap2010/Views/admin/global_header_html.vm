@@ -146,9 +146,8 @@ var map_view = $options_block;
 <link type='text/css' href='//images.wsu.edu/css/wsu_ui/jquery-ui-1.8.13.custom.css' rel='stylesheet' media='screen' />
 <link media='screen' href='//images.wsu.edu/css/campusmap/jquery-ui-1.8.19.custom.css' type='text/css' rel='stylesheet' />
 
-#*$scriptsService.Css("~/Content/js/colorpicker/css/jpicker-1.1.6.min.css,~/Content/js/scrollbar/style/jquery.jscrollpane.css,~/Content/js/scrollbar/style/jquery.jscrollpane.lozenge.css,~/Content/css/colorbox.css,~/Content/dis/css/admin.styles.css")*#
-$scriptsService.Css("~/Content/${jsfolder.Trim()}/css/admin.styles.css",true)
 
+<link type='text/css' href='$siteroot/Content/dis/css/admin.styles.css' rel='stylesheet' media='screen' />
 
 
 <!--<script type="text/javascript" src="$siteroot/content/js/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>-->
@@ -156,9 +155,7 @@ $scriptsService.Css("~/Content/${jsfolder.Trim()}/css/admin.styles.css",true)
 
 <script type="text/javascript" src="$siteroot/Content/src/js/admin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="$siteroot/Content/src/js/admin/tinymce/jquery.tinymce.min.js"></script>
-#*$scriptsService.Js("~/Content/js/modernizr-2.0.6/modernizr.min.js,~/Content/js/utilities_general.js,~/Content/js/jquery.mjs.nestedSortable.js,~/content/js/colorpicker/jpicker-1.1.6.min.js,~/Content/js/infobox.js,~/Content/js/jquery.ui.map.js,~/Content/js/jquery.ui.map.drawingmanager.js,~/Content/js/jquery.ui.map.extensions.js,~/Content/js/jquery.ui.map.services.js,~/Content/js/jquery.ui.map.overlays.js,~/Content/js/jquery.defaultvalue.js,~/Content/js/jquery.colorbox-min.js,~/Content/js/map_editor_vars.js,~/Content/js/map_functions.js,~/Content/js/admin_ui__map_functions.js,~/Content/js/scrollbar/jquery.mousewheel.js,~/Content/js/scrollbar/jquery.jscrollpane.min.js,~/Content/js/admin_ui__media.js,~/Content/js/admin_ui__tinymce.js,~/Content/js/admin_ui__editors.js,~/Content/js/zeroclipboard/ZeroClipboard.js,~/Content/js/init_test.js,~/Content/js/admin_ini.js,~/Content/js/admin_init.js",true)*#
-
-$scriptsService.Js("~/Content/${jsfolder.Trim()}/js/admin.maps.wsu.edu.js",true)
+<script type="text/javascript" src="$siteroot/Content/dis/js/admin.maps.wsu.edu.js"></script>
 
 
 <!-- <script type="text/javascript" id="boot" src="$siteroot/Content/js/bootstrap_admin.js"></script> -->

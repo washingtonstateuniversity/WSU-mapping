@@ -323,7 +323,7 @@ namespace campusMap.Controllers {
             PropertyBag["accesslevels"] = ActiveRecordBase<user_groups>.FindAll();
             PropertyBag["statuslists"] = ActiveRecordBase<status>.FindAll();
             PropertyBag["places"] = ActiveRecordBase<place>.FindAll();
-            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll();
+            PropertyBag["geometrics"] = ActiveRecordBase<geometrics>.FindAll(Order.Asc("name"));
             PropertyBag["campuses"] = ActiveRecordBase<campus>.FindAll(Order.Asc("name"));
             PropertyBag["listcats"] = ActiveRecordBase<categories>.FindAll();
             foreach (geometrics_types types in ActiveRecordBase<geometrics_types>.FindAll()) {
@@ -575,7 +575,7 @@ namespace campusMap.Controllers {
 
             if (view.id == 0) {
 
-                if (!userService.checkPrivleage("can_publish") || view.status == null) {
+                if (!userService.checkPrivilege("can_publish") || view.status == null) {
                     status stat = ActiveRecordBase<status>.Find(1);
                     view.status = stat;
                 }
