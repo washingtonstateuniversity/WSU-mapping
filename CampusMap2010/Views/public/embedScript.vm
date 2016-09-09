@@ -82,6 +82,18 @@ var map_scripts = [];
 //map_scripts.push('http://www.google.com/uds/api?file=uds.js&v=1.0');
 
 
+//if( map_view.map_view_scripts_block === false )
+{
+	if ( typeof(jQuery) === "undefined" ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
+	}
+	if ( typeof( jQuery['ui'] ) === "undefined" || typeof(jQuery.ui) === "undefined" ) {
+		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js');
+	}
+	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
+	map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
+}
+
 #if($controller.isLocal())
 
 map_scripts.push('http:${site_base.Trim()}content/src/js/jquery.defaultvalue.js');
@@ -127,17 +139,6 @@ map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js
 
 
 
-if( map_view.map_view_scripts_block === false ){
-	if ( typeof(jQuery) === "undefined" ) {
-		map_scripts.push('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
-	}
-	if ( typeof( jQuery['ui'] ) === "undefined" || typeof(jQuery.ui) === "undefined" ) {
-		map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js');
-	}
-	map_scripts.push('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css');
-	map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/css/map.view.styles.css');
-}
-
 
 (function(i,s,o,g,r,t,a,m){
 
@@ -145,17 +146,18 @@ if( map_view.map_view_scripts_block === false ){
 	m = document.getElementById(r);
 	if(m===null){
 		a = document.createElement('div');
-		a.setAttribute( "style", "width:100%;padding-top:66%;min-height: 0px;" );
+		a.setAttribute( "style", "width: 100%;height: 100%;padding-top: 66%;min-height: 0;" );
 		a.setAttribute( "class", "WSU_MAPS_NS" );
 		a.id=r;
 		t.parentNode.insertBefore(a,t.nextSibling);
 	}else{
 		m.setAttribute( "class", "WSU_MAPS_NS" );
-		m.setAttribute( "style", "width:100%;padding-top:66%;min-height: 0px;" );
+		m.setAttribute( "style", "width: 100%;height: 100%;padding-top: 66%;min-height: 0;" );
+
 	}
 	a=s.createElement(o);
 	a.async=0;
-	a.src='https://maps.googleapis.com/maps/api/js?v=3.exp${signed_in}&libraries=${libs}&sensor=false&callback=startEmbedded&key=AIzaSyCWtSRIku46hs90ZlYvhdRg7x7fSaKaJF8';
+	a.src='https://maps.googleapis.com/maps/api/js?v=3${signed_in}&libraries=${libs}&callback=startEmbedded&key=AIzaSyCWtSRIku46hs90ZlYvhdRg7x7fSaKaJF8';
 	t.parentNode.insertBefore(a,t);	
 	i.startEmbedded = function(){
 		(function($) {

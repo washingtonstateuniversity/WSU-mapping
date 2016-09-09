@@ -395,10 +395,10 @@ if (!Array.prototype.indexOf) {
 						}
 				}
 			];
-			//$.jtrack.defaults.debug.run = false;
-			//$.jtrack.defaults.debug.v_console = false;
-			//$.jtrack.defaults.debug.console = true;
-			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
+			$.jtrack.defaults.debug.run = false;
+			$.jtrack.defaults.debug.v_console = false;
+			$.jtrack.defaults.debug.console = true;
+			$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
 		ini_addthis:function (){//username){
 			/*if(!window._defined(username)){
