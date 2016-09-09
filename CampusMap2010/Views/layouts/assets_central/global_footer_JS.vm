@@ -6,7 +6,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
-<script type="text/javascript" src="https://repo.wsu.edu/jtrack/1/jtrack.js"></script>
 <!--
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=mcwsu&domready=1" id="addthisScript"></script>
 -->
@@ -55,7 +54,7 @@ $scriptsService.Js("~/content/${jsfolder.Trim()}/js/maps.wsu.edu.js")
 <script type="text/javascript" src="${siteroot}/content/${jsfolder.Trim()}/js/maps.wsu.edu.js"></script> 
 #end
 
-
+<script type="text/javascript" id="tracker_agent" src="https://repo.wsu.edu/jtrack/develop/bootstrap/bootstrap.min.js"></script>
 
 
 						

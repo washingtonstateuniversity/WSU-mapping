@@ -10,6 +10,20 @@ var pageTracker=pageTracker||null;
 var styles=styles||{};
 
 var startingUrl=startingUrl||null;
+var wsu_analytics = {
+      "wsuglobal":{"ga_code":"UA-55791317-1", 
+
+          "campus":"all", 
+          "unit_type":"unit", 
+          "unit":" marketing-and-communications",
+      },
+      "app": {
+          "ga_code": "UA-69906812-4",
+      },
+      "site":{
+          "ga_code": "UA-17815664-13"
+      }
+  };
 
 
 
@@ -395,10 +409,10 @@ if (!Array.prototype.indexOf) {
 						}
 				}
 			];
-			$.jtrack.defaults.debug.run = false;
-			$.jtrack.defaults.debug.v_console = false;
-			$.jtrack.defaults.debug.console = true;
-			$.jtrack({load_analytics:{account:gacode}, trackevents:data });
+			//$.jtrack.defaults.debug.run = false;
+			//$.jtrack.defaults.debug.v_console = false;
+			//$.jtrack.defaults.debug.console = true;
+			//$.jtrack({load_analytics:{account:gacode}, trackevents:data });
 		},
 		ini_addthis:function (){//username){
 			/*if(!window._defined(username)){
