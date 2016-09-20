@@ -2,7 +2,7 @@
 #set($target = $status.title)
 #end
 
-<div class="pagination $Pagination_location ui-widget-content ui-corner-all">
+<!-- <div class="pagination $Pagination_location ui-widget-content ui-corner-all">
     <h6>Showing $list_items.FirstItemIndex - $list_items.LastItemIndex of $list_items.TotalItems</h6>
    #if($list_items.HasPreviousPage || $list_items.HasNextPage)
 	   <ul class=" ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-bottom">
@@ -36,5 +36,5 @@
 			</li>
 		</ul>
 	#end
-</div>
+</div> -->
 

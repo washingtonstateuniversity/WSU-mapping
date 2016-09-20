@@ -44,7 +44,7 @@
 						#set($c=0)
 						#foreach($status in $statuses)
 							<li class="ui-state-default ui-corner-top">
-								<a href="#${status.name}">${status.name} ($controller.getVar("${status.name}_list").TotalItems)</a>
+								<a href="#${status.name}">${status.name} ($controller.getVar("${status.name}_list").Count)</a>
 							</li>
 							#set($c=$c+1)
 						#end

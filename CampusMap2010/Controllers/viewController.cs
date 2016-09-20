@@ -99,7 +99,7 @@ namespace campusMap.Controllers {
             } else {
                 items = ActiveRecordBase<map_views>.FindAll(Order.Desc("publish_time"), pubEx.ToArray());
             }
-            PropertyBag["published_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            PropertyBag["published_list"] = items; // PaginationHelper.CreatePagination(items, pagesize, paging);
             IList<string> buttons = new List<string>();
             buttons.Add("edit");
             buttons.Add("delete");
@@ -123,7 +123,7 @@ namespace campusMap.Controllers {
             revEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(2)));
 
             items = ActiveRecordBase<map_views>.FindAll(Order.Desc("creation_date"), revEx.ToArray());
-            PropertyBag["review_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            PropertyBag["review_list"] = items; // PaginationHelper.CreatePagination(items, pagesize, paging);
             buttons = new List<string>();
             buttons.Add("edit");
             buttons.Add("delete");
@@ -143,7 +143,7 @@ namespace campusMap.Controllers {
             draftEx.AddRange(baseEx);
             draftEx.Add(Expression.Eq("status", ActiveRecordBase<status>.Find(1)));
             items = ActiveRecordBase<map_views>.FindAll(Order.Desc("creation_date"), draftEx.ToArray());
-            PropertyBag["draft_list"] = PaginationHelper.CreatePagination(items, pagesize, paging);
+            PropertyBag["draft_list"] = items; // PaginationHelper.CreatePagination(items, pagesize, paging);
             buttons = new List<string>();
             buttons.Add("edit");
             buttons.Add("delete");
