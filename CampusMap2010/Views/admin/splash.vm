@@ -76,7 +76,7 @@
 		#end
 		<div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
 			<p style="line-height: 15px;padding-bottom: 0;">
-				<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Notice:</strong>Site is under devlopment, please report any bugs found.
+				<span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span><strong>Notice:</strong>Site is under development, please report any bugs found.
 			</p>
 		</div><br/>
 		

@@ -470,7 +470,7 @@ namespace campusMap.Controllers {
             String cached = getJsonCache(getDefaultAppPath(), "getCategoriesList.ext", DateTime.Now.AddDays(-7));
             if (cached == null)
             {
-                var tmp = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true).Select(i => new { i.id, i.name, parentid = (i.Parent == null ? 0 : i.Parent.id) });
+                var tmp = ActiveRecordBase<categories>.FindAllByProperty("position", "active", true).Select(i => new { i.id, i.friendly_name, i.name, parentid = (i.Parent == null ? 0 : i.Parent.id) });
                 String result = null;
                 if (tmp.Count() > 0)
                 {

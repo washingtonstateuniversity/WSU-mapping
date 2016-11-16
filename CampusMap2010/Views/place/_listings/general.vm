@@ -19,7 +19,7 @@
 			<th width="80px">renders</th>
 			<th width="15%">Name</th>
 			<th width="15%">Authors</th>
-			<th>Discription</th>
+			<th>Description</th>
 			<th></th>
 			<th class="no-sort" width="15%"></th>
 		</tr>

@@ -18,7 +18,7 @@
 			<th width="15%">Alias</th>
 			<th>Name</th>
 			<th width="15%">Authors</th>
-			<th>Discription</th>
+			<th>Description</th>
 			<th class="no-sort"></th>
 			<th class="no-sort"></th>
 		</tr>
@@ -29,7 +29,7 @@
 			<th>Name</th>
 			<th>Alias</th>
 			<th>Authors</th>
-			<th>Discription</th>
+			<th>Description</th>
 			<th></th>
 			<th></th>
 		</tr>

@@ -9,6 +9,7 @@
 					$('#main_nav .active').removeClass('active');
 					$('.checked').removeClass('checked');
 					$('.childSelected').removeClass('childSelected');
+					//$("li", jObj).addClass('checked');
 					if(!self_active){
 						jObj.addClass('active');
 					}
@@ -20,7 +21,7 @@
 				}
 			},
 			
-			reacton_parent:function(self,_url){
+			reacton_parent: function (self, _url) {
 				_url = _url || null;
 				var url = _url;
 				var jObj = WSU_MAP.state.map_jObj;
