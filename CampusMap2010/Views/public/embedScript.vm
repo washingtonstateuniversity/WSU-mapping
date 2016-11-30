@@ -154,6 +154,11 @@ map_scripts.push('${site_base.Trim()}content/${folder.Trim()}/js/maps.wsu.edu.js
 		m.setAttribute( "class", "WSU_MAPS_NS" );
 		m.setAttribute( "style", "width: 100%;height: 66vw;min-height: 0;" );
 	}
+
+	jQuery(window).resize(function(){
+		jQuery(".WSU_MAPS_NS").height( jQuery(".WSU_MAPS_NS").width()*.66 );
+	}).trigger("resize");
+
 	a=s.createElement(o);
 	a.async=0;
 	a.src='https://maps.googleapis.com/maps/api/js?v=3${signed_in}&libraries=${libs}&callback=startEmbedded&key=AIzaSyCWtSRIku46hs90ZlYvhdRg7x7fSaKaJF8';
