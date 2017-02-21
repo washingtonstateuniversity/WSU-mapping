@@ -1333,7 +1333,7 @@ namespace campusMap.Controllers {
             if (!String.IsNullOrEmpty(place.prime_name)) place.prime_name = place.prime_name.Trim();
             place.names.Clear();
             foreach (place_names pn in place_names) {
-                pn.place_id = place.id;
+               // pn.place = place;
                 if (pn.name != null && pn.id == 0) {
                     ActiveRecordMediator<place_names>.Save(pn);
                 }

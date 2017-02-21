@@ -85,9 +85,7 @@ namespace campusMap.Models {
             SqlGeography spatial = place.AsGeography(this.coordinate);
             return spatial.Long.ToString();
         }
-
-
-
+        
         [Property]
         virtual public bool hideTitles { get; set; }
 
@@ -349,8 +347,14 @@ namespace campusMap.Models {
         [PrimaryKey("name_id")]
         virtual public int id { get; set; }
 
-        [Property]
-        virtual public int place_id { get; set; }
+		[HasAndBelongsToMany(typeof(place), Lazy = true, Table = "place_to_place_names", ColumnKey = "name_id", ColumnRef = "place_id", NotFoundBehaviour = NotFoundBehaviour.Ignore)]
+		virtual public IList<place> places
+		{
+			get; set;
+		}
+
+		/*[BelongsTo("place_id")]
+        virtual public place place { get; set; }*/
 
         [Property]
         virtual public String name { get; set; }

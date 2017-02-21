@@ -1111,7 +1111,7 @@ namespace campusMap.Controllers {
             SortedDictionary<string, int> results = new SortedDictionary<string, int>();
             //id is for order
             int i = 0;
-
+			status publishedStatus = ActiveRecordMediator<status>.FindByPrimaryKey(3);
             // Trying a different Query method
             // Here was the all inclusive query (not used for now except for reference)
             String overallsqlstring = @"from place p where 
@@ -1144,6 +1144,7 @@ where p.status = 3
             // Search place abbrev
             String searchabbrev = @"from place p where 
                    p.abbrev_name LIKE :searchterm 
+			and p.status = 3
  order by p.prime_name ASC
                 ";
 
@@ -1167,14 +1168,21 @@ where p.status = 3
             place_names[] placenames = nq.Execute();
             // Loop through the place names
             foreach (place_names placename in placenames) {
-                if (results.Any(item => item.Key.Split(':')[1].Trim() == placename.name.Trim())
-                    && results.Any(item => item.Value == placename.place_id)
-                    ) {
-                } else {
-                    //results[i.ToString() + ":" + placename.name] = placename.place_id;
-                    results.Add(i.ToString() + ":" + placename.name.Trim(), placename.place_id);
-                    i++;
-                }
+				foreach(place oneplace in placename.places)
+				if (oneplace.status == publishedStatus)
+				{
+					if (results.Any(item => item.Key.Split(':')[1].Trim() == placename.name.Trim())
+						&& results.Any(item => item.Value == oneplace.id)
+						)
+					{
+					}
+					else
+					{
+						//results[i.ToString() + ":" + placename.name] = placename.place_id;
+						results.Add(i.ToString() + ":" + placename.name.Trim(), oneplace.id);
+						i++;
+					}
+				}
             }
 
 
@@ -1189,19 +1197,24 @@ where p.status = 3
             foreach (tags tag in tags) {
                 String ids = "";
                 foreach (place place in tag.places) {
-                    if (String.IsNullOrEmpty(ids))
-                        ids = place.id.ToString();
-                    else
-                        ids += "," + place.id.ToString();
+					if(place.status == publishedStatus)
+					{ 
+						if (String.IsNullOrEmpty(ids))
+							ids = place.id.ToString();
+						else
+							ids += "," + place.id.ToString();
 
-                    if (results.Any(item => item.Key.Split(':')[1] == place.prime_name.Trim())
-                        && results.Any(item => item.Value == place.id)
-                        ) {
-                    } else {
-                        results.Add("RELATED|" + i.ToString() + ":" + place.prime_name.Trim(), place.id);
-                        i++;
-                    }
-                }
+						if (results.Any(item => item.Key.Split(':')[1] == place.prime_name.Trim())
+							&& results.Any(item => item.Value == place.id))
+						{
+						}
+						else
+						{
+							results.Add("RELATED|" + i.ToString() + ":" + place.prime_name.Trim(), place.id);
+							i++;
+						}
+					}
+				}
                 //results[i.ToString() + ":" + tag.name] = ids;
             }
             return results;

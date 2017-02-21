@@ -621,7 +621,6 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Iesi.Collections.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\log4net.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Microsoft.SqlServer.SqlClrProvider.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Microsoft.SqlServer.Types.dll
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\MonoRailHelper.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Newtonsoft.Json.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\NHibernate.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Nullables.dll
@@ -699,8 +698,8 @@ C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\pt-BR\Castle.MonoRail.Framewo
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\zh-TW\Castle.MonoRail.Framework.resources.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.pdb
-C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\NHibernate.Linq.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.dll
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\Recaptcha.pdb
 C:\updesktop\natedev\WSU-mapping\CampusMap2010\bin\CentralCCProcessing.pdb
+C:\updesktop\natedev\WSU-mapping\CampusMap2010\obj\Debug\CampusMap2010.csprojResolveAssemblyReference.cache
