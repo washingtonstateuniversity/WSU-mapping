@@ -556,7 +556,7 @@ namespace campusMap.Controllers {
 
             PropertyBag["place_name_types"] = ActiveRecordBase<place_name_types>.FindAll();
 
-            PropertyBag["place_names"] = ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
+			PropertyBag["place_names"] = one_place.names; // . ActiveRecordBase<place_names>.FindAllByProperty("place_id", one_place.id);
 
             /*if (page == 0)
                 page = 1;
